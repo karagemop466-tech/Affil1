@@ -760,7 +760,7 @@ def build_questions():
 <div class="wrap">
   <div class="page-head">
     <h1>Questions that need answers before decisions</h1>
-    <p>Fourteen questions, each with the information required to answer it and a plain statement of whether this session could. {answered} are answered. {blocked} are blocked, and none of them is blocked for want of effort — they are blocked because the answer needs an account, a decision or a person.</p>
+    <p>{len(QUESTIONS["questions"])} questions, each with the information required to answer it and a plain statement of whether this session could. {answered} are answered. {blocked} are blocked, and none of them is blocked for want of effort — they are blocked because the answer needs an account, a decision or a person.</p>
   </div>
 
   <div class="note-box">

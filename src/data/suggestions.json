@@ -275,8 +275,9 @@
       "effort": 2,
       "confidence": "high",
       "evidence_needed": "A scheduled workflow running build + validate and opening an issue on failure. No secrets needed; no data leaves the repository.",
-      "status": "proposed",
-      "note": "Amazon's link behaviour also drifts: one supplied link resolved for two sessions and returned a bot interstitial for a third. A weekly check is the only way to notice without someone remembering to look."
+      "status": "shipped",
+      "note": "Amazon's link behaviour also drifts: one supplied link resolved for two sessions and returned a bot interstitial for a third. A weekly check is the only way to notice without someone remembering to look.",
+      "shipped_note": "Both halves are in the repository now: .github/workflows/pages.yml rebuilds from the data layer and runs tools/validate.py before publishing anything, and weekly-audit.yml re-runs the same gate on a schedule without deploying. What is deliberately not automated: watching Amazon's own pages, which no script in this repository should be doing."
     },
     {
       "id": "SUG-25",

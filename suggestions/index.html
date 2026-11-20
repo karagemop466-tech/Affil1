@@ -47,7 +47,7 @@
     <p><strong>How to review this board.</strong> Start with the two rows marked <em>rejected</em> and <em>blocked on account</em> — those are the ones where acting without information would cost money or trust. Then pick by the ratio of impact to effort. Nothing on this page has been implemented silently; what shipped is labelled shipped and says so.</p>
   </div>
 
-  <div class="filters"><span class="flbl">Filter</span><button class="filter-btn" data-filter="all" aria-pressed="true">All <span style="opacity:.6">29</span></button><button class="filter-btn" data-filter="shipped" aria-pressed="false">shipped <span style="opacity:.6">10</span></button><button class="filter-btn" data-filter="proposed" aria-pressed="false">proposed <span style="opacity:.6">7</span></button><button class="filter-btn" data-filter="blocked-on-account" aria-pressed="false">blocked on account <span style="opacity:.6">5</span></button><button class="filter-btn" data-filter="blocked-on-decision" aria-pressed="false">blocked on decision <span style="opacity:.6">4</span></button><button class="filter-btn" data-filter="rejected" aria-pressed="false">rejected <span style="opacity:.6">3</span></button></div>
+  <div class="filters"><span class="flbl">Filter</span><button class="filter-btn" data-filter="all" aria-pressed="true">All <span style="opacity:.6">29</span></button><button class="filter-btn" data-filter="shipped" aria-pressed="false">shipped <span style="opacity:.6">11</span></button><button class="filter-btn" data-filter="proposed" aria-pressed="false">proposed <span style="opacity:.6">6</span></button><button class="filter-btn" data-filter="blocked-on-account" aria-pressed="false">blocked on account <span style="opacity:.6">5</span></button><button class="filter-btn" data-filter="blocked-on-decision" aria-pressed="false">blocked on decision <span style="opacity:.6">4</span></button><button class="filter-btn" data-filter="rejected" aria-pressed="false">rejected <span style="opacity:.6">3</span></button></div>
   <div id="sug-list"><article class="sug" data-status="shipped">
   <div class="sug-head">
     <span class="flag-id">SUG-01</span>
@@ -370,11 +370,11 @@
   <p><span class="lbl">Why</span>Question-shaped guides already read like answers; marking them up lets a search engine see the question and the answer as a pair. Five new guides ship with it today. The four earlier guides have the questions in prose but no markup, so the set is inconsistent.</p>
   <p><span class="lbl">Evidence needed</span>Move each guide&#x27;s closing question list into the existing FAQ schema shape. Do not write questions a reader did not ask.</p>
   <p><span class="lbl">Note</span></p>
-</article><article class="sug" data-status="proposed">
+</article><article class="sug" data-status="shipped">
   <div class="sug-head">
     <span class="flag-id">SUG-24</span>
     <h3>Weekly automated audit of links, disclosure and claims</h3>
-    <span class="badge none">proposed</span>
+    <span class="badge ok">shipped</span>
   </div>
   <div class="sug-scores">
     <span class="score">impact <b>4</b>/5</span>
@@ -383,7 +383,7 @@
   </div>
   <p><span class="lbl">Why</span>The compliance state of this site is only true for the hour it was built. A listing disappears, a redirect changes, a page ships without the disclosure strip — and the site is silently non-compliant. tools/validate.py already checks all of that in a single pass; running it weekly converts a one-off good state into an ongoing one.</p>
   <p><span class="lbl">Evidence needed</span>A scheduled workflow running build + validate and opening an issue on failure. No secrets needed; no data leaves the repository.</p>
-  <p><span class="lbl">Note</span>Amazon&#x27;s link behaviour also drifts: one supplied link resolved for two sessions and returned a bot interstitial for a third. A weekly check is the only way to notice without someone remembering to look.</p>
+  <p><span class="lbl">What shipped</span>Both halves are in the repository now: .github/workflows/pages.yml rebuilds from the data layer and runs tools/validate.py before publishing anything, and weekly-audit.yml re-runs the same gate on a schedule without deploying. What is deliberately not automated: watching Amazon&#x27;s own pages, which no script in this repository should be doing.</p>
 </article><article class="sug" data-status="rejected">
   <div class="sug-head">
     <span class="flag-id">SUG-25</span>

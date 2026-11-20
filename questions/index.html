@@ -40,7 +40,7 @@
 <div class="wrap">
   <div class="page-head">
     <h1>Questions that need answers before decisions</h1>
-    <p>Fourteen questions, each with the information required to answer it and a plain statement of whether this session could. 3 are answered. 9 are blocked, and none of them is blocked for want of effort — they are blocked because the answer needs an account, a decision or a person.</p>
+    <p>22 questions, each with the information required to answer it and a plain statement of whether this session could. 7 are answered. 13 are blocked, and none of them is blocked for want of effort — they are blocked because the answer needs an account, a decision or a person.</p>
   </div>
 
   <div class="note-box">
@@ -162,6 +162,70 @@
   <td><span class="badge none">needs routine</span></td>
   <td style="min-width:220px">Re-run tools/validate.py monthly and diff the observed targets against products.json.</td>
   <td><a href="../flagged/#FLG-001">FLG-001</a></td>
+</tr><tr>
+  <td><strong>Q-15</strong></td>
+  <td style="min-width:240px">Do the five submitted links resolve to Amazon product pages at all?</td>
+  <td style="min-width:220px">Two independent fetch passes, recorded with the date and the destination each request returned.</td>
+  <td style="min-width:240px">Answered by this pass. Four of five reach a product page: B0CDY277D3 (CHEFMAN dual basket), B09B7SB46R (Emeril Lagasse French door), B08DKYBTPH (Chefman 8 Qt) and B0DZFD6R9Z (CHEF iQ Sense thermometer). One — B0c8moW59 — has never reached anything but Amazon&#x27;s continue-shopping interstitial. Earlier registers in this repository disagreed about exactly these rows, which is why the second pass was run.</td>
+  <td><span class="badge ok">answered</span></td>
+  <td style="min-width:220px">Nothing to unblock. Re-run the fetch on a schedule (SUG-24) and let the register update; treat every destination as an observation with a date, not a permanent fact.</td>
+  <td><span class="blank">—</span></td>
+</tr><tr>
+  <td><strong>Q-16</strong></td>
+  <td style="min-width:240px">What are the five products, by name and category?</td>
+  <td style="min-width:220px">The listing title and breadcrumb from each destination page.</td>
+  <td style="min-width:240px">Recorded for the four that resolved, transcribed from the destination page itself. Four are air fryers in Home &amp; Kitchen › Kitchen &amp; Dining › Small Appliances › Fryers › Air Fryers; one is a meat thermometer under Thermometers &amp; Timers › Meat. The fifth row has no name, because no listing was reached.</td>
+  <td><span class="badge ok">answered</span></td>
+  <td style="min-width:220px">Nothing. If the owner meant a different product by the 9-character code, that correction changes the register and every page built from it.</td>
+  <td><span class="blank">—</span></td>
+</tr><tr>
+  <td><strong>Q-17</strong></td>
+  <td style="min-width:240px">Is the GitHub Pages deployment currently healthy?</td>
+  <td style="min-width:220px">The Actions run history and the Pages build type, not a guess from the URL loading.</td>
+  <td style="min-width:240px">It was not. Every push to main ran the deploy workflow&#x27;s validation step and failed, so the Actions deployment was skipped and the site was being served only by the repository&#x27;s legacy branch build — a red check on a live URL, which looks fine and proves nothing. This pass replaced the ad-hoc check with the real validator and added a mount-path check.</td>
+  <td><span class="badge ok">answered</span></td>
+  <td style="min-width:220px">Confirm the next deploy goes green, and decide whether Pages should be served by Actions (build-then-publish) or by the branch build. Both are live in this repository at once today, which is the actual defect.</td>
+  <td><span class="blank">—</span></td>
+</tr><tr>
+  <td><strong>Q-18</strong></td>
+  <td style="min-width:240px">How many versions of this site exist, and which one publishes?</td>
+  <td style="min-width:220px">A count of competing front pages, stylesheets and navigation shells.</td>
+  <td style="min-width:240px">Five had accumulated at the root of main: a Good Measure Kitchen storefront, a /crisp/ publication, two further CSS/JS shells and an archive of older attempts. The integration pass promoted one publication to the root, moved the rest to archive/ untouched, and made the archive non-indexable. One brand, one nav, one stylesheet, one disclosure template.</td>
+  <td><span class="badge ok">answered</span></td>
+  <td style="min-width:220px">Nothing for the owner. Future sessions should extend the published surface via src/data and tools/build.py rather than adding a second front page alongside it.</td>
+  <td><span class="blank">—</span></td>
+</tr><tr>
+  <td><strong>Q-19</strong></td>
+  <td style="min-width:240px">Is there any traffic data at all to choose the next topic from?</td>
+  <td style="min-width:220px">Search Console query data for the published property, or an equivalent first-party source.</td>
+  <td style="min-width:240px">Unknown. No property is verified in this repository, no analytics endpoint is deployed, and the campaign ledger is empty by design. The topic queue on /topics/ is therefore stated as reasoning, not as demand.</td>
+  <td><span class="badge bad">blocked on account</span></td>
+  <td style="min-width:220px">Verify the property, wait for four weeks of queries, then re-order the queue. Any &#x27;high search volume&#x27; claim made before that would be invented.</td>
+  <td><span class="blank">—</span></td>
+</tr><tr>
+  <td><strong>Q-20</strong></td>
+  <td style="min-width:240px">What is the production hostname, and does the canonical URL match it?</td>
+  <td style="min-width:220px">A decision: publish at karagemop466-tech.github.io/Affil1/ or point a custom domain at the repository.</td>
+  <td style="min-width:240px">Unknown, and it matters. Every canonical tag, sitemap entry and feed link is currently written for the github.io project path. A custom domain without rebuilding the data layer would leave the site canonicalising to a host it no longer lives on.</td>
+  <td><span class="badge warn">blocked on decision</span></td>
+  <td style="min-width:220px">Decide the host. SITE_ROOT in tools/build.py is the single place to change; the build rewrites every page, sitemap and feed from it, and tools/validate.py fails the build if a canonical drifts outside that base.</td>
+  <td><span class="blank">—</span></td>
+</tr><tr>
+  <td><strong>Q-21</strong></td>
+  <td style="min-width:240px">Who signs off a guide before it publishes, and against what?</td>
+  <td style="min-width:220px">A named reviewer, or an accepted decision that the CI gate is the reviewer.</td>
+  <td style="min-width:240px">No human reviewer exists. Today the automated gate checks structure — disclosure present, links sponsored and marked, no price figures, images resolve, sitemap agreement — and cannot check whether a sentence is true. The signature line in PUBLISHING_WORKFLOW.md is still blank in the built pages, and the compliance table says so.</td>
+  <td><span class="badge warn">blocked on decision</span></td>
+  <td style="min-width:220px">Either name a reviewer or record, publicly, that publication is gated by the automated checks and the flagged register alone.</td>
+  <td><span class="blank">—</span></td>
+</tr><tr>
+  <td><strong>Q-22</strong></td>
+  <td style="min-width:240px">What does the owner want the site to optimise for in the next 60 days?</td>
+  <td style="min-width:220px">A stated priority: traffic, list building, revenue per visit, or a compliance clean-up before scaling.</td>
+  <td style="min-width:240px">Unknown from anything in the repository, and the difference changes the order of the board. A traffic priority means publishing volume plus Search Console; a revenue priority means the Special Link test and the one-link experiment first; a trust priority means an author, a corrections log and real photography.</td>
+  <td><span class="badge warn">blocked on decision</span></td>
+  <td style="min-width:220px">Pick one of the three in /suggestions/. The board is sorted so that the first two rows are worth more than the next ten combined.</td>
+  <td><span class="blank">—</span></td>
 </tr></tbody>
     </table>
   </div>
