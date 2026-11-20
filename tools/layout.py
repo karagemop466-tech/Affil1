@@ -106,9 +106,52 @@ def outbound(page_dir, url, label, **kw):
     return link(page_dir, url, label, external=True, **kw)
 
 
+WORDS = ("zero one two three four five six seven eight nine ten eleven twelve "
+         "thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty "
+         "twenty-one twenty-two twenty-three twenty-four twenty-five").split()
+
+
+def spelled(n):
+    """Small integers spelled out, because a page that says '21 flags' reads like a log."""
+    return WORDS[n] if 0 <= n < len(WORDS) else str(n)
+
+
+def _load(name):
+    import json
+    import pathlib
+    return json.loads((pathlib.Path(__file__).resolve().parent.parent / "src" / "data" / name).read_text(encoding="utf-8"))
+
+
+def flag_count():
+    return len(_load("flags.json")["flags"])
+
+
+def question_count():
+    return len(_load("questions.json")["questions"])
+
+
+TRACKING_TAG = "shopnow047c-20"
+
+
+def tagged(url):
+    """Every Amazon retail URL leaves this site carrying the Associates tag.
+
+    Policies 2(b) (SRC-02) requires the tracking ID as a parameter of the link,
+    so a bare /dp/ address is corrected here rather than left to each template.
+    A submitted short link is returned unchanged: it is shown as evidence of what
+    the owner sent, and the short-link service cannot carry the tag itself.
+    """
+    import re
+    if not AFFILIATE_HINT.search(url) or "link.amazon/" in url:
+        return url
+    if re.search(r"[?&]tag=", url):
+        return url
+    return url + ("&" if "?" in url else "?") + "tag=" + TRACKING_TAG
+
+
 def product_link(page_dir, url, label, **kw):
-    """A link to Amazon. Always marked sponsored, always in a new tab."""
-    return link(page_dir, url, label, sponsored=True, **kw)
+    """A link to Amazon. Always tagged, always marked sponsored, always a new tab."""
+    return link(page_dir, tagged(url), label, sponsored=True, **kw)
 
 
 def cite_or_product(page_dir, url, label, **kw):

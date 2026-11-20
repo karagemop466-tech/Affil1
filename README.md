@@ -49,6 +49,9 @@ Each rule exists because the site makes a matching claim somewhere.
    FTC says a footer-only disclosure is easy to miss.
 2. **Every Amazon product link carries `rel="sponsored nofollow noopener"`** and
    opens in a new tab. Google documents `sponsored` as the marker for paid links.
+   Every commerce link must also carry `?tag=shopnow047c-20` exactly: Program
+   Policies §2(b) requires the tracking ID as a parameter, so `layout.tagged()`
+   adds it at the point of rendering and the checker fails any link without it.
 3. **No price, star rating, review count or stock phrase in visible text.**
    Program Policies §2(b) allows those only from Amazon-served data or the
    Creators API / PA-API. Neither is connected.

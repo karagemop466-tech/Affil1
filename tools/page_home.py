@@ -11,8 +11,8 @@ House rules that still apply on this page:
   * every Amazon link is a tagged Special Link, marked sponsored
 """
 
-from layout import (DISCLOSURE, SITE_NAME, blank, esc, eyebrow, link, page,
-                    product_link, rel, section)
+from layout import (DISCLOSURE, SITE_NAME, blank, esc, eyebrow, flag_count, link, page,
+                    product_link, rel, section, spelled)
 from content import CLUSTERS, GUIDES
 
 FEATURED = "basket-or-oven-air-fryer"
@@ -218,7 +218,7 @@ def build(page_dir, products, meta):
     <div class="rule"><span class="rule-n">01</span><h3>The link goes where it says</h3>
       <p>Every product page names the ASIN it was observed to reach, and links to that same ASIN with the Associates tag attached. <a href="{esc(rel(d, 'products/index.html'))}">The register</a>.</p></div>
     <div class="rule"><span class="rule-n">02</span><h3>Nothing is invented to fill a gap</h3>
-      <p>No price, rating, review count or stock status appears anywhere, and no product is called a winner. Where a fact is missing, the page says so. <a href="{esc(rel(d, 'review/index.html'))}">Twenty flags</a>.</p></div>
+      <p>No price, rating, review count or stock status appears anywhere, and no product is called a winner. Where a fact is missing, the page says so. <a href="{esc(rel(d, 'review/index.html'))}">{esc(spelled(flag_count()).capitalize())} flags</a>.</p></div>
     <div class="rule"><span class="rule-n">03</span><h3>The disclosure is above the fold</h3>
       <p>The Associates statement sits under the masthead on every page and again in the footer, because the FTC says readers miss footer-only disclosures. <a href="{esc(rel(d, 'sources/index.html'))}">The quotations</a>.</p></div>
   </div>

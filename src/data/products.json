@@ -60,7 +60,10 @@
         "whether each basket is large enough on its own",
         "the counter space two drawers need when open"
       ],
-      "affiliate_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20"
+      "affiliate_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-02",
@@ -111,7 +114,10 @@
         "the door swing and the space in front of it",
         "what the six accessories actually are"
       ],
-      "affiliate_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20"
+      "affiliate_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-03",
@@ -163,7 +169,10 @@
         "how the 8 quarts compare with a two-basket 6",
         "whether the basket fits your sink"
       ],
-      "affiliate_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20"
+      "affiliate_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-04",
@@ -190,7 +199,7 @@
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-04 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Requested three times on 2026-11-20. The first two attempts landed on Amazon's /checkpoint/continue interstitial; the third resolved to /dp/B0DHZTCNR5. Recorded as observed on that date.",
+      "resolution_note": "Requested three times on 2026-11-20. The first two attempts landed on Amazon's /checkpoint/continue interstitial; the third resolved to /dp/B0DHZTCNR5. Recorded as observed on that date. Observed three times in this session on 2026-11-20, each time the same listing. A parallel session reported the inverse mapping (P-04 to B0DZFD6R9Z, P-05 to B0DHZTCNR5) on the same date; see FLG-021. Neither observation is treated as confirmed intent.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -217,7 +226,10 @@
         "the seller's accuracy and certification wording",
         "battery type and how it is replaced"
       ],
-      "affiliate_url": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20"
+      "affiliate_url": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-05",
@@ -243,7 +255,7 @@
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-05 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance.",
+      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance. Observed three times in this session on 2026-11-20, each time the same listing. A parallel session reported the inverse mapping (P-04 to B0DZFD6R9Z, P-05 to B0DHZTCNR5) on the same date; see FLG-021. Neither observation is treated as confirmed intent.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -269,7 +281,10 @@
         "app and account requirements",
         "probe battery life"
       ],
-      "affiliate_url": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20"
+      "affiliate_url": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     }
   ]
 }

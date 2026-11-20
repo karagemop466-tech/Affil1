@@ -118,11 +118,14 @@ BANNED = [
 AFFILIATE = re.compile(
     r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", re.I)
 AMAZON_ANY = re.compile(r"(^//|https?://)([a-z0-9.-]*amazon\.[a-z.]+|amzn\.to|link\.amazon)", re.I)
+TRACKING_ID = "shopnow047c-20"
+TAGGED = re.compile(r"[?&]tag=([A-Za-z0-9\-]+)")
+
 EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
 CITATION_OK = re.compile(
-    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|search\.google\.com|"
+    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|sell\.amazon\.com|support\.google\.com|consumer\.ftc\.gov|search\.google\.com|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"search\.google\.com|"
@@ -196,6 +199,15 @@ def check_page(path):
                 err(f"{rel}: affiliate link missing noopener: {href}")
             if a.get("target") != "_blank":
                 warn(f"{rel}: affiliate link without target=_blank: {href}")
+            # A commerce link must carry the Associates tag as a URL parameter
+            # (Program Policies 2(b), SRC-02). Submitted short links are shown for
+            # evidence and are exempt because they cannot carry the tag themselves.
+            if "amazon.com/dp/" in href:
+                tag = TAGGED.search(href)
+                if tag is None:
+                    err(f"{rel}: commerce link without the tracking tag: {href}")
+                elif tag.group(1) != TRACKING_ID:
+                    err(f"{rel}: commerce link carries the wrong tag: {href}")
         elif AMAZON_ANY.search(href):
             # A citation to Amazon's own policy or help page. It must NOT be
             # marked sponsored, because it is not a paid link.

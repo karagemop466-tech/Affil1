@@ -4,8 +4,8 @@ Two audiences, one data file. A shopper reads the card; a reviewer reads the
 table under it. Neither is asked to trust the other's column.
 """
 
-from layout import (blank, esc, eyebrow, link, outbound, page, product_link, rel,
-                    section, table, pagehead)
+from layout import (blank, esc, eyebrow, flag_count, link, outbound, page, product_link, rel,
+                    section, spelled, table, pagehead)
 from page_home import buy_button, img, picture
 
 FIELDS = [
@@ -239,7 +239,7 @@ def build_product(page_dir, p, meta):
       <p>Nothing on this page comes from using the product. The seller's claims are quoted as claims; the destination is the one
       fact this site established by opening the link. Where a useful number would need Amazon's API or a test, the page has
       neither and says so.</p>
-      <p><a class="tlink" href="{esc(rel(d, 'review/index.html'))}">All twenty flags <span aria-hidden="true">&rarr;</span></a></p>
+      <p><a class="tlink" href="{esc(rel(d, 'review/index.html'))}">All {esc(spelled(flag_count()))} flags <span aria-hidden="true">&rarr;</span></a></p>
     </div>
   </div>
 </div></section>

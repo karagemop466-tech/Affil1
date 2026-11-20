@@ -60,15 +60,19 @@ empty with a defined schema and a provenance rule (FLG-017).
   the Operating Agreement §5 requires.
 - Every Amazon product link: `rel="sponsored nofollow noopener"`, new tab, tagged.
 - `tools/check.py` fails the build on a missing disclosure, an unmarked product link, a
-  price or rating phrase, a test claim, a broken link, or a root-absolute link.
+  price or rating phrase, a test claim, a broken link, a root-absolute link, or a commerce
+  link without `?tag=shopnow047c-20`. That last rule caught twelve untagged evidence links
+  on the day it was added.
 
 ## Still unknown (published, not hidden)
 
 Six blocking questions: is the tracking ID active; does a click register; what was the
 intended ASIN for each link; is the account in the right marketplace; is API/image access
-available; what search demand exists. Ten items are flagged on `review/index.html`,
+available; what search demand exists. Twenty-one items are flagged on `review/index.html`,
 including the unresolved compliance status of `link.amazon` short links — which this site
-does **not** claim are invalid (FLG-003).
+does **not** claim are invalid (FLG-003) — and a new one, FLG-021: a parallel session recorded
+the opposite destinations for the two thermometer links, so this page shows both claims and
+says the conflict is unresolved rather than picking the tidier one.
 
 ## Decisions waiting for you
 

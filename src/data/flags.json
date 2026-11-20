@@ -277,6 +277,22 @@
       ],
       "impact": "The next topic cannot be chosen from evidence yet.",
       "blocks": "the publishing cadence"
+    },
+    {
+      "id": "FLG-021",
+      "severity": "high",
+      "title": "Two sessions observed opposite destinations for P-04 and P-05 on the same day",
+      "expected": "One short link resolves to one product page, and every observer sees the same page.",
+      "found": "In this session link.amazon/B0c8moW59 reached B0DHZTCNR5 (ThermoMaven instant-read) three times on 2026-11-20, and link.amazon/B0f3GKalj reached B0DZFD6R9Z (CHEF iQ Sense) on the same date. A parallel session recorded the reverse: B0c8moW59 to B0DZFD6R9Z and B0f3GKalj to B0DHZTCNR5.",
+      "reading": "At least one observation is wrong, or the redirect is not stable per request. Nothing here settles which; the disagreement is recorded rather than resolved by choosing the tidier story. Both destinations are thermometers, so the site's category split is unaffected either way.",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "A click from the enrolled account, then the Associates click report"
+      ],
+      "impact": "The P-04 and P-05 cards name the listing this session actually saw, and carry the disagreement in the note. No claim about which product the owner meant to ship appears anywhere.",
+      "blocks": "confirmed product-intent for P-04 and P-05",
+      "resolved": false
     }
   ]
 }

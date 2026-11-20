@@ -1,6 +1,7 @@
 """The question register: what is known, what is missing, and who holds it."""
 
-from layout import cite_or_product, esc, eyebrow, page, pagehead, rel, section, table
+from layout import (cite_or_product, esc, eyebrow, page, pagehead, question_count, rel,
+                    section, spelled, table)
 from content import CLUSTERS
 
 
@@ -53,7 +54,7 @@ def build(page_dir, questions, meta):
             {"html": status},
         ])
     info_tbl = table(["Ref", "Question", "Information needed", "Who holds it", "Status"], info_rows,
-                     cls="register", caption="The information register: sixteen questions and the missing piece for each")
+                     cls="register", caption=f"The information register: {spelled(question_count())} questions and the missing piece for each")
 
     buyer = "".join(f'''<a class="path" href="{esc(rel(d, 'guides/' + c['slug'] + '.html'))}">
     <h3>{esc(c['question'])}</h3>

@@ -62,6 +62,26 @@
       "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
       "applied_in": "rel=\"sponsored nofollow noopener\" on every Amazon product link.",
       "status": "read directly, 2026-11-20"
+    },
+    {
+      "id": "SRC-06",
+      "title": "Performance report (Search results): Overview and basic setup",
+      "publisher": "Google Search Console Help",
+      "url": "https://support.google.com/webmasters/answer/7576553",
+      "page_date": "No date shown on the page",
+      "used_for": "The only sanctioned way to learn which queries bring visitors, and which pages earn impressions without clicks. It is where the SEO half of this plan gets its numbers, and it is not connected.",
+      "quote": "See how your search traffic changes over time, where it's coming from, and what search queries are most likely to show your site.",
+      "applied_in": "Question Q-14 and the measurement section: search queries are listed as unknown until Search Console is verified, rather than guessed from keyword tools."
+    },
+    {
+      "id": "SRC-07",
+      "title": "Verify your site ownership",
+      "publisher": "Google Search Console Help",
+      "url": "https://support.google.com/webmasters/answer/9008080",
+      "page_date": "No date shown on the page",
+      "used_for": "Names the verification methods available to the owner (HTML file, HTML tag, DNS) and the fact that data starts accruing before verification finishes. The steps this site cannot perform for the owner.",
+      "quote": "Ownership verification means proving to Search Console that you own a specific website.",
+      "applied_in": "The publishing workflow's measurement gate: verification is listed as an owner action with three named methods, not as a vague 'set up analytics' item."
     }
   ],
   "could_not_verify": [
