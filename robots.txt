@@ -1,4 +1,15 @@
 User-agent: *
 Allow: /
+Disallow: /Affil1/crisp/
+Disallow: /Affil1/reviews/
+Disallow: /Affil1/data/
+Disallow: /Affil1/src/
+Disallow: /Affil1/tools/
+Disallow: /Affil1/analytics/
+
+# One canonical edition. Earlier editions and the build's own machinery are
+# kept in the repository as a record but are not offered to search engines:
+# three page sets disagreeing about the same five products, all competing in
+# one index, is a problem this site made for itself.
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml

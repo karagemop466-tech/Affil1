@@ -606,3 +606,21 @@ table.discovery td:nth-child(1){white-space:nowrap}
 table.negative td:first-child{white-space:nowrap;font-weight:500}
 table.events td:first-child{white-space:nowrap}
 .callout p:last-child{margin-bottom:0}
+
+/* ---------- masthead on narrow screens ----------
+   The shop has to work in a hand. The nav wraps to its own row rather than
+   overflowing, and the disclosure strip stays above it in the reading order. */
+@media(max-width:760px){
+  .masthead-inner{flex-wrap:wrap;gap:.65rem;padding:.95rem 0 .8rem}
+  .brand{order:1}
+  .nav{order:2;width:100%;gap:.35rem;border-top:1px solid var(--line);padding-top:.6rem}
+  .nav a{font-size:.8rem;padding:.32rem .55rem;border:1px solid var(--line);border-radius:2px;background:var(--card)}
+  .nav a[aria-current=page]{border-color:var(--amber);background:var(--amber-soft)}
+  .wrap{width:calc(100% - 2.2rem)}
+  .disclosure-inner{padding:.6rem 0}
+  .disclosure-code{display:none}
+  h1{font-size:clamp(1.95rem,7.6vw,2.7rem)}
+  .hero-inner{padding:2.8rem 0 2.4rem;min-height:0}
+  .pagehead{padding:2.3rem 0 1.9rem}
+  .sec-head{grid-template-columns:1fr;gap:.6rem}
+}
