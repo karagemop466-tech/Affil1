@@ -26,14 +26,14 @@ def build_about(page_dir, sources, meta):
     body = f"""{pagehead(
         'About',
         'A small, careful<br>shop window',
-        f'{SITE_NAME} is a static publication about air fryers and one thermometer. It has no backend, no cookies and no third-party requests. This page states its rules so you can hold it to them.',
+        f'{SITE_NAME} is a static publication about air fryers and one thermometer. This static publication has no active analytics backend or third-party tracking requests. This page states its rules so you can hold it to them.',
         meta='Static HTML &middot; self-hosted fonts &middot; no analytics running &middot; no prices',
     )}
 {section(f'''
 <div class="about-grid">
   <div class="prose-block">
     <h2 id="what">What this site is</h2>
-    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Four air fryers and one meat thermometer were submitted by the operator of the site. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
+    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Five product links were submitted by the operator of the site; the intended products are unconfirmed. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
     <p>It is not a review site. Nothing here was bought, cooked with, measured or compared by testing. That is a real limitation and it is stated on every product page and in every guide rather than in a footnote here.</p>
 
     <h2 id="why-blank">Why so much is blank</h2>
@@ -153,7 +153,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>An 18-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, fifteen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <p>A 22-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>

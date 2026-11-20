@@ -57,7 +57,7 @@ All flagged items are published at `review/index.html` and `flagged-for-review.h
 - PR created from `arena/e69a770b-affil1` to `main` with summary of changes, sources used, and flagged irregularities.
 - PR merged successfully (`gh pr merge`).
 - GitHub Pages deployed successfully: https://karagemop466-tech.github.io/Affil1/
-- PR link: https://github.com/karagemop466-tech/Affil1/pull/23
+- PR link: https://github.com/karagemop466-tech/Affil1/pull/29
 - Merge result: success
 
 ## Overlap with other branches

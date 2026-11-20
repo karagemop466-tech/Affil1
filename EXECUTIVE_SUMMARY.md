@@ -1,9 +1,16 @@
 # Executive Summary — Affil1
 
+<<<<<<< HEAD
 **Project:** Amazon affiliate marketing platform (GitHub Pages)  
 **Branch:** `arena/e69a770b-affil1` (base `54b2b451ec97c33d390b095ec777b56e31958bf9`)  
 **Tracking ID:** `shopnow047c-20`  
 **Prepared:** 2026-11-20  
+=======
+**Project:** Amazon affiliate marketing site (GitHub Pages)
+**Branch:** `arena/8206a8d0-affil1` (polish + re-verification pass, 2026-11-20)
+**Tracking ID:** `shopnow047c-20`
+**Prepared:** 2026-11-20
+>>>>>>> origin/main
 
 ## Goal & Vision
 Collect, organize, and analyze products into a polished marketing affiliate website that reads like a publication and shop, not an audit. The site must be findable (indexed by search engines), trustworthy (automated where possible, gated where not), and reader-facing (authorship, navigation, brand, imagery, seasons, clusters). Lead with products, not verification. Publish question-shaped guides, measure clicks/conversions, and keep disclosures above the fold and links sponsored.
@@ -65,6 +72,7 @@ Collect, organize, and analyze products into a polished marketing affiliate webs
 ## Questions, Information & Answers (Decision Basis)
 | # | Question / Information Needed | Answer (What We Have) | Status | Source |
 |---|---|---|---|---|
+<<<<<<< HEAD
 | Q1 | What product does each submitted link point to? | Verified for P-01, P-02, P-05; Unverified for P-03, P-04 | Partial | Amazon.com (official) |
 | Q2 | Intended ASIN for each product? | Parsed from URL; separate from observed target | Verified/Unverified | Submitted links / Amazon |
 | Q3 | Official Amazon listing URL? | Confirmed for P-01, P-02, P-05 | Partial | Amazon.com (official) |
@@ -75,6 +83,13 @@ Collect, organize, and analyze products into a polished marketing affiliate webs
 | Q8 | Clicks/conversions measured? | Endpoint defined; client instrumented; server persistence pending | Partially implemented | Affil1 (analytics.js) |
 | Q9 | Disclosure above fold + footer? | Yes — on every page | Done | Affil1 (site) |
 | Q10 | Outbound links marked sponsored? | Yes — `rel="sponsored nofollow"` | Done | Affil1 (site) |
+=======
+| 1 | https://link.amazon/B04G1MEwY | B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | Verified |
+| 2 | https://link.amazon/B02NbDxp3 | B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Verified |
+| 3 | https://link.amazon/B00hJ57DV | B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | Listing checked 2026-11-20 (re-verified) |
+| 4 | https://link.amazon/B0c8moW59 | B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | Listing checked 2026-11-20 (resolved on re-verification; was checkpoint-only) |
+| 5 | https://link.amazon/B0f3GKalj | B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | Listing checked 2026-11-20 (re-verified) |
+>>>>>>> origin/main
 
 ## Missing Information & Discovery Suggestions
 - Log into Amazon Associates dashboard to confirm tracking ID and pull reports.
@@ -87,9 +102,14 @@ Collect, organize, and analyze products into a polished marketing affiliate webs
 - GitHub Pages deployment workflow (`.github/workflows/pages.yml`).
 - Parallel session coordination via `COORDINATION.md`.
 
+<<<<<<< HEAD
 ## Compliance & Trust
 - Automation for verifiable parts; gate for unverified parts (prices, ratings, compliance).
 - Disclosure and policy checks integrated into publishing workflow.
+=======
+## Measurement (turned on before content)
+Five defined events (canonical, src/data/events.json): `page_view`, `outbound_product_click`, `guide_read_75`, `compare_view`, `flag_page_view`. Self-hosted collector at `/analytics/collect` (code: `server/collect.js`); client degrades silently when unreachable. No cookies, no IP logging. Next guide topic chosen from measured queries.
+>>>>>>> origin/main
 
 ## Next Steps
 1. Review suggestions (S-001..S-005) and choose paths.
@@ -97,5 +117,16 @@ Collect, organize, and analyze products into a polished marketing affiliate webs
 3. Continue measuring and iterating based on data.
 4. Maintain publication polish (authorship, navigation, brand, imagery, seasons, clusters).
 
+<<<<<<< HEAD
 ---
 *Verified line-by-line against official sources (Amazon.com, Amazon Associates Operating Agreement, FTC guidance, Google Search Console). Unverified values left blank and flagged. No hallucinations.*
+=======
+## Compliance gate
+Disclosure above the fold on every page + footer repeat; `rel="nofollow sponsored"` on all outbound product links; review against Amazon Associates Operating Agreement and FTC endorsement guidance before publishing (see `PUBLISHING_WORKFLOW.md`).
+
+## Flagged items
+All five short links now resolve to product pages (re-verified 2026-11-20). Every observed ASIN differs from the 9-character short-link slug — intended and observed identifiers remain in separate fields and are never merged. Tracking attribution under shopnow047c-20 remains unconfirmed for all five (FLG-002). All flagged items are published on `/reviews/flagged.html` with source links; they do not block the launch.
+
+## Next decisions awaiting review (`/suggestions.html`)
+S-001 price/commission tracking · S-002 replace short links with validated Special Links · S-003 turn on real analytics · S-004 compliance gate in publishing workflow · S-005 brand imagery.
+>>>>>>> origin/main

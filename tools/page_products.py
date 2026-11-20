@@ -60,7 +60,7 @@ def build_register(page_dir, products, meta):
 <div class="reg-lede">
   <div>
     <h2>What this table is</h2>
-    <p>Five links were supplied. Each was opened once, on 20 November 2026, and the page it landed on was read. Four landed on a live Amazon listing and the ASIN and title were transcribed. The fifth did not land at all.</p>
+    <p>Five links were supplied. The register records the Amazon listing and ASIN observed for each on 20 November 2026, including P-04, which resolved on re-verification. These observations do not establish intended product identity or tracking.</p>
     <p>Nothing in this table was inferred. Where a value could not be established, the cell is empty and the record says why.</p>
   </div>
   <dl class="reg-stats">
@@ -131,7 +131,7 @@ def _thermometer_note(d):
   <div>
     {eyebrow('Read the category path')}
     <h2>One of these is filed under thermometers</h2>
-    <p>P-05 resolves to a wireless meat thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. The other four are under Small Appliances, then Fryers, then Air Fryers.</p>
+    <p>An earlier P-05 observation reached a wireless meat thermometer; a later check reached a different thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. P-04 was unresolved in that earlier check and later reached a thermometer listing.</p>
     <p>That is not a problem with the link. It would be a problem with this site if it presented a thermometer as the fifth air fryer, which is exactly what a site written from the brief alone would have done.</p>
     <p><a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">The thermometer record <span aria-hidden="true">&rarr;</span></a></p>
   </div>

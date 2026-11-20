@@ -49,7 +49,7 @@
           <a href="suggestions.html" class="btn btn-ghost">Suggestions &#8594;</a>
         </div>
 
-        <p class="small">No decision should be made until the questions below are answered with information we actually have. Items marked <strong>missing</strong> are things we do not have and need to discover.</p>
+        <p class="small">No decision should be made until the questions below are answered with information we actually have. <strong>Blocked</strong> means no official source is reachable or the answer requires account access the owner holds. A blocked question is a reason to leave the value blank — never to guess. Updated 2026-11-20: all five listings now resolve (Q-03 partly answered); tracking and compliance questions (Q-01/Q-02) remain blocked on the Associates test.</p>
 
         <div class="table-wrap">
           <table>
@@ -64,6 +64,7 @@
             </thead>
             <tbody>
               <tr>
+<<<<<<< HEAD
                 <td>Q1</td>
                 <td>What product does each submitted Amazon short link point to?</td>
                 <td>Verified for P-01 (B0CDY277D3), P-02 (B09B7SB46R), P-05 (B0DZFD6R9Z). Unverified for P-03 and P-04 (homepage/checkpoint).</td>
@@ -132,6 +133,104 @@
                 <td>Yes — rel="sponsored nofollow" + visual sponsored tag.</td>
                 <td><span class="badge badge-ok">Done</span></td>
                 <td>Affil1 (this site)</td>
+=======
+                <td>Q-01</td>
+                <td><strong>Do the five supplied short links actually carry the tracking ID shopnow047c-20?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The Associates click report, or a resolved URL visibly containing the tag parameter, for each link.</span></td>
+                <td>Unknown.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Open each link while signed in to the Associates dashboard and check that the click registers under shopnow047c-20.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-02</td>
+                <td><strong>Are link.amazon short links compliant Special Links?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: An official statement from Amazon on this specific redirector, or a tracked click observed end to end.</span></td>
+                <td>Unresolved. No official source either permits or prohibits this specific host in a way this session can cite, and no tracked click could be observed.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Test one link through the Associates workflow. If the click appears in the report, it is functioning as a Special Link. That is a measurement, not a ruling.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-03</td>
+                <td><strong>What is the valid ASIN for each of the five products?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The ten-character ASIN shown on each product page and in the owner's Associates record.</span></td>
+                <td>Four observed redirect targets are recorded and are ten characters long. The fifth supplied link never reached a product page, so its ASIN is blank.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Open B0c8moW59 in a browser, past the interstitial, and read the ASIN from the page or URL.</span></td>
+                <td><span class="badge">partly-answered</span></td>
+                <td><a class="source-link" href="https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-04</td>
+                <td><strong>What commission rate applies to each product?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The Standard Commission Income schedule for Home & Kitchen and for the thermometer category.</span></td>
+                <td>Not recorded. The rate card URL redirects to an Associates sign-in page.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Read the rate card while signed in. Do not publish a rate until then.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-05</td>
+                <td><strong>What do these appliances cost, and are they in stock?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Price and availability served by Amazon through a link it serves, or through the Creators API / PA API.</span></td>
+                <td>Not published, because publishing it without that feed is prohibited, not merely unverified.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Connect the Creators API or PA API, or embed an Amazon-served widget that carries the price.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-06</td>
+                <td><strong>Which of these appliances is best?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Independent measurement, or a stated, disclosed testing method performed by this site.</span></td>
+                <td>No winner is declared. This site has not tested any product and says so on every guide.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Either purchase and test units and publish the method, or keep the site in its current advisory mode. Do not synthesise a verdict from listing titles.</span></td>
+                <td><span class="badge">blocked-on-decision</span></td>
+                <td><a class="source-link" href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-07</td>
+                <td><strong>Would any of these products appeal to readers enough to click?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Outbound click data from a first-party endpoint, over a meaningful window.</span></td>
+                <td>No data exists yet. The ledger is intentionally empty.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Choose a first-party host, deploy the documented collector, then wait for enough sessions to mean anything.</span></td>
+                <td><span class="badge">blocked-on-decision</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-08</td>
+                <td><strong>Which guide topic should be written next?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Search Console query impressions, and the click-through rate of existing guides.</span></td>
+                <td>Undetermined. Four guides are published as hypotheses; none has been measured.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Verify the site in Search Console, submit the sitemap, and revisit after four to six weeks.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://support.google.com/webmasters/answer/9008080" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-09</td>
+                <td><strong>Under what name should the site publish, and who is the author?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: A real legal or pen name, a short bio, and a decision on whether to disclose testing or not.</span></td>
+                <td>Undetermined. No author identity is published, because inventing one would be a fabrication.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Supply the name and a two-sentence bio. Then an author page and a real byline can be published.</span></td>
+                <td><span class="badge">blocked-on-decision</span></td>
+                <td><a class="source-link" href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-10</td>
+                <td><strong>Is the site allowed to show Amazon product photographs?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Either an Amazon-served widget that carries the image, or API image fields used unmodified under the IP License.</span></td>
+                <td>Not established for this site. Program Content may not be altered, and this site has no licensed feed.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Enrol the API, or use Amazon-served link formats, and then place images unmodified.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-11</td>
+                <td><strong>Does the FTC require the disclosure to be a specific wording?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The FTC's own guidance on affiliate disclosure wording and placement.</span></td>
+                <td>Answered. The FTC gives example wording and says the disclosure must be clear and conspicuous, and that the reader must be able to weigh the recommendation. Nearby 'paid link' labelling is described as adequate.<br><span style="color:var(--muted);font-size:.82rem">To unblock: n/a</span></td>
+                <td><span class="badge badge-ok">answered</span></td>
+                <td><a class="source-link" href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-12</td>
+                <td><strong>May this site display price comparison tables?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The Associates Program rules on price display, including the comparison-format clause.</span></td>
+                <td>Answered as a constraint. A price may be shown only if Amazon serves it or it arrives via the API, and a comparison format must show both the lowest new and, if provided, lowest used price. This site shows neither.<br><span style="color:var(--muted);font-size:.82rem">To unblock: n/a</span></td>
+                <td><span class="badge badge-ok">answered</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
+              </tr>
+              <tr>
+                <td>Q-13</td>
+                <td><strong>What was in this repository before this session?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Git history and working tree.</span></td>
+                <td>Answered. One commit, one eight-byte README. No site, no prior pages, no data. The 'existing site' referenced in the brief is not in this repository.<br><span style="color:var(--muted);font-size:.82rem">To unblock: n/a</span></td>
+                <td><span class="badge badge-ok">answered</span></td>
+                <td>repository git log (this repo)</td>
+              </tr>
+              <tr>
+                <td>Q-14</td>
+                <td><strong>Will the five links stay pointed at the same products?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: A dated re-check of each redirect, repeated over time.</span></td>
+                <td>Unknown over time. Each row is a single observation on one date.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Re-run tools/validate.py monthly and diff the observed targets against products.json.</span></td>
+                <td><span class="badge">needs-routine</span></td>
+                <td><a class="source-link" href="https://link.amazon/B04G1MEwY" target="_blank" rel="nofollow">Official source</a></td>
+>>>>>>> origin/main
               </tr>
             </tbody>
           </table>

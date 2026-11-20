@@ -17,6 +17,8 @@ concurrency:
 
 jobs:
   build:
+    outputs:
+      source: ${{ steps.pages-source.outputs.source }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,6 +29,9 @@ jobs:
       - name: Verify every rule the site claims
         run: python3 tools/check.py
 
+      - name: Check relative links across served editions
+        run: python3 tools/check_local_links.py
+
       - name: Confirm the build is reproducible, not hand-edited
         run: |
           cp -r . /tmp/first-build
@@ -36,14 +41,28 @@ jobs:
             exit 1
           fi
 
+      - name: Stage the public edition
+        run: python3 tools/stage.py _site
+
+      - name: Read the configured Pages source
+        id: pages-source
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)
+          echo "source=$source" >> "$GITHUB_OUTPUT"
+
       - uses: actions/configure-pages@v5
+        if: steps.pages-source.outputs.source == 'workflow'
 
       - uses: actions/upload-pages-artifact@v3
+        if: steps.pages-source.outputs.source == 'workflow'
         with:
-          path: .
+          path: _site
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: needs.build.outputs.source == 'workflow'
     needs: build
     environment:
       name: github-pages
