@@ -9,14 +9,21 @@
 
 ## What exists now
 
-A five-page publication with a front page, four question-shaped buying guides, a
-form-faithful comparison page, a products register, and four reviewer-facing
-registers (sources, suggestions, open questions, flagged for review). Four
-products are documented. One supplied link could not be resolved and is published
-as a gap rather than filled in.
+A buyer-facing publication with a front page, four question-shaped buying
+guides, a form-faithful comparison table, a products register, and four
+reviewer-facing registers (sources, suggestions, open questions, flagged for
+review). Five products are documented; all five submitted links now resolve to
+official Amazon listings (the fifth, link.amazon/B0c8moW59, resolved on
+re-verification 2026-11-20 — it previously only returned Amazon's checkpoint
+page).
 
 Every page carries the affiliate disclosure directly under the masthead and again
 in the footer. The build fails if either is missing.
+
+Reconciliation this pass (2026-11-20): `tools/validate.py` was reconciled to the
+canonical products.json schema and passes; the analytics client now records the
+five canonical events from `src/data/events.json`; root-build outbound product
+links now carry the Associates tag (`?tag=shopnow047c-20`).
 
 ## The four decisions that shaped it
 

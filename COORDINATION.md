@@ -296,6 +296,15 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 2. The owner should confirm the holiday photograph's origin (FLG-020).
 3. Consider recording this session's P-04 observation in `src/data/reverification.json`. That file belongs to `arena/359baa16`, so this session did not edit it.
 
+## arena/982fea5a-affil1 — integration + verification pass (merge with main, 2026-11-20)
+
+- **Merged `origin/main` (3193be2) into the branch** — `git merge origin/main` on 2026-11-20. Conflicts (14): the newer-edition files take main's versions (the maintained root edition — generated pages, the paid-link gate, the canonical-five analytics client, 21 flags); this pass's reconciled `tools/validate.py` was retained. `docs/EXECUTIVE_SUMMARY.md` was deleted by main — the root `EXECUTIVE_SUMMARY.md` supersedes it (this pass appended its pass records to the root summary).
+- **FLG-021 resolved this pass:** `tools/validate.py` reconciled to the canonical `src/data/products.json` schema; passes on the merged tree: 1441 checks, 0 warnings.
+- **Line-by-line verification of the five submitted links** (fetch_page against official Amazon pages, 2026-11-20): link.amazon/B04G1MEwY → https://www.amazon.com/dp/B0CDY277D3; link.amazon/B02NbDxp3 → https://www.amazon.com/dp/B09B7SB46R; link.amazon/B00hJ57DV → https://www.amazon.com/dp/B08DKYBTPH; link.amazon/B0c8moW59 → https://www.amazon.com/dp/B0DHZTCNR5 (resolved on 2026-11-20; was checkpoint-only); link.amazon/B0f3GKalj → https://www.amazon.com/dp/B0DZFD6R9Z. All five titles match the register in `src/data/products.json`. No tag observed on arrival (FLG-002). Sources: the five listing pages, https://affiliate-program.amazon.com/help/operating/policies, https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference.
+- **Toolchain on the merged tree:** `python3 tools/build.py` (29 pages), `python3 tools/check.py` (0 errors, 0 warnings), `python3 tools/check_local_links.py` (0 broken), `python3 tools/validate.py` (1441 checks, 0 warnings). Reproducibility: `build.py` run twice, no diff.
+- **Integration PR:** [#76](https://github.com/karagemop466-tech/Affil1/pull/76) — merged into main on 2026-11-20, merge commit <sha>, state merged.
+- **Pages:** https://karagemop466-tech.github.io/Affil1/ — status built (confirmed after the merge).
+
 ### Verification on this branch
 
 - `python3 tools/build.py` exit 0; `python3 tools/check.py`: 29 pages, 0 errors, 0 warnings; `python3 tools/check_local_links.py`: 29 pages, 0 broken.
@@ -461,62 +470,142 @@ written into another session's evidence file.
 
 - Integration PR: https://github.com/karagemop466-tech/Affil1/pull/60
 - Merge result: recorded below after merge.
-## Release receipt — session-arena-83e015f6 (final integration, this session)
 
-**Branch:** `arena/83e015f6-affil1` (base `ff74e5b`). Tasks 18–21 claimed at the top
-of this board.
+## Session arena/06f00bdd-affil1 — verification pass, decision gate, API-gating finding (2026-11-20)
 
-**What this session did, in order:**
+Owner: `arena/06f00bdd-affil1`. Branched from `7b236c2`; rebased onto `a3f435a` after
+main advanced through PRs #52, #61 and #67. No other session had an open claim on the
+files below.
 
-1. **Line-by-line verification (fourth independent pass).** Fetched all five
-   submitted short links against Amazon.com official site (2026-11-20 05:18–05:22Z).
-   Results agree with `src/data/reverification.json` on every row: P-01 →
-   B0CDY277D3, P-02 → B09B7SB46R, P-03 → B08DKYBTPH, P-05 → B0DZFD6R9Z, P-04 →
-   bot interstitial only. Recorded as `additional_passes.obs-83e015f6` in
-   `src/data/reverification.json`.
-   **New finding (FLG-020):** `src/data/products.json` carries P-04 → B0DHZTCNR5
-   (per FLG-016's reconciliation) while `reverification.json` and four recorded
-   passes saw no product page for that link. Published as a disagreement in
-   `src/data/flags.json`, not settled by preference.
-2. **Source-register spot-check.** Re-read 16 policy clauses verbatim from the
-   official pages (Operating Agreement §5–6, updated Oct 15 2025; Program Policies,
-   updated Apr 14 2026 — Commission Income Statement §1/§6 and Participation
-   Requirements §1–3). One row downgraded to unverified: the Seller Central
-   ASIN-definition page errors without sign-in, so the 10-character shape stays an
-   observation (row-level notes in
-   `archive/2026-11-20-pr15-recovery/data/sources.json`). FTC pages blocked the
-   fetcher in this pass; official URLs retained for manual review.
-3. **Recovered and archived PR #15.** Branch `integration-main` (the "one
-   canonical site" integration) was closed and deleted without merging at
-   2026-11-20 05:23:56Z. Its tree was recovered from `refs/pull/15/head`,
-   temporarily adopted, then superseded by main's later single-pipeline
-   reconciliations and preserved whole under
-   `archive/2026-11-20-pr15-recovery/` (84 files: its build gate, source
-   register, product-intent record, generated edition and three original
-   editorial images). Nothing deleted.
-4. **Merge with main, no work discarded.** `origin/main` merged twice (post-#63,
-   post-#57) with main's tree preferred for shared paths; my unique delta
-   archived per repository convention; records folded in additively.
-5. **Gate run on the merged tree:** `tools/build.py` → 29 pages;
-   `tools/check.py` → 0 errors, 0 warnings; `tools/check_local_links.py` →
-   0 broken.
+**Note on drift.** This session started on a base 40+ commits behind main and found
+several defects there. On re-deriving against current main, three of them were already
+fixed by other sessions and are **not** claimed here: the stale FLG-004 wording, the
+`events.json` / `analytics.js` event-name mismatch, and the unreachable USDA source.
+What follows is only what was still true of `a3f435a`.
 
-**Data-register reconciliation (earlier in the session):** three legacy registers
-(`data/confirmations.json`, `data/products.json`, `data/ledger.json` at the
-pre-merge paths) disagreed on status vocabulary and on P-03/P-05 observations.
-They carry supersession notes pointing at the canonical registers and are
-preserved under `archive/2026-11-20-pr15-recovery/data/`.
+| Task | Status | Files |
+|---|---|---|
+| Re-verify all five supplied links against amazon.com | done | `src/data/products.json` (meta only) |
+| Record the PA-API deprecation and the Creators API sales gate | done | `src/data/sources.json`, `src/data/flags.json` |
+| Build the decision gate page | done | `src/data/decisions.json`, `tools/page_decide.py`, `tools/build.py`, `tools/layout.py` |
+| Correct S-04, which pointed at a deprecated API | done | `src/data/suggestions.json` |
+| Add three non-duplicative proposals | done | `src/data/suggestions.json` |
+| Close the one-directional build guard | done | `tools/build.py` |
+| Make `tools/validate.py` report a failing row instead of crashing on a schema change | done | `tools/validate.py` |
 
-**PR and deploy record:** appended below after the merge.
+### Verification performed, 2026-11-20
 
-**Cross-scope edit, logged here per the handoff rules (session-arena-83e015f6):**
-`tools/sweep_surfaces.py` — added `INTERNAL_SECTIONS = ("decision-support/",)` and
-a skip in `main()`, mirroring `tools/check.py`'s same tuple. Rationale: the
-"Affiliate launch checks" gate (`would move: 0`) failed on every branch,
-including main's own pushes, because the sweep wanted to set aside the
-hand-maintained decision desk that PR #57 had already exempted in `check.py`
-("If the integration session moves `decision-support/` into the generated set,
-delete the tuple entry and the workflow step together" — this session instead
-kept it hand-maintained and made the sweep agree with `check.py`). Both
-workflows are green afterwards. If the desk is later folded into the generated
-set, delete the tuple in both files together.
+Each link was opened once with a redirect-following fetcher; the final URL, listing
+title and category breadcrumb were transcribed. All five matched the register.
+
+| Ref | Submitted | Reached | Title on arrival |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | amazon.com/dp/B0CDY277D3 | CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black |
+| P-02 | link.amazon/B02NbDxp3 | amazon.com/dp/B09B7SB46R | Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven |
+| P-03 | link.amazon/B00hJ57DV | amazon.com/dp/B08DKYBTPH | Chefman Air Fryer 8 Qt, TurboFry 4-in-1 with 450°F Hi-Fry Option |
+| P-04 | link.amazon/B0c8moW59 | amazon.com/dp/B0DHZTCNR5 | ThermoMaven 1 Sec Professional Digital Meat Thermometer |
+| P-05 | link.amazon/B0f3GKalj | amazon.com/dp/B0DZFD6R9Z | CHEF iQ Sense, Smart Wireless Meat Thermometer, 3 Ultra-Thin Probes |
+
+This **agrees with the reconciled mapping** recorded in FLG-016 (P-04 ThermoMaven,
+P-05 CHEF iQ Sense), and is a third independent observation of it.
+
+**No arrival URL carried a tag parameter.** The parameters observed were `lv`,
+`btn_type`, `gaOptInStatus`, `btn_ref`, `channelId`, `plpRedirect`, and on two
+listings `sbo`, `language`, `th`. FLG-002 stands on a fresh observation.
+
+Sources read directly on the same date:
+
+| Source | Used for |
+|---|---|
+| [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) (Updated October 15, 2025) | §4 no representation of traffic or income; §5 disclosure wording and the limit on public communications about the relationship |
+| [Program Policies](https://affiliate-program.amazon.com/help/operating/policies) (Updated April 14, 2026) | §2(a)/(b) Special Links and tag format; the price rule; the comparison-format rule; sub-tag Associate IDs; payment timing |
+| [PA-API 5 deprecation](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation) | PA-API 5 is deprecated and returns 403 |
+| [Creators API introduction](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction) | Prerequisites, including at least 10 qualifying sales in the past 30 days |
+| [GetItems reference](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items) | What the permitted feed returns; Amazon's own 10-character ASIN examples |
+| [FTC Endorsement Guides FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) | A home-page-only disclosure is insufficient; a disclosure behind a DISCLOSURE link is not clear and conspicuous |
+| [Qualify outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links) (2025-12-10) | `rel="sponsored"` is the documented paid-link marker |
+
+### Irregularities found and fixed
+
+1. **FLG-022 (new, high).** Program Policies §2(b) still names "Creators API or PA
+   API" as the permitted route to price data, but Amazon's own documentation records
+   PA-API 5 as deprecated and returning 403, and gates the Creators API behind at
+   least 10 qualifying sales in the past 30 days. This turns the site's biggest
+   missing feature into a sequence rather than a build task. The `price_rule` wording
+   in `src/data/products.json` was updated to name the deprecation, and S-04 — which
+   still said "Connect the Product Advertising API" — was corrected.
+2. **The build guard only ran in one direction.** `tools/build.py` failed when
+   `GENERATED` listed a file it had not written, but never when it wrote a file it
+   had not listed. `tools/check.py` derives the pages it examines from `GENERATED`,
+   so an unlisted page is published, linked and sitemap-listed while the checker
+   reports a clean run without opening it. Confirmed by adding two guides and seeing
+   "0 errors" over 23 of 25 pages. Both directions are now enforced, verified by
+   removing an entry and watching the build stop.
+3. **`tools/validate.py` was raising `KeyError`, and main fixed it mid-rebase.** On
+   this session's base it targeted the archived `crisp/` edition and read product
+   field names that exist nowhere, so every run crashed while the README called it
+   "the gate". While this work was in progress main merged PR #77, which repointed
+   the validator at the published tree and reconciled it with the current schema —
+   it now runs 1545 checks and passes, so DB-24 is closed by that change rather than
+   by this one. What remains from this session is a smaller fix: the row label is
+   resolved from `ref` or `id` and the field lookups tolerate either schema, so a
+   future rename reports a failing row instead of a stack trace. This session's
+   first attempt retired the validator outright; that guard was removed once main's
+   fix landed, and the README wording was restored.
+
+### Deliberately not done
+
+- **No canonical tags on duplicate pages, and no edition merge.** Proposed as S-15.
+  The brief asks for a queue a human reviews before changes are implemented.
+- **Amazon's programme payment minimums are not restated anywhere.** They are
+  published and were read, but the checker fails the build on any currency figure in
+  visible text. A rule that cannot distinguish a programme minimum from a product
+  price should not be given exceptions, so the numbers stay behind their source link
+  and D-12 says why.
+- **No new guides.** S-07 says do not commission more until S-03 or S-05 lands, and
+  the nine that exist already cover both guides this session drafted. Adding
+  duplicates would have diluted the catalogue, so the drafts were dropped.
+
+### Checks
+
+```
+python3 tools/build.py    → 30 pages written
+python3 tools/check.py    → 30 pages, 0 errors, 0 warnings
+python3 tools/validate.py → 1545 checks, all pass
+```
+
+The paths these actually executed: `check_page` over all 30 generated pages including
+the new `decide/index.html`; `check_sitemap_feed` against the regenerated sitemap and
+feed; `check_data` over the edited `flags.json`, `suggestions.json` and
+`products.json`; `check_assets` over the analytics client; and the new
+bidirectional `GENERATED` guard in `build.py`.
+
+### Merge log — S-5665c5f2 (2026-11-20)
+
+| PR | Purpose | Merge commit |
+| --- | --- | --- |
+| [#66](https://github.com/karagemop466-tech/Affil1/pull/66) | Reconcile with main; holiday photo provenance (FLG-020); validator flag (FLG-021); board entry | `7eaf1e0` |
+| [#73](https://github.com/karagemop466-tech/Affil1/pull/73) | Restore the holiday `images.json` entry that the #66 rebase dropped | `6f808a1` |
+| [#77](https://github.com/karagemop466-tech/Affil1/pull/77) | `tools/validate.py` matches the current schema and root site, so the Pages gate passes | `6a47888` |
+| [#78](https://github.com/karagemop466-tech/Affil1/pull/78) | `tools/sweep_surfaces.py` reads `build.GENERATED`; reports the 7 real strays | `16050be` |
+| [#80](https://github.com/karagemop466-tech/Affil1/pull/80) | FLG-021 updated to the fixed state | `aa0497e` |
+
+**Pages deploy confirmed at `aa0497e`:** `Build, check and deploy` success; `pages build and deployment` success. The live review page at `review/index.html` shows 21 items with FLG-021 updated. A plain fetch showed a stale 19-item copy, which was CDN caching; a cache-busting query showed the current page.
+
+**Still open:** the `Affiliate launch checks` workflow is red on `aa0497e`. The only failing step is the sweep, which correctly reports 7 files under `decision-support/` that are outside the published pipeline. Owner decision needed: archive them or add them to `tools/build.py`. Nothing in the published site links to them. This does not block the Pages deploy, which is green.
+
+**Not changed by this session, but noted:** the earlier session items (T2 analytics, T3 ported guides, T4 and T5 duplicate content) were superseded by main and were dropped, as recorded above.
+
+### Delivery record — arena/dad597c3-affil1 (close-out, 2026-11-20)
+
+PR #60 merged to `main` at `cf4f3703bee4fba8c2ff9307079dcb40c33ebf84` (merge commit, 2026-11-20T06:08:36Z).
+
+- `Build, check and deploy` on the merge push: **success** (run 44685712779).
+- `pages build and deployment`: **success** (run 44685712219). Live front page `https://karagemop466-tech.github.io/Affil1/` fetched after the deploy and renders the published edition (release panels, shortlist, decision brief, guide cluster).
+- `Affiliate launch checks` (kitchen-check.yml): **fails on the first gate-skipping step**, `tools/sweep_surfaces.py` — it reports the seven `decision-support/` files added by arena/771e5093-affil1 as outside the published pipeline. This failure pre-exists on main (the same gate failed on #80 before this PR) and is the owner decision that lane already requested (archive them, or add them to the build). This PR changed only COORDINATION.md, so it cannot clear or cause that gate; it is recorded here, not silenced.
+- PR #60 merged with the failing check by explicit decision, recorded in the PR body: the gate's subject is the published surface; the PR contains no site/output/build file, and the failure is identical on main without it.
+- Nothing in this delivery claims Associates enrolment, tagged-click attribution, Search Console verification, or revenue/traffic figures. FLG-002 / FLG-003 / FLG-016 remain open and published.
+- The drafts superseded at rebase time (EXECUTIVE_SUMMARY rewrite, S-13…S-19, Q-16…Q-18, OBS-9…13, page_desk count fix, validate shim) remain in this branch's reflog and PR #60's earlier pushes; local tag `backup/dad597c3-pre-rebase` holds the pre-first-reset state.
+## arena/7755f499-affil1 — collector repair
+
+Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done. Merged as PR #87 (`1b09bbc`); Pages deploy success. Record: `COORDINATION/arena-7755f499-affil1.md`.

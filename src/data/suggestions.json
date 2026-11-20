@@ -68,13 +68,14 @@
     {
       "id": "S-04",
       "status": "open",
-      "title": "Connect the Product Advertising API before showing any price or rating",
-      "why": "It is the only compliant route to live price, availability and rating, and those are the three things a shopper looks for before clicking. A shop without them has to work much harder.",
+      "title": "Apply for the Creators API — knowing it is gated behind 10 qualifying sales",
+      "why": "Program Policies §2(b) permits price and availability only where Amazon serves the data or it arrives through the Creators API or PA API. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment plus at least 10 qualifying sales within the past 30 days. The policy text still names both APIs, so following the policy alone would aim at a route that no longer answers.",
       "effort": "an application, plus qualifying sales on most accounts",
-      "risk": "None to the site. The blocker is that eligibility usually requires sales, which requires traffic, which is the thing being built.",
-      "depends_on": "Q-04",
-      "recommendation": "Start the application now; expect to wait",
-      "decision": "hold"
+      "risk": "Low, but the sequence is not negotiable: live prices arrive after the site proves it can sell, not before. A separate clause also requires a comparison-format price display to show the lowest used price as well as the lowest new, which is a second reason the comparison table stays blank.",
+      "depends_on": "S-01, and the 10-qualifying-sales threshold",
+      "recommendation": "Revisit the moment the sales count allows it; do not treat it as a build task",
+      "decision": "hold",
+      "evidence": "SRC-11, SRC-12, SRC-13, SRC-14; FLG-022"
     },
     {
       "id": "S-05",
@@ -103,7 +104,7 @@
       "status": "open",
       "title": "Do not commission more guides until S-03 or S-05 lands",
       "why": "Eight guides already cover the decision space honestly. A ninth written from another hypothesis adds volume, not value, and raises the chance the whole publication is treated as one undifferentiated block.",
-      "effort": "none \u2014 it is a decision not to act",
+      "effort": "none — it is a decision not to act",
       "risk": "None. It is reversible the moment data arrives.",
       "depends_on": "nothing",
       "recommendation": "The least popular and most important item here",
@@ -228,13 +229,46 @@
       "id": "S-18",
       "status": "implemented",
       "title": "Give the front page a seasonal feature and a reader channel",
-      "why": "A publication has a current issue. The hosting guide is featured on the front page, and RSS is offered as the way to come back \u2014 since no mailing list exists.",
+      "why": "A publication has a current issue. The hosting guide is featured on the front page, and RSS is offered as the way to come back — since no mailing list exists.",
       "effort": "done",
       "risk": "None. The RSS block says plainly that there is no mailing list.",
       "depends_on": "nothing",
       "recommendation": "Implemented",
       "implemented_on": "2026-11-20",
       "evidence": "index.html; feed.xml"
+    },
+    {
+      "id": "S-19",
+      "status": "open",
+      "title": "Request sub-tag Associate IDs so attribution comes from Amazon's own report",
+      "why": "Program Policies §2(b) allows Amazon to issue additional sub-tag Associate IDs on request so an Associate can “monitor and optimize the performance” of different links. A sub-tag per page turns “which guide earns?” into a question Amazon's own report answers, which is far stronger evidence than anything a first-party counter can produce. The same clause forbids tying a sub-tag to an identified visitor, which this site does not do.",
+      "effort": "a support request, then a small change to how each page builds its outbound links",
+      "risk": "Low. Sub-tags are subject to Amazon's approval, so the answer may be no, and nothing else on the site depends on it. It complements S-01 rather than replacing it: S-01 proves a click is credited at all, sub-tags say which page earned it.",
+      "depends_on": "S-01",
+      "recommendation": "Request it in the same dashboard session as S-01",
+      "evidence": "SRC-15"
+    },
+    {
+      "id": "S-20",
+      "status": "open",
+      "title": "Schedule the link re-check so drift is reported rather than discovered",
+      "why": "Every product fact on this site rests on a supplied link resolving to the same listing it did on 2026-11-20. P-04 already showed that the same link can return a product page on one attempt and Amazon's continuity page on another, on the same date. The repository already has the tool for this (tools/verify_links.py); what is missing is a schedule and a place for the result.",
+      "effort": "an hour to wire the existing tool into a scheduled run and publish its output",
+      "risk": "Medium, and worth stating plainly: an unattended re-check can hit the same interstitial P-04 did, and a false alarm is worse than no alarm. Any automated check must report the outcome and let a human adjudicate. It must never overwrite a verified record on its own.",
+      "depends_on": "nothing",
+      "recommendation": "Build it to report, never to rewrite",
+      "evidence": "FLG-004, FLG-016; tools/verify_links.py"
+    },
+    {
+      "id": "S-21",
+      "status": "open",
+      "title": "Do not buy paid search, and do not use Amazon marks in any promotion",
+      "why": "Program Policies prohibit purchasing, registering or using any Amazon Mark in a search engine, disqualify purchases arriving through a paid search placement, and state that Associates must not use their tags to claim commissions from another programme on the same traffic. The site also has no measurement that could attribute a click, so paid acquisition would spend money that cannot be accounted for.",
+      "effort": "zero — this is a decision not to spend",
+      "risk": "None from complying. The risk is entirely in ignoring it, and it falls on the account rather than on a page.",
+      "depends_on": "nothing",
+      "recommendation": "Adopt as policy and leave it on this page as a recorded refusal",
+      "evidence": "SRC-02"
     }
   ]
 }

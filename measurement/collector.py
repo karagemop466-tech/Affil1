@@ -11,14 +11,23 @@ PAGES = {'index', 'compare', 'guides', 'probe', 'flagged', 'desk', 'suggestions'
 EVENT_PAGES = {'page_view': PAGES, 'compare_view': {'compare'},
                'flag_page_view': {'flagged'}, 'guide_read_75': {'probe'},
                'outbound_product_click': {'compare', 'probe'}}
-RECORDS = Path(__file__).resolve().parent.parent / 'kitchen' / 'records.json'
+RECORDS = Path(__file__).resolve().parent.parent / 'src' / 'data' / 'product-intent.json'
 
 
 def eligible_products():
-    """Only operator-approved links, never bare observations, can be counted."""
-    return {row['id'] for row in json.loads(RECORDS.read_text())['products']
-            if all(row.get(k) for k in ('special_link', 'intended_asin', 'official_listing_url',
-                                        'confirmation_date', 'confirmation_source', 'tracking_report_ref'))}
+    """Only operator-approved links, never bare observations, can be counted.
+
+    Fail closed when the canonical register is absent or malformed. The five
+    intent records currently have no approved Special Links or report references.
+    """
+    try:
+        records = json.loads(RECORDS.read_text(encoding='utf-8'))['records']
+    except (OSError, KeyError, TypeError, ValueError):
+        return set()
+    required = ('approved_special_link', 'intended_asin', 'official_listing_url',
+                'confirmation_date', 'confirmation_source', 'tracking_report_reference')
+    return {row['ref'] for row in records if isinstance(row, dict)
+            and all(row.get(key) for key in required)}
 
 
 def create_app(database, origin, products=None):
