@@ -131,3 +131,31 @@ Source to *GitHub Actions* and restore the `upload-pages-artifact` /
 
 Content and code in this repository are unpublished work product. No licence is
 granted. Amazon product names and trademarks belong to their respective owners.
+
+---
+
+## Integration state (2026-11-20, final integration session)
+
+This repository has seen several parallel sessions. Their work is **preserved, not
+replaced**:
+
+| Path | What it is |
+|---|---|
+| *(root — the paths above)* | The canonical site: one publication, one sitemap, one feed. |
+| `crisp/` | S-96012762's "Crisp & Counter" section, kept at its original path with its own build and feed. `robots.txt` disallows it so one site is indexed; it is excluded from the published-page gate with a printed note. |
+| `src/`, `tools/`, `docs/MEASUREMENT.md`, `docs/EXECUTIVE-SUMMARY.md` | S-96012762's registers, builder and documents, kept at their original paths. |
+| `archive/legacy-surface/` | The earlier root surface (dashboard, legacy guides, legacy registers), relocated with rename history intact. |
+| `archive/session-*/` | Earlier sessions' own snapshots, where they left them. |
+| `docs/*-parallel-session.md`, `docs/COORDINATION-PR15-integration.md` | Session documents kept for review. |
+| `analytics/endpoint.py`, `data/confirmations.json`, `data/products.json`, `data/ledger.json` | Preserved records; supersession notes point at the canonical registers (`data/product-intent.json`, `data/campaign-ledger.json`). |
+
+Workflow: `.github/workflows/deploy-pages.yml` rebuilds the site from source,
+fails if committed output has drifted, runs the compliance gate, and runs the
+gate's negative self-test. GitHub Pages publishes from the `main` branch root
+(legacy build type); a red gate run means the site should not be published further.
+
+Verification: `data/sources.json` carries the row-level spot-check notes of the
+2026-11-20 integration pass (16 clauses re-read verbatim from the official pages;
+3 rows left blank and flagged unverified). Every product row in
+`data/product-intent.json` keeps intended and observed identifiers in separate
+fields and never merges them.
