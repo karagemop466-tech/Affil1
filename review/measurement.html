@@ -42,12 +42,12 @@
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Measurement plan</p>
   <h1>Measurement is written,<br>and switched off</h1>
-  <p class="dek">Five events are defined, a client exists, and nothing is being recorded. That is the current state and it is deliberate.</p>
+  <p class="dek">Nine event names are defined, five of them are explained below, a client exists, and nothing is being recorded. That is the current state and it is deliberate.</p>
   <p class="page-meta">Beacon disabled by default &middot; no cookies &middot; no third-party requests &middot; no endpoint deployed</p>
 </div></header>
 <section class="section "><div class="wrap">
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository; five events carry the campaign, four more are surface signals added by the comparison and review pages. None of it is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
   <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
 </div>
 <h2>What would be measured</h2>

@@ -161,3 +161,32 @@ at all" to "no air-fryer-specific guidance".
 
 State after both merges: 28 pages, 8 guides, 0 errors, 0 warnings, rebuild
 reproducible, 77 legacy pages link-checked clean, `kitchen-build` tests green.
+
+
+## Third merge (PR #51), and the state of the whole repository
+
+`main` moved a third time while this branch was open, to a build that had replaced
+`tools/check.py` with `tools/validate.py` and quarantined every guide page. Rather
+than overwrite it or abandon this branch, the merge took the newest edition of
+anything this build does not own and kept this build's rules for anything it does.
+Four things came out of that reconciliation that matter more than the merge itself:
+
+1. **Every Amazon link in the published repository is now tagged.** A repo-wide
+   sweep found 44 untagged `/dp/` links on pages this build does not generate
+   (dashboard, products, questions and others). All 44 now carry
+   `?tag=shopnow047c-20` and `rel="sponsored nofollow noopener"`. `check.py`
+   now enforces this across every served page, not only this build's output.
+2. **One analytics vocabulary, two clients.** `review/measurement.html` described
+   five events, `src/data/events.json` described a different five, and the
+   collector rejected the client's wire format. Nine names are now defined once,
+   the client posts the collector's exact three-field shape, and `report_import`
+   is scoped `operator`, so the collector refuses it with a 400 by design.
+3. **The launch register keeps its own rule.** `operations/launch-readiness.html`
+   cites listings as evidence: `rel=sponsored`, deliberately no tag, because the
+   point of that page is that no paid link exists until the destination is
+   confirmed. `check.py` exempts exactly that one file and no other.
+4. **The duplicate guides are gone.** Eight guides ship, one per question.
+
+State after three merges: 28 pages built, 8 guides, `check.py` 0 errors and 0
+warnings, 79 pages link-checked clean, `kitchen-build` 3/3 green, rebuild
+reproducible.

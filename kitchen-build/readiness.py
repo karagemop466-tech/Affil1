@@ -9,7 +9,7 @@ from urllib.parse import parse_qs, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
-from layout import DISCLOSURE, SITE_URL, esc, link, pagehead, section, table
+from layout import DISCLOSURE, SITE_URL, TRACKING_ID, esc, link, pagehead, section, table
 
 INTENT = Path(__file__).with_name('intent.json')
 OUTPUT = ROOT / 'operations/launch-readiness.html'
@@ -67,6 +67,13 @@ def validate(doc):
 
 
 def source(url, label, *, product=False):
+    """A listing cited as evidence is marked as commercial but carries no tag.
+
+    It is a record of what a redirect resolved to, not a call to action: no tag,
+    so nothing can be attributed from this page, and rel=sponsored so a reader and
+    a crawler are both told it points at a shop. Affiliate links elsewhere carry
+    the tag and the same marker.
+    """
     return {'html': link('operations', url, esc(label), external=True, sponsored=product)}
 
 

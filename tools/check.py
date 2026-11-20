@@ -367,6 +367,26 @@ def check_legacy_and_index():
         err("robots.txt: disallows the whole site")
 
 
+def check_all_pages_tagged():
+    """Every Amazon retail link in every served page, not just this build's own.
+
+    Other editions in this repository are published alongside this one. A page
+    this build does not generate can still carry an untagged /dp/ link, and an
+    untagged Special Link is an Associates compliance problem wherever it sits.
+    """
+    skip = ("archive/", "legacy/", "docs/", ".git/")
+    # The launch register cites listings as evidence, never as CTAs: untagged by design.
+    allow_untagged = {"operations/launch-readiness.html"}
+    for path in ROOT.rglob("*.html"):
+        rel_path = path.relative_to(ROOT).as_posix()
+        if rel_path.startswith(skip) or rel_path in allow_untagged:
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for href in re.findall(r'href="(https://www\.amazon\.com/[^"]*)"', text):
+            if "tag=shopnow047c-20" not in href:
+                err(f"{rel_path}: Amazon link outside this build without the Associates tag: {href}")
+
+
 def check_assets():
     for f in (ROOT / "assets/img").glob("*"):
         if f.suffix.lower() in (".jpg", ".png") and f.stat().st_size > 400_000:
@@ -457,6 +477,7 @@ def main():
     check_registers()
     check_legacy_and_index()
     check_assets()
+    check_all_pages_tagged()
 
     print(f"pages checked: {len(PAGES)} (this build's output only)")
     for w in warnings:

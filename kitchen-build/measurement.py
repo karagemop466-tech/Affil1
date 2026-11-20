@@ -17,7 +17,7 @@ from build import GENERATED, readiness
 
 READINESS_PAGE = "/Affil1/operations/launch-readiness.html"
 
-BROWSER = {e['name'] for e in json.loads((ROOT/'src/data/events.json').read_text())['events']}
+BROWSER = {e['name'] for e in json.loads((ROOT/'src/data/events.json').read_text())['events'] if e.get('scope') != 'operator'}
 PAGES = {'/Affil1/' + p for p in GENERATED if p.endswith('.html') and p != '404.html'}
 PAGES.add(READINESS_PAGE)
 PAGES |= {p.removesuffix('index.html') for p in PAGES if p.endswith('/index.html')}
