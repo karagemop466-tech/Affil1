@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 150" role="img" aria-label="French-door countertop convection oven diagram">
+  <rect width="260" height="150" rx="10" fill="#f3ede3"/>
+  <rect x="26" y="22" width="208" height="108" rx="8" fill="#d8d2c7" stroke="#191816" stroke-width="2"/>
+  <rect x="36" y="32" width="80" height="84" rx="4" fill="#faf7f2" stroke="#524e48" stroke-width="1.8"/>
+  <rect x="120" y="32" width="80" height="84" rx="4" fill="#faf7f2" stroke="#524e48" stroke-width="1.8"/>
+  <line x1="42" y1="62" x2="194" y2="62" stroke="#b84a27" stroke-width="2" stroke-dasharray="5 3"/>
+  <line x1="42" y1="88" x2="194" y2="88" stroke="#b84a27" stroke-width="2" stroke-dasharray="5 3"/>
+  <rect x="108" y="52" width="5" height="42" rx="2" fill="#191816"/>
+  <rect x="123" y="52" width="5" height="42" rx="2" fill="#191816"/>
+  <circle cx="218" cy="48" r="7" fill="#191816"/>
+  <circle cx="218" cy="74" r="7" fill="#b84a27"/>
+  <circle cx="218" cy="100" r="7" fill="#191816"/>
+</svg>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-page-slug="flagged">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flagged for Review — Countertop Almanac</title>
+  <meta name="description" content="Unverified items, link attribution flags, and line-by-line repository audit findings with official source links.">
+  <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/edition/flagged/">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="Countertop Almanac Buying Guides RSS" href="../feed.xml">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container masthead-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-mark" src="../assets/img/favicon.svg" alt="Countertop Almanac emblem" width="36" height="36">
+        <span>
+          <span class="brand-title">Countertop Almanac</span>
+          <span class="brand-sub">Kitchen Equipment Publication &amp; Verification Desk</span>
+        </span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="../index.html">Shop Shortlist</a> <a href="../categories/index.html">Categories</a> <a href="../guides/index.html">Buying Guides</a> <a href="../compare/index.html">Compare</a> <a href="../suggestions/index.html" aria-current="page">Decision Desk</a>
+      </nav>
+    </div>
+  </header>
+  <div class="disclosure" role="note" aria-label="Affiliate disclosure">
+    <div class="container disclosure-inner">
+      <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Paid links to Amazon are marked <code>rel="sponsored"</code> (selected Tracking ID: <code>shopnow047c-20</code>).</span>
+      <span class="disclosure-meta">
+        <a href="../compliance/index.html">Disclosure &amp; API rules</a> ·
+        <a href="index.html">Flagged for Review</a>
+      </span>
+    </div>
+  </div>
+  <main id="main-content" class="container">
+    <section class="hero panel-warn">
+      <span class="eyebrow">Transparent Review Register · Non-Blocking Audit Items</span>
+      <h1>Flagged for Review</h1>
+      <p class="lede">All unverified fields, redirect discrepancies, account-gated Associates checks, and cross-repository line-by-line audit findings discovered on 2026-11-20. Every row links directly to the governing official source.</p>
+    </section>
+
+    <div class="filter-bar" data-filter-root data-filter-target="[data-flag-row]">
+      <span class="filter-label">Filter review items:</span>
+      <button type="button" class="chip-btn" data-filter-value="all" aria-pressed="true">All 16 items</button>
+      <button type="button" class="chip-btn" data-filter-value="product-policy" aria-pressed="false">Product, Link &amp; Policy Flags (10)</button>
+      <button type="button" class="chip-btn" data-filter-value="repo-audit" aria-pressed="false">Repository Line-by-Line Audit (6)</button>
+    </div>
+
+    <h2>1. Product, Link, Attribution &amp; Policy Flags (FLG-001..FLG-010)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Flag ID</th>
+            <th>Item &amp; Scope</th>
+            <th>Verified Finding</th>
+            <th>Operator Resolution Action</th>
+            <th>Official Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="FLG-001" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-001</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>Supplied link.amazon path tokens are 9 characters, not 10-character ASINs; intended_asin left blank</strong><br><span class="disclosure-meta">Scope: P-01 .. P-05</span></td>
+            <td>All five supplied slugs (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9-character mixed-case short-link tokens. Amazon defines an ASIN as a unique 10-character alphanumeric code. While all five resolved to 10-character /dp/ ASINs on 2026-11-20, an observed redirect is not proof of operator intent, so intended_asin, official_listing_url, confirmation_date, and confirmation_source remain blank.</td>
+            <td>Operator confirms the intended 10-character ASIN and official listing URL for each row in Associates Central and records the confirmation date and source without overwriting observed_redirect.</td>
+            <td><a href="https://sell.amazon.com/blog/what-is-an-asin" rel="noopener" target="_blank">S03 · Amazon Selling Partner Blog</a><br><a href="https://www.amazon.com/dp/B0CDY277D3" rel="sponsored nofollow noopener" target="_blank">S09 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B09B7SB46R" rel="sponsored nofollow noopener" target="_blank">S10 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B08DKYBTPH" rel="sponsored nofollow noopener" target="_blank">S11 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">S12 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">S13 · Amazon.com</a></td>
+          </tr>
+          <tr id="FLG-002" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-002</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>Tracking ID shopnow047c-20 was not observed in any redirect URL on arrival</strong><br><span class="disclosure-meta">Scope: Tracking ID shopnow047c-20</span></td>
+            <td>Every 2026-11-20 fetch of the five supplied link.amazon URLs landed on https://www.amazon.com/dp/{ASIN} without a tag=shopnow047c-20 parameter. Participation Requirements §2(a)-(b) require the assigned Associates ID parameter on Special Links, and Commission Income Statement §2(g) excludes purchases not tracked due to improperly formatted links.</td>
+            <td>Generate fresh Special Links inside the enrolled Associates Central account for shopnow047c-20, execute one test click per product (without self-purchasing, per §6(u)), and verify click registration in Associates Central Reports.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="FLG-003" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-003</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>Associates Special Link compliance status of supplied link.amazon URLs is unresolved</strong><br><span class="disclosure-meta">Scope: link.amazon short links</span></td>
+            <td>Operating Agreement §1 and Program Policies §2(a) require Special Links formatted with Amazon-provided Associates link tools, while Commission Income Statement §2(e) disqualifies unapproved Redirecting Links and §6(w) prohibits link shorteners that obscure linking to an Amazon Site. Whether these specific link.amazon tokens were generated under an approved Amazon Associates workflow for shopnow047c-20 cannot be verified without account access; they are not claimed to be invalid, and their compliance status remains unresolved.</td>
+            <td>Verify inside Associates Central Link Checker / SiteStripe whether each link.amazon URL is tied to shopnow047c-20, or replace with validated Special Links generated directly in Associates Central before scaling traffic.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="FLG-004" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-004</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>Prices, star ratings, review counts, and stock availability omitted without Creators API / PA API</strong><br><span class="disclosure-meta">Scope: Prices, ratings, reviews &amp; stock</span></td>
+            <td>Participation Requirements §2(b) permits displaying Amazon price and availability only via Amazon-served dynamic links or Creators API / PA API under License terms; §6(t) similarly restricts Amazon customer reviews and star ratings; §6(y) prohibits price tracking or price alerting functionality unless agreed by Amazon. No API credentials are configured in this repository.</td>
+            <td>Keep price, star rating, review count, and availability blank on static pages, direct readers to check live values on Amazon, and connect Creators API / PA API only after qualifying account approval.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="FLG-005" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-005</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>Intermittent historical fallback on P-03 despite clean 2026-11-20 resolution to B08DKYBTPH</strong><br><span class="disclosure-meta">Scope: P-03 (link.amazon/B00hJ57DV)</span></td>
+            <td>On 2026-11-20 link.amazon/B00hJ57DV resolved cleanly to /dp/B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry 4-in-1), but an earlier archived pass recorded a fallback to the Amazon.com homepage under automated request headers.</td>
+            <td>Confirm intended ASIN B08DKYBTPH with the account owner and replace the short link with a direct Associates Central Special Link.</td>
+            <td><a href="https://www.amazon.com/dp/B08DKYBTPH" rel="sponsored nofollow noopener" target="_blank">S11 · Amazon.com</a><br><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="FLG-006" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-006</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>Historical bot-checkpoint and cross-session swap recorded on thermometer links P-04 and P-05</strong><br><span class="disclosure-meta">Scope: P-04 &amp; P-05 (B0c8moW59 / B0f3GKalj)</span></td>
+            <td>In our direct 2026-11-20 verification pass, P-04 (link.amazon/B0c8moW59) resolved to B0DHZTCNR5 (ThermoMaven instant-read thermometer) and P-05 (link.amazon/B0f3GKalj) resolved to B0DZFD6R9Z (CHEF iQ Sense 3-probe wireless thermometer). However, earlier automated fetches hit /checkpoint/continue on P-04 or the homepage on P-05, and one parallel session initially observed the two thermometer destinations in reverse order before agreeing with B0DHZTCNR5 / B0DZFD6R9Z.</td>
+            <td>Treat both thermometer mappings as dated observations rather than confirmed intent until the operator verifies each link inside an authenticated browser and Associates Central.</td>
+            <td><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">S12 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">S13 · Amazon.com</a><br><a href="https://sell.amazon.com/blog/what-is-an-asin" rel="noopener" target="_blank">S03 · Amazon Selling Partner Blog</a></td>
+          </tr>
+          <tr id="FLG-007" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-007</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>Submitted portfolio spans two distinct categories (3 air fryers + 2 meat thermometers)</strong><br><span class="disclosure-meta">Scope: Product category mix</span></td>
+            <td>P-01, P-02, and P-03 resolve under Small Appliances &gt; Fryers &gt; Air Fryers, whereas P-04 and P-05 resolve under Kitchen Utensils &amp; Gadgets &gt; Thermometers &amp; Timers &gt; Meat. Treating all five as air fryers would misstate P-04 and P-05.</td>
+            <td>Organize storefront and subpages into two explicit categories (Air Fryers and Meat Thermometers) and pair them truthfully through internal-doneness cooking workflows.</td>
+            <td><a href="https://www.amazon.com/dp/B0CDY277D3" rel="sponsored nofollow noopener" target="_blank">S09 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B09B7SB46R" rel="sponsored nofollow noopener" target="_blank">S10 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B08DKYBTPH" rel="sponsored nofollow noopener" target="_blank">S11 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">S12 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">S13 · Amazon.com</a></td>
+          </tr>
+          <tr id="FLG-008" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-008</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>No physical product testing conducted; wattage, dimensions, and warranty left blank</strong><br><span class="disclosure-meta">Scope: Hands-on testing &amp; specs</span></td>
+            <td>16 CFR §255.1 and Associates Participation Requirements §2(b) prohibit unsubstantiated or inaccurate product claims. None of the five products was physically handled or lab-tested in this session, and wattage, exterior dimensions, and warranty terms were not confirmed in consistent structured fields during verification.</td>
+            <td>Quote capabilities strictly as seller-stated listing-title attributes, omit rankings or &#x27;best overall&#x27; awards, and leave wattage, dimensions, and warranty blank until verified from official manufacturer manuals.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255" rel="noopener" target="_blank">S05 · Electronic Code of Federal Regulations (eCFR / FTC)</a></td>
+          </tr>
+          <tr id="FLG-009" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-009</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>GitHub Pages is static-only; self-hosted collector endpoint and Search Console require operator deployment</strong><br><span class="disclosure-meta">Scope: Analytics &amp; Campaign Ledger</span></td>
+            <td>GitHub Pages serves static assets only and cannot execute Python/Node collector endpoints natively. Until the operator deploys platform/collector.py on a first-party host, configures Search Console ownership, and exports authorized Associates Central CSV reports, the Campaign Ledger remains intentionally empty with zero sessions, clicks, or orders.</td>
+            <td>Deploy platform/collector.py on an approved first-party origin, update the privacy notice per Policies §3(e), verify Search Console, and import only signed-in Associates Central reports via platform/ledger.py.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://support.google.com/webmasters/answer/7576553?hl=en" rel="noopener" target="_blank">S07 · Google Search Console Help</a><br><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" rel="noopener" target="_blank">S08 · GitHub Docs</a><br><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="FLG-010" data-flag-row data-tags="product-policy">
+            <td><strong><code>FLG-010</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><strong>USDA FSIS minimum internal temperature chart URL unreachable from build sandbox</strong><br><span class="disclosure-meta">Scope: Thermometer food-safety reference</span></td>
+            <td>Automated fetch of https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-minimum-internal-temperature-chart failed in the build environment on 2026-11-20. Under the zero-inference rule, numeric USDA target temperatures are not reproduced from memory.</td>
+            <td>Link readers directly to the official USDA FSIS chart URL and populate specific temperature rows only after direct fetch or manual verification from the live federal table.</td>
+            <td><a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-minimum-internal-temperature-chart" rel="noopener" target="_blank">S15 · USDA Food Safety and Inspection Service (FSIS)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Repository-Wide Line-by-Line Audit Log (XR-01..XR-06)</h2>
+    <p>Findings across sibling/archived repository files logged in <code>COORDINATION.md</code> without overwriting other sessions' claimed scopes.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Audit ID</th>
+            <th>Repository File Scope</th>
+            <th>Line-by-Line Finding</th>
+            <th>Official Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="XR-01" data-flag-row data-tags="repo-audit">
+            <td><strong><code>XR-01</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><code>tools/validate.py (root legacy validator)</code></td>
+            <td>Invoking python3 tools/validate.py raises KeyError: &#x27;supplied_path_code_length&#x27; because src/data/products.json migrated to submitted_code_length / observed_asin, and SITE points to ROOT / &#x27;crisp&#x27; (which was archived). Logged in COORDINATION.md for active owner arena/487e4183-affil1 (PR #54).</td>
+            <td><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" rel="noopener" target="_blank">S08 · GitHub Docs</a></td>
+          </tr>
+          <tr id="XR-02" data-flag-row data-tags="repo-audit">
+            <td><strong><code>XR-02</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><code>Archived data/confirmations.json &amp; data.js</code></td>
+            <td>Earlier draft files stored 9-character link.amazon path tokens inside intended_asin / intendedAsin, copied observed_redirect_target into official_listing_url, and marked conf-001/conf-002 &#x27;verified&#x27; without operator confirmation — violating Amazon&#x27;s 10-character ASIN specification and the strict field-separation invariant.</td>
+            <td><a href="https://sell.amazon.com/blog/what-is-an-asin" rel="noopener" target="_blank">S03 · Amazon Selling Partner Blog</a><br><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="XR-03" data-flag-row data-tags="repo-audit">
+            <td><strong><code>XR-03</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><code>Archived crisp/ edition HTML (13 pages)</code></td>
+            <td>Line-by-line scan found crisp/ used paraphrased banner copy instead of the verbatim Operating Agreement §5 sentence (&#x27;As an Amazon Associate I earn from qualifying purchases.&#x27;) and omitted rel=&#x27;sponsored&#x27; on 8 link.amazon citations in crisp/flagged/index.html and crisp/sources/index.html.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a><br><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" rel="noopener" target="_blank">S06 · Google Search Central</a></td>
+          </tr>
+          <tr id="XR-04" data-flag-row data-tags="repo-audit">
+            <td><strong><code>XR-04</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><code>Archived disclosure.html &amp; questions.html</code></td>
+            <td>Line-by-line scan found disclosure.html marked non-commercial Amazon Associates policy documentation links as rel=&#x27;sponsored&#x27;, while questions.html:162 linked to https://link.amazon/B04G1MEwY without rel=&#x27;sponsored&#x27;.</td>
+            <td><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" rel="noopener" target="_blank">S06 · Google Search Central</a><br><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="XR-05" data-flag-row data-tags="repo-audit">
+            <td><strong><code>XR-05</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><code>Archived guides/*.html &amp; reviews/verification-audit.html</code></td>
+            <td>Line-by-line anchor resolution scan found 29 broken #fragment targets pointing to removed IDs (#products, #questions, #suggestions, #ledger, #disclosure) across superseded guide templates.</td>
+            <td><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" rel="noopener" target="_blank">S08 · GitHub Docs</a></td>
+          </tr>
+          <tr id="XR-06" data-flag-row data-tags="repo-audit">
+            <td><strong><code>XR-06</code></strong><br><span class="badge badge-warn">needs-review</span></td>
+            <td><code>Root src/data/products.json &amp; tools/layout.py</code></td>
+            <td>Root buy_url() constructs https://www.amazon.com/dp/{observed_asin}?tag=shopnow047c-20 directly from observed_asin while intended_asin is null; logged in COORDINATION.md that locally appending ?tag= is not a substitute for verifying enrollment and link tracking in Associates Central Reports.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon.com Associates Central</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Shop &amp; Categories</h4>
+          <ul>
+            <li><a href="../index.html">Storefront Shortlist</a></li>
+            <li><a href="../categories/index.html">All Categories</a></li>
+            <li><a href="../categories/air-fryers.html">Countertop Air Fryers (3)</a></li>
+            <li><a href="../categories/thermometers.html">Meat Thermometers (2)</a></li>
+            <li><a href="../compare/index.html">Side-by-Side Comparison</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Buying Guides &amp; Feed</h4>
+          <ul>
+            <li><a href="../guides/index.html">All 8 Buying Guides</a></li>
+            <li><a href="../guides/basket-or-oven-air-fryer.html">Basket vs Oven Air Fryer</a></li>
+            <li><a href="../guides/air-fryer-capacity-checklist.html">Capacity Checklist</a></li>
+            <li><a href="../guides/thanksgiving-countertop-oven-relief.html">Holiday Oven Relief</a></li>
+            <li><a href="../feed.xml">RSS 2.0 Feed</a> · <a href="../sitemap.xml">XML Sitemap</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Decision &amp; Operations Desk</h4>
+          <ul>
+            <li><a href="../suggestions/index.html">Suggestions &amp; Design Prompt Studio</a></li>
+            <li><a href="../questions/index.html">Pre-Decision Questions (12)</a></li>
+            <li><a href="../executive-summary/index.html">Executive Summary</a></li>
+            <li><a href="../operations/index.html">Measurement &amp; Empty Campaign Ledger</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Verification &amp; Governance</h4>
+          <ul>
+            <li><a href="../products/index.html">Product-Intent Confirmation Register</a></li>
+            <li><a href="index.html">Flagged for Review (10 + 6 Repo Audit)</a></li>
+            <li><a href="../compliance/index.html">Official Sources &amp; Compliance Gate</a></li>
+            <li><a href="../../index.html">Root Storefront Edition</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Outbound product links carry <code>rel="sponsored nofollow noopener"</code>. Prices, customer ratings, review counts, and live stock are shown only on Amazon in accordance with Amazon Associates Program Policies §2(b) and §6(t). Verified line by line on 2026-11-20.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/analytics.js" defer></script>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

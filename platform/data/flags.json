@@ -1,0 +1,139 @@
+{
+  "verified_on": "2026-11-20",
+  "flags": [
+    {
+      "id": "FLG-001",
+      "severity": "needs-review",
+      "scope": "P-01 .. P-05",
+      "title": "Supplied link.amazon path tokens are 9 characters, not 10-character ASINs; intended_asin left blank",
+      "finding": "All five supplied slugs (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9-character mixed-case short-link tokens. Amazon defines an ASIN as a unique 10-character alphanumeric code. While all five resolved to 10-character /dp/ ASINs on 2026-11-20, an observed redirect is not proof of operator intent, so intended_asin, official_listing_url, confirmation_date, and confirmation_source remain blank.",
+      "resolution_step": "Operator confirms the intended 10-character ASIN and official listing URL for each row in Associates Central and records the confirmation date and source without overwriting observed_redirect.",
+      "source_ids": ["S03", "S09", "S10", "S11", "S12", "S13"]
+    },
+    {
+      "id": "FLG-002",
+      "severity": "needs-review",
+      "scope": "Tracking ID shopnow047c-20",
+      "title": "Tracking ID shopnow047c-20 was not observed in any redirect URL on arrival",
+      "finding": "Every 2026-11-20 fetch of the five supplied link.amazon URLs landed on https://www.amazon.com/dp/{ASIN} without a tag=shopnow047c-20 parameter. Participation Requirements §2(a)-(b) require the assigned Associates ID parameter on Special Links, and Commission Income Statement §2(g) excludes purchases not tracked due to improperly formatted links.",
+      "resolution_step": "Generate fresh Special Links inside the enrolled Associates Central account for shopnow047c-20, execute one test click per product (without self-purchasing, per §6(u)), and verify click registration in Associates Central Reports.",
+      "source_ids": ["S01", "S02", "S14"]
+    },
+    {
+      "id": "FLG-003",
+      "severity": "needs-review",
+      "scope": "link.amazon short links",
+      "title": "Associates Special Link compliance status of supplied link.amazon URLs is unresolved",
+      "finding": "Operating Agreement §1 and Program Policies §2(a) require Special Links formatted with Amazon-provided Associates link tools, while Commission Income Statement §2(e) disqualifies unapproved Redirecting Links and §6(w) prohibits link shorteners that obscure linking to an Amazon Site. Whether these specific link.amazon tokens were generated under an approved Amazon Associates workflow for shopnow047c-20 cannot be verified without account access; they are not claimed to be invalid, and their compliance status remains unresolved.",
+      "resolution_step": "Verify inside Associates Central Link Checker / SiteStripe whether each link.amazon URL is tied to shopnow047c-20, or replace with validated Special Links generated directly in Associates Central before scaling traffic.",
+      "source_ids": ["S01", "S02", "S14"]
+    },
+    {
+      "id": "FLG-004",
+      "severity": "needs-review",
+      "scope": "Prices, ratings, reviews & stock",
+      "title": "Prices, star ratings, review counts, and stock availability omitted without Creators API / PA API",
+      "finding": "Participation Requirements §2(b) permits displaying Amazon price and availability only via Amazon-served dynamic links or Creators API / PA API under License terms; §6(t) similarly restricts Amazon customer reviews and star ratings; §6(y) prohibits price tracking or price alerting functionality unless agreed by Amazon. No API credentials are configured in this repository.",
+      "resolution_step": "Keep price, star rating, review count, and availability blank on static pages, direct readers to check live values on Amazon, and connect Creators API / PA API only after qualifying account approval.",
+      "source_ids": ["S02"]
+    },
+    {
+      "id": "FLG-005",
+      "severity": "needs-review",
+      "scope": "P-03 (link.amazon/B00hJ57DV)",
+      "title": "Intermittent historical fallback on P-03 despite clean 2026-11-20 resolution to B08DKYBTPH",
+      "finding": "On 2026-11-20 link.amazon/B00hJ57DV resolved cleanly to /dp/B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry 4-in-1), but an earlier archived pass recorded a fallback to the Amazon.com homepage under automated request headers.",
+      "resolution_step": "Confirm intended ASIN B08DKYBTPH with the account owner and replace the short link with a direct Associates Central Special Link.",
+      "source_ids": ["S11", "S02"]
+    },
+    {
+      "id": "FLG-006",
+      "severity": "needs-review",
+      "scope": "P-04 & P-05 (B0c8moW59 / B0f3GKalj)",
+      "title": "Historical bot-checkpoint and cross-session swap recorded on thermometer links P-04 and P-05",
+      "finding": "In our direct 2026-11-20 verification pass, P-04 (link.amazon/B0c8moW59) resolved to B0DHZTCNR5 (ThermoMaven instant-read thermometer) and P-05 (link.amazon/B0f3GKalj) resolved to B0DZFD6R9Z (CHEF iQ Sense 3-probe wireless thermometer). However, earlier automated fetches hit /checkpoint/continue on P-04 or the homepage on P-05, and one parallel session initially observed the two thermometer destinations in reverse order before agreeing with B0DHZTCNR5 / B0DZFD6R9Z.",
+      "resolution_step": "Treat both thermometer mappings as dated observations rather than confirmed intent until the operator verifies each link inside an authenticated browser and Associates Central.",
+      "source_ids": ["S12", "S13", "S03"]
+    },
+    {
+      "id": "FLG-007",
+      "severity": "needs-review",
+      "scope": "Product category mix",
+      "title": "Submitted portfolio spans two distinct categories (3 air fryers + 2 meat thermometers)",
+      "finding": "P-01, P-02, and P-03 resolve under Small Appliances > Fryers > Air Fryers, whereas P-04 and P-05 resolve under Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. Treating all five as air fryers would misstate P-04 and P-05.",
+      "resolution_step": "Organize storefront and subpages into two explicit categories (Air Fryers and Meat Thermometers) and pair them truthfully through internal-doneness cooking workflows.",
+      "source_ids": ["S09", "S10", "S11", "S12", "S13"]
+    },
+    {
+      "id": "FLG-008",
+      "severity": "needs-review",
+      "scope": "Hands-on testing & specs",
+      "title": "No physical product testing conducted; wattage, dimensions, and warranty left blank",
+      "finding": "16 CFR §255.1 and Associates Participation Requirements §2(b) prohibit unsubstantiated or inaccurate product claims. None of the five products was physically handled or lab-tested in this session, and wattage, exterior dimensions, and warranty terms were not confirmed in consistent structured fields during verification.",
+      "resolution_step": "Quote capabilities strictly as seller-stated listing-title attributes, omit rankings or 'best overall' awards, and leave wattage, dimensions, and warranty blank until verified from official manufacturer manuals.",
+      "source_ids": ["S02", "S05"]
+    },
+    {
+      "id": "FLG-009",
+      "severity": "needs-review",
+      "scope": "Analytics & Campaign Ledger",
+      "title": "GitHub Pages is static-only; self-hosted collector endpoint and Search Console require operator deployment",
+      "finding": "GitHub Pages serves static assets only and cannot execute Python/Node collector endpoints natively. Until the operator deploys platform/collector.py on a first-party host, configures Search Console ownership, and exports authorized Associates Central CSV reports, the Campaign Ledger remains intentionally empty with zero sessions, clicks, or orders.",
+      "resolution_step": "Deploy platform/collector.py on an approved first-party origin, update the privacy notice per Policies §3(e), verify Search Console, and import only signed-in Associates Central reports via platform/ledger.py.",
+      "source_ids": ["S02", "S07", "S08", "S14"]
+    },
+    {
+      "id": "FLG-010",
+      "severity": "needs-review",
+      "scope": "Thermometer food-safety reference",
+      "title": "USDA FSIS minimum internal temperature chart URL unreachable from build sandbox",
+      "finding": "Automated fetch of https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-minimum-internal-temperature-chart failed in the build environment on 2026-11-20. Under the zero-inference rule, numeric USDA target temperatures are not reproduced from memory.",
+      "resolution_step": "Link readers directly to the official USDA FSIS chart URL and populate specific temperature rows only after direct fetch or manual verification from the live federal table.",
+      "source_ids": ["S15"]
+    }
+  ],
+  "repo_audit": [
+    {
+      "id": "XR-01",
+      "file_scope": "tools/validate.py (root legacy validator)",
+      "status": "needs-review",
+      "finding": "Invoking python3 tools/validate.py raises KeyError: 'supplied_path_code_length' because src/data/products.json migrated to submitted_code_length / observed_asin, and SITE points to ROOT / 'crisp' (which was archived). Logged in COORDINATION.md for active owner arena/487e4183-affil1 (PR #54).",
+      "source_ids": ["S08"]
+    },
+    {
+      "id": "XR-02",
+      "file_scope": "Archived data/confirmations.json & data.js",
+      "status": "needs-review",
+      "finding": "Earlier draft files stored 9-character link.amazon path tokens inside intended_asin / intendedAsin, copied observed_redirect_target into official_listing_url, and marked conf-001/conf-002 'verified' without operator confirmation — violating Amazon's 10-character ASIN specification and the strict field-separation invariant.",
+      "source_ids": ["S03", "S01"]
+    },
+    {
+      "id": "XR-03",
+      "file_scope": "Archived crisp/ edition HTML (13 pages)",
+      "status": "needs-review",
+      "finding": "Line-by-line scan found crisp/ used paraphrased banner copy instead of the verbatim Operating Agreement §5 sentence ('As an Amazon Associate I earn from qualifying purchases.') and omitted rel='sponsored' on 8 link.amazon citations in crisp/flagged/index.html and crisp/sources/index.html.",
+      "source_ids": ["S01", "S06"]
+    },
+    {
+      "id": "XR-04",
+      "file_scope": "Archived disclosure.html & questions.html",
+      "status": "needs-review",
+      "finding": "Line-by-line scan found disclosure.html marked non-commercial Amazon Associates policy documentation links as rel='sponsored', while questions.html:162 linked to https://link.amazon/B04G1MEwY without rel='sponsored'.",
+      "source_ids": ["S06", "S01"]
+    },
+    {
+      "id": "XR-05",
+      "file_scope": "Archived guides/*.html & reviews/verification-audit.html",
+      "status": "needs-review",
+      "finding": "Line-by-line anchor resolution scan found 29 broken #fragment targets pointing to removed IDs (#products, #questions, #suggestions, #ledger, #disclosure) across superseded guide templates.",
+      "source_ids": ["S08"]
+    },
+    {
+      "id": "XR-06",
+      "file_scope": "Root src/data/products.json & tools/layout.py",
+      "status": "needs-review",
+      "finding": "Root buy_url() constructs https://www.amazon.com/dp/{observed_asin}?tag=shopnow047c-20 directly from observed_asin while intended_asin is null; logged in COORDINATION.md that locally appending ?tag= is not a substitute for verifying enrollment and link tracking in Associates Central Reports.",
+      "source_ids": ["S01", "S02", "S14"]
+    }
+  ]
+}

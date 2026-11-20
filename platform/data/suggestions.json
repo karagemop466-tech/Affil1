@@ -1,0 +1,211 @@
+{
+  "verified_on": "2026-11-20",
+  "suggestions": [
+    {
+      "id": "SG-01",
+      "track": "Priority 1 · Read Like a Shop, Not an Audit",
+      "title": "Lead above the fold with the 5-product shoppable shortlist and format roles, keeping audit registers in footer & Desk nav",
+      "problem": "Audit-first landing pages overwhelm buyers with internal verification jargon before showing what the products actually do.",
+      "proposal": "Open the front page with clear buyer format cards (Dual-Basket 6 Qt, French-Door 26 Qt Oven, Single-Basket 8 Qt, Instant-Read Probe, 3-Probe Wireless), interactive fit filters, and direct paid-link CTAs, while routing registers and flags through one Desk nav item and the footer.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition",
+      "source_ids": ["S01", "S04"]
+    },
+    {
+      "id": "SG-02",
+      "track": "Priority 1 · Read Like a Shop, Not an Audit",
+      "title": "Add an interactive Countertop Fit Finder matching batch size, counter clearance, and cooking task",
+      "problem": "Buyers comparing 2×3 qt drawers, an 8 qt single basket, and a 26 qt French-door oven struggle to translate quart numbers into real kitchen fit.",
+      "proposal": "Provide instant client-side workflow filters (Two foods at once, Single-layer batches, Sheet-pan & holiday trays, Spot-check vs leave-in roast) that narrow the shortlist and log aggregate comparison_filter_use events.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition",
+      "source_ids": ["S09", "S10", "S11", "S12", "S13"]
+    },
+    {
+      "id": "SG-03",
+      "track": "Priority 1 · Read Like a Shop, Not an Audit",
+      "title": "Pair air fryers with meat thermometers as a natural kitchen workflow rather than hiding category split",
+      "problem": "Three air fryers and two meat thermometers look mismatched if presented without culinary context.",
+      "proposal": "Cross-link P-04 (instant-read) with drawer air fryers (P-01, P-03) for quick drawer checks and P-05 (wireless leave-in probes) with the French-door oven (P-02) for closed-door roasting.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition",
+      "source_ids": ["S09", "S10", "S11", "S12", "S13"]
+    },
+    {
+      "id": "SG-04",
+      "track": "Priority 2 · Make It Findable (Organic Search)",
+      "title": "Publish question-shaped and seasonal kitchen guides wired into sitemap.xml and feed.xml",
+      "problem": "Thin product blurbs rarely rank for real buyer questions such as dual-basket vs single-basket math or holiday oven overflow.",
+      "proposal": "Ship 8 concrete, non-fluff buyer guides (4 core working hypotheses + 4 seasonal/weeknight problem solvers), automatically listed in sitemap.xml and RSS feed.xml, then select future topics from Search Console Queries.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition",
+      "source_ids": ["S06", "S07"]
+    },
+    {
+      "id": "SG-05",
+      "track": "Priority 3 · Make the Machinery Trustworthy",
+      "title": "Separate Product-Intent Confirmation fields strictly from Observed Redirect fields in JSON and HTML",
+      "problem": "Merging observed /dp/ redirects into intended_asin hides whether a short link points to the wrong product or variant.",
+      "proposal": "Enforce two distinct schema objects (intent_confirmation vs observed_redirect) validated on every build by platform/compliance_gate.py and platform/verify_edition.py.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition",
+      "source_ids": ["S03"]
+    },
+    {
+      "id": "SG-06",
+      "track": "Priority 3 · Make the Machinery Trustworthy",
+      "title": "Replace ambiguous link.amazon URLs with Associates-validated Special Links after signed-in click test",
+      "problem": "No tag=shopnow047c-20 parameter appeared on redirect arrival, and P-04/P-05 showed historical instability, while FLG-003 remains unresolved.",
+      "proposal": "Require operator sign-in to Associates Central to generate fresh Special Links for each confirmed 10-character ASIN and verify one non-purchasing click in Associates Reports before paid scaling.",
+      "default_decision": "hold",
+      "implementation_state": "awaiting-operator-account",
+      "source_ids": ["S01", "S02", "S14"]
+    },
+    {
+      "id": "SG-07",
+      "track": "Priority 4 · Evidence-Based Iteration & Measurement",
+      "title": "Ship privacy-preserving 5-event click counter and self-hosted collector with an empty Campaign Ledger",
+      "problem": "Third-party trackers add cookie banners and privacy risk, while fabricated conversion scores distort capital allocation.",
+      "proposal": "Track only aggregate daily counts of 5 defined events (page_view, product_card_click, guide_to_product_click, comparison_filter_use, suggestion_decision) honoring DNT/GPC, and import reported_orders solely from signed-in Associates CSV exports via platform/ledger.py.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition-collector-ready",
+      "source_ids": ["S02", "S08", "S14"]
+    },
+    {
+      "id": "SG-08",
+      "track": "Priority 5 · Compliance Gate",
+      "title": "Block CI deploys on missing §5 disclosure, unsponsored retail links, dollar prices, or broken anchors",
+      "problem": "Manual edits routinely drop above-the-fold disclosures, omit rel='sponsored', or introduce stale prices.",
+      "proposal": "Run platform/verify_edition.py in .github/workflows/edition-verify.yml on every push and pull request to fail loudly on any policy or link defect.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-ci",
+      "source_ids": ["S01", "S02", "S04", "S06"]
+    },
+    {
+      "id": "SG-27",
+      "track": "Parallel Polish Pass (SG-27..SG-30) · Read Like a Publication",
+      "title": "SG-27: Replace audit-speak navigation labels with reader-first editorial labels",
+      "problem": "Navigation bars stuffed with 'Audit', 'Telemetry', and 'Schema' read like internal engineering tools rather than a kitchen magazine.",
+      "proposal": "Use five plain-English masthead links (Shop Shortlist, Categories, Buying Guides, Compare, Decision Desk) and group governance/verification links cleanly in the footer.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition",
+      "source_ids": ["S04"]
+    },
+    {
+      "id": "SG-28",
+      "track": "Parallel Polish Pass (SG-27..SG-30) · Read Like a Publication",
+      "title": "SG-28: Ship valid RSS 2.0 feed (feed.xml) auto-discovered from every page <head>",
+      "problem": "Readers and syndication tools need a zero-tracking way to follow new seasonal and buyer guides.",
+      "proposal": "Generate feed.xml alongside sitemap.xml on every build and expose <link rel='alternate' type='application/rss+xml'> in every HTML head.",
+      "default_decision": "approved",
+      "implementation_state": "implemented-in-edition",
+      "source_ids": ["S08"]
+    },
+    {
+      "id": "SG-29",
+      "track": "Parallel Polish Pass (SG-27..SG-30) · Read Like a Publication",
+      "title": "SG-29: Connect Google Search Console and feed query exports into platform/research_engine.py",
+      "problem": "Choosing the next 10 articles by instinct wastes effort when real search impressions show exact buyer phrasing.",
+      "proposal": "Verify domain/URL-prefix ownership in Search Console, submit sitemap.xml, and run platform/research_engine.py on exported Queries CSVs to prioritize high-impression, low-CTR buyer questions.",
+      "default_decision": "hold",
+      "implementation_state": "awaiting-search-console-verification",
+      "source_ids": ["S07"]
+    },
+    {
+      "id": "SG-30",
+      "track": "Parallel Polish Pass (SG-27..SG-30) · Read Like a Publication",
+      "title": "SG-30: Gate email newsletter capture behind opted-in CAN-SPAM & Associates §4 compliance",
+      "problem": "Adding an email box without an unsubscribe system, physical mailing address, and §4 Special-Link rules creates legal exposure.",
+      "proposal": "Keep RSS active immediately and hold email capture until an opted-in provider is configured that links subscribers to on-site articles rather than raw Special Links.",
+      "default_decision": "hold",
+      "implementation_state": "held-pending-compliance-setup",
+      "source_ids": ["S02"]
+    },
+    {
+      "id": "SG-31",
+      "track": "Policy Guardrails (Explicitly Rejected Anti-Patterns)",
+      "title": "REJECTED: Automated scraping of Amazon prices, star ratings, or customer review excerpts",
+      "problem": "Many generic AI affiliate prompts ask agents to scrape live Amazon prices, star ratings, and review counts.",
+      "proposal": "Reject permanently unless connected through approved Creators API / PA API credentials under Participation Requirements §2(b) and §6(t).",
+      "default_decision": "rejected",
+      "implementation_state": "blocked-by-compliance-gate",
+      "source_ids": ["S02"]
+    },
+    {
+      "id": "SG-32",
+      "track": "Policy Guardrails (Explicitly Rejected Anti-Patterns)",
+      "title": "REJECTED: Public price-drop trackers or automated price-alert widgets",
+      "problem": "Price-history charts and drop alerts are common affiliate growth hacks that violate Amazon Associates rules.",
+      "proposal": "Reject under Participation Requirements §6(y): 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.'",
+      "default_decision": "rejected",
+      "implementation_state": "blocked-by-compliance-gate",
+      "source_ids": ["S02"]
+    }
+  ],
+  "prompt_modules": [
+    {
+      "id": "DP-01",
+      "category": "Anti-AI-Slop Voice & Editorial Craft",
+      "label": "Concrete Kitchen Prose (Ban AI Clichés & Fake Hands-On Claims)",
+      "default_enabled": true,
+      "why_it_converts": "Real buyers bounce immediately from generic 'In today's fast-paced kitchen...' fluff. Specific geometry trade-offs (2×3 qt drawers vs one 8 qt floor vs 26 qt rack clearance) earn reader trust.",
+      "prompt_instruction": "Write in crisp, observant kitchen-magazine prose. Ban filler openings ('In today's world', 'Whether you're a busy parent', 'Game-changer', 'Ultimate guide', 'Delve into'). Never claim hands-on lab testing, taste tests, or 'Best Overall' awards unless physical test logs exist; frame product specs strictly from verified seller titles and manufacturer manuals, and explain what each physical dimension or feature changes during real weeknight cooking."
+    },
+    {
+      "id": "DP-02",
+      "category": "Storefront Visual Hierarchy",
+      "label": "Warm Culinary Editorial Palette + Above-the-Fold Shoppable Shortlist",
+      "default_enabled": true,
+      "why_it_converts": "Visitors landing from search want to compare viable options in 10 seconds before reading 1,500 words.",
+      "prompt_instruction": "Design a warm, tactile editorial storefront (linen ground #FAF7F2, crisp white product cards, cast-iron ink #18181B, terracotta primary CTAs #B84A27, tabular numerals). Place the Associates disclosure strip directly beneath the masthead, then open immediately with the categorized product shortlist cards, 'Best Fit If / Skip If' buyer callouts, and an interactive workflow filter."
+    },
+    {
+      "id": "DP-03",
+      "category": "Organic Search & Trendy Topic Clusters",
+      "label": "High-Intent Problem & Seasonal Article Clusters (Zero Volume Hallucination)",
+      "default_enabled": true,
+      "why_it_converts": "Long-tail problem queries ('two 3-quart baskets vs one 8-quart', 'holiday side dishes in countertop oven', 'reheating pizza drawer vs rack', 'instant-read vs wireless leave-in probe') attract buyers right before purchase.",
+      "prompt_instruction": "Build topic clusters around concrete kitchen bottlenecks and seasonal cooking moments: (1) Dual-zone synchronization vs single-drawer width, (2) Holiday oven overflow & side-dish batching, (3) Crispy leftover reheating physics (perforated basket vs wire rack), (4) Counter depth, cabinet steam clearance & dishwasher cleanup, and (5) Pairing instant-read vs wireless leave-in thermometers with convection cookers. Treat topics as hypotheses until validated in Google Search Console."
+    },
+    {
+      "id": "DP-04",
+      "category": "Decision-Making & Conversion UX",
+      "label": "Trade-Off Matrix + 'Buy If / Skip If' Cards + Paired Workflow Upsell",
+      "default_enabled": true,
+      "why_it_converts": "Honest 'Skip If' criteria eliminate buyer hesitation and reduce post-click abandonment.",
+      "prompt_instruction": "Give every product card and comparison row an explicit 'Fits Best When' and 'Skip When' rule, a side-by-side verified attribute table with blank '—' cells for unconfirmed specs, and a natural cross-category pairing (e.g., pairing a drawer air fryer with an instant-read thermometer to prevent overcooked poultry)."
+    },
+    {
+      "id": "DP-05",
+      "category": "Amazon & FTC Hard Compliance Constraints",
+      "label": "Strict Associates §5, Policies §2(b)/§6(t)/§6(y), FTC 16 CFR 255 & rel='sponsored'",
+      "default_enabled": true,
+      "why_it_converts": "Protects the Associates account from termination while keeping paid links transparent.",
+      "prompt_instruction": "Include verbatim 'As an Amazon Associate I earn from qualifying purchases.' above <main> and in <footer> on every page. Mark every Amazon product link rel='sponsored nofollow noopener' with visible 'Paid link' microcopy. Never hardcode or scrape prices, star ratings, review counts, stock status, or price-tracking alerts without approved Creators API / PA API access."
+    },
+    {
+      "id": "DP-06",
+      "category": "Technical SEO & GitHub Pages Architecture",
+      "label": "Subpath-Safe Relative URLs, Clean Sitemap, RSS Feed & Fast Zero-JS-Required HTML",
+      "default_enabled": true,
+      "why_it_converts": "Fast, zero-layout-shift static HTML with valid canonicals and zero broken links indexes cleanly on GitHub Pages.",
+      "prompt_instruction": "Render semantic static HTML5 that works completely without JavaScript, enhanced progressively for interactive filters. Compute all internal links and asset paths as relative URLs so project subpaths (/Affil1/) never 404. Auto-generate sitemap.xml and RSS 2.0 feed.xml from the canonical page list."
+    },
+    {
+      "id": "DP-07",
+      "category": "Privacy-First Measurement & Iteration Loop",
+      "label": "5-Event Aggregate Click Counter + Provenance-Locked Associates Ledger",
+      "default_enabled": true,
+      "why_it_converts": "Measures which guides actually drive outbound product clicks without invasive tracking scripts.",
+      "prompt_instruction": "Instrument only five privacy-preserving events (page_view, product_card_click, guide_to_product_click, comparison_filter_use, suggestion_decision) honoring DNT and Global Privacy Control with zero cookies. Keep the Campaign Ledger empty until populated from signed-in Amazon Associates CSV reports with SHA-256 provenance."
+    },
+    {
+      "id": "DP-08",
+      "category": " Manufacturer Manual Enrichment Workflow",
+      "label": "Official PDF Manual Spec Backfill (Wattage, Dimensions, Tray Size)",
+      "default_enabled": false,
+      "why_it_converts": "Exact cabinet height and drawer interior width answer the #1 pre-purchase objection for small kitchens.",
+      "prompt_instruction": "Only after the operator confirms each product's intended 10-character ASIN, fetch the official brand PDF user manual (CHEFMAN, Emeril Lagasse, ThermoMaven, CHEF iQ), verify exterior H×W×D dimensions and wattage line by line, and cite the manual URL per row."
+    }
+  ]
+}
