@@ -125,7 +125,7 @@ CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
-    r"www\.ftc\.gov|search\.google\.com|www\.bing\.com)",
+    r"www\.ftc\.gov|search\.google\.com|www\.bing\.com|support\.google\.com)",
     re.I,
 )
 
