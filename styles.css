@@ -310,26 +310,3 @@ article ol, article ul { margin-bottom: 1.25rem; }
 }
 
 /* no-JS fallback for click tracking is handled by link attributes */
-/* ---------- polish additions (2026-11-20, arena/4772a1e3-affil1) ---------- */
-.section-tight { padding: 2.5rem 0; }
-.empty-note { font-size: 0.88rem; color: var(--soft); margin-top: 0.75rem; }
-.status-tag { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em;
-  text-transform: uppercase; padding: 0.18rem 0.6rem; border-radius: 999px; width: fit-content; }
-.status-obs { background: var(--chip); color: var(--chip-ink); }
-.status-conflict { background: #fef3c7; color: #92400e; }
-.status-blocked { background: #fef2f2; color: #991b1b; }
-.appliance-swatch { aspect-ratio: 16/10; border-radius: 10px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 0.15rem; color: #f8fafc; background: linear-gradient(150deg,#374151,#111827);
-  margin-bottom: 0.35rem; }
-.appliance-swatch .mono { font-size: 2rem; font-weight: 900; letter-spacing: 0.08em; }
-.appliance-swatch .kind { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #d1d5db; }
-.appliance-swatch.sage { background: linear-gradient(150deg,#3f6246,#1f3a29); }
-.appliance-swatch.steel { background: linear-gradient(150deg,#64748b,#1e293b); }
-.appliance-swatch.copper { background: linear-gradient(150deg,#b45309,#451a03); }
-.hero-photo-img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
-.cap { font-size: 0.75rem; color: var(--soft); margin-top: 0.4rem; text-align: right; }
-.band { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 1.25rem 1.5rem; }
-.ledger-empty td { color: var(--soft); font-style: italic; text-align: center; padding: 1.5rem; }
-@media (min-width: 900px) { .hero-art { display: block; height: 380px !important; } }
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }

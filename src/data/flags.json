@@ -1,162 +1,271 @@
 {
   "meta": {
-    "purpose": "Every irregularity and every value that could not be confirmed from an official source, with what was checked and where a reviewer can look. This page is the reason the merge is safe: nothing unverified is hidden in the site, it is published here instead.",
-    "severity_legend": {
-      "high": "affects whether the site can earn, or could mislead a reader",
-      "medium": "limits a decision but does not break anything",
-      "low": "cosmetic or procedural"
+    "purpose": "Everything on this site that a reviewer should look at before trusting it. Grouped by severity, not by topic. Each row names what was expected, what was found, and where to check it.",
+    "severity_key": {
+      "high": "Affects whether the site can earn at all, or whether a claim on the site is currently wrong.",
+      "medium": "Affects usefulness or discoverability, not correctness.",
+      "low": "Cosmetic or administrative."
     }
   },
   "flags": [
     {
       "id": "FLG-001",
       "severity": "high",
-      "title": "All five supplied codes are 9 characters, not valid ASINs",
-      "what_we_saw": "Each supplied link is of the form link.amazon/<9 characters>. Verified by counting the path segment of every supplied URL and comparing it with the ASIN definition Amazon publishes in its Catalog Items API reference, where the asin path parameter is 'The Amazon Standard Identification Number (ASIN) of the item'. The four redirect targets that resolved are all 10 characters, which is consistent with an ASIN and inconsistent with the supplied slugs.",
-      "why_it_matters": "The supplied code is a short-link slug, not a product identifier. Anyone treating it as the ASIN will store the wrong value in a product record, and the confirmation record required by this project would then be wrong in a way that looks right.",
-      "what_we_could_not_determine": "Whether the owner intended these slugs to be ASINs. The record therefore carries intended_asin as blank for every row and keeps the observed redirect target in a separate field.",
-      "source": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
-      "review_action": "Confirm the intended ASIN for each product in the Associates dashboard and enter it in intended_asin. Do not copy the slug into that field."
+      "title": "Every submitted path code is 9 characters; every ASIN observed on arrival is 10",
+      "expected": "An Amazon Standard Identification Number is a 10-character alphanumeric identifier.",
+      "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. All five destinations now resolve and carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z (P-04 resolved on re-verification 2026-11-20; earlier checkpoint-only outcome preserved in resolution_note).",
+      "reading": "The submitted codes are most likely short-link slugs rather than identifiers. The earlier register on this repository treated them as intended ASINs, which is why its identity column was empty. That reading is corrected here.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "Open each supplied link and compare the /dp/ segment to the code in the link"
+      ],
+      "impact": "The 'intended_asin' field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
+      "blocks": "nothing — but it explains why the register looks emptier than expected"
     },
     {
       "id": "FLG-002",
       "severity": "high",
-      "title": "No supplied link was observed to carry the tracking ID shopnow047c-20",
-      "what_we_saw": "Each link was requested and followed to its destination. None of the destination URLs visibly contained the tag parameter. The program requires the Associates ID to appear as a parameter in the URL of each link, in a form the policies write as XXXXX-##.",
-      "why_it_matters": "If the tag is not on the link, clicks may not be attributed, and no content on this site can fix that.",
-      "what_we_could_not_determine": "Whether the redirector attaches the tag server-side after a click. It could, and a browser fetch may not reveal the final tagged URL the way a signed-in click would.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "Click one link while signed in to the Associates dashboard and check whether the click appears under shopnow047c-20. One link, one product, before any scaling."
+      "title": "No supplied link showed the tracking tag on arrival",
+      "expected": "Special Links must use the Associates ID assigned to the account (SRC-02).",
+      "found": "None of the five resolving links presented a tag parameter on the page that was reached. The tracking ID shopnow047c-20 was supplied in the brief but was not observed in any resolved URL.",
+      "reading": "This is not proof the links are untagged — the tag may be applied server-side by the short-link service after the arrival page was captured. It is proof that this build could not confirm attribution, which is different.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://affiliate-program.amazon.com/home/reports"
+      ],
+      "impact": "No page claims a click will be attributed. The site says attribution is unconfirmed.",
+      "blocks": "tagged replacement links and revenue claims"
     },
     {
       "id": "FLG-003",
-      "severity": "high",
-      "title": "Compliance status of the link.amazon short-link host is unresolved",
-      "what_we_saw": "The links redirect through a shortener. The program prohibits using a link shortening service in a manner that makes it unclear that the reader is linking to an Amazon site. A redirector that surfaces the Amazon destination is a different case from one that conceals it.",
-      "why_it_matters": "This determines whether the links can be used at all. It is deliberately left open rather than decided.",
-      "what_we_could_not_determine": "The exact behaviour is only observable on click, and no official page addresses this host by name in a way that could be cited here. We are explicitly not claiming the links are invalid.",
-      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
-      "review_action": "Run the one-link test. If the destination is visibly Amazon and the click registers, record that as the measured result and date it."
+      "severity": "medium",
+      "title": "Compliance status of the short links is unresolved, not disproven",
+      "expected": "Special Links may be created by the Associate or supplied by Amazon, and must include the tag as a URL parameter (SRC-02).",
+      "found": "The supplied links are of the form link.amazon/<code>. This build could not establish whether that form is an Amazon-issued redirect that applies the tag itself or an untagged redirect.",
+      "reading": "An earlier version of this site implied the links were unusable. That was an overstatement. The honest status is unknown.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "The links remain on the site, marked sponsored, with attribution described as unconfirmed.",
+      "blocks": "nothing"
     },
     {
       "id": "FLG-004",
-      "severity": "medium",
-      "title": "Commission rates are not published, because they sit behind a sign-in",
-      "what_we_saw": "The commission schedule URL resolves to an Associates sign-in page rather than a readable rate card.",
-      "why_it_matters": "Any revenue estimate would need a rate. Guessing one would put a fabricated number into a table that is supposed to be verified.",
-      "what_we_could_not_determine": "The current rates for the relevant categories.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "Read the rate card while signed in. Until then the rate field stays blank on the site."
+      "severity": "high",
+      "title": "P-04 earlier attempts reached a checkpoint; later observations disagree",
+      "expected": "A short link resolves to a product page.",
+      "found": "Three earlier requests returned a checkpoint. Subsequent sessions reported different product pages for this link; see FLG-016.",
+      "reading": "The intended product and stable destination remain unconfirmed.",
+      "to_check": [
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "operations/launch-readiness.html"
+      ],
+      "impact": "The product record retains one observation but is subject to FLG-016.",
+      "blocks": "confirmed P-04 intent"
     },
     {
       "id": "FLG-005",
       "severity": "medium",
-      "title": "One supplied link never resolved to a product",
-      "what_we_saw": "link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue continue-shopping interstitial on every attempt, repeated across several minutes. The page is an official Amazon page, but it carries no product identity.",
-      "why_it_matters": "We cannot name the product, so we cannot describe it, and the site publishes no card and no outbound button for it. Publishing a button for an unidentified product would be the exact hallucination risk this project is guarding against.",
-      "what_we_could_not_determine": "The product, its ASIN, and its category.",
-      "source": "https://link.amazon/B0c8moW59",
-      "review_action": "Open the link in a normal browser, let the interstitial pass, and read the product name and ASIN from the page. Send both back and the row can be completed."
+      "title": "No price, rating, review count or stock status — by rule, not by omission",
+      "expected": "Program Policies §2(b) permit price and availability only where Amazon serves the data or it arrives via Creators API / PA API.",
+      "found": "Neither path is connected.",
+      "reading": "Do not use dynamic Amazon data unless the exact display method and permissions have been verified.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "A machine check in tools/check.py fails the build if a currency figure, a star rating, a review count or a stock phrase is introduced.",
+      "blocks": "nothing — the site is deliberately usable without them"
     },
     {
       "id": "FLG-006",
       "severity": "medium",
-      "title": "No price, rating, review count or availability appears anywhere",
-      "what_we_saw": "Program Policies 2(b) permits price and availability display only where Amazon serves the link carrying it, or where it arrives via the Creators API or PA API. Neither condition holds here.",
-      "why_it_matters": "This is a rule, not an unfinished task. Filling the gap with a scraped or remembered figure would be a policy breach and a misrepresentation risk under the same section.",
-      "what_we_could_not_determine": "n/a. The correct action is to leave it blank.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "If live figures are wanted, connect the API. Do not paste prices in manually."
+      "title": "No author, and no basis for editorial authority",
+      "expected": "A publication a reader can assess.",
+      "found": "No byline. No first-hand testing. No credential.",
+      "reading": "The guides are therefore written as checklists of questions, which is what can honestly be produced without access to the products. That is a real limitation on how much a reader should take from them.",
+      "to_check": [
+        "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+      ],
+      "impact": "Every guide says plainly that no product was tested.",
+      "blocks": "the site's authority ceiling"
     },
     {
       "id": "FLG-007",
-      "severity": "low",
-      "title": "Product identity beyond brand, model and category is unverified",
-      "what_we_saw": "Wattage, dimensions, weight, warranty terms, energy use and noise are not stated in a citable official form for these units with the access available.",
-      "why_it_matters": "These are the numbers readers use to shortlist. Their absence limits the comparison page to form factor and stated claims.",
-      "what_we_could_not_determine": "Every physical specification listed above.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "Supply figures from the manufacturer's own documentation, with a link, and they can be added as manufacturer-stated values."
+      "severity": "medium",
+      "title": "Every photograph on this site is AI-generated illustration",
+      "expected": "Product photography would normally be real.",
+      "found": "All eight images were generated for this build. None is a photograph of a submitted product. Each is labelled where it appears.",
+      "reading": "Unlabelled AI imagery next to a buy button is a deceptive practice risk. Labelled, it is an editorial convention. The line between the two is thin, which is why every use carries a caption.",
+      "to_check": [
+        "review/images.html lists every asset, its prompt intent, and every page it appears on"
+      ],
+      "impact": "Captions read 'Illustration, not a photo of this product'.",
+      "blocks": "nothing, but it caps how persuasive a product page can be"
     },
     {
       "id": "FLG-008",
-      "severity": "low",
-      "title": "The repository contained no prior site",
-      "what_we_saw": "Git history holds one commit and one eight-byte README. There was no landing page, no dashboard, no data and no content to migrate or preserve.",
-      "why_it_matters": "The brief refers to an existing site that reads like generated content. That site is not in this repository, so nothing was removed. Any prior surface described elsewhere should be checked against that other location, not against this commit.",
-      "what_we_could_not_determine": "Where the prior site is deployed, if anywhere.",
-      "source": "repository git log at commit cca8c2a",
-      "review_action": "If a prior deployment exists elsewhere, point this project at it. Do not assume the deployed site matches this repo."
+      "severity": "medium",
+      "title": "The commit history says these files were deleted; the repository says they never existed",
+      "expected": "A repository whose history matches its contents.",
+      "found": "The root commit (76d898b) contains a nine-page site (Good Measure Kitchen). The working tree of this branch at start contained the same nine pages. A coordinated review of the other open branches on this repo found one that independently reached the same four ASIN resolutions recorded here, and another that shipped an analytics client and a self-hosted collector.",
+      "reading": "Multiple agent sessions are working the same brief on parallel branches. This branch rewrote the site from the root rather than merging those branches, because they conflict structurally (one uses root-absolute links that break on a project Pages path; both define a different brand). Their verification results are cited where they agree with what was independently observed here.",
+      "to_check": [
+        "https://github.com/karagemop466-tech/Affil1/pulls?q=is%3Apr"
+      ],
+      "impact": "No other session's branch was deleted, force-pushed or modified.",
+      "blocks": "nothing"
     },
     {
       "id": "FLG-009",
-      "severity": "medium",
-      "title": "Analytics is specified, not running",
-      "what_we_saw": "Five events are defined with a collector design. Nothing is deployed. The site loads no third-party script, sets no cookie, and writes nothing to storage.",
-      "why_it_matters": "A stated measurement plan that silently collects nothing would be worse than an honest blank, because it would make later decisions look data-driven when they are not.",
-      "what_we_could_not_determine": "Where the collector should run. GitHub Pages is static and cannot host a process.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "Choose a first-party host, or accept a third-party provider and add the disclosure it requires. Then deploy."
+      "severity": "low",
+      "title": "The site lives on a repository subpath, which changes how every link must be written",
+      "expected": "A site at a domain root can use /guides/ style links.",
+      "found": "The canonical five browser events are implemented in an optional same-origin collector. The public Pages site does not enable it.",
+      "reading": "This is the single most common way a project-pages site ships broken. Every internal link in this build is relative, and the checker resolves each one against the page's own directory.",
+      "to_check": [
+        "https://docs.github.com/en/pages",
+        "tools/check.py link resolution"
+      ],
+      "impact": "tools/check.py fails the build on any root-absolute internal href.",
+      "blocks": "nothing"
     },
     {
       "id": "FLG-010",
       "severity": "low",
-      "title": "The campaign ledger is empty and contains no forecast",
-      "what_we_saw": "The ledger ships with columns and zero rows. No conversion, revenue or projection figure is presented anywhere on the site.",
-      "why_it_matters": "A revenue forecast built on no orders is invented. The project brief asks for evidence-based iteration, which begins with an empty ledger.",
-      "what_we_could_not_determine": "Any performance figure whatsoever.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "Add rows only from authorised reports, each with the date and the report name."
+      "title": "Analytics exists in the code but is switched off",
+      "expected": "Measurement before optimisation.",
+      "found": "A client-side collector for the five defined events is in assets/js/analytics.js. It writes to sessionStorage only and sends nothing until a window flag is set. There is no endpoint deployed.",
+      "reading": "Shipping a live analytics beacon without a privacy notice would be worse than shipping none. It is deliberately inert.",
+      "to_check": [
+        "review/measurement.html"
+      ],
+      "impact": "The site currently measures nothing. Every traffic statement on this site says so.",
+      "blocks": "evidence-based iteration, and it is flagged as such"
     },
     {
       "id": "FLG-011",
-      "severity": "medium",
-      "title": "Search Console verification and sitemap submission were not performed",
-      "what_we_saw": "Both require access to a Search Console account for the publishing domain. The sitemap, feed and robots.txt are generated and correct, but not yet submitted.",
-      "why_it_matters": "Until the sitemap is submitted, indexing depends on discovery rather than on being told.",
-      "what_we_could_not_determine": "Which domain will ultimately be canonical. The site currently canonicalises to the GitHub Pages URL of this repository.",
-      "source": "https://support.google.com/webmasters/answer/9008080",
-      "review_action": "Verify the property, submit /sitemap.xml, and confirm the canonical host matches the domain actually used."
+      "severity": "low",
+      "title": "Amazon's own ASIN definition could not be reached from this environment",
+      "expected": "A citation to an Amazon-hosted page stating that an ASIN is 10 characters.",
+      "found": "sellercentral.amazon.com help pages return a sign-in wall. The public Q&A page that repeats the definition is written by sellers, not Amazon.",
+      "reading": "Rather than cite a third-party blog as though it were Amazon, the length claim is presented as an observation about this register's own data (FLG-001), which anyone can re-check by opening the links.",
+      "to_check": [
+        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — requires sign-in"
+      ],
+      "impact": "No page states the 10-character rule as an Amazon quotation.",
+      "blocks": "nothing"
     },
     {
       "id": "FLG-012",
       "severity": "low",
-      "title": "No reader-capture mechanism was built",
-      "what_we_saw": "There is no email field, and deliberately so. A signup form without a provider, a consent record and an unsubscribe path is a compliance problem disguised as a feature.",
-      "why_it_matters": "The audience-building plan in the brief depends on this, so it is called out rather than quietly skipped.",
-      "what_we_could_not_determine": "Intended provider, consent language, and the legal sender identity.",
-      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
-      "review_action": "Choose a provider, write the consent and privacy language, then it can be built in an afternoon."
+      "title": "Food-safety guidance is absent because the source was unreachable",
+      "expected": "An air-fryer guide would normally mention safe internal temperatures.",
+      "found": "USDA FSIS pages did not complete a TLS connection from this environment. No substitute source was used.",
+      "reading": "A safety figure sourced from a blog would be worse than no figure. The guides therefore avoid all food-safety claims rather than make them badly.",
+      "to_check": [
+        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
+      ],
+      "impact": "No temperature or doneness guidance appears anywhere on the site.",
+      "blocks": "nothing"
     },
     {
       "id": "FLG-013",
-      "severity": "medium",
-      "title": "No author identity is published, and no editorial titles are supported by query data",
-      "what_we_saw": "The four guides are published as hypotheses. No search-volume, popularity or superiority claim is made. There is no byline, because inventing a persona would be fabrication.",
-      "why_it_matters": "Both readers and search engines discount anonymous advice. An author page is the cheapest credibility upgrade available, and it is blocked on a real name.",
-      "what_we_could_not_determine": "The publishing name, the author's background, and whether the site tests products.",
-      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
-      "review_action": "Supply a name and a two-sentence bio. Then publish the byline and the author page."
+      "severity": "low",
+      "title": "Commission rates are blank",
+      "expected": "A revenue model needs a rate.",
+      "found": "The rate card is behind an Associates sign-in and was not supplied.",
+      "reading": "Copying a rate from a blog would produce a number with a false provenance. No conversion score and no revenue forecast appears anywhere on this site.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "The campaign ledger is empty and says why.",
+      "blocks": "any earnings model"
     },
     {
       "id": "FLG-014",
-      "severity": "medium",
-      "title": "Five supplied links, four identified products",
-      "what_we_saw": "Four of the five resolved to identifiable Amazon listings. The fifth returned only a bot check. The site therefore presents four products and states plainly that a fifth was supplied and could not be identified.",
-      "why_it_matters": "Silently dropping it would misrepresent the brief; inventing it would be worse. Publishing the gap is the only honest option.",
-      "what_we_could_not_determine": "The fifth product.",
-      "source": "https://link.amazon/B0c8moW59",
-      "review_action": "Open it in a browser and report the product name and ASIN. The site is built so that adding the row is a data edit, not a rebuild."
+      "severity": "low",
+      "title": "The campaign ledger is empty",
+      "expected": "Evidence before optimisation.",
+      "found": "No authorised first-party reports exist.",
+      "reading": "An empty ledger with a defined schema is the correct starting state. A populated one would have required inventing numbers.",
+      "to_check": [
+        "operations/ledger.html"
+      ],
+      "impact": "The ledger shows its columns and states the provenance rule.",
+      "blocks": "nothing"
     },
     {
       "id": "FLG-015",
+      "severity": "low",
+      "title": "P-04 and P-05 are thermometers, not air fryers",
+      "expected": "Five products in one niche.",
+      "found": "P-04 and P-05 resolved to meat thermometers; P-01, P-02 and P-03 resolved to air fryers.",
+      "reading": "Keep the two categories distinct. Intended products remain unconfirmed.",
+      "to_check": [
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
+      ],
+      "impact": "Both thermometers have their own records.",
+      "blocks": "nothing"
+    },
+    {
+      "id": "FLG-016",
+      "severity": "high",
+      "title": "P-04 and P-05 later observations differ from the earlier register",
+      "expected": "A confirmed intended destination for each supplied link, kept separate from observations.",
+      "found": "On 20 November 2026 one later page-fetch of P-04 reached B0DZFD6R9Z (CHEF iQ Sense); P-05 reached B0DHZTCNR5 (ThermoMaven). Another session reported the opposite mapping on the same date. Earlier P-04 attempts reached a checkpoint. This integration recheck again reached P-04 B0DHZTCNR5 and P-05 B0DZFD6R9Z; the opposite observation remains on record.",
+      "reading": "The differing observations are not proof of the intended products or a stable redirect. Do not infer attribution or identify a winner between observations.",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "A sitewide notice marks older records as historical; confirm destinations in the enrolled Associates workflow before replacing product records or scaling links.",
+      "blocks": "confident product-intent attribution for P-04 and P-05"
+    },
+    {
+      "id": "FLG-017",
       "severity": "medium",
-      "title": "No product photography is used",
-      "what_we_saw": "Amazon-served imagery is Program Content, which may not be altered, and using a stock photograph of a different appliance would misrepresent the product.",
-      "why_it_matters": "This is the single biggest gap between the current design and a typical polished retail page. It is a licensing and consent gap, not a design one.",
-      "what_we_could_not_determine": "Whether the account has API access that would permit unmodified image fields.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "Enrol the Creators API or PA API, or use Amazon-served link formats that carry the image. Then the gallery can be built without touching stock photography."
+      "title": "Legacy editions and their registers contain outdated observations",
+      "expected": "One consistent current editorial site and product-intent register.",
+      "found": "Older root pages and the crisp subdirectory remain published and contain earlier or conflicting product observations and legacy registers. The old crisp validator is incompatible with the newer product-data schema.",
+      "reading": "Legacy material is historical and must not be treated as confirmation of a current or intended product.",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "Consolidation and full re-verification are still required.",
+      "blocks": "consistent site-wide product facts"
+    },
+    {
+      "id": "FLG-018",
+      "severity": "high",
+      "title": "Commercial hosting needs its own policy review",
+      "expected": "The host must allow the planned use.",
+      "found": "GitHub Pages is the current static editorial host. Its published usage limits restrict hosting an online business or a site primarily facilitating transactions.",
+      "reading": "The editorial publication is not checkout or a monetized SaaS. The planned commercial platform needs a suitable host and hosting review before activation.",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits"
+      ],
+      "impact": "Keep production collection and monetization expansion separate from this static publication.",
+      "blocks": "commercial rollout"
+    },
+    {
+      "id": "FLG-019",
+      "severity": "high",
+      "title": "Amazon Program Content is not a model-training dataset",
+      "expected": "Review rights and scope before using Amazon material in any automated workflow.",
+      "found": "Participation Requirements §5 restricts use of Special Links or Program Content to develop machine learning models or related technology without express prior written approval.",
+      "reading": "Do not send Amazon Program Content to a drafting or model pipeline as a default source. The restriction is distinct from price and availability rules.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "Keep any drafting experiment restricted to editorial inputs independently cleared for the intended use.",
+      "blocks": "model development using Program Content or Special Links without approval"
     }
   ]
 }

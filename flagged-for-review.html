@@ -1,16 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Flagged for review — moved | Good Measure — Kitchen Notes</title>
-<meta name="robots" content="noindex">
-<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/reviews/flagged.html">
-<meta http-equiv="refresh" content="0; url=reviews/flagged.html">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flagged for Review — Affil1</title>
+  <meta name="description" content="Flagged irregularities and unverified items published for review. Source links included so they can be reviewed after the site is live. Amazon Associate tracking ID shopnow047c-20." />
+  <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/flagged-for-review.html" />
+  <link rel="alternate" type="application/rss+xml" title="Affil1 feed" href="feed.xml" />
+  <link rel="sitemap" type="application/xml" href="sitemap.xml" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div class="disclosure">As an Amazon Associate I earn from qualifying purchases. Links marked “sponsored” are affiliate links.</div>
-<p style="font-family:ui-sans-serif,system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 1rem">This page has moved to keep one canonical address per topic: <a href="reviews/flagged.html">Flagged for review</a>. If you are not redirected, follow the link.</p>
+  <div class="disclosure-strip">
+    <div class="inner">
+      <span aria-label="Affiliate disclosure" role="img" aria-hidden="true">&#128226;</span>
+      <b>Affiliate disclosure:</b> As an Amazon Associate, we earn from qualifying purchases. This site contains affiliate links marked "sponsored." <a href="disclosure.html">Read full disclosure &#8594;</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="mark">A1</div>
+        <div class="wordmark"><div>Affil1</div><div class="tag">Buying guides &middot; Amazon Associate</div></div>
+      </div>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <a href="index.html">Front page</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">Categories</a>
+        <a href="guides.html">Guides</a>
+        <a href="suggestions.html">Suggestions</a>
+        <a href="questions.html">Open questions</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" fill="currentColor" fill-rule="evenodd"/></svg>
+        </button>
+        <a href="index.html" class="btn btn-ghost">&#8592; Front page</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Flagged for Review</h2>
+          <a href="index.html" class="btn btn-ghost">&#8592; Front page</a>
+        </div>
+
+        <p class="small">Flagged irregularities and unverified items do not block the site launch. They are published here with source links so they can be reviewed after the site is live and changes requested.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Item</th>
+                <th>Detail</th>
+                <th>Source / reference</th>
+                <th>Blocks launch?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FLG-001</td>
+                <td>Repository contains no source data</td>
+                <td>Repo main had only README.md (`# Affil1`); no pre-existing source register, product data, or code to verify line by line. Site built from scratch.</td>
+                <td>Repo inspection (this repo)</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>FLG-002</td>
+                <td>All five Amazon short links unverified</td>
+                <td>Build environment cannot reach amazon.com or link.amazon.com (outbound internet limited to github.com/npm/PyPI hosts). Intended ASIN, official listing URL, confirmation date, source, and observed redirect target left blank and flagged unverified — nothing inferred.</td>
+                <td>Submitted links: link.amazon/B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>FLG-003</td>
+                <td>Short-link compliance status unresolved</td>
+                <td>The exact compliance status of the supplied short links is unresolved. They are not declared invalid. Test one link per product in the enrolled Associates workflow before scaling.</td>
+                <td>Project notes (FLG-003)</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>FLG-004</td>
+                <td>Tracking ID enrollment unconfirmed</td>
+                <td>Tracking ID shopnow047c-20 recorded but not confirmed as enrolled/active against Amazon Associates.</td>
+                <td>Amazon Associates Program (official)</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>FLG-005</td>
+                <td>Analytics server-side persistence not wired</td>
+                <td>/api/collect endpoint defined; on GitHub Pages it requires a serverless function. Client-side events are stored in localStorage until wired.</td>
+                <td>Affil1 (analytics.js)</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>FLG-006</td>
+                <td>No authorized first-party reports obtained</td>
+                <td>Campaign ledger is empty by design. No timestamp, source, channel, eligible sessions, clicks, or reported orders added until obtained from authorized first-party reports.</td>
+                <td>Priority 4 rule (project notes)</td>
+                <td>No</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div class="ct">Review process</div>
+          <div>Flagged items are reviewed against official sources. Once confirmed, update the relevant page and data file, then move the item out of this list. Items remain visible here until resolved.</div>
+        </div>
+
+        <div class="grid-2 mt-8">
+          <div>
+            <h3 style="font-size:15px;margin-bottom:8px;">Related pages</h3>
+            <ul class="small" style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+              <li><a href="products.html">Product-intent confirmation record</a></li>
+              <li><a href="questions.html">Open questions, information &amp; answers</a></li>
+              <li><a href="executive-summary.html">Executive summary</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="font-size:15px;margin-bottom:8px;">Official references</h3>
+            <ul class="small" style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+              <li><a href="https://associates.amazon.com" rel="nofollow" target="_blank">Amazon Associates Program</a></li>
+              <li><a href="https://ftc.gov" rel="nofollow" target="_blank">Federal Trade Commission (FTC)</a></li>
+              <li><a href="https://search.google.com/search-console/" rel="nofollow" target="_blank">Google Search Console</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="mark">A1</div>
+        <div class="name">Affil1</div>
+        <div class="desc">Reader-first affiliate publishing. Clear disclosure, sponsored links, and buying guides built around real buyer questions.</div>
+      </div>
+      <nav class="footer-nav">
+        <h4>Dashboard &amp; surfaces</h4>
+        <ul>
+          <li><a href="index.html">Front page</a></li>
+          <li><a href="products.html">Product confirmation record</a></li>
+          <li><a href="guides.html">Publishing guides</a></li>
+          <li><a href="suggestions.html">Suggestions (review before implement)</a></li>
+          <li><a href="questions.html">Open questions &amp; answers</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-disclosure" style="grid-column: 1 / -1;">
+      <b>Affiliate disclosure:</b> As an Amazon Associate, we earn from qualifying purchases. Links on this site are affiliate links marked <strong>sponsored</strong>. Placement and endorsement context are reviewed against the Amazon Associates Program Operating Agreement and FTC guidance.
+    </div>
+    <div class="copyright">&#169; 2026 Affil1 &middot; Tracking ID shopnow047c-20 &middot; Built to be read like a publication, not an audit.</div>
+  </footer>
+
+  <script src="js/analytics.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

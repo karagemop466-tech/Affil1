@@ -1,33 +1,26 @@
-# Publishing workflow — compliance gate
+# Publishing workflow — evidence before promotion
 
-No page or guide publishes until every check below passes. Record the check, date and reviewer in the pull request.
+This is a release checklist for the maintained **Crisp & Counter** edition. A flag can remain open while the editorial site ships. It cannot be used as evidence to enable a blocked feature.
 
-## 1. Disclosure placement (S01 · S07 · S24)
-- [x] Affiliate disclosure strip present under the masthead, above the fold
-- [x] Disclosure repeated in the footer
-- [x] Full statement at /disclosure.html with Associates tracking ID shopnow047c-20
+## 1. Product identity and attribution
 
-## 2. Link marking
-- [ ] Every outbound product link carries `rel="nofollow sponsored"` and a visible “sponsored” label
-- [ ] No unverified destination is linked outbound (flagged items link to /reviews/flagged.html instead)
+- Observe each supplied URL separately from any enrolled link. Record the listing, ASIN, date, and unusual outcomes; retain conflicting observations. The [Amazon ASIN definition](https://sell.amazon.com/blog/what-is-an-asin) explains why a short-link slug is not an ASIN.
+- If authorized, record the intended ASIN, its official listing URL, date and public Associates Central reference in `kitchen-build/intent.json`. Leave confirmation fields null until the evidence bundle is complete. It is valid for separately sourced intended and observed ASINs to match.
+- Generate one Special Link per product in the enrolled workflow. Check the exact destination and variant with Amazon's authorized tooling and reconcile credited, eligible activity with [Associates Central reports](https://affiliate-program.amazon.com/home/reports). Do not create artificial clicks or orders or commit private reports, account identifiers other than the chosen public tag, access tokens, or query-bearing report URLs.
+- Only then populate `approved_special_link` and `tracking_report_reference` in the same evidence bundle. The build checks completeness, the intended listing and the selected tag. Resolve conflicting observed destinations before approval. This is a structural gate, **not** independent proof of the report. Public buttons use the direct listings until evidence exists. A short link is not declared invalid merely because attribution is unknown.
 
-## 3. Endorsement context
-- [ ] No language implying Amazon endorsement
-- [ ] Product findings labeled as findings, not endorsements; prices/ratings left blank when unconfirmed
-- [ ] Reviewed against Amazon Associates Program Operating Agreement and FTC Endorsement Guides
+## 2. Copy, links and rights
 
-## 4. Verification
-- [ ] Every table row has a source link to the official source (Amazon.com)
-- [ ] Unconfirmed values left blank and flagged; nothing inferred
-- [ ] Intended ASIN and observed redirect target in separate fields
+- Recheck the [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), and [FTC guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking). Read the disclosure on mobile before the first recommendation and again in the footer. Check the adjacent link text and endorsement context, not just the HTML attribute.
+- Mark outbound product links `sponsored`. Attribute listing statements, link the source, and leave missing information blank. Don't claim hands-on tests, rankings or trending status without supporting evidence.
+- Before introducing Amazon data, review IP, cache/refresh, display, and API eligibility rules. Do not use Program Content or Special Links to develop machine learning models or related technology without the express prior written approval described in Participation Requirements §5. Use cleared inputs for AI-assisted outlines; a reviewer checks every claim and approves publication. No autonomous publishing, scraping or private reporting is enabled.
 
-## 5. Measurement
-- [ ] Outbound click counter active on sponsored links
-- [ ] Five defined events instrumented (page_view, outbound_click, guide_read, suggestion_review, session_start)
+## 3. Measure, then plan the next guide
 
-## 6. Publish
-- [ ] Guide added to sitemap.xml and rss.xml
-- [ ] PR created from feature branch to main; review recorded in COORDINATION.md
-- [ ] After merge: confirm GitHub Pages deploy; check for broken links
+- Check [GitHub Pages usage limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) before any commercial rollout. Pages is static. The optional first-party counter is tested but off in production; review hosting, privacy, retention and opt-out before activation. Do not derive sessions or orders from raw events.
+- Confirm Search Console ownership and submit the canonical sitemap. Every four weeks read the [Search performance report](https://support.google.com/webmasters/answer/7576553) by page and available query. Improve one guide or propose one distinct guide; if evidence is sparse, record the result and defer. Keep the canonical sitemap and RSS feed in sync with every published guide.
+- Start with the empty campaign ledger. Add only authorized first-party report figures, with reporting period, timestamp, source, channel, and provenance. Unknown sessions, clicks or orders remain blank. No forecasts or conversion scores.
 
-Reviewer / date / decision: ____________________
+## 4. Release
+
+Run `python3 tools/build.py`, `python3 tools/check.py`, `python3 tools/check_local_links.py`, `python3 -m unittest discover -s kitchen-build`, and `python3 -m unittest discover -s analytics`. Stage the maintained edition with `python3 tools/stage.py <empty-output-folder>`. Record reviewer, date, unresolved flags and official sources on the PR. Confirm the Pages run for the merge SHA, not just the most recent green run.

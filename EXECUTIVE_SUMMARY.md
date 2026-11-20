@@ -1,88 +1,30 @@
-# Affil1 — Executive summary
+# Executive summary
 
-**Project:** Amazon Associates site for countertop cooking appliances (Air fryers, accessories, multi-function appliances)
-**Branch:** `arena/4772a1e3-affil1` (base `4ee0e7b`, main after PR #21)
-**Tracking ID:** `shopnow047c-20`
-**Prepared:** 2026-11-20 (reconciled by session arena/4772a1e3-affil1)
+**Publication:** [Crisp & Counter](https://karagemop466-tech.github.io/Affil1/) · **Tracking ID supplied:** `shopnow047c-20` · **Checked:** 20 November 2026
 
-## What this is
-A buyer-facing affiliate publication — **Good Measure — Kitchen Notes** — with a sister
-editorial edition (**Crisp & Counter**, under `crisp/`). It reads like a shop, not an audit:
-products lead the front page, every page carries an above-the-fold disclosure, and every
-outbound product link is marked sponsored.
+The buyer-facing publication presents three air fryers and two meat thermometers, with product records, comparisons and question-shaped guides. The [suggestions queue](https://karagemop466-tech.github.io/Affil1/suggestions/) and [open questions](https://karagemop466-tech.github.io/Affil1/questions/) separate proposals from missing evidence; [Flagged for Review](https://karagemop466-tech.github.io/Affil1/review/) records unresolved issues.
 
-## Products submitted (5) — what we actually know
-Two independent verification passes were run on 2026-11-20. They disagree for three of the
-five links. Both are recorded in full and are **never merged**.
+## Observed destinations, not confirmed intent
 
-| # | Submitted code | Pass 1 (04:xx–05:0xZ) | Pass 2 (05:15–05:22Z) | Status |
-|---|---|---|---|---|
-| 1 | `B04G1MEwY` | listed `dp/B0CDY277D3` (CHEFMAN 6 Quart Dual Basket) | same listing | observed, unconfirmed |
-| 2 | `B02NbDxp3` | unresolved / checkpoint (crisp FLG-005 agrees) | listed `dp/B09B7SB46R` (Emeril Lagasse 26QT) | **conflict logged** |
-| 3 | `B00hJ57DV` | Amazon homepage reached | listed `dp/B08DKYBTPH` (Chefman 8 Qt TurboFry) | **conflict logged** |
-| 4 | `B0c8moW59` | Amazon checkpoint gate | Amazon checkpoint gate | **unresolved** |
-| 5 | `B0f3GKalj` | Amazon homepage reached | listed `dp/B0DZFD6R9Z` (CHEF iQ Sense wireless meat thermometer — **not an air fryer**) | **conflict logged · IR-5** |
+All five submitted short links reached Amazon listings in a page-fetch check on 20 November 2026. P-04 first returned a checkpoint and resolved on a later attempt; the reason for the checkpoint is unknown. A parallel session reported the P-04 and P-05 destinations reversed, so their mapping is disputed (FLG-016); a repeated fetch in this session produced the mapping below. Observed destinations are not proof of the product originally intended. No intended ASIN, intended listing URL, intent-confirmation date or source has been confirmed.
 
-Intended ASIN is unknown for all five: the submitted codes are 9 characters; Amazon defines an
-ASIN as 10. The submitter's intent is **never inferred**. Identity, tracking and commission
-rates all require the enrolled Associates account and remain blank.
+| Ref | Submitted official link | Observed official listing | Intended ASIN |
+|---|---|---|---|
+| P-01 | https://link.amazon/B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | |
+| P-02 | https://link.amazon/B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | |
+| P-03 | https://link.amazon/B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | |
+| P-04 | https://link.amazon/B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | |
+| P-05 | https://link.amazon/B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | |
 
-**Never do:** assert the supplied links are invalid; merge pass-1 and pass-2 records; display
-prices/ratings/review counts/stock (Amazon serves those only via a live feed we do not have);
-claim order volume or revenue.
+No product has been tested; illustrations are not product photographs. Prices, ratings and commission rates are not published. Check the [Amazon policies](https://affiliate-program.amazon.com/help/operating/policies) before adding product data.
 
-## What is live
-- `/` — rebuilt 2026-11-20: products-first front page (original generated hero art), seasonal
-  reading band, open-questions strip, empty campaign ledger, how-we-work, full footer map.
-- `/guides/` index + question-led guides (basket vs oven · capacity · cleanup · multi-function ·
-  oven-or-air-fryer · accessories · holiday-hosting · **holiday-gift-checklist (new)**);
-  one question per guide, working titles labelled as hypotheses.
-- `/products.html` · `/dashboard.html` · `/categories/air-fryers.html` — register, ledger, category findings.
-- `/suggestions.html` — decision queue S-001…S-014 (nothing ships unreviewed).
-- `/questions.html` — open-question register Q1…Q20 (missing items say “Missing”).
-- `/reviews/flagged.html` — Flagged for Review with source links. `/reviews/verification-audit.html` — pass-2 audit.
-- `/design-prompt-pack.html` — **new**: the decision-gated pack to brief the next redesign
-  (brand system, tokens, page inventory, editorial hypotheses H1–H6, anti-slop rules).
-- `/sitemap.xml` · `/rss.xml` · `/feed.xml` — every canonical URL, stubs removed; duplicates
-  consolidated via redirect stubs (nothing deleted). CI reference check now scans **all** HTML
-  except `archive/`.
+## What remains unverified
 
-## Design & marketing directives (2026-11-20)
-- One brand voice storefront-wide (Good Measure — Kitchen Notes; sage token system; favicon;
-  shared shell unified). Remaining: retire the last legacy skins and get owner sign-off (S-007).
-- Cadence proposal: one question-led guide per fortnight, chosen from measured queries once
-  Search Console + analytics are live (S-008, Q14) — until then, hypotheses only.
-- Original imagery only (hero + seasonal art shipped); no scraped manufacturer images (S-009).
-- Reader capture stays gated on provider + privacy review (S-013, Q19); RSS is the capture path today.
+- Attribution and Special Link status are **unconfirmed**. The supplied short links are not declared invalid. One test per product in the enrolled Associates workflow, followed by a report check, is needed before scaling.
+- Analytics events are specified, but the maintained publication's collector is **not deployed or enabled**. GitHub Pages is static hosting; a separate properly configured service and a privacy/consent decision are needed. No traffic, conversion or revenue figures are claimed.
+- Search Console ownership verification and sitemap submission have not been confirmed. The sitemap and feed exist, but do not guarantee indexing or rankings.
+- An author identity, permitted live data access and genuine product testing remain open. The empty campaign ledger must only be populated from dated, authorized first-party reports.
 
-## Compliance gate
-Disclosure above the fold on every page + footer repeat; `rel="sponsored nofollow noopener"` on
-all outbound product links; PUBLISHING_WORKFLOW.md governs publishing; FTC Endorsement Guides
-and the Associates Operating Agreement (updated Oct 15, 2025) are the controlling references.
+## Compliance and publication
 
-## Flagged irregularities (see `/reviews/flagged.html` + COORDINATION.md)
-- FLG-001/IR-1: submitted codes are not ASINs; labels relabeled site-wide.
-- FLG-002: no supplied link was observed carrying `shopnow047c-20`.
-- FLG-003: compliance status of the supplied short links unresolved.
-- FLG-004: commission rates require sign-in; blank by design.
-- FLG-009/FLG-010: analytics endpoint designed, not deployed; ledger empty.
-- FLG-011/FLG-012: Search Console and email capture require account access.
-- IR-2: same-date observations disagree for 3 of 5 links (both passes retained).
-- IR-5: one observed listing is a wireless meat thermometer, not an air fryer (S-012 decides).
-- IR-13 (new): `js/analytics.js` (style.css pages) uses a legacy event list inconsistent with
-  the canonical five events; marked with a warning comment, not silently rewritten.
-
-## Awaiting owner decisions
-S-002 (test one Special Link per product) · S-003 (analytics host) · S-007 (brand sign-off) ·
-S-008 (cadence) · S-010 (Search Console) · S-012 (thermometer scope) · S-013 (email) · S-014
-(redesign via the prompt pack). Full list with paths: `/suggestions.html`.
-
-## Measurement (turned on in design, not in data)
-Five defined events: `page_view`, `outbound_click`, `guide_read`, `suggestion_review`,
-`session_start`. Self-hosted collector designed (`server/collect.js`); nothing deployed without
-a first-party host. No cookies, no IPs, no personal data client-side.
-
-## Bottom line
-The site is launchable, honest and now internally consistent. The binding constraints are not
-design — they are account access (Associates workflow, Search Console, analytics host) and a
-handful of owner decisions. Everything measurable is measured empty, not guessed.
+The publication places the Associates disclosure beneath the masthead and in the footer and marks product links sponsored. Review [Amazon's Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), and [FTC guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) before publishing changes. Automated checks do not substitute for account verification or legal review.

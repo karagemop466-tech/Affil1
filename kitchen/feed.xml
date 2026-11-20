@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss version="2.0">
+  <channel>
+    <title>Good Measure Kitchen Notes</title>
+    <link>https://karagemop466-tech.github.io/Affil1/kitchen/</link>
+    <description>Question-led kitchen buying guides.</description>
+    <item>
+      <title>Instant-read or wireless meat thermometer?</title>
+      <link>https://karagemop466-tech.github.io/Affil1/kitchen/probe.html</link>
+      <guid>https://karagemop466-tech.github.io/Affil1/kitchen/probe.html</guid>
+      <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Pick a thermometer by the way you actually cook.</description>
+    </item>
+    <item>
+      <title>Can a countertop appliance help you host?</title>
+      <link>https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html</link>
+      <guid>https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html</guid>
+      <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Plan the last half hour before serving.</description>
+    </item>
+  </channel>
+</rss>

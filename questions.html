@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Open questions, information &amp; answers — Good Measure — Kitchen Notes</title>
+  <title>Open questions, information &amp; answers — Affil1</title>
   <meta name="description" content="Clear list of questions, information, and answers that must be addressed before any decision. Plus suggestions to discover missing information. Amazon Associate tracking ID shopnow047c-20." />
   <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/questions.html" />
-  <link rel="alternate" type="application/rss+xml" title="Good Measure feed" href="feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Affil1 feed" href="feed.xml" />
   <link rel="sitemap" type="application/xml" href="sitemap.xml" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -21,14 +21,14 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
-        <div class="mark">gm</div>
-        <div class="wordmark"><div>Good Measure</div><div class="tag">Buying guides &middot; Amazon Associate</div></div>
+        <div class="mark">A1</div>
+        <div class="wordmark"><div>Affil1</div><div class="tag">Buying guides &middot; Amazon Associate</div></div>
       </div>
       <nav class="primary-nav" aria-label="Main navigation">
         <a href="index.html">Front page</a>
         <a href="products.html">Products</a>
         <a href="categories.html">Categories</a>
-        <a href="guides/">Guides</a>
+        <a href="guides.html">Guides</a>
         <a href="suggestions.html">Suggestions</a>
         <a href="questions.html" class="active">Open questions</a>
       </nav>
@@ -49,7 +49,7 @@
           <a href="suggestions.html" class="btn btn-ghost">Suggestions &#8594;</a>
         </div>
 
-        <p class="small">No decision should be made until the questions below are answered with information we actually have. Items marked <strong>missing</strong> are things we do not have and need to discover.</p>
+        <p class="small">No decision should be made until the questions below are answered with information we actually have. <strong>Blocked</strong> means no official source is reachable or the answer requires account access the owner holds. A blocked question is a reason to leave the value blank — never to guess. Updated 2026-11-20: all five listings now resolve (Q-03 partly answered); tracking and compliance questions (Q-01/Q-02) remain blocked on the Associates test.</p>
 
         <div class="table-wrap">
           <table>
@@ -64,144 +64,102 @@
             </thead>
             <tbody>
               <tr>
-                <td>Q1</td>
-                <td>What product does each submitted Amazon short link point to?</td>
-                <td class="unverified-note">Missing — cannot reach amazon.com/link.amazon.com from build environment</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Submitted links only</td>
+                <td>Q-01</td>
+                <td><strong>Do the five supplied short links actually carry the tracking ID shopnow047c-20?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The Associates click report, or a resolved URL visibly containing the tag parameter, for each link.</span></td>
+                <td>Unknown.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Open each link while signed in to the Associates dashboard and check that the click registers under shopnow047c-20.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q2</td>
-                <td>What is the intended ASIN for each product?</td>
-                <td class="unverified-note">Blank — not confirmed</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Amazon (official, unreachable)</td>
+                <td>Q-02</td>
+                <td><strong>Are link.amazon short links compliant Special Links?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: An official statement from Amazon on this specific redirector, or a tracked click observed end to end.</span></td>
+                <td>Unresolved. No official source either permits or prohibits this specific host in a way this session can cite, and no tracked click could be observed.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Test one link through the Associates workflow. If the click appears in the report, it is functioning as a Special Link. That is a measurement, not a ruling.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/agreement" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q3</td>
-                <td>What is the official Amazon listing URL for each product?</td>
-                <td class="unverified-note">Blank — not confirmed</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Amazon (official, unreachable)</td>
+                <td>Q-03</td>
+                <td><strong>What is the valid ASIN for each of the five products?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The ten-character ASIN shown on each product page and in the owner's Associates record.</span></td>
+                <td>Four observed redirect targets are recorded and are ten characters long. The fifth supplied link never reached a product page, so its ASIN is blank.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Open B0c8moW59 in a browser, past the interstitial, and read the ASIN from the page or URL.</span></td>
+                <td><span class="badge">partly-answered</span></td>
+                <td><a class="source-link" href="https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q4</td>
-                <td>What is the observed redirect target for each short link?</td>
-                <td class="unverified-note">Blank — kept in a separate field, not merged</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>To be observed in Associates workflow</td>
+                <td>Q-04</td>
+                <td><strong>What commission rate applies to each product?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The Standard Commission Income schedule for Home & Kitchen and for the thermometer category.</span></td>
+                <td>Not recorded. The rate card URL redirects to an Associates sign-in page.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Read the rate card while signed in. Do not publish a rate until then.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q5</td>
-                <td>Are the supplied short links compliant / valid Special Links?</td>
-                <td>Not declared invalid; exact compliance status unresolved (see FLG-003)</td>
-                <td><span class="badge badge-unverified">Unresolved</span></td>
-                <td>Project notes (FLG-003)</td>
+                <td>Q-05</td>
+                <td><strong>What do these appliances cost, and are they in stock?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Price and availability served by Amazon through a link it serves, or through the Creators API / PA API.</span></td>
+                <td>Not published, because publishing it without that feed is prohibited, not merely unverified.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Connect the Creators API or PA API, or embed an Amazon-served widget that carries the price.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q6</td>
-                <td>Has each link been tested in the enrolled Associates workflow?</td>
-                <td>No — not yet tested</td>
-                <td><span class="badge badge-unverified">Not done</span></td>
-                <td>Good Measure record</td>
+                <td>Q-06</td>
+                <td><strong>Which of these appliances is best?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Independent measurement, or a stated, disclosed testing method performed by this site.</span></td>
+                <td>No winner is declared. This site has not tested any product and says so on every guide.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Either purchase and test units and publish the method, or keep the site in its current advisory mode. Do not synthesise a verdict from listing titles.</span></td>
+                <td><span class="badge">blocked-on-decision</span></td>
+                <td><a class="source-link" href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q7</td>
-                <td>Is the Amazon Associates tracking ID shopnow047c-20 enrolled and active?</td>
-                <td class="unverified-note">Not confirmed — selected ID recorded only</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Amazon Associates (official)</td>
+                <td>Q-07</td>
+                <td><strong>Would any of these products appeal to readers enough to click?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Outbound click data from a first-party endpoint, over a meaningful window.</span></td>
+                <td>No data exists yet. The ledger is intentionally empty.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Choose a first-party host, deploy the documented collector, then wait for enough sessions to mean anything.</span></td>
+                <td><span class="badge">blocked-on-decision</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q8</td>
-                <td>Are clicks and conversions being measured (the five defined events)?</td>
-                <td>Endpoint defined (self-hosted analytics), page_view/outbound_click instrumented; server-side persistence not yet wired</td>
-                <td><span class="badge">Partially implemented</span></td>
-                <td>Good Measure (analytics.js)</td>
+                <td>Q-08</td>
+                <td><strong>Which guide topic should be written next?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Search Console query impressions, and the click-through rate of existing guides.</span></td>
+                <td>Undetermined. Four guides are published as hypotheses; none has been measured.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Verify the site in Search Console, submit the sitemap, and revisit after four to six weeks.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://support.google.com/webmasters/answer/9008080" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q9</td>
-                <td>Is the disclosure above the fold on every page and repeated in the footer?</td>
-                <td>Yes — disclosure strip included on every page + footer</td>
-                <td><span class="badge badge-ok">Done</span></td>
-                <td>Good Measure (this site)</td>
+                <td>Q-09</td>
+                <td><strong>Under what name should the site publish, and who is the author?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: A real legal or pen name, a short bio, and a decision on whether to disclose testing or not.</span></td>
+                <td>Undetermined. No author identity is published, because inventing one would be a fabrication.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Supply the name and a two-sentence bio. Then an author page and a real byline can be published.</span></td>
+                <td><span class="badge">blocked-on-decision</span></td>
+                <td><a class="source-link" href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q10</td>
-                <td>Are all outbound product links marked sponsored?</td>
-                <td>Yes — rel="sponsored nofollow" + visual sponsored tag</td>
-                <td><span class="badge badge-ok">Done</span></td>
-                <td>Good Measure (this site)</td>
+                <td>Q-10</td>
+                <td><strong>Is the site allowed to show Amazon product photographs?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Either an Amazon-served widget that carries the image, or API image fields used unmodified under the IP License.</span></td>
+                <td>Not established for this site. Program Content may not be altered, and this site has no licensed feed.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Enrol the API, or use Amazon-served link formats, and then place images unmodified.</span></td>
+                <td><span class="badge badge-unverified">blocked-on-account</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q11</td>
-                <td>Who is the primary reader (one person, not &ldquo;everyone&rdquo;)?</td>
-                <td class="unverified-note">Missing — no audience statement supplied; design and copy are targets without it</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Suggested discovery: 3 reader interviews or existing customer list segments; write a one-paragraph reader definition</td>
+                <td>Q-11</td>
+                <td><strong>Does the FTC require the disclosure to be a specific wording?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The FTC's own guidance on affiliate disclosure wording and placement.</span></td>
+                <td>Answered. The FTC gives example wording and says the disclosure must be clear and conspicuous, and that the reader must be able to weigh the recommendation. Nearby 'paid link' labelling is described as adequate.<br><span style="color:var(--muted);font-size:.82rem">To unblock: n/a</span></td>
+                <td><span class="badge badge-ok">answered</span></td>
+                <td><a class="source-link" href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q12</td>
-                <td>What is the brand system (name, mark, palette, type, tone)?</td>
-                <td>Partly answered — GOOD MEASURE / KITCHEN NOTES, sage palette and type system in styles.css (2026-11-20); favicon.svg added</td>
-                <td><span class="badge badge-ok">Partial</span></td>
-                <td>styles.css (this repo); assets/favicon.svg; remaining: owner sign-off on palette/voice and social avatar</td>
+                <td>Q-12</td>
+                <td><strong>May this site display price comparison tables?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: The Associates Program rules on price display, including the comparison-format clause.</span></td>
+                <td>Answered as a constraint. A price may be shown only if Amazon serves it or it arrives via the API, and a comparison format must show both the lowest new and, if provided, lowest used price. This site shows neither.<br><span style="color:var(--muted);font-size:.82rem">To unblock: n/a</span></td>
+                <td><span class="badge badge-ok">answered</span></td>
+                <td><a class="source-link" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
               <tr>
-                <td>Q13</td>
-                <td>Which imagery may be used (original vs manufacturer vs stock)?</td>
-                <td class="unverified-note">Missing — no image rights confirmed. Original generated art used for hero/seasonal images; no manufacturer images embedded</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Suggested discovery: confirm manufacturer media-kit terms; default to original art or rights-cleared stock; record license per asset</td>
+                <td>Q-13</td>
+                <td><strong>What was in this repository before this session?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: Git history and working tree.</span></td>
+                <td>Answered. One commit, one eight-byte README. No site, no prior pages, no data. The 'existing site' referenced in the brief is not in this repository.<br><span style="color:var(--muted);font-size:.82rem">To unblock: n/a</span></td>
+                <td><span class="badge badge-ok">answered</span></td>
+                <td>repository git log (this repo)</td>
               </tr>
               <tr>
-                <td>Q14</td>
-                <td>Which topic should be published next, and how is it chosen?</td>
-                <td class="unverified-note">Missing — working titles are hypotheses; no search-volume or query data exists yet</td>
-                <td><span class="badge badge-unverified">Blocked</span></td>
-                <td>Suggested discovery: verify Search Console property, export 4–6 weeks of queries, pick the next guide from measured demand (SG-26 cadence gate)</td>
-              </tr>
-              <tr>
-                <td>Q15</td>
-                <td>Who signs the guides (authorship and review attribution)?</td>
-                <td class="unverified-note">Missing — no author/reviewer names, bios or credentials supplied</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Suggested discovery: owner decision — real named author with a one-line bio; or an honest newsroom byline without invented credentials</td>
-              </tr>
-              <tr>
-                <td>Q16</td>
-                <td>What is the publishing cadence, and who owns it?</td>
-                <td class="unverified-note">Missing — the grid exists but no committed schedule or owner</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Suggested discovery: propose 1 question-led guide per fortnight to start; owner approves calendar; each guide ships via the publishing workflow gate</td>
-              </tr>
-              <tr>
-                <td>Q17</td>
-                <td>Where does the analytics endpoint run, and what is the retention/consent posture?</td>
-                <td class="unverified-note">Missing — endpoint designed (server/collect.js) but never deployed; no host, no retention policy</td>
-                <td><span class="badge badge-unverified">Blocked</span></td>
-                <td>See FLG-009 and design prompt pack; options: self-host on owner infrastructure or a privacy-first hosted collector; document retention ≤ 90 days</td>
-              </tr>
-              <tr>
-                <td>Q18</td>
-                <td>Who reviews the suggestions queue, and with what SLA?</td>
-                <td class="unverified-note">Missing — queue exists; no reviewer assigned; nothing is implemented without a decision</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Suggested discovery: owner names reviewer + weekly 30-min triage; decisions logged on this page and in COORDINATION.md</td>
-              </tr>
-              <tr>
-                <td>Q19</td>
-                <td>Which email capture provider, if any — and with what privacy review?</td>
-                <td class="unverified-note">Missing — no provider chosen; no consent mechanism; no privacy notice for email data</td>
-                <td><span class="badge badge-unverified">Blocked</span></td>
-                <td>See FLG-012; requires owner choice of provider + privacy notice update + consent banner review against FTC guidance and GDPR (NL audience)</td>
-              </tr>
-              <tr>
-                <td>Q20</td>
-                <td>Is the CHEF iQ smart meat thermometer (IR-5) intended for this air-fryer site at all?</td>
-                <td class="unverified-note">Missing — pass-2 observed a wireless meat thermometer; category naming may not cover it; submitter intent unknown</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Suggested discovery: ask the owner whether to (a) keep it as a cross-category pick, (b) re-scope the site to countertop cooking appliances, or (c) drop it from the register</td>
+                <td>Q-14</td>
+                <td><strong>Will the five links stay pointed at the same products?</strong><br><span style="color:var(--muted);font-size:.82rem">Needed: A dated re-check of each redirect, repeated over time.</span></td>
+                <td>Unknown over time. Each row is a single observation on one date.<br><span style="color:var(--muted);font-size:.82rem">To unblock: Re-run tools/validate.py monthly and diff the observed targets against products.json.</span></td>
+                <td><span class="badge">needs-routine</span></td>
+                <td><a class="source-link" href="https://link.amazon/B04G1MEwY" target="_blank" rel="nofollow">Official source</a></td>
               </tr>
             </tbody>
           </table>
@@ -222,7 +180,7 @@
             <h3 style="font-size:15px;margin-bottom:8px;">Related pages</h3>
             <ul class="small" style="list-style:none;display:flex;flex-direction:column;gap:6px;">
               <li><a href="products.html">Product-intent confirmation record</a></li>
-              <li><a href="reviews/flagged.html">Flagged for Review</a></li>
+              <li><a href="flagged-for-review.html">Flagged for Review</a></li>
               <li><a href="suggestions.html">Suggestions (review before implement)</a></li>
             </ul>
           </div>
@@ -242,8 +200,8 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="mark">gm</div>
-        <div class="name">Good Measure</div>
+        <div class="mark">A1</div>
+        <div class="name">Affil1</div>
         <div class="desc">Reader-first affiliate publishing. Clear disclosure, sponsored links, and buying guides built around real buyer questions.</div>
       </div>
       <nav class="footer-nav">
@@ -251,18 +209,18 @@
         <ul>
           <li><a href="index.html">Front page</a></li>
           <li><a href="products.html">Product confirmation record</a></li>
-          <li><a href="guides/">Publishing guides</a></li>
+          <li><a href="guides.html">Publishing guides</a></li>
           <li><a href="suggestions.html">Suggestions (review before implement)</a></li>
           <li><a href="executive-summary.html">Executive summary</a></li>
           <li><a href="disclosure.html">Affiliate disclosure</a></li>
-          <li><a href="reviews/flagged.html">Flagged for Review</a></li>
+          <li><a href="flagged-for-review.html">Flagged for Review</a></li>
         </ul>
       </nav>
     </div>
     <div class="footer-disclosure" style="grid-column: 1 / -1;">
       <b>Affiliate disclosure:</b> As an Amazon Associate, we earn from qualifying purchases. Links on this site are affiliate links marked <strong>sponsored</strong>. Placement and endorsement context are reviewed against the Amazon Associates Program Operating Agreement and FTC guidance.
     </div>
-    <div class="copyright">&#169; 2026 Good Measure &middot; Tracking ID shopnow047c-20 &middot; Built to be read like a publication, not an audit.</div>
+    <div class="copyright">&#169; 2026 Affil1 &middot; Tracking ID shopnow047c-20 &middot; Built to be read like a publication, not an audit.</div>
   </footer>
 
   <script src="js/analytics.js"></script>

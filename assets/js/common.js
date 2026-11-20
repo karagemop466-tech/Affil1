@@ -51,8 +51,6 @@
         { href: "/dashboard.html", label: "Product findings table" },
         { href: "/suggestions.html", label: "Decision suggestions" },
         { href: "/reviews/flagged.html", label: "Flagged for review" },
-        { href: "/reviews/verification-audit.html", label: "Verification audit" },
-        { href: "/design-prompt-pack.html", label: "Design prompt pack" },
       ],
     },
     {
@@ -66,26 +64,24 @@
   ];
 
   var DISCLOSURE_TEXT =
-    "As an Amazon Associate we earn from qualifying purchases. Links marked \u201csponsored\u201d are affiliate links. " +
+    "As an Amazon Associate I earn from qualifying purchases. Links marked \u201csponsored\u201d are affiliate links. " +
     "Full statement: affiliate disclosure.";
 
   function buildHeader(currentPath) {
-    var hasStaticStrip = !!document.querySelector(".disclosure-strip");
     var active = function (href) { return currentPath === href || currentPath === href.replace(/\.html$/, "/"); };
     var navLinks = NAV.map(function (n) {
       return '<a href="' + toRoot(n.href) + '"' + (active(n.href) ? ' class="active" aria-current="page"' : "") + '">' + n.label + "</a>";
     }).join("");
     return [
       '<header class="masthead" id="site-masthead"><div class="container">',
-      '<a class="brand" href="' + toRoot("/") + '"><span class="brand-mark">gm</span><span>GOOD MEASURE<span style="display:block;font-weight:600;font-size:0.62rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;">Kitchen Notes</span></span></a>',
+      '<a class="brand" href="' + toRoot("/") + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L3 7l9 5 9-5-9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17L3 22l9-5 9 5-9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="brand-mark">Affil1</span> <span style="font-weight:400;font-size:0.78rem;color:var(--muted);">shop now</span></a>',
       '<nav class="nav" id="site-nav">' + navLinks + '</nav>',
       '<button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>',
       '</div></header>',
-    ].concat(hasStaticStrip ? [] : [
       '<div class="disclosure-strip"><div class="container">',
       '<strong>Affiliate disclosure:</strong> ' + DISCLOSURE_TEXT + '. See the full <a href="' + toRoot("/disclosure.html") + '">affiliate disclosure</a>.',
       '</div></div>'
-    ]).join("");
+    ].join("");
   }
 
   function buildFooter() {
