@@ -14,7 +14,7 @@ further input.
 
 ## What exists now
 
-One canonical site, 27 pages, rebuilt from `src/data` on every deploy:
+One canonical site, 29 pages, rebuilt from `src/data` on every deploy:
 
 - a product-led front page with five picks in two categories and a buy button on
   every card;
