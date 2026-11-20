@@ -57,7 +57,8 @@
       "found": "Three earlier requests returned a checkpoint. Subsequent sessions reported different product pages for this link; see FLG-016.",
       "reading": "The intended product and stable destination remain unconfirmed.",
       "to_check": [
-        "Open https://link.amazon/B0c8moW59 in a normal browser and note where it lands"
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/dp/B0DHZTCNR5"
       ],
       "impact": "The product record retains one observation but is subject to FLG-016.",
       "blocks": "confirmed P-04 intent"
@@ -196,14 +197,15 @@
     {
       "id": "FLG-015",
       "severity": "low",
-      "title": "P-05 is filed under Thermometers, not Air Fryers",
+      "title": "P-04 and P-05 are thermometers, not air fryers",
       "expected": "Five products in one niche.",
-      "found": "Category path on arrival: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. The other four are all under Air Fryers.",
-      "reading": "Not an error in the link — the product really is a thermometer. It is an error to present it as the fifth air fryer, which is how a generated site would have handled it.",
+      "found": "P-04 and P-05 resolved to meat thermometers; P-01, P-02 and P-03 resolved to air fryers.",
+      "reading": "Keep the two categories distinct. Intended products remain unconfirmed.",
       "to_check": [
+        "https://www.amazon.com/dp/B0DHZTCNR5",
         "https://www.amazon.com/dp/B0DZFD6R9Z"
       ],
-      "impact": "P-05 has its own section and is never called an air fryer.",
+      "impact": "Both thermometers have their own records.",
       "blocks": "nothing"
     },
     {

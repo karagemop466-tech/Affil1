@@ -97,7 +97,7 @@ GUIDES = [
             {
                 "h": "The trap in the number",
                 "p": [
-                    "A larger quoted capacity usually means a physically larger machine, which needs more counter and, in the oven shape, more door clearance. There is no configuration where you get more cooking space for the same footprint.",
+                    "A larger quoted capacity usually means a physically larger machine, which needs more counter and, in the oven shape, more door clearance. Compare actual usable dimensions and footprint rather than assuming a fixed relationship.",
                     "The other trap is the opposite one: buying small to save counter space and then discovering that the meal you cook most often needs two batches. Two batches is not a disaster, but it is a daily tax, and it is worth noticing before you pay it rather than after."
                 ]
             },

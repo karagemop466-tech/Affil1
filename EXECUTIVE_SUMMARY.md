@@ -1,46 +1,30 @@
-# Affil1 — Executive summary
+# Executive summary
 
-**Project:** Amazon affiliate marketing site (GitHub Pages)
-**Branch:** `arena/8206a8d0-affil1` (polish + re-verification pass, 2026-11-20)
-**Tracking ID:** `shopnow047c-20`
-**Prepared:** 2026-11-20
+**Publication:** [Crisp & Counter](https://karagemop466-tech.github.io/Affil1/) · **Tracking ID supplied:** `shopnow047c-20` · **Checked:** 20 November 2026
 
-## What this is
-A buyer-facing affiliate site for air fryers and multi-function kitchen appliances. It reads like a shop/publication, not an audit: product picks lead the front page, every page carries an above-the-fold disclosure, and every outbound product link is marked `sponsored`.
+The buyer-facing publication presents three air fryers and two meat thermometers, with product records, comparisons and question-shaped guides. The [suggestions queue](https://karagemop466-tech.github.io/Affil1/suggestions/) and [open questions](https://karagemop466-tech.github.io/Affil1/questions/) separate proposals from missing evidence; [Flagged for Review](https://karagemop466-tech.github.io/Affil1/review/) records unresolved issues.
 
-## Products submitted (5)
-| # | Submitted link | Intended ASIN | Verified listing | Status |
-|---|---|---|---|---|
-| 1 | https://link.amazon/B04G1MEwY | B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | Verified |
-| 2 | https://link.amazon/B02NbDxp3 | B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Verified |
-| 3 | https://link.amazon/B00hJ57DV | B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | Listing checked 2026-11-20 (re-verified) |
-| 4 | https://link.amazon/B0c8moW59 | B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | Listing checked 2026-11-20 (resolved on re-verification; was checkpoint-only) |
-| 5 | https://link.amazon/B0f3GKalj | B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | Listing checked 2026-11-20 (re-verified) |
+## Observed destinations, not confirmed intent
 
-Verified against Amazon.com (official source) on 2026-11-20. Intended ASIN and observed redirect target are stored in separate fields and never merged. Prices, ratings and commissions are blank — not confirmed from an official source, never inferred.
+All five submitted short links reached Amazon listings in a page-fetch check on 20 November 2026. P-04 first returned a checkpoint and resolved on a later attempt; the reason for the checkpoint is unknown. A parallel session reported the P-04 and P-05 destinations reversed, so their mapping is disputed (FLG-016); a repeated fetch in this session produced the mapping below. Observed destinations are not proof of the product originally intended. No intended ASIN, intended listing URL, intent-confirmation date or source has been confirmed.
 
-## Site structure
-- `/` — publication front page: hero, this week’s picks (product grid), buyer-question guides, how it works
-- `/categories/air-fryers.html` — findings table, one row per product, source link per row
-- `/dashboard.html` — entries/findings table + empty campaign ledger + measurement status
-- `/guides/` — four question-shaped guides (working titles)
-- `/suggestions.html` — decision suggestions; review before implementing
-- `/reviews/flagged.html` — Flagged for Review page (irregularities + unverified items)
-- `/disclosure.html` — full Associates statement
-- `/privacy.html` — privacy notice for self-hosted analytics
-- `/sitemap.xml`, `/rss.xml` — for search engines and feed readers
+| Ref | Submitted official link | Observed official listing | Intended ASIN |
+|---|---|---|---|
+| P-01 | https://link.amazon/B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | |
+| P-02 | https://link.amazon/B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | |
+| P-03 | https://link.amazon/B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | |
+| P-04 | https://link.amazon/B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | |
+| P-05 | https://link.amazon/B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | |
 
-## Measurement (turned on before content)
-Five defined events (canonical, src/data/events.json): `page_view`, `outbound_product_click`, `guide_read_75`, `compare_view`, `flag_page_view`. Self-hosted collector at `/analytics/collect` (code: `server/collect.js`); client degrades silently when unreachable. No cookies, no IP logging. Next guide topic chosen from measured queries.
+No product has been tested; illustrations are not product photographs. Prices, ratings and commission rates are not published. Check the [Amazon policies](https://affiliate-program.amazon.com/help/operating/policies) before adding product data.
 
-## Campaign ledger
-Empty and intentionally so. Entries (timestamp, source, channel, eligible sessions, clicks, reported orders, provenance report, notes) are added only from authorized first-party reports, with a dated provenance trail. No conversion score or revenue forecast is presented.
+## What remains unverified
 
-## Compliance gate
-Disclosure above the fold on every page + footer repeat; `rel="nofollow sponsored"` on all outbound product links; review against Amazon Associates Operating Agreement and FTC endorsement guidance before publishing (see `PUBLISHING_WORKFLOW.md`).
+- Attribution and Special Link status are **unconfirmed**. The supplied short links are not declared invalid. One test per product in the enrolled Associates workflow, followed by a report check, is needed before scaling.
+- Analytics events are specified, but the maintained publication's collector is **not deployed or enabled**. GitHub Pages is static hosting; a separate properly configured service and a privacy/consent decision are needed. No traffic, conversion or revenue figures are claimed.
+- Search Console ownership verification and sitemap submission have not been confirmed. The sitemap and feed exist, but do not guarantee indexing or rankings.
+- An author identity, permitted live data access and genuine product testing remain open. The empty campaign ledger must only be populated from dated, authorized first-party reports.
 
-## Flagged items
-All five short links now resolve to product pages (re-verified 2026-11-20). Every observed ASIN differs from the 9-character short-link slug — intended and observed identifiers remain in separate fields and are never merged. Tracking attribution under shopnow047c-20 remains unconfirmed for all five (FLG-002). All flagged items are published on `/reviews/flagged.html` with source links; they do not block the launch.
+## Compliance and publication
 
-## Next decisions awaiting review (`/suggestions.html`)
-S-001 price/commission tracking · S-002 replace short links with validated Special Links · S-003 turn on real analytics · S-004 compliance gate in publishing workflow · S-005 brand imagery.
+The publication places the Associates disclosure beneath the masthead and in the footer and marks product links sponsored. Review [Amazon's Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), and [FTC guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) before publishing changes. Automated checks do not substitute for account verification or legal review.
