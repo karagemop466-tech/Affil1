@@ -11,7 +11,6 @@ Internal links are relative because GitHub Pages serves this repository from
 
 import json
 import pathlib
-import shutil
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -31,26 +30,21 @@ from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
 
-# The build writes these and nothing else. Anything not listed is another
-# session's or another edition's file and is never touched.
-OWNED = [
-    "index.html", "404.html",
-    "guides", "products", "compare", "questions", "suggestions",
-    "review", "about", "operations", "brief",
-    "sitemap.xml", "feed.xml", "robots.txt",
-]
-
 # Files this build generates. Anything in an owned directory that is NOT in this
-# list belongs to someone else, so clean() must not delete it. This is the
-# difference between a rebuild and a wipe.
+# list belongs to another session/edition, so clean() must not delete it.
 GENERATED = {
     "index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
     "guides/index.html",
     "guides/basket-or-oven-air-fryer.html",
+    "guides/instant-read-vs-wireless-meat-thermometer.html",
     "guides/air-fryer-capacity-checklist.html",
     "guides/cleanup-and-counter-space.html",
+    "guides/batch-cooking-air-fryer-formats.html",
+    "guides/holiday-roast-and-air-fryer-playbook.html",
     "guides/multi-function-kitchen-appliance-questions.html",
     "products/index.html",
+    "products/air-fryers.html",
+    "products/thermometers.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
     "compare/index.html",
@@ -62,11 +56,8 @@ GENERATED = {
     "brief/index.html",
 }
 
-# Files THIS build emitted in an earlier version, now renamed, which must be
-# removed when the slug list changes. It contains nothing that predates this
-# build: guides/basket-or-oven.html and guides/capacity-checklist.html belong to
-# a parallel edition on main and are still served, so deleting them here would
-# destroy another session's work. Verified by rebuilding and diffing the tree.
+# Only files THIS build emitted in an earlier version and retired. Never
+# contains files from parallel sessions.
 RETIRED = [
     "guides/cleanup-counterspace.html",
 ]
@@ -85,13 +76,7 @@ def write(rel_path, content):
 
 
 def clean():
-    """Remove only this build's own outputs.
-
-    The first version of this function wiped every owned directory. On a branch
-    that also carries other sessions' pages, a rebuild would have deleted their
-    work. Clean is now derived from GENERATED, so adding a foreign file to an
-    owned directory is safe and the build still cannot leave a stale page of its
-    own behind."""
+    """Remove only this build's own outputs."""
     for rel_path in sorted(GENERATED) + RETIRED:
         path = ROOT / rel_path
         if path.is_file():
@@ -139,7 +124,7 @@ def feed(latest_guides):
   <title>{esc(SITE_NAME)} \u2014 buying guides</title>
   <link>{SITE_URL}/</link>
   <atom:link href="{SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Air-fryer buying guides that check the link before they describe the product.</description>
+  <description>Air-fryer and meat-thermometer buying guides that verify every link and source before describing a product.</description>
   <language>en-us</language>
   <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
   <copyright>2026 {esc(SITE_NAME)}</copyright>
@@ -159,12 +144,17 @@ Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 def main():
     products_doc = load("products.json")
     products = products_doc["products"]
-    meta = {"tracking": products_doc["meta"].get("tracking_id_supplied")}
     sources = load("sources.json")
     questions = load("questions.json")
     suggestions = load("suggestions.json")
     flags = load("flags.json")
     images = load("images.json")
+
+    html_count = sum(1 for p in GENERATED if p.endswith(".html"))
+    meta = {
+        "tracking": products_doc["meta"].get("tracking_id_supplied"),
+        "page_count": html_count,
+    }
 
     clean()
     favicon()
@@ -178,10 +168,30 @@ def main():
     # guides
     pages.append(write("guides/index.html", page_guides.build_index("guides", meta)))
     for g in GUIDES:
-        pages.append(write(f"guides/{g['slug']}.html", page_guides.build_guide("guides", g, meta)))
+        pages.append(write(f"guides/{g['slug']}.html", page_guides.build_guide("guides", g, products, meta)))
 
-    # products
+    # products & category subpages
     pages.append(write("products/index.html", page_products.build_register("products", products, meta)))
+    pages.append(write("products/air-fryers.html", page_products.build_category(
+        "products", products,
+        slug="air-fryers",
+        label="Air Fryers",
+        kicker="Category 01 · Air Fryers",
+        headline="Three air-fryer shapes,<br>verified on Amazon",
+        dek="Dual-basket 6-quart drawer (P-01), French-door 26-quart countertop oven (P-02), and single 8-quart basket (P-03) — every listing verified on 20 November 2026 with zero invented prices or ratings.",
+        note_html='<p class="table-note">All three listings sit under Amazon&rsquo;s <em>Home &amp; Kitchen &gt; Kitchen &amp; Dining &gt; Small Appliances &gt; Fryers &gt; Air Fryers</em> breadcrumb.</p>',
+        meta=meta,
+    )))
+    pages.append(write("products/thermometers.html", page_products.build_category(
+        "products", products,
+        slug="thermometers",
+        label="Meat Thermometers",
+        kicker="Category 02 · Meat Thermometers",
+        headline="Two meat thermometers:<br>instant-read &amp; wireless",
+        dek="A handheld 1-second digital probe (P-04) and a 3-probe wireless smart kit (P-05) — both verified under Amazon&rsquo;s Thermometers &amp; Timers &gt; Meat category and paired with official USDA FSIS safe temperature guidance.",
+        note_html='<p class="table-note">Both listings sit under Amazon&rsquo;s <em>Home &amp; Kitchen &gt; Kitchen &amp; Dining &gt; Kitchen Utensils &amp; Gadgets &gt; Thermometers &amp; Timers &gt; Meat</em> breadcrumb. Safe minimum internal temperatures are sourced from USDA FSIS (<a href="../about/index.html#sources">SRC-06, SRC-07</a>).</p>',
+        meta=meta,
+    )))
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))
 
@@ -196,7 +206,7 @@ def main():
     pages.append(write("review/measurement.html", page_review.build_measurement("review", meta)))
 
     # desk
-    pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
+    pages.append(write("about/index.html", page_desk.build_about("about", sources, products, meta)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
 
@@ -206,8 +216,11 @@ def main():
 
     built = {p for p in pages}
     missing = GENERATED - built - {"robots.txt"}
+    extra = built - GENERATED
     if missing:
         raise SystemExit(f"GENERATED lists files the build never wrote: {sorted(missing)}")
+    if extra:
+        raise SystemExit(f"Build wrote files not listed in GENERATED: {sorted(extra)}")
     print(f"built {len([p for p in pages if p.endswith('.html')])} pages")
     for p in pages:
         print("  " + p)

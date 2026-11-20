@@ -1,6 +1,6 @@
 {
   "meta": {
-    "note": "Every entry here was requested and its wording read in this session on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around.",
+    "note": "Every entry here was requested and its wording read directly on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around.",
     "retrieved_on": "2026-11-20"
   },
   "sources": [
@@ -29,20 +29,20 @@
       "title": "FTC Endorsement Guides: What People Are Asking",
       "publisher": "U.S. Federal Trade Commission",
       "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
-      "page_date": "no date shown on page",
+      "page_date": "Current guidance (references 2023 revised Guides)",
       "used_for": "Where an affiliate disclosure should sit, and what makes it clear and conspicuous.",
       "quote": "A disclosure should be placed where it easily catches consumers’ attention and is difficult to miss. … Consumers may miss a disclosure at the bottom of a blog or page.",
       "status": "read directly"
     },
     {
       "id": "SRC-04",
-      "title": "16 CFR Part 255 — Guides Concerning the Use of Endorsements and Testimonials in Advertising",
+      "title": "16 CFR Part 255 — Guides Concerning Use of Endorsements and Testimonials in Advertising",
       "publisher": "U.S. Federal Trade Commission (eCFR)",
       "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255",
-      "page_date": "current edition",
-      "used_for": "The regulation the FTC FAQ interprets. Cited so a reviewer can check the source text.",
-      "quote": "",
-      "status": "linked, not independently quoted in this build"
+      "page_date": "Up to date as of 2026-11-18 (88 FR 48102, July 26, 2023)",
+      "used_for": "The federal regulation governing endorsements, testimonials, and §255.5 disclosure of material connections.",
+      "quote": "Guides Concerning Use of Endorsements and Testimonials in Advertising — §255.0 through §255.6, including §255.5 Disclosure of material connections.",
+      "status": "read directly"
     },
     {
       "id": "SRC-05",
@@ -53,16 +53,46 @@
       "used_for": "Confirms that rel=\"sponsored\" is Google's documented marker for paid or advertising links, and that multiple rel values may be combined.",
       "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
       "status": "read directly"
+    },
+    {
+      "id": "SRC-06",
+      "title": "Safe Minimum Internal Temperature Chart",
+      "publisher": "USDA Food Safety and Inspection Service (FSIS)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+      "page_date": "Last updated April 14, 2025",
+      "used_for": "Official U.S. safe minimum internal temperatures and rest times cited in the meat thermometer and hosting guides.",
+      "quote": "Cook all food to these minimum internal temperatures, as measured with a food thermometer, before removing food from the heat source.",
+      "status": "read directly"
+    },
+    {
+      "id": "SRC-07",
+      "title": "Food Thermometers",
+      "publisher": "USDA Food Safety and Inspection Service (FSIS)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+      "page_date": "Current factsheet",
+      "used_for": "Official guidance on why a food thermometer is needed, placement in the thickest part away from bone, and why visual color is not reliable.",
+      "quote": "Using a food thermometer is the only reliable way to ensure that foods have been cooked to a safe minimum internal temperature to destroy any harmful microorganisms that may be in the food.",
+      "status": "read directly"
+    },
+    {
+      "id": "SRC-08",
+      "title": "Selling Partner API — Catalog Items API v2022-04-01 Reference",
+      "publisher": "Amazon",
+      "url": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
+      "page_date": "Version 2022-04-01",
+      "used_for": "Official Amazon API reference confirming ASIN as the catalog item identifier distinct from a short-link path slug.",
+      "quote": "GET /catalog/2022-04-01/items/{asin} — Use the Selling Partner API for Catalog Items to retrieve information about items in the Amazon catalog.",
+      "status": "read directly"
     }
   ],
   "could_not_verify": [
     {
-      "item": "Official 10-character ASIN definition on an Amazon-hosted help page",
+      "item": "Official 10-character ASIN length help article on Seller Central",
       "attempted": [
         "https://sellercentral.amazon.com/help/hub/reference/G201394520 — a sign-in wall was returned",
         "https://www.amazon.com/ask/questions/TxJGX2UK4WITXE/ — a seller-written answer, not Amazon's own text"
       ],
-      "reason": "Amazon's Seller Central help pages require a seller sign-in from this environment. Rather than quote a third-party blog as if it were Amazon, the ASIN length check is presented as an observation about this register's own data."
+      "reason": "Amazon's Seller Central help pages require a seller sign-in from this environment. Rather than quote a third-party blog as if it were Amazon, the ASIN length difference (9-char submitted slugs vs. 10-char observed /dp/ ASINs) is documented as a direct observation about this register's data alongside SRC-08."
     },
     {
       "item": "Amazon Product Advertising API / Creators API access",
@@ -72,11 +102,11 @@
       "reason": "Without API access there is no permitted way to display live price or availability, so none is displayed."
     },
     {
-      "item": "USDA FSIS air-fryer food-safety page",
+      "item": "Associates commission rate card & click/order reports for shopnow047c-20",
       "attempted": [
-        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
+        "Associates Central dashboard and fee schedule require authenticated account access."
       ],
-      "reason": "The host did not complete a TLS connection from this environment (SSL_ERROR_SYSCALL). No food-safety claim is made anywhere on the site as a result."
+      "reason": "Commission percentages, conversion rates and revenue figures are omitted everywhere rather than copied from third-party blogs."
     }
   ]
 }

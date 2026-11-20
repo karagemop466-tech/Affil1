@@ -124,8 +124,8 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
-    r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
-    r"www\.ftc\.gov)",
+    r"sellercentral\.amazon\.com|developer-docs\.amazon\.com|developer-docs\.amazon|"
+    r"karagemop466-tech\.github\.io|link\.amazon|github\.com|www\.ftc\.gov)",
     re.I,
 )
 

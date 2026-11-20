@@ -533,3 +533,45 @@ ol.tight,ul.tight{margin-top:1rem}
   .pcard-grid.wide .pcard,.pcard-grid.wide .pcard-unresolved{grid-template-columns:1fr}
   .pcard-grid.wide .pcard-media{aspect-ratio:16/10;min-height:0;height:auto}
 }
+
+/* ---------- category grids & dark thermometer showcase ---------- */
+.pcard-grid-3{grid-template-columns:repeat(3,1fr);gap:1.35rem}
+.path-grid-4{grid-template-columns:repeat(4,1fr);gap:1.15rem}
+@media(max-width:1020px){
+  .pcard-grid-3{grid-template-columns:repeat(2,1fr)}
+  .path-grid-4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:680px){
+  .pcard-grid-3,.path-grid-4{grid-template-columns:1fr}
+}
+
+.cat-bar{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2rem}
+.cat-pill{display:inline-flex;align-items:center;font-size:.78rem;font-weight:500;padding:.45rem .9rem;border-radius:2px;border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);transition:border-color .15s,background .15s,color .15s}
+.cat-pill:hover{border-color:var(--forest);color:var(--forest)}
+.cat-pill-active{background:var(--forest);border-color:var(--forest);color:#f7f4ea}
+.cat-pill-active:hover{background:var(--forest-2);color:#fff}
+
+.thermo-showcase{padding:4.8rem 0}
+.sec-head-dark{border-bottom-color:#ffffff24}
+.sec-head-dark .eyebrow{color:#e9b44c}
+.sec-head-dark h2{color:#f7f4ea}
+.sec-head-dark>p{color:#c8d0c3}
+.sec-head-dark em{color:#f0cf94;font-style:italic}
+.pcard-dark{background:#254338;border-color:#36584b;color:#eceae0}
+.pcard-dark:hover{box-shadow:0 16px 36px -20px #09130fcc}
+.pcard-dark .pcard-ref{color:#b7c6b9}
+.pcard-dark h3,.pcard-dark h3 a{color:#f7f4ea}
+.pcard-dark h3 a:hover{color:#f0cf94}
+.pcard-dark .pcard-specs>div{border-top-color:#355649}
+.pcard-dark .pcard-specs dt{color:#9eb3a3}
+.pcard-dark .pcard-specs dd{color:#dde3d8}
+.pcard-dark .tlink{color:#f0cf94;border-bottom-color:#f0cf9470}
+.pcard-dark .tlink:hover{color:#fff;border-bottom-color:#fff}
+.pcard-dark .pcard-fine{color:#9eb3a3;border-top-color:#355649}
+.thermo-foot{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem}
+.btn-dark-ghost{background:transparent;color:#f5efe2;border-color:#6b8374}
+.btn-dark-ghost:hover{background:#ffffff14;color:#fff;border-color:#f5efe2}
+
+.guide-table{min-width:28rem}
+.article .table-scroll{margin:1.3rem 0 1.4rem}
+

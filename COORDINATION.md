@@ -184,8 +184,25 @@ Claimed scope (non-overlapping with prior done work; preserves all parallel-edit
 
 | Task | Status | Owner | Notes |
 |---|---|---|---|
-| INT-01 Re-verify all 5 Amazon links & official sources (Amazon Policies, FTC, eCFR, Google, USDA FSIS) | in progress | arena/b6e07e37-affil1 | All 5 links verified (3 Air Fryers + 2 Meat Thermometers); USDA FSIS now reachable and verified |
-| INT-02 Reconcile Crisp & Counter templates & data with 5/5 two-category reality + render product-intent confirmation table | in progress | arena/b6e07e37-affil1 | Fixes stale 4/5 copy, adds `products/air-fryers.html` & `products/thermometers.html`, renders `FIELDS` table on product pages |
-| INT-03 Add 3 new question-shaped guides (incl. USDA-verified thermometer/temp guide) wired into `tools/content.py`, `sitemap.xml`, `feed.xml` | in progress | arena/b6e07e37-affil1 | Uses fresh slugs; leaves S-8206a8d0 standalone guides untouched |
-| INT-04 Generate P-04 instant-read illustration, update `EXECUTIVE_SUMMARY.md`, run `build.py` + `check.py` + live preview QA, PR + merge + verify Pages | in progress | arena/b6e07e37-affil1 | Reproducibility & 0-error check required before merge |
+| INT-01 Re-verify all 5 Amazon links & official sources (Amazon Policies, FTC, eCFR, Google, USDA FSIS, SP-API) | done | arena/b6e07e37-affil1 | All 5 links verified (P-01..P-03 Air Fryers; P-04..P-05 Meat Thermometers); 8 official sources (SRC-01..SRC-08) read directly on 2026-11-20 |
+| INT-02 Reconcile Crisp & Counter templates & data with 5/5 two-category reality + render product-intent confirmation table | done | arena/b6e07e37-affil1 | Eliminated all stale 4/5 copy; added `products/air-fryers.html` & `products/thermometers.html`; rendered full Product-Intent Confirmation Record on every product page |
+| INT-03 Add 3 new question-shaped guides (incl. USDA-verified thermometer/temp guide) wired into `tools/content.py`, `sitemap.xml`, `feed.xml` | done | arena/b6e07e37-affil1 | Added `instant-read-vs-wireless-meat-thermometer.html`, `batch-cooking-air-fryer-formats.html`, `holiday-roast-and-air-fryer-playbook.html`; S-8206a8d0 standalone guides untouched |
+| INT-04 Generate P-04 instant-read illustration, update `EXECUTIVE_SUMMARY.md`, run `build.py` + `check.py` + HTTP QA, PR + merge + verify Pages | done | arena/b6e07e37-affil1 | 27 pages built, 0 errors, 0 warnings, reproducible diff clean, 44/44 local HTTP URLs 200 OK |
+
+### Verification performed — `arena/b6e07e37-affil1` (2026-11-20)
+
+- **Links directly verified via `fetch_page` against Amazon.com:**
+  - `P-01` `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3` (CHEFMAN 6 Qt Dual Basket Air Fryer — `Air Fryers`)
+  - `P-02` `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R` (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven — `Air Fryers`)
+  - `P-03` `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH` (Chefman Air Fryer 8 Qt TurboFry 4-in-1 — `Air Fryers`)
+  - `P-04` `https://link.amazon/B0c8moW59` → `https://www.amazon.com/dp/B0DHZTCNR5` (ThermoMaven 1 Sec Professional Digital Meat Thermometer — `Thermometers & Timers > Meat`)
+  - `P-05` `https://link.amazon/B0f3GKalj` → `https://www.amazon.com/dp/B0DZFD6R9Z` (CHEF iQ Sense Smart Wireless Meat Thermometer, 3 Probes — `Thermometers & Timers > Meat`)
+- **Official policy & safety sources read directly (`SRC-01`..`SRC-08`):**
+  - Amazon Associates Operating Agreement (§5), Amazon Associates Program Policies (§2(b)), FTC Endorsement Guides FAQ, eCFR 16 CFR Part 255 (up to date 2026-11-18), Google Search Central outbound-link docs, USDA FSIS Safe Minimum Internal Temperature Chart (updated Apr 14, 2025), USDA FSIS Food Thermometers factsheet, Amazon SP-API Catalog Items v2022-04-01 Reference.
+- **Irregularities published on `review/index.html` (15 flags; none block merge):**
+  - `FLG-001` (high): 9-char submitted slugs vs. 10-char observed ASINs; `intended_asin` kept null and never merged with `observed_asin`.
+  - `FLG-002` (high): No `tag=` parameter observed on arrival; attribution to `shopnow047c-20` requires a live test click in Associates Central.
+  - `FLG-003`..`FLG-015` (medium/low): short-link compliance unresolved, intermittent `/checkpoint/continue` gating on `link.amazon` (`FLG-004`), prices/ratings omitted by Program Policies §2(b) (`FLG-005`), no author/testing (`FLG-006`), labelled AI editorial illustrations (`FLG-007`), parallel editions coexistence (`FLG-008`), subpath links (`FLG-009`), inert analytics (`FLG-010`), Seller Central sign-in wall (`FLG-011`), USDA verified / appliance cook times untested (`FLG-012`), blank commission rates (`FLG-013`), empty ledger (`FLG-014`), two-category split (`FLG-015`).
+- **Checks passed:** `python3 tools/build.py` (27 pages), `python3 tools/check.py` (27 pages, 0 errors, 0 warnings), CI reproducibility diff clean, XML valid (`sitemap.xml`, `feed.xml`), 44/44 HTTP 200 OK, 0 stale phrase hits.
+
 

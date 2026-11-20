@@ -1,11 +1,13 @@
 # Crisp & Counter
 
-A static Amazon affiliate publication about air fryers and one meat thermometer.
+A static Amazon affiliate publication about air fryers and meat thermometers
+(3 Air Fryers + 2 Meat Thermometers — all 5 links verified on 2026-11-20).
 Live at **https://karagemop466-tech.github.io/Affil1/**
 
 It is built to one rule: **claim nothing that cannot be sourced.** That shows up
-as an absence of prices, ratings, test results and winners, and as a review page
-that publishes every gap instead of hiding it.
+as an absence of prices, ratings, test results and winners, official USDA FSIS
+citations for food-safety temperatures, and a review page that publishes every
+gap instead of hiding it.
 
 ---
 
@@ -13,16 +15,16 @@ that publishes every gap instead of hiding it.
 
 | Path | What it is |
 |---|---|
-| `index.html` | Front page. Leads with products and guides. |
-| `guides/` | Four question-shaped buying guides. |
-| `products/` | The five-link register plus one record per product. |
-| `compare/` | Every product side by side, with blank columns left blank. |
-| `questions/` | 15 questions, 4 answered with evidence, 11 open with the artefact that would close each. |
-| `suggestions/` | 12 proposals with an accept / hold / reject control per row. |
-| `review/` | Flagged for review, image policy, measurement plan. |
-| `about/` | Rules, disclosure, privacy, and the source list with quoted wording. |
+| `index.html` | Front page. Leads with products grouped by category and buying guides. |
+| `guides/` | Seven question-shaped buying guides (including USDA-sourced thermometer guide). |
+| `products/` | The five-link confirmation register, two category pages (`air-fryers.html`, `thermometers.html`), and one record per product. |
+| `compare/` | Every product side by side across both categories, with blank columns left blank. |
+| `questions/` | 15 questions, 5 answered with evidence, 10 open with the artefact that would close each. |
+| `suggestions/` | 14 proposals with an accept / hold / reject control per row. |
+| `review/` | Flagged for review (15 items), image policy (10 editorial assets), measurement plan. |
+| `about/` | Rules, disclosure, privacy, and 8 directly verified official sources with verbatim quotes. |
 | `operations/` | The empty campaign ledger and its provenance rule. |
-| `brief/` | Executive summary. |
+| `brief/` | Executive summary (also mirrored in `EXECUTIVE_SUMMARY.md`). |
 | `src/data/` | The single source of truth. Every fact on the site comes from here. |
 | `tools/` | `build.py` renders the site; `check.py` verifies it. |
 

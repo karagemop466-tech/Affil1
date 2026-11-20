@@ -34,7 +34,7 @@ def build(page_dir, suggestions, meta):
 
     body = f"""{pagehead(
         'Suggestions',
-        'Twelve proposals,<br>one decision each',
+        f'{len(items)} proposals,<br>one decision each',
         'Each row says what it would change, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented.',
         meta='Nothing on this page changes the site &middot; decisions are stored in your browser only, never sent anywhere',
     )}
@@ -67,7 +67,7 @@ def build(page_dir, suggestions, meta):
     return page(
         d,
         title="Suggestions \u2014 Crisp & Counter",
-        description="Twelve proposed changes to this site, each with its cost, its risk and the open question it depends on \u2014 with a decision control for each so a reviewer can choose a path before anything is built.",
+        description=f"{len(items)} proposed changes to this site, each with its cost, its risk and the open question it depends on \u2014 with a decision control for each so a reviewer can choose a path before anything is built.",
         body=body,
         active="suggestions/index.html",
         canonical="suggestions/",

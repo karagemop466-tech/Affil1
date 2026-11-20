@@ -38,13 +38,15 @@ NAV = [
 
 FOOTER_GROUPS = [
     ("Read", [
-        ("guides/index.html", "All guides"),
+        ("guides/index.html", "All buying guides"),
+        ("guides/instant-read-vs-wireless-meat-thermometer.html", "Thermometer & USDA temp guide"),
         ("compare/index.html", "Comparison table"),
         ("feed.xml", "RSS feed"),
     ]),
     ("Catalogue", [
-        ("products/index.html", "Product register"),
-        ("products/p-05.html", "The thermometer"),
+        ("products/index.html", "All products (register)"),
+        ("products/air-fryers.html", "Air Fryers (3)"),
+        ("products/thermometers.html", "Meat Thermometers (2)"),
         ("about/index.html#how-we-link", "How we link"),
     ]),
     ("Review queue", [

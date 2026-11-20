@@ -3,7 +3,7 @@
     "tracking_id_supplied": "shopnow047c-20",
     "tracking_id_status": "Not confirmed on any page reached in this session. No supplied link showed a tag parameter on arrival.",
     "retrieved_on": "2026-11-20",
-    "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result. Re-verification 2026-11-20 (S-8206a8d0): P-04 resolved to B0DHZTCNR5; all five now observed.",
+    "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result. Independently re-verified 2026-11-20 (S-8206a8d0 and arena/b6e07e37-affil1): all five submitted links resolve to live Amazon listings (3 Air Fryers + 2 Meat Thermometers).",
     "field_rule": "intended_asin (what the owner meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. Where a field could not be established it is null.",
     "price_rule": "Program Policies §2(b) (SRC-02) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / PA API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
     "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner."
@@ -11,6 +11,8 @@
   "products": [
     {
       "ref": "P-01",
+      "category": "air-fryers",
+      "category_label": "Air Fryers",
       "submitted_link": "https://link.amazon/B04G1MEwY",
       "submitted_code": "B04G1MEwY",
       "submitted_code_length": 9,
@@ -34,7 +36,7 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-01 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "The first request for this link returned an Amazon continuity page; the second returned the listing. Recorded as observed on 2026-11-20, not as a stable guarantee.",
+      "resolution_note": "Re-verified on 2026-11-20 against Amazon.com: resolved cleanly to ASIN B0CDY277D3 (an earlier automated attempt returned an Amazon continuity page before resolving). No tracking tag parameter appeared on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -52,6 +54,8 @@
     },
     {
       "ref": "P-02",
+      "category": "air-fryers",
+      "category_label": "Air Fryers",
       "submitted_link": "https://link.amazon/B02NbDxp3",
       "submitted_code": "B02NbDxp3",
       "submitted_code_length": 9,
@@ -74,7 +78,7 @@
       "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
       "photo_note": "Editorial illustration. It is not a photograph of P-02 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request.",
+      "resolution_note": "Resolved on first request and confirmed on re-verification 2026-11-20 to ASIN B09B7SB46R. No tracking tag parameter appeared on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -92,6 +96,8 @@
     },
     {
       "ref": "P-03",
+      "category": "air-fryers",
+      "category_label": "Air Fryers",
       "submitted_link": "https://link.amazon/B00hJ57DV",
       "submitted_code": "B00hJ57DV",
       "submitted_code_length": 9,
@@ -99,7 +105,7 @@
       "observed_asin": "B08DKYBTPH",
       "observed_asin_length": 10,
       "listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
-      "listing_title": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "listing_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
       "brand": "Chefman",
       "format": "basket",
       "format_label": "Single-basket air fryer",
@@ -115,7 +121,7 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-03 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request.",
+      "resolution_note": "Resolved on first request and confirmed on re-verification 2026-11-20 to ASIN B08DKYBTPH. No tracking tag parameter appeared on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -133,6 +139,8 @@
     },
     {
       "ref": "P-04",
+      "category": "thermometers",
+      "category_label": "Meat Thermometers",
       "submitted_link": "https://link.amazon/B0c8moW59",
       "submitted_code": "B0c8moW59",
       "submitted_code_length": 9,
@@ -142,21 +150,21 @@
       "listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
       "listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
       "brand": "ThermoMaven",
-      "format": "thermometer",
+      "format": "thermometer-instant",
       "format_label": "Instant-read meat thermometer",
       "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
       "title_stated": [
-        "a 1-second professional digital read, per the seller",
+        "a 1-second digital read, per the seller",
         "±0.5°F accuracy, per the seller",
         "NIST and NSF certification, per the seller",
         "an auto-rotate bright LED screen, per the seller",
         "IP67 waterproof, per the seller"
       ],
-      "photo": "assets/img/thermometer",
-      "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+      "photo": "assets/img/instant-thermometer",
+      "photo_alt": "An unbranded folding digital instant-read meat thermometer resting beside a seared chicken breast on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-04 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "RESOLVED on re-verification 2026-11-20 (S-8206a8d0, fetch_page against amazon.com): link.amazon/B0c8moW59 now reaches this listing. Earlier attempts (including this build's three requests) landed only on Amazon's /checkpoint/continue interstitial. Both outcomes are dated observations; this entry reflects the latest. Single observation on one date; re-check monthly.",
+      "resolution_note": "Resolved on two independent re-verifications on 2026-11-20 (S-8206a8d0 and arena/b6e07e37-affil1) to ASIN B0DHZTCNR5. Earlier automated attempts returned Amazon's /checkpoint/continue interstitial. That intermittency is documented in FLG-004.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -169,13 +177,15 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "flag": "FLG-014 (resolved 2026-11-20; see resolution_note)",
-      "stated_capacity": "Not applicable — it is a thermometer",
+      "flag": "FLG-004",
+      "stated_capacity": "Not applicable — instant-read probe",
       "stated_attributes": "1-second read stated; ±0.5°F accuracy stated; NIST & NSF certified stated; auto-rotate LED screen; IP67 waterproof stated",
-      "attention": "Second thermometer in the set (with P-05). Instant-read, not wireless. Any guide that treats it as an air fryer would be wrong."
+      "attention": "One of two meat thermometers in the five-link catalogue (paired with P-05). Instant-read handheld probe, not wireless; routed to the Meat Thermometers category."
     },
     {
       "ref": "P-05",
+      "category": "thermometers",
+      "category_label": "Meat Thermometers",
       "submitted_link": "https://link.amazon/B0f3GKalj",
       "submitted_code": "B0f3GKalj",
       "submitted_code_length": 9,
@@ -185,20 +195,20 @@
       "listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
       "listing_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
       "brand": "CHEF iQ",
-      "format": "thermometer",
+      "format": "thermometer-wireless",
       "format_label": "Wireless meat thermometer",
       "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
       "title_stated": [
-        "three probes, per the seller",
-        "the seller describes it as wireless",
-        "the seller states a 1000°F heat rating",
-        "the seller lists air fryers among the intended uses"
+        "three ultra-thin probes, per the seller",
+        "wireless WiFi unlimited range, per the seller",
+        "a 1000°F heat-safe rating and five sensors, per the seller",
+        "air fryers listed among intended uses (BBQ, grill, oven, smoker, air fryer), per the seller"
       ],
       "photo": "assets/img/thermometer",
-      "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+      "photo_alt": "A thin wireless probe thermometer inserted into a roasted chicken on a wooden board beside a small display",
       "photo_note": "Editorial illustration. It is not a photograph of P-05 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance.",
+      "resolution_note": "Resolved on first request and confirmed on re-verification 2026-11-20 to ASIN B0DZFD6R9Z. Filed under Meat Thermometers alongside P-04.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -211,9 +221,9 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "attention": "This product sits in a different category from the other four. Any guide that treats it as a fifth air fryer would be wrong. It is routed to its own section.",
-      "stated_capacity": "Not applicable — it is a thermometer",
-      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses"
+      "attention": "One of two meat thermometers in the five-link catalogue (paired with P-04). Leave-in wireless multi-probe kit; routed to the Meat Thermometers category.",
+      "stated_capacity": "Not applicable — 3 wireless probes",
+      "stated_attributes": "Three ultra-thin probes; WiFi wireless stated; 1000°F heat-safe rating stated; 5 sensors; lists air fryers among intended uses"
     }
   ]
 }

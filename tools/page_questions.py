@@ -42,7 +42,7 @@ def build(page_dir, questions, meta):
             {"html": blk},
         ])
     q_table = table(["Ref", "Question", "Status", "Blocks work"], q_rows,
-                    cls="qtable", caption="15 questions raised, 4 answered")
+                    cls="qtable", caption=f"{len(qs)} questions raised, {len(answered)} answered")
 
     body = f"""{pagehead(
         'Open questions',

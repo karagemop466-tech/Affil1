@@ -1,9 +1,9 @@
 """Guide index and article template."""
 
 from layout import (DISCLOSURE, SITE_NAME, esc, eyebrow, page, pagehead, rel,
-                    section)
+                    section, table)
 from content import GUIDES
-from page_home import img
+from page_home import img, product_card
 
 
 def build_index(page_dir, meta):
@@ -17,36 +17,40 @@ def build_index(page_dir, meta):
     <p class="gcard-kicker">{esc(g['kicker'])} &middot; {g['read_minutes']} min</p>
     <h3><a href="{esc(href)}">{esc(g['title'])}</a></h3>
     <p>{esc(g['dek'])}</p>
-    <a class="tlink" href="{esc(href)}">Read <span aria-hidden="true">&rarr;</span></a>
+    <a class="tlink" href="{esc(href)}">Read guide <span aria-hidden="true">&rarr;</span></a>
   </div>
 </article>""")
 
     body = f"""{pagehead(
         'Buying guides',
-        'Four questions worth<br>answering before you buy',
-        'These are written to be useful whether or not you buy anything through this site. Each one is a checklist, because a checklist is what can honestly be produced without access to the products.',
+        f'{len(GUIDES)} questions worth<br>answering before you buy',
+        'Written to be useful whether or not you click a single link. Each guide is a practical checklist grounded in verified listing facts and official USDA FSIS food-safety charts.',
         meta='No product was tested &middot; every product claim is quoted from the seller &middot; no prices, ratings or winners',
     )}
 {section(f'''
 <div class="gcard-grid">{''.join(cards)}</div>
-<p class="sec-foot">Every guide carries the same disclosure and the same limit: <a href="{esc(rel(d, 'about/index.html'))}#why-blank">nothing here was tested</a>.</p>''')}"""
+<p class="sec-foot">Browse by product category: <a href="{esc(rel(d, 'products/air-fryers.html'))}">Air Fryers (3)</a> &middot; <a href="{esc(rel(d, 'products/thermometers.html'))}">Meat Thermometers (2)</a> &middot; <a href="{esc(rel(d, 'about/index.html'))}#why-blank">Why nothing is rated or priced</a>.</p>''')}"""
     return page(
         d,
         title="Buying guides \u2014 Crisp & Counter",
-        description="Four air-fryer buying guides: basket versus oven, real capacity, cleanup and counter space, and what to ask before buying a multi-function appliance.",
+        description=f"{len(GUIDES)} kitchen buying guides across air fryers and meat thermometers: basket vs. oven, instant-read vs. wireless probes with USDA safe temperatures, capacity, cleanup, meal prep and hosting.",
         body=body,
         active="guides/index.html",
         canonical="guides/",
     )
 
 
-def build_guide(page_dir, g, meta):
+def build_guide(page_dir, g, products, meta):
     d = page_dir
+    by_ref = {p["ref"]: p for p in products}
     blocks = []
     for i, s in enumerate(g["sections"]):
         parts = [f"<h2>{esc(s['h'])}</h2>"]
         for para in s.get("p", []):
             parts.append(f"<p>{esc(para)}</p>")
+        if s.get("table"):
+            t = s["table"]
+            parts.append(table(t["headers"], t["rows"], cls="guide-table", caption=t.get("caption")))
         if s.get("items"):
             parts.append('<dl class="checks">')
             for term, desc in s["items"]:
@@ -59,15 +63,26 @@ def build_guide(page_dir, g, meta):
         f'<li><a href="#s{i+1}">{esc(s["h"])}</a></li>' for i, s in enumerate(g["sections"])
     )
 
+    related_html = ""
+    rel_prods = [by_ref[r] for r in g.get("related_refs", []) if r in by_ref]
+    if rel_prods:
+        grid_cls = "pcard-grid pcard-grid-3" if len(rel_prods) == 3 else "pcard-grid wide"
+        related_html = section(f"""
+<div class="sec-head"><div>{eyebrow('Referenced in this guide')}<h2>Listings mentioned above</h2></div>
+<p>Every link below opens the verified Amazon listing as a marked sponsored link, or takes you to the full product-intent record.</p></div>
+<div class="{grid_cls}">
+  {''.join(product_card(d, p, compact=True) for p in rel_prods)}
+</div>""", cls="")
+
     others = [x for x in GUIDES if x["slug"] != g["slug"]][:2]
     next_html = "".join(f"""<a class="next-card" href="{esc(rel(d, 'guides/' + x['slug'] + '.html'))}">
   <p class="gcard-kicker">{esc(x['kicker'])} &middot; {x['read_minutes']} min</p>
   <h3>{esc(x['title'])}</h3>
-  <span class="tlink">Read <span aria-hidden="true">&rarr;</span></span></a>""" for x in others)
+  <span class="tlink">Read guide <span aria-hidden="true">&rarr;</span></span></a>""" for x in others)
 
     body = f"""{pagehead(
         g['kicker'],
-        esc(g['title']).replace(': what should you compare?', ',<br>and what does not matter').replace(' for comparing air-fryer capacity', ',<br>without the marketing'),
+        esc(g['title']),
         esc(g['dek']),
         meta=f"Updated {esc(g['updated'])} &middot; {g['read_minutes']} min read &middot; no product tested &middot; no prices or ratings",
     )}
@@ -87,11 +102,12 @@ def build_guide(page_dir, g, meta):
     <nav class="toc" aria-label="On this page"><h2>On this page</h2><ol>{toc}</ol></nav>
     <div class="side-card side-card-quiet">
       <h2>The limit</h2>
-      <p>Nothing in this guide comes from using a product. It comes from the questions worth asking and from the sellers' own descriptions. Where a fact was needed and could not be sourced, the guide says so instead of filling it in.</p>
+      <p>Nothing in this guide comes from testing a product. Product claims come strictly from live listing titles; food-safety figures come strictly from USDA FSIS (<a href="{esc(rel(d, 'about/index.html'))}#sources">Sources</a>).</p>
       <p><a href="{esc(rel(d, 'about/index.html'))}#why-blank">Why the gaps exist</a></p>
     </div>
   </aside>
 </div></section>
+{related_html}
 <section class="section section-tint"><div class="wrap">
   <div class="sec-head"><div>{eyebrow('Keep reading')}<h2>Two more, same standard</h2></div></div>
   <div class="next-grid">{next_html}</div>
