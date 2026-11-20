@@ -322,6 +322,18 @@ page's own date or the words "no update date shown". Gates on the final tree (47
 
 **Follow-up on the same branch.** After the merge, the surviving guide was found not to satisfy this session's own sourcing rule: its USDA classification table carried the figures as text with no link per row. Fixed by giving the table an "Official source" column (six row links to the FSIS page it was transcribed from) and an article-level Sources block, which also puts the row under `check.py`'s per-row-link rule so the gap cannot come back. **Follow-up receipt.** [PR #125](https://github.com/karagemop466-tech/Affil1/pull/125) merged into `main` as `b0b8ccd`. On that commit `Affiliate launch checks`, `Build, check and deploy`, `Verify Countertop Almanac edition and platform` and `pages build and deployment` all completed successfully. Read back from the live URL https://karagemop466-tech.github.io/Affil1/guides/where-to-put-the-probe.html: the classification table carries a "Official source" column with a link to the FSIS page in all six rows, the article ends with a Sources list of the two federal pages, the disclosure strip still precedes the content, and the product cards render as untagged `See on Amazon` links, consistent with the empty Special-Link register. This session's work is therefore fully live; no item in its scope remains unmerged.
 
+### Cross-scope repair — `arena/ddb6772b-affil1` (2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| `.github/workflows/edition-verify.yml` pointed its test step at `discover -s platform`, a directory that has not existed since the `_platform` rename; the step ran CPython's own `test.test_support` suite (45 tests) and reported success while this repository's 6 platform tests never ran. Retargeted to `_platform`. | done | arena/ddb6772b-affil1 | `.github/workflows/edition-verify.yml`, `_src/data/flags.json` (FLG-041) |
+
+Filed because the shared workflow belongs to no session's claim and the failure mode
+is a class, not a typo: a green CI step that verifies nothing. `_platform/` itself was
+not modified. `python3 -m unittest discover -s _platform -p 'test_*.py' -v` → 6 tests OK;
+`python3 _platform/compliance_gate.py` → 0 errors.
+
+
 **Session closed.** Nothing in `arena/ddb6772b-affil1`'s claim is left in progress. Files returned to other owners: none were held. Unresolved items are on the board as FLG-028/029/036/037/038/039/040 and S-01/S-39/S-40/S-41, all of which need an owner action (one Associates click, the Pages `build_type` setting, a taxonomy decision) rather than more code.
 **Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are
 shared write-points. My edits are additive (new list entries, new rows); if another

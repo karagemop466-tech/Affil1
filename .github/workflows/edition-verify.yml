@@ -36,4 +36,10 @@ jobs:
           node --check edition/assets/app.js
 
       - name: Run platform unit & HTTP collector tests
-        run: python3 -m unittest discover -s platform -p 'test_*.py' -v
+        # This pointed at `platform`, a directory that has not existed since the
+        # rename to `_platform`. `unittest discover` did not fail: it resolved the
+        # name to the standard-library `platform` module, took its parent directory,
+        # and ran 45 of CPython's own test-support tests -- green, and nothing to do
+        # with this repository. The step passed while verifying nothing. The path is
+        # `_platform` now, which is where test_platform.py actually lives.
+        run: python3 -m unittest discover -s _platform -p 'test_*.py' -v
