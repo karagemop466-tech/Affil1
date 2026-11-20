@@ -429,7 +429,7 @@ def build_guide(slug, g):
 
     return page(f"/guides/{slug}/", f"{g['title']} — {SITE_NAME}", g["deck"], body,
                 active="/guides/",
-                crumbs=[("/", "Home"), ("/guides/", "Buying guides"), (None, g["title"][:48])])
+                crumbs=[("/", "Home"), ("/guides/", "Buying guides"), (None, g["cluster"])])
 
 
 def build_products():
