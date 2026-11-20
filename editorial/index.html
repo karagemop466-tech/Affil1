@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The editor&#x27;s desk — what changed and what we declined | Crisp &amp; Counter</title>
+<meta name="description" content="Seven decisions shipped in the 2026-11-20 release, three suggestions declined with reasons, and four questions that need the account owner. Every row links its source.">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/editorial/">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Crisp &amp; Counter">
+<meta property="og:title" content="The editor&#x27;s desk — what changed and what we declined | Crisp &amp; Counter">
+<meta property="og:description" content="Seven decisions shipped in the 2026-11-20 release, three suggestions declined with reasons, and four questions that need the account owner. Every row links its source.">
+<meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/editorial/">
+<meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-counter-w1280.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/storefront.css">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://karagemop466-tech.github.io/Affil1/"}, {"@type": "ListItem", "position": 2, "name": "The editor's desk", "item": "https://karagemop466-tech.github.io/Affil1/editorial/"}]}</script>
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
+      <span class="brand-tag">Air fryer &amp; thermometer notes</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="../start/index.html">Where to start</a><a href="../products/index.html">Shop the edit</a><a href="../guides/index.html">Guides</a><a href="../compare/index.html">Compare</a><a href="../fit/index.html">Fit finder</a><a href="../questions/index.html">Questions</a><a href="../suggestions/index.html">Suggestions</a>
+    </nav>
+  </div>
+</header>
+<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
+  <div class="wrap disclosure-inner">
+    <span class="disclosure-tag">Paid links</span>
+    <p>As an Amazon Associate I earn from qualifying purchases. Links to Amazon here are affiliate links: if you buy through one, this site may earn a commission and you pay the same price.
+      <a href="../about/index.html#disclosure">How that works</a>.</p>
+  </div>
+</div>
+<main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><ol><li><a href="../index.html">Home</a></li></ol></div></nav>
+<header class="pagehead"><div class="wrap">
+  <p class="eyebrow">The editor&#x27;s desk</p>
+  <h1>What changed,<br>and what we refused to change</h1>
+  <p class="dek">Seven decisions shipped in this release, three suggestions declined with reasons, and four questions that need a person rather than an agent. Each row carries the source it rests on or the gate that enforces it.</p>
+  <p class="page-meta">Release 2026-11-20 &middot; 7 shipped &middot; 3 declined &middot; 4 blocking</p>
+</div></header>
+<section class="section "><div class="wrap">
+<div class="desk-lede">
+  <p>Most change logs describe what was built. This one is written for the person who has to
+  decide what happens next, so the two columns that matter are <em>evidence</em> and <em>cost</em>,
+  and the most useful section is the declined list.</p>
+  <p>A suggestion that cannot name its source is a preference. Every row below either links an
+  official document or a page on this site that shows its working.</p>
+</div></div></section>
+<section class="section "><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Shipped</p><h2>Seven decisions this release took</h2></div>
+<p>Ordered by how much they change a reader's experience, not by effort.</p></div>
+<div class="table-scroll"><table class="register"><caption>Decisions shipped on 2026-11-20</caption><thead><tr><th scope="col">Ref</th><th scope="col">Decision</th><th scope="col">What changed</th><th scope="col">Evidence</th><th scope="col">Source</th><th scope="col">Cost</th></tr></thead><tbody><tr><td><strong>E-01</strong></td><td>Publish one tree, not the repository</td><td>The branch build was serving /src/data/products.json, /tools/build.py and a second full storefront under /archive/. tools/publish.py is now the single allow-list, and tools/stage.py, _config.yml and a new gate all read it.</td><td>Observed live on 2026-11-20 by fetching those paths; the archive storefront carried tagged buy links and no noindex.</td><td><a href="../review/index.html">The review queue</a></td><td>2 hours</td></tr><tr><td><strong>E-02</strong></td><td>Advertise the shop, not the audit</td><td>sitemap.xml listed 21 of 30 entries as registers and working papers. It now lists the front page, the five product pages, the comparison, the fit finder and ten guides. robots.txt also disallows /archive/.</td><td>Google&amp;#x27;s own documentation: a noindex rule is ignored when the page is blocked from crawling, so the archive is kept out of the build instead of being blocked.</td><td><a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag" rel="noopener" target="_blank">Google Search Central: robots meta tag and X-Robots-Tag</a></td><td>1 hour</td></tr><tr><td><strong>E-03</strong></td><td>Open with a situation, not a spec sheet</td><td>New /start/ page: five buyer situations, each answered by one shape, one measurement to take before paying, and the guides that settle it. Linked first in the navigation and first on the front page.</td><td>The page resolves every product ref and guide slug at build time, so it fails the build rather than describe content that does not exist.</td><td><a href="../start/index.html">/start/</a></td><td>3 hours</td></tr><tr><td><strong>E-04</strong></td><td>Ship a seasonal guide the site can actually support</td><td>New holiday-turkey guide. It links FSIS for cooking guidance rather than restating times or temperatures, because a copied number is the first thing to go stale on an affiliate page.</td><td>The FSIS turkey and thermometer pages were fetched and read on 2026-11-20.</td><td><a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers" rel="noopener" target="_blank">USDA FSIS: food thermometers</a></td><td>2 hours</td></tr><tr><td><strong>E-05</strong></td><td>Show the sources a guide already had</td><td>Two guides carried a `sources` list that the template silently dropped, so a claim resting on an official page had no visible citation. The template now renders it and the block sits under the article.</td><td>Checked by rendering both guides and reading the output.</td><td><a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers" rel="noopener" target="_blank">USDA FSIS: food thermometers</a></td><td>20 minutes</td></tr><tr><td><strong>E-06</strong></td><td>Run the tests that were never run</td><td>analytics/test_endpoint.py, measurement/test_collector.py, the paid-link gate test and the fit-finder test shipped in the repository and never ran in a workflow. All four now run in the Pages workflow.</td><td>Both Python suites are red from the repository root because they import a sibling module; CI runs them from their own directory, which is how they pass.</td><td><a href="../.github/workflows/pages.yml">The workflow</a></td><td>1 hour</td></tr><tr><td><strong>E-07</strong></td><td>Say where every claim comes from</td><td>This page. Each decision carries the official source it rests on, or the commit and gate that produced the claim, and an honest estimate of what it cost.</td><td>The site&amp;#x27;s register tables fail the build if a row has no source link.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">Amazon Associates Program Policies</a></td><td>1 hour</td></tr></tbody></table></div><p class="table-note">Cost is the working estimate for the session that did the work, not an invoice.</p></div></section>
+<section class="section section-tint"><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Declined</p><h2>Three suggestions we are advising against</h2></div>
+<p>Each of these is the obvious next move, and each one would cost more than it returns right now.</p></div>
+<div class="table-scroll"><table class="register"><caption>Suggestions the owner should reject, for now</caption><thead><tr><th scope="col">Ref</th><th scope="col">Suggestion</th><th scope="col">Why not yet</th><th scope="col">What enforces it</th><th scope="col">Source</th></tr></thead><tbody><tr><td><strong>N-01</strong></td><td>Do not add prices, ratings or review counts yet</td><td>Program Policies section 2(b) permits price and availability only where Amazon serves the data or it arrives through the Creators API or PA API. Neither is connected, and the API that would supply it is gated behind qualifying sales.</td><td>The site&amp;#x27;s build fails on a currency figure rather than trusting an editor to remember.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">Amazon Associates Program Policies</a></td></tr><tr><td><strong>N-02</strong></td><td>Do not call the supplied short links invalid</td><td>Every submitted code is nine characters where an ASIN is ten, which makes it a short-link slug rather than an identifier. That is a fact about the string, not a ruling on its compliance, and no enrolled-workflow test has been run.</td><td>The distinction is published as FLG-003 rather than resolved by assertion.</td><td><a href="https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference" rel="noopener" target="_blank">Amazon SP-API: Catalog Items (ASIN format)</a></td></tr><tr><td><strong>N-03</strong></td><td>Do not publish a ranking, a winner or a test result</td><td>Nothing on this site has been bought, cooked with or measured. The FTC&amp;#x27;s guidance on endorsements treats an implied test as a claim, and inventing one to move a commission is the specific failure mode an affiliate publication is prone to.</td><td>The build refuses first-person testing language, star ratings and ranking words anywhere in visible text.</td><td><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" rel="noopener" target="_blank">FTC endorsement guides: what people are asking</a></td></tr></tbody></table></div><p class="table-note">A declined row is not permanent. Each names the condition that would change the answer.</p></div></section>
+<section class="section "><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Blocking</p><h2>Four questions only the owner can answer</h2></div>
+<p>No session, and no amount of engineering, closes any of these.</p></div>
+<div class="table-scroll"><table class="register"><caption>Open questions that block the next decision</caption><thead><tr><th scope="col">Ref</th><th scope="col">Question</th><th scope="col">How to close it</th><th scope="col">Who</th><th scope="col">Source</th></tr></thead><tbody><tr><td><strong>B-01</strong></td><td>Is a click actually credited to shopnow047c-20?</td><td>Open a buy button once from a device you control, then read the Associates click report for that day. Either answer is useful; neither is currently known.</td><td>Needs the account owner. No agent session can read the report.</td><td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">Amazon Associates Program Policies</a></td></tr><tr><td><strong>B-02</strong></td><td>Which product was each short link meant to reach?</td><td>Five destinations are confirmed by observation. Whether each one is the product the owner intended cannot be read from a nine-character slug.</td><td>Needs the Associates dashboard, or the owner confirming each listing.</td><td><a href="https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference" rel="noopener" target="_blank">Amazon SP-API: Catalog Items (ASIN format)</a></td></tr><tr><td><strong>B-03</strong></td><td>Does the owner want a domain of their own?</td><td>A github.io subpath is fine for an editorial release and poor for a commercial one, and GitHub&amp;#x27;s Pages limits restrict use for sites primarily intended to facilitate commercial transactions.</td><td>A hosting and domain decision, not an engineering one.</td><td><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits" rel="noopener" target="_blank">GitHub Pages usage limits</a></td></tr><tr><td><strong>B-04</strong></td><td>Which of the three paths is this?</td><td>Shop first, publication first, or measure first. Every suggestion below a path depends on that choice, and the rows are individually sensible and collectively contradictory until it is made.</td><td>Recorded on the suggestions page with the cost of each path.</td><td><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" rel="noopener" target="_blank">Google Search Central: creating helpful content</a></td></tr></tbody></table></div></div></section>
+<section class="section section-tint"><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">State</p><h2>The numbers, as of this build</h2></div>
+<p>Every figure is read from the repository at build time, and the build fails if one drifts.</p></div>
+<div class="table-scroll"><table class="register"><caption>State of the publication on 2026-11-20</caption><thead><tr><th scope="col">Measure</th><th scope="col">Value</th><th scope="col">Basis</th></tr></thead><tbody><tr><td>Pages in the published tree</td><td><strong>33</strong></td><td>tools/build.py GENERATED, counted by the gate</td></tr><tr><td>Guides</td><td><strong>10</strong></td><td>tools/content.py</td></tr><tr><td>Sitemap entries</td><td><strong>26</strong></td><td>sitemap.xml after the findability change</td></tr><tr><td>Registers deliberately left out of the sitemap</td><td><strong>9</strong></td><td>publish.SITEMAP_EXCLUDE, still crawlable</td></tr><tr><td>Official sources linked on this site</td><td><strong>17</strong></td><td>src/data/sources.json</td></tr><tr><td>Review flags published</td><td><strong>26</strong></td><td>src/data/flags.json</td></tr><tr><td>Product links re-verified today</td><td><strong>5 of 5</strong></td><td>data/verification-observations.ndjson, 2026-11-20</td></tr><tr><td>Prices, ratings or test results published</td><td><strong>0</strong></td><td>enforced by tools/check.py</td></tr><tr><td>Measured traffic or orders</td><td><strong>0</strong></td><td>no first-party report has been read</td></tr></tbody></table></div>
+<p class="tiny">The last three rows are the point of the table. A site can be finished and still
+earn nothing; this one publishes no price, no rating, no test result and no traffic figure, and
+says so in the same place it lists its successes.</p></div></section>
+<section class="section "><div class="wrap">
+<div class="desk-next">
+  <h2>Where to take this next</h2>
+  <ul class="tight">
+    <li><a href="../suggestions/index.html">The suggestion queue</a> &mdash; twenty-one rows, three paths, and a decision control per row that stores your choice in your own browser.</li>
+    <li><a href="../suggestions/design.html">The design decision brief</a> &mdash; four directions for the next version, with the evidence each one would need first.</li>
+    <li><a href="../questions/index.html">Open questions</a> &mdash; twenty-two, ten answered, and what would close each of the rest.</li>
+    <li><a href="../review/index.html">Flagged for review</a> &mdash; every irregularity found, with its source, published rather than buried.</li>
+    <li><a href="../brief/index.html">Executive summary</a> &mdash; the same picture in four minutes.</li>
+  </ul>
+  <p class="tiny">Nothing on this page is a commitment to spend money. The declined rows exist so
+  that the next session does not re-propose them without reading why.</p>
+</div></div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="foot-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
+    <div class="foot-grid"><div class="foot-col"><h2>Shop</h2><ul><li><a href="../products/index.html">All five picks</a></li><li><a href="../products/p-01.html">Dual-basket air fryer</a></li><li><a href="../products/p-02.html">French-door oven</a></li><li><a href="../products/p-03.html">Single-basket air fryer</a></li><li><a href="../products/p-04.html">Instant-read thermometer</a></li><li><a href="../products/p-05.html">Wireless probe set</a></li></ul></div><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../start/index.html">Where to start</a></li><li><a href="../compare/index.html">Side-by-side table</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>The desk</h2><ul><li><a href="index.html">Editor&#x27;s desk</a></li><li><a href="../decide/index.html">Decision gate</a></li><li><a href="../questions/index.html">Open questions</a></li><li><a href="../suggestions/index.html">Suggestions &amp; decisions</a></li><li><a href="../suggestions/design.html">Design decision brief</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li></ul></div><div class="foot-col"><h2>Trust</h2><ul><li><a href="../about/index.html">About &amp; how we link</a></li><li><a href="../about/index.html#sources">Sources</a></li><li><a href="../review/index.html">Flagged for review</a></li><li><a href="../review/images.html">Image policy</a></li><li><a href="../review/measurement.html">Measurement plan</a></li></ul></div></div>
+    <div class="foot-bottom">
+      <p>Submitted tracking ID: <code>shopnow047c-20</code>. Attribution remains unverified; only account-confirmed purchase links may use this tag.</p>
+      <p class="foot-meta">Crisp &amp; Counter &middot; static site &middot; last built 2026-11-20 &middot; no cookies, no trackers, no third-party requests</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/analytics.js" defer></script>
+</body>
+</html>

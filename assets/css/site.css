@@ -760,3 +760,12 @@ a.btn:hover{transform:translateY(-1px)}
 @media(max-width:520px){.start-grid{grid-template-columns:1fr}.start-card{padding:1.2rem}}
 .cover-sub{margin:.9rem 0 0;font-size:.86rem;color:var(--ink-2);opacity:.85}
 .cover-sub a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
+/* Editor's desk: the release record. Same register tables as the rest of the
+   desk pages, plus a short lede that explains why the declined rows matter. */
+.desk-lede{max-width:70ch;margin:0 0 1rem;font-size:1.02rem;line-height:1.65;color:var(--ink-2)}
+.desk-lede p+p{margin-top:.9rem}
+.desk-next{max-width:70ch}
+.desk-next h2{font-family:var(--serif);font-size:1.5rem;margin:0 0 .8rem}
+.desk-next ul{margin:0 0 1rem;padding-left:1.1rem;line-height:1.7}
+.desk-next .tiny{font-size:.8rem;color:var(--faint)}

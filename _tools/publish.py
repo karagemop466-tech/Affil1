@@ -97,10 +97,17 @@ def in_sitemap(path):
     return not path.startswith(SITEMAP_EXCLUDE)
 
 
+<<<<<<< HEAD:_tools/publish.py
 def missing_required():
     """Generated pages the site is expected to have but the builder did not write."""
     pages = generated_pages()
     return [p for p in REQUIRED_PAGES if p not in pages]
+=======
+# Pages whose visible text legitimately names a build input: they exist to
+# document the repository's own structure, so "src/data/products.json" is the
+# subject rather than a dangling reference. Everything else is checked strictly.
+NOTE_PAGES = ("review/", "editorial/", "about/", "questions/", "suggestions/")
+>>>>>>> 2a4f813 (Add the editor's desk: shipped decisions, declined suggestions, blocking questions):tools/publish.py
 
 
 def generated_pages():
@@ -158,11 +165,14 @@ def jekyll_exclude():
 def stale_notes():
     """Generated pages that still contain their build-input breadcrumbs.
 
-    Not an error by itself, but a page that mentions `src/data/` in visible text
-    is telling a reader about files they can no longer open, so the gate warns.
+    A storefront page that mentions `src/data/` in visible text is telling a reader
+    about a file they cannot open, so those pages are checked strictly. The pages
+    in NOTE_PAGES document the repository on purpose and are exempt.
     """
     hits = []
     for f in sorted(generated_pages()):
+        if f.startswith(NOTE_PAGES):
+            continue
         p = ROOT / f
         if not p.exists():
             continue

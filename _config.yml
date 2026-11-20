@@ -6,12 +6,23 @@
 # _tools/publish.py -- run `python3 _tools/publish.py --write-config` and commit
 # the result rather than hand-editing it.
 #
+<<<<<<< HEAD
 # One correction to the note this file used to carry: the underscore rename does
 # NOT keep anything off the public host. On 2026-11-20
 # https://karagemop466-tech.github.io/Affil1/_tools/build.py returned the complete
 # build script, and /_src/data/products.json returned the product register, because
 # .nojekyll disables the very Jekyll rule that hides underscore paths. What keeps
 # them off is _tools/publish.py and the route used to publish. See FLG-031.
+=======
+# The exclude list below is generated from tools/publish.py, which is the single
+# allow-list both routes read. Do not hand-edit it; run
+#
+#     python3 tools/publish.py --write-config
+#
+# and commit the result. Left to itself, Jekyll published the whole repository:
+# /src/data/products.json, /tools/build.py and a second storefront under
+# /archive/ were all reachable on 2026-11-20 (FLG-030).
+>>>>>>> 2a4f813 (Add the editor's desk: shipped decisions, declined suggestions, blocking questions)
 plugins: []
 exclude:
   - .github

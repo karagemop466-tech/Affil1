@@ -22,6 +22,7 @@ import page_home  # noqa: E402
 import page_fit  # noqa: E402
 import page_design  # noqa: E402
 import page_start  # noqa: E402
+import page_editorial  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
 import page_compare  # noqa: E402
@@ -38,7 +39,7 @@ DATA = ROOT / "_src" / "data"
 # static asset or an archived edition, and is never touched.
 OWNED = [
     "index.html", "404.html",
-    "guides", "start", "products", "compare", "questions", "suggestions", "decide",
+    "guides", "start", "editorial", "products", "compare", "questions", "suggestions", "decide",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
@@ -47,6 +48,7 @@ GENERATED = {
     "index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
     "guides/index.html",
     "start/index.html",
+    "editorial/index.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
@@ -150,7 +152,7 @@ def feed(guides):
 # The earlier wording here said "/archive/ is not listed in the sitemap", which
 # was true and insufficient: the files were still published and still parseable,
 # and one archive page was a complete second storefront with tagged buy links.
-# See FLG-026.
+# See FLG-030.
 ROBOTS = """User-agent: *
 Allow: /
 Disallow: /archive/
@@ -186,6 +188,7 @@ def main():
 
     # products
     pages.append(write("start/index.html", page_start.build("start", products_doc, GUIDES)))
+    pages.append(write("editorial/index.html", page_editorial.build("editorial", {"built": BUILD_DATE})))
     pages.append(write("products/index.html", page_products.build_register("products", products, meta)))
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))
