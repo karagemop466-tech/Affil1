@@ -182,10 +182,10 @@ def build(page_dir, products, meta):
     latest = section(f"""
 <div class="sec-head">
   <div>{eyebrow('The journal')}<h2>Guides worth your ten minutes</h2></div>
-  <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you.</p>
+  <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you. Newest first.</p>
 </div>
 <div class="gcard-grid">
-{''.join(guide_card(d, g) for g in GUIDES[:4])}
+{''.join(guide_card(d, g) for g in list(reversed(GUIDES))[:4])}
 </div>
 <p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'guides/index.html'))}">All {len(GUIDES)} guides <span aria-hidden="true">&rarr;</span></a></p>""",
                     cls="")
