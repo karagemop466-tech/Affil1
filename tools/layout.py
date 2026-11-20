@@ -6,7 +6,7 @@ other way to produce a page.
 
 Two rules are enforced by construction rather than remembered:
 
-  * every Amazon destination is built by buy_url(), so it always carries the
+  * every Amazon destination is built by buy_url(), so only approved URLs may carry the
     Associates tag that Program Policies 2(b) requires;
   * every internal link is relative and computed with posixpath.relpath,
     because GitHub Pages serves this repository from /Affil1/.
@@ -16,6 +16,10 @@ import html
 import json
 import pathlib
 import posixpath
+from functools import lru_cache
+from urllib.parse import parse_qs, urlsplit
+
+from paid_link_gate import approved_links
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_NAME = "Crisp & Counter"
@@ -79,18 +83,19 @@ def rel(page_dir, target):
     return posixpath.relpath(target, page_dir) if page_dir else target
 
 
-def buy_url(asin):
-    """The only place an Amazon click destination is constructed.
+@lru_cache(maxsize=1)
+def approved_amazon_urls():
+    data = json.loads((ROOT / 'src/data/products.json').read_text())
+    return approved_links(data['products'], TRACKING_ID)
 
-    Program Policies 2(b): every Special Link must carry the Associates ID as a
-    tag parameter. Putting that in one function means it cannot be forgotten on
-    one page and remembered on the next.
-    """
-    return f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
+
+def buy_url(asin):
+    """Use the account-approved URL verbatim, or show an untagged listing source."""
+    return approved_amazon_urls().get(asin, f"https://www.amazon.com/dp/{asin}")
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
-         aria=None, title=None):
+         aria=None, title=None, affiliate_ref=None):
     # An absolute URL is never passed through rel(): doing so would rewrite
     # "https://host/x" into "../https:/host/x" and produce a 404.
     absolute = target.startswith(("http://", "https://", "mailto:", "#"))
@@ -102,6 +107,8 @@ def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
         attrs.append(f'title="{esc(title)}"')
     if aria:
         attrs.append(f'aria-label="{esc(aria)}"')
+    if affiliate_ref:
+        attrs.append(f'data-affiliate-ref="{esc(affiliate_ref)}"')
     if sponsored:
         attrs.append('rel="sponsored nofollow noopener"')
         attrs.append('target="_blank"')
@@ -118,6 +125,16 @@ def outbound(page_dir, url, label, **kw):
 
 def product_link(page_dir, url, label, **kw):
     """A link to Amazon. Always marked sponsored, always in a new tab."""
+    tagged = 'tag' in parse_qs(urlsplit(url).query, keep_blank_values=True)
+    if tagged and url not in approved_amazon_urls().values():
+        raise ValueError(f'Unapproved Amazon tag: {url}')
+    if tagged:
+        kw['affiliate_ref'] = urlsplit(url).path.rsplit('/', 1)[-1]
+    else:
+        if label.startswith(('See ', 'Check ')):
+            label = 'See listing source <span aria-hidden="true">&#8599;</span>'
+        if kw.get('aria'):
+            kw['aria'] = kw['aria'].replace('paid link, ', '').replace('affiliate link, ', '')
     return link(page_dir, url, label, sponsored=True, **kw)
 
 
@@ -185,7 +202,7 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Affiliate tag on every product link: <code>{esc(TRACKING_ID)}</code>. Attribution is not yet confirmed in an Associates report.</p>
+      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code>. Attribution remains unverified; only account-confirmed purchase links may use this tag.</p>
       <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
     </div>
   </div>
@@ -233,6 +250,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
+<link rel="stylesheet" href="{esc(rel(page_dir, 'assets/css/storefront.css'))}">
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>

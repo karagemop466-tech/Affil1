@@ -11,11 +11,12 @@ def stage(destination):
     destination.mkdir(parents=True, exist_ok=True)
     if any(destination.iterdir()):
         raise SystemExit(f"Staging directory must be empty: {destination}")
-    files = GENERATED | {'.nojekyll'}
+    (destination / '.nojekyll').touch()
+    files = set(GENERATED)
     files |= {
         str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*')
         if path.is_file() and (path.suffix in {'.woff2', '.svg'} or
-           path.name in {'editorial.css', 'discover.js', 'site.css', 'site.js', 'analytics.js', 'fit.css', 'fit.js'} or
+           path.name in {'editorial.css', 'discover.js', 'storefront.css', 'site.css', 'site.js', 'analytics.js', 'fit.css', 'fit.js'} or
            path.stem.endswith(('-w560', '-w760', '-w900', '-w1280')))
     }
     for name in sorted(files):
