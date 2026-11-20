@@ -33,6 +33,7 @@ NAV = [
     ("index.html", "The Edit"),
     ("products/index.html", "Product Shelf"),
     ("guides/index.html", "Buying Guides"),
+    ("fit/index.html", "Fit Finder"),
     ("brief/index.html", "Site Desk"),
 ]
 
@@ -41,6 +42,7 @@ FOOTER_GROUPS = [
         ("guides/index.html", "All guides"),
         ("compare/index.html", "Comparison table"),
         ("feed.xml", "RSS feed"),
+        ("fit/index.html", "Air fryer fit finder"),
     ]),
     ("Catalogue", [
         ("products/index.html", "Product register"),
@@ -57,6 +59,7 @@ FOOTER_GROUPS = [
     ("Desk", [
         ("questions/index.html", "Open questions"),
         ("suggestions/index.html", "Suggestions"),
+        ("suggestions/design.html", "Design decision brief"),
         ("operations/ledger.html", "Campaign ledger"),
         ("brief/index.html", "Executive summary"),
         ("about/index.html", "About this site"),
@@ -192,12 +195,13 @@ def footer(page_dir):
 
 
 def page(page_dir, *, title, description, body, active=None, canonical=None,
-         body_class="", structured=None, og_type="website"):
+         body_class="", structured=None, og_type="website", extra_css=None):
     css = rel(page_dir, "assets/css/site.css")
     js = rel(page_dir, "assets/js/site.js")
     feed = rel(page_dir, "feed.xml")
     home = rel(page_dir, "index.html")
     canon = canonical or ""
+    css_extra = f'<link rel="stylesheet" href="{esc(rel(page_dir, extra_css))}">' if extra_css else ""
     structured_block = ""
     if structured:
         structured_block = (
@@ -205,6 +209,9 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
             + json.dumps(structured, ensure_ascii=False)
             + "</script>\n"
         )
+    destination_note = ''
+    if canon in {"products/p-04.html", "products/p-05.html"}:
+        destination_note = f'''<div class="wrap" role="note"><p><strong>Link note:</strong> Checks of the submitted thermometer links reached differing destinations. This page describes the specific listing, not a confirmed intended destination. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the observations</a>.</p></div>'''
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -225,12 +232,14 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
 <link rel="stylesheet" href="{esc(rel(page_dir, 'assets/css/editorial.css'))}">
+{css_extra}
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
+{destination_note}
 {body}
 </main>
 {footer(page_dir)}
