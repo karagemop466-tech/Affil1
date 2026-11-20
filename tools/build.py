@@ -86,7 +86,7 @@ def disclosure():
     return f"""<div class="disclosure" role="region" aria-label="Affiliate disclosure">
   <div class="wrap">
     <span class="tag">Disclosure</span>
-    <span>As an Amazon Associate, {esc(SITE_NAME)} earns from qualifying purchases. Links to Amazon are affiliate links: if you buy through one, we may earn a commission at no extra cost to you. <a href="/about/#disclosure">Read the full disclosure</a>.</span>
+    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: links from this site to Amazon are affiliate links, and if you buy through one we may earn a commission at no cost to you. <a href="/about/#disclosure">Full disclosure and method</a>.</span>
   </div>
 </div>"""
 
@@ -155,7 +155,7 @@ def footer():
 </footer>"""
 
 
-def page(path, title, description, body, active="/", extra_head="", crumbs=None):
+def page(path, title, description, body, active="/", extra_head="", crumbs=None, og_type="website", og_image="hero-counter.jpg"):
     """Write one page. Disclosure is always the first thing under the masthead."""
     canonical = SITE_URL + (path if path != "/" else "/")
     crumb_html = ""
@@ -177,12 +177,17 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None)
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{canonical}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{og_type}">
+<meta property="og:image" content="{SITE_URL}/assets/img/{og_image}">
+<meta property="og:image:alt" content="Illustrated countertop kitchen scene made for {esc(SITE_NAME)}; not product photography.">
+<meta property="og:image:width" content="960">
+<meta property="og:image:height" content="720">
+<meta name="theme-color" content="#1b1a17">
 <meta property="og:site_name" content="{esc(SITE_NAME)}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:url" content="{canonical}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="{esc(SITE_NAME)}" href="/feed.xml">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script src="/assets/js/events.js" defer></script>
@@ -457,7 +462,8 @@ def build_guide(slug, g):
 </div>"""
 
     return page(f"/guides/{slug}/", f"{g['title']} — {SITE_NAME}", g["deck"], body,
-                active="/guides/", extra_head=g.get("head", ""),
+                active="/guides/", extra_head=g.get("head", ""), og_type="article",
+                og_image=g.get("og_image", "hero-counter.jpg"),
                 crumbs=[("/", "Home"), ("/guides/", "Buying guides"), (None, g["title"][:48])])
 
 
@@ -914,7 +920,7 @@ def build_about():
     say what that person actually did. That is tracked as a suggestion, not as a promise: see
     <a href="/suggestions/">the board</a>.</p>
 
-    <h2>Corrections</h2>
+    <h2 id="corrections">Corrections</h2>
     <p><strong>2026-11-20 —</strong> an earlier register kept in the repository archive recorded two of the five
     submitted links as reaching only the Amazon homepage. Two independent fetch passes now reach product pages for
     both, and one of them is a meat thermometer rather than an air fryer. The archived file is left untouched so the

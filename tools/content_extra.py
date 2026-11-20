@@ -12,6 +12,7 @@ GUIDES = {
         "title": "Thanksgiving overflow: what an air fryer actually fixes on the biggest oven day",
         "deck": "It will not roast the turkey. What it can do is take four sides, the rolls and the reheating off an oven that is already holding a bird for four hours. Here is the plan, and the questions to ask a listing before you believe it.",
         "cluster": "Cook with it",
+        "og_image": "feature-holiday.jpg",
         "minutes": 7,
         "products": ["P-01", "P-02"],
         "head": """<script type="application/ld+json">
@@ -80,6 +81,7 @@ GUIDES = {
         "title": "Frozen food nights: four questions that decide whether a basket earns its counter",
         "deck": "Most air-fryer purchases are justified on weeknights, not weekends. Before you buy one for the freezer aisle, four questions are worth answering with your own kitchen in front of you.",
         "cluster": "Live with it",
+        "og_image": "topic-frozen.jpg",
         "minutes": 5,
         "products": ["P-03"],
         "head": """<script type="application/ld+json">
@@ -123,6 +125,7 @@ GUIDES = {
         "title": "Dual basket or two separate machines? The counter math nobody writes down",
         "deck": "Two baskets in one box looks obviously better than one. The comparison that matters is against two small single-basket machines — on outlets, on cleanup, on cooking floor, and on what happens when one half breaks.",
         "cluster": "Size it right",
+        "og_image": "topic-frozen.jpg",
         "minutes": 6,
         "products": ["P-01", "P-03"],
         "body": """
@@ -174,6 +177,7 @@ GUIDES = {
         "title": "Is a smart probe worth it? Four questions before you spend on a thermometer",
         "deck": "One of the five links in our register is not an air fryer at all — it is a wireless meat thermometer, in the same shopping basket for the same occasion. So it gets the same treatment: what the listing claims, and what you should ask before paying.",
         "cluster": "Buy smart",
+        "og_image": "topic-probe.jpg",
         "minutes": 6,
         "products": ["P-05"],
         "body": """
@@ -219,6 +223,7 @@ GUIDES = {
         "title": "Your first week with a new air fryer: a checklist that is not recipes",
         "deck": "Everything you should do in the first seven days so the appliance is still on the counter in month six — seasoning the run, learning the hot spots, and setting up the cleanup you will actually keep.",
         "cluster": "Live with it",
+        "og_image": "topic-firstweek.jpg",
         "minutes": 5,
         "products": [],
         "body": """
