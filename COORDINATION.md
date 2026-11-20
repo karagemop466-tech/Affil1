@@ -254,7 +254,9 @@ Reconciled cleanly against `main` (`4f42810`, after PR #63 and PR #64) while pre
 
 ## Session S-5665c5f2 — branch `arena/5665c5f2-affil1` (2026-11-20)
 
-Owner: session `5665c5f2` on branch `arena/5665c5f2-affil1`. Status: **PR #66 open** (https://github.com/karagemop466-tech/Affil1/pull/66); merge and Pages deploy recorded after the merge. Branch name follows the board convention `arena/<id>-affil1`; the branch name is fixed for this session.
+Owner: session `5665c5f2` on branch `arena/5665c5f2-affil1`. Status: **PR #66 merged** at `7eaf1e0` (https://github.com/karagemop466-tech/Affil1/pull/66).
+
+Follow-up: the merge in PR #66 dropped the `holiday-hosting-counter` entry in `src/data/images.json`. The cause was a rebase conflict that was resolved in favour of main on that file. The entry is restored in a follow-up PR. FLG-020 and FLG-021 were not affected and are on main. Branch name follows the board convention `arena/<id>-affil1`; the branch name is fixed for this session.
 
 ### What happened
 
