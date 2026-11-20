@@ -1,76 +1,85 @@
-# Affil1 — Amazon affiliate site
+# Affil1
 
-Buyer-first affiliate editorial site for air fryers and multi-function kitchen appliances. Built to read like a shop, not an audit: product picks lead the front page, every page carries an above-the-fold Associates disclosure, and every outbound product link is marked `sponsored`.
+An Amazon Associates site for countertop cooking appliances. It has two sections,
+built by different sessions and merged without either discarding the other.
 
-**Tracking ID:** `shopnow047c-20` (user-supplied; account enrollment and live attribution unverified)
-**Branch:** `arena/f10ea853-affil1` (base `cca8c2a`, merged with parallel session `arena/8e0006cf-affil1`)
-**Prepared:** 2026-11-20
+| Section | URL | Contents |
+| --- | --- | --- |
+| **Good Measure Kitchen Notes** | https://karagemop466-tech.github.io/Affil1/ | Storefront, guide set, dashboard, categories, flagged review |
+| **Crisp & Counter** | https://karagemop466-tech.github.io/Affil1/crisp/ | Publication front page, 4 guides, compare, products, and the register set |
 
-## What’s in the repo
+Both disclose the affiliate relationship above the fold and neither publishes a
+price without an Amazon-served feed.
 
-- `/` — Affil1 publication front page: product picks, buyer-question guides, how it works
-- `/categories/air-fryers.html` — findings table (one row per submitted link, source link per row)
-- `/dashboard.html` — entries/findings table, empty campaign ledger, measurement status
-- `/guides/` — question-shaped buying guides (working titles)
-- `/suggestions.html` — decision suggestions; review before implementing
-- `/reviews/flagged.html` — Affil1 Flagged for Review page (irregularities and unverified items)
-- `/guides/flagged-for-review.html` — parallel session’s review queue (Good Measure Kitchen)
-- `/disclosure.html` — Associates statement (tracking ID `shopnow047c-20`)
-- `/privacy.html` — privacy notice for self-hosted analytics
-- `/assets/css/main.css` — design system
-- `/assets/js/common.js` — shared masthead, navigation group, disclosure strip, footer
-- `/assets/js/analytics.js` — privacy-preserving client; five defined events; outbound click counter
-- `/server/collect.js` — self-hosted analytics endpoint (Node.js, run outside GitHub Pages)
-- `/data/confirmations.json` — product-intent confirmation records
-- `/data/campaign-ledger.json` — empty campaign ledger with provenance trail
-- `/app.js`, `/data.js`, `/styles.css` — parallel session’s static storefront components (retained)
-- `/feed.xml` — parallel session’s RSS feed (retained)
-- `/sitemap.xml`, `/rss.xml`, `/robots.txt`
+## Crisp & Counter (`crisp/`)
 
-## Verification standard
+Live: https://karagemop466-tech.github.io/Affil1/crisp/
 
-Every table row carries a source link to an official source (Amazon.com). Values not confirmed from an official source are left blank and flagged — never inferred. Full records: `data/confirmations.json`.
+## What this is
 
-Verified against Amazon.com (official site), fetched 2026-11-20:
+Buying guides that state what a product's listing claims, and refuse to state
+anything else. No prices, ratings, review counts or stock figures appear
+anywhere, because Amazon permits them only when Amazon serves the data or it
+arrives through its API — and no such feed is connected here.
 
-| # | Submitted link | Intended ASIN | Verified listing | Status |
-|---|---|---|---|---|
-| 1 | https://link.amazon/B04G1MEwY | B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | Verified |
-| 2 | https://link.amazon/B02NbDxp3 | B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Verified |
-| 3 | https://link.amazon/B00hJ57DV | B00hJ57DV | — | Unverified — homepage reached |
-| 4 | https://link.amazon/B0c8moW59 | B0c8moW59 | — | Unverified — Amazon checkpoint |
-| 5 | https://link.amazon/B0f3GKalj | B0f3GKalj | — | Unverified — homepage reached |
-
-## Preview locally
-
-Run `python3 -m http.server 8080 --bind 0.0.0.0` and open the preview. The site is plain HTML/CSS/JS and has no build dependencies.
-
-## Deployment
-
-`.github/workflows/pages.yml` deploys to GitHub Pages on pushes to `main` and on manual workflow dispatch. Enable GitHub Pages with **GitHub Actions** as the source in repository settings. Update `sitemap.xml` and `rss.xml` if the canonical Pages URL differs from `https://karagemop466-tech.github.io/Affil1/`. Search Console and analytics require account/property setup and are not falsely represented as connected.
-
-## Self-hosted analytics
-
-GitHub Pages is static, so the collector must run outside Pages:
+## Layout of `crisp/`
 
 ```
-node server/collect.js   # PORT=8080 by default; set $PORT to override
-POST /analytics/collect  # newline-delimited JSON events -> data/events.jsonl
+crisp/index.html           front page (generated)
+crisp/guides/              four question-shaped buying guides (generated)
+crisp/compare/             form-factor comparison (generated)
+crisp/products/            identifier register (generated)
+crisp/about/  sources/  suggestions/  questions/  flagged/  legacy/
+src/data/*.json            the single source of truth for every figure and claim
+src/data/products.json     product observations, intended vs observed identifiers kept apart
+src/data/compliance.json   verbatim policy quotations with URLs
+src/data/flags.json        every unverified value and irregularity
+src/data/suggestions.json  scored proposals awaiting a decision
+src/data/questions-open.json  what is needed to answer each open question
+tools/build.py             renders every page from the data
+tools/content.py           editorial copy
+tools/validate.py          647 pre-publish checks
+docs/EXECUTIVE-SUMMARY.md  what was found and what to do next
+docs/MEASUREMENT.md        the five events, and why none is live
+COORDINATION.md            shared task board for parallel sessions
 ```
 
-The client degrades silently if the collector is unreachable.
+All links inside `crisp/` are relative, because GitHub Pages serves this repo
+under `/Affil1/` and absolute root paths would 404 there.
 
-## Decision process
+Pages are **generated**. Edit the JSON in `src/data/` or the copy in
+`tools/content.py`, then:
 
-Suggestions live on `/suggestions.html`. Nothing is implemented until a suggestion is reviewed and a path is chosen. See `PUBLISHING_WORKFLOW.md` for the pre-publish compliance gate.
+```bash
+python3 tools/build.py      # renders crisp/ from src/data + tools/content.py
+python3 tools/validate.py   # 600 checks, scoped to crisp/ only
+```
 
-## Coordination
+Do not hand-edit the HTML: it is overwritten on the next build. This is
+deliberate — the disclosure strip and footer are emitted by one template, so no
+page can ship without them.
 
-`COORDINATION.md` is the shared task board for parallel sessions. Claim tasks there before working.
+## Editorial rule
 
-## Editorial and compliance limits (both sessions)
+A capability is stated only if it appears in the seller's own listing title.
+Everything else is framed as a question the reader should ask, or omitted.
 
-- Top-of-page and footer Associates disclosure on each page.
-- Submitted outbound product links use `rel="sponsored nofollow"`.
-- No product features, price, reviews, rank, popularity, commission, conversion, or revenue claims are populated without evidence.
-- Flagged pages list missing data, official source references, and next steps; unverified means unverified — not invalid.
+## Compliance
+
+- Affiliate disclosure above the fold on every page, repeated in the footer.
+- Every buy link carries `rel="sponsored nofollow noopener"`.
+- No price, rating or availability figure anywhere (Program Policies 2(b)).
+- No third-party scripts, no cookies, no tracking.
+- Policy citations are backed by verbatim quotations with source URLs.
+
+Unverified items are published at `crisp/flagged/` with source links.
+
+`tools/validate.py` validates only `crisp/`. The storefront at the repo root is
+another session's scope and is not policed by this tool.
+
+## Known gaps
+
+All five supplied link codes are nine characters; an ASIN is ten. Four links
+resolved to identifiable listings whose ASINs are recorded. The fifth never
+resolved. Tracking attribution and commission rates require Associates account
+access. See `/flagged/`.

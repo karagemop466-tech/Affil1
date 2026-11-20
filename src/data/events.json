@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "purpose": "Five events, defined before any code ships, so that 'which page works' becomes a question with an answer.",
+    "status": "specification only. Nothing here is deployed. No third-party script is loaded on this site, and no cookie is set. See FLG-009.",
+    "principles": [
+      "first-party only: the collector must live on the site's own host, not a third party",
+      "no cookie, no local storage, no fingerprint: session counting uses a rotating in-memory bucket, not an identifier",
+      "aggregate only: no per-visitor record is stored, so the data cannot be joined to a person",
+      "no Amazon data: nothing about what happens after the click is knowable from this site, and nothing is implied"
+    ],
+    "explicitly_out_of_scope": "Reported orders, revenue and conversion rate. Those can only come from the Associates dashboard or the API, which this session cannot read. The campaign ledger starts empty and stays empty until authorised first-party reports exist."
+  },
+  "events": [
+    {
+      "id": "E1",
+      "name": "page_view",
+      "fires_when": "A guide, category or register page is rendered",
+      "props": ["path", "referrer_host", "viewport_class"],
+      "answers": "Which pages are reached at all, and from where",
+      "not_collected": ["IP", "user agent string", "cookie", "query string of the referrer"]
+    },
+    {
+      "id": "E2",
+      "name": "outbound_product_click",
+      "fires_when": "A reader activates an outbound link to a product listing",
+      "props": ["product_id", "asin", "page_path", "position_in_page"],
+      "answers": "Which products and which positions earn the click",
+      "not_collected": ["anything after the click; the destination is Amazon's, not ours"],
+      "note": "The click is counted locally before navigation. It does not prove a purchase, a session, or a commission."
+    },
+    {
+      "id": "E3",
+      "name": "guide_read_75",
+      "fires_when": "A reader reaches 75% of a guide's height",
+      "props": ["guide_slug"],
+      "answers": "Whether the guide is actually read or merely opened",
+      "not_collected": ["time per paragraph, scroll path, mouse movement"]
+    },
+    {
+      "id": "E4",
+      "name": "compare_view",
+      "fires_when": "The comparison page or a comparison table is rendered",
+      "props": ["table_id"],
+      "answers": "Whether readers want side-by-side data more than prose",
+      "not_collected": ["individually identifying data of any kind"]
+    },
+    {
+      "id": "E5",
+      "name": "flag_page_view",
+      "fires_when": "The Flagged for Review page is opened",
+      "props": ["referrer_path"],
+      "answers": "Whether the review page is actually consulted, which tells us if the verification work is visible",
+      "not_collected": ["identity of the reviewer"]
+    }
+  ],
+  "collector_design": {
+    "endpoint": "/api/e (POST, same origin)",
+    "payload": "the event id and its props, nothing else",
+    "retention": "aggregate counts per day per event per prop value; raw events discarded on write",
+    "opt_out": "Do Not Track and Global Privacy Control headers must be honoured by skipping the send",
+    "why_not_deployed": "Deploying it requires a host that can run a process. GitHub Pages serves static files only, so there is nowhere for the collector to run. A third-party analytics provider would meet the measurement goal but would break the first-party principle and add a disclosure obligation that is not worth it before there is traffic to measure."
+  },
+  "campaign_ledger": {
+    "status": "empty by design",
+    "columns": ["date", "source", "channel", "eligible_sessions", "outbound_clicks", "reported_orders", "provenance"],
+    "rules": [
+      "a row is added only when the figure comes from an authorised first-party report",
+      "every row carries the date the figure was pulled and the report it came from",
+      "no projection, no forecast, no model output is permitted in this table",
+      "reported_orders is left blank until the Associates report provides it"
+    ],
+    "current_rows": []
+  }
+}
