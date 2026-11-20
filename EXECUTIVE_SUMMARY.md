@@ -40,8 +40,8 @@ and checked page by page by `_tools/check.py`:
   implemented and shown with evidence), each row carrying cost, risk and the question
   it depends on;
 
-- fourteen question-shaped guides across seven clusters, all in `sitemap.xml`
-  and `feed.xml`, plus a category index and two category pages;
+- nineteen question-shaped guides across six clusters, all in `sitemap.xml` and
+  `feed.xml`, plus a category index and two category pages;
 - a decision register of 27 questions, 10 answered with evidence, 17 open and each
    naming the document or dashboard that would close it;
 - a suggestion queue with three coherent paths and 31 proposals, of which some
@@ -647,7 +647,7 @@ version of it — that part is recorded here rather than quietly deleted.
 Thermometers): the same register regrouped by what a shopper is buying, every row
 linked to the listing it was transcribed from, and an explicit statement of what the
 page cannot tell you. `PUBLIC_DIRS` in `_tools/check.py` had already reserved
-`categories`; nothing had ever written it. One guide was kept — probe placement, a
+`categories`; nothing had ever written it. One guide was kept — probe placement, the
 question no other page answered — with every figure transcribed from a US-government
 page opened the same day and linked in the same table row. Three more drafted here
 (reheating leftovers, the two-hour rule, Thanksgiving oven timing) were dropped on
@@ -684,9 +684,10 @@ sentence is *computed* from `approved_amazon_urls()`
 register state; and **FLG-037** records that the guard is a literal-string test,
 which will start demanding a false sentence the day a Special Link is validated.
 
-**Gates after this pass:** 42 pages built twice, byte-identical · `check.py` 0 errors
-0 warnings · `validate.py` 0 warnings · `check_local_links.py` 0 broken · paid-link
-tests OK · Decision Desk PASS · Almanac edition checks 0 errors · `sweep_surfaces.py`
-0 to move · `stage.py` staging complete · CI reproducibility diff clean. No price,
+**Gates after this pass, on the final tree:** 47 pages built twice, byte-identical ·
+`check.py` 0 errors 0 warnings · `validate.py` 2,884 checks 0 warnings ·
+`check_local_links.py` 81 pages 0 broken · paid-link tests OK · Decision Desk PASS ·
+Almanac edition checks 0 errors · `sweep_surfaces.py` 0 to move · `stage.py` staging
+complete · CI-style copy/rebuild/`diff -r` clean. No price,
 rating, review count, stock level, test result or ranking was added; the listing page
 read during verification displayed both, and neither was transcribed.

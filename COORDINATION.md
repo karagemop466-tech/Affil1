@@ -243,9 +243,10 @@ recorded in `_tools/content_season.py` so the topic is left alone.
 
 **Ids after reconciliation.** Sources SRC-21 (FSIS Leftovers), SRC-22 (FSIS Food
 Thermometers), SRC-23 (FSIS Turkey from Farm to Table), SRC-24 (FoodSafety.gov
-chart). Questions Q-25, Q-26, Q-27. Proposals S-32 (retire the unreachable
-generators), S-33 (dated source line on figure-carrying guides), S-34 (one
-indexable taxonomy: categories as the shop, the register as the appendix). Flags
+chart). Questions Q-25, Q-26, Q-27. Proposals S-37 (retire the unreachable
+generators), S-38 (dated source line on figure-carrying guides), S-39 (one indexable
+taxonomy: categories as the shop, the register as the appendix) — renumbered twice
+because main took S-26..S-31 and then S-32..S-36 under me. Flags
 FLG-036 (nine `_tools/` modules reachable from neither build nor CI) and FLG-037
 (the `check.py` guides rule asserts a literal sentence about tag status, which the
 register can make false). My short-link finding and my guide-tag-sentence finding
@@ -261,10 +262,11 @@ title exactly. Not a claim that the links are invalid — FLG-003 stays unresolv
 no published destination uses a short link.
 
 Quoted wording is stored verbatim in `_src/data/sources.json`, each row carrying the
-page's own date or the words "no update date shown". Gates on the final tree: build 43
-pages twice, byte-identical · `check.py` 0 errors 0 warnings · `validate.py` 2,639
-checks 0 warnings · `check_local_links.py` 77 pages 0 broken · paid-link tests OK ·
-Decision Desk PASS · Almanac 1,965 checks 0 errors · `sweep_surfaces.py` 0 to move.
+page's own date or the words "no update date shown". Gates on the final tree (47 pages, 19 guides, after three rebases onto a moving
+`main`): build byte-identical twice · `check.py` 0 errors 0 warnings · `validate.py`
+2,884 checks 0 warnings · `check_local_links.py` 81 pages 0 broken · paid-link tests OK
+· Decision Desk PASS · Almanac 1,965 checks 0 errors · `sweep_surfaces.py` 0 to move ·
+`stage.py` complete.
 
 Merge: [PR #118](https://github.com/karagemop466-tech/Affil1/pull/118) from `arena/ddb6772b-affil1`. The receipt (CI runs, merge commit, Pages deployment, live URLs) is recorded immediately below.
 **Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are

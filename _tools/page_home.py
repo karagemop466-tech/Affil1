@@ -165,27 +165,29 @@ def build(page_dir, products, meta):
   </a>
 </div>""", cls="paths")
 
-<<<<<<< HEAD
     # Select the seasonal feature by slug, not by position: parallel sessions
-    # inserting guides silently shift positional indexes (this happened once).
+    # inserting guides silently shift positional indexes (this happened once, and
+    # GUIDES[7] was the fallback that let it happen). If the named guide is gone,
+    # fall back to the newest guide in the Seasonal cluster rather than to whatever
+    # happens to sit at index 7.
     by_slug = {g["slug"]: g for g in GUIDES}
-    feature = by_slug.get("air-fryer-gift-guide", GUIDES[7])
-=======
-    # The seasonal slot's standing copy is written for the holiday-hosting guide,
-    # so select it by slug rather than by position: parallel sessions inserting
-    # guides silently shifted GUIDES[7] onto a different guide once already.
-    feature = next((g for g in GUIDES if g["slug"] == "holiday-hosting-air-fryer"),
-                   next((g for g in GUIDES if g.get("cluster") == "Seasonal"), GUIDES[-1]))
-    # The extra line below is copy for the hosting guide specifically. If the
-    # selection falls through to a different seasonal piece, the standing sentence
-    # would be describing someone else's article, so it is only shown when the
-    # sentence and the article still belong to each other.
-    standing = ("Work backwards from the moment you sit down and give the air fryer "
-                "the last twenty minutes, not the first two hours."
-                if feature["slug"] == "holiday-hosting-air-fryer" else "")
->>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
+    seasonal_pool = [g for g in GUIDES if g.get("cluster") == "Seasonal"]
+    feature = (by_slug.get("air-fryer-gift-guide")
+               or (seasonal_pool[-1] if seasonal_pool else GUIDES[-1]))
+    # The line under the dek is copy for the gift edit specifically. Shown only when
+    # the gift guide is the guide actually being displayed, so the front page cannot
+    # advertise one article while linking another.
+    standing = ("Shopping the weekend instead? The checklist version is here too \u2014 "
+                "what to measure, what to read, and what to ignore until the shape "
+                "question is answered."
+                if feature["slug"] == "air-fryer-gift-guide" else "")
     feat_href = rel(d, f"guides/{feature['slug']}.html")
+    # The secondary link is only emitted when the guide it points at exists, so a
+    # session retiring that piece cannot leave the front page holding a dead link.
     bf_href = rel(d, "guides/black-friday-air-fryer-checklist.html")
+    bf_link = (f'<a class="tlink" href="{esc(bf_href)}">The Black Friday checklist '
+               f'<span aria-hidden="true">&rarr;</span></a>'
+               if "black-friday-air-fryer-checklist" in by_slug else "")
     seasonal = section(f"""
 <div class="seasonal">
   <div class="seasonal-media">{img(d, feature['photo'], feature['photo_alt'], sizes='(max-width:820px) 100vw, 520px')}</div>
@@ -193,14 +195,9 @@ def build(page_dir, products, meta):
     {eyebrow('Seasonal · the gift edit')}
     <h2>{esc(feature['title'])}</h2>
     <p class="dek">{esc(feature['dek'])}</p>
-<<<<<<< HEAD
-    <p>Shopping the weekend instead? The checklist version is here too &mdash; what to measure, what to read, and what to ignore until the shape question is answered.</p>
-    <a class="btn btn-small" href="{esc(feat_href)}">Read the gift guide</a>
-    <a class="tlink" href="{esc(bf_href)}">The Black Friday checklist <span aria-hidden="true">&rarr;</span></a>
-=======
     {f'<p>{esc(standing)}</p>' if standing else ''}
-    <a class="btn btn-small" href="{esc(feat_href)}">Read the hosting guide</a>
->>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
+    <a class="btn btn-small" href="{esc(feat_href)}">Read the guide</a>
+    {bf_link}
   </div>
 </div>""", cls="seasonal-band")
 
