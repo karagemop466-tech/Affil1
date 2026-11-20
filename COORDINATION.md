@@ -934,3 +934,12 @@ Scope is non-overlapping: no other session has claimed these files. No product f
 - **Gates:** `build.py` leaves generated output unchanged; `validate.py` 1813 checks, 0 warnings; `check.py` 34 pages, 0 errors / 0 warnings; `check_local_links.py` 68 pages, 0 broken.
 - **Irregularities carried forward (not blocking):** FLG-002 tag enrolment unconfirmed; FLG-003 short-link compliance unresolved; FLG-004 / FLG-018 P-04 and P-05 `mhFallback` arrivals; FLG-016 thermometer pair dispute; FLG-027 robots.txt below host root (Search Console needed); `assets/js/events.js` event names differ from `_src/data/events.json` (client inert, no data loss) — logged for owner decision.
 - **Status:** done, pending integration PR + Pages deploy confirmation (recorded below when complete).
+---
+
+### Claim — live re-verification of the five links, README correction · arena/bcd93318-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Re-verify the five submitted short links and the direct `/dp/` destinations line by line on 2026-11-20; re-verify the Associates §5 wording; correct the README P-04 row that contradicts `_src/data/products.json`; record the re-check as a new flag | in progress | arena/bcd93318-affil1 | `_docs/VERIFICATION-arena-bcd93318.md` (new), `_src/data/flags.json` (append FLG-028 only), `README.md` (P-04 row only), `COORDINATION.md`, and the rebuilt `review/index.html` |
+
+Not claimed and not touched: product data, guides, Special Links, analytics, Search Console, and anything owned by another open claim.
