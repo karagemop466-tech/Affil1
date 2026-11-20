@@ -1,0 +1,61 @@
+name: Build and verify
+
+# This repository publishes GitHub Pages from the main branch root (legacy
+# build type), which means the generated HTML must be committed. The job below
+# is therefore a *gate*, not a deployer: it rebuilds from source, asserts the
+# committed output matches, runs the compliance gate, and proves the gate
+# catches deliberate violations. A red run here means the site should not be
+# published further.
+#
+# The deploy itself is performed by GitHub's own Pages builder when main moves.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Build, gate and self-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build the site from source
+        run: node scripts/build.mjs
+
+      - name: Fail if committed output differs from a clean build
+        # Generated pages are committed for legacy Pages publishing, so they must
+        # not drift from their source of truth in data/ and content/.
+        run: |
+          if [ -n "$(git status --porcelain -- '*.html' '*.xml' '*.txt')" ]; then
+            echo "::error::Generated output is out of date. Run 'npm run build' and commit the result."
+            git status --porcelain -- '*.html' '*.xml' '*.txt'
+            exit 1
+          fi
+
+      - name: Run the compliance gate
+        run: node scripts/check.mjs
+
+      - name: Prove the gate catches deliberate violations
+        run: node scripts/test-gate.mjs
+
+      - name: Report
+        if: always()
+        run: |
+          echo "### Compliance gate" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Build, gate and negative self-test all run against the committed site." >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Rules enforced: disclosure wording and placement (C01), Associates tag on outbound links (C03), sponsored marking (C04), no shortener or redirect (C05), no price (C06), no rating or review text (C07), no hands-on claim (C08), no broken internal link (LNK), sitemap and canonical parity (SM)." >> "$GITHUB_STEP_SUMMARY"
