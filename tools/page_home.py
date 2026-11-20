@@ -47,7 +47,7 @@ def _chips(p):
     return "".join(f'<li>{esc(c)}</li>' for c in chips[:3])
 
 
-def thermometer_card(page_dir, p):
+def product_card(page_dir, p):
     href = rel(page_dir, f"products/{p['ref'].lower()}.html")
     media = (
         f'<a class="pcard-media" href="{esc(href)}" tabindex="-1" aria-hidden="true">'
@@ -77,7 +77,7 @@ BUYER_NOTES = {
 }
 
 
-def product_card(page_dir, p):
+def issue_card(page_dir, p):
     href = rel(page_dir, f"products/{p['ref'].lower()}.html")
     art, name, spec = {
         "P-01": ("dual", "Chefman Dual Basket", "6 qt · Two baskets"),
@@ -131,7 +131,7 @@ def build(page_dir, products, meta):
     shop = section(f"""<div class="edit-head"><div><p class="ink-label"><i></i> SHOP BY FORMAT</p>
       <h2>The countertop shortlist<span>.</span></h2></div>
       <a class="edit-all" href="{esc(rel(d,'products/index.html'))}">All products <span>→</span></a></div>
-      <div class="edit-grid">{''.join(product_card(d,p) for p in air)}</div>""", cls="edit-shop", sid="shortlist")
+      <div class="edit-grid">{''.join(issue_card(d,p) for p in air)}</div>""", cls="edit-shop", sid="shortlist")
 
     thermo = section(f"""
 <div class="sec-head">
@@ -139,7 +139,7 @@ def build(page_dir, products, meta):
   <p>An air fryer can tell you the outside is done. Only a probe tells you the inside is.</p>
 </div>
 <div class="pcard-grid two">
-{''.join(thermometer_card(d, p) for p in therm)}
+{''.join(product_card(d, p) for p in therm)}
 </div>
 <p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'guides/thermometer-pairing.html'))}">Which thermometer for an air fryer? <span aria-hidden="true">&rarr;</span></a></p>""",
                     cls="section-tint")
