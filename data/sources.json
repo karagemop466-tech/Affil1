@@ -11,7 +11,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Operating Agreement page shows 'Updated: October 15, 2025'. A violation of Section 5 is stated to be a material breach (Section 6)."
+      "note": "Operating Agreement page shows 'Updated: October 15, 2025'. A violation of Section 5 is stated to be a material breach (Section 6).",
+      "spot_check": "confirmed 2026-11-20 (integration): Operating Agreement Section 5 read verbatim — exact disclosure wording matches; page shows 'Updated: October 15, 2025'; Section 5 violations are material breach (Section 6)."
     },
     {
       "id": "S02",
@@ -21,7 +22,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Program Policies page shows 'Updated: April 14, 2026'. The supplied short links use the link.amazon shortener; whether that format counts as a compliant Special Link is not resolved by this page, which is why it is tracked as FLG-003 rather than asserted either way."
+      "note": "Program Policies page shows 'Updated: April 14, 2026'. The supplied short links use the link.amazon shortener; whether that format counts as a compliant Special Link is not resolved by this page, which is why it is tracked as FLG-003 rather than asserted either way.",
+      "spot_check": "confirmed 2026-11-20 (integration): Program Policies Participation Requirements §2(a)-(b) read verbatim — 'Special Links must use the Associates ID we have assigned to you'; tag must appear as a URL parameter (XXXXX-##)."
     },
     {
       "id": "S03",
@@ -31,7 +33,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Directly relevant to short-link usage on a page. Our design therefore labels every outbound control with the destination Amazon listing."
+      "note": "Directly relevant to short-link usage on a page. Our design therefore labels every outbound control with the destination Amazon listing.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §1(w) read verbatim — link shortening may not make it unclear the visitor is linking to an Amazon Site."
     },
     {
       "id": "S04",
@@ -41,7 +44,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "This is why no star rating or review excerpt appears anywhere on this site, even though ratings are visible on the listings."
+      "note": "This is why no star rating or review excerpt appears anywhere on this site, even though ratings are visible on the listings.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §1(t) read verbatim — customer reviews and star ratings may not be displayed without Creators API / PA API."
     },
     {
       "id": "S05",
@@ -51,7 +55,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Consequence: this site states no price. Prices observed on listings are volatile and were not API-sourced, so they are excluded rather than copied."
+      "note": "Consequence: this site states no price. Prices observed on listings are volatile and were not API-sourced, so they are excluded rather than copied.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §2(b) read verbatim — prices and availability only where Amazon serves them in the link or via Creators API / PA API."
     },
     {
       "id": "S06",
@@ -61,7 +66,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Sets a hard constraint on the paid-acquisition suggestions in the suggestion register."
+      "note": "Sets a hard constraint on the paid-acquisition suggestions in the suggestion register.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §6(e)-(f) read verbatim — no bidding on Amazon marks; Prohibited Paid Search Placement defined in the Commission Income Statement."
     },
     {
       "id": "S07",
@@ -71,7 +77,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Important nuance for the SEO plan: organic traffic must land on our own site, not on an Amazon link placed in a search result. Our design never places an Amazon link in a search result."
+      "note": "Important nuance for the SEO plan: organic traffic must land on our own site, not on an Amazon link placed in a search result. Our design never places an Amazon link in a search result.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §6(f) read verbatim — paid and unpaid search results must send users to your site, not directly or via a Redirecting Link to an Amazon Site."
     },
     {
       "id": "S08",
@@ -81,7 +88,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "This is the reason the outbound counter is designed as a fire-and-forget beacon on a real user click, not an auto-redirect."
+      "note": "This is the reason the outbound counter is designed as a fire-and-forget beacon on a real user click, not an auto-redirect.",
+      "spot_check": "confirmed 2026-11-20 (integration): §6(f) and §1(r) read verbatim — Redirecting Link prohibition."
     },
     {
       "id": "S09",
@@ -91,7 +99,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Directly constrains any click-tracking redirect endpoint. Our endpoint is write-only telemetry and never performs the navigation."
+      "note": "Directly constrains any click-tracking redirect endpoint. Our endpoint is write-only telemetry and never performs the navigation.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §1(v) read verbatim — no cloaking, hiding, spoofing or obscuring the URL of the site containing Special Links, including via Redirecting Links."
     },
     {
       "id": "S10",
@@ -101,7 +110,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Defines the attribution window the ledger's 'eligible sessions' column must respect."
+      "note": "Defines the attribution window the ledger's 'eligible sessions' column must respect.",
+      "spot_check": "confirmed 2026-11-20 (integration): Commission Income Statement §1(b) read verbatim — session ends at 24 hours, order placement, or another Special Link click."
     },
     {
       "id": "S11",
@@ -111,7 +121,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Sets the realistic lag before a campaign ledger row can show reported orders."
+      "note": "Sets the realistic lag before a campaign ledger row can show reported orders.",
+      "spot_check": "confirmed 2026-11-20 (integration): Commission Income Statement §6 read verbatim — payment approximately 60 days after the end of the calendar month."
     },
     {
       "id": "S12",
@@ -121,7 +132,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Read from the Payment Minimum Chart table."
+      "note": "Read from the Payment Minimum Chart table.",
+      "spot_check": "confirmed 2026-11-20 (integration): Payment Minimum Chart read verbatim — 10 USD direct deposit, 10 USD gift card, 100 USD check, 15 USD check processing fee."
     },
     {
       "id": "S13",
@@ -131,7 +143,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "The supplied tag shopnow047c-20 contains no Amazon mark, so this row passes. The site is hosted on github.io, which is not an Amazon-confusable domain."
+      "note": "The supplied tag shopnow047c-20 contains no Amazon mark, so this row passes. The site is hosted on github.io, which is not an Amazon-confusable domain.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §1(g) read verbatim — no Amazon trademark in a tag or Associates ID."
     },
     {
       "id": "S14",
@@ -141,7 +154,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/compare",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "What's-changed page states 'Original Content Definition: Added definition requiring original content to contain commentary, analysis or transformation for additional value.'"
+      "note": "What's-changed page states 'Original Content Definition: Added definition requiring original content to contain commentary, analysis or transformation for additional value.'",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §1 read verbatim — original content requirement with significant commentary, analysis or transformation."
     },
     {
       "id": "S15",
@@ -151,7 +165,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/compare",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "This is a forward-dated change notice on the official page. It is recorded as stated, not interpreted."
+      "note": "This is a forward-dated change notice on the official page. It is recorded as stated, not interpreted.",
+      "spot_check": "confirmed 2026-11-20 (integration): Commission Income Statement §1(c)(iii) read verbatim — product must be shipped/streamed/downloaded and paid for within 180 days of purchase."
     },
     {
       "id": "S16",
@@ -161,7 +176,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/compare",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Materially constrains any plan to buy traffic. Recorded as a decision input, not a recommendation to buy traffic."
+      "note": "Materially constrains any plan to buy traffic. Recorded as a decision input, not a recommendation to buy traffic.",
+      "spot_check": "not re-checked in the integration pass (cited page is the what's-changed comparison; original register status retained). Manual review link: https://affiliate-program.amazon.com/help/operating/compare"
     },
     {
       "id": "S17",
@@ -171,7 +187,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "verified_at": "2026-11-20",
       "status": "unverified",
-      "note": "The schedule URL redirects to an Amazon sign-in page, so no commission rate could be read without an account. No commission percentage is stated anywhere on this site."
+      "note": "The schedule URL redirects to an Amazon sign-in page, so no commission rate could be read without an account. No commission percentage is stated anywhere on this site.",
+      "spot_check": "unverified stands (integration 2026-11-20): the commission schedule URL redirects to an Associates sign-in; rate values remain blank."
     },
     {
       "id": "S18",
@@ -181,7 +198,8 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Guidance states disclosures are likely to be missed if they appear only on an ABOUT page, at the end of posts, or anywhere requiring a click. This is the basis for the masthead strip."
+      "note": "Guidance states disclosures are likely to be missed if they appear only on an ABOUT page, at the end of posts, or anywhere requiring a click. This is the basis for the masthead strip.",
+      "spot_check": "not re-checkable in the integration pass (the fetcher was blocked by the ftc.gov page; official URL retained for manual review): https://www.ftc.gov/business-guidance/resources/disclosures-101-social"
     },
     {
       "id": "S19",
@@ -191,7 +209,8 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Governing constraint on guide copy: no hands-on test claims are made anywhere on this site, because this session did not test any product."
+      "note": "Governing constraint on guide copy: no hands-on test claims are made anywhere on this site, because this session did not test any product.",
+      "spot_check": "not re-checkable in the integration pass (the fetcher was blocked by the ftc.gov page; official URL retained for manual review): https://www.ftc.gov/business-guidance/resources/disclosures-101-social"
     },
     {
       "id": "S20",
@@ -201,7 +220,8 @@
       "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Basis for shipping both sitemap.xml and an RSS feed, and for the robots.txt Sitemap directive."
+      "note": "Basis for shipping both sitemap.xml and an RSS feed, and for the robots.txt Sitemap directive.",
+      "spot_check": "not re-checked in the integration pass (original register status retained). Manual review link: https://developers.google.com/search/docs/crawling-indexing/sitemaps/b"
     },
     {
       "id": "S21",
@@ -211,17 +231,19 @@
       "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Basis for the Pages workflow in .github/workflows/deploy-pages.yml."
+      "note": "Basis for the Pages workflow in .github/workflows/deploy-pages.yml.",
+      "spot_check": "not re-checked in the integration pass (original register status retained). Manual review link: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site"
     },
     {
       "id": "S22",
       "claim": "An Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique identifier assigned by Amazon for product identification.",
-      "value": "ASIN definition",
+      "value": "",
       "publisher": "Amazon Seller Central glossary",
       "url": "https://sellercentral.amazon.com/help/hub/reference/external/G200436010",
       "verified_at": "2026-11-20",
-      "status": "verified",
-      "note": "This is the 'checkable identifier' rationale for the product-intent record. Note the 10-character shape: the observed targets B0CDY277D3, B09B7SB46R, B08DKYBTPH and B0DZFD6R9Z are each 10 characters."
+      "status": "unverified",
+      "note": "This is the 'checkable identifier' rationale for the product-intent record. Note the 10-character shape: the observed targets B0CDY277D3, B09B7SB46R, B08DKYBTPH and B0DZFD6R9Z are each 10 characters. Value left blank per the verification rule: no official source readable without sign-in states the length.",
+      "spot_check": "downgraded to unverified in the integration pass 2026-11-20: the cited Seller Central help topic (G20043601) returned 'There was an error displaying this topic' without sign-in, so the 10-character length could not be confirmed from an official page. The SP-API Catalog Items reference (https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference) confirms ASIN is Amazon's catalog identifier (the {asin} path parameter) but does not state a length. The 10-character shape remains an observation from the four ASINs in the product-intent register (all 10 characters) and is not asserted as an official rule."
     },
     {
       "id": "S23",
@@ -231,7 +253,8 @@
       "url": "https://www.amazon.com/dp/B0C8MOW59",
       "verified_at": "2026-11-20",
       "status": "unverified",
-      "note": "The codes B04G1MEwY and B02NbDxp3 are 9 characters, and all five use mixed case; an ASIN is 10 characters. A direct fetch of /dp/B0C8MOW59 returned no product. This does NOT establish that the short links are non-compliant — their compliance status is unresolved and tracked as FLG-003. Flagged rather than concluded."
+      "note": "The codes B04G1MEwY and B02NbDxp3 are 9 characters, and all five use mixed case; an ASIN is 10 characters. A direct fetch of /dp/B0C8MOW59 returned no product. This does NOT establish that the short links are non-compliant — their compliance status is unresolved and tracked as FLG-003. Flagged rather than concluded.",
+      "spot_check": "unverified stands (integration 2026-11-20): the probe URL https://www.amazon.com/dp/B0C8MOW59 could not be fetched in the integration pass (fetch error), so 'returned no product' is retained from the register session and is not re-asserted here."
     },
     {
       "id": "S24",
@@ -241,7 +264,13 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "verified_at": "2026-11-20",
       "status": "verified",
-      "note": "Confirms the Operating Agreement and FTC guidance are cumulative, not alternatives. Both are enforced in the build gate."
+      "note": "Confirms the Operating Agreement and FTC guidance are cumulative, not alternatives. Both are enforced in the build gate.",
+      "spot_check": "confirmed 2026-11-20 (integration): Participation Requirements §3(b) read verbatim — cites the U.S. FTC Guides Concerning the Use of Endorsement and Testimonials in Advertising as a compliance requirement for disclosures."
     }
-  ]
+  ],
+  "integration_spot_check": {
+    "by": "session-arena-83e015f6 (final integration session)",
+    "at": "2026-11-20",
+    "method": "Independent re-fetch of each cited official page; clauses read verbatim where reachable. Rows are annotated with spot_check. A row marked confirmed was read from its cited official URL during this pass; a row marked not-rechecked keeps the original register's status but was not re-read this pass; unverified rows have the value column left blank."
+  }
 }

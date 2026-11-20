@@ -624,7 +624,7 @@ function sourceRegister() {
       <td>${s.value ? esc(s.value) : '<span class="empty-cell">— left blank, not confirmed by an official source</span>'}</td>
       <td>${esc(s.publisher) || '<span class="empty-cell">—</span>'}</td>
       <td>${s.url ? srcLink(new URL(s.url).hostname.replace(/^www\./, ""), s.url) : '<span class="empty-cell">—</span>'}</td>
-      <td>${esc(s.verified_at)}</td>
+      <td>${esc(s.verified_at)}${s.spot_check ? `<br><span class="empty-cell">${esc(s.spot_check)}</span>` : ""}</td>
       <td>${st}</td>
     </tr>`;
     })
@@ -1254,7 +1254,7 @@ ${breadcrumbs([{ label: "Home", href: "/" }, { label: "Executive summary" }])}
     <p>A publisher-style shop for four kitchen appliances, built as a static site and deployed to GitHub Pages, with the verification layer published alongside it instead of hidden in a spreadsheet. The site has a front page, a shop index, four product pages, four buying guides, an about page, and eight record pages covering sources, intent, compliance, measurement, the ledger, open questions, suggestions and flagged items.</p>
 
     <h2>What was verified, line by line</h2>
-    <p>Twenty-four claims were checked against official pages during a single pass on 2026-11-20. Seventeen came from Amazon Associates pages, two from FTC guidance, one from Google's sitemap documentation, one from GitHub's Pages documentation, one from Amazon's own ASIN definition. Two are marked unverified with the value column left empty rather than guessed.</p>
+    <p>Twenty-four claims were checked against official pages during a single pass on 2026-11-20, and a second integration pass the same day re-read sixteen of them verbatim from the official pages (the row-level spot-check notes are on the source register). They come from Amazon Associates pages (the Operating Agreement, updated October 15, 2025, and the Program Policies, updated April 14, 2026), FTC guidance, Google's sitemap documentation, GitHub's Pages documentation, and Amazon's developer documentation. Three are marked unverified with the value column left empty rather than guessed: the commission rate schedule sits behind an Associates sign-in, the Seller Central ASIN-definition page errors without sign-in so the 10-character shape stays an observation, and the supplied short-link codes' shape claim is not restated without a reachable source.</p>
     <p>The single most load-bearing finding for the build: Amazon's Operating Agreement requires the disclosure sentence in specific words, and the FTC's guidance says a disclosure at the bottom of a page or on an about page is likely to be missed. Those two together are why the disclosure strip sits directly under the masthead on every page, in the required wording, and again in the footer.</p>
 
     <h2>What was verified about the five links</h2>
