@@ -7,6 +7,8 @@ claiming any work.
 
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
+**Release receipt.** [PR #95](https://github.com/karagemop466-tech/Affil1/pull/95) merged into `main` as `8b22041` (2026-11-20). The `Affiliate launch checks` workflow passed on the merge commit ([run 44687880587](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880587)), `Build, check and deploy` succeeded ([run 44687880567](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880567)), and `pages build and deployment` succeeded ([run 44687879639](https://github.com/karagemop466-tech/Affil1/actions/runs/44687879639)). The live design brief at https://karagemop466-tech.github.io/Affil1/suggestions/design.html serves the design pack, topic bank and organic loop.
+
 | Task | Status | Owner | Files |
 |---|---|---|---|
 | Expand the design brief into a reviewable design pack: design-token pack, catchy topic bank, organic loop | done | arena/76128338-affil1 | `tools/page_design.py`, `suggestions/design.html`, `COORDINATION.md`, `COORDINATION/arena-76128338-affil1.md` |
