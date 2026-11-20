@@ -21,19 +21,43 @@ def build_index(page_dir, meta):
   </div>
 </article>""")
 
+    # Grouped so a reader can find the shelf they need, not an undifferentiated
+    # list. The grouping is editorial (what decision the guide serves), not a
+    # ranking, and no group claims to be better than another.
+    groups = [
+        ("Choosing a format", ["basket-or-oven-air-fryer", "air-fryer-capacity-checklist"]),
+        ("Living with it", ["cleanup-and-counter-space", "batch-cooking-for-the-week"]),
+        ("Cooking tools and occasions", ["thermometer-pairing", "hosting-season-air-fryer", "multi-function-kitchen-appliance-questions"]),
+    ]
+    by_slug = {g["slug"]: g for g in GUIDES}
+    grouped = []
+    for heading, slugs in groups:
+        cards = "".join(
+            f"""<article class="gcard">
+  <a class="gcard-media" href="{esc(rel(d, 'guides/' + s + '.html'))}" tabindex="-1" aria-hidden="true">{img(d, by_slug[s]['photo'], by_slug[s]['photo_alt'], sizes='(max-width:720px) 100vw, 340px')}</a>
+  <div class="gcard-body">
+    <p class="gcard-kicker">{esc(by_slug[s]['kicker'])} &middot; {by_slug[s]['read_minutes']} min</p>
+    <h3><a href="{esc(rel(d, 'guides/' + s + '.html'))}">{esc(by_slug[s]['title'])}</a></h3>
+    <p>{esc(by_slug[s]['dek'])}</p>
+    <a class="tlink" href="{esc(rel(d, 'guides/' + s + '.html'))}">Read <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</article>""" for s in slugs if s in by_slug
+        )
+        grouped.append(f'<div class="sec-head guide-group-head"><div>{eyebrow(heading)}</div></div><div class="gcard-grid gcard-grid-3">{cards}</div>')
+
     body = f"""{pagehead(
         'Buying guides',
-        'Four questions worth<br>answering before you buy',
-        'These are written to be useful whether or not you buy anything through this site. Each one is a checklist, because a checklist is what can honestly be produced without access to the products.',
+        'Six checklists worth<br>ten minutes each',
+        'Every one is written to be useful whether or not you buy anything here, and each ends with a decision you can act on. They are checklists because a checklist is the honest form for advice from a site that has not used the products.',
         meta='No product was tested &middot; every product claim is quoted from the seller &middot; no prices, ratings or winners',
     )}
 {section(f'''
-<div class="gcard-grid">{''.join(cards)}</div>
+{''.join(grouped)}
 <p class="sec-foot">Every guide carries the same disclosure and the same limit: <a href="{esc(rel(d, 'about/index.html'))}#why-blank">nothing here was tested</a>.</p>''')}"""
     return page(
         d,
         title="Buying guides \u2014 Crisp & Counter",
-        description="Four air-fryer buying guides: basket versus oven, real capacity, cleanup and counter space, and what to ask before buying a multi-function appliance.",
+        description="Six air-fryer and thermometer buying guides: basket versus oven, real capacity, cleanup and counter space, and what to ask before buying a multi-function appliance.",
         body=body,
         active="guides/index.html",
         canonical="guides/",

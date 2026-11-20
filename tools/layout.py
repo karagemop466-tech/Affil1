@@ -39,6 +39,8 @@ NAV = [
 FOOTER_GROUPS = [
     ("Shop", [
         ("products/index.html", "All five products"),
+        ("categories/air-fryers.html", "Air fryers"),
+        ("categories/thermometers.html", "Meat thermometers"),
         ("products/p-01.html", "Dual-basket air fryer"),
         ("products/p-02.html", "French-door oven"),
         ("products/p-03.html", "Single-basket air fryer"),
@@ -53,6 +55,7 @@ FOOTER_GROUPS = [
     ]),
     ("Follow", [
         ("feed.xml", "RSS feed"),
+        ("calendar/index.html", "Publishing calendar"),
         ("questions/index.html", "Ask a question"),
         ("about/index.html#editorial", "How we write"),
         ("about/index.html#disclosure", "Disclosure"),

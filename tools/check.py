@@ -313,6 +313,57 @@ def check_data():
             warn(f"questions.json: {q['id']} answered without a source reference")
 
 
+def check_calendar():
+    """A slot marked published must have a guide; a guide must be in the calendar.
+
+    Without this the calendar can promise a page that does not exist, which is
+    the exact failure mode a published schedule is supposed to prevent."""
+    import page_calendar
+    from content import GUIDES
+    slugs = {g["slug"] for g in GUIDES}
+    published = {s["slug"] for s in page_calendar.SLOTS if s["status"] == "published"}
+    for slug in published:
+        if slug not in slugs:
+            err(f"calendar: slot marked published for {slug!r} but no such guide exists")
+        if not (ROOT / "guides" / f"{slug}.html").exists():
+            err(f"calendar: published slot {slug!r} has no rendered page")
+    for slug in slugs:
+        if slug not in published:
+            warn(f"calendar: guide {slug!r} is not on the publishing calendar")
+
+
+def check_tagged_links():
+    """Every outbound Amazon product link must carry the Associates tag.
+
+    Program Policies 2(b) requires the tag as a URL parameter in each link, and
+    the Commission Income Statement disqualifies purchases that are not
+    correctly tracked because a link was not properly formatted. This is the
+    single defect with the highest cost, so it gets its own check rather than
+    relying on the template being used correctly.
+    """
+    from build import GENERATED
+    pattern = re.compile(r'<a\s[^>]*href="(https?://[^"]*amazon\.[a-z.]+/(?:dp|gp/product)/[^"]*)"', re.I)
+    for rel_path in sorted(GENERATED):
+        if not rel_path.endswith(".html"):
+            continue
+        path = ROOT / rel_path
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for m in pattern.finditer(text):
+            href = m.group(1)
+            if "tag=" not in href:
+                err(f"{rel_path}: Amazon product link without a tag: {href}")
+    data = json.loads((ROOT / "src/data/products.json").read_text(encoding="utf-8"))
+    tag = data["meta"]["tracking_id_supplied"]
+    for p in data["products"]:
+        link = p.get("special_link") or ""
+        if tag not in link:
+            err(f"products.json: {p['ref']} special_link does not carry {tag}")
+        if p.get("listing_url") == link:
+            err(f"products.json: {p['ref']} merged listing_url and special_link")
+
+
 def check_assets():
     for f in (ROOT / "assets/img").glob("*"):
         if f.suffix.lower() in (".jpg", ".png") and f.stat().st_size > 400_000:
@@ -340,6 +391,8 @@ def main():
         check_page(p)
     check_sitemap_feed()
     check_data()
+    check_calendar()
+    check_tagged_links()
     check_assets()
 
     print(f"pages checked: {len(PAGES)} (this build's output only)")

@@ -591,3 +591,13 @@ table.temps td:nth-child(2){font-variant-numeric:tabular-nums;white-space:nowrap
 .ship .tiny{margin:0;color:var(--faint)}
 table.queue td:nth-child(2){min-width:16rem}
 table.queue td:nth-child(4),table.queue td:nth-child(6){white-space:nowrap}
+
+/* ---------- guide index grouping ---------- */
+.gcard-grid-3{grid-template-columns:repeat(3,1fr)}
+.guide-group-head{margin-top:2.6rem;margin-bottom:1.1rem}
+.guide-group-head:first-child{margin-top:0}
+@media(max-width:960px){.gcard-grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.gcard-grid-3{grid-template-columns:1fr}}
+table.calendar td:nth-child(1){white-space:nowrap;font-variant-numeric:tabular-nums}
+table.calendar td:nth-child(2){min-width:15rem}
+table.discovery td:nth-child(1){white-space:nowrap}

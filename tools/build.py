@@ -27,6 +27,8 @@ import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
+import page_categories  # noqa: E402
+import page_calendar  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -60,6 +62,9 @@ GENERATED = {
     "suggestions/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
+    "categories/air-fryers.html",
+    "categories/thermometers.html",
+    "calendar/index.html",
     "operations/ledger.html",
     "brief/index.html",
 }
@@ -201,6 +206,11 @@ def main():
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
+
+    # categories and the publishing calendar are generated from the same data
+    for rel_path, html in page_categories.build("categories", products, meta):
+        pages.append(write(rel_path, html))
+    pages.append(write("calendar/index.html", page_calendar.build("calendar", meta)))
 
     pages.append(write("sitemap.xml", sitemap(pages)))
     pages.append(write("feed.xml", feed(GUIDES)))
