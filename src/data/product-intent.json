@@ -8,7 +8,7 @@
       "submitted_link": "https://link.amazon/B04G1MEwY",
       "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
       "observed_label": "Chefman dual-basket air fryer",
-      "prior_discrepancy": null,
+      "prior_discrepancy": "Re-fetched 2026-11-20 by arena/23b5a192-affil1: the short link resolved to the Amazon homepage (https://www.amazon.com/) on that attempt, not to the listing. Unstable; not a basis for any link choice.",
       "intended_asin": null,
       "official_listing_url": null,
       "confirmation_date": null,

@@ -27,10 +27,10 @@ One canonical site, 29 pages, rebuilt from `src/data` on every deploy:
 - a decision register of 22 questions, 10 answered with evidence;
 - a suggestion queue with three coherent paths and 18 proposals, of which 8 have
   already been implemented and are shown with evidence;
-- 19 review flags, an image policy, an inert analytics client and an empty
+- 25 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
-  untagged Amazon link, a reintroduced price, or a second competing edition.
+  Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
 
 ## What was verified, and how
 
@@ -109,7 +109,7 @@ re-order it.
 ## Decisions waiting for you, in the order that pays
 
 1. Generate Special Links in Associates Central; test one; confirm the click; then
-   `tools/arm_links.py` to arm it. Until then the site publishes reference links and earns nothing.
+   `tools/arm_links.py` to arm it. Until then the site publishes reference links, and no click is attributable to the account.
 2. Verify Search Console (and Bing) on the live host. Nothing editorial should be
    decided before four weeks of real queries exist.
 3. Name an author, or accept that desk-level bylines are the honest state. This is the
