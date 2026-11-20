@@ -169,3 +169,28 @@ and unmerged branches when this pass started; arena/96012762's `crisp/` publicat
 layer were merged (PR #7) and are the base this integration extended. Nothing from those branches
 was edited or overwritten here. Any later session should extend `src/data/` and `tools/`, not add
 a fifth front page.
+
+### Concurrent integration pass resolved (PR #27, session arena/c9fc4295-affil1)
+
+Main moved while this branch was open: a second session merged its own full rebuild
+(`brief/`, `review/`, `operations/`, per-product pages, a rewritten `tools/build.py` plus
+`tools/page_*.py`, and new `src/data` schemas). Resolution, recorded so the trade-off is
+visible rather than silent:
+
+- **Adopted from that pass:** self-hosted Fraunces + Inter, the responsive editorial art
+  set and `src/data/images.json` (with its imagery rule), `favicon.svg`, the wider-bleed
+  front-page title/description, and its P-04 destination discrepancy — published as
+  FLG-016 and in `src/data/reverification.json` instead of being resolved by guesswork.
+- **Set aside, not deleted:** its generated pages and second build system moved to
+  `archive/2026-11-20-c9fc4295/`, and its two verification-audit files preserved
+  side by side with this session's under `archive/2026-11-20-integration/`. One published
+  pipeline was the point of the integration; two generators disagreeing about the same
+  data would reproduce the original defect.
+- **Conflict handling:** merged with `-X ours` on files this session owns and re-verified
+  after; nothing in their branch was edited. Their work remains in `main` history and on
+  `arena/c9fc4295-affil1`.
+- **Gate widened by what the merge exposed:** a `srcset` attribute is a set of URLs, and
+  the mount-path bug class that broke the earlier surfaces hides in it. `tools/validate.py`
+  now resolves every `srcset` entry on disk, and `tools/build.py` rewrites `srcset` per
+  directory depth like any other reference. Both changes came from reviewing the merged
+  tree, not from a spec.

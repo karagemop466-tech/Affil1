@@ -21,6 +21,9 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/events.js" defer></script>
 <script src="../assets/js/shortlist.js" defer></script>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../assets/fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b1a17'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23c9743a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -45,7 +48,7 @@
 <div class="wrap">
   <div class="page-head">
     <h1>Flagged for review</h1>
-    <p>Everything this project could not confirm, and every irregularity found while checking. 15 items: 3 high severity, 8 medium. None of them blocks publication, and none of them is hidden — each states what was observed, what was checked, what it means, and what would resolve it.</p>
+    <p>Everything this project could not confirm, and every irregularity found while checking. 17 items: 3 high severity, 10 medium. None of them blocks publication, and none of them is hidden — each states what was observed, what was checked, what it means, and what would resolve it.</p>
   </div>
 
   <div class="note-box">
@@ -202,6 +205,32 @@
     <dt>What we could not determine</dt><dd>Whether the account has API access that would permit unmodified image fields.</dd>
     <dt>Source</dt><dd><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="nofollow noopener" target="_blank">https://affiliate-program.amazon.com/help/operating/policies</a></dd>
     <dt>What you can do</dt><dd>Enrol the Creators API or PA API, or use Amazon-served link formats that carry the image. Then the gallery can be built without touching stock photography.</dd>
+  </dl>
+</article><article class="flag sev-medium" id="FLG-016">
+  <div class="flag-head">
+    <span class="flag-id">FLG-016</span>
+    <h3>The same short link returns different destinations on different attempts</h3>
+    <span class="badge warn">medium</span>
+  </div>
+  <dl>
+    <dt>What we observed</dt><dd>Across three sessions on 2026-11-20: P-01 and P-02 returned Amazon&#x27;s continue-shopping interstitial on one attempt and a product page on another; P-04 has never returned anything but the interstitial; a parallel pass recorded a differing destination for P-04 on its own attempts.</dd>
+    <dt>Why it matters</dt><dd>A published link is a promise about where a reader lands. If the destination is unstable, the register must be dated and re-checked, and no page may describe a product as if the mapping were permanent.</dd>
+    <dt>What we could not determine</dt><dd>Whether link.amazon applies a fallback (homepage, interstitial, or a merchandising redirect) per request, per session or per region. No official document in this repository states the rule.</dd>
+    <dt>Source</dt><dd><a href="https://link.amazon/B0c8moW59 — observed behaviour only; the interstitial page is served by amazon.com" rel="nofollow noopener" target="_blank">https://link.amazon/B0c8moW59 — observed behaviour only; the interstitial page is served by amazon.com</a></dd>
+    <dt>What you can do</dt><dd>Re-run tools/verify_links.py on a schedule, keep every destination dated on the page, and treat a change as a correction to publish, not a value to overwrite.</dd>
+  </dl>
+</article><article class="flag sev-medium" id="FLG-017">
+  <div class="flag-head">
+    <span class="flag-id">FLG-017</span>
+    <h3>Two integration passes rebuilt the same repository in parallel</h3>
+    <span class="badge warn">medium</span>
+  </div>
+  <dl>
+    <dt>What we observed</dt><dd>Session arena/c9fc4295-affil1 merged a second full publication (its own tools/build.py rewrite, tools/page_*.py modules, brief/, review/, operations/ and per-product pages) into main while this pass was rebuilding the same surfaces. Its design assets — self-hosted Fraunces and Inter, responsive editorial art, favicon — were adopted; its pages and generator were moved to archive/2026-11-20-c9fc4295/.</dd>
+    <dt>Why it matters</dt><dd>Two front pages, two build systems and two data schemas in one repository is how a site becomes unindexable and unverifiable. Choosing one pipeline is a decision, and a reviewer should be able to see what was set aside and why.</dd>
+    <dt>What we could not determine</dt><dd>Whether their per-product pages (products/p-01.html … p-05.html) outperform the single shortlist page. That is a measurement question, and no traffic data exists.</dd>
+    <dt>Source</dt><dd><a href="https://github.com/karagemop466-tech/Affil1/pull/27" rel="nofollow noopener" target="_blank">https://github.com/karagemop466-tech/Affil1/pull/27</a></dd>
+    <dt>What you can do</dt><dd>If per-product pages are wanted, port them onto the single generator in tools/build.py rather than republishing a second build system.</dd>
   </dl>
 </article><article class="flag sev-low" id="FLG-007">
   <div class="flag-head">

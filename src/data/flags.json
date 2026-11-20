@@ -157,6 +157,26 @@
       "what_we_could_not_determine": "Whether the account has API access that would permit unmodified image fields.",
       "source": "https://affiliate-program.amazon.com/help/operating/policies",
       "review_action": "Enrol the Creators API or PA API, or use Amazon-served link formats that carry the image. Then the gallery can be built without touching stock photography."
+    },
+    {
+      "id": "FLG-016",
+      "severity": "medium",
+      "title": "The same short link returns different destinations on different attempts",
+      "what_we_saw": "Across three sessions on 2026-11-20: P-01 and P-02 returned Amazon's continue-shopping interstitial on one attempt and a product page on another; P-04 has never returned anything but the interstitial; a parallel pass recorded a differing destination for P-04 on its own attempts.",
+      "why_it_matters": "A published link is a promise about where a reader lands. If the destination is unstable, the register must be dated and re-checked, and no page may describe a product as if the mapping were permanent.",
+      "what_we_could_not_determine": "Whether link.amazon applies a fallback (homepage, interstitial, or a merchandising redirect) per request, per session or per region. No official document in this repository states the rule.",
+      "source": "https://link.amazon/B0c8moW59 \u2014 observed behaviour only; the interstitial page is served by amazon.com",
+      "review_action": "Re-run tools/verify_links.py on a schedule, keep every destination dated on the page, and treat a change as a correction to publish, not a value to overwrite."
+    },
+    {
+      "id": "FLG-017",
+      "severity": "medium",
+      "title": "Two integration passes rebuilt the same repository in parallel",
+      "what_we_saw": "Session arena/c9fc4295-affil1 merged a second full publication (its own tools/build.py rewrite, tools/page_*.py modules, brief/, review/, operations/ and per-product pages) into main while this pass was rebuilding the same surfaces. Its design assets \u2014 self-hosted Fraunces and Inter, responsive editorial art, favicon \u2014 were adopted; its pages and generator were moved to archive/2026-11-20-c9fc4295/.",
+      "why_it_matters": "Two front pages, two build systems and two data schemas in one repository is how a site becomes unindexable and unverifiable. Choosing one pipeline is a decision, and a reviewer should be able to see what was set aside and why.",
+      "what_we_could_not_determine": "Whether their per-product pages (products/p-01.html \u2026 p-05.html) outperform the single shortlist page. That is a measurement question, and no traffic data exists.",
+      "source": "https://github.com/karagemop466-tech/Affil1/pull/27",
+      "review_action": "If per-product pages are wanted, port them onto the single generator in tools/build.py rather than republishing a second build system."
     }
   ]
 }

@@ -10,7 +10,7 @@ because it is rendered by the same page() function as everything else.
 import json
 import pathlib
 
-from build import (BUILD_DATE, COMPARE_ROWS, EVENTS, FLAGS, GUIDES, PRICE_BLANK_NOTE,
+from build import (BUILD_DATE, art, COMPARE_ROWS, EVENTS, FLAGS, GUIDES, PRICE_BLANK_NOTE,
                    PRODUCT_BY_ID, PRODUCTS, QUESTIONS, ROOT, SITE_NAME, SITE_URL, SUGGESTIONS,
                    TOPICS, TRACKING_ID, esc, guide_rows, page, product_card,
                    product_link, tagged_listing_url)
@@ -48,8 +48,8 @@ def guide_card(slug, image=None, kicker=None):
     g = GUIDES[slug]
     media = ""
     if image:
-        media = (f'<div class="card-media"><img src="{IMG}/{image}" alt="{esc(g["title"])} — editorial illustration" '
-                 f'loading="lazy" width="960" height="640"></div>')
+        alt_txt = g["title"] + " — editorial illustration made for this publication"
+        media = '<div class="card-media">' + art(image, alt=alt_txt, sizes="(max-width: 900px) 100vw, 420px") + "</div>"
     return f"""<a class="feature-card" href="/guides/{slug}/">
   {media}
   <div class="feature-body">
@@ -79,10 +79,10 @@ def build_front():
     resolved = [i for i in ids if PRODUCT_BY_ID[i].get("official_listing_url")]
     cards = "".join(product_card_with_save(PRODUCT_BY_ID[i], f"{n:02d}")
                     for n, i in enumerate(ids, start=1))
-    feature = guide_card(NEW_SLUGS[0], image="feature-holiday.jpg", kicker="This week’s feature")
+    feature = guide_card(NEW_SLUGS[0], image="feature-holiday", kicker="This week’s feature")
     secondary = "".join(guide_card(s, image=img) for s, img in
-                        [(NEW_SLUGS[1], "topic-frozen.jpg"), (NEW_SLUGS[3], "topic-probe.jpg"),
-                         (NEW_SLUGS[4], "topic-firstweek.jpg")])
+                        [(NEW_SLUGS[1], "topic-frozen"), (NEW_SLUGS[3], "topic-probe"),
+                         (NEW_SLUGS[4], "topic-firstweek")])
     topic_chips = "".join(
         f'<a class="topic-chip" href="/topics/#{esc(t["name"])}"><strong>{esc(t["name"])}</strong>'
         f'<span>{esc(t["blurb"])}</span></a>' for t in TOPICS)
@@ -119,8 +119,7 @@ def build_front():
         </p>
       </div>
       <div class="hero-media">
-        <img src="{IMG}/hero-counter.jpg" width="960" height="720"
-             alt="A countertop air fryer on a warm kitchen counter with a tray of vegetables beside it, illustrated for this publication.">
+        {art("hero-counter.jpg", sizes="(max-width: 900px) 100vw, 560px")}
         <figcaption>{esc(CREDIT)}</figcaption>
       </div>
     </div>
@@ -229,10 +228,11 @@ def build_front():
 
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 """
-    return page("/", f"{SITE_NAME} — air fryer and countertop buying guides",
-                "Question-led buying guides for air fryers, dual baskets and countertop cooking appliances. "
-                "Every listing checked by hand, every claim attributed, no prices or ratings we cannot stand behind.",
-                body, active="/")
+    return page("/", f"{SITE_NAME} — air fryer comparisons and buying guides",
+                "Compare single-basket, dual-basket and French-door countertop air fryers on the things a listing "
+                "can actually tell you, plus capacity, counter space, cleanup and probe thermometers. Every link "
+                "checked by hand; no prices, ratings or scores we could not stand behind.",
+                body, active="/", og_image="hero-counter.jpg")
 
 
 # ------------------------------------------------------------------ topics

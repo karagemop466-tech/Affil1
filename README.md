@@ -42,7 +42,8 @@ tools/validate.py     the gate: links, images, disclosure, sponsored marking,
                       price prohibition, sitemap/feed agreement
 tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
 tools/verify_links.py re-resolve the register against Amazon and report drift
-archive/              the four earlier competing surfaces, preserved untouched
+archive/              five earlier competing surfaces (four storefronts and a parallel
+                      integration pass), preserved untouched and non-indexable
 ```
 
 Nothing in the tree is hand-edited except `assets/`, `tools/`, `src/data/`, `docs/`
@@ -120,6 +121,16 @@ point at the **official listing URL with the tracking tag appended**, and why
 `tools/verify_links.py` exists: the final step, replacing those with Special Links
 generated inside Associates Central and confirming one click in the account's own
 report, can only be done by the account owner. Test one link. Then scale.
+
+## Design layer
+
+Typefaces are self-hosted (Fraunces for display, Inter for text) — no external font
+request, so nothing leaks a reader's visit to a third party and the page paints without
+a network round trip. Editorial art is generated for this publication, shipped in
+width variants with `srcset`, and captioned on every use as an illustration: never a
+listing photo, never a brand mark, never in a slot that imitates one. The rule and the
+reason sit in `src/data/images.json`, carried over from the parallel integration pass
+whose artwork and typography this site adopted.
 
 ## Open questions and blockers
 

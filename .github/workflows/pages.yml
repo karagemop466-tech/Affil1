@@ -16,11 +16,13 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
+    outputs:
+      source: ${{ steps.pages-source.outputs.source }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -55,7 +57,10 @@ jobs:
           MOUNT=http://127.0.0.1:8207/Affil1 python3 tools/check_deploy_paths.py
 
       - uses: actions/configure-pages@v5
+        if: steps.pages-source.outputs.source == 'workflow'
+
       - uses: actions/upload-pages-artifact@v3
+        if: steps.pages-source.outputs.source == 'workflow'
         with:
           path: .
 
@@ -66,7 +71,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4

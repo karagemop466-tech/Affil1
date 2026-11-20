@@ -20,6 +20,7 @@ TRACKING_ID = "shopnow047c-20"
 # publication is a section within it, so a reader can always get back.
 STORE_HOME = "@STORE@"
 BUILD_DATE = "2026-11-20"
+IMG_BASE = "/assets/img"   # page() rewrites the leading slash per directory depth
 
 # Canonical host. GitHub Pages serves this repository at this URL.
 SITE_ROOT = "https://karagemop466-tech.github.io/Affil1"
@@ -64,6 +65,12 @@ from content_extra import GUIDES as EXTRA_GUIDES, COMPARE_ROWS as EXTRA_COMPARE_
 # Guides and comparison rows added by the integration pass. Appending rather
 # than editing keeps the earlier session's copy intact and reviewable.
 GUIDES = {**GUIDES, **EXTRA_GUIDES}
+for _slug, _img in [("basket-or-oven-air-fryer", "format-basket.jpg"),
+                    ("air-fryer-capacity-checklist", "capacity.jpg"),
+                    ("cleanup-and-counter-space", "cleanup.jpg"),
+                    ("multi-function-kitchen-appliance-questions", "multifunction.jpg")]:
+    GUIDES[_slug]["og_image"] = _img
+GUIDES = {k: v for k, v in GUIDES.items()}
 COMPARE_ROWS = COMPARE_ROWS + EXTRA_COMPARE_ROWS
 
 PRODUCT_BY_ID = {p["id"]: p for p in PRODUCTS["products"]}
@@ -192,6 +199,9 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None,
 <link rel="stylesheet" href="/assets/css/site.css">
 <script src="/assets/js/events.js" defer></script>
 <script src="/assets/js/shortlist.js" defer></script>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b1a17'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23c9743a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
 {extra_head}</head>
 <body>
@@ -211,6 +221,17 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None,
     # to the domain root and 404. Relative links work at any mount point.
     prefix = rel(path)
     doc = re.sub(r'(href|src)="/(?!/)', lambda m: f'{m.group(1)}="{prefix or "./"}', doc)
+
+    def _rewrite_set(match):
+        parts = []
+        for piece in match.group(2).split(","):
+            url, _, descriptor = piece.strip().partition(" ")
+            if url.startswith("/"):
+                url = (prefix or "./") + url.lstrip("/")
+            parts.append((url + (" " + descriptor if descriptor else "")).strip())
+        return f'{match.group(1)}="' + ", ".join(parts) + '"'
+
+    doc = re.sub(r'(srcset)="([^"]+)"', _rewrite_set, doc)
     doc = doc.replace('url(/assets/', 'url(./assets/')
     doc = doc.replace("@STORE@", prefix + "archive/2026-11-20-integration/index.html")
 
@@ -219,6 +240,70 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None,
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(doc, encoding="utf-8")
     return out
+
+
+
+
+ART_ALT = {
+    "hero-counter.jpg": "An unbranded air fryer on a wooden kitchen counter, illustrated for this publication",
+    "feature-holiday.jpg": "A holiday side-dish spread beside a countertop fryer, illustrated for this publication",
+    "topic-frozen.jpg": "Frozen food laid in a single layer in an air fryer basket, illustrated for this publication",
+    "topic-probe.jpg": "A wired meat probe resting beside a roast, illustrated for this publication",
+    "topic-firstweek.jpg": "An air fryer basket being wiped down next to a notebook, illustrated for this publication",
+}
+
+
+def art(name, alt=None, sizes="(max-width: 760px) 100vw, 720px", cls=""):
+    """One <img>, with responsive variants when the folder has them.
+
+    Art is made for this publication and never lifted from a listing: Amazon's
+    Program Policies bar misleading claims about a Product, and a generated
+    "photo" beside a buy button reads to most shoppers as a photo of that
+    product. So: illustrative only, captioned as such on the page, no brand
+    mark, and never inside a slot that imitates a listing image.
+    """
+    stem = name.rsplit(".", 1)[0]
+    folder = ROOT / "assets" / "img"
+    variants = sorted(
+        (int(m.group(1)), f.name)
+        for f in folder.glob(stem + "-w*.jpg")
+        if (m := re.match(r".*-w(\d+)\.jpg$", f.name))
+    )
+    base = stem + ".jpg"
+    if not variants and (folder / base).exists():
+        srcset = ""
+        chosen = base
+    elif variants:
+        chosen = variants[-1][1]
+        # the src attribute already points at the largest variant, so the base
+        # file needs no descriptor and the list stays width-only
+        srcset = ", ".join(f"{IMG_BASE}/{fn} {w}w" for w, fn in variants)
+    else:
+        return ""
+    alt = alt or ART_ALT.get(name, ART_ALT.get(stem + ".jpg",
+                  "Editorial illustration made for " + SITE_NAME))
+    img = f'<img src="{IMG_BASE}/{chosen}" alt="{esc(alt)}" loading="lazy" decoding="async"'
+    if srcset:
+        img += f' srcset="{esc(srcset)}" sizes="{esc(sizes)}"'
+    img += ">"
+    return f'<div class="{cls}">{img}</div>' if cls else img
+
+
+ART_ALT = {
+    "hero-counter.jpg": "An unbranded air fryer on a wooden kitchen counter with lemons and thyme, illustrated for this publication",
+    "feature-holiday.jpg": "A holiday side-dish spread beside a countertop fryer, illustrated for this publication",
+    "topic-frozen.jpg": "Frozen food laid out in a single layer in an air fryer basket, illustrated for this publication",
+    "topic-probe.jpg": "A wired meat probe resting beside a roast, illustrated for this publication",
+    "topic-firstweek.jpg": "An air fryer basket being wiped down next to a notebook, illustrated for this publication",
+    "format-basket.jpg": "Potato wedges lifted from the basket of an unbranded air fryer",
+    "format-oven.jpg": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
+    "capacity.jpg": "Three air fryer baskets of different sizes lined up on a counter",
+    "cleanup.jpg": "A rinsed air fryer basket drying beside a dishwasher rack",
+    "multifunction.jpg": "A countertop oven with a rack, a rotisserie skewer and a baking tray laid out beside it",
+    "thermometer.jpg": "A meat probe thermometer with a thin cable resting on a wooden board",
+    "holiday-hosting-counter.jpg": "A counter set for hosting, with a countertop fryer and a tray of food",
+    "decision-tools.jpg": "A notebook, a tape measure and a printed checklist on a kitchen counter",
+}
 
 
 # ---------------------------------------------------------------- components
@@ -436,9 +521,15 @@ def build_guide(slug, g):
         return inline_products(ids)
     body_html = re.sub(r'<div class="product-grid" data-products="([^"]+)"></div>', expand, body_html)
 
+    figure = ""
+    if g.get("og_image"):
+        figure = (f'<figure class="article-figure">{art(g["og_image"], sizes="100vw")}'
+                  f'<figcaption>Illustration made for this publication — not product photography, '
+                  f'not an image from any listing, and not a depiction of the item a link leads to.</figcaption></figure>')
     body = f"""
 <div class="wrap">
   <article>
+    {figure}
     <div class="hero" style="border-bottom:0;padding-bottom:8px">
       <p class="kicker">{esc(g['cluster'])}</p>
       <h1>{esc(g['title'])}</h1>

@@ -1109,3 +1109,29 @@ a:focus-visible, button:focus-visible {
 .saved-head p { margin: 0; font-size: .84rem; color: var(--ink-2); }
 .saved-list ul { list-style: none; margin: 12px 0 0; padding: 0; }
 .saved-list li { display: flex; gap: 14px; align-items: baseline; justify-content: space-between; padding: 9px 0; border-top: 1px solid var(--line); font-size: .88rem; }
+
+/* ============================================================
+   Typography and art adopted from the concurrent integration pass
+   (session arena/c9fc4295-affil1): self-hosted Fraunces + Inter,
+   no external font request, responsive image variants.
+   ============================================================ */
+@font-face{font-family:Fraunces;src:url(../fonts/fraunces-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Fraunces;src:url(../fonts/fraunces-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:Fraunces;src:url(../fonts/fraunces-latin-600-normal.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:Inter;src:url(../fonts/inter-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Inter;src:url(../fonts/inter-latin-500-normal.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:Inter;src:url(../fonts/inter-latin-600-normal.woff2) format("woff2");font-weight:600;font-style:normal;font-display:swap}
+
+body { font-family: Inter, var(--sans); }
+h1, h2, h3, .brand-name, .feature-body h3, .topic-block h2, .stat strong,
+.card h3, .deck, .section-head h2 { font-family: Fraunces, var(--serif); }
+h1 { letter-spacing: -.022em; font-weight: 600; }
+h2 { letter-spacing: -.015em; }
+body { font-variant-numeric: tabular-nums lining-nums; letter-spacing: -.005em; }
+
+/* responsive editorial art: same treatment on the hero and every card */
+.hero-media img, .feature-card .card-media img, .article-figure img {
+  width: 100%; height: auto; object-fit: cover; display: block;
+}
+.article-figure { margin: 0 0 26px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--paper-2); }
+.article-figure figcaption { padding: 10px 14px; font-size: .74rem; color: var(--ink-3); background: var(--card); border-top: 1px solid var(--line); }

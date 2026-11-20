@@ -77,6 +77,13 @@ class RefCollector(HTMLParser):
                 self.imgs_without_alt += 1
             if a.get("src"):
                 self.imgs.append(a["src"])
+            # A srcset is a second set of URLs, and one that a link check misses.
+            # Root-absolute entries here survive the filesystem check and 404 in
+            # production, which is exactly the bug this gate exists to catch.
+            for entry in (a.get("srcset") or "").split(","):
+                url = entry.strip().split(" ")[0]
+                if url:
+                    self.imgs.append(url)
         if tag == "div" and a.get("class") == "disclosure":
             self.has_disclosure = True
         if tag == "footer":

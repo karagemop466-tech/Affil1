@@ -1,128 +1,77 @@
-/* Affil1 — self-hosted, privacy-preserving analytics
-   Five defined events (documented here; no other events are recorded):
-     1. page_view     — a page is loaded
-     2. outbound_click — a user clicks an outbound (affiliate) link
-     3. guide_read     — a user finishes reading a buying guide
-     4. suggestion_review — a user reviews a decision suggestion
-     5. session_start  — first page view of a browser session
-
-   Design:
-   - No cookies, no personal identifiers, no IP logging in the client code.
-   - Events are queued in memory and persisted to localStorage ("affil1_events").
-   - A self-hosted collector endpoint (server/collect.js) accepts POST /analytics/collect
-     and appends events to data/events.jsonl. Run it on your own host; GitHub Pages
-     is static, so the endpoint must be self-hosted elsewhere or enabled via your host.
-   - The beacon falls back silently if the endpoint is unreachable — the page never
-     breaks because of analytics.
-   - Outbound product links are counted automatically; each link keeps its own
-     counter so clicks can be compared against orders in first-party reports.
-*/
-
+/* Crisp & Counter — analytics client, INERT BY DEFAULT.
+ *
+ * The five events the brief asked for are defined below. Nothing is recorded
+ * and nothing leaves the browser unless a page sets window.CC_ANALYTICS_ENDPOINT
+ * to a self-hosted URL. It is not set anywhere in this build, and an endpoint is
+ * not deployed, so this file currently does nothing except define five names.
+ *
+ * What it would store if enabled: the event name, the page path (never the
+ * query string), the product reference for a click, and a date. No cookie, no
+ * persistent identifier, no IP address, no user agent, no referrer text.
+ *
+ * Before enabling: publish a privacy notice, deploy a collector, decide a
+ * retention period, and take a view on consent. See review/measurement.html.
+ */
 (function () {
-  var ENDPOINT = (window.affil1Root || "") + "analytics/collect";
-  var STORAGE_KEY = "affil1_events";
-  var MAX_QUEUE = 50;
-  var sessionId = sessionStorage.getItem("affil1_session");
-  if (!sessionId) {
-    sessionId = "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-    sessionStorage.setItem("affil1_session", sessionId);
+  "use strict";
+
+  var EVENTS = ["page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"];
+
+  var endpoint = window.CC_ANALYTICS_ENDPOINT || "";
+  if (!endpoint) {
+    /* Deliberate no-op. Expose the names so they can be inspected, and stop. */
+    window.CC_ANALYTICS = { enabled: false, events: EVENTS.slice(), track: function () {} };
+    return;
   }
 
-  var queue = [];
+  var buffer = [];
 
-  function enqueue(event, payload) {
-    var item = {
-      t: new Date().toISOString(),
-      e: event,
-      s: sessionId,
-      p: payload || {},
-      l: location.href,
-      r: document.referrer || "",
-    };
-    queue.push(item);
-    persist();
-    flush();
-  }
-
-  function persist() {
+  function send() {
+    if (!buffer.length) return;
+    var body = JSON.stringify({ events: buffer.splice(0, buffer.length) });
     try {
-      var stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      stored = stored.concat(queue.slice(-MAX_QUEUE));
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored.slice(-MAX_QUEUE)));
-    } catch (e) { /* storage unavailable — ignore */ }
-    queue = [];
-  }
-
-  function flush() {
-    try {
-      var stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      if (!stored.length) return;
-      var pending = stored.slice(0);
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", ENDPOINT, true);
-      xhr.setRequestHeader("Content-Type", "application/x-ndjson");
-      xhr.onerror = function () { /* endpoint unreachable — keep in localStorage */ };
-      xhr.onabort = function () {};
-      xhr.ontimeout = function () {};
-      xhr.send(
-        pending
-          .map(function (e) { return JSON.stringify(e); })
-          .join("\n") + "\n"
-      );
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
-    } catch (e) { /* ignore */ }
-  }
-
-  /* Public API: affil1.record(event, payload) */
-  window.affil1 = window.affil1 || {};
-  window.affil1.record = enqueue;
-
-  /* Automatic page view */
-  enqueue("page_view", { title: document.title });
-
-  /* Automatic outbound click counter for affiliate links */
-  document.addEventListener("click", function (ev) {
-    var link = ev.target.closest && ev.target.closest("a[href]");
-    if (!link) return;
-    var href = link.getAttribute("href") || "";
-    if (!href) return;
-    try {
-      var isOutbound = href.startsWith("http") && !href.includes(location.hostname);
-      var isSponsored = link.rel && link.rel.split(/\s+/).indexOf("sponsored") !== -1;
-      var isProduct = link.classList.contains("product-link");
-      if (isOutbound && (isSponsored || isProduct)) {
-        enqueue("outbound_click", {
-          url: href,
-          text: (link.textContent || "").trim().slice(0, 120),
-          sponsored: isSponsored,
-          product: isProduct,
-        });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(endpoint, new Blob([body], { type: "application/json" }));
+      } else {
+        fetch(endpoint, { method: "POST", body: body, keepalive: true, headers: { "Content-Type": "application/json" } });
       }
-    } catch (e) { /* ignore malformed links */ }
-  }, { passive: true });
+    } catch (e) {
+      /* A failed beacon must never break the page. */
+    }
+  }
 
-  /* Periodic flush every 30 seconds */
-  setInterval(flush, 30000);
+  function track(name, detail) {
+    if (EVENTS.indexOf(name) === -1) return;
+    buffer.push({
+      event: name,
+      path: location.pathname,
+      ref: (detail && detail.ref) || null,
+      date: new Date().toISOString().slice(0, 10)
+    });
+    if (buffer.length >= 5) send();
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") send();
+  });
+
+  track("page_view");
+
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest("a[rel~='sponsored']");
+    if (!a) return;
+    var m = (a.getAttribute("href") || "").match(/\/(?:dp\/)?(B0[0-9A-Z]{8})/);
+    track("outbound_click", { ref: m ? m[1] : null });
+  });
+
+  if (document.referrer) {
+    try {
+      var host = new URL(document.referrer).hostname;
+      if (/(^|\.)(google|bing|duckduckgo|yahoo|yandex|brave|ecosia)\.[a-z.]+$/.test(host)) {
+        track("search_query_referral");
+      }
+    } catch (e) { /* ignore a malformed referrer */ }
+  }
+
+  window.CC_ANALYTICS = { enabled: true, events: EVENTS.slice(), track: track };
 })();
-
-/* Helper used by guides: mark a guide as read */
-function affil1GuideRead(slug) {
-  if (window.affil1 && window.affil1.record) {
-    window.affil1.record("guide_read", { guide: slug });
-  }
-}
-
-/* Helper used by suggestions page */
-function affil1SuggestionReviewed(id) {
-  if (window.affil1 && window.affil1.record) {
-    window.affil1.record("suggestion_review", { suggestion: id });
-  }
-}
-
-/* Helper: session start already recorded on first load */
-function affil1SessionStart() {
-  if (window.affil1 && window.affil1.record) {
-    window.affil1.record("session_start", {});
-  }
-}
-affil1SessionStart();

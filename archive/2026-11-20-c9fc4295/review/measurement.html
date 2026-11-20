@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measurement plan — Crisp & Counter</title>
+<meta name="description" content="The five events this site would record, the collector that is written but switched off, and the four things that must exist before any of it is switched on.">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/review/measurement.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Crisp &amp; Counter">
+<meta property="og:title" content="Measurement plan — Crisp &amp; Counter">
+<meta property="og:description" content="The five events this site would record, the collector that is written but switched off, and the four things that must exist before any of it is switched on.">
+<meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/review/measurement.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../assets/fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
+      <span class="brand-tag">Kitchen buying guides</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="../guides/index.html">Guides</a><a href="../products/index.html">Shortlist</a><a href="../compare/index.html">Compare</a><a href="../brief/index.html">Site desk</a>
+    </nav>
+  </div>
+</header>
+<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
+  <div class="wrap disclosure-inner">
+    <span class="disclosure-tag">Disclosure</span>
+    <p>As an Amazon Associate I earn from qualifying purchases. Product links are marked as sponsored. Tracking on the supplied links has not been confirmed.
+      <a href="../about/index.html#disclosure">Read the full disclosure</a>.</p>
+  </div>
+</div>
+<main id="main">
+<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="index.html#FLG-016">See the review flag and sources</a>.</p></div>
+<header class="pagehead"><div class="wrap">
+  <p class="eyebrow">Measurement plan</p>
+  <h1>Measurement is written,<br>and switched off</h1>
+  <p class="dek">Five events are defined, a client exists, and nothing is being recorded. That is the current state and it is deliberate.</p>
+  <p class="page-meta">Beacon disabled by default &middot; no cookies &middot; no third-party requests &middot; no endpoint deployed</p>
+</div></header>
+<section class="section "><div class="wrap">
+<div class="lede-prose">
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
+  <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
+</div>
+<h2>What would be measured</h2>
+<div class="table-scroll"><table class="events"><thead><tr><th scope="col">Event</th><th scope="col">Fires when</th><th scope="col">What is stored</th></tr></thead><tbody><tr><td><code class="code">page_view</code></td><td>Every page load</td><td>Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept.</td></tr><tr><td><code class="code">outbound_click</code></td><td>Any click on an Amazon link</td><td>Records which product reference was clicked and the page it was clicked from. This is the number that matters for this site.</td></tr><tr><td><code class="code">guide_open</code></td><td>Opening a guide from the index</td><td>Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be.</td></tr><tr><td><code class="code">search_query_referral</code></td><td>Arrival from a search engine</td><td>Records that a referral happened and the referring host, not the query. Search Console supplies queries; this does not try to reconstruct them.</td></tr><tr><td><code class="code">report_import</code></td><td>A manual import of an Associates report</td><td>A dated record that a first-party report was added to the ledger, with its provenance. Never an automated scrape.</td></tr></tbody></table></div>
+<h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
+<ol class="tight">
+  <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
+  <li><strong>A deployed collector.</strong> The endpoint is in this repository and is not hosted anywhere. GitHub Pages serves static files only.</li>
+  <li><strong>A retention decision.</strong> Raw event rows have a half-life; the ledger does not. A retention period has to be chosen, not defaulted.</li>
+  <li><strong>A consent decision.</strong> Whether visitor consent is required depends on jurisdiction and on what is collected. That is a legal question, not an engineering one, and it has not been answered.</li>
+</ol>
+<h2 style="margin-top:2.4rem">Why the site currently claims nothing about traffic</h2>
+<p>Every traffic statement on this site is an absence: no sessions, no clicks, no conversions, no revenue. That is not modesty. With the beacon off, the site genuinely has no numbers, and inventing plausible ones would be the single fastest way to make everything else on the site untrustworthy.</p>
+<div class="callout">
+  <h2>What the campaign ledger holds</h2>
+  <p>Nothing. It has a defined schema &mdash; date, source, channel, eligible sessions, clicks, reported orders &mdash; and every row has to arrive with a provenance note. <a href="../operations/ledger.html">See the empty ledger</a>.</p>
+</div></div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="foot-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
+    <div class="foot-grid"><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../compare/index.html">Comparison table</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>Catalogue</h2><ul><li><a href="../products/index.html">Product register</a></li><li><a href="../products/p-05.html">The thermometer</a></li><li><a href="../about/index.html#how-we-link">How we link</a></li></ul></div><div class="foot-col"><h2>Review queue</h2><ul><li><a href="index.html">Flagged for review</a></li><li><a href="images.html">Image policy</a></li><li><a href="measurement.html">Measurement plan</a></li><li><a href="../about/index.html#sources">Sources</a></li></ul></div><div class="foot-col"><h2>Desk</h2><ul><li><a href="../questions/index.html">Open questions</a></li><li><a href="../suggestions/index.html">Suggestions</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../about/index.html">About this site</a></li></ul></div></div>
+    <div class="foot-bottom">
+      <p>Submitted tracking ID: <code>shopnow047c-20</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
+      <p class="foot-meta">Crisp &amp; Counter &middot; static site &middot; last built 2026-11-20 &middot; no cookies, no trackers, no third-party requests</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/analytics.js" defer></script>
+</body>
+</html>
