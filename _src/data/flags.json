@@ -28,8 +28,8 @@
       "severity": "high",
       "title": "Attribution to shopnow047c-20 is not confirmed by an Associates report",
       "expected": "A click from this site appears in the Associates report against the supplied tag.",
-      "found": "The tag was not observed in any URL reached while following the supplied links. The site now appends ?tag=shopnow047c-20 to every Amazon destination, which is what Program Policies 2(b) requires, but no report has been read.",
-      "impact": "Links are plain listing links until an account-validated Special Link is recorded, so nothing published is attributable yet. The site says so in its footer and on this page rather than implying success.",
+      "found": "The tag was not observed in any URL reached while following the supplied links, and no Associates report has been read. An earlier build appended ?tag=shopnow047c-20 to every Amazon destination anyway; that was withdrawn on 2026-11-20 because a tag invented from a public observation looks like attribution while remaining unconfirmed. The five products now publish as untagged listing links, marked sponsored.",
+      "impact": "The site earns nothing from those clicks and says so in the footer of every page. Adding a tag is a data change, not a code change: one approved intent record per product, and the build tags that product automatically.",
       "reading": "Two separate questions were being confused: does the destination carry a tag, and does the account register a click. The first is not met yet, because the published links carry no tag. The second needs a click and a dashboard.",
       "blocks": "any claim that the site can currently earn",
       "to_check": [
