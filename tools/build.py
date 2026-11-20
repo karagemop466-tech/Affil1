@@ -10,6 +10,7 @@ Internal links are relative because GitHub Pages serves this repository from
 """
 
 import json
+from datetime import date
 import pathlib
 import shutil
 import sys
@@ -20,6 +21,8 @@ sys.path.insert(0, str(ROOT / "tools"))
 import layout  # noqa: E402
 from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # noqa: E402
 import page_home  # noqa: E402
+import page_fit  # noqa: E402
+import page_design  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
 import page_compare  # noqa: E402
@@ -39,7 +42,7 @@ DATA = ROOT / "src" / "data"
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions",
-    "review", "about", "operations", "brief",
+    "review", "about", "operations", "brief", "fit",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
 
@@ -49,22 +52,17 @@ OWNED = [
 GENERATED = {
     "index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
     "guides/index.html",
-    "guides/basket-or-oven-air-fryer.html",
-    "guides/air-fryer-capacity-checklist.html",
-    "guides/cleanup-and-counter-space.html",
-    "guides/multi-function-kitchen-appliance-questions.html",
-    "guides/holiday-side-dish-capacity.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
     "compare/index.html",
     "questions/index.html",
-    "suggestions/index.html",
+    "suggestions/index.html", "suggestions/design.html", "fit/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
     "operations/ledger.html", "operations/launch-readiness.html",
     "brief/index.html",
-}
+} | {f"guides/{guide['slug']}.html" for guide in GUIDES}
 
 # Files THIS build emitted in an earlier version, now renamed, which must be
 # removed when the slug list changes. It contains nothing that predates this
@@ -128,13 +126,14 @@ def sitemap(pages):
 
 def feed(latest_guides):
     items = []
-    for g in sorted(latest_guides, key=lambda g: g["updated"], reverse=True):
+    for g in sorted(latest_guides, key=lambda item: item['updated'], reverse=True):
+        published = date.fromisoformat(g.get('published', g['updated'])).strftime('%a, %d %b %Y 00:00:00 GMT')
         link = f"{SITE_URL}/guides/{g['slug']}.html"
         items.append(f"""  <item>
     <title>{esc(g['title'])}</title>
     <link>{link}</link>
     <guid isPermaLink="true">{link}</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>{published}</pubDate>
     <description>{esc(g['dek'])}</description>
   </item>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -143,7 +142,7 @@ def feed(latest_guides):
   <title>{esc(SITE_NAME)} \u2014 buying guides</title>
   <link>{SITE_URL}/</link>
   <atom:link href="{SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Air-fryer buying guides that check the link before they describe the product.</description>
+  <description>Practical guides to air fryers, countertop ovens, and cooking thermometers.</description>
   <language>en-us</language>
   <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
   <copyright>2026 {esc(SITE_NAME)}</copyright>
@@ -200,6 +199,9 @@ def main():
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))
 
+    pages.append(write("fit/index.html", page_fit.build("fit")))
+    pages.append(write("suggestions/design.html", page_design.build("suggestions")))
+
     # compare / questions / suggestions
     pages.append(write("compare/index.html", page_compare.build("compare", products, meta)))
     pages.append(write("questions/index.html", page_questions.build("questions", questions, meta)))
@@ -221,9 +223,8 @@ def main():
     pages.append(write("robots.txt", ROBOTS))
 
     built = {p for p in pages}
-    missing = GENERATED - built - {"robots.txt"}
-    if missing:
-        raise SystemExit(f"GENERATED lists files the build never wrote: {sorted(missing)}")
+    if GENERATED != built:
+        raise SystemExit(f"Page manifest mismatch: missing={sorted(GENERATED - built)}, extra={sorted(built - GENERATED)}")
     print(f"built {len([p for p in pages if p.endswith('.html')])} pages")
     for p in pages:
         print("  " + p)

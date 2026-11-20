@@ -85,7 +85,7 @@ def build(page_dir, products, meta):
     <h1>The air fryer<br><em>field guide.</em></h1>
     <p class="cover-dek">One basket, two baskets, or French doors? Find the format that fits your counter and the way you cook.</p>
     <div class="cover-actions"><a class="cover-btn" href="#shortlist">Explore the shortlist <span>→</span></a>
-      <a class="cover-link" href="{esc(rel(d, 'compare/index.html'))}">Compare formats ↗</a></div></div>
+      <a class="cover-link" href="{esc(rel(d, 'fit/index.html'))}">Find your format ↗</a></div></div>
   <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
     <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
     <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
@@ -109,14 +109,16 @@ def build(page_dir, products, meta):
   </div>
 </div></section>"""
 
+    featured = [next(g for g in GUIDES if g['slug'] == slug) for slug in
+                ('holiday-hosting', 'small-kitchen-counter', 'meal-prep-sunday', 'thermometer-pairing')]
     guides = section(f"""
 <div class="sec-head">
   <div>{eyebrow('Buying guides')}<h2>Before you clear the counter</h2></div>
   <p>Use these checklists before you measure the counter, compare capacity or decide which features you’ll actually use.</p>
 </div>
 <div class="gcard-grid">
-  {guide_card(d, GUIDES[0], feature=True)}
-  {''.join(guide_card(d, g) for g in GUIDES[1:])}
+  {guide_card(d, featured[0], feature=True)}
+  {''.join(guide_card(d, g) for g in featured[1:])}
 </div>""", cls="guides", sid="guides")
 
     subscribe = section(f"""
