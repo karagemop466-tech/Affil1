@@ -21,6 +21,11 @@ import site_data as D  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIGIN = D.SITE["origin"].rstrip("/")
 
+# The site is served from a subpath on GitHub Pages (e.g. /Affil1/). A root-absolute
+# link must carry that prefix or it points at the wrong host path.
+from urllib.parse import urlparse
+BASE_PATH = urlparse(ORIGIN).path.rstrip("/")
+
 E = html.escape
 
 
@@ -593,6 +598,76 @@ official listing and the desk records dated observations with their source.</p>
     return body
 
 
+def compare_page(root):
+    """The comparison table. One row per dimension, one cell per product.
+
+    Every cell is a value the listing states, or an editorial line derived from
+    those stated facts. Nothing here is a ranking, a price, a rating or a
+    popularity claim, and the table says so at the top."""
+    prods = [p for p in D.PRODUCTS if p["observed_redirect"]]
+    head = "".join("<th scope=\"col\">%s</th>" % E(p["brand"]) for p in prods)
+    sub = "".join("<th scope=\"col\" class=\"col-sub\">%s</th>" % E(p["kicker"]) for p in prods)
+    srcs = "".join(
+        "<th scope=\"col\" class=\"src-cell\">%s</th>" % cite_link(
+            p["observed_redirect"], "listing", root)
+        for p in prods
+    )
+    rows = []
+    for dim, values, source in D.COMPARE:
+        cells = []
+        for p in prods:
+            v = values.get(p["intent_asin"], "")
+            if not v:
+                cells.append('<td><span class="unverified">Not confirmed</span></td>')
+                continue
+            # Every value links to the listing it was read from, so a reader can
+            # check one cell without leaving the table.
+            cells.append('<td><a class="cell-src" href="%s" target="_blank" '
+                         'rel="sponsored nofollow noopener">%s</a></td>'
+                         % (E(p["observed_redirect"]), E(v)))
+        rows.append(
+            '<tr id="cmp-%s"><th scope="row">%s</th>%s'
+            '<td class="src-cell"><span class="src-note">%s</span></td></tr>'
+            % (E(dim.lower().replace(" ", "-")), E(dim), "".join(cells), E(source))
+        )
+    notes = "".join("<li>%s</li>" % E(n) for n in D.COMPARE_NOTES)
+    cards = "".join(product_card(p, root) for p in prods)
+
+    return """
+<section class="page-head"><div class="wrap"><p class="eyebrow">The shelf &middot; Compare</p>
+<h1>Compare the<br>range.</h1>
+<p class="lead">Compared on what a listing can actually tell you: the shape, what cooks at
+once, what the seller states, and who each machine suits. Read the columns as
+descriptions, not as a ranking.</p></div></section>
+
+<section class="wrap section section-tight"><div class="callout callout-wide">
+<h3>What this table deliberately leaves out</h3>
+<ul class="plain-list">%(notes)s</ul>
+<p>Where a value could not be read from the listing, the cell says so instead of guessing.
+<a href="%(records)s">See the full records</a> &middot;
+<a href="%(method)s">How we verify</a></p></div></section>
+
+<section class="wrap section section-tight"><div class="table-wrap"><table class="data-table compare-table">
+<thead><tr><th scope="col">Dimension</th>%(head)s<th scope="col">Source</th></tr>
+<tr class="sub-head"><th scope="col"></th>%(sub)s<th scope="col"></th></tr>
+<tr class="src-head"><th scope="col"></th>%(srcs)s<th scope="col"></th></tr>
+</thead><tbody>%(rows)s</tbody></table></div></section>
+
+<section class="wrap section section-tight"><div class="section-head"><div>
+<p class="eyebrow">Record by record</p><h2>The cards behind the columns.</h2></div></div>
+<div class="product-grid">%(cards)s</div></section>
+""" % {
+        "head": head,
+        "sub": sub,
+        "srcs": srcs,
+        "rows": "".join(rows),
+        "notes": notes,
+        "cards": cards,
+        "records": E(rel("desk/product-records.html", root)),
+        "method": E(rel("desk/methodology.html", root)),
+    }
+
+
 def category_page(cat, root):
     prods = products_in(cat["slug"])
     cards = "".join(product_card(p, root) for p in prods)
@@ -781,7 +856,7 @@ def desk_index(root):
         ("How we verify", "desk/methodology.html",
          "The method, the sources, and the editorial standards the site is held to."),
         ("Flagged for review", "desk/flagged-for-review.html",
-         "Eight open items, each with the source that would settle it."),
+         "Nine open items, each with the source that would settle it."),
     ]
     for title, href, blurb in entries:
         cards += ('<a class="desk-card desk-card-lg" href="%s"><b>%s</b><span>%s</span></a>'
@@ -797,7 +872,17 @@ open item, and every suggestion with a decision slot left empty for review.</p><
 source, and the source is linked. Where a value could not be confirmed, the cell is blank and the
 item is flagged. That rule applies to product specifications, prices, ratings, availability,
 review counts, search demand, click counts, orders and revenue.</p></div></section>
-""" % {"cards": cards}
+
+<section class="wrap section section-tight"><div class="callout callout-wide callout-flag">
+<h3>Work from earlier passes of this site</h3>
+<p>Several sessions built this site in parallel. Their work is kept in the repository under
+<code>archive/</code>, one folder per session, with its internal links repaired so it still
+renders. It is not published and not deployed &mdash; the live site is the one publication above,
+so that two front doors never compete for the same reader or the same search result.</p>
+<p>The comparison table is the one idea carried forward from that work; it is now
+<a href="%(compare)s">the range, side by side</a>, with every cell linked to the listing it was
+read from.</p></div></section>
+""" % {"cards": cards, "compare": E(rel("shop/compare.html", root))}
 
 
 def exec_summary(root):
@@ -1433,27 +1518,27 @@ NOT_FOUND = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found &mdash; Good Measure Kitchen</title>
 <meta name="description" content="That page is not here. Here is where everything moved to.">
-<link rel="stylesheet" href="/styles.css"></head>
+<link rel="stylesheet" href="%(base)s/styles.css"></head>
 <body class="page-404">
 <div class="disclosure"><span class="disclosure-inner"><strong>As an Amazon Associate I earn from qualifying purchases.</strong></span></div>
 <header class="masthead"><div class="wrap masthead-inner">
-<a class="brand" href="/"><span class="brand-mark">gm</span><span class="brand-text">Good Measure Kitchen<span class="brand-sub">Kitchen Notes</span></span></a>
-<nav class="nav"><ul><li class="nav-item"><a class="nav-top" href="/shop/index.html">Shop</a></li>
-<li class="nav-item"><a class="nav-top" href="/guides/index.html">Guides</a></li>
-<li class="nav-item"><a class="nav-top" href="/desk/index.html">The Desk</a></li></ul></nav>
+<a class="brand" href="%(base)s/"><span class="brand-mark">gm</span><span class="brand-text">Good Measure Kitchen<span class="brand-sub">Kitchen Notes</span></span></a>
+<nav class="nav"><ul><li class="nav-item"><a class="nav-top" href="%(base)s/shop/index.html">Shop</a></li>
+<li class="nav-item"><a class="nav-top" href="%(base)s/guides/index.html">Guides</a></li>
+<li class="nav-item"><a class="nav-top" href="%(base)s/desk/index.html">The Desk</a></li></ul></nav>
 </div></header>
 <main id="main"><section class="wrap section"><p class="eyebrow">404</p>
 <h1>That page is not here.</h1><p class="lead">It may have moved. Everything the site publishes is
 one click away.</p>
 <ul class="guide-links">
-<li><a href="/">Front page</a></li><li><a href="/shop/index.html">The shelf</a></li>
-<li><a href="/guides/index.html">All guides</a></li><li><a href="/desk/index.html">The desk</a></li>
-<li><a href="/desk/executive-summary.html">Executive summary</a></li>
-<li><a href="/desk/flagged-for-review.html">Flagged for review</a></li></ul>
+<li><a href="%(base)s/">Front page</a></li><li><a href="%(base)s/shop/index.html">The shelf</a></li>
+<li><a href="%(base)s/guides/index.html">All guides</a></li><li><a href="%(base)s/desk/index.html">The desk</a></li>
+<li><a href="%(base)s/desk/executive-summary.html">Executive summary</a></li>
+<li><a href="%(base)s/desk/flagged-for-review.html">Flagged for review</a></li></ul>
 </section></main>
 <footer class="site-footer"><div class="wrap footer-bottom"><span>Good Measure Kitchen</span></div></footer>
 </body></html>
-"""
+""" % {"base": BASE_PATH}
 
 
 def main():
@@ -1473,6 +1558,13 @@ def main():
         description="Every product record on the site, with the format, the ASIN, the dated price "
                     "observation and a link to the official listing. Blank cells were not confirmed.",
         root="../", body=shop_index("../"), active="Shop", path="shop/index.html")))
+    written.append(write("shop/compare.html", page(
+        title="Compare the range \u2014 %s" % D.SITE["name"],
+        description="A comparison table built only from what each listing states: shape, what "
+                    "cooks at once, listed capacity, listed programs and who each machine "
+                    "suits. No ranking, no price, no rating.",
+        root="../", body=compare_page("../"), active="Shop",
+        path="shop/compare.html")))
     for c in D.CATEGORIES:
         written.append(write("shop/%s.html" % c["slug"], page(
             title="%s \u2014 %s" % (c["title"], D.SITE["name"]),
@@ -1536,7 +1628,8 @@ def main():
     written.append(write("robots.txt", ROBOTS))
     written.append(write(".nojekyll", ""))
 
-    paths = ["index.html", "shop/index.html", "guides/index.html", "desk/index.html"]
+    paths = ["index.html", "shop/index.html", "shop/compare.html",
+             "guides/index.html", "desk/index.html"]
     paths += ["shop/%s.html" % c["slug"] for c in D.CATEGORIES]
     paths += ["guides/%s.html" % g["slug"] for g in D.GUIDES]
     paths += [p for p, _, _, _, _ in desk_pages]

@@ -16,10 +16,11 @@
 (function () {
   'use strict';
 
-  var cfg = (window.GM_SITE && window.GM_SITE.collector) ? window.GM_SITE : null;
-  if (!cfg) return;
+  var site = window.GM_SITE;
+  if (!site || !site.collector) return;
 
-  var settings = window.GM_SITE.tracking || {};
+  var cfg = site.collector;
+  var settings = site.tracking || {};
   var events = settings.events || [];
   var queue = [];
   var active = false;
@@ -159,9 +160,14 @@
     originalSend(event, extra);
   };
 
+  /* The collector is not deployed by default. While `deployed` is false the
+     tracker makes no network request at all and stays inert, so a reader never
+     waits on a probe that cannot succeed. Setting `deployed` to true switches it
+     on: the tracker then probes the health endpoint and stays inert unless the
+     collector answers. */
   if (cfg.deployed) {
     probe();
   } else {
-    probe();
+    document.documentElement.setAttribute('data-collector', 'inactive');
   }
 })();

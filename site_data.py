@@ -32,6 +32,7 @@ NAV = [
         "href": "shop/index.html",
         "children": [
             {"label": "All products", "href": "shop/index.html"},
+            {"label": "Compare the range", "href": "shop/compare.html"},
             {"label": "Basket air fryers", "href": "shop/basket-air-fryers.html"},
             {"label": "Air fryer ovens", "href": "shop/air-fryer-ovens.html"},
             {"label": "Cooking tools", "href": "shop/cooking-tools.html"},
@@ -1193,4 +1194,52 @@ DESIGN_DIRECTION = [
      "Stock-photo grids, fake urgency, countdown timers, rating stars the reader cannot "
      "verify, \u201ctop 10\u201d lists, comparison tables with an unearned winner column, and "
      "any layout that reads as machine-generated filler."),
+]
+
+
+# --------------------------------------------------------------------------------------
+# Comparison dimensions. One row per dimension, one cell per product. Every value is
+# taken from the listing the product record cites, and the row carries the source
+# used. Dimensions we cannot source are deliberately absent rather than guessed.
+# --------------------------------------------------------------------------------------
+COMPARE = [
+    ("Shape",
+     {"B0CDY277D3": "Two pull-out baskets", "B09B7SB46R": "Front-door oven cabinet",
+      "B08DKYBTPH": "One pull-out basket", "B0DZFD6R9Z": "Probe and base, no cooking cavity"},
+     "Listing title"),
+    ("What cooks at once",
+     {"B0CDY277D3": "Two baskets, if the listed sync feature is used as described",
+      "B09B7SB46R": "One cavity; racks may allow levels", "B08DKYBTPH": "One basket",
+      "B0DZFD6R9Z": "Not applicable"},
+     "Listing title"),
+    ("Listed capacity",
+     {"B0CDY277D3": "6 quart across two 3-quart baskets", "B09B7SB46R": "26 quart",
+      "B08DKYBTPH": "8 quart", "B0DZFD6R9Z": "Not applicable"},
+     "Listing title"),
+    ("Listed programs",
+     {"B0CDY277D3": "Air fry, Hi-Fry, auto shutoff", "B09B7SB46R": "24 one-touch presets",
+      "B08DKYBTPH": "Air fry, bake, dehydrate, frozen", "B0DZFD6R9Z": "Not applicable"},
+     "Listing title"),
+    ("Cleaning as listed",
+     {"B0CDY277D3": "Nonstick, dishwasher-safe baskets", "B09B7SB46R": "Not confirmed",
+      "B08DKYBTPH": "Nonstick, dishwasher-safe basket", "B0DZFD6R9Z": "Not confirmed"},
+     "Listing title"),
+    ("Who it suits",
+     {"B0CDY277D3": "Two people cooking different food at the same time",
+      "B09B7SB46R": "One household cooking several things at once",
+      "B08DKYBTPH": "One person cooking one dish, simply",
+      "B0DZFD6R9Z": "Anyone cooking outdoors or wanting a reading in the kitchen"},
+     "Editorial, from the listing facts above"),
+    ("Counter footprint to check",
+     {"B0CDY277D3": "Wide and shallow; the drawer pulls toward you",
+      "B09B7SB46R": "Deep; the front door needs clearance in front of it",
+      "B08DKYBTPH": "Standard single-drawer footprint",
+      "B0DZFD6R9Z": "Small base, plus a receiver that stays in view"},
+     "Editorial, from the shape of each format"),
+]
+
+COMPARE_NOTES = [
+    "Deliberately not compared: which one cooks better. We have not used them.",
+    "Deliberately not compared: which one is worth the money. We do not publish prices.",
+    "Deliberately not compared: which one is more popular. No review or sales data was obtained.",
 ]

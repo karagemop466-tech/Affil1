@@ -344,3 +344,14 @@ p:last-child{margin-bottom:0}
   .byline-date{margin-left:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------------------------------------------------------------- comparison table */
+.compare-table th[scope="row"]{min-width:180px}
+.compare-table .sub-head th{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;padding-top:0}
+.compare-table .sub-head th.col-sub{text-transform:none;letter-spacing:0;font-size:.85rem;font-weight:400;color:var(--muted)}
+.compare-table .src-head th{border-bottom:1px solid var(--line);padding-bottom:10px}
+.compare-table .src-head a{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.compare-table td a.cell-src{color:inherit;text-decoration:none;border-bottom:1px solid var(--line-2)}
+.compare-table td a.cell-src:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.compare-table .src-note{font-size:.78rem;color:var(--muted);display:block;line-height:1.45}
+.compare-table tbody tr:nth-child(even){background:var(--cream)}

@@ -30,9 +30,15 @@ function cleanString(value, max) {
   return value.trim().slice(0, max);
 }
 
+/* A URL is reduced to its host before it is stored. The browser tracker already
+   reduces the referrer and the outbound target to a host before sending, so a
+   bare host name has to be accepted as well as a full URL. */
 function hostOnly(value) {
   const v = cleanString(value, 400);
   if (!v) return '';
+  if (/^[a-z0-9.-]+$/i.test(v)) {
+    return v.toLowerCase().slice(0, MAX_FIELD.ref);
+  }
   try {
     return new URL(v).hostname.toLowerCase().slice(0, MAX_FIELD.ref);
   } catch (e) {

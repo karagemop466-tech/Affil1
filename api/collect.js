@@ -71,11 +71,16 @@ function cleanString(value, max) {
   return trimmed.slice(0, max);
 }
 
-/* The referrer is reduced to a host before it is stored. A search engine referrer
-   may carry the query the visitor typed; that is dropped here. */
+/* A URL is reduced to its host before it is stored. A search engine referrer may
+   carry the query the visitor typed; that is dropped here.
+   The browser tracker already reduces the referrer to a host before sending it,
+   so a bare host name has to be accepted as well as a full URL. */
 function hostOnly(value) {
   const v = cleanString(value, 400);
   if (!v) return '';
+  if (/^[a-z0-9.-]+$/i.test(v)) {
+    return v.toLowerCase().slice(0, MAX_FIELD.ref);
+  }
   try {
     return new URL(v).hostname.toLowerCase().slice(0, MAX_FIELD.ref);
   } catch (e) {
@@ -196,8 +201,18 @@ function json(res, status, body) {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://' + (req.headers.host || 'localhost'));
 
-  if (req.method === 'GET' && url.pathname === '/health') {
-    return json(res, 200, { ok: true, service: 'good-measure-collector', events: ALLOWED_EVENTS });
+  // The collector may be mounted at the site root or under /api/collect. Accept
+  // both mount points so the same file works behind a reverse proxy and as a
+  // Pages Function, and so the documented contract and the code agree.
+  const path = url.pathname.replace(/^\/api\/collect/, '') || '/';
+
+  if (req.method === 'GET' && (path === '/health' || path === '/')) {
+    return json(res, 200, {
+      ok: true,
+      service: 'good-measure-collector',
+      events: ALLOWED_EVENTS,
+      mounted: url.pathname.startsWith('/api/collect') ? '/api/collect' : '/'
+    });
   }
 
   if (req.method === 'OPTIONS') {
@@ -205,7 +220,7 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
 
-  if (req.method !== 'POST' || url.pathname !== '/collect') {
+  if (req.method !== 'POST' || (path !== '/collect' && path !== '/')) {
     return json(res, 404, { ok: false, error: 'not found' });
   }
 

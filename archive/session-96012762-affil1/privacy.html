@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy | Affil1</title>
+<meta name="description" content="Affil1 privacy notice: privacy-preserving self-hosted analytics, five defined events, no cookies, no IP logging.">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="alternate" type="application/rss+xml" title="Affil1" href="../../rss.xml">
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+  <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
+    <a href="../../index.html">Home</a> &rsaquo; Privacy
+  </nav>
+  <section class="section-tight">
+    <h1>Privacy notice</h1>
+
+    <h2>Analytics</h2>
+    <p>Affil1 uses a self-hosted, privacy-preserving analytics endpoint (<code>/analytics/collect</code>; collector code at <a href="server/collect.js">server/collect.js</a>). It records only five defined events:</p>
+    <table>
+      <thead><tr><th style="width:22%;">Event</th><th>What is recorded</th></tr></thead>
+      <tbody>
+        <tr><td>page_view</td><td>Page URL, page title, referrer, session id, timestamp</td></tr>
+        <tr><td>outbound_click</td><td>Outbound link URL, link text, whether it is marked sponsored/product, session id, timestamp</td></tr>
+        <tr><td>guide_read</td><td>Guide slug, session id, timestamp</td></tr>
+        <tr><td>suggestion_review</td><td>Suggestion id, session id, timestamp</td></tr>
+        <tr><td>session_start</td><td>Session id, timestamp</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>No cookies. A random session id lives in sessionStorage only (not sent to any third party).</li>
+      <li>No IP addresses are logged by the client code.</li>
+      <li>No personal identifiers are collected.</li>
+      <li>Events are queued locally and sent as newline-delimited JSON to the self-hosted collector, which appends them to an append-only log. If the collector is unreachable, the page still works and events remain in the browser only.</li>
+    </ul>
+
+    <h2>Affiliate links</h2>
+    <p>Clicking a sponsored product link sends you to Amazon.com. Amazon’s own privacy and cookies policies apply there; Affil1 does not add tracking parameters beyond the Associates tag required by the program.</p>
+
+    <h2>Data retention</h2>
+    <p>The events log is append-only and rotated regularly; nothing is edited or deleted after collection. You can clear your browser’s localStorage to remove any locally queued events.</p>
+
+    <p><a href="disclosure.html">Read the affiliate disclosure &rarr;</a></p>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/analytics.js"></script>
+</body>
+</html>

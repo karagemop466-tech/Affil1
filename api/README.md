@@ -17,9 +17,25 @@ GET  /api/collect/health   -> 200 {"ok":true,"service":"good-measure-collector",
 POST /api/collect          -> 202 {"ok":true}
 ```
 
-The browser tracker probes `/health` once per session. If it does not answer, the tracker
-disables itself and sets `data-collector="inactive"` on the root element, so the site never
-implies measurement that is not happening.
+Both implementations accept the collector mounted at the site root or under `/api/collect`,
+so the same file works behind a reverse proxy and as a Pages Function:
+
+| Request | Result |
+| --- | --- |
+| `GET /health` | 200, the health payload |
+| `GET /api/collect/health` | 200, the health payload |
+| `POST /collect` or `POST /api/collect` | 202 when the event is accepted |
+| `POST` with an event outside the five | 400 `rejected` |
+| `POST` with a body over 4096 bytes | the connection is closed, nothing is stored |
+| `GET /collect` | 404 |
+
+`referrer` and `target` may be either a full URL or a bare host name. Either way only the
+host is kept: a referrer's query string is dropped before it is stored.
+
+The browser tracker probes the health endpoint once per session, and only when
+`collector.deployed` is true. Until then it makes no network request at all. If the probe
+does not answer, the tracker stays inert and sets `data-collector="inactive"` on the root
+element, so the site never implies measurement that is not happening.
 
 ## What is collected
 
@@ -61,6 +77,22 @@ Set `window.GM_SITE.collector.deployed = true` in `assets/site-config.js` once i
 
 Create a KV namespace, bind it as `ANALYTICS`, set a secret `ANALYTICS_SALT`, and deploy
 `worker.js` as a Pages Function at `/api/collect`.
+
+## Verified behaviour
+
+The Node collector was run locally and exercised end to end. The browser tracker was driven
+against it in a headless harness. Results:
+
+| Check | Result |
+| --- | --- |
+| Health at `/health` and at `/api/collect/health` | 200, with the five event names |
+| `page_view`, `guide_open`, `search_query_referral` sent by the tracker | accepted, stored with the expected fields |
+| `outbound_click` carrying `?tag=shopnow047c-20` | accepted, stored as `target: "www.amazon.com"`. The tracking tag never reaches storage. |
+| `search_query_referral` with a Google referrer | stored as `ref: "www.google.com"`. The referrer's `?q=` value is dropped. |
+| An event outside the five | 400, nothing stored |
+| A body over 4096 bytes | connection closed, nothing stored, collector still serving |
+| A referrer or IP address in the stored record | absent. Only a 16-character daily salted hash is kept. |
+| Cookies, localStorage, advertising identifiers, user agent | never read by the tracker and never stored |
 
 ## Before you switch it on
 

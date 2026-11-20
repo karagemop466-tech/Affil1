@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — findings, analysis and campaign ledger | Affil1</title>
+<meta name="description" content="Affil1 dashboard: product findings table, analysis and the empty campaign ledger. Privacy-preserving click measurement is active; no conversion scores or revenue forecasts are presented.">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="alternate" type="application/rss+xml" title="Affil1" href="../../rss.xml">
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+  <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
+    <a href="../../index.html">Home</a> &rsaquo; Dashboard
+  </nav>
+  <section class="section-tight">
+    <h1>Dashboard</h1>
+    <p>All entries and findings in one readable table, plus the campaign ledger and measurement status. Nothing here is a conversion score or revenue forecast.</p>
+
+    <div class="section-head" style="margin-top:30px;">
+      <h2>Entries &amp; findings table</h2>
+      <a class="btn" href="categories/air-fryers.html">Category page &rarr;</a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:4px;">#</th>
+          <th>Intended ASIN</th>
+          <th>Official listing URL</th>
+          <th>Observed redirect target</th>
+          <th>Confirmation date</th>
+          <th>Status</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>B04G1MEwY</code></td>
+          <td><a class="source-link" href="https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20" rel="nofollow sponsored" target="_blank">https://www.amazon.com/dp/B0CDY277D3</a></td>
+          <td><code>https://www.amazon.com/dp/B0CDY277D3</code></td>
+          <td>2026-11-20</td>
+          <td><span class="status-tag status-verified">verified</span></td>
+          <td><a class="source-link" href="https://www.amazon.com/dp/B0CDY277D3" target="_blank">Amazon.com</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>B02NbDxp3</code></td>
+          <td><a class="source-link" href="https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20" rel="nofollow sponsored" target="_blank">https://www.amazon.com/dp/B09B7SB46R</a></td>
+          <td><code>https://www.amazon.com/dp/B09B7SB46R</code></td>
+          <td>2026-11-20</td>
+          <td><span class="status-tag status-verified">verified</span></td>
+          <td><a class="source-link" href="https://www.amazon.com/dp/B09B7SB46R" target="_blank">Amazon.com</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>B00hJ57DV</code></td>
+          <td><span class="blank">blank</span></td>
+          <td><code>https://www.amazon.com/</code> (homepage — no product page)</td>
+          <td>2026-11-20</td>
+          <td><span class="status-tag status-unverified">unverified</span></td>
+          <td><a class="source-link" href="https://www.amazon.com/" target="_blank">Amazon.com</a></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>B0c8moW59</code></td>
+          <td><span class="blank">blank</span></td>
+          <td>Amazon checkpoint gate — no product page reachable</td>
+          <td>2026-11-20</td>
+          <td><span class="status-tag status-unverified">unverified</span></td>
+          <td><a class="source-link" href="https://www.amazon.com/checkpoint/continue" target="_blank">Amazon.com</a></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>B0f3GKalj</code></td>
+          <td><span class="blank">blank</span></td>
+          <td><code>https://www.amazon.com/</code> (homepage — no product page)</td>
+          <td>2026-11-20</td>
+          <td><span class="status-tag status-unverified">unverified</span></td>
+          <td><a class="source-link" href="https://www.amazon.com/" target="_blank">Amazon.com</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note" style="color:var(--muted);font-size:0.85rem;">Source link per row: the official Amazon page reached when resolving each submitted short link. Values left blank were not confirmed from an official source; nothing is inferred.</p>
+
+    <div class="section-head" style="margin-top:40px;">
+      <h2>Campaign ledger (Priority 4)</h2>
+    </div>
+    <div class="ok">
+      <strong>Status: empty — intentionally.</strong> The ledger awaits timestamp, source, channel, eligible sessions, clicks and reported orders obtained only from authorized first-party reports. A dated provenance trail is kept. No conversion score or revenue forecast is presented here.
+    </div>
+    <table style="margin-top:14px;">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Source</th>
+          <th>Channel</th>
+          <th>Eligible sessions</th>
+          <th>Clicks</th>
+          <th>Reported orders</th>
+          <th>Provenance report</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="8" style="text-align:center;color:var(--muted);">No entries yet — awaiting authorized first-party reports.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top:40px;">
+      <h2>Measurement status</h2>
+    </div>
+    <ul>
+      <li>Outbound click counter: active on every outbound product link (<code>rel="nofollow sponsored"</code>).</li>
+      <li>Five defined events recorded: page_view, outbound_click, guide_read, suggestion_review, session_start.</li>
+      <li>Analytics endpoint: self-hosted collector at <code>/analytics/collect</code> (<a href="server/collect.js">server/collect.js</a>), privacy-preserving — no cookies, no IP logging.</li>
+      <li>Real analytics: to be turned on once the collector is self-hosted; topics for new guides will be chosen from measured queries.</li>
+    </ul>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/analytics.js"></script>
+</body>
+</html>

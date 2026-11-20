@@ -29,6 +29,11 @@ import site_data as D  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# The site is served from a subpath (e.g. /Affil1/). Root-absolute links in the
+# generated HTML must carry that prefix.
+from urllib.parse import urlparse
+BASE_PATH = urlparse(D.SITE["origin"].rstrip("/")).path.rstrip("/")
+
 OFFICIAL_HOSTS = {
     "amazon.com", "www.amazon.com", "link.amazon", "amzn.to", "a.co",
     "amzn.eu", "amzn.asia", "affiliate-program.amazon.com",
@@ -39,6 +44,10 @@ OFFICIAL_HOSTS = {
 }
 
 READER_FACING_GLOBS = ["index.html", "shop/*.html", "guides/*.html"]
+
+# Archived prior-session work. Preserved in the repository, never published, and
+# therefore not subject to the publishing gate.
+ARCHIVE_DIRS = ("archive",)
 
 # Pages kept only to preserve an older published URL. They are exempt from the content
 # checks but must still link onward to the page that replaced them.
@@ -71,7 +80,9 @@ def read(path):
 def all_html():
     out = []
     for base, dirs, files in os.walk(ROOT):
-        dirs[:] = [d for d in dirs if d not in (".git", ".github", "node_modules", "api", "scripts", "data")]
+        dirs[:] = [d for d in dirs
+                   if d not in (".git", ".github", "node_modules", "api", "scripts", "data")
+                   and d not in ARCHIVE_DIRS]
         for f in files:
             if f.endswith(".html"):
                 out.append(os.path.relpath(os.path.join(base, f), ROOT).replace(os.sep, "/"))
@@ -207,6 +218,8 @@ def check_internal_links(pages):
             if not target:
                 continue
             if target.startswith("/"):
+                if target == BASE_PATH or target.startswith(BASE_PATH + "/"):
+                    target = target[len(BASE_PATH):] or "/"
                 resolved = os.path.normpath(os.path.join(ROOT, target.lstrip("/")))
             else:
                 base = os.path.dirname(os.path.join(ROOT, page))

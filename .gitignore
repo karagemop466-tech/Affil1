@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python bytecode
 __pycache__/
 *.py[cod]
@@ -8,3 +9,11 @@ api/data/
 
 # Build artefacts
 _site/
+=======
+# build artefacts and local scratch
+__pycache__/
+*.pyc
+.venv/
+/tmp/
+.DS_Store
+>>>>>>> origin/main
