@@ -176,3 +176,9 @@ Requests (not performed — files owned/contested by other sessions): wire the a
 - GitHub Pages: build for commit 65cd4ab completed successfully, no error (pages builds/latest API, 2026-11-20T05:28:37Z).
 - Live, verified after deploy: https://karagemop466-tech.github.io/Affil1/reviews/verification-audit.html and https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html — both fetched after the deploy completed; disclosure strip, tables, image and links render as authored.
 - Follow-up requests to the integration session remain open above (guides.html root-relative paths; sitemap/feed/nav wiring of the two new pages; canonical register decision; category naming IR-5).
+
+## Claim — arena/31f366a2-affil1 (2026-11-20)
+
+Scope: `index.html`, `guides.html`, `assets/css/main.css`, and this coordination log.
+Task: storefront polish and correction of the root guides page's broken relative references. No source-register values or external account data will be changed. This session operates on the fixed Arena branch `arena/31f366a2-affil1`.
+Status: in progress.
