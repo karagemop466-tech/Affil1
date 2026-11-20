@@ -233,6 +233,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
+<link rel="stylesheet" href="{esc(rel(page_dir, 'assets/css/storefront.css'))}">
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
