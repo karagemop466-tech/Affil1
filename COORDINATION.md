@@ -1418,3 +1418,20 @@ Not claimed and not touched: `_src/data/products.json`, `product-intent.json`, `
 - **Renumbering receipt:** this session's two flags shipped as **FLG-034** (high, underscore directories publicly served while `.nojekyll` bypasses the Jekyll `_`-exclusion) and **FLG-035** (low, stale `Disallow: /archive/` rule). They were first written as FLG-029/030; concurrent sessions took those IDs mid-flight, so both were renumbered before merge. The board, the register and `_docs/VERIFICATION-arena-3d6a7607.md` all carry the renumber note.
 - **Gates at merge time:** build ×2 byte-identical · `check.py` 0 errors / 0 warnings · `validate.py` all pass, 0 warnings · `check_local_links.py` 73 pages, 0 broken · `test_paid_link_gate` OK.
 - **Owner items queued by this session (no action taken here):** flip Pages to `build_type: workflow` (durable fix for FLG-034, read together with FLG-032's dual-publisher finding); settle FLG-025 in the enrolled Associates workflow; review FLG-035 when next editing the robots generator.
+## Claim — one-site indexing & final integration/verification · arena/1623419c-affil1 · 2026-11-20 UTC
+
+Session ID: `arena/1623419c-affil1` · Branch: `arena/1623419c-affil1` · Cut from `main` @ `6eb15b7`.
+
+| Task | Status | Owner | Files (claimed scope) |
+|---|---|---|---|
+| De-index every non-canonical HTML surface so search engines index exactly one site; fix the `robots.txt` `/archive/` → `/_archive/` path bug; re-verify the five links line-by-line; correct the stale README build paths; final integration gate + PR/merge/deploy | in progress | `arena/1623419c-affil1` | `_tools/build.py` (ROBOTS), `_platform/build_edition.py` (head + edition robots), `_decision-support/*.html`, `_archive/**/*.html` (noindex meta only), `README.md`, `COORDINATION.md`, `COORDINATION/arena-1623419c-affil1.md` |
+
+**Rationale.** `main` serves the repo root, so every un-prefixed HTML directory is a live URL. Audit on this branch found **two competing, indexable editions** plus an internal desk and a non-blocked archive, against the brief's "give search engines one site to index":
+
+- `edition/` — 27 HTML pages, **0 noindex**, own permissive `robots.txt` advertising its own `sitemap.xml`. A second edition ("Countertop Almanac") competing with the canonical root "Crisp & Counter".
+- `_decision-support/` — 7 HTML pages, **0 noindex** (internal desk).
+- `_archive/` — 69 of 126 HTML pages **without** noindex, and root `robots.txt` disallows `/archive/` while the real directory is `_archive/`, so the crawler block never matched.
+
+The durable fix (Pages `build_type: workflow`) needs repository admin scope this token does not have (recorded as an owner request). The fix implemented here is the one available without admin: make every non-canonical HTML surface reachable-for-review but `noindex, follow`, and correct the `robots.txt` path so the crawler block actually matches. Root canonical pages, sitemap and feed are unchanged. No data, no product links, no editorial content is altered by this task.
+
+**Cross-scope guard.** `_platform/**`, `_tools/**` (other than `build.py`), `_src/**`, `_analytics/**`, `_measurement/**`, `_server/**`, `edition/**` (other than the generator + robots), and all canonical root generated pages are **read-only** for this task. If a change to another session's file is required, it will be logged here rather than made.
