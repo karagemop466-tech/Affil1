@@ -4,9 +4,12 @@ The disclosure strip, the masthead, the navigation and the footer are generated
 here and nowhere else. A page cannot be added without them because there is no
 other way to produce a page.
 
-Every internal link is relative and computed with posixpath.relpath, because
-GitHub Pages serves this repository from /Affil1/ and a root-absolute href such
-as "/about/" would 404.
+Two rules are enforced by construction rather than remembered:
+
+  * every Amazon destination is built by buy_url(), so it always carries the
+    Associates tag that Program Policies 2(b) requires;
+  * every internal link is relative and computed with posixpath.relpath,
+    because GitHub Pages serves this repository from /Affil1/.
 """
 
 import html
@@ -16,48 +19,51 @@ import posixpath
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_NAME = "Crisp & Counter"
-SITE_TAGLINE = "Kitchen buying guides"
+SITE_TAGLINE = "Air fryer & thermometer notes"
 SITE_URL = "https://karagemop466-tech.github.io/Affil1"
 TRACKING_ID = "shopnow047c-20"
 BUILD_DATE = "2026-11-20"
 
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 
-# A retail destination is an affiliate link; a policy page is a citation.
-AFFILIATE_HINT = __import__("re").compile(
-    r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", __import__("re").I)
+# Amazon serves the price; this site does not hold price data.
+AMAZON_NOTE = "Price, rating and delivery are shown on Amazon, where they are always current."
 
-# The only navigation group. Everything else lives in the footer.
+# One navigation group. Everything else is reachable from the footer.
 NAV = [
+    ("products/index.html", "Shop the edit"),
     ("guides/index.html", "Guides"),
-    ("products/index.html", "Shortlist"),
     ("compare/index.html", "Compare"),
-    ("brief/index.html", "Site desk"),
+    ("questions/index.html", "Questions"),
+    ("suggestions/index.html", "Suggestions"),
 ]
 
 FOOTER_GROUPS = [
+    ("Shop", [
+        ("products/index.html", "All five picks"),
+        ("products/p-01.html", "Dual-basket air fryer"),
+        ("products/p-02.html", "French-door oven"),
+        ("products/p-03.html", "Single-basket air fryer"),
+        ("products/p-04.html", "Instant-read thermometer"),
+        ("products/p-05.html", "Wireless probe set"),
+    ]),
     ("Read", [
         ("guides/index.html", "All guides"),
-        ("compare/index.html", "Comparison table"),
+        ("compare/index.html", "Side-by-side table"),
         ("feed.xml", "RSS feed"),
     ]),
-    ("Catalogue", [
-        ("products/index.html", "Product register"),
-        ("products/p-05.html", "The thermometer"),
-        ("about/index.html#how-we-link", "How we link"),
+    ("The desk", [
+        ("questions/index.html", "Open questions"),
+        ("suggestions/index.html", "Suggestions & decisions"),
+        ("brief/index.html", "Executive summary"),
+        ("operations/ledger.html", "Campaign ledger"),
     ]),
-    ("Review queue", [
+    ("Trust", [
+        ("about/index.html", "About & how we link"),
+        ("about/index.html#sources", "Sources"),
         ("review/index.html", "Flagged for review"),
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
-        ("about/index.html#sources", "Sources"),
-    ]),
-    ("Desk", [
-        ("questions/index.html", "Open questions"),
-        ("suggestions/index.html", "Suggestions"),
-        ("operations/ledger.html", "Campaign ledger"),
-        ("brief/index.html", "Executive summary"),
-        ("about/index.html", "About this site"),
     ]),
 ]
 
@@ -71,6 +77,16 @@ def esc(value):
 def rel(page_dir, target):
     """Relative URL from a page's directory to a target path at the repo root."""
     return posixpath.relpath(target, page_dir) if page_dir else target
+
+
+def buy_url(asin):
+    """The only place an Amazon click destination is constructed.
+
+    Program Policies 2(b): every Special Link must carry the Associates ID as a
+    tag parameter. Putting that in one function means it cannot be forgotten on
+    one page and remembered on the next.
+    """
+    return f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
@@ -105,7 +121,18 @@ def product_link(page_dir, url, label, **kw):
     return link(page_dir, url, label, sponsored=True, **kw)
 
 
-def kindle(summary, body):
+def buy_button(page_dir, product, label="See it on Amazon", *, cls="btn"):
+    """The primary call to action on a product card or page."""
+    return product_link(
+        page_dir,
+        buy_url(product["observed_asin"]),
+        f'{label} <span aria-hidden="true">&#8599;</span>',
+        cls=cls,
+        aria=f"Open the Amazon listing for {product['brand']} {product['format_label']} (paid link, opens in a new tab)",
+    )
+
+
+def note(summary, body):
     """A small labelled aside. Used for honesty notes inside editorial prose."""
     return (
         '<aside class="note">'
@@ -118,15 +145,14 @@ def kindle(summary, body):
 def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
-    <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Product links are marked as sponsored. Tracking on the supplied links has not been confirmed.
-      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
+    <span class="disclosure-tag">Paid links</span>
+    <p>{DISCLOSURE} Links to Amazon here are affiliate links: if you buy through one, this site may earn a commission and you pay the same price.
+      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">How that works</a>.</p>
   </div>
 </div>"""
 
 
 def masthead(page_dir, active=None):
-    # section-aware: every page under guides/ should light "Guides".
     def section_of(path):
         return path.split("/")[0] if "/" in path else path
     act = section_of(active) if active else None
@@ -138,7 +164,7 @@ def masthead(page_dir, active=None):
   <div class="wrap masthead-inner">
     <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">
       <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
-      <span class="brand-tag">{SITE_TAGLINE}</span>
+      <span class="brand-tag">{esc(SITE_TAGLINE)}</span>
     </a>
     <nav class="nav" aria-label="Sections">
       {"".join(items)}
@@ -159,7 +185,7 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
+      <p>Affiliate tag on every product link: <code>{esc(TRACKING_ID)}</code>. Attribution is not yet confirmed in an Associates report.</p>
       <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
     </div>
   </div>
@@ -167,34 +193,42 @@ def footer(page_dir):
 
 
 def page(page_dir, *, title, description, body, active=None, canonical=None,
-         body_class="", structured=None, og_type="website"):
+         body_class="", structured=None, og_type="website", og_image=None,
+         index=True):
     css = rel(page_dir, "assets/css/site.css")
     js = rel(page_dir, "assets/js/site.js")
     feed = rel(page_dir, "feed.xml")
-    home = rel(page_dir, "index.html")
     canon = canonical or ""
+    blocks = []
+    if isinstance(structured, list):
+        blocks = structured
+    elif structured:
+        blocks = [structured]
     structured_block = ""
-    if structured:
-        structured_block = (
+    for block in blocks:
+        structured_block += (
             '<script type="application/ld+json">'
-            + json.dumps(structured, ensure_ascii=False)
+            + json.dumps(block, ensure_ascii=False)
             + "</script>\n"
         )
+    image = og_image or f"{SITE_URL}/assets/img/hero-counter-w1280.jpg"
+    robots = "" if index else '<meta name="robots" content="noindex, follow">\n'
     return f"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
+<title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{esc(SITE_URL + '/' + canon)}">
-<link rel="icon" href="{esc(rel(page_dir, 'assets/img/favicon.svg'))}" type="image/svg+xml">
+{robots}<link rel="icon" href="{esc(rel(page_dir, 'assets/img/favicon.svg'))}" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="{esc(SITE_NAME)} notes" href="{esc(feed)}">
 <meta property="og:type" content="{esc(og_type)}">
 <meta property="og:site_name" content="{esc(SITE_NAME)}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:url" content="{esc(SITE_URL + '/' + canon)}">
+<meta property="og:image" content="{esc(image)}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
@@ -205,7 +239,6 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
 {body}
 </main>
 {footer(page_dir)}
@@ -235,15 +268,48 @@ def pagehead(kicker, title, dek, meta=None):
 </div></header>"""
 
 
-def table(headers, rows, *, cls="", caption=None, note=None):
+def breadcrumbs(page_dir, trail):
+    """trail: [(target, label), ...] excluding the current page."""
+    items = [f'<li><a href="{esc(rel(page_dir, "index.html"))}">Home</a></li>']
+    for target, label in trail:
+        items.append(f'<li><a href="{esc(rel(page_dir, target))}">{esc(label)}</a></li>')
+    return f'<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><ol>{"".join(items)}</ol></div></nav>'
+
+
+def breadcrumb_schema(trail, current_label, current_path):
+    items = [{"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"}]
+    pos = 2
+    for _, label in trail:
+        items.append({"@type": "ListItem", "position": pos, "name": label})
+        pos += 1
+    items.append({"@type": "ListItem", "position": pos, "name": current_label, "item": f"{SITE_URL}/{current_path}"})
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items}
+
+
+def _src_cell(url):
+    if not url:
+        return '<span class="src-none">no single document</span>'
+    host = url.split("//", 1)[-1].split("/", 1)[0].replace("www.", "")
+    return f'<a rel="noopener" href="{esc(url)}">{esc(host)}</a>'
+
+
+def table(headers, rows, *, cls="", caption=None, note=None, sources=None):
+    """Render a table. ``sources`` adds a final Source column.
+
+    Pass a single URL for a table where every row rests on the same document, or
+    a list with one URL per row. A row without a source link fails the build.
+    """
+    if sources is not None:
+        headers = list(headers) + ["Source"]
+        per_row = sources if isinstance(sources, (list, tuple)) else [sources] * len(rows)
+        rows = [list(r) + [{"html": _src_cell(u)}] for r, u in zip(rows, per_row)]
     head = "".join(f"<th scope=\"col\">{h}</th>" for h in headers)
     body = []
     for row in rows:
         cells = []
         for cell in row:
             # A dict carries raw HTML; a string is escaped text. A list is a
-            # bug: iterating it would emit one cell per character, which is
-            # exactly the kind of silent corruption this build refuses to ship.
+            # bug: iterating it would emit one cell per character.
             if isinstance(cell, dict):
                 tag = cell.get("tag", "td")
                 attrs = cell.get("attrs", "")
@@ -262,7 +328,7 @@ def table(headers, rows, *, cls="", caption=None, note=None):
     )
 
 
-def blank(value, why="not confirmed"):
+def blank(value, why="not confirmed from an official source"):
     if value in (None, "", []):
         return f'<span class="blank" title="{esc(why)}">&mdash;</span>'
     return esc(value)

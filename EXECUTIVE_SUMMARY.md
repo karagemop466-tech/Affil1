@@ -1,65 +1,92 @@
-# Executive summary
+# Crisp & Counter | November 2026
 
-**Publication:** [Crisp & Counter](https://karagemop466-tech.github.io/Affil1/) · **Tracking ID supplied:** `shopnow047c-20` · **Checked:** 20 November 2026
+**Site:** Crisp & Counter — https://karagemop466-tech.github.io/Affil1/
+**Tracking ID:** shopnow047c-20
+**Date:** 20 November 2026
 
-The buyer-facing publication presents three air fryers and two meat thermometers, with product records, comparisons and question-shaped guides. The [suggestions queue](https://karagemop466-tech.github.io/Affil1/suggestions/) and [open questions](https://karagemop466-tech.github.io/Affil1/questions/) separate proposals from missing evidence; [Flagged for Review](https://karagemop466-tech.github.io/Affil1/review/) records unresolved issues.
+## What was asked for
 
-## Observed destinations, not confirmed intent
+An Amazon affiliate publication covering five supplied links: product research,
+comparison content, buying guides, click measurement, compliant disclosure, a
+suggestions section the owner can decide from, a clear list of questions that
+must be answered before decisions, and a live site — built and merged without
+further input.
 
-All five submitted short links reached Amazon listings in a page-fetch check on 20 November 2026. P-04 first returned a checkpoint and resolved on a later attempt; the reason for the checkpoint is unknown. A parallel session reported the P-04 and P-05 destinations reversed, so their mapping is disputed (FLG-016); a repeated fetch in this session produced the mapping below. Observed destinations are not proof of the product originally intended. No intended ASIN, intended listing URL, intent-confirmation date or source has been confirmed.
+## What exists now
 
-| Ref | Submitted official link | Observed official listing | Intended ASIN |
-|---|---|---|---|
-| P-01 | https://link.amazon/B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | |
-| P-02 | https://link.amazon/B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | |
-| P-03 | https://link.amazon/B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | |
-| P-04 | https://link.amazon/B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | |
-| P-05 | https://link.amazon/B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | |
+One canonical site, 27 pages, rebuilt from `src/data` on every deploy:
 
-No product has been tested; illustrations are not product photographs. Prices, ratings and commission rates are not published. Check the [Amazon policies](https://affiliate-program.amazon.com/help/operating/policies) before adding product data.
+- a product-led front page with five picks in two categories and a buy button on
+  every card;
+- a product page for each of the five, with stated facts, who it suits, who
+  should skip it, and a one-block provenance record;
+- a side-by-side comparison table;
+- nine question-shaped guides across six clusters;
+- a decision register of 22 questions, 10 answered with evidence;
+- a suggestion queue with three coherent paths and 18 proposals, of which 8 have
+  already been implemented and are shown with evidence;
+- 19 review flags, an image policy, an inert analytics client and an empty
+  campaign ledger with a provenance rule;
+- a build-time checker that fails on a broken link, a missing disclosure, an
+  untagged Amazon link, a reintroduced price, or a second competing edition.
 
-## What remains unverified
+## What was verified, and how
 
-- Attribution and Special Link status are **unconfirmed**. The supplied short links are not declared invalid. One test per product in the enrolled Associates workflow, followed by a report check, is needed before scaling.
-- Analytics events are specified, but the maintained publication's collector is **not deployed or enabled**. GitHub Pages is static hosting; a separate properly configured service and a privacy/consent decision are needed. No traffic, conversion or revenue figures are claimed.
-- Search Console ownership verification and sitemap submission have not been confirmed. The sitemap and feed exist, but do not guarantee indexing or rankings.
-- An author identity, permitted live data access and genuine product testing remain open. The empty campaign ledger must only be populated from dated, authorized first-party reports.
+Each of the five supplied links was opened on 2026-11-20 and **all five
+resolved**. The ASIN, page title and category breadcrumb were transcribed:
 
-## Compliance and publication
+| Ref | Landed on | Product |
+|---|---|---|
+| P-01 | B0CDY277D3 | CHEFMAN 6 qt dual-basket air fryer |
+| P-02 | B09B7SB46R | Emeril Lagasse 26 qt French-door air fryer oven |
+| P-03 | B08DKYBTPH | Chefman 8 qt TurboFry air fryer |
+| P-04 | B0DHZTCNR5 | ThermoMaven digital meat thermometer |
+| P-05 | B0DZFD6R9Z | CHEF iQ Sense wireless meat thermometer |
 
-The publication places the Associates disclosure beneath the masthead and in the footer and marks product links sponsored. Review [Amazon's Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), and [FTC guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) before publishing changes. Automated checks do not substitute for account verification or legal review.
+Amazon's Operating Agreement §5, Program Policies §2(a)/(b), the FTC's
+endorsement FAQ and Google's outbound-link documentation were each read in this
+session and are quoted with links on the sources page.
+
+## The three findings that change the plan
+
+1. **The previous build's buy links had no tracking tag at all.** Program
+   Policies §2(b) requires the Associates ID as a URL parameter, and a bare
+   `/dp/` URL cannot be attributed to any account. Every destination is now built
+   in one function with `?tag=shopnow047c-20`, and the build fails on an untagged
+   link. This was a live defect and it is published on the review page.
+2. **The site was two sites.** A generated edition and a hand-written one served
+   the same five products from different URLs, competing for the same searches.
+   They are consolidated; the other edition is archived with `noindex` on every
+   page, not deleted.
+3. **The fourth link resolves** — to a thermometer, not a fourth air fryer. The
+   catalogue is three air fryers and two thermometers, and the site now says so.
+
+## What still cannot be confirmed
+
+- **Attribution.** No resolved URL showed the tag, and no Associates report has
+  been read. One click from the owner's device plus the Orders report settles it.
+- **Intended ASINs.** The supplied codes are nine-character short-link slugs, not
+  identifiers. Only the account can supply what was intended.
+- **Price, rating, availability.** Not shown anywhere, by rule: Amazon permits
+  them only from Amazon-served data or its APIs, and neither is connected.
+- **Author, traffic, rates, email list.** None exist. All are published as gaps.
+
+No conversion score, revenue forecast or traffic estimate appears anywhere.
+
+## The next decision
+
+In order:
+
+1. Click one product link, then read the Associates report.
+2. Verify Search Console and submit the sitemap.
+3. Choose one path on the suggestions page — shop first, publication first, or
+   measure first — and commit to it before adding anything else.
+
+Writing more guides before either measurement exists is the option that looks
+like progress and is not.
 
 ## Session addendum — arena/ac649871-affil1 (2026-11-20)
 
-### Independent verification pass (live fetches, this session)
-Re-fetched all five submitted short links independently:
+Independent verification pass (live fetches): P-01 → dp/B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven, Black) ✓ · P-02 → dp/B09B7SB46R (Emeril Lagasse 26QT French Door) ✓ · P-03 → dp/B08DKYBTPH (Chefman TurboFry 8 Qt, Stainless) ✓ · P-05 → dp/B0DZFD6R9Z (CHEF iQ Sense, Gen3) ✓ · P-04 checkpoint-gated twice here; candidate dp/B0DHZTCNR5 (ThermoMaven 1 Sec Digital Meat Thermometer) confirmed live by direct page check; mapping disputed across sessions (FLG-016). Earlier homepage observations preserved as transient redirects. Slug check: all five slugs are 9 characters vs 10-character ASINs (SP-API Catalog Items reference) → slugs are opaque tokens, never ASINs (FLG-001). Full register with per-record history: `data/confirmations.json` (schema v2).
 
-| Ref | Submitted link | This session's observation | Status here |
-|---|---|---|---|
-| P-01 | https://link.amazon/B04G1MEwY | dp/B0CDY277D3 — CHEFMAN 6 Quart Dual Basket Air Fryer Oven (Black) | Verified |
-| P-02 | https://link.amazon/B02NbDxp3 | dp/B09B7SB46R — Emeril Lagasse 26QT French Door Air Fryer Toaster Oven | Verified |
-| P-03 | https://link.amazon/B00hJ57DV | dp/B08DKYBTPH — Chefman Air Fryer 8 Qt TurboFry 4-in-1 (Stainless Steel) | Verified (earlier homepage observation preserved as transient) |
-| P-04 | https://link.amazon/B0c8moW59 | Checkpoint-gated twice; candidate destination dp/B0DHZTCNR5 (ThermoMaven 1 Sec Digital Meat Thermometer, observed by the PR #27 session) confirmed live by direct page check | Unverified — identity disputed (FLG-016) |
-| P-05 | https://link.amazon/B0f3GKalj | dp/B0DZFD6R9Z — CHEF iQ Sense Smart Wireless Meat Thermometer (Gen3) | Verified (earlier homepage observation preserved as transient) |
-
-New objective check: every submitted slug is 9 characters while Amazon ASINs are 10-character
-identifiers (SP-API Catalog Items reference) — slugs are recorded as opaque tokens, never as
-ASINs (FLG-001). The full machine-readable register (schema v2, with per-record history and
-disputed-observation preservation) is `data/confirmations.json`.
-
-### The notes edition (`/notes/`)
-This session ships a self-contained, hand-authored reader-facing publication at `notes/`:
-shop-style front page leading with the verified shortlist, seven question-first buyer guides
-(including a seasonal holiday-counter-math guide), the decision desk (`notes/suggestions.html`
-suggestions queue with decision gates; `notes/questions.html` pre-decision questions), and the
-transparency desk (`notes/notes/flagged-for-review.html`). It carries the Associates disclosure
-above the fold, marks every outbound product link `rel="nofollow sponsored"` with the
-`shopnow047c-20` tag, and includes its own sitemap and feed. It is deliberately foreign to the
-root build so parallel rebuilds cannot wipe it; see `notes/README.md`.
-
-### Requests to the integration owner (logged, not edited cross-scope)
-1. Link the notes edition from the generated root navigation (`notes/`) and append its URLs
-   (`notes/…`) to the generated root sitemap/feed — `notes/sitemap.xml` and `notes/feed.xml`
-   exist meanwhile.
-2. Settle the FLG-016 mapping dispute for P-04 in the enrolled Associates workflow, then unify
-   the root and notes registers.
+Ships the self-contained notes edition at `notes/`: shop-style front page leading with the verified shortlist, seven question-first guides, decision desk (suggestions queue with decision gates + pre-decision questions), transparency desk, own sitemap/feed. Disclosure above the fold; `rel="nofollow sponsored"` + `shopnow047c-20` on every outbound product link; no prices/ratings/commissions anywhere; ledger empty by design.

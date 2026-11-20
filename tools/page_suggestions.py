@@ -1,15 +1,17 @@
-"""The suggestion queue: proposals a reviewer can accept or reject one at a time."""
+"""The suggestion queue: paths, proposals, and a decision control per row.
+
+Nothing here is implemented by pressing a button. The buttons record a choice in
+the reader's own browser, which can then be copied out as text. The point is that
+the owner can choose a path before anything changes.
+"""
 
 from layout import esc, eyebrow, page, pagehead, rel, section
 
+PATHS_CLASS = {"PATH-A": "path-card", "PATH-B": "path-card", "PATH-C": "path-card"}
 
-def build(page_dir, suggestions, meta):
-    d = page_dir
-    items = suggestions["suggestions"]
-    recommended = [s for s in items if s["id"] in ("S-01", "S-02", "S-03")]
 
-    def row(s, n):
-        return f"""<article class="scard" id="{esc(s['id'])}">
+def _row(s):
+    return f"""<article class="scard" id="{esc(s['id'])}">
   <div class="scard-head">
     <span class="scard-id">{esc(s['id'])}</span>
     <h3>{esc(s['title'])}</h3>
@@ -24,7 +26,7 @@ def build(page_dir, suggestions, meta):
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your decision</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
@@ -32,43 +34,81 @@ def build(page_dir, suggestions, meta):
   </div>
 </article>"""
 
+
+def build(page_dir, suggestions, meta):
+    d = page_dir
+    items = suggestions["suggestions"]
+    open_items = [s for s in items if s.get("status") != "implemented"]
+    done = [s for s in items if s.get("status") == "implemented"]
+    paths = suggestions.get("paths", [])
+
+    path_cards = "".join(f"""<article class="path-card">
+  <p class="scard-id">{esc(p['id'])}</p>
+  <h3>{esc(p['name'])}</h3>
+  <p class="path-summary">{esc(p['summary'])}</p>
+  <dl class="scard-meta">
+    <div><dt>Needs</dt><dd>{esc(p['needs'])}</dd></div>
+    <div><dt>Before you choose</dt><dd>{esc(p['before_you_choose'])}</dd></div>
+    <div><dt>Good if</dt><dd>{esc(p['good_if'])}</dd></div>
+  </dl>
+</article>""" for p in paths)
+
+    done_rows = "".join(f"""<tr>
+  <td><strong>{esc(s['id'])}</strong></td>
+  <td>{esc(s['title'])}</td>
+  <td>{esc(s.get('implemented_on', ''))}</td>
+  <td>{esc(s.get('evidence', ''))}</td>
+</tr>""" for s in done)
+
     body = f"""{pagehead(
         'Suggestions',
-        'Twelve proposals,<br>one decision each',
-        'Each row says what it would change, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented.',
-        meta='Nothing on this page changes the site &middot; decisions are stored in your browser only, never sent anywhere',
+        'Choose a direction,<br>then choose the rows',
+        f'{len(paths)} coherent paths and {len(open_items)} individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.',
+        meta='Decisions are stored in your browser only &middot; nothing transmitted &middot; no account',
     )}
 {section(f'''
 <div class="decide-intro">
   <div>
-    <h2>How to use this page</h2>
-    <p>Work down the list and mark each row. The buttons record your decision in this browser's own storage so you can come back to it. Nothing is transmitted, there is no account, and no one is notified &mdash; the site has no backend by design.</p>
-    <p>When you are ready, use <strong>Copy decisions</strong> to get a plain-text summary you can paste into a message. That is the hand-off: a human deciding, then instructing.</p>
+    <h2>Read this first</h2>
+    <p>The rows below are individually sensible and collectively contradictory. Product photography is pointless without an author; a publishing cadence is pointless without a name behind it; analytics is pointless if nobody reads the report. That is why the three paths come before the queue.</p>
+    <p>Pick one path, then read only the rows it needs. Everything else can wait without the site getting worse.</p>
   </div>
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
-    <p class="decide-count" data-count>0 of {len(items)} decided</p>
+    <p class="decide-count" data-count>0 of {len(open_items)} decided</p>
   </div>
-</div>
-<p class="lede-prose">Order matters more than it looks. Two of these are free and unblock the others, and one of them is a recommendation not to do something. That last one is included because a suggestion queue that only ever says yes is not a decision tool.</p>''', cls='')}
+</div>''', cls='')}
 {section(f'''
-<div class="sec-head"><div>{eyebrow('Start here')}<h2>The first three</h2></div><p>Cheap, reversible, and they make the later items worth doing.</p></div>
-{''.join(row(s, i) for i, s in enumerate(recommended))}''', cls='section-tint')}
+<div class="sec-head"><div>{eyebrow('Three ways forward')}<h2>Pick a path, not a pile</h2></div>
+<p>Each path needs a different set of rows. Choosing one is the decision this page exists for.</p></div>
+<div class="path-grid paths-three">{path_cards}</div>''', cls='section-tint')}
 {section(f'''
-<div class="sec-head"><div>{eyebrow('The full queue')}<h2>Everything else</h2></div><p>Ordered by what they unlock, not by size.</p></div>
-{''.join(row(s, i) for i, s in enumerate([x for x in items if x['id'] not in ('S-01','S-02','S-03')]))}''', cls='')}
+<div class="sec-head"><div>{eyebrow('The queue')}<h2>Open proposals</h2></div>
+<p>Ordered so the cheap, unblocking rows come first.</p></div>
+{"".join(_row(s) for s in open_items)}''', cls='')}
+{section(f'''
+<div class="sec-head"><div>{eyebrow('Already done')}<h2>Implemented on 20 November 2026</h2></div>
+<p>Kept visible, with evidence, so the record of what changed is not only a commit log.</p></div>
+<div class="table-scroll"><table class="register">
+<thead><tr><th scope="col">Ref</th><th scope="col">Change</th><th scope="col">Date</th><th scope="col">Evidence</th></tr></thead>
+<tbody>{done_rows}</tbody></table></div>
+<p class="table-note">An implemented row is not a suggestion any more. It is here because the owner should be able to see what changed without reading the repository.</p>''', cls='section-tint')}
 {section(f'''
 <div class="callout">
   <h2>The one recommendation to read twice</h2>
-  <p>Everything else on this page adds something. S-11 says stop: do not commission more AI-written guides until either a real test or real search data exists. More synthetic prose makes the site bigger, not better, and it raises the chance the whole publication is treated as one undifferentiated block.</p>
-  <p>The four guides that exist are defensible because they claim little. That is a narrow advantage, and it survives by not being diluted.</p>
+  <p>Everything else on this page adds something. S-07 says stop: do not commission more guides until either a real test or real search data exists. More synthetic prose makes the publication bigger, not better, and it raises the chance the whole site is treated as one undifferentiated block.</p>
+  <p>The nine guides that exist are defensible because they claim little. That is a narrow advantage, and it survives by not being diluted.</p>
 </div>''', cls='')}"""
     return page(
         d,
-        title="Suggestions \u2014 Crisp & Counter",
-        description="Twelve proposed changes to this site, each with its cost, its risk and the open question it depends on \u2014 with a decision control for each so a reviewer can choose a path before anything is built.",
+        title="Suggestions and decisions | Crisp & Counter",
+        description=f"{len(open_items)} proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.",
         body=body,
         active="suggestions/index.html",
         canonical="suggestions/",
+        structured={"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://karagemop466-tech.github.io/Affil1/"},
+            {"@type": "ListItem", "position": 2, "name": "Suggestions", "item": "https://karagemop466-tech.github.io/Affil1/suggestions/"},
+        ]},
     )
