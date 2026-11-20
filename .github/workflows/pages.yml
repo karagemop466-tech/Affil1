@@ -15,27 +15,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate static site references
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Render the site from the single source of truth
+        run: python3 scripts/build_site.py
+
+      - name: Fail if the committed pages have drifted from the renderer
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          from html.parser import HTMLParser
-          class Links(HTMLParser):
-              def __init__(self): super().__init__(); self.links=[]
-              def handle_starttag(self, tag, attrs):
-                  for k,v in attrs:
-                      if k in ('href','src') and v and not v.startswith(('http://','https://','#','mailto:','data:','javascript:')): self.links.append(v.split('#')[0])
-          for page in [Path('index.html'), *Path('guides').glob('*.html')]:
-              parser=Links(); parser.feed(page.read_text())
-              for ref in parser.links:
-                  target=(page.parent/ref).resolve()
-                  if ref and not target.exists(): raise SystemExit(f'Broken local reference: {page}: {ref}')
-          print('Local HTML references exist.')
-          PY
+          if ! git diff --exit-code --stat -- '*.html' '*.xml' '*.txt' '.nojekyll'; then
+            echo "::error::The committed pages do not match site_data.py. Run scripts/build_site.py and commit the result."
+            git diff --stat -- '*.html' '*.xml' '*.txt' '.nojekyll'
+            exit 1
+          fi
+
+      - name: Publishing gate
+        run: python3 scripts/check_site.py
+
+      - name: Stage only the published files
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          cp index.html 404.html robots.txt sitemap.xml feed.xml styles.css app.js .nojekyll _site/
+          cp -r assets guides shop desk _site/
+          echo "Staged:" && find _site -type f | sort
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
+
   deploy:
     environment:
       name: github-pages

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campaign ledger — Good Measure Kitchen</title>
+<meta name="description" content="An empty but fully defined campaign ledger, to be filled only from authorised first-party reports.">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/desk/ledger.html">
+<meta property="og:site_name" content="Good Measure Kitchen">
+<meta property="og:title" content="Campaign ledger — Good Measure Kitchen">
+<meta property="og:description" content="An empty but fully defined campaign ledger, to be filled only from authorised first-party reports.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/desk/ledger.html">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="Good Measure Kitchen — Kitchen Notes" href="../feed.xml">
+<link rel="stylesheet" href="../styles.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Good Measure Kitchen", "alternateName": "Kitchen Notes", "url": "https://karagemop466-tech.github.io/Affil1/", "description": "An empty but fully defined campaign ledger, to be filled only from authorised first-party reports."}</script>
+</head>
+<body class="">
+<div class="disclosure"><span class="disclosure-inner"><strong>As an Amazon Associate I earn from qualifying purchases.</strong> <span class="disclosure-more">Every link to Amazon on this site is a paid placement. <a href="../desk/methodology.html#disclosure">How our links work</a></span></span></div>
+<header class="masthead"><div class="wrap masthead-inner"><a class="brand" href="../index.html"><span class="brand-mark">gm</span><span class="brand-text">Good Measure Kitchen<span class="brand-sub">Kitchen Notes</span></span></a><nav class="nav" aria-label="Main"><ul><li class="nav-item"><a class="nav-top" href="../shop/index.html">Shop</a><div class="menu"><a href="../shop/index.html">All products</a><a href="../shop/basket-air-fryers.html">Basket air fryers</a><a href="../shop/air-fryer-ovens.html">Air fryer ovens</a><a href="../shop/cooking-tools.html">Cooking tools</a></div></li><li class="nav-item"><a class="nav-top" href="../guides/index.html">Guides</a><div class="menu"><a href="../guides/index.html">All guides</a><a href="../guides/index.html#format">Format</a><a href="../guides/index.html#capacity">Capacity</a><a href="../guides/index.html#cleanup">Cleanup</a></div></li><li class="nav-item"><a class="nav-top" href="../desk/index.html">The Desk</a><div class="menu"><a href="../desk/executive-summary.html">Executive summary</a><a href="../desk/product-records.html">Product records</a><a href="../desk/suggestions.html">Suggestions</a><a href="../desk/questions.html">Open questions</a><a href="../desk/ledger.html">Campaign ledger</a><a href="../desk/publishing-gate.html">Publishing gate</a><a href="../desk/flagged-for-review.html">Flagged for review</a></div></li><li class="nav-item"><a class="nav-top" href="../desk/methodology.html">Method</a><div class="menu"><a href="../desk/methodology.html">How we verify</a><a href="../desk/methodology.html#sources">Sources</a><a href="../desk/methodology.html#standards">Editorial standards</a></div></li></ul></nav><a class="btn btn-small masthead-cta" href="../shop/index.html">Shop the shelf</a><button class="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span><span></span><span></span></button></div><div class="mobile-nav" id="mobile-nav" hidden><a href="../shop/index.html">All products</a><a href="../shop/basket-air-fryers.html">Basket air fryers</a><a href="../shop/air-fryer-ovens.html">Air fryer ovens</a><a href="../shop/cooking-tools.html">Cooking tools</a><a href="../guides/index.html">All guides</a><a href="../guides/index.html#format">Format</a><a href="../guides/index.html#capacity">Capacity</a><a href="../guides/index.html#cleanup">Cleanup</a><a href="../desk/executive-summary.html">Executive summary</a><a href="../desk/product-records.html">Product records</a><a href="../desk/suggestions.html">Suggestions</a><a href="../desk/questions.html">Open questions</a><a href="../desk/ledger.html">Campaign ledger</a><a href="../desk/publishing-gate.html">Publishing gate</a><a href="../desk/flagged-for-review.html">Flagged for review</a><a href="../desk/methodology.html">How we verify</a><a href="../desk/methodology.html#sources">Sources</a><a href="../desk/methodology.html#standards">Editorial standards</a></div></header>
+<main id="main">
+<section class="page-head"><div class="wrap"><p class="eyebrow">The desk &middot; Campaign ledger</p>
+<h1>Evidence before<br>optimisation.</h1>
+<p class="lead">A fixed schema with no rows. It will be filled only from authorised first-party
+reports, each with a dated provenance trail. No conversion score and no revenue forecast appear
+anywhere on this site.</p></div></section>
+
+<section class="wrap section section-tight"><div class="table-wrap"><table class="data-table ledger-table">
+<thead><tr><th>Date</th><th>Source</th><th>Channel</th><th>Eligible sessions</th><th>Clicks</th><th>Reported orders</th><th>Provenance</th><th>Logged by</th></tr></thead><tbody><tr><td colspan="8" class="ledger-empty">No authorised report data recorded yet. This ledger is empty by design and stays empty until a first-party report is imported with its provenance. Source of truth: <a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">Amazon Associates Program Policies</a></td></tr></tbody></table></div>
+<p class="editorial-note">Source of truth for what a row may contain:
+<a href="https://affiliate-program.amazon.com/help/operating/policies">Amazon Associates Program Policies</a> (Commission Income Statement, and the
+IP License requirement to disclose accurately how visitor data is collected and stored).</p></section>
+
+<section class="wrap section section-tight"><div class="split">
+<div><h2 class="h3">The import control</h2>
+<p>When an authorised report is available, load the file below. It records a
+<span class="mono">report_import</span> event and a provenance row. It does not invent a figure,
+and it does not fill a cell that the report does not contain.</p>
+<p class="ledger-actions"><label class="file-label">Choose an authorised report
+<input type="file" id="report-file" accept=".csv,.txt" class="file-input"></label>
+<button class="btn btn-dark" id="report-import">Import and record provenance</button></p>
+<p class="ledger-status" id="report-status" role="status">No report loaded.</p>
+</div>
+<div class="panel"><h3>What is collected by the tracker</h3>
+<p>Event name, page path, referrer host, the outbound host a reader clicked, a guide id, a
+timestamp, and a truncated salted hash of the IP address that changes daily. No cookies, no
+advertising identifiers, no fingerprinting, no cross-site identifiers, and no storage of query
+strings on outbound links. Retention is 90 days.</p>
+<p><a href="../desk/methodology.html#privacy">Read the method</a></p></div></div></section>
+
+<section class="wrap section section-tight"><div class="section-head"><div><p class="eyebrow">Event definitions</p>
+<h2>Five events, defined once.</h2></div><p class="section-note">The collector ships in the
+repository but is not deployed. Until it is, nothing is collected and no number on this site
+moves.</p></div>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Event</th><th>Meaning</th>
+<th>Where it fires</th><th>Authority</th></tr></thead><tbody><tr><td class="mono">page_view</td><td>A page was opened.</td><td>Every page.</td><td class="src-cell"><a class="" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener">IP License and Commission Income Statement</a></td></tr><tr><td class="mono">outbound_click</td><td>A reader clicked a link to Amazon.</td><td>Every product link, marked sponsored.</td><td class="src-cell"><a class="" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener">IP License and Commission Income Statement</a></td></tr><tr><td class="mono">guide_open</td><td>A guide was opened.</td><td>Every guide page, with the guide id.</td><td class="src-cell"><a class="" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener">IP License and Commission Income Statement</a></td></tr><tr><td class="mono">search_query_referral</td><td>A visit arrived from a search engine.</td><td>Recorded on the landing page with the referring engine and any query term carried in the URL.</td><td class="src-cell"><a class="" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener">IP License and Commission Income Statement</a></td></tr><tr><td class="mono">report_import</td><td>An authorised report was imported into the ledger.</td><td>Fired by the ledger import control, with the report name and date.</td><td class="src-cell"><a class="" href="https://affiliate-program.amazon.com/help/operating/policies" target="_blank" rel="noopener">IP License and Commission Income Statement</a></td></tr></tbody></table></div></section>
+</main>
+<footer class="site-footer"><div class="wrap footer-main"><div class="footer-brand"><a class="brand" href="../index.html"><span class="brand-mark">gm</span><span class="brand-text">Good Measure Kitchen<span class="brand-sub">Kitchen Notes</span></span></a><p class="footer-blurb">Independent kitchen buying guides. We have not handled the appliances we write about, and we say what we could not confirm.</p><p class="footer-disclosure"><strong>As an Amazon Associate I earn from qualifying purchases.</strong></p></div><div class="footer-nav"><b>Shop</b><a href="../shop/index.html">All products</a><a href="../shop/basket-air-fryers.html">Basket air fryers</a><a href="../shop/air-fryer-ovens.html">Air fryer ovens</a><a href="../shop/cooking-tools.html">Cooking tools</a><a href="../shop/index.html">All shop</a></div><div class="footer-nav"><b>Guides</b><a href="../guides/index.html">All guides</a><a href="../guides/index.html#format">Format</a><a href="../guides/index.html#capacity">Capacity</a><a href="../guides/index.html#cleanup">Cleanup</a><a href="../guides/index.html">All guides</a></div><div class="footer-nav"><b>The Desk</b><a href="../desk/executive-summary.html">Executive summary</a><a href="../desk/product-records.html">Product records</a><a href="../desk/suggestions.html">Suggestions</a><a href="../desk/questions.html">Open questions</a><a href="../desk/ledger.html">Campaign ledger</a><a href="../desk/publishing-gate.html">Publishing gate</a><a href="../desk/flagged-for-review.html">Flagged for review</a><a href="../desk/index.html">All the desk</a></div><div class="footer-nav"><b>Method</b><a href="../desk/methodology.html">How we verify</a><a href="../desk/methodology.html#sources">Sources</a><a href="../desk/methodology.html#standards">Editorial standards</a><a href="../desk/methodology.html">All method</a></div><div class="footer-nav"><b>The Desk</b><a href="../desk/executive-summary.html">Executive summary</a><a href="../desk/suggestions.html">Suggestions register</a><a href="../desk/questions.html">Open questions</a><a href="../desk/ledger.html">Campaign ledger</a><a href="../desk/publishing-gate.html">Publishing gate</a><a href="../desk/flagged-for-review.html">Flagged for review</a><a href="../feed.xml">RSS feed</a><a href="../sitemap.xml">Sitemap</a></div></div><div class="wrap footer-bottom"><span>Good Measure Kitchen &middot; Issue 01 &middot; November 2026</span><span>Built from one verified data file. <a href="../desk/methodology.html">How we verify</a></span></div></footer>
+<script src="../assets/site-config.js" defer></script>
+<script src="../app.js" defer></script>
+<script src="../assets/analytics.js" defer></script>
+</body>
+</html>
