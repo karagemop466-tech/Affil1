@@ -27,6 +27,8 @@ import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
+import page_decisions  # noqa: E402
+import legacy  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -50,13 +52,15 @@ GENERATED = {
     "guides/air-fryer-capacity-checklist.html",
     "guides/cleanup-and-counter-space.html",
     "guides/multi-function-kitchen-appliance-questions.html",
+    "guides/thermometer-instant-or-wireless.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
     "compare/index.html",
-    "questions/index.html",
+    "questions/index.html", "questions/decisions.html",
     "suggestions/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
+    "review/verification.html",
     "about/index.html",
     "operations/ledger.html",
     "brief/index.html",
@@ -163,8 +167,21 @@ def main():
     sources = load("sources.json")
     questions = load("questions.json")
     suggestions = load("suggestions.json")
+    decisions = load("decisions.json")
+    verification = load("verification.json")
     flags = load("flags.json")
     images = load("images.json")
+    meta["counts"] = {
+        "pages": len([g for g in GENERATED if g.endswith(".html")]),
+        "guides": len(GUIDES),
+        "products": len(products),
+        "identified": sum(1 for p in products if p.get("observed_asin")),
+        "suggestions": len(suggestions["suggestions"]),
+        "flags": len(flags["flags"]),
+        "questions": len(questions["questions"]),
+        "decisions": len(decisions["decisions"]),
+        "sources": len(sources["sources"]),
+    }
 
     clean()
     favicon()
@@ -188,12 +205,14 @@ def main():
     # compare / questions / suggestions
     pages.append(write("compare/index.html", page_compare.build("compare", products, meta)))
     pages.append(write("questions/index.html", page_questions.build("questions", questions, meta)))
+    pages.append(write("questions/decisions.html", page_decisions.build("questions", decisions, sources, meta)))
     pages.append(write("suggestions/index.html", page_suggestions.build("suggestions", suggestions, meta)))
 
     # review
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))
     pages.append(write("review/images.html", page_review.build_images("review", images, products, meta)))
     pages.append(write("review/measurement.html", page_review.build_measurement("review", meta)))
+    pages.append(write("review/verification.html", page_review.build_verification("review", verification, sources, meta)))
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
@@ -203,6 +222,10 @@ def main():
     pages.append(write("sitemap.xml", sitemap(pages)))
     pages.append(write("feed.xml", feed(GUIDES)))
     pages.append(write("robots.txt", ROBOTS))
+
+    # The other edition on this repository is left in place and marked
+    # noindex, so search engines see one shop. Idempotent, and never deletes.
+    legacy.main()
 
     built = {p for p in pages}
     missing = GENERATED - built - {"robots.txt"}

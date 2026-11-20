@@ -104,7 +104,7 @@ GUIDES = [
             {
                 "h": "What the sellers in this register actually state",
                 "p": [
-                    "Four of the five submitted links resolved to listings; the fifth is unresolved and is flagged. Three of those four are air fryers (the fourth is a probe thermometer, which has no capacity to compare). The three titles state 6 quarts across two 3-quart baskets (P-01), 8 quarts in a single basket (P-03), and 26 quarts in a French-door oven (P-02).",
+                    "All five submitted links resolved to live listings in the session of 20 November 2026, and one of them needed a retry after three failures in an earlier session. Three are air fryers; the other two are probe thermometers, which have no capacity to compare and are handled in their own guide. The three air-fryer titles state 6 quarts across two 3-quart baskets (P-01), 8 quarts in a single basket (P-03), and 26 quarts in a French-door oven (P-02).",
                     "Those are the sellers' figures, repeated as figures. They have not been measured. A quart quoted for a two-basket machine is also counting two separate containers, which is exactly the kind of detail a single capacity number hides \u2014 so if you are comparing P-01 against P-03, compare the 3-quart basket against the 8-quart basket, not the 6 against the 8."
                 ]
             },
@@ -162,7 +162,7 @@ GUIDES = [
             {
                 "h": "What the register can and cannot tell you here",
                 "p": [
-                    "Three of the four resolved listings state in their titles that the basket or baskets are dishwasher-safe, in the sellers' wording (P-01, P-03, and by a different phrasing P-02's accessory set). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
+                    "Two of the three air-fryer listings state in their titles that the basket is dishwasher-safe, in the sellers' wording (P-01 and P-03). P-02's title instead lists six cooking accessories as included, which is a count, not a care instruction. Those are seller statements, and this site has not checked any of them against a manual.",
                     "No dimensions are published for any of these products on this site, because dimensions were not confirmed from an official specification sheet in this build. That is a gap, and it is on the review page rather than buried."
                 ]
             }
@@ -225,6 +225,63 @@ GUIDES = [
             }
         ],
         "closing": "No product on this site was tested, ranked or scored. P-05's attributes above are transcribed from its listing title."
+    },
+    {
+        "slug": "thermometer-instant-or-wireless",
+        "kicker": "Thermometers",
+        "title": "Instant-read or wireless probe? What a kitchen thermometer has to do",
+        "dek": "Two of the five products here are thermometers, and they are not competing answers to the same question. One is for the moment you open the oven; the other is for the twenty minutes before it.",
+        "read_minutes": 6,
+        "photo": "assets/img/thermometer",
+        "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+        "photo_caption": "Illustration. It is not a photograph of either thermometer on this site.",
+        "updated": "2026-11-20",
+        "sections": [
+            {
+                "h": "The question is not accuracy. It is where you are standing.",
+                "p": [
+                    "Both products here are sold on accuracy, and accuracy is the least useful thing to compare them on, because neither seller's accuracy claim can be checked from a listing. What differs, and what you can actually feel in a kitchen, is where the reading appears and how long you have to stand there to get it.",
+                    "An instant-read probe is a hand tool. You open the oven or lift the lid, push the probe in, read a number, and take it out. A wireless probe set stays in the food while it cooks and sends the number somewhere else \u2014 a base unit, a phone \u2014 so you can be in another room when the target is reached."
+                ]
+            },
+            {
+                "h": "What each listing actually states",
+                "p": [
+                    "These are the sellers' own claims, transcribed from the listing titles on 2026-11-20. They are not measurements, and no product here was used."
+                ],
+                "items": [
+                    ("P-04, ThermoMaven instant-read", "The title claims a one-second reading, an accuracy of plus or minus 0.5\u00b0F, NIST and NSF certification, IP67 waterproofing and an auto-rotating backlit screen."),
+                    ("P-05, CHEF iQ Sense", "The title claims three ultra-thin probes, a wireless connection with unlimited range over WiFi, a 1000\u00b0F heat rating, five sensors, and lists BBQ, grill, oven, smoker and air fryer among its intended uses.")
+                ]
+            },
+            {
+                "h": "Where the two claims diverge, and why it matters",
+                "items": [
+                    ("Probes", "One probe against three. Three probes means three pieces of food monitored at once, which matters if you cook two joints and a bird, and is dead weight if you cook one steak."),
+                    ("Heat rating", "The wireless set states 1000\u00b0F. That is a rating for the probe sitting inside a hot cavity, not a cooking instruction, and it is the number that decides whether a probe survives a pizza oven."),
+                    ("Range", "\u201cUnlimited range\u201d is a claim about a network connection, not about physics. If your WiFi does not reach the garden, the range is your WiFi's range."),
+                    ("Reading time", "One second stated for the instant-read. That is the difference between checking a pan on the hob without lifting it off and having to wait."),
+                    ("Water", "IP67 is stated for P-04 only. That is a rating for the probe, and it is the sort of claim a manual should confirm before you put it anywhere near a dishwasher."),
+                    ("Batteries and pairing", "A wireless set has two things to keep charged and one thing to pair. Neither listing title states battery life, and this site does not fill that gap.")
+                ]
+            },
+            {
+                "h": "What this guide will not tell you",
+                "p": [
+                    "It will not tell you a safe internal temperature. The United States Department of Agriculture publishes that guidance, and the page could not be reached from the environment this site was built in; a temperature figure copied from a blog would be worse than no figure, so none appears here.",
+                    "It will not tell you which of the two is more accurate, because accuracy claims are made by sellers and this site has tested nothing. And it will not tell you which one to buy: that depends on whether you cook one thing at a time or several, and whether you want to walk away."
+                ]
+            },
+            {
+                "h": "A short way to decide",
+                "p": [
+                    "If you mostly need to know when a pan, a breast or a loaf is done while you are standing next to it, a fast hand-held probe is the simpler tool: one object, one reading, nothing to charge but the device itself.",
+                    "If you roast, smoke or air-fry large pieces and want to know the moment the centre reaches temperature without opening the door, a probe that stays in the food is doing something the hand-held one cannot do. That is a different job, not a better one.",
+                    "Write down which of those two sentences describes your week. The specification sheet will not change the answer."
+                ]
+            }
+        ],
+        "closing": "No product on this site was tested, ranked or scored. Every attribute above is quoted from a listing title reached on 2026-11-20. No temperature or food-safety figure appears because the official source could not be reached."
     }
 ]
 

@@ -1,31 +1,33 @@
 {
   "meta": {
-    "status": "Six questions below are answerable now. Nine are not, and each one names the specific artefact that would close it. Nothing here is a forecast.",
+    "status": "Two further questions were closed in the pass of 2026-11-20: the link that failed three times resolved twice on retry, and Amazon's ASIN definition was found on an Amazon-hosted page. Six are answered with a source; nine remain open, each naming the artefact that would close it.",
     "rule": "A question moves to 'answered' only when the answer has a source link. An answer of 'we cannot know yet' is a legitimate answer and is recorded as such."
   },
   "questions": [
     {
       "id": "Q-01",
       "question": "Does each submitted link actually land on the product the owner meant to send readers to?",
-      "what_we_have": "Four of the five land on a live listing, and the arrival ASIN and title were transcribed (P-01, P-02, P-03, P-05).",
-      "what_is_missing": "The owner's intended ASIN. Every submitted path code is 9 characters; every ASIN observed on arrival is 10. That is evidence the codes are short-link slugs, not identifiers, so the intended product cannot be read off the link itself.",
+      "what_we_have": "All five links resolved to a live listing on 2026-11-20, and each arrival ASIN and title was transcribed (P-01 to P-05). One of them resolved only on retry.",
+      "what_is_missing": "The owner's intended ASIN. Every submitted path code is 9 characters; every ASIN observed on arrival is 10, and Amazon states that an ASIN is a 10-character code (SRC-06). That is evidence the codes are short-link slugs, not identifiers, so the intended product cannot be read off the link itself.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended, then record both values side by side.",
       "answered": false,
       "blocking": "yes — every product claim downstream depends on it"
     },
     {
       "id": "Q-02",
-      "question": "Why does one link never resolve?",
-      "what_we_have": "https://link.amazon/B0c8moW59 was requested three times and returned Amazon's /checkpoint/continue interstitial each time. No product page was reached.",
-      "what_is_missing": "Whether the short link is expired, mistyped, region-restricted, or simply challenging this particular client.",
-      "how_to_close": "Open it once from a normal browser on the owner's own network and note the final URL. If it is dead, re-issue the link from the Associates dashboard.",
-      "answered": false,
-      "blocking": "no — the other four can proceed without it, but P-04 cannot be sold"
+      "question": "Why did one link fail three times and then work?",
+      "what_we_have": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three consecutive attempts in an earlier session, and resolved to /dp/B0DHZTCNR5 on both attempts in this one.",
+      "what_is_missing": "Whether the interstitial is served intermittently, by region, or to some clients only. Nothing needs to be known to use the link today.",
+      "how_to_close": "Open it from a normal browser on the owner's network and note where it lands; keep the dated result in the log.",
+      "answered": true,
+      "blocking": "no — it is resolved",
+      "answer": "The link is not dead and the product is now identified. The failure was intermittent or client-specific, and both observations are kept rather than one overwriting the other.",
+      "evidence": "review/verification.html#V-01"
     },
     {
       "id": "Q-03",
       "question": "Are the clicks actually attributed to shopnow047c-20?",
-      "what_we_have": "The tracking ID was supplied in the brief. Nothing on any arrived-at page showed a tag parameter.",
+      "what_we_have": "The tracking ID was supplied in the brief. No arrival URL carried a tag parameter, and the site's own buy links were untagged until this build changed them to /dp/<ASIN>/?tag=shopnow047c-20. Program Policies 2(b) requires the tag as a URL parameter (SRC-02).",
       "what_is_missing": "Evidence that the link the server serves carries the tag, and a click that then shows up in the Associates click report.",
       "how_to_close": "One test click on the owner's own device, then check the Associates click report for that day. That is the only permitted source for this number.",
       "answered": false,
@@ -55,9 +57,9 @@
     },
     {
       "id": "Q-06",
-      "question": "P-05 is a thermometer, not an air fryer. Does it belong in the same catalogue?",
-      "what_we_have": "The listing title and its category path both put P-05 under Thermometers, not Air Fryers. The other four are all under Air Fryers.",
-      "what_is_missing": "The owner's editorial intent — was the thermometer meant as an accessory to the air-fryer content, or as a separate line?",
+      "question": "Two of the five products are thermometers. Do they belong in the same catalogue?",
+      "what_we_have": "P-04 resolves to an instant-read probe and P-05 to a wireless probe set. Amazon's breadcrumb files both under Kitchen Utensils & Gadgets, then Thermometers & Timers, then Meat. The other three are under Air Fryers.",
+      "what_is_missing": "The owner's editorial intent: a second product line, or an accessory to the air-fryer content. The site currently treats them as their own cluster because that is defensible either way.",
       "how_to_close": "One sentence from the owner. Until then the site treats it honestly: it is listed in its own section and never described as an air fryer.",
       "answered": false,
       "blocking": "no — handled by separating it"

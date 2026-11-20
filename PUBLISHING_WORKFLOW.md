@@ -1,33 +1,44 @@
-# Publishing workflow — compliance gate
+# Publishing workflow — the compliance gate
 
-No page or guide publishes until every check below passes. Record the check, date and reviewer in the pull request.
+No page or guide publishes until every item below is true. Each line names where
+it is enforced, so the gate is a script rather than a habit.
 
-## 1. Disclosure placement (S01 · S07 · S24)
-- [x] Affiliate disclosure strip present under the masthead, above the fold
-- [x] Disclosure repeated in the footer
-- [x] Full statement at /disclosure.html with Associates tracking ID shopnow047c-20
+## 1. Disclosure (Operating Agreement §5, 16 CFR 255.0(f))
+- [x] Required sentence present on every page, above `<main>` — enforced by `tools/check.py`
+- [x] Repeated in the footer — same check
+- [x] Full statement at `/about/#disclosure`
+- [x] Placement rationale recorded with the regulation quoted on `/about/#sources`
 
-## 2. Link marking
-- [ ] Every outbound product link carries `rel="nofollow sponsored"` and a visible “sponsored” label
-- [ ] No unverified destination is linked outbound (flagged items link to /reviews/flagged.html instead)
+## 2. Link integrity (Program Policies §2(a)(b), Google paid-link guidance)
+- [x] Every Amazon retail link carries `rel="sponsored nofollow noopener"` and opens in a new tab — enforced
+- [x] Every Amazon retail link carries `tag=shopnow047c-20` as a URL parameter — enforced in this pass
+- [x] Policy citations are *not* marked sponsored — enforced
+- [x] No `link.amazon` short link is offered as a click target — enforced
+- [ ] One click confirmed in the Associates click report — **outstanding, needs account access (D-01)**
 
-## 3. Endorsement context
-- [ ] No language implying Amazon endorsement
-- [ ] Product findings labeled as findings, not endorsements; prices/ratings left blank when unconfirmed
-- [ ] Reviewed against Amazon Associates Program Operating Agreement and FTC Endorsement Guides
+## 3. Claims
+- [x] No price, star rating, review count or stock phrase in visible text — enforced
+- [x] No test, ranking or "best" claim — enforced
+- [x] Product attributes only as the seller's own wording, transcribed from the listing title
+- [x] Every illustration labelled as an illustration at the point of use
 
-## 4. Verification
-- [ ] Every table row has a source link to the official source (Amazon.com)
-- [ ] Unconfirmed values left blank and flagged; nothing inferred
-- [ ] Intended ASIN and observed redirect target in separate fields
+## 4. One site for search engines
+- [x] Canonical URLs on every generated page
+- [x] `sitemap.xml` matches the built pages exactly — enforced
+- [x] `feed.xml` items all resolve to real pages — enforced
+- [x] Parallel-edition pages marked `noindex, follow` — enforced by `tools/legacy.py` and checked
+- [ ] Search Console verified and sitemap submitted — **needs the owner's Google account (S-07)**
 
 ## 5. Measurement
-- [ ] Outbound click counter active on sponsored links
-- [ ] Five defined events instrumented (page_view, outbound_click, guide_read, suggestion_review, session_start)
+- [ ] Analytics endpoint chosen and running — **decision D-13**
+- [ ] Five defined events recorded at the endpoint — client exists and is inert
+- [ ] No cookie, no third-party request — currently true and enforced
 
 ## 6. Publish
-- [ ] Guide added to sitemap.xml and rss.xml
-- [ ] PR created from feature branch to main; review recorded in COORDINATION.md
-- [ ] After merge: confirm GitHub Pages deploy; check for broken links
+- [x] New guide added to the sitemap and the feed automatically
+- [x] Build reproducible: CI rebuilds and diffs the tree
+- [x] Every internal link and anchor resolves — enforced
+- [ ] Record the reviewer, the date and the decision on the row being approved
 
-Reviewer / date / decision: ____________________
+**Rule:** an unchecked box is not a blocker for the site being live. It is a
+blocker for claiming the thing the box describes.

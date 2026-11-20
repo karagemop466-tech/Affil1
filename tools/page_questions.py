@@ -42,7 +42,7 @@ def build(page_dir, questions, meta):
             {"html": blk},
         ])
     q_table = table(["Ref", "Question", "Status", "Blocks work"], q_rows,
-                    cls="qtable", caption="15 questions raised, 4 answered")
+                    cls="qtable", caption=f"{len(qs)} questions raised, {len(answered)} answered with a source")
 
     body = f"""{pagehead(
         'Open questions',
@@ -51,6 +51,12 @@ def build(page_dir, questions, meta):
         meta='Nothing on this page is a forecast &middot; every answer carries a source or says it has none',
     )}
 {section(f'''
+<div class="callout">
+  <h2>Questions are not the same as decisions</h2>
+  <p>This page is the research register: what is known, what is not, and what would settle it. The
+  <a href="{esc(rel(d, 'questions/decisions.html'))}">decision dossier</a> is the other half: sixteen decisions
+  the operator has to make, each pointing at the questions above it and naming the artefact that closes the gap.</p>
+</div>
 <div class="sec-head"><div>{eyebrow('At a glance')}<h2>Every question in one table</h2></div><p>A one-line answer and where it stands. The cards below carry the detail.</p></div>
 {q_table}
 ''', cls='')}

@@ -533,3 +533,26 @@ ol.tight,ul.tight{margin-top:1rem}
   .pcard-grid.wide .pcard,.pcard-grid.wide .pcard-unresolved{grid-template-columns:1fr}
   .pcard-grid.wide .pcard-media{aspect-ratio:16/10;min-height:0;height:auto}
 }
+
+/* Decision dossier. Reuses the flag card, so a decision and a flag look like
+   the same kind of object: something a person has to read and answer. */
+.dec-stack{display:grid;gap:1.1rem;margin-top:1.6rem}
+.dec-answer{margin:1.1rem 1.5rem 1.4rem;padding:1rem 1.2rem;background:#f3f6ef;border-left:2px solid var(--forest);border-radius:0 var(--radius) var(--radius) 0}
+.dec-answer p{margin:0 0 .4rem;font-size:.9rem;line-height:1.65;color:var(--ink)}
+.dec-answer p:last-child{margin-bottom:0}
+.dec .flag-dl ul.tight{margin:.2rem 0 0;padding-left:1.05rem}
+.dec .flag-dl ul.tight li{margin-bottom:.3rem}
+.path .scard-meta{display:grid;gap:.45rem;margin-top:.4rem}
+.path .scard-meta div{display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;font-size:.78rem}
+.path .scard-meta dt{color:var(--faint)}
+.path .scard-meta dd{margin:0;color:var(--muted)}
+@media (max-width:860px){
+  .dec-stack{gap:.9rem}
+  .path .scard-meta div{grid-template-columns:1fr;gap:.1rem}
+}
+
+/* Three product cards on the front page: equal columns rather than the
+   four-column register grid, which left a hole with three products. */
+.pcard-grid.trio{grid-template-columns:repeat(3,1fr)}
+@media (max-width:980px){.pcard-grid.trio{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.pcard-grid.trio{grid-template-columns:1fr}}

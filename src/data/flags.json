@@ -5,7 +5,8 @@
       "high": "Affects whether the site can earn at all, or whether a claim on the site is currently wrong.",
       "medium": "Affects usefulness or discoverability, not correctness.",
       "low": "Cosmetic or administrative."
-    }
+    },
+    "note": "Flags are grouped by severity, not by topic. Where a flag has been closed it is kept and marked closed rather than removed, so a reviewer can see what changed. Every row names what was expected, what was found, and where to check."
   },
   "flags": [
     {
@@ -20,21 +21,22 @@
         "Open each supplied link and compare the /dp/ segment to the code in the link"
       ],
       "impact": "The 'intended_asin' field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
-      "blocks": "nothing \u2014 but it explains why the register looks emptier than expected"
+      "blocks": "nothing — but it explains why the register looks emptier than expected"
     },
     {
       "id": "FLG-002",
       "severity": "high",
-      "title": "No supplied link showed the tracking tag on arrival",
-      "expected": "Special Links must use the Associates ID assigned to the account (SRC-02).",
-      "found": "None of the four resolving links presented a tag parameter on the page that was reached. The tracking ID shopnow047c-20 was supplied in the brief but was not observed in any resolved URL.",
-      "reading": "This is not proof the links are untagged \u2014 the tag may be applied server-side by the short-link service after the arrival page was captured. It is proof that this build could not confirm attribution, which is different.",
+      "title": "The buy links carried no Associates tag until this build",
+      "expected": "Program Policies 2(b): the Associates ID must appear as a parameter in the URL of each link placed on the site.",
+      "found": "After following the redirects on 2026-11-20, all five supplied links ended on a bare /dp/<ASIN> address with no tag parameter, and the site itself was offering those bare addresses as click targets. Whether the redirect service applies the tag server-side could not be observed.",
+      "reading": "A /dp/ link without the tag is not a Special Link. Amazon's own application-review page lists untagged product links among the reasons an application is rejected, which makes this a revenue defect and an approval risk rather than a polish item. It is not a claim that the supplied short links are invalid: their exact behaviour remains unknown, which is FLG-003.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
-        "One click from the owner's device, then the Associates click report"
+        "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+        "review/verification.html#V-02"
       ],
-      "impact": "No page claims a click will be attributed. The site says attribution is unconfirmed.",
-      "blocks": "any revenue expectation"
+      "impact": "The build now emits /dp/<ASIN>/?tag=shopnow047c-20 for every buy link, keeps the submitted code in the record, and fails the check if an untagged Amazon retail link appears. Attribution is still unconfirmed until a click shows in the report.",
+      "blocks": "earning anything, until one click is confirmed"
     },
     {
       "id": "FLG-003",
@@ -51,29 +53,30 @@
     },
     {
       "id": "FLG-004",
-      "severity": "high",
-      "title": "P-04 could not be resolved at all",
-      "expected": "A short link resolves to a product page.",
-      "found": "https://link.amazon/B0c8moW59 was requested three times on 2026-11-20. Each request returned Amazon's /checkpoint/continue interstitial. No product page was reached, so no product, brand, category or ASIN was recorded.",
-      "reading": "Could be an expired link, a typo, a region restriction, or a challenge specific to this client. It was not diagnosed.",
+      "severity": "low",
+      "title": "P-04 failed three times, then resolved twice",
+      "expected": "A supplied link resolves to a product page, reliably.",
+      "found": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three consecutive attempts in an earlier session. In this session it was requested twice and resolved both times to /dp/B0DHZTCNR5.",
+      "reading": "The link is not dead. The interstitial is intermittent or client-specific. Both observations are kept because either one alone would mislead: the first suggests a broken link, the second suggests a link that never failed.",
       "to_check": [
-        "Open https://link.amazon/B0c8moW59 in a normal browser and note where it lands"
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "review/verification.html#V-01"
       ],
-      "impact": "P-04 has no card, no photograph and no buy link. It appears only in the register as an unresolved row.",
-      "blocks": "the fifth product"
+      "impact": "P-04 now has a card, a record and a tagged buy link, and its record states the retry. A monthly link check is proposed as S-19.",
+      "blocks": "nothing"
     },
     {
       "id": "FLG-005",
       "severity": "medium",
-      "title": "No price, rating, review count or stock status \u2014 by rule, not by omission",
-      "expected": "Program Policies \u00a72(b) permit price and availability only where Amazon serves the data or it arrives via Creators API / PA API.",
+      "title": "No price, rating, review count or stock status — by rule, not by omission",
+      "expected": "Program Policies §2(b) permit price and availability only where Amazon serves the data or it arrives via Creators API / PA API.",
       "found": "Neither path is connected.",
       "reading": "This is the single most common failure in affiliate sites and the most common way an Associates account is closed. Empty is the compliant state.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "impact": "A machine check in tools/check.py fails the build if a currency figure, a star rating, a review count or a stock phrase is introduced.",
-      "blocks": "nothing \u2014 the site is deliberately usable without them"
+      "blocks": "nothing — the site is deliberately usable without them"
     },
     {
       "id": "FLG-006",
@@ -144,15 +147,17 @@
     {
       "id": "FLG-011",
       "severity": "low",
-      "title": "Amazon's own ASIN definition could not be reached from this environment",
-      "expected": "A citation to an Amazon-hosted page stating that an ASIN is 10 characters.",
-      "found": "sellercentral.amazon.com help pages return a sign-in wall. The public Q&A page that repeats the definition is written by sellers, not Amazon.",
-      "reading": "Rather than cite a third-party blog as though it were Amazon, the length claim is presented as an observation about this register's own data (FLG-001), which anyone can re-check by opening the links.",
+      "title": "Closed: Amazon does publish an ASIN definition a reader can open",
+      "expected": "A citation to an Amazon-hosted page stating that an ASIN is ten characters.",
+      "found": "Seller Central help returns a sign-in wall, but Sell on Amazon states it plainly: a unique 10-character alphanumeric code, found after /dp/ in the URL.",
+      "reading": "The earlier version of this flag was too pessimistic. It is kept rather than deleted so the record shows the question being closed rather than quietly disappearing.",
       "to_check": [
-        "https://sellercentral.amazon.com/help/hub/reference/G201394520 \u2014 requires sign-in"
+        "https://sell.amazon.com/blog/what-is-an-asin",
+        "review/verification.html#V-05"
       ],
-      "impact": "No page states the 10-character rule as an Amazon quotation.",
-      "blocks": "nothing"
+      "impact": "The nine-character code versus ten-character ASIN argument now rests on an Amazon page as well as on the register's own observation.",
+      "blocks": "nothing",
+      "closed_on": "2026-11-20"
     },
     {
       "id": "FLG-012",
@@ -199,11 +204,39 @@
       "title": "P-05 is filed under Thermometers, not Air Fryers",
       "expected": "Five products in one niche.",
       "found": "Category path on arrival: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. The other four are all under Air Fryers.",
-      "reading": "Not an error in the link \u2014 the product really is a thermometer. It is an error to present it as the fifth air fryer, which is how a generated site would have handled it.",
+      "reading": "Not an error in the link — the product really is a thermometer. It is an error to present it as the fifth air fryer, which is how a generated site would have handled it.",
       "to_check": [
         "https://www.amazon.com/dp/B0DZFD6R9Z"
       ],
       "impact": "P-05 has its own section and is never called an air fryer.",
+      "blocks": "nothing"
+    },
+    {
+      "id": "FLG-016",
+      "severity": "low",
+      "title": "Several pages described yesterday's catalogue until this pass",
+      "expected": "A page that describes the site's own facts should match the data it is built from.",
+      "found": "The front page, the about page, the register, two guides and the executive summary said four of five links were identified and one product was unresolved, which was true before P-04 resolved.",
+      "reading": "A static site does not notice that its own facts moved. Every one of those sentences was correct when written and wrong when read, which is the most common way a careful site stops being careful.",
+      "to_check": [
+        "products/index.html",
+        "review/verification.html#V-09"
+      ],
+      "impact": "Corrected in the data and the templates, and listed on the front page's dated change log.",
+      "blocks": "nothing"
+    },
+    {
+      "id": "FLG-017",
+      "severity": "medium",
+      "title": "The parallel edition is still in the repository",
+      "expected": "One site for a search engine to index.",
+      "found": "A second edition built by a parallel session (crisp/ and several root-level pages) is still present and still served. It is now marked noindex, follow, with a canonical where an equivalent exists.",
+      "reading": "Deleting another session's work is irreversible and would break any existing link. noindex is the reversible half of the fix, and it is the half that addresses the duplicate-index problem.",
+      "to_check": [
+        "crisp/index.html",
+        "https://developers.google.com/search/docs/crawling-indexing/block-indexing"
+      ],
+      "impact": "Search engines are pointed at one edition. Whether to redirect or delete the other is decision D-11.",
       "blocks": "nothing"
     }
   ]

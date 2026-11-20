@@ -3,10 +3,13 @@
     "tracking_id_supplied": "shopnow047c-20",
     "tracking_id_status": "Not confirmed on any page reached in this session. No supplied link showed a tag parameter on arrival.",
     "retrieved_on": "2026-11-20",
-    "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result.",
-    "field_rule": "intended_asin (what the owner meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. Where a field could not be established it is null.",
+    "method": "Each supplied link was requested in this session through a fetching client that follows redirects, and the final URL, the <title> of the page and the breadcrumb were read and transcribed. Nothing was inferred and no value was carried over from a search result. P-04 was requested twice in this session and resolved both times; an earlier session recorded three failures, and that history is kept rather than overwritten.",
+    "field_rule": "intended_asin (what the owner meant to ship), observed_asin (what the link actually opened) and tagged_link (the destination URL the site offers) are separate fields and are never merged. Where a field could not be established it is null.",
     "price_rule": "Program Policies §2(b) (SRC-02) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / PA API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
-    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner."
+    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner.",
+    "verified_on": "2026-11-20",
+    "tag_rule": "Program Policies 2(b) (SRC-02) requires the Associates ID to appear as a tag parameter in the URL of each link to an Amazon Site. Every buy link on this site is therefore a destination URL of the form /dp/<ASIN>/?tag=shopnow047c-20, built from the ASIN observed on arrival. The supplied short link is kept in the record as history and is not offered as a click target, because its own tracking behaviour could not be observed.",
+    "tagged_link_status": "Built to the documented format on 2026-11-20. Not yet confirmed by a click that appears in the Associates click report; that confirmation requires account access."
   },
   "products": [
     {
@@ -48,7 +51,10 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "6 quart total, as two independent 3-quart baskets",
-      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe"
+      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
+      "verified_in_session": "2026-11-20",
+      "tagged_link": "https://www.amazon.com/dp/B0CDY277D3/?tag=shopnow047c-20",
+      "arrival_url_had_tag": false
     },
     {
       "ref": "P-02",
@@ -88,7 +94,10 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "26 quart",
-      "stated_attributes": "24 one-touch presets; six cooking accessories included"
+      "stated_attributes": "24 one-touch presets; six cooking accessories included",
+      "verified_in_session": "2026-11-20",
+      "tagged_link": "https://www.amazon.com/dp/B09B7SB46R/?tag=shopnow047c-20",
+      "arrival_url_had_tag": false
     },
     {
       "ref": "P-03",
@@ -129,7 +138,10 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "8 quart",
-      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel"
+      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
+      "verified_in_session": "2026-11-20",
+      "tagged_link": "https://www.amazon.com/dp/B08DKYBTPH/?tag=shopnow047c-20",
+      "arrival_url_had_tag": false
     },
     {
       "ref": "P-04",
@@ -137,27 +149,44 @@
       "submitted_code": "B0c8moW59",
       "submitted_code_length": 9,
       "intended_asin": null,
-      "observed_asin": null,
-      "observed_asin_length": null,
-      "listing_url": null,
-      "listing_title": null,
-      "brand": null,
-      "format": null,
-      "format_label": "Not identified",
-      "category_path": null,
-      "title_stated": [],
-      "photo": null,
-      "photo_alt": null,
-      "photo_note": null,
-      "checked_on": "2026-11-20",
-      "resolution_note": "Requested three times on 2026-11-20. Every attempt landed on Amazon's /checkpoint/continue interstitial and no product page was reached. No product was guessed to fill the gap.",
-      "identity_confidence": "unresolved",
-      "unverified": [
-        "everything — the destination was never reached"
+      "observed_asin": "B0DHZTCNR5",
+      "observed_asin_length": 10,
+      "listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+      "brand": "ThermoMaven",
+      "format": "thermometer",
+      "format_label": "Instant-read digital thermometer",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "title_stated": [
+        "a stated one-second reading time, in the seller's wording",
+        "the seller states an accuracy figure of plus or minus 0.5°F",
+        "the seller states NIST and NSF certification",
+        "the seller describes it as IP67 waterproof",
+        "an auto-rotating backlit screen, per the seller"
       ],
-      "flag": "FLG-014",
-      "stated_capacity": null,
-      "stated_attributes": null
+      "photo": "assets/img/instant-read",
+      "photo_alt": "An unbranded instant-read probe thermometer resting on a folded linen cloth beside a joint of meat",
+      "photo_note": "Editorial illustration. It is not a photograph of P-04 and must not be read as one.",
+      "checked_on": "2026-11-20",
+      "resolution_note": "An earlier session recorded three consecutive failures, each landing on Amazon's /checkpoint/continue interstitial. In this session the link was requested twice and resolved both times to /dp/B0DHZTCNR5. The failure is therefore intermittent or client-specific, not a dead link; both observations are kept.",
+      "identity_confidence": "observed",
+      "unverified": [
+        "intended ASIN",
+        "current price",
+        "star rating",
+        "review count",
+        "availability",
+        "probe accuracy independent of the seller",
+        "warranty",
+        "tracking tag on the click"
+      ],
+      "stated_capacity": "Not applicable — it is a thermometer",
+      "stated_attributes": "One-second reading stated; ±0.5°F stated; NIST/NSF certification stated; IP67 stated",
+      "attention": "This is the second thermometer, not a fifth air fryer. Filed under Kitchen Utensils & Gadgets > Thermometers & Timers > Meat, the same category path as P-05.",
+      "priority_note": "Resolved on retry. No product was guessed and no earlier attempt was overwritten.",
+      "verified_in_session": "2026-11-20",
+      "tagged_link": "https://www.amazon.com/dp/B0DHZTCNR5/?tag=shopnow047c-20",
+      "arrival_url_had_tag": false
     },
     {
       "ref": "P-05",
@@ -198,7 +227,10 @@
       ],
       "attention": "This product sits in a different category from the other four. Any guide that treats it as a fifth air fryer would be wrong. It is routed to its own section.",
       "stated_capacity": "Not applicable — it is a thermometer",
-      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses"
+      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
+      "verified_in_session": "2026-11-20",
+      "tagged_link": "https://www.amazon.com/dp/B0DZFD6R9Z/?tag=shopnow047c-20",
+      "arrival_url_had_tag": false
     }
   ]
 }

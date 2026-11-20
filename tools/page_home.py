@@ -1,15 +1,36 @@
 """The front page. Leads with products and guides; the machinery lives in the footer."""
 
+import pathlib
+
 from layout import (DISCLOSURE, SITE_NAME, blank, esc, eyebrow, link, page,
                     product_link, rel, section, table)
 from content import GUIDES
 
 
 def img(page_dir, path, alt, *, sizes, cls="", loading="lazy"):
+    """Responsive image, or a plain one when only one rendition exists.
+
+    A missing -w560/-w900 pair used to emit two srcset entries pointing at files
+    that were never there. Existence is now checked, so an asset that arrives
+    later as a single file cannot ship a broken image.
+    """
+    root = pathlib.Path(__file__).resolve().parent.parent
+    small = root / (path + "-w560.jpg")
+    large = root / (path + "-w900.jpg")
+    single = root / (path + ".jpg")
+    if small.is_file() and large.is_file():
+        src = rel(page_dir, path + "-w900.jpg")
+        srcset = (f'srcset="{esc(rel(page_dir, path + "-w560.jpg"))} 560w, '
+                  f'{esc(rel(page_dir, path + "-w900.jpg"))} 900w" ')
+    elif single.is_file():
+        src = rel(page_dir, path + ".jpg")
+        srcset = ""
+    else:
+        # No file at all: refuse to emit a broken image.
+        return ""
     return (
-        f'<img class="{esc(cls)}" src="{esc(rel(page_dir, path + "-w900.jpg"))}" '
-        f'srcset="{esc(rel(page_dir, path + "-w560.jpg"))} 560w, '
-        f'{esc(rel(page_dir, path + "-w900.jpg"))} 900w" '
+        f'<img class="{esc(cls)}" src="{esc(src)}" '
+        f'{srcset}'
         f'sizes="{esc(sizes)}" alt="{esc(alt)}" loading="{esc(loading)}" decoding="async">'
     )
 
@@ -37,7 +58,7 @@ def product_card(page_dir, p, *, compact=False):
     <p class="pcard-ref">{esc(p['ref'])} &middot; {esc(p['brand'])}</p>
     <h3>{esc(_short(p))}</h3>
     <p class="pcard-actions"><a class="tlink" href="{esc(href)}">Read the record <span aria-hidden="true">&rarr;</span></a>
-    {product_link(page_dir, p['listing_url'], 'See listing <span aria-hidden="true">&#8599;</span>', cls='tlink tlink-sponsor', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}</p>
+    {product_link(page_dir, p.get('tagged_link') or p['listing_url'], 'See listing <span aria-hidden="true">&#8599;</span>', cls='tlink tlink-sponsor', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}</p>
   </div>"""
     else:
         body = f"""<div class="pcard-body">
@@ -45,7 +66,7 @@ def product_card(page_dir, p, *, compact=False):
     <h3><a href="{esc(href)}">{esc(_short(p))}</a></h3>
     <dl class="pcard-specs">{attrs}</dl>
     <p class="pcard-actions"><a class="tlink" href="{esc(href)}">Read the record <span aria-hidden="true">&rarr;</span></a>
-    {product_link(page_dir, p['listing_url'], 'See listing <span aria-hidden="true">&#8599;</span>', cls='tlink tlink-sponsor', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}</p>
+    {product_link(page_dir, p.get('tagged_link') or p['listing_url'], 'See listing <span aria-hidden="true">&#8599;</span>', cls='tlink tlink-sponsor', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}</p>
     <p class="pcard-fine">Not tested. No price or rating is shown here because this site has no permitted live data source.</p>
   </div>"""
     return f'<article class="pcard">{media}{body}</article>'
@@ -90,8 +111,9 @@ def guide_card(page_dir, g, *, feature=False):
 def build(page_dir, products, meta):
     d = page_dir
     by_ref = {p["ref"]: p for p in products}
-    mains = [by_ref[r] for r in ("P-01", "P-02", "P-03", "P-04")]
+    mains = [by_ref[r] for r in ("P-01", "P-02", "P-03")]
     therm = by_ref["P-05"]
+    therm_instant = by_ref["P-04"]
 
     hero = f"""<section class="hero">
   <div class="hero-media">
@@ -104,7 +126,7 @@ def build(page_dir, products, meta):
     <div class="hero-copy">
       {eyebrow('The kitchen edit')}
       <h1>Buy once.<br><em>Cook better.</em></h1>
-      <p class="hero-dek">Five links, opened and read one by one. Three air fryers, one air-fryer oven, one thermometer &mdash; and plain guidance on shape, size and washing-up. Nothing here was tested, and the site says so on every page.</p>
+      <p class="hero-dek">Three air fryers and two thermometers, every one of them opened and read. Two of the fryers are baskets and one is a French-door oven, so the shape of your counter decides more here than any badge. Nothing on this site was tested, and every page says so.</p>
       <p class="hero-actions">
         <a class="btn" href="{esc(rel(d, 'products/index.html'))}">See the shortlist</a>
         <a class="btn btn-ghost" href="{esc(rel(d, 'guides/index.html'))}">Start with a guide</a>
@@ -139,28 +161,30 @@ def build(page_dir, products, meta):
 
     shortlist = section(f"""
 <div class="sec-head">
-  <div>{eyebrow('The shortlist')}<h2>Five links, four of them identified</h2></div>
-  <p>Each page was opened on 20 November 2026 and the listing transcribed. One did not open at all, and it is still on the page.</p>
+  <div>{eyebrow('The shortlist')}<h2>Five links, all five identified</h2></div>
+  <p>Each page was opened on 20 November 2026 and the listing transcribed. One had failed three times in an earlier session and resolved on both attempts here; it is in the list, with that history.</p>
 </div>
-<div class="pcard-grid wide">
+<div class="pcard-grid trio">
   {''.join(product_card(d, p) for p in mains)}
 </div>
-<p class="sec-foot">Identity is the only thing confirmed. <a href="{esc(rel(d, 'products/index.html'))}">The full register, including the fields left blank</a> &middot; <a href="{esc(rel(d, 'compare/index.html'))}">compare them side by side</a>.</p>""", cls="shortlist")
+<p class="sec-foot">The other two links are thermometers, not fryers, and they sit below in their own section. Identity is the only thing confirmed about any of the five. <a href="{esc(rel(d, 'products/index.html'))}">The full register, including the fields left blank</a> &middot; <a href="{esc(rel(d, 'compare/index.html'))}">compare them side by side</a>.</p>""", cls="shortlist")
 
     thermometer = f"""<section class="thermo-band"><div class="wrap thermo-inner">
-  <div class="thermo-art">{img(d, 'assets/img/thermometer', 'A probe thermometer resting in a roasted chicken beside a small display unit', sizes='(max-width:720px) 100vw, 420px')}<span class="illus-tag">Illustration</span></div>
+  <div class="thermo-art">{img(d, 'assets/img/instant-read', 'An unbranded instant-read probe thermometer on a folded cloth beside a joint of meat', sizes='(max-width:720px) 100vw, 420px')}<span class="illus-tag">Illustration</span></div>
   <div class="thermo-copy">
-    {eyebrow('A note on the fifth link')}
-    <h2>The fifth product is not an air fryer</h2>
-    <p>It resolves to a wireless meat thermometer filed under <em>Thermometers &amp; Timers</em>, not <em>Air Fryers</em>. A generated site would have called it the fifth air fryer and moved on. It gets its own page instead, because describing it as cookware would be false.</p>
-    <p class="thermo-actions"><a class="btn btn-light" href="{esc(rel(d, 'products/p-05.html'))}">Read the thermometer record</a></p>
+    {eyebrow('The other two links')}
+    <h2>Two of the five are not air fryers at all</h2>
+    <p>P-04 is an instant-read probe. P-05 is a wireless probe set. Amazon files both under <em>Thermometers &amp; Timers</em>, not <em>Air Fryers</em>, and a site written from the brief alone would have called the second one the fifth air fryer.</p>
+    <p>They are a different decision from each other, too: one answers &ldquo;is this done?&rdquo; in a second, the other answers it from across the room. That is worth a page of its own rather than a footnote.</p>
+    <p class="thermo-actions"><a class="btn btn-light" href="{esc(rel(d, 'guides/thermometer-instant-or-wireless.html'))}">Instant-read or wireless?</a>
+    <a class="tlink" href="{esc(rel(d, 'products/p-04.html'))}">P-04 record</a> &nbsp; <a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">P-05 record</a></p>
   </div>
 </div></section>"""
 
     guides = section(f"""
 <div class="sec-head">
   <div>{eyebrow('Buying guides')}<h2>Written to be useful before you click</h2></div>
-  <p>Four guides. Every product claim in them is the seller's own wording, quoted. Nothing was tested, so nothing is rated.</p>
+  <p>{len(GUIDES)} guides. Every product claim in them is the seller's own wording, quoted. Nothing was tested, so nothing is rated.</p>
 </div>
 <div class="gcard-grid">
   {guide_card(d, GUIDES[0], feature=True)}
@@ -176,7 +200,7 @@ def build(page_dir, products, meta):
     <span class="rule-n">01</span>
     <h3>A link is opened, not trusted</h3>
     <p>Every submitted link was requested and the arrival page read. Where the page could not be reached, the row says so and stays empty.</p>
-    <p class="rule-cost"><strong>The cost:</strong> one of five products is still a blank.</p>
+    <p class="rule-cost"><strong>The cost:</strong> one link needed a retry, and the record keeps both outcomes.</p>
   </div>
   <div class="rule">
     <span class="rule-n">02</span>
@@ -199,7 +223,9 @@ def build(page_dir, products, meta):
   <p>A dated record. Affiliate pages age badly and silently, so the site keeps its own receipt.</p>
 </div>
 <ol class="dispatch">
-  <li><time datetime="2026-11-20">20 Nov 2026</time><div><strong>All five links opened and read.</strong> Four resolved to live listings; their ASINs and titles are recorded. One stopped at a continuity page and stays unresolved. <a href="{esc(rel(d, 'products/index.html'))}">Register</a></div></li>
+  <li><time datetime="2026-11-20">20 Nov 2026</time><div><strong>Every buy link is now a tagged Special Link.</strong> The short links were replaced as click targets by <code class="code">/dp/&lt;ASIN&gt;/?tag=shopnow047c-20</code>, which is the format the Program Policies require. One click still has to appear in the report before anything is claimed. <a href="{esc(rel(d, 'review/verification.html'))}">Verification log</a></div></li>
+  <li><time datetime="2026-11-20">20 Nov 2026</time><div><strong>P-04 resolved, on retry.</strong> Three failures were recorded in an earlier session; in this one the link opened a ThermoMaven instant-read thermometer on both attempts. The catalogue is three air fryers and two thermometers, and the site now says that. <a href="{esc(rel(d, 'products/p-04.html'))}">The record</a></div></li>
+  <li><time datetime="2026-11-20">20 Nov 2026</time><div><strong>All five links opened and read.</strong> All five resolved to live listings; their ASINs and titles are recorded. <a href="{esc(rel(d, 'products/index.html'))}">Register</a></div></li>
   <li><time datetime="2026-11-20">20 Nov 2026</time><div><strong>Corrected an earlier error.</strong> A previous version of this repository treated the supplied link codes as intended ASINs. They are nine characters; the ASINs on arrival are ten. The two fields are now separate. <a href="{esc(rel(d, 'review/index.html'))}#FLG-001">Flagged</a></div></li>
   <li><time datetime="2026-11-20">20 Nov 2026</time><div><strong>Prices removed by rule.</strong> No price, rating or stock status appears anywhere, because neither permitted data source is connected. <a href="{esc(rel(d, 'review/index.html'))}#FLG-005">Flagged</a></div></li>
   <li><time datetime="2026-11-20">20 Nov 2026</time><div><strong>Analytics written but switched off.</strong> Nothing is measured yet, so no traffic claim is made. <a href="{esc(rel(d, 'review/measurement.html'))}">Measurement plan</a></div></li>
@@ -221,7 +247,9 @@ def build(page_dir, products, meta):
   </div>
 </div></section>"""
 
-    body = "\n".join([hero, paths, shortlist, thermometer, guides, promise, dispatch, capture])
+    # Products before method: the front page is a shop window, and the
+    # explanation of how the shop is run sits below the goods.
+    body = "\n".join([hero, shortlist, paths, thermometer, guides, promise, dispatch, capture])
 
     structured = {
         "@context": "https://schema.org",
@@ -234,7 +262,7 @@ def build(page_dir, products, meta):
     return page(
         d,
         title="Crisp & Counter \u2014 air fryer buying guides that check the link first",
-        description="Four air fryers and a thermometer, each checked against its live Amazon listing. Plain guidance on basket versus oven, capacity and cleanup \u2014 with no invented prices, ratings or test results.",
+        description="Three air fryers and two thermometers, each checked against its live Amazon listing. Plain guidance on basket versus oven, capacity, cleanup and probe thermometers \u2014 with no invented prices, ratings or test results.",
         body=body,
         active="index.html",
         canonical="",

@@ -49,12 +49,14 @@ FOOTER_GROUPS = [
     ]),
     ("Review queue", [
         ("review/index.html", "Flagged for review"),
+        ("review/verification.html", "Verification log"),
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
         ("about/index.html#sources", "Sources"),
     ]),
     ("Desk", [
         ("questions/index.html", "Open questions"),
+        ("questions/decisions.html", "Before you decide"),
         ("suggestions/index.html", "Suggestions"),
         ("operations/ledger.html", "Campaign ledger"),
         ("brief/index.html", "Executive summary"),
@@ -104,6 +106,22 @@ def outbound(page_dir, url, label, **kw):
 def product_link(page_dir, url, label, **kw):
     """A link to Amazon. Always marked sponsored, always in a new tab."""
     return link(page_dir, url, label, sponsored=True, **kw)
+
+
+def tag_url(url):
+    """Return a retail Amazon URL with the Associates tag attached.
+
+    Program Policies 2(b) requires the tag as a parameter in the URL of each
+    link to an Amazon Site, so a bare /dp/ address is never emitted. Anything
+    that is not a retail product address is returned untouched, because a
+    policy page is a citation, not a paid link.
+    """
+    if not url or not AFFILIATE_HINT.search(url):
+        return url
+    if "tag=" in url:
+        return url
+    sep = "&" if "?" in url else "?"
+    return f"{url}{sep}tag={TRACKING_ID}"
 
 
 def kindle(summary, body):

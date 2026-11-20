@@ -6,6 +6,7 @@ from layout import (DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
 
 def build_about(page_dir, sources, meta):
     d = page_dir
+    c = meta.get("counts", {})
     rows = []
     for s in sources["sources"]:
         quote = f'<blockquote class="quote">{esc(s["quote"])}</blockquote>' if s.get("quote") else '<span class="blank">&mdash;</span>'
@@ -33,7 +34,7 @@ def build_about(page_dir, sources, meta):
 <div class="about-grid">
   <div class="prose-block">
     <h2 id="what">What this site is</h2>
-    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Four air fryers and one meat thermometer were submitted by the operator of the site. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
+    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Three air fryers and two thermometers were submitted by the operator of the site. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
     <p>It is not a review site. Nothing here was bought, cooked with, measured or compared by testing. That is a real limitation and it is stated on every product page and in every guide rather than in a footnote here.</p>
 
     <h2 id="why-blank">Why so much is blank</h2>
@@ -52,15 +53,15 @@ def build_about(page_dir, sources, meta):
     <p>This site sets no cookies, loads no third-party scripts, calls no external APIs and embeds no fonts from a CDN. The typefaces are served from this repository. The analytics client is present but inert: it writes to session storage and transmits nothing. There is no form, no newsletter and no comment system, so the site holds no personal data at all.</p>
 
     <h2 id="imagery">Imagery</h2>
-    <p>All eight photographs are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
+    <p>Every photograph on this site is an AI-generated illustration, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
 
     <h2 id="who">Who wrote this</h2>
     <p>No author is named, because there is no person whose name would be accurate to put here. This is the site's largest weakness and it is recorded as FLG-006 rather than papered over with a stock biography and an invented credential. A named editor with a true description of what they did is suggestion S-03.</p>
   </div>
   <aside class="record-side">
     <div class="side-card"><h2>At a glance</h2><dl class="side-dl">
-      <div><dt>Pages</dt><dd>18</dd></div>
-      <div><dt>Products</dt><dd>5 submitted, 4 identified</dd></div>
+      <div><dt>Pages</dt><dd>{c['pages']}</dd></div>
+      <div><dt>Products</dt><dd>{c['products']} submitted, {c['identified']} identified</dd></div>
       <div><dt>Tested</dt><dd>0</dd></div>
       <div><dt>Prices shown</dt><dd>None</dd></div>
       <div><dt>Third-party requests</dt><dd>0</dd></div>
@@ -136,6 +137,7 @@ def build_ledger(page_dir, meta):
 
 def build_brief(page_dir, products, questions, flags, meta):
     d = page_dir
+    c = meta.get("counts", {})
     n_q = len(questions["questions"])
     n_open = sum(1 for q in questions["questions"] if not q.get("answered"))
     n_high = sum(1 for f in flags["flags"] if f["severity"] == "high")
@@ -143,7 +145,7 @@ def build_brief(page_dir, products, questions, flags, meta):
         'Executive summary',
         'The short version,<br>for someone with four minutes',
         'What exists, what was verified, what could not be, and what the next decision is.',
-        meta='Written 20 November 2026 &middot; 1,600 words shorter than it could have been',
+        meta='Written 20 November 2026 &middot; one page, no forecast, no revenue claim',
     )}
 {section(f'''
 <div class="exec">
@@ -153,16 +155,16 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>An 18-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, fifteen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <p>A {c['pages']}-page static site with {c['guides']} buying guides, a five-row product register, a per-product record for each, a comparison table, {c['questions']} questions, {c['decisions']} decisions, {c['suggestions']} suggestions, {c['flags']} items in the review queue, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, an untagged Amazon link, a missing disclosure or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
-    <p>Each of the five supplied links was opened once on 20 November 2026. Four resolved to live Amazon listings. The ASIN and full listing title were transcribed for each of those four. The fifth returned a continuity page on three attempts and remains unidentified. Amazon's Associates Operating Agreement section 5, its Program Policies section 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly, and the relevant wording is quoted on the sources page.</p>
+    <p>All five supplied links were opened on 20 November 2026 and all five resolved to live Amazon listings, with each ASIN and full title transcribed. One of them had failed three times in an earlier session and resolved on both attempts in this one, which is recorded rather than smoothed over. The Associates Operating Agreement section 5, the Program Policies on Special Links and on price display, 16 CFR 255.0(f), Google's outbound-link documentation, and Amazon's own ASIN definition and application-review page were each read directly, and the relevant wording is quoted on the sources page. Four things changed as a result: the buy links are now tagged Special Links, the catalogue is three air fryers and two thermometers, a verification log is published, and a decision dossier sits above the suggestion queue.</p>
   </div>
   <div class="exec-block exec-warn">
-    <h2>The one finding that changes the plan</h2>
-    <p>The five supplied link codes are nine characters and contain lowercase letters. Every ASIN that loaded is ten characters and uppercase. The codes are short-link slugs, not product identifiers &mdash; which means the earlier version of this repository recorded the wrong thing in its "intended ASIN" column, and that the intended product for each link cannot be read from the link at all. It has to come from the Associates dashboard.</p>
-    <p>This does not invalidate the links. It does mean nothing downstream can be confirmed without one look inside the account.</p>
+    <h2>The two findings that change the plan</h2>
+    <p><strong>The links were not Special Links.</strong> After the redirects were followed, every supplied link ended on a bare <code class="code">/dp/&lt;ASIN&gt;</code> address with no tag, and the site was offering those addresses as click targets. Program Policies 2(b) requires the Associates ID as a parameter in the URL of each link, and Amazon's own review page lists untagged links among the reasons an application is rejected. The build now emits <code class="code">/dp/&lt;ASIN&gt;/?tag={esc(TRACKING_ID)}</code> and fails if an untagged retail link appears. That is a defect fixed; attribution is still unproven until one click shows in the report.</p>
+    <p><strong>Two of the five products are thermometers.</strong> P-04 resolved on retry to an instant-read probe. The catalogue is three air fryers and two thermometers, so every page that said otherwise &mdash; including this summary &mdash; was corrected, and the thermometers got a guide of their own.</p>
   </div>
   <div class="exec-block">
     <h2>What could not be verified, and why it matters</h2>
@@ -176,17 +178,19 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>The next decision</h2>
-    <p>Three things, in this order. Tag the links from SiteStripe and make one test click, then read the Associates report for that day. Verify the Search Console property and submit the sitemap. Then choose between the two paths that actually improve the site: buy one product and test it properly, or wait for query data before writing another guide.</p>
-    <p>Writing more guides first is the option that looks like progress and is not.</p>
+    <p>Make one tagged click and read the Associates click report. That single action closes the highest-severity flag on the site, and it is the only thing standing between a finished publication and an earning one. Everything else is already as compliant as this repository can make it without account access.</p>
+    <p>After that, choose a path rather than a page. <strong>Path A</strong> proves the click and puts the shortlist above the method. <strong>Path B</strong> publishes to measured queries once Search Console is verified. <strong>Path C</strong> buys one appliance, uses it, and photographs it, which is the only route to a page a competitor cannot copy in an afternoon. Writing a sixth guide before one of those lands is the option that looks like progress and is not.</p>
+    <p>The full reasoning, with the missing information named row by row, is on <a href="{esc(rel(d, 'questions/decisions.html'))}">Before you decide</a>.</p>
   </div>
   <div class="exec-block">
     <h2>Numbers on the record</h2>
     <div class="exec-stats">
       <div><span>5</span><p>links supplied</p></div>
-      <div><span>4</span><p>resolved and transcribed</p></div>
-      <div><span>1</span><p>unresolved, published as a blank</p></div>
+      <div><span>5</span><p>resolved and transcribed</p></div>
+      <div><span>1</span><p>resolved only on retry, with both outcomes kept</p></div>
       <div><span>0</span><p>products tested</p></div>
       <div><span>0</span><p>prices shown</p></div>
+      <div><span>{c['decisions']}</span><p>decisions registered</p></div>
       <div><span>{n_q}</span><p>questions raised</p></div>
       <div><span>{n_open}</span><p>still open</p></div>
       <div><span>{n_high}</span><p>high-severity flags</p></div>

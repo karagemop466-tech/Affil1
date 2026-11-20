@@ -124,7 +124,7 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
-    r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
+    r"sellercentral\.amazon\.com|sell\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"www\.ftc\.gov)",
     re.I,
 )
@@ -181,6 +181,19 @@ def check_page(path):
             ids.feed(target.read_text(encoding="utf-8"))
             if frag not in ids.ids:
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
+
+    # --- every retail Amazon link must carry the Associates tag ---
+    # Program Policies 2(b) requires the ID as a URL parameter. A /dp/ link
+    # without it is not a Special Link, so it cannot be credited and Amazon
+    # lists untagged links among its reasons for rejecting an application.
+    for a in s.anchors:
+        href = a.get("href") or ""
+        if "link.amazon/" in href:
+            err(f"{rel}: short link offered as a click target: {href}")
+            continue
+        if re.match(r"^https?://(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/", href, re.I):
+            if "tag=shopnow047c-20" not in href:
+                err(f"{rel}: Amazon retail link without the Associates tag: {href}")
 
     # --- Amazon links must be sponsored ---
     for a in s.anchors:
@@ -297,7 +310,8 @@ def check_data():
         if p["intended_asin"] == p["observed_asin"] and p["intended_asin"] is not None:
             err(f"products.json: {p['ref']} intended and observed have been merged")
 
-    for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):
+    for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json",
+                 "decisions.json", "verification.json"):
         json.loads((ROOT / "src/data" / name).read_text(encoding="utf-8"))
 
     flags = json.loads((ROOT / "src/data/flags.json").read_text(encoding="utf-8"))
@@ -311,6 +325,29 @@ def check_data():
             err(f"questions.json: {q['id']} marked answered with no answer")
         if q.get("answered") and not q.get("evidence"):
             warn(f"questions.json: {q['id']} answered without a source reference")
+
+
+def check_legacy_and_index():
+    """One site for search engines to index.
+
+    The parallel edition is still served, so it must be noindexed rather than
+    deleted; a page that becomes indexable by accident would put two copies of
+    the same shop in front of a crawler.
+    """
+    from build import GENERATED
+    for path in sorted(ROOT.rglob("*.html")):
+        rel = path.relative_to(ROOT).as_posix()
+        if rel.startswith(".git/") or rel in GENERATED:
+            continue
+        head = path.read_text(encoding="utf-8")[:2500]
+        if 'content="noindex' not in head:
+            err(f"{rel}: parallel-edition page is indexable (no noindex in <head>)")
+
+    robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
+    if "Sitemap:" not in robots:
+        err("robots.txt: no sitemap reference")
+    if re.search(r"^Disallow:\s*/(\s*$|\s*\n)", robots, re.M):
+        err("robots.txt: disallows the whole site")
 
 
 def check_assets():
@@ -335,11 +372,72 @@ def check_assets():
         err("analytics.js: sets a cookie")
 
 
+def check_registers():
+    """The decision register, the suggestion queue and the verification log.
+
+    These three pages are the ones a reviewer acts on, so their internal
+    consistency is a build rule rather than a matter of care: every suggestion
+    points at a decision that exists, every path lists suggestions that exist,
+    and every link in the verification log matches the product register.
+    """
+    d = json.loads((ROOT / "src/data/decisions.json").read_text(encoding="utf-8"))
+    s = json.loads((ROOT / "src/data/suggestions.json").read_text(encoding="utf-8"))
+    v = json.loads((ROOT / "src/data/verification.json").read_text(encoding="utf-8"))
+    products = json.loads((ROOT / "src/data/products.json").read_text(encoding="utf-8"))["products"]
+    by_ref = {p["ref"]: p for p in products}
+
+    dec_ids = [x["id"] for x in d["decisions"]]
+    if len(dec_ids) != len(set(dec_ids)):
+        err("decisions.json: duplicate ids")
+    for g in d["gates"]:
+        for did in g["decisions"]:
+            if did not in dec_ids:
+                err(f"decisions.json: gate {g['id']} lists unknown {did}")
+    for x in d["decisions"]:
+        if x["answered"] and not x.get("evidence"):
+            err(f"decisions.json: {x['id']} answered with no evidence")
+        if not x["answered"] and not x.get("artefact"):
+            err(f"decisions.json: {x['id']} open with no artefact that would close it")
+
+    sug_ids = [x["id"] for x in s["suggestions"]]
+    if len(sug_ids) != len(set(sug_ids)):
+        err("suggestions.json: duplicate ids")
+    path_ids = {p["id"] for p in s["paths"]}
+    listed = [i for p in s["paths"] for i in p["items"]]
+    for i in listed:
+        if i not in sug_ids:
+            err(f"suggestions.json: path lists unknown {i}")
+    for x in s["suggestions"]:
+        if x["path"] not in path_ids:
+            err(f"suggestions.json: {x['id']} names unknown path {x['path']}")
+        if x["id"] not in listed:
+            err(f"suggestions.json: {x['id']} is in no path, so it can never be reviewed")
+        for dep in re.findall(r"D-\d\d", x.get("depends_on", "")):
+            if dep not in dec_ids:
+                err(f"suggestions.json: {x['id']} depends on unknown decision {dep}")
+
+    for r in v["links"]:
+        p = by_ref.get(r["ref"])
+        if not p:
+            err(f"verification.json: unknown product {r['ref']}")
+            continue
+        if p.get("observed_asin") != r["asin"]:
+            err(f"verification.json: {r['ref']} asin disagrees with products.json")
+        if p.get("listing_url") and not p["listing_url"].endswith(r["asin"]):
+            err(f"verification.json: {r['ref']} listing_url disagrees with the asin")
+        if p.get("tagged_link") and "tag=shopnow047c-20" not in p["tagged_link"]:
+            err(f"products.json: {r['ref']} tagged_link has no tag")
+    if len(v["links"]) != len(products):
+        err("verification.json: not every product has a link row")
+
+
 def main():
     for p in sorted(PAGES):
         check_page(p)
     check_sitemap_feed()
     check_data()
+    check_registers()
+    check_legacy_and_index()
     check_assets()
 
     print(f"pages checked: {len(PAGES)} (this build's output only)")

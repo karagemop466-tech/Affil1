@@ -9,11 +9,23 @@ FIELDS = [
     ("submitted_code", "Path code", "The characters after link.amazon/. Kept verbatim, including case."),
     ("intended_asin", "Intended ASIN", "What the operator meant to ship. Blank: it cannot be read from a nine-character slug."),
     ("observed_asin", "Observed ASIN", "The /dp/ segment of the page that actually loaded. Separate field, never merged with the one above."),
+    ("tagged_link", "Buy link offered", "The /dp/ destination plus the Associates tag, built from the ASIN observed on arrival."),
     ("listing_title", "Listing title", "Transcribed from the page reached, including the seller's own punctuation and claims."),
     ("brand", "Brand", "As stated on the listing."),
     ("category_path", "Category path", "The breadcrumb Amazon displayed on the arrival page."),
     ("checked_on", "Checked on", "The date the link was opened in this build."),
 ]
+
+
+def buy_url(p):
+    """The destination the site offers.
+
+    Program Policies 2(b) requires the Associates tag as a parameter in each
+    Amazon URL, so the buy link is the observed listing plus the tag. The
+    submitted short link is never used as a click target: its own tracking
+    behaviour was never observable from outside.
+    """
+    return p.get("tagged_link") or p.get("listing_url")
 
 
 def _short(p):
@@ -26,12 +38,11 @@ def build_register(page_dir, products, meta):
     d = page_dir
     rows = []
     for p in products:
-        link_cell = product_link(
-            d, p["submitted_link"], esc(p["submitted_code"]),
-            aria=f"Open submitted link {p['ref']} (affiliate link, opens in a new tab)")
+        link_cell = (f'<code class="code">{esc(p["submitted_link"])}</code>'
+                     '<br><span class="tiny">recorded, not offered as a click target</span>')
         if p["observed_asin"]:
             listing = product_link(
-                d, p["listing_url"], esc(p["observed_asin"]),
+                d, buy_url(p), esc(p["observed_asin"]),
                 aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
             name = esc(_short(p))
             status = '<span class="pill pill-ok">Identified</span>'
@@ -60,13 +71,13 @@ def build_register(page_dir, products, meta):
 <div class="reg-lede">
   <div>
     <h2>What this table is</h2>
-    <p>Five links were supplied. Each was opened once, on 20 November 2026, and the page it landed on was read. Four landed on a live Amazon listing and the ASIN and title were transcribed. The fifth did not land at all.</p>
+    <p>Five links were supplied. Each was opened on 20 November 2026 and the page it landed on was read. All five resolved to a live Amazon listing in this session, and each ASIN and title was transcribed. One of them &mdash; P-04 &mdash; had failed three times in an earlier session and resolved on both attempts here, so its record keeps both outcomes.</p>
     <p>Nothing in this table was inferred. Where a value could not be established, the cell is empty and the record says why.</p>
   </div>
   <dl class="reg-stats">
     <div><dt>Links submitted</dt><dd>5</dd></div>
-    <div><dt>Opened successfully</dt><dd>4</dd></div>
-    <div><dt>Unresolved</dt><dd>1</dd></div>
+    <div><dt>Opened successfully</dt><dd>5</dd></div>
+    <div><dt>Resolved only on retry</dt><dd>1</dd></div>
     <div><dt>Tested</dt><dd>0</dd></div>
   </dl>
 </div>
@@ -83,7 +94,7 @@ def build_register(page_dir, products, meta):
 <h2>Four things a reviewer will want to check</h2>
 <ol class="tight">
   <li><strong>The codes are nine characters.</strong> B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59 and B0f3GKalj all contain lowercase letters and are all nine characters long. Every ASIN that loaded is ten and uppercase. The codes are short-link slugs, and the earlier version of this register was wrong to treat them as identifiers.</li>
-  <li><strong>Attribution is unconfirmed.</strong> No arrived-at page showed a tag parameter. That does not prove the links are untagged, because a redirect service may apply the tag server-side. It does mean this build cannot confirm that a click is credited to <code class="code">shopnow047c-20</code>.</li>
+  <li><strong>Attribution is now built in, and still unconfirmed.</strong> No arrival URL carried a tag parameter, so the site stopped offering the short links as click targets and instead offers <code class="code">/dp/&lt;ASIN&gt;/?tag=shopnow047c-20</code>, which is the format Program Policies 2(b) requires. Whether Amazon records such a click is confirmed only by the click report, and that is FLG-002.</li>
   <li><strong>Identity is not quality.</strong> Knowing which product a link opens says nothing about whether the product is any good. No product here was handled.</li>
   <li><strong>The empty columns are deliberate.</strong> Price, rating, review count and stock status would all require either Amazon-served data or API access. Neither is connected, so they stay empty site-wide.</li>
 </ol>''', cls='')}
@@ -102,9 +113,9 @@ def _head(d):
     from layout import pagehead
     return pagehead(
         "The register",
-        "Five submitted links,<br>opened one by one",
+        "Five links, opened,<br>all five identified",
         "What each link actually reaches, transcribed from the page that loaded \u2014 and the fields that stay empty because no official source was available.",
-        meta=f"Checked {esc('20 November 2026')} &middot; 5 links &middot; 4 identified &middot; 0 tested",
+        meta=f"Checked {esc('20 November 2026')} &middot; 5 links &middot; 5 identified &middot; 1 resolved only on retry &middot; 0 tested",
     )
 
 
@@ -130,10 +141,17 @@ def _thermometer_note(d):
     return f"""<section class="band"><div class="wrap band-inner">
   <div>
     {eyebrow('Read the category path')}
-    <h2>One of these is filed under thermometers</h2>
-    <p>P-05 resolves to a wireless meat thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. The other four are under Small Appliances, then Fryers, then Air Fryers.</p>
-    <p>That is not a problem with the link. It would be a problem with this site if it presented a thermometer as the fifth air fryer, which is exactly what a site written from the brief alone would have done.</p>
-    <p><a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">The thermometer record <span aria-hidden="true">&rarr;</span></a></p>
+    <h2>Two of these are thermometers</h2>
+    <p>P-04 resolves to a ThermoMaven instant-read probe. P-05 resolves to a CHEF iQ wireless probe set with
+    three probes and a stated 1000&deg;F rating. Amazon's own breadcrumb files both under Kitchen Utensils &amp;
+    Gadgets, then Thermometers &amp; Timers, then Meat. The other three are under Small Appliances, then Fryers,
+    then Air Fryers.</p>
+    <p>That is not a problem with the links. It would be a problem with this site if it presented either one as
+    the fourth air fryer, which is exactly what a site written from the brief alone would have done. They get
+    their own cluster and their own guide, because an instant-read probe and a wireless multi-probe set are a
+    genuinely different decision.</p>
+    <p><a class="tlink" href="{esc(rel(d, 'guides/thermometer-instant-or-wireless.html'))}">Instant-read or wireless? <span aria-hidden="true">&rarr;</span></a>
+    &nbsp; <a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">The P-05 record <span aria-hidden="true">&rarr;</span></a></p>
   </div>
 </div></section>"""
 
@@ -152,7 +170,7 @@ def build_product(page_dir, p, meta):
         if key == "submitted_link":
             cell = product_link(d, value, esc(p["submitted_code"]), aria=f"Open submitted link for {p['ref']} (affiliate link, opens in a new tab)")
         elif key == "observed_asin":
-            cell = product_link(d, p["listing_url"], esc(value), aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
+            cell = product_link(d, buy_url(p), esc(value), aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
         elif key == "category_path":
             cell = esc(value)
         else:
@@ -199,7 +217,7 @@ def build_product(page_dir, p, meta):
         <p class="cta-label">Amazon listing</p>
         <p>Opens in a new tab. This is an affiliate link{'' if not meta.get('tracking') else ''}.</p>
       </div>
-      {product_link(d, p['listing_url'], 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
+      {product_link(d, buy_url(p), 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
     </div>
     <p class="fineprint">{DISCLOSURE} A purchase through this link does not change the price you pay. Whether a click is credited to this site's tracking ID is not confirmed \u2014 see the review queue.</p>
   </div>
@@ -237,7 +255,7 @@ def build_product(page_dir, p, meta):
         "name": p["listing_title"],
         "brand": {"@type": "Brand", "name": p["brand"]},
         "sku": p["observed_asin"],
-        "url": p["listing_url"],
+        "url": buy_url(p),
     }
 
     return page(
