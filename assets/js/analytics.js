@@ -19,7 +19,7 @@
 */
 
 (function () {
-  var ENDPOINT = "/analytics/collect";
+  var ENDPOINT = (window.affil1Root || "") + "analytics/collect";
   var STORAGE_KEY = "affil1_events";
   var MAX_QUEUE = 50;
   var sessionId = sessionStorage.getItem("affil1_session");
