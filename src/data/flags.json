@@ -240,6 +240,32 @@
       ],
       "impact": "Older editions remain archived in the repository; the Pages build excludes them.",
       "blocks": "Nothing in the current edition."
+    },
+    {
+      "id": "FLG-018",
+      "severity": "high",
+      "title": "Commercial hosting needs its own policy review",
+      "expected": "The host must allow the planned use.",
+      "found": "GitHub Pages is the current static editorial host. Its published usage limits restrict hosting an online business or a site primarily facilitating transactions.",
+      "reading": "The editorial publication is not checkout or a monetized SaaS. The planned commercial platform needs a suitable host and hosting review before activation.",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits"
+      ],
+      "impact": "Keep production collection and monetization expansion separate from this static publication.",
+      "blocks": "commercial rollout"
+    },
+    {
+      "id": "FLG-019",
+      "severity": "high",
+      "title": "Amazon Program Content is not a model-training dataset",
+      "expected": "Review rights and scope before using Amazon material in any automated workflow.",
+      "found": "Participation Requirements §5 restricts use of Special Links or Program Content to develop machine learning models or related technology without express prior written approval.",
+      "reading": "Do not send Amazon Program Content to a drafting or model pipeline as a default source. The restriction is distinct from price and availability rules.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "Keep any drafting experiment restricted to editorial inputs independently cleared for the intended use.",
+      "blocks": "model development using Program Content or Special Links without approval"
     }
   ]
 }

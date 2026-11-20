@@ -99,17 +99,17 @@ def build_ledger(page_dir, meta):
         'Campaign ledger',
         'An empty ledger,<br>with its columns defined',
         'The brief asked for measurement before optimisation. The measurable unit here is a row, and a row needs a provenance note. There are none yet.',
-        meta='No reports imported &middot; traffic and orders unverified &middot; no forecast',
+        meta='0 ledger rows &middot; traffic and reported orders unmeasured &middot; no forecast',
     )}
 {section(f'''
 <div class="lede-prose">
   <p>A ledger is only worth keeping if every row can be traced back to a report somebody was authorised to read. The columns below are therefore fixed in advance, and the rule is that a row is added only when the value comes from an authorised first-party report, with the date and the source recorded alongside it.</p>
-  <p>There are no rows. Not because the table was forgotten, but because no Associates report has been supplied, production traffic is unknown. A table with six plausible numbers in it would be the most damaging thing this site could publish.</p>
+  <p>There are no rows. Not because the table was forgotten, but because no Associates report has been supplied, no analytics endpoint is live, and no traffic has been measured. A table with six plausible numbers in it would be the most damaging thing this site could publish.</p>
 </div>
-{table(['Date', 'Source', 'Channel', 'Eligible sessions', 'Clicks', 'Reported orders', 'Provenance note'], rows, cls='ledger')}
+{table(['Report date / import timestamp', 'Source', 'Channel', 'Eligible sessions', 'Clicks', 'Reported orders', 'Provenance note'], rows, cls='ledger')}
 <h2 style="margin-top:2.4rem">The provenance rule</h2>
 <ol class="tight">
-  <li><strong>Date</strong> &mdash; the date of the report, not the date of entry.</li>
+  <li><strong>Report date and import timestamp</strong> &mdash; keep both so the entry can be traced back to its reporting period.</li>
   <li><strong>Source</strong> &mdash; which report, in which account, exported by whom.</li>
   <li><strong>Channel</strong> &mdash; organic search, direct, referral or social, as the report labels it.</li>
   <li><strong>Eligible sessions</strong> &mdash; sessions that had a reasonable chance to reach a link, not raw page views.</li>
@@ -119,7 +119,7 @@ def build_ledger(page_dir, meta):
 </ol>
 <h2 style="margin-top:2.4rem">What is deliberately absent</h2>
 <p>No conversion rate. No revenue estimate. No commission projection. Each would require a rate card that has not been read, a traffic figure that has not been measured, and a conversion assumption with nothing behind it. The site says so instead of producing a number that looks like evidence.</p>
-<div class="callout"><h2>What would put a row here</h2><p>One test click, then one Associates report. That is it. <a href="{esc(rel(d, 'suggestions/index.html'))}#S-01">Suggestion S-01</a>.</p></div>''', cls='')}"""
+<div class="callout"><h2>What would put a row here</h2><p>An authorized report with a known date, scope and provenance. <a href="{esc(rel(d, 'suggestions/index.html'))}#S-01">Suggestion S-01</a>.</p></div>''', cls='')}"""
     return page(
         d,
         title="Campaign ledger \u2014 Crisp & Counter",
@@ -132,63 +132,42 @@ def build_ledger(page_dir, meta):
 
 def build_brief(page_dir, products, questions, flags, meta):
     d = page_dir
-    n_q = len(questions["questions"])
-    n_open = sum(1 for q in questions["questions"] if not q.get("answered"))
-    n_high = sum(1 for f in flags["flags"] if f["severity"] == "high")
+    observed = sum(bool(p['observed_asin']) for p in products)
+    rows = [
+        ('Which product should each link promote?', 'Five public destinations observed; intended ASINs and attribution unconfirmed.',
+         'Confirm the intended variant in Associates Central. Generate one enrolled link per product, check where it lands, and reconcile eligible credited activity before rollout.', 'https://affiliate-program.amazon.com/help/operating/policies'),
+        ('What will readers search for?', 'No verified property or query dataset is on record.',
+         'Verify the property and submit the sitemap. Review available page/query impressions every four weeks; refresh a guide or commission one new guide only if it answers a distinct question.', 'https://support.google.com/webmasters/answer/7576553'),
+        ('Which niche or product converts?', 'No authorized order report; the tested five-event collector is off on GitHub Pages.',
+         'Read first-party page and click counts alongside a separate dated Associates report. Keep denominators and reporting windows explicit; never infer orders from clicks.', 'https://affiliate-program.amazon.com/home/reports'),
+        ('What can an AI drafting tool publish?', 'Drafting, not independent fact-finding or automatic publication.',
+         'Require official sources for product claims, permission for imagery and API content, and a disclosure and link review before publication.', 'https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking'),
+    ]
+    evidence = [[esc(q), esc(known), esc(step), {'html': outbound(d, url, 'Official source')}]
+                for q, known, step, url in rows]
     body = f"""{pagehead(
-        'Executive summary',
-        'The short version,<br>for someone with four minutes',
-        'What exists, what was verified, what could not be, and what the next decision is.',
-        meta='Written 20 November 2026 &middot; 1,600 words shorter than it could have been',
+        'Executive summary', 'The next decisions for Crisp &amp; Counter',
+        'Keep the shop useful now. Measure and confirm attribution before expanding the catalogue or making revenue claims.',
+        meta='20 November 2026 &middot; evidence and next steps',
     )}
-{section(f'''
-<div class="exec">
+{section(f'''<div class="exec">
   <div class="exec-block">
-    <h2>What was asked for</h2>
-    <p>An Amazon affiliate publication covering five supplied links: product research, comparison content, buying guides, click measurement and a compliant disclosure layer, built as a live GitHub Pages site and merged without further input.</p>
+    <h2>What shoppers can use today</h2>
+    <p>Compare three air fryers and two thermometers, then use the buying guides to check fit, capacity and cleanup. The comparison reflects Amazon listing statements, not hands-on tests or rankings.</p>
+    <p><strong>{observed} of {len(products)} submitted links</strong> reached listings in this recheck. That verifies observed destinations, not intended products or credit to <code class="code">{esc(TRACKING_ID)}</code>. P-04 reached a ThermoMaven listing after earlier checkpoint results. Another session observed the opposite P-04/P-05 mapping; the <a href="{esc(rel(d, 'review/index.html'))}#FLG-016">conflict remains flagged</a>. <a href="{esc(rel(d, 'products/index.html'))}">See the source for each product</a>.</p>
   </div>
   <div class="exec-block">
-    <h2>What was built</h2>
-    <p>A publication with nine buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen decision questions, twelve suggestions, a review queue, a source list with quoted wording, an empty campaign ledger, a self-hosted aggregate counter and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <h2>What to decide, and what evidence would change the answer</h2>
+    {table(['Question', 'What we know', 'How to find out', 'Source'], evidence, cls='compare')}
   </div>
   <div class="exec-block">
-    <h2>What was actually verified</h2>
-    <p>All five short links reached Amazon listings on 20 November 2026: three cooking appliances and two meat thermometers. P-04 reached ThermoMaven on recheck after previously returning an interstitial. These observations establish destinations, not affiliate attribution.</p>
-  </div>
-  <div class="exec-block exec-warn">
-    <h2>The one finding that changes the plan</h2>
-    <p>The five supplied link codes are nine characters and contain lowercase letters. Every ASIN that loaded is ten characters and uppercase. The codes are short-link slugs, not product identifiers &mdash; which means the earlier version of this repository recorded the wrong thing in its "intended ASIN" column, and that the intended product for each link cannot be read from the link at all. It has to come from the Associates dashboard.</p>
-    <p>This does not invalidate the links. It does mean nothing downstream can be confirmed without one look inside the account.</p>
-  </div>
-  <div class="exec-block">
-    <h2>What could not be verified, and why it matters</h2>
-    <dl class="exec-dl">
-      <div><dt>Tracking attribution</dt><dd>No arrival page showed a tag parameter. Whether clicks are credited to <code class="code">{esc(TRACKING_ID)}</code> is unknown. This is the difference between a site that earns and a site that does not.</dd></div>
-      <div><dt>Price, rating, availability</dt><dd>Not shown anywhere, because Amazon permits them only from Amazon-served data or its API. This is deliberate and is the site's largest visible gap to a reader.</dd></div>
-      <div><dt>Author</dt><dd>None. No name would be true, so none is used. It caps how much authority the guides can claim.</dd></div>
-      <div><dt>Product quality</dt><dd>Nothing was tested. No product is ranked, scored or recommended.</dd></div>
-      <div><dt>Traffic and revenue</dt><dd>Pages analytics is not active, no Search Console property is verified, and no commission rate has been read. Therefore no conversion score and no revenue forecast appears anywhere on this site.</dd></div>
-    </dl>
-  </div>
-  <div class="exec-block">
-    <h2>The next decision</h2>
-    <p>Three things, in this order. Tag the links from SiteStripe and make one test click, then read the Associates report for that day. Verify the Search Console property and submit the sitemap. Then choose between the two paths that actually improve the site: buy one product and test it properly, or wait for query data before writing another guide.</p>
-    <p>Writing more guides first is the option that looks like progress and is not.</p>
-  </div>
-  <div class="exec-block">
-    <h2>Numbers on the record</h2>
-    <div class="exec-stats">
-      <div><span>5</span><p>links supplied</p></div>
-      <div><span>5</span><p>resolved and transcribed</p></div>
-      <div><span>0</span><p>intended ASINs confirmed</p></div>
-      <div><span>0</span><p>products tested</p></div>
-      <div><span>0</span><p>prices shown</p></div>
-      <div><span>{n_q}</span><p>questions raised</p></div>
-      <div><span>{n_open}</span><p>still open</p></div>
-      <div><span>{n_high}</span><p>high-severity flags</p></div>
-    </div>
+    <h2>Editorial brief for the next guide</h2>
+    <p>Pick a meal the reader actually cooks. Open with one concrete decision, such as whether two foods finish together or whether the tray clears the door. Give a measuring step, a trade-off and a reason not to buy. Link to the relevant comparison or listing. Do not use “best,” trend claims, prices, ratings or a hands-on voice without evidence.</p>
+    <p>Candidate questions: <em>Will two different sides fit without a second batch?</em> and <em>Do I need a leave-in probe or just a quick spot-check?</em> These are ideas, not verified demand. Review them against measured queries before scheduling new pieces.</p>
+    <p><a class="btn" href="{esc(rel(d, 'suggestions/index.html'))}">Review suggestions</a> <a class="btn btn-ghost" href="{esc(rel(d, 'operations/launch-readiness.html'))}">Launch readiness</a> <a class="btn btn-ghost" href="{esc(rel(d, 'review/index.html'))}">Flagged for Review</a></p>
   </div>
 </div>''', cls='')}"""
+
     return page(
         d,
         title="Executive summary \u2014 Crisp & Counter",

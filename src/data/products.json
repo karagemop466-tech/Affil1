@@ -5,7 +5,7 @@
     "retrieved_on": "2026-11-20",
     "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result. Re-verification 2026-11-20 (S-8206a8d0): P-04 resolved to B0DHZTCNR5; all five now observed.",
     "field_rule": "intended_asin (what the owner meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. Where a field could not be established it is null.",
-    "price_rule": "Program Policies §2(b) (SRC-02) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / PA API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
+    "price_rule": "Program Policies §2(b) (SRC-02) restrict how price and availability can be displayed. Neither permitted source is connected; ratings and review counts are also withheld because no approved source is connected.",
     "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner."
   },
   "products": [
@@ -34,7 +34,7 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-01 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "The first request for this link returned an Amazon continuity page; the second returned the listing. Recorded as observed on 2026-11-20, not as a stable guarantee.",
+      "resolution_note": "The first request for this link returned an Amazon continuity page; the second returned the listing. Recorded as observed on 2026-11-20, not as a stable guarantee. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -80,7 +80,7 @@
       "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
       "photo_note": "Editorial illustration. It is not a photograph of P-02 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request.",
+      "resolution_note": "Resolved on first request. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -127,7 +127,7 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-03 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request.",
+      "resolution_note": "Resolved on first request. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -174,7 +174,7 @@
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-04 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "RESOLVED on re-verification 2026-11-20 (S-8206a8d0, fetch_page against amazon.com): link.amazon/B0c8moW59 now reaches this listing. Earlier attempts (including this build's three requests) landed only on Amazon's /checkpoint/continue interstitial. Both outcomes are dated observations; this entry reflects the latest. Single observation on one date; re-check monthly.",
+      "resolution_note": "RESOLVED on re-verification 2026-11-20 (S-8206a8d0, fetch_page against amazon.com): link.amazon/B0c8moW59 now reaches this listing. Earlier attempts (including this build's three requests) landed only on Amazon's /checkpoint/continue interstitial. Both outcomes are dated observations; this entry reflects the latest. Single observation on one date; re-check monthly. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -188,7 +188,7 @@
         "tracking tag on the click"
       ],
       "flag": "FLG-014 (resolved 2026-11-20; see resolution_note)",
-      "stated_capacity": "Not applicable — it is a thermometer",
+      "stated_capacity": null,
       "stated_attributes": "1-second read stated; ±0.5°F accuracy stated; NIST & NSF certified stated; auto-rotate LED screen; IP67 waterproof stated",
       "intended_listing_url": null,
       "intended_confirmed_on": null,
@@ -221,7 +221,7 @@
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-05 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance.",
+      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -234,7 +234,7 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "stated_capacity": "Not applicable — it is a thermometer",
+      "stated_capacity": null,
       "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
       "intended_listing_url": null,
       "intended_confirmed_on": null,
