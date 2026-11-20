@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "purpose": "Questions, the information needed to answer each one, and whether this session could answer it. 'Blocked' means no official source exists that this session can reach, or the answer requires account access the owner holds and the agent does not.",
+    "rule": "A blocked question is not a reason to guess. It is a reason to leave the value blank and say so."
+  },
+  "questions": [
+    {
+      "id": "Q-01",
+      "question": "Do the five supplied short links actually carry the tracking ID shopnow047c-20?",
+      "needed_info": "The Associates click report, or a resolved URL visibly containing the tag parameter, for each link.",
+      "answer": "Unknown.",
+      "status": "blocked-on-account",
+      "how_to_unblock": "Open each link while signed in to the Associates dashboard and check that the click registers under shopnow047c-20.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "flag": "FLG-002"
+    },
+    {
+      "id": "Q-02",
+      "question": "Are link.amazon short links compliant Special Links?",
+      "needed_info": "An official statement from Amazon on this specific redirector, or a tracked click observed end to end.",
+      "answer": "Unresolved. No official source either permits or prohibits this specific host in a way this session can cite, and no tracked click could be observed.",
+      "status": "blocked-on-account",
+      "how_to_unblock": "Test one link through the Associates workflow. If the click appears in the report, it is functioning as a Special Link. That is a measurement, not a ruling.",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "flag": "FLG-003"
+    },
+    {
+      "id": "Q-03",
+      "question": "What is the valid ASIN for each of the five products?",
+      "needed_info": "The ten-character ASIN shown on each product page and in the owner's Associates record.",
+      "answer": "Four observed redirect targets are recorded and are ten characters long. The fifth supplied link never reached a product page, so its ASIN is blank.",
+      "status": "partly-answered",
+      "how_to_unblock": "Open B0c8moW59 in a browser, past the interstitial, and read the ASIN from the page or URL.",
+      "source": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
+      "flag": "FLG-005"
+    },
+    {
+      "id": "Q-04",
+      "question": "What commission rate applies to each product?",
+      "needed_info": "The Standard Commission Income schedule for Home & Kitchen and for the thermometer category.",
+      "answer": "Not recorded. The rate card URL redirects to an Associates sign-in page.",
+      "status": "blocked-on-account",
+      "how_to_unblock": "Read the rate card while signed in. Do not publish a rate until then.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "flag": "FLG-004"
+    },
+    {
+      "id": "Q-05",
+      "question": "What do these appliances cost, and are they in stock?",
+      "needed_info": "Price and availability served by Amazon through a link it serves, or through the Creators API / PA API.",
+      "answer": "Not published, because publishing it without that feed is prohibited, not merely unverified.",
+      "status": "blocked-on-account",
+      "how_to_unblock": "Connect the Creators API or PA API, or embed an Amazon-served widget that carries the price.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "flag": "FLG-006"
+    },
+    {
+      "id": "Q-06",
+      "question": "Which of these appliances is best?",
+      "needed_info": "Independent measurement, or a stated, disclosed testing method performed by this site.",
+      "answer": "No winner is declared. This site has not tested any product and says so on every guide.",
+      "status": "blocked-on-decision",
+      "how_to_unblock": "Either purchase and test units and publish the method, or keep the site in its current advisory mode. Do not synthesise a verdict from listing titles.",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "flag": "FLG-007"
+    },
+    {
+      "id": "Q-07",
+      "question": "Would any of these products appeal to readers enough to click?",
+      "needed_info": "Outbound click data from a first-party endpoint, over a meaningful window.",
+      "answer": "No data exists yet. The ledger is intentionally empty.",
+      "status": "blocked-on-decision",
+      "how_to_unblock": "Choose a first-party host, deploy the documented collector, then wait for enough sessions to mean anything.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "flag": "FLG-009"
+    },
+    {
+      "id": "Q-08",
+      "question": "Which guide topic should be written next?",
+      "needed_info": "Search Console query impressions, and the click-through rate of existing guides.",
+      "answer": "Undetermined. Four guides are published as hypotheses; none has been measured.",
+      "status": "blocked-on-account",
+      "how_to_unblock": "Verify the site in Search Console, submit the sitemap, and revisit after four to six weeks.",
+      "source": "https://support.google.com/webmasters/answer/9008080",
+      "flag": "FLG-011"
+    },
+    {
+      "id": "Q-09",
+      "question": "Under what name should the site publish, and who is the author?",
+      "needed_info": "A real legal or pen name, a short bio, and a decision on whether to disclose testing or not.",
+      "answer": "Undetermined. No author identity is published, because inventing one would be a fabrication.",
+      "status": "blocked-on-decision",
+      "how_to_unblock": "Supply the name and a two-sentence bio. Then an author page and a real byline can be published.",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "flag": "FLG-013"
+    },
+    {
+      "id": "Q-10",
+      "question": "Is the site allowed to show Amazon product photographs?",
+      "needed_info": "Either an Amazon-served widget that carries the image, or API image fields used unmodified under the IP License.",
+      "answer": "Not established for this site. Program Content may not be altered, and this site has no licensed feed.",
+      "status": "blocked-on-account",
+      "how_to_unblock": "Enrol the API, or use Amazon-served link formats, and then place images unmodified.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "flag": "FLG-015"
+    },
+    {
+      "id": "Q-11",
+      "question": "Does the FTC require the disclosure to be a specific wording?",
+      "needed_info": "The FTC's own guidance on affiliate disclosure wording and placement.",
+      "answer": "Answered. The FTC gives example wording and says the disclosure must be clear and conspicuous, and that the reader must be able to weigh the recommendation. Nearby 'paid link' labelling is described as adequate.",
+      "status": "answered",
+      "how_to_unblock": "n/a",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "flag": null
+    },
+    {
+      "id": "Q-12",
+      "question": "May this site display price comparison tables?",
+      "needed_info": "The Associates Program rules on price display, including the comparison-format clause.",
+      "answer": "Answered as a constraint. A price may be shown only if Amazon serves it or it arrives via the API, and a comparison format must show both the lowest new and, if provided, lowest used price. This site shows neither.",
+      "status": "answered",
+      "how_to_unblock": "n/a",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "flag": "FLG-006"
+    },
+    {
+      "id": "Q-13",
+      "question": "What was in this repository before this session?",
+      "needed_info": "Git history and working tree.",
+      "answer": "Answered. One commit, one eight-byte README. No site, no prior pages, no data. The 'existing site' referenced in the brief is not in this repository.",
+      "status": "answered",
+      "how_to_unblock": "n/a",
+      "source": "repository git log",
+      "flag": "FLG-008"
+    },
+    {
+      "id": "Q-14",
+      "question": "Will the five links stay pointed at the same products?",
+      "needed_info": "A dated re-check of each redirect, repeated over time.",
+      "answer": "Unknown over time. Each row is a single observation on one date.",
+      "status": "needs-routine",
+      "how_to_unblock": "Re-run tools/validate.py monthly and diff the observed targets against products.json.",
+      "source": "https://link.amazon/B04G1MEwY",
+      "flag": "FLG-001"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision suggestions — review before implementing | Affil1</title>
+<meta name="description" content="Suggestions for improving the site and affiliate program. Review each suggestion and choose the best path before implementing any changes. Nothing here is implemented until reviewed.">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="alternate" type="application/rss+xml" title="Affil1" href="/rss.xml">
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+  <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
+    <a href="/">Home</a> &rsaquo; Suggestions
+  </nav>
+  <section class="section-tight">
+    <h1>Decision suggestions</h1>
+    <p>This section is a review inbox, not a to-do list. Review each suggestion, choose the best path, and record a decision before anything is implemented. No suggestion here has been approved.</p>
+
+    <div class="section-head" style="margin-top:22px;">
+      <h2>Open for review</h2>
+    </div>
+
+    <article class="sugg">
+      <div class="decide">S-001 &middot; Proposed &middot; Owner: site editor</div>
+      <p><strong>Suggestion:</strong> Add price and commission tracking to each product row once pricing is confirmed from an official source.</p>
+      <p><strong>Why:</strong> Buyers act on price; commission potential drives link placement decisions.</p>
+      <p><strong>Blocker:</strong> Prices are blank today because they were not confirmed from an official source — nothing may be inferred or filled in.</p>
+      <p><strong>Paths:</strong> (a) Wait for authorized first-party price reports, then add a verified price column; (b) add a manual “check price” step with dated source; (c) decline until Associates reporting provides it.</p>
+      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-001'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
+    </article>
+
+    <article class="sugg unvoted">
+      <div class="decide">S-002 &middot; Proposed &middot; Owner: site editor</div>
+      <p><strong>Suggestion:</strong> Replace the remaining three short links with validated Amazon Special Links after testing one link per product in the enrolled Associates workflow.</p>
+      <p><strong>Why:</strong> Special Links carry the tracking ID explicitly; current short links resolve to homepages or checkpoints for three of five products.</p>
+      <p><strong>Constraint:</strong> Do not claim the supplied short links are invalid — their exact compliance status is unresolved (see Flagged for Review). Test one link per product first, confirm destination and tracking report, then scale.</p>
+      <p><strong>Paths:</strong> (a) Enroll/test in Associates SiteStripe, generate Special Links for the two verified ASINs; (b) re-submit the three broken short links to the source; (c) hold.</p>
+      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-002'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
+    </article>
+
+    <article class="sugg unvoted">
+      <div class="decide">S-003 &middot; Proposed &middot; Owner: site editor</div>
+      <p><strong>Suggestion:</strong> Turn on real analytics (self-hosted collector at /analytics/collect) and choose the next guide topic from measured queries instead of instinct.</p>
+      <p><strong>Why:</strong> Editorial cadence should be data-driven; five events are already instrumented (page_view, outbound_click, guide_read, suggestion_review, session_start).</p>
+      <p><strong>Blocker:</strong> The collector endpoint must be self-hosted outside GitHub Pages before events reach a server.</p>
+      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-003'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
+    </article>
+
+    <article class="sugg unvoted">
+      <div class="decide">S-004 &middot; Proposed &middot; Owner: compliance</div>
+      <p><strong>Suggestion:</strong> Add the compliance gate check to the publishing workflow: disclosure placement + endorsement context reviewed against the Amazon Associates Operating Agreement and FTC guidance before any page publishes.</p>
+      <p><strong>Paths:</strong> (a) Adopt PUBLISHING_WORKFLOW.md as a pre-publish checklist; (b) expand with legal review step; (c) decline.</p>
+      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-004'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
+    </article>
+
+    <article class="sugg unvoted">
+      <div class="decide">S-005 &middot; Proposed &middot; Owner: editorial</div>
+      <p><strong>Suggestion:</strong> Add imagery and brand assets (logo, seasonal hero image) so the site reads as published rather than generated.</p>
+      <p><strong>Why:</strong> Publication polish path (authorship, navigation, brand, imagery, seasons, clusters) builds trust.</p>
+      <p><strong>Paths:</strong> (a) Commission or generate brand imagery; (b) keep CSS-only placeholders; (c) use only manufacturer images with confirmed rights.</p>
+      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-005'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
+    </article>
+
+    <div class="section-head" style="margin-top:40px;">
+      <h2>Decided</h2>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;">No decisions yet. When a suggestion is decided, it moves here with the chosen path, date and reviewer.</p>
+
+    <div class="flag">
+      <strong>Rule:</strong> no suggestion is implemented until someone reviews it and chooses a path. Implementation notes go in the pull request, never directly on the live site.
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="/assets/js/common.js"></script>
+<script src="/assets/js/analytics.js"></script>
+</body>
+</html>
