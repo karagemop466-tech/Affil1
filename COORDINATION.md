@@ -934,3 +934,21 @@ Scope is non-overlapping: no other session has claimed these files. No product f
 - **Gates:** `build.py` leaves generated output unchanged; `validate.py` 1813 checks, 0 warnings; `check.py` 34 pages, 0 errors / 0 warnings; `check_local_links.py` 68 pages, 0 broken.
 - **Irregularities carried forward (not blocking):** FLG-002 tag enrolment unconfirmed; FLG-003 short-link compliance unresolved; FLG-004 / FLG-018 P-04 and P-05 `mhFallback` arrivals; FLG-016 thermometer pair dispute; FLG-027 robots.txt below host root (Search Console needed); `assets/js/events.js` event names differ from `_src/data/events.json` (client inert, no data loss) — logged for owner decision.
 - **Status:** done, pending integration PR + Pages deploy confirmation (recorded below when complete).
+---
+
+### Claim — live re-verification of the five links, README correction · arena/bcd93318-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Re-verify the five submitted short links and the direct `/dp/` destinations line by line on 2026-11-20; re-verify the Associates §5 wording; correct the README P-04 row that contradicts `_src/data/products.json`; record the re-check as a new flag | in progress | arena/bcd93318-affil1 | `_docs/VERIFICATION-arena-bcd93318.md` (new), `_src/data/flags.json` (append FLG-028 only), `README.md` (P-04 row only), `COORDINATION.md`, and the rebuilt `review/index.html` |
+
+Not claimed and not touched: product data, guides, Special Links, analytics, Search Console, and anything owned by another open claim.
+
+**Done · arena/bcd93318-affil1 · 2026-11-20 UTC.** Scope actually touched: `_docs/VERIFICATION-arena-bcd93318.md` (new), `_src/data/flags.json` (FLG-028 appended), `README.md` (P-04 row, re-check note), `_tools/page_now.py` (caption now counts the rows; file was unclaimed), and rebuilt `brief/`, `now/`, `review/` output.
+
+- **Sources fetched (2026-11-20):** the five short links; `/dp/B0CDY277D3`, `/dp/B0DHZTCNR5`, `/dp/B0DZFD6R9Z`; [Associates Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) (updated Oct 15, 2025).
+- **Result:** the §5 sentence matches verbatim. The three `/dp/` pages resolve to the recorded listings. **All five short links returned `https://www.amazon.com/` on this date**, including P-04 on two attempts. The register's redirect observations for the short links are therefore not reproducible today. Recorded as **FLG-028 (high)**; no observed value was changed.
+- **Corrected:** README P-04 said "none, no buy button", which contradicted `products.json` and the built pages.
+- **Not verified:** P-02 and P-03 `/dp/` pages were not re-fetched. Program Policies and the Commission Income Statement were not re-fetched in this pass.
+- **Gates (local):** `build.py` ok · `check.py` 0 errors/0 warnings (34 pages) · `check_local_links.py` 68 pages, 0 broken · unit tests 6/6 · `_decision-support/validate.py` PASS · `_platform/verify_edition.py` 1965/0 · `_tools/validate.py` 1818 checks, 0 warnings.
+- **Irregularities left for review:** FLG-028; the short-link redirect instability (FLG-018, FLG-028); no attribution tag (FLG-002); the Special Link test still needs an enrolled account (FLG-003).

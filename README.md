@@ -104,7 +104,16 @@ page returned; none of it is a product recommendation and none of it was tested 
 | P-01 | `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` — CHEFMAN 6 Quart Dual Basket | unstable: interstitial on one attempt; on a 2026-11-20 fetch it resolved to the Amazon homepage (`amazon.com/`) |
 | P-02 | `link.amazon/B02NbDxp3` | `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French Door | unstable: second attempt only |
 | P-03 | `link.amazon/B00hJ57DV` | `amazon.com/dp/B08DKYBTPH` — Chefman Air Fryer 8 Qt | an earlier archived register wrongly logged this as the homepage |
-| P-04 | `link.amazon/B0c8moW59` | **none** — Amazon continue-shopping interstitial | published as unresolved; no buy button |
+| P-04 | `link.amazon/B0c8moW59` | `amazon.com/dp/B0DHZTCNR5` — ThermoMaven 1 Sec Digital Meat Thermometer | resolved only on a third attempt in an earlier pass, with `plpRedirect=mhFallback` ([FLG-018](https://karagemop466-tech.github.io/Affil1/review/#FLG-018)); the product page carries reference links to this listing, with no tag. The 2026-11-20 re-check returned the homepage for the short link ([FLG-028](https://karagemop466-tech.github.io/Affil1/review/#FLG-028)) |
+
+The earlier version of this table said P-04 had no destination and no link. That contradicted
+`src/data/products.json` and the built product pages, which both point to `B0DHZTCNR5`. The
+table now follows the data.
+
+**2026-11-20 re-check (FLG-028).** All five short links, fetched directly, returned
+`https://www.amazon.com/` rather than the product pages above. The direct `/dp/` pages for
+P-01, P-04 and P-05 still resolve to the listings recorded here. Full method and results:
+[`_docs/VERIFICATION-arena-bcd93318.md`](_docs/VERIFICATION-arena-bcd93318.md).
 | P-05 | `link.amazon/B0f3GKalj` | `amazon.com/dp/B0DZFD6R9Z` — CHEF iQ Sense thermometer | not an air fryer; gets its own guide |
 
 Manual review entry points: [verification log](https://karagemop466-tech.github.io/Affil1/review/measurement.html)
