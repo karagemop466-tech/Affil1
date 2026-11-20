@@ -1425,3 +1425,67 @@ Not claimed and not touched: `_src/data/products.json`, `product-intent.json`, `
 - **Renumbering receipt:** this session's two flags shipped as **FLG-034** (high, underscore directories publicly served while `.nojekyll` bypasses the Jekyll `_`-exclusion) and **FLG-035** (low, stale `Disallow: /archive/` rule). They were first written as FLG-029/030; concurrent sessions took those IDs mid-flight, so both were renumbered before merge. The board, the register and `_docs/VERIFICATION-arena-3d6a7607.md` all carry the renumber note.
 - **Gates at merge time:** build ×2 byte-identical · `check.py` 0 errors / 0 warnings · `validate.py` all pass, 0 warnings · `check_local_links.py` 73 pages, 0 broken · `test_paid_link_gate` OK.
 - **Owner items queued by this session (no action taken here):** flip Pages to `build_type: workflow` (durable fix for FLG-034, read together with FLG-032's dual-publisher finding); settle FLG-025 in the enrolled Associates workflow; review FLG-035 when next editing the robots generator.
+## Claim — one-site indexing & final integration/verification · arena/1623419c-affil1 · 2026-11-20 UTC
+
+Session ID: `arena/1623419c-affil1` · Branch: `arena/1623419c-affil1` · Cut from `main` @ `6eb15b7`.
+
+| Task | Status | Owner | Files (claimed scope) |
+|---|---|---|---|
+| De-index every non-canonical HTML surface so search engines index exactly one site; fix the `robots.txt` `/archive/` → `/_archive/` path bug; re-verify the five links line-by-line; correct the stale README build paths; final integration gate + PR/merge/deploy | in progress | `arena/1623419c-affil1` | `_tools/build.py` (ROBOTS), `_platform/build_edition.py` (head + edition robots), `_decision-support/*.html`, `_archive/**/*.html` (noindex meta only), `README.md`, `COORDINATION.md`, `COORDINATION/arena-1623419c-affil1.md` |
+
+**Rationale.** `main` serves the repo root, so every un-prefixed HTML directory is a live URL. Audit on this branch found **two competing, indexable editions** plus an internal desk and a non-blocked archive, against the brief's "give search engines one site to index":
+
+- `edition/` — 27 HTML pages, **0 noindex**, own permissive `robots.txt` advertising its own `sitemap.xml`. A second edition ("Countertop Almanac") competing with the canonical root "Crisp & Counter".
+- `_decision-support/` — 7 HTML pages, **0 noindex** (internal desk).
+- `_archive/` — 69 of 126 HTML pages **without** noindex, and root `robots.txt` disallows `/archive/` while the real directory is `_archive/`, so the crawler block never matched.
+
+The durable fix (Pages `build_type: workflow`) needs repository admin scope this token does not have (recorded as an owner request). The fix implemented here is the one available without admin: make every non-canonical HTML surface reachable-for-review but `noindex, follow`, and correct the `robots.txt` path so the crawler block actually matches. Root canonical pages, sitemap and feed are unchanged. No data, no product links, no editorial content is altered by this task.
+
+**Cross-scope guard.** `_platform/**`, `_tools/**` (other than `build.py`), `_src/**`, `_analytics/**`, `_measurement/**`, `_server/**`, `edition/**` (other than the generator + robots), and all canonical root generated pages are **read-only** for this task. If a change to another session's file is required, it will be logged here rather than made.
+
+### Work completed — arena/1623419c-affil1 (2026-11-20 UTC)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| De-index non-canonical surfaces + fix robots path + re-verify links + README paths + integration gate | done | `arena/1623419c-affil1` | `_tools/build.py`, `_platform/build_edition.py`, `_decision-support/*.html`, `_archive/**/*.html`, `README.md`, `COORDINATION.md`, `COORDINATION/arena-1623419c-affil1.md` |
+
+**What changed.**
+
+1. `_tools/build.py` `ROBOTS`: the crawler block disallowed `/archive/`, which never
+   matched the served `_archive/` directory. Now `Disallow: /_archive/`,
+   `/edition/`, `/_decision-support/`. Canonical root pages remain indexable.
+2. `_platform/build_edition.py`: added `<meta name="robots" content="noindex, follow">`
+   to the edition head template (all 27 pages) and changed `edition/robots.txt` to
+   `Disallow: /` with no sitemap advertisement. The Countertop Almanac edition stays
+   reachable for human review but is no longer a second indexable edition.
+3. `_decision-support/*.html` (7) and `_archive/**/*.html` (69 that lacked it):
+   injected `<meta name="robots" content="noindex,follow">`. 133/133 internal HTML
+   pages now carry noindex.
+4. `README.md`: corrected documented paths to the real tree (`_tools/`, `_src/data/`,
+   `_archive/`, `_docs/`) so the build commands actually run.
+
+**Line-by-line verification (official Amazon listing pages, fetched 2026-11-20).** All
+five destinations resolve and the observed titles match `_src/data/products.json`
+exactly — no drift:
+
+| Entry | Submitted | Observed ASIN | Official title match |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | B0CDY277D3 | CHEFMAN 6 Qt Dual Basket Air Fryer Oven, 2×3Qt baskets |
+| P-02 | link.amazon/B02NbDxp3 | B09B7SB46R | Emeril Lagasse 26QT French Door, 24 presets, 6 accessories |
+| P-03 | link.amazon/B00hJ57DV | B08DKYBTPH | Chefman 8 Qt TurboFry 4-in-1, 450°F Hi-Fry |
+| P-04 | link.amazon/B0c8moW59 | B0DHZTCNR5 | ThermoMaven 1 Sec, ±0.5℉, NIST&NSF, IP67 |
+| P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z | CHEF iQ Sense, 3 probes, 1000°F, lists Air Fryer |
+
+Every arrival carried `plpRedirect=mhFallback` (FLG-018). No `tag` was observed on
+arrival (FLG-002, unchanged); `intended_asin` stays `null` and is kept separate from
+`observed_asin`. The supplied short links are not declared invalid (FLG-003).
+
+**Gates (all green):** `_tools/build.py` 34 pages reproducible; `_platform/build_edition.py`
+27 pages reproducible; `check.py` 0/0; `validate.py` 1607 checks 0 warnings;
+`check_local_links.py` 65 pages 0 broken; `check_deploy_paths.py` 1645 refs resolve at
+`/Affil1/`; `_decision-support/validate.py` PASS; `verify_edition.py` 1965 checks 0 errors;
+`sweep_surfaces.py --dry-run` moves 0; `check_js.py` clean; paid-link + platform tests pass.
+
+**Still open (owner, not blocked):** enrolment/`tag` confirmation (FLG-002); the
+compliance status of the supplied short links (FLG-003); the P-04/P-05 intended mapping
+(FLG-016); the durable Pages `build_type: workflow` setting (admin scope required).

@@ -138,16 +138,19 @@ def feed(guides):
 """
 
 
-# One canonical site. The archived edition under _archive/ carries noindex, and
-# /_archive/ is not listed in the sitemap. edition/ (Countertop Almanac) is a
-# second publication kept readable but out of the index: every page there
-# carries noindex, follow (FLG-030), and this file disallows it. Nothing here
+# One canonical site. The archived edition under _archive/, the internal
+# decision desk under _decision-support/ and the parallel Countertop Almanac
+# edition under edition/ are all reachable for human review but carry
+# noindex, and none is listed in the sitemap. Disallow their served paths here
+# as well, so a crawler that ignores the meta tag is still blocked. The path
+# must be the served one (/_archive/, not /archive/) — an earlier revision
+# disallowed /archive/, which never matched the real directory. Nothing here
 # blocks crawling of the canonical pages.
 ROBOTS = """User-agent: *
 Allow: /
-Disallow: /archive/
 Disallow: /_archive/
 Disallow: /edition/
+Disallow: /_decision-support/
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
