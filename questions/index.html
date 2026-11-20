@@ -67,7 +67,7 @@
   <div class="qcard-top"><span class="q-num">Q-01</span><span class="pill pill-warn">Open</span> <span class="pill pill-block">Blocks work</span></div>
   <h3>Did each submitted link land on the product the owner meant to send readers to?</h3>
   <dl class="q-dl">
-    <div><dt>What we have</dt><dd>All five submitted short links reached a live listing on an earlier pass on 2026-11-20, with arrival ASINs and titles transcribed: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z. A later pass the same day reached no listing at all — all five short links returned https://www.amazon.com/. The five direct /dp/ URLs were re-opened in that later pass and every page title matched the record. See FLG-028.</dd></div>
+    <div><dt>What we have</dt><dd>All five submitted short links reached a live listing on an earlier pass on 2026-11-20, with arrival ASINs and titles transcribed: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z. Two later passes the same day reached no listing at all — all five short links returned https://www.amazon.com/. The five direct /dp/ URLs were re-opened and every page title matched the record. See FLG-028.</dd></div>
     <div><dt>What is missing</dt><dd>Two things, and they are different. First, the owner&#x27;s intended ASIN: the supplied codes are nine characters and lowercase, the observed ASINs are ten and uppercase, and intent cannot be read off a redirect that behaves differently on different passes. Second, a stable destination for the short link form itself.</dd></div>
   </dl>
   <div class="q-answer"><p class="q-label">What would close it</p><p>In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended. Record both values side by side, as the register does.</p></div>
@@ -187,10 +187,10 @@
   <div class="qcard-top"><span class="q-num">Q-02</span><span class="pill pill-ok">Answered</span></div>
   <h3>Why did one link fail to resolve at all?</h3>
   <dl class="q-dl">
-    <div><dt>What we have</dt><dd>P-04 (link.amazon/B0c8moW59) failed three times in an earlier session, resolved once on 2026-11-20 to B0DHZTCNR5, and on a later pass the same day reached only the Amazon homepage like the other four. Every short link has now shown at least two arrival behaviours.</dd></div>
+    <div><dt>What we have</dt><dd>P-04 (link.amazon/B0c8moW59) failed three times in an earlier session, resolved once on 2026-11-20 to B0DHZTCNR5, and on later passes the same day reached only the Amazon homepage like the other four. Every short link has now shown at least two arrival behaviours.</dd></div>
     <div><dt>What is missing</dt><dd>Nothing for the /dp/ destination, which was re-confirmed directly. What remains unknown is why the short-link form returns different pages across passes, so no claim is made about the cause and none is inferred.</dd></div>
   </dl>
-  <div class="q-answer"><p class="q-label">Answer</p><p>The direct /dp/ URL resolves and opens a ThermoMaven digital meat thermometer, which is a different product category from the three air fryers and is treated as such on the site. The short link is not a stable route to it.</p><p class="q-evidence">Source: Direct observation, 2026-11-20: https://www.amazon.com/dp/B0DHZTCNR5 returns the ThermoMaven listing; https://link.amazon/B0c8moW59 returned https://www.amazon.com/ on the later pass (FLG-028).</p></div>
+  <div class="q-answer"><p class="q-label">Answer</p><p>The direct /dp/ URL resolves and opens a ThermoMaven digital meat thermometer, which is a different product category from the three air fryers and is treated as such on the site. The short link is not a stable route to it.</p><p class="q-evidence">Source: Direct observation, 2026-11-20: https://www.amazon.com/dp/B0DHZTCNR5 returns the ThermoMaven listing; https://link.amazon/B0c8moW59 returned https://www.amazon.com/ on a later pass (FLG-028).</p></div>
 </article><article class="qcard" id="Q-04">
   <div class="qcard-top"><span class="q-num">Q-04</span><span class="pill pill-ok">Answered</span></div>
   <h3>Should the site show prices?</h3>

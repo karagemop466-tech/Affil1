@@ -411,14 +411,14 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-22">
+</article><article class="scard" id="S-26">
   <div class="scard-head">
-    <span class="scard-id">S-22</span>
+    <span class="scard-id">S-26</span>
     <h3>Never publish a supplied short link as a buy destination — link the /dp/ listing instead</h3>
     <span class="scard-effort">zero — enforce what the build already does</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.</p></div>
+    <div class="scard-why"><p class="q-label">Why</p><p>On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. Independently observed by two sessions and recorded as FLG-028. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.</p></div>
     <dl class="scard-meta">
       <div><dt>Risk</dt><dd>None. The cost is that the supplied links stay in the record as evidence rather than as revenue paths, which is what FLG-028 and FLG-003 already say they are.</dd></div>
       <div><dt>Depends on</dt><dd>nothing</dd></div>
@@ -432,18 +432,18 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-23">
+</article><article class="scard" id="S-27">
   <div class="scard-head">
-    <span class="scard-id">S-23</span>
-    <h3>Give each of the five products a five-minute check the reader can actually do in the aisle</h3>
-    <span class="scard-effort">an evening across five pages</span>
+    <span class="scard-id">S-27</span>
+    <h3>Make the edition&#x27;s robots.txt agree with its own noindex tag</h3>
+    <span class="scard-effort">one line in the edition generator</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>The product pages explain trade-offs well but stop at description. The one thing this site can offer that a listing page cannot is a short, concrete test the buyer performs themselves — measure the counter, count the parts to wash, check the door swing, confirm the probe reads room temperature. It costs nothing, needs no testing, and directly answers the brief&#x27;s ask for pages that help a real person decide.</p></div>
+    <div class="scard-why"><p class="q-label">Why</p><p>Every edition/ page now carries noindex, follow, but edition/robots.txt still says &#x27;Allow: /&#x27; and still advertises the edition&#x27;s own sitemap. The meta tag and the robots file contradict each other at the same URL, and the sitemap invites exactly the crawl the meta tag declines. A crawler is entitled to treat the more permissive instruction as authoritative.</p></div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Low, provided nothing is written as a claim about how the product performed. A check the reader runs is not a test result the site reports.</dd></div>
+      <div><dt>Risk</dt><dd>None for readers: the edition stays fully reachable for review; only the instruction to index it is withdrawn.</dd></div>
       <div><dt>Depends on</dt><dd>nothing</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Do this before commissioning any new guide — it improves pages that already have traffic potential</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Done in this pass (Disallow: /), and enforced — _tools/check.py now fails the build if any published directory below the root permits a crawl or serves a page without noindex.</dd></div>
     </dl>
   </div>
   <div class="scard-foot">
@@ -453,14 +453,14 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-24">
+</article><article class="scard" id="S-28">
   <div class="scard-head">
-    <span class="scard-id">S-24</span>
+    <span class="scard-id">S-28</span>
     <h3>Decide what edition/ is for: keep it as a labelled archive, or retire it to _archive/</h3>
     <span class="scard-effort">an afternoon, once the owner decides</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>edition/ is a complete second publication of 27 pages sitting at a public URL. As of this pass it no longer asks to be indexed, and the build fails if it ever does again, but it is still a second set of product pages describing the same five products with different wording. Two descriptions of one product is a maintenance cost and a source of drift.</p></div>
+    <div class="scard-why"><p class="q-label">Why</p><p>edition/ is a complete second publication of 27 pages sitting at a public URL. It no longer asks to be indexed and the build fails if it ever does again, but it is still a second set of product pages describing the same five products with different wording. Two descriptions of one product is a maintenance cost and a source of drift.</p></div>
     <dl class="scard-meta">
       <div><dt>Risk</dt><dd>Retiring it loses the reviewable comparison unless it moves to _archive/ with the rest of the superseded work. Keeping it means someone has to keep both registers honest.</dd></div>
       <div><dt>Depends on</dt><dd>Q-01, Q-06</dd></div>

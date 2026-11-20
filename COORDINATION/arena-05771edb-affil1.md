@@ -107,3 +107,41 @@ warnings** · `_tools/check_local_links.py` **0 broken across 68 pages** ·
 `_platform/verify_edition.py` **1965 checks / 0 errors** · paid-link gate **6/6** ·
 `check_deploy_paths.py` **1825/1825 resolve at the `/Affil1` mount** · rebuild
 **reproducible, zero drift** · `check_one_indexable_site()` negative-tested.
+
+### 7. Final reconciliation (third rebase) — overlapping work, resolved without loss
+
+`main` moved three more times during this session (`1b061c2` → `3d2a453` → `ef0a566`).
+Two other sessions landed adjacent work. Nothing was discarded from either side.
+
+**Duplicate work found and dropped, not merged:**
+
+| Finding | Session that got there first | What this session did |
+|---|---|---|
+| All five short links return the Amazon homepage | `arena/bcd93318-affil1` — FLG-028 | Dropped my own FLG-028; kept theirs verbatim and added `corroborated_by` plus the five `/dp/` re-checks |
+| `edition/` pages need `noindex` | `arena/acb1e4c8-affil1` (S-23) | Kept their generator change; **renumbered my three rows** from S-22..S-24 to **S-26..S-28** because they had taken S-22..S-25 |
+
+**A gap survived both fixes, and is the reason this branch still matters.** Main's
+`_platform/build_edition.py` adds `noindex, follow` to every edition page — but main's
+`edition/robots.txt` still reads:
+
+```
+User-agent: *
+Allow: /
+Sitemap: https://karagemop466-tech.github.io/Affil1/edition/sitemap.xml
+```
+
+So at the same URL one instruction says *do not index* and another says *crawl me, here is
+my sitemap*. A crawler is entitled to follow the more permissive one. This branch sets that
+file to `Disallow: /` and removes the sitemap invitation, so the two agree. That is S-27 on
+the suggestions page and the reason `check_one_indexable_site()` exists: the meta tag was
+fixed once already and drifted back, because nothing was checking the file beside it.
+
+Both branches of that guard are negative-tested on the merged tree:
+- restoring `Allow: /` → `FAIL edition/robots.txt permits crawling`;
+- stripping both `noindex` lines from a page → `FAIL edition/: 1 of 27 pages lack noindex`.
+
+**Gates on the final merged tree:** `_tools/check.py` 0 errors / 0 warnings ·
+`_tools/validate.py` 1909 checks / 0 warnings · `check_local_links.py` 0 broken in 69 pages ·
+`_decision-support/validate.py` PASS · `_platform/compliance_gate.py` 0 errors ·
+`_platform/verify_edition.py` 1965 checks / 0 errors · `_tools` tests 10/10 ·
+rebuild reproducible, zero drift.
