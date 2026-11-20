@@ -1708,3 +1708,32 @@ without `--i-am-the-owner` refuses with exit 3 and writes nothing.
 **Nothing was armed.** `_src/data/product-intent.json` untouched — five `null` approvals, three
 `null` confirmations, `published state: reference links only`. No traffic, order, conversion,
 revenue or popularity figure is claimed anywhere in this pass.
+
+### Addendum, same session — the live annex check found a worse defect than the ones on my list
+
+Merge of #122 landed as `1e100a4`; while verifying it on the live host I read
+`/Affil1/edition/index.html` rather than trusting the green pipeline, and the product cards'
+**buy buttons pointed at `https://link.amazon/<9-char>` — the unvalidated short links** — on
+19 annex pages, 60 anchors (re-measured from git: pre-fix 19/60, post-fix 0). The root site's
+`permitted_amazon_urls` gate has refused those URLs since #90; the annex is a separate
+generator with its own verifier, and that verifier treated `link.amazon/` as a *valid* product
+destination, so it reported the pages clean while the register's own rows said the redirect was
+unstable (P-01 "resolved to the Amazon homepage… Unstable"; P-02/P-04 "returned a checkpoint").
+A reader clicking "View on Amazon (Paid link)" there had a real chance of landing on Amazon's
+home page.
+
+Fixed as `FLG-051`: `buy_href()` now sends the reader to the observed `/dp/` listing (or a
+validated Special Link if one is ever recorded), the short link stays printed 50 times as
+`<code>` evidence, the annex's compliance copy states the rule instead of merely qualifying the
+`rel` attribute, and `verify_edition.py` fails on a short link used as a destination **or** on a
+paid destination absent from the register (2,230 checks, from 2,047) — both halves negative-tested
+by injecting one of each.
+
+Two notes for whoever integrates next:
+- **A per-surface policy must be asserted on every surface.** "The gate covers this" was the
+  assumption that let this ship. `_platform/build_edition.py` and `_tools/layout.py` are two
+  independent link emitters; only one had a gate.
+- My own first count of this ("44 root anchors") was wrong, produced by a `grep -h` whose
+  filename prefix I had filtered on. The published numbers above are per-file counts from
+  `git grep -c`, re-measured after the fix. Worth repeating because the mistake was in the
+  direction of overstating a neighbouring session's defect.

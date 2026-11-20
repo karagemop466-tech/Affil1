@@ -89,7 +89,7 @@ Negative tests, so the new gates are not decoration:
 - `_measurement/collector.py` reads `src/data/product-intent.json` (no such path since the
   underscore rename), so its allowlist is permanently empty and it fails closed for the wrong
   reason; `_platform/collector.py` belongs to the annex. Both were left alone as other
-  sessions' scopes and recorded in FLG-035 / Q-25 rather than rewritten here.
+  sessions' scopes and recorded in FLG-046 / Q-28 rather than rewritten here.
 - `assets/js/events.js` and `assets/js/shortlist.js` are orphaned (loaded by no page) yet are
   the only two files `kitchen-check.yml` syntax-checks, while all 17+ pages load
   `analytics.js` + `site.js`. Left as-is — the files still parse and the collector's tests now

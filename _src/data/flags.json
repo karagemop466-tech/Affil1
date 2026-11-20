@@ -680,6 +680,22 @@
         "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
         "https://karagemop466-tech.github.io/Affil1/robots.txt"
       ]
+    },
+    {
+      "id": "FLG-051",
+      "severity": "high",
+      "title": "The annex offered the unvalidated short links as its buy buttons; the root site refused to",
+      "expected": "One rule for both published surfaces: a reader's buy path is an account-approved Special Link when one exists, otherwise the observed /dp/ listing. A link whose redirect the register itself records as unstable is evidence, not a destination.",
+      "found": "Verified on the live site before this fix: every product card on /Affil1/edition/, the comparison table, each of the five product pages, the two category pages and eight annex guides wired 'View on Amazon (Paid link)' and 'Open Supplied Amazon Link (Paid link)' to https://link.amazon/<9-char> - 60 anchors across 19 pages. Meanwhile the register rows for those links say the redirect is unreliable (P-01 'resolved to the Amazon homepage... Unstable'; P-02 and P-04 'A prior pass returned a checkpoint'), _tools/layout.py raises ValueError if the root build emits such a URL, and the annex verifier treated link.amazon/ as a valid product destination, so it reported the pages clean. One page's own compliance text even advertised that link.amazon anchors were 'qualified', which was true of the rel attribute and useless as a guarantee about where a reader lands.",
+      "impact": "Fixed and then made unregressable: buy_href() routes every CTA to the observed listing (or the validated Special Link if the register ever gains one), and the supplied short link is still printed - 50 times as <code> across the annex, so the evidence survives - while verify_edition.py now fails on a short link used as a destination or on a paid destination absent from the register (2,230 checks, up from 2,047; both halves negative-tested by injecting one of each, and the pre-fix state re-measured from git as 19 pages / 60 anchors).",
+      "reading": "The root site's paid-link gate protected the root site. The annex was built by a different generator with its own rules, and the shared assumption that 'the gate covers this' was exactly where the defect lived. If a policy is per-surface, say which surfaces, and assert it on each.",
+      "blocks": "nothing - fixed on this branch; the underlying question of whether the short links resolve at all stays open (FLG-003, S-26)",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "_platform/build_edition.py (buy_href, evidence_ref)",
+        "_platform/verify_edition.py (permitted_amazon_destinations)",
+        "https://karagemop466-tech.github.io/Affil1/edition/"
+      ]
     }
   ]
 }
