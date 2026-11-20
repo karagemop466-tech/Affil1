@@ -677,3 +677,37 @@ Operating Agreement §5 https://affiliate-program.amazon.com/help/operating/agre
 Program Policies §2(a)(b) https://affiliate-program.amazon.com/help/operating/policies ·
 FTC Endorsement Guides FAQ https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking ·
 Google `rel="sponsored"` https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
+
+### Session `arena/de1b6fa5-affil1` — completion record (2026-11-20)
+
+| Task | Status | Files |
+|---|---|---|
+| Fifth link verification + cart buy path | done | `src/data/links.json`, `tools/cta.py`, `tools/page_home.py`, `tools/page_products.py` |
+| Weighted offer board | done | `src/data/offers.json`, `tools/page_offers.py` |
+| Cross-artefact verification register | done | `src/data/crosscheck.json`, `tools/page_crosscheck.py` |
+| Plain-English "what is left" page | done | `tools/page_now.py` |
+| One visual language across all imagery | done | `assets/img/*` (8 re-drawn), `src/data/images.json`, `src/data/products.json` |
+| Gate repair: cart endpoints classified as citations | done | `tools/check.py`, `tools/validate.py` (URL-shape predicate extended, no page exempted) |
+| Executive summary addendum | done | `EXECUTIVE_SUMMARY.md` |
+
+**Verification performed:** `python3 tools/build.py` → 33 pages · `python3 tools/check.py` → 33 pages,
+0 errors, 0 warnings · `python3 tools/validate.py` → 1749 checks, 0 warnings · `tools/check_local_links.py`
+→ 40 pages, 0 broken · `tools/check_js.py` → 3 scripts parse · `tools/stage.py` → staged artefact crawled,
+0 broken references · all five links opened first-hand in this session.
+
+**Correction recorded, not hidden.** This session's first pass reported one photoreal image in the
+seasonal band. Opening every referenced image showed eight of seventeen in use were photographic, including
+both images on product pages P-02 and P-04. The finding was rewritten in place on `/verification/` and in
+`crosscheck.json` rather than quietly deleted, because a register that edits away its own error is the
+failure mode this site exists to avoid.
+
+**Genuine conflict with other open work, for the integrator:** open PRs #86 (`tools/validate.py`),
+#84 (`decision-support/*`), #82 (guides + layout), #79 (archive), #74 (`assets/css/site.css`, guides,
+`README.md`), #69, #62, #54, #47 all target files this branch also touches or depends on. This branch does
+not modify `decision-support/`, `tools/validate.py` beyond the one regex in `is_product_link`, or
+`src/data/{flags,questions,suggestions,product-intent}.json`. Expect conflicts in `tools/layout.py`,
+`tools/build.py` and `assets/css/site.css`; this branch's versions are the newer ones and build clean.
+
+**Still open, needs the owner (unchanged):** Associates enrolment and one confirmed click · Pages source
+setting · tag-while-unverified decision · named author · domain · Search Console · analytics endpoint.
+None blocks this branch.

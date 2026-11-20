@@ -86,3 +86,10 @@
   .cta-pair{flex-direction:column}
   .cta{width:100%}
 }
+
+/* width hints for the two new wide tables */
+table.cctable{min-width:58rem}
+table.offertable{min-width:52rem}
+table.factortable{min-width:34rem}
+table.flagtable{min-width:40rem}
+.step-body{min-width:0}

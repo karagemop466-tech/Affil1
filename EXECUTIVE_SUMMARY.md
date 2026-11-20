@@ -168,3 +168,82 @@ https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-refe
 - `python3 tools/check.py` — 0 errors, 0 warnings.
 - `python3 tools/check_local_links.py` — 0 broken relative references.
 - `python3 tools/validate.py` — 1441 checks, 0 warnings.
+
+---
+
+# Addendum — session `arena/de1b6fa5-affil1`, 2026-11-20
+
+This section supersedes the page counts and the "what exists now" list above where they
+conflict. It records what this session verified first-hand and what it changed.
+
+## The one number that decides everything
+
+**Zero of the five submitted links carried a `tag` parameter when this session opened them,
+and the `?tag=shopnow047c-20` form of the same listing also arrived without one.** Both
+observations are from `fetch_page` with redirects followed, on 2026-11-20. That is FLG-002
+restated with a fresh observation. Until a click is seen in an Associates report, every
+statement about earnings on this site is a possibility, not a fact.
+
+## What this session opened, itself
+
+| Ref | Submitted | Reached | Title read from the page |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | `/dp/B0CDY277D3` | CHEFMAN 6 Quart Dual Basket Air Fryer Oven |
+| P-02 | link.amazon/B02NbDxp3 | `/dp/B09B7SB46R` | Emeril Lagasse 26QT French Door |
+| P-03 | link.amazon/B00hJ57DV | `/dp/B08DKYBTPH` | Chefman Air Fryer 8 Qt TurboFry |
+| P-04 | link.amazon/B0c8moW59 | `/dp/B0DHZTCNR5` | ThermoMaven 1 Sec Professional Digital Meat Thermometer |
+| P-05 | link.amazon/B0f3GKalj | `/dp/B0DZFD6R9Z` | CHEF iQ Sense, Smart Wireless Meat Thermometer, 3 probes |
+
+Sources read first-hand: [Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement)
+(updated 15 Oct 2025) · [Program Policies §2](https://affiliate-program.amazon.com/help/operating/policies)
+(updated 14 Apr 2026) · [FTC Endorsement Guides FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking)
+· [Google paid-link qualification](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links).
+
+## What was built
+
+The site had three registers of ideas and no way to choose between them. It now has a
+choice surface, and a conversion path.
+
+| New surface | What it answers |
+|---|---|
+| `/now/` | What do I actually have to do? Three steps, one of which is real work. |
+| `/offers/` | Which change first? Ten offers scored on six weighted factors, arithmetic reproducible with `tools/page_offers.py --check`. |
+| `/verification/` | Does this page's claim hold? Sixteen surfaces, one row each, with a verdict allowed to be unflattering. |
+| Cart CTA on the front page | A reader who has decided can add to basket in one click instead of landing on a product page and hunting. |
+
+The site is now **33 pages**, built from `src/data`, and `tools/check.py` reports
+0 errors and 0 warnings over that whole set.
+
+## Five findings, all opened rather than reasoned about
+
+1. **The published site serves the whole repository.** GitHub's API reports
+   `build_type: legacy, source.path: "/"`, and `/tools/build.py` and
+   `/archive/notes-edition/index.html` both resolve publicly on the live host. Five
+   editions of one shop are live. The staged artefact that CI builds is not what ships.
+   *Fix: one Pages setting. Logged as OFF-02.*
+2. **Eight of seventeen in-use images were photographic** on a site whose image register
+   said illustrations only — including the images on product pages P-02 and P-04, where a
+   photograph sits directly above a note saying it is not a photograph. *Fixed this session:
+   all eight re-drawn as engravings in the style the other nine already used.*
+3. **The paid-link gate is not wired to the pages.** `paid_link_gate.approved_links()`
+   returns `{}` for the current register; `tools/validate.py` never imports it; the tag is
+   added by a fallback in `layout.approved_amazon_urls()`. The site asserts a relationship
+   the register says is unconfirmed. *Not fixed here — removing the tag changes what every
+   buy link does. Logged as OFF-03 with the code path named on `/verification/`.*
+4. **22 archived pages carry no `noindex`**, contradicting the checker's own comment that
+   every archived page does.
+5. **The cart endpoint works and dead-ends at a sign-in wall.** `gp/aws/cart/add.html`
+   returned Amazon's sign-in redirect with the Associates return path. The format is
+   accepted; whether a purchase is credited is still unknown, and is not claimed.
+
+## What still needs the owner, in order
+
+1. **Ten minutes in Associates Central.** Generate one Special Link, click it, read the
+   report. This is the only step that turns "cannot earn" into a known state.
+2. **One Pages setting**, so the live site is the built site.
+3. **A decision on the tag** while step 1 is open: keep it and accept the claim is
+   unverified, or ship untagged reference links and say so.
+4. Then, and only then: a named author, a domain, Search Console, an analytics endpoint.
+
+Nothing in this repository can close steps 1 to 3, because all three need an account this
+session cannot sign in to. That is the honest bottom line.
