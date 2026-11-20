@@ -8,7 +8,7 @@
     {
       "id": "S-01",
       "title": "Get the five links tagged, then test one click and read the report",
-      "why": "Four of five destinations are now known. What is still unknown is whether a click on them is attributed to shopnow047c-20. Until one real click shows up in the Associates report, the site is sending readers somewhere that may not pay.",
+      "why": "Five of five destinations are now known. What is still unknown is whether a click on them is attributed to shopnow047c-20. Until one real click shows up in the Associates report, the site is sending readers somewhere that may not pay.",
       "effort": "about 20 minutes of dashboard work plus one click",
       "risk": "Low. Links can be swapped without changing any prose.",
       "depends_on": "Q-03, Q-14",
@@ -37,8 +37,8 @@
     },
     {
       "id": "S-04",
-      "title": "Add one genuinely tested product comparison \u2014 bought, used, and photographed",
-      "why": "This is the single biggest available jump in both usefulness and ranking potential. Every air-fryer page on the internet is currently synthesised from seller copy; a page with a real measurement table, a real cleanup test and real photographs would be materially different.",
+      "title": "Add one genuinely tested product comparison — bought, used, and photographed",
+      "why": "First-hand measurements and original photographs could add useful evidence, but any effect on rankings is unknown.",
       "effort": "a purchase plus several evenings",
       "risk": "Cost. Also, FTC and Amazon rules require the review to be genuine, so the testing must actually happen before the page exists.",
       "depends_on": "Q-08",
@@ -48,9 +48,9 @@
     {
       "id": "S-05",
       "title": "Connect the Product Advertising API before showing any price or rating",
-      "why": "It is the only compliant route to live price, availability and rating, and those are the three things shoppers look for before clicking.",
-      "effort": "an application, plus 3 qualifying sales to unlock it on most accounts",
-      "risk": "None to the site. The blocker is that eligibility usually requires sales, which requires traffic, which is the thing being built.",
+      "why": "Access to approved Amazon data may enable permitted product data displays, subject to current program and API rules.",
+      "effort": "Application and integration; eligibility must be checked with Amazon.",
+      "risk": "Eligibility and access are not yet confirmed.",
       "depends_on": "Q-04",
       "recommendation": "Start the application now; expect to wait",
       "status": "proposed"
@@ -59,7 +59,7 @@
       "id": "S-06",
       "title": "Switch on measurement before writing guide number five",
       "why": "Four guides exist on hypotheses. A fifth written on another hypothesis adds almost nothing. A fifth written from an actual Search Console query report adds a page that has a reason to exist.",
-      "effort": "an hour of setup, then 2\u20134 weeks of waiting for data",
+      "effort": "an hour of setup, then 2–4 weeks of waiting for data",
       "risk": "Low. The client is already written and stays silent until switched on.",
       "depends_on": "Q-10, Q-11",
       "recommendation": "Do before more content",
@@ -68,7 +68,7 @@
     {
       "id": "S-07",
       "title": "Verify the property in Search Console and submit the sitemap",
-      "why": "Without this the site cannot be found, and the topic question can never be answered with data.",
+      "why": "Search Console can report search performance and accept sitemap submissions; indexing and traffic are not guaranteed.",
       "effort": "15 minutes",
       "risk": "None. Requires the owner's Google account, so it cannot be done by an agent.",
       "depends_on": "Q-11",
@@ -77,12 +77,12 @@
     },
     {
       "id": "S-08",
-      "title": "Decide what P-05 (the thermometer) is doing here",
-      "why": "It is the only non-air-fryer in the set. It currently has its own honest section, which is fine, but it will not be found by anyone searching for air fryers and it dilutes the site's topic focus.",
+      "title": "Decide how the two thermometers fit the catalogue",
+      "why": "P-04 and P-05 are thermometers, not air fryers. Their relationship to the broader publication is an editorial decision; their category is kept distinct.",
       "effort": "a decision",
       "risk": "Low either way. Keeping it is harmless; removing it loses a link.",
       "depends_on": "Q-06",
-      "recommendation": "Either is defensible \u2014 but decide, so the navigation stops hedging",
+      "recommendation": "Either is defensible — but decide, so the navigation stops hedging",
       "status": "proposed"
     },
     {
