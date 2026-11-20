@@ -62,11 +62,12 @@ GENERATED = {
     "brief/index.html",
 }
 
-# Generated files from earlier versions of this build that should be removed
-# when the slug list changes. Explicit, so a removal is always a deliberate act.
+# Files THIS build emitted in an earlier version, now renamed, which must be
+# removed when the slug list changes. It contains nothing that predates this
+# build: guides/basket-or-oven.html and guides/capacity-checklist.html belong to
+# a parallel edition on main and are still served, so deleting them here would
+# destroy another session's work. Verified by rebuilding and diffing the tree.
 RETIRED = [
-    "guides/basket-or-oven.html",
-    "guides/capacity-checklist.html",
     "guides/cleanup-counterspace.html",
 ]
 

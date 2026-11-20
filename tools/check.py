@@ -20,8 +20,28 @@ from html.parser import HTMLParser
 from urllib.parse import urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PAGES = [p for p in ROOT.rglob("*.html")
-         if not any(part in {"tools", "src", "node_modules", ".git"} for part in p.parts)]
+
+# This build owns the site root. Other editions on main (crisp/ and the
+# root-level *.html pages of a parallel session) are theirs, not this build's,
+# and are deliberately out of scope. Claiming to verify them would be false.
+OTHER_EDITIONS = {"crisp", "archive", "reviews", "docs", "server", "categories"}
+FOREIGN_ROOT_PAGES = {
+    "products.html", "questions.html", "suggestions.html", "guides.html",
+    "dashboard.html", "disclosure.html", "executive-summary.html",
+    "flagged-for-review.html", "privacy.html", "categories.html",
+    "compare.html", "about.html", "legacy.html", "sources.html",
+}
+
+def owned(page):
+    """True only for a file this build generates.
+
+    Directory-based filtering was not enough: it still swept in other sessions'
+    pages that live in guides/. The build's GENERATED set is the only honest
+    definition of 'ours', and it is imported rather than duplicated."""
+    from build import GENERATED
+    return page.relative_to(ROOT).as_posix() in GENERATED
+
+PAGES = sorted(p for p in ROOT.rglob("*.html") if owned(p))
 
 errors = []
 warnings = []
@@ -235,17 +255,28 @@ def check_sitemap_feed():
     base = "https://karagemop466-tech.github.io/Affil1/"
     listed = {l.replace(base, "") for l in locs}
     urls = {as_url(p) for p in pages}
-    for u in urls:
+    # Only this build's own generated set. Other editions' pages live at their
+    # own URLs and are not this sitemap's business.
+    from build import GENERATED  # the build's own list, not a second copy
+    generated = set()
+    for g in GENERATED:
+        if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
+            continue
+        generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
+    for u in sorted(generated):
         if u not in listed:
             err(f"sitemap.xml: missing {u or '(root)'}")
     for l in listed:
-        if l not in urls:
-            err(f"sitemap.xml: lists {l!r} but no built page matches")
+        target = ROOT / (l or "index.html")
+        if l.endswith("/"):
+            target = ROOT / l / "index.html"
+        if not target.exists():
+            err(f"sitemap.xml: lists {l!r} but no such page exists")
 
     feed = (ROOT / "feed.xml").read_text(encoding="utf-8")
-    for link in re.findall(r"<link>(.*?)</link>", feed):
-        item = link.replace(base, "")
-        if item and item not in pages:
+    for link in re.findall(r"<(?:link|guid[^>]*)>(.*?)</(?:link|guid)>", feed):
+        item = link.replace(base, "").strip()
+        if item and not item.startswith("http") and not (ROOT / item).exists():
             err(f"feed.xml: item link {item} does not exist")
     if "<rss" not in feed:
         err("feed.xml: not an RSS document")
@@ -311,7 +342,7 @@ def main():
     check_data()
     check_assets()
 
-    print(f"pages checked: {len(PAGES)}")
+    print(f"pages checked: {len(PAGES)} (this build's output only)")
     for w in warnings:
         print(f"  WARN  {w}")
     for e in errors:
