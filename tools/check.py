@@ -118,7 +118,7 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
-    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
+    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"www\.ftc\.gov)",
     re.I,
@@ -326,7 +326,8 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for spec in json.loads((ROOT / "src/data/events.json").read_text())["events"]:
+        ev = spec["name"]
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:

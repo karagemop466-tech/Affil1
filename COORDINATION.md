@@ -102,10 +102,33 @@ Link verification, one request per link on 2026-11-20:
 
 All 17 flags are published at `review/index.html` with source links.
 
+## Reconciliation with main (after rebase)
+
+`main` moved four merges ahead while this session was working. On reconciliation,
+`main` carried **three** published editions (generated root, `crisp/` and a
+`kitchen/` "Good Measure" desk) plus duplicate root pages. All three are now
+archived under `archive/legacy-2026-11-20/` with `noindex`, and the Pages
+artifact is staged from the generated set only (`tools/stage.py`, added by a
+parallel session and kept).
+
+Two pieces of the parallel work were kept as-is because they are good and
+complementary:
+
+- `tools/stage.py` — packages only the generated edition for Pages, so the
+  repository can hold history without publishing it.
+- `measurement/collector.py` and its tests — the self-hosted collector the
+  measurement plan refers to.
+
+**Conflict in the product record, published rather than resolved by preference:**
+a parallel session observed P-04 → B0DZFD6R9Z and P-05 → B0DHZTCNR5, the reverse
+of this session's observation. Both mappings are recorded in FLG-016, both
+product pages carry an identity note, and neither is called the intended product.
+The operator can settle it in a minute with SiteStripe.
+
 ## Merge log
 
-- PR: see the pull request opened from `arena/b41317f8-affil1` to `main`.
-- Merge result: recorded in the PR body and in the final commit message.
+- PR: https://github.com/karagemop466-tech/Affil1/pull/37
+- Merge result: recorded in the PR body and in the commit message.
 
 ## Public URL
 

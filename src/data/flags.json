@@ -17,7 +17,7 @@
       "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. All five destinations now resolve, and they carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z.",
       "impact": "The intended_asin field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
       "reading": "The submitted codes are short-link slugs rather than identifiers. The register records what arrived, and keeps the two fields separate.",
-      "blocks": "nothing \u2014 but it explains why one column is empty",
+      "blocks": "nothing — but it explains why one column is empty",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/agreement",
         "Open each supplied link and compare the /dp/ segment to the code in the link"
@@ -34,7 +34,7 @@
       "blocks": "any claim that the site can currently earn",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
-        "One click from the owner's device, then Reports \u2192 Orders in the Associates dashboard"
+        "One click from the owner's device, then Reports → Orders in the Associates dashboard"
       ]
     },
     {
@@ -52,22 +52,23 @@
     },
     {
       "id": "FLG-004",
-      "severity": "low",
-      "title": "P-04 failed three times, then resolved on a later request",
-      "expected": "A short link resolves to a product page.",
-      "found": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three attempts in an earlier session. On 2026-11-20 the same link resolved on the first attempt to B0DHZTCNR5, a ThermoMaven digital meat thermometer.",
-      "impact": "P-04 now has a product page, a category and a buy link. Nothing else on the site assumes the earlier failure will not recur.",
-      "reading": "Resolution is a record of one request, not a guarantee about the next. The cause of the earlier failures is not diagnosed and is not guessed at.",
-      "blocks": "nothing now",
+      "severity": "high",
+      "title": "P-04 failed three times, then resolved — and later observations disagree on which product it is",
+      "expected": "One short link resolves consistently to one product page.",
+      "found": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three attempts in an earlier session. On 2026-11-20 it resolved on the first attempt to B0DHZTCNR5, a ThermoMaven digital meat thermometer. A parallel session recorded this link reaching B0DZFD6R9Z instead. See FLG-016.",
+      "impact": "P-04 has a product page, a category and a tagged buy link to the destination reached here. The identity is labelled as observed-and-disputed, not settled.",
+      "reading": "Resolution is a record of one request, not a guarantee about the next. Neither mapping is declared correct.",
+      "blocks": "confident product identity for P-04 and P-05",
       "to_check": [
         "https://link.amazon/B0c8moW59",
-        "https://www.amazon.com/dp/B0DHZTCNR5"
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
       ]
     },
     {
       "id": "FLG-005",
       "severity": "medium",
-      "title": "No price, rating, review count or stock status \u2014 by rule, not by omission",
+      "title": "No price, rating, review count or stock status — by rule, not by omission",
       "expected": "A shop normally shows price and rating next to each product.",
       "found": "Nothing is shown, because neither permitted data path is connected. Program Policies 2(b) allows price and availability only where Amazon serves the link carrying that data, or where it arrives through Creators API or PA API.",
       "impact": "Buy buttons say what they do and send the reader to Amazon, where the live figure is. No number on this site can go stale.",
@@ -214,6 +215,37 @@
     },
     {
       "id": "FLG-016",
+      "severity": "high",
+      "title": "P-04 and P-05 were mapped to opposite products by two sessions on the same day",
+      "expected": "A short link maps consistently to one listing.",
+      "found": "This session observed P-04 (B0c8moW59) → B0DHZTCNR5 (ThermoMaven) and P-05 (B0f3GKalj) → B0DZFD6R9Z (CHEF iQ Sense). A parallel session recorded the reverse mapping on 2026-11-20. Earlier P-04 attempts reached a checkpoint.",
+      "impact": "Both products remain published in the Thermometers category, each with the destination this session reached, and each carrying this caveat. No winner is declared and no attribution is inferred.",
+      "reading": "Differing observations are not proof of the intended products or of a stable redirect. They are published as a disagreement. The operator can settle it in one minute with SiteStripe: copy the tagged link for the intended ASIN and compare.",
+      "blocks": "calling either thermometer's identity settled",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
+      ]
+    },
+    {
+      "id": "FLG-017",
+      "severity": "medium",
+      "title": "Archived editions contain earlier or conflicting product observations",
+      "expected": "One served edition, one register.",
+      "found": "Three editions had been published from this repository: the generated root edition, a crisp/ sub-site and a kitchen/ sub-site, plus duplicate root pages. Their registers disagree about P-04 in particular.",
+      "impact": "All three are archived under archive/legacy-2026-11-20/ with noindex on every page, and the published artifact is staged from the generated set only. Archived material is a record, not confirmation.",
+      "reading": "Old pages that still rank, or that a reader bookmarks, would otherwise contradict the current register. Archiving plus noindex removes that contradiction without destroying the history.",
+      "blocks": "nothing now",
+      "to_check": [
+        "archive/legacy-2026-11-20/README.md",
+        "tools/stage.py",
+        "sitemap.xml"
+      ]
+    },
+    {
+      "id": "FLG-018",
       "severity": "medium",
       "title": "Buy-button wording is a compliance judgement the site cannot make for itself",
       "expected": "A shop's call to action is usually 'add to basket' or a price.",
@@ -227,7 +259,7 @@
       ]
     },
     {
-      "id": "FLG-017",
+      "id": "FLG-019",
       "severity": "low",
       "title": "The site has no Search Console property and no email list",
       "expected": "A publication measures what it publishes.",

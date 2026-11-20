@@ -137,6 +137,7 @@ def build_product(page_dir, p, meta):
       {product_link(d, buy_url(asin), 'See it on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['brand']} {p['format_label']} (paid link, opens in a new tab)")}
     </p>
     <p class="product-fine">Paid link &middot; {esc(AMAZON_NOTE)} &middot; tag <code>{esc(meta['tracking'])}</code></p>
+    {_conflict_note(d, p)}
     <dl class="fact-list">
       <div><dt>Stated size</dt><dd>{esc(p.get('stated_capacity') or '—')}</dd></div>
       <div><dt>Also stated</dt><dd>{esc((p.get('stated_attributes') or '—').split(';')[0])}</dd></div>
@@ -232,3 +233,14 @@ def _pairs(d, p, meta):
   </div>
   <div class="crosslink-media">{img(d, other['photo'], other['photo_alt'], sizes='(max-width:720px) 100vw, 320px')}</div>
 </div>""", cls="section-tint")
+
+
+def _conflict_note(d, p):
+    if not p.get("observation_conflict"):
+        return ""
+    return (
+        '<div class="identity-caveat">'
+        '<p><strong>Identity note.</strong> ' + esc(p.get("conflict_note", "")) + " "
+        '<a href="' + esc(rel(d, "review/index.html")) + '#FLG-016">See FLG-016</a>.</p>'
+        "</div>"
+    )

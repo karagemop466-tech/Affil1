@@ -716,3 +716,8 @@ a.btn:hover{transform:translateY(-1px)}
   .trust-row .wrap{gap:.6rem;flex-direction:column}
   .article-hero img{aspect-ratio:16/10}
 }
+
+/* identity caveat on disputed product records */
+.identity-caveat{margin:0 0 1.2rem;padding:.75rem .9rem;border:1px dashed var(--line-2);border-left:2px solid var(--warn);background:#fdf7f2;border-radius:0 3px 3px 0}
+.identity-caveat p{margin:0;font-size:.79rem;line-height:1.55;color:var(--ink-2)}
+.identity-caveat a{border-bottom:1px solid var(--line-2);color:var(--amber-ink)}
