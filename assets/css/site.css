@@ -533,3 +533,5 @@ ol.tight,ul.tight{margin-top:1rem}
   .pcard-grid.wide .pcard,.pcard-grid.wide .pcard-unresolved{grid-template-columns:1fr}
   .pcard-grid.wide .pcard-media{aspect-ratio:16/10;min-height:0;height:auto}
 }
+
+.format-credit{position:absolute;right:.5rem;bottom:.45rem;color:white;background:#272820d9;padding:.1rem .38rem;border-radius:2px;font:500 .6rem/1.6 var(--sans)}

@@ -56,13 +56,13 @@
     },
     {
       "id": "SRC-08",
-      "title": "Understanding ASINs",
-      "publisher": "Amazon",
+      "title": "Understanding ASINs: Your guide to Amazon’s product identification system",
       "url": "https://sell.amazon.com/blog/what-is-an-asin",
-      "page_date": "June 4, 2025",
-      "used_for": "Identifier format and the /dp/ segment.",
+      "publisher": "Amazon Selling Partner Blog",
+      "page_date": "4 June 2025",
+      "used_for": "Distinguish a listing identifier from a submitted short-link code.",
       "quote": "It’s a unique 10-character alphanumeric code assigned to every product listed in the Amazon store.",
-      "status": "read directly"
+      "status": "read directly 2026-11-20"
     },
     {
       "id": "SRC-06",
