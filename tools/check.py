@@ -239,6 +239,13 @@ def check_page(path):
             for row in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl.split("</thead>", 1)[-1], re.S):
                 if "<td" in row and not re.search(r'href="https?://', row):
                     err(f"{rel}: register row lacks a source link")
+        # --- header and cell counts agree, so no column is silently missing ---
+        for tbl in re.findall(r"<table[^>]*>(.*?)</table>", body, re.S):
+            ths = len(re.findall(r"<th[ >]", tbl))
+            for row in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl.split("</thead>", 1)[-1], re.S):
+                tds = len(re.findall(r"<td[ >]", row))
+                if tds and ths and tds != ths:
+                    err(f"{rel}: table row has {tds} cells against {ths} columns")
         char_cells = len(re.findall(r"<td>.{1}</td>", body))
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
