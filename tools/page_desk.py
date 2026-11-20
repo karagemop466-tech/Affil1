@@ -1,5 +1,6 @@
 """About, sources, ledger, brief and the 404 page."""
 
+from release_panels import render as release_panel
 from layout import (DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
                     outbound, page, pagehead, rel, section, table)
 
@@ -172,7 +173,7 @@ def build_brief(page_dir, products, questions, flags, meta):
         d,
         title="Executive summary \u2014 Crisp & Counter",
         description="What was built, what was verified against official sources, the one finding that changes the plan, and the next decision \u2014 in four minutes.",
-        body=body,
+        body=body + release_panel(d, "brief/"),
         active="index.html",
         canonical="brief/",
     )
