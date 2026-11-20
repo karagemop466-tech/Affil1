@@ -190,3 +190,10 @@ Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official
 - CI on PR: Build, check and deploy — build pass (6s), deploy skipped (PR). On main: build success (27s), pages build success (34s). Pages latest build status: built.
 - Live: https://karagemop466-tech.github.io/Affil1/ (Crisp & Counter front page) and https://karagemop466-tech.github.io/Affil1/crisp/ (parallel edition).
 - Rebase onto PR #22 logged above; no session's work discarded. Follow-up for integration session: wire `guides/meal-prep-sunday.html`, `guides/small-kitchen-counter.html`, `guides/thermometer-pairing.html` into generated sitemap/feed (requires extending `tools/content.py` GUIDES in the PR #22 build).
+## Integration follow-up — 2026-11-20
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Audit and reconcile live editions, correct broken links and disclosure gaps, document differing redirect observations and broaden checks | in progress | arena/c9fc4295-affil1 | COORDINATION.md, root legacy HTML, src/data/, tools/, generated site output and workflow |
+
+The initial shallow checkout made the ancestor appear unrelated and caused a rebase conflict; after fetching complete history, main fast-forwarded without discarding either edition. The generated and legacy pages will be checked separately. Account-gated attribution and measurement remain unverified.
