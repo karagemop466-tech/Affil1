@@ -176,3 +176,50 @@ Requests (not performed — files owned/contested by other sessions): wire the a
 - GitHub Pages: build for commit 65cd4ab completed successfully, no error (pages builds/latest API, 2026-11-20T05:28:37Z).
 - Live, verified after deploy: https://karagemop466-tech.github.io/Affil1/reviews/verification-audit.html and https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html — both fetched after the deploy completed; disclosure strip, tables, image and links render as authored.
 - Follow-up requests to the integration session remain open above (guides.html root-relative paths; sitemap/feed/nav wiring of the two new pages; canonical register decision; category naming IR-5).
+
+## Claim — arena/4772a1e3-affil1 (claimed 2026-11-20 ~06:05 UTC)
+
+Branch `arena/4772a1e3-affil1` (fixed by environment; cannot be renamed), branched from
+`4ee0e7b` (main after PR #21). Claiming the open integration follow-ups from
+`arena/a4ab7faf-affil1` plus the storefront polish/consolidation scope. No other live
+session holds a claim on these files (the storefront sessions' work is merged; all their
+tasks read done/needs-review, none claimed <60 min ago).
+
+Scope (this session):
+1. Rebuild root `index.html` as one consistent, polished publication front page
+   (products-first; disclosure above the fold; sponsored links; intended vs observed
+   never merged; messages match data/confirmations.json + data/verification-audit.json;
+   remove contradictory "unverified" vs "Verified picks" copy; OG/Twitter meta; favicon).
+2. Consolidate duplicate storefront pages into canonical URLs via redirect stubs
+   (root `guides.html` -> `guides/` index; `guides/cleanup-counterspace.html` ->
+   `guides/cleanup-counter-space.html`; `guides/flagged-for-review.html` and
+   `flagged-for-review.html` -> `reviews/flagged.html`; `guides/suggestions.html` ->
+   `suggestions.html`; `guides/executive-summary.html` -> `executive-summary.html`;
+   `guides/buying-guide-air-fryer.html` -> `guides/basket-or-oven.html`;
+   `guides/air-fryer-category.html` -> `categories/air-fryers.html`;
+   `guides/pre-decision-questions.html` -> `questions.html`). No file is deleted;
+   stubs keep every inbound link working.
+3. CI (`.github/workflows/pages.yml`): widen the static reference check from
+   `index.html` + `guides/*.html` to all HTML except `archive/`.
+4. `sitemap.xml`, `feed.xml`, `rss.xml`: add reviews/verification-audit.html,
+   guides/holiday-hosting.html, the new seasonal guide and the new design-prompt-pack
+   page; drop stubbed URLs; keep crisp/ entries byte-identical.
+5. New pages: `design-prompt-pack.html` (the site-design prompt + design tokens +
+   marketing suggestions to feed a redesign, decision-gated) and
+   `guides/holiday-gift-checklist.html` (seasonal, question-shaped; editorial
+   hypothesis; no prices/ratings; sponsored links).
+6. `suggestions.html`: add proposed S-006..S-0xx (design/brand/imagery/cadence/OG/email
+   gate/Search Console), each marked proposed — nothing auto-implemented.
+   `questions.html`: add Q10+ marketing/brand/measurement-readiness rows (answerable /
+   blocked), matching the existing table format.
+7. `EXECUTIVE_SUMMARY.md` refresh to the reconciled state; `data.js` / `app.js`
+   relabeled ("Submitted code (short-link slug)", not ASIN; single-observation evidence;
+   pass-1 vs pass-2 conflicts noted, never adjudicated).
+8. `assets/js/common.js`: unify injected brand with the storefront masthead
+   (GOOD MEASURE — Kitchen Notes), add the verification-audit/holiday pages to footer.
+
+Explicitly NOT doing: touching `crisp/` (S-96012762's scope), deleting any file,
+merging pass-1 and pass-2 verification records, asserting any supplied link invalid,
+adding prices/ratings/review counts, or turning on analytics (no first-party host yet).
+
+Status: in progress.
