@@ -661,6 +661,35 @@ PR #60 merged to `main` at `cf4f3703bee4fba8c2ff9307079dcb40c33ebf84` (merge com
 
 Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done. Merged as PR #87 (`1b09bbc`); Pages deploy success. Record: `COORDINATION/arena-7755f499-affil1.md`.
 
+## Session arena/bba82abd-affil1 — full-brief review pass (2026-11-20)
+
+Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **PR open; merge held.** All gates pass on `6880c87` except the deploy gate, which cannot pass under the configured legacy Pages source: the `Build, check and deploy` deploy job is skipped on every `main` run (checked on `b305af3`, `6eb15b7`, `2934ed0`), so the merge condition 'deploy passes' is not met. Owner decision needed (RVW-09): waive the deploy gate for this PR, merging on the staged-artifact check recorded below, or switch the Pages source to `workflow`.
+
+**Pull request:** https://github.com/karagemop466-tech/Affil1/pull/96 (`arena/bba82abd-affil1` into `main`). Merge result: **none; held** (see status). If the owner waives the deploy gate, the merge commit and the post-merge Pages result will be recorded as a comment on PR #96.
+
+**Scope, narrowed.** Claimed files: `_src/data/verification-log.json` (new; was `src/data/`), `_src/data/sources.json` (dates and quotes), the proposals folder (`COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt`, unwired), this section and its record. `_tools/page_desk.py` (brief and About generator, committed at `fa607a4`) and the regenerated `brief/index.html` and `about/index.html` are already in the branch under the owner's gap-closure scope; the integration session should review them. Withdrawn from the first claim: `_tools/build.py`, `_tools/layout.py`, `EXECUTIVE_SUMMARY.md`, and a dashboard page. Those are logged as requests below, not edited here.
+
+**Path rename on main.** `main` renamed `src/`, `tools/`, `analytics/`, `measurement/`, `archive/` and `decision-support/` to `_`-prefixed paths. Merged in `20047b5` with `main` at `a289cf9`; later merged `c13d7ad` as `f757eac`. Pages does not publish `_` folders, so the rename moves those files out of public reach.
+
+**Branch deviation.** The environment fixed the branch name `arena/bba82abd-affil1`; the board's `session-<id>/<task>` convention cannot be followed. Recorded here.
+
+**Merge resolutions.** `main` merged into the branch at `1cdd046` (with `--allow-unrelated-histories -X theirs`, safe because the earlier base's tree was a subset of `main`), `370b3ce` (c2d1050), `b55f191` (PR #90, 25ade98), `a17882b` (PR #95, 8b22041), and `20047b5` (a289cf9, PR #92 and the `_` rename). The `about/index.html` conflict was resolved by regeneration. The `sources.json` conflict kept the audited register and restored verified quotes from main's version. Pushed as `665e6ef` (merge of `23fa2e3`) and `b4c6ae9` (board) before `20047b5`; `20047b5` is the current head.
+
+**Source quote audit.** All 17 entries in `_src/data/sources.json` were checked against the official text read on 2026-11-20. None is blank. Corrections: FTC SRC-04, 05 and 17 are verbatim (full read, 12 chunks; "June 2023" date shown); eCFR SRC-06 is §255.5(a), verbatim; FSIS thermometer SRC-09 is dated "Last Updated: Mar 21, 2025"; FSIS chart SRC-08 is the verbatim table row, dated "Apr 14, 2025"; SRC-10 is narrowed to a verbatim sentence; SRC-13 is the verbatim `itemIds` sentence (first of three chunks read). Earlier blanking of SRC-04, 05, 06 and 17 was reversed after the full reads.
+
+**Irregularities** (published in `_src/data/verification-log.json`): RVW-01 untagged listing links vs. Program Policies §2(b) (high, owner decision); RVW-02 launch-check red (high, resolved upstream by #90); RVW-03 root files still published, `_` rename partly resolved (medium, owner decision); RVW-04 tag format note (low); RVW-05 `EXECUTIVE_SUMMARY.md` counts stale (low, open); RVW-06 paid-link test failing (medium, resolved upstream by #90); RVW-07 `review/index.html` tag and archive-count text is wrong (medium, cross-scope request); RVW-08 the root deploy-path crawl reports 41 false 404s from unpublished `_decision-support/`; the staged artifact passes (resolved as checker scope); RVW-09 `pages.yml` deploy job is skipped under the legacy Pages source (medium, owner decision).
+
+**Cross-scope requests (for the integration session):**
+
+- Wire the dashboard proposal (`COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt`) into `_tools/build.py` and `_tools/layout.py`.
+- `EXECUTIVE_SUMMARY.md` is stale (29 pages, 19 flags; current 30 pages, 26 flags). Rewrite not approved under this claim.
+- Review the brief and About table and label changes in `_tools/page_desk.py`, and confirm the regenerated pages.
+- `review/index.html` (RVW-07): the owner of `_tools/page_review.py` corrects the tag and archive-count statements.
+- `_tools/check_deploy_paths.py` (RVW-08): skip path segments starting with `_`.
+- Pages source (RVW-09): owner decision, legacy root publish or `workflow`.
+
+**Gates on the merged tree (`f757eac`):** build 65 pages, reproducible under the workflow exclusions; `platform/` edition gate pass (1,965 checks); check 0 errors, 0 warnings; validate pass; local links 0 broken across 65 pages; sweep would move 0; unit tests 6 of 6; check_js pass; `_analytics/endpoint.py` compiles. Staged artifact (`_tools/stage.py _site`, 31 HTML, `.nojekyll`): `check_deploy_paths` against the staged copy resolves 851 internal references at `/Affil1/` with 0 failures. Before merge, this staged-artifact check stands in for the deploy gate: the deploy job runs only on pushes to `main` and is skipped under the legacy Pages source (RVW-09). PR checks: build and launch.
+
 ## Release receipt — session-arena-83e015f6 (final integration, this session)
 
 **Branch:** `arena/83e015f6-affil1` (base `ff74e5b`). Tasks 18–21 claimed at the top

@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "session": "arena/bba82abd-affil1",
+    "read_on": "2026-11-20",
+    "purpose": "Every official-source read made in the 2026-11-20 review pass, and every irregularity that pass found. Each row names the page that was read and what it showed. Nothing here is inferred from another session's notes: each entry was read in this pass.",
+    "rule": "A value appears on the dashboard only if it is copied from a page listed here. A read that failed or returned a checkpoint is recorded as failed, not as a result. Internal findings name the repository file they rest on and say that no official source applies.",
+    "not_read": "Amazon Associates Central (account data, SiteStripe, Reports) is not reachable from this environment. Nothing below confirms enrolment, the Associates ID, attribution, commission or intended ASIN. Listing titles for P-01 to P-05 come from src/data/products.json; they were read earlier in this session and were not re-read in this pass."
+  },
+  "reads": [
+    {
+      "id": "V-01",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "publisher": "Amazon Associates",
+      "read_result": "Page says 'Updated: October 15, 2025'. Section 5 reads: 'You must clearly and prominently state the following ... on your Site: \"As an Amazon Associate I earn from qualifying purchases.\"' Section 1 says links 'must properly use the special \"tagged\" link formats we provide'.",
+      "affects": [
+        "DISCLOSURE strip on every page",
+        "RVW-01"
+      ],
+      "matches_site": true
+    },
+    {
+      "id": "V-02",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon Associates",
+      "read_result": "Page says 'Updated: April 14, 2026'. §2(a): 'Special Links must use the Associates ID we have assigned to you.' §2(b): 'you must include your Associates ID or \"tag\" (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.' §2(b) price rule: prices may be shown only where Amazon serves the link carrying that data, or via Creators API or PA API.",
+      "affects": [
+        "Every Amazon link",
+        "FLG-002",
+        "FLG-009",
+        "RVW-01",
+        "RVW-04"
+      ],
+      "matches_site": "partly: the site tags every product link, which matches §2(b); the open PR #82 would remove the tag, which does not"
+    },
+    {
+      "id": "V-03",
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "publisher": "Federal Trade Commission",
+      "read_result": "Page is the FTC FAQ on the Endorsement Guides. It says a connection a significant minority of consumers would not expect 'should be disclosed clearly and conspicuously', and that the Guides 'were revised in 2023' with a new definition of 'clearly and conspicuously'.",
+      "affects": [
+        "Disclosure placement, FLG-018"
+      ],
+      "matches_site": true
+    },
+    {
+      "id": "V-04",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "publisher": "Google Search Central",
+      "read_result": "'rel=\"sponsored\"': 'Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.' Page says 'Last updated 2025-12-10 UTC'.",
+      "affects": [
+        "Every product link carries rel=\"sponsored\""
+      ],
+      "matches_site": true
+    },
+    {
+      "id": "V-05",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+      "publisher": "GitHub Docs",
+      "read_result": "GitHub Docs publishing-source page, read 2026-11-20 (paraphrase, not quoted): a branch can be the publishing source, with the repository root as the folder. The page covers Jekyll processing unless a .nojekyll file is present.",
+      "affects": [
+        "RVW-03"
+      ],
+      "matches_site": "see RVW-03"
+    },
+    {
+      "id": "V-06",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+      "publisher": "Amazon Associates",
+      "read_result": "'PA-API 5 Deprecation Notice': PA-API 5 'has been deprecated and is being replaced by the Creators API.' Calls to PA-API 5 receive HTTP 403 with AccessDeniedException.",
+      "affects": [
+        "FLG-022",
+        "products.json price_rule"
+      ],
+      "matches_site": true
+    },
+    {
+      "id": "V-07",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "publisher": "Amazon.com (listing)",
+      "read_result": "Amazon listing for P-01. listing read earlier in this session (2026-11-20); title as recorded in src/data/products.json, not re-read in this pass.",
+      "affects": [
+        "P-01"
+      ],
+      "matches_site": "title on file; arrival parameters not recorded"
+    },
+    {
+      "id": "V-08",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "publisher": "Amazon.com (listing)",
+      "read_result": "Amazon listing for P-02. listing read earlier in this session (2026-11-20); title as recorded in src/data/products.json, not re-read in this pass.",
+      "affects": [
+        "P-02"
+      ],
+      "matches_site": "title on file; arrival parameters not recorded"
+    },
+    {
+      "id": "V-09",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "publisher": "Amazon.com (listing)",
+      "read_result": "Amazon listing for P-03. listing read earlier in this session (2026-11-20); title as recorded in src/data/products.json, not re-read in this pass.",
+      "affects": [
+        "P-03"
+      ],
+      "matches_site": "title on file; arrival parameters not recorded"
+    },
+    {
+      "id": "V-10",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "publisher": "Amazon.com (listing)",
+      "read_result": "Amazon listing for P-04. listing read earlier in this session (2026-11-20); title as recorded in src/data/products.json, not re-read in this pass. The arrival URL carried plpRedirect=mhFallback.",
+      "affects": [
+        "P-04",
+        "FLG-016"
+      ],
+      "matches_site": "title on file"
+    },
+    {
+      "id": "V-11",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "publisher": "Amazon.com (listing)",
+      "read_result": "Amazon listing for P-05. listing read earlier in this session (2026-11-20); title as recorded in src/data/products.json, not re-read in this pass. The arrival URL carried plpRedirect=mhFallback.",
+      "affects": [
+        "P-05",
+        "FLG-016"
+      ],
+      "matches_site": "title on file"
+    },
+    {
+      "id": "V-12",
+      "url": "https://karagemop466-tech.github.io/Affil1/COORDINATION.md",
+      "publisher": "Live site (this repository)",
+      "read_result": "Fetch returned the file content from the public site. _config.yml's exclude list names COORDINATION.md.",
+      "affects": [
+        "RVW-03"
+      ],
+      "matches_site": "no: the exclude list is not applied to the live site"
+    },
+    {
+      "id": "V-13",
+      "url": "https://karagemop466-tech.github.io/Affil1/src/data/product-intent.json",
+      "publisher": "Live site (this repository)",
+      "read_result": "Fetch returned the file content from the public site. _config.yml's exclude list names src.",
+      "affects": [
+        "RVW-03"
+      ],
+      "matches_site": "no: as V-12"
+    },
+    {
+      "id": "V-15",
+      "url": "https://karagemop466-tech.github.io/Affil1/tools/build.py",
+      "publisher": "Live site (this repository)",
+      "read_result": "Fetch returned the raw source of tools/build.py from the public site. _config.yml's exclude list names tools.",
+      "affects": [
+        "RVW-03"
+      ],
+      "matches_site": "no: as V-12"
+    },
+    {
+      "id": "V-16",
+      "url": "https://karagemop466-tech.github.io/Affil1/archive/legacy-2026-11-20/README.md",
+      "publisher": "Live site (this repository)",
+      "read_result": "Fetch returned the file content from the public site. _config.yml's exclude list names archive. The file says 'Archived edition — do not publish'.",
+      "affects": [
+        "RVW-03"
+      ],
+      "matches_site": "no: as V-12"
+    },
+    {
+      "id": "V-14",
+      "url": "https://github.com/karagemop466-tech/Affil1/actions/runs/44686287239",
+      "publisher": "GitHub Actions (this repository)",
+      "read_result": "Run of 'Affiliate launch checks' on push to main is marked failure. Its log could not be downloaded from this environment (HTTP EOF). The same sweep was reproduced locally on the base commit: 'would move: 7 file(s)', all under decision-support/.",
+      "affects": [
+        "RVW-02"
+      ],
+      "matches_site": "no: the launch gate is red on main"
+    }
+  ],
+  "findings": [
+    {
+      "id": "RVW-01",
+      "severity": "high",
+      "title": "PR #82 would remove the Associates tag from every product link, which the official text does not allow",
+      "found": "PR #82 would remove the Associates tag from every product link. Program Policies §2(b) says a site must include the tag 'as a parameter in the URL of each link you place on your Site to an Amazon Site'. Current state on main after PR #90 (merged 2026-11-20): layout.approved_amazon_urls() returns an empty set, so every product link is an untagged listing link. This is the untagged approach the policy text does not seem to allow, read literally. The register's own link_rule cites §2(b) for the tag requirement.",
+      "why_it_matters": "Read literally, an untagged Amazon link is itself outside §2(b). The gate the PR adds is a sound instinct about attribution, but it is applied to the wrong side: the policy asks for the tag, and the unconfirmed part is whether the tag belongs to an enrolled account.",
+      "action": "Owner decision, not changed in this pass. Either confirm an Associates enrolment and use the tag on validated Special Links, or accept the untagged listing approach after reading §2(b) with its owner. The review page still describes the earlier tagged design; see RVW-07.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "https://github.com/karagemop466-tech/Affil1/pull/82"
+      ]
+    },
+    {
+      "id": "RVW-02",
+      "severity": "high",
+      "title": "The Affiliate launch checks workflow is red on main",
+      "found": "tools/sweep_surfaces.py --dry-run reports 'would move: 7 file(s)' under decision-support/ (editorial-plan, executive-summary, index, products, questions, suggestions, verification). The workflow requires 'would move: 0'. The run is recorded as failure on main (run 44686287239).",
+      "why_it_matters": "The Pages deployment is green, so the live site is not broken by this. The red check means the launch gate does not certify the published surface, which is the purpose the workflow states for itself.",
+      "action": "Not repaired here. PR #86 (arena/89ddabf5-affil1) and PR #84 (arena/771e5093-affil1) claim the launch gate and decision-support/. Owner decision: archive the seven files or add them to tools/build.py.",
+      "sources": [
+        "https://github.com/karagemop466-tech/Affil1/actions/runs/44686287239",
+        "https://github.com/karagemop466-tech/Affil1/pull/86",
+        "https://github.com/karagemop466-tech/Affil1/pull/84"
+      ],
+      "status": "Resolved on main by PR #90. Re-checked on the merged tree in this pass: sweep reports 'would move: 0'."
+    },
+    {
+      "id": "RVW-03",
+      "severity": "medium",
+      "title": "Pages publishes the repository root, so the _config.yml exclude list does not apply",
+      "found": "The _ rename on main moved src/, tools/, archive/, analytics/, measurement/ and decision-support/ to _-prefixed folders, which Pages does not publish. Still at the repository root, which Pages publishes: COORDINATION.md (HTTP 200 checked 2026-11-20), EXECUTIVE_SUMMARY.md, README.md, PUBLISHING_WORKFLOW.md (present at root; not individually fetched).",
+      "why_it_matters": "Files the repository's own exclude list names are public: the board, the register source, the build source and the archive README. Archived HTML carries noindex, which keeps it out of search results but does not stop it being served.",
+      "action": "Not changed. Owner decision: keep the root publication and accept it, or publish from a staged artifact (the workflow's 'workflow' source) so the staging step decides what is public.",
+      "sources": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+        "https://karagemop466-tech.github.io/Affil1/COORDINATION.md",
+        "https://karagemop466-tech.github.io/Affil1/src/data/product-intent.json",
+        "https://karagemop466-tech.github.io/Affil1/tools/build.py",
+        "https://karagemop466-tech.github.io/Affil1/archive/legacy-2026-11-20/README.md"
+      ],
+      "status": "Partly resolved by the _ rename on main. Still open for the root files. Owner decision."
+    },
+    {
+      "id": "RVW-04",
+      "severity": "low",
+      "title": "The supplied tracking ID does not match the example format in the policy",
+      "found": "Program Policies §2(b) gives the tag format as 'XXXXX-##, or such other format as we may designate'. The supplied ID is shopnow047c-20, which is not in the XXXXX-## example form.",
+      "why_it_matters": "The policy allows other formats, so this is not evidence the ID is wrong. It is one more reason to confirm the ID in Associates Central before any link is trusted.",
+      "action": "Confirm the ID in Associates Central (FLG-002). This pass does not treat the format as a defect.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "RVW-05",
+      "severity": "low",
+      "title": "Two summary documents state counts that no longer match the build",
+      "found": "EXECUTIVE_SUMMARY.md says '29 pages' and '19 flags'. The build produces 30 generated pages before this pass and the flag register holds 22 entries. README.md links to /sources/ and /flagged/, which are not generated; the flagged page is /review/.",
+      "why_it_matters": "A reader who follows the summary lands on a count that is wrong, or a link that is dead.",
+      "action": "EXECUTIVE_SUMMARY.md is not rewritten in this pass: the rewrite is outside the narrowed claim. Logged as a request for the integration session, with the current counts computed from src/data: 30 generated pages before this pass, 22 flags.",
+      "sources": [
+        "repository file: EXECUTIVE_SUMMARY.md",
+        "repository file: src/data/flags.json"
+      ],
+      "status": "Open. EXECUTIVE_SUMMARY.md still says '19 flags' and '29 pages' as of this pass."
+    },
+    {
+      "id": "RVW-06",
+      "severity": "medium",
+      "title": "The paid-link gate's own unit test fails on main, and no workflow runs it",
+      "found": "tools/test_paid_link_gate.py asserts that public observations create no tags (approved_amazon_urls() == {}). On this base the assertion fails: layout.approved_amazon_urls() returns a tagged URL for all five ASINs, because layout.py falls back to the supplied tag. None of the four workflows in .github/workflows/ runs tools/test_paid_link_gate.py or any unittest suite under tools/.",
+      "why_it_matters": "The test states the rule PR #82 implements. Against the current build it is red, and nothing reports that. A gate that is never run does not gate.",
+      "action": "Not changed in this pass: the fix belongs with the RVW-01 decision. Once the owner decides which rule stands, the test should be made to match it and added to a workflow.",
+      "sources": [
+        "repository file: tools/test_paid_link_gate.py",
+        "repository file: .github/workflows/pages.yml",
+        "repository file: .github/workflows/kitchen-check.yml",
+        "repository file: .github/workflows/editorial.yml",
+        "repository file: .github/workflows/weekly-audit.yml"
+      ],
+      "status": "Resolved on main by PR #90. Re-checked on the merged tree in this pass: 6 of 6 unit tests pass, including test_paid_link_gate."
+    },
+    {
+      "id": "RVW-07",
+      "severity": "medium",
+      "status": "Open. Cross-scope request to the owner of review/index.html (tools/page_review.py).",
+      "title": "The review page describes a tagging state that PR #90 reversed, and its archive count is wrong",
+      "found": "review/index.html says 'The site now appends ?tag=shopnow047c-20 to every Amazon destination, which is what Program Policies 2(b) requires', and that the archive 'holds 25 HTML files from earlier editions, and they carry tag=shopnow047c-20 on Amazon product links'. Checked on the merged tree: no built page carries the tag in an href; approved_amazon_urls() is empty. archive/legacy-2026-11-20 holds 22 HTML files, none tagged. The whole archive/ tree holds 126 HTML files, 39 of which contain the tag string.",
+      "why_it_matters": "A reviewer reading the review page is told the site tags every link, which the build no longer does. The count is wrong under either reading of 'earlier editions'.",
+      "action": "Correct the sentence and the count in tools/page_review.py to match the build. Not changed here: that file is outside this session's claim.",
+      "sources": [
+        "repository file: review/index.html",
+        "repository file: tools/layout.py (approved_amazon_urls)",
+        "repository file: archive/legacy-2026-11-20/"
+      ]
+    },
+    {
+      "id": "RVW-08",
+      "severity": "low",
+      "status": "Resolved as a checker-scope issue. No publication change needed. Re-verified on the merged tree 2026-11-20.",
+      "title": "Deploy-path checker counts pages in unpublished underscore folders",
+      "found": "Pages publishes nothing whose path segment starts with '_' (see _config.yml). Run from the repository root, tools/check_deploy_paths.py crawls _decision-support/ and reports 41 HTTP 404 references, all from unpublished pages. Run against the staged artifact (_site, 30 HTML files, .nojekyll present), the same check resolves 851 internal references at /Affil1/ with zero failures. The earlier finding (before main renamed the folders) said the staged artifact omitted decision-support/; under the current layout that omission is by design.",
+      "why_it_matters": "The checker's root crawl is noisy, so a real break could be hidden among the 41. The live site is unaffected.",
+      "action": "Cross-scope request to the owner of _tools/check_deploy_paths.py: skip path segments that start with '_' (matching Pages). Not changed in this pass.",
+      "sources": [
+        "repository file: _config.yml (header comment on the underscore rename)",
+        "repository file: _tools/stage.py",
+        "staged artifact check on commit f757eac (851 references, 0 failures, 31 HTML)"
+      ]
+    },
+    {
+      "id": "RVW-09",
+      "severity": "medium",
+      "status": "Open. Blocks the merge of PR #96 under the brief condition (deploy passes). Owner decision.",
+      "title": "The deploy job in pages.yml is skipped under the current legacy Pages source",
+      "found": "pages.yml runs the deploy job only when needs.build.outputs.source == 'workflow'. The Pages API reports build_type 'legacy' with source main '/' (checked 2026-11-20). On a push to main, the build job therefore reports the source as legacy and the deploy job is skipped. The live publish is GitHub's legacy build from the repository root (run 'pages build and deployment', success, on 23fa2e3).",
+      "why_it_matters": "The deploy job cannot show 'pass' on main until the Pages source is switched to 'workflow' (a repository setting). Pre-merge deploy evidence therefore comes from the staged artifact check, not from the deploy job.",
+      "action": "Owner decision, one of: (1) waive the deploy gate for PR #96 and merge on the staged-artifact mount check (851 references, 0 failures); or (2) switch the Pages source to 'workflow' so the deploy job runs on main. Not changed in this pass. The deploy job was skipped on b305af3, 6eb15b7 and 2934ed0.",
+      "sources": [
+        "repository file: .github/workflows/pages.yml (deploy job condition)",
+        "GitHub Pages API: build_type legacy, source main /"
+      ]
+    }
+  ]
+}

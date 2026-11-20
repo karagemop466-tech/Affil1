@@ -1,0 +1,259 @@
+"""The dashboard: every entry and finding in one set of tables.
+
+Every table is built from a file under src/data/. A row that has an official
+source link carries it. A cell that cannot be confirmed from an official source
+is left as the word "unverified" and is never filled in by inference. Internal
+findings say so, rather than being given a made-up source.
+
+Amazon listing links on this page are product links, so they are rendered
+through product_link(): marked sponsored and nofollow, and never tagged here.
+Tags are a link-format decision owned by layout.buy_url(), not by this page.
+"""
+
+import json
+import pathlib
+import re
+from urllib.parse import urlsplit
+
+from layout import (blank, esc, eyebrow, outbound, page, pagehead, product_link,
+                    rel, section, table, BUILD_DATE)
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+DATA = ROOT / "src" / "data"
+
+SEV_ORDER = {"high": 0, "medium": 1, "low": 2}
+
+
+def _load(name):
+    return json.loads((DATA / name).read_text(encoding="utf-8"))
+
+
+def unverified(why="not confirmed from an official source, so left blank"):
+    return {"html": f'<span class="blank" title="{esc(why)}">unverified</span>'}
+
+
+def _is_https(url):
+    return isinstance(url, str) and url.startswith("https://")
+
+
+def src_link(d, url, label=None):
+    """A source cell: a sponsored link for an Amazon listing, a plain citation for anything else.
+
+    A short link (link.amazon/...) is never used as a source here: it is the
+    submitted form and cannot carry a tag, so it is shown as text elsewhere.
+    """
+    if not url:
+        return unverified("no official source is linked for this row")
+    if not _is_https(url):
+        return {"html": f'<span class="blank">internal file: <code>{esc(url.replace("repository file: ", ""))}</code></span>'}
+    parts = urlsplit(url)
+    if parts.netloc in ("www.amazon.com", "amazon.com") and parts.path.startswith("/dp/"):
+        return {"html": product_link(d, url, label or "amazon.com listing")}
+    return {"html": outbound(d, url, label or parts.netloc.replace("www.", ""))}
+
+
+def _sources_from_text(text, sources_by_id):
+    """Expand 'SRC-01, SRC-03' into the official URLs those ids name."""
+    urls = []
+    for sid in re.findall(r"SRC-\d+", text or ""):
+        url = sources_by_id.get(sid, {}).get("url")
+        if url and url not in urls:
+            urls.append(url)
+    return urls
+
+
+def _first_citable(urls):
+    for url in urls:
+        if _is_https(url) and not url.startswith("https://link.amazon/"):
+            return url
+    return None
+
+
+def build(page_dir, meta):
+    d = page_dir
+    products_doc = _load("products.json")
+    products = products_doc["products"]
+    intent = _load("product-intent.json")
+    intent_by_ref = {r["ref"]: r for r in intent["records"]}
+    sources = _load("sources.json")["sources"]
+    sources_by_id = {s["id"]: s for s in sources}
+    log = _load("verification-log.json")
+    reads = sorted(log["reads"], key=lambda r: r["id"])
+    findings = sorted(log["findings"], key=lambda f: (SEV_ORDER[f["severity"]], f["id"]))
+    flags = sorted(_load("flags.json")["flags"], key=lambda f: (SEV_ORDER[f["severity"]], f["id"]))
+    questions = _load("questions.json")["questions"]
+    suggestions = _load("suggestions.json")["suggestions"]
+    ledger = _load("ledger.json")
+
+    read_urls = {r["url"]: r["id"] for r in reads}
+
+    # ---- counts, computed from the data ----
+    n_products = len(products)
+    n_intended = sum(1 for p in products if p.get("intended_asin"))
+    n_confirmed = sum(1 for r in intent["records"] if r.get("confirmation_date"))
+    n_flags = len(flags)
+    n_high = sum(1 for f in flags if f["severity"] == "high")
+    n_answered = sum(1 for q in questions if q.get("answered"))
+    n_open_q = len(questions) - n_answered
+    n_blocking = sum(1 for q in questions if not q.get("answered") and str(q.get("blocking", "")).startswith("yes"))
+    n_ledger = len(ledger.get("rows", []))
+    n_sugg = len(suggestions)
+    n_sugg_done = sum(1 for s in suggestions if s.get("implemented_on"))
+
+    stats = f"""<div class="stat-row">
+  <div class="stat"><span class="stat-n">{n_products}</span><span class="stat-l">product entries</span></div>
+  <div class="stat"><span class="stat-n">{n_intended}</span><span class="stat-l">intended ASINs confirmed (of {n_products})</span></div>
+  <div class="stat"><span class="stat-n">{n_confirmed}</span><span class="stat-l">confirmation records with a date</span></div>
+  <div class="stat stat-warn"><span class="stat-n">{n_flags}</span><span class="stat-l">flags, {n_high} high</span></div>
+  <div class="stat"><span class="stat-n">{n_open_q}</span><span class="stat-l">open questions, {n_blocking} blocking</span></div>
+  <div class="stat"><span class="stat-n">{n_ledger}</span><span class="stat-l">campaign ledger rows (none without a first-party report)</span></div>
+</div>"""
+
+    # ---- 1. product entries ----
+    prod_rows = []
+    for p in products:
+        ref = p["ref"]
+        rec = intent_by_ref.get(ref, {})
+        observed = p.get("observed_url") or rec.get("observed_redirect_target")
+        prod_rows.append([
+            {"html": f"<strong>{esc(ref)}</strong>"},
+            {"html": f"<code>{esc(p['submitted_link'])}</code>"},
+            {"html": f"<code>{esc(observed or '')}</code>"},
+            {"html": esc(p.get("listing_title") or "")},
+            unverified("no Associates account data is available to this build, so the intended ASIN is not confirmed") if not p.get("intended_asin") else p["intended_asin"],
+            unverified("no confirmation record exists yet") if not rec.get("confirmation_date") else rec["confirmation_date"],
+            src_link(d, observed, "amazon.com listing"),
+        ])
+    products_html = table(
+        ["Ref", "Submitted link", "Observed destination (separate field)", "Listing title as read 2026-11-20",
+         "Intended ASIN", "Confirmation date", "Source"],
+        prod_rows, cls="dash",
+        caption="Five product entries. The intended ASIN and the observed destination are separate fields and are never merged.",
+    )
+
+    # ---- 2. official sources ----
+    src_rows = []
+    for s in sources:
+        url = s["url"]
+        read_id = read_urls.get(url)
+        status = f"read {log['meta']['read_on']} ({read_id})" if read_id else "not re-read in this pass"
+        src_rows.append([
+            {"html": f"<strong>{esc(s['id'])}</strong>"},
+            s.get("title", ""),
+            s.get("used_for", ""),
+            status,
+            s.get("page_date", ""),
+            src_link(d, url, urlsplit(url).netloc.replace("www.", "")),
+        ])
+    sources_html = table(
+        ["ID", "Source", "Used for", "Read in this pass?", "Page date as shown", "Source link"],
+        src_rows, cls="dash",
+        caption="Official sources the site cites. A source marked 'not re-read' is kept as the register recorded it, and is not presented as checked today.",
+    )
+
+    # ---- 3. checks made in this pass ----
+    read_rows = []
+    for r in reads:
+        read_rows.append([
+            {"html": f"<strong>{esc(r['id'])}</strong>"},
+            r.get("read_result", ""),
+            str(r.get("matches_site", "")),
+            ", ".join(r.get("affects", [])),
+            src_link(d, r["url"], urlsplit(r["url"]).netloc.replace("www.", "")),
+        ])
+    reads_html = table(
+        ["ID", "What the page showed", "Matches the site?", "Affects", "Source link"],
+        read_rows, cls="dash",
+        caption=f"{len(reads)} checks made on {log['meta']['read_on']}. A row names the page read; nothing in it comes from another session's notes.",
+    )
+
+    # ---- 4. findings from this pass ----
+    find_rows = []
+    for f in findings:
+        srcs = f.get("sources", [])
+        cells = "<br>".join(src_link(d, s, None)["html"] if _is_https(s) else
+                            f'<span class="blank">internal file: <code>{esc(s.replace("repository file: ", ""))}</code></span>' for s in srcs)
+        find_rows.append([
+            {"html": f"<strong>{esc(f['id'])}</strong>"},
+            f["severity"],
+            f["title"],
+            f["found"],
+            f["action"],
+            {"html": cells or unverified()["html"]},
+        ])
+    findings_html = table(
+        ["ID", "Severity", "Finding", "What was found", "Action (owner decision)", "Sources to check"],
+        find_rows, cls="dash",
+        caption="Irregularities from this pass. Each is published for review, and none blocks the site.",
+    )
+
+    # ---- 5. flags ----
+    flag_rows = []
+    for f in flags:
+        url = _first_citable(f.get("to_check", []))
+        flag_rows.append([
+            {"html": f"<strong>{esc(f['id'])}</strong>"},
+            f["severity"],
+            f["title"],
+            src_link(d, url, None) if url else unverified("no official source is linked; the flag rests on this repository alone"),
+        ])
+    flags_html = table(
+        ["ID", "Severity", "Flag", "Official source to check"],
+        flag_rows, cls="dash",
+        caption=f"{len(flags)} flags from the register. The full text of each flag is on the Flagged for review page.",
+    )
+
+    # ---- 6. questions ----
+    q_rows = []
+    for q in questions:
+        urls = _sources_from_text(str(q.get("evidence", "")), sources_by_id)
+        if not urls:
+            urls = [u for u in re.findall(r"https://[^\s)\"']+", str(q.get("evidence", "")))]
+        url = _first_citable(urls)
+        q_rows.append([
+            {"html": f"<strong>{esc(q['id'])}</strong>"},
+            q["question"],
+            "answered" if q.get("answered") else "open",
+            str(q.get("blocking", "")),
+            src_link(d, url, None) if url else unverified("no official source is linked for this question"),
+        ])
+    questions_html = table(
+        ["ID", "Question", "Status", "Blocking?", "Official source"],
+        q_rows, cls="dash",
+        caption=f"{len(questions)} questions. A question is answered only when its answer has a source link or a reproducible check.",
+    )
+
+    body = f"""{pagehead(
+        'Dashboard',
+        'Every entry and finding, with its source',
+        'The five product entries, the official sources, the checks made in this pass, the review flags and the open questions, in one set of tables. A cell marked unverified could not be confirmed from an official source, so it is left blank on purpose.',
+        meta=f'Built {esc(BUILD_DATE)} &middot; computed from src/data/ &middot; tracking ID supplied by the owner, attribution unconfirmed',
+    )}
+{section(stats, cls='')}
+{section(f'''<div class="sec-head"><div>{eyebrow('Entries')}<h2>Product entries</h2></div><p>The submitted link, the destination it reached on {esc(log['meta']['read_on'])}, and the intended ASIN the owner has not yet confirmed.</p></div>
+{products_html}''', cls='')}
+{section(f'''<div class="sec-head"><div>{eyebrow('Checks')}<h2>What this pass read</h2></div><p>Each row is one page read on {esc(log['meta']['read_on'])}.</p></div>
+{reads_html}''', cls='')}
+{section(f'''<div class="sec-head"><div>{eyebrow('Findings')}<h2>Irregularities from this pass</h2></div><p>Owner decisions, not automatic fixes. Two of them block nothing and one needs a decision before a link is trusted.</p></div>
+{findings_html}''', cls='')}
+{section(f'''<div class="sec-head"><div>{eyebrow('Sources')}<h2>Official sources</h2></div><p>{len(sources)} sources in the register. Only the rows marked as read in this pass were opened on that date.</p></div>
+{sources_html}''', cls='')}
+{section(f'''<div class="sec-head"><div>{eyebrow('Review')}<h2>Flags</h2></div><p>{len(flags)} flags. The source column names the official page to check, or says that none applies.</p></div>
+{flags_html}''', cls='')}
+{section(f'''<div class="sec-head"><div>{eyebrow('Questions')}<h2>What would close each question</h2></div><p>{n_open_q} open. The blocking column is the one that matters for decisions.</p></div>
+{questions_html}''', cls='')}
+{section(f'''<div class="sec-head"><div>{eyebrow('Suggestions')}<h2>Suggestions and the campaign ledger</h2></div><p>{n_sugg} suggestions, {n_sugg_done} recorded as implemented with evidence. Nothing is approved here.</p></div>
+<div class="crosslinks">
+  <a class="crosslink" href="{esc(rel(d, 'suggestions/index.html'))}"><h3>Suggestions and decisions</h3><p>Choose a path before anything changes. Each row says what it would change and what it depends on.</p></a>
+  <a class="crosslink" href="{esc(rel(d, 'operations/ledger.html'))}"><h3>Campaign ledger</h3><p>{n_ledger} rows. Empty by design until a first-party report exists.</p></a>
+  <a class="crosslink" href="{esc(rel(d, 'review/index.html'))}"><h3>Flagged for review</h3><p>The full text of every flag, with where to check it.</p></a>
+</div>''', cls='')}"""
+
+    return page(
+        d,
+        title="Dashboard \u2014 every entry and finding \u2014 Crisp & Counter",
+        description="Every product entry, official source, review check, flag and open question on this site in one set of tables. Each row names its source, and anything that could not be confirmed is marked unverified.",
+        body=body,
+        active="dashboard/index.html",
+        canonical="dashboard/",
+    )
