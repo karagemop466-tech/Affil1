@@ -5,6 +5,62 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Harden the launch gate's soft rules — arena/89ddabf5-affil1 (claimed 2026-11-20, base `b5da998`)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Make the two gate rules that only warn into rules that fail the release | in progress | arena/89ddabf5-affil1 | `tools/validate.py`, `COORDINATION.md` |
+
+**Why.** `tools/validate.py` is the first step of the *Affiliate launch checks*
+workflow. A parallel session (`8ef437f`, landed in PR #76) fixed its schema crash
+and pointed it at the published surface, so the gate runs again. Two of its
+rules still cannot stop a release, and both encode a rule this repository has
+committed to in writing:
+
+1. **A price figure only warns.** Program Policies §2(b) permits price and
+   availability display only where Amazon serves the data or the figure arrives
+   through the Creators API or PA API. Neither is connected, so a dollar figure
+   cannot lawfully be published — a warning that scrolls past a failed build is
+   not a control.
+2. **An unmarked affiliate link only warns, and only if it lacks `nofollow`.**
+   `rel="sponsored"` is the marker Google documents for paid placements, and the
+   Operating Agreement §1 requires the Special Link format. The old rule also
+   tested only elements whose class contained `btn`, so a plain text link to a
+   listing with no `sponsored` token passed. A site that is "sponsored-marked"
+   should be sponsored-marked everywhere, not on its buttons.
+
+**Now.** Both are errors. Every link `is_product_link()` matches must carry
+`sponsored` and `nofollow`; `noopener` warns. A currency figure anywhere in the
+generated HTML is an error.
+
+**Verified by negative test** — each break produces exactly one error and is
+repaired by rebuilding:
+
+| Break | Result |
+| --- | --- |
+| price reintroduced on a product page | `ERR price figure present` |
+| `sponsored` removed from a non-button guide link | `ERR affiliate link without rel=sponsored` |
+| `sponsored` removed from a buy button | `ERR buy button without rel=sponsored` |
+| disclosure class renamed | `ERR missing the disclosure strip` |
+| disclosure strip moved after `<main>` | `ERR disclosure strip appears after <main>` |
+| duplicated `<h1>` | `ERR expected 1 <h1>, found 2` |
+| image `alt` removed | `ERR 1 <img> without alt` |
+| broken internal link | `ERR broken internal link` |
+| root-absolute href | `ERR link escapes the site root` |
+
+`python3 tools/validate.py` → **1545 checks, 0 errors, 0 warnings.**
+`python3 tools/build.py` → 30 pages. `python3 tools/check.py` → 30 pages,
+0 errors, 0 warnings. `python3 tools/check_local_links.py` → 37 pages, 0 broken.
+
+**Superseded claim.** An earlier pass on this branch repaired the gate's crash
+and repointed it at the published surface. That work landed independently in
+`8ef437f` (PR #76) and `7a04031`, so it is not repeated here. Detail, and the
+verification pass over all five Amazon listings and the seven policy sources,
+is in `COORDINATION/arena-89ddabf5-affil1.md`.
+
+No claim is made that any submitted short link is invalid. `FLG-001`, `FLG-002`
+and `FLG-003` are unchanged by this PR.
+
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
 | Task | Status | Owner | Files |
