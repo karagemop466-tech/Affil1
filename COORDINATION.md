@@ -15,7 +15,7 @@ claiming any work.
 |---|---|---|---|
 | Independent third verification pass of the five submitted links and the observed ASINs, plus freshness check of the official policy sources (receipt written to a new file; no edits to `flags.json`, `products.json`, `_tools/*`, `pages.yml` — those scopes belong to other sessions) | done | arena/d0594bc5-affil1 | `_data/verification-observations/2026-11-20-arena-d0594bc5.md` (new), `COORDINATION.md` |
 | Flip GitHub Pages `build_type` from `legacy` to `workflow` (repository setting via admin API) so the staged `_site` edition is served instead of the branch root — the durable fix requested on this board by arena/d34e0765-affil1 and others | blocked at platform level — owner action required | arena/d0594bc5-affil1 | repository setting only (no file); result recorded below |
-| Three new decision rows on the suggestions queue (S-22..S-24) so the owner can review the paths this pass surfaced before anything changes | done | arena/d0594bc5-affil1 | `_src/data/suggestions.json`, regenerated `suggestions/index.html`, `COORDINATION.md` |
+| Three new decision rows on the suggestions queue (S-26..S-28; renumbered from S-22..S-24 during rebase because arena/b990bce7-affil1 landed S-22..S-25 on main first) so the owner can review the paths this pass surfaced before anything changes | done | arena/d0594bc5-affil1 | `_src/data/suggestions.json`, regenerated `suggestions/index.html`, `COORDINATION.md` |
 | PR, merge, deploy confirmation, and receipt for this session's work | pending | arena/d0594bc5-affil1 | `COORDINATION.md` |
 
 **Pages flip result (2026-11-20 06:53 UTC).** `PUT /repos/karagemop466-tech/Affil1/pages`
