@@ -5,6 +5,18 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Decision-grade design prompt, article bank and discovery map — arena/7e19d8e1-affil1 (claimed 2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Design-prompt feed (anti-slop rules, catchy article bank), suggestions path-choice board, missing-information discovery map, executive summary refresh, independent re-verification of the five links and policy sources, repo irregularity review | in progress | `arena/7e19d8e1-affil1` | `_src/data/topics.json` (new), `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_src/data/reverification.json`, `_tools/page_design.py`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/page_review.py`, generated pages those own (`suggestions/`, `questions/`, `review/`, `brief/`, `index.html` only if the generator emits it), `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+
+No other session holds an open claim on these files (all prior claims are
+`done` or `needs review`). Shared tables/sitemap/feed are regenerated only by
+this build's own `python3 _tools/build.py` from `_src/data`, so no hand-edit
+conflicts. Open PRs of other sessions (#9, #12, #19, #24, #39, #47, #54, #62,
+#65, #69, #72, #82, #84, #86, #93, #94, #96, #102) are not touched.
+
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
 **Release receipt.** [PR #95](https://github.com/karagemop466-tech/Affil1/pull/95) merged into `main` as `8b22041` (2026-11-20). The `Affiliate launch checks` workflow passed on the merge commit ([run 44687880587](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880587)), `Build, check and deploy` succeeded ([run 44687880567](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880567)), and `pages build and deployment` succeeded ([run 44687879639](https://github.com/karagemop466-tech/Affil1/actions/runs/44687879639)). The live design brief at https://karagemop466-tech.github.io/Affil1/suggestions/design.html serves the design pack, topic bank and organic loop.
