@@ -46,7 +46,8 @@ def build_about(page_dir, sources, meta):
     <p>Until 20 November 2026 this repository served two competing editions of the same shop: a generated one at the root and a hand-written one in a subdirectory, with duplicate pages covering the same five products. Two editions cannot both be the answer a search engine should index. The root build is now canonical, the other edition is preserved under <code class="code">archive/legacy-2026-11-20/</code> with a noindex tag on every page, and the sitemap lists only the canonical URLs. Nothing was deleted; the archive and the git history both keep it.</p>
 
     <h2 id="how-we-link">How the links work</h2>
-    <p>Only approved Special Links may carry the selected Associates tag. Listing citations are untagged. Every outbound product link is marked <code class="code">rel="sponsored nofollow noopener"</code> and opens in a new tab. Google's own documentation on qualifying outbound links confirms that <code class="code">sponsored</code> is the correct marker for paid or advertising links. That is applied by the build script to every Amazon anchor at once, and a check fails if any is missing it.</p>
+    <p>Every buy button points at <code class="code">https://www.amazon.com/dp/&lt;ASIN&gt;?tag={esc(TRACKING_ID)}</code>. Program Policies 2(b) requires the Associates tag as a parameter on each link to an Amazon Site, so the tag is applied by the build to every destination rather than being optional; a page that emitted an untagged product link would fail the gate. Listing citations &mdash; the policy and help pages quoted on this site &mdash; are deliberately untagged.</p>
+    <p>None of the five is an <em>account-confirmed</em> Special Link. A confirmed link needs the intended ASIN, the confirmation date and the report that proves the click was credited, and that record is empty for all five (that is <a href="../review/index.html#FLG-002">FLG-002</a>). Every outbound product link is marked <code class="code">rel="sponsored nofollow noopener"</code> and opens in a new tab. Google's own documentation on qualifying outbound links confirms that <code class="code">sponsored</code> is the correct marker for paid or advertising links. That is applied by the build script to every Amazon anchor at once, and a check fails if any is missing it.</p>
     <p>The tracking ID supplied for this site is <code class="code">{esc(TRACKING_ID)}</code>. Whether a click is actually credited to it has not been confirmed, because confirming it needs a click from the operator's own device followed by a look at the Associates report. That is on the review queue as FLG-002 rather than being asserted here.</p>
 
     <h2 id="disclosure">The disclosure</h2>
@@ -144,6 +145,13 @@ def build_brief(page_dir, products, questions, flags, meta):
     n_q = len(questions["questions"])
     n_open = sum(1 for q in questions["questions"] if not q.get("answered"))
     n_high = sum(1 for f in flags["flags"] if f["severity"] == "high")
+    # "Account-confirmed" means an evidence bundle, not a tagged URL. The build
+    # tags every observed ASIN (Program Policies 2(b)); none of the five has a
+    # confirmation record, so this figure is zero and must stay zero until an
+    # item in src/data/product-intent.json carries a real one. Rendering
+    # len(approved_amazon_urls()) here printed 5 and contradicted the flag.
+    from paid_link_gate import approved_links
+    confirmed = len(approved_links(products, TRACKING_ID))
     body = f"""{pagehead(
         'Executive summary',
         'The short version,<br>for someone with four minutes',
@@ -172,7 +180,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   <div class="exec-block">
     <h2>What could not be verified, and why it matters</h2>
     <dl class="exec-dl">
-      <div><dt>Tracking attribution</dt><dd>No arrival page showed a tag parameter. Whether clicks are credited to <code class="code">{esc(TRACKING_ID)}</code> is unknown. This is the difference between a site that earns and a site that does not.</dd></div>
+      <div><dt>Tracking attribution</dt><dd>No arrival page showed a tag parameter from the supplied short links, and no report has been read since the site began attaching <code class="code">tag={esc(TRACKING_ID)}</code> to its own destinations. Whether clicks are credited is unknown. This is the difference between a site that earns and a site that does not.</dd></div>
       <div><dt>Price, rating, availability</dt><dd>Not shown anywhere, because Amazon permits them only from Amazon-served data or its API. This is deliberate and is the site's largest visible gap to a reader.</dd></div>
       <div><dt>Author</dt><dd>None. No name would be true, so none is used. It caps how much authority the guides can claim.</dd></div>
       <div><dt>Product quality</dt><dd>Nothing was tested. No product is ranked, scored or recommended.</dd></div>
@@ -189,7 +197,7 @@ def build_brief(page_dir, products, questions, flags, meta):
     <div class="exec-stats">
       <div><span>5</span><p>links supplied</p></div>
       <div><span>5</span><p>resolved and transcribed</p></div>
-      <div><span>{len(approved_amazon_urls())}</span><p>account-confirmed buy links at publication</p></div>
+      <div><span>{confirmed}</span><p>account-confirmed buy links at publication</p></div>
       <div><span>0</span><p>products tested</p></div>
       <div><span>0</span><p>prices shown</p></div>
       <div><span>{n_q}</span><p>questions raised</p></div>

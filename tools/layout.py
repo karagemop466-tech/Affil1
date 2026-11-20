@@ -217,7 +217,7 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code>. Attribution remains unverified; only account-confirmed purchase links may use this tag.</p>
+      <p>Associates tracking ID <code>{esc(TRACKING_ID)}</code> is applied to every Amazon destination on this site, as Program Policies 2(b) requires of a Special Link. No click, order or commission has been confirmed against it in an Associates report, so nothing here is presented as earning; the open item is <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-002">FLG-002</a>.</p>
       <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
     </div>
   </div>

@@ -131,11 +131,17 @@ def feed(guides):
 """
 
 
-# One canonical site. The archived edition under archive/ carries noindex, and
-# /archive/ is not listed in the sitemap. Nothing here blocks crawling of the
-# canonical pages.
+# One site to index. Every reader page stays crawlable; the superseded editions
+# under archive/ and the working papers under decision-support/ are disallowed,
+# so a search engine is pointed at one edition instead of discovering four.
+# This file and the noindex tags on those pages do different jobs: robots.txt
+# stops the crawl, noindex stops the index if a page is reached by a direct link.
+# Google documents that robots.txt alone does not remove a page from results, so
+# both are set (SRC-19).
 ROBOTS = """User-agent: *
 Allow: /
+Disallow: /archive/
+Disallow: /decision-support/
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
