@@ -6,7 +6,7 @@ import pathlib as _pathlib
 
 from content import GUIDES as _GUIDES
 
-_asset_n = len(_json.load(open(_pathlib.Path(__file__).resolve().parent.parent / "src" / "data" / "images.json", encoding="utf-8"))["assets"])
+_asset_n = len(_json.load(open(_pathlib.Path(__file__).resolve().parent.parent / "_src" / "data" / "images.json", encoding="utf-8"))["assets"])
 
 from layout import (approved_amazon_urls,DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
                     outbound, page, pagehead, rel, section, table)
