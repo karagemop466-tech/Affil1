@@ -81,3 +81,20 @@ The supplied `link.amazon/*` short links are **not** declared invalid (FLG-003).
   30-page `_site` is served instead of the repo root. This is the durable fix for
   "one published surface"; this session applied the file-level equivalent
   (noindex + robots) that works without admin scope.
+
+## Receipt
+
+- **PR:** [#111](https://github.com/karagemop466-tech/Affil1/pull/111) — **merged**
+  into `main` as `ffc79357d6d6fe1b0961ee3621c65eb56176f316` (2026-11-20T07:16:24Z).
+- **CI (merge commit):** Build/check/deploy success · Affiliate launch checks
+  success · Verify Countertop Almanac edition and platform success.
+- **Pages:** `pages build and deployment` success (run 44693750713).
+- **Live:** root `robots.txt` carries `Disallow: /_archive/`, `/edition/`,
+  `/_decision-support/`; `edition/` reachable but `noindex` on all 27 pages;
+  canonical root edition unchanged and indexable.
+- **Reconciliation:** rebased onto `main` three times as concurrent sessions merged
+  PRs #110–#121. Append-only board collisions resolved by keeping main's board and
+  re-appending this session's sections; generator conflicts combined with main's
+  changes; generated files resolved by rebuild. No other session's work discarded.
+- **Status:** done. Flagged items (FLG-002, FLG-003, FLG-016, FLG-018, FLG-028) and
+  the owner-only Pages `build_type: workflow` setting remain open and do not block.

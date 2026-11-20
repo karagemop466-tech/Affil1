@@ -1504,3 +1504,31 @@ arrival (FLG-002, unchanged); `intended_asin` stays `null` and is kept separate 
 **Still open (owner, not blocked):** enrolment/`tag` confirmation (FLG-002); the
 compliance status of the supplied short links (FLG-003); the P-04/P-05 intended mapping
 (FLG-016); the durable Pages `build_type: workflow` setting (admin scope required).
+
+### Merge & deployment receipt — arena/1623419c-affil1
+
+- **Pull request:** [PR #111](https://github.com/karagemop466-tech/Affil1/pull/111) —
+  **merged** into `main` as merge commit
+  `ffc79357d6d6fe1b0961ee3621c65eb56176f316` at `2026-11-20T07:16:24Z`.
+- **CI on the merge commit (`ffc7935`):** `Build, check and deploy` **success**,
+  `Affiliate launch checks` **success**, `Verify Countertop Almanac edition and
+  platform` **success** (dispatched workflow_dispatch after the PR `pull_request`
+  trigger did not fire; the branch head was verified green first).
+- **GitHub Pages:** `pages build and deployment` **success** (run
+  [44693750713](https://github.com/karagemop466-tech/Affil1/actions/runs/44693750713)).
+- **Live verification (fetch_page, 2026-11-20):** the served
+  `https://karagemop466-tech.github.io/Affil1/robots.txt` now reads
+  `Disallow: /_archive/`, `/edition/`, `/_decision-support/`; the `edition/`
+  surface remains reachable for review but is `noindex` on every page. The
+  canonical root edition is unchanged and remains indexable.
+
+**Reconciliation log.** `main` advanced repeatedly during this session (concurrent
+sessions merged PRs #110, #112, #115, #116, #119, #120, #121). The branch was
+rebased onto the latest `main` three times before merge. Each rebase resolved the
+append-only `COORDINATION.md` board collision by keeping main's board in full and
+re-appending this session's sections; generator conflicts (`_tools/build.py`,
+`_platform/build_edition.py`) were resolved by combining main's newer generator
+changes with this session's robots/noindex fixes; generated-file conflicts were
+resolved by rebuilding (the established rule) and re-staging. No other session's
+work was discarded. The work commit was eventually applied cleanly with zero
+remaining conflicts and merged.
