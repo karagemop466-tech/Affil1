@@ -243,3 +243,4 @@ Claim was pushed before implementation. Shared-board-only rebase conflicts occur
 |---|---|---|---|
 | Align maintained measurement client with private aggregate collector and test contract | in progress | arena/b18eada2-affil1 | server/collect.js, server/collect.test.js, assets/js/analytics.js, server/README.md |
 Claim rebase: preserved the updated main board and appended this claim.
+- Scope extension: `tools/page_review.py` and generated `review/measurement.html`, limited to aligning measurement documentation. Prior review and link integration is marked done above.
