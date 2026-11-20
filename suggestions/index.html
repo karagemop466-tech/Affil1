@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suggestions and decisions | Crisp &amp; Counter</title>
-<meta name="description" content="12 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta name="description" content="15 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
 <meta property="og:title" content="Suggestions and decisions | Crisp &amp; Counter">
-<meta property="og:description" content="12 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta property="og:description" content="15 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-counter-w1280.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Suggestions</p>
   <h1>Choose a direction,<br>then choose the rows</h1>
-  <p class="dek">3 coherent paths and 12 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
+  <p class="dek">3 coherent paths and 15 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
   <p class="page-meta">Decisions are stored in your browser only &middot; nothing transmitted &middot; no account</p>
 </div></header>
 <section class="section "><div class="wrap">
@@ -59,7 +59,7 @@
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
-    <p class="decide-count" data-count>0 of 12 decided</p>
+    <p class="decide-count" data-count>0 of 15 decided</p>
   </div>
 </div></div></section>
 <section class="section section-tint"><div class="wrap">
@@ -162,15 +162,15 @@
 </article><article class="scard" id="S-04">
   <div class="scard-head">
     <span class="scard-id">S-04</span>
-    <h3>Connect the Product Advertising API before showing any price or rating</h3>
+    <h3>Apply for the Creators API — knowing it is gated behind 10 qualifying sales</h3>
     <span class="scard-effort">an application, plus qualifying sales on most accounts</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>It is the only compliant route to live price, availability and rating, and those are the three things a shopper looks for before clicking. A shop without them has to work much harder.</p></div>
+    <div class="scard-why"><p class="q-label">Why</p><p>Program Policies §2(b) permits price and availability only where Amazon serves the data or it arrives through the Creators API or PA API. Amazon&#x27;s own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment plus at least 10 qualifying sales within the past 30 days. The policy text still names both APIs, so following the policy alone would aim at a route that no longer answers.</p></div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>None to the site. The blocker is that eligibility usually requires sales, which requires traffic, which is the thing being built.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-04</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Start the application now; expect to wait</dd></div>
+      <div><dt>Risk</dt><dd>Low, but the sequence is not negotiable: live prices arrive after the site proves it can sell, not before. A separate clause also requires a comparison-format price display to show the lowest used price as well as the lowest new, which is a second reason the comparison table stays blank.</dd></div>
+      <div><dt>Depends on</dt><dd>S-01, and the 10-qualifying-sales threshold</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Revisit the moment the sales count allows it; do not treat it as a build task</dd></div>
     </dl>
   </div>
   <div class="scard-foot">
@@ -348,6 +348,69 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
+</article><article class="scard" id="S-19">
+  <div class="scard-head">
+    <span class="scard-id">S-19</span>
+    <h3>Request sub-tag Associate IDs so attribution comes from Amazon&#x27;s own report</h3>
+    <span class="scard-effort">a support request, then a small change to how each page builds its outbound links</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Program Policies §2(b) allows Amazon to issue additional sub-tag Associate IDs on request so an Associate can “monitor and optimize the performance” of different links. A sub-tag per page turns “which guide earns?” into a question Amazon&#x27;s own report answers, which is far stronger evidence than anything a first-party counter can produce. The same clause forbids tying a sub-tag to an identified visitor, which this site does not do.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. Sub-tags are subject to Amazon&#x27;s approval, so the answer may be no, and nothing else on the site depends on it. It complements S-01 rather than replacing it: S-01 proves a click is credited at all, sub-tags say which page earned it.</dd></div>
+      <div><dt>Depends on</dt><dd>S-01</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Request it in the same dashboard session as S-01</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-20">
+  <div class="scard-head">
+    <span class="scard-id">S-20</span>
+    <h3>Schedule the link re-check so drift is reported rather than discovered</h3>
+    <span class="scard-effort">an hour to wire the existing tool into a scheduled run and publish its output</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Every product fact on this site rests on a supplied link resolving to the same listing it did on 2026-11-20. P-04 already showed that the same link can return a product page on one attempt and Amazon&#x27;s continuity page on another, on the same date. The repository already has the tool for this (tools/verify_links.py); what is missing is a schedule and a place for the result.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Medium, and worth stating plainly: an unattended re-check can hit the same interstitial P-04 did, and a false alarm is worse than no alarm. Any automated check must report the outcome and let a human adjudicate. It must never overwrite a verified record on its own.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Build it to report, never to rewrite</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-21">
+  <div class="scard-head">
+    <span class="scard-id">S-21</span>
+    <h3>Do not buy paid search, and do not use Amazon marks in any promotion</h3>
+    <span class="scard-effort">zero — this is a decision not to spend</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Program Policies prohibit purchasing, registering or using any Amazon Mark in a search engine, disqualify purchases arriving through a paid search placement, and state that Associates must not use their tags to claim commissions from another programme on the same traffic. The site also has no measurement that could attribute a click, so paid acquisition would spend money that cannot be accounted for.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>None from complying. The risk is entirely in ignoring it, and it falls on the account rather than on a page.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Adopt as policy and leave it on this page as a recorded refusal</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
 </article></div></section>
 <section class="section section-tint"><div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">Already done</p><h2>Implemented on 20 November 2026</h2></div>
@@ -397,7 +460,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <p class="foot-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
-    <div class="foot-grid"><div class="foot-col"><h2>Shop</h2><ul><li><a href="../products/index.html">All five picks</a></li><li><a href="../products/p-01.html">Dual-basket air fryer</a></li><li><a href="../products/p-02.html">French-door oven</a></li><li><a href="../products/p-03.html">Single-basket air fryer</a></li><li><a href="../products/p-04.html">Instant-read thermometer</a></li><li><a href="../products/p-05.html">Wireless probe set</a></li></ul></div><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../compare/index.html">Side-by-side table</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>The desk</h2><ul><li><a href="../questions/index.html">Open questions</a></li><li><a href="index.html">Suggestions &amp; decisions</a></li><li><a href="design.html">Design decision brief</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li></ul></div><div class="foot-col"><h2>Trust</h2><ul><li><a href="../about/index.html">About &amp; how we link</a></li><li><a href="../about/index.html#sources">Sources</a></li><li><a href="../review/index.html">Flagged for review</a></li><li><a href="../review/images.html">Image policy</a></li><li><a href="../review/measurement.html">Measurement plan</a></li></ul></div></div>
+    <div class="foot-grid"><div class="foot-col"><h2>Shop</h2><ul><li><a href="../products/index.html">All five picks</a></li><li><a href="../products/p-01.html">Dual-basket air fryer</a></li><li><a href="../products/p-02.html">French-door oven</a></li><li><a href="../products/p-03.html">Single-basket air fryer</a></li><li><a href="../products/p-04.html">Instant-read thermometer</a></li><li><a href="../products/p-05.html">Wireless probe set</a></li></ul></div><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../compare/index.html">Side-by-side table</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>The desk</h2><ul><li><a href="../decide/index.html">Decision gate</a></li><li><a href="../questions/index.html">Open questions</a></li><li><a href="index.html">Suggestions &amp; decisions</a></li><li><a href="design.html">Design decision brief</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li></ul></div><div class="foot-col"><h2>Trust</h2><ul><li><a href="../about/index.html">About &amp; how we link</a></li><li><a href="../about/index.html#sources">Sources</a></li><li><a href="../review/index.html">Flagged for review</a></li><li><a href="../review/images.html">Image policy</a></li><li><a href="../review/measurement.html">Measurement plan</a></li></ul></div></div>
     <div class="foot-bottom">
       <p>Submitted tracking ID: <code>shopnow047c-20</code>. Attribution remains unverified; only account-confirmed purchase links may use this tag.</p>
       <p class="foot-meta">Crisp &amp; Counter &middot; static site &middot; last built 2026-11-20 &middot; no cookies, no trackers, no third-party requests</p>

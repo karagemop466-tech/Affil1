@@ -38,8 +38,9 @@ assets/js/shortlist.js  "Save" on a product card; localStorage only, nothing sen
 assets/img/*.jpg      commissioned illustrations (not product photography)
 src/data/*.json       every fact the site publishes, with its source
 tools/build.py        data → HTML (one template for nav, disclosure, footer)
-tools/validate.py     the gate: links, images, disclosure, sponsored marking,
+tools/check.py        a gate: links, images, disclosure, sponsored marking,
                       price prohibition, sitemap/feed agreement
+tools/validate.py     a second gate over the published tree; prints its own check count
 tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
 tools/verify_links.py re-resolve the register against Amazon and report drift
 archive/              five earlier competing surfaces (four storefronts and a parallel
@@ -67,7 +68,7 @@ cannot quietly fall out of compliance.
 
 ## The rules this site publishes under
 
-Each rule below is enforced by `tools/validate.py`, not just asserted in prose:
+Each rule below is enforced by `tools/check.py` and `tools/validate.py`, not just asserted in prose:
 
 1. **Disclosure above the fold on every page, and again in the footer.** The strip
    carries Amazon's required sentence verbatim — *"As an Amazon Associate I earn from

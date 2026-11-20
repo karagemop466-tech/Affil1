@@ -292,12 +292,26 @@
       "expected": "Every validator in tools/ runs clean against the current data.",
       "found": "python3 tools/validate.py stopped with KeyError 'supplied_path_code_length' because the product schema had been renamed. The validator also pointed at a retired section. Both were fixed in PR #77: field names now match the schema, the validator checks the published pages, and it passes (1441 checks, 0 warnings).",
       "reading": "The gate had been red on main. That is the reason this flag was raised, and the fix is recorded here.",
-      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",
-      "blocks": "nothing",
+      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",      "blocks": "nothing",
       "to_check": [
         "tools/validate.py",
         "src/data/products.json"
       ]
+    },
+    {
+      "id": "FLG-022",
+      "severity": "high",
+      "title": "The only supported route to price and availability data is gated behind 10 qualifying sales",
+      "expected": "A site can decide to add prices once it has a data feed.",
+      "found": "Program Policies §2(b) still names “Creators API or PA API” as the permitted route. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment, at least 10 qualifying sales within the past 30 days, registration through Associates Central, and generated credentials.",
+      "reading": "This turns the site's biggest missing feature into a sequencing problem rather than an engineering one. Prices arrive after the site proves it can sell, not before. A separate clause in the same section adds that a comparison-format price display must also show the lowest used price, which is a second reason this site's comparison table keeps its price column empty.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "The comparison table keeps its blank price column by rule, and the site's own price_rule wording was updated to name the deprecation rather than pointing at an API that no longer answers.",
+      "blocks": "any live price, rating or availability display, until the sales threshold is met"
     }
   ]
 }

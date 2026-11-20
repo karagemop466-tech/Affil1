@@ -470,3 +470,112 @@ written into another session's evidence file.
 
 - Integration PR: https://github.com/karagemop466-tech/Affil1/pull/60
 - Merge result: recorded below after merge.
+
+## Session arena/06f00bdd-affil1 — verification pass, decision gate, API-gating finding (2026-11-20)
+
+Owner: `arena/06f00bdd-affil1`. Branched from `7b236c2`; rebased onto `a3f435a` after
+main advanced through PRs #52, #61 and #67. No other session had an open claim on the
+files below.
+
+**Note on drift.** This session started on a base 40+ commits behind main and found
+several defects there. On re-deriving against current main, three of them were already
+fixed by other sessions and are **not** claimed here: the stale FLG-004 wording, the
+`events.json` / `analytics.js` event-name mismatch, and the unreachable USDA source.
+What follows is only what was still true of `a3f435a`.
+
+| Task | Status | Files |
+|---|---|---|
+| Re-verify all five supplied links against amazon.com | done | `src/data/products.json` (meta only) |
+| Record the PA-API deprecation and the Creators API sales gate | done | `src/data/sources.json`, `src/data/flags.json` |
+| Build the decision gate page | done | `src/data/decisions.json`, `tools/page_decide.py`, `tools/build.py`, `tools/layout.py` |
+| Correct S-04, which pointed at a deprecated API | done | `src/data/suggestions.json` |
+| Add three non-duplicative proposals | done | `src/data/suggestions.json` |
+| Close the one-directional build guard | done | `tools/build.py` |
+| Make `tools/validate.py` report a failing row instead of crashing on a schema change | done | `tools/validate.py` |
+
+### Verification performed, 2026-11-20
+
+Each link was opened once with a redirect-following fetcher; the final URL, listing
+title and category breadcrumb were transcribed. All five matched the register.
+
+| Ref | Submitted | Reached | Title on arrival |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | amazon.com/dp/B0CDY277D3 | CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black |
+| P-02 | link.amazon/B02NbDxp3 | amazon.com/dp/B09B7SB46R | Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven |
+| P-03 | link.amazon/B00hJ57DV | amazon.com/dp/B08DKYBTPH | Chefman Air Fryer 8 Qt, TurboFry 4-in-1 with 450°F Hi-Fry Option |
+| P-04 | link.amazon/B0c8moW59 | amazon.com/dp/B0DHZTCNR5 | ThermoMaven 1 Sec Professional Digital Meat Thermometer |
+| P-05 | link.amazon/B0f3GKalj | amazon.com/dp/B0DZFD6R9Z | CHEF iQ Sense, Smart Wireless Meat Thermometer, 3 Ultra-Thin Probes |
+
+This **agrees with the reconciled mapping** recorded in FLG-016 (P-04 ThermoMaven,
+P-05 CHEF iQ Sense), and is a third independent observation of it.
+
+**No arrival URL carried a tag parameter.** The parameters observed were `lv`,
+`btn_type`, `gaOptInStatus`, `btn_ref`, `channelId`, `plpRedirect`, and on two
+listings `sbo`, `language`, `th`. FLG-002 stands on a fresh observation.
+
+Sources read directly on the same date:
+
+| Source | Used for |
+|---|---|
+| [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) (Updated October 15, 2025) | §4 no representation of traffic or income; §5 disclosure wording and the limit on public communications about the relationship |
+| [Program Policies](https://affiliate-program.amazon.com/help/operating/policies) (Updated April 14, 2026) | §2(a)/(b) Special Links and tag format; the price rule; the comparison-format rule; sub-tag Associate IDs; payment timing |
+| [PA-API 5 deprecation](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation) | PA-API 5 is deprecated and returns 403 |
+| [Creators API introduction](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction) | Prerequisites, including at least 10 qualifying sales in the past 30 days |
+| [GetItems reference](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items) | What the permitted feed returns; Amazon's own 10-character ASIN examples |
+| [FTC Endorsement Guides FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) | A home-page-only disclosure is insufficient; a disclosure behind a DISCLOSURE link is not clear and conspicuous |
+| [Qualify outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links) (2025-12-10) | `rel="sponsored"` is the documented paid-link marker |
+
+### Irregularities found and fixed
+
+1. **FLG-022 (new, high).** Program Policies §2(b) still names "Creators API or PA
+   API" as the permitted route to price data, but Amazon's own documentation records
+   PA-API 5 as deprecated and returning 403, and gates the Creators API behind at
+   least 10 qualifying sales in the past 30 days. This turns the site's biggest
+   missing feature into a sequence rather than a build task. The `price_rule` wording
+   in `src/data/products.json` was updated to name the deprecation, and S-04 — which
+   still said "Connect the Product Advertising API" — was corrected.
+2. **The build guard only ran in one direction.** `tools/build.py` failed when
+   `GENERATED` listed a file it had not written, but never when it wrote a file it
+   had not listed. `tools/check.py` derives the pages it examines from `GENERATED`,
+   so an unlisted page is published, linked and sitemap-listed while the checker
+   reports a clean run without opening it. Confirmed by adding two guides and seeing
+   "0 errors" over 23 of 25 pages. Both directions are now enforced, verified by
+   removing an entry and watching the build stop.
+3. **`tools/validate.py` was raising `KeyError`, and main fixed it mid-rebase.** On
+   this session's base it targeted the archived `crisp/` edition and read product
+   field names that exist nowhere, so every run crashed while the README called it
+   "the gate". While this work was in progress main merged PR #77, which repointed
+   the validator at the published tree and reconciled it with the current schema —
+   it now runs 1545 checks and passes, so DB-24 is closed by that change rather than
+   by this one. What remains from this session is a smaller fix: the row label is
+   resolved from `ref` or `id` and the field lookups tolerate either schema, so a
+   future rename reports a failing row instead of a stack trace. This session's
+   first attempt retired the validator outright; that guard was removed once main's
+   fix landed, and the README wording was restored.
+
+### Deliberately not done
+
+- **No canonical tags on duplicate pages, and no edition merge.** Proposed as S-15.
+  The brief asks for a queue a human reviews before changes are implemented.
+- **Amazon's programme payment minimums are not restated anywhere.** They are
+  published and were read, but the checker fails the build on any currency figure in
+  visible text. A rule that cannot distinguish a programme minimum from a product
+  price should not be given exceptions, so the numbers stay behind their source link
+  and D-12 says why.
+- **No new guides.** S-07 says do not commission more until S-03 or S-05 lands, and
+  the nine that exist already cover both guides this session drafted. Adding
+  duplicates would have diluted the catalogue, so the drafts were dropped.
+
+### Checks
+
+```
+python3 tools/build.py    → 30 pages written
+python3 tools/check.py    → 30 pages, 0 errors, 0 warnings
+python3 tools/validate.py → 1545 checks, all pass
+```
+
+The paths these actually executed: `check_page` over all 30 generated pages including
+the new `decide/index.html`; `check_sitemap_feed` against the regenerated sitemap and
+feed; `check_data` over the edited `flags.json`, `suggestions.json` and
+`products.json`; `check_assets` over the analytics client; and the new
+bidirectional `GENERATED` guard in `build.py`.
