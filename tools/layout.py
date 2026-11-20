@@ -63,6 +63,7 @@ FOOTER_GROUPS = [
         ("suggestions/design.html", "Design decision brief"),
         ("brief/index.html", "Executive summary"),
         ("operations/ledger.html", "Campaign ledger"),
+        ("verification/index.html", "Verification log &amp; site gates"),
     ]),
     ("Trust", [
         ("about/index.html", "About & how we link"),

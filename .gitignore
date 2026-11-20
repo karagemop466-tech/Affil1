@@ -4,3 +4,6 @@ __pycache__/
 node_modules/
 
 dist/
+
+# staged copy produced by tools/stage.py in CI
+_site/
