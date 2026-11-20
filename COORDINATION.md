@@ -218,3 +218,5 @@ The initial shallow checkout made the ancestor appear unrelated and caused a reb
 | Integrate the maintained publication: storefront art direction, evidence-gated next actions and editorial research, build and Pages release | in progress | arena/daf8045f-affil1 | tools/page_home.py, tools/layout.py, tools/page_suggestions.py, tools/check.py, assets/css/storefront.css, assets/img/storefront*, generated maintained HTML, COORDINATION.md |
 
 Earlier #27 integration merged. Open #29 targets legacy tables, not these publication templates. No legacy table edits planned.
+
+Additional unclaimed scope: `tools/stage.py` (package stylesheet), `assets/js/analytics.js`, `analytics/cc_collector.py`, `analytics/test_cc_collector.py` (maintained-edition aggregate schema), and `tools/page_desk.py` / `tools/page_review.py` for the release status. No changes to other sessions' collectors.
