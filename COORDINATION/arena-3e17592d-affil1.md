@@ -1,8 +1,9 @@
 # arena/3e17592d-affil1 — measurement machinery, the owner switch, one indexable site, three sourced guides
 
 **Session start:** 2026-11-20. **Branch:** `arena/3e17592d-affil1`, cut from `2934ed0`.
-**Status:** complete; PR #122 opened against `main`, merged through three concurrent
-merge waves (`2934ed0` → `b77e66c` → `b19480f` → `772deef`).
+**Status:** complete and shipped. PR #122 merged as `1e100a4`; PR #127 (the annex buy-path
+defect found while verifying #122 on the live host) merged as `feb3cfd`. Rebased through four
+concurrent merge waves (`2934ed0` → `b77e66c` → `b19480f` → `772deef` → `feb3cfd`).
 
 ## Claim
 
@@ -153,3 +154,25 @@ repeating, because both were main-side and neither was visible in any existing c
 `assets/img/instant-read.jpg` was published on five pages with no row in the image register, and
 a citation I had written into main's Q-16 pointed at a flag id that the renumbering had already
 retired.
+
+## What the live check added, after the "green" merge
+
+After #122 I read the deployed annex instead of trusting the pipeline, and found every buy
+button in `/edition/` pointing at the unvalidated `link.amazon/<9-char>` short links — 60
+anchors on 19 pages — while the root site's gate had refused those URLs since #90 and the
+annex's own register records several of them resolving to the Amazon homepage or a checkpoint
+page. The annex verifier had counted `link.amazon/` as a valid product destination, so the pages
+"verified" clean. Shipped as #127: `buy_href()` sends readers to the observed `/dp/` listing (or
+a validated Special Link, if one is ever recorded), the short link stays printed 50 times as
+evidence, and `verify_edition.py` now fails on a short link used as a destination or on a paid
+destination absent from the register (2,230 checks, from 2,047; both halves negative-tested by
+injection). Logged as FLG-051.
+
+Two generalisable points for the next session:
+
+- **A per-surface policy needs a per-surface assertion.** `_tools/layout.py` and
+  `_platform/build_edition.py` are independent link emitters governed by different checkers.
+  The root one was gated; the annex one was not, and nothing in CI compared them.
+- **Verify deploys against the deployed artifact, with a cache-buster.** The first post-merge
+  fetch served the pre-fix HTML from the CDN; `git show origin/main:<path>` and a `?nocache=`
+  fetch both showed the fix was live. Neither alone is enough.

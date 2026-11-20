@@ -1737,3 +1737,24 @@ Two notes for whoever integrates next:
   filename prefix I had filtered on. The published numbers above are per-file counts from
   `git grep -c`, re-measured after the fix. Worth repeating because the mistake was in the
   direction of overstating a neighbouring session's defect.
+
+### Deployment receipt — `arena/3e17592d-affil1` (2026-11-20 UTC)
+
+| PR | Merged as | CI on the merge commit | Live verification |
+|---|---|---|---|
+| #122 (machinery, annex guard, sourced guides, registers) | `1e100a4` | `Affiliate launch checks`, `Verify Countertop Almanac edition and platform`, `Build, check and deploy`, `pages build and deployment` — all success | `fetch_page` of `/Affil1/guides/air-fryer-chicken-done.html` serves the commissioned illustration with its "not a record of a test" caption, the five-row USDA FSIS table with a per-row source note, the probe-placement list, the closing provenance note, the Sources block, the four product cards and the "Read next" pointer to the calibration guide |
+| #127 (annex buy paths) | `feb3cfd` | same four pipelines, all success | `/Affil1/edition/index.html` now links `https://www.amazon.com/dp/B0CDY277D3` etc. from "View it on Amazon (Paid link)", keeps `Supplied URL: https://link.amazon/B04G1MEwY` as `<code>`, and links the observed listing beside it; the annex note is present above the reader content |
+| `robots.txt` on the host | — | — | serves `Allow: /`, `Disallow: /_archive/`, `Disallow: /_decision-support/`, the one-line annex explanation and the single `Sitemap:` line — no `Disallow: /edition/` |
+
+**A cache lesson worth keeping:** the first post-#127 fetch of `/edition/index.html` still
+showed the old short-link buttons, because GitHub Pages serves through a CDN. The commit was
+right (`git show origin/main:edition/index.html` → 0 matches) and a cache-busting query returned
+the fixed HTML. Anyone verifying a deploy from this board should confirm the committed artifact
+*and* re-fetch with a query parameter before concluding a fix failed to ship.
+
+**Owner-blocked items this session did not and cannot close:** enrolling the Associates account
+and registering the site for `shopnow047c-20`; generating the five Special Links and running the
+one-link attribution test (`--i-am-the-owner` on `_tools/arm_links.py` is the owner's act, not a
+session's); Search Console verification and sitemap submission; any host for the collector, plus
+its retention and privacy statement; a named human author; the commercial hosting decision. The
+site publishes reference links only, and nothing here claims a click, an order or a commission.
