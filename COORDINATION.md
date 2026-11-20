@@ -284,6 +284,12 @@ Additive SG-32 public scope: `operations/launch-readiness.html`, separate from t
 
 Post-merge handoff: #23 and #26 are merged. SG-32 claims the maintained generator's launch-register link, paid CTA gate, stale root review copy, and one seasonal capacity guide through its generated feed/sitemap. This does not rewrite the historical `crisp/` or legacy editions; #24 still owns `guides.html`. Rebase onto #23/#26 and the #23 delivery note caused an append-only board conflict; main's notes were retained and this section reattached.
 
+### SG-32 delivery — S-02502b50
+
+- [PR #38](https://github.com/karagemop466-tech/Affil1/pull/38) merged into `main` at 05:43:39 UTC on 2026-11-20, merge commit `32bad415bb5291b7af6ad6e76d58bc699382b663`. Build and launch checks both passed before merge.
+- [GitHub Pages deployment 44682938832](https://github.com/karagemop466-tech/Affil1/actions/runs/44682938832) completed successfully for the merge. Direct post-deploy fetches confirmed the [launch readiness desk](https://karagemop466-tech.github.io/Affil1/operations/launch-readiness.html) and [holiday capacity guide](https://karagemop466-tech.github.io/Affil1/guides/holiday-side-dish-capacity.html).
+- Final checks covered 24 maintained pages and 74 served HTML files, with no broken relative references. During rebase, kept #32’s canonical five-event names and browser client, aligned the optional self-hostable preview/runtime to its `/api/e` protocol, and restricted outbound events to approved paid CTAs. The competing delivery log that landed immediately before the merge caused a `COORDINATION.md` append conflict; both records were preserved.
+
 ### SG-32 verification — S-02502b50
 
 - **Done:** maintained root guide, sitemap/RSS integration, footer launch desk, five-row intent/observation record, paid-CTA build gate, self-hostable same-origin aggregate counters and private normalized Associates-report importer. Preview/test data are not campaign data. **Needs review:** production analytics hosting/privacy, Associates enrollment and tracking, Search Console, and reader email; the public ledger stays empty. AI draft prompt and review workflow are documented; no unattended AI or campaign optimization is claimed.
