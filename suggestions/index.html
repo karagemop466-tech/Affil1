@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suggestions and decisions | Crisp &amp; Counter</title>
-<meta name="description" content="15 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta name="description" content="18 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
 <meta property="og:title" content="Suggestions and decisions | Crisp &amp; Counter">
-<meta property="og:description" content="15 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta property="og:description" content="18 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-counter-w1280.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Suggestions</p>
   <h1>Choose a direction,<br>then choose the rows</h1>
-  <p class="dek">3 coherent paths and 15 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
+  <p class="dek">3 coherent paths and 18 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
   <p class="page-meta">Decisions are stored in your browser only &middot; nothing transmitted &middot; no account</p>
 </div></header>
 <section class="section "><div class="wrap">
@@ -59,7 +59,7 @@
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
-    <p class="decide-count" data-count>0 of 15 decided</p>
+    <p class="decide-count" data-count>0 of 18 decided</p>
   </div>
 </div></div></section>
 <section class="section section-tint"><div class="wrap">
@@ -402,6 +402,69 @@
       <div><dt>Risk</dt><dd>None from complying. The risk is entirely in ignoring it, and it falls on the account rather than on a page.</dd></div>
       <div><dt>Depends on</dt><dd>nothing</dd></div>
       <div><dt>Recommendation</dt><dd class="rec">Adopt as policy and leave it on this page as a recorded refusal</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-22">
+  <div class="scard-head">
+    <span class="scard-id">S-22</span>
+    <h3>Never publish a supplied short link as a buy destination — link the /dp/ listing instead</h3>
+    <span class="scard-effort">zero — enforce what the build already does</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>None. The cost is that the supplied links stay in the record as evidence rather than as revenue paths, which is what FLG-028 and FLG-003 already say they are.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Adopt as policy. _tools/check.py already fails any buy destination that is not an approved Special Link or a plain /dp/ listing.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-23">
+  <div class="scard-head">
+    <span class="scard-id">S-23</span>
+    <h3>Give each of the five products a five-minute check the reader can actually do in the aisle</h3>
+    <span class="scard-effort">an evening across five pages</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>The product pages explain trade-offs well but stop at description. The one thing this site can offer that a listing page cannot is a short, concrete test the buyer performs themselves — measure the counter, count the parts to wash, check the door swing, confirm the probe reads room temperature. It costs nothing, needs no testing, and directly answers the brief&#x27;s ask for pages that help a real person decide.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low, provided nothing is written as a claim about how the product performed. A check the reader runs is not a test result the site reports.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Do this before commissioning any new guide — it improves pages that already have traffic potential</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-24">
+  <div class="scard-head">
+    <span class="scard-id">S-24</span>
+    <h3>Decide what edition/ is for: keep it as a labelled archive, or retire it to _archive/</h3>
+    <span class="scard-effort">an afternoon, once the owner decides</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>edition/ is a complete second publication of 27 pages sitting at a public URL. As of this pass it no longer asks to be indexed, and the build fails if it ever does again, but it is still a second set of product pages describing the same five products with different wording. Two descriptions of one product is a maintenance cost and a source of drift.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Retiring it loses the reviewable comparison unless it moves to _archive/ with the rest of the superseded work. Keeping it means someone has to keep both registers honest.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-01, Q-06</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Keep for now — it is the only place the per-page verification dossiers live — but name it as an archive on the page itself</dd></div>
     </dl>
   </div>
   <div class="scard-foot">
