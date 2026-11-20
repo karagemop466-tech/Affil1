@@ -331,3 +331,14 @@ Narrowed after #27, #30, #31 and #32 merged during this turn: own only the Speci
 - Verified the maintained build, 24 generated pages (0 errors/warnings), 74 served pages’ relative references (0 broken), staged artifact, the launch-readiness test and the merged analytics integration test. Remaining **needs review**: FLG-002/003 private link confirmation; FLG-016/017 conflicting redirects and legacy releases mixed into root-based Pages; real collector hosting, consent/retention, Search Console and reader capture. The site is not collecting production analytics or conversions; ledger remains empty.
 
 - Delivery: [PR #42](https://github.com/karagemop466-tech/Affil1/pull/42) merged into `main` as `4059ac2242eae90df17a94a43fad0d2312bd91fe`. PR build and launch checks passed. [GitHub Pages deployment 44683077831](https://github.com/karagemop466-tech/Affil1/actions/runs/44683077831) succeeded, and the Pages API reported `built` for that same merge SHA. [Live editorial site](https://karagemop466-tech.github.io/Affil1/).
+## Buyer decision tools and measurement readiness — arena/487a66ea-affil1
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Build independent fit planner and testable first-party aggregate measurement; integrate after checking prior owner’s merge | in progress | arena/487a66ea-affil1 | `fit/`, `assets/js/fit.js`, `tools/fit_checks.py`, `tools/integrate_publication.py`, `server/first-party/`; final integration requests for generated navigation, guides, register, metadata and CI below |
+
+The previous integration’s site changes were merged in #27; its open #28 is deployment bookkeeping. No sibling branch will be modified or merged from this session.
+
+Rebase against #28 and #30 touched the final board section; retained both upstream records and this claim. #32 independently claimed the maintained analytics files and collector; this session will leave them to that owner and focus on the fit planner, storefront copy, source-backed guide integration, and design decisions.
+
+The next rebase pulled in #31, #32 and #35. Retained each board entry; #32 owns the now-merged analytics implementation. Integration scope is narrowed to `tools/page_fit.py`, `tools/buyer_guides.py`, `tools/page_guides.py`, `tools/layout.py`, `tools/stage.py`, `tools/build.py` (page manifest/feed integration only), `tools/page_home.py`, `assets/css/fit.css`, `assets/js/fit.js`, and their regenerated output. #24’s old build/home claim is stale against #26/#32; the planned guide/sitemap work does not copy its changes or touch its legacy files. #36's legacy pages, operator summary and shared records remain untouched.
