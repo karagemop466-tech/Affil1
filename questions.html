@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Open questions, information &amp; answers — Affil1</title>
+  <title>Open questions, information &amp; answers — Good Measure — Kitchen Notes</title>
   <meta name="description" content="Clear list of questions, information, and answers that must be addressed before any decision. Plus suggestions to discover missing information. Amazon Associate tracking ID shopnow047c-20." />
   <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/questions.html" />
-  <link rel="alternate" type="application/rss+xml" title="Affil1 feed" href="feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Good Measure feed" href="feed.xml" />
   <link rel="sitemap" type="application/xml" href="sitemap.xml" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -21,14 +21,14 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
-        <div class="mark">A1</div>
-        <div class="wordmark"><div>Affil1</div><div class="tag">Buying guides &middot; Amazon Associate</div></div>
+        <div class="mark">gm</div>
+        <div class="wordmark"><div>Good Measure</div><div class="tag">Buying guides &middot; Amazon Associate</div></div>
       </div>
       <nav class="primary-nav" aria-label="Main navigation">
         <a href="index.html">Front page</a>
         <a href="products.html">Products</a>
         <a href="categories.html">Categories</a>
-        <a href="guides.html">Guides</a>
+        <a href="guides/">Guides</a>
         <a href="suggestions.html">Suggestions</a>
         <a href="questions.html" class="active">Open questions</a>
       </nav>
@@ -103,7 +103,7 @@
                 <td>Has each link been tested in the enrolled Associates workflow?</td>
                 <td>No — not yet tested</td>
                 <td><span class="badge badge-unverified">Not done</span></td>
-                <td>Affil1 record</td>
+                <td>Good Measure record</td>
               </tr>
               <tr>
                 <td>Q7</td>
@@ -117,21 +117,91 @@
                 <td>Are clicks and conversions being measured (the five defined events)?</td>
                 <td>Endpoint defined (self-hosted analytics), page_view/outbound_click instrumented; server-side persistence not yet wired</td>
                 <td><span class="badge">Partially implemented</span></td>
-                <td>Affil1 (analytics.js)</td>
+                <td>Good Measure (analytics.js)</td>
               </tr>
               <tr>
                 <td>Q9</td>
                 <td>Is the disclosure above the fold on every page and repeated in the footer?</td>
                 <td>Yes — disclosure strip included on every page + footer</td>
                 <td><span class="badge badge-ok">Done</span></td>
-                <td>Affil1 (this site)</td>
+                <td>Good Measure (this site)</td>
               </tr>
               <tr>
                 <td>Q10</td>
                 <td>Are all outbound product links marked sponsored?</td>
                 <td>Yes — rel="sponsored nofollow" + visual sponsored tag</td>
                 <td><span class="badge badge-ok">Done</span></td>
-                <td>Affil1 (this site)</td>
+                <td>Good Measure (this site)</td>
+              </tr>
+              <tr>
+                <td>Q11</td>
+                <td>Who is the primary reader (one person, not &ldquo;everyone&rdquo;)?</td>
+                <td class="unverified-note">Missing — no audience statement supplied; design and copy are targets without it</td>
+                <td><span class="badge badge-unverified">Missing</span></td>
+                <td>Suggested discovery: 3 reader interviews or existing customer list segments; write a one-paragraph reader definition</td>
+              </tr>
+              <tr>
+                <td>Q12</td>
+                <td>What is the brand system (name, mark, palette, type, tone)?</td>
+                <td>Partly answered — GOOD MEASURE / KITCHEN NOTES, sage palette and type system in styles.css (2026-11-20); favicon.svg added</td>
+                <td><span class="badge badge-ok">Partial</span></td>
+                <td>styles.css (this repo); assets/favicon.svg; remaining: owner sign-off on palette/voice and social avatar</td>
+              </tr>
+              <tr>
+                <td>Q13</td>
+                <td>Which imagery may be used (original vs manufacturer vs stock)?</td>
+                <td class="unverified-note">Missing — no image rights confirmed. Original generated art used for hero/seasonal images; no manufacturer images embedded</td>
+                <td><span class="badge badge-unverified">Missing</span></td>
+                <td>Suggested discovery: confirm manufacturer media-kit terms; default to original art or rights-cleared stock; record license per asset</td>
+              </tr>
+              <tr>
+                <td>Q14</td>
+                <td>Which topic should be published next, and how is it chosen?</td>
+                <td class="unverified-note">Missing — working titles are hypotheses; no search-volume or query data exists yet</td>
+                <td><span class="badge badge-unverified">Blocked</span></td>
+                <td>Suggested discovery: verify Search Console property, export 4–6 weeks of queries, pick the next guide from measured demand (SG-26 cadence gate)</td>
+              </tr>
+              <tr>
+                <td>Q15</td>
+                <td>Who signs the guides (authorship and review attribution)?</td>
+                <td class="unverified-note">Missing — no author/reviewer names, bios or credentials supplied</td>
+                <td><span class="badge badge-unverified">Missing</span></td>
+                <td>Suggested discovery: owner decision — real named author with a one-line bio; or an honest newsroom byline without invented credentials</td>
+              </tr>
+              <tr>
+                <td>Q16</td>
+                <td>What is the publishing cadence, and who owns it?</td>
+                <td class="unverified-note">Missing — the grid exists but no committed schedule or owner</td>
+                <td><span class="badge badge-unverified">Missing</span></td>
+                <td>Suggested discovery: propose 1 question-led guide per fortnight to start; owner approves calendar; each guide ships via the publishing workflow gate</td>
+              </tr>
+              <tr>
+                <td>Q17</td>
+                <td>Where does the analytics endpoint run, and what is the retention/consent posture?</td>
+                <td class="unverified-note">Missing — endpoint designed (server/collect.js) but never deployed; no host, no retention policy</td>
+                <td><span class="badge badge-unverified">Blocked</span></td>
+                <td>See FLG-009 and design prompt pack; options: self-host on owner infrastructure or a privacy-first hosted collector; document retention ≤ 90 days</td>
+              </tr>
+              <tr>
+                <td>Q18</td>
+                <td>Who reviews the suggestions queue, and with what SLA?</td>
+                <td class="unverified-note">Missing — queue exists; no reviewer assigned; nothing is implemented without a decision</td>
+                <td><span class="badge badge-unverified">Missing</span></td>
+                <td>Suggested discovery: owner names reviewer + weekly 30-min triage; decisions logged on this page and in COORDINATION.md</td>
+              </tr>
+              <tr>
+                <td>Q19</td>
+                <td>Which email capture provider, if any — and with what privacy review?</td>
+                <td class="unverified-note">Missing — no provider chosen; no consent mechanism; no privacy notice for email data</td>
+                <td><span class="badge badge-unverified">Blocked</span></td>
+                <td>See FLG-012; requires owner choice of provider + privacy notice update + consent banner review against FTC guidance and GDPR (NL audience)</td>
+              </tr>
+              <tr>
+                <td>Q20</td>
+                <td>Is the CHEF iQ smart meat thermometer (IR-5) intended for this air-fryer site at all?</td>
+                <td class="unverified-note">Missing — pass-2 observed a wireless meat thermometer; category naming may not cover it; submitter intent unknown</td>
+                <td><span class="badge badge-unverified">Missing</span></td>
+                <td>Suggested discovery: ask the owner whether to (a) keep it as a cross-category pick, (b) re-scope the site to countertop cooking appliances, or (c) drop it from the register</td>
               </tr>
             </tbody>
           </table>
@@ -152,7 +222,7 @@
             <h3 style="font-size:15px;margin-bottom:8px;">Related pages</h3>
             <ul class="small" style="list-style:none;display:flex;flex-direction:column;gap:6px;">
               <li><a href="products.html">Product-intent confirmation record</a></li>
-              <li><a href="flagged-for-review.html">Flagged for Review</a></li>
+              <li><a href="reviews/flagged.html">Flagged for Review</a></li>
               <li><a href="suggestions.html">Suggestions (review before implement)</a></li>
             </ul>
           </div>
@@ -172,8 +242,8 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="mark">A1</div>
-        <div class="name">Affil1</div>
+        <div class="mark">gm</div>
+        <div class="name">Good Measure</div>
         <div class="desc">Reader-first affiliate publishing. Clear disclosure, sponsored links, and buying guides built around real buyer questions.</div>
       </div>
       <nav class="footer-nav">
@@ -181,18 +251,18 @@
         <ul>
           <li><a href="index.html">Front page</a></li>
           <li><a href="products.html">Product confirmation record</a></li>
-          <li><a href="guides.html">Publishing guides</a></li>
+          <li><a href="guides/">Publishing guides</a></li>
           <li><a href="suggestions.html">Suggestions (review before implement)</a></li>
           <li><a href="executive-summary.html">Executive summary</a></li>
           <li><a href="disclosure.html">Affiliate disclosure</a></li>
-          <li><a href="flagged-for-review.html">Flagged for Review</a></li>
+          <li><a href="reviews/flagged.html">Flagged for Review</a></li>
         </ul>
       </nav>
     </div>
     <div class="footer-disclosure" style="grid-column: 1 / -1;">
       <b>Affiliate disclosure:</b> As an Amazon Associate, we earn from qualifying purchases. Links on this site are affiliate links marked <strong>sponsored</strong>. Placement and endorsement context are reviewed against the Amazon Associates Program Operating Agreement and FTC guidance.
     </div>
-    <div class="copyright">&#169; 2026 Affil1 &middot; Tracking ID shopnow047c-20 &middot; Built to be read like a publication, not an audit.</div>
+    <div class="copyright">&#169; 2026 Good Measure &middot; Tracking ID shopnow047c-20 &middot; Built to be read like a publication, not an audit.</div>
   </footer>
 
   <script src="js/analytics.js"></script>

@@ -6,9 +6,9 @@
   --line: #e2e8f0;
   --bg: #ffffff;
   --bg-soft: #f8fafc;
-  --accent: #d97706;
-  --accent-soft: #fef3c7;
-  --accent-hover: #b45309;
+  --accent: #3f6246;
+  --accent-soft: #eff6f1;
+  --accent-hover: #2f4a35;
   --green: #15803d;
   --red: #b91c1c;
   --radius: 10px;
@@ -60,15 +60,15 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 
 /* ---------- Disclosure strip (above the fold, every page) ---------- */
 .disclosure-strip {
-  background: var(--accent-soft);
-  border-bottom: 1px solid #fcd34d;
-  color: #7c3a0d;
+  background: #fef3c7;
+  border-bottom: 1px solid #ecd9a0;
+  color: #78350f;
   font-size: 0.82rem;
   padding: 7px 0;
 }
 .disclosure-strip .container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .disclosure-strip strong { font-size: 0.88rem; }
-.disclosure-strip a { color: #b45309; text-decoration: underline; }
+.disclosure-strip a { color: #78350f; text-decoration: underline; }
 
 /* ---------- Buttons ---------- */
 .btn {

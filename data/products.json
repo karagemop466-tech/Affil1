@@ -2,7 +2,11 @@
   "meta": {
     "title": "Product-intent confirmation record",
     "trackingId": "shopnow047c-20",
-    "note": "Per the verification rule, every value that cannot be confirmed from an official source is left blank and flagged unverified. Nothing is inferred. The sandbox cannot reach amazon.com or link.amazon.com, so all five submitted short links are unverified as of the build date. The exact compliance status of the supplied short links is unresolved (see FLG-003); they are not declared invalid."
+    "note": "HISTORICAL BLANK REGISTER retained for provenance. This file claims the sandbox could not reach amazon.com; two later direct-fetch sessions (2026-11-20) did reach Amazon and recorded observations in data/confirmations.json (pass 1) and data/verification-audit.json (pass 2). Those records stand on their own; the two passes are never merged. Compliance status of the supplied short links remains unresolved (FLG-003).",
+    "superseded_by": [
+      "data/confirmations.json",
+      "data/verification-audit.json"
+    ]
   },
   "products": [
     {
@@ -75,5 +79,6 @@
       "sponsored": true,
       "rel": "sponsored nofollow"
     }
-  ]
+  ],
+  "_status": "HISTORICAL — superseded 2026-11-20 by data/confirmations.json (pass 1) and data/verification-audit.json (pass 2). Never edit this file to merge observations by other sessions; record new observations in the audit format instead."
 }

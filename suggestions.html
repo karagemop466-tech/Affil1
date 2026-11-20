@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decision suggestions — review before implementing | Affil1</title>
+<title>Decision suggestions — review before implementing | Good Measure — Kitchen Notes</title>
 <meta name="description" content="Suggestions for improving the site and affiliate program. Review each suggestion and choose the best path before implementing any changes. Nothing here is implemented until reviewed.">
 <link rel="stylesheet" href="assets/css/main.css">
-<link rel="alternate" type="application/rss+xml" title="Affil1" href="rss.xml">
+<link rel="alternate" type="application/rss+xml" title="Good Measure" href="rss.xml">
 </head>
 <body>
 <div id="site-header"></div>
@@ -61,6 +61,83 @@
       <p><strong>Why:</strong> Publication polish path (authorship, navigation, brand, imagery, seasons, clusters) builds trust.</p>
       <p><strong>Paths:</strong> (a) Commission or generate brand imagery; (b) keep CSS-only placeholders; (c) use only manufacturer images with confirmed rights.</p>
       <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-005'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
+    </article>
+
+
+    <div class="section-head" style="margin-top:22px;">
+      <h2>Proposed 2026-11-20 — design &amp; marketing track</h2>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;max-width:70ch;">Added by session arena/4772a1e3-affil1. Each is decision-gated: nothing below is implemented because it appears here. The one exception, already shipped under the owner's explicit 2026-11-20 brief, is noted inline. The full reasoning for S-006…S-013, the design tokens, the page inventory and a copy-paste redesign brief live in the <a href="design-prompt-pack.html">design prompt pack</a>.</p>
+
+    <article class="sugg">
+      <div class="decide">S-006 &middot; Proposed &middot; Owner: editor-in-chief</div>
+      <p><strong>Suggestion:</strong> Rebuild the front page as a products-first publication (lead with the picks grid, seasonal reading band, ledger, and the register table collapsed below the fold).</p>
+      <p><strong>Status:</strong> <em>Shipped 2026-11-20</em> under the owner's explicit brief for this session (front page leads with products; registers reachable from footer/nav). Listed here so the decision and its rationale are on record.</p>
+      <p><strong>Why:</strong> A page that opens with verification tables repels buyers; a page that opens with labelled products keeps them — verification stays one click away.</p>
+      <p><strong>Review note:</strong> Confirm the residual register table still earns its place; move it fully to /dashboard.html if scroll depth says so.</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-007 &middot; Proposed &middot; Owner: brand</div>
+      <p><strong>Suggestion:</strong> Adopt one brand system storefront-wide: GOOD MEASURE / KITCHEN NOTES, sage palette (styles.css tokens), the favicon mark, and one chrome template for every page.</p>
+      <p><strong>Why:</strong> Two brand voices (Good Measure vs Good Measure) and three header implementations made the site read as generated, not published.</p>
+      <p><strong>Status:</strong> <em>Partially shipped 2026-11-20</em> — front page rebuilt on styles.css, favicon added, shared shell (common.js) unified to the same masthead. Remaining: retire the last Amber/Affil1 skin on legacy dashboard pages, and owner sign-off on palette.</p>
+      <p><strong>Paths:</strong> (a) sign off sage system everywhere; (b) adopt a different palette but keep one system; (c) revert storefront to cf. Crisp &amp; Counter only.</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-008 &middot; Proposed &middot; Owner: editorial</div>
+      <p><strong>Suggestion:</strong> Publish on a fixed cadence — one question-led guide every two weeks — with an editorial calendar keyed to seasons (holiday gifting, spring cleaning, summer grilling) instead of keyword lists.</p>
+      <p><strong>Why:</strong> Cadence is what makes a site feel maintained; seasonal questions are what readers actually type. Topics stay hypotheses until Search Console data exists.</p>
+      <p><strong>What it needs:</strong> owner-approved calendar; the publishing-workflow gate per guide; each new guide added to sitemap + RSS; measurement live to pick topics from queries.</p>
+      <p><strong>Paths:</strong> (a) adopt 2-week cadence now; (b) monthly cadence until analytics verifies demand; (c) on-hold until Search Console access exists.</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-009 &middot; Proposed &middot; Owner: editorial</div>
+      <p><strong>Suggestion:</strong> Commission or generate original imagery (hero, per-category art, seasonal scenes) and forbid scraped manufacturer images.</p>
+      <p><strong>Why:</strong> Original art is what makes the site read as published; scraped images are a rights and trust problem; manufacturer media kits usually permit editorial use only with attribution and no alteration.</p>
+      <p><strong>Status:</strong> <em>Partially shipped</em> — original generated hero (assets/img/hero-kitchen-notes.jpg) and holiday-seasonal art (assets/img/holiday-gift-checklist.jpg) are live; category grid still uses monogram swatches.</p>
+      <p><strong>Paths:</strong> (a) continue original art for all imagery; (b) manufacturer images under media-kit terms, with credit lines; (c) rights-cleared stock only.</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-010 &middot; Proposed &middot; Owner: growth</div>
+      <p><strong>Suggestion:</strong> Turn on Search Console and a privacy-preserving analytics host; choose the next three guides from measured queries, not instinct.</p>
+      <p><strong>Why:</strong> &ldquo;Organic traffic&rdquo; is the whole point of the project; without query data the editorial plan is unfalsifiable.</p>
+      <p><strong>Blocker:</strong> account access (Search Console) and a first-party host (FLG-009). Both require the owner; no agent can create these accounts.</p>
+      <p><strong>Paths:</strong> (a) owner sets up GSC + picks analytics host this week; (b) run 4–6 weeks of baseline before choosing topics; (c) keep hypotheses-only publishing until then.</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-011 &middot; Proposed &middot; Owner: compliance</div>
+      <p><strong>Suggestion:</strong> Keep the compliance gate in the publishing workflow as a hard block: disclosure visible, sponsored rels, endorsement-context review, source provenance, before any page merges.</p>
+      <p><strong>Why:</strong> Amazon&rsquo;s Operating Agreement (Oct 15, 2025) and FTC Endorsement Guides both put the duty on the publisher; one missed page can cost Associates standing.</p>
+      <p><strong>Status:</strong> Gate documented in PUBLISHING_WORKFLOW.md; not yet enforced as a CI check. Optional hard version: a lint step failing on missing disclosure strip or missing sponsored rel on outbound links.</p>
+      <p><strong>Paths:</strong> (a) document-only gate (current); (b) add CI lint for disclosure + sponsored rel; (c) legal review of every page (expensive, unnecessary at this scale).</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-012 &middot; Proposed &middot; Owner: product</div>
+      <p><strong>Suggestion:</strong> Decide the fate of the CHEF iQ smart meat thermometer (IR-5): keep as a cross-category &ldquo;countertop cooking&rdquo; pick, re-scope the site, or remove it from the register.</p>
+      <p><strong>Why:</strong> The submitted set is not all air fryers; a one-category storefront with an off-category pick confuses readers and search engines alike.</p>
+      <p><strong>What it needs:</strong> owner&rsquo;s intent; if kept, add a second category page &ldquo;Smart kitchen tools&rdquo; and retarget internal links; if dropped, remove two outbound links and note the decision in the register.</p>
+      <p><strong>Paths:</strong> (a) keep + new category; (b) re-scope site name/subtitle to countertop cooking; (c) remove from register; (d) defer until the thermometer listing is re-observed.</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-013 &middot; Proposed &middot; Owner: growth</div>
+      <p><strong>Suggestion:</strong> Add reader capture — but only after a provider and privacy review exist (FLG-012/Q19). Until then, the RSS feed is the capture mechanism.</p>
+      <p><strong>Why:</strong> An email list is the one channel Amazon cannot throttle; but an unconsented capture violates both privacy law and host terms.</p>
+      <p><strong>Paths:</strong> (a) provider + privacy review now; (b) RSS-only until 100 outbound clicks/month are measured; (c) decline email entirely.</p>
+    </article>
+
+    <article class="sugg">
+      <div class="decide">S-014 &middot; Proposed &middot; Owner: growth</div>
+      <p><strong>Suggestion:</strong> Publish the design prompt pack as the input to the next redesign, and redesign deliberately from it rather than iterating page-by-page.</p>
+      <p><strong>Why:</strong> Page-by-page restyles are how the three-chrome sprawl happened; one brief, one tokens file, one review, then apply.</p>
+      <p><strong>Status:</strong> <em>Shipped 2026-11-20</em> as design-prompt-pack.html under this session&rsquo;s brief; the redesign itself remains gated on Q11 (audience), Q12 (brand sign-off) and Q13 (imagery rights).</p>
+      <p><strong>Paths:</strong> (a) owner answers Q11–Q13, then full reskin in one PR; (b) tokens-only refresh, no structural changes; (c) hold indefinitely.</p>
     </article>
 
     <div class="section-head" style="margin-top:40px;">

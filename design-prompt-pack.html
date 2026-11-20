@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design prompt pack — feeding the next redesign | Good Measure — Kitchen Notes</title>
+<meta name="description" content="Decision-gated design suggestions for the Good Measure Kitchen Notes storefront: brand system, design tokens, page inventory, editorial hypotheses, and a copy-paste redesign brief. Nothing on this page ships until the open questions are answered and a path is chosen.">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/design-prompt-pack.html">
+<link rel="alternate" type="application/rss+xml" title="Good Measure — Kitchen Notes" href="rss.xml">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="disclosure">As an Amazon Associate I earn from qualifying purchases. Links marked “sponsored” are affiliate links. <a href="disclosure.html">Read the full disclosure &#8594;</a></div>
+<header class="masthead wrap"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><nav><a href="index.html#guides">Guides</a><a href="index.html#products">Picks</a><a href="questions.html">Open questions</a><a href="suggestions.html">Review</a><a href="index.html">Home</a></nav></header>
+
+<main class="wrap section">
+<p class="eyebrow">DECISION-GATED · UPDATED 2026-11-20</p>
+<h1>The design prompt pack.</h1>
+<p class="lead">Everything needed to brief a redesign of this site — brand, layout, tokens, page inventory, editorial direction and the guardrails — in one place, so the next design pass is a decision, not a drift. Nothing on this page is implemented because it appears here; it is input to the suggestions queue.</p>
+
+<div class="band" style="margin:1.5rem 0">
+<p style="margin:0"><strong>Read first:</strong> this pack is gated on <a href="questions.html">Q11–Q20</a> — especially Q11 (audience), Q12 (brand sign-off) and Q13 (imagery rights). Until those are answered, the prompt below is a proposal, not a spec.</p>
+</div>
+
+<h2>1 · The copy-paste redesign brief</h2>
+<p>Paste the block below into your design tool of choice (or hand it to whoever reskins the site). It is deliberately self-contained and carries the compliance constraints with it.</p>
+<pre class="table-wrap" style="white-space:pre-wrap;padding:1.25rem;font-size:0.82rem;line-height:1.55;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:auto">You are the art director and front-end engineer for “Good Measure — Kitchen Notes”, an Amazon Associates publication about air fryers and multi-function kitchen appliances. It must read like a small, fiercely edited food-and-kitchen magazine — never like a generated affiliate farm.
+
+BRAND
+- Name: Good Measure — Kitchen Notes. Mark: lowercase “gm” in a sage rounded square. Tagline: “The Kitchen Edit”.
+- Palette (tokens already in styles.css): ink #111827, paper #ffffff, base #fafaf6, line #e7e5e4, accent deep sage #3f6246 (hover #2f4a35), muted #4b5563, warn strip #fef3c7 on #78350f ink. Radius 12px. Max width 1100px. One serif/sans pairing, system fonts only — no external font requests.
+- Voice: dry, generous, specific. Question-shaped headlines (“Basket or oven-style: what should you compare?”). No superlatives, no “best”, no “game-changer”, no fake urgency, no exclamation marks in headlines.
+
+AUDIENCE (fill in Q11 before shipping)
+- One reader. Someone cooking three to five nights a week in a small-to-medium Dutch kitchen (NL, with EU/UK/NL English readers), who wants fewer appliances used harder — and who distrusts round-ups.
+
+INFORMATION ARCHITECTURE
+- / (front page): disclosure strip; masthead; hero with original art + one-line promise; “This week’s picks” product grid (products-first, never verification-first); seasonal reading band; open questions strip; suggestions pointer; empty campaign ledger; “How we work” strip; footer with full sitemap + disclosure repeat.
+- /guides/ (index) + /guides/&lt;slug&gt; (one question per guide, 400–700 words body + checklist).
+- /products.html (register table), /dashboard.html (findings + ledger), /categories/air-fryers.html, /suggestions.html (decision queue), /questions.html (open-question register), /reviews/flagged.html + /reviews/verification-audit.html (transparency desk), /design-prompt-pack.html (this page), /disclosure.html, /privacy.html.
+- One canonical URL per topic; duplicates redirect; sitemap.xml + rss.xml + feed.xml updated on every publish.
+
+PRODUCT SURFACES (hard rules)
+- No prices, ratings, review counts, stock or delivery promises — Amazon serves those only via a live feed we do not have.
+- Every outbound product link: rel="sponsored nofollow noopener", opens in a new tab, and sits under an above-the-fold disclosure strip repeated in the footer.
+- Intended vs observed identifiers are never merged. “Listing observed” (single point in time) is labelled as such; conflicts show both passes, never an average.
+- No manufacturer images without confirmed media-kit rights; default to original illustration/photography.
+
+EDITORIAL RULES
+- Every product-specific factual statement must trace to (a) the seller listing title, (b) an official source, or (c) it is framed as a question for the reader. Otherwise omit it.
+- Every guide ends with “before you buy” checklist and links internally only to canonical pages.
+- Working titles carry “editorial hypothesis — not a claim about popularity, search volume or product superiority.”
+
+PERFORMANCE & ACCESSIBILITY
+- Budget: total page weight &lt; 250 KB excluding the hero image; hero &lt; 200 KB, width 1270, lazy-loaded below the fold. No third-party scripts. No cookies. Visible focus rings. prefers-reduced-motion respected. Colour contrast ≥ 4.5:1.</pre>
+
+<h2>2 · Design tokens (the system we actually ship)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Token</th><th>Value</th><th>Used for</th></tr></thead>
+<tbody>
+<tr><td><code>--ink</code></td><td>#111827</td><td>Headlines, body text</td></tr>
+<tr><td><code>--accent</code></td><td>#3f6246 (sage)</td><td>Brand mark, links, focus rings, CTAs</td></tr>
+<tr><td><code>--base</code> / <code>--paper</code></td><td>#fafaf6 / #ffffff</td><td>Page ground / cards and bands</td></tr>
+<tr><td><code>--line</code></td><td>#e7e5e4</td><td>Borders, table rules</td></tr>
+<tr><td><code>--warn</code></td><td>#fef3c7 on #78350f</td><td>Disclosure strip (above the fold, every page)</td></tr>
+<tr><td><code>--radius</code></td><td>12px</td><td>Cards, buttons, inputs</td></tr>
+<tr><td><code>--max-width</code></td><td>1100px</td><td>Content column</td></tr>
+<tr><td>Type</td><td>system-ui stack</td><td>No external font requests — zero layout shift, zero requests</td></tr>
+<tr><td>Motion</td><td>instant / reduced</td><td>No animations by default; nothing autoplays</td></tr>
+</tbody></table></div>
+
+<h2>3 · Page inventory (one canonical URL per topic)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Path</th><th>Role</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>/</td><td>Front page — products first</td><td>Rebuilt 2026-11-20; hero art, picks grid, seasonal band, ledger, how-we-work</td></tr>
+<tr><td>/guides/ + /guides/*</td><td>Question-led guides</td><td>One question per guide; 5 live; new seasonal gifting guide added 2026-11-20</td></tr>
+<tr><td>/products.html</td><td>Product-intent register</td><td>Submission → observed, never merged; blanks stay blank</td></tr>
+<tr><td>/dashboard.html</td><td>Findings + campaign ledger</td><td>Ledger empty by design; entries only from authorized first-party reports</td></tr>
+<tr><td>/categories/air-fryers.html</td><td>Category findings table</td><td>Every row linked to its source</td></tr>
+<tr><td>/suggestions.html</td><td>Decision queue (S-001…S-014)</td><td>Nothing ships unreviewed; decisions recorded here</td></tr>
+<tr><td>/questions.html</td><td>Open questions (Q1…Q20)</td><td>Missing items say “Missing”, not “TBD”</td></tr>
+<tr><td>/reviews/flagged.html</td><td>Flagged for review</td><td>Every unverified value, with source links</td></tr>
+<tr><td>/reviews/verification-audit.html</td><td>Pass-2 audit</td><td>OBS-1…OBS-5 with official source URLs</td></tr>
+<tr><td>/disclosure.html · /privacy.html</td><td>Policy</td><td>Required by the Associates Operating Agreement + FTC guidance</td></tr>
+<tr><td>/crisp/</td><td>Crisp &amp; Counter — the editorial edition</td><td>Sister section; register-first rendering of the same data</td></tr>
+</tbody></table></div>
+
+<h2>4 · Editorial hypotheses worth testing (not claims)</h2>
+<p class="small">Working titles only. Each is an editorial hypothesis awaiting measured query data — never a claim about popularity, volume or superiority. Nothing here is scheduled until the cadence gate (S-008) is decided.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>Hypothesis title</th><th>Why now</th><th>Needs</th></tr></thead>
+<tbody>
+<tr><td>H1</td><td>Air fryer for the holidays? A no-hype gifting checklist</td><td><strong>Published 2026-11-20</strong> as <a href="guides/holiday-gift-checklist.html">/guides/holiday-gift-checklist.html</a></td><td>Cadence decision; seasonal refresh Nov 2027</td></tr>
+<tr><td>H2</td><td>Dual-basket air fryers and two-zone holiday mains: what to check</td><td>Dual-basket format is the strongest observed listing; winter mains season</td><td>Listing re-observation; no performance claims without hands-on testing</td></tr>
+<tr><td>H3</td><td>Air-fryer liners and paper trays: what the manuals actually say</td><td>Accessory-safety question with no good no-hype answer online</td><td>Manufacturer manual citations only; no paraphrase without source</td></tr>
+<tr><td>H4</td><td>Small kitchen? Toaster oven vs basket air fryer, the 30-second test</td><td>Evergreen capacity/footprint cluster head</td><td>Measured queries before promotion</td></tr>
+<tr><td>H5</td><td>Dehydration mode: which jobs it really does</td><td>Multi-function presets nobody explains; matches the TurboFry/Emeril-class listings</td><td>Manufacturer manual citations; zero experience claims</td></tr>
+<tr><td>H6</td><td>Wireless meat thermometer + air fryer: who actually needs both?</td><td>Answers the IR-5 register anomaly honestly</td><td>Owner decision on category scope (S-012)</td></tr>
+</tbody></table></div>
+
+<h2>5 · Organic-traffic levers, in order of honesty-to-effort</h2>
+<ol>
+<li><strong>One canonical host + clean sitemap/feed/RSS</strong> — done and maintained; nothing can rank if engines see three duplicates of every page.</li>
+<li><strong>Question-shaped titles mapped to the cluster</strong> — basket vs oven → capacity → cleanup → multi-function → gifting; each new guide links up and sideways, never orphaned.</li>
+<li><strong>E-E-A-T signals</strong> — authorship (Q15), published/updated dates on every guide, sources block per guide, visible corrections policy (Flagged for Review page doubles as this).</li>
+<li><strong>Search Console verification + 4–6 weeks of query data</strong> (Q14) — only then do H2–H6 get scheduled; until then they are hypotheses.</li>
+<li><strong>RSS + feed auto-discovery</strong> — every page ships <code>rel=alternate</code>; the feed is the zero-cost distribution channel.</li>
+<li><strong>No backlink schemes, no AI-spun volume</strong> — both violate the same quality bar Amazon and Google enforce from opposite sides.</li>
+</ol>
+
+<h2>6 · What this pack must never produce</h2>
+<ul>
+<li>Prices, ratings, review counts, “orders today: 132” — anything Amazon does not serve live.</li>
+<li>“Best”, “#1”, “winner”, fake countdowns, invented expert quotes or credentials.</li>
+<li>Outbound links without visible sponsored marking and <code>rel="sponsored"</code>.</li>
+<li>Manufacturer imagery without documented license; stock that looks like implied endorsement.</li>
+<li>Merged intended/observed identifiers, or silence where passes disagree — show the disagreement.</li>
+</ul>
+
+<h2>7 · Decision map</h2>
+<p>Everything above feeds the queue: <a href="suggestions.html">S-006…S-014</a> (design and marketing decisions) and <a href="questions.html">Q11…Q20</a> (the information still missing). Pick paths there; implementation lands as one reviewed PR — never page-by-page drift.</p>
+<p class="back-link"><a href="index.html">&larr; Home</a> · <a href="suggestions.html">Suggestions queue</a> · <a href="questions.html">Open questions</a> · <a href="reviews/verification-audit.html">Verification audit</a></p>
+</main>
+
+<footer><div class="wrap footer-main"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><div class="footer-nav"><b>Explore</b><a href="guides/">Buying guides</a><a href="categories/air-fryers.html">Air fryers</a><a href="products.html">Product register</a><a href="dashboard.html">Dashboard &amp; ledger</a></div><div class="footer-nav"><b>Review queue</b><a href="suggestions.html">Decision suggestions</a><a href="questions.html">Open questions</a><a href="reviews/flagged.html">Flagged for review</a><a href="reviews/verification-audit.html">Verification audit</a></div><div class="footer-nav"><b>Policy</b><a href="disclosure.html">Affiliate disclosure</a><a href="privacy.html">Privacy</a><a href="sitemap.xml">Sitemap</a><a href="rss.xml">RSS feed</a></div></div><div class="wrap footer-bottom"><span><b>As an Amazon Associate I earn from qualifying purchases.</b> Associates tracking ID: shopnow047c-20.</span><span>© 2026 Good Measure — Kitchen Notes</span></div></footer>
+</body></html>

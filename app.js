@@ -11,14 +11,16 @@
     number.textContent = '0' + p.id;
 
     const title = document.createElement('h3');
-    title.textContent = 'Intended ASIN ' + p.intendedAsin;
+    title.textContent = 'Submitted code ' + p.submittedCode;
 
     const chip = document.createElement('span');
     chip.className = 'product-chip unverified';
-    chip.textContent = 'UNVERIFIED';
+    chip.textContent = (p.status === 'unresolved' ? 'UNRESOLVED' : (p.passesAgreed ? 'OBSERVED · UNCONFIRMED' : 'CONFLICT LOGGED'));
 
     const desc = document.createElement('p');
-    desc.textContent = 'Submitted Amazon link — destination and product identity not yet confirmed.';
+    desc.textContent = p.observedTarget
+      ? 'Observed listing: ' + p.observedTarget + ' (single point-in-time evidence, not an endorsement).'
+      : 'Destination not observed — Amazon bot checkpoint on both passes.';
 
     const note = document.createElement('p');
     note.className = 'quiet';

@@ -11,6 +11,16 @@ built by different sessions and merged without either discarding the other.
 Both disclose the affiliate relationship above the fold and neither publishes a
 price without an Amazon-served feed.
 
+Storefront notes (updated 2026-11-20, session arena/4772a1e3-affil1):
+- One brand voice site-wide: **Good Measure — Kitchen Notes** (shared shell, favicon,
+  sage token system). URLs and the repository name stay `Affil1`.
+- Duplicate pages were consolidated into canonical URLs via redirect stubs
+  (nothing was deleted): e.g. `flagged-for-review.html` → `reviews/flagged.html`,
+  `guides/cleanup-counterspace.html` → `guides/cleanup-counter-space.html`.
+- The new design brief for the next redesign lives at `/design-prompt-pack.html`.
+- CI (`.github/workflows/pages.yml`) now validates local references in **all** HTML
+  except `archive/`.
+
 ## Crisp & Counter (`crisp/`)
 
 Live: https://karagemop466-tech.github.io/Affil1/crisp/

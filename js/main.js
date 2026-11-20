@@ -10,7 +10,8 @@
     'Disclosure: As an Amazon Associate, we earn from qualifying purchases. ' +
     'This site contains affiliate links marked "sponsored." Learn more about our ' +
     'affiliate disclosure.';
-  const DISCLOSURE_LINK = '/disclosure.html';
+  const _depth = Math.max(0, location.pathname.split('/').filter(Boolean).length - 2);
+  const DISCLOSURE_LINK = (_depth ? '../'.repeat(_depth) : '') + 'disclosure.html';
 
   // ---------- Disclosure strip (above the fold, every page) ----------
   function ensureDisclosure() {

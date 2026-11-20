@@ -19,7 +19,12 @@
 (function () {
   'use strict';
 
-  const ENDPOINT = '/api/collect';
+  // Root-absolute '/api/collect' 404s on GitHub project pages; resolve relative to site root.
+  const _depth = Math.max(0, location.pathname.split('/').filter(Boolean).length - 2);
+  const ENDPOINT = (_depth ? '../'.repeat(_depth) : '') + 'api/collect';
+  // NOTE: this file predates the canonical 5-event contract (assets/js/analytics.js +
+  // docs/MEASUREMENT.md). Event names here (guide_engagement, conversion_attempt) are
+  // legacy and NOT counted by the dashboard contract — see COORDINATION.md IR-13.
   const STORAGE_KEY = 'affil1_events';
   const MAX_EVENTS = 500;
 
