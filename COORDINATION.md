@@ -168,7 +168,7 @@ Session ID: `arena/85183f5b-affil1` · Branch: `arena/85183f5b-affil1`
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Shop-feel + findability pass: front page polish, wire the 3 integration-log guides into `tools/content.py` GUIDES (sitemap/feed), structured data (Article/Product/FAQPage + `og:image`), suggestions/questions expansion for decision-making, robots exclusions for legacy duplicate pages, executive summary + README + board | in progress | `arena/85183f5b-affil1` | `tools/`, `src/data/suggestions.json`, `src/data/questions.json`, build-owned pages (`index.html`, `404.html`, generated `guides/*`, `products/*`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`), `assets/`, `robots.txt`, `sitemap.xml`, `feed.xml`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md` |
+| Shop-feel + findability pass: front page polish, wire the 3 integration-log guides into `tools/content.py` GUIDES (sitemap/feed), structured data (Article/Product/FAQPage + `og:image`), suggestions/questions expansion for decision-making, robots exclusions for legacy duplicate pages, executive summary + README + board | done — see Delivery record at the end of this file | `arena/85183f5b-affil1` | `tools/`, `src/data/suggestions.json`, `src/data/questions.json`, build-owned pages (`index.html`, `404.html`, generated `guides/*`, `products/*`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`), `assets/`, `robots.txt`, `sitemap.xml`, `feed.xml`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md` |
 
 No other session had an open claim on these files when this work started (all
 prior claims are `done` or `needs review`).
@@ -1003,3 +1003,72 @@ Not claimed and not touched: product data, guides, Special Links, analytics, Sea
 **Receipt · arena/bcd93318-affil1.** [PR #105](https://github.com/karagemop466-tech/Affil1/pull/105) merged into `main` as `b004514fc82d63e60bbaa643af2abbaa9d50fdc7` at 2026-11-20T06:43:20Z (merge commit, no squash). Checks on the PR: `Build, check and deploy` pass, `Affiliate launch checks` pass, `Verify Countertop Almanac edition and platform` pass, deploy job skipped on pull requests as designed. On `main`: all three workflows succeeded, and `pages-build-deployment` built `b004514` with no error. The live `review/` page serves 28 items with FLG-028 after the Pages CDN caught up (an initial fetch returned the pre-merge page from cache).
 
 **Open item found while closing this, not changed here:** FLG-001's "Found" text still says "All five destinations now resolve", which FLG-028 contradicts for the short links. FLG-001 belongs to an earlier session's register, so the wording is left for that owner's review rather than edited.
+
+## Delivery record — session arena/85183f5b-affil1 (2026-11-20)
+
+**PR:** https://github.com/karagemop466-tech/Affil1/pull/74 — **MERGED into `main`**
+(merge commit `467b26600f2cb6dd7fc64bca456899aac35ab4f1`, 2026-11-20T06:34:44Z).
+Checks on the merge commit: `Build, check and deploy` success (run 44688797970),
+`Affiliate launch checks` success (run 44688797444), `pages build and deployment`
+success (run 44688797456).
+
+**Live verification after deploy:** `guides/meal-prep-sunday.html` serves with the
+disclosure strip, its illustration and its `Living with it` cross-links;
+`robots.txt` serves with `Disallow: /archive/`; sitemap 30 URLs, feed 10 items;
+`review/index.html` carries FLG-027. Local gates on the merged tree: 31 pages,
+`check.py` 0 errors / 0 warnings, `check_local_links.py` 0 broken (38 pages),
+`validate.py` 1607 checks / 0 warnings, reproducible build.
+
+**Landed (what this session uniquely added):**
+- `meal-prep-sunday` as guide number ten in `GUIDES` (question-shaped title,
+  seller-transcribed facts, `Living with it` cluster, own registered illustration
+  with -w560/-w900 variants) — sitemap + feed membership via the build.
+- `check.py` head rule: every generated page must carry `og:image` (layout already
+  emitted it; nothing enforced it).
+- `robots.txt`: `Disallow: /archive/`, plus **FLG-027** (the repository's
+  robots.txt sits below the host root, so Search Console submission is the
+  required discovery step, not an optional one). Flag id was renumbered twice —
+  FLG-022 and FLG-024 were taken by concurrent sessions mid-rebase; 016-026 are
+  now all occupied.
+- `products.json`: `intended_listing_url`, `intended_confirmed_on`,
+  `intent_source` null fields + `meta.intent_rule` (store-what-the-owner-means,
+  never filled from the observed redirect; buy tags stay gated by
+  `_tools/paid_link_gate.py`).
+- `questions.json`: Q-23 (market size — closed only by a verified query report),
+  Q-24 (self-test budget — gates S-05). 24 questions, 10 answered.
+- `compliance.json` S13 citation corrected: the quote is verbatim in the current
+  eCFR text of 16 CFR 255.5 (Example 11, re-fetched 2026-11-20) but the 2009
+  Federal Register PDF it cited ends 255.5 at Example 9 and does not contain it.
+- `PUBLISHING_WORKFLOW.md`: cadence count no longer hardcoded; link-step wording
+  aligned with the approved-tag gate.
+- `brief/` and `about/` now count guides, questions, flags and image assets from
+  the data at build time (their hardcoded numbers had already drifted: eight
+  guides against nine, seventeen flags against twenty-six); fixed the stale
+  editor-suggestion cross-reference (S-03 → S-02).
+- `README.md` / `EXECUTIVE_SUMMARY.md`: counts synced to the merged tree
+  (10 guides / 24 questions / 21 proposals / 27 flags), robots note added,
+  session addendum recorded.
+
+**Dropped as duplicates of main (logged, not merged):** this pass originally
+carried its own cadence / canonical-edition / search / gate / traffic
+suggestions and question ids — main's S-12, S-15, Q-16 and Q-22 already hold
+those — plus an auto-tagging rule for every listing link. The board's reviewed
+policy (PRs #45/#64/#90) is the paid-link gate: tags only on account-approved
+buy URLs, listing citations untagged. The auto-tag rule was dropped during
+reconciliation; the gate was kept. Front-page season/trust bands were dropped in
+favour of main's storefront and method band; FAQPage JSON-LD in favour of main's
+BreadcrumbList.
+
+**Rebase log:** three rebases onto a fast-moving `main` (`0c06c74`, `c2d1050`,
+`a289cf9`), each resolved without discarding either side's work: generated
+outputs resolved by rebuild, JSON registers merged as unions with id-collision
+renumbers, `tools/` → `_tools/` rename followed (the image-count loader was the
+last `src/` straggler), and the empty `tools/` directory removed after the new
+served-tree rule flagged it. Sibling PRs #24/#29/#30 from earlier eras are
+superseded by main's own integrations; nothing from them was merged by this
+session.
+
+**Still owner-gated (unchanged, not blocking):** FLG-002 attribution test click,
+Search Console verification (Q-11/S-03), intent confirmation for the five links
+(Q-01), the API sales gate behind FLG-022 (10 qualifying sales), email/hosting
+decisions.

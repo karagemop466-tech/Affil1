@@ -773,3 +773,8 @@ a.btn:hover{transform:translateY(-1px)}
   .cta-pair{flex-direction:column}
   .cta{align-items:flex-start}
 }
+
+/* a resolved flag keeps its severity but gains a clear closed state */
+.flag-resolved{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--line)}
+.flag-resolved dt{color:#2f5438 !important}
+.flag-resolved dd{color:var(--ink-2) !important}
