@@ -424,6 +424,65 @@
         "https://affiliate-program.amazon.com/help/operating/policies",
         "_src/data/_links.json cart endpoint row",
         "One click on an Add to basket button, then Reports → Orders"
+      ],
+      "resolution": "Resolved in code on 2026-11-20 by session arena/acb1e4c8-affil1, during the merge that brought this flag onto the branch. _tools/cta.py no longer builds a cart permalink from an observed ASIN and no longer appends the tag by hand. pair() now renders the cart door only when paid_link_gate holds an account-approved Special Link for that ASIN; otherwise the primary door is the official listing for the observed ASIN via buy_url() -- the same gate every other Amazon link uses -- still marked rel=\"sponsored nofollow noopener\", with a one-line note saying why there is no one-click basket. No published page contains a cart/add.html URL. Regression test: _tools/test_cta_gate.py (4 cases). The remaining question in this flag -- whether a tagged cart permalink is itself a permitted Special Link -- is not answered here and does not need to be until the account issues one; it is D-01 on /decisions/.",
+      "status": "resolved-in-code"
+    },
+    {
+      "id": "FLG-030",
+      "severity": "medium",
+      "title": "A second complete edition of the same five-product shop was indexable under /edition/",
+      "expected": "One site for a search engine to index, which is what the About page claims and what the brief asks for.",
+      "found": "The published tree contains a preserved edition/ build of more than twenty pages, each carrying a self-referencing canonical under /Affil1/edition/, and a sitemap of its own. A canonical pointing at a second copy of the same catalogue does not consolidate anything: it asks a crawler to index two shops. No robots meta instruction was present on any edition page.",
+      "impact": "Every edition page now carries <meta name=\"robots\" content=\"noindex, follow\"> beside its canonical, so the maintained root is the only indexable surface. The edition stays reachable for review and no content changed.",
+      "reading": "The edition is a preserved working copy, not a rival storefront, so it stays in the repository. What it must not do is compete for the same query. Two sessions converged on this decision independently on 2026-11-20 (arena/b990bce7-affil1 and arena/d3f5a958-affil1); the second also added Disallow: /edition/ to robots.txt and wrote the reversal path: remove the noindex metas and the robots line if the owner chooses Countertop Almanac as the canonical brand instead.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/edition/",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "id": "FLG-031",
+      "severity": "high",
+      "title": "The site's own copy said every link carried the Amazon tag, and every product page printed the tag beside the button",
+      "expected": "A page describes its own links accurately, in the cautious direction as well as the confident one.",
+      "found": "The sidebar on all ten guides read 'every one carries the site's Amazon tag', and each product page printed 'tag shopnow047c-20' under its buy button. No published URL carries a tag: _src/data/product-intent.json holds no account-confirmed Special Link, so all five destinations are the plain listing. The statements were untrue in the direction that flatters the site, which is the more damaging direction.",
+      "impact": "Both now derive from the paid-link register and say the plain thing: plain listing, no tag, a click is not yet credited. _tools/check.py fails the build if the copy and the register disagree, in either direction.",
+      "reading": "A cautious site is still wrong if it describes its own machinery incorrectly. This is the class of error that survives several review passes because it sounds like the responsible sentence.",
+      "blocks": "nothing — fixed",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/products/p-01.html",
+        "https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "FLG-032",
+      "severity": "low",
+      "title": "Two publishers are configured for the same Pages site: the legacy branch source and an Actions deploy job",
+      "expected": "One publishing source per GitHub Pages site, so a reviewer can say which pipeline put a page live.",
+      "found": "The repository's Pages configuration reports build_type \"legacy\" (source branch main, path /) while .github/workflows/pages.yml also stages and deploys an artifact when the source is \"workflow\". Both paths appear in run history; the legacy path is what serves pages today.",
+      "impact": "The site serves the repository root, so working directories are public URLs unless underscore-prefixed (see check_serving_scope). The staged _site artifact is built and checked but is not what publishes.",
+      "reading": "Ported from the Decision Desk (IRR-03) and re-verified directly on 2026-11-20 with gh api repos/karagemop466-tech/Affil1/pages, which returned build_type=legacy. A configuration fact, not a content defect.",
+      "blocks": "any claim that the staged artifact is what deploys",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+        "Run: gh api repos/karagemop466-tech/Affil1/pages and read build_type"
+      ]
+    },
+    {
+      "id": "FLG-033",
+      "severity": "low",
+      "title": "The P-05 listing pages were recorded as stating several different heat tolerances for one probe set",
+      "expected": "One product listing states one figure for the same specification.",
+      "found": "Session arena/771e5093-affil1 recorded on 2026-11-20 that the CHEF iQ Sense pages it read stated several different heat tolerances across pages (1,400 °C / 1,40 °C, 1,300 °F, 1,500 °F, 1,000 °F), including one amazon.nl page contradicting itself. The observation is carried forward as recorded; it was not re-verified in this session, and no heat-tolerance figure is published on this site.",
+      "impact": "None on the published pages: the site transcribes only the listing title, which states no heat tolerance. The flag exists so the owner checks the current listing before any future content mentions probe heat limits.",
+      "reading": "An upstream-inconsistency note with dated provenance, not a claim about the product. Ported from the Decision Desk (IRR-05) during the 2026-11-20 integration pass.",
+      "blocks": "nothing — it blocks only future copy about heat tolerances",
+      "to_check": [
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "Re-open the amazon.nl listing pages recorded by session arena/771e5093-affil1 and compare the stated heat tolerances line by line"
       ]
     }
   ]

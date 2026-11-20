@@ -1,9 +1,108 @@
+> **Release receipt · arena/b990bce7-affil1 · 2026-11-20.** [PR #112](https://github.com/karagemop466-tech/Affil1/pull/112) merged into `main` as `ef0a566a1b8519fc30ff4dd45d281297b41c04b6`. PR checks: `build` pass, `launch` pass, `verify-edition` pass ([deploy run 44691120728](https://github.com/karagemop466-tech/Affil1/actions/runs/44691120728), [launch 44691120810](https://github.com/karagemop466-tech/Affil1/actions/runs/44691120810), [edition 44691120741](https://github.com/karagemop466-tech/Affil1/actions/runs/44691120741)); `pages build and deployment` [44691120060](https://github.com/karagemop466-tech/Affil1/actions/runs/44691120060) succeeded on the merge commit. Verified live afterwards: `/products/p-01.html` carries the corrected link status and the 06:40 UTC re-check, `/fit/` serves the printable worksheet, `/review/` lists FLG-030 and FLG-031. No production tracking or order report has been verified, and no traffic, conversion or revenue figure exists.
+
 > **Release receipt · arena/ae991ca9-affil1 · 2026-11-20.** [PR #41](https://github.com/karagemop466-tech/Affil1/pull/41) merged as `14cca70523f7d01ccb4fd6a9280512347df7d7ee`. Its [publication checks](https://github.com/karagemop466-tech/Affil1/actions/runs/44683584256) and [affiliate gate tests](https://github.com/karagemop466-tech/Affil1/actions/runs/44683584250) passed. Its Pages build completed but its deployment was cancelled when #37 superseded it. The subsequent staging repair #59 passed CI, and [Pages deployment 44683751106](https://github.com/karagemop466-tech/Affil1/actions/runs/44683751106) succeeded. The public site and this session’s 31-page preview are therefore different editions. No production tracking or order report has been verified.
 
 # COORDINATION.md — shared task board
 
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
+
+## PRODUCT BUYING PATH + DECISION REGISTRY — arena/acb1e4c8-affil1 (2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Product buying-decision record, live-listing CTAs, reviewable decision registry | done | arena/acb1e4c8-affil1 | `_src/data/decisions-registry.json`, `_tools/page_products.py`, `_tools/page_compare.py`, `_tools/page_home.py`, `_tools/layout.py`, `_tools/page_decisions.py`, `_tools/build.py`, `_tools/content.py`, `assets/css/site.css`, `EXECUTIVE_SUMMARY.md`, `_data/verification-observations.ndjson` |
+
+**Problem found.** The site's only call to action read "See listing source" on
+every card, because `layout.product_link()` rewrote any untagged label starting
+"See "/"Check " into that citation phrase. The comparison table carried two
+permanently empty columns (price, rating) and explained at length why they were
+empty. Both statements were true and both made the shop read as an audit.
+
+**Change.** `product_link()` no longer rewrites the label. Product pages open
+with a decision block (choose it if / check before you buy / what it costs you /
+where the price is) fed from a new `_src/data/decisions-registry.json`. The
+compare page gains a second table sorted by decision; its price and rating cells
+are now links to the live listing rather than blanks. A new `/decisions/` page
+gives seven proposals, each with the official document and verbatim quote it is
+checked against, the missing fact, its owner, and accept/hold/reject stored in
+the browser only.
+
+**Not changed, deliberately.** The Associates tag. `paid_link_gate.py` still
+requires an account-issued Special Link, `test_paid_link_gate.py` still asserts
+the approved register is empty, and every destination still goes through
+`buy_url()`. Attaching `?tag=shopnow047c-20` to a URL rebuilt from a redirect
+observation would be a link this project invented; Program Policies 2(a)–(b)
+require the account's own Special Links. Logged as **D-01** on `/decisions/`.
+No price, rating, review count, stock level, test result or ranking was added.
+
+**Verification on this branch:** build 32 pages · `check.py` 0 errors 0 warnings ·
+`check_local_links.py` 0 broken in 66 pages · 6 paid-link tests OK · `validate.py`
+1704 checks 0 warnings · Decision Desk PASS · Almanac 1965 checks 0 errors ·
+`stage.py` 81 files · rebuild produces zero drift.
+
+**Re-verification.** The five `/dp/` listing pages were read on 2026-11-20 and
+each page title matched `products.json`. The supplied short links were **not**
+re-followed, so this is a title check, not a redirect check: FLG-002 (attribution),
+FLG-003 (short-link compliance) and FLG-018 (`plpRedirect=mhFallback`) stay open.
+Observations appended to `_data/verification-observations.ndjson`, each row saying
+so.
+
+**Overlap.** Open PRs #47, #62 and #93 touch `page_home.py`,
+`page_products.py` and `layout.py`. They are unmerged proposals, not merged work.
+If one merges first, resolve in favour of the paid-link gate: each of those
+proposals relaxes it by tagging observed URLs. No branch was rebased or
+force-pushed here, and no other session's files were edited.
+
+### Reader-polish & accuracy pass — arena/b990bce7-affil1 (2026-11-20 06:40 UTC)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Correct the site's two false statements about the tracking tag, noindex the duplicate edition, hand the masthead back to readers, add a printable counter worksheet, record this pass's short-link behaviour | done | arena/b990bce7-affil1 | `_tools/{layout,check,page_guides,page_products,page_suggestions,page_fit}.py`, `_platform/build_edition.py`, `_src/data/{products,reverification,sources,flags,suggestions,questions}.json`, `assets/css/{storefront,fit}.css`, generated pages, `EXECUTIVE_SUMMARY.md` |
+
+**Scope.** The maintained root edition only. No legacy table, no
+`_decision-support/`, no other session's guides. `_platform/build_edition.py` was
+edited once, to add a `noindex` meta tag to that edition's own shell; no content
+changed there.
+
+**Reconciliation — read this before rebasing.** The branch was cut at `2934ed0`;
+`origin/main` advanced through four merges (`d39e8f4`, then `3d2a453`) while this
+pass ran, and each rebase collided on generated pages plus source files. The rule
+applied was main's version wins, then re-apply only the source edit and let
+`_tools/build.py` regenerate the pages. What that cost, and what changed:
+
+- Main **already** carries FLG-028 for this pass's own 06:40 UTC fetch (another
+  session recorded the same five-homepage result earlier the same day). The new
+  findings were therefore numbered **above** main's highest: **FLG-030** (duplicate
+  indexable edition, fixed) and **FLG-031** (false tag claims in the site's own
+  copy, fixed). Nothing was renumbered over another session's flag.
+- Main's `now/`, `verification/`, `offers/` and `decisions/` pages landed mid-pass
+  and had reintroduced the exact defect being fixed: `NAV` carried "What's left"
+  and "Decisions". The masthead fix was re-applied to main's newer navigation and
+  both surfaces were added to `DESK_SURFACES`; the footer already listed them.
+- Main had softened the product page fine print to `Paid link · <Amazon note>`.
+  That is not the same as saying a click is uncredited, so the register-derived
+  line was re-applied rather than kept.
+
+**Verified line by line, this pass.**
+- Five supplied `link.amazon` URLs requested once each at 06:40 UTC:
+  **all five returned `https://www.amazon.com/`**, none a product page.
+- Five destination listings requested directly: B0CDY277D3, B09B7SB46R,
+  B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z — titles match the register exactly, each
+  arrival carrying `plpRedirect=mhFallback`.
+- Operating Agreement §1 and §5 re-read (updated 2025-10-15); Program Policies and
+  the Commission Income Statement re-read (updated 2026-04-14). SRC-18..20 added;
+  only SRC-20 carries a quote, re-copied from the live page.
+
+**Irregularities → disposition.** False tag claims fixed (FLG-031) · duplicate
+indexable edition fixed (FLG-030) · desk surfaces removed from the masthead ·
+stale "eight/nine guides" counts corrected to ten · no dead anchors found
+(`about/#how-we-link` resolves on main and is where the new copy points).
+
+**Gates at hand-off.** `check.py` 0 errors / 0 warnings (35 pages) ·
+`validate.py` 1,909 checks, 0 warnings · `check_local_links.py` 0 broken ·
+paid-link unit tests 6/6 · `verify_edition.py` 1,965 checks · `_decision-support`
+validator PASS · build reproducible.
 
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
@@ -938,7 +1037,7 @@ this branch was ported onto both. Two of its own findings then had to be rewritt
 
 ```
 _tools/build.py                 → 34 pages
-_tools/check.py                 → 34 pages, 0 errors, 0 warnings
+_tools/check.py                 → 38 pages, 0 errors, 0 warnings
 _tools/validate.py              → 1813 checks, 0 warnings
 _tools/check_local_links.py     → 68 pages, 0 broken
 python3 -m unittest discover -s _tools -p 'test_*.py'  → 6 tests OK
@@ -1112,3 +1211,66 @@ Merged-tree verification at the time of writing: `_tools/build.py` 34 pages · `
 `_tools/check_local_links.py` 68 pages, 0 broken.
 
 The three surfaces this session added are live: `/now/`, `/offers/`, `/verification/`.
+---
+
+## Session `arena/d3f5a958-affil1` — shop-polish & final integration (2026-11-20, second record, supersedes the claim block above)
+
+**Merge-storm note, recorded rather than hidden.** This session's first four
+commits (claim, decision-desk archival, three guides, records) were built on
+`23fa2e3`. While the session ran, `main` moved five integrations ahead and was
+restructured (`tools/` → `_tools/`, `src/` → `_src/`, `data/` → `_data/`,
+`docs/` → `_docs/`, `archive/` → `_archive/`, `analytics/` → `_analytics/`,
+`measurement/` → `_measurement/`, `server/` → `_server/`; new `edition/`,
+`_platform/`, `_decision-support/`), and the rebase replayed badly. The branch
+was reset onto `origin/main` at `2934ed0` and every content change was
+re-applied by hand at the renamed paths. The old commits remain reachable from
+the earlier branch pushes and from `/tmp/mywork.patch` recorded in the session
+transcript; nothing was silently dropped.
+
+**A regression found and repaired: session `76128338`'s design pack was lost.**
+The reader-polish design-token pack and the reviewable topic bank (T-01..T-10)
+that `fb831c1` added to `tools/page_design.py` do not exist on `main` at
+`2934ed0` — one of the concurrent rename merges kept the older
+`page_design.py`. The full source was recovered from `fb831c1` and restored,
+then extended (T-11..T-16 and a State column). Credit: `arena/76128338-affil1`.
+
+| Task | Status | Result |
+|---|---|---|
+| Three question-shaped guides (air-fryer-for-two, air-fryer-or-toaster-oven, cooking-from-frozen) | done | `_tools/content.py`; guide template renders a Sources block (USDA FSIS links on the frozen guide); sitemap 37 URLs, feed 13 items |
+| Shop-voice copy on the catalogue and front page | done | `_tools/page_products.py` ("the two columns we refuse to fill" → "the whole shelf on one screen"), `_tools/page_home.py` (journal newest-first) |
+| FAQPage structured data on answered questions | done | `_tools/page_questions.py` |
+| Topic bank states + three gated future ideas feeding the copy-ready design prompt | done | `_tools/page_design.py` (restored from `fb831c1` + T-11..T-16) |
+| One site to index: `edition/` (Countertop Almanac) kept readable but out of the index | done | noindex, follow on all 27 `edition/` pages; `robots.txt` disallows `/edition/` (FLG-032, with the reversal path written down) |
+| Findings from the Decision Desk ported | done | FLG-030 (Pages dual publisher, re-verified via `gh api` today), FLG-031 (P-05 heat-tolerance contradictions, provenance-labelled, not re-verified) |
+| Executive summary accuracy | done | `brief/` counts derive from data; `EXECUTIVE_SUMMARY.md` addendum |
+| Associates attribution, intended ASINs, Search Console, analytics hosting, named author, §2(b) reading | needs review (owner) | published at `review/` — FLG-001/002/006/019/025 |
+
+**Superseded by parallel sessions and not re-applied (their work preserved):**
+the plan to archive `decision-support/` — `d34e0765` renamed it
+`_decision-support/` and `44f81bcd`/`23b5a192` keep it wired with its own
+validator; and the plan to delete the `INTERNAL_SECTIONS` exemptions — `d34e0765`
+replaced list-based exemptions with the stricter rule-based
+`check_serving_scope()` plus `INTERNAL_SECTIONS = ("_decision-support/", "edition/")`.
+This session's earlier board block describes the pre-rebase plan; this block is
+what actually shipped.
+
+**Verification performed (2026-11-20, on the merged tree):**
+
+```
+python3 _tools/build.py                    → 38 pages; second build byte-identical
+python3 _tools/check.py                    → 38 pages, 0 errors, 0 warnings
+python3 _tools/validate.py                 → 2158 checks, all pass
+python3 _tools/check_local_links.py        → 72 pages, 0 broken references
+python3 _tools/sweep_surfaces.py --dry-run → would move: 0
+cd _tools && python3 -m unittest discover  → 6 tests OK (paid-link gate)
+python3 _platform/verify_edition.py        → 1,965 line-by-line checks, 0 errors
+python3 _decision-support/validate.py      → PASS
+```
+
+Every register table row carries a source link (enforced on any table with a
+Source/Listing/Evidence column); unconfirmable values stay blank and flagged
+(32 flags on `review/`). No product fact was added beyond the listing-title
+transcriptions already in `_src/data/products.json`; the two USDA FSIS URLs in
+the frozen guide are the ones recorded as directly verified in SRC-08/SRC-09.
+The Pages configuration fact behind FLG-030 was checked first-hand:
+`gh api repos/karagemop466-tech/Affil1/pages` → `build_type: legacy`.

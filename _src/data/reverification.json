@@ -13,7 +13,15 @@
       "operating_agreement": "https://affiliate-program.amazon.com/help/operating/agreement",
       "ftc_endorsement_guides": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
     },
-    "consolidation_note": "2026-11-20, integration pass arena/10b5816b-affil1: the additional_passes log (obs-83e015f6 and obs-10b5816b) had ended up only in the archived copy at _archive/2026-11-20-pr50-source/src/data/reverification.json after the working-directory rename, while flags.json and the review page point at additional_passes.obs-83e015f6 in this file. The passes are restored here verbatim. Nothing was removed from either copy."
+    "pass_2026_11_20_0640": {
+      "session": "arena/b990bce7-affil1",
+      "retrieved_at_utc": "2026-11-20T06:40Z",
+      "method": "Each of the five supplied short links was requested once, redirects followed, final URL and page title recorded. The five destination listings were then requested directly and their titles and breadcrumbs read.",
+      "short_link_result": "All five arrived at https://www.amazon.com/ — the storefront home page. None reached a product page. This is the third distinct behaviour recorded for the same five URLs on 2026-11-20, and it agrees with FLG-028.",
+      "listing_result": "All five destination listings loaded with titles matching this register exactly: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z.",
+      "not_claimed": "No price, rating or stock figure is recorded even though the pages displayed them: publishing those requires an Amazon-served or API-served feed (Program Policies 2(b)). No intended ASIN is inferred from any redirect."
+    },
+    "consolidation_note": "2026-11-20, integration pass arena/10b5816b-affil1: the additional_passes log (obs-83e015f6 and obs-10b5816b) had ended up only in the archived copy at _archive/2026-11-20-pr50-source/src/data/reverification.json after the working-directory rename, while flags.json and the review page point at additional_passes.obs-83e015f6 in this file. The passes are restored here verbatim. Nothing was removed from either copy. A later merge again lost the passes; restored again on 2026-11-20 by arena/10b5816b-affil1."
   },
   "rows": [
     {

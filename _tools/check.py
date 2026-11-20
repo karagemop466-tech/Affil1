@@ -339,8 +339,11 @@ def check_assets():
         if f.suffix.lower() in (".jpg", ".png") and f.stat().st_size > 400_000:
             warn(f"assets/img/{f.name}: {f.stat().st_size // 1024} KB is heavy")
     css = (ROOT / "assets/css/site.css").read_text(encoding="utf-8")
-    if re.search(r"@import|https?://", css):
-        err("site.css: imports or absolute URLs present")
+    for name in ("site.css", "storefront.css", "fit.css"):
+        sheet = (ROOT / "assets/css" / name).read_text(encoding="utf-8")
+        if re.search(r"@import|https?://", sheet):
+            err(f"{name}: imports or absolute URLs present")
+    css = (ROOT / "assets/css/site.css").read_text(encoding="utf-8")
     if "fonts.googleapis" in css:
         err("site.css: still references Google Fonts")
     for css_url in re.findall(r"url\(([^)]+)\)", css):
@@ -423,6 +426,70 @@ def check_serving_scope():
                 f"rename to _{rel}/ or add it to PUBLIC_DIRS deliberately")
 
 
+def check_navigation_group():
+    """Two navigation rules that were prose only, so both had quietly broken.
+
+    A reader's masthead must not carry the desk: "What's left" and "Decisions"
+    were top-bar items, so a shopper's navigation led to the project's own
+    to-do list and decision register. Desk surfaces stay one click away under the
+    footer's "The desk" heading, and that is now checked rather than remembered.
+    """
+    from build import GENERATED
+    import layout
+
+    for target, label in layout.NAV:
+        if target.startswith(layout.DESK_SURFACES):
+            err(f"navigation: '{label}' ({target}) is a desk surface and belongs in the footer, not the masthead")
+
+    linked = {target.split("#")[0] for _h, rows in layout.FOOTER_GROUPS for target, _l in rows}
+    for target in ("now/index.html", "verification/index.html", "decisions/index.html",
+                   "questions/index.html", "suggestions/index.html", "review/index.html",
+                   "decide/index.html", "operations/ledger.html", "brief/index.html"):
+        if target not in linked:
+            err(f"footer: {target} is in no footer group, so a reader cannot reach the desk")
+    for target in linked:
+        if target.endswith(".html") and target not in GENERATED:
+            err(f"footer: {target} is linked but is not a generated page")
+
+
+def check_link_state_copy():
+    """The site must describe its own links accurately.
+
+    assets/js/analytics.js counts a product click only for an anchor carrying both
+    rel~=sponsored and data-affiliate-ref, and layout.product_link() sets the second
+    only when the URL carries a tag. No URL carries a tag until an account-confirmed
+    Special Link exists, so the counter cannot fire: correct, but it has to be said
+    on the page. This keeps the copy and the register from drifting apart in either
+    direction, which is how "every one carries the site's Amazon tag" survived
+    several review passes.
+    """
+    import layout
+    data = json.loads((ROOT / "_src/data/products.json").read_text(encoding="utf-8"))
+    approved = layout.approved_amazon_urls()
+    armed = [p["observed_asin"] for p in data["products"] if p["observed_asin"] in approved]
+
+    sample_path = ROOT / "products/p-01.html"
+    if sample_path.exists():
+        sample = sample_path.read_text(encoding="utf-8")
+        if armed:
+            if "not yet credited" in sample:
+                err("link copy: a Special Link is armed but the product page still says clicks are not credited")
+        else:
+            if "not yet credited" not in sample:
+                err("link copy: no tag is armed, so the product page must say a click is not credited")
+            if "data-affiliate-ref" in sample:
+                err("link copy: data-affiliate-ref is published with no armed link, so the counter would count untracked clicks")
+
+    for page in (ROOT / "guides").glob("*.html"):
+        if page.name == "index.html":
+            continue
+        text = page.read_text(encoding="utf-8")
+        if "every one carries the site's Amazon tag" in text:
+            err(f"{page.relative_to(ROOT)}: claims every link carries the Amazon tag, which none does")
+        elif "No link currently carries the tracking tag" not in text:
+            err(f"{page.relative_to(ROOT)}: guide sidebar must state the real tag status")
+
+
 def main():
     for p in sorted(PAGES):
         check_page(p)
@@ -431,6 +498,8 @@ def main():
     check_serving_scope()
     check_data()
     check_assets()
+    check_navigation_group()
+    check_link_state_copy()
 
     print(f"pages checked: {len(PAGES)} (this build's output only)")
     for w in warnings:

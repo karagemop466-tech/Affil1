@@ -63,7 +63,7 @@ def product_card(page_dir, p):
     <p class="pcard-why">{esc(p['why'])}</p>
     <ul class="chips">{_chips(p)}</ul>
     {cta_pair(page_dir, p)}
-    <p class="pcard-fine">Listing source &middot; {esc(AMAZON_NOTE)}</p>
+    <p class="pcard-fine">{esc(AMAZON_NOTE)}</p>
   </div>
 </article>"""
 
@@ -118,8 +118,8 @@ def build(page_dir, products, meta):
     hero = f"""<section class="issue-cover wrap">
   <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 02</span> THE HOLIDAY EDIT</p>
     <h1>Cook the season<br><em>from the counter.</em></h1>
-    <p class="cover-dek">The shopping weekend is here. Format first, deals second &mdash; and a gift edit for every kind of cook, from the two-drawer dinner to the roast that needs watching.</p>
-    <div class="cover-actions"><a class="cover-btn" href="#shortlist">Explore the shortlist <span>→</span></a>
+    <p class="cover-dek">Five appliances, chosen and explained: two drawers, one basket, one French door, two probes. Format first, deals second &mdash; and a gift edit for every kind of cook.</p>
+    <div class="cover-actions"><a class="cover-btn" href="#shortlist">See the five picks <span>→</span></a>
       <a class="cover-link" href="{esc(rel(d, 'guides/air-fryer-gift-guide.html'))}">Read the gift guide ↗</a></div></div>
   <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
     <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
@@ -182,16 +182,13 @@ def build(page_dir, products, meta):
   </div>
 </div>""", cls="seasonal-band")
 
-    fresh = [by_slug.get(s) for s in ("black-friday-air-fryer-checklist", "air-fryer-gift-guide",
-                                       "wireless-thermometer-worth-it", "air-fryer-accessories-checklist")]
-    fresh = [g for g in fresh if g] or GUIDES[:4]
     latest = section(f"""
 <div class="sec-head">
   <div>{eyebrow('The journal')}<h2>Fresh for the season</h2></div>
-  <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you.</p>
+  <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you. Newest first.</p>
 </div>
 <div class="gcard-grid">
-{''.join(guide_card(d, g) for g in fresh)}
+{''.join(guide_card(d, g) for g in list(reversed(GUIDES))[:4])}
 </div>
 <p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'guides/index.html'))}">All {len(GUIDES)} guides <span aria-hidden="true">&rarr;</span></a></p>""",
                     cls="")

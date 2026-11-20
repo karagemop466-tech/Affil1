@@ -2,8 +2,14 @@
   "meta": {
     "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
     "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
-    "recommended_first": "S-01 and S-03. One confirms the site can earn; the other makes it findable. Neither needs new content. For decision-making itself, S-24 and S-25 are the cheapest upgrades on the board.",
-    "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads."
+    "recommended_first": "S-01 and S-03. One confirms the site can earn; the other makes it findable. Neither needs new content. For decision-making itself, S-28 and S-29 are the cheapest upgrades on the board.",
+    "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads.",
+    "implemented_this_pass": [
+      "S-22",
+      "S-23",
+      "S-24",
+      "S-25"
+    ]
   },
   "paths": [
     {
@@ -103,7 +109,7 @@
       "id": "S-07",
       "status": "open",
       "title": "Do not commission more guides until S-03 or S-05 lands",
-      "why": "Eight guides already cover the decision space honestly. A ninth written from another hypothesis adds volume, not value, and raises the chance the whole publication is treated as one undifferentiated block.",
+      "why": "Ten guides already cover the decision space honestly. An eleventh written from another hypothesis adds volume, not value, and raises the chance the whole publication is treated as one undifferentiated block.",
       "effort": "none — it is a decision not to act",
       "risk": "None. It is reversible the moment data arrives.",
       "depends_on": "nothing",
@@ -273,6 +279,50 @@
     {
       "id": "S-22",
       "status": "implemented",
+      "title": "Stop claiming the links carry the tracking tag",
+      "why": "Two reader-facing statements said every link carried the site's Amazon tag: the sidebar on all ten guides, and a 'tag shopnow047c-20' line under every buy button. No published URL carries a tag, because the paid-link gate holds no account-confirmed Special Link. A page may not describe its own links wrongly, even in the cautious direction, because the next session will believe the sentence.",
+      "effort": "ten minutes",
+      "risk": "None. The copy now derives from the register and changes by itself when a Special Link is armed.",
+      "depends_on": "none",
+      "recommendation": "Done this pass; enforced by _tools/check.py check_link_state_copy",
+      "decision": "accept"
+    },
+    {
+      "id": "S-23",
+      "status": "implemented",
+      "title": "Give a crawler one site instead of two",
+      "why": "The preserved edition/ tree published more than twenty pages with self-referencing canonicals under /edition/ and no robots instruction. Two copies of the same five products is the duplicate case a search engine resolves by choosing neither.",
+      "effort": "one line in the edition generator",
+      "risk": "None for readers: the edition stays reachable for review, and only the indexing instruction changed.",
+      "depends_on": "none",
+      "recommendation": "Done: every edition page carries noindex, and the maintained root is the only indexable surface",
+      "decision": "accept"
+    },
+    {
+      "id": "S-24",
+      "status": "implemented",
+      "title": "Make the masthead a reader's navigation",
+      "why": "The top bar carried 'What's left' and 'Decisions', which are the project's to-do list and decision register, so a shopper's navigation led out of the shop. The brief asks for one navigation group with every dashboard surface still reachable from the footer.",
+      "effort": "a few lines, plus a check",
+      "risk": "Low: anything removed from the masthead is one click away in the footer, and a check now proves it.",
+      "depends_on": "none",
+      "recommendation": "Done and enforced: a desk surface in the masthead fails the build",
+      "decision": "accept"
+    },
+    {
+      "id": "S-25",
+      "status": "implemented",
+      "title": "Give the reader something to carry to the counter",
+      "why": "Every guide ends in a measurement and there was nowhere to write it down. The fit finder now carries a printable worksheet: two tables, one for the space and one for the food, an empty cell for the reader's number and an empty cell for what the manual requires.",
+      "effort": "an hour",
+      "risk": "None. Nothing is pre-filled, because no dimension on this site came from an official specification sheet, and the sheet says so.",
+      "depends_on": "none",
+      "recommendation": "Done: linked from the Guides index as well as the fit finder",
+      "decision": "accept"
+    },
+    {
+      "id": "S-26",
+      "status": "implemented",
       "title": "Ship a seasonal issue: holiday cover, gift edit and trend-led guides",
       "why": "The brief asked for a shop that reads like a publication with catchy, timely topics rather than an audit. The front page is now Issue Nº 02, the holiday edit: a gift-guide feature, a Black Friday checklist timed to the live shopping weekend, a wireless-probe buyer's guide and an accessories filter, each written around the question a shopper actually types.",
       "effort": "done",
@@ -283,7 +333,7 @@
       "evidence": "guides/air-fryer-gift-guide.html; guides/black-friday-air-fryer-checklist.html; guides/wireless-thermometer-worth-it.html; guides/air-fryer-accessories-checklist.html; index.html holiday cover"
     },
     {
-      "id": "S-23",
+      "id": "S-27",
       "status": "open",
       "title": "Turn the topic bank into a dated editorial calendar chosen from measured queries",
       "why": "Thirteen guides now exist as editorial hypotheses. The next four should come from Search Console queries, not instinct: the design pack already holds the topic bank and the organic loop, and this decision turns it into slots with dates and an owner per slot. Without it the cadence collapses into bursts.",
@@ -294,7 +344,7 @@
       "decision": "open"
     },
     {
-      "id": "S-24",
+      "id": "S-28",
       "status": "open",
       "title": "Give the comparison page a 'who it suits' decision column instead of more specification text",
       "why": "Decision-making improves when the reader can match themselves to a row. The compare page currently replicates register fields; a short 'suits you if' column drawn from each product's suits list would let a reader eliminate options instead of reading more prose.",
@@ -305,7 +355,7 @@
       "decision": "open"
     },
     {
-      "id": "S-25",
+      "id": "S-29",
       "status": "open",
       "title": "Publish one 'how we choose' method page and link it from the Questions group",
       "why": "The method (open the link, transcribe the listing, say what it changes, leave blanks blank) is currently scattered across the about page, the review pages and the front-page method band. One short page that states the rules in the reader's language is the single best answer to 'why does this shop show no prices' — and it is a trust asset a search snippet can quote.",
@@ -316,7 +366,7 @@
       "decision": "open"
     },
     {
-      "id": "S-26",
+      "id": "S-30",
       "status": "open",
       "title": "Adopt a fortnightly owner question ritual: close the top blocking question before commissioning the next guide",
       "why": "The register shows exactly what is missing before each decision can be made. The failure mode is not ignorance, it is drift: guides get written while the two blocking questions stay open. A dated ritual — one question, one closing artefact, per fortnight — keeps the missing information list shrinking.",
