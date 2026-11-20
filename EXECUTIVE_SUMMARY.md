@@ -23,11 +23,11 @@ One canonical site, 29 pages, rebuilt from `src/data` on every deploy:
 - a product page for each of the five, with stated facts, who it suits, who
   should skip it, and a one-block provenance record;
 - a side-by-side comparison table;
-- nine question-shaped guides across six clusters;
-- a decision register of 22 questions, 10 answered with evidence;
+- ten question-shaped guides across six clusters;
+- a decision register of 24 questions, 10 answered with evidence;
 - a suggestion queue with three coherent paths and 18 proposals, of which 8 have
   already been implemented and are shown with evidence;
-- 25 review flags, an image policy, an inert analytics client and an empty
+- 27 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
@@ -168,3 +168,42 @@ https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-refe
 - `python3 tools/check.py` — 0 errors, 0 warnings.
 - `python3 tools/check_local_links.py` — 0 broken relative references.
 - `python3 tools/validate.py` — 1441 checks, 0 warnings.
+
+Ships the self-contained notes edition at `notes/`: shop-style front page leading with the verified shortlist, seven question-first guides, decision desk (suggestions queue with decision gates + pre-decision questions), transparency desk, own sitemap/feed. Disclosure above the fold; `rel="nofollow sponsored"` + `shopnow047c-20` on every outbound product link; no prices/ratings/commissions anywhere; ledger empty by design.
+
+## Session addendum — arena/85183f5b-affil1 (2026-11-20)
+
+Findability + line-by-line re-verification pass on the canonical edition:
+
+- **Guide number ten.** `meal-prep-sunday` ported from the earlier integration log
+  (question-shaped title, seller-transcribed facts only, `Living with it` cluster),
+  with its own generated illustration registered in `src/data/images.json`. It flows
+  into the sitemap (29 URLs) and the feed (10 items) through `GUIDES`.
+- **Every published quote re-checked live on 2026-11-20** against SRC-01..SRC-10:
+  Operating Agreement §1 and §5, Program Policies §2(b), the FTC endorsement FAQ
+  (placement + affiliate sections), Google's outbound-link qualification, the
+  eCFR current text of 16 CFR 255 (§255.5 Example 11, the affiliate-blogger case),
+  USDA FSIS chart and thermometer pages, and Amazon's SP-API ASIN definition.
+  One citation was corrected on the way: `src/data/compliance.json` S13 had a
+  correct quote pointed at the 2009 Federal Register PDF that does not contain it
+  (that PDF ends §255.5 at Example 9); it now cites the eCFR text where the
+  sentence was re-fetched and matched verbatim. The FSIS host was retried and is
+  still unreachable from this environment — no food-safety claim depends on it
+  because the chart in the thermometer guide is transcribed from the chart page
+  that did resolve (SRC-08).
+- **Intent record.** `products.json` now stores `intended_listing_url`,
+  `intended_confirmed_on` and `intent_source` as null fields beside
+  `intended_asin`, with `meta.intent_rule`: they stay blank until the owner
+  confirms each destination in the enrolled Associates account, and are never
+  filled from the observed redirect.
+- **Robots.** `robots.txt` now carries `Disallow: /archive/`; **FLG-027** records
+  that a project-page robots.txt sits below the host root, so Search Console
+  submission (Q-11 / S-03) is the required discovery step.
+- **No number can drift.** The brief and about pages now count guides, questions,
+  flags and image assets from the data at build time instead of hardcoding them.
+- **Checks.** 30 pages, `check.py` 0 errors / 0 warnings, `check_local_links.py`
+  0 broken references, build reproducible.
+- **Duplicates dropped, not merged.** Earlier drafts of this pass carried their own
+  cadence / consolidation / search / gate suggestions and question ids; main's
+  S-12, S-15, Q-16 and Q-22 already hold those, so only genuinely new items were
+  kept: Q-23 (market size), Q-24 (self-test budget) and FLG-027.
