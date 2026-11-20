@@ -11,13 +11,10 @@ def stage(destination):
     destination.mkdir(parents=True, exist_ok=True)
     if any(destination.iterdir()):
         raise SystemExit(f"Staging directory must be empty: {destination}")
-    files = GENERATED | {'.nojekyll'}
-    files |= {
-        str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*')
-        if path.is_file() and (path.suffix in {'.woff2', '.svg'} or
-           path.name in {'editorial.css', 'discover.js', 'site.css', 'site.js', 'analytics.js', 'fit.css', 'fit.js'} or
-           path.stem.endswith(('-w560', '-w760', '-w900', '-w1280')))
-    }
+    # The artifact is prebuilt. Branch-based Pages can still use the repository's
+    # Jekyll exclusions; this marker belongs to the artifact, not the checkout.
+    (destination / '.nojekyll').touch()
+    files = GENERATED | {str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*') if path.is_file()}
     for name in sorted(files):
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
