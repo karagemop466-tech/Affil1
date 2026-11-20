@@ -615,3 +615,33 @@ these files as of this commit.
 
 Not in scope and not touched: `src/data/products.json` observations, `tools/paid_link_gate.py`
 logic, `.github/workflows/*`, any other session's guides.
+
+### Result — `arena/b1a42a51-affil1` (2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Line-by-line audit with a source link per row | done | `arena/b1a42a51-affil1` | `src/data/audit.json`, `tools/page_audit.py`, `tools/check_audit.py`, `tools/build.py` (wiring), `review/audit.html` (generated) |
+| One indexable site: robots + noindex + sweeper gate | done | `arena/b1a42a51-affil1` | `tools/build.py` (ROBOTS), `tools/sweep_surfaces.py`, `archive/**/*.html` (noindex only), `decision-support/*.html` (noindex only) |
+| Shop voice: footer claim, false "account-confirmed" figure | done | `arena/b1a42a51-affil1` | `tools/layout.py`, `tools/page_desk.py` |
+| New proposals and open questions for the growth path | done | `arena/b1a42a51-affil1` | `src/data/suggestions.json` (S-22..S-28), `src/data/questions.json` (Q-23..Q-26) |
+| New findings, each with a source or a reproduction | done | `arena/b1a42a51-affil1` | `src/data/flags.json` (FLG-023..FLG-027), `src/data/sources.json` (SRC-18..SRC-23) |
+| Repair the affiliate gate test | done | `arena/b1a42a51-affil1` | `tools/test_paid_link_gate.py` |
+| Release: PR, merge, Pages deploy | done | `arena/b1a42a51-affil1` | this file |
+
+**Verification performed (2026-11-20).** `tools/build.py` writes 31 pages + sitemap, feed and
+robots. `tools/check.py` 31 pages, 0 errors, 0 warnings. `tools/validate.py` 1655 checks, 0
+warnings. `tools/check_local_links.py` 38 pages, 0 broken. `tools/check_audit.py` (register,
+`--jsonld`, `--single-site`, `--counts`) all pass. `decision-support/validate.py` passes all six
+check families. `python3 -m unittest tools.test_paid_link_gate` 2 tests pass. The staged artifact
+(78 files) serves every route 200 from a local server.
+
+**Links re-opened this pass** with a redirect-following fetcher: P-01 → `/dp/B0CDY277D3`
+(CHEFMAN 6 Quart Dual Basket), P-02 → `/dp/B09B7SB46R` (Emeril Lagasse 26QT French Door),
+P-03 → `/dp/B08DKYBTPH` (Chefman 8 Qt TurboFry), P-05 → `/dp/B0DZFD6R9Z` (CHEF iQ Sense Gen3).
+**P-04 (`link.amazon/B0c8moW59`) reached `amazon.com/` — the store home page — not a listing on
+this pass**, after earlier passes reached `/dp/B0DHZTCNR5`. Recorded as A-12; the product register
+was not edited, because one unstable fetch is not evidence of a different product.
+
+**Deliberately not done.** No product fact was added or removed. No page was deleted: the archive
+and the desk gained noindex and nothing else. No count on a page was hard-coded; the audit page
+quotes the command rather than the number, and `--counts` fails if a stated number drifts.
