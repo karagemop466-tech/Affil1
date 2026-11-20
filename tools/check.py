@@ -179,13 +179,16 @@ def check_page(path):
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
     # --- Amazon links must be sponsored AND carry the Associates tag ---
-    from layout import approved_amazon_urls
+    # Only permitted Amazon product URLs may be published: an account-approved
+    # Special Link, or the plain listing of an observed ASIN (layout.permitted_amazon_urls).
+    # Any other tag, a short link, or an unobserved ASIN fails here.
+    from layout import permitted_amazon_urls
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
-            if "tag" in parse_qs(urlparse(href).query, keep_blank_values=True) and href not in approved_amazon_urls().values():
-                err(f"{rel}: unapproved tagged link: {href}")
+            if href not in permitted_amazon_urls():
+                err(f"{rel}: Amazon product link is not a permitted URL (unapproved tag, short link or unobserved ASIN): {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:
