@@ -68,6 +68,22 @@ def build(page_dir, questions, meta):
     q_table = table(["Ref", "Question", "Status", "Blocks work"], rows, cls="qtable",
                     caption=f"{len(qs)} questions: {len(answered)} answered, {len(open_)} open")
 
+    disc_rows = []
+    for q in open_:
+        disc = q.get("discovery", {})
+        if not disc:
+            continue
+        disc_rows.append([
+            {"html": f'<a href="#{esc(q["id"])}"><strong>{esc(q["id"])}</strong></a>'},
+            {"html": esc(q.get("what_is_missing", ""))},
+            {"html": esc(disc.get("action", ""))},
+            {"html": esc(disc.get("who", ""))},
+            {"html": esc(disc.get("effort", ""))},
+        ])
+    disc_table = table(["Ref", "What is missing", "How to discover it", "Who holds the fact", "Effort"],
+                       disc_rows, cls="qtable",
+                       caption=f"{len(disc_rows)} open questions, each with a discovery route — none is closed by inference")
+
     blocking_html = "".join(card(q) for q in blocking)
     open_html = "".join(card(q) for q in open_ if not str(q.get("blocking", "")).startswith("yes"))
     answered_html = "".join(card(q) for q in answered)
@@ -76,7 +92,7 @@ def build(page_dir, questions, meta):
         'Questions',
         'What has to be decided<br>before anything else changes',
         f'{len(qs)} questions the site cannot answer on its own. {len(answered)} are closed with a source or a reproducible check; {len(open_)} are open, and each one names the specific document, dashboard or decision that would settle it.',
-        meta='No forecasts &middot; no invented answers &middot; every closed row carries its evidence',
+        meta='No forecasts &middot; no invented answers &middot; every open row names the discovery action, the holder of the fact, and the effort it takes',
     )}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('The register')}<h2>Everything in one table</h2></div>
@@ -88,6 +104,10 @@ def build(page_dir, questions, meta):
   <div class="stat stat-warn"><span class="stat-n">{len(open_)}</span><span class="stat-l">still open</span></div>
   <div class="stat stat-warn"><span class="stat-n">{len(blocking)}</span><span class="stat-l">blocking other work</span></div>
 </div>''', cls='')}
+{section(f'''
+<div class="sec-head"><div>{eyebrow('Discovery map')}<h2>How the missing information is found</h2></div>
+<p>Every open question carries a route to its answer: the action that would close it, who holds the missing fact, and what it costs. A question stays open until the named artefact exists — this page never guesses it closed.</p></div>
+{disc_table}''', cls='section-tint')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('Answer these first')}<h2>Blocking questions</h2></div>
 <p>Until one of these is answered, the work that depends on it is guesswork.</p></div>

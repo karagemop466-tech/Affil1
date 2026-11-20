@@ -1,6 +1,6 @@
 {
   "meta": {
-    "note": "Every entry marked 'read directly' was requested and its wording read in this session on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around. SRC-21 to SRC-24 were added by session arena/ddb6772b-affil1 on 2026-11-20: the four USDA pages the new guides quote, each carrying the date the page itself shows.",
+    "note": "Every entry marked 'read directly' was requested and its wording read in this session on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around.",
     "retrieved_on": "2026-11-20",
     "rule": "A quote on this site appears only if it was copied from the page named beside it. Where a page is linked but not quoted, the entry says so."
   },

@@ -10,7 +10,14 @@
       "S-24",
       "S-25"
     ],
-    "what_changed_in_this_pass": "Three rows added (S-26 to S-28) for a reviewer to accept, hold or reject. They were numbered S-22 to S-24 on the branch, then renumbered on merge because a concurrent session had already taken S-22 to S-25. No existing row was reworded and no decision recorded by a reviewer was overwritten."
+    "what_changed_in_this_pass": "Three rows added (S-26 to S-28) for a reviewer to accept, hold or reject. They were numbered S-22 to S-24 on the branch, then renumbered on merge because a concurrent session had already taken S-22 to S-25. No existing row was reworded and no decision recorded by a reviewer was overwritten.",
+    "recommended_path": {
+      "path": "PATH-C",
+      "name": "Measure first",
+      "why": "It is the only path whose every step is cheap, reversible and answers a question the other paths spend money guessing at. The owner's brief says to turn measurement on before writing anything else, and the compliance rule is already enforced in code — so measurement is the remaining unknown, not the content.",
+      "if_you_can_only_do_one_thing": "S-03 — fifteen minutes with a Google account turns every later decision from instinct into evidence.",
+      "review_note": "Choose on this page before anything is implemented. Accept, hold or reject each row; the buttons record your choice in your browser and export it as text. Nothing changes on the site until a session implements an accepted row."
+    }
   },
   "paths": [
     {
@@ -19,7 +26,9 @@
       "summary": "Make the five product pages as good as they can be, then buy traffic or push it socially.",
       "needs": "S-03, S-12, S-16",
       "before_you_choose": "Product pages cannot show a price, so the page has to win on explanation alone. This path is honest but slow until a named author exists.",
-      "good_if": "You can name an editor and want the catalogue to carry the site."
+      "good_if": "You can name an editor and want the catalogue to carry the site.",
+      "verdict": "Right later, wrong first. Product pages cannot show prices until an API exists (Q-04), so polishing them now buys little. Revisit after S-01 and S-05.",
+      "first_moves": "S-02 (name the editor), then S-12"
     },
     {
       "id": "PATH-B",
@@ -27,7 +36,9 @@
       "summary": "Keep publishing question-shaped guides and let search traffic arrive before optimising anything.",
       "needs": "S-07, S-18, S-11",
       "before_you_choose": "Without Search Console this is writing into the dark. S-07 is 15 minutes and makes the rest measurable.",
-      "good_if": "You enjoy writing and can hold a cadence for three months."
+      "good_if": "You enjoy writing and can hold a cadence for three months.",
+      "verdict": "Attractive and half-right, but writing without query data repeats the guess that produced the first ten guides. Do S-03 first, then run this path on measured topics — the article bank in the design brief is the ready queue.",
+      "first_moves": "S-03 first, then S-07's gate lifts and the bank opens"
     },
     {
       "id": "PATH-C",
@@ -35,7 +46,9 @@
       "summary": "Switch on analytics and Search Console, collect four weeks of data, then decide what to build.",
       "needs": "S-06, S-07, S-10",
       "before_you_choose": "Needs a host for the collector and a privacy statement. That is the only real cost.",
-      "good_if": "You would rather have one well-chosen page than eight guessed ones."
+      "good_if": "You would rather have one well-chosen page than eight guessed ones.",
+      "verdict": "Recommended. Fifteen minutes of setup (S-03) plus one test click (S-01) converts the next three months from guesswork into a measured loop. Cost: one Google account and one Associates login.",
+      "first_moves": "S-01, S-03, then wait 28 days"
     }
   ],
   "suggestions": [
@@ -445,6 +458,28 @@
     },
     {
       "id": "S-37",
+      "status": "open",
+      "title": "Adopt the ten house-style rules as the gate for every page",
+      "why": "The design brief now carries a numbered style register (ST-17 to ST-26) that bans the habits that read as generated text: unearned first-person testing, superlatives, hollow meta, monotone rhythm. Adopting it is a decision, not a build task — and it is what separates this site from the AI-slop look the owner named. Each rule already carries its basis, from the Operating Agreement to a plain design decision.",
+      "effort": "one review pass to approve the register",
+      "risk": "None. The rules only constrain future writing; the checker already enforces the disclosure and price rules.",
+      "depends_on": "nothing",
+      "recommendation": "Approve with the design brief; it costs nothing and governs everything written after it",
+      "decision": "accept"
+    },
+    {
+      "id": "S-38",
+      "status": "open",
+      "title": "Open the article bank only where evidence and queries agree",
+      "why": "The design brief now carries 14 working titles in five clusters. None is a popularity claim. The safe move is to let Search Console (S-03) confirm which questions real people ask, then write those from the bank — starting with the two artefact pages (T-26 temperature chart, T-17 cheat sheet) whose every figure can carry an official source.",
+      "effort": "each accepted guide is one build cycle",
+      "risk": "Writing from the bank without query data would repeat the guesswork S-07 exists to stop. T-23 must not be written at all until a citable source exists.",
+      "depends_on": "S-03, S-07",
+      "recommendation": "Queue, do not start — this is the 'what to write next' answer waiting on evidence",
+      "decision": "accept"
+    },
+    {
+      "id": "S-39",
       "status": "proposed",
       "title": "Add a dated 'checked against the source' line to every guide that quotes a figure",
       "why": "The guides that quote federal numbers are the most durable content on the site and the most perishable. A dated line turns 'trust us' into 'trust this, and here is when it was last read'.",
@@ -455,7 +490,7 @@
       "decision": "proposed"
     },
     {
-      "id": "S-38",
+      "id": "S-40",
       "status": "proposed",
       "title": "Choose one indexable taxonomy: categories as the shop, the register as the appendix",
       "why": "/products/ and /categories/ currently both describe five products, both in the sitemap. The shop-facing one should win the index and the register-facing one should stay reachable for checking, not compete. Precedent: S-23 and S-15 settled the same question at edition scale, which is why the decision is worth ten minutes rather than a debate.",
@@ -466,13 +501,13 @@
       "decision": "proposed"
     },
     {
-      "id": "S-39",
+      "id": "S-41",
       "status": "proposed",
-      "title": "Retire or wire the ten orphaned generator modules in _tools/",
+      "title": "Retire or wire the nine generator modules in _tools/ that nothing runs",
       "why": "Ten files in _tools/ look like live editorial entry points and are not reachable from the build. The next session that edits one of them will publish nothing and believe it did.",
       "effort": "an hour to read each and decide",
       "risk": "Deleting content that a reviewer still wants. Move them under _archive/ with the editions they built rather than deleting.",
-      "depends_on": "FLG-036",
+      "depends_on": "FLG-039",
       "recommendation": "Accept in the next integration pass, not in a content pass",
       "decision": "proposed"
     }

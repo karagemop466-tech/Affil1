@@ -334,7 +334,8 @@
         "https://link.amazon/B0c8moW59",
         "https://www.amazon.com/checkpoint/continue"
       ],
-      "raised_by": "session-arena-83e015f6, 2026-11-20"
+      "raised_by": "session-arena-83e015f6, 2026-11-20",
+      "third_pass_note": "A third independent pass (arena/7e19d8e1-affil1, 2026-11-20) opened https://www.amazon.com/dp/B0DHZTCNR5 directly and reached the ThermoMaven 1 Sec listing on the first attempt, agreeing with the register. The pass did not re-walk the short link for P-04."
     },
     {
       "id": "FLG-024",
@@ -377,7 +378,8 @@
       ],
       "blocks": "treating the P-01 short link as verified",
       "update_2026_11_20_by_arena_05771edb": "Superseded as a single-link finding: later passes the same day found this for all five short links at once. Recorded in FLG-028.",
-      "superseded_by": "FLG-028"
+      "superseded_by": "FLG-028",
+      "third_pass_note": "A third independent pass (arena/7e19d8e1-affil1, 2026-11-20) fetched https://link.amazon/B04G1MEwY once: it resolved to https://www.amazon.com/dp/B0CDY277D3 with btn_type=ss&btn_ref=srctok-… parameters (a generated short-link arrival), not to the homepage. One fetch does not refute the earlier homepage observation; link.amazon responses remain unstable request to request, which is the point of this flag."
     },
     {
       "id": "FLG-027",
@@ -413,7 +415,8 @@
         "https://www.amazon.com/dp/B0DZFD6R9Z",
         "https://affiliate-program.amazon.com/help/operating/agreement"
       ],
-      "corroborated_by": "arena/05771edb-affil1, independently, on a later pass the same day: all five short links returned https://www.amazon.com/. Two sessions, two passes, same result. The later pass also re-opened all five direct /dp/ URLs and found each page title matching the register verbatim — including B09B7SB46R (P-02) and B08DKYBTPH (P-03), which the first pass did not re-check. Also reproduced on 2026-11-20T07:05Z by arena/ddb6772b-affil1, in five separate fetches of the five codes, each returning the homepage; the direct /dp/ read of B0CDY277D3 in that same session matched the register title. Three sessions, same result."
+      "corroborated_by": "arena/05771edb-affil1, independently, on a later pass the same day: all five short links returned https://www.amazon.com/. Two sessions, two passes, same result. The later pass also re-opened all five direct /dp/ URLs and found each page title matching the register verbatim — including B09B7SB46R (P-02) and B08DKYBTPH (P-03), which the first pass did not re-check.",
+      "third_pass_note": "A same-day probe (arena/7e19d8e1-affil1, 2026-11-20) fetched https://link.amazon/B04G1MEwY once and reached the product page https://www.amazon.com/dp/B0CDY277D3 with a generated short-link arrival token — one product-page observation. It does not refute the homepage observations above: link.amazon responses are unstable request to request (see FLG-003 and FLG-026). Both dated records are kept; neither is presented as the permanent behaviour."
     },
     {
       "id": "FLG-029",
@@ -522,7 +525,48 @@
     {
       "id": "FLG-036",
       "severity": "low",
-      "title": "Nine generator modules in _tools/ are reachable only from nothing: not the build, not a check, not a workflow",
+      "title": "Eighteen pull requests from earlier sessions remain open and unmerged",
+      "expected": "A repository where session work reaches main or is closed with a recorded reason.",
+      "found": "PRs #9, #12, #19, #24, #39, #47, #54, #62, #65, #69, #72, #82, #84, #86, #93, #94, #96 and #102 are open on GitHub as of 2026-11-20. Several predate the current build pipeline (_tools/build.py + _src/data) and describe editions that were superseded or archived.",
+      "impact": "Reviewers cannot tell which of these represent live work and which are historical. Unmerged does not mean rejected; it means nobody has adjudicated.",
+      "reading": "A human with context should triage: merge what still applies, close what the current pipeline already supersedes, and say which in the PR thread. No agent session should bulk-close another session's work silently.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://github.com/karagemop466-tech/Affil1/pulls"
+      ]
+    },
+    {
+      "id": "FLG-037",
+      "severity": "medium",
+      "title": "The /edition/ tree serves a second indexable front door beside the canonical site",
+      "expected": "One site for search engines to index (the brief). A second public tree should be noindexed, redirected, or merged into the canonical navigation.",
+      "found": "edition/index.html is served publicly with a self-referential canonical (https://karagemop466-tech.github.io/Affil1/edition/), is not listed in sitemap.xml (30 URLs, none under edition/), and robots.txt disallows only /archive/. PR #100 kept edition/ public deliberately as a curated surface and added a gate for working files inside it — but its indexability was not decided.",
+      "impact": "A crawler that finds /edition/ sees a full second publication that canonicalizes to itself and competes with the root for the same five products and topics.",
+      "reading": "Two clean fixes, owner's choice: add <meta name=\"robots\" content=\"noindex, follow\"> to edition/ pages (keeps the surface readable, removes it from the index), or fold the one useful thing it has into the canonical nav and archive the rest. Either is compliant; the status quo splits the site's search footprint.",
+      "blocks": "nothing — but it blunts every organic-traffic effort until it is decided",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/edition/",
+        "https://karagemop466-tech.github.io/Affil1/sitemap.xml",
+        "https://karagemop466-tech.github.io/Affil1/robots.txt"
+      ]
+    },
+    {
+      "id": "FLG-038",
+      "severity": "low",
+      "title": "README.md documents tool paths that no longer exist at those names",
+      "expected": "A reader following README.md finds the paths it names: tools/build.py, src/data/…",
+      "found": "The underscore rename (PR #92 lineage, reinforced by PR #100) moved them to _tools/ and _src/. README.md still says tools/ and src/ in 19 places. The CI workflows use the underscored paths and pass, so this is documentation drift, not a build defect.",
+      "impact": "A human reviewer following the README runs a command that fails and may conclude the repo is broken. Trust is the product here; the manual should not send readers to missing paths.",
+      "reading": "Cosmetic until a maintainer touches README.md; then it should be corrected in the same commit.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://github.com/karagemop466-tech/Affil1/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "FLG-039",
+      "severity": "low",
+      "title": "Nine generator modules in _tools/ are reachable from neither the build nor any workflow",
       "expected": "Every file under _tools/ either runs in the build or runs in CI as a check.",
       "found": "Importing _tools/build.py's module graph resolves 21 of the 31 modules, and the five workflows add validate.py, check_js.py, sweep_surfaces.py, check_deploy_paths.py, research_brief.py and the paid-link tests. Nine content generators are reached by neither: buyer_guides.py, content_extra.py, extra_pages.py, page_sources.py, preview.py, quarantine_legacy.py, shop_build.py, shop_check.py and verify_links.py. Some define guide prose and page templates that supersede nothing. arm_links.py is also unreferenced but is a deliberate owner CLI. extra_pages.py additionally links to /_src/data/reverification.json with a root-absolute URL, which cannot work on a project-pages path.",
       "impact": "Nothing published changes. The risk is a future session editing content_extra.py or buyer_guides.py and believing it has shipped a guide, because the file names look live and the guides inside them read well. Two competing editorial voices sit in one directory with nothing marking which one the site builds.",
@@ -535,14 +579,14 @@
       ]
     },
     {
-      "id": "FLG-037",
+      "id": "FLG-040",
       "severity": "medium",
       "title": "A build rule demands one exact sentence about tag status, which will be wrong the day a Special Link is validated",
       "expected": "A checker should test the state, not a fixed string describing it.",
       "found": "_tools/check.py fails any guide page that does not contain the literal sentence 'No link currently carries the tracking tag'. The guide sidebar is now generated from the approved Special-Link register, so the sentence is true today and is produced only while the register is empty. The first validated link makes the checker require a false statement.",
       "impact": "Two possible bad outcomes at the moment attribution starts: either the build goes red on a correct page, or someone satisfies the checker by hard-coding the sentence again. This project has already shipped one hard-coded attribution sentence that was false (FLG-031).",
       "reading": "The rule should assert the invariant instead: no published Amazon link may carry a tag that the register does not approve. That check already exists in check.py and in test_paid_link_gate.py, so this string test is a duplicate with an expiry date.",
-      "blocks": "nothing today",
+      "blocks": "nothing today; it decides whether the next register change is caught or worked around",
       "to_check": [
         "_tools/check.py, the guides/*.html loop",
         "_tools/page_guides.py::_link_note"

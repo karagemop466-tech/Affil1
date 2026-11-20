@@ -634,6 +634,7 @@ change. What shipped:
 Everything else — API access, custom domain, product photography, paid
 acquisition — is sequenced behind those five and documented on /suggestions/.
 
+<<<<<<< HEAD
 ---
 
 ## Addendum — session `arena/ddb6772b-affil1`, 2026-11-20 UTC
@@ -661,9 +662,10 @@ data rather than from fixed list indices, which every appending session invalida
 Thermometers, SRC-23 FSIS Turkey from Farm to Table, SRC-24 FoodSafety.gov chart, each
 with the page's own date or the words "no update date shown"); two Amazon-policy rows
 drafted here were dropped as duplicates of main's SRC-18/SRC-19. Three new open
-questions (Q-25, Q-26, Q-27), three new board proposals (S-37, S-38, S-39, renumbered
-twice because main took S-26…S-31 and then S-32…S-36 under this branch) and two new
-review flags (FLG-036, FLG-037). Three further proposals were dropped as duplicates of
+questions (Q-25, Q-26, Q-27), three new board proposals (S-39, S-40, S-41) and two new review flags
+(FLG-039, FLG-040). The ids moved three times: main took S-26…S-31, then S-32…S-36,
+then FLG-036…038 under this branch, and each renumbering was resolved by keeping main's
+row and re-filing mine, never by overwriting it. Three further proposals were dropped as duplicates of
 S-01, S-12 and S-24, and the short-link finding was folded into main's FLG-028 as a
 third corroboration rather than filed again.
 
@@ -695,3 +697,67 @@ Almanac edition checks 0 errors · `sweep_surfaces.py` 0 to move · `stage.py` s
 complete · CI-style copy/rebuild/`diff -r` clean. No price,
 rating, review count, stock level, test result or ranking was added; the listing page
 read during verification displayed both, and neither was transcribed.
+=======
+## Session addendum — arena/7e19d8e1-affil1 (2026-11-20)
+
+Decision-grade design feed, discovery map and a third independent verification
+pass, merged the same day with `arena/d0594bc5-affil1`'s work (both histories
+kept; colliding ids renumbered — this session's rows are S-37/S-38 and
+FLG-037/038/036).
+
+- **Design prompt + token pack + house style + a 30-title topic bank**
+  (`suggestions/design.html`). The copy-ready prompt carries the anti-slop rules
+  the owner asked for; the house-style register ST-01..ST-10 gives each rule a
+  basis, quoting live policy where the rule is Amazon's or the FTC's. The bank
+  holds T-01..T-16 (the brief's hypotheses, kept verbatim from the earlier
+  design pack) and T-17..T-30 (session additions in `_src/data/topics.json`,
+  each with the evidence required before writing). Every title is an editorial
+  hypothesis — no keyword tool was consulted and no popularity is claimed. The
+  organic loop is stated as publish → sitemap/feed → internal link → measure
+  queries → next topic, with the Search Console gate named.
+- **Suggestions board answers "which path?" first** (`suggestions/`). PATH-C
+  *Measure first* is recommended with the reason, the first moves (S-01 test
+  click, S-03 Search Console) and the review gate: choose on the page before
+  anything is implemented. This session's rows: **S-37** (adopt the style
+  register) and **S-38** (open the article bank only where evidence and queries
+  agree).
+- **Every open question carries a discovery route** (`questions/`): the action
+  that would close it, who holds the missing fact, and what it costs — 14 rows
+  in the discovery map. No question is closed by inference.
+- **Third independent verification pass** (`_src/data/reverification.json` →
+  `third_pass`, beside the same-day receipt of `arena/d0594bc5-affil1`). All five
+  destinations re-fetched from Amazon's own pages and matched to the register:
+
+  | Ref | Destination | Listing title (transcribed 2026-11-20) |
+  |---|---|---|
+  | P-01 | https://www.amazon.com/dp/B0CDY277D3 | CHEFMAN 6 Quart Dual Basket Air Fryer Oven… |
+  | P-02 | https://www.amazon.com/dp/B09B7SB46R | Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven |
+  | P-03 | https://www.amazon.com/dp/B08DKYBTPH | Chefman Air Fryer 8 Qt TurboFry 4-in-1 |
+  | P-04 | https://www.amazon.com/dp/B0DHZTCNR5 | ThermoMaven 1 Sec Professional Digital Meat Thermometer |
+  | P-05 | https://www.amazon.com/dp/B0DZFD6R9Z | CHEF iQ Sense Smart Wireless Meat Thermometer (Gen3) |
+
+  One short-link probe (link.amazon/B04G1MEwY → B0CDY277D3, generated arrival
+  token) is recorded as a counter-observation on FLG-028; link.amazon responses
+  remain unstable request to request, and both dated records are kept.
+  Policy language re-retrieved verbatim on 2026-11-20:
+
+  | Claim | Source (official) | Status |
+  |---|---|---|
+  | Disclosure sentence, verbatim | [Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) | matched |
+  | Special Links must use the assigned Associates ID | [Program Policies §2(a)](https://affiliate-program.amazon.com/help/operating/policies) | matched |
+  | Tag as URL parameter ("XXXXX-##") | [Program Policies §2(b)](https://affiliate-program.amazon.com/help/operating/policies) | matched (scope reading still FLG-025) |
+  | Prices/availability only from Amazon-served links or Creators/PA API | [Program Policies §2(b)](https://affiliate-program.amazon.com/help/operating/policies) (page updated 2026-04-14) | matched |
+  | `rel="sponsored"` marks paid links | [Google: qualify outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links) | matched |
+  | Material connection disclosed clearly and conspicuously | [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) | matched |
+
+- **Repo review — three new irregularities, all on `/review/`:** FLG-037 (medium)
+  the `/edition/` tree served a second self-canonical front door outside the
+  sitemap (main's same-day S-23/S-27 landed the noindex fix; flag kept with that
+  context), FLG-038 (low) README.md still names `tools/`/`src/` paths renamed
+  `_tools/`/`_src/`, FLG-036 (low) 18 pull requests from earlier sessions
+  remain open and untriaged (main's S-31 proposes the triage). None blocks
+  anything; each names what to check.
+- **Still owner-only, still open:** the Associates test click and report read
+  (S-01, Q-03), the SiteStripe intent register (Q-01), Search Console (S-03,
+  Q-07), an editor name (S-02, Q-08).
+>>>>>>> origin/main
