@@ -31,7 +31,7 @@ jobs:
         run: python3 _tools/validate.py
 
       - name: Launch gate — paid-link unit tests (no synthesised tags, approved register only)
-        run: cd tools && python3 -m unittest test_paid_link_gate -v
+        run: cd _tools && python3 -m unittest test_paid_link_gate -v
 
       - name: Launch gate — no second published surface has crept back in
         run: |

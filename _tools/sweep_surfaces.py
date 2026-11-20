@@ -28,10 +28,10 @@ sys.path.insert(0, str(ROOT / "_tools"))
 
 ARCHIVE_ROOT = "_archive"
 # Hand-maintained internal sections, not published surfaces. Mirrors
-# tools/check.py's INTERNAL_SECTIONS; the decision-support desk is one (see
+# _tools/check.py's INTERNAL_SECTIONS; the decision-support desk is one (see
 # COORDINATION.md — added by session-arena-83e015f6 to unstick the launch
 # gate, which failed on every branch including main).
-INTERNAL_SECTIONS = ("decision-support/",)
+INTERNAL_SECTIONS = ("_decision-support/",)
 PUBLISHED_DIRS = ["guides", "compare", "products", "about", "sources", "suggestions",
                   "questions", "flagged", "legacy", "topics", "dashboard"]
 PUBLISHED_FILES = {"index.html", "404.html", "feed.xml", "sitemap.xml", "robots.txt"}
