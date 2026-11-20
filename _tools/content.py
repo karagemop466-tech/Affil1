@@ -529,6 +529,216 @@ GUIDES.append({
 })
 
 
+# --- Seasonal and trend-led additions, 2026-11-20 ----------------------------
+# Written for the questions people actually type in late November: the shopping
+# weekend, the gift list, the gadget of the moment, and the accessory drawer.
+# Same editorial rule as everything above: product facts come only from listing
+# titles in src/data/products.json; no price, rating, review count or test claim.
+
+GUIDES.append({
+    "slug": "black-friday-air-fryer-checklist",
+    "cluster": "Before you buy",
+    "kicker": "Seasonal shopping",
+    "title": "Black Friday air fryer deals: what should you check before you buy?",
+    "dek": "A discount on the wrong shape is still the wrong purchase. Five minutes with a tape measure and a listing beats an evening with a returns label.",
+    "read_minutes": 5,
+    "photo": "assets/img/black-friday-checklist",
+    "photo_alt": "An engraved illustration of an open notebook, pencil, kitchen timer and coiled tape measure on a counter, with an unbranded air fryer drawn softly behind",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-01", "P-03", "P-02"],
+    "sections": [
+        {
+            "h": "A deal only matters on the machine you would have bought anyway",
+            "p": [
+                "The shopping weekend changes the price tag, not the decision. The format question \u2014 drawer or door, one basket or two \u2014 is exactly the same in November as it is in March, and getting it wrong is expensive at any discount.",
+                "So decide the shape first, with the guides on this site or a piece of paper, and only then go looking at what is on offer. A shortlist of one or two models is all you need; everything else is noise with a countdown on it.",
+            ],
+        },
+        {
+            "h": "The five checks that take five minutes",
+            "items": [
+                ("The format", "Basket, dual-basket or oven-style. If you have not answered this yet, stop reading deals and read the shape guide first."),
+                ("The measurements", "Width and depth of the counter space, height to the cabinet above, and the distance to the nearest socket. Measure the space, not the feeling."),
+                ("The batch reality", "Write down the meal you cook most and how many people eat it. That decides capacity more than any number on the box."),
+                ("The wash-up", "Count the pieces that need washing: one or two drawers, or a rack, a tray and the accessories. Every piece is a piece you own forever."),
+                ("The listing read", "Open the product page and read the title clause by clause. The first clause is usually the job; the rest is the ambition."),
+            ],
+        },
+        {
+            "h": "What to do on the product page itself",
+            "p": [
+                "Amazon serves the current figure, the availability and the delivery date on the listing, and those are the values to read \u2014 this site deliberately publishes none of them, because a copied number is a stale number (SRC-02). Click through from here and read them where they are live.",
+                "While you are there, check the model variant selected on the page. The same title can cover more than one size or colour, and the variant you saw in a promotion is not always the variant the page opens on. Check the return window shown on the listing too, and keep the packaging until you have measured the machine in your kitchen.",
+            ],
+        },
+        {
+            "h": "Where this site helps, and where it stops",
+            "p": [
+                "Everything here is built to make the decision clearer before the shopping starts: the shape guide, the capacity checklist, the space audit and the cleanup guide. What this site does not do is rank machines, score them, or claim anyone cooked with them.",
+                "When you click a product link on this site and buy on Amazon, this site may earn a commission \u2014 that is what the disclosure strip above says on every page, and it costs you nothing extra. It does not change what is written here.",
+            ],
+        },
+        {
+            "h": "If the box arrives and it is wrong",
+            "p": [
+                "It happens: the variant was wrong, the counter was optimistic, the drawer is louder than expected. Return it. An unused machine sent back promptly is a much cheaper mistake than a machine that lives in a cupboard for a year to avoid admitting the mistake.",
+                "Then write down what was wrong before you shop again. Most returns come from one of the five checks above, and the note takes thirty seconds.",
+            ],
+        },
+    ],
+    "closing": "Seasonal framing is editorial. Amazon's homepage was running its Black Friday Week event on 2026-11-20, recorded here as a dated observation only \u2014 no deal, figure or offer is claimed. Product descriptions on this site are transcribed from listing titles reached on 2026-11-20. No product on this site was tested, ranked or scored.",
+})
+
+GUIDES.append({
+    "slug": "air-fryer-gift-guide",
+    "cluster": "Seasonal",
+    "kicker": "The gift edit",
+    "title": "Which air fryer gift fits which cook?",
+    "dek": "Match the format to the person, not the badge on the box. A short guide to giving a countertop appliance someone will actually use in February.",
+    "read_minutes": 5,
+    "photo": "assets/img/gift-edit",
+    "photo_alt": "An engraved illustration of a wrapped gift beside an unbranded air fryer and a probe thermometer on a wooden counter, with sprigs of pine",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-01", "P-02", "P-05"],
+    "sections": [
+        {
+            "h": "Give the format, not the feature list",
+            "p": [
+                "The kindest thing you can do for someone's counter is match the shape of the machine to the shape of their dinners. Everything else \u2014 the presets, the windows, the app \u2014 is second-order. The drawer-versus-door question is first.",
+                "So think about how that person cooks on a normal Wednesday, not on the day they talk about dinner parties. The Wednesday version is who will use the gift.",
+            ],
+        },
+        {
+            "h": "Five people, five sensible gifts",
+            "items": [
+                ("The cook whose dinner comes in two parts", "A dual-basket machine. P-01's listing states two independent 3-quart drawers and a sync-finish setting \u2014 one drawer for the main, one for the side, landing together."),
+                ("The family that cooks one big batch", "A single large basket. P-03's listing states an 8-quart basket in one container, which is the shape that takes a family portion without splitting it."),
+                ("The host who is always short of oven space", "An oven-style machine. P-02's listing states a 26-quart French-door cavity and six cooking accessories \u2014 a second oven for the side dishes and the overflow."),
+                ("The one who reads the thermometer, not the timer", "A leave-in probe set. P-05's listing states three wireless probes and names air fryers among its uses."),
+                ("The no-fuss cook who wants a drawer and nothing else", "An instant-read thermometer instead. P-04's listing states a one-second reading \u2014 the smallest, cheapest way to stop guessing."),
+            ],
+        },
+        {
+            "h": "The measurement nobody thinks to take",
+            "p": [
+                "Before the wrapping paper: how much counter can the person actually give up, and is there a cabinet above? A drawer needs room to lift out; French doors swing forward into the space where a person stands.",
+                "If you cannot measure their kitchen without spoiling the surprise, give a tape measure with the gift. It is a joke and a genuinely useful thing, and it turns a possible return into a plan.",
+            ],
+        },
+        {
+            "h": "What tends to go wrong with appliance gifts",
+            "p": [
+                "The machine is bigger or louder than expected. The colour is not the colour in the picture. The box is opened, used twice, and quietly adopted by the gift-giver instead. None of these are reasons not to give one \u2014 they are reasons to keep the receipt, buy from a listing with a clear return window, and include the person in the format decision if they are the sort who has opinions.",
+                "The other classic mistake is giving accessories before the machine. A rack for a machine nobody owns is clutter with a ribbon on it. If you want to give extras, give them next to the machine, not instead of it.",
+            ],
+        },
+        {
+            "h": "A gift receipt is part of the gift",
+            "p": [
+                "Listings change. Variants multiply. The machine that was in the promotion may not be the machine the page opens on a week later. A gift receipt turns that entire problem from awkward into trivial.",
+            ],
+        },
+    ],
+    "closing": "Product attributes are the sellers' own wording, transcribed from listing titles reached on 2026-11-20. No product on this site was tested, ranked or scored, and nothing here is a claim that any machine cooks well.",
+})
+
+GUIDES.append({
+    "slug": "wireless-thermometer-worth-it",
+    "cluster": "Tools",
+    "kicker": "Tools \u00b7 wireless probes",
+    "title": "Is a wireless meat thermometer worth it?",
+    "dek": "The gadget of the moment answers a real question \u2014 but only if you cook the kind of food that has a middle to get wrong.",
+    "read_minutes": 5,
+    "photo": "assets/img/thermometer",
+    "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-05", "P-04"],
+    "sections": [
+        {
+            "h": "What wireless actually changes",
+            "p": [
+                "A leave-in probe stays in the food while it cooks and reports the middle to a base or a phone. The promise is simple: you stop opening the drawer to check, and you stop guessing. For a roast or a whole bird in a small cavity, that is a genuine change \u2014 every opening costs heat, and the centre is the one place you cannot look.",
+                "For thin pieces \u2014 wings, thighs, fish, vegetables \u2014 the change is smaller. You can read those in seconds with a hand-held probe, and a leave-in probe is more setup than the job needs.",
+            ],
+        },
+        {
+            "h": "Five questions before you buy",
+            "items": [
+                ("What do you actually cook?", "Roasts and whole birds make the case for wireless. Mostly pieces? An instant read does the same job from a drawer."),
+                ("How many things at once?", "P-05's listing states three probes \u2014 useful when a roast and two sides share the cavity. One dish at a time does not need three."),
+                ("Does the heat rating cover your machine?", "P-05's listing states a 1000\u00b0F heat rating, per the seller. Check any probe's stated rating against the temperatures you actually run."),
+                ("Will you live with the base?", "Wireless probes still need somewhere to sit, something to charge and often an app. Countertop space is the currency of this whole category."),
+                ("Is the answer maybe both?", "Many cooks end up with one of each: an instant read for the weeknight, a leave-in for the Sunday roast. P-04 states a one-second reading; P-05 states the wireless set. They solve different halves of the same problem."),
+            ],
+        },
+        {
+            "h": "What it does not do",
+            "p": [
+                "A probe does not make food safe on its own \u2014 it tells you a number, and the number is only useful if the probe is in the right place. USDA FSIS states that colour and texture are unreliable and that a thermometer placed in the thickest part, away from bone, fat and gristle, is the reliable check (SRC-09).",
+                "It also does not fix a badly planned cook. A probe helps you hit the middle; it does not help you fit the tray or time the table. Those are the capacity and hosting questions, and they have their own guides.",
+            ],
+        },
+        {
+            "h": "The pairing most people land on",
+            "p": [
+                "If the budget is one tool, buy the instant read first \u2014 it answers the everyday question and disappears into a drawer. If you cook roasts often, or you are buying a gift for someone who does, the wireless set is the one they will actually brag about.",
+                "Either way, spend on the thermometer before you spend on a bigger machine. Capacity changes how much you cook; temperature changes whether it is any good.",
+            ],
+        },
+    ],
+    "closing": "P-04 and P-05 attributes are the sellers' wording from listing titles reached on 2026-11-20. No thermometer on this site was tested, and no accuracy claim is made beyond what the listings state. Safe-temperature guidance is USDA FSIS's, linked above.",
+})
+
+GUIDES.append({
+    "slug": "air-fryer-accessories-checklist",
+    "cluster": "Before you buy",
+    "kicker": "Before you buy \u00b7 accessories",
+    "title": "Which air-fryer accessories will you actually use?",
+    "dek": "The drawer fills up fast \u2014 liners, racks, tongs, mats, moulds. A short filter for what earns space and what becomes expensive clutter.",
+    "read_minutes": 4,
+    "photo": "assets/img/accessories-tray",
+    "photo_alt": "An engraved illustration of an open kitchen drawer with unbranded air-fryer accessories: tongs, a silicone mat, a wire rack, parchment liners and a brush",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-02", "P-01", "P-04"],
+    "sections": [
+        {
+            "h": "The accessory rule",
+            "p": [
+                "An accessory earns its place only if it solves a problem you have already had twice. Everything else is clutter with a product page. The test is not \u201cwould this be useful one day\u201d \u2014 it is \u201cdid I miss this last week\u201d.",
+                "The second filter: check what is already in the box. P-02's listing states six cooking accessories included; P-01 and P-03 state their baskets and trays. Read the listing before buying a duplicate of something you already own.",
+            ],
+        },
+        {
+            "h": "What tends to earn its place",
+            "items": [
+                ("Liners for the cleanup", "If washing up is the reason the machine sits idle, liners attack the actual problem. The cleanup guide works through what each shape needs."),
+                ("Tongs that fit the drawer", "Short, soft-ended tongs you can work inside a hot basket. The ones from the big-tool-jar are usually too long and too clumsy."),
+                ("A mat for the counter", "Heat protection for the surface under and around the machine \u2014 the boring purchase nobody regrets."),
+                ("A rack only if the manual allows it", "Stacking changes how air moves. If the exact model's manual says a rack or stacking is supported in the mode you use, fine. If it is silent, assume it is not a good idea."),
+            ],
+        },
+        {
+            "h": "What tends to gather dust",
+            "items": [
+                ("Unitaskers", "Anything that makes one specific shape of one specific food. Fun in the product photo, unused by the third week."),
+                ("Oversized inserts", "If an insert shrinks the food area you actually use, it has made the machine smaller. Measure the basket before the accessory goes in the cart."),
+                ("Second copies of included parts", "The most common accessory purchase is a spare of something the box already contained."),
+            ],
+        },
+        {
+            "h": "Where the money usually goes further",
+            "p": [
+                "A thermometer. Accessories change the convenience of the cook; a probe changes the result \u2014 and it is the one tool that works across every machine you will ever own. If the gift budget or the treat-yourself budget is small, that is where it goes first.",
+            ],
+        },
+    ],
+    "closing": "Included-accessory claims are the sellers' wording from listing titles reached on 2026-11-20. No accessory on this site was tested, and compatibility with any specific machine is a question for that machine's manual, not for this page.",
+})
+
 COMPARE_COLUMNS = [
     ("Product", "Brand and shape as stated on the listing"),
     ("Shape", "Basket, oven or thermometer, read from the title and category path"),

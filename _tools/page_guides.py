@@ -51,7 +51,7 @@ def build_index(page_dir):
     return page(
         d,
         title="Guides \u2014 air fryers, capacity and thermometers | Crisp & Counter",
-        description=f"{len(GUIDES)} question-shaped buying guides: basket or oven, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers and seasonal hosting.",
+        description=f"{len(GUIDES)} question-shaped buying guides: basket or oven, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers, seasonal hosting, gift formats and the Black Friday checklist.",
         body=body,
         active="guides/index.html",
         canonical="guides/",
