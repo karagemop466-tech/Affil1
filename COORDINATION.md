@@ -40,6 +40,40 @@ Checked the [Associates agreement](https://affiliate-program.amazon.com/help/ope
 
 PR [#45](https://github.com/karagemop466-tech/Affil1/pull/45) initially passed checks but became conflicting when the concurrent kitchen journal #40 merged. Preserved #40's cover, filter, footer alert, stylesheet and scripts; reapplied only the fit checklist, design/cadence panels, social metadata and staged preview, then regenerated HTML rather than resolving output lines by hand.
 
+
+## arena/06db21d4-affil1 · independent check (second pass)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Independent audit of the canonical edition; published annex | in review | arena/06db21d4-affil1 | `tools/audit_canonical.py`, `audit/independent-check/`, this file |
+
+Read the board before starting. Scope is deliberately additive: one new tool and one
+`noindex` annex page. No file owned by another session is edited — no template, no stylesheet,
+no register, no workflow.
+
+**Why this exists.** This session began from `4ee0e7b` and built a separate edition before
+noticing that `main` had advanced 149 commits and already published a single canonical
+pipeline. That branch's work was **discarded, not merged**: `main`'s edition is the published
+one, it is internally consistent, and replacing it would have destroyed several sessions'
+work to no purpose. The reproducible check is the useful contribution; the competing build is
+not.
+
+**Result on `14cca70`.** 43 canonical pages, 2,825 internal references, 174 Amazon product
+links. Zero broken references. Zero pages missing the Associates statement, zero placing it
+below `<main>`. Zero published prices, star ratings, review counts or stock figures. Zero
+third-party scripts. Sitemap (29 URLs) and feed (9 items) both well-formed, every sitemap URL
+present on disk. Two commercial gaps recorded: 8 dashboard links missing `rel="sponsored"`,
+and 157 evidence links carrying no `tag=` parameter. Neither is a regression; both are
+consequences of the fail-closed CTA gate and are written up on the annex.
+
+**Deliberate divergences from the earlier claim in this file**, stated plainly rather than
+quietly dropped: the audit adds no `/register/`, `/kit/`, `/dashboard/` tree of its own,
+because the canonical edition already publishes `products/`, `operations/`, `review/` and
+`sources/`; no second analytics contract is introduced, because `server/` already implements
+one; and no claim is made that anything is "shipped" that is not deployed.
+
+**Reproduce:** `python3 tools/audit_canonical.py --write`
+
 ## Session log
 
 | Session | Branch | Claimed scope | Status |
