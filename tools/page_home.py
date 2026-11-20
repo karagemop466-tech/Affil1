@@ -22,23 +22,19 @@ BUYER_NOTES = {
 
 def product_card(page_dir, p):
     href = rel(page_dir, f"products/{p['ref'].lower()}.html")
-    return f"""<article class="pcard">
-  <div class="pcard-media">{img(page_dir, p['photo'], p['photo_alt'], sizes='(max-width:720px) 100vw, 350px')}
-    <span class="illus-tag">Format illustration</span></div>
-  <div class="pcard-body">
-    <p class="pcard-ref">{esc(p['stated_capacity'])} &middot; seller-stated</p>
-    <h3><a href="{esc(href)}">{esc(_short(p))}</a></h3>
-    <p>{esc(BUYER_NOTES[p['ref']])}</p>
-    <p class="pcard-actions"><a class="tlink" href="{esc(href)}">Product details &rarr;</a>
-      {product_link(page_dir, p['listing_url'], 'View on Amazon &#8599;', cls='tlink tlink-sponsor')}</p>
-  </div>
-</article>"""
-
-
-def _short(p):
-    shape = p.get("format_label") or ""
-    brand = p.get("brand") or ""
-    return f"{brand} {shape}".strip()
+    art, name, spec = {
+        "P-01": ("dual", "Chefman Dual Basket", "6 qt · Two baskets"),
+        "P-02": ("oven", "Emeril Lagasse French Door", "26 qt · Oven style"),
+        "P-03": ("single", "Chefman TurboFry", "8 qt · Single basket"),
+    }[p['ref']]
+    return f"""<article class="edit-card">
+  <a class="edit-art" href="{esc(href)}" aria-label="Read about {esc(name)}">
+    <img src="{esc(rel(page_dir, 'assets/img/storefront-' + art + '-w900.jpg'))}" loading="lazy" alt="Editorial drawing of the {esc(p['format_label'])} format">
+    <span class="folio">FIG. {esc(p['ref'][-2:])}</span><span class="art-note">Format illustration</span></a>
+  <div class="edit-info"><span class="ink-label">{esc(spec)}</span>
+    <h3><a href="{esc(href)}">{esc(name)}</a></h3><p>{esc(BUYER_NOTES[p['ref']])}</p>
+    <a class="edit-more" href="{esc(href)}">Explore this format →</a>
+  </div></article>"""
 
 
 def guide_card(page_dir, g, *, feature=False):
@@ -62,59 +58,21 @@ def build(page_dir, products, meta):
     by_ref = {p["ref"]: p for p in products}
     mains = [by_ref[r] for r in ("P-01", "P-02", "P-03")]
 
-    hero = f"""<section class="hero">
-  <div class="hero-media">
-    <img src="{esc(rel(d, 'assets/img/hero-counter-w1280.jpg'))}"
-         srcset="{esc(rel(d, 'assets/img/hero-counter-w760.jpg'))} 760w, {esc(rel(d, 'assets/img/hero-counter-w1280.jpg'))} 1280w"
-         sizes="100vw" alt="An unbranded air fryer on a wooden kitchen counter in morning light, with lemons, salt and thyme" fetchpriority="high" decoding="async">
-    <span class="hero-illus">Illustration</span>
-  </div>
-  <div class="wrap hero-inner">
-    <div class="hero-copy">
-      {eyebrow('The kitchen edit')}
-      <h1>Find the air fryer<br><em>that fits.</em></h1>
-      <p class="hero-dek">One basket, two baskets or a countertop oven? Start with what you cook, how much counter space you have, and what you want to wash afterward.</p>
-      <p class="hero-actions">
-        <a class="btn" href="{esc(rel(d, 'products/index.html'))}">See the shortlist</a>
-        <a class="btn btn-ghost" href="{esc(rel(d, 'guides/index.html'))}">Start with a guide</a>
-      </p>
-      <p class="hero-fine">Listing-based comparisons, not hands-on reviews.</p>
-    </div>
-  </div>
+    hero = f"""<section class="issue-cover wrap">
+  <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 01</span> THE COUNTERTOP EDIT</p>
+    <h1>The air fryer<br><em>field guide.</em></h1>
+    <p class="cover-dek">One basket, two baskets, or French doors? Find the format that fits your counter and the way you cook.</p>
+    <div class="cover-actions"><a class="cover-btn" href="#shortlist">Explore the shortlist <span>→</span></a>
+      <a class="cover-link" href="{esc(rel(d, 'compare/index.html'))}">Compare formats ↗</a></div></div>
+  <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
+    <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
+    <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
 </section>"""
 
-    paths = section(f"""
-<div class="sec-head">
-  <div>{eyebrow('Three ways in')}<h2>Start from the decision you are actually facing</h2></div>
-  <p>Most air-fryer advice starts with a product. These start with the thing that is making the choice hard.</p>
-</div>
-<div class="path-grid">
-  <a class="path" href="{esc(rel(d, 'guides/basket-or-oven-air-fryer.html'))}">
-    <span class="path-n">01</span><h2>I do not know which shape I want</h2>
-    <p>Basket or oven changes how often you intervene, how much door space you need, and what you can put inside.</p>
-    <span class="tlink">Compare the shapes <span aria-hidden="true">&rarr;</span></span>
-  </a>
-  <a class="path" href="{esc(rel(d, 'guides/air-fryer-capacity-checklist.html'))}">
-    <span class="path-n">02</span><h2>I cannot tell if it is big enough</h2>
-    <p>A quart figure is a volume. You cook on a surface. Here is how to convert one into the other before you buy.</p>
-    <span class="tlink">Work out capacity <span aria-hidden="true">&rarr;</span></span>
-  </a>
-  <a class="path" href="{esc(rel(d, 'guides/cleanup-and-counter-space.html'))}">
-    <span class="path-n">03</span><h2>I am worried it will end up in a cupboard</h2>
-    <p>The parts you wash and the space it occupies decide whether you keep using it. Both are checkable in five minutes.</p>
-    <span class="tlink">Check the everyday cost <span aria-hidden="true">&rarr;</span></span>
-  </a>
-</div>""", cls="paths")
-
-    shortlist = section(f"""
-<div class="sec-head">
-  <div>{eyebrow('The shortlist')}<h2>Three air fryer formats to compare</h2></div>
-  <p>Start with the format that matches your weeknight cooking, then check the details before buying.</p>
-</div>
-<div class="pcard-grid wide">
-  {''.join(product_card(d, p) for p in mains)}
-</div>
-<p class="sec-foot"><a href="{esc(rel(d, 'compare/index.html'))}">Compare the formats side by side &rarr;</a></p>""", cls="shortlist", sid="compare")
+    shortlist = section(f"""<div class="edit-head"><div><p class="ink-label"><i></i> SHOP BY FORMAT</p>
+      <h2>The countertop shortlist<span>.</span></h2></div>
+      <a class="edit-all" href="{esc(rel(d,'products/index.html'))}">All products <span>→</span></a></div>
+      <div class="edit-grid">{''.join(product_card(d,p) for p in mains)}</div>""", cls="edit-shop", sid="shortlist")
 
     thermometer = f"""<section class="thermo-band"><div class="wrap thermo-inner">
   <div class="thermo-art">{img(d, 'assets/img/thermometer', 'A probe thermometer resting in a roasted chicken beside a small display unit', sizes='(max-width:720px) 100vw, 420px')}<span class="illus-tag">Illustration</span></div>
@@ -122,13 +80,14 @@ def build(page_dir, products, meta):
     {eyebrow('Cooking tools')}
     <h2>Instant-read or wireless?</h2>
     <p>For a quick spot check, compare instant-read models. For monitoring while food cooks, check the wireless probe’s app and device requirements.</p>
+    <p>These two submitted links have opened different listings across checks. <a class="tlink" href="{esc(rel(d, 'review/index.html'))}#FLG-016">See the destination notes →</a></p>
     <p class="thermo-actions"><a class="btn btn-light" href="{esc(rel(d, 'products/p-05.html'))}">CHEF iQ wireless details</a> <a class="btn btn-light" href="{esc(rel(d, 'products/p-04.html'))}">ThermoMaven instant-read details</a></p>
   </div>
 </div></section>"""
 
     guides = section(f"""
 <div class="sec-head">
-  <div>{eyebrow('Buying guides')}<h2>Written to be useful before you click</h2></div>
+  <div>{eyebrow('Buying guides')}<h2>Before you clear the counter</h2></div>
   <p>Use these checklists before you measure the counter, compare capacity or decide which features you’ll actually use.</p>
 </div>
 <div class="gcard-grid">
@@ -139,7 +98,7 @@ def build(page_dir, products, meta):
     subscribe = section(f"""
 <div class="sec-head"><div>{eyebrow('Keep reading')}<h2>Get new guides in your feed reader</h2></div>
 <p><a class="tlink" href="{esc(rel(d, 'feed.xml'))}">Follow Crisp &amp; Counter via RSS &rarr;</a></p></div>""")
-    body = "\n".join([hero, shortlist, guides, paths, thermometer, subscribe])
+    body = "\n".join([hero, shortlist, thermometer, guides, subscribe])
 
     structured = {
         "@context": "https://schema.org",

@@ -29,8 +29,9 @@ AFFILIATE_HINT = __import__("re").compile(
 
 # The only navigation group. Everything else lives in the footer.
 NAV = [
-    ("guides/index.html", "Guides"),
-    ("products/index.html", "Shortlist"),
+    ("index.html", "Home"),
+    ("guides/index.html", "Buying guides"),
+    ("products/index.html", "Product shortlist"),
     ("compare/index.html", "Compare"),
     ("brief/index.html", "Site desk"),
 ]
@@ -118,9 +119,8 @@ def kindle(summary, body):
 def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
-    <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Product links are marked as sponsored. Tracking on the supplied links has not been confirmed.
-      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
+    <span class="disc-icon" aria-hidden="true">i</span>
+    <p>{DISCLOSURE} <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Affiliate disclosure</a></p>
   </div>
 </div>"""
 
@@ -137,8 +137,8 @@ def masthead(page_dir, active=None):
     return f"""<header class="masthead">
   <div class="wrap masthead-inner">
     <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">
+      <svg class="brand-mark" width="39" height="39" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="10" fill="#35233c"/><g stroke="#f9db9a" stroke-width="1.8" stroke-linecap="round"><path d="M7 24h21c-1 5-6 7-11 7s-9-2-10-7Zm20-1 6-4M10 20h14M14 17c-4-4 4-5 0-9m6 9c-4-4 4-5 0-9"/></g></svg>
       <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
-      <span class="brand-tag">{SITE_TAGLINE}</span>
     </a>
     <nav class="nav" aria-label="Sections">
       {"".join(items)}
@@ -180,6 +180,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
             + json.dumps(structured, ensure_ascii=False)
             + "</script>\n"
         )
+    destination_note = '' if not canonical else f'''<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>'''
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -199,13 +200,14 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
+<link rel="stylesheet" href="{esc(rel(page_dir, 'assets/css/storefront.css'))}">
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
+{destination_note}
 {body}
 </main>
 {footer(page_dir)}
