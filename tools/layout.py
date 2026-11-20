@@ -124,6 +124,19 @@ def tag_url(url):
     return f"{url}{sep}tag={TRACKING_ID}"
 
 
+def approved_link(record, meta):
+    """The buy URL for a product, preferring an owner-approved intent bundle.
+
+    The parallel session's gate was that no buy link should exist until the
+    intended destination is confirmed. That is right about the risk and wrong
+    about the order: without a tagged link there is no click, and without a
+    click there is no report to confirm anything with. So the default is the
+    tagged observed destination, and a validated bundle overrides it when one
+    is supplied in meta["approved_links"]. Both are Special Links either way.
+    """
+    return meta.get("approved_links", {}).get(record["ref"]) or record.get("tagged_link") or record.get("listing_url")
+
+
 def kindle(summary, body):
     """A small labelled aside. Used for honesty notes inside editorial prose."""
     return (

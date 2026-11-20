@@ -77,6 +77,26 @@ Product identity lives in `src/data/products.json`. The `intended_asin` and
 `review/index.html#FLG-001` for why.
 
 
+## What the parallel session added, and what was kept
+
+PR #38 (`arena/02502b50-affil1`) landed while this branch was open and is merged in
+rather than overwritten. What was kept:
+
+- `kitchen-build/` — an operator preflight that validates a product-intent record
+  (intended ASIN, official listing URL, confirmation date and source, approved
+  Special Link, tracking report reference) and refuses a paid CTA without one. It
+  also generates `operations/launch-readiness.html`, which is an operator surface
+  and is therefore `noindex`.
+- `guides/holiday-side-dish-capacity.html` — a seasonal guide that cites the USDA
+  rather than inventing a food-safety figure.
+- The buyer-note line on each product card, and the "Observed" framing that came
+  with it.
+
+What was not carried over: their two Search Console help quotes in
+`sources.json`. They were read in their session and not re-read in this one, so
+they are not republished here as verified. The claim they support — that Search
+Console shows queries and accepts a sitemap — is asserted nowhere on this site.
+
 ## One edition, one index
 
 `main` also carries a second edition built by a parallel session: a `crisp/`

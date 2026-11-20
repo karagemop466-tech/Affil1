@@ -54,7 +54,10 @@
       "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
       "verified_in_session": "2026-11-20",
       "tagged_link": "https://www.amazon.com/dp/B0CDY277D3/?tag=shopnow047c-20",
-      "arrival_url_had_tag": false
+      "arrival_url_had_tag": false,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-02",
@@ -97,7 +100,10 @@
       "stated_attributes": "24 one-touch presets; six cooking accessories included",
       "verified_in_session": "2026-11-20",
       "tagged_link": "https://www.amazon.com/dp/B09B7SB46R/?tag=shopnow047c-20",
-      "arrival_url_had_tag": false
+      "arrival_url_had_tag": false,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-03",
@@ -141,7 +147,10 @@
       "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
       "verified_in_session": "2026-11-20",
       "tagged_link": "https://www.amazon.com/dp/B08DKYBTPH/?tag=shopnow047c-20",
-      "arrival_url_had_tag": false
+      "arrival_url_had_tag": false,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-04",
@@ -186,7 +195,10 @@
       "priority_note": "Resolved on retry. No product was guessed and no earlier attempt was overwritten.",
       "verified_in_session": "2026-11-20",
       "tagged_link": "https://www.amazon.com/dp/B0DHZTCNR5/?tag=shopnow047c-20",
-      "arrival_url_had_tag": false
+      "arrival_url_had_tag": false,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-05",
@@ -230,7 +242,10 @@
       "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
       "verified_in_session": "2026-11-20",
       "tagged_link": "https://www.amazon.com/dp/B0DZFD6R9Z/?tag=shopnow047c-20",
-      "arrival_url_had_tag": false
+      "arrival_url_had_tag": false,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     }
   ]
 }

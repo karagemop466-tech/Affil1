@@ -35,6 +35,15 @@ def img(page_dir, path, alt, *, sizes, cls="", loading="lazy"):
     )
 
 
+BUYER_NOTES = {
+    "P-01": "Cooking dinner and a side at once? Compare the size of each basket, not just their combined volume.",
+    "P-02": "Want room for a tray? Check the usable rack area and how far the doors swing before you commit counter space.",
+    "P-03": "One basket, one batch. Check whether the meal you cook most often fits in a single layer.",
+    "P-04": "Need a number in a second, standing at the hob? That is the job this one is sold for.",
+    "P-05": "Want to walk away while a roast finishes? That is a different job, and a different device.",
+}
+
+
 def product_card(page_dir, p, *, compact=False):
     href = rel(page_dir, f"products/{p['ref'].lower()}.html")
     if p["identity_confidence"] == "unresolved":
@@ -64,6 +73,7 @@ def product_card(page_dir, p, *, compact=False):
         body = f"""<div class="pcard-body">
     <p class="pcard-ref">{esc(p['ref'])} &middot; identity checked {esc(p['checked_on'])}</p>
     <h3><a href="{esc(href)}">{esc(_short(p))}</a></h3>
+    <p class="pcard-note">{esc(BUYER_NOTES.get(p['ref'], ''))}</p>
     <dl class="pcard-specs">{attrs}</dl>
     <p class="pcard-actions"><a class="tlink" href="{esc(href)}">Read the record <span aria-hidden="true">&rarr;</span></a>
     {product_link(page_dir, p.get('tagged_link') or p['listing_url'], 'See listing <span aria-hidden="true">&#8599;</span>', cls='tlink tlink-sponsor', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}</p>

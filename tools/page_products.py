@@ -1,7 +1,7 @@
 """Product register and the per-product records."""
 
-from layout import (blank, esc, eyebrow, link, outbound, page, product_link, rel,
-                    section, table, DISCLOSURE)
+from layout import (DISCLOSURE, approved_link, blank, esc, eyebrow, link, outbound,
+                    page, product_link, rel, section, table)
 from page_home import img
 
 FIELDS = [
@@ -25,7 +25,7 @@ def buy_url(p):
     submitted short link is never used as a click target: its own tracking
     behaviour was never observable from outside.
     """
-    return p.get("tagged_link") or p.get("listing_url")
+    return approved_link(p, {})
 
 
 def _short(p):

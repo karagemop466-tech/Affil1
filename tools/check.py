@@ -122,7 +122,7 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
 CITATION_OK = re.compile(
-    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
+    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|sell\.amazon\.com|support\.google\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"sellercentral\.amazon\.com|sell\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"www\.ftc\.gov)",
@@ -195,11 +195,28 @@ def check_page(path):
             if "tag=shopnow047c-20" not in href:
                 err(f"{rel}: Amazon retail link without the Associates tag: {href}")
 
-    # --- Amazon links must be sponsored ---
+    # --- Amazon links must be sponsored, tagged, and any approval claim must hold ---
+    # The kitchen-build preflight (a parallel session's tool) is the only thing
+    # allowed to declare a link "approved". A link may not claim that approval
+    # unless the intent record actually validates for it.
+    sys.path.insert(0, str(ROOT / "kitchen-build"))
+    try:
+        import readiness
+        intent = json.loads(readiness.INTENT.read_text())
+    except Exception:
+        readiness, intent = None, {"records": []}
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
+            paid = a.get("data-affiliate-ref")
+            if paid:
+                ok = readiness is not None and any(
+                    p["ref"] == paid and p["approved_special_link"] == href
+                    and readiness.eligible(p, intent["tracking_id_supplied"])
+                    for p in intent["records"])
+                if not ok:
+                    err(f"{rel}: link claims an approval bundle that does not validate: {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:
@@ -273,7 +290,7 @@ def check_sitemap_feed():
     from build import GENERATED  # the build's own list, not a second copy
     generated = set()
     for g in GENERATED:
-        if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
+        if g in ("404.html", "operations/launch-readiness.html", "sitemap.xml", "feed.xml", "robots.txt"):
             continue
         generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
     for u in sorted(generated):
@@ -365,7 +382,8 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for spec in json.loads((ROOT / "src/data/events.json").read_text())["events"]:
+        ev = spec["name"]
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:

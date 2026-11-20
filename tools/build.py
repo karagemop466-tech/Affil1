@@ -29,6 +29,12 @@ import page_review  # noqa: E402
 import page_desk  # noqa: E402
 import page_decisions  # noqa: E402
 import legacy  # noqa: E402
+
+# The parallel session's operator preflight (PR #38). Imported here so that
+# kitchen-build/check and tools/check.py can both reach the same intent record
+# without duplicating its validation rules.
+sys.path.insert(0, str(ROOT / "kitchen-build"))
+import readiness  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -53,6 +59,7 @@ GENERATED = {
     "guides/cleanup-and-counter-space.html",
     "guides/multi-function-kitchen-appliance-questions.html",
     "guides/thermometer-instant-or-wireless.html",
+    "guides/holiday-side-dish-capacity.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",

@@ -10,10 +10,10 @@
 
 ## 1. What this is, in one paragraph
 
-A 25-page static publication built from `src/data/`, checked by a script that fails
+A 26-page static publication built from `src/data/`, checked by a script that fails
 the build on a broken link, an untagged Amazon link, a missing disclosure or a
 reintroduced price. It leads with five products that were individually opened and
-recorded, follows them with five question-shaped buying guides, and publishes its
+recorded, follows them with six question-shaped buying guides, and publishes its
 own gaps rather than filling them: no prices, no ratings, no test results, no
 named author and no revenue claim appear anywhere, because none of those could be
 sourced.
@@ -67,7 +67,7 @@ is logged row by row on `/review/verification.html`.
 |---|---|
 | Front page | Products first, method second; dated change log; two thermometers in their own band |
 | Product register and five records | All five identified; intended ASIN, observed ASIN and tagged link are three separate fields |
-| Guides | Five, including the new instant-read vs wireless thermometer guide |
+| Guides | Six, including the instant-read vs wireless thermometer guide and a seasonal sides guide that cites the USDA |
 | Compare | Every product side by side, with blanks left blank |
 | Questions | 15 research questions, 6 answered with a source |
 | Before you decide | **New.** 16 decisions in four ordered gates: what is known, what is missing, who can supply it, what artefact closes it |
@@ -75,6 +75,7 @@ is logged row by row on `/review/verification.html`.
 | Review queue | 17 flags, severity-ordered, with closed flags kept rather than deleted |
 | Verification log | **New.** 5 links, 7 sources, 9 findings from this pass |
 | Image policy, measurement plan, ledger | Unchanged in substance: illustrations are labelled; analytics is inert; the ledger is empty and says why |
+| `operations/launch-readiness.html` | Operator surface from PR #38: a product-intent record that must validate before a link may be labelled approved. noindex, and not in the sitemap |
 
 ## 6. What is deliberately absent
 
@@ -99,3 +100,13 @@ is logged row by row on `/review/verification.html`.
 
 Everything a reviewer needs to disagree with is written down, with its source, on
 `/questions/decisions.html` and `/review/verification.html`.
+
+## 8. Where the two parallel sessions disagreed
+
+One thing only, and it is worth naming. PR #38 gated the shop so that no buy link
+existed until the intended destination was confirmed. This branch emits a tagged
+link to the observed destination. Both are defensible; the resolution here is to
+emit the tagged link — without a click there is no report, and without a report the
+intent can never be confirmed — while keeping their preflight as the gate that must
+pass before any link is labelled *approved*. Their tooling, seasonal guide and
+product-card notes are merged in, not replaced.

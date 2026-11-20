@@ -64,7 +64,7 @@
   ];
 
   var DISCLOSURE_TEXT =
-    "As an Amazon Associate we earn from qualifying purchases. Links marked \u201csponsored\u201d are affiliate links. " +
+    "As an Amazon Associate I earn from qualifying purchases. Links marked \u201csponsored\u201d are affiliate links. " +
     "Full statement: affiliate disclosure.";
 
   function buildHeader(currentPath) {

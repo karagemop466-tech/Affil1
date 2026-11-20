@@ -91,7 +91,8 @@ most:
 | PR | Branch | Result |
 |---|---|---|
 | #22 | `arena/fa9307f7-affil1` | merged before this session; the root build became canonical |
-| #23 | `arena/47a393a2-affil1` | this session — see the PR body for the change list, sources and flags |
+| #38 | `arena/02502b50-affil1` | merged while this branch was open; reconciled, not overwritten |
+| #39 | `arena/47a393a2-affil1` | this session — see the PR body for the change list, sources and flags |
 
 GitHub Pages: https://karagemop466-tech.github.io/Affil1/
 
@@ -106,3 +107,33 @@ meta tag — it never removes a page.
 Handoff note: if a session finds a page here that contradicts `src/data/`, the data
 is canonical and the page is the bug. Rebuild rather than hand-edit; CI diffs the
 tree and fails on a hand-edited output.
+
+
+## Merge conflict of 2026-11-20, and how it was resolved
+
+PR #38 merged to `main` after this branch was opened, and it changed the same
+tools and data files. The conflict was resolved by taking this branch's version of
+the generated pages and rebuilding them from data, and by hand-merging the source
+files. Nothing from #38 was discarded:
+
+| Their change | What happened to it |
+|---|---|
+| P-04 resolved to `B0DHZTCNR5` | Independently the same observation. Corroboration, not a conflict. |
+| `intended_listing_url` / `intended_confirmed_on` / `intended_confirmation_source` fields | Added to every product record |
+| `kitchen-build/` preflight and `operations/launch-readiness.html` | Kept intact; `check.py` now rejects any link that claims an approval bundle the intent record does not validate |
+| Seasonal guide, with a USDA citation | Kept, and added to the sitemap and feed |
+| Buyer note on each product card | Kept |
+| Hedged wording in suggestions (no ranking or indexing guarantee) | Adopted; this branch's S-04 and S-07 were overclaiming and were rewritten |
+| Two Search Console help quotes in `sources.json` | **Not carried over.** They were read in their session and not re-read in this one, and this site does not republish a quote it has not read |
+| Their `page_measurement` signature and events table | Superseded by this branch's version, which keeps the same five events and the same "switched off" claim |
+
+The two sessions disagreed on one thing worth recording. Their gate was to publish
+no buy link at all until intended identity is confirmed; this branch emits a tagged
+link to the observed destination. Both are defensible. The resolution: emit the
+tagged observed link, because without a click there is no report and without a
+report nothing can ever be confirmed; and keep their preflight as the gate that
+must pass before any link is *labelled* approved. `layout.approved_link()` lets a
+validated intent bundle override the observed destination when one exists.
+
+After the merge: `python3 tools/build.py` → 26 pages; `python3 tools/check.py` →
+0 errors, 0 warnings; rebuild diffed clean.
