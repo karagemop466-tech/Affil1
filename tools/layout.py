@@ -69,6 +69,7 @@ FOOTER_GROUPS = [
         ("about/index.html", "About & how we link"),
         ("about/index.html#sources", "Sources"),
         ("review/index.html", "Flagged for review"),
+        ("review/audit.html", "The audit: every claim checked"),
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
     ]),

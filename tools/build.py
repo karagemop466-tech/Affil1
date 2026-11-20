@@ -29,6 +29,7 @@ import page_suggestions  # noqa: E402
 import page_decide  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
+import page_audit  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -53,6 +54,7 @@ GENERATED = {
     "suggestions/index.html", "suggestions/design.html", "fit/index.html",
     "decide/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
+    "review/audit.html",
     "about/index.html",
     "operations/ledger.html",
     "brief/index.html",
@@ -190,6 +192,7 @@ def main():
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))
     pages.append(write("review/images.html", page_review.build_images("review", images, products, meta)))
     pages.append(write("review/measurement.html", page_review.build_measurement("review", meta)))
+    pages.append(write("review/audit.html", page_audit.build("review", load("audit.json"), meta)))
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
