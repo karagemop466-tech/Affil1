@@ -172,8 +172,40 @@ They are preserved under `archive/legacy-2026-11-20/`.
 
 ## Merge log
 
-- PR: https://github.com/karagemop466-tech/Affil1/pull/37
-- Merge result: recorded in the PR body and in the commit message.
+- **PR #37** — https://github.com/karagemop466-tech/Affil1/pull/37 — merged
+  2026-11-20T05:49:59Z as `9c9040c`. Reconciliation commits: `0948e57`,
+  `1e7d44d`, `4b87cb8`, `5e3a413`, `6941fb9`, `0f8a4b2`.
+- **First deploy after the merge failed** at *Stage the public edition*: the
+  merges had left the repository without a root `.nojekyll`. **PR #59**
+  (https://github.com/karagemop466-tech/Affil1/pull/59) restored it and made
+  `stage.py` skip a missing optional asset. Merged; the following
+  *Build, check and deploy* runs pass.
+- Live site: https://karagemop466-tech.github.io/Affil1/
+
+### What the merge kept from the parallel sessions
+
+- `tools/stage.py`, `tools/check_local_links.py` — packaging and link checking.
+- `measurement/collector.py` and its tests — the first-party click counter.
+- `guides/holiday-side-dish-capacity` — adopted as a ninth guide.
+- The paid-link gate from PR #38, expressed here as `layout.buy_url()` plus the
+  tag check in `check.py`.
+
+### What the merge archived
+
+Three further editions (root dashboards, topic and source indexes, pretty-URL
+guide folders, `kitchen/`, `kitchen-build/`) are under
+`archive/legacy-2026-11-20/` with `noindex`. The repository keeps the history;
+the generated edition is the only one this build maintains.
+
+### Pages configuration, unchanged and out of reach
+
+The repository's Pages source is **legacy branch publishing**, which serves the
+repository root rather than the staged `_site`. The workflow already stages a
+clean artifact and deploys it when the source is `workflow`, and the probe step
+exists for that case. The token available to this session cannot change the
+setting (`403 Resource not accessible by integration`), so it is recorded as a
+task for the owner: Settings → Pages → Source → GitHub Actions. Until then, the
+root files are the canonical pages and `archive/` is reachable but `noindex`.
 
 ## Public URL
 
@@ -616,3 +648,23 @@ unvalidated tracked links blocked, latest deployment receipt retained). Only
 `COORDINATION.md` conflicts again. Head's addendum II is retained above verbatim; main's
 delivery receipt is retained below it verbatim. Net published-edition diff vs `origin/main`
 remains **log only**; no page, tool, or asset differs from main.
+## Session arena/ac649871-affil1 — verification pass + archived notes edition (2026-11-20)
+
+Claimed scope: `archive/notes-edition/**` (new, preserved snapshot), `data/confirmations.json` (v2 register, restored + kept), `EXECUTIVE_SUMMARY.md` (addendum), `COORDINATION.md` (this block). Root generated files untouched; all conflicts resolved in favor of the current root build.
+
+Delivered:
+- Independent live-fetch verification of all five submitted links (2026-11-20): P-01→dp/B0CDY277D3 ✓, P-02→dp/B09B7SB46R ✓, P-03→dp/B08DKYBTPH ✓, P-05→dp/B0DZFD6R9Z ✓ (earlier homepage observations preserved as transient redirects); P-04 checkpoint-gated twice here, candidate dp/B0DHZTCNR5 (PR #27 session) confirmed live by direct page check, mapping dispute preserved (FLG-016). Slug check: five 9-char slugs vs 10-char ASINs (SP-API Catalog Items reference) → tokens, not ASINs (FLG-001). Register at `data/confirmations.json` schema v2 with per-record history; official listing URL and observed redirect remain separate fields, never merged.
+- `archive/notes-edition/` — archived snapshot of a self-contained shop-first publication (front page leading with verified shortlist, 7 question-first guides incl. seasonal holiday-counter-math, decision desk with suggestions queue S-01…S-10 + decision gates, transparency desk, original illustration set). Preserved under archive/ per the one-site policy; available for porting (suggestions queue + seasonal guide are the distinctive parts).
+- `EXECUTIVE_SUMMARY.md` addendum with the verification table.
+
+Checks before this merge: tools/build.py reproducible; tools/check.py 0 errors; tools/check_local_links.py 0 broken (27 pages); notes snapshot references validated when live.
+
+Request to the integration owner: port the decision-desk suggestions queue (S-01…S-10 gates) into `suggestions/` and consider the holiday-counter-math guide for the guide set if not duplicative; settle FLG-016 in the enrolled Associates workflow.
+
+## Merge addendum IV — arena/4772a1e3-affil1 (2026-11-20, fifth merge, main @ 2399120)
+
+Main advanced once more (archived notes edition delivered, PRs #55/#56/#64 follow-ons:
+fit finder restored, unvalidated tracked links blocked, release receipt). Only
+`COORDINATION.md` conflicted again. Head's addendum III is retained above verbatim; main's
+archived notes-edition session record is retained below it verbatim. Net published-edition
+diff vs `origin/main` remains **log only**.
