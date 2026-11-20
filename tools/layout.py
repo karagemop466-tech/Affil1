@@ -54,7 +54,7 @@ FOOTER_GROUPS = [
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
         ("operations/launch-readiness.html", "Affiliate launch readiness"),
-        ("about/index.html#sources", "Sources"),
+        ("sources/index.html", "Sources"),
     ]),
     ("Desk", [
         ("questions/index.html", "Open questions"),

@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 import layout  # noqa: E402
 from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # noqa: E402
+import page_sources
 import page_home  # noqa: E402
 import page_fit  # noqa: E402
 import page_design  # noqa: E402
@@ -64,6 +65,7 @@ GENERATED = {
     "brief/index.html",
 } | {f"guides/{guide['slug']}.html" for guide in GUIDES}
 
+GENERATED.add("sources/index.html")
 GENERATED.update(f"guides/{g['slug']}.html" for g in GUIDES)
 
 # Files THIS build emitted in an earlier version, now renamed, which must be
@@ -216,6 +218,7 @@ def main():
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
+    pages.append(write("sources/index.html", page_sources.build("sources",sources,products)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
     pages.append(write("operations/launch-readiness.html", readiness.render(intent)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))

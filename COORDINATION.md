@@ -437,3 +437,5 @@ Preserved the latest hosting recommendation, ASIN citation, legacy collector ret
 Pre-merge rebase after #46: preserved the more complete fit finder, guide cluster, and its generated navigation. Narrowed this PR to the sourced launch/design panels and staged analytics preview so it does not replace work that is already live.
 
 Pre-push after #49/#53: kept their storefront and suggestions changes; regenerated our sourced decision sections against their current output and removed overlapping style additions.
+
+Integrated #51's independent provenance and legacy quarantine. Retained its noindex metadata on legacy files and new illustration assets. Reconciled the conflicting commercial design by preserving the stricter approved-link gate (a constructed tag is not a tracking report), adding the official sources desk to this publication, and keeping the five-event privacy contract and nine-guide cluster. #51’s detailed coordination record remains in its merge history.
