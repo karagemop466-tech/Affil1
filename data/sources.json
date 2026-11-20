@@ -1,0 +1,247 @@
+{
+  "$comment": "SOURCE REGISTER. Every row carries an official URL. 'verified' means the value was read directly off the linked official page by this session on verified_at. 'unverified' means no official source states it; the value column is left empty. Never infer or fill in a value.",
+  "register_version": 1,
+  "verified_at": "2026-11-20",
+  "sources": [
+    {
+      "id": "S01",
+      "claim": "Associates must clearly and prominently state 'As an Amazon Associate I earn from qualifying purchases.'",
+      "value": "Required disclosure wording, Section 5 (Identifying Yourself as an Associate)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Operating Agreement page shows 'Updated: October 15, 2025'. A violation of Section 5 is stated to be a material breach (Section 6)."
+    },
+    {
+      "id": "S02",
+      "claim": "Links must use the tagged Special Link formats Amazon provides; links must use the assigned Associates ID.",
+      "value": "Special Links required; tag must appear as a URL parameter (Participation Requirements, Section 2)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Program Policies page shows 'Updated: April 14, 2026'. The supplied short links use the link.amazon shortener; whether that format counts as a compliant Special Link is not resolved by this page, which is why it is tracked as FLG-003 rather than asserted either way."
+    },
+    {
+      "id": "S03",
+      "claim": "Associates may not use a link shortening service in a way that makes it unclear the visitor is linking to an Amazon Site.",
+      "value": "Participation Requirements, Section 1(w)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Directly relevant to short-link usage on a page. Our design therefore labels every outbound control with the destination Amazon listing."
+    },
+    {
+      "id": "S04",
+      "claim": "Associates may not display customer reviews or star ratings unless obtained through Creators API or PA API.",
+      "value": "Participation Requirements, Section 1(t)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "This is why no star rating or review excerpt appears anywhere on this site, even though ratings are visible on the listings."
+    },
+    {
+      "id": "S05",
+      "claim": "Prices and availability may only be shown if Amazon serves them in the link, or if obtained via Creators API / PA API.",
+      "value": "Participation Requirements, Section 2(b)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Consequence: this site states no price. Prices observed on listings are volatile and were not API-sourced, so they are excluded rather than copied."
+    },
+    {
+      "id": "S06",
+      "claim": "Associates may not engage in Prohibited Paid Search Placement, including bidding on 'amazon' or Amazon Marks.",
+      "value": "Commission Income Statement, Section 2(c) and Participation Requirements, Section 1(f)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Sets a hard constraint on the paid-acquisition suggestions in the suggestion register."
+    },
+    {
+      "id": "S07",
+      "claim": "Purchases referred by a link generated or displayed on a search engine are disqualified.",
+      "value": "Commission Income Statement, Section 2(d)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Important nuance for the SEO plan: organic traffic must land on our own site, not on an Amazon link placed in a search result. Our design never places an Amazon link in a search result."
+    },
+    {
+      "id": "S08",
+      "claim": "Purchases referred through a Redirecting Link (an intermediate site with no affirmative click) are disqualified.",
+      "value": "Commission Income Statement, Section 2(e)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "This is the reason the outbound counter is designed as a fire-and-forget beacon on a real user click, not an auto-redirect."
+    },
+    {
+      "id": "S09",
+      "claim": "Associates may not cloak or obscure the URL of the site containing Special Links.",
+      "value": "Participation Requirements, Section 1(v)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Directly constrains any click-tracking redirect endpoint. Our endpoint is write-only telemetry and never performs the navigation."
+    },
+    {
+      "id": "S10",
+      "claim": "A session begins at the click and ends after 24 hours, at order placement, or at another Associate's link click.",
+      "value": "Commission Income Statement, Section 1(b)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Defines the attribution window the ledger's 'eligible sessions' column must respect."
+    },
+    {
+      "id": "S11",
+      "claim": "Commission income is paid approximately 60 days after the end of the month in which it was earned.",
+      "value": "Commission Income Statement, Section 6",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Sets the realistic lag before a campaign ledger row can show reported orders."
+    },
+    {
+      "id": "S12",
+      "claim": "US payment minimums: 10 USD direct deposit, 10 USD gift card, 100 USD check, 15 USD check processing fee.",
+      "value": "Payment Minimum Chart",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Read from the Payment Minimum Chart table."
+    },
+    {
+      "id": "S13",
+      "claim": "An Amazon Associates tag may not contain an Amazon trademark, and the tag must not be used in a domain name.",
+      "value": "Participation Requirements, Section 1(g)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "The supplied tag shopnow047c-20 contains no Amazon mark, so this row passes. The site is hosted on github.io, which is not an Amazon-confusable domain."
+    },
+    {
+      "id": "S14",
+      "claim": "The site must contain original content; third-party material needs significant commentary, analysis, or transformation.",
+      "value": "Participation Requirements, Section 1; strengthened by the April 14, 2026 update",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/compare",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "What's-changed page states 'Original Content Definition: Added definition requiring original content to contain commentary, analysis or transformation for additional value.'"
+    },
+    {
+      "id": "S15",
+      "claim": "From April 14, 2026 a 180-day limit applies: the product must be shipped/streamed/downloaded and paid for within 180 days of purchase.",
+      "value": "Qualifying Purchases, 180-day time limit",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/compare",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "This is a forward-dated change notice on the official page. It is recorded as stated, not interpreted."
+    },
+    {
+      "id": "S16",
+      "claim": "From April 14, 2026, products purchased by customers referred through any paid or boosted advertisement linking to Amazon are disqualified, with limited exceptions.",
+      "value": "Disqualified Purchases, expanded paid-advertising exclusion",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/compare",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Materially constrains any plan to buy traffic. Recorded as a decision input, not a recommendation to buy traffic."
+    },
+    {
+      "id": "S17",
+      "claim": "Amazon's Commission Income Statement appendix links to a Standard Commission Income schedule.",
+      "value": "Appendix links to /help/operating/schedule",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/schedule",
+      "verified_at": "2026-11-20",
+      "status": "unverified",
+      "note": "The schedule URL redirects to an Amazon sign-in page, so no commission rate could be read without an account. No commission percentage is stated anywhere on this site."
+    },
+    {
+      "id": "S18",
+      "claim": "FTC: disclose a material connection clearly and prominently, hard to miss, with simple language such as 'advertisement', 'ad', or 'sponsored'.",
+      "value": "Disclosures 101 for Social Media Influencers",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Guidance states disclosures are likely to be missed if they appear only on an ABOUT page, at the end of posts, or anywhere requiring a click. This is the basis for the masthead strip."
+    },
+    {
+      "id": "S19",
+      "claim": "FTC: you cannot talk about your experience with a product you have not tried, or make claims requiring proof the advertiser does not have.",
+      "value": "Disclosures 101, 'What Else to Know'",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Governing constraint on guide copy: no hands-on test claims are made anywhere on this site, because this session did not test any product."
+    },
+    {
+      "id": "S20",
+      "claim": "Google supports XML, RSS/Atom, and text sitemap formats, and recommends submitting a sitemap through Search Console.",
+      "value": "Build and submit a sitemap",
+      "publisher": "Google Search Central",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Basis for shipping both sitemap.xml and an RSS feed, and for the robots.txt Sitemap directive."
+    },
+    {
+      "id": "S21",
+      "claim": "GitHub Pages publishes from a branch and folder, and can publish via a GitHub Actions workflow.",
+      "value": "Configuring a publishing source for your GitHub Pages site",
+      "publisher": "GitHub Docs",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Basis for the Pages workflow in .github/workflows/deploy-pages.yml."
+    },
+    {
+      "id": "S22",
+      "claim": "An Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique identifier assigned by Amazon for product identification.",
+      "value": "ASIN definition",
+      "publisher": "Amazon Seller Central glossary",
+      "url": "https://sellercentral.amazon.com/help/hub/reference/external/G200436010",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "This is the 'checkable identifier' rationale for the product-intent record. Note the 10-character shape: the observed targets B0CDY277D3, B09B7SB46R, B08DKYBTPH and B0DZFD6R9Z are each 10 characters."
+    },
+    {
+      "id": "S23",
+      "claim": "The five supplied short-link codes are not themselves valid ASINs in the form supplied.",
+      "value": "",
+      "publisher": "",
+      "url": "https://www.amazon.com/dp/B0C8MOW59",
+      "verified_at": "2026-11-20",
+      "status": "unverified",
+      "note": "The codes B04G1MEwY and B02NbDxp3 are 9 characters, and all five use mixed case; an ASIN is 10 characters. A direct fetch of /dp/B0C8MOW59 returned no product. This does NOT establish that the short links are non-compliant — their compliance status is unresolved and tracked as FLG-003. Flagged rather than concluded."
+    },
+    {
+      "id": "S24",
+      "claim": "Amazon Associates statement on influencer/advertising law: Influencer Content and Site are subject to Section 3(b) of the Participation Requirements relating to compliance with all applicable laws, for example the US FTC Endorsement Guides.",
+      "value": "Influencer Program Policy, Section 3(c)",
+      "publisher": "Amazon Associates Central",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "verified_at": "2026-11-20",
+      "status": "verified",
+      "note": "Confirms the Operating Agreement and FTC guidance are cumulative, not alternatives. Both are enforced in the build gate."
+    }
+  ]
+}

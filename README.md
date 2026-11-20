@@ -1,76 +1,133 @@
-# Affil1 — Amazon affiliate site
+# The Crisp Counter
 
-Buyer-first affiliate editorial site for air fryers and multi-function kitchen appliances. Built to read like a shop, not an audit: product picks lead the front page, every page carries an above-the-fold Associates disclosure, and every outbound product link is marked `sponsored`.
+A publication-style shop for four kitchen appliances, built as a static site and
+deployed to GitHub Pages — with the verification layer published next to the
+shop rather than filed away from it.
 
-**Tracking ID:** `shopnow047c-20` (user-supplied; account enrollment and live attribution unverified)
-**Branch:** `arena/f10ea853-affil1` (base `cca8c2a`, merged with parallel session `arena/8e0006cf-affil1`)
-**Prepared:** 2026-11-20
+**Live site:** https://karagemop466-tech.github.io/Affil1/
+**Associates ID:** `shopnow047c-20`
 
-## What’s in the repo
+> As an Amazon Associate I earn from qualifying purchases.
 
-- `/` — Affil1 publication front page: product picks, buyer-question guides, how it works
-- `/categories/air-fryers.html` — findings table (one row per submitted link, source link per row)
-- `/dashboard.html` — entries/findings table, empty campaign ledger, measurement status
-- `/guides/` — question-shaped buying guides (working titles)
-- `/suggestions.html` — decision suggestions; review before implementing
-- `/reviews/flagged.html` — Affil1 Flagged for Review page (irregularities and unverified items)
-- `/guides/flagged-for-review.html` — parallel session’s review queue (Good Measure Kitchen)
-- `/disclosure.html` — Associates statement (tracking ID `shopnow047c-20`)
-- `/privacy.html` — privacy notice for self-hosted analytics
-- `/assets/css/main.css` — design system
-- `/assets/js/common.js` — shared masthead, navigation group, disclosure strip, footer
-- `/assets/js/analytics.js` — privacy-preserving client; five defined events; outbound click counter
-- `/server/collect.js` — self-hosted analytics endpoint (Node.js, run outside GitHub Pages)
-- `/data/confirmations.json` — product-intent confirmation records
-- `/data/campaign-ledger.json` — empty campaign ledger with provenance trail
-- `/app.js`, `/data.js`, `/styles.css` — parallel session’s static storefront components (retained)
-- `/feed.xml` — parallel session’s RSS feed (retained)
-- `/sitemap.xml`, `/rss.xml`, `/robots.txt`
+---
 
-## Verification standard
+## What this repository contains
 
-Every table row carries a source link to an official source (Amazon.com). Values not confirmed from an official source are left blank and flagged — never inferred. Full records: `data/confirmations.json`.
+| Path | What it is |
+|---|---|
+| `index.html` | Front page: masthead, disclosure strip, seasonal feature, product shelf, guides |
+| `shop/` | Shop index, four product pages, and one held-link page |
+| `guides/` | Guide index and four question-shaped buying guides |
+| `about/` | Disclosure, sourcing policy, and what the site deliberately does not publish |
+| `summary/` | Executive summary |
+| `records/` | The verification layer: source register, product intent, compliance, measurement, campaign ledger, open questions, suggestions, flagged for review |
+| `data/` | The source of truth. Every table on the site renders from these files |
+| `content/` | Product and guide copy, as data |
+| `lib/` | Site config and rendering primitives |
+| `scripts/build.mjs` | Generates every HTML page, plus sitemap, feed and robots |
+| `scripts/check.mjs` | The build gate. Fails the build on a compliance or link violation |
+| `scripts/test-gate.mjs` | Injects deliberate violations and asserts the gate catches them |
+| `COORDINATION.md` | The shared task board, including the integration log for three parallel sessions |
+| `analytics/endpoint.py` | Self-hosted collector contributed by a parallel session; the candidate host for the click counter |
+| `archive/` | Superseded pages from parallel sessions, preserved rather than deleted. Excluded from the gate |
+| `docs/` | Parallel-session documents kept for review (legacy privacy notice, their executive summary) |
 
-Verified against Amazon.com (official site), fetched 2026-11-20:
+Everything under `shop/`, `guides/`, `records/`, `about/`, `summary/`,
+`index.html`, `404.html`, `sitemap.xml`, `feed.xml` and `robots.txt` is
+**generated**. Edit `content/`, `data/`, `lib/` or `scripts/build.mjs`, never the
+generated output.
 
-| # | Submitted link | Intended ASIN | Verified listing | Status |
-|---|---|---|---|---|
-| 1 | https://link.amazon/B04G1MEwY | B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | Verified |
-| 2 | https://link.amazon/B02NbDxp3 | B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Verified |
-| 3 | https://link.amazon/B00hJ57DV | B00hJ57DV | — | Unverified — homepage reached |
-| 4 | https://link.amazon/B0c8moW59 | B0c8moW59 | — | Unverified — Amazon checkpoint |
-| 5 | https://link.amazon/B0f3GKalj | B0f3GKalj | — | Unverified — homepage reached |
+## Commands
 
-## Preview locally
+```bash
+npm run build    # regenerate the whole site
+npm run check    # run the compliance and link gate
+npm test         # prove the gate catches deliberate violations
+npm run verify   # all three, in order (this is what CI runs)
+npm run serve    # local preview on http://localhost:4321
+```
 
-Run `python3 -m http.server 8080 --bind 0.0.0.0` and open the preview. The site is plain HTML/CSS/JS and has no build dependencies.
+No dependencies. Node 20+, standard library only.
+
+## The five verification commitments
+
+1. **Every table row has a source link.** `records/source-register/` carries a
+   link to the official page behind each claim.
+2. **Unconfirmed values are blank, not guessed.** A row that could not be
+   verified has an empty value cell and an `unverified` badge.
+3. **Intent and observation are separate fields.** `data/product-intent.json`
+   keeps `intended_asin` apart from `observed_redirect_target` and never merges
+   them.
+4. **The ledger is empty on purpose.** `data/campaign-ledger.json` has defined
+   columns and zero rows. No conversion score, no revenue forecast.
+5. **Every open question is published.** `records/questions/` lists the fourteen
+   gaps, what each one blocks, and how to close it.
+
+## What the site deliberately does not publish
+
+- **Prices.** Amazon permits showing a price only when Amazon serves it or when
+  it comes from an approved API, and a copied price is wrong within the hour.
+- **Star ratings and review quotes.** Restricted to data obtained through
+  Amazon's APIs.
+- **Hands-on testing claims.** No product here has been tested by this desk, and
+  the FTC is explicit that you cannot describe experience you have not had.
+- **Rankings and "best of" lists.** A ranking implies a comparison that was
+  actually performed.
+
+Each of these is enforced by the gate, not just by good intentions.
+
+## The five submitted links, as verified on 2026-11-20
+
+| Submitted | Observed destination | Status |
+|---|---|---|
+| `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` — Chefman 6 Qt dual basket | observed only |
+| `link.amazon/B02NbDxp3` | `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French door | observed only |
+| `link.amazon/B00hJ57DV` | `amazon.com/dp/B08DKYBTPH` — Chefman TurboFry 8 Qt | observed only |
+| `link.amazon/B0c8moW59` | none reached | **unresolved — held** |
+| `link.amazon/B0f3GKalj` | `amazon.com/dp/B0DZFD6R9Z` — CHEF iQ Sense thermometer | observed only |
+
+No intended ASIN has been confirmed for any link. The observations above record
+what each link *did*, which is not the same as what it was *meant* to do.
+
+## Repository history note
+
+Three agent sessions worked this repository in parallel on 2026-11-20. Their
+work was merged into `main` while this session was building, which produced two
+competing surfaces for the same site. The integration kept this session's
+generated shop as the canonical site and moved the other surface into
+`archive/legacy-surface/`, because publishing both would create exactly the
+duplicate-site problem the brief asks to avoid — and the gate found 129 rule
+violations across the superseded pages. Nothing was deleted. The full account,
+including which of their artifacts were kept live, is in `COORDINATION.md`.
+Where the two surfaces disagree on facts, this session's dated observation is
+newer: it resolved **4 of 5** submitted links; the earlier table recorded 2 of 5.
+
+## Open items
+
+See `records/flagged/` for the eight flagged items, and `records/questions/` for
+what each one blocks. The two that need a person rather than an engineering
+session are the unconfirmed intended ASINs and the unresolved question of
+whether the submitted short-link format is a compliant Special Link.
 
 ## Deployment
 
-`.github/workflows/pages.yml` deploys to GitHub Pages on pushes to `main` and on manual workflow dispatch. Enable GitHub Pages with **GitHub Actions** as the source in repository settings. Update `sitemap.xml` and `rss.xml` if the canonical Pages URL differs from `https://karagemop466-tech.github.io/Affil1/`. Search Console and analytics require account/property setup and are not falsely represented as connected.
+GitHub Pages publishes this repository from the **main branch root** (legacy
+build type), so the generated HTML is committed. Because of that,
+`.github/workflows/deploy-pages.yml` is a **gate rather than a deployer**: on
+every push and pull request it
 
-## Self-hosted analytics
+1. rebuilds the site from `data/` and `content/`,
+2. fails if the committed output differs from that clean build, so generated
+   pages cannot drift from their source of truth,
+3. runs the compliance gate, and
+4. runs the gate's own negative test.
 
-GitHub Pages is static, so the collector must run outside Pages:
+A red run means the published site should not be trusted. To move to a
+workflow-driven deploy instead, change Settings → Pages → Build and deployment →
+Source to *GitHub Actions* and restore the `upload-pages-artifact` /
+`deploy-pages` steps.
 
-```
-node server/collect.js   # PORT=8080 by default; set $PORT to override
-POST /analytics/collect  # newline-delimited JSON events -> data/events.jsonl
-```
+## Licence
 
-The client degrades silently if the collector is unreachable.
-
-## Decision process
-
-Suggestions live on `/suggestions.html`. Nothing is implemented until a suggestion is reviewed and a path is chosen. See `PUBLISHING_WORKFLOW.md` for the pre-publish compliance gate.
-
-## Coordination
-
-`COORDINATION.md` is the shared task board for parallel sessions. Claim tasks there before working.
-
-## Editorial and compliance limits (both sessions)
-
-- Top-of-page and footer Associates disclosure on each page.
-- Submitted outbound product links use `rel="sponsored nofollow"`.
-- No product features, price, reviews, rank, popularity, commission, conversion, or revenue claims are populated without evidence.
-- Flagged pages list missing data, official source references, and next steps; unverified means unverified — not invalid.
+Content and code in this repository are unpublished work product. No licence is
+granted. Amazon product names and trademarks belong to their respective owners.

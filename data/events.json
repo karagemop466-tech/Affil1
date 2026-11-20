@@ -1,0 +1,41 @@
+{
+  "$comment": "DEFINED EVENTS. Five events, all first-party, all aggregate. No user identifier is stored for any of them. The client beacon is inert until an endpoint is configured (see Q-06).",
+  "events_version": 1,
+  "tag": "shopnow047c-20",
+  "privacy_stance": "No cookie. No localStorage. No IP storage. No user agent. No session id. No cross-site pixel. Each event is an aggregate counter keyed only by page path and, for outbound clicks, product id and day.",
+  "events": [
+    {
+      "name": "page_view",
+      "fires_when": "A page finishes loading.",
+      "payload": ["path"],
+      "status": "defined, endpoint not connected"
+    },
+    {
+      "name": "outbound_click",
+      "fires_when": "A reader activates an outbound Amazon control. Fired on a real activation; the browser performs the navigation itself.",
+      "payload": ["product_id", "placement"],
+      "status": "defined, endpoint not connected",
+      "note": "Not a redirect. The anchor's href is the Amazon URL. This keeps the site clear of the Redirecting Link and URL-obscuring rules (S08, S09)."
+    },
+    {
+      "name": "guide_read",
+      "fires_when": "A reader reaches the end of a guide.",
+      "payload": ["guide_id"],
+      "status": "defined, endpoint not connected"
+    },
+    {
+      "name": "record_open",
+      "fires_when": "A reader opens a records or flagged-for-review page.",
+      "payload": ["record_id"],
+      "status": "defined, endpoint not connected",
+      "note": "Useful for telling apart buyer traffic from review traffic."
+    },
+    {
+      "name": "suggestion_decide",
+      "fires_when": "An owner marks a suggestion accepted, rejected, or deferred on the suggestions page.",
+      "payload": ["suggestion_id", "state"],
+      "status": "defined, endpoint not connected",
+      "note": "Design intent: this records the decision locally in the browser only. No server write is implied."
+    }
+  ]
+}

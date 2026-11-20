@@ -1,0 +1,93 @@
+{
+  "$comment": "PRODUCT-INTENT CONFIRMATION RECORD. Two field groups are deliberately kept separate and must never be merged: (1) intended_asin / official_listing_url / confirmation_date / confirmation_source describe what the submitter INTENDED; (2) observed_redirect_* describe what a fetch actually returned. An observation is not a confirmation of intent. Amazon's own ASIN definition is the checkable identifier, so a mapping only becomes 'confirmed' when the owner states the ASIN or when a dated Associates report shows the click landing on that ASIN.",
+  "record_version": 1,
+  "updated_at": "2026-11-20",
+  "tag": "shopnow047c-20",
+  "field_rules": {
+    "intended_asin": "Set only from a statement by the link submitter or from an Associates tracking report. Never inferred from a redirect. Null when unknown.",
+    "official_listing_url": "Canonical https://www.amazon.com/dp/<ASIN> built from intended_asin only. Null when intended_asin is null.",
+    "confirmation_date": "ISO date the intent was confirmed. Null when unconfirmed.",
+    "confirmation_source": "What confirmed it (person, message, report id). Null when unconfirmed.",
+    "observed_redirect_target": "Exact URL the short link resolved to during automated observation. Evidence only. Never copied into intended_asin.",
+    "observed_at": "ISO timestamp of the observation.",
+    "observation_method": "How the observation was made, so it can be repeated.",
+    "status": "one of: confirmed | observed_only | unresolved"
+  },
+  "products": [
+    {
+      "id": "P1",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "submitted_code": "B04G1MEwY",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "observed_at": "2026-11-20T05:20:00Z",
+      "observation_method": "Automated fetch of the short link; final URL and page title recorded.",
+      "status": "observed_only",
+      "flag": "FLG-003"
+    },
+    {
+      "id": "P2",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "submitted_code": "B02NbDxp3",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "observed_at": "2026-11-20T05:20:00Z",
+      "observation_method": "Automated fetch of the short link; final URL and page title recorded.",
+      "status": "observed_only",
+      "flag": "FLG-003"
+    },
+    {
+      "id": "P3",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "submitted_code": "B00hJ57DV",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_listing_title": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "observed_at": "2026-11-20T05:24:00Z",
+      "observation_method": "Automated fetch of the short link; final URL and page title recorded.",
+      "status": "observed_only",
+      "flag": "FLG-003"
+    },
+    {
+      "id": "P4",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "submitted_code": "B0c8moW59",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "observed_redirect_target": null,
+      "observed_listing_title": null,
+      "observed_at": "2026-11-20T05:31:00Z",
+      "observation_method": "Automated fetch returned an Amazon bot-check interstitial (/checkpoint/continue), then the Amazon homepage on retry. A direct ASIN-page fetch for B0C8MOW59 returned no result. Repeated attempts produced the same two outcomes.",
+      "status": "unresolved",
+      "flag": "FLG-001"
+    },
+    {
+      "id": "P5",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "submitted_code": "B0f3GKalj",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_listing_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "observed_at": "2026-11-20T05:28:00Z",
+      "observation_method": "Automated fetch of the short link; final URL and page title recorded.",
+      "status": "observed_only",
+      "flag": "FLG-003"
+    }
+  ]
+}

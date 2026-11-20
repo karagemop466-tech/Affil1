@@ -1,0 +1,15 @@
+{
+  "name": "affil1-crisp-counter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Crisp Counter — a publication-style shop for kitchen tools, with the verification layer published alongside it.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node scripts/test-gate.mjs",
+    "verify": "node scripts/build.mjs && node scripts/check.mjs && node scripts/test-gate.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "license": "UNLICENSED"
+}
