@@ -3,78 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decision suggestions — review before implementing | Affil1</title>
-<meta name="description" content="Suggestions for improving the site and affiliate program. Review each suggestion and choose the best path before implementing any changes. Nothing here is implemented until reviewed.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="alternate" type="application/rss+xml" title="Affil1" href="rss.xml">
+<title>Suggestions for review — choose the path before changes ship | Good Measure Kitchen</title>
+<meta name="description" content="A reviewed queue of proposed improvements for this site: each suggestion with rationale, effort, dependencies, status and the decision gate that must pass before anything is implemented.">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions.html">
+<link rel="stylesheet" href="styles.css">
+<link rel="alternate" type="application/rss+xml" title="Good Measure Kitchen — new guides" href="feed.xml">
 </head>
 <body>
-<div id="site-header"></div>
-<main class="container">
-  <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
-    <a href="index.html">Home</a> &rsaquo; Suggestions
+<div class="disclosure"><div class="wrap"><p>As an Amazon Associate I earn from qualifying purchases. <a href="guides/flagged-for-review.html#disclosure">How our links work</a></p></div></div>
+<header class="masthead wrap">
+  <a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a>
+  <nav aria-label="Main navigation">
+    <a href="index.html#shop">The shortlist</a>
+    <a href="guides/index.html">Guides</a>
+    <a href="questions.html">Decision questions</a>
+    <details><summary>More</summary><div class="menu">
+      <a href="executive-summary.html">Executive summary</a>
+      <a href="dashboard.html">Verification dashboard</a>
+      <a href="guides/flagged-for-review.html">Flagged for review</a>
+      <a href="feed.xml">RSS</a>
+      <a href="crisp/"><strong>Crisp &amp; Counter edition →</strong></a>
+    </div></details>
   </nav>
-  <section class="section-tight">
-    <h1>Decision suggestions</h1>
-    <p>This section is a review inbox, not a to-do list. Review each suggestion, choose the best path, and record a decision before anything is implemented. No suggestion here has been approved.</p>
+</header>
+<main class="wrap section">
+  <p class="eyebrow">DECISION DESK · SUGGESTIONS QUEUE</p>
+  <h1>Proposals under review —<br><em>choose before you build.</em></h1>
+  <p class="lead">Every proposed change to this site lands here first, with the reasoning, the effort, the dependencies and the gate that must pass before implementation. Nothing on this page has been implemented on its own recommendation alone; a reviewer picks the path and records the decision.</p>
 
-    <div class="section-head" style="margin-top:22px;">
-      <h2>Open for review</h2>
-    </div>
+  <h2 style="margin-top:1.6em">How to use this queue</h2>
+  <ul>
+    <li><b>Statuses:</b> <span class="status-tag status-pending">Awaiting decision</span> = ready to review · <span class="status-tag status-verified">Adopted</span> = approved and scheduled · <span class="status-tag status-flagged">Blocked</span> = a gate must pass first (e.g. account access, policy review).</li>
+    <li><b>Decision gate:</b> the specific evidence or permission that must exist before work starts. No gate, no build.</li>
+    <li><b>Pick a path, write it down:</b> mark one item <i>Adopted</i> at a time, record who decided and when, then implement. This page is the paper trail.</li>
+  </ul>
 
-    <article class="sugg">
-      <div class="decide">S-001 &middot; Proposed &middot; Owner: site editor</div>
-      <p><strong>Suggestion:</strong> Add price and commission tracking to each product row once pricing is confirmed from an official source.</p>
-      <p><strong>Why:</strong> Buyers act on price; commission potential drives link placement decisions.</p>
-      <p><strong>Blocker:</strong> Prices are blank today because they were not confirmed from an official source — nothing may be inferred or filled in.</p>
-      <p><strong>Paths:</strong> (a) Wait for authorized first-party price reports, then add a verified price column; (b) add a manual “check price” step with dated source; (c) decline until Associates reporting provides it.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-001'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
+  <h2 style="margin-top:1.6em">The queue</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Suggestion</th><th>Why it matters</th><th>Effort</th><th>Depends on</th><th>Status</th><th>Decision gate</th></tr></thead>
+    <tbody>
+      <tr><td><b>S-01</b></td><td>Test one outbound link per product in the enrolled Associates workflow (SiteStripe) and confirm destination + tracking report before scaling</td><td>Turns "links that resolve" into "links that earn and report" — the difference between a brochure and a campaign</td><td>Low</td><td>Associates account access (operator)</td><td><span class="status-tag status-flagged">Blocked</span></td><td>Tracking report shows the test click for tag shopnow047c-20</td></tr>
+      <tr><td><b>S-02</b></td><td>Re-verify all five short links on a fixed schedule (weekly, automated where possible) and date-stamp every record</td><td>Listings change; a stale verification is a broken promise to readers</td><td>Low</td><td>None — performed 2026-11-20; needs scheduling</td><td><span class="status-tag status-pending">Awaiting decision</span></td><td>Reviewer sets cadence + owner</td></tr>
+      <tr><td><b>S-03</b></td><td>Verify Search Console property and submit sitemap.xml + feed.xml</td><td>"Make it findable": one canonical site for the index, and a reason to rank it (question-shaped guides)</td><td>Low</td><td>Google account access (operator)</td><td><span class="status-tag status-flagged">Blocked</span></td><td>Property verified; sitemap shows "Success"</td></tr>
+      <tr><td><b>S-04</b></td><td>Publish on the proposed cadence: one question-shaped guide per two weeks; add each to sitemap + feed at publish time</td><td>Cadence builds habit — for readers and for the index; topics then come from measured queries</td><td>Medium</td><td>S-03 for measurement; content calendar</td><td><span class="status-tag status-pending">Awaiting decision</span></td><td>Reviewer approves the calendar + first three topics</td></tr>
+      <tr><td><b>S-05</b></td><td>Deploy the self-hosted analytics collector (analytics/endpoint.py or server/collect.js) and enable the five-event beacon</td><td>Click + conversion measurement before writing anything else; ledger stays empty until first-party data exists</td><td>Medium</td><td>Hosting decision, privacy notice review</td><td><span class="status-tag status-flagged">Blocked</span></td><td>Privacy review signed off; endpoint reachable</td></tr>
+      <tr><td><b>S-06</b></td><td>After S-01/S-05: populate the campaign ledger only from authorized first-party reports (timestamp, source, channel, sessions, clicks, orders)</td><td>Evidence-based iteration: the next topic is chosen from data, not instinct</td><td>Low</td><td>S-01, S-05</td><td><span class="status-tag status-pending">Awaiting decision</span></td><td>First authorized report in hand</td></tr>
+      <tr><td><b>S-07</b></td><td>Request Amazon-served price/availability data (SiteStripe or PA API if approved) before ever displaying prices</td><td>Removes the last "no numbers" limitation from product cards — only via permitted channels</td><td>Medium</td><td>PA API approval or SiteStripe workflow</td><td><span class="status-tag status-flagged">Blocked</span></td><td>Approved API access or confirmed Amazon-served feed</td></tr>
+      <tr><td><b>S-08</b></td><td>Add author/reviewer attribution and update dates to every guide</td><td>Publication polish: readers (and raters) trust named, dated work</td><td>Low</td><td>Editorial decision on bylines</td><td><span class="status-tag status-pending">Awaiting decision</span></td><td>Reviewer picks pseudonym/staff model + policy</td></tr>
+      <tr><td><b>S-09</b></td><td>Run the pre-publish compliance checklist on every new page (disclosure placement, sponsored rel, source provenance, endorsement context)</td><td>Makes the compliance gate mechanical instead of aspirational</td><td>Low</td><td>None — checklist already drafted in PUBLISHING_WORKFLOW.md</td><td><span class="status-tag status-pending">Awaiting decision</span></td><td>Reviewer adopts checklist as blocking CI step</td></tr>
+      <tr><td><b>S-10</b></td><td>Monthly review of measured queries → choose the next guide topic from data</td><td>Closes the loop: publish → measure → choose → publish</td><td>Low</td><td>S-03 + S-05 for data</td><td><span class="status-tag status-pending">Awaiting decision</span></td><td>First monthly query export exists</td></tr>
+    </tbody>
+  </table></div>
 
-    <article class="sugg unvoted">
-      <div class="decide">S-002 &middot; Proposed &middot; Owner: site editor</div>
-      <p><strong>Suggestion:</strong> Replace the remaining three short links with validated Amazon Special Links after testing one link per product in the enrolled Associates workflow.</p>
-      <p><strong>Why:</strong> Special Links carry the tracking ID explicitly; current short links resolve to homepages or checkpoints for three of five products.</p>
-      <p><strong>Constraint:</strong> Do not claim the supplied short links are invalid — their exact compliance status is unresolved (see Flagged for Review). Test one link per product first, confirm destination and tracking report, then scale.</p>
-      <p><strong>Paths:</strong> (a) Enroll/test in Associates SiteStripe, generate Special Links for the two verified ASINs; (b) re-submit the three broken short links to the source; (c) hold.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-002'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
+  <h2 style="margin-top:1.8em">Suggestions for improving decision-making itself</h2>
+  <div class="how-grid" style="margin-top:22px">
+    <div class="how-card"><div class="num">01</div><h3>Gate, then build</h3><p>Every suggestion above carries a decision gate. Adopt the rule: no implementation starts until its gate evidence exists — this is what keeps enthusiasm from outrunning verification.</p></div>
+    <div class="how-card"><div class="num">02</div><h3>One decision owner</h3><p>Name a single reviewer for this queue (even if it's you). Split ownership produces unqueued changes; unqueued changes are how sites drift into slop.</p></div>
+    <div class="how-card"><div class="num">03</div><h3>Write the decision down</h3><p>A decision that isn't recorded didn't happen. Mark the row Adopted, date it, and note the evidence used — the queue becomes the site's decision history.</p></div>
+    <div class="how-card"><div class="num">04</div><h3>Measure before optimizing</h3><p>Resist auto-optimization until the ledger has first-party rows. The order is fixed: verify → publish → measure → then optimize, with the ledger as the referee.</p></div>
+  </div>
 
-    <article class="sugg unvoted">
-      <div class="decide">S-003 &middot; Proposed &middot; Owner: site editor</div>
-      <p><strong>Suggestion:</strong> Turn on real analytics (self-hosted collector at /analytics/collect) and choose the next guide topic from measured queries instead of instinct.</p>
-      <p><strong>Why:</strong> Editorial cadence should be data-driven; five events are already instrumented (page_view, outbound_click, guide_read, suggestion_review, session_start).</p>
-      <p><strong>Blocker:</strong> The collector endpoint must be self-hosted outside GitHub Pages before events reach a server.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-003'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <article class="sugg unvoted">
-      <div class="decide">S-004 &middot; Proposed &middot; Owner: compliance</div>
-      <p><strong>Suggestion:</strong> Add the compliance gate check to the publishing workflow: disclosure placement + endorsement context reviewed against the Amazon Associates Operating Agreement and FTC guidance before any page publishes.</p>
-      <p><strong>Paths:</strong> (a) Adopt PUBLISHING_WORKFLOW.md as a pre-publish checklist; (b) expand with legal review step; (c) decline.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-004'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <article class="sugg unvoted">
-      <div class="decide">S-005 &middot; Proposed &middot; Owner: editorial</div>
-      <p><strong>Suggestion:</strong> Add imagery and brand assets (logo, seasonal hero image) so the site reads as published rather than generated.</p>
-      <p><strong>Why:</strong> Publication polish path (authorship, navigation, brand, imagery, seasons, clusters) builds trust.</p>
-      <p><strong>Paths:</strong> (a) Commission or generate brand imagery; (b) keep CSS-only placeholders; (c) use only manufacturer images with confirmed rights.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-005'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <div class="section-head" style="margin-top:40px;">
-      <h2>Decided</h2>
-    </div>
-    <p style="color:var(--muted);font-size:0.9rem;">No decisions yet. When a suggestion is decided, it moves here with the chosen path, date and reviewer.</p>
-
-    <div class="flag">
-      <strong>Rule:</strong> no suggestion is implemented until someone reviews it and chooses a path. Implementation notes go in the pull request, never directly on the live site.
-    </div>
-  </section>
+  <div class="questions-band" style="margin-top:40px">
+    <h2>Nothing here is silently shipped</h2>
+    <p>Each row above is a proposal, not a change. The paired page <a href="questions.html">Decision questions</a> lists what we know, what we're missing and how to discover it — read it before picking a path. Compliance context lives on <a href="guides/flagged-for-review.html">Flagged for review</a>.</p>
+  </div>
 </main>
-<div id="site-footer"></div>
-<script src="assets/js/common.js"></script>
+<footer><div class="footer-main">
+  <div><a class="brand" href="index.html" style="margin-bottom:14px;display:inline-flex"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><p style="font-size:.84rem;color:#B4A98F;max-width:300px">Independent, question-first buying notes for countertop kitchen gear.</p></div>
+  <div class="footer-nav"><b>Shop &amp; guides</b><a href="index.html#shop">The shortlist</a><a href="guides/index.html">All buying guides</a><a href="index.html#seasonal">Holiday notes</a><a href="feed.xml">RSS — new guides</a></div>
+  <div class="footer-nav"><b>Decision desk</b><a href="suggestions.html">Suggestions for review</a><a href="questions.html">Decision questions</a><a href="executive-summary.html">Executive summary</a><a href="dashboard.html">Verification dashboard</a></div>
+  <div class="footer-nav"><b>Transparency</b><a href="guides/flagged-for-review.html">Flagged for review</a><a href="disclosure.html">Disclosure</a><a href="privacy.html">Privacy</a><a href="data/confirmations.json">Link register</a></div>
+</div><div class="footer-bottom"><span>As an Amazon Associate I earn from qualifying purchases.</span><span>© 2026 Good Measure Kitchen · <a href="sitemap.xml">Sitemap</a></span></div></footer>
+<script>window.affil1Root = "";</script>
 <script src="assets/js/analytics.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

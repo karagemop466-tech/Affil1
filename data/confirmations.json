@@ -1,85 +1,116 @@
 {
-  "schema": "product-intent-confirmation v1",
+  "schema": "product-intent-confirmation v2",
   "generated": "2026-11-20",
+  "verified_by": "session-arena-ac649871 (independent live fetch pass, 2026-11-20)",
   "associates_tracking_id": "shopnow047c-20",
   "fields": {
-    "submitted_link": "The Amazon short link submitted by the user.",
-    "intended_asin": "The ASIN encoded in the submitted short link. Per Amazon, an ASIN is Amazon's checkable product identifier.",
-    "official_listing_url": "The official Amazon listing URL reached after resolving the short link. Left blank when no product destination could be confirmed.",
-    "observed_redirect_target": "The actual destination observed when the short link was fetched. Kept in a separate field from official_listing_url; the two are never merged.",
-    "confirmation_date": "Date the short link was fetched and resolved (local time, UTC per system date).",
+    "submitted_link": "The Amazon short link submitted by the operator, preserved byte-for-byte.",
+    "slug_format_check": "Objective check of the short-link slug against the ASIN format. Per Amazon's SP-API Catalog Items reference (https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference), an ASIN is a 10-character identifier; every submitted slug is 9 characters, so slugs are recorded as opaque tokens and are never treated as ASINs.",
+    "intended_asin": "Deprecated field name retained for schema compatibility. Holds the submitted slug verbatim; see slug_format_check. Not asserted to be an ASIN.",
+    "official_listing_url": "The official Amazon listing URL confirmed by resolving the submitted link (live fetch). Left blank when no product destination could be confirmed. Never merged with observed_redirect_target.",
+    "observed_redirect_target": "The exact final URL observed when the short link was fetched. Kept in a separate field from official_listing_url; the two are never merged.",
+    "product_title": "The listing title exactly as served by amazon.com on the confirmed date. No other attributes are recorded.",
+    "confirmation_date": "Date of the live verification fetch (UTC).",
     "source": "Official source used for verification.",
-    "status": "verified when an official Amazon product page was reached; unverified otherwise."
+    "status": "verified when an official Amazon product page was reached; unverified otherwise.",
+    "history": "Preserved observations from earlier sessions. Never deleted; later observations do not overwrite earlier ones."
   },
-  "note": "Do not claim that supplied short links are invalid; their exact compliance status is unresolved. One link per product should be tested in the enrolled Associates workflow before scaling (test-link step not yet performed).",
+  "note": "Do not claim that supplied short links are invalid; their exact compliance status as Associates Special Links is unresolved (FLG-003). One link per product should be tested in the enrolled Associates workflow before scaling (test-link step not yet performed; account access unavailable to this build).",
   "records": [
     {
       "id": "conf-001",
       "submitted_link": "https://link.amazon/B04G1MEwY",
+      "slug_format_check": "9 characters — not a valid ASIN format (ASINs are 10 chars); treated as opaque short-link token",
       "intended_asin": "B04G1MEwY",
       "official_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
-      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3 (final URL as served, 2026-11-20)",
       "product_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
       "confirmation_date": "2026-11-20",
-      "source": "https://www.amazon.com/dp/B0CDY277D3 (reached via https://link.amazon/B04G1MEwY; Amazon.com official site)",
+      "source": "https://www.amazon.com/dp/B0CDY277D3 (Amazon.com official listing page; title confirmed on live fetch)",
       "status": "verified",
-      "destination_matches_intended_asin": false
+      "destination_matches_intended_asin": false,
+      "history": [
+        "2026-11-20 session arena/55d40788-affil1: same destination reported (B0CDY277D3).",
+        "2026-11-20 session arena/ac649871-affil1: independently re-fetched; destination and title confirmed live."
+      ]
     },
     {
       "id": "conf-002",
       "submitted_link": "https://link.amazon/B02NbDxp3",
+      "slug_format_check": "9 characters — not a valid ASIN format (ASINs are 10 chars); treated as opaque short-link token",
       "intended_asin": "B02NbDxp3",
       "official_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
-      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R (final URL as served, 2026-11-20)",
       "product_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
       "confirmation_date": "2026-11-20",
-      "source": "https://www.amazon.com/dp/B09B7SB46R (reached via https://link.amazon/B02NbDxp3; Amazon.com official site)",
+      "source": "https://www.amazon.com/dp/B09B7SB46R (Amazon.com official listing page; title confirmed on live fetch)",
       "status": "verified",
-      "destination_matches_intended_asin": false
+      "destination_matches_intended_asin": false,
+      "history": [
+        "2026-11-20 session arena/55d40788-affil1: same destination reported (B09B7SB46R).",
+        "2026-11-20 session arena/96012762-affil1: reported bot checkpoint on that fetch (transient gate).",
+        "2026-11-20 session arena/ac649871-affil1: independently re-fetched; destination and title confirmed live."
+      ]
     },
     {
       "id": "conf-003",
       "submitted_link": "https://link.amazon/B00hJ57DV",
+      "slug_format_check": "9 characters — not a valid ASIN format (ASINs are 10 chars); treated as opaque short-link token",
       "intended_asin": "B00hJ57DV",
-      "official_listing_url": "",
-      "observed_redirect_target": "https://www.amazon.com/",
-      "product_title": "",
+      "official_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH (final URL as served, 2026-11-20)",
+      "product_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
       "confirmation_date": "2026-11-20",
-      "source": "https://www.amazon.com/ (reached via https://link.amazon/B00hJ57DV; Amazon.com official site)",
-      "status": "unverified",
-      "flag": "Short link resolved to the Amazon homepage, not to a product page. No product destination confirmed. Flagged for review.",
-      "destination_matches_intended_asin": false
+      "source": "https://www.amazon.com/dp/B08DKYBTPH (Amazon.com official listing page; title confirmed on live fetch)",
+      "status": "verified",
+      "destination_matches_intended_asin": false,
+      "history": [
+        "2026-11-20 session arena/55d40788-affil1: fetch reached the Amazon homepage (no product destination).",
+        "2026-11-20 session arena/ac649871-affil1: re-fetched; resolved to the product page above. Homepage observation preserved as a transient redirect; periodic re-checks advised."
+      ]
     },
     {
       "id": "conf-004",
       "submitted_link": "https://link.amazon/B0c8moW59",
+      "slug_format_check": "9 characters — not a valid ASIN format (ASINs are 10 chars); treated as opaque short-link token",
       "intended_asin": "B0c8moW59",
       "official_listing_url": "",
-      "observed_redirect_target": "https://www.amazon.com/checkpoint/continue (Amazon bot checkpoint / continue-shopping gate)",
+      "observed_redirect_target": "https://www.amazon.com/checkpoint/continue (Amazon bot-checkpoint interstitial requiring an interactive click; observed on two independent fetches, 2026-11-20)",
       "product_title": "",
-      "confirmation_date": "2026-11-20",
-      "source": "https://www.amazon.com/checkpoint/continue (reached via https://link.amazon/B0c8moW59; Amazon.com official site)",
+      "confirmation_date": "",
+      "source": "",
       "status": "unverified",
-      "flag": "Short link reached an Amazon checkpoint page requiring manual interaction. No product page reachable. Flagged for review.",
-      "destination_matches_intended_asin": false
+      "destination_matches_intended_asin": false,
+      "history": [
+        "2026-11-20 session arena/55d40788-affil1: fetch reached a checkpoint page.",
+        "2026-11-20 session arena/ac649871-affil1: two further fetches reached the same checkpoint interstitial. Destination remains unconfirmed — not asserted invalid. Test manually in the enrolled Associates workflow."
+      ],
+      "flag": "Short link resolves to an Amazon bot-checkpoint page on repeated fetches. No product destination confirmed. Flagged for review (FLG-005)."
     },
     {
       "id": "conf-005",
       "submitted_link": "https://link.amazon/B0f3GKalj",
+      "slug_format_check": "9 characters — not a valid ASIN format (ASINs are 10 chars); treated as opaque short-link token",
       "intended_asin": "B0f3GKalj",
-      "official_listing_url": "",
-      "observed_redirect_target": "https://www.amazon.com/",
-      "product_title": "",
+      "official_listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z (final URL as served, 2026-11-20)",
+      "product_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
       "confirmation_date": "2026-11-20",
-      "source": "https://www.amazon.com/ (reached via https://link.amazon/B0f3GKalj; Amazon.com official site)",
-      "status": "unverified",
-      "flag": "Short link resolved to the Amazon homepage, not to a product page. No product destination confirmed. Flagged for review.",
-      "destination_matches_intended_asin": false
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z (Amazon.com official listing page; title confirmed on live fetch)",
+      "status": "verified",
+      "destination_matches_intended_asin": false,
+      "history": [
+        "2026-11-20 session arena/55d40788-affil1: fetch reached the Amazon homepage (no product destination).",
+        "2026-11-20 session arena/ac649871-affil1: re-fetched; resolved to the product page above. Homepage observation preserved as a transient redirect; periodic re-checks advised."
+      ]
     }
   ],
   "irregularities": [
-    "Three of five submitted short links did not resolve to an official Amazon product page (homepage or checkpoint).",
-    "For verified links, the observed redirect target ASIN differs from the short-link slug (intended ASIN). Fields are intentionally kept separate.",
-    "Prices, ratings, review counts and commission rates are left blank: they were not confirmed from an official source and must not be inferred."
+    "FLG-001: All five submitted slugs are 9 characters; Amazon ASINs are 10-character identifiers. Slugs are recorded as opaque tokens; ASINs are read only from resolved listing URLs.",
+    "FLG-002: No supplied link was observed to carry the tag shopnow047c-20; per-link tracking attribution is unconfirmed pending the enrolled-workflow test.",
+    "FLG-003: Compliance status of link.amazon short links as Associates Special Links is unresolved. Do not assert invalid; do not scale before the test.",
+    "FLG-005: One of five links consistently lands on a bot checkpoint; its listing identity is blank.",
+    "Transient-redirect note: two links resolved to the Amazon homepage on one session's fetch and to product pages on another session's fetch the same date. Both observations are preserved above; neither was deleted or overwritten.",
+    "Prices, ratings, review counts and commission rates are left blank: Associates policy conditions price display on Amazon-served or API-served data, which this static build does not have. Nothing was inferred."
   ]
 }
