@@ -7,6 +7,7 @@ Shared task board for parallel sessions on this repository.
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
+| `arena/c7f7070d-affil1` | `arena/c7f7070d-affil1` | Shop-front polish + re-verification: `src/data/products.json`, `src/data/flags.json`, `src/data/questions.json`, `src/data/suggestions.json`, `tools/content.py`, `tools/build.py`, `tools/page_home.py`, `tools/page_guides.py`, `tools/page_products.py`, `tools/page_compare.py`, `tools/page_desk.py`, `tools/page_review.py`, generated HTML, `COORDINATION.md` | in progress |
 
 No other session had an open claim on these files when this work started. Two
 other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
@@ -21,6 +22,7 @@ other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
 | Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
 | Product facts beyond the listing title | needs review | — | `src/data/products.json` |
 | Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
+| Reconcile newly merged PR #23 with generated publication and correct summary; no new guides before measurement | in progress | arena/c7f7070d-affil1 | `src/data/*.json`, `tools/*.py`, generated HTML, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
 
 `needs review` means the item is published on the review page and does not block
 anything.
@@ -210,3 +212,12 @@ The initial shallow checkout made the ancestor appear unrelated and caused a reb
 - [PR #27](https://github.com/karagemop466-tech/Affil1/pull/27) merged as `92a3509c9a56bbd6aa01eef8d7ae0afbb4ab7f06`; the PR build and link checks passed.
 - GitHub Pages [deployment run 44682421711](https://github.com/karagemop466-tech/Affil1/actions/runs/44682421711) succeeded; the Pages API reported `built` for that merge commit.
 - Audit and link repairs: done. Full legacy-edition reconciliation, product intent, tracking attribution, and live analytics: **needs review** as detailed in FLG-016/017 and the measurement page. The older crisp-specific validator remains incompatible with the current data schema.
+## Reconciliation — arena/c7f7070d-affil1, 2026-11-20
+
+PR #23 and PR #26 landed after the initial claim; PR #27 landed while this work was in progress. Work was stashed and rebased, then stash-application conflicts were resolved by retaining PR #27's destination warnings and review flags, combining the source-link and event-spec corrections, and regenerating output from the combined templates. No other session's edition was deleted. The parallel claim overlaps this one; future cross-scope changes should be coordinated here rather than silently overwritten.
+
+Two independent fetches in this session reached [P-04 B0DHZTCNR5](https://link.amazon/B0c8moW59) and [P-05 B0DZFD6R9Z](https://link.amazon/B0f3GKalj), respectively; PR #27 reports the reverse. The conflict is retained as FLG-016, not resolved by assumption. Intended product and attribution remain unknown. Added explicit null intent URL/date/source fields, corrected stale counts and the P-02 dishwasher assertion, and removed a fabricated blank ledger row. Aligned the measurement *documentation* to the five canonical event names; the existing disabled client still uses different names and must not be mistaken for a working implementation. Sources read: [Amazon Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Amazon Policies](https://affiliate-program.amazon.com/help/operating/policies), [FTC FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [Google Performance report](https://support.google.com/webmasters/answer/7576553) and [Search Console verification](https://support.google.com/webmasters/answer/9008080).
+
+Checks: `python3 tools/build.py`, `python3 tools/check.py` (22 generated pages, 0 errors, 0 warnings), and `python3 tools/check_local_links.py` (65 pages, 0 broken relative file references). The legacy validator and live measurement remain needs review, as do all account-gated work and full cross-edition factual verification. Link checks do not establish attribution, stable redirects, or buyer intent.
+
+Rebase after PR #28: a task-board conflict was resolved by retaining both merge/deployment histories and this reconciliation record.

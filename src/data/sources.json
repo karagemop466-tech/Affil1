@@ -53,6 +53,26 @@
       "used_for": "Confirms that rel=\"sponsored\" is Google's documented marker for paid or advertising links, and that multiple rel values may be combined.",
       "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
       "status": "read directly"
+    },
+    {
+      "id": "SRC-06",
+      "title": "Performance report (Search results)",
+      "publisher": "Google Search Console Help",
+      "url": "https://support.google.com/webmasters/answer/7576553",
+      "page_date": "No date shown",
+      "used_for": "Search performance queries, impressions and clicks.",
+      "quote": "The Performance report shows important metrics about how your site performs in Google Search results.",
+      "status": "read directly 2026-11-20"
+    },
+    {
+      "id": "SRC-07",
+      "title": "Verify your site ownership",
+      "publisher": "Google Search Console Help",
+      "url": "https://support.google.com/webmasters/answer/9008080",
+      "page_date": "No date shown",
+      "used_for": "Ownership verification methods.",
+      "quote": "Ownership verification means proving to Search Console that you own a specific website.",
+      "status": "read directly 2026-11-20"
     }
   ],
   "could_not_verify": [

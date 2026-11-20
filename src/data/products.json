@@ -48,7 +48,10 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "6 quart total, as two independent 3-quart baskets",
-      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe"
+      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-02",
@@ -88,7 +91,10 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "26 quart",
-      "stated_attributes": "24 one-touch presets; six cooking accessories included"
+      "stated_attributes": "24 one-touch presets; six cooking accessories included",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-03",
@@ -129,7 +135,10 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "8 quart",
-      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel"
+      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-04",
@@ -172,7 +181,10 @@
       "flag": "FLG-014 (resolved 2026-11-20; see resolution_note)",
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "1-second read stated; ±0.5°F accuracy stated; NIST & NSF certified stated; auto-rotate LED screen; IP67 waterproof stated",
-      "attention": "Second thermometer in the set (with P-05). Instant-read, not wireless. Any guide that treats it as an air fryer would be wrong."
+      "attention": "Second thermometer in the set (with P-05). Instant-read, not wireless. Any guide that treats it as an air fryer would be wrong.",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     },
     {
       "ref": "P-05",
@@ -211,9 +223,12 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "attention": "This product sits in a different category from the other four. Any guide that treats it as a fifth air fryer would be wrong. It is routed to its own section.",
+      "attention": "P-04 and P-05 are thermometers; P-01, P-02 and P-03 are air fryers. They are presented separately.",
       "stated_capacity": "Not applicable — it is a thermometer",
-      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses"
+      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intended_confirmation_source": null
     }
   ]
 }
