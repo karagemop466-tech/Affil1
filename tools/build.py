@@ -878,7 +878,7 @@ def build_about():
   </div>
 </div>"""
 
-    return page("/about/", f"About &amp; method — {SITE_NAME}",
+    return page("/about/", f"About & method — {SITE_NAME}",
                 "The disclosure, the editorial rule, why prices and specifications are blank, and exactly what this site does and does not collect.",
                 body, active="/about/", crumbs=[("/", "Home"), (None, "About")])
 

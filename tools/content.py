@@ -92,7 +92,7 @@ GUIDES = {
 
 <p>On a single-basket machine, the quart figure usually refers to the basket. On a dual-basket machine, it commonly refers to the total across both drawers — which means each drawer is roughly half. On an oven-style machine, it refers to the cavity, which includes space above the food that a basket does not have.</p>
 
-<p>So &ldquo;6 quart&rdquo; on a dual basket and &ldquo;6 quart&rdquo; on a single basket are not the same claim about how much food fits at once. One of them can only cook one temperature at a time.</p>
+<p>So “6 quart” on a dual basket and “6 quart” on a single basket are not the same claim about how much food fits at once. One of them can only cook one temperature at a time.</p>
 
 <div class="callout">
   <p class="callout-label">The arithmetic worth doing</p>
@@ -176,7 +176,7 @@ GUIDES = {
     },
     "multi-function-kitchen-appliance-questions": {
         "title": "Questions to ask before buying a multi-function kitchen appliance",
-        "deck": "&ldquo;24 presets&rdquo; and &ldquo;multi-function&rdquo; are counts, not capabilities. Here is how to find out which functions you will actually use before you pay for the rest.",
+        "deck": "“24 presets” and “multi-function” are counts, not capabilities. Here is how to find out which functions you will actually use before you pay for the rest.",
         "cluster": "Buy the function, not the badge",
         "minutes": 5,
         "products": ["P-02", "P-05"],
@@ -189,7 +189,7 @@ GUIDES = {
 
 <ul class="tick">
   <li><strong>A function</strong> is a mode the machine can perform at all — bake, dehydrate, air fry, roast.</li>
-  <li><strong>A preset</strong> is a shortcut inside those modes — &ldquo;frozen fries,&rdquo; &ldquo;chicken wings.&rdquo;</li>
+  <li><strong>A preset</strong> is a shortcut inside those modes — “frozen fries,” “chicken wings.”</li>
 </ul>
 
 <p>If a machine lists a function you will never use, the preset count for it is decoration. If it lacks a function you use weekly, no number of presets fixes that.</p>

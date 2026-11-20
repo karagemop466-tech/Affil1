@@ -128,6 +128,12 @@ def main():
             err(f"{rel}: {c.imgs_without_alt} <img> without alt")
 
         CHECKS += 1
+        # Rule: no double-encoded entities. A named entity inside esc() renders as
+        # the literal text "&ldquo;" on the page, which is a visible defect.
+        for m in re.finditer(r"&amp;(?:ldquo|rdquo|mdash|ndash|rsquo|lsquo|hellip|nbsp|amp|quot);", html):
+            err(f"{rel}: double-encoded entity '{m.group(0)}'")
+
+        CHECKS += 1
         # Rule: no price-like strings anywhere. Catches an accidental reintroduction.
         for m in re.finditer(r"\$\s?\d", html):
             warn(f"{rel}: dollar figure near '{html[max(0,m.start()-40):m.start()+20].strip()[:70]}'")
