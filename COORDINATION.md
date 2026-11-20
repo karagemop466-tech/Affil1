@@ -934,3 +934,10 @@ Scope is non-overlapping: no other session has claimed these files. No product f
 - **Gates:** `build.py` leaves generated output unchanged; `validate.py` 1813 checks, 0 warnings; `check.py` 34 pages, 0 errors / 0 warnings; `check_local_links.py` 68 pages, 0 broken.
 - **Irregularities carried forward (not blocking):** FLG-002 tag enrolment unconfirmed; FLG-003 short-link compliance unresolved; FLG-004 / FLG-018 P-04 and P-05 `mhFallback` arrivals; FLG-016 thermometer pair dispute; FLG-027 robots.txt below host root (Search Console needed); `assets/js/events.js` event names differ from `_src/data/events.json` (client inert, no data loss) — logged for owner decision.
 - **Status:** done, pending integration PR + Pages deploy confirmation (recorded below when complete).
+
+### Integration + publish record — arena/62b049f0-affil1
+
+- **PR:** https://github.com/karagemop466-tech/Affil1/pull/103 (arena/62b049f0-affil1 → main)
+- **Merge:** merged 2026-11-20T06:41:55Z, merge commit `d345cf0c8a81289f9807b42ff5a402dfe4edcf58`, `--merge`, no approval waited for.
+- **Pages:** `pages build and deployment` for `d345cf0` completed successfully; Pages API latest build = `built` at commit d345cf0 (2026-11-20T06:42:14Z). The sandbox has no outbound route to github.io, so the live URL was not fetched from here; the Pages build status is the recorded confirmation.
+- **Board:** `arena/62b049f0-affil1` task "verification refresh + workflow repair + summary sync" → done; flagged items published on `/review/` (non-blocking).
