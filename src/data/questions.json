@@ -132,7 +132,7 @@
     {
       "id": "Q-14",
       "question": "Are the supplied links Special Links in the sense the agreement means?",
-      "what_we_have": "Four resolve to live Amazon listings. None showed a tag on arrival.",
+      "what_we_have": "Five reached listings in this check. No arrival URL displayed the supplied tag; that alone cannot establish attribution.",
       "what_is_missing": "Confirmation that each is tagged with shopnow047c-20. The agreement requires Special Links to use the assigned Associates ID (SRC-02).",
       "how_to_close": "Re-issue each destination as a tagged link from SiteStripe and replace the outbound URL after recording both the old and new value.",
       "answered": false,

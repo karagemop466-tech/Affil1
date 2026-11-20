@@ -230,7 +230,7 @@ The initial shallow checkout made the ancestor appear unrelated and caused a reb
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Front-page publication design, reader guide discovery, fresh source spot checks and integration | in progress | arena/eaf80f48-affil1 | tools/page_home.py, tools/layout.py, new assets/css/editorial.css, assets/js/discover.js, assets/img/edit-*, generated maintained HTML, COORDINATION.md |
+| Front-page publication design, reader guide discovery, fresh source spot checks and integration | done | arena/eaf80f48-affil1 | tools/page_home.py, tools/layout.py, new assets/css/editorial.css, assets/js/discover.js, assets/img/edit-*, generated maintained HTML, COORDINATION.md |
 
 Prior integration #27 is merged. This scope does not edit the legacy editions, their data or the other open PRs.
 ### PR and deployment result — arena/c9fc4295-affil1
@@ -251,6 +251,8 @@ Rebase after PR #28: a task-board conflict was resolved by retaining both merge/
 Integration note (eaf80f48): preserved both board entries after the concurrent append conflict. PR #32 owns measurement; this session will not duplicate that work. Additional scope: tools/stage.py to include the new reader assets in Pages artifacts.
 
 ### Reader-facing release — eaf80f48
+
+**Delivery:** [PR #40](https://github.com/karagemop466-tech/Affil1/pull/40) merged at `6c7a224` on 2026-11-20. Its build and launch checks passed. The first Pages run was cancelled as main advanced; the [successful Pages deployment](https://github.com/karagemop466-tech/Affil1/actions/runs/44683220523) shipped descendant `8761544`, whose only subsequent file change was this board. [Live publication](https://karagemop466-tech.github.io/Affil1/). Final integration checks: 24 maintained pages, zero errors/warnings; 74 served HTML files checked for relative file links, zero broken. Browser checked local search, Escape dismissal, both shelf categories and 375px layout. Collector and launch-gate tests passed. This verifies delivery, not production click or purchase attribution.
 - PR #40: https://github.com/karagemop466-tech/Affil1/pull/40. Concurrent #42/#43 shared-output conflict resolved by preserving both board histories and regenerating the affected product page from the merged data.
 
 - Updated the maintained templates, not the legacy storefronts. A seasonal cover leads into a filterable five-product shelf, short reading paths and local search. No-JS readers can browse all five cards and follow ordinary links. Disclosures still appear under the masthead and in the footer.
@@ -348,8 +350,28 @@ Narrowed after #27, #30, #31 and #32 merged during this turn: own only the Speci
 - Amazon recheck (2026-11-20, submitted redirects followed via official Amazon pages): P-01 [B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), P-02 [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), P-03 [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH), P-04 [B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5), P-05 [B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z). Listing titles and arrival identifiers checked against the maintained register; no visible tag. Preserved #27's conflicting P-04/P-05 observations in FLG-016. No account-backed intent or attribution was established.
 - Read [Amazon ASIN definition](https://sell.amazon.com/blog/what-is-an-asin), [Operating Agreement §§1, 5](https://affiliate-program.amazon.com/help/operating/agreement), [Policies §§2(b), 3 and 5](https://affiliate-program.amazon.com/help/operating/policies), [FTC endorsement FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [Search Console Performance report](https://support.google.com/webmasters/answer/7576553), and [Pages static hosting and logging](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [usage limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). The last two new flags cover commercial hosting and use of Amazon Program Content in ML development. Nothing here approves the account, API or production AI automation.
 - Verified the maintained build, 24 generated pages (0 errors/warnings), 74 served pages’ relative references (0 broken), staged artifact, the launch-readiness test and the merged analytics integration test. Remaining **needs review**: FLG-002/003 private link confirmation; FLG-016/017 conflicting redirects and legacy releases mixed into root-based Pages; real collector hosting, consent/retention, Search Console and reader capture. The site is not collecting production analytics or conversions; ledger remains empty.
+## Publication release — arena/ca3c913e-affil1
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Measurement compatibility, evidence gates, buyer-first storefront, source recheck and integration release | in progress | arena/ca3c913e-affil1 | server/, maintained generators and checker in tools/, assets/css/site.css, assets/js/, src/data/, generated edition, COORDINATION.md and release docs |
+
+Handoff from merged #27: retain the conflicting redirect observations. No changes to open sibling PRs or their legacy pages.
+
+Rebase: main received #28–35 during implementation. Preserved the independent supplement, evidence reconciliation, and #32's tested Python measurement contract rather than replacing them with a competing protocol. Combined the board entries and regenerated the storefront markup from the integrated templates.
+
+Main advanced again through #38. Kept its paid-link gate, holiday guide, sitemap/feed and launch desk; our shelf links to internal detail pages, not unapproved Special Links. Kept both sides of board-only conflicts and regenerated HTML from the combined templates. Remaining legacy edition consolidation is FLG-017, not part of another branch's release. The Pages configuration API declined the change to artifact-based publishing (HTTP 403); keep the existing main-root deployment.
 
 - Delivery: [PR #42](https://github.com/karagemop466-tech/Affil1/pull/42) merged into `main` as `4059ac2242eae90df17a94a43fad0d2312bd91fe`. PR build and launch checks passed. [GitHub Pages deployment 44683077831](https://github.com/karagemop466-tech/Affil1/actions/runs/44683077831) succeeded, and the Pages API reported `built` for that same merge SHA. [Live editorial site](https://karagemop466-tech.github.io/Affil1/).
+
+Release integration: retained #40’s accessible search, working filters, edition layout and RSS shelf; added per-card illustration labels, seasonal headline and category counts. Merged the duplicate commercial-hosting finding into FLG-018 and preserved #42’s decision brief.
+
+| Task | Status | Owner | Verification |
+|---|---|---|---|
+| Seasonal storefront and source gate | done | arena/ca3c913e-affil1 | Five Amazon destination checks; official ASIN definition SRC-08; 24 generated pages, sourced table rows, full relative-link crawl, collector and launch tests. |
+| Commercial rollout and attribution | needs review | enrolled account / hosting | FLG-002, FLG-003, FLG-016, FLG-018. No production conversion data. |
+
+Release PR: [#49](https://github.com/karagemop466-tech/Affil1/pull/49).
 ## Buyer decision tools and measurement readiness — arena/487a66ea-affil1
 
 | Task | Status | Owner | Files |

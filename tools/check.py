@@ -239,6 +239,9 @@ def check_page(path):
         trs = len(re.findall(r"<tr[ >]", body))
         if trs and tds > trs * 12:
             err(f"{rel}: table body has {tds} cells across {trs} rows - likely shredded markup")
+        for row in re.findall(r"<tr[^>]*>(.*?)</tr>", body, re.S):
+            if '<td' in row and 'href="https://' not in row:
+                err(f"{rel}: table row lacks a source link")
         char_cells = len(re.findall(r"<td>.{1}</td>", body))
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")

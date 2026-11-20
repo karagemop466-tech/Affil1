@@ -54,7 +54,7 @@ def shelf_card(d, p):
     if p['ref'] == 'P-03':
         photo = img(d, 'assets/img/capacity', 'An illustrated single-layer portion beside a tape measure', sizes='(max-width:700px) 92vw, 32vw')
     source = product_link(d, p["listing_url"], "Listing source ↗", cls="textact")
-    return f'''<article class="shelfcard" data-category="{category}"><a class="shelfphoto" href="{dest}" aria-label="Read about {esc(name)}">{photo}<span>{esc(tag)}</span></a>
+    return f'''<article class="shelfcard" data-category="{category}"><a class="shelfphoto" href="{dest}" aria-label="Read about {esc(name)}">{photo}<span>{esc(tag)}</span><small class="format-credit">Format illustration</small></a>
     <div class="shelfmeta">FIELD NOTE &nbsp; / &nbsp; {esc(p['ref'][-2:])}</div><h3><a href="{dest}">{esc(name)}</a></h3><p>{esc(note)}</p>
     <a class="textact" href="{dest}">Product details &rarr;</a> &nbsp; {source}</article>'''
 
@@ -91,7 +91,7 @@ def build(page_dir, products, meta):
     <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
 </section>"""
 
-    tabs = '<div class="shelftabs" hidden aria-label="Filter products">'+''.join(f'<button data-filter="{key}" aria-pressed="false">{text}</button>' for key,text in [('air-fryers','Air fryers'),('thermometers','Thermometers'),('all','All products')])+'</div>'
+    tabs = '<div class="shelftabs" hidden aria-label="Filter products">'+''.join(f'<button data-filter="{key}" aria-pressed="false">{text}</button>' for key,text in [('air-fryers','Air fryers · 3'),('thermometers','Thermometers · 2'),('all','All products')])+'</div>'
     shortlist = section(f"""<div class="edit-head" id="shelf"><div><p class="ink-label"><i></i> SHOP BY FORMAT</p>
       <h2>The countertop shortlist<span>.</span></h2></div>
       <a class="edit-all" href="{esc(rel(d,'products/index.html'))}">All products <span>→</span></a></div>

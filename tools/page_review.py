@@ -41,7 +41,7 @@ def build_index(page_dir, flags, meta):
             {"html": esc(f["title"])},
             {"html": esc(f["blocks"])},
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
-            {"html": _urlish(next((c for c in f.get("to_check", []) if c.startswith("https://")), "https://affiliate-program.amazon.com/help/operating/agreement"), d)},
+            {"html": _urlish(next((c for c in f.get("to_check", []) if c.startswith("https://") and not c.startswith("https://link.amazon/")), "https://affiliate-program.amazon.com/help/operating/agreement"), d)},
         ])
     flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects", "Source to consult"], flag_rows,
                        cls="flags", caption=f"{len(fl)} items, ordered by severity")
@@ -145,7 +145,7 @@ def build_measurement(page_dir, meta, spec):
     events = spec["events"]
     rows = [[{"html": f'<code class="code">{esc(e["name"])}</code>'},
              esc(e["fires_when"]), esc(", ".join(e["props"])),
-             {"html": outbound(d, "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages", "GitHub Pages hosting")}] for e in events]
+             {"html": outbound(d, "https://github.com/karagemop466-tech/Affil1/blob/main/analytics/endpoint.py", "Collector implementation")}] for e in events]
     body = f"""{pagehead(
         'Measurement plan',
         'Measurement is written,<br>and switched off',
@@ -158,7 +158,7 @@ def build_measurement(page_dir, meta, spec):
   <p>The optional first-party host counts events by date and page. The client sets no cookie or identifier and does not send queries, referring hosts or reader-level details. GitHub Pages does not enable it. See the <a href="../operations/launch-readiness.html">launch readiness checklist</a>.</p>
 </div>
 <h2>What would be measured</h2>
-{table(['Event', 'Fires when', 'Properties', 'Hosting context'], rows, cls='events')}
+{table(['Event', 'Fires when', 'Properties', 'Source'], rows, cls='events')}
 <h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
 <ol class="tight">
   <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
