@@ -414,3 +414,50 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 - **Not done here, needs an owner decision:** either archive the 7 files, as the gate's documented remedy (`archive/`, nothing deleted), or add them to `tools/build.py`. Moving them touches shared output, so this session left them in place. Until one of those happens, the launch-check workflow stays red. This was red before this session's changes; the validator fix only moved the failure to this step.
 - Pages deploy: `Build, check and deploy` and `pages build and deployment` both succeeded on `6a47888`. The live root serves the current publication. The live `review/` page lagged behind main at the time of checking (19 items live versus 21 on main), so the deploy was checked against main, not against the live text.
 - Request: owner of `decision-support/` to choose archive or build (see above). Owner of `tools/sweep_surfaces.py` to confirm the `GENERATED` source.
+
+
+## Session `arena/dad597c3-affil1` — third verification pass (2026-11-20)
+
+Branch `arena/dad597c3-affil1`, opened as PR #60. Cut from `8961b9a` (the
+pre-consolidation tip). While the session worked, `main` advanced through two
+consolidation waves (three editions → one generated site, then a monetization/
+release-panel gate) and a second wave of fixes (PRs #37–#78). The branch was
+rebased three times; what survives in the branch is this entry and the
+verification record below. Everything else this session drafted was reconciled
+away as superseded.
+
+**Third independent verification pass (fetch_page, redirects followed, 2026-11-20 UTC).**
+Titles and ASINs transcribed; nothing inferred; no price, rating or review count
+recorded or published anywhere.
+
+| Ref | Submitted | Observed listing | Agrees with merged register |
+|---|---|---|---|
+| P-01 | https://link.amazon/B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 (CHEFMAN 6 Qt Dual Basket) | yes |
+| P-02 | https://link.amazon/B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R (Emeril Lagasse 26QT French Door) | yes |
+| P-03 | https://link.amazon/B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH (Chefman 8 Qt TurboFry) | yes |
+| P-04 | https://link.amazon/B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 (ThermoMaven 1-Sec; mhFallback marker on arrival) | yes — matches the register; earlier attempts reached checkpoint interstitials, and one opposite mapping was recorded by another session (FLG-016) |
+| P-05 | https://link.amazon/B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z (CHEF iQ Sense Gen3) | yes — same note |
+
+No resolved URL showed `tag=shopnow047c-20`; attribution remains unconfirmed
+(FLG-002 stands). FLG-003 (short-link compliance) remains unresolved. FLG-004 /
+FLG-016 already record the P-04 interstitials and the destination disagreement;
+this pass is an additional corroborating observation, logged here rather than
+written into another session's evidence file.
+
+**What this branch does NOT contain, and why**
+
+- Appends to `data/verification-audit.json` / `data/confirmations.json` (pre-reset commits): those registers were archived by the consolidation; `src/data/reverification.json` is canonical for the current register.
+- A rewrite of `EXECUTIVE_SUMMARY.md`: the consolidated summary is current and links its sources.
+- Suggestions S-13…S-19 and Questions Q-16…Q-18 (pre-reset commits): all duplicate rows in the canonical queue on main; re-adding them would fork the decision queue.
+- `tools/page_desk.py` count fix and `brief/index.html`: dead paths on the current build; reverted rather than shipped as cosmetic drift.
+- `tools/validate.py` delegation shim: written when main's copy crashed on the old schema (FLG-021). Main has since fixed the gate against the current schema (now 1441 checks, 0 warnings, per the entry above); the shim was dropped.
+- Earlier PR #60 body described the drafts above; the PR body was edited to match the branch's actual content.
+
+**Verification commands run on the pre-merge tree:** `python3 tools/validate.py` (exit 0, 1034 checks, 0 warnings at that point; main has since extended it) · `python3 tools/check_local_links.py` → 0 broken · `python3 tools/build.py` reproducible. `tools/check.py` remains stale (`ImportError: GENERATED`) and CI/README use `tools/validate.py` as the gate; logged for the tools lane, not silently patched.
+
+**Sources (official, reachable 2026-11-20):** Operating Agreement (upd. 2025-10-15) https://affiliate-program.amazon.com/help/operating/agreement · Program Policies (upd. 2026-04-14) https://affiliate-program.amazon.com/help/operating/policies · FTC Endorsement Guides FAQ https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking · Google paid-link markup https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links · Amazon Catalog Items reference https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference · GitHub Pages https://docs.github.com/en/pages · Observed listings /dp/B0CDY277D3 · /dp/B09B7SB46R · /dp/B08DKYBTPH · /dp/B0DHZTCNR5 · /dp/B0DZFD6R9Z.
+
+**Not possible from here (unchanged, published on the review lane):** Associates account access (intended ASINs, rate card, tagged-click confirmation, SiteStripe re-issue), Search Console ownership, collector hosting, named author. None blocks this PR.
+
+- Integration PR: https://github.com/karagemop466-tech/Affil1/pull/60
+- Merge result: recorded below after merge.
