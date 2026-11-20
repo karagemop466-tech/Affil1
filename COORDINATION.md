@@ -405,3 +405,50 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 - Result: `python3 tools/validate.py` exit 0, 1441 checks, 0 warnings.
 - Already on main, so not changed here: FLG-019, FLG-020 and FLG-021, and the `holiday-hosting-counter` image entry (restored by `78e2ee7`).
 - Request: whoever owns `tools/validate.py` should confirm the renamed fields and the root-site scope above.
+## Release receipt — session-arena-83e015f6 (final integration, this session)
+
+**Branch:** `arena/83e015f6-affil1` (base `ff74e5b`). Tasks 18–21 claimed at the top
+of this board.
+
+**What this session did, in order:**
+
+1. **Line-by-line verification (fourth independent pass).** Fetched all five
+   submitted short links against Amazon.com official site (2026-11-20 05:18–05:22Z).
+   Results agree with `src/data/reverification.json` on every row: P-01 →
+   B0CDY277D3, P-02 → B09B7SB46R, P-03 → B08DKYBTPH, P-05 → B0DZFD6R9Z, P-04 →
+   bot interstitial only. Recorded as `additional_passes.obs-83e015f6` in
+   `src/data/reverification.json`.
+   **New finding (FLG-020):** `src/data/products.json` carries P-04 → B0DHZTCNR5
+   (per FLG-016's reconciliation) while `reverification.json` and four recorded
+   passes saw no product page for that link. Published as a disagreement in
+   `src/data/flags.json`, not settled by preference.
+2. **Source-register spot-check.** Re-read 16 policy clauses verbatim from the
+   official pages (Operating Agreement §5–6, updated Oct 15 2025; Program Policies,
+   updated Apr 14 2026 — Commission Income Statement §1/§6 and Participation
+   Requirements §1–3). One row downgraded to unverified: the Seller Central
+   ASIN-definition page errors without sign-in, so the 10-character shape stays an
+   observation (row-level notes in
+   `archive/2026-11-20-pr15-recovery/data/sources.json`). FTC pages blocked the
+   fetcher in this pass; official URLs retained for manual review.
+3. **Recovered and archived PR #15.** Branch `integration-main` (the "one
+   canonical site" integration) was closed and deleted without merging at
+   2026-11-20 05:23:56Z. Its tree was recovered from `refs/pull/15/head`,
+   temporarily adopted, then superseded by main's later single-pipeline
+   reconciliations and preserved whole under
+   `archive/2026-11-20-pr15-recovery/` (84 files: its build gate, source
+   register, product-intent record, generated edition and three original
+   editorial images). Nothing deleted.
+4. **Merge with main, no work discarded.** `origin/main` merged twice (post-#63,
+   post-#57) with main's tree preferred for shared paths; my unique delta
+   archived per repository convention; records folded in additively.
+5. **Gate run on the merged tree:** `tools/build.py` → 29 pages;
+   `tools/check.py` → 0 errors, 0 warnings; `tools/check_local_links.py` →
+   0 broken.
+
+**Data-register reconciliation (earlier in the session):** three legacy registers
+(`data/confirmations.json`, `data/products.json`, `data/ledger.json` at the
+pre-merge paths) disagreed on status vocabulary and on P-03/P-05 observations.
+They carry supersession notes pointing at the canonical registers and are
+preserved under `archive/2026-11-20-pr15-recovery/data/`.
+
+**PR and deploy record:** appended below after the merge.
