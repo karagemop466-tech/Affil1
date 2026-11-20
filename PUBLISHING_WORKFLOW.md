@@ -1,26 +1,76 @@
-# Publishing workflow — evidence before promotion
+# Publishing workflow
 
-This is a release checklist for the maintained **Crisp & Counter** edition. A flag can remain open while the editorial site ships. It cannot be used as evidence to enable a blocked feature.
+How a page gets from an idea to the live site, and what stops it.
 
-## 1. Product identity and attribution
+## Cadence
 
-- Observe each supplied URL separately from any enrolled link. Record the listing, ASIN, date, and unusual outcomes; retain conflicting observations. The [Amazon ASIN definition](https://sell.amazon.com/blog/what-is-an-asin) explains why a short-link slug is not an ASIN.
-- If authorized, record the intended ASIN, its official listing URL, date and public Associates Central reference in `kitchen-build/intent.json`. Leave confirmation fields null until the evidence bundle is complete. It is valid for separately sourced intended and observed ASINs to match.
-- Generate one Special Link per product in the enrolled workflow. Check the exact destination and variant with Amazon's authorized tooling and reconcile credited, eligible activity with [Associates Central reports](https://affiliate-program.amazon.com/home/reports). Do not create artificial clicks or orders or commit private reports, account identifiers other than the chosen public tag, access tokens, or query-bearing report URLs.
-- Only then populate `approved_special_link` and `tracking_report_reference` in the same evidence bundle. The build checks completeness, the intended listing and the selected tag. Resolve conflicting observed destinations before approval. This is a structural gate, **not** independent proof of the report. Public buttons use the direct listings until evidence exists. A short link is not declared invalid merely because attribution is unknown.
+One guide a fortnight. Eight exist. The pace is deliberately slower than the
+category average because each guide has to be written from listing facts and
+general reasoning rather than from a test that did not happen.
 
-## 2. Copy, links and rights
+A guide is not published to fill a slot. If there is nothing honest to say about
+a topic, the slot is skipped and the RSS feed stays quiet.
 
-- Recheck the [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), and [FTC guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking). Read the disclosure on mobile before the first recommendation and again in the footer. Check the adjacent link text and endorsement context, not just the HTML attribute.
-- Mark outbound product links `sponsored`. Attribute listing statements, link the source, and leave missing information blank. Don't claim hands-on tests, rankings or trending status without supporting evidence.
-- Before introducing Amazon data, review IP, cache/refresh, display, and API eligibility rules. Do not use Program Content or Special Links to develop machine learning models or related technology without the express prior written approval described in Participation Requirements §5. Use cleared inputs for AI-assisted outlines; a reviewer checks every claim and approves publication. No autonomous publishing, scraping or private reporting is enabled.
+## The gate
 
-## 3. Measure, then plan the next guide
+Every change passes through this order. A step that fails stops the chain.
 
-- Check [GitHub Pages usage limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) before any commercial rollout. Pages is static. The optional first-party counter is tested but off in production; review hosting, privacy, retention and opt-out before activation. Do not derive sessions or orders from raw events.
-- Confirm Search Console ownership and submit the canonical sitemap. Every four weeks read the [Search performance report](https://support.google.com/webmasters/answer/7576553) by page and available query. Improve one guide or propose one distinct guide; if evidence is sparse, record the result and defer. Keep the canonical sitemap and RSS feed in sync with every published guide.
-- Start with the empty campaign ledger. Add only authorized first-party report figures, with reporting period, timestamp, source, channel, and provenance. Unknown sessions, clicks or orders remain blank. No forecasts or conversion scores.
+| Step | Check | Who |
+|---|---|---|
+| 1 | Claim: does a source exist for this sentence? If not, cut the sentence, not the standard. | Editor |
+| 2 | Product facts: transcribed from the listing title reached, or blank. | Editor |
+| 3 | Marketing language: no price, rating, review count, stock phrase, or superlative. | `tools/check.py` |
+| 4 | Disclosure: strip above `<main>`, repeated in the footer, "Paid links" label present. | `tools/check.py` |
+| 5 | Links: every Amazon destination tagged, sponsored, nofollow, new tab. | `tools/check.py` |
+| 6 | Structure: one `<h1>`, alt text, resolving internal links and anchors, canonical, description. | `tools/check.py` |
+| 7 | One site: no stray `.html` outside the generated set or `archive/`. | `tools/check.py` |
+| 8 | Reproducible: rebuild and diff — a hand-edited page fails CI. | `.github/workflows/pages.yml` |
+| 9 | Human read of the rendered page on a phone. | Editor |
 
-## 4. Release
+## What cannot be automated
 
-Run `python3 tools/build.py`, `python3 tools/check.py`, `python3 tools/check_local_links.py`, `python3 -m unittest discover -s kitchen-build`, and `python3 -m unittest discover -s analytics`. Stage the maintained edition with `python3 tools/stage.py <empty-output-folder>`. Record reviewer, date, unresolved flags and official sources on the PR. Confirm the Pages run for the merge SHA, not just the most recent green run.
+Three things need a person, and the build does not pretend otherwise:
+
+- **Whether a sentence is true.** The checker catches patterns, not meaning.
+- **Whether a claim is supported.** A sentence can pass every regex and still be
+  an unsupported opinion dressed as a fact.
+- **Whether the disclosure is prominent enough.** The FTC frames this as a
+  judgement about the reader, not a markup rule.
+
+## Disclosure review
+
+Reviewed at each publication against:
+
+- Associates Program Operating Agreement §5 (required sentence);
+- Associates Program Policies §2(b) (price/availability, and no misleading
+  claims);
+- FTC Endorsement Guides FAQ, affiliate section (placement and wording).
+
+The rule the site applies: the disclosure sits under the masthead on every page,
+the footer repeats it, and every product card carries its own one-line affiliate
+note next to the button. That is one more placement than the minimum, because the
+FTC's guidance is that the closer the disclosure is to the recommendation, the
+better.
+
+## When a link changes destination
+
+1. Open the link. Record the new `/dp/` ASIN, page title and category.
+2. If the ASIN changed, update `observed_asin` in `src/data/products.json`. The
+   buy URL is derived from it, so nothing else needs editing.
+3. Never overwrite `intended_asin` with an observation. The two fields are
+   separate by design.
+4. Rebuild. `check.py` will confirm the new link is tagged and sponsored.
+5. Add a line to the campaign ledger's provenance trail if the change came from a
+   report rather than a manual check.
+
+## When a new product is submitted
+
+1. Open the link once, record where it lands.
+2. If it does not land, publish it as unresolved — a blank row with a flag — not
+   as a guess.
+3. Write the note from the listing title only: what it is, who it suits, what
+   trade the shape implies.
+4. Add it to a category in `products.json` `meta.categories`; the front page and
+   the register both read that list.
+5. Do not write a guide around it until there is something true to say that is
+   not already on the product page.
