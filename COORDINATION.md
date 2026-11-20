@@ -940,3 +940,44 @@ Gates after the change: `validate.py` 1550 checks / 0 warnings; `check.py` 0 err
 - **CI checks on `main` (`c13d7ada`):** `Build, check and deploy` **success** ([run 44688881254](https://github.com/karagemop466-tech/Affil1/actions/runs/44688881254)), `Affiliate launch checks` **success** ([run 44688881241](https://github.com/karagemop466-tech/Affil1/actions/runs/44688881241)), `Verify Countertop Almanac edition and platform` **success** ([run 44688881210](https://github.com/karagemop466-tech/Affil1/actions/runs/44688881210)).
 - **GitHub Pages deployment:** `pages-build-deployment` **success** ([run 44688880323](https://github.com/karagemop466-tech/Affil1/actions/runs/44688880323)); Pages API reported `status: "built"` for `c13d7ada0cba759540160962e13aaf8ec288bec8` at `2026-11-20T06:35:55Z`. Live pages verified via HTTP fetch at `https://karagemop466-tech.github.io/Affil1/`, `https://karagemop466-tech.github.io/Affil1/edition/`, `https://karagemop466-tech.github.io/Affil1/edition/suggestions/`, and `https://karagemop466-tech.github.io/Affil1/edition/flagged/`.
 
+
+---
+
+## Claim — verification refresh, workflow repair, summary sync · arena/62b049f0-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Fresh line-by-line re-verification of all five submitted links + official policy sources (fetch_page, 2026-11-20) | in progress | arena/62b049f0-affil1 | `COORDINATION.md` (log only; no register values changed) |
+| Repair `PUBLISHING_WORKFLOW.md` (unresolved merge-conflict markers + stale `tools/`/`src/` paths) | in progress | arena/62b049f0-affil1 | `PUBLISHING_WORKFLOW.md` |
+| Fix `page_now.py` stale `ROOT/"tools"` path (latent import bug after underscore rename) | in progress | arena/62b049f0-affil1 | `_tools/page_now.py` |
+| Sync `EXECUTIVE_SUMMARY.md` + `README.md` counts/paths to the merged tree (34 pages, 10 guides, 21 suggestions, 27 flags, `_tools/`/`_src/` layout) | in progress | arena/62b049f0-affil1 | `EXECUTIVE_SUMMARY.md`, `README.md` |
+| Rebuild, run all gates, preview, PR + merge + deploy verify | in progress | arena/62b049f0-affil1 | generated HTML via `_tools/build.py` |
+
+Scope is non-overlapping: no other session has claimed these files. No product facts, links, tags, prices or registers are changed by this session.
+
+### Completion — arena/62b049f0-affil1 (2026-11-20 UTC)
+
+- **Re-verification (fetch_page, this session):** the five `/dp/` destinations (B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z) returned product pages whose titles match `_src/data/products.json`. Short links `link.amazon/*` returned the amazon.com homepage via the fetch tool (bot/fallback), which is not proof of invalidity; FLG-003 stays unresolved. No intended ASIN, listing confirmation or Special Link was filled.
+- **Sources:** https://affiliate-program.amazon.com/help/operating/agreement (updated Oct 15, 2025); https://affiliate-program.amazon.com/help/operating/policies (updated Apr 14, 2026); https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking; https://sell.amazon.com/blog/what-is-an-asin.
+- **Fixed:** `PUBLISHING_WORKFLOW.md` merge-conflict markers resolved (both sides kept, paths updated to `_tools/`, `_src/`); `_tools/page_now.py` sys.path `tools` → `_tools`; `EXECUTIVE_SUMMARY.md` and `README.md` counts and paths synced to the tree (34 checked pages, 33 sitemap URLs, 10 guides, 21 suggestions = 6 implemented / 15 open, 24 questions, 27 flags).
+- **Gates:** `build.py` leaves generated output unchanged; `validate.py` 1813 checks, 0 warnings; `check.py` 34 pages, 0 errors / 0 warnings; `check_local_links.py` 68 pages, 0 broken.
+- **Irregularities carried forward (not blocking):** FLG-002 tag enrolment unconfirmed; FLG-003 short-link compliance unresolved; FLG-004 / FLG-018 P-04 and P-05 `mhFallback` arrivals; FLG-016 thermometer pair dispute; FLG-027 robots.txt below host root (Search Console needed); `assets/js/events.js` event names differ from `_src/data/events.json` (client inert, no data loss) — logged for owner decision.
+- **Status:** done, pending integration PR + Pages deploy confirmation (recorded below when complete).
+---
+
+### Claim — live re-verification of the five links, README correction · arena/bcd93318-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Re-verify the five submitted short links and the direct `/dp/` destinations line by line on 2026-11-20; re-verify the Associates §5 wording; correct the README P-04 row that contradicts `_src/data/products.json`; record the re-check as a new flag | in progress | arena/bcd93318-affil1 | `_docs/VERIFICATION-arena-bcd93318.md` (new), `_src/data/flags.json` (append FLG-028 only), `README.md` (P-04 row only), `COORDINATION.md`, and the rebuilt `review/index.html` |
+
+Not claimed and not touched: product data, guides, Special Links, analytics, Search Console, and anything owned by another open claim.
+
+**Done · arena/bcd93318-affil1 · 2026-11-20 UTC.** Scope actually touched: `_docs/VERIFICATION-arena-bcd93318.md` (new), `_src/data/flags.json` (FLG-028 appended), `README.md` (P-04 row, re-check note), `_tools/page_now.py` (caption now counts the rows; file was unclaimed), and rebuilt `brief/`, `now/`, `review/` output.
+
+- **Sources fetched (2026-11-20):** the five short links; `/dp/B0CDY277D3`, `/dp/B0DHZTCNR5`, `/dp/B0DZFD6R9Z`; [Associates Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) (updated Oct 15, 2025).
+- **Result:** the §5 sentence matches verbatim. The three `/dp/` pages resolve to the recorded listings. **All five short links returned `https://www.amazon.com/` on this date**, including P-04 on two attempts. The register's redirect observations for the short links are therefore not reproducible today. Recorded as **FLG-028 (high)**; no observed value was changed.
+- **Corrected:** README P-04 said "none, no buy button", which contradicted `products.json` and the built pages.
+- **Not verified:** P-02 and P-03 `/dp/` pages were not re-fetched. Program Policies and the Commission Income Statement were not re-fetched in this pass.
+- **Gates (local):** `build.py` ok · `check.py` 0 errors/0 warnings (34 pages) · `check_local_links.py` 68 pages, 0 broken · unit tests 6/6 · `_decision-support/validate.py` PASS · `_platform/verify_edition.py` 1965/0 · `_tools/validate.py` 1818 checks, 0 warnings.
+- **Irregularities left for review:** FLG-028; the short-link redirect instability (FLG-018, FLG-028); no attribution tag (FLG-002); the Special Link test still needs an enrolled account (FLG-003).
