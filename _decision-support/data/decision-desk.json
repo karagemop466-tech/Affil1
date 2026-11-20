@@ -1,0 +1,892 @@
+{
+ "generated": "2026-11-20",
+ "section": "decision-support",
+ "generated_by": "validate.py --json (parses the same HTML a human reads)",
+ "counts": {
+  "product_intents": 5,
+  "sources": 50,
+  "irregularities": 10,
+  "open_questions": 14,
+  "suggestions": 28,
+  "verbatim_sources": 40,
+  "pages": 7,
+  "suggestion_gates": {
+   "free": 23,
+   "blocked": 5
+  },
+  "suggestion_paths": {
+   "a": 12,
+   "c": 11,
+   "b": 13
+  }
+ },
+ "registers": {
+  "product_intents": [
+   {
+    "id": "P-01",
+    "submitted_and_intended": "B04G1MEwY submitted as link.amazon/B04G1MEwY . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
+    "candidate_listing": "B0CDY277D3",
+    "product": "Chefman 6 Qt Dual Basket Air Fryer Oven (CHEFMAN)",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0CDY277D3 aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B0CDY277D3 status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_this_session": "not observable from this workspace this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
+    "confirmation": "no confirmation date Agreement between both registers.",
+    "source": "Amazon listing (candidate) · full source log"
+   },
+   {
+    "id": "P-02",
+    "submitted_and_intended": "B02NbDxp3 submitted as link.amazon/B02NbDxp3 . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
+    "candidate_listing": "B09B7SB46R",
+    "product": "Emeril Lagasse 26QT Multi-Function Air Fryer Toaster Oven",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B09B7SB46R aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B09B7SB46R status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_this_session": "not observable; ASIN confirmed on amazon.fr and amazon.com.be pages this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
+    "confirmation": "no confirmation date Agreement between both registers.",
+    "source": "Amazon.com.be listing (ASIN shown) · full source log"
+   },
+   {
+    "id": "P-03",
+    "submitted_and_intended": "B00hJ57DV submitted as link.amazon/B00hJ57DV . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
+    "candidate_listing": "B08DKYBTPH",
+    "product": "Chefman Air Fryer 8 Qt TurboFry 4-in-1",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B08DKYBTPH aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B08DKYBTPH status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_this_session": "not observable this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
+    "confirmation": "no confirmation date Contested. The listing is real; the route is not agreed. IRR-02",
+    "source": "Amazon listing (ASIN shown) · full source log"
+   },
+   {
+    "id": "P-04",
+    "submitted_and_intended": "B0c8moW59 submitted as link.amazon/B0c8moW59 . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
+    "candidate_listing": "—",
+    "product": "ThermoMaven instant-read family (unconfirmed)",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0DHZTCNR5 aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B0DHZTCNR5 status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_this_session": "not observable this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
+    "confirmation": "no confirmation date Both registers fail this row. Candidate identifiers conflict: B0DHZTCNR5 vs B0DMDQZTZN. IRR-04",
+    "source": "Page as captured (different identifier in URL) · full source log"
+   },
+   {
+    "id": "P-05",
+    "submitted_and_intended": "B0f3GKalj submitted as link.amazon/B0f3GKalj . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
+    "candidate_listing": "B0DZFD6R9Z",
+    "product": "CHEF iQ Sense (Gen3) wireless meat thermometer",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0DZFD6R9Z aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B0DZFD6R9Z status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_this_session": "not observable; ASIN + model CQ60-3C-Z1-E confirmed on amazon.ca, .nl, .in pages this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
+    "confirmation": "no confirmation date Contested. Listing is real; the route is not agreed.",
+    "source": "Amazon.ca listing (ASIN shown) · full source log"
+   }
+  ],
+  "sources": [
+   {
+    "id": "A-01",
+    "entry": "Only Amazon's tagged formats may be used",
+    "wording": "\"The links must properly use the special “tagged” link formats we provide and comply with this Agreement (“Special Links”).\" — §1, Description of the Associates Program",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-02",
+    "entry": "The disclosure sentence, exactly",
+    "wording": "\"You must clearly and prominently state the following… on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”\" — §5",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-03",
+    "entry": "Document currency",
+    "wording": "Operating Agreement \"Updated: October 15, 2025\". Program Policies \"Updated: April 14, 2026.\" Both pages predate this review, so the review used the live text, not a cached copy.",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-04",
+    "entry": "Breaking these rules voids earnings",
+    "wording": "\"…we reserve the right to permanently… cease payment of… any and all commission income otherwise payable to you… whether or not directly related to such violation without notice…\" — §2. And §6: \"any violation of Section 5 and as specified in the Program Policies will be deemed a material breach\".",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-05",
+    "entry": "Special Links allowed only after applying",
+    "wording": "\"After you have applied to the Associates Program, you are permitted to display Special Links on your Site.\" and \"Special Links must use the Associates ID we have assigned to you.\" — Participation Requirements §2(a)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-06",
+    "entry": "The tag must be in the URL",
+    "wording": "\"you must include your Associates ID or “tag” (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-07",
+    "entry": "No cloaking, no bookmarking, direct access only",
+    "wording": "\"All Special Links must be accessed directly from your Site.\" and \"You must not encourage customers to bookmark your Special Links.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-08",
+    "entry": "No per-user dynamic tagging — kills a popular automation idea",
+    "wording": "\"Under no circumstances may you associate any sub-tag, other ID or reporting provided in connection with the Associates Program with a specific end user of your Site (e.g., you may not dynamically assign sub-tags to users as they arrive on your Site for purposes of monitoring such users' behavior).\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-09",
+    "entry": "Price and availability may only come from Amazon-served links or the APIs",
+    "wording": "\"your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API and you comply with the requirements regarding use of Creators API or PA API in the License.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-10",
+    "entry": "Price comparison has a formatting duty",
+    "wording": "If prices are shown in \"any “comparison” format\" alongside non-Amazon offers, \"you must display both the lowest “new” price and, if we provide it to you, the lowest “used” price at which the Product is available on the Amazon Site.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-11",
+    "entry": "No misleading product claims, and an example of what counts",
+    "wording": "\"You must not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or any of our policies, promotions, or prices. For example, if you include on your Site a link to a 64 GB smartphone… you may not state that you are linking to a smartphone that has 128 GB of memory.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-12",
+    "entry": "Promotions expire on the clock, not on the calendar",
+    "wording": "\"You must remove from your Site any links and related references to limited time promotions as soon as that promotion on the relevant Amazon Site ends.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-13",
+    "entry": "List pages need their own original writing",
+    "wording": "\"Special Links must link to Products… When linking to pages with Product lists you must have additional original content on your Site that is relevant to the Special Link. Product lists include search results, events (e.g. Prime Day), or a department homepage.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-14",
+    "entry": "Do not seed links on Amazon itself",
+    "wording": "\"You must not post any Special Links on Amazon or link to any page on your Site from Amazon specifically to promote your Special Links.\" — §2(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-15",
+    "entry": "Originality bar for approval",
+    "wording": "\"Your Site(s) must contain original content and be publicly available via the website address provided in the application. Original content utilizing third-party materials must contain significant commentary, analysis, or transformation to any materials you include.\" — Participation Requirements §1",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-16",
+    "entry": "No Amazon marks in the domain, subdomain or tag",
+    "wording": "Unsuitable Sites include those that \"include any trademark of Amazon or its affiliates, or a variant or misspelling… in any domain name, subdomain name, in any “tag” or Associates ID, or in any username, group name, or other identifier on any social networking site\" — §1(g)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-17",
+    "entry": "A rejection for abuse is close to terminal",
+    "wording": "\"if at any time we 1) reject your application for any other reason or 2) terminate your account in connection with any violation or abuse…, you cannot attempt to re-join the Associates Program without our advance authorization.\" — §1",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-18",
+    "entry": "The program is free; anyone charging you is unauthorised",
+    "wording": "\"The Associates Program is free to join… We have never authorized any business to provide paid set-up or consulting services to our associates, so please be wary if any business like that (even one attempting to appropriate the Amazon name) reaches out to offer you costly services.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-19",
+    "entry": "The session is 24 hours and ends at the first order",
+    "wording": "Session begins \"when a customer clicks through that Special Link\" and ends on the first of: \"24 hours elapse from that click\", the customer orders a non-digital Product, or they click another Associate's link. — Commission Income Statement §1(b)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-20",
+    "entry": "Cart items get 89 days; fulfilment gets 180",
+    "wording": "\"completing the order for that Product no later than 89 days after their initial click-through of the Special Link\" and \"within 180 days of the purchase, the Product is shipped to, streamed or downloaded by, and paid for by the customer\". — §1(c)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-21",
+    "entry": "Commission is not a share of the sticker price",
+    "wording": "Qualifying Revenue \"is equal to the amount we actually receive from that Qualifying Purchase, less any shipping charges, gift-wrapping fees, handling fees, taxes (e.g. sales tax and VAT), service charges, credits, rebates, credit card processing fees, and bad debt.\" — §1",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-22",
+    "entry": "Paid ads through our links earn nothing",
+    "wording": "Purchases are disqualified when the customer \"is referred to an Amazon Site through any advertisement that you purchased, including through participation in bidding or auctions on keywords, search terms, or other identifiers that include the word “amazon”, or “kindle”, or any other Amazon Mark\" — §2(c) “Prohibited Paid Search Placement”",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-23",
+    "entry": "Links displayed on a search engine earn nothing",
+    "wording": "Disqualified when referred \"by a link that is generated or displayed on a search engine (including Google, Yahoo, Bing, or any other search portal, sponsored advertising service, or other search or referral service…)\" — §2(d)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-24",
+    "entry": "Auto-redirects earn nothing — which is why the submitted short links cannot simply be wrapped",
+    "wording": "Disqualified when the link \"sends users indirectly to an Amazon Site via an intermediate site, without requiring the customer to click on a link or take some other affirmative action on that intermediate site (a “Redirecting Link”)\" — §2(e)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-25",
+    "entry": "A badly built link is an unpaid link",
+    "wording": "Disqualified where the purchase \"is not correctly tracked or reported because the links from your site to the relevant Amazon Site are not properly formatted\" — §2(g)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-26",
+    "entry": "Pre-orders are out, and so is double-dipping on tags",
+    "wording": "§2(k): a \"pre-release or pre-order Product that is not available on a Product listing page\" is excluded. §5: \"Associates' tags should only be used to benefit from Amazon Associates commissions… by manipulating or combining attribution links… we may take action, including withholding commissions\".",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-27",
+    "entry": "Payment timing, minimums, and the dormancy clause",
+    "wording": "\"approximately 60 days following the end of each calendar month\". Minimums: Direct Deposit 10 USD; Gift Card 10 USD (max 2,000 USD); Check 100 USD with a 15 USD processing fee. And \"if at any time there has been no substantial activity on your account for at least 3 years, then we will have the right, with 7 days' written notice to withhold the accrued commission income\".",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-28",
+    "entry": "What an ASIN is, in Amazon's own words",
+    "wording": "\"“ASIN” stands for “Amazon Standard Identification Number.” It's a unique 10-character alphanumeric code assigned to every product listed in the Amazon store… The format of an ASIN code typically starts with “B0,”\". How to find one: \"The ASIN appears after \"/dp/\".\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-29",
+    "entry": "API access is gated behind sales, not registration",
+    "wording": "Prerequisites for Creators API: \"Be enrolled in the Amazon Associates program for your target marketplace\", \"Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API\", \"Register for API access through Associates Central\", \"Generate API credentials\".",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-30",
+    "entry": "The same gate, stated as an error condition",
+    "wording": "\"The current eligibility criteria to access the Product Advertising API is that the account must have made 10 qualified sales in the trailing 30 days.\" (HTTP 403 AssociateNotEligible )",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-31",
+    "entry": "Approval needs three real sales, and ten posts of content",
+    "wording": "\"After you sign up, our Associates team will check your application once you've driven qualified sales (we require at least three within the first 180 days). Please note that personal orders do not qualify… All Sites must have robust original content (even when advertising is removed) – a good rule of thumb is at least 10 posts.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-32",
+    "entry": "…and the clock cannot be bought back",
+    "wording": "\"Once you've applied, you have 180 days to refer a sale. Once you have referred three qualifying sales, we'll evaluate your application within a day or two… Your application can be withdrawn if there were not enough qualifying sales for 180 days after your application was submitted. We're unable to reinstate your account or Associates ID after it's been rejected.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "A-33",
+    "entry": "Commission rate card for these categories",
+    "wording": "The rate for a category is published in the Appendix (\"Standard Commission Income\") to the Commission Income Statement. The Appendix is served inside the login-bound help centre; the numeric rate for Kitchen or Thermometers was not captured in this session and is left blank throughout this desk rather than quoted from a blog.",
+    "read": "2026-11-20",
+    "status": "unresolved"
+   },
+   {
+    "id": "F-01",
+    "entry": "\"Clear and conspicuous\", defined in the regulation",
+    "wording": "\"“clear and conspicuous” means that a disclosure is difficult to miss (i.e., easily noticeable) and easily understandable by ordinary consumers… In any communication using an interactive electronic medium, such as social media or the internet, the disclosure should be unavoidable. The disclosure should not be contradicted or mitigated by, or inconsistent with, anything else in the communication.\" — 16 CFR §255.0(f)",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "F-02",
+    "entry": "When a connection must be disclosed",
+    "wording": "\"if there's a connection between an endorser and the marketer that a significant minority of consumers wouldn't expect and it would affect how they evaluate the endorsement, that connection should be disclosed clearly and conspicuously.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "F-03",
+    "entry": "The FTC does not offer a safe harbour",
+    "wording": "\"This guidance doesn't provide a safe harbor from potential liability; whether a particular advertising claim is deceptive or otherwise violates the FTC Act will depend on the facts of the specific case.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "F-04",
+    "entry": "An endorsement must not outstate what the marketer could claim",
+    "wording": "\"An endorsement must reflect the honest opinion of the endorser and can't be used to make a claim the marketer of the product couldn't legally make.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "F-05",
+    "entry": "Whether \"affiliate link\" alone is enough",
+    "wording": "Secondary legal summaries attribute to the FAQ the position that \"affiliate link\" or a bare \"buy now\" button is not an adequate disclosure while \"paid link\" beside the link can be. This session read the FAQ's advertiser-responsibility and review-program sections; the affiliate paragraph itself was not captured, so the wording is not quoted as FTC text anywhere on the shop.",
+    "read": "2026-11-20",
+    "status": "unresolved · re-read"
+   },
+   {
+    "id": "G-01",
+    "entry": "Thin affiliation — the policy that names this exact business model",
+    "wording": "\"Thin affiliation is the practice of publishing content with product affiliate links where the product descriptions and reviews are copied directly from the original merchant without any original content or added value.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "G-02",
+    "entry": "What Google says a good affiliate site does",
+    "wording": "\"Not every site that participates in an affiliate program is a thin affiliate. Good affiliate sites add value by offering meaningful content or features. Examples of good affiliate pages include offering additional information about price, original product reviews, rigorous testing and ratings, navigation of products or categories, and product comparisons.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "G-03",
+    "entry": "Two of those \"good\" signals are ones we cannot yet supply",
+    "wording": "Read against A-09: \"additional information about price\" requires Amazon-served or API data, and \"rigorous testing and ratings\" requires a person to have tested something. Neither exists here yet. inference",
+    "read": "2026-11-20",
+    "status": "inference"
+   },
+   {
+    "id": "G-04",
+    "entry": "What makes a commercial section defensible under the site reputation policy",
+    "wording": "Google's worked example of a case it would not act against: \"it's primarily unique content generated for the host site and its end users. Authorship, editorial responsibility, and affiliate links are clearly marked, and the formatting and presentation of the content are consistent with the rest of the publisher's content.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "G-05",
+    "entry": "Scaled content abuse turns on purpose, not on who typed it",
+    "wording": "The policy targets generating many pages for the primary purpose of manipulating rankings rather than helping users, \"no matter how it's created\". Google's guidance on the March 2024 update frames it as covering automation, humans, or both. Spam policies · AI-generated content guidance",
+    "read": "2026-11-20",
+    "status": "official · paraphrased"
+   },
+   {
+    "id": "G-06",
+    "entry": "A site name in Search comes from the domain root, not a subfolder",
+    "wording": "\"Google Search only supports one site name per site, where a site is defined by the domain or subdomain. Google Search does not support site names at the subdirectory level.\" and \"The WebSite structured data must be on the home page of a site… the domain or subdomain level root URI.\"",
+    "read": "2026-11-20",
+    "status": "verbatim"
+   },
+   {
+    "id": "R-01",
+    "entry": "Pages publishing is the legacy branch publisher, not Actions",
+    "wording": "gh api repos/karagemop466-tech/Affil1/pages returns build_type: \"legacy\" , source: {branch: \"main\", path: \"/\"} , https_enforced: true . So the site the world sees is the main tree at /Affil1/ ; the deploy job in .github/workflows/pages.yml is not what publishes it.",
+    "read": "2026-11-20",
+    "status": "command output"
+   },
+   {
+    "id": "R-02",
+    "entry": "What this workspace could and could not reach",
+    "wording": "link.amazon resolves from the sandbox (18.172.170.20/.59/.77 — CloudFront range), but outbound HTTPS to amazon.com is blocked by the egress allow-list, so the redirect chain behind the five submitted links could not be read here. That is a limit of this environment, not a property of the links.",
+    "read": "2026-11-20",
+    "status": "observed"
+   },
+   {
+    "id": "R-03",
+    "entry": "`.amazon` really is Amazon's own top-level domain",
+    "wording": "IANA's Root Zone Database lists .amazon as a generic TLD with TLD Manager \"Amazon Registry Services, Inc.\" That is why link.amazon is a plausible Amazon-operated host — though it says nothing about what the path after it does.",
+    "read": "2026-11-20",
+    "status": "official"
+   },
+   {
+    "id": "R-04",
+    "entry": "Where the public site actually lives",
+    "wording": "https://karagemop466-tech.github.io/Affil1/ · canonical host used by robots.txt and sitemap.xml . Any move to a custom domain invalidates both, and A-16 forbids an Amazon mark in whatever domain is chosen.",
+    "read": "2026-11-20",
+    "status": "observed"
+   },
+   {
+    "id": "R-05",
+    "entry": "The user-supplied tracking ID",
+    "wording": "shopnow047c-20 is the ID named in the brief. It matches the XXXXX-## shape required by A-06. Whether the account behind it is approved, and whether karagemop466-tech.github.io/Affil1 is listed as one of its Sites, cannot be checked from here.",
+    "read": "2026-11-20",
+    "status": "unresolved"
+   },
+   {
+    "id": "R-06",
+    "entry": "The same-day audit that aligned the two product registers",
+    "wording": "_data/verification-audit.json (sessions a4ab7faf / 8206a8d0 , window 05:15–05:22Z) records, for each submitted link, the final URL and page title as returned by a platform-level fetcher, with its own limitations stated: bot-like mobile landing variant, point-in-time observation, \"observations are EVIDENCE, NOT confirmation of submitter intent\". Intended-identity fields were left null for the enrolled workflow to fill. A later observation contradicts its thermometer pair (FLG-016), which is exactly why these rows stay open.",
+    "read": "2026-11-20",
+    "status": "third-party in-repo"
+   }
+  ],
+  "irregularities": [
+   {
+    "id": "IRR-01",
+    "finding": "All five submitted identifiers are 9 characters; Amazon publishes ASINs as 10. The submitted URLs also carry no tag parameter and no /dp/ path, so they cannot function as Special Links in the form supplied.",
+    "evidence": "printf %s B04G1MEwY | wc -c → 9 (same for the other four) · A-06, A-28. Note this is a format mismatch, not a verdict that the links are invalid — that status is unresolved in the brief and stays unresolved here.",
+    "action": "Keep the links out of revenue claims; run the one-product link test in the enrolled workflow before scaling. Rows in the register .",
+    "severity": "High"
+   },
+   {
+    "id": "IRR-02",
+    "finding": "Two registers on this branch contradicted each other on three of five links — and a later audit settled it. Before this section was drafted, _src/data/products.json recorded product-page destinations for P-03/P-05 while _data/confirmations.json recorded the Amazon homepage for both and a bot-checkpoint for P-04. An independent same-day audit ( _data/verification-audit.json , sessions a4ab7faf / 8206a8d0 ) fetched all five links, observed /dp/ destinations for each, and the registers were aligned to it — but a different session's fetch reports the two thermometer routes swapped (repo flag FLG-016 ), so at least one of those observations is wrong and none is reproducible from here.",
+    "evidence": "_src/data/products.json ( observed_redirect_asin P-03 B08DKYBTPH , P-05 B0DZFD6R9Z ) vs _data/confirmations.json archived at _archive/2026-11-20-integration/_data/confirmations.json ; the live successor fields are observed_asin in _src/data/products.json and FLG-004/016 in _src/data/flags.json as revised at 05:3xZ, which now agrees — with _data/verification-audit.json now archived at _archive/2026-11-20-integration/_data/verification-audit.json by the 05:5xZ reorganisation — note the archive copy is still published on Pages as the third witness. The audit's own limitations note that its fetcher rendered bot-variant mobile pages and that observations are point-in-time.",
+    "action": "Resolved as a contradiction; still open as evidence. The audit came from other sandboxes, so the enrolled workflow must still reproduce destinations before any monetised claim. Keep one authoritative register — there are now three files describing the same five links.",
+    "severity": "Med · was High"
+   },
+   {
+    "id": "IRR-03",
+    "finding": "The repo ships an Actions deploy workflow, but Pages is configured as the legacy branch publisher. Two publishers are configured and only one is active; runs of the custom workflow were cancelled mid-queue during this session (05:19:55 UTC) by its own cancel-in-progress concurrency group.",
+    "evidence": "R-01 · run history · .github/workflows/pages.yml",
+    "action": "Pick one publisher. Either switch the repo setting to \"GitHub Actions\" or delete the deploy job. Until then, \"CI verified the deploy\" claims are ambiguous — the site you see came from the branch, not the workflow.",
+    "severity": "Medium"
+   },
+   {
+    "id": "IRR-04",
+    "finding": "P-04's product was named only by a late, third-party observation. Earlier this session it had two competing candidate identifiers, a bot checkpoint where a listing should be, and no register that could name it; the 05:3xZ audit recorded B0c8moW59 reaching amazon.com/dp/B0DHZTCNR5 and the registers updated to match. Nothing here can reproduce that, so the row reads \"observed · pending workflow\", not \"confirmed\".",
+    "evidence": "Product evidence row B0DHZTCNR5 · _data/verification-audit.json now archived at _archive/2026-11-20-integration/_data/verification-audit.json by the 05:5xZ reorganisation — note the archive copy is still published on Pages OBS-4 · _data/confirmations.json archived at _archive/2026-11-20-integration/_data/confirmations.json ; the live successor fields are observed_asin in _src/data/products.json and FLG-004/016 in _src/data/flags.json conf-004 (status listing-checked , intended fields still null)",
+    "action": "The logged-out browser check from Q-01 still applies to all five links; P-04 is the one whose entire evidence base is somebody else's fetch. No card copy, no tagged link, no spec claims until the enrolled workflow lands.",
+    "severity": "High"
+   },
+   {
+    "id": "IRR-05",
+    "finding": "The CHEF iQ Sense listing contradicts itself on the one number a buyer cares about: heat tolerance appears as 1,40 °C, 1,300 °F, 1,500 °F and 1,000 °F on different captured pages of the same product.",
+    "evidence": ".ca · .nl (title 1,300 °F, description 1,500 °F) · .in (1,000 °F)",
+    "action": "Print no heat figure. If one is ever needed, quote the seller's page for the marketplace the reader buys from, with the date. A \"how to read spec-sheet conflicts\" angle is a better article than a made-up number.",
+    "severity": "Low"
+   },
+   {
+    "id": "IRR-06",
+    "finding": "Live reader-facing pages already carry tag=shopnow047c-20 in their outbound links, while the account behind that tag and its registered Sites are unconfirmed. Special Links are permitted \"after you have applied\", and the application must name the Site.",
+    "evidence": "grep -rl 'tag=shopnow047c-20' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 17 live files carrying 53 tagged hrefs (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft): the root front page, six guides/ pages, categories/air-fryers.html , products.html , dashboard.html and the whole crisp/ edition · A-05, A-06, R-05. The count grew while this desk was being written; the exposure is now site-wide, not a handful of pages.",
+    "action": "Confirm enrolment and that karagemop466-tech.github.io/Affil1 is listed as a Site; if not, ship the links untagged until it is. Then do the single-product test and record the attributed click.",
+    "severity": "Medium"
+   },
+   {
+    "id": "IRR-07",
+    "finding": "The same kind of page exists in several places at once: root products.html , questions.html , suggestions.html , executive-summary.html , flagged-for-review.html ; also guides/suggestions.html , guides/executive-summary.html , crisp/products/ , crisp/questions/ , crisp/suggestions/ , crisp/flagged/ — plus new root products/ , questions/ , suggestions/ , review/ and reviews/ mirrors of the same page types. 65 reader-facing HTML files outside _archive/ and this desk, canonicals on 57 (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft). A crawler sees near-duplicates with no canonical story.",
+    "evidence": "find . -name '*.html' -not -path './_archive/*' -not -path './_decision-support/*' | wc -l → 65 (was 43 an hour earlier) · rel=\"canonical\" in 57 · crisp/ and the root page-type mirrors still both live · G-01",
+    "action": "The final integration pass should choose one canonical set, canonicalise or redirect the rest, and prune _archive/ out of the published tree. This is a Google-facing risk before it is an aesthetic one.",
+    "severity": "Medium"
+   },
+   {
+    "id": "IRR-08",
+    "finding": "Measurement is written three times with two incompatible endpoints, and nowhere can it land: js/analytics.js beacons to /api/collect , analytics.js and assets/js/analytics.js beacons to /_analytics/collect , and GitHub Pages serves no such POST handler.",
+    "evidence": "js/analytics.js:22 · analytics.js:9 · _server/collect.js , _analytics/endpoint.py are never invoked by a static host · the code says so itself: \"on GitHub Pages it requires a serverless…\"",
+    "action": "One contract, one file, and a stated destination: either a hosted endpoint, or the local-only ledger that already exists in _data/campaign-ledger.json . Until then, no page may say clicks are being recorded.",
+    "severity": "Medium"
+   },
+   {
+    "id": "IRR-09",
+    "finding": "Structured data is partially fixed. application/ld+json appeared in 0 of 43 files when first counted; it is now in 13 of 65 (root front page, the seven guides/ pages with JSON-LD, the five products/p-0n pages) — but crisp/ still has none, and a \"site name\" in Search remains out of reach while the pages live under /Affil1/ .",
+    "evidence": "grep -rl 'application/ld+json' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 13 (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft) · G-06",
+    "action": "Add Article + BreadcrumbList to guide pages in the shared templates; skip WebSite site-name markup on a project page. A custom domain is the real fix for the site name.",
+    "severity": "Medium"
+   },
+   {
+    "id": "IRR-10",
+    "finding": "Two sitemaps and three feeds that do not know about each other: root sitemap.xml (21 URLs, down from 32 as pages were consolidated) is the one robots.txt advertises, crisp/sitemap.xml (14 URLs) is unadvertised, and feed.xml , rss.xml and crisp/feed.xml all exist. Neither sitemap lists this Decision Desk section.",
+    "evidence": "cat robots.txt · grep -c '<loc>' sitemap.xml crisp/sitemap.xml → 32 / 14",
+    "action": "Merge into one sitemap and one feed at the site root, list every canonical page including _decision-support/ , and 301 or drop the rest. Logged as a request to the integration session in COORDINATION.md .",
+    "severity": "Low"
+   }
+  ],
+  "open_questions": [
+   {
+    "id": "Q-01",
+    "question": "What are these five products, really?",
+    "what_we_have": "Four candidate listings whose identity is confirmed on official Amazon pages; a same-day audit aligned two registers that had disagreed on three routes — but the audit is another sandbox's observation, and P-04 still rests on it alone",
+    "what_is_missing": "Where each submitted short link actually lands, and which ASIN the submitter meant for P-04",
+    "how_to_find_out": "Open each link.amazon/… in a logged-out browser with the network tab open; write down the final /dp/ URL. Then re-run from a host that can reach amazon.com and store the whole redirect chain",
+    "owner": "you, 10 min",
+    "severity": "blocks launch"
+   },
+   {
+    "id": "Q-02",
+    "question": "Is shopnow047c-20 approved, and is this site listed against it?",
+    "what_we_have": "The tag matches the XXXXX-## shape Amazon requires; six published pages already carry it",
+    "what_is_missing": "Enrolment status, whether karagemop466-tech.github.io/Affil1 is one of the Sites on the application, and whether three qualifying sales have ever been driven",
+    "how_to_find_out": "Associates Central → Account settings → Website list; and the reports screen for any click history at all",
+    "owner": "you, 5 min",
+    "severity": "blocks monetisation"
+   },
+   {
+    "id": "Q-03",
+    "question": "Which single link survives the enrolled-workflow test?",
+    "what_we_have": "The test procedure is written; the register has a column waiting for its output",
+    "what_is_missing": "A click recorded against our own tag, for one product, with the destination noted and dated",
+    "how_to_find_out": "Build one link in Associates Central, click it from a staging page, check Reports. One product first — that is what the brief prescribes, and it is also the cheapest way to learn the link format is right",
+    "owner": "you, 20 min",
+    "severity": "blocks monetisation"
+   },
+   {
+    "id": "Q-04",
+    "question": "What is the commission rate for these categories?",
+    "what_we_have": "Verification that Qualifying Revenue is net of shipping, taxes, gift fees, credits, rebates and processing fees, and that rates live in the Appendix to the Commission Income Statement",
+    "what_is_missing": "The numeric rate for Kitchen small appliances and for thermometers. Third-party blogs quote 1–4.5%, which is not a source",
+    "how_to_find_out": "Logged in: Associates Central → the Commission Income Statement Appendix. The number belongs in the register with a date, not in prose",
+    "owner": "you, or an agent with access",
+    "severity": "shapes the plan"
+   },
+   {
+    "id": "Q-05",
+    "question": "Can a reader reach this site at all, and what do they type to find it?",
+    "what_we_have": "A live URL, a Pages config that publishes from main , and 65 HTML files with no query data whatsoever",
+    "what_is_missing": "Any impression, query or click data. Whether the domain is even indexed",
+    "how_to_find_out": "Verify the property in Search Console, submit the single canonical sitemap, wait two weeks, then read the Queries tab. Until then every keyword claim in this project is fiction",
+    "owner": "needs an account",
+    "severity": "shapes the plan"
+   },
+   {
+    "id": "Q-06",
+    "question": "Who is the reader, and what is on their counter?",
+    "what_we_have": "Four plausible buyer questions the brief already proposes as working titles, and an inventory of the trade-offs they imply",
+    "what_is_missing": "Household size, counter depth, wash-up tolerance, whether the toaster oven is being replaced, budget band",
+    "how_to_find_out": "Five questions at the end of each guide, a message-form field, or six conversations with six people who own an air fryer. Not a survey tool",
+    "owner": "only a reader can",
+    "severity": "shapes the plan"
+   },
+   {
+    "id": "Q-07",
+    "question": "Where do events go, and does anything receive them?",
+    "what_we_have": "Three analytics scripts, two endpoint paths, one Python and one Node collector stub — and no receiver on a static host",
+    "what_is_missing": "A decision: hosted endpoint, or honest local-only counting. Plus a retention period and a privacy line matching whichever is chosen",
+    "how_to_find_out": "Pick one contract, delete two files, write the destination in privacy.html . Then no page has to pretend it is \"tracking\"",
+    "owner": "you, or an agent",
+    "severity": "blocks the measurement claim"
+   },
+   {
+    "id": "Q-08",
+    "question": "Which section of this repository is the shop?",
+    "what_we_have": "Root index.html , crisp/index.html , guides/index.html , categories.html , dashboard.html , products.html — plus an _archive/ of superseded sessions",
+    "what_is_missing": "One canonical home, and a rule for what happens to the rest",
+    "how_to_find_out": "A person decides the brand (one name, one nav). The mechanical half — canonicals, 301s, sitemap merge — an agent can then finish in a day",
+    "owner": "you, a decision",
+    "severity": "blocks the front page"
+   },
+   {
+    "id": "Q-09",
+    "question": "Do we have rights to any product imagery?",
+    "what_we_have": "Amazon's IP licence and Trademark Guidelines exist and are referenced; no image on this site carries a provenance field",
+    "what_is_missing": "Whether listing images may be displayed here, or whether we shoot/generate our own",
+    "how_to_find_out": "Read the IP licence section of the Program Policies; add an image_source and image_rights field to product data and refuse to build a page without both",
+    "owner": "an agent can start",
+    "severity": "shapes the plan"
+   },
+   {
+    "id": "Q-10",
+    "question": "Who is accountable for what is published?",
+    "what_we_have": "A brand, a footer line, and no name anywhere",
+    "what_is_missing": "An author who consents to being named, an editor, and a route for a correction",
+    "how_to_find_out": "A person agrees, writes four sentences of bio, and their name goes in the template. Google's own defensible-example language rests on exactly this",
+    "owner": "only a human",
+    "severity": "shapes the plan"
+   },
+   {
+    "id": "Q-11",
+    "question": "What is the current compliance status of the supplied short links?",
+    "what_we_have": "They are not in the tagged Special-Link form; the identifier is 9 characters against a published 10-character ASIN definition; .amazon is a genuine Amazon-run TLD",
+    "what_is_missing": "Whether using them at all is permitted as-is. The brief records this as unresolved and it stays unresolved — no source we can reach settles it",
+    "how_to_find_out": "Ask Associates support in writing, quoting §2(b). Keep the answer with the register. Meanwhile ship untagged, unmonetised links",
+    "owner": "you, one email",
+    "severity": "blocks monetisation"
+   },
+   {
+    "id": "Q-12",
+    "question": "Which jurisdiction's rules apply to this publisher?",
+    "what_we_have": "US-facing sources: Amazon US agreement, FTC Endorsement Guides. The owner's location is stated as Los Angeles, California",
+    "what_is_missing": "Whether any state or EU-facing rule (e.g. consent banners for readers in the EU/UK) applies to this deployment, and what Amazon's terms say for the marketplaces we intend to link to",
+    "how_to_find_out": "Confirm the target marketplace list; if readers outside the US are intended, re-read the disclosure and consent rules for those markets before adding those stores",
+    "owner": "you agent can draft",
+    "severity": "shapes the plan"
+   },
+   {
+    "id": "Q-13",
+    "question": "Has anyone here actually used one of these appliances?",
+    "what_we_have": "Nothing. No test log, no measurement, no ownership claim",
+    "what_is_missing": "Either a real test protocol and a person to run it, or a permanent editorial rule that we never write \"we tested\"",
+    "how_to_find_out": "Borrow or buy one unit for a two-week protocol: same food, same basket load, timed crispness, wash-up minutes, tape-measure footprint. It is the one input that turns this from a list into a publication",
+    "owner": "only a human can",
+    "severity": "shapes the plan"
+   },
+   {
+    "id": "Q-14",
+    "question": "Which publisher actually deploys this site?",
+    "what_we_have": "Pages reports the legacy branch publisher while the repo also ships an Actions deploy workflow whose runs get cancelled by its own concurrency group",
+    "what_is_missing": "One publishing source, set deliberately, and a deploy that can be attributed to a commit",
+    "how_to_find_out": "Flip the repo setting or delete the redundant job, then confirm the run history shows exactly one publisher per commit",
+    "owner": "an agent can finish",
+    "severity": "blocks trust in CI"
+   }
+  ],
+  "suggestions": [
+   {
+    "id": "S-01",
+    "path": "a",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Reconcile the two product registers into one authoritative file",
+    "why": "The same five links were described two ways on the same branch (three rows disagreed); a same-day audit aligned them, but two files still track the same fact and can drift again. Pick one authoritative register. IRR-02",
+    "touches": "_src/data/products.json · _src/data/flags.json (the _data/*.json audit pair was archived by the 05:5xZ reorg)"
+   },
+   {
+    "id": "S-02",
+    "path": "a",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Re-run the five fetches from a host that can reach amazon.com and store the full redirect chain per link",
+    "why": "A same-day audit saw the destinations, but this workspace (firewalled to an allow-list) never reproduced any of it, and no full Location chain is stored — only final URLs. Chain + status codes, timestamped, replaces a third party's word with ours. R-02",
+    "touches": "_data/confirmations.json"
+   },
+   {
+    "id": "S-03",
+    "path": "a",
+    "effort": "s",
+    "gate": "blocked",
+    "suggestion": "Confirm shopnow047c-20 is approved and that this Pages URL is listed as its Site",
+    "why": "Special Links are permitted \"after you have applied\", and the application must identify the Site. Links are already carrying this tag on six pages. IRR-06 · A-05, A-06",
+    "touches": "index.html · guides/*.html · categories/air-fryers.html"
+   },
+   {
+    "id": "S-04",
+    "path": "a",
+    "effort": "s",
+    "gate": "blocked",
+    "suggestion": "Test one link, then all five: build in Associates Central, click from staging, confirm the attributed click in reports, record destination + date + who checked",
+    "why": "This is the exact instruction in the brief, and it is the only step that converts a guessed mapping into a confirmed one. One product first. A-05 · next actions",
+    "touches": "_data/confirmations.json"
+   },
+   {
+    "id": "S-05",
+    "path": "a",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Resolve or remove P-04 — the product with no confirmable name",
+    "why": "Two candidate identifiers, a checkpoint page, and no register that can name it. A shop that cannot say what it is selling should stop displaying it. IRR-04",
+    "touches": "products.html · crisp/products/index.html"
+   },
+   {
+    "id": "S-06",
+    "path": "a",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Keep observed redirect in its own field, forever — add a schema check that refuses to merge it with the intended identifier",
+    "why": "The brief asks for the split; the register already got it right. Make it structural so a later automated pass cannot silently overwrite intent with observation. A-28",
+    "touches": "_tools/validate.py"
+   },
+   {
+    "id": "S-07",
+    "path": "a c",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Make the disclosure and rel rules a CI gate: fail the build if any page lacks the above-the-fold Associates statement, or if an outbound Amazon link misses sponsored nofollow noopener",
+    "why": "Currently it is a convention that each session re-discovers. A check turns good intentions into a build that cannot ship without them. Existing workflow already validates links the same way. A-02, F-01",
+    "touches": ".github/workflows/pages.yml · _tools/validate.py"
+   },
+   {
+    "id": "S-08",
+    "path": "a c",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "No evergreen promo copy: any mention of a discount or event gets an expires_at field and a build-time check that removes it when past",
+    "why": "Amazon requires limited-time promotion mentions to come down \"as soon as that promotion… ends\". A dated field makes that automatic instead of heroic. A-12",
+    "touches": "_src/data/*.json · _tools/build.py"
+   },
+   {
+    "id": "S-09",
+    "path": "a c",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Refuse price fields in content data unless a row carries a provenance object naming the Amazon-served link or the API response",
+    "why": "Snapshots showing $79.91 were discarded by hand this session. Hand-filtering does not scale; a rejected field does. A-09",
+    "touches": "_tools/build.py · _tools/validate.py"
+   },
+   {
+    "id": "S-10",
+    "path": "b c",
+    "effort": "l",
+    "gate": "free",
+    "suggestion": "Choose one canonical site and redirect or retire the rest; today the same page type exists at the root, under guides/ , under crisp/ and in _archive/",
+    "why": "65 reader-facing files, canonicals on 57, and the page-type duplication has grown to products/ , questions/ , review/ mirrors as well as crisp/ . Search engines get a choice of which copy to index, and readers get four tones of the same advice. Still the single biggest quality lever left. IRR-07 · G-01",
+    "touches": "index.html · crisp/ · guides/ · _archive/ · sitemap.xml"
+   },
+   {
+    "id": "S-11",
+    "path": "b",
+    "effort": "m",
+    "gate": "blocked",
+    "suggestion": "Named authors with a real bio, photo and contact route; one byline per article",
+    "why": "Google's own worked example for a defensible commercial section turns on \"Authorship, editorial responsibility, and affiliate links are clearly marked\". Anonymous advice is the tell that makes a page read as generated. G-04",
+    "touches": "crisp/about/ · guide templates"
+   },
+   {
+    "id": "S-12",
+    "path": "b",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Rebuild the front page as a shop: shelf and seasonal picks above the fold; every dashboard surface reachable from one footer group instead of the masthead",
+    "why": "Half landed while this board was written: the root front page is now products-led with a product grid and no verification preamble. The remaining job is the same treatment for crisp/ , and merging the shelf with it. The register belongs one click away, not in the hero — a buyer arrives for a fryer, not for our sourcing method.",
+    "touches": "index.html · crisp/index.html"
+   },
+   {
+    "id": "S-13",
+    "path": "b",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "First 100 words of every guide answer the question in the title ; move the evidence caveats into a short standing box below",
+    "why": "Caveat-first prose is what \"reads like an audit\". Nothing is hidden — it just stops being the first thing a reader meets, and it stays in the same document.",
+    "touches": "crisp/guides/*/index.html"
+   },
+   {
+    "id": "S-14",
+    "path": "b",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Add a style lint: ban \"in today's fast-paced world\", \"game-changer\", \"elevate\", \"delve\", \"unlock\", \"whether you're a…\", tri-colon symmetrical bullets, and any sentence that starts with \"Let's be honest\"",
+    "why": "Not taste, hygiene. A list of forbidden patterns in the build is cheap, mechanical, and catches the exact phrasing that makes readers bounce. Nothing here substitutes for a human read.",
+    "touches": "_tools/validate.py"
+   },
+   {
+    "id": "S-15",
+    "path": "b",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Nav labels a shopper uses: Air fryers · Thermometers · How we choose · Sale picks. Retire \"SG-27..SG-30\" style internal codes from reader-facing chrome",
+    "why": "Two navs already ship with different vocabularies (root vs crisp/ ). Internal task codes in a menu are the surest sign of a generated site.",
+    "touches": "index.html · crisp/assets/css/site.css"
+   },
+   {
+    "id": "S-16",
+    "path": "b",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Commission or shoot one honest still-life set (countertop, open basket, probe on a board) and reuse it; label any generated image as illustrative in the alt text and caption",
+    "why": "No product photograph on this site has a rights-cleared source today, and Amazon's licence terms govern reused imagery. An honest illustration beats a borrowed hero shot. A-16 · IP licence",
+    "touches": "assets/ · crisp/assets/"
+   },
+   {
+    "id": "S-17",
+    "path": "b",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Three clusters, cross-linked: Choosing a format · Living with it (cleanup, counter, noise) · Cooking with it (thermometer-led). Every guide links two siblings and the cluster index",
+    "why": "One-off guides read like a content calendar. A cluster reads like an editor who cares about a subject — which is the difference Google describes between thin affiliates and useful ones. G-02",
+    "touches": "crisp/guides/ · categories/"
+   },
+   {
+    "id": "S-18",
+    "path": "a b",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Add one sentence under each product block saying what we did and did not do to the product (\"we have not tested this; here is what the listing claims\")",
+    "why": "The FTC standard is that a disclosure be unavoidable and not contradicted by the rest of the page. A strip plus a candid per-block line is both compliance and the plainest tone a shop can strike. F-01, F-02",
+    "touches": "guide + product templates"
+   },
+   {
+    "id": "S-19",
+    "path": "b",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Ship a 5-question chooser (household size, counter depth, wash-up tolerance, oven replacement yes/no, budget band) that outputs which format fits and links the matching guide",
+    "why": "Absolutely no product claims and no prices in the result — the output is a format and a reading list. It answers the buyer's real question and gives the site something no scraped list page has.",
+    "touches": "crisp/compare/ · new js module"
+   },
+   {
+    "id": "S-20",
+    "path": "b",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Set a body measure of 62–72 characters, 1.6 line height, and no full-bleed hero image above 40 kB",
+    "why": "Half the shop is read on a phone in a kitchen. Long unbroken lines are also what machine-written pages look like, so this fix buys credibility and readability at once.",
+    "touches": "assets/css/*.css · crisp/assets/css/site.css"
+   },
+   {
+    "id": "S-21",
+    "path": "b",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Add a one-paragraph editorial-standards and corrections note stating that listing facts are snapshots with dates, and how a reader reports a wrong one (email or issue link)",
+    "why": "There is a disclosure.html and a privacy.html but no route for \"your page told me something untrue\". Trust pages that cannot be acted on read as boilerplate.",
+    "touches": "disclosure.html · crisp/about/"
+   },
+   {
+    "id": "S-22",
+    "path": "c",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Consolidate the three analytics files into one module with one endpoint, and label the destination truthfully — either a hosted collector or \"counts live in your browser only\"",
+    "why": "js/analytics.js posts to /api/collect , the other two to /_analytics/collect , and a GitHub Pages deploy answers neither. Two contracts, zero receivers. IRR-08",
+    "touches": "js/analytics.js · analytics.js · assets/js/analytics.js · _server/collect.js"
+   },
+   {
+    "id": "S-23",
+    "path": "c",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Freeze the event contract — outbound_click , guide_view , compare_open , chooser_result , newsletter_signup — each with fields, and keep the campaign ledger empty until an authorised report fills it",
+    "why": "Already half-done in _src/data/events.json and _data/campaign-ledger.json . The ledger being empty is the correct state; the brief forbids a conversion score or forecast, so keep it that way.",
+    "touches": "_src/data/events.json · _data/campaign-ledger.json"
+   },
+   {
+    "id": "S-24",
+    "path": "a c",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Document the prohibition in the code comment and the privacy page: no dynamic per-user sub-tagging, no linkage of any Associates ID to a specific end user",
+    "why": "It is not a privacy preference, it is a term: \"Under no circumstances may you associate any sub-tag… with a specific end user of your Site.\" Anyone automating later needs to meet that wall in writing. A-08",
+    "touches": "privacy.html · analytics module"
+   },
+   {
+    "id": "S-25",
+    "path": "b c",
+    "effort": "m",
+    "gate": "free",
+    "suggestion": "Emit Article + BreadcrumbList JSON-LD and a canonical URL on every page from the templates ; skip WebSite site-name markup while the host is github.io/Affil1/",
+    "why": "0 → 13 of 65 files gained JSON-LD on 2026-11-20 (root front page, guides, products/p-0n ), which proves the fix is cheap; crisp/ and the mirror pages still have none. Google only supports a site name from the domain root — a project-page subpath can never own one. Fix what is fixable, and do not pretend about the rest. IRR-09 · G-06",
+    "touches": "_tools/build.py · templates"
+   },
+   {
+    "id": "S-26",
+    "path": "c",
+    "effort": "m",
+    "gate": "blocked",
+    "suggestion": "Verify the property, submit the one real sitemap, and record the first query data with a date — then let those queries choose next month's topic",
+    "why": "No property exists yet, so any statement that the site \"ranks\" or \"gets traffic\" would be fiction. The registration itself is a two-minute job for whoever owns the account. A-15 · Search Console start",
+    "touches": "sitemap.xml · robots.txt"
+   },
+   {
+    "id": "S-27",
+    "path": "a c",
+    "effort": "l",
+    "gate": "blocked",
+    "suggestion": "Do not build the automated price-and-review optimiser yet. Build its data contract and stub now; wire it when API access exists",
+    "why": "Creators API prerequisites demand ten qualifying sales in the last thirty days. Until then, \"automation\" means guessing at prices we are also not allowed to display. Design the interface, skip the illusion. A-09, A-29, A-30",
+    "touches": "_src/data/ · _tools/content.py"
+   },
+   {
+    "id": "S-28",
+    "path": "c",
+    "effort": "s",
+    "gate": "free",
+    "suggestion": "Settle how this site is deployed: either point Pages at GitHub Actions or remove the deploy job, and stop the queue from cancelling itself mid-publish",
+    "why": "Pages reports the legacy branch publisher while the workflow also tries to deploy, and runs were cancelled by cancel-in-progress during this session. A deploy you cannot attribute is a deploy you cannot trust. IRR-03",
+    "touches": ".github/workflows/pages.yml · repo settings"
+   }
+  ]
+ },
+ "links": {
+  "product_links_marked_sponsored": "21/21",
+  "documentation_links": 136
+ }
+}

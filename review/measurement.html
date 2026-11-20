@@ -50,7 +50,7 @@
 </div></header>
 <section class="section "><div class="wrap">
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. The client exists in this repository, records the five canonical events from src/data/events.json, and is inert: nothing is recorded until a page sets an endpoint. The naming mismatch with the legacy event set (the five names in assets/js/analytics.js when this was written) is resolved — tools/check.py now enforces the canonical five and fails on the legacy names. FLG-016 lists the legacy duplicates for review.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. The client exists in this repository, records the five canonical events from _src/data/events.json, and is inert: nothing is recorded until a page sets an endpoint. The naming mismatch with the legacy event set (the five names in assets/js/analytics.js when this was written) is resolved — _tools/check.py now enforces the canonical five and fails on the legacy names. FLG-016 lists the legacy duplicates for review.</p>
   <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
 </div>
 <h2>What would be measured</h2>
