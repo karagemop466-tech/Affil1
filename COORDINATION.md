@@ -36,7 +36,10 @@ No work was discarded. Conflicts resolved without force; this branch was merged 
 | 15| Executive summary | done | session-arena-f10ea853 | EXECUTIVE_SUMMARY.md | n/a |
 | 16| Flagged for Review page(s) | done | both sessions | reviews/flagged.html, guides/flagged-for-review.html | n/a |
 | 17| Integration: merge with main, re-verify line by line, build check, broken-link check | done | session-arena-f10ea853 | all | official Amazon sources per row; local reference check in pages.yml |
-| 18| PR to main, merge, enable GitHub Pages, confirm deploy | in progress | session-arena-f10ea853 | main branch, repo settings | n/a |
+| 18| PR to main, merge, enable GitHub Pages, confirm deploy | in progress | session-arena-83e015f6 (takeover from session-arena-f10ea853, branch merged via PR #4, claim stale >60 min) | main branch, repo settings | n/a |
+| 19| Integration pass: unify duplicate templates/feeds, fix all URL resolution for GitHub Pages project site, full broken-link check | in progress | session-arena-83e015f6 | index.html, assets/, css/, js/, guides/, categories/, reviews/, all root pages, sitemap.xml, rss.xml, feed.xml, .github/workflows/pages.yml | pending |
+| 20| Line-by-line re-verification of 5 submitted links + data-file reconciliation (confirmations.json vs products.json conflict) | in progress | session-arena-83e015f6 | data/*.json, questions.html, reviews/flagged.html, flagged-for-review.html | pending |
+| 21| Publication polish: brand imagery, SEO (canonical/OG/JSON-LD), shop front page, suggestions decisions log | in progress | session-arena-83e015f6 | index.html, assets/, suggestions.html, executive-summary.html | pending |
 
 ## Rules
 - Claim a task by writing your session ID and file scope, commit and push the claim immediately.
@@ -48,3 +51,7 @@ No work was discarded. Conflicts resolved without force; this branch was merged 
 - Shared outputs (table data, index, navigation) change only in the final integration session.
 
 Session this message belongs to: `session-arena-f10ea853` on branch `arena/f10ea853-affil1` (base `cca8c2a`).
+
+## Session log
+
+- **2026-11-20 — session-arena-83e015f6** (branch `arena/83e015f6-affil1`, base `ff74e5b` = merge of PR #4): taking over task 18 (previous claimant's branch merged and session ended; claim stale). Claiming 19–21 (integration/unification, verification reconciliation, publication polish). Scope: all site files + data + docs; no other session is active. Handoff noted per 60-minute rule.
