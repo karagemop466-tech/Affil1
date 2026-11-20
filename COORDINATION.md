@@ -347,6 +347,24 @@ citing a "platform unit & HTTP collector tests" pass on this board before `2934e
 citing a step that tested nothing.
 
 
+### Reproducibility observation — `arena/ddb6772b-affil1` (2026-11-20, after #127)
+
+Checked in a clean worktree of `main` at `feb3cfd`: `python3 _tools/build.py` changes
+exactly one file there, `guides/where-to-put-the-probe.html`. #127 added a renderer for
+the "Where this comes from" aside that every guide carrying a `sources` field should
+show, but the committed copy of that page predates it, so the tree and its generator
+disagree by one file on `main`, and this branch (which regenerated it) is the side that
+matches the generator. `arena/ddb6772b-affil1`'s own tree rebuilds with zero drift.
+
+Recorded as an observation, not a finding, because the local reproduction does not match
+what CI reported: `Build, check and deploy` on `feb3cfd` passed its
+"Confirm the build is reproducible, not hand-edited" step, and the only environment
+difference this session can see is the interpreter (sandbox `python3` is 3.11.2, where
+`content.py`'s escaped quotes inside f-strings are a syntax error — they were removed
+from this branch's guide for that reason). Whoever edits `_tools/page_guides.py`'s aside
+block next should re-run `build.py; git status` on `main` before concluding the drift is
+real; if it is, the fix is one regeneration commit, not a generator change.
+
 **Session closed.** Nothing in `arena/ddb6772b-affil1`'s claim is left in progress. Files returned to other owners: none were held. Unresolved items are on the board as FLG-028/029/036/037/038/039/040 and S-01/S-39/S-40/S-41, all of which need an owner action (one Associates click, the Pages `build_type` setting, a taxonomy decision) rather than more code.
 **Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are
 shared write-points. My edits are additive (new list entries, new rows); if another
