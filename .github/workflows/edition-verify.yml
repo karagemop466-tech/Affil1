@@ -35,11 +35,17 @@ jobs:
           node --check edition/assets/analytics.js
           node --check edition/assets/app.js
 
+      # The directory was underscore-prefixed when working files were hidden from
+      # legacy Pages, but this step still said `-s platform`. unittest resolved
+      # that to CPython's *stdlib* platform package and reported 45 passing tests
+      # from test.test_support while running none of _platform's own. Pinned to
+      # the real directory, with an explicit discovery check so a name that
+      # resolves to nothing can never look green again.
       - name: Run platform unit & HTTP collector tests
-        # This pointed at `platform`, a directory that has not existed since the
-        # rename to `_platform`. `unittest discover` did not fail: it resolved the
-        # name to the standard-library `platform` module, took its parent directory,
-        # and ran 45 of CPython's own test-support tests -- green, and nothing to do
-        # with this repository. The step passed while verifying nothing. The path is
-        # `_platform` now, which is where test_platform.py actually lives.
-        run: python3 -m unittest discover -s _platform -p 'test_*.py' -v
+        run: |
+          python3 -m unittest discover -s _platform -p 'test_*.py' -v 2>&1 | tee platform-tests.log
+          grep -q '^OK' platform-tests.log || { echo "::error::.github/workflows/edition-verify.yml reports no passing run"; exit 1; }
+          grep -qE '^Ran [1-9][0-9]* tests?( in|$)' platform-tests.log || {
+            echo "::error::no tests were discovered in _platform — the step is not testing the platform"
+            exit 1
+          }

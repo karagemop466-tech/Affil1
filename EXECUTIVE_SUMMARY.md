@@ -696,6 +696,7 @@ FLG-037/038/036).
 - **Still owner-only, still open:** the Associates test click and report read
   (S-01, Q-03), the SiteStripe intent register (Q-01), Search Console (S-03,
   Q-07), an editor name (S-02, Q-08).
+
 ---
 
 ## Addendum — session `arena/ddb6772b-affil1`, 2026-11-20 UTC
@@ -724,7 +725,7 @@ Thermometers, SRC-23 FSIS Turkey from Farm to Table, SRC-24 FoodSafety.gov chart
 with the page's own date or the words "no update date shown"); two Amazon-policy rows
 drafted here were dropped as duplicates of main's SRC-18/SRC-19. Three new open
 questions (Q-25, Q-26, Q-27), three new board proposals (S-39, S-40, S-41) and two new review flags
-(FLG-039, FLG-040). The ids moved three times: main took S-26…S-31, then S-32…S-36,
+(FLG-045, FLG-046). The ids moved three times: main took S-26…S-31, then S-32…S-36,
 then FLG-036…038 under this branch, and each renumbering was resolved by keeping main's
 row and re-filing mine, never by overwriting it. Three further proposals were dropped as duplicates of
 S-01, S-12 and S-24, and the short-link finding was folded into main's FLG-028 as a
@@ -758,3 +759,54 @@ Almanac edition checks 0 errors · `sweep_surfaces.py` 0 to move · `stage.py` s
 complete · CI-style copy/rebuild/`diff -r` clean. No price,
 rating, review count, stock level, test result or ranking was added; the listing page
 read during verification displayed both, and neither was transcribed.
+
+---
+
+## Session addendum — arena/3e17592d-affil1 (2026-11-20): the plumbing under "measure first" was the part that was broken
+
+**What was wrong.** Four things you cannot see from a browser were failing quietly. The click
+counter could never fire, because the attribute it watches was emitted only on tagged links and
+the site deliberately publishes untagged ones. The collector behind it could not import at all,
+and CI never noticed, because it checked that file's *syntax* rather than running its tests. The
+step that reported "platform tests: 45 passed" was running **CPython's own standard library** and
+testing nothing of yours. And the one program you would use to arm a link crashed on a stale path
+before it could print its first state line. All four are fixed, and each fix was demonstrated
+failing before it was demonstrated passing.
+
+**Where a judgement was yours, it stayed yours.** Counting clicks on links the account cannot
+attribute is arguably a misleading metric and arguably the only way to learn which page works
+before anything is armed. While this branch was open the repository grew a gate that forbids the
+first position, so the code now follows the gate and the alternative is written up as a decision
+row with both paths priced (S-43), not slipped in sideways.
+
+**One site, and now a rule that cannot rot.** `edition/` was a second fully indexable publication
+of the same five listings under a second brand. It is now an annex that a crawler is told to leave
+out of the index, that says so to a reader who lands there, and that is *checked* per page by the
+edition verifier — so the next template edit cannot quietly undo it. That pass also removed a
+contradiction two sessions had created without noticing: a `Disallow: /edition/` line in the root
+robots.txt blocked the very crawl that had to read the `noindex` tag, which is the one outcome
+that guarantees indexed annex pages with no description. The tag is now the single mechanism
+(FLG-050).
+
+**Two guides, not three — and one better for it.** This session drafted chicken-doneness,
+ice-water calibration and two-hour-leftovers guides. `main` published a leftovers guide in the
+meantime that covered the third more thoroughly, so the duplicate was withdrawn and its two
+non-overlapping blocks (cooling mechanics, the day-after checklist) were folded into the version
+already in the sitemap. What ships: *Is chicken in an air fryer actually done?* and *Is your
+thermometer telling the truth?* — every figure quoted from a USDA FSIS fact sheet fetched and read
+on 2026-11-20 (safe minimum internal temperatures, probe placement for thin pieces, the ice-water
+and boiling-water procedures), every product sentence limited to the seller's own listing wording,
+each page closing with a plain statement that nothing here was tested.
+
+**Two gates that were missing, both verified by breaking them.** A published image can no longer
+lack a row in the image-policy register, and citations between registers must resolve, must cover
+the subject of the citing row, and — for guides — must point at a dated register entry. The second
+one exists because a merge silently repointed three citations at the wrong documents: `main` had
+renumbered `SRC-18..20`, and no dangling-id check can see a reference that resolves to the wrong
+*thing*.
+
+**Still yours to decide.** Q-28 which collector is canonical (three exist, one reads a dead path),
+Q-29 whether guides may quote food-safety limits beside buy buttons, Q-30 what happens when a
+cited government page changes, S-43 whether to count unattributed clicks. Nothing about arming a
+link changed: the register still holds five `null` approvals, the site still publishes reference
+links only, and no traffic, order, conversion or revenue figure is asserted anywhere.

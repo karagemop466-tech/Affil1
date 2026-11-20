@@ -147,6 +147,24 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .disclosure strong {
   font-weight: 650;
 }
+.annex-note {
+  background: #12261f;
+  color: #f2ebe0;
+  font-size: 0.84rem;
+  padding: 0.7rem 0;
+}
+.annex-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.annex-note a {
+  color: #12261f;
+  background: #e9b44c;
+  border-color: #e9b44c;
+}
 .disclosure-meta {
   color: var(--ink-muted);
   font-size: 0.8rem;

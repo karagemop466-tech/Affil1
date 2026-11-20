@@ -25,7 +25,11 @@ import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DATA = ROOT / "_src" / "_data" / "product-intent.json"
+# This read the register at _src/_data/, a path created when directories were
+# underscore-prefixed for Pages and never corrected here. The owner's one switch
+# for arming affiliate links therefore died on `--status` with FileNotFoundError
+# before it could print a single state line.
+DATA = ROOT / "_src" / "data" / "product-intent.json"
 
 STEPS = [
     "Sign in to Associates Central and confirm the tracking ID is active on an enrolled account.",

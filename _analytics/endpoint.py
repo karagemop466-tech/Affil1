@@ -9,7 +9,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'tools'))
+# The generator directories were underscore-prefixed on 2026-11-20 so that legacy
+# Pages (which serves this branch root) stops publishing them. This line still
+# said 'tools', so the module did not import at all — and CI only ever ran
+# py_compile over this file, which checks syntax and never executes an import.
+# `python3 -m unittest test_endpoint` was failing for that reason alone.
+sys.path.insert(0, str(ROOT / '_tools'))
 from build import GENERATED
 
 DATA = ROOT / '_src/data'

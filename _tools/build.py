@@ -149,14 +149,43 @@ def feed(guides):
 # must be the served one (/_archive/, not /archive/) — an earlier revision
 # disallowed /archive/, which never matched the real directory. Nothing here
 # blocks crawling of the canonical pages.
+# Why the published file above carries no "Disallow: /edition/" line.
+#
+# The annex at /Affil1/edition/ is a preserved review surface of the same five listings, and
+# main's FLG-037 asks that it stop competing for the index. The mechanism it now uses is a
+# per-page <meta name="robots" content="noindex, follow"> (asserted for all 27 pages by
+# _platform/verify_edition.py). Blocking the crawl would defeat that: Google reads an indexing
+# instruction "only if crawlers are allowed to access the pages that include these settings",
+# while a URL disallowed in robots.txt "can still be indexed if linked to from other sites" -
+# and the shop links to the annex from its review and question pages. A Disallow line here
+# therefore produces indexed annex pages with no description, which is worse than the tag
+# alone. Read 2026-11-20:
+#   https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+#   https://developers.google.com/search/docs/crawling-indexing/robots/intro
+# Two sessions' fixes for the same annex met in main and contradicted each other; FLG-044
+# records the resolution rather than hiding it.
 ROBOTS = """User-agent: *
 Allow: /
 Disallow: /_archive/
-Disallow: /edition/
+
 Disallow: /_decision-support/
 
+# The /edition/ annex is held out of the index by a per-page noindex tag, not by a
+# Disallow rule here: a blocked page cannot show you its tag, and its URLs can still be
+# indexed from the links this site points at it. See the notes in _tools/build.py and FLG-050.
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
+
+
+# No "Disallow: /edition/". The annex at /Affil1/edition/ is kept out of the index by
+# a noindex meta tag on each of its pages (FLG-030, FLG-036), and blocking the crawl
+# defeats that: Google reads a indexing tag "only if crawlers are allowed to access the
+# pages that include these settings", while a URL disallowed in robots.txt "can still be
+# indexed if linked to from other sites" - so a Disallow line here produces indexed
+# annex pages with no description, which is the worse outcome of the two. Sources:
+#   https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+#   https://developers.google.com/search/docs/crawling-indexing/robots/intro
+# A subdirectory robots.txt is not read at all, so edition/robots.txt cannot say this.
 
 
 def main():

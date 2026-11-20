@@ -35,6 +35,15 @@ class CartGateTest(TestCase):
         self.assertIn('rel="sponsored nofollow noopener"', html)
         self.assertIn('target="_blank"', html)
 
+    def test_an_untagged_listing_link_emits_no_counter_hook(self):
+        # data-affiliate-ref is the attribute the first-party click counter reads.
+        # _tools/check.py refuses to publish it while nothing is armed, because a
+        # click that cannot be attributed is not evidence; the emitter has to obey
+        # the same rule, or the gate is only as wide as the one file it samples.
+        html = pair("", P01)
+        self.assertNotIn('data-affiliate-ref="', html)
+        self.assertIn('data-cta="listing"', html)
+
     def test_the_pair_never_emits_a_naked_span_when_a_link_is_available(self):
         # Regressing to "withheld" while a permitted listing exists would cost the
         # reader the buy path for no compliance gain.

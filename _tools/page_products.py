@@ -23,6 +23,7 @@ from layout import (AMAZON_NOTE, approved_amazon_urls, blank, breadcrumbs, bread
                     esc, eyebrow, link, outbound, page, pagehead, product_link,
                     rel, section, table)
 from page_home import img, product_card
+from content import GUIDES
 
 DATA = pathlib.Path(__file__).resolve().parent.parent / "_src" / "data"
 
@@ -168,6 +169,24 @@ def build_product(page_dir, p, meta):
         note="Seller wording, repeated as stated. Nothing in this table was measured, inferred or tidied up.",
     )
 
+    # The sentence under the buy button used to read "Paid link ... tag shopnow047c-20"
+    # whatever the gate had decided, while product_link() was deliberately labelling the
+    # same link a listing source and stripping the tag. Now the wording follows the URL,
+    # so the page cannot claim attribution that the register says has not been confirmed.
+    related_guides = [g for g in GUIDES if p["ref"] in (g.get("related") or [])]
+    guides_for_ref = (
+        "Each guide below names this product in its own text, so the arithmetic is on the page."
+        if related_guides else
+        "No guide on this site refers to this product yet."
+    )
+    link_is_tagged = "tag=" in buy_url(asin)
+    if link_is_tagged:
+        fine_print = (f'Paid link &middot; {esc(AMAZON_NOTE)} &middot; tagged '
+                      f'<code>{esc(meta["tracking"])}</code>')
+    else:
+        fine_print = (f'Listing source &middot; {esc(AMAZON_NOTE)} &middot; this link carries '
+                      f'no tracking tag, so nothing here can be credited to an account yet')
+
     suits = "".join(f"<li>{esc(s)}</li>" for s in p.get("suits", []))
     skip = p.get("skip_if") or ""
     skip_html = (f'<div class="skip-block"><p class="q-label">Look elsewhere if</p><p>{esc(skip)}</p></div>'
@@ -222,6 +241,10 @@ def build_product(page_dir, p, meta):
     </div>
   </div>
 </div>''', cls='')}
+{section(f'''
+<div class="sec-head"><div>{eyebrow('Read next')}<h2>Guides that involve this one</h2></div>
+<p>{guides_for_ref}</p></div>
+<ul class="suits">{''.join(f'<li><a class="tlink" href="{esc(rel(d, "guides/" + g["slug"] + ".html"))}">{esc(g["title"])} <span aria-hidden="true">&rarr;</span></a></li>' for g in related_guides)}</ul>''', cls='section-tint')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('The record')}<h2>What the listing states</h2></div>
 <p>Everything below is the seller's own description. It is the whole of what this page knows for certain.</p></div>
