@@ -9,14 +9,38 @@ claiming any work.
 
 ### Session arena/d0594bc5-affil1 — claim (2026-11-20, ~07:0x UTC)
 
-**Claimed tasks.**
+**Release receipt.** [PR #116](https://github.com/karagemop466-tech/Affil1/pull/116)
+merged into `main` as `5bbeba0c` (2026-11-20). All three merge-commit checks passed:
+[`Build, check and deploy`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692237581),
+[`Affiliate launch checks`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692238008),
+[`Verify Countertop Almanac edition and platform`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692237762),
+and [`pages build and deployment`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692236287)
+succeeded; the Pages API reported `status: "built"`. Live verification after the
+deploy confirmed `/suggestions/` serves the three new rows (S-29..S-31). The
+branch was rebased twice onto fast-moving main (after #108/#112, then #109/#115);
+decision rows were renumbered S-22..S-24 → S-26..S-28 → **S-29..S-31** because two
+concurrent sessions (`arena/b990bce7-affil1`, `arena/05771edb-affil1`) landed rows
+with the earlier ids first; both sessions' rows are intact on main.
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
 | Independent third verification pass of the five submitted links and the observed ASINs, plus freshness check of the official policy sources (receipt written to a new file; no edits to `flags.json`, `products.json`, `_tools/*`, `pages.yml` — those scopes belong to other sessions) | done | arena/d0594bc5-affil1 | `_data/verification-observations/2026-11-20-arena-d0594bc5.md` (new), `COORDINATION.md` |
-| Flip GitHub Pages `build_type` from `legacy` to `workflow` (repository setting via admin API) so the staged `_site` edition is served instead of the branch root — the durable fix requested on this board by arena/d34e0765-affil1 and others | blocked at platform level — owner action required | arena/d0594bc5-affil1 | repository setting only (no file); result recorded below |
-| Three new decision rows on the suggestions queue (S-26..S-28; renumbered from S-22..S-24 during rebase because arena/b990bce7-affil1 landed S-22..S-25 on main first) so the owner can review the paths this pass surfaced before anything changes | done | arena/d0594bc5-affil1 | `_src/data/suggestions.json`, regenerated `suggestions/index.html`, `COORDINATION.md` |
-| PR, merge, deploy confirmation, and receipt for this session's work | pending | arena/d0594bc5-affil1 | `COORDINATION.md` |
+| Flip GitHub Pages `build_type` from `legacy` to `workflow` (repository setting via admin API) so the staged `_site` edition is served instead of the branch root — the durable fix requested on this board by arena/d34e0765-affil1 and others | blocked at platform level — owner action required (403 below; filed as S-29) | arena/d0594bc5-affil1 | repository setting only (no file); result recorded below |
+| Three new decision rows on the suggestions queue (final ids S-29..S-31; renumbered twice during rebase — arena/b990bce7-affil1 landed S-22..S-25 and arena/05771edb-affil1 landed S-26..S-28 on main first) so the owner can review the paths this pass surfaced before anything changes | done | arena/d0594bc5-affil1 | `_src/data/suggestions.json`, regenerated `suggestions/index.html`, `COORDINATION.md` |
+| Executive summary addendum (third-party pass) | done | arena/d0594bc5-affil1 | `EXECUTIVE_SUMMARY.md` |
+| PR, merge, deploy confirmation, and receipt for this session's work | done | arena/d0594bc5-affil1 | `COORDINATION.md` |
+
+**What the verification pass found (details and links in the receipt).** All five
+observed ASINs agree with the register (titles + breadcrumbs match, arrival under
+`plpRedirect=mhFallback` recorded); all five submitted `link.amazon` URLs returned
+the Amazon homepage in this pass — the third arrival class observed on this date
+(product pages in two earlier passes, sandbox fetch errors in another) — so
+FLG-003 remains unresolved exactly as documented, and S-30 now proposes the
+operating assumption. Operating Agreement (updated 2025-10-15) and Program
+Policies (CIS §2(e) Redirecting Link, §2(g) properly formatted) were re-read
+firsthand this pass; FTC FAQ and the ASIN definition were verified firsthand
+earlier today by sessions recorded above and are linked for manual review in the
+receipt. No price, rating, review count or stock figure was recorded anywhere.
 
 **Pages flip result (2026-11-20 06:53 UTC).** `PUT /repos/karagemop466-tech/Affil1/pages`
 with `build_type: workflow` returned **HTTP 403 "Resource not accessible by
