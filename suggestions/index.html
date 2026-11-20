@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suggestions and decisions | Crisp &amp; Counter</title>
-<meta name="description" content="18 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta name="description" content="21 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
 <meta property="og:title" content="Suggestions and decisions | Crisp &amp; Counter">
-<meta property="og:description" content="18 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta property="og:description" content="21 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-counter-w1280.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Suggestions</p>
   <h1>Choose a direction,<br>then choose the rows</h1>
-  <p class="dek">3 coherent paths and 18 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
+  <p class="dek">3 coherent paths and 21 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
   <p class="page-meta">Decisions are stored in your browser only &middot; nothing transmitted &middot; no account</p>
 </div></header>
 <section class="section "><div class="wrap">
@@ -59,7 +59,7 @@
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
-    <p class="decide-count" data-count>0 of 18 decided</p>
+    <p class="decide-count" data-count>0 of 21 decided</p>
   </div>
 </div></div></section>
 <section class="section section-tint"><div class="wrap">
@@ -465,6 +465,69 @@
       <div><dt>Risk</dt><dd>Retiring it loses the reviewable comparison unless it moves to _archive/ with the rest of the superseded work. Keeping it means someone has to keep both registers honest.</dd></div>
       <div><dt>Depends on</dt><dd>Q-01, Q-06</dd></div>
       <div><dt>Recommendation</dt><dd class="rec">Keep for now — it is the only place the per-page verification dossiers live — but name it as an archive on the page itself</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-29">
+  <div class="scard-head">
+    <span class="scard-id">S-29</span>
+    <h3>Switch Pages from branch-root serving to the staged 37-page edition (owner repository setting)</h3>
+    <span class="scard-effort">minutes — one repository setting; no code change</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Legacy serving publishes the whole branch root. On 2026-11-20 this meant root working files (PUBLISHING_WORKFLOW.md, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md, LICENSE) were publicly served, and every future un-prefixed root directory becomes a live URL by default — the exact exposure class three underscore renames have had to close. The staged edition is already built by CI (`_tools/stage.py`), pre-flighted clean on 2026-11-20 (86 files, 37 pages, every href/src/srcset resolving, 0 missing targets), and the workflow already deploys it when the setting is flipped. A session attempted the flip via API on 2026-11-20 and was refused (HTTP 403: the sandbox integration token lacks Pages write), so it is a repository-owner action: Settings → Pages → Build and deployment → Source: GitHub Actions.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. The deploy job only activates after the checks pass, and the same workflow serves the branch root again if the setting is flipped back. The one real cost: URLs outside the staged set (the working files listed above) stop being served — which is the point.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Approve. It is the durable fix three board entries have requested</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-30">
+  <div class="scard-head">
+    <span class="scard-id">S-30</span>
+    <h3>Treat the submitted short links as unresolvable for attribution, whatever their compliance status turns out to be</h3>
+    <span class="scard-effort">zero to decide now; the arming itself is the S-01 owner step</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>A third independent pass on 2026-11-20 found all five submitted link.amazon URLs landing on the Amazon homepage — the same day other passes saw product pages and fetch errors. Three arrival classes in one day means no click through these URLs can be relied on to reach, let alone be credited for, the intended listing. This does not resolve FLG-003 (the links are not being declared invalid); it argues the operational path: only account-validated Special Links pasted through _tools/arm_links.py should ever carry the tracking tag.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>None. The site already publishes untagged reference links with the observed ASINs; nothing on the reader-facing pages changes until a Special Link is armed.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-03, Q-14</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Adopt as the operating assumption until the Associates account says otherwise</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-31">
+  <div class="scard-head">
+    <span class="scard-id">S-31</span>
+    <h3>Triage the stale open pull requests before the next merge wave</h3>
+    <span class="scard-effort">under an hour of triage with the PR list and the board open side by side</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Roughly twenty pull requests opened on 2026-11-20 predate the current main (several reference directories that have since been underscore-renamed, so their branches cannot merge cleanly). They sit on the board as if reviewable, but approving any of them would reintroduce retired surfaces. Each should be either closed with a one-line reason or explicitly marked needs-rebase, so the next integration session works from an honest queue.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low, provided every closure names what superseded it — the board&#x27;s rule against discarding another session&#x27;s work applies to PRs as much as to files.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Do it before the next feature PR, not after</dd></div>
     </dl>
   </div>
   <div class="scard-foot">
