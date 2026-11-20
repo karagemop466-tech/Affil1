@@ -337,8 +337,8 @@
     {
       "id": "S-26",
       "status": "open",
-      "title": "Never publish a supplied short link as a buy destination \u2014 link the /dp/ listing instead",
-      "why": "On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. Independently observed by two sessions and recorded as FLG-028. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.",
+      "title": "Never publish a supplied short link as a buy destination \u2014 link the /dp/ listing instead (root: already enforced; annex: enforced from 2026-11-20)",
+      "why": "On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. Independently observed by two sessions and recorded as FLG-028. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build. Status after this session: the root site refused such links from the start, and the annex was found doing it on 19 pages (60 anchors) and fixed the same way, with verify_edition.py asserting it - see the flag about the annex offering short links as buy buttons.",
       "effort": "zero \u2014 enforce what the build already does",
       "risk": "None. The cost is that the supplied links stay in the record as evidence rather than as revenue paths, which is what FLG-028 and FLG-003 already say they are.",
       "depends_on": "nothing",

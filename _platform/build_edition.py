@@ -52,6 +52,36 @@ def canonical_url(rel_page: str) -> str:
     return f"{BASE_URL}/{rel_page}"
 
 
+def buy_href(prod: dict[str, Any]) -> str:
+    """The only Amazon destination the annex may offer as a buy path.
+
+    ``submitted_url`` is the short link the owner supplied. It stays on the page as
+    the artefact under verification, printed and never linked, because the register
+    records its redirect as unstable (several re-checks returned the Amazon homepage
+    or a checkpoint page rather than a listing). The observed /dp/ listing is the
+    destination a reader can actually be sent to, and it is the same rule the root
+    site enforces through ``permitted_amazon_urls`` in _tools/layout.py: an
+    unvalidated short link is not a monetisation path. If the account ever issues a
+    Special Link, that approved URL wins, exactly as it does at the root.
+    """
+    intent = prod.get("intent_confirmation") or {}
+    approved = intent.get("validated_special_link_url") or intent.get("approved_special_link")
+    if approved:
+        return approved
+    return prod["observed_redirect"]["observed_redirect_url"]
+
+
+def evidence_ref(prod: dict[str, Any]) -> str:
+    """The supplied short link, as evidence: shown, not clickable.
+
+    A reader who wants to re-run the check can copy it; a reader who wants to buy
+    gets the listing. Linking the short link is what sent people to Amazon's home
+    page, which is a broken buy path on a page whose whole claim is that the links
+    were checked.
+    """
+    return f'<code>{esc(prod["submitted_url"])}</code>'
+
+
 def sponsored_link(
     url: str,
     label: str,
@@ -277,8 +307,8 @@ def render_product_card(
     track_evt = "guide_to_product_click" if guide_slug else "product_card_click"
 
     cta_html = sponsored_link(
-        prod["submitted_url"],
-        "View on Amazon (Paid link)",
+        buy_href(prod),
+        "View it on Amazon (Paid link)",
         cls="btn btn-primary",
         track_event=track_evt,
         product_id=pid,
@@ -579,8 +609,8 @@ def build_compare_page(
         src = sources_by_id[obs["source_id"]]
         tags = " ".join([p["category"], ed["format"]] + ed["workflow_tags"])
         cta = sponsored_link(
-            p["submitted_url"],
-            "Amazon (Paid link)",
+            buy_href(p),
+            "Amazon listing (Paid link)",
             cls="btn btn-primary btn-sm",
             track_event="product_card_click",
             product_id=p["id"],
@@ -657,7 +687,7 @@ def build_products_register(
         intent_rows.append(
             f"""          <tr>
             <td><strong><a href="{esc(rel_href(rel_page, f'products/{p["slug"]}.html'))}">{esc(p['id'])}</a></strong></td>
-            <td>{sponsored_link(p['submitted_url'], esc(p['submitted_url']))}</td>
+            <td>{evidence_ref(p)}</td>
             <td><code>{esc(p['submitted_slug'])}</code> ({p['submitted_slug_length']} chars)</td>
             {blank_cell(rel_href(rel_page, 'flagged/index.html#FLG-001'), 'Blank · FLG-001')}
             {blank_cell(rel_href(rel_page, 'flagged/index.html#FLG-001'), 'Blank · FLG-001')}
@@ -671,7 +701,7 @@ def build_products_register(
             f"""          <tr>
             <td><strong><a href="{esc(rel_href(rel_page, f'products/{p["slug"]}.html'))}">{esc(p['id'])}</a></strong></td>
             <td><code>{esc(obs['observed_asin'])}</code> ({obs['observed_asin_length']} chars)</td>
-            <td>{sponsored_link(obs['observed_redirect_url'], esc(obs['observed_redirect_url']))}</td>
+            <td>{sponsored_link(obs['observed_redirect_url'], f"/dp/{esc(obs['observed_asin'])}")}</td>
             {blank_cell(rel_href(rel_page, 'flagged/index.html#FLG-002'), 'None observed · FLG-002')}
             <td>{esc(obs['observed_date'])}</td>
             <td>{esc(obs['historical_observations'])}</td>
@@ -767,8 +797,8 @@ def build_product_detail(
     )
 
     cta = sponsored_link(
-        prod["submitted_url"],
-        "Open Supplied Amazon Link (Paid link)",
+        buy_href(prod),
+        "Open the Amazon listing (Paid link)",
         cls="btn btn-primary",
         track_event="product_card_click",
         product_id=prod["id"],
@@ -821,7 +851,7 @@ def build_product_detail(
           <tr>
             <td>Submitted Short Link</td>
             <td>Submitted Input</td>
-            <td>{sponsored_link(prod['submitted_url'], esc(prod['submitted_url']))} (9-char token <code>{esc(prod['submitted_slug'])}</code>)</td>
+            <td>{evidence_ref(prod)} (9-char token <code>{esc(prod['submitted_slug'])}</code>)</td>
             <td><span class="badge badge-warn">FLG-003 Unresolved</span></td>
             <td>{official_link(s_pol['url'], 'Associates Program Policies §2 (S02)')}</td>
           </tr>
@@ -1202,7 +1232,7 @@ def build_executive_summary_page(
         prod_rows.append(
             f"""          <tr>
             <td><strong><a href="{esc(rel_href(rel_page, f'products/{p["slug"]}.html'))}">{esc(p['id'])}</a></strong></td>
-            <td>{sponsored_link(p['submitted_url'], esc(p['submitted_url']))}</td>
+            <td>{evidence_ref(p)}</td>
             <td><code>{esc(obs['observed_asin'])}</code></td>
             <td>{esc(p['editorial']['display_name'])}</td>
             {blank_cell(rel_href(rel_page, 'flagged/index.html#FLG-001'), 'Blank · FLG-001')}
@@ -1436,7 +1466,7 @@ def build_compliance_page(sources_doc: dict[str, Any]) -> str:
       <h2>Automated Pre-Publish Gate Checklist</h2>
       <ul class="spec-list">
         <li><strong>Operating Agreement §5 verbatim disclosure:</strong> <em>“{esc(EXACT_ASSOCIATES_DISCLOSURE)}”</em> appears above <code>&lt;main&gt;</code> and in <code>&lt;footer&gt;</code> on every published page.</li>
-        <li><strong>Outbound paid-link qualification:</strong> Every <code>link.amazon/...</code> and <code>amazon.com/dp/...</code> anchor carries <code>rel="sponsored nofollow noopener"</code>; regulatory and technical citations carry <code>rel="noopener"</code> only.</li>
+        <li><strong>Outbound paid-link qualification:</strong> Every Amazon destination on these pages is an <code>/dp/</code> listing and carries <code>rel="sponsored nofollow noopener"</code>. The <code>link.amazon/...</code> short links the owner supplied appear here as <code>evidence, printed not linked</code>: the register records several of them resolving to the Amazon homepage or a checkpoint page, so a buy button would be a coin flip, and Program Policies 2(a) require a Special Link to carry the assigned ID. Regulatory and technical citations carry <code>rel="noopener"</code> only.</li>
         <li><strong>API-gated commercial fields:</strong> Zero static prices, star ratings, customer review excerpts/counts, stock claims, or price-alert tools appear on static pages (Program Policies §2(b), §6(t), §6(y)).</li>
         <li><strong>Identifier separation:</strong> <code>intended_asin</code> and <code>observed_asin</code> are stored in distinct schema objects and never merged (S03).</li>
       </ul>

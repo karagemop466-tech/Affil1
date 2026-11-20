@@ -172,7 +172,7 @@ Disallow: /_decision-support/
 
 # The /edition/ annex is held out of the index by a per-page noindex tag, not by a
 # Disallow rule here: a blocked page cannot show you its tag, and its URLs can still be
-# indexed from the links this site points at it. See _tools/build.py notes and FLG-044.
+# indexed from the links this site points at it. See the notes in _tools/build.py and FLG-050.
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
 

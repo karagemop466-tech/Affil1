@@ -57,7 +57,7 @@
       <h2>Automated Pre-Publish Gate Checklist</h2>
       <ul class="spec-list">
         <li><strong>Operating Agreement §5 verbatim disclosure:</strong> <em>“As an Amazon Associate I earn from qualifying purchases.”</em> appears above <code>&lt;main&gt;</code> and in <code>&lt;footer&gt;</code> on every published page.</li>
-        <li><strong>Outbound paid-link qualification:</strong> Every <code>link.amazon/...</code> and <code>amazon.com/dp/...</code> anchor carries <code>rel="sponsored nofollow noopener"</code>; regulatory and technical citations carry <code>rel="noopener"</code> only.</li>
+        <li><strong>Outbound paid-link qualification:</strong> Every Amazon destination on these pages is an <code>/dp/</code> listing and carries <code>rel="sponsored nofollow noopener"</code>. The <code>link.amazon/...</code> short links the owner supplied appear here as <code>evidence, printed not linked</code>: the register records several of them resolving to the Amazon homepage or a checkpoint page, so a buy button would be a coin flip, and Program Policies 2(a) require a Special Link to carry the assigned ID. Regulatory and technical citations carry <code>rel="noopener"</code> only.</li>
         <li><strong>API-gated commercial fields:</strong> Zero static prices, star ratings, customer review excerpts/counts, stock claims, or price-alert tools appear on static pages (Program Policies §2(b), §6(t), §6(y)).</li>
         <li><strong>Identifier separation:</strong> <code>intended_asin</code> and <code>observed_asin</code> are stored in distinct schema objects and never merged (S03).</li>
       </ul>
