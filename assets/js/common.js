@@ -3,6 +3,20 @@
    site reads as one publication, not generated fragments. */
 
 (function () {
+  /* Root-relative paths break on GitHub Project Pages (site lives under /<user>/<repo>/).
+     Compute a relative root from the current pathname so every injected link works
+     from any depth. */
+  function siteRoot() {
+    var seg = location.pathname.split("/").filter(Boolean);
+    var depth = Math.max(0, seg.length - 2); // segments after "<user>/<repo>"
+    return depth ? "../".repeat(depth) : "";
+  }
+  var ROOT = siteRoot();
+  window.affil1Root = ROOT;
+  function toRoot(href) {
+    return href === "/" ? ROOT + "index.html" : ROOT + href.slice(1);
+  }
+
   var NAV = [
     { href: "/", label: "Home" },
     { href: "/categories/air-fryers.html", label: "Air Fryers" },
@@ -56,16 +70,16 @@
   function buildHeader(currentPath) {
     var active = function (href) { return currentPath === href || currentPath === href.replace(/\.html$/, "/"); };
     var navLinks = NAV.map(function (n) {
-      return '<a href="' + n.href + '"' + (active(n.href) ? ' class="active" aria-current="page"' : "") + '">' + n.label + "</a>";
+      return '<a href="' + toRoot(n.href) + '"' + (active(n.href) ? ' class="active" aria-current="page"' : "") + '">' + n.label + "</a>";
     }).join("");
     return [
       '<header class="masthead" id="site-masthead"><div class="container">',
-      '<a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L3 7l9 5 9-5-9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17L3 22l9-5 9 5-9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="brand-mark">Affil1</span> <span style="font-weight:400;font-size:0.78rem;color:var(--muted);">shop now</span></a>',
+      '<a class="brand" href="' + toRoot("/") + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L3 7l9 5 9-5-9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17L3 22l9-5 9 5-9-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="brand-mark">Affil1</span> <span style="font-weight:400;font-size:0.78rem;color:var(--muted);">shop now</span></a>',
       '<nav class="nav" id="site-nav">' + navLinks + '</nav>',
       '<button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>',
       '</div></header>',
       '<div class="disclosure-strip"><div class="container">',
-      '<strong>Affiliate disclosure:</strong> ' + DISCLOSURE_TEXT + '. See the full <a href="/disclosure.html">affiliate disclosure</a>.',
+      '<strong>Affiliate disclosure:</strong> ' + DISCLOSURE_TEXT + '. See the full <a href="' + toRoot("/disclosure.html") + '">affiliate disclosure</a>.',
       '</div></div>'
     ].join("");
   }
@@ -73,7 +87,7 @@
   function buildFooter() {
     var groups = FOOTER_GROUPS.map(function (g) {
       var items = g.links.map(function (l) {
-        return '<li><a href="' + l.href + '">' + l.label + "</a></li>";
+        return '<li><a href="' + toRoot(l.href) + '">' + l.label + "</a></li>";
       }).join("");
       return '<div><h4>' + g.title + '</h4><ul>' + items + '</ul></div>';
     }).join("");
@@ -83,7 +97,7 @@
       '<div class="disclosure-repeat">',
       '<strong>Affiliate disclosure (repeated):</strong> As an Amazon Associate we earn from qualifying purchases. ' +
       'Links marked <strong>sponsored</strong> are affiliate links. Product findings are not endorsements; ' +
-      'see the <a href="/disclosure.html">full affiliate disclosure</a> and our <a href="/privacy.html">privacy notice</a>. ' +
+      'see the <a href="' + toRoot("/disclosure.html") + '">full affiliate disclosure</a> and our <a href="' + toRoot("/privacy.html") + '">privacy notice</a>. ' +
       'Associates tracking ID: shopnow047c-20.',
       '</div>',
       '</div></footer>'
