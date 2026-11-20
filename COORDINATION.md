@@ -204,3 +204,37 @@ The initial shallow checkout made the ancestor appear unrelated and caused a reb
 - Fixed root guide paths and legacy links to retired files, added no-script disclosure fallbacks, added `sponsored` to four legacy product citations, and corrected an unsupported dishwasher-safe statement about P-02. Official listing: https://www.amazon.com/dp/B09B7SB46R. Added a sitewide destination warning and FLG-017 for conflicting legacy editions.
 - `python3 tools/build.py`, `python3 tools/check.py` (22 generated pages, 0 errors), and `python3 tools/check_local_links.py` (65 served HTML files, 0 broken relative file references) pass. The new check does not verify anchors or external URLs. The older `tools/validate.py` fails because the newer product schema is incompatible; this needs reconciliation, not a claim of success.
 - Analytics remains disabled, Search Console and Associates reporting are not connected, and no product-intent, conversion, price or commission data has been invented. Older editions remain inconsistent; consolidation and complete line-by-line verification remain **needs review**, not complete.
+
+## Final integration session — S-d3cc8dbe (2026-11-20)
+
+**Branch:** `arena/d3cc8dbe-affil1` (base `92a3509`). The repository's
+`session-<id>/<task>` branch convention is superseded here by the hosting
+platform, which fixes one branch per session; the branch name above is the
+claim. Nothing is pushed to any other branch.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| INT-01 Re-verify the five product links and the four policy sources | in progress | S-d3cc8dbe | `src/data/products.json`, `src/data/sources.json`, `review/` |
+| INT-02 Tag every outbound product link with the supplied tracking ID; enforce in `check.py` | in progress | S-d3cc8dbe | `src/data/products.json`, `tools/`, generated root edition |
+| INT-03 Consolidate to one indexed edition; retire superseded editions from the crawl path without deleting them | in progress | S-d3cc8dbe | `robots.txt`, `sitemap.xml`, coordination notes |
+| INT-04 Design pass: publication front page, shop-like product and guide surfaces | in progress | S-d3cc8dbe | `assets/css/site.css`, `tools/layout.py`, `tools/page_*.py` |
+| INT-05 New question-shaped guides, category pages, editorial standards, publishing calendar | in progress | S-d3cc8dbe | `tools/content.py`, `tools/`, `src/data/` |
+| INT-06 Suggestions review surface, open-question discovery list, executive summary | in progress | S-d3cc8dbe | `src/data/suggestions.json`, `src/data/questions*.json`, `brief/`, `EXECUTIVE_SUMMARY.md` |
+| INT-07 Measurement: client, self-hosted collector, deploy runbook | in progress | S-d3cc8dbe | `assets/js/analytics.js`, `analytics/`, `review/measurement.html` |
+| INT-08 Build, check, PR, merge, confirm Pages deploy | unclaimed | — | `.github/workflows/pages.yml`, `COORDINATION.md` |
+
+### Findings this session opened (before any change was made)
+
+Audited on 2026-11-20 against `main` at `92a3509`.
+
+| Ref | Finding | Where it shows |
+|---|---|---|
+| INT-A | **48 of 101** outbound Amazon product links carried no `tag=` parameter — the front page, all five product pages, the comparison table and the whole register. They were `sponsored` and `nofollow`, so compliant as markup, but a click through them cannot be attributed to `shopnow047c-20`. | `index.html`, `products/p-0*.html`, `compare/index.html`, `products/index.html`, `review/index.html` |
+| INT-B | The README states links use `?tag=shopnow047c-20`; the build passed `listing_url` (untagged) to `product_link()`. Claim and output disagreed. | `README.md` vs `tools/page_products.py` |
+| INT-C | Five editions are served from one origin: the maintained root edition, `crisp/`, and the root-level `products.html`/`dashboard.html`/`guides.html`/`questions.html`/`suggestions.html`/`flagged-for-review.html`/`categories.html`/`executive-summary.html`/`reviews/`. Three of them use three different brand names. | site root |
+| INT-D | Six legacy pages carry no Associates disclosure sentence at all. | `dashboard.html`, `products.html`, `guides.html`, `questions.html`, `suggestions.html`, `flagged-for-review.html` |
+| INT-E | The published `crisp/` edition uses the wording "As an Amazon Associate, Crisp & Counter earns…", which is not the sentence the Operating Agreement quotes, and is not the wording the maintained edition uses. | `crisp/**` |
+
+No other session holds an open claim on the files listed above. PRs #19, #24
+and #29 are open on other branches; this session will not touch, rebase or
+force-push them.
