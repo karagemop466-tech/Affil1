@@ -233,7 +233,7 @@ GUIDES = [
         "related": ["P-01", "P-03"],
         "kicker": "Batch cooking",
         "title": "Meal-prep Sunday: one basket, two, or an oven?",
-        "dek": "Meal prep fails on geometry, not motivation. Count how many things need the appliance at once \\u2014 then choose the shape that matches that number.",
+        "dek": "Meal prep fails on geometry, not motivation. Count how many things need the appliance at once \u2014 then choose the shape that matches that number.",
         "read_minutes": 5,
         "photo": "assets/img/meal-prep",
         "photo_alt": "An unbranded black air fryer beside glass jars of prepped vegetables, a cutting board and an open notebook on a wooden counter",
@@ -244,15 +244,15 @@ GUIDES = [
                 "h": "The question is sequencing, not capacity",
                 "p": [
                     "You buy for the week you imagine, then cook for the week you have: one tray of vegetables, one protein, one grain, all wanting the same basket at the same time.",
-                    "So the shape question is really a sequencing question \\u2014 how many batches, in what order, with how much washing in between? A bigger quoted capacity does not answer it. Two smaller containers running in parallel answer it differently from one large container running twice, and neither answer is written on the box."
+                    "So the shape question is really a sequencing question \u2014 how many batches, in what order, with how much washing in between? A bigger quoted capacity does not answer it. Two smaller containers running in parallel answer it differently from one large container running twice, and neither answer is written on the box."
                 ]
             },
             {
                 "h": "Three shapes, three Sunday routines",
                 "items": [
-                    ("Dual-basket (P-01)", "The listing title describes two independent 3-quart baskets with a sync-finish function. The Sunday advantage is parallelism: protein in one basket, vegetables in the other. The cost is width \\u2014 two baskets side by side need the widest counter strip of the basket shapes \\u2014 and two baskets to wash."),
+                    ("Dual-basket (P-01)", "The listing title describes two independent 3-quart baskets with a sync-finish function. The Sunday advantage is parallelism: protein in one basket, vegetables in the other. The cost is width \u2014 two baskets side by side need the widest counter strip of the basket shapes \u2014 and two baskets to wash."),
                     ("Oven-style (P-02)", "The listing title describes a 26-quart French-door cavity with six cooking accessories included. The advantage is stacking: tray above tray, or one large batch that never has to be split. The cost is door swing and depth, plus more parts that come out to wash."),
-                    ("Single-basket (P-03)", "The listing title describes one 8-quart basket. The advantage is simplicity: fill it, run it, empty it. The cost is sequencing \\u2014 the second batch waits while the first rests, which is exactly the Sunday-night bottleneck.")
+                    ("Single-basket (P-03)", "The listing title describes one 8-quart basket. The advantage is simplicity: fill it, run it, empty it. The cost is sequencing \u2014 the second batch waits while the first rests, which is exactly the Sunday-night bottleneck.")
                 ]
             },
             {
