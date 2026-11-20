@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Archived design edition. Not part of the live site.
