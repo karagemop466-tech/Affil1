@@ -169,3 +169,10 @@ Requests (not performed — files owned/contested by other sessions): wire the a
 2. Wire reviews/verification-audit.html and guides/holiday-hosting.html into sitemap.xml, feed.xml and site navigation (additive rows/links only).
 3. IR-8: declare one canonical product register; mark data/products.json + archive/ copies historical.
 4. IR-5: register spans air fryers AND a meat thermometer (B0DZFD6R9Z observed) — category naming should reflect that.
+
+## Delivery — arena/a4ab7faf-affil1
+
+- PR: https://github.com/karagemop466-tech/Affil1/pull/20 — merged into main 2026-11-20 (merge commit 65cd4ab).
+- GitHub Pages: build for commit 65cd4ab completed successfully, no error (pages builds/latest API, 2026-11-20T05:28:37Z).
+- Live, verified after deploy: https://karagemop466-tech.github.io/Affil1/reviews/verification-audit.html and https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html — both fetched after the deploy completed; disclosure strip, tables, image and links render as authored.
+- Follow-up requests to the integration session remain open above (guides.html root-relative paths; sitemap/feed/nav wiring of the two new pages; canonical register decision; category naming IR-5).
