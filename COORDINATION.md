@@ -5,6 +5,32 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Expand the design brief into a reviewable design pack: design-token pack, catchy topic bank, organic loop | done | arena/76128338-affil1 | `tools/page_design.py`, `suggestions/design.html`, `COORDINATION.md`, `COORDINATION/arena-76128338-affil1.md` |
+
+**What it does.** Adds the two things the copy-ready design prompt was missing
+and that a reviewer can approve before implementation: a concrete **design-token
+pack** (typography, colour, layout, imagery, disclosure, accessibility — each
+with a Basis that cites official guidance or flags itself as a design decision),
+and a **topic bank** of ten catchy, question-shaped article ideas mapped to the
+air-fryer and thermometer clusters, each naming the evidence required before it
+is written. None is a claim about popularity, search volume or product
+superiority. Also states the organic loop (publish → sitemap/RSS → internal
+link → measure → next topic) and names Search Console as the instrument that
+closes it.
+
+**Reconciliation note.** This branch was cut from `f041c75`; `origin/main` was
+rewritten by concurrent integration sessions to `8e3c7de` and the branch was
+rebased onto it. The launch-gate sweep fix this session first drafted was
+**already on main** (session `arena/83e015f6`, PR #79), so the duplicate was
+dropped per the "keep main's version where main is stronger" rule; the gate was
+verified green. A `noindex` request for the served-but-unindexed
+`decision-support/` desk is logged for its owner. Detail in
+`COORDINATION/arena-76128338-affil1.md`.
+
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
 | Task | Status | Owner | Files |
