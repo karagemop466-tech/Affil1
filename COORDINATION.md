@@ -251,3 +251,47 @@ Claim was pushed before implementation. Shared-board-only rebase conflicts occur
 - Rebased again over the #28 deployment log; retained both coordination entries.
 - Preserved the parallel session’s source column and updated the now-implemented measurement wording; regenerated the shared page.
 - Rebased over #31, retaining its independent supplement and coordination entry.
+
+## Decision room, storefront voice, and independent re-verification — arena/a01ed1a9-affil1
+
+Claimed 2026-11-20. Branch rebased onto `main` @ `14a9c3a` (after PRs #29–#32) before any edit.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| DR-01 Re-verify all five submitted links independently | in progress | arena/a01ed1a9-affil1 | `src/data/products.json`, `src/data/flags.json` |
+| DR-02 Publish a decision room a reviewer can act on | in progress | arena/a01ed1a9-affil1 | `src/data/decisions.json`, `tools/page_decisions.py`, `suggestions/` |
+| DR-03 Question frontier with explicit provenance states | in progress | arena/a01ed1a9-affil1 | `src/data/questions.json`, `tools/page_questions.py`, `questions/` |
+| DR-04 Evidence ledger: every claim, its source, its status | in progress | arena/a01ed1a9-affil1 | `tools/page_evidence.py`, `evidence/` |
+| DR-05 Remove audit voice from reader-facing chrome; publication nav | in progress | arena/a01ed1a9-affil1 | `tools/layout.py`, `tools/page_home.py`, `assets/css/site.css` |
+| DR-06 Enforce the tracking tag on every outbound product link | in progress | arena/a01ed1a9-affil1 | `tools/check.py` |
+| DR-07 Two seasonal guides, wired into sitemap and feed | in progress | arena/a01ed1a9-affil1 | `tools/content.py`, `tools/build.py` |
+| DR-08 Build, check, PR, merge, confirm Pages deploy | in progress | arena/a01ed1a9-affil1 | `COORDINATION.md`, `README.md`, `EXECUTIVE_SUMMARY.md` |
+
+Scope note: this session does **not** edit `kitchen/`, `measurement/`, `analytics/`, root legacy pages
+(`dashboard.html`, `products.html`, `questions.html`, `suggestions.html`, `guides.html`,
+`flagged-for-review.html`, `reviews/`, `categories/`, `archive/`, `crisp/`). Those belong to prior
+sessions and stay served as-is. Requests against them are logged here, not actioned by edit.
+
+### DR-01 independent re-verification (2026-11-20, this session)
+
+Every link was fetched fresh in this session. Arrival URL and the page `<title>` were read directly.
+
+| Ref | Submitted | Arrived at | Listing title (start) |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | amazon.com/dp/B0CDY277D3 | CHEFMAN 6 Quart Dual Basket Air Fryer Oven… |
+| P-02 | link.amazon/B02NbDxp3 | amazon.com/dp/B09B7SB46R | Emeril Lagasse 26QT French Door… |
+| P-03 | link.amazon/B00hJ57DV | amazon.com/dp/B08DKYBTPH | Chefman Air Fryer 8 Qt \| TurboFry 4-in-1… |
+| P-04 | link.amazon/B0c8moW59 | amazon.com/dp/B0DHZTCNR5 | ThermoMaven 1 Sec Professional Digital Meat Thermometer… |
+| P-05 | link.amazon/B0f3GKalj | amazon.com/dp/B0DZFD6R9Z | CHEF iQ Sense \| Smart Wireless Meat Thermometer… |
+
+This matches the register as merged (`src/data/products.json`), and **contradicts FLG-016**, which
+recorded P-04/P-05 as reversed. All five arrivals were consistent in this pass; no reversal observed.
+FLG-016 is updated to record both observation sets with dates rather than one being called wrong.
+
+No arrival URL carried `tag=`. That does not disprove tagging (the redirector may apply it
+server-side); it means attribution to `shopnow047c-20` stays unconfirmed as FLG-002.
+
+Sources re-read this session: [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement)
+§5, [Program Policies](https://affiliate-program.amazon.com/help/operating/policies) §2(a) and §2(b),
+[Google outbound-link guidance](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links),
+[Amazon's ASIN explainer](https://sell.amazon.com/blog/what-is-an-asin).
