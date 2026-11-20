@@ -96,7 +96,7 @@ The official Amazon ASIN article [What is an ASIN?](https://sell.amazon.com/blog
 ## Local verification performed
 
 - On a fresh archive of `origin/main` `7b236c2`, `python3 tools/build.py && python3 tools/check.py`: **22 generated pages, 0 errors/warnings**; `python3 tools/stage.py _site`: **22 staged HTML pages**.
-- `python3 tools/validate.py` on `7b236c2`: **fails** with `KeyError: 'supplied_path_code_length'` at line 176 after the P-04 schema update.
+- `python3 tools/validate.py` on `7b236c2`: **fails** with `KeyError: 'supplied_path_code_length'` at line 176 after the P-04 schema update. On this branch the data-integrity block was repaired to accept either product-register schema (old `supplied_path_code*` / `observed_redirect_asin`, new `submitted_code*` / `observed_asin`) and still enforces code-length, intent/observed separation, and 10-character observed-ASIN rules. Result on the same tree: **619 checks, 0 warnings**; a deliberate length corruption is caught (`P-01: recorded code length disagrees with the code`, exit 1).
 - Whole-tree local-reference/fragment crawl on `7b236c2`: **73 HTML pages, 1,766 local references, 53 broken** (32 root-level; 21 archived; 0 in `/crisp/`).
 - Direct Amazon listing links in the 22 staged HTML pages: **19, zero with the supplied tracking ID**; all are sponsored-marked.
 - `npm run verify` on the isolated PR #15 branch: **24 pages, 0 gate violations; 7/7 negative tests caught**.

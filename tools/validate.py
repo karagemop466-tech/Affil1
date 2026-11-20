@@ -171,18 +171,40 @@ def main():
     # ---- data integrity ----
     CHECKS += 1
     data = json.loads((ROOT / "src/data/products.json").read_text())
+
+    def _fields(prod):
+        """Normalize the two product-register schemas seen in this repository.
+
+        Older records used id / supplied_path_code / supplied_path_code_length /
+        observed_redirect_asin. PR #23 renamed them to ref / submitted_code /
+        submitted_code_length / observed_asin. Accept either; invent neither.
+        """
+        label = prod.get("ref") or prod.get("id") or "?"
+        code = prod.get("submitted_code")
+        code_len = prod.get("submitted_code_length")
+        if code is None:
+            code = prod.get("supplied_path_code")
+            code_len = prod.get("supplied_path_code_length")
+        observed = prod.get("observed_asin")
+        if observed is None:
+            observed = prod.get("observed_redirect_asin")
+        return label, code, code_len, prod.get("intended_asin"), observed
+
     for prod in data["products"]:
+        label, code, code_len, intended, observed = _fields(prod)
         CHECKS += 1
-        if prod["supplied_path_code_length"] != len(prod["supplied_path_code"]):
-            err(f"{prod['id']}: supplied_path_code_length disagrees with the code")
+        if code is None or code_len is None:
+            err(f"{label}: submitted code or its length is missing from the register")
+        elif code_len != len(code):
+            err(f"{label}: recorded code length disagrees with the code")
         CHECKS += 1
         # Rule: intended and observed identifiers are separate fields and never merged.
-        if prod.get("intended_asin") == prod.get("observed_redirect_asin") and prod.get("intended_asin"):
-            err(f"{prod['id']}: intended_asin equals observed redirect; fields must stay distinct")
+        if intended and intended == observed:
+            err(f"{label}: intended_asin equals observed redirect; fields must stay distinct")
         CHECKS += 1
         # Rule: observed ASIN, when present, must be 10 characters.
-        if prod.get("observed_redirect_asin") and len(prod["observed_redirect_asin"]) != 10:
-            err(f"{prod['id']}: observed ASIN is not 10 characters")
+        if observed and len(observed) != 10:
+            err(f"{label}: observed ASIN is not 10 characters")
 
     # ---- sitemap / feed agreement ----
     sitemap = (SITE / "sitemap.xml").read_text()
