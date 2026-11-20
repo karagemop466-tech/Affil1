@@ -74,20 +74,31 @@ def build_index(page_dir, flags, meta):
     return page(
         d,
         title="Flagged for review \u2014 Crisp & Counter",
-        description="Every uncertainty on this site in one place: unresolved links, unconfirmed tracking, missing prices, absent authorship and generated imagery, each with the source to check it against.",
-        body=body + release_panel(d, "review/"),
+        description="Every uncertainty on this site in one place: unconfirmed tracking, missing prices, absent authorship, generated imagery and the consolidation record, each with the source to check it against.",
+        body=body,
         active="review/index.html",
         canonical="review/",
     )
 
 
 def _urlish(text, d):
-    from layout import AFFILIATE_HINT, product_link
+    """Render a 'where to check it' entry.
+
+    A listing URL becomes a tagged Special Link, because an Amazon product link
+    without the Associates tag is exactly the defect this site was built to
+    avoid. A short link is shown as text: it cannot carry the tag, so it is
+    evidence rather than a destination. Anything else is a citation.
+    """
+    import re as _re
+    from layout import buy_url, product_link
     if text.startswith("http"):
-        if AFFILIATE_HINT.search(text):
-            return product_link(d, text, "Amazon listing",
-                                aria="Open this Amazon listing (affiliate link, opens in a new tab)")
-        return outbound(d, text, esc(text.split("/")[2]))
+        m = _re.search(r"/dp/([A-Z0-9]{10})", text)
+        if m:
+            return product_link(d, buy_url(m.group(1)), esc(text),
+                                aria="Open this Amazon listing (paid link, opens in a new tab)")
+        if "link.amazon/" in text:
+            return f'<code class="code">{esc(text)}</code>'
+        return outbound(d, text, esc(text))
     return esc(text)
 
 
@@ -136,8 +147,45 @@ def build_images(page_dir, images, products, meta):
 
 def build_measurement(page_dir, meta, spec):
     d = page_dir
-    import json
-    from layout import ROOT
-    rows=[[e['name'],e['fires_when'],', '.join(e['props']),{'html':outbound(d,'https://github.com/karagemop466-tech/Affil1/blob/main/src/data/events.json','Event definition')}] for e in spec['events']]
-    body=pagehead('Privacy & measurement','What gets counted?','Clicks are a signal of interest. Only an authorized Associates report can establish orders.')+section('<p>The self-hosted edition accepts the five events below at its own /api/e endpoint. The static GitHub Pages edition sends none: Pages cannot run the collector.</p>'+table(['Event','Trigger','Dimensions','Source'],rows)+'<p>Only daily totals are written. No IP, raw URL, query, referrer, user agent, cookie or visitor ID is stored by the counter. Entries older than 90 days are pruned on writes. Do Not Track and Global Privacy Control suppress collection. Saved picks and editorial decisions stay in your browser.</p><p>Do not mix preview or test activity with campaign reports. A permanent production collector and consent review remain open.</p>')
-    return page(d,title='Privacy and measurement — Crisp &amp; Counter',description='Five first-party event definitions and their privacy limits.',body=body,canonical='review/measurement.html')
+    events = [
+        ("page_view", "Every page load", "Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept."),
+        ("outbound_click", "Any click on an Amazon link", "Records which product reference was clicked and the page it was clicked from. This is the number that matters for this site."),
+        ("guide_open", "Opening a guide from the index", "Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be."),
+        ("search_query_referral", "Arrival from a search engine", "Records that a referral happened and the referring host, not the query. Search Console supplies queries; this does not try to reconstruct them."),
+        ("report_import", "A manual import of an Associates report", "A dated record that a first-party report was added to the ledger, with its provenance. Never an automated scrape."),
+    ]
+    rows = [[{"html": f'<code class="code">{esc(n)}</code>'}, esc(t), esc(w)] for n, t, w in events]
+    body = f"""{pagehead(
+        'Measurement plan',
+        'Measurement is written,<br>and switched off',
+        'Five events are defined, a client exists, and nothing is being recorded. That is the current state and it is deliberate.',
+        meta='Beacon disabled by default &middot; no cookies &middot; no third-party requests &middot; no endpoint deployed',
+    )}
+{section(f'''
+<div class="lede-prose">
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
+  <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
+</div>
+<h2>What would be measured</h2>
+{table(['Event', 'Fires when', 'What is stored'], rows, cls='events')}
+<h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
+<ol class="tight">
+  <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
+  <li><strong>A deployed collector.</strong> The endpoint is in this repository and is not hosted anywhere. GitHub Pages serves static files only.</li>
+  <li><strong>A retention decision.</strong> Raw event rows have a half-life; the ledger does not. A retention period has to be chosen, not defaulted.</li>
+  <li><strong>A consent decision.</strong> Whether visitor consent is required depends on jurisdiction and on what is collected. That is a legal question, not an engineering one, and it has not been answered.</li>
+</ol>
+<h2 style="margin-top:2.4rem">Why the site currently claims nothing about traffic</h2>
+<p>Every traffic statement on this site is an absence: no sessions, no clicks, no conversions, no revenue. That is not modesty. With the beacon off, the site genuinely has no numbers, and inventing plausible ones would be the single fastest way to make everything else on the site untrustworthy.</p>
+<div class="callout">
+  <h2>What the campaign ledger holds</h2>
+  <p>Nothing. It has a defined schema &mdash; date, source, channel, eligible sessions, clicks, reported orders &mdash; and every row has to arrive with a provenance note. <a href="{esc(rel(d, 'operations/ledger.html'))}">See the empty ledger</a>.</p>
+</div>''', cls='')}"""
+    return page(
+        d,
+        title="Measurement plan \u2014 Crisp & Counter",
+        description="The five events this site would record, the collector that is written but switched off, and the four things that must exist before any of it is switched on.",
+        body=body,
+        active="review/index.html",
+        canonical="review/measurement.html",
+    )
