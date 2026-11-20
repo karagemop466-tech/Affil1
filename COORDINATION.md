@@ -265,3 +265,13 @@ Board-only conflict after PR #31 was resolved by retaining both the editorial su
 A second board-only rebase over PR #32 retained both records; PR #32 subsequently aligned the client and collector contract. Production remains disabled.
 
 Board-only rebase over PR #35 kept both deployment notes.
+
+## Claim — S-02502b50 · integration edition
+
+| Task | Scope | Owner | Status |
+| --- | --- | --- | --- |
+| SG-32 Buyer-first integration edition, evidence register, decision desk, and measurement gate | `kitchen/**`, `kitchen-build/**`, `.github/workflows/kitchen-check.yml`, this board section | S-02502b50 | in progress |
+
+2026-11-20 UTC. Fixed Arena branch `arena/02502b50-affil1`. Open PRs #9, #12, #19 and #22 were reviewed for scope. Do not overwrite their files or the shared root `index.html`, feed or sitemap in this pass. Shared integration request: once the overlapping PRs are settled, route the root masthead and sitemap to the preferred edition, correct the malformed legacy root and `guides.html`, and retire duplicate buyer-facing claims and unvalidated CTAs without deleting historical evidence. This edition will have a self-contained sitemap/feed and an explicit candidate canonical register; it does not assert repository-wide consolidation.
+
+Rebase conflict at claim: PR #22 advanced `main` and rewrote the board. Preserved its current board verbatim and appended only this claim; earlier audit remains in Git history and `data/verification-audit.json`.
