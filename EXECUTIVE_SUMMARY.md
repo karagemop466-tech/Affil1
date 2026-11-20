@@ -31,7 +31,7 @@ One canonical site, 38 pages, rebuilt from `_src/data` on every deploy:
   already been implemented and are shown with evidence (19 open);
 - an owner's "what is left" page (`/now/`), a ranked offers page (`/offers/`, 10
   weighted offers) and a per-page verification audit (`/verification/`);
-- 28 review flags, an image policy, an inert analytics client and an empty
+- 29 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
