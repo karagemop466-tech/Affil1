@@ -23,8 +23,8 @@ BUILD_DATE = "2026-11-20"
 
 # Canonical host. GitHub Pages serves this repository at this URL.
 SITE_ROOT = "https://karagemop466-tech.github.io/Affil1"
-BASE = "/crisp"
-SITE_URL = SITE_ROOT + BASE
+BASE = ""            # the publication is the site: it publishes at the repository root
+SITE_URL = SITE_ROOT
 
 # Relative prefix per page depth. Root of the app is /crisp/; any page below it
 # links back with ../ per level. Absolute root paths would break a project Pages
@@ -39,8 +39,10 @@ NAV = [
     ("", "Home"),
     ("guides/", "Buying guides"),
     ("compare/", "Compare"),
+    ("topics/", "Topics"),
     ("products/", "All products"),
     ("about/", "About"),
+    ("dashboard/", "Dashboard"),
 ]
 
 
@@ -57,6 +59,12 @@ FLAGS = load("flags.json")
 EVENTS = load("events.json")
 
 from content import GUIDES, COMPARE_ROWS, PRICE_BLANK_NOTE  # noqa: E402
+from content_extra import GUIDES as EXTRA_GUIDES, COMPARE_ROWS as EXTRA_COMPARE_ROWS, TOPICS
+
+# Guides and comparison rows added by the integration pass. Appending rather
+# than editing keeps the earlier session's copy intact and reviewable.
+GUIDES = {**GUIDES, **EXTRA_GUIDES}
+COMPARE_ROWS = COMPARE_ROWS + EXTRA_COMPARE_ROWS
 
 PRODUCT_BY_ID = {p["id"]: p for p in PRODUCTS["products"]}
 
@@ -117,6 +125,7 @@ def footer():
           <li><a href="/compare/">Compare the range</a></li>
           <li><a href="/products/">All products</a></li>
           <li><a href="/about/">About &amp; method</a></li>
+          <li><a href="/topics/">All topics</a></li>
         </ul>
       </div>
       <div>
@@ -133,7 +142,7 @@ def footer():
         <ul>
           <li><a href="/feed.xml">RSS feed</a></li>
           <li><a href="/sitemap.xml">Sitemap</a></li>
-          <li><a href="@STORE@">Kitchen Notes storefront</a></li>
+          <li><a href="/dashboard/">Operations dashboard</a></li>
           <li><a href="/about/#privacy">Privacy &amp; cookies</a></li>
         </ul>
       </div>
@@ -177,6 +186,7 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None)
 <link rel="alternate" type="application/rss+xml" title="{esc(SITE_NAME)}" href="/feed.xml">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script src="/assets/js/events.js" defer></script>
+<script src="/assets/js/shortlist.js" defer></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b1a17'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23c9743a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
 {extra_head}</head>
 <body>
@@ -197,7 +207,7 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None)
     prefix = rel(path)
     doc = re.sub(r'(href|src)="/(?!/)', lambda m: f'{m.group(1)}="{prefix or "./"}', doc)
     doc = doc.replace('url(/assets/', 'url(./assets/')
-    doc = doc.replace("@STORE@", prefix + "../")
+    doc = doc.replace("@STORE@", prefix + "archive/2026-11-20-integration/index.html")
 
     out = (ROOT / BASE.strip("/") / path.lstrip("/") / "index.html") if path.endswith("/") \
         else (ROOT / BASE.strip("/") / path.lstrip("/"))
@@ -212,14 +222,33 @@ def badge(text, kind="none"):
     return f'<span class="badge {kind}">{esc(text)}</span>'
 
 
+def tagged_listing_url(p):
+    """The buy destination: the official listing URL carrying the tracking tag.
+
+    Why not the supplied short link: a link that only redirects through an
+    intermediate host, with no tag, cannot be attributed to an Associate.
+    Amazon's Commission Income Statement disqualifies purchases reached through a
+    "Redirecting Link" and any purchase "not correctly tracked or reported
+    because the links from your site ... are not properly formatted". Publishing
+    an untagged redirect would therefore earn nothing while looking compliant.
+    The supplied link is still recorded, in its own field, as evidence of intent;
+    the two fields are never merged. Before scaling, each link here must be
+    replaced with the Special Link that Associates Central generates for the
+    enrolled account - see /flagged/#FLG-003.
+    """
+    asin = p.get("observed_redirect_asin")
+    if not asin:
+        return None
+    return f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
+
+
 def product_link(p, label=None, cls="btn"):
     """An outbound button, or an honest disabled state if the listing is unknown.
 
-    The supplied short link is used as the destination because that is the link
-    the account owner supplied. The observed listing URL is published separately
-    as a citation, not as the affiliate destination, so the two are never merged.
-    """
-    if not p.get("official_listing_url"):
+    A card only gets a button when a product page was actually reached. The
+    supplied short link and the observed listing URL stay separate fields; the
+    register table shows both side by side."""
+    if not p.get("official_listing_url") or not tagged_listing_url(p):
         return (
             '<span class="btn" aria-disabled="true">Listing not identified</span>'
             '<p class="paid-note">No button shown: this supplied link never resolved '
@@ -228,7 +257,7 @@ def product_link(p, label=None, cls="btn"):
     label = label or "Check the listing"
     klass = "btn" if cls in ("btn", "") else f"btn {cls}"
     return (
-        f'<a class="{klass}" href="{esc(p["supplied_link"])}" rel="sponsored nofollow noopener" '
+        f'<a class="{klass}" href="{esc(tagged_listing_url(p))}" rel="sponsored nofollow noopener" '
         f'target="_blank">{esc(label)}<span class="sr-only"> at Amazon (affiliate link, opens in a new tab)</span></a>'
         f'<p class="paid-note"><strong>Paid link.</strong> We earn a commission if you buy.</p>'
     )
@@ -428,7 +457,7 @@ def build_guide(slug, g):
 </div>"""
 
     return page(f"/guides/{slug}/", f"{g['title']} — {SITE_NAME}", g["deck"], body,
-                active="/guides/",
+                active="/guides/", extra_head=g.get("head", ""),
                 crumbs=[("/", "Home"), ("/guides/", "Buying guides"), (None, g["title"][:48])])
 
 
@@ -638,7 +667,7 @@ def build_suggestions():
     for s in SUGGESTIONS["suggestions"]:
         badge_kind = {"shipped": "ok", "proposed": "none", "blocked-on-account": "warn",
                       "blocked-on-decision": "warn", "rejected": "bad"}[s["status"]]
-        note = s.get("shipped_note") or s.get("blocked_note") or ""
+        note = s.get("shipped_note") or s.get("blocked_note") or s.get("note") or ""
         note_lbl = "What shipped" if s["status"] == "shipped" else ("Why it is blocked" if s["status"].startswith("blocked") else "Note")
         if s["status"] == "rejected":
             note_lbl = "Why not"
@@ -662,7 +691,7 @@ def build_suggestions():
 <div class="wrap">
   <div class="page-head">
     <h1>Suggestion board</h1>
-    <p>Eighteen proposals, scored, with what each one would change and what it would need before it is safe to ship. Four are blocked on things only the account owner can supply. One is rejected outright. Read the scores as an argument, not a gospel: impact is judged against this site's purpose, not against a generic growth playbook.</p>
+    <p>{len(SUGGESTIONS["suggestions"])} proposals, scored, with what each one would change and what it would need before it is safe to ship. {counts['blocked-on-account']} are blocked on things only the account owner can supply, {counts['blocked-on-decision']} await a product decision, and {counts['rejected']} are recorded as things this site must never build. Read the scores as an argument, not a gospel: impact is judged against this site's purpose, not against a generic growth playbook.</p>
   </div>
 
   <div class="note-box">
@@ -677,7 +706,12 @@ def build_suggestions():
     <li><strong>Connect the API, or accept no prices forever.</strong> Without the Creators API or PA API the site cannot legally show a price, and price is the number readers want most. This is the single highest-leverage unblock on the board.</li>
     <li><strong>Run the one-link test.</strong> One product, one link, confirmed in the Associates click report. Everything downstream — scaling to five, writing more guides, buying a domain — is premature until that single click is observed.</li>
     <li><strong>Give the site an author.</strong> A name and two sentences buy more credibility than any redesign, and it is the one thing that cannot be generated.</li>
+    <li><strong>Decide the traffic machinery.</strong> Verifying Search Console (SUG-22) and scheduling the weekly audit (SUG-24) are both one-off jobs that turn this from a published site into a measured one. Neither needs a new feature built, and until the first is done, every statement on this site about what readers want is reasoning rather than evidence.</li>
   </ol>
+
+  <div class="note-box">
+    <p><strong>If you only do three things.</strong> Replace the five buy links with Special Links generated inside Associates Central and confirm one click in the report; verify the Search Console property; then let four weeks of queries re-order the editorial queue before writing anything new. Those three cost about an hour between them and every other row on this board is more valuable after them.</p>
+  </div>
 </div>
 <script>
 (function () {{
@@ -858,7 +892,7 @@ def build_about():
       <li><strong>We have not tested anything.</strong> So we do not rank the products or tell you which cooks better. A verdict without a test is a guess wearing a lab coat.</li>
     </ul>
 
-    <h2>The editorial rule</h2>
+    <h2 id="method">The editorial rule</h2>
     <p>One rule governs every sentence about a product on this site: <strong>a capability is stated only if it appears in the seller's own listing title.</strong> When you read &ldquo;6 quart, two baskets,&rdquo; that is the seller's claim, quoted. When you read &ldquo;check the swing of the door before you buy,&rdquo; that is advice about your kitchen, which needs no sourcing because it makes no claim about the product.</p>
     <p>Where a listing claim could be read as a measured fact and would mislead if it were, the guide says so in the same paragraph. Where the site cannot answer a question a reader will have, the guide names the question and tells you where to find the answer.</p>
 
@@ -867,10 +901,25 @@ def build_about():
     <p>Two identifiers are kept in strictly separate fields for every product: the code that appeared in the supplied link, and the ASIN that the destination page actually carries. They are never merged, because merging them would destroy the only record that could catch a link pointing at the wrong product. On this set they are never the same string — the supplied codes are nine characters, and an ASIN is ten.</p>
 
     <h2 id="privacy">Privacy and cookies</h2>
-    <p>This site sets no cookies, writes nothing to your browser's storage, and loads no third-party script. There is no analytics running, because there is nowhere on a static host for a first-party collector to run and a third-party one was judged not worth the disclosure surface before there is traffic to measure. The measurement plan is published on the <a href="/sources/#events">source register</a> so that when it is switched on, you can see exactly what it would collect.</p>
+    <p>This site sets no cookies and loads no third-party script. There is exactly one thing that touches your browser: the &ldquo;Save&rdquo; button on a product card keeps a list of identifiers in local storage so you can come back to it in this browser. It is never transmitted, it is not read by anything else on the page, and clearing site data removes it. Analytics are off — there is nowhere on a static host for a first-party collector to run, and a third-party one was judged not worth the disclosure surface before there is traffic to measure. The measurement plan is published on the <a href="/sources/#events">source register</a> so that when it is switched on, you can see exactly what it would collect.</p> There is no analytics running, because there is nowhere on a static host for a first-party collector to run and a third-party one was judged not worth the disclosure surface before there is traffic to measure. The measurement plan is published on the <a href="/sources/#events">source register</a> so that when it is switched on, you can see exactly what it would collect.</p>
     <p>Clicking a product link takes you to Amazon, where Amazon's own privacy notice applies. We receive no information about what you do after you leave this site.</p>
 
+    <h2 id="who">Who writes this</h2>
+    <p>Guides are written and checked by the Crisp &amp; Counter editorial desk — the small group that reads the
+    listings, resolves the links, and re-checks the register when a value changes. Bylines are at desk level on
+    purpose: this publication has no named human reviewer yet, and inventing a person to say “I cooked 400 wings
+    in this machine” would be the exact kind of fabricated experience the FTC’s endorsement rules exist to prevent.
+    Nobody here has cooked in any of these products, and no sentence on this site claims otherwise.</p>
+    <p>If a real editor joins with credentials worth naming, the byline changes and this paragraph is rewritten to
+    say what that person actually did. That is tracked as a suggestion, not as a promise: see
+    <a href="/suggestions/">the board</a>.</p>
+
     <h2>Corrections</h2>
+    <p><strong>2026-11-20 —</strong> an earlier register kept in the repository archive recorded two of the five
+    submitted links as reaching only the Amazon homepage. Two independent fetch passes now reach product pages for
+    both, and one of them is a meat thermometer rather than an air fryer. The archived file is left untouched so the
+    disagreement can be inspected, and the corrected rows are on the
+    <a href="/dashboard/#verification">verification log</a>.</p>
     <p>Everything factual on this site is traceable to an official page, listed on the <a href="/sources/">source register</a>. If something here is wrong, the more useful response is to say which row and which source contradicts it. Corrections are made to the data, and the page is rebuilt from the data, so a fix lands everywhere at once rather than on one page and not another.</p>
 
     <h2>What this site is not</h2>
@@ -918,8 +967,8 @@ def build_legacy():
 # ---------------------------------------------------------------- sitemap / feed
 
 def build_sitemap():
-    urls = ["/", "/guides/", "/compare/", "/products/", "/about/", "/sources/",
-            "/suggestions/", "/questions/", "/flagged/", "/legacy/"]
+    urls = ["/", "/guides/", "/compare/", "/topics/", "/products/", "/about/", "/sources/",
+            "/suggestions/", "/questions/", "/flagged/", "/dashboard/", "/legacy/"]
     urls += [f"/guides/{s}/" for s in GUIDES]
     entries = []
     locs = []
@@ -932,7 +981,7 @@ def build_sitemap():
             f"    <priority>{'1.0' if u == '/' else ('0.8' if u.startswith('/guides') else '0.5')}</priority>\n  </url>\n")
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(entries) + "</urlset>\n")
-    (ROOT / "crisp" / "sitemap.xml").write_text(xml, encoding="utf-8")
+    (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
 
     # Union into the repository sitemap that the storefront publishes, so search
     # engines reach this section too. Existing entries are preserved verbatim.
@@ -973,12 +1022,13 @@ def build_feed():
 </channel>
 </rss>
 """
-    (ROOT / "crisp" / "feed.xml").write_text(xml, encoding="utf-8")
+    (ROOT / "feed.xml").write_text(xml, encoding="utf-8")
 
 
 def build_robots():
-    (ROOT / "crisp" / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
+    (ROOT / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nDisallow: /archive/\n\nSitemap: {SITE_URL}/sitemap.xml\n",
+        encoding="utf-8")
 
 
 def build_404():
@@ -993,8 +1043,8 @@ def build_404():
 def main():
     # clear generated pages so a deleted page cannot linger
     for d in ["guides", "compare", "products", "about", "sources", "suggestions",
-              "questions", "flagged", "legacy"]:
-        p = ROOT / "crisp" / d
+              "questions", "flagged", "legacy", "topics", "dashboard"]:
+        p = ROOT / d
         if p.exists():
             shutil.rmtree(p)
 
@@ -1010,21 +1060,19 @@ def main():
     build_questions()
     build_flagged()
     build_legacy()
+
+    # The integration pass's front page, topics index and dashboard are built
+    # before the sitemap so their URLs are in it on the same commit.
+    import extra_pages
+    extra_pages.build_all()
+
     build_sitemap()
     build_feed()
     build_robots()
     build_404()
 
-    js_dst = ROOT / "crisp" / "assets" / "js" / "events.js"
-    js_dst.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(ROOT / "assets" / "js" / "events.js", js_dst)
-
-    dst = ROOT / "crisp" / "assets" / "css" / "site.css"
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(ROOT / "assets" / "css" / "site.css", dst)
-
-    n = len(list((ROOT / "crisp").rglob("*.html")))
-    print(f"built {n} pages under /crisp/")
+    n = len([p for p in ROOT.rglob("*.html") if "archive" not in p.parts])
+    print(f"built {n} published pages at the repository root")
 
 
 if __name__ == "__main__":

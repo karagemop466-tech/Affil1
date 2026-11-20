@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestion board — Crisp &amp; Counter</title>
+<meta name="description" content="Eighteen scored proposals for improving the site, each with the evidence it needs and what is blocking it, so a reviewer can choose a path before anything is built.">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Crisp &amp; Counter">
+<meta property="og:title" content="Suggestion board — Crisp &amp; Counter">
+<meta property="og:description" content="Eighteen scored proposals for improving the site, each with the evidence it needs and what is blocking it, so a reviewer can choose a path before anything is built.">
+<meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter" href="../feed.xml">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/events.js" defer></script>
+<script src="../assets/js/shortlist.js" defer></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b1a17'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23c9743a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="../">Crisp <span class="amp">&amp;</span> Counter<span class="brand-tag">Kitchen buying guides</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="../">Home</a><a href="../guides/">Buying guides</a><a href="../compare/">Compare</a><a href="../topics/">Topics</a><a href="../products/">All products</a><a href="../about/">About</a><a href="../dashboard/">Dashboard</a>
+    </nav>
+  </div>
+</header>
+<div class="disclosure" role="region" aria-label="Affiliate disclosure">
+  <div class="wrap">
+    <span class="tag">Disclosure</span>
+    <span>As an Amazon Associate, Crisp &amp; Counter earns from qualifying purchases. Links to Amazon are affiliate links: if you buy through one, we may earn a commission at no extra cost to you. <a href="../about/#disclosure">Read the full disclosure</a>.</span>
+  </div>
+</div>
+<div class="wrap"><div class="crumbs"><a href="../">Home</a><span class="sep">/</span><span>Suggestion board</span></div></div>
+<main id="main">
+
+<div class="wrap">
+  <div class="page-head">
+    <h1>Suggestion board</h1>
+    <p>29 proposals, scored, with what each one would change and what it would need before it is safe to ship. 5 are blocked on things only the account owner can supply, 4 await a product decision, and 3 are recorded as things this site must never build. Read the scores as an argument, not a gospel: impact is judged against this site's purpose, not against a generic growth playbook.</p>
+  </div>
+
+  <div class="note-box">
+    <p><strong>How to review this board.</strong> Start with the two rows marked <em>rejected</em> and <em>blocked on account</em> — those are the ones where acting without information would cost money or trust. Then pick by the ratio of impact to effort. Nothing on this page has been implemented silently; what shipped is labelled shipped and says so.</p>
+  </div>
+
+  <div class="filters"><span class="flbl">Filter</span><button class="filter-btn" data-filter="all" aria-pressed="true">All <span style="opacity:.6">29</span></button><button class="filter-btn" data-filter="shipped" aria-pressed="false">shipped <span style="opacity:.6">10</span></button><button class="filter-btn" data-filter="proposed" aria-pressed="false">proposed <span style="opacity:.6">7</span></button><button class="filter-btn" data-filter="blocked-on-account" aria-pressed="false">blocked on account <span style="opacity:.6">5</span></button><button class="filter-btn" data-filter="blocked-on-decision" aria-pressed="false">blocked on decision <span style="opacity:.6">4</span></button><button class="filter-btn" data-filter="rejected" aria-pressed="false">rejected <span style="opacity:.6">3</span></button></div>
+  <div id="sug-list"><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-01</span>
+    <h3>Publish the disclosure in a strip under the masthead, and again in the footer</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high — it is a stated obligation, not a hypothesis</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Both Amazon&#x27;s Operating Agreement and the FTC&#x27;s guidance put the duty on the publisher, and the FTC&#x27;s test is whether a reader can weigh the recommendation at the moment they read it. A disclosure only in the footer fails that test on a long page.</p>
+  <p><span class="lbl">Evidence needed</span>none; the sources are already read and quoted</p>
+  <p><span class="lbl">What shipped</span>Present on every page, generated by one template, so a new page cannot ship without it.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-02</span>
+    <h3>Stop publishing prices, star ratings and review counts entirely</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Program Policies 2(b) allows price display only when Amazon serves the link carrying the data, or when it comes from the Creators API / PA API. This site has no such feed. A stale price is also a misrepresentation risk under the same section.</p>
+  <p><span class="lbl">Evidence needed</span>none</p>
+  <p><span class="lbl">What shipped</span>No number appears on any product surface. The blank is deliberate and is explained in-line, not hidden.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-03</span>
+    <h3>Keep intended ASIN and observed redirect target as two separate, never-merged fields</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>The observed redirect is a fact about today&#x27;s redirect. The intended ASIN is a fact about what the owner meant to enrol. Merging them destroys the only audit trail that would catch a wrong-product redirect.</p>
+  <p><span class="lbl">Evidence needed</span>none</p>
+  <p><span class="lbl">What shipped</span>products.json carries them in separate keys. intended_asin is deliberately null for all five rows.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-04</span>
+    <h3>Build the landing page as a publication front page, with the audit surfaces demoted to the footer</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>3</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium — standard practice, not measured on this site</b></span>
+  </div>
+  <p><span class="lbl">Why</span>A buyer arriving from a search result needs a reason to stay within about five seconds. A verification table is a reason to leave. The register still has to exist; it just should not be the front door.</p>
+  <p><span class="lbl">Evidence needed</span>post-launch: scroll depth and outbound click rate by page</p>
+  <p><span class="lbl">What shipped</span>Front page leads with the products and the guides. Every register is reachable from the footer.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-05</span>
+    <h3>Write question-shaped guides, one per real buyer decision, and link products from inside the argument</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>3</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium — the titles are hypotheses until query data exists</b></span>
+  </div>
+  <p><span class="lbl">Why</span>A guide that answers a question earns a link and a share; a product card does not. Question-shaped titles also match how people type into a search box.</p>
+  <p><span class="lbl">Evidence needed</span>Search Console query data after 4–6 weeks</p>
+  <p><span class="lbl">What shipped</span>Four guides published. Every claim inside them is either quoted from a listing title or omitted.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-06</span>
+    <h3>Ship an RSS feed and one canonical host, before chasing traffic</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high on the mechanics, medium on the size of the effect</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Syndication gives a second surface for free and makes the publishing cadence visible. Duplicate hosts split whatever authority the site earns.</p>
+  <p><span class="lbl">Evidence needed</span>none for the mechanics</p>
+  <p><span class="lbl">What shipped</span>feed.xml plus rel=alternate on every page, canonical tags throughout, robots.txt pointing at the sitemap.</p>
+</article><article class="sug" data-status="blocked-on-decision">
+  <div class="sug-head">
+    <span class="flag-id">SUG-07</span>
+    <h3>Define the five events and a privacy-preserving outbound-click counter — but deploy nothing until a host is chosen</h3>
+    <span class="badge warn">blocked on decision</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high on the event schema, n/a on the effect until data exists</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Measurement has to exist before optimisation, or the next decision is made on instinct. But an unhosted endpoint and an unconsented cookie are worse than no measurement: one is dead code, the other is a compliance problem.</p>
+  <p><span class="lbl">Evidence needed</span>a first-party host (see FLG-009)</p>
+  <p><span class="lbl">Why it is blocked</span>The schema is published in events.json. The collector is a documented design, not live code. No third-party script is loaded on this site.</p>
+</article><article class="sug" data-status="blocked-on-account">
+  <div class="sug-head">
+    <span class="flag-id">SUG-08</span>
+    <h3>Test exactly one Special Link end to end before scaling to five</h3>
+    <span class="badge warn">blocked on account</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high — this is the owner&#x27;s own stated plan, and it is the right one</b></span>
+  </div>
+  <p><span class="lbl">Why</span>If the tag is dropping, one wrong link and five wrong links cost the same in lost trust but five is a bigger hole. One-link-per-product, confirmed in the Associates report, is the cheapest possible experiment.</p>
+  <p><span class="lbl">Evidence needed</span>an Associates dashboard session</p>
+  <p><span class="lbl">Why it is blocked</span>Requires reading the click report in the Associates dashboard. This session has no account access.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-09</span>
+    <h3>Add a comparison table that compares on decisions, not on specs we cannot verify</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium</b></span>
+  </div>
+  <p><span class="lbl">Why</span>A reader choosing between a dual basket and a French-door oven wants to know which one their counter and their family size can actually accommodate. That comparison is honest without needing a wattage figure we cannot source.</p>
+  <p><span class="lbl">Evidence needed</span>none for the form-factor comparison; dimensions would need a feed</p>
+  <p><span class="lbl">What shipped</span>The compare page compares form factor, what the seller claims, and what to check in person. It does not invent a winner.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-10</span>
+    <h3>Publish a &#x27;Flagged for Review&#x27; page and keep it visible in the footer</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Every unverified value has to be reviewable by the person who can actually resolve it. A hidden to-do list gets ignored; a public page with source links gets acted on.</p>
+  <p><span class="lbl">Evidence needed</span>none</p>
+  <p><span class="lbl">What shipped</span>/flagged/ lists every irregularity with its source link.</p>
+</article><article class="sug" data-status="blocked-on-decision">
+  <div class="sug-head">
+    <span class="flag-id">SUG-11</span>
+    <h3>Add author identity and a methodology page before adding more content</h3>
+    <span class="badge warn">blocked on decision</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium-high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Readers and search engines both discount anonymous product advice. An author page with a real name, a stated method and a correction policy is the cheapest credibility upgrade available.</p>
+  <p><span class="lbl">Evidence needed</span>a real name and a real bio from the owner</p>
+  <p><span class="lbl">Why it is blocked</span>A method page exists. An author page does not, because inventing a persona would be exactly the failure mode this project is trying to avoid.</p>
+</article><article class="sug" data-status="proposed">
+  <div class="sug-head">
+    <span class="flag-id">SUG-12</span>
+    <h3>Publish one guide every two weeks rather than five at once</h3>
+    <span class="badge none">proposed</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium</b></span>
+  </div>
+  <p><span class="lbl">Why</span>A cadence is a signal that the site is maintained. A burst followed by silence reads as abandoned, and it also makes it impossible to attribute a change in traffic to a topic.</p>
+  <p><span class="lbl">Evidence needed</span>Search Console data to confirm the cadence is producing indexed pages</p>
+  <p><span class="lbl">Note</span>No new guides should be drafted until SUG-08 resolves, so that the first guide is measured against a working link.</p>
+</article><article class="sug" data-status="blocked-on-decision">
+  <div class="sug-head">
+    <span class="flag-id">SUG-13</span>
+    <h3>Add a reader-capture email list</h3>
+    <span class="badge warn">blocked on decision</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>4</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium</b></span>
+  </div>
+  <p><span class="lbl">Why</span>An email list is the only audience asset that survives an algorithm change. It is also the highest-risk item on this list, because it brings CAN-SPAM, consent records and a provider into scope at once.</p>
+  <p><span class="lbl">Evidence needed</span>a provider, a privacy review, and an unsubscribe path</p>
+  <p><span class="lbl">Why it is blocked</span>Not built. A signup box that silently does nothing is worse than no signup box.</p>
+</article><article class="sug" data-status="blocked-on-account">
+  <div class="sug-head">
+    <span class="flag-id">SUG-14</span>
+    <h3>Connect the Creators API or PA API and serve live price and availability</h3>
+    <span class="badge warn">blocked on account</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>4</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high on the value, high on the constraint</b></span>
+  </div>
+  <p><span class="lbl">Why</span>This is the only route that makes a price legal to display, and price is the single most-requested datum on a buying page. It also unlocks real availability, which prevents sending readers to an out-of-stock listing.</p>
+  <p><span class="lbl">Evidence needed</span>Associates account approval plus API credentials</p>
+  <p><span class="lbl">Why it is blocked</span>Until then the correct behaviour is to show no price. Do not fill this gap with a scrape.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-15</span>
+    <h3>Add structured data for articles and breadcrumbs</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>2</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">low-medium</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Article and BreadcrumbList markup help a search engine describe the page correctly. Product and Offer markup is deliberately excluded, because marking up an offer implies price and availability data this site does not have.</p>
+  <p><span class="lbl">Evidence needed</span>rich-result eligibility check after indexing</p>
+  <p><span class="lbl">What shipped</span>Article and BreadcrumbList only. No Product, no Offer, no AggregateRating.</p>
+</article><article class="sug" data-status="blocked-on-account">
+  <div class="sug-head">
+    <span class="flag-id">SUG-16</span>
+    <h3>Add a visual product gallery with Amazon-hosted imagery</h3>
+    <span class="badge warn">blocked on account</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>3</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Images carry a buyer further than paragraphs. But Program Content may not be altered, and an image cannot be used in a way that implies an endorsement.</p>
+  <p><span class="lbl">Evidence needed</span>a compliant image route: Amazon-served widgets, or the API&#x27;s image fields used unmodified</p>
+  <p><span class="lbl">Why it is blocked</span>Rejected for now rather than approximated with stock photography, which would misrepresent the product. See FLG-015.</p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-17</span>
+    <h3>Publish a per-guide &#x27;what we could not verify&#x27; box</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium-high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Stating the limits next to the recommendation is what separates a publication from an advertorial, and it costs one component.</p>
+  <p><span class="lbl">Evidence needed</span>none</p>
+  <p><span class="lbl">What shipped</span>Each guide closes with a &#x27;What this guide does not claim&#x27; block.</p>
+</article><article class="sug" data-status="rejected">
+  <div class="sug-head">
+    <span class="flag-id">SUG-18</span>
+    <h3>Run paid search to accelerate</h3>
+    <span class="badge bad">rejected</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>1</b>/5</span>
+    <span class="score">effort <b>4</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high that it is the wrong move</b></span>
+  </div>
+  <p><span class="lbl">Why</span>It is the fastest way to buy traffic.</p>
+  <p><span class="lbl">Evidence needed</span>n/a</p>
+  <p><span class="lbl">Why not</span>Purchases arriving through paid search, and through search-engine or redirecting links generally, are disqualified under the Commission Income Statement, and bidding on Amazon marks is separately prohibited. Paid search would spend money to generate non-commissionable orders. See S07.</p>
+</article><article class="sug" data-status="proposed">
+  <div class="sug-head">
+    <span class="flag-id">SUG-19</span>
+    <h3>Finish the illustration system so every guide opens with a real image</h3>
+    <span class="badge none">proposed</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium — it improves the perceived quality and click-through of a page; it does not by itself earn a ranking</b></span>
+  </div>
+  <p><span class="lbl">Why</span>A text-only page is the single most common tell of a generated site. Five hand-commissioned-style illustrations now run on the front page, but seven of the nine guides still open with text. Consistent artwork is also the difference between a page a reader screenshots and shares and one they do not, and it is what makes a card legible in a search result or a feed reader.</p>
+  <p><span class="lbl">Evidence needed</span>One art direction decision (palette and composition are already fixed in assets/css/site.css), then ~15 minutes per remaining guide.</p>
+  <p><span class="lbl">Note</span>Illustrations are made for this publication and captioned as such. They must never be swapped for Amazon listing photos: see SUG-25.</p>
+</article><article class="sug" data-status="proposed">
+  <div class="sug-head">
+    <span class="flag-id">SUG-20</span>
+    <h3>Rotate a seasonal shelf by date, not by rebuild</h3>
+    <span class="badge none">proposed</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>3</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Kitchen-gear intent is seasonal: Thanksgiving and holiday hosting now, party appetisers in December, meal-prep in January, grill-adjacent gear in May. A shelf that swaps with the calendar keeps the front page current without touching the data layer, and it puts the right question in front of the right month.</p>
+  <p><span class="lbl">Evidence needed</span>Decide whether a static build (re-run tools/build.py on a schedule) or a small client-side date check is acceptable. If the front page must be identical for every visitor — which is what a crawler sees — the build must re-run, not the browser.</p>
+  <p><span class="lbl">Note</span>The first seasonal feature is live now (the holiday overflow guide). What is not built is the rotation.</p>
+</article><article class="sug" data-status="proposed">
+  <div class="sug-head">
+    <span class="flag-id">SUG-21</span>
+    <h3>Build hub pages around situations, not superlatives</h3>
+    <span class="badge none">proposed</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>3</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high that it is the only compliant version of the idea; medium on traffic</b></span>
+  </div>
+  <p><span class="lbl">Why</span>&amp;ldquo;Best air fryer 2026&amp;rdquo; is the query with volume, and it is the one this site cannot answer honestly: ranking products requires either hands-on testing we have not done or third-party scores we are not licensed to republish. A hub page for &amp;ldquo;a small kitchen that cooks for two&amp;rdquo; or &amp;ldquo;one that has to fit a sheet pan&amp;rdquo; can be answered from listing facts, is the same search intent, and is defensible line by line.</p>
+  <p><span class="lbl">Evidence needed</span>Two or three hubs, each assembled from fields already in src/data/products.json, plus one sentence per claim naming its source.</p>
+  <p><span class="lbl">Note</span></p>
+</article><article class="sug" data-status="blocked-on-account">
+  <div class="sug-head">
+    <span class="flag-id">SUG-22</span>
+    <h3>Verify Search Console and Bing Webmaster on the day the site is live</h3>
+    <span class="badge warn">blocked on account</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Nothing else on this board can be decided with evidence until queries arrive. Search Console is the only source that tells us which questions people actually came in asking, which is the input the editorial queue is supposed to be re-ordered by. Until a property is verified, the queue on /topics/ is reasoning, not measurement.</p>
+  <p><span class="lbl">Evidence needed</span>Account access this session does not have and should not fake: property verification is done by the person who owns the domain and the GitHub organisation.</p>
+  <p><span class="lbl">Why it is blocked</span>No site-verification record, token or meta tag was added by an agent, because a verified property implies an owner who agreed to it. The sitemap and robots file are already published and correct, so verification is the only missing step.</p>
+</article><article class="sug" data-status="proposed">
+  <div class="sug-head">
+    <span class="flag-id">SUG-23</span>
+    <h3>Give every guide a FAQ block with matching structured data</h3>
+    <span class="badge none">proposed</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium — markup is a comprehension aid, not a ranking promise</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Question-shaped guides already read like answers; marking them up lets a search engine see the question and the answer as a pair. Five new guides ship with it today. The four earlier guides have the questions in prose but no markup, so the set is inconsistent.</p>
+  <p><span class="lbl">Evidence needed</span>Move each guide&#x27;s closing question list into the existing FAQ schema shape. Do not write questions a reader did not ask.</p>
+  <p><span class="lbl">Note</span></p>
+</article><article class="sug" data-status="proposed">
+  <div class="sug-head">
+    <span class="flag-id">SUG-24</span>
+    <h3>Weekly automated audit of links, disclosure and claims</h3>
+    <span class="badge none">proposed</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>The compliance state of this site is only true for the hour it was built. A listing disappears, a redirect changes, a page ships without the disclosure strip — and the site is silently non-compliant. tools/validate.py already checks all of that in a single pass; running it weekly converts a one-off good state into an ongoing one.</p>
+  <p><span class="lbl">Evidence needed</span>A scheduled workflow running build + validate and opening an issue on failure. No secrets needed; no data leaves the repository.</p>
+  <p><span class="lbl">Note</span>Amazon&#x27;s link behaviour also drifts: one supplied link resolved for two sessions and returned a bot interstitial for a third. A weekly check is the only way to notice without someone remembering to look.</p>
+</article><article class="sug" data-status="rejected">
+  <div class="sug-head">
+    <span class="flag-id">SUG-25</span>
+    <h3>Do not display Amazon listing images, copy listing descriptions, or republish ratings</h3>
+    <span class="badge bad">rejected</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high — it is a stated restriction, not a judgement call</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Program Content — images, descriptions, ratings and review text — may be used only as provided through Amazon&#x27;s own linking tools or the Product Advertising / Creators API, and ratings and customer reviews only when obtained through that API. Hand-copied screenshots and pasted bullet points are the most common cause of an account closing, and the risk is highest on a site that looks like it has a feed but does not.</p>
+  <p><span class="lbl">Evidence needed</span>Nothing. This is a prohibition to observe, recorded here so the next session does not &amp;lsquo;improve&amp;rsquo; the product cards by scraping.</p>
+  <p><span class="lbl">Why not</span>Rejected means: do not build it. If API access is ever granted, the replacement is a live pull with a date and time stamp beside the price, not a static copy.</p>
+</article><article class="sug" data-status="rejected">
+  <div class="sug-head">
+    <span class="flag-id">SUG-26</span>
+    <h3>Do not build price history, price-drop alerts or a comparison engine</h3>
+    <span class="badge bad">rejected</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>The Participation Requirements state that, unless otherwise agreed by Amazon, an Associate site must not have price-tracking or price-alerting functionality. A price-alert feature is the standard affiliate playbook and the standard account-closing move. The FTC&#x27;s concern points the same way: an alert that goes out with stale numbers is a misleading claim sent to someone who trusted you.</p>
+  <p><span class="lbl">Evidence needed</span>Nothing; the restriction is published. Recorded so the absence of price data reads as a policy decision and not an oversight.</p>
+  <p><span class="lbl">Why not</span>Rejected means: this is not on the roadmap. Every blank price cell on the site is the visible consequence of obeying it.</p>
+</article><article class="sug" data-status="blocked-on-account">
+  <div class="sug-head">
+    <span class="flag-id">SUG-27</span>
+    <h3>Turn the ledger into an importer, with the report as the only input</h3>
+    <span class="badge warn">blocked on account</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>4</b>/5</span>
+    <span class="score">effort <b>3</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>The campaign ledger is empty by design and must stay that way until numbers arrive from the enrolled account&#x27;s own reports. The safe automation is a one-way importer that reads an exported report, appends rows with a timestamp and a provenance field, and refuses to compute anything not present in the file.</p>
+  <p><span class="lbl">Evidence needed</span>Report access, plus an agreed export format. Never scrape the dashboard into a database — that is a separate restriction and an unnecessary risk.</p>
+  <p><span class="lbl">Why it is blocked</span>No authorized report has ever been read. Any session that fills this table before then is fabricating data, which is why the empty state is published rather than removed.</p>
+</article><article class="sug" data-status="blocked-on-decision">
+  <div class="sug-head">
+    <span class="flag-id">SUG-28</span>
+    <h3>Name a human editor, with a bio that survives an audit</h3>
+    <span class="badge warn">blocked on decision</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high</b></span>
+  </div>
+  <p><span class="lbl">Why</span>E-E-A-T is not a ranking factor you can install, but a publication with no named person behind it is indistinguishable from a content farm to both a reader and a quality rater. The byline currently says &amp;lsquo;editorial desk&amp;rsquo; on purpose: inventing a person who has tested products would be a fabricated endorsement, which is exactly what the FTC&#x27;s guides prohibit.</p>
+  <p><span class="lbl">Evidence needed</span>One real person who agrees to be named, two true sentences about what they have actually done, and a corrections record they own.</p>
+  <p><span class="lbl">Why it is blocked</span>Only the site owner can supply this. Until then /about/#who says the byline is a desk, and the site claims no testing.</p>
+</article><article class="sug" data-status="proposed">
+  <div class="sug-head">
+    <span class="flag-id">SUG-29</span>
+    <h3>Publish a downloadable capacity worksheet as the linkable asset</h3>
+    <span class="badge none">proposed</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>3</b>/5</span>
+    <span class="score">effort <b>2</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">medium — outreach-driven, and the effect is not measurable until Search Console is verified</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Guides get read; assets get linked. A one-page worksheet — measure your pan, count your one-layer portions, list the three dishes that would move off your oven — is genuinely useful, costs nothing to maintain, and is the kind of thing a niche newsletter or forum answer cites. It also sends readers back to the register with a question they can now answer.</p>
+  <p><span class="lbl">Evidence needed</span>A print-ready PDF generated from the same data as the capacity guide, and a decision about whether to accept links at all (no paid links, no guest-post farms).</p>
+  <p><span class="lbl">Note</span></p>
+</article></div>
+
+  <h2 style="margin-top:40px">The three that need a decision from you first</h2>
+  <ol class="steps" style="max-width:68ch">
+    <li><strong>Connect the API, or accept no prices forever.</strong> Without the Creators API or PA API the site cannot legally show a price, and price is the number readers want most. This is the single highest-leverage unblock on the board.</li>
+    <li><strong>Run the one-link test.</strong> One product, one link, confirmed in the Associates click report. Everything downstream — scaling to five, writing more guides, buying a domain — is premature until that single click is observed.</li>
+    <li><strong>Give the site an author.</strong> A name and two sentences buy more credibility than any redesign, and it is the one thing that cannot be generated.</li>
+    <li><strong>Decide the traffic machinery.</strong> Verifying Search Console (SUG-22) and scheduling the weekly audit (SUG-24) are both one-off jobs that turn this from a published site into a measured one. Neither needs a new feature built, and until the first is done, every statement on this site about what readers want is reasoning rather than evidence.</li>
+  </ol>
+
+  <div class="note-box">
+    <p><strong>If you only do three things.</strong> Replace the five buy links with Special Links generated inside Associates Central and confirm one click in the report; verify the Search Console property; then let four weeks of queries re-order the editorial queue before writing anything new. Those three cost about an hour between them and every other row on this board is more valuable after them.</p>
+  </div>
+</div>
+<script>
+(function () {
+  var btns = document.querySelectorAll('.filter-btn');
+  var items = document.querySelectorAll('#sug-list .sug');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      items.forEach(function (it) {
+        it.style.display = (f === 'all' || it.getAttribute('data-status') === f) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-disclosure">
+      <strong>Affiliate disclosure.</strong> Crisp &amp; Counter is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. As an Amazon Associate we earn from qualifying purchases. Prices and availability are set by Amazon and are not shown on this site, because we have no live product feed. Product capability statements are quoted from the seller's listing title; nothing on this site is a test result.
+    </div>
+    <div class="foot-grid">
+      <div>
+        <a class="foot-brand" href="../">Crisp <span class="amp">&amp;</span> Counter</a>
+        <p style="margin:0 0 10px;max-width:34ch;color:var(--ink-2)">Plain-language buying guides for countertop cooking appliances. No prices we cannot stand behind, no verdicts we have not earned.</p>
+        <p style="margin:0;font-size:.76rem;color:var(--ink-3)">Publishing ID: <span class="mono">shopnow047c-20</span></p>
+      </div>
+      <div>
+        <h4>Read</h4>
+        <ul>
+          <li><a href="../guides/">Buying guides</a></li>
+          <li><a href="../compare/">Compare the range</a></li>
+          <li><a href="../products/">All products</a></li>
+          <li><a href="../about/">About &amp; method</a></li>
+          <li><a href="../topics/">All topics</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Registers</h4>
+        <ul>
+          <li><a href="../sources/">Source register</a></li>
+          <li><a href="../suggestions/">Suggestion board</a></li>
+          <li><a href="../questions/">Open questions</a></li>
+          <li><a href="../flagged/">Flagged for review</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="../feed.xml">RSS feed</a></li>
+          <li><a href="../sitemap.xml">Sitemap</a></li>
+          <li><a href="../dashboard/">Operations dashboard</a></li>
+          <li><a href="../about/#privacy">Privacy &amp; cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by or affiliated with Amazon beyond participation in the Associates Program. Information is provided for general guidance and is not professional advice.</p>
+      <p style="white-space:nowrap;color:var(--ink-3)">Built 2026-11-20</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
