@@ -29,7 +29,7 @@ def build(page_dir):
     questions = _load("questions.json")["questions"]
 
     import sys
-    sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT / "_tools"))
     from page_offers import ranked
 
     scored, unscored = ranked(offers)

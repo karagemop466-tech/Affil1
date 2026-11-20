@@ -925,3 +925,12 @@ Gates after the change: `validate.py` 1550 checks / 0 warnings; `check.py` 0 err
 | Rebuild, run all gates, preview, PR + merge + deploy verify | in progress | arena/62b049f0-affil1 | generated HTML via `_tools/build.py` |
 
 Scope is non-overlapping: no other session has claimed these files. No product facts, links, tags, prices or registers are changed by this session.
+
+### Completion — arena/62b049f0-affil1 (2026-11-20 UTC)
+
+- **Re-verification (fetch_page, this session):** the five `/dp/` destinations (B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z) returned product pages whose titles match `_src/data/products.json`. Short links `link.amazon/*` returned the amazon.com homepage via the fetch tool (bot/fallback), which is not proof of invalidity; FLG-003 stays unresolved. No intended ASIN, listing confirmation or Special Link was filled.
+- **Sources:** https://affiliate-program.amazon.com/help/operating/agreement (updated Oct 15, 2025); https://affiliate-program.amazon.com/help/operating/policies (updated Apr 14, 2026); https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking; https://sell.amazon.com/blog/what-is-an-asin.
+- **Fixed:** `PUBLISHING_WORKFLOW.md` merge-conflict markers resolved (both sides kept, paths updated to `_tools/`, `_src/`); `_tools/page_now.py` sys.path `tools` → `_tools`; `EXECUTIVE_SUMMARY.md` and `README.md` counts and paths synced to the tree (34 checked pages, 33 sitemap URLs, 10 guides, 21 suggestions = 6 implemented / 15 open, 24 questions, 27 flags).
+- **Gates:** `build.py` leaves generated output unchanged; `validate.py` 1813 checks, 0 warnings; `check.py` 34 pages, 0 errors / 0 warnings; `check_local_links.py` 68 pages, 0 broken.
+- **Irregularities carried forward (not blocking):** FLG-002 tag enrolment unconfirmed; FLG-003 short-link compliance unresolved; FLG-004 / FLG-018 P-04 and P-05 `mhFallback` arrivals; FLG-016 thermometer pair dispute; FLG-027 robots.txt below host root (Search Console needed); `assets/js/events.js` event names differ from `_src/data/events.json` (client inert, no data loss) — logged for owner decision.
+- **Status:** done, pending integration PR + Pages deploy confirmation (recorded below when complete).
