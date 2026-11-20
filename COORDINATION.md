@@ -167,6 +167,9 @@ was also directly observed to expose root working files
 during this pre-flight), which is the same exposure class the underscore renames
 closed and one more reason to flip.
 
+**Scope discipline carried over from the claim:** Not touched on purpose: `_tools/layout.py`, `_tools/check.py`, `_tools/cta.py`,
+
+
 ## PRODUCT BUYING PATH + DECISION REGISTRY — arena/acb1e4c8-affil1 (2026-11-20)
 
 | Task | Status | Owner | Files |
