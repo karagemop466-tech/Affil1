@@ -1,5 +1,6 @@
 """The review queue, the image policy, and the measurement plan."""
 
+from release_panels import render as release_panel
 from layout import (blank, esc, eyebrow, outbound, page, pagehead, rel,
                     section, table)
 
@@ -40,10 +41,11 @@ def build_index(page_dir, flags, meta):
             {"html": f'<span class="pill pill-{"block" if f["severity"]=="high" else ("warn" if f["severity"]=="medium" else "none")}">{esc(f["severity"])}</span>'},
             {"html": esc(f["title"])},
             {"html": esc(f["blocks"])},
+            {"html": _urlish(next(c for c in f["to_check"] if c.startswith("https://") and not c.startswith("https://link.amazon/")),d)},
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
         ])
-    flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects"], flag_rows,
-                       cls="flags", caption=f"{len(fl)} items, ordered by severity")
+    flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Source", "Affects"], flag_rows,
+                       cls="flags", caption="15 items, ordered by severity")
 
     body = f"""{pagehead(
         'Review queue',
@@ -57,7 +59,7 @@ def build_index(page_dir, flags, meta):
   <div class="stat"><span class="stat-n">{counts['medium']}</span><span class="stat-l">medium &mdash; affects usefulness</span></div>
   <div class="stat"><span class="stat-n">{counts['low']}</span><span class="stat-l">low &mdash; cosmetic or administrative</span></div>
 </div>
-<p class="lede-prose">Two of the three high flags come from the same place: this site cannot see inside an Associates account, so which ASIN was intended and whether a click is credited are unverifiable from outside it. The third was a real defect &mdash; outbound links carried no tag parameter &mdash; and it is fixed rather than explained away. The site responds to the rest by claiming less, not by guessing more.</p>''', cls='')}
+<p class="lede-prose">The three high flags share a cause: this site cannot see inside an Associates account. Everything that requires that view &mdash; which ASIN was intended, whether the tag applies, whether a click is credited &mdash; is unverifiable from outside it. The site responds by claiming less, not by guessing more.</p>''', cls='')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('Index')}<h2>Every flag in one table</h2></div><p>Scan here, then read the card below for the detail and the source to check.</p></div>
 {flag_table}
@@ -72,7 +74,7 @@ def build_index(page_dir, flags, meta):
     return page(
         d,
         title="Flagged for review \u2014 Crisp & Counter",
-        description="Every uncertainty in one place: unresolved links, unconfirmed tracking, missing prices, no named author, generated imagery \u2014 each with a source to check.",
+        description="Every uncertainty on this site in one place: unconfirmed tracking, missing prices, absent authorship, generated imagery and the consolidation record, each with the source to check it against.",
         body=body,
         active="review/index.html",
         canonical="review/",
@@ -80,11 +82,22 @@ def build_index(page_dir, flags, meta):
 
 
 def _urlish(text, d):
-    from layout import AFFILIATE_HINT, product_link
+    """Render a 'where to check it' entry.
+
+    A listing URL becomes a tagged Special Link, because an Amazon product link
+    without the Associates tag is exactly the defect this site was built to
+    avoid. A short link is shown as text: it cannot carry the tag, so it is
+    evidence rather than a destination. Anything else is a citation.
+    """
+    import re as _re
+    from layout import buy_url, product_link
     if text.startswith("http"):
-        if AFFILIATE_HINT.search(text):
-            return product_link(d, text, esc(text),
-                                aria="Open this Amazon listing (affiliate link, opens in a new tab)")
+        m = _re.search(r"/dp/([A-Z0-9]{10})", text)
+        if m:
+            return product_link(d, buy_url(m.group(1)), esc(text),
+                                aria="Open this Amazon listing (paid link, opens in a new tab)")
+        if "link.amazon/" in text:
+            return f'<code class="code">{esc(text)}</code>'
         return outbound(d, text, esc(text))
     return esc(text)
 
@@ -95,7 +108,7 @@ def build_images(page_dir, images, products, meta):
     for a in images["assets"]:
         rows.append([
             {"html": f'<strong>{esc(a["file"])}</strong><br><span class="tiny">{esc(a["alt"])}</span>'},
-            {"html": '<span class="pill pill-warn">AI generated</span>'},
+            {"html": outbound(d,'https://github.com/karagemop466-tech/Affil1/blob/main/src/data/images.json','Image provenance')},
             {"html": esc(a["used_on"])},
             {"html": esc(a["rules_met"])},
         ])
@@ -108,7 +121,7 @@ def build_images(page_dir, images, products, meta):
         'Image policy',
         'Every photograph here<br>is an illustration',
         images["meta"]["why"],
-        meta=f'{len(images["assets"])} generated assets &middot; 0 product photographs &middot; 3 uses declined',
+        meta='9 generated assets &middot; 0 product photographs &middot; 3 uses declined',
     )}
 {section(f'''
 <h2>The rule</h2>
@@ -125,19 +138,19 @@ def build_images(page_dir, images, products, meta):
     return page(
         d,
         title="Image policy \u2014 Crisp & Counter",
-        description="Every image here is an AI-generated illustration, labelled where it appears: the asset list, the rule each follows, and what the site declined to do.",
+        description="Every image on this site is AI-generated illustration, labelled where it appears. Here is the full asset list, the rule each follows, and what the site declined to do.",
         body=body,
         active="review/index.html",
         canonical="review/images.html",
     )
 
 
-def build_measurement(page_dir, meta):
+def build_measurement(page_dir, meta, spec):
     d = page_dir
     events = [
         ("page_view", "Every page load", "Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept."),
         ("outbound_click", "Any click on an Amazon link", "Records which product reference was clicked and the page it was clicked from. This is the number that matters for this site."),
-        ("guide_open", "Opening any page under /guides/", "Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be."),
+        ("guide_open", "Opening a guide from the index", "Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be."),
         ("search_query_referral", "Arrival from a search engine", "Records that a referral happened and the referring host, not the query. Search Console supplies queries; this does not try to reconstruct them."),
         ("report_import", "A manual import of an Associates report", "A dated record that a first-party report was added to the ledger, with its provenance. Never an automated scrape."),
     ]
@@ -151,7 +164,7 @@ def build_measurement(page_dir, meta):
 {section(f'''
 <div class="lede-prose">
   <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
-  <p>The client keeps its buffer in memory and sends nothing while no endpoint is configured. It sets no cookie, writes nothing to local storage, keeps no identifier that survives a tab, and contacts no third party. It switches on when a page sets <code class="code">window.CC_ANALYTICS_ENDPOINT</code> to a first-party URL, and switching it on without an endpoint and a notice would be a mistake.</p>
+  <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
 </div>
 <h2>What would be measured</h2>
 {table(['Event', 'Fires when', 'What is stored'], rows, cls='events')}
