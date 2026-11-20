@@ -14,6 +14,18 @@ def _product_index():
     return {p["ref"]: p for p in doc["products"]}
 
 
+def _worksheet_band(d):
+    return section(f"""
+<div class="capture-card">
+  <div>
+    {eyebrow('Printable')}
+    <h2>The counter fit worksheet</h2>
+    <p>Every guide here ends in a measurement. Print the sheet, take a tape measure, and write down what your counter gives you beside what the manual for the exact model asks for &mdash; two columns, no guessing.</p>
+  </div>
+  <p class="capture-actions"><a class="btn" href="{esc(rel(d, 'fit/index.html'))}">Open the fit finder &amp; worksheet</a></p>
+</div>""", cls="section-tint")
+
+
 def build_index(page_dir):
     d = page_dir
     clusters = []
@@ -30,6 +42,7 @@ def build_index(page_dir):
 {''.join(guide_card(d, g) for g in items)}
 </div>""", cls="" if i % 2 == 0 else "section-tint")
 
+    worksheet_band = _worksheet_band(d)
     body = f"""{pagehead(
         'The journal',
         'Buying guides that<br>start with your question',
@@ -47,7 +60,7 @@ def build_index(page_dir):
     <a class="btn btn-small" href="{esc(rel(d, 'guides/' + GUIDES[0]['slug'] + '.html'))}">Read the guide</a>
   </div>
 </div>''', cls='')}
-{blocks}"""
+{blocks}{worksheet_band}"""
     return page(
         d,
         title="Guides \u2014 air fryers, capacity and thermometers | Crisp & Counter",
@@ -74,6 +87,7 @@ def build_guide(page_dir, g, meta):
     d = page_dir
     href = f"guides/{g['slug']}.html"
     products = _product_index()
+    tag_state = rel(d, "about/index.html") + "#how-we-link"
 
     article = []
     for s in g["sections"]:
@@ -150,7 +164,7 @@ def build_guide(page_dir, g, meta):
     </div>
     <div class="side-card-quiet">
       <p class="q-label">Paid links</p>
-      <p>Product links in these guides earn a commission. They are marked <code>sponsored</code> and every one carries the site's Amazon tag.</p>
+      <p>Product links in these guides are affiliate links, marked <code>rel="sponsored"</code> so a reader and a crawler can both see the relationship. No link currently carries the tracking tag: <code>_src/data/product-intent.json</code> holds no account-confirmed Special Link yet, so this publication cannot claim credit for a click. <a href="{tag_state}">What that means</a>.</p>
     </div>
   </aside>
 </div>

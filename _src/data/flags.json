@@ -430,6 +430,35 @@
     },
     {
       "id": "FLG-030",
+      "severity": "medium",
+      "title": "A second complete edition of the same five-product shop was indexable under /edition/",
+      "expected": "One site for a search engine to index, which is what the About page claims and what the brief asks for.",
+      "found": "The published tree contains a preserved edition/ build of more than twenty pages, each carrying a self-referencing canonical under /Affil1/edition/, and a sitemap of its own. A canonical pointing at a second copy of the same catalogue does not consolidate anything: it asks a crawler to index two shops. No robots meta instruction was present on any edition page.",
+      "impact": "Every edition page now carries <meta name=\"robots\" content=\"noindex, follow\"> beside its canonical, so the maintained root is the only indexable surface. The edition stays reachable for review and no content changed.",
+      "reading": "The edition is a preserved working copy, not a rival storefront, so it stays in the repository. What it must not do is compete for the same query. Two sessions converged on this decision independently on 2026-11-20 (arena/b990bce7-affil1 and arena/d3f5a958-affil1); the second also added Disallow: /edition/ to robots.txt and wrote the reversal path: remove the noindex metas and the robots line if the owner chooses Countertop Almanac as the canonical brand instead.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/edition/",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "id": "FLG-031",
+      "severity": "high",
+      "title": "The site's own copy said every link carried the Amazon tag, and every product page printed the tag beside the button",
+      "expected": "A page describes its own links accurately, in the cautious direction as well as the confident one.",
+      "found": "The sidebar on all ten guides read 'every one carries the site's Amazon tag', and each product page printed 'tag shopnow047c-20' under its buy button. No published URL carries a tag: _src/data/product-intent.json holds no account-confirmed Special Link, so all five destinations are the plain listing. The statements were untrue in the direction that flatters the site, which is the more damaging direction.",
+      "impact": "Both now derive from the paid-link register and say the plain thing: plain listing, no tag, a click is not yet credited. _tools/check.py fails the build if the copy and the register disagree, in either direction.",
+      "reading": "A cautious site is still wrong if it describes its own machinery incorrectly. This is the class of error that survives several review passes because it sounds like the responsible sentence.",
+      "blocks": "nothing — fixed",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/products/p-01.html",
+        "https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "FLG-032",
       "severity": "low",
       "title": "Two publishers are configured for the same Pages site: the legacy branch source and an Actions deploy job",
       "expected": "One publishing source per GitHub Pages site, so a reviewer can say which pipeline put a page live.",
@@ -443,7 +472,7 @@
       ]
     },
     {
-      "id": "FLG-031",
+      "id": "FLG-033",
       "severity": "low",
       "title": "The P-05 listing pages were recorded as stating several different heat tolerances for one probe set",
       "expected": "One product listing states one figure for the same specification.",
@@ -454,20 +483,6 @@
       "to_check": [
         "https://www.amazon.com/dp/B0DZFD6R9Z",
         "Re-open the amazon.nl listing pages recorded by session arena/771e5093-affil1 and compare the stated heat tolerances line by line"
-      ]
-    },
-    {
-      "id": "FLG-032",
-      "severity": "low",
-      "title": "edition/ (Countertop Almanac) is a second reader-facing publication on one repository; it is now noindex and robots-disallowed",
-      "expected": "One site to index: a search engine should see a single canonical publication, with internal mirrors hidden from indexing.",
-      "found": "PR #89 added edition/ — a full second publication (shop, categories, guides, compare, questions, suggestions, its own sitemap and feed) describing the same five products under the name Countertop Almanac, registered as an internal section with its own verifier. Two indexable publications on one host split canonicalisation (see FLG-008).",
-      "impact": "This integration marked every edition/ page noindex, follow and added Disallow: /edition/ to robots.txt, keeping the edition readable and gated by _platform/verify_edition.py but out of search indexes. The root publication (Crisp & Counter) is the single site in the root sitemap and feed.",
-      "reading": "An integration decision made by the final integration session on 2026-11-20, recorded so it can be reversed deliberately: remove the noindex metas and the robots line if the owner chooses Countertop Almanac as the canonical brand instead. The work in edition/ is preserved unchanged otherwise.",
-      "blocks": "nothing; it blocks only re-opening edition/ to indexing without a canonical decision",
-      "to_check": [
-        "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
-        "edition/index.html and the root sitemap.xml"
       ]
     }
   ]

@@ -88,3 +88,18 @@ table.flagtable{min-width:40rem}
   .cta-pair{flex-direction:column}
   .cta{width:100%}
 }
+
+/* ---------------------------------------------------------------- reading */
+/* Raise the floor on body size and measure. A shop's front door should be
+   readable in one screen without touching the colour system. */
+.article-body p,.product-why,.pcard-why,.gcard-body p,.dek,.lede-prose{max-width:68ch}
+.article-body p{font-size:1.0125rem;line-height:1.72}
+.gcard-body h3{letter-spacing:-.022em}
+.edit-info p,.pcard-why{line-height:1.6}
+
+/* A correction is not an aside. Where a re-check contradicts an earlier record,
+   the reader sees it beside the record, not buried in a register. */
+.verify-note.verify-warn{border-left:3px solid var(--warn,#a8451f);background:#fdf4ef;padding:11px 14px;margin-top:14px;font-size:13.5px}
+.verify-note.verify-warn .tlink{white-space:nowrap}
+
+@media(max-width:680px){.article-body p{font-size:1rem;line-height:1.66}}
