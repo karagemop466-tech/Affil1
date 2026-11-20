@@ -165,7 +165,11 @@ def build(page_dir, products, meta):
   </a>
 </div>""", cls="paths")
 
-    feature = GUIDES[7]
+    # The seasonal slot's standing copy is written for the holiday-hosting guide,
+    # so select it by slug rather than by position: parallel sessions inserting
+    # guides silently shifted GUIDES[7] onto a different guide once already.
+    feature = next((g for g in GUIDES if g["slug"] == "holiday-hosting-air-fryer"),
+                   next((g for g in GUIDES if g.get("cluster") == "Seasonal"), GUIDES[-1]))
     feat_href = rel(d, f"guides/{feature['slug']}.html")
     seasonal = section(f"""
 <div class="seasonal">
