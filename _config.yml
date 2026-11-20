@@ -11,7 +11,7 @@
 #
 # and commit the result. Left to itself, Jekyll published the whole repository:
 # /src/data/products.json, /tools/build.py and a second storefront under
-# /archive/ were all reachable on 2026-11-20 (FLG-026).
+# /archive/ were all reachable on 2026-11-20 (FLG-030).
 plugins: []
 exclude:
   - .github

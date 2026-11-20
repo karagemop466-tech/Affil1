@@ -64,6 +64,7 @@ FOOTER_GROUPS = [
         ("feed.xml", "RSS feed"),
     ]),
     ("The desk", [
+        ("editorial/index.html", "Editor's desk"),
         ("decide/index.html", "Decision gate"),
         ("questions/index.html", "Open questions"),
         ("suggestions/index.html", "Suggestions & decisions"),
