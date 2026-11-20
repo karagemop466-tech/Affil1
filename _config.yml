@@ -1,4 +1,4 @@
-# Legacy Pages deployment: publish the same editorial pages as tools/stage.py.
+# Canonical branch-based Pages publication. Superseded editions remain in git.
 plugins: []
 exclude:
   - COORDINATION.md
@@ -7,46 +7,27 @@ exclude:
   - PUBLISHING_WORKFLOW.md
   - README.md
   - analytics
-  - analytics.js
-  - app.js
   - archive
-  - categories
-  - categories.html
-  - crisp
-  - css
-  - dashboard.html
-  - data
-  - data.js
-  - disclosure.html
+  - dashboard
   - dist
   - docs
-  - executive-summary.html
-  - flagged-for-review.html
-  - guides.html
-  - guides/air-fryer-accessories.html
-  - guides/air-fryer-category.html
-  - guides/basket-or-oven.html
-  - guides/buying-guide-air-fryer.html
-  - guides/capacity-checklist.html
-  - guides/cleanup-counter-space.html
-  - guides/executive-summary.html
-  - guides/multi-function-appliance.html
-  - guides/oven-or-air-fryer.html
-  - guides/pre-decision-questions.html
-  - guides/suggestions.html
-  - js
+  - flagged
+  - guides/air-fryer-capacity-checklist/index.html
+  - guides/air-fryer-thanksgiving-overflow/index.html
+  - guides/basket-or-oven-air-fryer/index.html
+  - guides/cleanup-and-counter-space/index.html
+  - guides/dual-basket-math/index.html
+  - guides/first-week-checklist/index.html
+  - guides/frozen-food-nights/index.html
+  - guides/multi-function-kitchen-appliance-questions/index.html
+  - guides/smart-probe-thermometer/index.html
+  - kitchen
+  - kitchen-build
+  - legacy
+  - measurement
   - node_modules
-  - privacy.html
-  - products.html
-  - questions.html
-  - reviews
-  - rss.xml
   - server
   - src
-  - styles.css
-  - suggestions.html
   - tools
+  - topics
   - vendor
-  - kitchen
-  - measurement
-  - kitchen-build

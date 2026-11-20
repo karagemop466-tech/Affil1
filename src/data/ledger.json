@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "title": "Campaign ledger \u2014 empty by design",
+    "tracking_id_supplied": "shopnow047c-20",
+    "rule": "Add timestamp, source, channel, eligible sessions, clicks and reported orders only when obtained from authorized first-party reports. Keep a dated provenance trail. No conversion score, no revenue forecast, no projected earnings.",
+    "why_empty": "The only numbers that belong in this table come from the enrolled Associates account's own reports. No such report has been read by any session, so there is nothing to record. A click counter is not a conversion measurement and is never entered here as one."
+  },
+  "columns": [
+    "timestamp",
+    "source",
+    "channel",
+    "eligible_sessions",
+    "clicks",
+    "reported_orders",
+    "provenance_report",
+    "notes"
+  ],
+  "rows": [],
+  "empty_note": "No authorized first-party report has been read, so there are no rows. This is the intended state of the ledger on launch day: an empty table with a defined schema is a measurement plan; a filled table without one is a fabrication.",
+  "provenance_trail": [
+    {
+      "timestamp": "2026-11-20",
+      "action": "Ledger initialised with an empty row set and this schema",
+      "note": "No report data exists yet; nothing inferred."
+    },
+    {
+      "timestamp": "2026-11-20",
+      "action": "Five submitted links re-fetched by a second, independent session",
+      "note": "Results in src/data/reverification.json; four resolved, one did not."
+    },
+    {
+      "timestamp": "2026-11-20",
+      "action": "Buy destination changed from the untagged short link to a tagged listing URL",
+      "note": "Rationale recorded in tools/build.py product_link() and /flagged/ FLG-003; still pending regeneration inside Associates Central."
+    },
+    {
+      "timestamp": "2026-11-20",
+      "action": "Publication consolidated at the site root; five earlier surfaces archived",
+      "note": "See archive/2026-11-20-integration/README.md."
+    }
+  ],
+  "compliance_checks": [
+    {
+      "check": "Disclosure strip present under the masthead on every page, and repeated in the footer",
+      "automated": true,
+      "state": "pass"
+    },
+    {
+      "check": "Every outbound link a reader could buy through carries rel=\"sponsored nofollow noopener\"",
+      "automated": true,
+      "state": "pass"
+    },
+    {
+      "check": "No price, star rating, review count or stock figure appears anywhere in the built site",
+      "automated": true,
+      "state": "pass"
+    },
+    {
+      "check": "Intended identifier and observed redirect target are stored in separate, never-merged fields",
+      "automated": true,
+      "state": "pass"
+    },
+    {
+      "check": "Every published table row carries a link to the official source it was read from",
+      "automated": false,
+      "state": "pass"
+    },
+    {
+      "check": "Sitemap and feed include every new page on the day it publishes",
+      "automated": true,
+      "state": "pass"
+    },
+    {
+      "check": "Tracking ID shopnow047c-20 confirmed enrolled and the site registered to it",
+      "automated": false,
+      "state": "blocked-on-account"
+    },
+    {
+      "check": "Each buy link replaced with a Special Link generated inside Associates Central, then test-one-before-scaling",
+      "automated": false,
+      "state": "blocked-on-account"
+    },
+    {
+      "check": "Editorial review that no sentence implies endorsement, superiority or hands-on testing",
+      "automated": false,
+      "state": "needs-review"
+    },
+    {
+      "check": "Analytics collector deployed and privacy notice checked against local law before any event is stored",
+      "automated": false,
+      "state": "needs-review"
+    }
+  ]
+}
