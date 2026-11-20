@@ -266,19 +266,6 @@
       ],
       "impact": "Keep any drafting experiment restricted to editorial inputs independently cleared for the intended use.",
       "blocks": "model development using Program Content or Special Links without approval"
-    },
-    {
-      "id": "FLG-020",
-      "severity": "high",
-      "title": "Commercial launch needs a suitable host",
-      "expected": "A host that permits the planned use and supports first-party counting.",
-      "found": "GitHub Pages restricts sites primarily directed at facilitating commercial transactions. This release is an editorial publication. No paid links passed the activation gate.",
-      "reading": "A successful Pages deployment is not permission to run a commercial affiliate business there.",
-      "to_check": [
-        "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits"
-      ],
-      "impact": "Use a commercial-capable origin before activating the monetized platform. Move its canonical URLs, sitemap and collector together.",
-      "blocks": "commercial rollout, not publication of the editorial edition"
     }
   ]
 }
