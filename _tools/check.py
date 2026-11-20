@@ -255,7 +255,7 @@ def check_page(path):
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
 
     # --- head essentials ---
-    for needle in ("<title>", 'name="description"', 'rel="canonical"'):
+    for needle in ("<title>", 'name="description"', 'rel="canonical"', 'property="og:image"'):
         if needle not in text:
             err(f"{rel}: missing {needle}")
     if 'lang="en"' not in text:

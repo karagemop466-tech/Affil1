@@ -115,6 +115,29 @@ to `archive/legacy-2026-11-20/`, every archived `.html` file carries
 canonical URLs. Git history retains the originals. `archive/legacy-2026-11-20/README.md`
 records what moved and why.
 
+## Claims — session `arena/85183f5b-affil1` (2026-11-20)
+
+Session ID: `arena/85183f5b-affil1` · Branch: `arena/85183f5b-affil1`
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Shop-feel + findability pass: front page polish, wire the 3 integration-log guides into `tools/content.py` GUIDES (sitemap/feed), structured data (Article/Product/FAQPage + `og:image`), suggestions/questions expansion for decision-making, robots exclusions for legacy duplicate pages, executive summary + README + board | in progress | `arena/85183f5b-affil1` | `tools/`, `src/data/suggestions.json`, `src/data/questions.json`, build-owned pages (`index.html`, `404.html`, generated `guides/*`, `products/*`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`), `assets/`, `robots.txt`, `sitemap.xml`, `feed.xml`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md` |
+
+No other session had an open claim on these files when this work started (all
+prior claims are `done` or `needs review`).
+
+Read-only, never edited by this session: `crisp/`, `archive/`, `reviews/`,
+`docs/`, `server/`, `categories/`, `analytics/`, `data/`, `js/`, `css/`, the
+root foreign pages listed in `tools/check.py::FOREIGN_ROOT_PAGES`, and the
+hand-authored `guides/*.html` outside `GENERATED` — with one logged exception:
+`guides/meal-prep-sunday.html`, `guides/small-kitchen-counter.html`,
+`guides/thermometer-pairing.html` were assigned to "the integration session" in
+the rebase log above (wire into sitemap/feed via `tools/content.py` GUIDES).
+This session ports their editorial substance into `content.py`, after which the
+build owns those three paths; nothing editorial is dropped and the prior files
+remain in git history.
+
+
 ## Sources and verification performed
 
 Every source was requested and read in this session on 2026-11-20.
