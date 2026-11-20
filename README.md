@@ -1,162 +1,25 @@
-# Crisp & Counter — an Amazon affiliate publication for countertop cooking
+# Crisp & Counter
 
-One site, one brand, one stylesheet. Question-led buying guides for air fryers and
-countertop cooking appliances, a shortlist assembled from links that were actually
-resolved by hand, and a public register of everything that could not be confirmed.
+[The Countertop Edit](https://karagemop466-tech.github.io/Affil1/) · [Executive summary](EXECUTIVE_SUMMARY.md) · [Coordination](COORDINATION.md)
 
-**Live:** https://karagemop466-tech.github.io/Affil1/
-**Associates tracking ID supplied by the owner:** `shopnow047c-20` (enrolment and
-attribution are **not** verified — see [Open questions](#open-questions-and-blockers))
-**Prepared:** 2026-11-20 by session `arena/359baa16-affil1` (integration pass)
+A kitchen buying publication with a filterable and bookmarkable product shortlist. `src/data/products.json` separates the submitted URL, observed destination, intended product and account confirmation. Blank means unknown, not zero. The editorial desk links every decision surface without making a shopper start at the audit.
 
----
+## Build and test
 
-## What this repository is for
-
-The brief had five parts. This is where each one lives:
-
-| The ask | Where it is answered |
-|---|---|
-| Read like a shop, not an audit | The generated front page: seasonal feature, shortlist, topics, guides. The registers are one click from the footer, never the front door. |
-| Make it findable | `sitemap.xml`, `feed.xml`, `robots.txt`, canonical tags, Open Graph images, `Article` + `FAQPage` + `BreadcrumbList` structured data, topic clusters with internal links |
-| Make the machinery trustworthy | `tools/build.py` generates every page from `src/data/`; `tools/validate.py` is the gate; two GitHub Actions workflows run it (deploy + weekly audit) |
-| Lead with products, disclose above the fold, mark every link | One `disclosure()` template, one `product_link()` template — a page cannot ship without either |
-| Suggestions and questions before decisions | `/suggestions/` (29 scored proposals, 2 rejected on policy grounds), `/questions/` (22 questions, 5 answered by this pass), `/flagged/` (irregularities with sources), `/dashboard/` (entries, verification log, empty ledger) |
-
-## Layout
-
-```
-index.html            publication front page          ← generated
-guides/<slug>/index.html  9 buyer guides              ← generated
-compare/ products/ topics/ about/                     ← generated
-sources/ suggestions/ questions/ flagged/              ← generated
-dashboard/            entries, verification, ledger    ← generated
-404.html              not-found page                   ← generated
-assets/css/site.css   the only stylesheet
-assets/js/events.js   the five defined events, inert until an endpoint exists
-assets/js/shortlist.js  "Save" on a product card; localStorage only, nothing sent
-assets/img/*.jpg      commissioned illustrations (not product photography)
-src/data/*.json       every fact the site publishes, with its source
-tools/build.py        data → HTML (one template for nav, disclosure, footer)
-tools/validate.py     the gate: links, images, disclosure, sponsored marking,
-                      price prohibition, sitemap/feed agreement
-tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
-tools/verify_links.py re-resolve the register against Amazon and report drift
-archive/              five earlier competing surfaces (four storefronts and a parallel
-                      integration pass), preserved untouched and non-indexable
+```sh
+python3 tools/build.py
+python3 tools/check.py
+python3 tools/check_local_links.py
+python3 tools/stage.py dist  # destination must be empty
+python3 server/publication.py
 ```
 
-Nothing in the tree is hand-edited except `assets/`, `tools/`, `src/data/`, `docs/`
-and the markdown files. If you edit a generated `.html` directly, the drift check in
-CI fails and tells you so.
+The Python server serves **only** `dist` on port 8000. It enables five same-origin events, honors DNT/GPC, and writes daily aggregate counts to SQLite outside the web root. `PORT` and `COUNTER_DB` are configurable. Use a durable non-public database for an authorized production host. No raw event ingestion, cookies, visitor IDs, referral strings or IP logging by the collector. Do not import preview tests into the campaign ledger.
 
-## Build, check, publish
+GitHub Pages serves static HTML. Its client sends no analytics requests. Native branch publishing uses `_config.yml` exclusions to avoid publishing historical editions or source data. Workflow-based Pages uses `tools/stage.py`. Keep both scopes aligned. No other domains or editions are submitted in the sitemap.
 
-```bash
-python3 tools/build.py            # regenerate every page from src/data
-python3 tools/validate.py         # the gate; exits non-zero on any violation
-python3 -m http.server 8207 --bind 0.0.0.0   # preview; open /Affil1/ after linking the parent dir
-```
+## Editorial cadence
 
-Deploy is automatic: pushing to `main` runs
-[`.github/workflows/pages.yml`](.github/workflows/pages.yml), which rebuilds, runs
-the gate, fails if the committed HTML differs from the build, resolves every
-reference at the Pages project mount, and only then publishes the artifact. A weekly
-audit (`weekly-audit.yml`) re-runs the same gate against a live snapshot so a page
-cannot quietly fall out of compliance.
+Monday: review authorized, sanitized query aggregates. `editorial.yml` gates AI drafting on approved public-use Search Console data in `src/data/editorial-signals.json` (query, impressions, source, retrieved_on, provenance, approved_for_public_use). With no reports the job selects no topic. With data, it attaches an unpublished draft using GitHub Models; it cannot write to the repository. Every proposal requires an editorial decision and policy review. Do not upload raw reports or customer data. Review product destinations monthly and on redirect changes. Publish at most one approved guide per week through `tools/content.py`; the build updates the guide desk, sitemap and RSS together. A schedule is not a promise to publish without evidence.
 
-## The rules this site publishes under
-
-Each rule below is enforced by `tools/validate.py`, not just asserted in prose:
-
-1. **Disclosure above the fold on every page, and again in the footer.** The strip
-   carries Amazon's required sentence verbatim — *"As an Amazon Associate I earn from
-   qualifying purchases."* — followed by a plain-language version, because the FTC's
-   test is whether a reader understands the relationship, not whether they found a
-   legal page. Source: [Associates Program Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement)
-   (retrieved 2026-11-20) and [FTC Endorsement Guides](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking).
-2. **No price, star rating, review count or stock figure anywhere.** Amazon permits
-   those only in a link it serves itself or through the Creators/PA API. This site has
-   no feed, so it has no numbers — and a validator fails the build if a `$` + digit
-   appears in a page. Source: [Associates Program Policies](https://affiliate-program.amazon.com/help/operating/policies).
-3. **No price tracking or price alerts.** The Participation Requirements prohibit
-   price-tracking or price-alerting functionality on an Associate site. Recorded as a
-   rejected suggestion ([/suggestions/](docs note: SUG-25, SUG-26)) so the next session
-   does not "improve" the site into a violation.
-4. **Buy buttons only where a listing was actually reached**, with
-   `rel="sponsored nofollow noopener"` and a visible "Paid link" note. A row whose
-   destination never resolved has no button at all.
-5. **Intended identifier and observed redirect are separate fields, never merged.**
-   The five submitted codes are 9 characters; the destinations this project reached
-   are 10-character ASINs. `intended_asin` stays null — see `src/data/products.json`.
-6. **Every factual cell carries its source**, and an unconfirmed value is left blank
-   and listed on `/flagged/`. Blanks are the honest state, not a gap to fill in.
-
-## Verification of the five submitted links
-
-Every link was fetched twice by two different sessions on 2026-11-20; the second pass
-is recorded in `src/data/reverification.json`. Values below are what the destination
-page returned; none of it is a product recommendation and none of it was tested here.
-
-| Entry | Submitted | Destination reached | Note |
-|---|---|---|---|
-| P-01 | `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` — CHEFMAN 6 Quart Dual Basket | unstable: interstitial on one attempt |
-| P-02 | `link.amazon/B02NbDxp3` | `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French Door | unstable: second attempt only |
-| P-03 | `link.amazon/B00hJ57DV` | `amazon.com/dp/B08DKYBTPH` — Chefman Air Fryer 8 Qt | an earlier archived register wrongly logged this as the homepage |
-| P-04 | `link.amazon/B0c8moW59` | **none** — Amazon continue-shopping interstitial | published as unresolved; no buy button |
-| P-05 | `link.amazon/B0f3GKalj` | `amazon.com/dp/B0DZFD6R9Z` — CHEF iQ Sense thermometer | not an air fryer; gets its own guide |
-
-Manual review entry points: [verification log](https://karagemop466-tech.github.io/Affil1/dashboard/#verification)
-· [source register](https://karagemop466-tech.github.io/Affil1/sources/)
-· [flagged register](https://karagemop466-tech.github.io/Affil1/flagged/)
-
-## The one finding that decides whether this site can earn
-
-None of the five submitted URLs carries a `tag` parameter, and each works by redirecting
-through an intermediate host. Under Amazon's Commission Income Statement, a purchase
-reached through a "Redirecting Link" is disqualified, as is any purchase "not correctly
-tracked or reported because the links … are not properly formatted". So links in that
-form cannot be attributed to `shopnow047c-20` — which is why the published buy buttons
-point at the **official listing URL with the tracking tag appended**, and why
-`tools/verify_links.py` exists: the final step, replacing those with Special Links
-generated inside Associates Central and confirming one click in the account's own
-report, can only be done by the account owner. Test one link. Then scale.
-
-## Design layer
-
-Typefaces are self-hosted (Fraunces for display, Inter for text) — no external font
-request, so nothing leaks a reader's visit to a third party and the page paints without
-a network round trip. Editorial art is generated for this publication, shipped in
-width variants with `srcset`, and captioned on every use as an illustration: never a
-listing photo, never a brand mark, never in a slot that imitates one. The rule and the
-reason sit in `src/data/images.json`, carried over from the parallel integration pass
-whose artwork and typography this site adopted.
-
-## Open questions and blockers
-
-Twenty-two are listed at [/questions/](https://karagemop466-tech.github.io/Affil1/questions/)
-with the information each one needs. Five were answered by this pass. The ones that
-block everything else, in order:
-
-1. **Enrolment** — is `shopnow047c-20` an active tracking ID, and is this site listed
-   in the account? No claim is made either way here.
-2. **Special Links** — regenerate all five destinations in Associates Central and
-   confirm one click in the report before publishing more.
-3. **Search Console** — verify the property. Until then, every statement about what
-   readers want is reasoning, not evidence.
-4. **An author** — a named human with two true biographical sentences. Bylines stay at
-   desk level because inventing a person who tested these machines would be a
-   fabricated endorsement.
-
-## Editorial rule, in one line
-
-A capability sentence is published only when it quotes the seller's own listing title,
-attributed as such; nothing on this site claims a product was tested, and no figure
-appears that cannot be traced to an official source.
-
-## Licence and trademark note
-
-Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This
-site is not endorsed by or affiliated with Amazon beyond participation in the Associates
-Program. All listing titles are quoted for identification and are the property of their
-sellers. Illustrations were made for this publication and are captioned as such.
+Review [Amazon's agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), the [FTC's endorsement guidance](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) and [Google's paid-link guidance](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links) before release. No hand-built tagged URL is treated as an account-validated Special Link.

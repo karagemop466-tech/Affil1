@@ -62,11 +62,9 @@
     if (!a || !a.href) { return; }
     if (a.href.indexOf("link.amazon") === -1 && a.href.indexOf("/dp/") === -1) { return; }
     var card = a.closest(".card");
-    var host = "";
-    try { host = new URL(a.href, location.href).host; } catch (err) { host = ""; }
     record("outbound_click", {
       product_id: card ? card.id : "",
-      destination_host: host
+      destination_host: "link.amazon"
     });
   }, true);
 

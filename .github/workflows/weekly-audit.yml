@@ -28,12 +28,12 @@ jobs:
 
       - name: Compliance and integrity gate
         id: gate
-        run: python3 tools/validate.py | tee gate.log
+        run: set -o pipefail; python3 tools/check.py | tee gate.log
 
       - name: Every reference still resolves at the Pages mount
         run: |
           mkdir -p "$RUNNER_TEMP/www"
-          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/www/Affil1"
+          python3 tools/stage.py "$RUNNER_TEMP/www/Affil1"
           (cd "$RUNNER_TEMP/www" && python3 -m http.server 8207 --bind 127.0.0.1 >/dev/null 2>&1 &)
           for i in $(seq 1 20); do
             curl -fsS -o /dev/null http://127.0.0.1:8207/Affil1/index.html && break
