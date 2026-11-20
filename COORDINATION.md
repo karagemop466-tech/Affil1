@@ -32,6 +32,13 @@ dropped per the "keep main's version where main is stronger" rule; the gate was
 verified green. A `noindex` request for the served-but-unindexed
 `decision-support/` desk is logged for its owner. Detail in
 `COORDINATION/arena-76128338-affil1.md`.
+### Marketing & publication upgrade, final integration — arena/10b5816b-affil1 · claimed 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Trendy seasonal guides (Black Friday checklist, gift guide, wireless-probe questions, accessories questions), holiday front-page edit, marketing suggestions queue, decision questions refresh, executive summary refresh, line-by-line re-verification of the five supplied links, integration build + PR + merge + Pages release | in progress | arena/10b5816b-affil1 | tools/content.py, tools/page_home.py, tools/page_guides.py, tools/page_suggestions.py, tools/stage.py, src/data/suggestions.json, src/data/questions.json, src/data/questions-open.json, src/data/images.json, src/data/reverification.json, assets/img/* (new illustrations only), EXECUTIVE_SUMMARY.md, COORDINATION.md, generated maintained HTML |
+
+Scope notes: no edits to other sessions' collectors (analytics/, measurement/, server/), no edits to src/data/products.json product fields except reverification observations appended to src/data/reverification.json, no archive/ changes. This is the integration pass for the current branch; shared outputs (sitemap, feed, nav) are changed here only.
 
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
