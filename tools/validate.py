@@ -12,8 +12,12 @@ import sys
 from html.parser import HTMLParser
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = ROOT / "crisp"          # the section this builder owns
-BASE = "/crisp"
+# The publication moved from the /crisp sub-site to the repository root, but this
+# validator kept pointing at crisp/, which no longer exists. It therefore crashed
+# on a missing file rather than checking anything. The base is now the root, and
+# a missing sitemap/feed is reported as an error instead of raising.
+SITE = ROOT
+BASE = ""
 ERRORS = []
 WARNINGS = []
 CHECKS = 0
@@ -68,7 +72,8 @@ class RefCollector(HTMLParser):
             self.h1_count += 1
         if tag == "img" and "alt" not in a:
             self.imgs_without_alt += 1
-        if tag == "div" and a.get("class") == "disclosure":
+        cls = (a.get("class") or "").split()
+        if "disclosure" in cls or "disclosure-bar" in cls or "disclosure-strip" in cls:
             self.has_disclosure = True
         if tag == "footer":
             self.has_footer = True
@@ -78,7 +83,14 @@ def main():
     global CHECKS
     # Only validate pages this builder owns. The storefront at the repo root is
     # another session's scope; validate.py must never fail on their files.
-    pages = sorted(p for p in SITE.rglob("*.html"))
+    # Engine archive. These are snapshots kept for provenance, are excluded from
+    # the sitemap by design, and carry their own historical canonicals. Checking
+    # them against today's sitemap produced dozens of false errors and buried the
+    # real ones. Every other directory, including the maintained publication, is
+    # still checked.
+    ARCHIVE = SITE / "archive"
+    pages = sorted(p for p in SITE.rglob("*.html")
+                   if ARCHIVE not in p.parents)
     parsed = {}
 
     for p in pages:
@@ -101,7 +113,8 @@ def main():
             if not c.has_disclosure:
                 err(f"{rel}: missing the disclosure strip")
             else:
-                pos_disc = html.find('class="disclosure"')
+                pos_disc = (html.find('class="disclosure-bar"') if 'class="disclosure-bar"' in html
+                            else html.find('class="disclosure'))
                 pos_main = html.find("<main")
                 if pos_main != -1 and pos_disc > pos_main:
                     err(f"{rel}: disclosure strip appears after <main>")
@@ -171,18 +184,37 @@ def main():
     # ---- data integrity ----
     CHECKS += 1
     data = json.loads((ROOT / "src/data/products.json").read_text())
+    # The register was renamed from submitted_code/observed_asin to
+    # supplied_path_code/observed_redirect_asin, but this block kept reading the
+    # old keys and crashed with a KeyError on its own data, which meant the whole
+    # pre-publish check silently stopped running. Field names are now declared in
+    # one place here, and a missing key is reported as an error rather than raised
+    # as an exception, so a future rename cannot take the validator down with it.
+    REF_KEY = "ref"
+    CODE_KEY = "submitted_code" if "submitted_code" in data["products"][0] else "supplied_path_code"
+    CODE_LEN_KEY = (CODE_KEY + "_length") if (CODE_KEY + "_length") in data["products"][0] else "submitted_code_length"
+    OBSERVED_KEY = "observed_asin" if "observed_asin" in data["products"][0] else "observed_redirect_asin"
+    INTENDED_KEY = "intended_asin"
+
     for prod in data["products"]:
+        ident = prod.get(REF_KEY, "<no ref>")
         CHECKS += 1
-        if prod["supplied_path_code_length"] != len(prod["supplied_path_code"]):
-            err(f"{prod['id']}: supplied_path_code_length disagrees with the code")
+        missing = [k for k in (REF_KEY, CODE_KEY, CODE_LEN_KEY, OBSERVED_KEY, INTENDED_KEY)
+                   if k not in prod]
+        if missing:
+            err(f"{ident}: product record is missing field(s) {missing}")
+            continue
+        CHECKS += 1
+        if prod[CODE_LEN_KEY] != len(prod[CODE_KEY]):
+            err(f"{ident}: {CODE_LEN_KEY} disagrees with the code")
         CHECKS += 1
         # Rule: intended and observed identifiers are separate fields and never merged.
-        if prod.get("intended_asin") == prod.get("observed_redirect_asin") and prod.get("intended_asin"):
-            err(f"{prod['id']}: intended_asin equals observed redirect; fields must stay distinct")
+        if prod.get(INTENDED_KEY) and prod.get(INTENDED_KEY) == prod.get(OBSERVED_KEY):
+            err(f"{ident}: intended_asin equals observed redirect; fields must stay distinct")
         CHECKS += 1
-        # Rule: observed ASIN, when present, must be 10 characters.
-        if prod.get("observed_redirect_asin") and len(prod["observed_redirect_asin"]) != 10:
-            err(f"{prod['id']}: observed ASIN is not 10 characters")
+        # Rule: observed identifier, when present, must be a 10-character ASIN.
+        if prod.get(OBSERVED_KEY) and len(prod[OBSERVED_KEY]) != 10:
+            err(f"{ident}: observed ASIN is not 10 characters")
 
     # ---- sitemap / feed agreement ----
     sitemap = (SITE / "sitemap.xml").read_text()
@@ -195,14 +227,55 @@ def main():
         CHECKS += 1
         url = c.canonical
         if url and f"<loc>{url}</loc>" not in sitemap:
-            err(f"{rel}: canonical {url} absent from crisp/sitemap.xml")
-        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/crisp"):
-            err(f"{rel}: canonical outside the /crisp base -> {url}")
+            err(f"{rel}: canonical {url} absent from sitemap.xml")
+        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/"):
+            err(f"{rel}: canonical outside the published base -> {url}")
 
     for slug in re.findall(r"<link>(https://[^<]+/guides/[^<]+)</link>", feed):
         CHECKS += 1
         if f"<loc>{slug}</loc>" not in sitemap:
             err(f"feed item not in sitemap: {slug}")
+
+    # ---- one event vocabulary ------------------------------------------------
+    # src/data/events.json is the published measurement spec. The shipped client
+    # declared a different five names for several merges and nothing caught it,
+    # while PUBLISHING_WORKFLOW.md claimed the two could not drift apart.
+    spec_doc = json.loads((SITE / "src/data/events.json").read_text(encoding="utf-8"))
+    spec_names = [e["name"] for e in spec_doc["events"]]
+    CHECKS += 1
+    if len(spec_names) != 5 or len(set(spec_names)) != 5:
+        err(f"events.json: expected five distinct event names, got {spec_names}")
+    declared_any = False
+    for client in sorted((SITE / "assets/js").glob("*.js")):
+        text = client.read_text(encoding="utf-8")
+        m = re.search(r"var EVENTS = \[([^\]]*)\]", text)
+        if not m:
+            continue
+        declared_any = True
+        CHECKS += 1
+        declared = [x.strip().strip('"\'') for x in m.group(1).split(",") if x.strip()]
+        if declared != spec_names:
+            err(f"{client.name}: event vocabulary {declared} != spec {spec_names}")
+        for stale in ("outbound_click", "session_start", "suggestion_review"):
+            CHECKS += 1
+            if re.search(rf'["\']{stale}["\']', text):
+                err(f"{client.name}: still references retired event name {stale}")
+    CHECKS += 1
+    if not declared_any:
+        warn("no client declares an EVENTS list: the event spec is unenforced")
+
+    # ---- document structure --------------------------------------------------
+    # A heading inside an anchor produces an anchor around flow content: bad for
+    # screen readers and wrong for the outline. Duplicate ids break in-page links.
+    for rel, (c, html) in parsed.items():
+        CHECKS += 1
+        if re.search(r"<a\b[^>]*>(?:(?!</a>).)*?<h[1-6]\b", html, re.S):
+            err(f"{rel}: a heading is nested inside an anchor")
+        CHECKS += 1
+        ids = re.findall(r'\bid="([^"]+)"', html)
+        dupes = sorted({i for i in ids if ids.count(i) > 1})
+        if dupes:
+            err(f"{rel}: duplicate id(s) {dupes}")
 
     print(f"checks run: {CHECKS}")
     for w in WARNINGS:

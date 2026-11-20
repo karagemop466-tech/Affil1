@@ -150,21 +150,24 @@ def build(page_dir, products, meta):
   <p>If you are not ready to shop, start with the thing that is making the choice hard.</p>
 </div>
 <div class="path-grid">
-  <a class="path" href="{esc(rel(d, 'guides/basket-or-oven-air-fryer.html'))}">
-    <span class="path-n">01</span><h2>Which shape do I want?</h2>
+  <article class="path">
+    <span class="path-n">01</span>
+    <h2><a class="stretch" href="{esc(rel(d, 'guides/basket-or-oven-air-fryer.html'))}">Which shape do I want?</a></h2>
     <p>A drawer and a door change how often you intervene, what fits inside and how much counter you give up.</p>
-    <span class="tlink">Compare the shapes <span aria-hidden="true">&rarr;</span></span>
-  </a>
-  <a class="path" href="{esc(rel(d, 'guides/air-fryer-capacity-checklist.html'))}">
-    <span class="path-n">02</span><h2>Is it big enough?</h2>
+    <span class="tlink" aria-hidden="true">Compare the shapes <span aria-hidden="true">&rarr;</span></span>
+  </article>
+  <article class="path">
+    <span class="path-n">02</span>
+    <h2><a class="stretch" href="{esc(rel(d, 'guides/air-fryer-capacity-checklist.html'))}">Is it big enough?</a></h2>
     <p>A quart is a volume. You cook on a surface. Convert one into the other before you buy.</p>
-    <span class="tlink">Work out capacity <span aria-hidden="true">&rarr;</span></span>
-  </a>
-  <a class="path" href="{esc(rel(d, 'guides/cleanup-and-counter-space.html'))}">
-    <span class="path-n">03</span><h2>Will I actually keep using it?</h2>
+    <span class="tlink" aria-hidden="true">Work out capacity <span aria-hidden="true">&rarr;</span></span>
+  </article>
+  <article class="path">
+    <span class="path-n">03</span>
+    <h2><a class="stretch" href="{esc(rel(d, 'guides/cleanup-and-counter-space.html'))}">Will I actually keep using it?</a></h2>
     <p>The parts you wash and the space it occupies decide that. Both are checkable in five minutes.</p>
-    <span class="tlink">Check the everyday cost <span aria-hidden="true">&rarr;</span></span>
-  </a>
+    <span class="tlink" aria-hidden="true">Check the everyday cost <span aria-hidden="true">&rarr;</span></span>
+  </article>
 </div>""", cls="paths")
 
     feature = GUIDES[7]

@@ -181,3 +181,54 @@ https://karagemop466-tech.github.io/Affil1/
 ### Release receipt — arena/ca3c913e-affil1 (done)
 
 [PR #49](https://github.com/karagemop466-tech/Affil1/pull/49) merged to main at `9982e99378b746153ce1ab1a6c975b7fd08f25fa` on 2026-11-20 at 05:47 UTC. Final integration retained #46's fit finder, design suggestions and seasonal guide cluster, resolving the homepage in the source template and rebuilding rather than overwriting parallel work. Final local checks: **30 generated pages, zero errors or warnings; 76 served HTML pages, zero broken relative file references**. Collector, launch-gate and fit-finder tests passed. The original Pages job was superseded by the next main commit; the [successful deploy including #49](https://github.com/karagemop466-tech/Affil1/actions/runs/44683344876) and a [fresh live fetch](https://karagemop466-tech.github.io/Affil1/?edition=9982e993) confirmed “The countertop edit”, all five records and the new seasonal links. This confirms publication, not Associates activation or search rankings.
+
+
+## Session S-54c9491d — pre-publish validator repair (2026-11-20)
+
+Scope claimed before editing: `tools/validate.py`, `assets/js/events.js`,
+`tools/page_home.py`, `tools/page_guides.py`, `tools/page_review.py`,
+`assets/css/site.css`, this board. No other session's pages were edited or deleted.
+
+**Finding: the pre-publish validator had stopped validating anything.**
+On `main` at `d9ad0f6`, `python3 tools/validate.py` raised
+`KeyError: 'supplied_path_code_length'` on its own data, after first dying on a
+missing `crisp/sitemap.xml`. Three separate causes, all dated and reproducible:
+
+| # | Defect | Effect | Fix |
+|---|---|---|---|
+| 1 | `SITE = ROOT / "crisp"` while the publication had moved to the repository root and `crisp/` no longer existed | validator died on a missing file before checking anything | base is now `ROOT`; a missing sitemap/feed is reported as an error, not raised |
+| 2 | product fields renamed (`supplied_path_code` → `submitted_code`, `observed_redirect_asin` → `observed_asin`) but the check still read the old names | `KeyError` crash on the first product | field names resolved from the data itself; a missing field is now reported per product instead of raising |
+| 3 | disclosure check looked for exactly `class="disclosure"`, but every page emits `class="disclosure-bar"` | every page reported as missing a disclosure | matches `disclosure`, `disclosure-bar` and `disclosure-strip` |
+| 4 | the scanner walked `archive/`, whose snapshots carry historical canonicals | dozens of false errors obscured the real ones | archive excluded; everything else still checked |
+
+Result: **checks run 1,282 → all passing** (was: crash). Two of the repaired
+checks were then tested by injection — removing a disclosure strip, and setting
+`intended_asin` equal to `observed_asin` — and both failed the build as intended.
+
+**Two rules added, both of which found real defects on `main`**
+
+1. *One event vocabulary.* `src/data/events.json` defines `page_view`,
+   `outbound_product_click`, `guide_read_75`, `compare_view`, `flag_page_view`.
+   The shipped `assets/js/events.js` declared `outbound_click`, `guide_read`,
+   `suggestion_review`, `session_start`. The spec and the code had disagreed;
+   nothing checked it. Client aligned, enforcement added.
+2. *No heading nested inside an anchor, no duplicate `id`.* Found 6 pages
+   wrapping `<h2>`/`<h3>` blocks in an `<a>`. Rewritten as stretched-link cards
+   (heading stays a heading, anchor stays inline, whole card still clickable).
+
+Final: `tools/build.py` 27 pages; `tools/validate.py` **1,342 checks, 0 errors,
+0 warnings**; `tools/check_local_links.py` 27 pages, 0 broken; rebuild
+byte-identical. Every new rule verified by injecting a failure and reverting.
+
+**Sources** — no new product or policy claim was made in this pass. It reconciled
+existing published claims with existing published code. Sources read earlier this
+session and still applicable: [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement),
+[Program Policies](https://affiliate-program.amazon.com/help/operating/policies),
+[FTC endorsement FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking),
+[Google outbound-link guidance](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links).
+
+**Parked, not merged** — an earlier, larger edition from this session (tagged
+`buy_url` field, decision-inputs page, shop-front rebuild, three in-brand guides)
+is preserved on branch `backup-full-edition-54c9491d`. It was superseded on
+`main` by PRs #45–#51 while in progress. It is left intact for a future
+integration pass rather than force-merged over 100+ commits of newer work.

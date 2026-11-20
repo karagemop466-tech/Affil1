@@ -137,12 +137,12 @@ def build_guide(page_dir, g, meta):
   <div class="mini-grid">{related}</div>
 </div></section>
 <section class="section"><div class="wrap">
-  <a class="next-card" href="{esc(rel(d, 'guides/' + nxt['slug'] + '.html'))}">
+  <article class="next-card">
     <span class="eyebrow">Read next &middot; {esc(nxt['cluster'])}</span>
-    <h2>{esc(nxt['title'])}</h2>
+    <h2><a class="stretch" href="{esc(rel(d, 'guides/' + nxt['slug'] + '.html'))}">{esc(nxt['title'])}</a></h2>
     <p>{esc(nxt['dek'])}</p>
-    <span class="tlink">Continue <span aria-hidden="true">&rarr;</span></span>
-  </a>
+    <span class="tlink" aria-hidden="true">Continue <span aria-hidden="true">&rarr;</span></span>
+  </article>
 </div></section>"""
     # anchors must exist on the page for the in-guide contents list
     for s in g["sections"]:

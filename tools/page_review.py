@@ -67,9 +67,9 @@ def build_index(page_dir, flags, meta):
 {section(''.join(cards), cls='')}
 {section(f'''
 <div class="crosslinks">
-  <a class="crosslink" href="{esc(rel(d, 'review/images.html'))}"><h3>Image policy</h3><p>Every photograph on this site is generated. Here is every asset, where it appears, and the rule it follows.</p></a>
-  <a class="crosslink" href="{esc(rel(d, 'review/measurement.html'))}"><h3>Measurement plan</h3><p>Five events, a collector that is written but switched off, and why it is off.</p></a>
-  <a class="crosslink" href="{esc(rel(d, 'questions/index.html'))}"><h3>Open questions</h3><p>The same uncertainty, organised as questions with the document that would close each one.</p></a>
+  <article class="crosslink"><h3><a class="stretch" href="{esc(rel(d, 'review/images.html'))}">Image policy</a></h3><p>Every photograph on this site is generated. Here is every asset, where it appears, and the rule it follows.</p></article>
+  <article class="crosslink"><h3><a class="stretch" href="{esc(rel(d, 'review/measurement.html'))}">Measurement plan</a></h3><p>Five events, a collector that is written but switched off, and why it is off.</p></article>
+  <article class="crosslink"><h3><a class="stretch" href="{esc(rel(d, 'questions/index.html'))}">Open questions</a></h3><p>The same uncertainty, organised as questions with the document that would close each one.</p></article>
 </div>''', cls='section-tint')}"""
     return page(
         d,

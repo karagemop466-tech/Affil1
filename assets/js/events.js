@@ -2,8 +2,10 @@
  *
  * The parallel sessions own the collector contract:
  *   POST /analytics/collect, newline-delimited JSON, implemented in server/collect.js.
- * This file implements the same five event names, because a schema that two
- * sections of one publication disagree about is not a schema.
+ * This file implements the five names defined in src/data/events.json. It
+ * previously shipped a different five (outbound_click, guide_read,
+ * suggestion_review, session_start), so the published spec and the published
+ * code disagreed. tools/validate.py now fails the build on that.
  *
  * It is inert by default. Nothing is sent unless window.CRISP_ANALYTICS_ENDPOINT
  * is set to a real host, because GitHub Pages is static and cannot receive a POST.
@@ -15,7 +17,7 @@
   var ENDPOINT = window.CRISP_ANALYTICS_ENDPOINT || null;
 
   // The five defined events. Kept in one place so the spec and the code cannot drift.
-  var EVENTS = ["page_view", "outbound_click", "guide_read", "suggestion_review", "session_start"];
+  var EVENTS = ["page_view", "outbound_product_click", "guide_read_75", "compare_view", "flag_page_view"];
 
   var queue = [];
 
@@ -48,12 +50,8 @@
     }
   }
 
-  // E1 + E5: every page load is a view; a session starts once per tab.
-  record("page_view", { url: location.pathname });
-  if (!window.__crispSession) {
-    window.__crispSession = true;
-    record("session_start", {});
-  }
+  // E1: every page load is a view.
+  record("page_view", { page: location.pathname });
 
   // E2: outbound product clicks. Counted locally before navigation; nothing about
   // what happens after the click is knowable from this site.
@@ -62,10 +60,7 @@
     if (!a || !a.href) { return; }
     if (a.href.indexOf("link.amazon") === -1 && a.href.indexOf("/dp/") === -1) { return; }
     var card = a.closest(".card");
-    record("outbound_click", {
-      product_id: card ? card.id : "",
-      destination_host: "link.amazon"
-    });
+    record("outbound_product_click", { product: card ? card.id : "" });
   }, true);
 
   // E3: a guide counts as read at 75% of its scrollable height.
@@ -78,20 +73,18 @@
       if (total <= 0) { return; }
       if ((window.scrollY / total) >= 0.75) {
         fired = true;
-        record("guide_read", { guide: location.pathname });
+        record("guide_read_75", { guide: location.pathname });
         window.removeEventListener("scroll", onScroll);
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  // E4: the suggestion board was reviewed, not merely loaded.
-  if (/\/suggestions\/?$/.test(location.pathname)) {
-    var board = document.getElementById("sug-list");
-    if (board) {
-      board.addEventListener("click", function () {
-        record("suggestion_review", {});
-      }, { once: true });
-    }
+  // E4 / E5: the two page-level events, keyed off the page's own body class so
+  // the rule travels with the page rather than with a URL pattern.
+  var bodyClass = (document.body && document.body.className) || "";
+  if (bodyClass.indexOf("compare") !== -1) { record("compare_view", { page: location.pathname }); }
+  if (bodyClass.indexOf("review") !== -1 || bodyClass.indexOf("flagged") !== -1) {
+    record("flag_page_view", { page: location.pathname });
   }
 })();
