@@ -320,7 +320,32 @@ page's own date or the words "no update date shown". Gates on the final tree (47
 
 **Merge receipt.** [PR #118](https://github.com/karagemop466-tech/Affil1/pull/118) merged into `main` as `d63b2f6`. On that merge commit: `Affiliate launch checks` [44694703775](https://github.com/karagemop466-tech/Affil1/actions/runs/44694703775), `Build, check and deploy` [44694703759](https://github.com/karagemop466-tech/Affil1/actions/runs/44694703759), `Verify Countertop Almanac edition and platform` [44694703666](https://github.com/karagemop466-tech/Affil1/actions/runs/44694703666) and `pages build and deployment` [44694702258](https://github.com/karagemop466-tech/Affil1/actions/runs/44694702258) all completed successfully. Live afterwards: https://karagemop466-tech.github.io/Affil1/categories/air-fryers/index.html renders the three product blocks with the disclosure strip above the content, an "Official listing"-linked evidence table per pick and the honest "what this page cannot tell you" section; the masthead carries Shop · Categories · Guides · Compare · Find your fit and the footer carries all three category URLs. `build_type` is still `legacy` (source `main`), verified with `gh api` during this pass — FLG-032/owner setting unchanged by this session.
 
-**Follow-up on the same branch.** After the merge, the surviving guide was found not to satisfy this session's own sourcing rule: its USDA classification table carried the figures as text with no link per row. Fixed by giving the table an "Official source" column (six row links to the FSIS page it was transcribed from) and an article-level Sources block, which also puts the row under `check.py`'s per-row-link rule so the gap cannot come back. **Follow-up receipt.** [PR #125](https://github.com/karagemop466-tech/Affil1/pull/125) merged into `main` as `b0b8ccd`. On that commit `Affiliate launch checks`, `Build, check and deploy`, `Verify Countertop Almanac edition and platform` and `pages build and deployment` all completed successfully. Read back from the live URL https://karagemop466-tech.github.io/Affil1/guides/where-to-put-the-probe.html: the classification table carries a "Official source" column with a link to the FSIS page in all six rows, the article ends with a Sources list of the two federal pages, the disclosure strip still precedes the content, and the product cards render as untagged `See on Amazon` links, consistent with the empty Special-Link register. This session's work is therefore fully live; no item in its scope remains unmerged.
+**Follow-up on the same branch.** After the merge, the surviving guide was found not to satisfy this session's own sourcing rule: its USDA classification table carried the figures as text with no link per row. Fixed by giving the table an "Official source" column (six row links to the FSIS page it was transcribed from) and an article-level Sources block, which also puts the row under `check.py`'s per-row-link rule so the gap cannot come back. **Follow-up receipt.** [PR #125](https://github.com/karagemop466-tech/Affil1/pull/125) merged into `main` as `b0b8ccd1bfc03e1ea005b1eca0fb5eb7923f3bfb`. On that commit `Affiliate launch checks`, `Build, check and deploy`, `Verify Countertop Almanac edition and platform` and `pages build and deployment` all completed successfully. Read back from the live URL https://karagemop466-tech.github.io/Affil1/guides/where-to-put-the-probe.html: the classification table carries a "Official source" column with a link to the FSIS page in all six rows, the article ends with a Sources list of the two federal pages, the disclosure strip still precedes the content, and the product cards render as untagged `See on Amazon` links, consistent with the empty Special-Link register. This session's work is therefore fully live; no item in its scope remains unmerged.
+
+### Cross-scope finding — `arena/ddb6772b-affil1` (2026-11-20): already repaired upstream
+
+While closing out, this session found that `edition-verify.yml`'s step
+`python3 -m unittest discover -s platform` points at a directory that has not existed
+since the `_platform` rename. `unittest` resolves the name to CPython's stdlib
+`platform` package, so the step ran 45 `test.test_support` tests and reported success
+while this repository's `_platform/test_platform.py` never ran in CI. Reproduced
+locally: `-s platform` → 45 tests OK, `-s _platform` → our 6 tests.
+
+**No change was made here.** `arena/3e17592d-affil1` had already fixed it on `main` as
+[FLG-045](https://github.com/karagemop466-tech/Affil1/commit/feb3cfd) with a better
+repair than mine: the step now targets `_platform` *and* fails when discovery collects
+nothing, so a name that resolves to the wrong place can never look green again — mine
+only corrected the path. FLG-045 also names two further vacuous steps this session had
+not found (`kitchen-check.yml` compiling an `_analytics/endpoint.py` that cannot import;
+`_tools/arm_links.py` reading `_src/_data/`, a path that does not exist).
+
+This session's duplicate flag row was deleted rather than renumbered, and a draft PR
+carrying the path-only fix was closed instead of merged, so the board does not record
+two claims for one repair. Kept here because FLG-045's own rule is the transferable
+part: *if a command can succeed while collecting zero tests, it is not a gate.* Anyone
+citing a "platform unit & HTTP collector tests" pass on this board before `2934ed0` is
+citing a step that tested nothing.
+
 
 **Session closed.** Nothing in `arena/ddb6772b-affil1`'s claim is left in progress. Files returned to other owners: none were held. Unresolved items are on the board as FLG-028/029/036/037/038/039/040 and S-01/S-39/S-40/S-41, all of which need an owner action (one Associates click, the Pages `build_type` setting, a taxonomy decision) rather than more code.
 **Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are

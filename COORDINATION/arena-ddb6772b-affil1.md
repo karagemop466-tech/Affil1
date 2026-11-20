@@ -106,3 +106,16 @@ collided was resolved by keeping main's row and renumbering or dropping mine:
 
 `_data/verification-observations.ndjson`, `_src/data/*.json` id renumbering, and the
 retired-guide note in `_tools/content_season.py` are the audit trail for all of it.
+
+## Late find, already fixed upstream (why nothing was filed here)
+
+`edition-verify.yml` ran `unittest discover -s platform` against a directory that no
+longer exists; Python resolved `platform` to the stdlib package and the step passed on
+45 interpreter tests while `_platform/test_platform.py` never ran. Reproduced both
+ways locally. `arena/3e17592d-affil1` had already repaired it on `main` (FLG-045) with
+a zero-discovery guard and had found two more vacuous steps in the same class. A draft
+flag row and a path-only workflow patch were therefore dropped rather than merged, so
+main carries one record of the defect and one owner of its repair.
+
+Carried away from it: a CI step that can succeed while collecting nothing is not a
+gate. Any pre-`2934ed0` receipt quoting that step as verification is quoting a no-op.
