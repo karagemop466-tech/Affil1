@@ -39,7 +39,7 @@
 <div class="disclosure" role="region" aria-label="Affiliate disclosure">
   <div class="wrap">
     <span class="tag">Disclosure</span>
-    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: links from this site to Amazon are affiliate links, and if you buy through one we may earn a commission at no cost to you. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
+    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: no button on this site is an affiliate link yet — the links we publish to Amazon are labelled as reference links and earn us nothing. If you buy through one, the price is the same and we get no commission; that changes only once the account owner confirms enrolment and links, which is recorded publicly at /flagged/#FLG-003. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
   </div>
 </div>
 <div class="wrap"><div class="crumbs"><a href="../">Home</a><span class="sep">/</span><span>Flagged for review</span></div></div>
@@ -92,15 +92,15 @@
 </article><article class="flag sev-high" id="FLG-003">
   <div class="flag-head">
     <span class="flag-id">FLG-003</span>
-    <h3>Compliance status of the link.amazon short-link host is unresolved</h3>
+    <h3>Submitted links cannot be attributed; the site publishes no affiliate link until enrolment is confirmed</h3>
     <span class="badge bad">high</span>
   </div>
   <dl>
-    <dt>What we observed</dt><dd>The links redirect through a shortener. The program prohibits using a link shortening service in a manner that makes it unclear that the reader is linking to an Amazon site. A redirector that surfaces the Amazon destination is a different case from one that conceals it.</dd>
-    <dt>Why it matters</dt><dd>This determines whether the links can be used at all. It is deliberately left open rather than decided.</dd>
-    <dt>What we could not determine</dt><dd>The exact behaviour is only observable on click, and no official page addresses this host by name in a way that could be cited here. We are explicitly not claiming the links are invalid.</dd>
+    <dt>What we observed</dt><dd>Every submitted URL is link.amazon/&lt;9 chars&gt;, resolves through an Amazon-hosted intermediate, carries share/placement parameters (lv=shuf, btn_type=ss, btn_ref=srctok-*, channelId=500, in two cases plpRedirect=mhFallback) and no tag parameter on any observed arrival.</dd>
+    <dt>Why it matters</dt><dd>Commission Income Statement §2 disqualifies purchases reached through a &quot;Redirecting Link&quot; and any purchase untracked because links are &quot;not properly formatted&quot;; Operating Agreement §2 lets Amazon withhold commission for a violation. So the supplied form cannot earn, and inventing a tagged link without a confirmed enrolled account would assert a relationship this project cannot verify.</dd>
+    <dt>What we could not determine</dt><dd>Whether shopnow047c-20 is enrolled, whether this site is listed in the account, and whether an Associates-generated Special Link for these ASINs resolves to the listings published here.</dd>
     <dt>Source</dt><dd><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="nofollow noopener" target="_blank">https://affiliate-program.amazon.com/help/operating/agreement</a></dd>
-    <dt>What you can do</dt><dd>Run the one-link test. If the destination is visibly Amazon and the click registers, record that as the measured result and date it.</dd>
+    <dt>What you can do</dt><dd>For each ASIN: generate the Special Link in Associates Central, paste it into approved_special_link in src/data/product-intent.json, publish, click once, and confirm the click in the account&#x27;s report. Do that for one product before all five. Never declare the supplied short links invalid — their owner may have a reason for using them on another surface.</dd>
   </dl>
 </article><article class="flag sev-high" id="FLG-004">
   <div class="flag-head">
@@ -353,7 +353,7 @@
       </div>
     </div>
     <div class="foot-legal">
-      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by or affiliated with Amazon beyond participation in the Associates Program. Information is provided for general guidance and is not professional advice.</p>
+      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is built for participation in the Associates Program; enrolment of this site and its tracking ID is recorded as unconfirmed at /flagged/#FLG-003. This site is not endorsed by or sponsored by Amazon. Information is provided for general guidance and is not professional advice.</p>
       <p style="white-space:nowrap;color:var(--ink-3)">Built 2026-11-20</p>
     </div>
   </div>

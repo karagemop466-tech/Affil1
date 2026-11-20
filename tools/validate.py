@@ -189,6 +189,41 @@ def main():
                 if key in parsed and frag not in parsed[key][0].ids:
                     err(f"{rel}: link {href} -> missing anchor #{frag}")
 
+    # ---- monetization gate ----
+    # Two directions, because both failure modes are live risks:
+    # an unregistered site publishing a tracking tag, and a registered site
+    # publishing affiliate links without the paid-link note.
+    CHECKS += 1
+    try:
+        import build as _build
+        live, intent = _build.LINKS_LIVE, _build.INTENT
+    except Exception as exc:  # noqa: BLE001
+        err(f"could not import the build gate to check it: {exc}")
+        live, intent = None, None
+    if live is not None:
+        tagged = []
+        for rel, (c, html) in parsed.items():
+            for href, rel_attr, cls in c.outbound:
+                if "tag=" in href:
+                    tagged.append((rel, href))
+            if "tag=" in html and "shopnow047c-20" in html:
+                tagged.append((rel, "raw text mention"))
+        CHECKS += 1
+        if not live and tagged:
+            for rel, href in tagged[:5]:
+                err(f"{rel}: a tracking tag is published while product-intent.json says enrolment is unconfirmed -> {href[:70]}")
+        if live:
+            for rel, (c, html) in parsed.items():
+                for href, rel_attr, cls in c.outbound:
+                    CHECKS += 1
+                    if "tag=" in href and "sponsored" not in rel_attr:
+                        err(f"{rel}: tagged affiliate link without rel=sponsored -> {href[:70]}")
+        approved = sum(1 for r in intent["records"] if r.get("approved_special_link"))
+        CHECKS += 1
+        if not live and approved:
+            warn(f"{approved} approved_special_link value(s) exist while the three gate fields are false; "
+                 "an approved link is published as an affiliate link regardless of those flags")
+
     # ---- data integrity ----
     CHECKS += 1
     data = json.loads((ROOT / "src/data/products.json").read_text())

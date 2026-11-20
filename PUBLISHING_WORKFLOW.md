@@ -31,13 +31,18 @@ python3 tools/validate.py # the gate; non-zero exit blocks the deploy job
       `rel="sponsored nofollow noopener"`, a visible "Paid link" note, and `target="_blank"`.
 - [x] A buy button exists only where a product page was actually reached. An unresolved
       row gets a link to its flag entry instead — never a guess.
-- [x] Buy destinations are tagged listing URLs (`?tag=<tracking id>`), because an untagged
-      redirect through an intermediate host cannot be attributed (Commission Income
-      Statement §2(e) and §2(g)).
-- [ ] **Human step:** replace each tagged URL with the Special Link generated inside
-      Associates Central for the enrolled account, then confirm one click in the
-      account's own report before scaling. `tools/verify_links.py` reports drift; it
-      cannot confirm attribution.
+- [x] No tracking tag is published while enrolment is unconfirmed. `src/data/product-intent.json`
+      is the gate and `tools/validate.py` fails the build if a `tag=` appears while
+      `associate_enrollment_confirmed`, `site_registered` and `one_link_test_completed` are false.
+      Until then every button is a labelled **reference link** to the official listing.
+      Rationale: an untagged redirect through an intermediate host cannot be attributed
+      (Commission Income Statement §2(e), §2(g)), and a tag implies a registered site on an
+      enrolled account, which this repository cannot verify.
+- [ ] **Human step (one command, owner-only):** `python3 tools/arm_links.py --checklist`, then
+      paste each Associates-generated Special Link with
+      `python3 tools/arm_links.py --i-am-the-owner --link P-01 "<url>"`. One product first;
+      confirm the click in the account's report before arming the rest.
+      `tools/verify_links.py` reports destination drift; it cannot confirm attribution.
 
 ## 3 · Claims and endorsement context (human review)
 
@@ -60,6 +65,9 @@ python3 tools/validate.py # the gate; non-zero exit blocks the deploy job
       `validate.py` warns on any dollar-figure pattern in a page.
 - [x] An unconfirmed value is left blank and listed on `/flagged/` with the source that
       would settle it. Never fill a blank with an estimate.
+- [x] Every destination is stored with the timestamp and the arrival parameters it was
+      observed under, including `plpRedirect=mhFallback` where Amazon served a fallback
+      (`tools/verify_links.py` records and flags it; it never overwrites intent with observation).
 - [ ] **Human step:** re-run `python3 tools/verify_links.py --write` where egress to
       amazon.com is permitted, and read the drift report before the next issue.
 - Prohibited outright, recorded as rejected proposals so nobody "improves" them in: price

@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "purpose": "The monetization gate. A product card gets an affiliate link only when this file says the account has approved one; until then the site publishes a plainly-labelled reference link with no tag.",
+    "why": "Publishing a link that carries a tracking ID is an assertion that the site is registered to that ID in an enrolled Associates account. Nothing in this repository can confirm that, and Amazon's Operating Agreement makes an improperly formatted or unattributable link the publisher's problem — §2 allows Amazon to cease commission income for a violation, and §5/§6 make disclosure and link-format failures material breaches. So the conservative default is: disclose, link plainly, and flip one field when the account owner confirms.",
+    "to_go_live": [
+      "Confirm shopnow047c-20 is an active tracking ID on an enrolled account.",
+      "Add this site (karagemop466-tech.github.io/Affil1) to the account's listed websites.",
+      "Generate a Special Link for each ASIN below and paste it into approved_special_link.",
+      "Publish, click one link, and confirm the click appears in the account's report before adding more.",
+      "Set site_registered: true and one_link_test_completed: true, then rebuild."
+    ],
+    "sources": {
+      "operating_agreement": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "program_policies": "https://affiliate-program.amazon.com/help/operating/policies",
+      "ftc_guides": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+    },
+    "checked_on": "2026-11-20"
+  },
+  "tracking_id_supplied": "shopnow047c-20",
+  "associate_enrollment_confirmed": false,
+  "site_registered": false,
+  "one_link_test_completed": false,
+  "records": [
+    {
+      "ref": "P-01",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_label": "CHEFMAN 6 Quart dual-basket air fryer",
+      "arrival_markers": ["lv=shuf", "btn_type=ss", "btn_ref=srctok-*", "no tag parameter"],
+      "prior_discrepancy": "An earlier session returned the continue-shopping interstitial for this link on its first attempt.",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    },
+    {
+      "ref": "P-02",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_label": "Emeril Lagasse 26QT French-door air fryer oven",
+      "arrival_markers": ["lv=shuf", "btn_type=ss", "btn_ref=srctok-*", "no tag parameter"],
+      "prior_discrepancy": "Resolved only on a second attempt in an earlier pass.",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    },
+    {
+      "ref": "P-03",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_label": "Chefman TurboFry 8 Qt air fryer",
+      "arrival_markers": ["lv=shuf", "btn_type=ss", "btn_ref=srctok-*", "no tag parameter"],
+      "prior_discrepancy": "An archived register in this repository recorded this link as reaching only the Amazon homepage; three later passes reached the listing.",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    },
+    {
+      "ref": "P-04",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed_label": "ThermoMaven 1 Sec instant-read meat thermometer",
+      "arrival_markers": ["lv=shuf", "btn_type=ss", "btn_ref=srctok-*", "plpRedirect=mhFallback", "sp_phone_homepage_blended", "no tag parameter"],
+      "prior_discrepancy": "Returned the continue-shopping interstitial at 05:12 and 05:17 UTC; reached a live listing only on a third attempt at 05:52 UTC, and that arrival carried Amazon's fallback marker. The destination is the least certain row in the register.",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    },
+    {
+      "ref": "P-05",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_label": "CHEF iQ Sense leave-in wireless meat thermometer",
+      "arrival_markers": ["lv=shuf", "btn_type=ss", "btn_ref=srctok-*", "plpRedirect=mhFallback", "no tag parameter"],
+      "prior_discrepancy": "An archived register logged the homepage here; two later passes reached the thermometer listing, whose category is Thermometers & Timers › Meat rather than Fryers.",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    }
+  ]
+}

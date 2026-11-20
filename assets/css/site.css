@@ -1135,3 +1135,9 @@ body { font-variant-numeric: tabular-nums lining-nums; letter-spacing: -.005em; 
 }
 .article-figure { margin: 0 0 26px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--paper-2); }
 .article-figure figcaption { padding: 10px 14px; font-size: .74rem; color: var(--ink-3); background: var(--card); border-top: 1px solid var(--line); }
+
+/* --- gate panel on the dashboard --------------------------------- */
+.gate-list { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0 0 12px; }
+.gate-list dt { font-size: .8rem; color: var(--ink-3); }
+.gate-list dd { margin: 0; font-size: .86rem; }
+.paid-note.pending { color: var(--amber); }

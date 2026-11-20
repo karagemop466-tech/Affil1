@@ -39,7 +39,7 @@
 <div class="disclosure" role="region" aria-label="Affiliate disclosure">
   <div class="wrap">
     <span class="tag">Disclosure</span>
-    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: links from this site to Amazon are affiliate links, and if you buy through one we may earn a commission at no cost to you. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
+    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: no button on this site is an affiliate link yet — the links we publish to Amazon are labelled as reference links and earn us nothing. If you buy through one, the price is the same and we get no commission; that changes only once the account owner confirms enrolment and links, which is recorded publicly at /flagged/#FLG-003. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
   </div>
 </div>
 <div class="wrap"><div class="crumbs"><a href="../">Home</a><span class="sep">/</span><span>Suggestion board</span></div></div>
@@ -48,14 +48,14 @@
 <div class="wrap">
   <div class="page-head">
     <h1>Suggestion board</h1>
-    <p>29 proposals, scored, with what each one would change and what it would need before it is safe to ship. 5 are blocked on things only the account owner can supply, 4 await a product decision, and 3 are recorded as things this site must never build. Read the scores as an argument, not a gospel: impact is judged against this site's purpose, not against a generic growth playbook.</p>
+    <p>30 proposals, scored, with what each one would change and what it would need before it is safe to ship. 5 are blocked on things only the account owner can supply, 4 await a product decision, and 3 are recorded as things this site must never build. Read the scores as an argument, not a gospel: impact is judged against this site's purpose, not against a generic growth playbook.</p>
   </div>
 
   <div class="note-box">
     <p><strong>How to review this board.</strong> Start with the two rows marked <em>rejected</em> and <em>blocked on account</em> — those are the ones where acting without information would cost money or trust. Then pick by the ratio of impact to effort. Nothing on this page has been implemented silently; what shipped is labelled shipped and says so.</p>
   </div>
 
-  <div class="filters"><span class="flbl">Filter</span><button class="filter-btn" data-filter="all" aria-pressed="true">All <span style="opacity:.6">29</span></button><button class="filter-btn" data-filter="shipped" aria-pressed="false">shipped <span style="opacity:.6">11</span></button><button class="filter-btn" data-filter="proposed" aria-pressed="false">proposed <span style="opacity:.6">6</span></button><button class="filter-btn" data-filter="blocked-on-account" aria-pressed="false">blocked on account <span style="opacity:.6">5</span></button><button class="filter-btn" data-filter="blocked-on-decision" aria-pressed="false">blocked on decision <span style="opacity:.6">4</span></button><button class="filter-btn" data-filter="rejected" aria-pressed="false">rejected <span style="opacity:.6">3</span></button></div>
+  <div class="filters"><span class="flbl">Filter</span><button class="filter-btn" data-filter="all" aria-pressed="true">All <span style="opacity:.6">30</span></button><button class="filter-btn" data-filter="shipped" aria-pressed="false">shipped <span style="opacity:.6">12</span></button><button class="filter-btn" data-filter="proposed" aria-pressed="false">proposed <span style="opacity:.6">6</span></button><button class="filter-btn" data-filter="blocked-on-account" aria-pressed="false">blocked on account <span style="opacity:.6">5</span></button><button class="filter-btn" data-filter="blocked-on-decision" aria-pressed="false">blocked on decision <span style="opacity:.6">4</span></button><button class="filter-btn" data-filter="rejected" aria-pressed="false">rejected <span style="opacity:.6">3</span></button></div>
   <div id="sug-list"><article class="sug" data-status="shipped">
   <div class="sug-head">
     <span class="flag-id">SUG-01</span>
@@ -462,6 +462,20 @@
   <p><span class="lbl">Why</span>Guides get read; assets get linked. A one-page worksheet — measure your pan, count your one-layer portions, list the three dishes that would move off your oven — is genuinely useful, costs nothing to maintain, and is the kind of thing a niche newsletter or forum answer cites. It also sends readers back to the register with a question they can now answer.</p>
   <p><span class="lbl">Evidence needed</span>A print-ready PDF generated from the same data as the capacity guide, and a decision about whether to accept links at all (no paid links, no guest-post farms).</p>
   <p><span class="lbl">Note</span></p>
+</article><article class="sug" data-status="shipped">
+  <div class="sug-head">
+    <span class="flag-id">SUG-30</span>
+    <h3>Hold every tracking tag behind a data-file gate until enrolment is confirmed</h3>
+    <span class="badge ok">shipped</span>
+  </div>
+  <div class="sug-scores">
+    <span class="score">impact <b>5</b>/5</span>
+    <span class="score">effort <b>1</b>/5</span>
+    <span class="score">confidence <b style="font-weight:600">high — it is a stated condition of the program, and the flip is one file</b></span>
+  </div>
+  <p><span class="lbl">Why</span>Publishing a tag asserts a relationship: that this site is listed on an enrolled Associates account for that ID. Nothing in the repository can confirm it, and a link that is unregistered or improperly formatted is the publisher&#x27;s breach — Operating Agreement §2 lets Amazon withhold commission for a violation, while the Commission Income Statement already disqualifies purchases arriving through an untagged redirect. So the safe launch state is disclosed reference links, and monetization becomes a data edit rather than a claim.</p>
+  <p><span class="lbl">Evidence needed</span>the owner&#x27;s own confirmation in Associates Central, then one observed click in the report</p>
+  <p><span class="lbl">What shipped</span>tools/build.py reads src/data/product-intent.json; tools/validate.py fails the build if a tag appears while the gate flags are false; tools/arm_links.py refuses to arm the site without --i-am-the-owner.</p>
 </article></div>
 
   <h2 style="margin-top:40px">The three that need a decision from you first</h2>
@@ -533,7 +547,7 @@
       </div>
     </div>
     <div class="foot-legal">
-      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by or affiliated with Amazon beyond participation in the Associates Program. Information is provided for general guidance and is not professional advice.</p>
+      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is built for participation in the Associates Program; enrolment of this site and its tracking ID is recorded as unconfirmed at /flagged/#FLG-003. This site is not endorsed by or sponsored by Amazon. Information is provided for general guidance and is not professional advice.</p>
       <p style="white-space:nowrap;color:var(--ink-3)">Built 2026-11-20</p>
     </div>
   </div>

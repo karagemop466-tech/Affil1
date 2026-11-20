@@ -21,11 +21,13 @@ appliances, tracking ID `shopnow047c-20` (supplied by the owner; enrolment unver
    intermediate redirect. Amazon's Commission Income Statement disqualifies purchases
    arriving via a "Redirecting Link", and separately disqualifies any purchase "not
    correctly tracked or reported because the links from your site … are not properly
-   formatted". The published buy buttons therefore point at the official listing URL
-   with the tracking tag appended, and the register keeps the submitted link in its
-   own field. **The remaining step is human:** generate the real Special Links in
-   Associates Central, test one link, confirm one click in the account's report, then
-   scale. Until then this site is a well-built shop with the door handle unbolted.
+   formatted". The site therefore publishes **reference links with no tag**, labelled
+   as such on every button, while the register keeps the submitted link, the observed
+   destination and the intended ASIN in three separate fields. Monetization is a data
+   edit behind an owner-only switch (`tools/arm_links.py`), not a claim an agent can
+   make. **The remaining step is human:** generate the Special Links in Associates
+   Central, test one, confirm one click in the account's report, then arm the rest.
+   Until then this is a well-built shop with the till switched off on purpose.
 3. **Two registers in the repo contradicted each other about the same links, and both
    were partly wrong — including about P-04, which this pass eventually resolved.** An archived file logged three links as "reached only the
    Amazon homepage"; a second file, written from a sandbox with no network, logged all
@@ -112,7 +114,8 @@ re-order it.
 
 ## Decisions waiting for you, in the order that pays
 
-1. Generate Special Links in Associates Central; test one; confirm the click. Then scale.
+1. Generate Special Links in Associates Central; test one; confirm the click; then
+   `tools/arm_links.py` to arm it. Until then the site publishes reference links and earns nothing.
 2. Verify Search Console (and Bing) on the live host. Nothing editorial should be
    decided before four weeks of real queries exist.
 3. Name an author, or accept that desk-level bylines are the honest state. This is the

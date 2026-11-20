@@ -31,12 +31,12 @@
     {
       "id": "FLG-003",
       "severity": "high",
-      "title": "Compliance status of the link.amazon short-link host is unresolved",
-      "what_we_saw": "The links redirect through a shortener. The program prohibits using a link shortening service in a manner that makes it unclear that the reader is linking to an Amazon site. A redirector that surfaces the Amazon destination is a different case from one that conceals it.",
-      "why_it_matters": "This determines whether the links can be used at all. It is deliberately left open rather than decided.",
-      "what_we_could_not_determine": "The exact behaviour is only observable on click, and no official page addresses this host by name in a way that could be cited here. We are explicitly not claiming the links are invalid.",
+      "title": "Submitted links cannot be attributed; the site publishes no affiliate link until enrolment is confirmed",
+      "what_we_saw": "Every submitted URL is link.amazon/<9 chars>, resolves through an Amazon-hosted intermediate, carries share/placement parameters (lv=shuf, btn_type=ss, btn_ref=srctok-*, channelId=500, in two cases plpRedirect=mhFallback) and no tag parameter on any observed arrival.",
+      "why_it_matters": "Commission Income Statement \u00a72 disqualifies purchases reached through a \"Redirecting Link\" and any purchase untracked because links are \"not properly formatted\"; Operating Agreement \u00a72 lets Amazon withhold commission for a violation. So the supplied form cannot earn, and inventing a tagged link without a confirmed enrolled account would assert a relationship this project cannot verify.",
+      "what_we_could_not_determine": "Whether shopnow047c-20 is enrolled, whether this site is listed in the account, and whether an Associates-generated Special Link for these ASINs resolves to the listings published here.",
       "source": "https://affiliate-program.amazon.com/help/operating/agreement",
-      "review_action": "Run the one-link test. If the destination is visibly Amazon and the click registers, record that as the measured result and date it."
+      "review_action": "For each ASIN: generate the Special Link in Associates Central, paste it into approved_special_link in src/data/product-intent.json, publish, click once, and confirm the click in the account's report. Do that for one product before all five. Never declare the supplied short links invalid \u2014 their owner may have a reason for using them on another surface."
     },
     {
       "id": "FLG-004",

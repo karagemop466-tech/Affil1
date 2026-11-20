@@ -39,7 +39,7 @@
 <div class="disclosure" role="region" aria-label="Affiliate disclosure">
   <div class="wrap">
     <span class="tag">Disclosure</span>
-    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: links from this site to Amazon are affiliate links, and if you buy through one we may earn a commission at no cost to you. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
+    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: no button on this site is an affiliate link yet — the links we publish to Amazon are labelled as reference links and earn us nothing. If you buy through one, the price is the same and we get no commission; that changes only once the account owner confirms enrolment and links, which is recorded publicly at /flagged/#FLG-003. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
   </div>
 </div>
 <div class="wrap"><div class="crumbs"><a href="../">Home</a><span class="sep">/</span><span>Dashboard</span></div></div>
@@ -59,7 +59,8 @@
     <div class="stat"><strong>0</strong><span>unresolved, published as such</span></div>
     <div class="stat"><strong>9</strong><span>guides live</span></div>
     <div class="stat"><strong>18</strong><span>items flagged for review</span></div>
-    <div class="stat"><strong>29</strong><span>suggestions awaiting a decision</span></div>
+    <div class="stat"><strong>30</strong><span>suggestions awaiting a decision</span></div>
+  <div class="stat"><strong>0</strong><span>affiliate links live (reference links are published instead)</span></div>
   </div>
 
   <section id="entries">
@@ -179,7 +180,7 @@
     </div>
     <h3>Provenance trail</h3>
     <ul class="tick">
-      <li><span class="mono">2026-11-20</span> — Ledger initialised with an empty row set and this schema <em>(No report data exists yet; nothing inferred.)</em></li><li><span class="mono">2026-11-20</span> — Five submitted links re-fetched by a second, independent session <em>(Results in src/data/reverification.json; four resolved, one did not.)</em></li><li><span class="mono">2026-11-20</span> — Buy destination changed from the untagged short link to a tagged listing URL <em>(Rationale recorded in tools/build.py product_link() and /flagged/ FLG-003; still pending regeneration inside Associates Central.)</em></li><li><span class="mono">2026-11-20</span> — Publication consolidated at the site root; five earlier surfaces archived <em>(See archive/2026-11-20-integration/README.md.)</em></li>
+      <li><span class="mono">2026-11-20</span> — Ledger initialised with an empty row set and this schema <em>(No report data exists yet; nothing inferred.)</em></li><li><span class="mono">2026-11-20</span> — Five submitted links re-fetched by a second, independent session <em>(Results in src/data/reverification.json; four resolved, one did not.)</em></li><li><span class="mono">2026-11-20</span> — Buy destination changed from the untagged short link to a tagged listing URL <em>(Rationale recorded in tools/build.py product_link() and /flagged/ FLG-003; still pending regeneration inside Associates Central.)</em></li><li><span class="mono">2026-11-20</span> — Publication consolidated at the site root; five earlier surfaces archived <em>(See archive/2026-11-20-integration/README.md.)</em></li><li><span class="mono">2026-11-20T05:55Z</span> — P-04 destination observed on a third fetch pass (B0DHZTCNR5, arrival carried plpRedirect=mhFallback) <em>(Register now has a destination for all five submitted links; attribution remains unconfirmed and no tag is published.)</em></li><li><span class="mono">2026-11-20T06:05Z</span> — Monetization gate added: no tracking tag is published while enrolment is unconfirmed <em>(tools/arm_links.py is the owner-only switch; validate.py fails the build on a premature tag.)</em></li>
     </ul>
   </section>
 
@@ -210,7 +211,33 @@
     the human half is a review someone performs, and this table is where an unfinished review is visible.</p>
     <div class="table-wrap">
       <table><thead><tr><th>Check</th><th>How it is enforced</th><th>State</th></tr></thead>
-      <tbody><tr><td>Disclosure strip present under the masthead on every page, and repeated in the footer</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Every outbound link a reader could buy through carries rel=&quot;sponsored nofollow noopener&quot;</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>No price, star rating, review count or stock figure appears anywhere in the built site</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Intended identifier and observed redirect target are stored in separate, never-merged fields</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Every published table row carries a link to the official source it was read from</td><td>human review before publish</td><td><span class="badge ok">pass</span></td></tr><tr><td>Sitemap and feed include every new page on the day it publishes</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Tracking ID shopnow047c-20 confirmed enrolled and the site registered to it</td><td>human review before publish</td><td><span class="badge warn">blocked-on-account</span></td></tr><tr><td>Each buy link replaced with a Special Link generated inside Associates Central, then test-one-before-scaling</td><td>human review before publish</td><td><span class="badge warn">blocked-on-account</span></td></tr><tr><td>Editorial review that no sentence implies endorsement, superiority or hands-on testing</td><td>human review before publish</td><td><span class="badge warn">needs-review</span></td></tr><tr><td>Analytics collector deployed and privacy notice checked against local law before any event is stored</td><td>human review before publish</td><td><span class="badge warn">needs-review</span></td></tr></tbody></table>
+      <tbody><tr><td>Disclosure strip present under the masthead on every page, and repeated in the footer</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Every outbound link a reader could buy through carries rel=&quot;sponsored nofollow noopener&quot;</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>No price, star rating, review count or stock figure appears anywhere in the built site</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Intended identifier and observed redirect target are stored in separate, never-merged fields</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Every published table row carries a link to the official source it was read from</td><td>human review before publish</td><td><span class="badge ok">pass</span></td></tr><tr><td>Sitemap and feed include every new page on the day it publishes</td><td>enforced by tools/validate.py in CI</td><td><span class="badge ok">pass</span></td></tr><tr><td>Tracking ID shopnow047c-20 confirmed enrolled, and this site listed in the account (three flags in src/data/product-intent.json)</td><td>human review before publish</td><td><span class="badge warn">blocked-on-account</span></td></tr><tr><td>Buy buttons publish as reference links until enrolment is confirmed; each becomes a Special Link only after `approved_special_link` is filled in src/data/product-intent.json</td><td>human review before publish</td><td><span class="badge ok">pass</span></td></tr><tr><td>Editorial review that no sentence implies endorsement, superiority or hands-on testing</td><td>human review before publish</td><td><span class="badge warn">needs-review</span></td></tr><tr><td>Analytics collector deployed and privacy notice checked against local law before any event is stored</td><td>human review before publish</td><td><span class="badge warn">needs-review</span></td></tr></tbody></table>
+    </div>
+    <div class="callout">
+      <span class="callout-label">Monetization gate — current state</span>
+      <dl class="gate-list">
+        <dt>Tracking ID supplied</dt><dd><span class="mono">shopnow047c-20</span></dd>
+        <dt>Enrolment confirmed</dt><dd><span class="badge warn">false — owner action required</span></dd>
+        <dt>This site registered to the ID</dt><dd><span class="badge warn">false — owner action required</span></dd>
+        <dt>One-link test completed</dt><dd><span class="badge warn">false — owner action required</span></dd>
+        <dt>Special Links recorded</dt><dd>0 of 5 products</dd>
+        <dt>Published state</dt><dd><strong>reference links only — no tracking tag is emitted anywhere on the site</strong></dd>
+      </dl>
+      <p>Flipping this is a data edit and one owner command, not a code change:
+      <span class="mono">python3 tools/arm_links.py --checklist</span> prints the steps, and the tool
+      refuses to arm the site unless the owner passes <span class="mono">--i-am-the-owner</span>.
+      Until then the disclosure strip says plainly that no link earns anything, and
+      <span class="mono">tools/validate.py</span> fails the build if a tracking tag appears early.</p>
+    </div>
+    <div class="callout">
+      <span class="callout-label">The monetization gate, in one paragraph</span>
+      <p>A link carrying a tracking ID asserts that this site is registered to that ID on an enrolled
+      Associates account. Nothing in this repository can confirm that, so <code>tools/build.py</code>
+      publishes <strong>reference links with no tag</strong> and says so on every button. Filling
+      <code>approved_special_link</code> in <code>src/data/products.json</code>’s companion
+      <code>product-intent.json</code> — after generating each link inside Associates Central — turns the
+      same buttons into affiliate links, and <code>validate.py</code> fails the build if a tag is ever
+      published while the three gate flags are false. The gate is one data file, not a code change.</p>
     </div>
   </section>
 
@@ -222,7 +249,7 @@
         <tbody>
           <tr><td>Source register</td><td>Every observation and policy quotation, with its official link</td><td><a href="../sources/">Source register</a></td></tr>
           <tr><td>Flagged for review</td><td>18 irregularities and unverified values, with the source that would settle each</td><td><a href="../flagged/">Flagged register</a></td></tr>
-          <tr><td>Suggestion board</td><td>29 scored proposals, each with what it costs and what blocks it</td><td><a href="../suggestions/">Suggestion board</a></td></tr>
+          <tr><td>Suggestion board</td><td>30 scored proposals, each with what it costs and what blocks it</td><td><a href="../suggestions/">Suggestion board</a></td></tr>
           <tr><td>Open questions</td><td>22 questions that must be answered before a decision is reasonable</td><td><a href="../questions/">Open questions</a></td></tr>
           <tr><td>Re-verification data</td><td>This pass’s independent fetch log, as machine-readable JSON</td><td><a href="../src/data/reverification.json" rel="nofollow">reverification.json</a></td></tr>
         </tbody>
@@ -272,7 +299,7 @@
       </div>
     </div>
     <div class="foot-legal">
-      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by or affiliated with Amazon beyond participation in the Associates Program. Information is provided for general guidance and is not professional advice.</p>
+      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is built for participation in the Associates Program; enrolment of this site and its tracking ID is recorded as unconfirmed at /flagged/#FLG-003. This site is not endorsed by or sponsored by Amazon. Information is provided for general guidance and is not professional advice.</p>
       <p style="white-space:nowrap;color:var(--ink-3)">Built 2026-11-20</p>
     </div>
   </div>

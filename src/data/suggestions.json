@@ -332,6 +332,17 @@
       "confidence": "medium \u2014 outreach-driven, and the effect is not measurable until Search Console is verified",
       "evidence_needed": "A print-ready PDF generated from the same data as the capacity guide, and a decision about whether to accept links at all (no paid links, no guest-post farms).",
       "status": "proposed"
+    },
+    {
+      "id": "SUG-30",
+      "title": "Hold every tracking tag behind a data-file gate until enrolment is confirmed",
+      "why": "Publishing a tag asserts a relationship: that this site is listed on an enrolled Associates account for that ID. Nothing in the repository can confirm it, and a link that is unregistered or improperly formatted is the publisher's breach \u2014 Operating Agreement \u00a72 lets Amazon withhold commission for a violation, while the Commission Income Statement already disqualifies purchases arriving through an untagged redirect. So the safe launch state is disclosed reference links, and monetization becomes a data edit rather than a claim.",
+      "impact": 5,
+      "effort": 1,
+      "confidence": "high \u2014 it is a stated condition of the program, and the flip is one file",
+      "evidence_needed": "the owner's own confirmation in Associates Central, then one observed click in the report",
+      "status": "shipped",
+      "shipped_note": "tools/build.py reads src/data/product-intent.json; tools/validate.py fails the build if a tag appears while the gate flags are false; tools/arm_links.py refuses to arm the site without --i-am-the-owner."
     }
   ]
 }

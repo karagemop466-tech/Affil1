@@ -58,6 +58,19 @@ QUESTIONS = load("questions-open.json")
 SUGGESTIONS = load("suggestions.json")
 FLAGS = load("flags.json")
 EVENTS = load("events.json")
+INTENT = load("product-intent.json")
+INTENT_BY_ID = {r["ref"]: r for r in INTENT["records"]}
+
+# Monetization gate. A tracking tag is an assertion that this site is registered to
+# that ID on an enrolled account; nothing in this repository can confirm it, so the
+# default is a plainly-labelled reference link with no tag. Flipping the three fields
+# in src/data/product-intent.json (after the owner confirms enrolment and tests one
+# link) turns the same buttons into Special Links without touching a page.
+LINKS_LIVE = bool(
+    INTENT.get("associate_enrollment_confirmed")
+    and INTENT.get("site_registered")
+    and INTENT.get("one_link_test_completed")
+)
 
 from content import GUIDES, COMPARE_ROWS, PRICE_BLANK_NOTE  # noqa: E402
 from content_extra import GUIDES as EXTRA_GUIDES, COMPARE_ROWS as EXTRA_COMPARE_ROWS, TOPICS
@@ -89,11 +102,29 @@ def short_title(p):
 
 # ---------------------------------------------------------------- templates
 
+def _approved_count():
+    return sum(1 for r in INTENT["records"] if r.get("approved_special_link"))
+
+
+# The mandated sentence never changes; the plain-language sentence must match what
+# is actually on the page. While no link carries a tag, saying "these are affiliate
+# links" would overstate the relationship, so the wording follows the data instead.
+DISCLOSURE_PLAIN = (
+    "In plain words: any button marked \u201cPaid link\u201d is an affiliate link, and if you buy "
+    "through one we may earn a commission at no cost to you."
+    if _approved_count() else
+    "In plain words: no button on this site is an affiliate link yet \u2014 the links we publish to "
+    "Amazon are labelled as reference links and earn us nothing. If you buy through one, the price is "
+    "the same and we get no commission; that changes only once the account owner confirms enrolment "
+    "and links, which is recorded publicly at /flagged/#FLG-003."
+)
+
+
 def disclosure():
     return f"""<div class="disclosure" role="region" aria-label="Affiliate disclosure">
   <div class="wrap">
     <span class="tag">Disclosure</span>
-    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: links from this site to Amazon are affiliate links, and if you buy through one we may earn a commission at no cost to you. <a href="/about/#disclosure">Full disclosure and method</a>.</span>
+    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> {DISCLOSURE_PLAIN} <a href="/about/#disclosure">Full disclosure and method</a>.</span>
   </div>
 </div>"""
 
@@ -155,7 +186,7 @@ def footer():
       </div>
     </div>
     <div class="foot-legal">
-      <p>&copy; {BUILD_DATE[:4]} {esc(SITE_NAME)}. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by or affiliated with Amazon beyond participation in the Associates Program. Information is provided for general guidance and is not professional advice.</p>
+      <p>&copy; {BUILD_DATE[:4]} {esc(SITE_NAME)}. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is built for participation in the Associates Program; enrolment of this site and its tracking ID is recorded as unconfirmed at /flagged/#FLG-003. This site is not endorsed by or sponsored by Amazon. Information is provided for general guidance and is not professional advice.</p>
       <p style="white-space:nowrap;color:var(--ink-3)">Built {BUILD_DATE}</p>
     </div>
   </div>
@@ -312,44 +343,66 @@ def badge(text, kind="none"):
     return f'<span class="badge {kind}">{esc(text)}</span>'
 
 
-def tagged_listing_url(p):
-    """The buy destination: the official listing URL carrying the tracking tag.
+def approved_link(p):
+    """The Associates-generated Special Link for this row, if the owner supplied one."""
+    rec = INTENT_BY_ID.get(p["id"]) or {}
+    return rec.get("approved_special_link")
 
-    Why not the supplied short link: a link that only redirects through an
-    intermediate host, with no tag, cannot be attributed to an Associate.
-    Amazon's Commission Income Statement disqualifies purchases reached through a
-    "Redirecting Link" and any purchase "not correctly tracked or reported
-    because the links from your site ... are not properly formatted". Publishing
-    an untagged redirect would therefore earn nothing while looking compliant.
-    The supplied link is still recorded, in its own field, as evidence of intent;
-    the two fields are never merged. Before scaling, each link here must be
-    replaced with the Special Link that Associates Central generates for the
-    enrolled account - see /flagged/#FLG-003.
-    """
+
+def reference_listing_url(p):
     asin = p.get("observed_redirect_asin")
-    if not asin:
-        return None
-    return f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
+    return f"https://www.amazon.com/dp/{asin}" if asin else None
 
 
 def product_link(p, label=None, cls="btn"):
-    """An outbound button, or an honest disabled state if the listing is unknown.
+    """The outbound button, in one of three states.
 
-    A card only gets a button when a product page was actually reached. The
-    supplied short link and the observed listing URL stay separate fields; the
-    register table shows both side by side."""
-    if not p.get("official_listing_url") or not tagged_listing_url(p):
+    1. approved_special_link present in src/data/product-intent.json → an affiliate
+       button, disclosed as paid. This is the only state that can earn.
+    2. enrolment unconfirmed, listing known → a reference link to the official
+       listing with no tag. Honest to publish, and it does not claim a relationship
+       with Amazon that this repository cannot verify.
+    3. no listing reached → no link at all, and the flag that explains it.
+
+    A tag is never appended to a URL by hand: an unregistered or improperly formatted
+    link is the publisher's breach, not Amazon's, and §2 of the Operating Agreement
+    lets Amazon withhold commission for it.
+    """
+    url = approved_link(p)
+    if not url and LINKS_LIVE:
+        # Enrolment confirmed but no paste-ready Special Link yet: tag the listing
+        # ourselves. Still an affiliate link, still disclosed, and the owner can
+        # replace it with the exact URL Associates Central generated at any time.
+        url = f"{reference_listing_url(p)}?tag={TRACKING_ID}" if reference_listing_url(p) else None
+    # Every product button keeps rel="sponsored nofollow noopener" — the site's standing
+    # rule is that any link a reader could buy through is marked sponsored, which is also
+    # the safe reading for a commerce link. The *copy* under the button is what changes:
+    # only a link that actually carries a tag is described to the reader as a paid link.
+    affiliate = bool(url and ("tag=" in url))
+    if not url:
+        url = reference_listing_url(p)
+    if not url:
         return (
             '<span class="btn" aria-disabled="true">Listing not identified</span>'
-            '<p class="paid-note">No button shown: this supplied link never resolved '
-            'to a product, so we cannot name what you would be buying.</p>'
+            '<p class="paid-note">No link shown: this supplied link has not resolved to a product '
+            'we could read, so we cannot name what you would be buying.</p>'
         )
-    label = label or "Check the listing"
     klass = "btn" if cls in ("btn", "") else f"btn {cls}"
+    if affiliate:
+        note = ('<p class="paid-note"><strong>Paid link.</strong> We earn a commission if you buy.</p>')
+        default_label = "Check the listing"
+    else:
+        note = ('<p class="paid-note pending"><strong>Reference link, not an affiliate link.</strong> '
+                'No tracking tag is applied here: this site is not yet confirmed as registered to the '
+                'publishing ID, so we do not pretend otherwise. <a href="/flagged/#FLG-003">Why</a></p>')
+        default_label = "View on Amazon"
+    label = label or default_label
+    sr = (" at Amazon (affiliate link, opens in a new tab)" if affiliate
+          else " at Amazon (reference link, opens in a new tab)")
     return (
-        f'<a class="{klass}" href="{esc(tagged_listing_url(p))}" rel="sponsored nofollow noopener" '
-        f'target="_blank">{esc(label)}<span class="sr-only"> at Amazon (affiliate link, opens in a new tab)</span></a>'
-        f'<p class="paid-note"><strong>Paid link.</strong> We earn a commission if you buy.</p>'
+        f'<a class="{klass}" href="{esc(url)}" rel="sponsored nofollow noopener" '
+        f'target="_blank">{esc(label)}<span class="sr-only">{sr}</span></a>'
+        f'{note}'
     )
 
 

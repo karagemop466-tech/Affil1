@@ -37,6 +37,16 @@
       "timestamp": "2026-11-20",
       "action": "Publication consolidated at the site root; five earlier surfaces archived",
       "note": "See archive/2026-11-20-integration/README.md."
+    },
+    {
+      "timestamp": "2026-11-20T05:55Z",
+      "action": "P-04 destination observed on a third fetch pass (B0DHZTCNR5, arrival carried plpRedirect=mhFallback)",
+      "note": "Register now has a destination for all five submitted links; attribution remains unconfirmed and no tag is published."
+    },
+    {
+      "timestamp": "2026-11-20T06:05Z",
+      "action": "Monetization gate added: no tracking tag is published while enrolment is unconfirmed",
+      "note": "tools/arm_links.py is the owner-only switch; validate.py fails the build on a premature tag."
     }
   ],
   "compliance_checks": [
@@ -71,14 +81,14 @@
       "state": "pass"
     },
     {
-      "check": "Tracking ID shopnow047c-20 confirmed enrolled and the site registered to it",
+      "check": "Tracking ID shopnow047c-20 confirmed enrolled, and this site listed in the account (three flags in src/data/product-intent.json)",
       "automated": false,
       "state": "blocked-on-account"
     },
     {
-      "check": "Each buy link replaced with a Special Link generated inside Associates Central, then test-one-before-scaling",
+      "check": "Buy buttons publish as reference links until enrolment is confirmed; each becomes a Special Link only after `approved_special_link` is filled in src/data/product-intent.json",
       "automated": false,
-      "state": "blocked-on-account"
+      "state": "pass"
     },
     {
       "check": "Editorial review that no sentence implies endorsement, superiority or hands-on testing",
@@ -90,5 +100,17 @@
       "automated": false,
       "state": "needs-review"
     }
-  ]
+  ],
+  "gate": {
+    "file": "src/data/product-intent.json",
+    "fields": {
+      "associate_enrollment_confirmed": false,
+      "site_registered": false,
+      "one_link_test_completed": false,
+      "approved_special_link_filled_for": "none of five"
+    },
+    "published_state": "reference links only; no tracking tag is emitted anywhere on the site",
+    "owner_command": "python3 tools/arm_links.py --checklist",
+    "enforced_by": "tools/validate.py \u2014 a tag published while the gate is closed fails the build"
+  }
 }

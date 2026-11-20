@@ -112,25 +112,35 @@ Manual review entry points: [verification log](https://karagemop466-tech.github.
 
 ## The one finding that decides whether this site can earn
 
-None of the five submitted URLs carries a `tag` parameter, and each works by redirecting
-through an intermediate host. Under Amazon's Commission Income Statement, a purchase
-reached through a "Redirecting Link" is disqualified, as is any purchase "not correctly
-tracked or reported because the links … are not properly formatted". So links in that
-form cannot be attributed to `shopnow047c-20` — which is why the published buy buttons
-point at the **official listing URL with the tracking tag appended**, and why
-`tools/verify_links.py` exists: the final step, replacing those with Special Links
-generated inside Associates Central and confirming one click in the account's own
-report, can only be done by the account owner. Test one link. Then scale.
+None of the five submitted URLs carries a `tag` parameter, and each reaches Amazon through
+an intermediate redirect. Under the Commission Income Statement, a purchase reached through
+a "Redirecting Link" is disqualified, as is any purchase "not correctly tracked or reported
+because the links … are not properly formatted" — so in that form they cannot be attributed
+to `shopnow047c-20` at all.
 
-## Design layer
+The site is therefore **gated, not guessed**. Publishing a tracking tag asserts that this
+site is listed on an enrolled Associates account for that ID, which nothing in this
+repository can confirm. So:
 
-Typefaces are self-hosted (Fraunces for display, Inter for text) — no external font
-request, so nothing leaks a reader's visit to a third party and the page paints without
-a network round trip. Editorial art is generated for this publication, shipped in
-width variants with `srcset`, and captioned on every use as an illustration: never a
-listing photo, never a brand mark, never in a slot that imitates one. The rule and the
-reason sit in `src/data/images.json`, carried over from the parallel integration pass
-whose artwork and typography this site adopted.
+- every buy button is a **reference link** to the official listing, with no tag, labelled
+  as such, and the disclosure strip's plain-language sentence says plainly that no link
+  earns anything today;
+- the required Associates sentence stays verbatim on every page, above the fold and in the
+  footer, because the obligation is not conditional on that state;
+- `src/data/product-intent.json` holds the gate (`associate_enrollment_confirmed`,
+  `site_registered`, `one_link_test_completed`, and `approved_special_link` per product);
+- `tools/validate.py` fails the build if a tag is published while those flags are false, so
+  the safe state is enforced rather than hoped for;
+- `tools/arm_links.py` is the owner's switch: `--checklist` prints the steps, and it refuses
+  to arm the site unless `--i-am-the-owner` is passed, so no future automated session can
+  start claiming a relationship with Amazon on its own.
+
+One of the five destinations (`P-04`) resolved only on a third attempt and arrived with
+Amazon's `plpRedirect=mhFallback` marker, and `P-05` carries it too. That is Amazon's own
+signal for a merchandised fallback, which is why the register publishes each destination as
+a dated observation, keeps `intended_asin` null, and flags the pair as
+[FLG-018](https://karagemop466-tech.github.io/Affil1/flagged/#FLG-018) rather than presenting the mapping as
+confirmed. Read each one in a signed-in browser before arming anything.
 
 ## Open questions and blockers
 
@@ -140,8 +150,9 @@ block everything else, in order:
 
 1. **Enrolment** — is `shopnow047c-20` an active tracking ID, and is this site listed
    in the account? No claim is made either way here.
-2. **Special Links** — regenerate all five destinations in Associates Central and
-   confirm one click in the report before publishing more.
+2. **Special Links** — generate them in Associates Central, paste each into
+   `approved_special_link` via `tools/arm_links.py --i-am-the-owner --link P-01 "<url>"`,
+   and confirm one click in the report before arming the other four.
 3. **Search Console** — verify the property. Until then, every statement about what
    readers want is reasoning, not evidence.
 4. **An author** — a named human with two true biographical sentences. Bylines stay at
