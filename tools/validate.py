@@ -12,8 +12,8 @@ import sys
 from html.parser import HTMLParser
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = ROOT / "crisp"          # the section this builder owns
-BASE = "/crisp"
+SITE = ROOT                    # the published site (the build writes at the repository root)
+BASE = "/Affil1"
 ERRORS = []
 WARNINGS = []
 CHECKS = 0
@@ -68,7 +68,7 @@ class RefCollector(HTMLParser):
             self.h1_count += 1
         if tag == "img" and "alt" not in a:
             self.imgs_without_alt += 1
-        if tag == "div" and a.get("class") == "disclosure":
+        if tag == "div" and set((a.get("class") or "").split()) & {"disclosure", "disclosure-bar"}:
             self.has_disclosure = True
         if tag == "footer":
             self.has_footer = True
@@ -78,7 +78,11 @@ def main():
     global CHECKS
     # Only validate pages this builder owns. The storefront at the repo root is
     # another session's scope; validate.py must never fail on their files.
-    pages = sorted(p for p in SITE.rglob("*.html"))
+    # Only the pages the builder publishes. Archived editions and other
+    # sessions' files under the repository root are not part of this gate.
+    sys.path.insert(0, str(ROOT / "tools"))
+    from build import GENERATED
+    pages = sorted(SITE / g for g in GENERATED if g.endswith(".html") and (SITE / g).exists())
     parsed = {}
 
     for p in pages:
@@ -101,7 +105,7 @@ def main():
             if not c.has_disclosure:
                 err(f"{rel}: missing the disclosure strip")
             else:
-                pos_disc = html.find('class="disclosure"')
+                pos_disc = min((i for i in (html.find('class="disclosure"'), html.find('class="disclosure-bar')) if i != -1), default=-1)
                 pos_main = html.find("<main")
                 if pos_main != -1 and pos_disc > pos_main:
                     err(f"{rel}: disclosure strip appears after <main>")
@@ -173,15 +177,15 @@ def main():
     data = json.loads((ROOT / "src/data/products.json").read_text())
     for prod in data["products"]:
         CHECKS += 1
-        if prod["supplied_path_code_length"] != len(prod["supplied_path_code"]):
-            err(f"{prod['id']}: supplied_path_code_length disagrees with the code")
+        if prod["submitted_code_length"] != len(prod["submitted_code"]):
+            err(f"{prod['id']}: submitted_code_length disagrees with the code")
         CHECKS += 1
         # Rule: intended and observed identifiers are separate fields and never merged.
-        if prod.get("intended_asin") == prod.get("observed_redirect_asin") and prod.get("intended_asin"):
+        if prod.get("intended_asin") == prod.get("observed_asin") and prod.get("intended_asin"):
             err(f"{prod['id']}: intended_asin equals observed redirect; fields must stay distinct")
         CHECKS += 1
         # Rule: observed ASIN, when present, must be 10 characters.
-        if prod.get("observed_redirect_asin") and len(prod["observed_redirect_asin"]) != 10:
+        if prod.get("observed_asin") and len(prod["observed_asin"]) != 10:
             err(f"{prod['id']}: observed ASIN is not 10 characters")
 
     # ---- sitemap / feed agreement ----
@@ -195,9 +199,9 @@ def main():
         CHECKS += 1
         url = c.canonical
         if url and f"<loc>{url}</loc>" not in sitemap:
-            err(f"{rel}: canonical {url} absent from crisp/sitemap.xml")
-        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/crisp"):
-            err(f"{rel}: canonical outside the /crisp base -> {url}")
+            err(f"{rel}: canonical {url} absent from sitemap.xml")
+        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/"):
+            err(f"{rel}: canonical outside the site base -> {url}")
 
     for slug in re.findall(r"<link>(https://[^<]+/guides/[^<]+)</link>", feed):
         CHECKS += 1
