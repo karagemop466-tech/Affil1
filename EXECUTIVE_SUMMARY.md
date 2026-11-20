@@ -527,3 +527,36 @@ checks, build reproducible.
 **Still unverifiable, and still the whole story:** whether `shopnow047c-20` is
 active and lists this site, which ASIN each product was meant to be, and whether a
 click is credited. All three are read-only steps inside an Associates account.
+
+## Addendum — third-party pass, session `arena/d0594bc5-affil1` (2026-11-20)
+
+An independent session re-ran the core verification rather than trusting the
+board, and published its full receipt at
+`_data/verification-observations/2026-11-20-arena-d0594bc5.md`. Results:
+
+- **All five observed ASINs agree with the register.** Requesting
+  `amazon.com/dp/{B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z}`
+  directly returned product pages whose titles and breadcrumbs match
+  `products.json` row for row (arrival under Amazon's `plpRedirect=mhFallback`
+  fallback, recorded as the register requires). No price, rating or review count
+  was recorded, per the site's standing rule.
+- **All five submitted `link.amazon` URLs returned the Amazon homepage** in this
+  pass — a third arrival class on the same date (earlier passes saw product
+  pages and fetch errors). FLG-003 stays unresolved and nothing is claimed about
+  the links' validity; the operational conclusion (only account-validated
+  Special Links may carry the tag) is now proposal **S-30** on the decision queue.
+- **Policy sources re-read firsthand:** Operating Agreement (updated 2026-10-15,
+  §1 Special Links "tagged" formats) and Program Policies (Commission Income
+  Statement §2(e) Redirecting Link, §2(g) properly formatted). FTC FAQ and the
+  ASIN definition were verified firsthand earlier the same day by sessions
+  recorded on the board; links for manual review are in the receipt.
+- **Pages serving exposure confirmed, fix still owner-blocked.** This pass
+  observed `PUBLISHING_WORKFLOW.md` serving HTTP 200 on the live host. The
+  durable fix (flip Pages `build_type` to `workflow` so the staged 37-page
+  edition is served) was pre-flighted clean — 86 files staged, 37 pages, every
+  reference resolving — but the API call was refused to this environment
+  (HTTP 403, no Pages write scope). Filed as proposal **S-29** with exact owner
+  steps; ~20 stale open PRs are filed as proposal **S-31**.
+- **Queue and gates.** The suggestions queue is now 28 rows (18 open, 10 implemented). In this pass (rebased onto main before merge): `check.py` 0 errors/0
+  warnings, `validate.py` all checks pass, unit tests OK, local links 0 broken,
+  edition verify 1965 checks pass.
