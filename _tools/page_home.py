@@ -116,11 +116,11 @@ def build(page_dir, products, meta):
     therm = categories[1]["items"]
 
     hero = f"""<section class="issue-cover wrap">
-  <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 01</span> THE COUNTERTOP EDIT</p>
-    <h1>The air fryer<br><em>field guide.</em></h1>
-    <p class="cover-dek">Five appliances, chosen and explained: two drawers, one basket, one French door, two probes. Pick the shape that fits your counter, then check the live price on Amazon.</p>
+  <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 02</span> THE HOLIDAY EDIT</p>
+    <h1>Cook the season<br><em>from the counter.</em></h1>
+    <p class="cover-dek">Five appliances, chosen and explained: two drawers, one basket, one French door, two probes. Format first, deals second &mdash; and a gift edit for every kind of cook.</p>
     <div class="cover-actions"><a class="cover-btn" href="#shortlist">See the five picks <span>→</span></a>
-      <a class="cover-link" href="{esc(rel(d, 'fit/index.html'))}">Find your format ↗</a></div></div>
+      <a class="cover-link" href="{esc(rel(d, 'guides/air-fryer-gift-guide.html'))}">Read the gift guide ↗</a></div></div>
   <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
     <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
     <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
@@ -165,27 +165,28 @@ def build(page_dir, products, meta):
   </a>
 </div>""", cls="paths")
 
-    # The seasonal slot's standing copy is written for the holiday-hosting guide,
-    # so select it by slug rather than by position: parallel sessions inserting
-    # guides silently shifted GUIDES[7] onto a different guide once already.
-    feature = next((g for g in GUIDES if g["slug"] == "holiday-hosting-air-fryer"),
-                   next((g for g in GUIDES if g.get("cluster") == "Seasonal"), GUIDES[-1]))
+    # Select the seasonal feature by slug, not by position: parallel sessions
+    # inserting guides silently shift positional indexes (this happened once).
+    by_slug = {g["slug"]: g for g in GUIDES}
+    feature = by_slug.get("air-fryer-gift-guide", GUIDES[7])
     feat_href = rel(d, f"guides/{feature['slug']}.html")
+    bf_href = rel(d, "guides/black-friday-air-fryer-checklist.html")
     seasonal = section(f"""
 <div class="seasonal">
   <div class="seasonal-media">{img(d, feature['photo'], feature['photo_alt'], sizes='(max-width:820px) 100vw, 520px')}</div>
   <div class="seasonal-copy">
-    {eyebrow('Seasonal · hosting')}
+    {eyebrow('Seasonal · the gift edit')}
     <h2>{esc(feature['title'])}</h2>
     <p class="dek">{esc(feature['dek'])}</p>
-    <p>Work backwards from the moment you sit down and give the air fryer the last twenty minutes, not the first two hours.</p>
-    <a class="btn btn-small" href="{esc(feat_href)}">Read the hosting guide</a>
+    <p>Shopping the weekend instead? The checklist version is here too &mdash; what to measure, what to read, and what to ignore until the shape question is answered.</p>
+    <a class="btn btn-small" href="{esc(feat_href)}">Read the gift guide</a>
+    <a class="tlink" href="{esc(bf_href)}">The Black Friday checklist <span aria-hidden="true">&rarr;</span></a>
   </div>
 </div>""", cls="seasonal-band")
 
     latest = section(f"""
 <div class="sec-head">
-  <div>{eyebrow('The journal')}<h2>Guides worth your ten minutes</h2></div>
+  <div>{eyebrow('The journal')}<h2>Fresh for the season</h2></div>
   <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you. Newest first.</p>
 </div>
 <div class="gcard-grid">
@@ -226,8 +227,8 @@ def build(page_dir, products, meta):
     body = hero + shop + thermo + paths + seasonal + latest + method + capture
     return page(
         d,
-        title="Crisp & Counter \u2014 air fryers and thermometers, checked and explained",
-        description="Five Amazon picks for air frying, each link opened and matched to its live listing: two basket air fryers, one French-door oven and two meat thermometers. Listing sources and disclosure on every page.",
+        title="Crisp & Counter \u2014 air fryer & thermometer buying guides, checked link by link",
+        description="The countertop edit for the holidays: two basket air fryers, a French-door oven and two meat thermometers, each Amazon link opened and matched to its live listing. Gift guide, Black Friday checklist, and question-shaped buying guides.",
         body=body,
         active="index.html",
         canonical="",
