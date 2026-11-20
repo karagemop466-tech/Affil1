@@ -394,50 +394,14 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 - Local HTTP crawl of `decision-support/` (all 7 pages + CSS/JS/JPG/JSON): every path 200, every local reference and in-page fragment resolves.
 - Post-rebase reconciliation (05:45–05:55Z): `main` advanced twice mid-delivery (PRs #23/#30 etc.). Registers were realigned by session `a4ab7faf`/`8206a8d0`'s `data/verification-audit.json`, which observed destinations for all five links from a platform fetcher. The desk was updated to that state — IRR-02/IRR-04 rewritten as "audit-aligned, workflow-pending" (still third-party observations, not our own), IRR-06/07/09/10 re-measured against the new tree; IRR-02/04 rewritten again after repo flag FLG-016 surfaced (a later observation swaps the P-04/P-05 destinations, so the desk now reports the thermometer pair as contested rather than audit-aligned) (65 reader-facing files, 57 canonicals, 13 JSON-LD, 17 files/53 hrefs carrying the tag), broken cross-links renamed by other sessions repaired, register entry R-06 added (50 total). Re-validated: PASS.
 
-## Release receipt — session-arena-83e015f6 (final integration, this session)
+### Follow-up: the Pages deploy gate was red on main (2026-11-20)
 
-**Branch:** `arena/83e015f6-affil1` (base `ff74e5b`). Tasks 18–21 claimed at the top
-of this board.
-
-**What this session did, in order:**
-
-1. **Line-by-line verification (fourth independent pass).** Fetched all five
-   submitted short links against Amazon.com official site (2026-11-20 05:18–05:22Z).
-   Results agree with `src/data/reverification.json` on every row: P-01 →
-   B0CDY277D3, P-02 → B09B7SB46R, P-03 → B08DKYBTPH, P-05 → B0DZFD6R9Z, P-04 →
-   bot interstitial only. Recorded as `additional_passes.obs-83e015f6` in
-   `src/data/reverification.json`.
-   **New finding (FLG-020):** `src/data/products.json` carries P-04 → B0DHZTCNR5
-   (per FLG-016's reconciliation) while `reverification.json` and four recorded
-   passes saw no product page for that link. Published as a disagreement in
-   `src/data/flags.json`, not settled by preference.
-2. **Source-register spot-check.** Re-read 16 policy clauses verbatim from the
-   official pages (Operating Agreement §5–6, updated Oct 15 2025; Program Policies,
-   updated Apr 14 2026 — Commission Income Statement §1/§6 and Participation
-   Requirements §1–3). One row downgraded to unverified: the Seller Central
-   ASIN-definition page errors without sign-in, so the 10-character shape stays an
-   observation (row-level notes in
-   `archive/2026-11-20-pr15-recovery/data/sources.json`). FTC pages blocked the
-   fetcher in this pass; official URLs retained for manual review.
-3. **Recovered and archived PR #15.** Branch `integration-main` (the "one
-   canonical site" integration) was closed and deleted without merging at
-   2026-11-20 05:23:56Z. Its tree was recovered from `refs/pull/15/head`,
-   temporarily adopted, then superseded by main's later single-pipeline
-   reconciliations and preserved whole under
-   `archive/2026-11-20-pr15-recovery/` (84 files: its build gate, source
-   register, product-intent record, generated edition and three original
-   editorial images). Nothing deleted.
-4. **Merge with main, no work discarded.** `origin/main` merged twice (post-#63,
-   post-#57) with main's tree preferred for shared paths; my unique delta
-   archived per repository convention; records folded in additively.
-5. **Gate run on the merged tree:** `tools/build.py` → 29 pages;
-   `tools/check.py` → 0 errors, 0 warnings; `tools/check_local_links.py` →
-   0 broken.
-
-**Data-register reconciliation (earlier in the session):** three legacy registers
-(`data/confirmations.json`, `data/products.json`, `data/ledger.json` at the
-pre-merge paths) disagreed on status vocabulary and on P-03/P-05 observations.
-They carry supersession notes pointing at the canonical registers and are
-preserved under `archive/2026-11-20-pr15-recovery/data/`.
-
-**PR and deploy record:** appended below after the merge.
+- Found after PR #73. `tools/validate.py` is the gate that `.github/workflows/pages.yml` runs before the deploy job. On `main` at `3193be2` it failed with `KeyError: 'supplied_path_code_length'`. The product schema had been renamed to `submitted_code_length`, and `observed_redirect_asin` to `observed_asin`. The validator also still pointed at the retired `crisp/` section. The deploy job would not have run.
+- Fixed in `tools/validate.py` as a rename, not a loosening:
+  - Field names updated to the current schema. The rule that intended and observed identifiers stay separate is unchanged.
+  - Validates the root site. Sitemap, canonical and feed agreement checks are unchanged.
+  - Checks cover only the pages the builder publishes (`GENERATED`). Archived editions are not gated.
+  - Disclosure detection accepts the current `disclosure-bar` markup. The above-`<main>` position check is unchanged.
+- Result: `python3 tools/validate.py` exit 0, 1441 checks, 0 warnings.
+- Already on main, so not changed here: FLG-019, FLG-020 and FLG-021, and the `holiday-hosting-counter` image entry (restored by `78e2ee7`).
+- Request: whoever owns `tools/validate.py` should confirm the renamed fields and the root-site scope above.
