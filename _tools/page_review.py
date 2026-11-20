@@ -19,10 +19,19 @@ def build_index(page_dir, flags, meta):
         checks = "".join(
             f'<li>{_urlish(c, d)}</li>' for c in f.get("to_check", [])
         )
+        # A flag that has been closed in code must say so where the reader is
+        # already looking, not only in the data file. Until this existed, FLG-029
+        # still read as an open "Add to basket" defect after the defect was fixed.
+        status_pill = ('<span class="pill pill-ok">resolved in code</span>'
+                       if f.get("status", "").startswith("resolved") else "")
+        resolved_dd = ""
+        if f.get("resolution"):
+            resolved_dd = ('<div class="flag-resolved"><dt>Resolution</dt>'
+                           f'<dd>{esc(f["resolution"])}</dd></div>')
         cards.append(f"""<article class="flag flag-{sev}" id="{esc(f['id'])}">
   <div class="flag-top">
     <span class="flag-id">{esc(f['id'])}</span>
-    <span class="pill pill-{ 'block' if sev=='high' else ('warn' if sev=='medium' else 'none') }">{esc(sev)}</span>
+    <span class="pill pill-{ 'block' if sev=='high' else ('warn' if sev=='medium' else 'none') }">{esc(sev)}</span>{status_pill}
   </div>
   <h3>{esc(f['title'])}</h3>
   <dl class="flag-dl">
@@ -31,6 +40,7 @@ def build_index(page_dir, flags, meta):
     <div><dt>How to read it</dt><dd>{esc(f['reading'])}</dd></div>
     <div><dt>What the site does about it</dt><dd>{esc(f['impact'])}</dd></div>
     <div><dt>Blocks</dt><dd>{esc(f['blocks'])}</dd></div>
+    {resolved_dd}
   </dl>
   {'<div class="flag-check"><p class="q-label">Where to check it yourself</p><ul>' + checks + '</ul></div>' if checks else ''}
 </article>""")

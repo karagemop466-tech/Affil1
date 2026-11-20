@@ -39,13 +39,18 @@ AMAZON_NOTE = "Price, rating and delivery are shown on Amazon, where they are al
 
 # One navigation group. Everything else is reachable from the footer.
 NAV = [
-    ("products/index.html", "Shop the edit"),
+    ("products/index.html", "Shop"),
     ("guides/index.html", "Guides"),
     ("compare/index.html", "Compare"),
-    ("fit/index.html", "Fit finder"),
-    ("questions/index.html", "Questions"),
-    ("suggestions/index.html", "Suggestions"),
+    ("fit/index.html", "Find your fit"),
 ]
+
+# Desk surfaces: the project's own working pages. They stay one click away under
+# the footer's "The desk" heading and never appear in a reader's masthead --
+# "What's left" and "Decisions" were both top-bar items until this pass, which
+# meant a shopper's fifth navigation choice was the project's to-do list.
+DESK_SURFACES = ("now/", "verification/", "offers/", "decisions/", "questions/",
+                 "suggestions/", "review/", "decide/", "operations/", "brief/")
 
 FOOTER_GROUPS = [
     ("Shop", [
@@ -62,9 +67,13 @@ FOOTER_GROUPS = [
         ("feed.xml", "RSS feed"),
     ]),
     ("The desk", [
+        ("now/index.html", "What's left to do"),
+        ("offers/index.html", "Offers, ranked"),
+        ("verification/index.html", "What is verified"),
         ("decide/index.html", "Decision gate"),
+        ("decisions/index.html", "Decision registry"),
         ("questions/index.html", "Open questions"),
-        ("suggestions/index.html", "Suggestions & decisions"),
+        ("suggestions/index.html", "Suggestions queue"),
         ("suggestions/design.html", "Design decision brief"),
         ("brief/index.html", "Executive summary"),
         ("operations/ledger.html", "Campaign ledger"),
@@ -122,7 +131,29 @@ def permitted_amazon_urls():
     """
     data = json.loads((ROOT / '_src/data/products.json').read_text())
     observed = {p['observed_asin'] for p in data['products'] if p.get('observed_asin')}
-    return frozenset(set(approved_amazon_urls().values()) | {listing_url(a) for a in observed})
+    return frozenset(set(approved_amazon_urls().values()) | {listing_url(a) for a in observed}
+                     | cart_urls())
+
+
+@lru_cache(maxsize=1)
+def cart_urls():
+    """Cart permalinks for observed ASINs only, and never with a tag.
+
+    A cart permalink is a reference link like listing_url: it points at the real
+    listing and adds nothing the register has not approved. Building it here rather
+    than in a template means the gate can see every URL the site may publish, and a
+    typo in an ASIN fails the build instead of shipping a link to another product.
+    """
+    doc = json.loads((ROOT / "_src/data/links.json").read_text())
+    endpoint = doc["cta"]["cart_endpoint"]
+    observed = {p["observed_asin"] for p in
+                json.loads((ROOT / "_src/data/products.json").read_text())["products"]}
+    out = set()
+    for row in doc["links"]:
+        if row["asin"] not in observed:
+            raise ValueError(f"cart permalink for unobserved ASIN: {row['asin']}")
+        out.add(endpoint + row["cart_path"])
+    return frozenset(out)
 
 
 def buy_url(asin):
@@ -172,8 +203,10 @@ def product_link(page_dir, url, label, **kw):
     if tagged:
         kw['affiliate_ref'] = urlsplit(url).path.rsplit('/', 1)[-1]
     else:
-        if label.startswith(('See ', 'Check ')):
-            label = 'See listing source <span aria-hidden="true">&#8599;</span>'
+        # An untagged destination is a plain reference to an official listing. It
+        # is still marked sponsored (it is a paid link in the FTC/Google sense),
+        # but it carries no attribution claim, so the aria text must not say
+        # "paid link" as though a commission were being tracked.
         if kw.get('aria'):
             kw['aria'] = kw['aria'].replace('paid link, ', '').replace('affiliate link, ', '')
     return link(page_dir, url, label, sponsored=True, **kw)

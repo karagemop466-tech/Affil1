@@ -130,3 +130,38 @@
     init();
   }
 })();
+
+/* The offer board: choosing a row, and choosing a path. One choice at a time,
+   remembered locally, nothing transmitted. A path clears an individual pick,
+   because a path is a bundle and mixing them is the mistake the page prevents. */
+(function () {
+  "use strict";
+  var KEY = "cc:offer";
+  function read() { try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; } }
+  function write(state) { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* private mode */ } }
+  function paint() {
+    var state = read();
+    document.querySelectorAll(".offer-pick").forEach(function (btn) {
+      var offer = btn.getAttribute("data-offer");
+      var path = btn.getAttribute("data-path");
+      var on = offer ? state.offer === offer : path ? state.path === path : false;
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      if (offer) { var label = btn.parentNode.querySelector(".offer-picked");
+        if (label) { label.textContent = on ? "Chosen" : ""; } }
+    });
+  }
+  function init() {
+    if (!document.querySelector(".offer-pick")) { return; }
+    paint();
+    document.addEventListener("click", function (ev) {
+      var btn = ev.target.closest ? ev.target.closest(".offer-pick") : null;
+      if (!btn) { return; }
+      var state = read(), offer = btn.getAttribute("data-offer"), path = btn.getAttribute("data-path");
+      if (offer) { state.offer = state.offer === offer ? null : offer; state.path = null; }
+      else if (path) { state.path = state.path === path ? null : path; state.offer = null; }
+      write(state); paint();
+    });
+  }
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); }
+  else { init(); }
+})();

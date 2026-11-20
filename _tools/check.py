@@ -111,7 +111,7 @@ BANNED = [
 # policy pages is a source, not a Special Link, and marking it "sponsored"
 # would misdescribe it. This distinction is enforced rather than described.
 AFFILIATE = re.compile(
-    r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", re.I)
+    r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:(?:dp|gp/product)/|gp/aws/cart/add\.html)|link\.amazon/)", re.I)
 AMAZON_ANY = re.compile(r"(^//|https?://)([a-z0-9.-]*amazon\.[a-z.]+|amzn\.to|link\.amazon)", re.I)
 EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
@@ -121,6 +121,7 @@ CITATION_OK = re.compile(
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"developer-docs\.amazon\.com|sell\.amazon\.com|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
+    r"sitemaps\.org|"
     r"www\.ftc\.gov|foodsafety\.gov)(?=/|$)",
     re.I,
 )
@@ -338,8 +339,11 @@ def check_assets():
         if f.suffix.lower() in (".jpg", ".png") and f.stat().st_size > 400_000:
             warn(f"assets/img/{f.name}: {f.stat().st_size // 1024} KB is heavy")
     css = (ROOT / "assets/css/site.css").read_text(encoding="utf-8")
-    if re.search(r"@import|https?://", css):
-        err("site.css: imports or absolute URLs present")
+    for name in ("site.css", "storefront.css", "fit.css"):
+        sheet = (ROOT / "assets/css" / name).read_text(encoding="utf-8")
+        if re.search(r"@import|https?://", sheet):
+            err(f"{name}: imports or absolute URLs present")
+    css = (ROOT / "assets/css/site.css").read_text(encoding="utf-8")
     if "fonts.googleapis" in css:
         err("site.css: still references Google Fonts")
     for css_url in re.findall(r"url\(([^)]+)\)", css):
@@ -422,14 +426,124 @@ def check_serving_scope():
                 f"rename to _{rel}/ or add it to PUBLIC_DIRS deliberately")
 
 
+def check_navigation_group():
+    """Two navigation rules that were prose only, so both had quietly broken.
+
+    A reader's masthead must not carry the desk: "What's left" and "Decisions"
+    were top-bar items, so a shopper's navigation led to the project's own
+    to-do list and decision register. Desk surfaces stay one click away under the
+    footer's "The desk" heading, and that is now checked rather than remembered.
+    """
+    from build import GENERATED
+    import layout
+
+    for target, label in layout.NAV:
+        if target.startswith(layout.DESK_SURFACES):
+            err(f"navigation: '{label}' ({target}) is a desk surface and belongs in the footer, not the masthead")
+
+    linked = {target.split("#")[0] for _h, rows in layout.FOOTER_GROUPS for target, _l in rows}
+    for target in ("now/index.html", "verification/index.html", "decisions/index.html",
+                   "questions/index.html", "suggestions/index.html", "review/index.html",
+                   "decide/index.html", "operations/ledger.html", "brief/index.html"):
+        if target not in linked:
+            err(f"footer: {target} is in no footer group, so a reader cannot reach the desk")
+    for target in linked:
+        if target.endswith(".html") and target not in GENERATED:
+            err(f"footer: {target} is linked but is not a generated page")
+
+
+def check_link_state_copy():
+    """The site must describe its own links accurately.
+
+    assets/js/analytics.js counts a product click only for an anchor carrying both
+    rel~=sponsored and data-affiliate-ref, and layout.product_link() sets the second
+    only when the URL carries a tag. No URL carries a tag until an account-confirmed
+    Special Link exists, so the counter cannot fire: correct, but it has to be said
+    on the page. This keeps the copy and the register from drifting apart in either
+    direction, which is how "every one carries the site's Amazon tag" survived
+    several review passes.
+    """
+    import layout
+    data = json.loads((ROOT / "_src/data/products.json").read_text(encoding="utf-8"))
+    approved = layout.approved_amazon_urls()
+    armed = [p["observed_asin"] for p in data["products"] if p["observed_asin"] in approved]
+
+    sample_path = ROOT / "products/p-01.html"
+    if sample_path.exists():
+        sample = sample_path.read_text(encoding="utf-8")
+        if armed:
+            if "not yet credited" in sample:
+                err("link copy: a Special Link is armed but the product page still says clicks are not credited")
+        else:
+            if "not yet credited" not in sample:
+                err("link copy: no tag is armed, so the product page must say a click is not credited")
+            if "data-affiliate-ref" in sample:
+                err("link copy: data-affiliate-ref is published with no armed link, so the counter would count untracked clicks")
+
+    for page in (ROOT / "guides").glob("*.html"):
+        if page.name == "index.html":
+            continue
+        text = page.read_text(encoding="utf-8")
+        if "every one carries the site's Amazon tag" in text:
+            err(f"{page.relative_to(ROOT)}: claims every link carries the Amazon tag, which none does")
+        elif "No link currently carries the tracking tag" not in text:
+            err(f"{page.relative_to(ROOT)}: guide sidebar must state the real tag status")
+
+
+def check_one_indexable_site():
+    """Fail if a second published surface tells a crawler to index it.
+
+    `edition/` is exempt from check_no_stray_pages() because it validates with
+    its own gate, and that exemption used to hide a contradiction: the pages
+    were served with `Allow: /` and a sitemap link, i.e. a complete second site
+    competing with the canonical one for the same product pages.
+
+    This rule is the rule, not a list of names: any published directory that
+    carries its own robots.txt must not permit the crawl, and its HTML must
+    carry `noindex`. Adding a new surface therefore cannot silently reopen the
+    problem.
+    """
+    for robots in sorted(ROOT.rglob("robots.txt")):
+        if robots.parent == ROOT or robots.parent.is_relative_to(ARCHIVE):
+            continue
+        rel_dir = robots.parent.relative_to(ROOT).as_posix()
+        text = robots.read_text(encoding="utf-8", errors="replace")
+        allows = [
+            line.split(":", 1)[1].strip()
+            for line in text.splitlines()
+            if line.lower().startswith("allow:")
+        ]
+        disallows_all = any(
+            line.split(":", 1)[1].strip() == "/"
+            for line in text.splitlines()
+            if line.lower().startswith("disallow:")
+        )
+        if any(a == "/" for a in allows) or not disallows_all:
+            err(f"{rel_dir}/robots.txt permits crawling — a second surface must not "
+                f"be indexable; use `Disallow: /` (canonical site is the root)")
+        html_files = list(robots.parent.rglob("*.html"))
+        missing = [
+            p.relative_to(ROOT).as_posix()
+            for p in html_files
+            if "noindex" not in p.read_text(encoding="utf-8", errors="replace")
+        ]
+        if missing:
+            err(f"{rel_dir}/: {len(missing)} of {len(html_files)} pages lack "
+                f"`noindex` (first: {missing[0]}) — a served second surface must "
+                f"decline indexing on every page")
+
+
 def main():
     for p in sorted(PAGES):
         check_page(p)
     check_sitemap_feed()
     check_no_stray_pages()
+    check_one_indexable_site()
     check_serving_scope()
     check_data()
     check_assets()
+    check_navigation_group()
+    check_link_state_copy()
 
     print(f"pages checked: {len(PAGES)} (this build's output only)")
     for w in warnings:

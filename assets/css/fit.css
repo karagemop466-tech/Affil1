@@ -18,3 +18,19 @@
 .fit-checklist li { margin-block:.65rem; }
 .fit-grid [hidden] { display:none; }
 @media(max-width:720px) { .fit-hero-grid,.fit-grid { grid-template-columns: 1fr; } }
+
+/* The counter fit worksheet. Empty cells on purpose: the reader writes in the
+   measurements, and the note says why nothing is pre-filled. */
+.worksheet{width:100%;border-collapse:collapse;margin:0 0 26px;background:#fffdf8;font-size:14px}
+.worksheet caption{caption-side:top;text-align:left;font-size:12.5px;color:var(--muted,#5d6f66);padding:0 0 9px}
+.worksheet th,.worksheet td{border:1px solid #ddd4ce;padding:9px 11px;text-align:left;vertical-align:top}
+.worksheet thead th{background:#f4f1e8;font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+.worksheet tbody th{font-weight:500;width:42%}
+.worksheet tbody td{height:34px;min-width:70px}
+.worksheet-note{max-width:72ch;font-size:14px;color:var(--ink-2,#33463d)}
+@media print{
+  .masthead,.disclosure-bar,.site-footer,.skip,.fit-hero figure,.nav{display:none!important}
+  .worksheet{page-break-inside:avoid;box-shadow:none}
+  .worksheet tbody td{height:46px}
+  body{background:#fff}
+}

@@ -1,7 +1,7 @@
 {
   "meta": {
     "rule": "A question moves to 'answered' only when the answer has a source link or a reproducible check. 'We cannot know yet' is a legitimate answer and is recorded as such.",
-    "status": "Twenty-four questions. 10 are answered. 14 are open. Every open row now names the discovery action, the holder of the missing fact, and the effort it takes. Five open questions are blocking (Q-01, Q-03, Q-10, Q-14 and the attribution chain they form).",
+    "status": "Twenty-four questions. 10 are answered. 14 are open, and each one names the specific document, dashboard or decision that would close it.",
     "how_to_read": "The blocking column is the useful one. A blocking question means work that depends on it is guesswork until it is answered.",
     "discovery_note": "Every open question below carries a discovery block: who can obtain the missing information, what it costs, and the exact action that would close the question. No question is closed by inference; a question stays open until the named artefact exists."
   },
@@ -9,8 +9,8 @@
     {
       "id": "Q-01",
       "question": "Did each submitted link land on the product the owner meant to send readers to?",
-      "what_we_have": "All five links now land on a live listing, and the arrival ASIN and title were transcribed on 2026-11-20: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z.",
-      "what_is_missing": "The owner's intended ASIN. The supplied codes are nine characters and lowercase; every ASIN observed is ten and uppercase. The intended product cannot be read off the link itself.",
+      "what_we_have": "All five submitted short links reached a live listing on an earlier pass on 2026-11-20, with arrival ASINs and titles transcribed: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z. Two later passes the same day reached no listing at all — all five short links returned https://www.amazon.com/. The five direct /dp/ URLs were re-opened and every page title matched the record. See FLG-028.",
+      "what_is_missing": "Two things, and they are different. First, the owner's intended ASIN: the supplied codes are nine characters and lowercase, the observed ASINs are ten and uppercase, and intent cannot be read off a redirect that behaves differently on different passes. Second, a stable destination for the short link form itself.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended. Record both values side by side, as the register does.",
       "answered": false,
       "blocking": "yes — the product-record fields depend on it",
@@ -24,13 +24,13 @@
     {
       "id": "Q-02",
       "question": "Why did one link fail to resolve at all?",
-      "what_we_have": "P-04 (link.amazon/B0c8moW59) failed three times in an earlier session and resolved on the first attempt on 2026-11-20 to B0DHZTCNR5, a ThermoMaven digital meat thermometer.",
-      "what_is_missing": "Nothing for the destination. What remains unknown is why the earlier requests hit a continuity page, so no claim is made about the cause.",
+      "what_we_have": "P-04 (link.amazon/B0c8moW59) failed three times in an earlier session, resolved once on 2026-11-20 to B0DHZTCNR5, and on later passes the same day reached only the Amazon homepage like the other four. Every short link has now shown at least two arrival behaviours.",
+      "what_is_missing": "Nothing for the /dp/ destination, which was re-confirmed directly. What remains unknown is why the short-link form returns different pages across passes, so no claim is made about the cause and none is inferred.",
       "how_to_close": "Closed for the destination on 2026-11-20. The cause of the earlier failures is recorded as unexplained rather than diagnosed.",
       "answered": true,
       "blocking": "no",
-      "answer": "The link resolves. It opens a ThermoMaven 1 Sec digital meat thermometer, which is a different product category from the three air fryers and is treated as such on the site.",
-      "evidence": "Observation, 2026-11-20: https://link.amazon/B0c8moW59 → https://www.amazon.com/dp/B0DHZTCNR5"
+      "answer": "The direct /dp/ URL resolves and opens a ThermoMaven digital meat thermometer, which is a different product category from the three air fryers and is treated as such on the site. The short link is not a stable route to it.",
+      "evidence": "Direct observation, 2026-11-20: https://www.amazon.com/dp/B0DHZTCNR5 returns the ThermoMaven listing; https://link.amazon/B0c8moW59 returned https://www.amazon.com/ on a later pass (FLG-028)."
     },
     {
       "id": "Q-03",
@@ -83,7 +83,7 @@
     {
       "id": "Q-07",
       "question": "Which topics are worth writing next?",
-      "what_we_have": "Eight guides on editorial hypotheses: shape, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers and seasonal hosting.",
+      "what_we_have": "Ten guides on editorial hypotheses: shape, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers, seasonal hosting, meal-prep geometry and holiday side-dish capacity.",
       "what_is_missing": "Search data. No Search Console property is connected, so no topic has been chosen from measured demand.",
       "how_to_close": "Verify the property, submit the sitemap, wait two to four weeks, then pick the next topic from the queries that actually appear.",
       "answered": false,
@@ -284,7 +284,7 @@
     {
       "id": "Q-22",
       "question": "What cadence can this publication actually sustain?",
-      "what_we_have": "Eight guides, written to one standard, each sourced from listing titles and general reasoning rather than tests.",
+      "what_we_have": "Ten guides, written to one standard, each sourced from listing titles and general reasoning rather than tests.",
       "what_is_missing": "A commitment from the owner. A cadence without an author is a wish.",
       "how_to_close": "Choose one guide a fortnight or one a month, put it in the publishing workflow document, and hold to it.",
       "answered": false,

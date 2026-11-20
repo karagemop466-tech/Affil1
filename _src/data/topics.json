@@ -6,7 +6,8 @@
     "purpose": "Working titles and house-style rules for the next version of Crisp & Counter. This is the raw material a designer or writer receives before touching a page: what to write about, what it must never say, and how organic traffic is legitimately earned.",
     "status_rule": "Every title below is a working title and an editorial hypothesis. None is a claim about popularity, search volume, trend data or product superiority — no keyword tool was consulted and no demand estimate is made. Titles are shaped like the questions buyers actually type; whether anyone types them is answered only by the Search Console query report after it exists (S-03, Q-07).",
     "how_to_use": "Pick topics only after the measurement path is chosen (suggestions: PATH-C). Each topic names the evidence required before it is written; a topic whose evidence cannot be obtained is rewritten as a checklist of questions, or not written. Published guides go into tools/content.py GUIDES, which feeds the sitemap and RSS feed automatically.",
-    "counts": "14 working titles in 5 clusters · 6 map to published guides · 8 are proposals · 10 house-style rules · 1 organic-traffic loop"
+    "counts": "14 working titles in 5 clusters · 6 map to published guides · 8 are proposals · 10 house-style rules · 1 organic-traffic loop",
+    "id_note": "T-01..T-16 are the brief's hypothesis rows published in the earlier design pack (arena/76128338-affil1 lineage); T-17..T-30 are this session's additions. One id space, one bank."
   },
   "style_rules": [
     {
@@ -93,7 +94,7 @@
   },
   "topics": [
     {
-      "id": "T-01",
+      "id": "T-17",
       "cluster": "Using it well",
       "working_title": "Air Fryer Times and Temperatures: A Cheat Sheet for the Foods You Actually Cook",
       "shape": "utility artefact",
@@ -110,7 +111,7 @@
       ]
     },
     {
-      "id": "T-02",
+      "id": "T-18",
       "cluster": "Using it well",
       "working_title": "Foil, Parchment, or Oil Spray: What an Air Fryer Basket Will Actually Tolerate",
       "shape": "question",
@@ -125,7 +126,7 @@
       ]
     },
     {
-      "id": "T-03",
+      "id": "T-19",
       "cluster": "Choosing the format",
       "working_title": "Basket or Oven-Style Air Fryer: The Five Questions That Decide It",
       "shape": "question",
@@ -143,7 +144,7 @@
       ]
     },
     {
-      "id": "T-04",
+      "id": "T-20",
       "cluster": "Choosing the format",
       "working_title": "Combined Quarts Lie: Dual-Basket Math for Real Meals",
       "shape": "comparison hook",
@@ -160,7 +161,7 @@
       ]
     },
     {
-      "id": "T-05",
+      "id": "T-21",
       "cluster": "Choosing the format",
       "working_title": "The Counter-Space Audit: Measure Once Before You Buy Any Air Fryer",
       "shape": "utility artefact",
@@ -176,7 +177,7 @@
       ]
     },
     {
-      "id": "T-06",
+      "id": "T-22",
       "cluster": "Living with it",
       "working_title": "How to Clean an Air Fryer Basket Without Wrecking the Coating",
       "shape": "question",
@@ -191,7 +192,7 @@
       ]
     },
     {
-      "id": "T-07",
+      "id": "T-23",
       "cluster": "Living with it",
       "working_title": "New-Appliance Smell After the First Use: Off-Gassing, Residue, or a Real Problem?",
       "shape": "question",
@@ -204,7 +205,7 @@
       "internal_links": []
     },
     {
-      "id": "T-08",
+      "id": "T-24",
       "cluster": "Thermometers",
       "working_title": "Do You Need a Meat Thermometer for an Air Fryer?",
       "shape": "question",
@@ -221,7 +222,7 @@
       ]
     },
     {
-      "id": "T-09",
+      "id": "T-25",
       "cluster": "Thermometers",
       "working_title": "Instant-Read or Leave-In: Which Probe Saves Which Dinner",
       "shape": "comparison",
@@ -238,7 +239,7 @@
       ]
     },
     {
-      "id": "T-10",
+      "id": "T-26",
       "cluster": "Thermometers",
       "working_title": "Internal Temperature Chart: The One Page That Ends the Guessing",
       "shape": "utility artefact",
@@ -255,7 +256,7 @@
       ]
     },
     {
-      "id": "T-11",
+      "id": "T-27",
       "cluster": "Seasonal",
       "working_title": "Thanksgiving When the Oven Is Full: The Countertop Overflow Plan",
       "shape": "seasonal feature",
@@ -271,7 +272,7 @@
       ]
     },
     {
-      "id": "T-12",
+      "id": "T-28",
       "cluster": "Seasonal",
       "working_title": "The 6pm Frozen Reset: Air Fryer Math for Weeknights",
       "shape": "seasonal evergreen",
@@ -288,7 +289,7 @@
       ]
     },
     {
-      "id": "T-13",
+      "id": "T-29",
       "cluster": "Seasonal",
       "working_title": "Meal Prep Sunday: What an Air Fryer Changes and What It Doesn't",
       "shape": "question",
@@ -304,7 +305,7 @@
       ]
     },
     {
-      "id": "T-14",
+      "id": "T-30",
       "cluster": "Seasonal",
       "working_title": "The Small Gift That Fixes Overcooked Dinners",
       "shape": "seasonal feature",
@@ -312,7 +313,7 @@
       "funnel": "middle",
       "season": "late November–December",
       "why_on_the_list": "The thermometer cluster is gift-priced and giftable without any quality claim, because the article sells the problem, not the brand.",
-      "evidence_before_writing": "Listing-stated features and packaging claims only; no price, no \"under $X\" framing — price display is prohibited without a feed (ST-03).",
+      "evidence_before_writing": "Listing-stated features and packaging claims only; no price, no \"under $X\" framing — price display is prohibited without a feed (ST-19).",
       "maps_to": "new guide or holiday feature",
       "internal_links": [
         "products/p-04.html",

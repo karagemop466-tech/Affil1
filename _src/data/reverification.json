@@ -12,6 +12,14 @@
       "program_policies": "https://affiliate-program.amazon.com/help/operating/policies",
       "operating_agreement": "https://affiliate-program.amazon.com/help/operating/agreement",
       "ftc_endorsement_guides": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+    },
+    "pass_2026_11_20_0640": {
+      "session": "arena/b990bce7-affil1",
+      "retrieved_at_utc": "2026-11-20T06:40Z",
+      "method": "Each of the five supplied short links was requested once, redirects followed, final URL and page title recorded. The five destination listings were then requested directly and their titles and breadcrumbs read.",
+      "short_link_result": "All five arrived at https://www.amazon.com/ — the storefront home page. None reached a product page. This is the third distinct behaviour recorded for the same five URLs on 2026-11-20, and it agrees with FLG-028.",
+      "listing_result": "All five destination listings loaded with titles matching this register exactly: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z.",
+      "not_claimed": "No price, rating or stock figure is recorded even though the pages displayed them: publishing those requires an Amazon-served or API-served feed (Program Policies 2(b)). No intended ASIN is inferred from any redirect."
     }
   },
   "rows": [

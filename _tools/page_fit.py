@@ -12,6 +12,44 @@ PATHS = (
 )
 
 
+def _worksheet(d):
+    """A printable sheet the reader fills in at the counter.
+
+    Nothing is pre-filled: no dimension, clearance or capacity value is published
+    anywhere on this site, because none was confirmed from an official
+    specification sheet. The sheet holds what the reader measures and what the
+    manual for the exact model states -- the only reliable source for either.
+    """
+    return f'''<section class="section section-tint"><div class="wrap">
+  <div class="sec-head"><div><p class="eyebrow">Printable</p><h2>The counter fit worksheet</h2></div>
+  <p>Print this, take a tape measure, and fill it in beside the manual for the exact model. Nothing is pre-filled, because no dimension on this site was confirmed from an official specification sheet.</p></div>
+  <table class="worksheet">
+    <caption>Space you are giving it. Write your measurement, then the number the manual requires.</caption>
+    <thead><tr><th scope="col">What to measure</th><th scope="col">Your space</th><th scope="col">The manual says</th><th scope="col">Fits?</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Width of the free counter</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Depth of the free counter</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Height to the cabinet above</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Clearance above (basket lift or door swing)</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Clearance in front (drawer pull or door travel)</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Distance to the nearest socket</th><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <table class="worksheet">
+    <caption>What you actually cook. Measure the food, not the appliance.</caption>
+    <thead><tr><th scope="col">Your usual batch</th><th scope="col">Size or count</th><th scope="col">Inside the machine</th><th scope="col">One load?</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">The tray or pan you already use</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">Portions at a normal dinner</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">The biggest thing you would put in it</th><td></td><td></td><td></td></tr>
+      <tr><th scope="row">How many separate things at once</th><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="worksheet-note">Three rules for filling it in. Write &ldquo;unknown&rdquo; rather than a guess, and treat it as a reason to open the manual. Compare inside dimensions, never the quart figure on the carton. If a number is not in the manual or on the official listing, the seller has not published it, and no shop should invent it for you.</p>
+  <p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'guides/air-fryer-capacity-checklist.html'))}">The capacity checklist behind this sheet <span aria-hidden="true">&rarr;</span></a></p>
+</div></section>'''
+
+
 def build(d):
     choices = ''.join(f'''<label class="fit-choice">
       <input name="meal" type="radio" value="{key}" aria-controls="fit-results">
@@ -41,4 +79,5 @@ def build(d):
   <p>A format is a starting point, not a confirmed fit. This tool doesn’t have verified dimensions for these models.</p>
   <a class="tlink" href="{esc(rel(d, 'guides/cleanup-and-counter-space.html'))}">Read the counter-space guide &rarr;</a></aside>
 </div></section>
+{_worksheet(d)}
 <script src="{esc(rel(d, 'assets/js/fit.js'))}" defer></script>''')
