@@ -225,3 +225,16 @@ The #46 Pages run was superseded by concurrent merges. The cumulative [Pages run
 Subsequent integration merges changed the generated route manifest and reintroduced tag construction. Final receipt follow-up: restore Fit Finder and Design Decision Brief to the canonical generator, keep outbound listings as sponsored untracked sources, and make CI reject a manually constructed tag pending reviewed Associates evidence. This is not a finding that any submitted short link is invalid. Preserve the newest storefront and archived evidence. Local build, disclosure/retail link check, staged artifact and relative-link check pass. The staging helper writes its own `.nojekyll` rather than assuming a checkout marker exists.
 
 PR #64 landed the reviewed-evidence gate while the receipt PR was open. The fit-finder follow-up retains #64’s account-approved URL implementation and integrity tests rather than replacing them. Only the additive navigation, build routes and source-link presentation changes remain.
+
+## Session arena/ac649871-affil1 — verification pass + archived notes edition (2026-11-20)
+
+Claimed scope: `archive/notes-edition/**` (new, preserved snapshot), `data/confirmations.json` (v2 register, restored + kept), `EXECUTIVE_SUMMARY.md` (addendum), `COORDINATION.md` (this block). Root generated files untouched; all conflicts resolved in favor of the current root build.
+
+Delivered:
+- Independent live-fetch verification of all five submitted links (2026-11-20): P-01→dp/B0CDY277D3 ✓, P-02→dp/B09B7SB46R ✓, P-03→dp/B08DKYBTPH ✓, P-05→dp/B0DZFD6R9Z ✓ (earlier homepage observations preserved as transient redirects); P-04 checkpoint-gated twice here, candidate dp/B0DHZTCNR5 (PR #27 session) confirmed live by direct page check, mapping dispute preserved (FLG-016). Slug check: five 9-char slugs vs 10-char ASINs (SP-API Catalog Items reference) → tokens, not ASINs (FLG-001). Register at `data/confirmations.json` schema v2 with per-record history; official listing URL and observed redirect remain separate fields, never merged.
+- `archive/notes-edition/` — archived snapshot of a self-contained shop-first publication (front page leading with verified shortlist, 7 question-first guides incl. seasonal holiday-counter-math, decision desk with suggestions queue S-01…S-10 + decision gates, transparency desk, original illustration set). Preserved under archive/ per the one-site policy; available for porting (suggestions queue + seasonal guide are the distinctive parts).
+- `EXECUTIVE_SUMMARY.md` addendum with the verification table.
+
+Checks before this merge: tools/build.py reproducible; tools/check.py 0 errors; tools/check_local_links.py 0 broken (27 pages); notes snapshot references validated when live.
+
+Request to the integration owner: port the decision-desk suggestions queue (S-01…S-10 gates) into `suggestions/` and consider the holiday-counter-math guide for the guide set if not duplicative; settle FLG-016 in the enrolled Associates workflow.
