@@ -3,14 +3,15 @@
 from release_panels import render as release_panel
 
 from layout import (approved_amazon_urls,DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
-                    outbound, page, pagehead, rel, section, table)
+                    outbound, page, pagehead, product_link, rel, section, table)
 
 
 def build_about(page_dir, sources, meta):
     d = page_dir
     rows = []
     for s in sources["sources"]:
-        quote = f'<blockquote class="quote">{esc(s["quote"])}</blockquote>' if s.get("quote") else '<span class="blank">&mdash;</span>'
+        quote = (f'<blockquote class="quote">{esc(s["quote"])}</blockquote>' if s.get("quote")
+                 else f'<span class="blank" title="{esc(s.get("quote_status", "no quote recorded"))}">unverified: {esc(s.get("quote_status", "no quote recorded"))}</span>')
         status_cls = "pill-ok" if s["status"].startswith("read") else "pill"
         rows.append([
             {"html": f'<strong>{esc(s["id"])}</strong>'},
@@ -139,6 +140,54 @@ def build_ledger(page_dir, meta):
     )
 
 
+def _brief_checks(d, products, flags):
+    """The table the brief was missing: each claim on this page, what was read, and its official link.
+
+    A claim with no official link is left blank and marked unverified.
+    """
+    POL = "https://affiliate-program.amazon.com/help/operating/policies"
+    AGR = "https://affiliate-program.amazon.com/help/operating/agreement"
+    CRE = "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction"
+    PA5 = "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation"
+    GOO = "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+    FTC = "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+    unver = {"html": '<span class="blank">unverified</span>'}
+
+    def cite(url, label):
+        return {"html": outbound(d, url, label)}
+
+    rows = [
+        ["Agreement section 5: the site must state 'As an Amazon Associate I earn from qualifying purchases.'",
+         "Read 2026-11-20; wording matched", "verified", cite(AGR, "Operating Agreement")],
+        ["Program Policies 2(b): the tag is a URL parameter on each Special Link",
+         "Read 2026-11-20; wording matched", "verified", cite(POL, "Program Policies")],
+        ["Program Policies 2(b): prices and availability only as Amazon serves them, or via Creators API or PA API",
+         "Read 2026-11-20; wording matched", "verified", cite(POL, "Program Policies")],
+        ["Creators API: enrolment and at least 10 qualifying sales in the past 30 days",
+         "Read 2026-11-20; wording matched", "verified", cite(CRE, "Creators API introduction")],
+        ["PA-API 5 is deprecated; calls return HTTP 403 with AccessDeniedException",
+         "Read 2026-11-20; wording matched", "verified", cite(PA5, "PA-API 5 deprecation notice")],
+        ["rel='sponsored' marks paid links",
+         "Read 2026-11-20; page dated 2025-12-10", "verified", cite(GOO, "Google: qualify outbound links")],
+        ["FTC: a connection a significant minority would not expect must be disclosed clearly and conspicuously",
+         "Page read 2026-11-20; quoted wording not matched, so no quote is shown", "partly verified", cite(FTC, "FTC Endorsement Guides FAQ")],
+        ["Intended ASIN for each product",
+         "No Associates account data is available to this build", "unverified", unver],
+        ["Account-confirmed buy links",
+         f"{sum(1 for p in products if p.get('intended_asin'))} of {len(products)} have an intended ASIN or confirmation record", "unverified", unver],
+    ]
+    for p in products:
+        title = (p.get("listing_title") or "").split("|")[0].strip()[:90]
+        url = f"https://www.amazon.com/dp/{p['observed_asin']}"
+        rows.append([
+            f"{p['ref']} submitted link resolves to an Amazon listing (observed destination {p['observed_asin']}, kept separate from the intended ASIN)",
+            f"Listing read 2026-11-20 earlier in this session: {title}", "resolved",
+            {"html": product_link(d, url, "amazon.com listing")},
+        ])
+    return section(f'''<div class="sec-head"><div>{eyebrow("Checks")}<h2>What this page claims, and what the official source says</h2></div><p>Every claim on this page, with the reading that supports it. A cell marked unverified could not be confirmed, so no link is given.</p></div>
+{table(["Claim", "What was read", "Status", "Official source"], rows, cls="checks", caption="Checked 20 November 2026. Product links are sponsored and untagged; no tag is added by this page.")}''', cls="")
+
+
 def build_brief(page_dir, products, questions, flags, meta):
     d = page_dir
     n_q = len(questions["questions"])
@@ -148,7 +197,7 @@ def build_brief(page_dir, products, questions, flags, meta):
         'Executive summary',
         'The short version,<br>for someone with four minutes',
         'What exists, what was verified, what could not be, and what the next decision is.',
-        meta='Written 20 November 2026 &middot; 1,600 words shorter than it could have been',
+        meta='Written 20 November 2026 &middot; checked against the sources listed below',
     )}
 {section(f'''
 <div class="exec">
@@ -158,11 +207,11 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A single canonical static site: a product-led front page, five picks in two categories, eight question-shaped guides, a per-product note for every item, a comparison table, a decision register of twenty-two questions, a suggestion queue with three paths, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure, an unapproved tagged Amazon link or a reintroduced price.</p>
+    <p>A single canonical static site: a product-led front page, five picks in two categories, eight question-shaped guides, a per-product note for every item, a comparison table, a decision register of twenty-two questions, a suggestion queue with three paths, {len(flags["flags"])} flags for review, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure, an unapproved tagged Amazon link or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
-    <p>Each of the five supplied links was opened on 20 November 2026 and all five resolved. The ASIN, page title and category breadcrumb were transcribed for each. Four had resolved in an earlier session; the fifth, which had failed three times, resolved on this attempt to a ThermoMaven digital meat thermometer. Amazon's Associates Operating Agreement section 5, its Program Policies sections 2(a) and 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly in this session, and the relevant wording is quoted on the sources page.</p>
+    <p>Each of the five supplied links was opened on 20 November 2026 and all five resolved to an Amazon listing. The listing title for each is in the table at the foot of this page. Amazon's Associates Operating Agreement section 5, its Program Policies sections 2(a) and 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were read on 20 November 2026. Quoted wording appears on the sources page only where it matched the text read; the FTC quotes did not match and are blank there.</p>
   </div>
   <div class="exec-block exec-warn">
     <h2>The one finding that changes the plan</h2>
@@ -189,7 +238,8 @@ def build_brief(page_dir, products, questions, flags, meta):
     <div class="exec-stats">
       <div><span>5</span><p>links supplied</p></div>
       <div><span>5</span><p>resolved and transcribed</p></div>
-      <div><span>{len(approved_amazon_urls())}</span><p>account-confirmed buy links at publication</p></div>
+      <div><span>{sum(1 for p in products if p.get("intended_asin"))}</span><p>intended ASINs confirmed (of {len(products)})</p></div>
+      <div><span>{len(approved_amazon_urls())}</span><p>tagged buy links, none confirmed against an Associates account</p></div>
       <div><span>0</span><p>products tested</p></div>
       <div><span>0</span><p>prices shown</p></div>
       <div><span>{n_q}</span><p>questions raised</p></div>
@@ -197,7 +247,8 @@ def build_brief(page_dir, products, questions, flags, meta):
       <div><span>{n_high}</span><p>high-severity flags</p></div>
     </div>
   </div>
-</div>''', cls='')}"""
+</div>''', cls='')}
+{section(_brief_checks(d, products, flags), cls='')}"""
     return page(
         d,
         title="Executive summary \u2014 Crisp & Counter",

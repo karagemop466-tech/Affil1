@@ -613,3 +613,15 @@ Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-
 ## Session arena/bba82abd-affil1 — full-brief review pass (2026-11-20)
 
 Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **in progress**.
+
+**Scope, narrowed.** Claimed files: `src/data/verification-log.json` (new), `src/data/sources.json` (dates and quotes), `tools/page_desk.py` (brief page only), this section and its record. Withdrawn from the first claim: `tools/build.py`, `tools/layout.py`, `EXECUTIVE_SUMMARY.md` and a dashboard page. The dashboard and summary rewrite are logged as requests for the integration session, not edited here. The dashboard generator is kept as a proposal, unwired.
+
+**Shared-output touch, stated.** `src/data/sources.json` (table data) and the brief and About pages change under the owner's explicit gap-closure scope for this session. The integration session should regenerate from them and confirm.
+
+**Branch deviation.** The environment fixed the branch name `arena/bba82abd-affil1`; the board's `session-<id>/<task>` convention cannot be followed.
+
+**Merge resolution.** `main` (`1b09bbc`, later `c2d1050`) was merged into the branch with `--allow-unrelated-histories -X theirs` (merge `1cdd046`), because the branch base and `main` had unrelated histories. Safe only because the branch's earlier tree was a subset of `main`, which was checked. The `pull --rebase` rule was not used for this reason.
+
+**Irregularities for owner decision** (published in `src/data/verification-log.json`): RVW-01 PR #82 would drop the tag that Program Policies §2(b) requires (high); RVW-02 launch-check sweep red on `main` (high); RVW-03 live site publishes `src/data/`, `tools/` and `COORDINATION.md` (medium); RVW-04 tag format note (low); RVW-05 `EXECUTIVE_SUMMARY.md` counts stale (low); RVW-06 `tools/test_paid_link_gate.py` fails and no workflow runs it (medium).
+
+**Gates on the branch:** build reproducible (30 pages); check 0/0; validate pass; local links 0 broken; deploy paths 1,059 references resolve at `/Affil1/`. **Sweep still reports 7 `decision-support/` files**, the existing red gate, not changed here.
