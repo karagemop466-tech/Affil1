@@ -120,12 +120,18 @@ def main():
         # A buy button must say sponsored. A citation in a register must not,
         # because it is evidence, not a recommendation - but it must be nofollowed.
         for href, rel_attr, cls in c.outbound:
-            if "btn" in (cls or ""):
-                if "sponsored" not in rel_attr:
-                    err(f"{rel}: buy button without rel=sponsored -> {href[:70]}")
-            else:
-                if "nofollow" not in rel_attr:
-                    warn(f"{rel}: citation link not nofollowed -> {href[:70]}")
+            # An affiliate link is an advertisement. rel="sponsored" is the
+            # marker Google documents for paid placements, and the Operating
+            # Agreement requires the link format we were given. There is no
+            # affiliate link on this site that should be unmarked, so this is an
+            # error, not a warning, and it applies to every product link rather
+            # than only to elements carrying a button class.
+            if "sponsored" not in rel_attr:
+                err(f"{rel}: affiliate link without rel=sponsored -> {href[:70]}")
+            if "nofollow" not in rel_attr:
+                err(f"{rel}: affiliate link without rel=nofollow -> {href[:70]}")
+            if "noopener" not in rel_attr:
+                warn(f"{rel}: affiliate link without rel=noopener -> {href[:70]}")
 
         CHECKS += 1
         if c.imgs_without_alt:
@@ -138,9 +144,15 @@ def main():
             err(f"{rel}: double-encoded entity '{m.group(0)}'")
 
         CHECKS += 1
-        # Rule: no price-like strings anywhere. Catches an accidental reintroduction.
-        for m in re.finditer(r"\$\s?\d", html):
-            warn(f"{rel}: dollar figure near '{html[max(0,m.start()-40):m.start()+20].strip()[:70]}'")
+        # Rule: no price, rating, review-count or stock phrase anywhere. The
+        # Program Policies permit price and availability display only where
+        # Amazon serves the data or it arrives through the Creators API or PA
+        # API; neither is connected, so a figure cannot be published, and a
+        # reintroduced one must stop the gate rather than warn past it.
+        pricey = re.compile(r"[$£€]\s?\d[\d,.]*")
+        if pricey.search(html):
+            err(f"{rel}: price figure present -> "
+                f"'{html[max(0,pricey.search(html).start()-40):pricey.search(html).start()+20].strip()[:70]}'")
 
     # ---- internal link resolution (filesystem-exact) ----
     for rel, (c, html) in parsed.items():
