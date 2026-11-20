@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "purpose": "One row per product: the decision a shopper is actually making, the evidence that supports it, and the price question. Every evidence row names the official document it rests on. A row with no source does not go on the page.",
+    "rule": "Two columns are deliberately different things. 'Asking price at the source' links to the live listing and never states a number, because Amazon permits a site to show price and availability only when Amazon serves that data (Program Policies, Participation Requirements 2(b)). 'What it changes for a buyer' is an editorial trade-off statement, not a test result.",
+    "retrieved_on": "2026-11-20",
+    "sources": {
+      "listing": "https://www.amazon.com/dp/{asin}",
+      "policy_links": "https://affiliate-program.amazon.com/help/operating/policies",
+      "policy_operating": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "ftc_faq": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "google_qualify": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+    }
+  },
+  "rows": [
+    {
+      "ref": "P-01",
+      "decision": "Cooking two different things at once, and wanting them to land together.",
+      "best_for": "Households that cook a main and a side in the same sitting.",
+      "check_before": "Measure one drawer against your usual batch. Six quarts is two three-quart drawers, not one six-quart basket.",
+      "trade_off": "A second drawer costs counter footprint and one more thing to wash. If dinner is usually one thing, the drawer earns nothing.",
+      "asking_price_where": "On the listing, always current",
+      "evidence_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "evidence_note": "Listing title, stated capacity and stated features transcribed from the page the supplied link reached on 2026-11-20."
+    },
+    {
+      "ref": "P-02",
+      "decision": "Room for a tray, a pan or a second rack — cooking that a drawer cannot do.",
+      "best_for": "A kitchen that would otherwise also buy a toaster oven.",
+      "check_before": "Measure the cavity and the door swing, and count the accessories: each one is something to store and wash.",
+      "trade_off": "The largest footprint in this edit and the slowest to preheat. It is the least compact way to fry chips.",
+      "asking_price_where": "On the listing, always current",
+      "evidence_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "evidence_note": "Listing title and stated capacity transcribed from the page the supplied link reached on 2026-11-20."
+    },
+    {
+      "ref": "P-03",
+      "decision": "One deep basket, one job at a time, the largest single surface here.",
+      "best_for": "Weeknights where dinner is one thing and you would rather shake than coordinate.",
+      "check_before": "Check whether your usual batch fits a single layer. Eight quarts is a volume; you cook on a surface.",
+      "trade_off": "Cooking two foods with different times means running it twice. That is the honest cost of the simplicity.",
+      "asking_price_where": "On the listing, always current",
+      "evidence_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "evidence_note": "Listing title and stated features transcribed from the page the supplied link reached on 2026-11-20."
+    },
+    {
+      "ref": "P-04",
+      "decision": "A fast internal-temperature reading, taken at the counter and put away.",
+      "best_for": "Anyone who already owns an air fryer and wants to stop guessing at the middle.",
+      "check_before": "Decide whether you want to read and put it away, or leave a probe in. This is the first answer, not the second.",
+      "trade_off": "One reading at a time. It does nothing while the food is still in the oven, which is the case a leave-in probe exists for.",
+      "asking_price_where": "On the listing, always current",
+      "evidence_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "evidence_note": "Listing title and stated features transcribed from the page the supplied link reached on 2026-11-20. This is a thermometer, not a fourth air fryer."
+    },
+    {
+      "ref": "P-05",
+      "decision": "Watching the middle of a cook from the app, without opening the door.",
+      "best_for": "Long roasts and multi-probe cooks where you want to see the curve, not a single number.",
+      "check_before": "Set-up and charging are part of owning it. Check you will keep the base charged and the app installed.",
+      "trade_off": "More to charge, pair and maintain than an instant-read. If you want a reading and nothing else, that is P-04.",
+      "asking_price_where": "On the listing, always current",
+      "evidence_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "evidence_note": "Listing title and stated features transcribed from the page the supplied link reached on 2026-11-20. Identity disagreement between sessions is published as FLG-016."
+    }
+  ],
+  "price_rule": {
+    "statement": "No price, star rating, review count or stock figure appears on this site. Amazon's Program Policies, Participation Requirements 2(b), permit a site to show prices and availability only when Amazon serves the link in which that data is displayed, or when the data arrives through the Creators API or the Product Advertising API. This is a static site with neither connection, so it shows none and links to the live listing instead.",
+    "source": "https://affiliate-program.amazon.com/help/operating/policies"
+  }
+}

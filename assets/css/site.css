@@ -731,3 +731,26 @@ a.btn:hover{transform:translateY(-1px)}
 .identity-caveat{margin:0 0 1.2rem;padding:.75rem .9rem;border:1px dashed var(--line-2);border-left:2px solid var(--warn);background:#fdf7f2;border-radius:0 3px 3px 0}
 .identity-caveat p{margin:0;font-size:.79rem;line-height:1.55;color:var(--ink-2)}
 .identity-caveat a{border-bottom:1px solid var(--line-2);color:var(--amber-ink)}
+
+/* ---------- the buying decision block ----------
+   Sits directly under the product hero. This is the part a reader acts on, so
+   it gets the warm card, the serif headline and the only amber rule on the page
+   apart from the disclosure tag. */
+.decision-band{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:2rem 2.2rem;max-width:64rem;box-shadow:0 1px 0 rgba(23,37,31,.04)}
+.decision-card h2{font-size:clamp(1.35rem,2.4vw,1.85rem);margin:.35rem 0 1.4rem;max-width:30ch;line-height:1.2}
+.decision-dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:1.4rem 2.6rem}
+.decision-dl>div{display:grid;gap:.3rem;align-content:start}
+.decision-dl dt{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--amber-ink);
+  font-weight:600;font-family:var(--sans)}
+.decision-dl dd{margin:0;font-size:.905rem;line-height:1.62;color:var(--ink-2)}
+.decision-dl dd .tlink{font-size:.86rem}
+
+/* the understated price cell in the tables: a link, never a number */
+.blank a,.blank-link{color:var(--amber-ink);border-bottom:1px dashed var(--line-2)}
+
+@media(max-width:820px){
+  .decision-dl{grid-template-columns:1fr;gap:1.1rem}
+  .decision-card{padding:1.5rem 1.3rem}
+}
