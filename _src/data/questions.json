@@ -1,15 +1,15 @@
 {
   "meta": {
     "rule": "A question moves to 'answered' only when the answer has a source link or a reproducible check. 'We cannot know yet' is a legitimate answer and is recorded as such.",
-    "status": "Twenty-four questions. 10 are answered. 14 are open, and each one names the specific document, dashboard or decision that would close it.",
+    "status": "27 questions. 10 are answered. 17 are open, and each one names the specific document, dashboard or decision that would close it.",
     "how_to_read": "The blocking column is the useful one. A blocking question means work that depends on it is guesswork until it is answered."
   },
   "questions": [
     {
       "id": "Q-01",
       "question": "Did each submitted link land on the product the owner meant to send readers to?",
-      "what_we_have": "All five links now land on a live listing, and the arrival ASIN and title were transcribed on 2026-11-20: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z.",
-      "what_is_missing": "The owner's intended ASIN. The supplied codes are nine characters and lowercase; every ASIN observed is ten and uppercase. The intended product cannot be read off the link itself.",
+      "what_we_have": "All five submitted short links reached a live listing on an earlier pass on 2026-11-20, with arrival ASINs and titles transcribed: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z. Two later passes the same day reached no listing at all \u2014 all five short links returned https://www.amazon.com/. The five direct /dp/ URLs were re-opened and every page title matched the record. See FLG-028.",
+      "what_is_missing": "Two things, and they are different. First, the owner's intended ASIN: the supplied codes are nine characters and lowercase, the observed ASINs are ten and uppercase, and intent cannot be read off a redirect that behaves differently on different passes. Second, a stable destination for the short link form itself.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended. Record both values side by side, as the register does.",
       "answered": false,
       "blocking": "yes \u2014 the product-record fields depend on it",
@@ -18,13 +18,13 @@
     {
       "id": "Q-02",
       "question": "Why did one link fail to resolve at all?",
-      "what_we_have": "P-04 (link.amazon/B0c8moW59) failed three times in an earlier session and resolved on the first attempt on 2026-11-20 to B0DHZTCNR5, a ThermoMaven digital meat thermometer.",
-      "what_is_missing": "Nothing for the destination. What remains unknown is why the earlier requests hit a continuity page, so no claim is made about the cause.",
+      "what_we_have": "P-04 (link.amazon/B0c8moW59) failed three times in an earlier session, resolved once on 2026-11-20 to B0DHZTCNR5, and on later passes the same day reached only the Amazon homepage like the other four. Every short link has now shown at least two arrival behaviours.",
+      "what_is_missing": "Nothing for the /dp/ destination, which was re-confirmed directly. What remains unknown is why the short-link form returns different pages across passes, so no claim is made about the cause and none is inferred.",
       "how_to_close": "Closed for the destination on 2026-11-20. The cause of the earlier failures is recorded as unexplained rather than diagnosed.",
       "answered": true,
       "blocking": "no",
-      "answer": "The link resolves. It opens a ThermoMaven 1 Sec digital meat thermometer, which is a different product category from the three air fryers and is treated as such on the site.",
-      "evidence": "Observation, 2026-11-20: https://link.amazon/B0c8moW59 \u2192 https://www.amazon.com/dp/B0DHZTCNR5"
+      "answer": "The direct /dp/ URL resolves and opens a ThermoMaven digital meat thermometer, which is a different product category from the three air fryers and is treated as such on the site. The short link is not a stable route to it.",
+      "evidence": "Direct observation, 2026-11-20: https://www.amazon.com/dp/B0DHZTCNR5 returns the ThermoMaven listing; https://link.amazon/B0c8moW59 returned https://www.amazon.com/ on a later pass (FLG-028)."
     },
     {
       "id": "Q-03",
@@ -102,7 +102,7 @@
     {
       "id": "Q-10",
       "question": "Is there an analytics endpoint that can be switched on lawfully?",
-      "what_we_have": "A self-hosted collector (_analytics/endpoint.py) and a cookie-free client that records five defined events. Both are inert. Added 2026-11-20 by arena/3e17592d-affil1: the collector could not import at all (_analytics/endpoint.py inserted a 'tools' path on sys.path before importing build, and that directory has been _tools/ since the Pages rename), so its test suite failed to load while CI's py_compile step kept the pipeline green. Repaired, and its suite passes. The click handler is a separate open choice, not a defect: assets/js/analytics.js counts only anchors carrying data-affiliate-ref, which the site deliberately omits while no Special Link is armed (S-30, FLG-038).",
+      "what_we_have": "A self-hosted collector (_analytics/endpoint.py) and a cookie-free client that records five defined events. Both are inert. Added 2026-11-20 by arena/3e17592d-affil1: the collector could not import at all (_analytics/endpoint.py inserted a 'tools' path before importing build, and that directory has been _tools/ since the Pages rename), so its suite failed to load while CI's py_compile step kept the lane green; repaired, and its test passes. The click handler is a separate open choice, not a defect: assets/js/analytics.js counts only anchors carrying data-affiliate-ref, which the site deliberately omits while no Special Link is armed (check_link_copy_state; the owner's alternative is recorded as the suggestion row at the bottom of the queue).",
       "what_is_missing": "A host for the collector, a retention statement, and a lawful basis for processing IP addresses.",
       "how_to_close": "Deploy the collector to a host you control, set retention, edit the privacy page with the specifics, then point the client at it.",
       "answered": false,
@@ -165,7 +165,7 @@
     {
       "id": "Q-16",
       "question": "Should one repository serve two competing editions of the same site?",
-      "what_we_have": "It did: a generated edition at the root and a hand-written edition under crisp/ plus a set of duplicate root pages. They described the same five products and could compete with each other in search. Added 2026-11-20 by arena/3e17592d-affil1: the answer above held for the archived duplicate but not for edition/, which was still a second fully indexable publication of the same five listings (27 pages, own canonicals, own sitemap, own feed, a 'Sitemap:' line in edition/robots.txt that no crawler reads). The annex now carries 'noindex, follow' on every page, shows a visible note pointing readers to the shop, and no longer advertises a second sitemap; verify_edition.py asserts all three per page and was negative-tested by stripping the tag and the note from one page (FLG-030, FLG-036). Fold-or-retire remains the owner's call, since the duplication is now harmless to a crawler and still visible to a reader.",
+      "what_we_have": "It did: a generated edition at the root and a hand-written edition under crisp/ plus a set of duplicate root pages. They described the same five products and could compete with each other in search. Added 2026-11-20 by arena/3e17592d-affil1: the annex at /edition/ also needed guarding rather than only deciding - all 27 pages now carry noindex, follow, a visible note pointing readers to the shop, and no second advertised sitemap, and verify_edition.py asserts all three per page (2,047 checks; negative-tested by stripping the tag and the note from one page). One contradiction was removed: the root robots.txt's 'Disallow: /edition/' blocked the crawl that had to read the noindex tag while a disallowed URL can still be indexed from links, so the line is gone and the tag is the single mechanism (see the flag about two sessions' fixes colliding).",
       "what_is_missing": "Nothing factual. This was a duplication problem with a clear answer.",
       "how_to_close": "Answered on 2026-11-20 by consolidating into one canonical edition and archiving the other with noindex.",
       "answered": true,
@@ -256,14 +256,44 @@
       "evidence": ""
     },
     {
+      "id": "Q-25",
+      "question": "Which search queries actually bring people to this site?",
+      "what_we_have": "Thirteen question-shaped guides, each written around a question a shopper plausibly types. They are editorial hypotheses, nothing more: the site has no query data of any kind.",
+      "what_is_missing": "Google Search Console. It is free, it is first-party, and its Performance report answers exactly this question. Until the site is verified there, every topic choice is instinct dressed as strategy.",
+      "how_to_close": "Verify the site in Search Console (DNS or the HTML tag route), submit sitemap.xml, wait 28 days, read Performance > Queries. Then pick the next topic from the measured list instead of the topic bank. Documentation: https://support.google.com/webmasters/answer/7576553",
+      "answered": false,
+      "blocking": "yes \u2014 the next topic decision is guesswork until this is answered",
+      "evidence": ""
+    },
+    {
+      "id": "Q-26",
+      "question": "What publishing cadence can be held for three months, and who signs off each issue?",
+      "what_we_have": "A suggestion-board entry for a dated editorial calendar (S-23) and a publishing workflow document. The seasonal issue proves one edition can ship.",
+      "what_is_missing": "An owner decision: cadence (fortnightly is the default proposal), and a named person who approves each issue before it goes out. An unsigned publication drifts; an unsustainable cadence dies in month two.",
+      "how_to_close": "One line in the workflow document: cadence, reviewer, and the rule that an issue ships without the reviewer's sign-off only if it changes nothing but dates.",
+      "answered": false,
+      "blocking": "yes \u2014 for the calendar in S-23",
+      "evidence": ""
+    },
+    {
+      "id": "Q-27",
+      "question": "Do the seasonal modules and gift edit change what readers click?",
+      "what_we_have": "Five events defined before any code shipped (page_view, outbound_product_click, guide_read_75, compare_view, flag_page_view), implemented, privacy-preserving, and inert on static hosting because GitHub Pages cannot receive a POST.",
+      "what_is_missing": "A hosted collector endpoint and a first-party report. No click or conversion claim is made anywhere on this site, and none can be made until either the collector is hosted or the Associates report is read.",
+      "how_to_close": "Either host the collector (S-06) with a retention statement, or read the Associates click report (S-01) as the first-party check. Both close the question; the second is cheaper.",
+      "answered": false,
+      "blocking": "no \u2014 the site is useful without it, but optimisation is guesswork without it",
+      "evidence": ""
+    },
+    {
       "question": "Which first-party collector is canonical, and does the owner accept running it?",
       "what_we_have": "Three exist: _analytics/endpoint.py (validates against the build's own page list; repaired and passing on 2026-11-20), _measurement/collector.py (reads a register path that no longer exists, so it fails closed permanently and for the wrong reason, and validates an older page scheme) and _platform/collector.py, which belongs to the annex. The client side is one file, assets/js/analytics.js, inert until a host sets CC_ANALYTICS_ENABLED, and its click handler only sees anchors carrying data-affiliate-ref, which the site now deliberately omits while no Special Link is armed (S-30).",
       "what_is_missing": "One decision and one host: which file is the collector, what it may store, for how long, and who runs the process. GitHub Pages cannot run a process, so nothing in this repository can be switched on from inside it.",
-      "how_to_close": "Adopt the smallest correct one (_analytics/endpoint.py, because its allowlist comes from the build rather than a hand-typed list), archive the other two with a note naming the session that wrote them, then answer the hosting and retention half of Q-10 and record the first day's counts in the ledger with provenance. Recorded as FLG-035.",
+      "how_to_close": "Adopt the smallest correct one (_analytics/endpoint.py, because its allowlist comes from the build rather than a hand-typed list), archive the other two with a note naming the session that wrote them, then answer the hosting and retention half of Q-10 and record the first day's counts in the ledger with provenance. Recorded as FLG-039.",
       "answered": false,
       "blocking": "yes \u2014 it blocks any promise of click or conversion measurement",
       "evidence": "",
-      "id": "Q-25"
+      "id": "Q-28"
     },
     {
       "question": "May a guide that ends in a buy button quote government food-safety limits, and who owns that risk?",
@@ -273,7 +303,7 @@
       "answered": false,
       "blocking": "no \u2014 but it decides which future topics can ship",
       "evidence": "SRC-08, SRC-09, SRC-21",
-      "id": "Q-26"
+      "id": "Q-29"
     },
     {
       "question": "What happens to a quoted guide when the official page it cites changes?",
@@ -283,7 +313,7 @@
       "answered": false,
       "blocking": "no \u2014 it is maintenance",
       "evidence": "SRC-21 (page states: Last Updated Jul 31, 2020)",
-      "id": "Q-27"
+      "id": "Q-30"
     }
   ]
 }

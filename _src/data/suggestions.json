@@ -2,14 +2,15 @@
   "meta": {
     "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
     "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
-    "recommended_first": "S-01 and S-07. One confirms the site can earn; the other makes it findable. Neither needs new content.",
+    "recommended_first": "S-01 and S-03. One confirms the site can earn; the other makes it findable. Neither needs new content. For decision-making itself, S-34 and S-35 are the cheapest upgrades on the board.",
     "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads.",
     "implemented_this_pass": [
       "S-22",
       "S-23",
       "S-24",
       "S-25"
-    ]
+    ],
+    "what_changed_in_this_pass": "Three rows added (S-26 to S-28) for a reviewer to accept, hold or reject. They were numbered S-22 to S-24 on the branch, then renumbered on merge because a concurrent session had already taken S-22 to S-25. No existing row was reworded and no decision recorded by a reviewer was overwritten."
   },
   "paths": [
     {
@@ -321,6 +322,128 @@
       "decision": "accept"
     },
     {
+      "id": "S-26",
+      "status": "open",
+      "title": "Never publish a supplied short link as a buy destination \u2014 link the /dp/ listing instead",
+      "why": "On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. Independently observed by two sessions and recorded as FLG-028. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.",
+      "effort": "zero \u2014 enforce what the build already does",
+      "risk": "None. The cost is that the supplied links stay in the record as evidence rather than as revenue paths, which is what FLG-028 and FLG-003 already say they are.",
+      "depends_on": "nothing",
+      "recommendation": "Adopt as policy. _tools/check.py already fails any buy destination that is not an approved Special Link or a plain /dp/ listing.",
+      "evidence": "FLG-028; _src/data/products.json observation_trail"
+    },
+    {
+      "id": "S-27",
+      "status": "open",
+      "title": "Make the edition's robots.txt agree with its own noindex tag",
+      "why": "Every edition/ page now carries noindex, follow, but edition/robots.txt still says 'Allow: /' and still advertises the edition's own sitemap. The meta tag and the robots file contradict each other at the same URL, and the sitemap invites exactly the crawl the meta tag declines. A crawler is entitled to treat the more permissive instruction as authoritative.",
+      "effort": "one line in the edition generator",
+      "risk": "None for readers: the edition stays fully reachable for review; only the instruction to index it is withdrawn.",
+      "depends_on": "nothing",
+      "recommendation": "Done in this pass (Disallow: /), and enforced \u2014 _tools/check.py now fails the build if any published directory below the root permits a crawl or serves a page without noindex.",
+      "evidence": "edition/robots.txt; _tools/check.py check_one_indexable_site"
+    },
+    {
+      "id": "S-28",
+      "status": "open",
+      "title": "Decide what edition/ is for: keep it as a labelled archive, or retire it to _archive/",
+      "why": "edition/ is a complete second publication of 27 pages sitting at a public URL. It no longer asks to be indexed and the build fails if it ever does again, but it is still a second set of product pages describing the same five products with different wording. Two descriptions of one product is a maintenance cost and a source of drift.",
+      "effort": "an afternoon, once the owner decides",
+      "risk": "Retiring it loses the reviewable comparison unless it moves to _archive/ with the rest of the superseded work. Keeping it means someone has to keep both registers honest.",
+      "depends_on": "Q-01, Q-06",
+      "recommendation": "Keep for now \u2014 it is the only place the per-page verification dossiers live \u2014 but name it as an archive on the page itself",
+      "evidence": "edition/; FLG-008; _tools/check.py check_one_indexable_site"
+    },
+    {
+      "id": "S-29",
+      "status": "open",
+      "title": "Switch Pages from branch-root serving to the staged 37-page edition (owner repository setting)",
+      "why": "Legacy serving publishes the whole branch root. On 2026-11-20 this meant root working files (PUBLISHING_WORKFLOW.md, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md, LICENSE) were publicly served, and every future un-prefixed root directory becomes a live URL by default \u2014 the exact exposure class three underscore renames have had to close. The staged edition is already built by CI (`_tools/stage.py`), pre-flighted clean on 2026-11-20 (86 files, 37 pages, every href/src/srcset resolving, 0 missing targets), and the workflow already deploys it when the setting is flipped. A session attempted the flip via API on 2026-11-20 and was refused (HTTP 403: the sandbox integration token lacks Pages write), so it is a repository-owner action: Settings \u2192 Pages \u2192 Build and deployment \u2192 Source: GitHub Actions.",
+      "effort": "minutes \u2014 one repository setting; no code change",
+      "risk": "Low. The deploy job only activates after the checks pass, and the same workflow serves the branch root again if the setting is flipped back. The one real cost: URLs outside the staged set (the working files listed above) stop being served \u2014 which is the point.",
+      "depends_on": "nothing",
+      "recommendation": "Approve. It is the durable fix three board entries have requested",
+      "evidence": "GitHub Pages REST API, Update information about a GitHub Pages site: https://docs.github.com/en/rest/pages/pages (build_type: legacy | workflow); receipt _data/verification-observations/2026-11-20-arena-d0594bc5.md \u00a7E"
+    },
+    {
+      "id": "S-30",
+      "status": "open",
+      "title": "Treat the submitted short links as unresolvable for attribution, whatever their compliance status turns out to be",
+      "why": "A third independent pass on 2026-11-20 found all five submitted link.amazon URLs landing on the Amazon homepage \u2014 the same day other passes saw product pages and fetch errors. Three arrival classes in one day means no click through these URLs can be relied on to reach, let alone be credited for, the intended listing. This does not resolve FLG-003 (the links are not being declared invalid); it argues the operational path: only account-validated Special Links pasted through _tools/arm_links.py should ever carry the tracking tag.",
+      "effort": "zero to decide now; the arming itself is the S-01 owner step",
+      "risk": "None. The site already publishes untagged reference links with the observed ASINs; nothing on the reader-facing pages changes until a Special Link is armed.",
+      "depends_on": "Q-03, Q-14",
+      "recommendation": "Adopt as the operating assumption until the Associates account says otherwise",
+      "evidence": "SRC-02; receipt _data/verification-observations/2026-11-20-arena-d0594bc5.md \u00a7B"
+    },
+    {
+      "id": "S-31",
+      "status": "open",
+      "title": "Triage the stale open pull requests before the next merge wave",
+      "why": "Roughly twenty pull requests opened on 2026-11-20 predate the current main (several reference directories that have since been underscore-renamed, so their branches cannot merge cleanly). They sit on the board as if reviewable, but approving any of them would reintroduce retired surfaces. Each should be either closed with a one-line reason or explicitly marked needs-rebase, so the next integration session works from an honest queue.",
+      "effort": "under an hour of triage with the PR list and the board open side by side",
+      "risk": "Low, provided every closure names what superseded it \u2014 the board's rule against discarding another session's work applies to PRs as much as to files.",
+      "depends_on": "nothing",
+      "recommendation": "Do it before the next feature PR, not after",
+      "evidence": "PR list at https://github.com/karagemop466-tech/Affil1/pulls observed 2026-11-20 06:05\u201306:45 UTC; board entries 2026-11-20"
+    },
+    {
+      "id": "S-32",
+      "status": "implemented",
+      "title": "Ship a seasonal issue: holiday cover, gift edit and trend-led guides",
+      "why": "The brief asked for a shop that reads like a publication with catchy, timely topics rather than an audit. The front page is now Issue N\u00ba 02, the holiday edit: a gift-guide feature, a Black Friday checklist timed to the live shopping weekend, a wireless-probe buyer's guide and an accessories filter, each written around the question a shopper actually types.",
+      "effort": "done",
+      "risk": "Reduced: every product fact stays inside the listing-title register, and the seasonal framing is labelled editorial in each guide's closing note.",
+      "depends_on": "nothing \u2014 shipped on the operator's explicit instruction",
+      "recommendation": "Implemented",
+      "implemented_on": "2026-11-20",
+      "evidence": "guides/air-fryer-gift-guide.html; guides/black-friday-air-fryer-checklist.html; guides/wireless-thermometer-worth-it.html; guides/air-fryer-accessories-checklist.html; index.html holiday cover"
+    },
+    {
+      "id": "S-33",
+      "status": "open",
+      "title": "Turn the topic bank into a dated editorial calendar chosen from measured queries",
+      "why": "Thirteen guides now exist as editorial hypotheses. The next four should come from Search Console queries, not instinct: the design pack already holds the topic bank and the organic loop, and this decision turns it into slots with dates and an owner per slot. Without it the cadence collapses into bursts.",
+      "effort": "an hour of scheduling once Q-11 (Search Console) is closed",
+      "risk": "Low. The risk is publishing into the dark for another month if this is approved without the measurement step it depends on.",
+      "depends_on": "Q-25 (the query question), S-03",
+      "recommendation": "Accept, but schedule the first slot no earlier than four weeks after Search Console is verified",
+      "decision": "open"
+    },
+    {
+      "id": "S-34",
+      "status": "open",
+      "title": "Give the comparison page a 'who it suits' decision column instead of more specification text",
+      "why": "Decision-making improves when the reader can match themselves to a row. The compare page currently replicates register fields; a short 'suits you if' column drawn from each product's suits list would let a reader eliminate options instead of reading more prose.",
+      "effort": "half a day, template only \u2014 the suits lists already exist in the register",
+      "risk": "Low, provided the column stays phrased as a question to the reader and never as a ranking.",
+      "depends_on": "nothing",
+      "recommendation": "Accept; it is the cheapest decision-making upgrade left on this list",
+      "decision": "open"
+    },
+    {
+      "id": "S-35",
+      "status": "open",
+      "title": "Publish one 'how we choose' method page and link it from the Questions group",
+      "why": "The method (open the link, transcribe the listing, say what it changes, leave blanks blank) is currently scattered across the about page, the review pages and the front-page method band. One short page that states the rules in the reader's language is the single best answer to 'why does this shop show no prices' \u2014 and it is a trust asset a search snippet can quote.",
+      "effort": "two hours",
+      "risk": "None. It repeats rules the site already enforces in its checker.",
+      "depends_on": "nothing",
+      "recommendation": "Accept; pair it with S-02 (named editor) if that row is approved",
+      "decision": "open"
+    },
+    {
+      "id": "S-36",
+      "status": "open",
+      "title": "Adopt a fortnightly owner question ritual: close the top blocking question before commissioning the next guide",
+      "why": "The register shows exactly what is missing before each decision can be made. The failure mode is not ignorance, it is drift: guides get written while the two blocking questions stay open. A dated ritual \u2014 one question, one closing artefact, per fortnight \u2014 keeps the missing information list shrinking.",
+      "effort": "fifteen minutes a fortnight",
+      "risk": "None. The only risk is adopting it and skipping it.",
+      "depends_on": "Q-03 (click attribution) is the top of the queue; Q-23/Q-24 follow",
+      "recommendation": "Accept, and record each closing artefact on the questions page the same day",
+      "decision": "open"
+    },
+    {
       "status": "implemented",
       "title": "Make every gate prove it ran, and repair the two switches that could not",
       "why": "The pipeline's own evidence was inflated: a CI step that discovered CPython's stdlib tests reported 45 passes while running none of this repository's platform suite, another checked the collector's syntax while the module could not import, and the owner's arming switch crashed on a path left over from the Pages rename. All three were reported as verified in earlier receipts.",
@@ -328,19 +451,19 @@
       "risk": "A step that used to pass silently can now fail a build. That is the point, and each was run green locally first.",
       "depends_on": "nothing",
       "recommendation": "Keep. Apply the same rule to any future step: assert the test ran, not that the command exited zero.",
-      "evidence": "FLG-034 \u00b7 .github/workflows/edition-verify.yml, .github/workflows/kitchen-check.yml, _tools/arm_links.py",
-      "id": "S-26"
+      "evidence": "FLG-040 \u00b7 .github/workflows/edition-verify.yml, .github/workflows/kitchen-check.yml, _tools/arm_links.py",
+      "id": "S-37"
     },
     {
       "status": "implemented",
       "title": "Publish guides whose only facts are a government page and the seller's own title",
       "why": "The journal was rich in decision guides and empty of the questions a buyer types at the moment of doubt: is this chicken done, is my thermometer lying, what do I do with the food that sat out. Each new guide is anchored to an official page read on 2026-11-20, so the site can be useful without inventing a test result it does not have.",
       "effort": "three articles, three commissioned illustrations, a source block rendered on the page, and regenerated sitemap, feed and internal links",
-      "risk": "Health-adjacent copy beside buy buttons. Contained by quoting rather than advising, linking every figure, and stating on each page that nothing was tested. Q-26 asks the owner to accept or narrow the rule.",
+      "risk": "Health-adjacent copy beside buy buttons. Contained by quoting rather than advising, linking every figure, and stating on each page that nothing was tested. Q-29 asks the owner to accept or narrow the rule.",
       "depends_on": "nothing",
       "recommendation": "Keep, and extend the same sourcing rule to every future guide.",
       "evidence": "SRC-09, SRC-21 \u00b7 guides/air-fryer-chicken-done.html, guides/thermometer-ice-water-check.html, guides/leftovers-two-hour-rule.html",
-      "id": "S-27"
+      "id": "S-38"
     },
     {
       "status": "open",
@@ -351,7 +474,7 @@
       "depends_on": "the question on the health-adjacent rule, and the refresh rule",
       "recommendation": "Adopt. Next two candidates that need no new sourcing: reheating without a microwave, and what a 'dehydrate' setting actually claims.",
       "evidence": "SRC-08, SRC-09 \u00b7 suggestions/design.html",
-      "id": "S-28"
+      "id": "S-39"
     },
     {
       "status": "open",
@@ -362,18 +485,18 @@
       "depends_on": "Q-24 (the same budget question, one tier down)",
       "recommendation": "Do it as the pilot for any self-test policy before considering S-05's full appliance purchase.",
       "evidence": "SRC-09 \u00b7 questions/index.html",
-      "id": "S-29"
+      "id": "S-40"
     },
     {
-      "id": "S-30",
+      "id": "S-41",
       "status": "open",
       "title": "Decide whether the counter counts untagged clicks, or does not run at all until the account is armed",
-      "why": "The brief asks for click measurement before anything else; the enforced gate says a click on a link that cannot be attributed should not be counted, because an unattributed count dressed up as a metric is exactly the kind of claim this repository has been flagging all day. Both positions are defensible and they cannot both be true, so the choice has to be the owner's rather than a session's. Today the site takes the second position consistently: cta.py emits no counter hook on an untagged listing link, and _tools/check.py enforces that on every generated page (FLG-038 records the state before this branch, when the rule sampled one file and four pages disagreed with it).",
+      "why": "The brief asks for click measurement before anything else; the enforced gate says a click on a link that cannot be attributed should not be counted, because an unattributed count dressed up as a metric is exactly the kind of claim this repository has been flagging all day. Both positions are defensible and they cannot both be true, so the choice has to be the owner's rather than a session's. Today the site takes the second position consistently: cta.py emits no counter hook on an untagged listing link, and _tools/check.py enforces that on every generated page (FLG-040 records the state before this branch, when the rule sampled one file and four pages disagreed with it).",
       "effort": "Path A (leave it as the gate has it): zero, and the register already says measurement is blocked behind Q-03. Path B (count untagged listing clicks as unattributed observations): restore the hook in _tools/cta.py, rewrite the p-01 assertion and the site-wide scan in _tools/check.py to require instead the sentence that says a counted click is not an attributed one, and update the E2 record in _src/data/events.json, which this branch restored to the gate's wording.",
       "risk": "Path A risks a site that ships with no idea which page works. Path B risks a number being read as performance evidence by someone who does not read the sentence under it. Path B also has to survive a reviewer's question about whether counting clicks on links Amazon cannot attribute invites any obligation in the Program Policies; nothing here claims it does or does not.",
-      "depends_on": "Q-03 (are clicks attributed at all) and Q-10 / Q-25 (a host and a collector)",
+      "depends_on": "Q-03 (are clicks attributed at all) and Q-10 / Q-28 (a host and a collector)",
       "recommendation": "Choose Path A for launch week, and revisit when one Special Link has been recorded and tested: at that point the counter has real links to count and the argument disappears. If the owner wants reader data before then, Path B is legitimate only with the 'not attributed' wording published beside the dashboard, not inside it.",
-      "evidence": "FLG-035 \u00b7 _tools/check.py (link-copy assertions) \u00b7 _src/data/events.json"
+      "evidence": "FLG-041 \u00b7 _tools/check.py (link-copy assertions) \u00b7 _src/data/events.json"
     }
   ]
 }

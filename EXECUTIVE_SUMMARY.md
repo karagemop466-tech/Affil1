@@ -3,8 +3,10 @@
 **What:** a live Amazon affiliate publication for air fryers and countertop cooking
 appliances, tracking ID `shopnow047c-20` (supplied by the owner; enrolment unverified).
 **Where:** https://karagemop466-tech.github.io/Affil1/
+**Latest pass:** 2026-11-20, marketing & publication upgrade, session `arena/10b5816b-affil1` (addendum at the end).
 **When:** 2026-11-20, integration pass by session `arena/359baa16-affil1`; counts and
-verification refreshed 2026-11-20 by session `arena/62b049f0-affil1` (see addendum at the end).
+verification refreshed 2026-11-20 by session `arena/62b049f0-affil1`; buyer-decision
+pass by session `arena/05771edb-affil1` (each addendum at the end of this file).
 **Repo:** `karagemop466-tech/Affil1`, published from `main` by GitHub Actions.
 
 ## Read this first: the three facts that matter
@@ -29,18 +31,21 @@ and checked page by page by `_tools/check.py`:
 - a comparison page with **two** tables: what the listings state, and what
   decision each product actually answers. The price and rating cells link to the
   live listing instead of sitting empty;
-- ten question-shaped guides across six clusters, all in `sitemap.xml` and
-  `feed.xml`;
-- a decision register of 24 questions, 10 answered with evidence;
-- a suggestion queue with three coherent paths and 21 proposals, of which some
-  are already implemented and are shown with evidence;
+- eleven question-shaped guides across six clusters, all in `sitemap.xml` and
+  `feed.xml` (one added 2026-11-20: reheating Thanksgiving leftovers, built from
+  USDA FSIS and FoodSafety.gov pages fetched that day);
+- a decision register of 24 questions, 10 answered with evidence and 4 that block
+  other work until they are answered;
+- a suggestion queue with three coherent paths and 24 proposals (18 open, 6 already
+  implemented and shown with evidence), each row carrying cost, risk and the question
+  it depends on;
 - an owner's "what is left" page (`/now/`), a ranked offers page (`/offers/`, 10
   weighted offers) and a per-page verification audit (`/verification/`);
 - a **decision registry** (`/decisions/`) of 7 open proposals, each carrying the
   official source and verbatim quote it is checked against, the single missing
   fact, the person who can close it, and an accept/hold/reject control recorded
   in the browser only;
-- 27 review flags, an image policy, an inert analytics client and an empty
+- 35 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
@@ -89,8 +94,8 @@ Notes that belong with that table, not under it:
 - **Topics/cluster pages** so the internal link graph is deliberate, and an editorial
   **queue** published in the open with the reason each candidate is there.
 - **Registers, demoted to the footer where a buyer will not trip over them:** source
-  register, flagged register (27 items, each with its source), suggestion board
-  (21 proposals), open questions (24, 10 answered with evidence; 14 still blocked and
+  register, flagged register (29 items, each with its source), suggestion board
+  (24 proposals), open questions (24, 10 answered with evidence; 14 still blocked and
   published as such), decision registry (7 proposals), operations ledger.
 - **No prices, ratings, review counts or stock anywhere** — enforced by a build-time
   check, not by a promise. Publishing them without a PA/Creators feed is prohibited, and
@@ -116,11 +121,19 @@ re-order it.
 | FLG-001 | Five 9-character codes, not ASINs | The intended product identity cannot be read from any official source |
 | FLG-002 | Tracking-ID attribution unconfirmed | Only the enrolled account's click report can confirm it |
 | FLG-003 | Compliance status of `link.amazon` destinations unresolved | Redirect + no tag: cannot be attributed as published; not declared invalid |
-| FLG-004 | P-04 resolved only on a third attempt | Two interstitials, then a fallback-flagged listing |
-| FLG-018 | Three arrivals carry `plpRedirect=mhFallback` | The published destination may be a fallback, not the intended product |
-| FLG-007 | Wattage, dimensions, warranty, noise blank | Not confirmable from an official source with this access |
-| FLG-014 | Contradiction between archived registers on P-03/P-05 | Recorded as a correction with both observations dated |
-| new | Two Pages deployments racing | Pages is set to a legacy branch build while Actions also publishes; owner decision on which is canonical |
+| FLG-004 | P-04 failed three times, then resolved; later observations disagree on which product it is | The P-04 identity rests on one disputed observation |
+| FLG-023 | Four recorded passes for P-04 saw only the bot interstitial | A single observation is not a settled identity |
+| FLG-025 | Open reading: may plain listing links stay untagged before a Special Link is validated | A policy interpretation the site cannot make for itself |
+| FLG-026 | P-01 short link returned the Amazon homepage on a 2026-11-20 fetch | Superseded by FLG-028, which found this for all five |
+| **FLG-028** | **All five short links returned the Amazon homepage, found independently by two sessions** | **The link form is unstable; it is not used as any destination on the site** |
+| FLG-029 | The 'Add to basket' links carry no tag and are not Special Links | Until an account-issued Special Link exists, no cart click can be attributed |
+
+> **Correction made in this pass.** Three rows of this table previously carried the wrong
+> flag IDs: a fallback-URL observation was attributed to FLG-018, a blank-specification
+> observation to FLG-007, and an archived-register contradiction to FLG-014. Those IDs now
+> belong to different findings (buy-button wording, AI illustrations and the empty ledger
+> respectively). The rows above have been rewritten to match the flags they actually cite.
+> The discrepancy was found by comparing each ID with its title in `_src/data/flags.json`.
 
 ## Decisions waiting for you, in the order that pays
 
@@ -146,6 +159,92 @@ current; the Associates account is enrolled, in good standing, or attributing; a
 traffic, conversion or revenue figure exists; or that Search Console / analytics are
 running. Every one of those would need a source this project does not have, so each is
 either blank with a reason, or a question on a page.
+
+## Latest pass — arena/05771edb-affil1 (2026-11-20)
+
+This pass changed two things that were wrong and three that were missing. It did not
+restyle the site and did not add a guide.
+
+### 1. The five supplied short links reached no product — a second, independent confirmation
+
+Each was requested once, in order, and followed. **All five returned
+`https://www.amazon.com/`** — title *"Amazon.com. Spend less. Smile more."* — not a `/dp/`
+listing. None carried `tag=shopnow047c-20`, because none arrived at a product page.
+
+This duplicates, and so corroborates, **FLG-028**, which session `arena/bcd93318-affil1`
+raised independently on the same day. Two sessions, two passes, same result. That flag is
+the published record; this section adds the one thing it did not cover — all five direct
+`/dp/` URLs were re-opened here and every title matched, including P-02 and P-03, which the
+first pass did not re-check.
+
+The finding is that the link form is **unstable**, which is the fifth distinct arrival
+behaviour recorded for this same set of links across sessions: a product listing, the
+Amazon homepage, and a `/checkpoint/continue` interstitial. It is *not* a claim that the
+links are invalid or non-compliant; that question stays open in FLG-003 and is not decided
+here, and no observed field was changed on the strength of any single fetch.
+
+**Nothing on the site depended on them.** Every buy button already points at the direct
+`/dp/` URL. All five direct URLs were re-opened in this pass and each returned a live
+product page whose `<title>` matched the recorded `listing_title` verbatim:
+
+| Ref | Direct destination re-verified 2026-11-20 | Capacity as stated in the data |
+|---|---|---|
+| P-01 | `amazon.com/dp/B0CDY277D3` — CHEFMAN 6 Quart Dual Basket Air Fryer Oven | 6 qt, as two 3-qt baskets |
+| P-02 | `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French Door Air Fryer Toaster Oven | 26 qt |
+| P-03 | `amazon.com/dp/B08DKYBTPH` — Chefman Air Fryer 8 Qt TurboFry 4-in-1 | 8 qt |
+| P-04 | `amazon.com/dp/B0DHZTCNR5` — ThermoMaven 1 Sec Professional Digital Meat Thermometer | n/a (thermometer) |
+| P-05 | `amazon.com/dp/B0DZFD6R9Z` — CHEF iQ Sense Smart Wireless Meat Thermometer, 3 probes | n/a (thermometer) |
+
+No price, rating, review count, stock level or availability figure was recorded, here or
+on the site, because Program Policies §2(b) permits those only from an Amazon-served feed
+and none is connected. `intended_asin`, `official_listing_url`, `confirmation_date`,
+`confirmation_source`, `approved_special_link` and `tracking_report_reference` all remain
+`null`: an observation of where a link lands cannot fill an intent field. A dated
+`observation_trail` was added to `_src/data/products.json` so the passes are visible side
+by side rather than averaged into one claim.
+
+### 2. A second 27-page site was telling crawlers to index it
+
+`edition/` (the "Countertop Almanac") is served from the same branch root. It shipped with
+its own `robots.txt` saying `Allow: /`, its own `sitemap.xml`, and **no `noindex` on any of
+its 27 pages** — a complete second publication competing with the canonical one for the
+same five product pages. That is the exact condition the "one site to index" rule exists
+to prevent, and it arrived after the earlier consolidation.
+
+Fixed without deleting anything: every `edition/` page now carries `noindex, follow`, its
+`robots.txt` is `Disallow: /`, and `_tools/check.py` gained `check_one_indexable_site()`.
+The new rule is a rule, not a list of directory names: it finds any `robots.txt` below the
+root and fails the build if that surface permits a crawl or if any of its pages lacks
+`noindex`. Negative-tested by temporarily restoring `Allow: /`, confirming the build
+fails, then restoring the fix.
+
+### 3. What was missing, and is now on the site
+
+- **Three new decision rows** on `/suggestions/`, each with cost, risk and dependency:
+  S-22 (never publish a short link as a buy destination — current behaviour, made a
+  standing rule), S-23 (give each product a five-minute check the reader can run in the
+  shop, the cheapest genuinely useful content change left), S-24 (decide what `edition/`
+  is for).
+- **Two questions refreshed** rather than answered: Q-01 and Q-02 now state both arrival
+  behaviours instead of the flattering one.
+- **FLG-008 reopened** in a narrower, accurate form; **FLG-026 marked superseded** by
+  FLG-028 because it described a one-link finding that is now a five-link one; and a
+  `corroborated_by` note added to FLG-028 recording the second independent pass.
+
+### 4. Gates after this pass
+
+`_tools/build.py` 34 pages · `_tools/check.py` **0 errors, 0 warnings** ·
+`_tools/validate.py` **1814 checks, 0 warnings** · `_tools/check_local_links.py` **0 broken
+references across 68 pages** · `_decision-support/validate.py` PASS ·
+`_platform/verify_edition.py` **1965 checks, 0 errors** · paid-link gate **6/6 tests pass**
+· rebuild **reproducible, zero drift**.
+
+### 5. What this pass could not do, and will not pretend to
+
+No Associates report was read, so **no click, order or commission is attributed** to
+`shopnow047c-20` and no revenue figure appears anywhere. Search Console is not connected,
+so no traffic or query is claimed. No product was tested, so no page says one was. Those
+three gaps need the account owner, and they sit at the top of the decision list above.
 
 ## Integration + verification pass (2026-11-20, arena/982fea5a-affil1)
 
@@ -180,7 +279,7 @@ https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-refe
 
 ### Toolchain on the merged tree (2026-11-20)
 
-- `python3 tools/build.py` — 29 pages.
+- `python3 _tools/build.py` — 29 pages at the time of that pass (34 after this one).
 - `python3 tools/check.py` — 0 errors, 0 warnings.
 - `python3 tools/check_local_links.py` — 0 broken relative references.
 - `python3 tools/validate.py` — 1441 checks, 0 warnings.
@@ -431,53 +530,142 @@ checks, build reproducible.
 active and lists this site, which ASIN each product was meant to be, and whether a
 click is credited. All three are read-only steps inside an Associates account.
 
+## Addendum — third-party pass, session `arena/d0594bc5-affil1` (2026-11-20)
+
+An independent session re-ran the core verification rather than trusting the
+board, and published its full receipt at
+`_data/verification-observations/2026-11-20-arena-d0594bc5.md`. Results:
+
+- **All five observed ASINs agree with the register.** Requesting
+  `amazon.com/dp/{B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z}`
+  directly returned product pages whose titles and breadcrumbs match
+  `products.json` row for row (arrival under Amazon's `plpRedirect=mhFallback`
+  fallback, recorded as the register requires). No price, rating or review count
+  was recorded, per the site's standing rule.
+- **All five submitted `link.amazon` URLs returned the Amazon homepage** in this
+  pass — a third arrival class on the same date (earlier passes saw product
+  pages and fetch errors). FLG-003 stays unresolved and nothing is claimed about
+  the links' validity; the operational conclusion (only account-validated
+  Special Links may carry the tag) is now proposal **S-30** on the decision queue.
+- **Policy sources re-read firsthand:** Operating Agreement (updated 2026-10-15,
+  §1 Special Links "tagged" formats) and Program Policies (Commission Income
+  Statement §2(e) Redirecting Link, §2(g) properly formatted). FTC FAQ and the
+  ASIN definition were verified firsthand earlier the same day by sessions
+  recorded on the board; links for manual review are in the receipt.
+- **Pages serving exposure confirmed, fix still owner-blocked.** This pass
+  observed `PUBLISHING_WORKFLOW.md` serving HTTP 200 on the live host. The
+  durable fix (flip Pages `build_type` to `workflow` so the staged 37-page
+  edition is served) was pre-flighted clean — 86 files staged, 37 pages, every
+  reference resolving — but the API call was refused to this environment
+  (HTTP 403, no Pages write scope). Filed as proposal **S-29** with exact owner
+  steps; ~20 stale open PRs are filed as proposal **S-31**.
+- **Queue and gates.** The suggestions queue is now 28 rows (18 open, 10 implemented). In this pass (rebased onto main before merge): `check.py` 0 errors/0
+  warnings, `validate.py` all checks pass, unit tests OK, local links 0 broken,
+  edition verify 1965 checks pass.
+
+## Marketing & publication pass (2026-11-20, arena/10b5816b-affil1)
+
+The brief for this pass: make the site read like a shop and a publication, not an
+audit; lead with products; publish catchy, question-shaped seasonal content that
+can earn organic traffic; and keep a reviewable decision board in front of any
+change. What shipped:
+
+- **Issue Nº 02, the holiday edit.** The front page now opens on a seasonal cover
+  with a gift-edit feature and the Black Friday checklist, timed against the live
+  shopping weekend (Amazon's own homepage was running its Black Friday Week event
+  when this session fetched it — recorded as a dated observation, not a claim).
+- **Four new question-shaped guides** (the site now holds seventeen), each built only from listing facts in the
+  register: *Which air fryer gift fits which cook?*, *Black Friday air fryer
+  deals: what should you check before you buy?*, *Is a wireless meat thermometer
+  worth it?*, *Which air-fryer accessories will you actually use?*
+- **Three new editorial illustrations** in the house engraving style, registered
+  in the image register with prompts and alt text, labelled as illustrations.
+- **Decision board extended**: S-32 (the seasonal issue, recorded as implemented
+  with evidence), S-33..S-36 (editorial calendar from measured queries,
+  comparison-page decision column, a single 'how we choose' page, and a
+  fortnightly owner-question ritual). Every row stays unimplemented until the
+  owner accepts it on /suggestions/.
+- **Question register extended**: Q-25 (which queries actually arrive — blocked
+  on Search Console), Q-26 (cadence and sign-off), Q-27 (do the seasonal modules
+  change clicks — blocked on measurement).
+- **Third independent verification pass over the five supplied links**
+  (obs-10b5816b). Result, recorded honestly: only P-05 reproduced its registered
+  destination in this pass (B0DZFD6R9Z, CHEF iQ Sense); the other four landed on
+  the Amazon homepage this time. That is consistent with the documented
+  instability of these redirectors and with earlier archived observations; it
+  does not refute the earlier successful arrivals, which remain dated
+  observations. FLG-003 stance unchanged: the short links' compliance status is
+  unresolved, not disproven.
+- **Repository drift resolved, nothing discarded**: concurrent sessions renamed
+  the working directories (`tools/` → `_tools/`, `src/` → `_src/`) and the
+  observation log had ended up only in an archived copy. The two verification
+  passes were restored to the active register verbatim and the incident logged on
+  the coordination board.
+
+### The owner checklist this pass leaves behind, in the order that pays
+
+1. Click one buy link on the live site, then read Reports → Orders in Associates
+   Central. That single check closes FLG-002 / Q-03 and is the only proof that
+   the site can earn (S-01).
+2. Verify Search Console and submit sitemap.xml. Every topic decision before
+   that is instinct; after 28 days it is data (S-03, Q-23).
+3. Choose a path on /suggestions/ (Shop first, Publication first, Measure first),
+   then mark the rows. Nothing on that page has been implemented by anyone
+   pressing a button.
+4. Name an editor, or accept the honest desk-level byline (S-02).
+5. Answer Q-26 in one line: cadence, reviewer, and the sign-off rule.
+
+Everything else — API access, custom domain, product photography, paid
+acquisition — is sequenced behind those five and documented on /suggestions/.
+
 
 ---
 
-## Session addendum — arena/3e17592d-affil1 (2026-11-20): the machinery you cannot see was the part that was broken
+## Session addendum — arena/3e17592d-affil1 (2026-11-20): the plumbing under "measure first" was the part that was broken
 
-You asked for a site that reads like a shop, with measurement switched on first and compliance
-gated rather than asserted. This pass went after the plumbing under that sentence, because four
-of its supports were not load-bearing.
+**What was wrong.** Four things you cannot see from a browser were failing quietly. The click
+counter could never fire, because the attribute it watches was emitted only on tagged links and
+the site deliberately publishes untagged ones. The collector behind it could not import at all,
+and CI never noticed, because it checked that file's *syntax* rather than running its tests. The
+step that reported "platform tests: 45 passed" was running **CPython's own standard library** and
+testing nothing of yours. And the one program you would use to arm a link crashed on a stale path
+before it could print its first state line. All four are fixed, and each fix was demonstrated
+failing before it was demonstrated passing.
 
-**What was actually wrong, and is now not.** The click counter could never fire, because the
-attribute it watches was only emitted on tagged links and the site deliberately publishes
-untagged ones; the collector behind it could not import at all, and CI never noticed because it
-checked that file's *syntax*; the CI step that "tested the platform" was running CPython's own
-standard library and reporting 45 passes; and the one program the owner would use to arm a link
-crashed before printing a single state line. All four are fixed, and each fix was shown failing
-before it was shown passing. Where the fix required a judgement that was not this session's to
-make — whether to count clicks the account cannot attribute — the code follows the gate that
-`main` grew in the same day, and the choice is on the reviewable queue as S-30 with both paths
-priced.
+**Where a judgement was yours, it stayed yours.** Counting clicks on links the account cannot
+attribute is arguably a misleading metric and arguably the only way to learn which page works
+before anything is armed. While this branch was open the repository grew a gate that forbids the
+first position, so the code now follows the gate and the alternative is written up as a decision
+row with both paths priced (S-41), not slipped in sideways.
 
-**One site, and now a rule that cannot rot.** The repository was publishing two branded
-publications of the same five listings, both indexable. The annex under `/edition/` is now
-explicitly an annex: held out of the index on every page, visibly pointing readers back to the
-shop, advertising no second sitemap, and asserted per page by the edition verifier so the next
-template edit cannot quietly undo it. It also had a contradiction of its own — one session's
-`Disallow: /edition/` blocked the crawl that had to read another session's `noindex` tag, the
-worst of both — which is resolved in favour of the tag (FLG-039).
+**One site, and now a rule that cannot rot.** `edition/` was a second fully indexable publication
+of the same five listings under a second brand. It is now an annex that a crawler is told to leave
+out of the index, that says so to a reader who lands there, and that is *checked* per page by the
+edition verifier — so the next template edit cannot quietly undo it. That pass also removed a
+contradiction two sessions had created without noticing: a `Disallow: /edition/` line in the root
+robots.txt blocked the very crawl that had to read the `noindex` tag, which is the one outcome
+that guarantees indexed annex pages with no description. The tag is now the single mechanism
+(FLG-041).
 
-**The storefront gained the three articles it was missing.** Not more decision guides: the
-questions a buyer types at the moment of doubt. *Is chicken in an air fryer actually done?*
-*Is my thermometer telling the truth?* *What about the food that sat out all evening?* Every
-number in them is quoted from a USDA FSIS fact sheet fetched and read on 2026-11-20 — safe
-minimum internal temperatures, probe placement for thin pieces, the ice-water calibration
-procedure, the two-hour rule — and every product sentence is the seller's own listing wording.
-Nothing was tested here, and each page says so in its closing note.
+**Two guides, not three — and one better for it.** This session drafted chicken-doneness,
+ice-water calibration and two-hour-leftovers guides. `main` published a leftovers guide in the
+meantime that covered the third more thoroughly, so the duplicate was withdrawn and its two
+non-overlapping blocks (cooling mechanics, the day-after checklist) were folded into the version
+already in the sitemap. What ships: *Is chicken in an air fryer actually done?* and *Is your
+thermometer telling the truth?* — every figure quoted from a USDA FSIS fact sheet fetched and read
+on 2026-11-20 (safe minimum internal temperatures, probe placement for thin pieces, the ice-water
+and boiling-water procedures), every product sentence limited to the seller's own listing wording,
+each page closing with a plain statement that nothing here was tested.
 
-**Two new gates, both negative-tested.** A merge that renumbered one session's sources had left
-three citations pointing at the wrong *documents* — not dangling, just wrong — and a compliance
-rule that sampled one page had let four pages publish exactly what it forbade. There is now a
-gate that fails when a published image has no row in the image policy register, a gate that
-checks cross-register citations resolve and cover what the citing record talks about, and the
-attribution rule scans every generated page instead of one file. Each was verified by breaking
-it on purpose.
+**Two gates that were missing, both verified by breaking them.** A published image can no longer
+lack a row in the image-policy register, and citations between registers must resolve, must cover
+the subject of the citing row, and — for guides — must point at a dated register entry. The second
+one exists because a merge silently repointed three citations at the wrong documents: `main` had
+renumbered `SRC-18..20`, and no dangling-id check can see a reference that resolves to the wrong
+*thing*.
 
-**What is still yours to decide.** Nothing about arming a link changed: the register still holds
-five `null` approvals, the site still publishes reference links only, and no traffic, order,
-conversion or revenue figure is claimed anywhere. The open decisions worth your time are Q-25
-(which collector, if any), Q-26 (whether guides may quote food-safety limits beside buy
-buttons), Q-27 (what happens when a cited government page changes) and S-30 (count unattributed
-clicks or measure nothing until the account is armed). The first three are one paragraph each.
+**Still yours to decide.** Q-28 which collector is canonical (three exist, one reads a dead path),
+Q-29 whether guides may quote food-safety limits beside buy buttons, Q-30 what happens when a
+cited government page changes, S-41 whether to count unattributed clicks. Nothing about arming a
+link changed: the register still holds five `null` approvals, the site still publishes reference
+links only, and no traffic, order, conversion or revenue figure is asserted anywhere.

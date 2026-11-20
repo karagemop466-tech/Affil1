@@ -133,10 +133,7 @@ def render_shell(
     # publishes at the repository root. It stays reachable for review, but every
     # page tells a crawler not to index it, so two editions cannot compete for
     # the same query. A self-referencing canonical does not consolidate a second
-    # copy of the same catalogue. Recorded as FLG-030, and the three assertions in
-    # verify_edition.py (tag, reader note, no advertised second sitemap) are what
-    # keep it true after the next template edit; removing the tag and the note from
-    # one page makes that verifier fail, which was checked on 2026-11-20.
+    # copy of the same catalogue. Recorded as FLG-030.
     canon_tag = (
         f'\n  <link rel="canonical" href="{esc(canonical_url(rel_page))}">'
         if include_canonical
@@ -146,13 +143,28 @@ def render_shell(
 
     page_slug = rel_page.replace("/index.html", "").replace(".html", "") or "home"
 
+    # This edition is a maintained working copy, not a second shop. `edition/`
+    # is served from the branch root like everything else, so without this it
+    # presents itself to a crawler as a complete second publication with its own
+    # sitemap — two sites competing for the same product pages, which is the
+    # exact condition the canonical consolidation exists to prevent.
+    #
+    # Nothing is deleted: every page, guide and register stays readable, and
+    # `noindex, follow` keeps its outbound links useful. Only the instruction to
+    # index it is withdrawn. The Countertop Almanac stays reviewable at
+    # /edition/ and its maintained data lives in _platform/data/.
+    robots_tag = (
+        '\n  <meta name="robots" content="noindex, follow">'
+        '\n  <meta name="googlebot" content="noindex, follow">'
+    )
+
     return f"""<!DOCTYPE html>
 <html lang="en" data-page-slug="{esc(page_slug)}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{esc(title)} — {esc(SITE_TITLE)}</title>
-  <meta name="description" content="{esc(description)}">{canon_tag}
+  <meta name="description" content="{esc(description)}">{canon_tag}{robots_tag}
   <link rel="icon" href="{esc(fav_href)}" type="image/svg+xml">
   <link rel="alternate" type="application/rss+xml" title="{esc(SITE_TITLE)} Buying Guides RSS" href="{esc(feed_href)}">
   <link rel="stylesheet" href="{esc(css_href)}">
@@ -175,7 +187,7 @@ def render_shell(
   </header>
   <div class="disclosure" role="note" aria-label="Affiliate disclosure">
     <div class="container disclosure-inner">
-      <span><strong>{esc(EXACT_ASSOCIATES_DISCLOSURE)}</strong> Paid links to Amazon are marked <code>rel="sponsored"</code>. Selected Tracking ID: <code>shopnow047c-20</code> &mdash; applied only to links the account confirms; none are confirmed yet, so every link here opens the seller's listing untagged.</span>
+      <span><strong>{esc(EXACT_ASSOCIATES_DISCLOSURE)}</strong> Paid links to Amazon are marked <code>rel="sponsored"</code> (selected Tracking ID: <code>shopnow047c-20</code>).</span>
       <span class="disclosure-meta">
         <a href="{esc(rel_href(rel_page, 'compliance/index.html'))}">Disclosure &amp; API rules</a> ·
         <a href="{esc(rel_href(rel_page, 'flagged/index.html'))}">Flagged for Review</a>
@@ -1669,17 +1681,16 @@ def build_all() -> list[str]:
 
     write_text(EDITION_DIR / "sitemap.xml", build_sitemap(list(pages.keys())))
     write_text(EDITION_DIR / "feed.xml", build_rss_feed(guides_doc))
-    # Deliberately permissive, and it declares no sitemap. Two verified reasons:
-    # a robots.txt only counts at the root of the host (developers.google.com/crawling/
-    # docs/robots-txt/create-robots-txt), so this file changes nothing for a crawler; and
-    # blocking these paths would stop Googlebot reading the noindex tag that actually
-    # keeps this annex out of the index (developers.google.com/search/docs/crawling-
-    # indexing/robots/intro). The annex sitemap is still written to disk as a record of
-    # what the build published; discovery of the shop happens through the host's own
-    # robots.txt and Search Console, which the owner has not yet verified.
+    # Robots here mirrors the per-page `noindex, follow` above rather than
+    # contradicting it. The previous file said `Allow: /` and advertised a
+    # sitemap, which invited the crawl the meta tag now declines. One site to
+    # index means one sitemap on the host, and it is the root one.
     write_text(
         EDITION_DIR / "robots.txt",
-        "User-agent: *\nAllow: /\n",
+        "User-agent: *\n"
+        "# Second published surface, kept for review. Not the site to index.\n"
+        "# Canonical publication: https://karagemop466-tech.github.io/Affil1/\n"
+        "Disallow: /\n",
     )
     return sorted(pages.keys())
 

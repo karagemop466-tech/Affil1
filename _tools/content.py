@@ -640,6 +640,216 @@ GUIDES.append({
 })
 
 
+# --- Seasonal and trend-led additions, 2026-11-20 ----------------------------
+# Written for the questions people actually type in late November: the shopping
+# weekend, the gift list, the gadget of the moment, and the accessory drawer.
+# Same editorial rule as everything above: product facts come only from listing
+# titles in src/data/products.json; no price, rating, review count or test claim.
+
+GUIDES.append({
+    "slug": "black-friday-air-fryer-checklist",
+    "cluster": "Before you buy",
+    "kicker": "Seasonal shopping",
+    "title": "Black Friday air fryer deals: what should you check before you buy?",
+    "dek": "A discount on the wrong shape is still the wrong purchase. Five minutes with a tape measure and a listing beats an evening with a returns label.",
+    "read_minutes": 5,
+    "photo": "assets/img/black-friday-checklist",
+    "photo_alt": "An engraved illustration of an open notebook, pencil, kitchen timer and coiled tape measure on a counter, with an unbranded air fryer drawn softly behind",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-01", "P-03", "P-02"],
+    "sections": [
+        {
+            "h": "A deal only matters on the machine you would have bought anyway",
+            "p": [
+                "The shopping weekend changes the price tag, not the decision. The format question \u2014 drawer or door, one basket or two \u2014 is exactly the same in November as it is in March, and getting it wrong is expensive at any discount.",
+                "So decide the shape first, with the guides on this site or a piece of paper, and only then go looking at what is on offer. A shortlist of one or two models is all you need; everything else is noise with a countdown on it.",
+            ],
+        },
+        {
+            "h": "The five checks that take five minutes",
+            "items": [
+                ("The format", "Basket, dual-basket or oven-style. If you have not answered this yet, stop reading deals and read the shape guide first."),
+                ("The measurements", "Width and depth of the counter space, height to the cabinet above, and the distance to the nearest socket. Measure the space, not the feeling."),
+                ("The batch reality", "Write down the meal you cook most and how many people eat it. That decides capacity more than any number on the box."),
+                ("The wash-up", "Count the pieces that need washing: one or two drawers, or a rack, a tray and the accessories. Every piece is a piece you own forever."),
+                ("The listing read", "Open the product page and read the title clause by clause. The first clause is usually the job; the rest is the ambition."),
+            ],
+        },
+        {
+            "h": "What to do on the product page itself",
+            "p": [
+                "Amazon serves the current figure, the availability and the delivery date on the listing, and those are the values to read \u2014 this site deliberately publishes none of them, because a copied number is a stale number (SRC-02). Click through from here and read them where they are live.",
+                "While you are there, check the model variant selected on the page. The same title can cover more than one size or colour, and the variant you saw in a promotion is not always the variant the page opens on. Check the return window shown on the listing too, and keep the packaging until you have measured the machine in your kitchen.",
+            ],
+        },
+        {
+            "h": "Where this site helps, and where it stops",
+            "p": [
+                "Everything here is built to make the decision clearer before the shopping starts: the shape guide, the capacity checklist, the space audit and the cleanup guide. What this site does not do is rank machines, score them, or claim anyone cooked with them.",
+                "When you click a product link on this site and buy on Amazon, this site may earn a commission \u2014 that is what the disclosure strip above says on every page, and it costs you nothing extra. It does not change what is written here.",
+            ],
+        },
+        {
+            "h": "If the box arrives and it is wrong",
+            "p": [
+                "It happens: the variant was wrong, the counter was optimistic, the drawer is louder than expected. Return it. An unused machine sent back promptly is a much cheaper mistake than a machine that lives in a cupboard for a year to avoid admitting the mistake.",
+                "Then write down what was wrong before you shop again. Most returns come from one of the five checks above, and the note takes thirty seconds.",
+            ],
+        },
+    ],
+    "closing": "Seasonal framing is editorial. Amazon's homepage was running its Black Friday Week event on 2026-11-20, recorded here as a dated observation only \u2014 no deal, figure or offer is claimed. Product descriptions on this site are transcribed from listing titles reached on 2026-11-20. No product on this site was tested, ranked or scored.",
+})
+
+GUIDES.append({
+    "slug": "air-fryer-gift-guide",
+    "cluster": "Seasonal",
+    "kicker": "The gift edit",
+    "title": "Which air fryer gift fits which cook?",
+    "dek": "Match the format to the person, not the badge on the box. A short guide to giving a countertop appliance someone will actually use in February.",
+    "read_minutes": 5,
+    "photo": "assets/img/gift-edit",
+    "photo_alt": "An engraved illustration of a wrapped gift beside an unbranded air fryer and a probe thermometer on a wooden counter, with sprigs of pine",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-01", "P-02", "P-05"],
+    "sections": [
+        {
+            "h": "Give the format, not the feature list",
+            "p": [
+                "The kindest thing you can do for someone's counter is match the shape of the machine to the shape of their dinners. Everything else \u2014 the presets, the windows, the app \u2014 is second-order. The drawer-versus-door question is first.",
+                "So think about how that person cooks on a normal Wednesday, not on the day they talk about dinner parties. The Wednesday version is who will use the gift.",
+            ],
+        },
+        {
+            "h": "Five people, five sensible gifts",
+            "items": [
+                ("The cook whose dinner comes in two parts", "A dual-basket machine. P-01's listing states two independent 3-quart drawers and a sync-finish setting \u2014 one drawer for the main, one for the side, landing together."),
+                ("The family that cooks one big batch", "A single large basket. P-03's listing states an 8-quart basket in one container, which is the shape that takes a family portion without splitting it."),
+                ("The host who is always short of oven space", "An oven-style machine. P-02's listing states a 26-quart French-door cavity and six cooking accessories \u2014 a second oven for the side dishes and the overflow."),
+                ("The one who reads the thermometer, not the timer", "A leave-in probe set. P-05's listing states three wireless probes and names air fryers among its uses."),
+                ("The no-fuss cook who wants a drawer and nothing else", "An instant-read thermometer instead. P-04's listing states a one-second reading \u2014 the smallest, cheapest way to stop guessing."),
+            ],
+        },
+        {
+            "h": "The measurement nobody thinks to take",
+            "p": [
+                "Before the wrapping paper: how much counter can the person actually give up, and is there a cabinet above? A drawer needs room to lift out; French doors swing forward into the space where a person stands.",
+                "If you cannot measure their kitchen without spoiling the surprise, give a tape measure with the gift. It is a joke and a genuinely useful thing, and it turns a possible return into a plan.",
+            ],
+        },
+        {
+            "h": "What tends to go wrong with appliance gifts",
+            "p": [
+                "The machine is bigger or louder than expected. The colour is not the colour in the picture. The box is opened, used twice, and quietly adopted by the gift-giver instead. None of these are reasons not to give one \u2014 they are reasons to keep the receipt, buy from a listing with a clear return window, and include the person in the format decision if they are the sort who has opinions.",
+                "The other classic mistake is giving accessories before the machine. A rack for a machine nobody owns is clutter with a ribbon on it. If you want to give extras, give them next to the machine, not instead of it.",
+            ],
+        },
+        {
+            "h": "A gift receipt is part of the gift",
+            "p": [
+                "Listings change. Variants multiply. The machine that was in the promotion may not be the machine the page opens on a week later. A gift receipt turns that entire problem from awkward into trivial.",
+            ],
+        },
+    ],
+    "closing": "Product attributes are the sellers' own wording, transcribed from listing titles reached on 2026-11-20. No product on this site was tested, ranked or scored, and nothing here is a claim that any machine cooks well.",
+})
+
+GUIDES.append({
+    "slug": "wireless-thermometer-worth-it",
+    "cluster": "Tools",
+    "kicker": "Tools \u00b7 wireless probes",
+    "title": "Is a wireless meat thermometer worth it?",
+    "dek": "The gadget of the moment answers a real question \u2014 but only if you cook the kind of food that has a middle to get wrong.",
+    "read_minutes": 5,
+    "photo": "assets/img/thermometer",
+    "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-05", "P-04"],
+    "sections": [
+        {
+            "h": "What wireless actually changes",
+            "p": [
+                "A leave-in probe stays in the food while it cooks and reports the middle to a base or a phone. The promise is simple: you stop opening the drawer to check, and you stop guessing. For a roast or a whole bird in a small cavity, that is a genuine change \u2014 every opening costs heat, and the centre is the one place you cannot look.",
+                "For thin pieces \u2014 wings, thighs, fish, vegetables \u2014 the change is smaller. You can read those in seconds with a hand-held probe, and a leave-in probe is more setup than the job needs.",
+            ],
+        },
+        {
+            "h": "Five questions before you buy",
+            "items": [
+                ("What do you actually cook?", "Roasts and whole birds make the case for wireless. Mostly pieces? An instant read does the same job from a drawer."),
+                ("How many things at once?", "P-05's listing states three probes \u2014 useful when a roast and two sides share the cavity. One dish at a time does not need three."),
+                ("Does the heat rating cover your machine?", "P-05's listing states a 1000\u00b0F heat rating, per the seller. Check any probe's stated rating against the temperatures you actually run."),
+                ("Will you live with the base?", "Wireless probes still need somewhere to sit, something to charge and often an app. Countertop space is the currency of this whole category."),
+                ("Is the answer maybe both?", "Many cooks end up with one of each: an instant read for the weeknight, a leave-in for the Sunday roast. P-04 states a one-second reading; P-05 states the wireless set. They solve different halves of the same problem."),
+            ],
+        },
+        {
+            "h": "What it does not do",
+            "p": [
+                "A probe does not make food safe on its own \u2014 it tells you a number, and the number is only useful if the probe is in the right place. USDA FSIS states that colour and texture are unreliable and that a thermometer placed in the thickest part, away from bone, fat and gristle, is the reliable check (SRC-09).",
+                "It also does not fix a badly planned cook. A probe helps you hit the middle; it does not help you fit the tray or time the table. Those are the capacity and hosting questions, and they have their own guides.",
+            ],
+        },
+        {
+            "h": "The pairing most people land on",
+            "p": [
+                "If the budget is one tool, buy the instant read first \u2014 it answers the everyday question and disappears into a drawer. If you cook roasts often, or you are buying a gift for someone who does, the wireless set is the one they will actually brag about.",
+                "Either way, spend on the thermometer before you spend on a bigger machine. Capacity changes how much you cook; temperature changes whether it is any good.",
+            ],
+        },
+    ],
+    "closing": "P-04 and P-05 attributes are the sellers' wording from listing titles reached on 2026-11-20. No thermometer on this site was tested, and no accuracy claim is made beyond what the listings state. Safe-temperature guidance is USDA FSIS's, linked above.",
+})
+
+GUIDES.append({
+    "slug": "air-fryer-accessories-checklist",
+    "cluster": "Before you buy",
+    "kicker": "Before you buy \u00b7 accessories",
+    "title": "Which air-fryer accessories will you actually use?",
+    "dek": "The drawer fills up fast \u2014 liners, racks, tongs, mats, moulds. A short filter for what earns space and what becomes expensive clutter.",
+    "read_minutes": 4,
+    "photo": "assets/img/accessories-tray",
+    "photo_alt": "An engraved illustration of an open kitchen drawer with unbranded air-fryer accessories: tongs, a silicone mat, a wire rack, parchment liners and a brush",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "updated": "2026-11-20",
+    "related": ["P-02", "P-01", "P-04"],
+    "sections": [
+        {
+            "h": "The accessory rule",
+            "p": [
+                "An accessory earns its place only if it solves a problem you have already had twice. Everything else is clutter with a product page. The test is not \u201cwould this be useful one day\u201d \u2014 it is \u201cdid I miss this last week\u201d.",
+                "The second filter: check what is already in the box. P-02's listing states six cooking accessories included; P-01 and P-03 state their baskets and trays. Read the listing before buying a duplicate of something you already own.",
+            ],
+        },
+        {
+            "h": "What tends to earn its place",
+            "items": [
+                ("Liners for the cleanup", "If washing up is the reason the machine sits idle, liners attack the actual problem. The cleanup guide works through what each shape needs."),
+                ("Tongs that fit the drawer", "Short, soft-ended tongs you can work inside a hot basket. The ones from the big-tool-jar are usually too long and too clumsy."),
+                ("A mat for the counter", "Heat protection for the surface under and around the machine \u2014 the boring purchase nobody regrets."),
+                ("A rack only if the manual allows it", "Stacking changes how air moves. If the exact model's manual says a rack or stacking is supported in the mode you use, fine. If it is silent, assume it is not a good idea."),
+            ],
+        },
+        {
+            "h": "What tends to gather dust",
+            "items": [
+                ("Unitaskers", "Anything that makes one specific shape of one specific food. Fun in the product photo, unused by the third week."),
+                ("Oversized inserts", "If an insert shrinks the food area you actually use, it has made the machine smaller. Measure the basket before the accessory goes in the cart."),
+                ("Second copies of included parts", "The most common accessory purchase is a spare of something the box already contained."),
+            ],
+        },
+        {
+            "h": "Where the money usually goes further",
+            "p": [
+                "A thermometer. Accessories change the convenience of the cook; a probe changes the result \u2014 and it is the one tool that works across every machine you will ever own. If the gift budget or the treat-yourself budget is small, that is where it goes first.",
+            ],
+        },
+    ],
+    "closing": "Included-accessory claims are the sellers' wording from listing titles reached on 2026-11-20. No accessory on this site was tested, and compatibility with any specific machine is a question for that machine's manual, not for this page.",
+})
+
 COMPARE_COLUMNS = [
     ("Product", "Brand and shape as stated on the listing"),
     ("Shape", "Basket, oven or thermometer, read from the title and category path"),
@@ -653,18 +863,114 @@ COMPARE_COLUMNS = [
 # _src/data/products.json so that a fact can never exist in two places and drift.
 
 
-# ---------------------------------------------------------------------------
-# Added 2026-11-20 (session arena/3e17592d-affil1): three guides written to the
-# same editorial rule as the set above - a factual sentence ships only with an
-# official source behind it, and the only product facts used are the listing
-# titles transcribed in _src/data/products.json. Each of these answers a question
-# people actually arrive asking, in the words they use, and each one ends at a
-# thermometer or a basket rather than at a verdict.
-# Sources quoted, retrieved and read on 2026-11-20:
-#   https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers
-#   https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety
-# ---------------------------------------------------------------------------
+# Appended 2026-11-20 (arena/3d6a7607-affil1). Every figure below was transcribed
+# on 2026-11-20 from the two official pages listed in `sources`: the USDA FSIS
+# "Leftovers and Food Safety" page (fsis.usda.gov, Last Updated Jul 31, 2020) and
+# the FoodSafety.gov "Cold Food Storage Chart" (foodsafety.gov, Date Last Reviewed
+# September 19, 2023). Nothing here is a product test, and no appliance-specific
+# reheating setting is endorsed: the official rules are about temperature and time.
+GUIDES.append({
+    "slug": "reheating-thanksgiving-leftovers",
+    "cluster": "Seasonal",
+    "related": ["P-04", "P-03"],
+    "title": "Reheating Thanksgiving leftovers in an air fryer: what is safe?",
+    "kicker": "Seasonal kitchen · the day after",
+    "dek": "The fan brings the crunch back. The rules that keep leftovers safe come from a thermometer and a clock, not the appliance \u2014 and the official ones are simpler than most articles make them.",
+    "updated": "2026-11-20",
+    "read_minutes": 6,
+    "photo": "assets/img/leftovers",
+    "photo_alt": "An engraved illustration of an open air fryer drawer holding sliced turkey and roasted vegetables, with a food thermometer on the counter beside it",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "sections": [
+        {
+            "h": "The clock starts when the meal ends, not when you feel hungry again",
+            "p": [
+                "USDA's Food Safety and Inspection Service puts the line plainly: bacteria grow rapidly between 40\u00b0F and 140\u00b0F, and within 2 hours of cooking \u2014 or of coming out of an appliance that was keeping it warm \u2014 leftovers must be refrigerated. Perishable food left out longer than 2 hours gets thrown away; if the room is over 90\u00b0F, the window drops to 1 hour.",
+                "On the day itself that rule collides with hospitality. The practical version that respects both: while the table is still up, put a shallow container next to the serving dishes and pack the turkey into it in slices, not in a lump. FSIS's cooling advice is exactly that \u2014 divide large amounts into shallow containers and cut big items into smaller pieces so the cold reaches the middle fast. Slice the breast meat; legs and wings can go in whole.",
+                "None of that is about the air fryer. It is the part of the day-after that decides whether reheating is even on the table.",
+            ],
+        },
+        {
+            "h": "The fridge window, and where the freezer line sits",
+            "p": [
+                "Both of the official charts this guide leans on agree on the refrigerator: cooked meat or poultry keeps 3 to 4 days at 40\u00b0F or below. After that, the rule is the bin, not the sniff test.",
+                "The freezer numbers look different on the two pages until you read their footnotes. FoodSafety.gov's storage chart gives cooked meat or poultry 2 to 6 months in the freezer; FSIS's leftovers page says 3 to 4 months. The chart's own note explains the slack: freezer guidelines are for quality only \u2014 food held continuously at 0\u00b0F stays safe indefinitely, it just loses moisture and flavour over time. So the honest summary is: safe for longer than it is good.",
+            ],
+        },
+        {
+            "h": "The one number that decides the reheat",
+            "p": [
+                "Whatever appliance brings the food back, FSIS's reheating rule is a single sentence: leftovers must reach 165\u00b0F as measured with a food thermometer. Sauces, soups and gravies get their own instruction \u2014 bring them to a rolling boil \u2014 and that is a saucepan job before it is anything else.",
+                "The same page adds two reheating habits that matter more than any setting: cover the food while it reheats, because trapped moisture helps it heat all the way through, and when a microwave was involved, check more than one spot \u2014 FSIS warns that microwaves leave cold spots and says to verify the temperature in several places. That caution is written for microwaves, but checking the middle in two places is the honest way to treat any reheating method, including this one.",
+                "This is also where a thermometer earns its drawer space. An instant-read like the one in the shortlist answers the only question the appliance cannot: what the middle actually reached.",
+            ],
+            "table": {
+                "caption": "Storage and reheating figures, transcribed from the official pages on 2026-11-20",
+                "headers": ["Situation", "Official figure", "Official source"],
+                "rows": [
+                    ["Cooked meat or poultry in the refrigerator, 40\u00b0F or below", "3 to 4 days", {"url": "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts", "label": "FoodSafety.gov · Cold Food Storage Chart"}],
+                    ["Cooked meat or poultry in the freezer, 0\u00b0F or below", "2 to 6 months (quality, not safety)", {"url": "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts", "label": "FoodSafety.gov · Cold Food Storage Chart"}],
+                    ["Perishable food left out at room temperature", "Refrigerate within 2 hours; discard after (1 hour if the room is over 90\u00b0F)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety", "label": "USDA FSIS · Leftovers and Food Safety"}],
+                    ["Reheating leftovers of any kind", "165\u00b0F, measured with a food thermometer", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety", "label": "USDA FSIS · Leftovers and Food Safety"}],
+                    ["Sauces, soups and gravies", "Bring to a rolling boil", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety", "label": "USDA FSIS · Leftovers and Food Safety"}],
+                ],
+            },
+        },
+        {
+            "h": "Where the air fryer genuinely fits \u2014 and where it pulls against the rules",
+            "p": [
+                "Firm pieces with surface to crisp \u2014 roast potatoes, wedges, a breast sliced thick enough to keep its interior moist \u2014 are the leftovers a moving column of hot air treats kindly. Soft or sauced food has nothing to gain, and gravy has an instruction of its own already.",
+                "Here is the tension worth naming: FSIS says cover leftovers to reheat, because moist heat helps the food heat evenly all the way through. A fan appliance is good at the opposite \u2014 dry, moving air that crisps the surface. Those two goals pull in opposite directions, and the safety rule does not decide between them. Cover or uncover is a texture decision. The thermometer check is the safety decision, and only one of the two is negotiable about the number.",
+                "If the basket would be packed solid, run it in batches with space for air to move. That is appliance common sense rather than official instruction, and the manual for the exact model is the authority on how it heats.",
+            ],
+        },
+        {
+            "h": "What the official guidance does not say",
+            "p": [
+                "No federal page endorses an air-fryer reheat, and none publishes a minutes-and-power setting for one. The official rules are about temperature and time, not about which appliance applies them. So when another article hands you \u201c370\u00b0F for 4 minutes\u201d for leftover turkey, that number is the author's machine, not a safety figure \u2014 the same class of unstated provenance this site refuses to publish.",
+                "The official way to think about it: 165\u00b0F in the middle is the requirement; the appliance is just the route. FSIS's note on reheating frozen leftovers without thawing makes the same point in passing \u2014 a saucepan, microwave or oven all qualify, and the only cost is time.",
+            ],
+        },
+        {
+            "h": "Day-after questions, answered from the sources",
+            "items": [
+                ("Reheat straight from the freezer?", "FSIS says it is safe to reheat frozen leftovers without thawing, and that it simply takes longer than reheating thawed food."),
+                ("Refreeze what you already reheated?", "Safe, per FSIS, once the food was reheated to 165\u00b0F with a food thermometer."),
+                ("How long do the extras keep?", "Three to 4 days in the refrigerator. Frozen, quality holds 2 to 6 months for cooked meat or poultry by the chart; safety lasts longer than quality does."),
+                ("What about the gravy?", "Its official instruction is a rolling boil, which is a saucepan instruction. Reheat it with everything else, then judge."),
+            ],
+        },
+        {
+            "h": "Cooling it quickly is a technique, not a vibe",
+            "items": [
+                ("Divide it", "Large amounts go into shallow containers. A deep pot of soup cools slowly in the middle, which is the window the rule is about."),
+                ("Cut it", "For whole roasts or hams, slice or cut into smaller parts. FSIS's turkey example is specific: slice the breast meat, legs and wings may be left whole."),
+                ("Do not wait for it to reach room temperature", "Hot food can be placed directly in the refrigerator, or rapidly chilled in an ice or cold water bath first. Waiting is the thing being avoided."),
+                ("Seal it", "Cover, wrap airtight or seal in a container: it keeps bacteria out, holds moisture in and stops the leftovers taking on the fridge."),
+            ],
+        },
+        {
+            "h": "The day-after checklist",
+            "items": [
+                ("Note the time it came out of the oven", "The 2-hour clock starts there, not when you finish eating."),
+                ("Shallow containers, sliced meat", "Divide before you refrigerate, not after."),
+                ("Date on the lid", "3 to 4 days in the fridge is the whole allowance."),
+                ("165 degrees F on the reheat", "Measured in the thickest part, with a thermometer you have checked."),
+                ("When in doubt", "The guidance is to throw it out. There is no upside to winning that argument."),
+            ],
+        },
+    
+    ],
+    "sources": [
+        ("USDA FSIS · Leftovers and Food Safety (Last updated Jul 31, 2020)", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety"),
+        ("FoodSafety.gov · Cold Food Storage Chart (Date last reviewed Sep 19, 2023)", "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts"),
+    ],
+    "closing": "The storage and reheating figures above are transcribed from USDA FSIS and FoodSafety.gov pages fetched on 2026-11-20, and the table links the page each row came from. No product on this site was tested, and no appliance-specific reheating setting is endorsed here \u2014 the manual for your model is the authority on how it heats.",
+})
 
+
+# URLs read and quoted on 2026-11-20; the register rows that date them are
+# SRC-09 (food thermometers) and SRC-21 (leftovers), see _src/data/sources.json.
 FSIS_THERMOMETERS = ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/"
                      "food-safety-basics/food-thermometers")
 FSIS_LEFTOVERS = ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/"
@@ -810,73 +1116,4 @@ GUIDES.append({
         },
     ],
     "closing": "Every tolerance, step and caution on this page is quoted from the USDA Food Safety and Inspection Service fact sheet 'Food Thermometers', read on 2026-11-20. The accuracy, certification, waterproof and heat-safety wording attributed to P-04 and P-05 is the sellers' own listing text; none of it was tested or confirmed here.",
-})
-
-GUIDES.append({
-    "slug": "leftovers-two-hour-rule",
-    "cluster": "Seasonal",
-    "kicker": "The day after",
-    "title": "The two-hour rule: what to do with the food that sat out all evening",
-    "dek": "A holiday table is an exercise in bacterial arithmetic. Here is the rule in the government's own words, the numbers that follow it, and the one job a small hot box is genuinely good at.",
-    "read_minutes": 6,
-    "photo": "assets/img/guide-leftovers",
-    "photo_alt": "Leftover roast chicken and potatoes being divided into two shallow glass containers on a kitchen counter",
-    "photo_caption": "Illustration commissioned for this guide. Shallow containers are in the picture on purpose; that part comes from the guidance, not from a stylist.",
-    "updated": "2026-11-20",
-    "related": ["P-01", "P-02", "P-03", "P-04"],
-    "sources": [
-        ["USDA FSIS: Leftovers and Food Safety (fact sheet)", FSIS_LEFTOVERS],
-        ["USDA FSIS: Food Thermometers (fact sheet)", FSIS_THERMOMETERS],
-    ],
-    "sections": [
-        {
-            "h": "The rule, exactly as the USDA states it",
-            "p": [
-                "Bacteria grow rapidly between 40 degrees F and 140 degrees F. Once food is safely cooked, hot food has to be kept at 140 degrees F or warmer. Within 2 hours of cooking - or of coming off whatever is keeping it warm - leftovers must be refrigerated.",
-                "And the part people negotiate about: FSIS says to throw away all perishable foods that have been left at room temperature for more than 2 hours, or 1 hour if the temperature is above 90 degrees F. Reheating is not a pardon for a plate that has been sitting out since the main course.",
-            ],
-        },
-        {
-            "h": "Cooling it quickly is a technique, not a vibe",
-            "items": [
-                ("Divide it", "Large amounts go into shallow containers. A deep pot of soup cools slowly in the middle, which is the window the rule is about."),
-                ("Cut it", "For whole roasts or hams, slice or cut into smaller parts. FSIS's turkey example is specific: slice the breast meat, legs and wings may be left whole."),
-                ("Do not wait for it to reach room temperature", "Hot food can be placed directly in the refrigerator, or rapidly chilled in an ice or cold water bath first. Waiting is the thing being avoided."),
-                ("Seal it", "Cover, wrap airtight or seal in a container: it keeps bacteria out, holds moisture in and stops the leftovers taking on the fridge."),
-            ],
-        },
-        {
-            "h": "How long is 'still fine'",
-            "p": [
-                "Leftovers keep 3 to 4 days in the refrigerator, or 3 to 4 months in the freezer. Frozen leftovers stay safe beyond that window, indefinitely in fact, but lose moisture and flavour - so the freezer limit on that chart is a quality note wearing the clothes of a safety rule.",
-                "Write the date on the container. That single habit is what turns the 3-to-4-day question from a guess into a lookup.",
-            ],
-        },
-        {
-            "h": "Reheating: the number, and the honest trade",
-            "p": [
-                "Reheat leftovers to 165 degrees F as measured with a food thermometer. Sauces, soups and gravies go to a rolling boil instead, and leftovers should be covered while reheating, which retains moisture and helps the food heat all the way through.",
-                "Covering and moisture are the words to notice if your plan is a basket fryer. A small dry convection oven is excellent at reviving a crisp surface and indifferent at keeping moisture inside it - that is the trade, and it is a design property rather than a fault. FSIS's own microwave advice explains why covering matters there: cold spots. The equivalent risk in an air fryer is uneven packing, which is why the same thermometer goes in at the end either way.",
-                "One reassurance from the fact sheet: it is safe to reheat frozen leftovers without thawing them first, in the oven or a saucepan, for casseroles and combination meals. It just takes longer than reheating thawed food.",
-            ],
-        },
-        {
-            "h": "Which format earns its place the next morning",
-            "p": [
-                "Not by magic - by the shape of the food you are reviving. Two 3-quart baskets (P-01, per the seller's title) run a piece of chicken and a pile of potatoes as two jobs with one finish time. A 26-quart French-door oven (P-02, whose listing title states an extra-large interior and 24 one-touch presets) is the one that takes a tray of sides flat, which is where a basket cannot follow. An 8-quart single basket (P-03) is the right answer only when the leftovers are one pile and loose.",
-                "Read those against the containers you actually own. A tray that does not fit is not a small inconvenience on a day when you are feeding people from yesterday's cooking.",
-            ],
-        },
-        {
-            "h": "The day-after checklist",
-            "items": [
-                ("Note the time it came out of the oven", "The 2-hour clock starts there, not when you finish eating."),
-                ("Shallow containers, sliced meat", "Divide before you refrigerate, not after."),
-                ("Date on the lid", "3 to 4 days in the fridge is the whole allowance."),
-                ("165 degrees F on the reheat", "Measured in the thickest part, with a thermometer you have checked."),
-                ("When in doubt", "The guidance is to throw it out. There is no upside to winning that argument."),
-            ],
-        },
-    ],
-    "closing": "Times, temperatures and storage windows are quoted from the USDA Food Safety and Inspection Service fact sheet 'Leftovers and Food Safety' (page states: Last Updated Jul 31, 2020; retrieved 2026-11-20) and from the 'Food Thermometers' fact sheet. Product wording is the sellers' own listing text from the listings reached on 2026-11-20. This site has no test kitchen and is not a substitute for the guidance pages it links.",
 })

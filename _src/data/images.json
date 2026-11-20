@@ -17,6 +17,123 @@
       "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
     },
     {
+      "file": "format-basket",
+      "alt": "An engraved illustration of a single-basket air fryer with tongs lifting a wedge",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "P-01 and P-03 cards and pages; basket-or-oven and dual-zone guides; the cooking-from-frozen guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "format-oven",
+      "alt": "An engraved illustration of a French-door countertop oven, doors open",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "P-02 card and page; basket-or-oven guide; the air-fryer-or-toaster-oven guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "capacity",
+      "alt": "An engraved flat-lay of a bowl of cooked pieces, a grid of potato rounds and a folding ruler",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "Capacity-checklist and holiday side-dish guides; home guide card; the air-fryer-for-two guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "cleanup",
+      "alt": "An engraved illustration of a cleaned basket and tray drying beside a sink",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "Cleanup-and-counter-space guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "thermometer",
+      "alt": "An engraved illustration of a thin probe in a roasted bird with a charging base",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "P-05 card and page; thermometer-pairing guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "multifunction",
+      "alt": "An engraved illustration of a basket fryer beside a countertop oven with trays and a probe",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "Multi-function-appliance guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "decision-tools",
+      "alt": "An engraved flat-lay of a notebook, tape measure, ruler and coffee cup",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "Small-kitchen-space-audit guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "instant-thermometer",
+      "alt": "An engraved illustration of a folding instant-read probe on a board",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "P-04 card and page",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "holiday-hosting-counter",
+      "alt": "An engraved illustration of a crowded holiday counter with an air fryer, platter and foliage",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
+      "depicts_a_real_product": false,
+      "used_on": "Home seasonal band; holiday-hosting guide",
+      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "gift-edit",
+      "alt": "An engraved illustration of a wrapped gift beside an unbranded air fryer and a probe thermometer on a wooden counter, with sprigs of pine",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded seasonal still life in the house engraving style",
+      "depicts_a_real_product": false,
+      "used_on": "Home, holiday gift-edit module; gift guide",
+      "rules_met": "No brand mark. No price or spec implied. Labelled in the page's image note."
+    },
+    {
+      "file": "black-friday-checklist",
+      "alt": "An engraved illustration of an open notebook, pencil, kitchen timer and coiled tape measure on a counter, with an unbranded air fryer drawn softly behind",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded checklist still life in the house engraving style",
+      "depicts_a_real_product": false,
+      "used_on": "Black Friday checklist guide",
+      "rules_met": "No brand mark. No price or spec implied. Labelled in the page's image note."
+    },
+    {
+      "file": "accessories-tray",
+      "alt": "An engraved illustration of an open kitchen drawer with unbranded air-fryer accessories: tongs, a silicone mat, a wire rack, parchment liners and a brush",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for unbranded accessories in the house engraving style",
+      "depicts_a_real_product": false,
+      "used_on": "Air-fryer accessories guide",
+      "rules_met": "No brand mark. No price or spec implied. Labelled in the page's image note."
+    },
+    {
       "file": "storefront-hero",
       "alt": "An engraved illustration of a basket air fryer with garlic and rosemary",
       "style": "engraved two-colour illustration",
@@ -57,96 +174,6 @@
       "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
     },
     {
-      "file": "format-basket",
-      "alt": "An engraved illustration of a single-basket air fryer with tongs lifting a wedge",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "P-01 and P-03 cards and pages; basket-or-oven and dual-zone guides; the cooking-from-frozen guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "format-oven",
-      "alt": "An engraved illustration of a French-door countertop oven, doors open",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "P-02 card and page; basket-or-oven guide; the air-fryer-or-toaster-oven guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "instant-thermometer",
-      "alt": "An engraved illustration of a folding instant-read probe on a board",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "P-04 card and page",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "thermometer",
-      "alt": "An engraved illustration of a thin probe in a roasted bird with a charging base",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "P-05 card and page; thermometer-pairing guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "capacity",
-      "alt": "An engraved flat-lay of a bowl of cooked pieces, a grid of potato rounds and a folding ruler",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "Capacity-checklist and holiday side-dish guides; home guide card; the air-fryer-for-two guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "cleanup",
-      "alt": "An engraved illustration of a cleaned basket and tray drying beside a sink",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "Cleanup-and-counter-space guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "decision-tools",
-      "alt": "An engraved flat-lay of a notebook, tape measure, ruler and coffee cup",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "Small-kitchen-space-audit guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "multifunction",
-      "alt": "An engraved illustration of a basket fryer beside a countertop oven with trays and a probe",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "Multi-function-appliance guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
-      "file": "holiday-hosting-counter",
-      "alt": "An engraved illustration of a crowded holiday counter with an air fryer, platter and foliage",
-      "style": "engraved two-colour illustration",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in an engraved print style",
-      "depicts_a_real_product": false,
-      "used_on": "Home seasonal band; holiday-hosting guide",
-      "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
-    },
-    {
       "file": "holiday-table",
       "alt": "An engraved illustration of a holiday table laid for a gathering",
       "style": "engraved two-colour illustration",
@@ -167,14 +194,24 @@
       "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
     },
     {
+      "file": "leftovers",
+      "alt": "An engraved illustration of an open air fryer drawer holding sliced turkey and roasted vegetables, with a food thermometer on the counter beside it",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance drawer and leftovers in the set's engraved print style; width variants (w560, w900) resized from the base file the same session",
+      "depicts_a_real_product": false,
+      "used_on": "Guide: reheating-thanksgiving-leftovers (hero image); guides index card",
+      "rules_met": "No brand mark, no price, no specification implied, and the page that shows it carries a caption saying it is not a photograph of the product. The thermometer drawn beside the drawer is generic and unbranded; it does not depict either thermometer product sold here."
+    },
+    {
       "file": "guide-chicken-done",
       "alt": "Roast chicken thighs on a pale board with a digital thermometer probe inserted sideways into the thickest piece",
       "style": "unbranded editorial photograph, generated",
       "generated_on": "2026-11-20",
       "generated_by": "AI image generation, prompted for an unbranded basket fryer and a plain probe with a blank display",
       "depicts_a_real_product": false,
-      "used_on": "guides/air-fryer-chicken-done.html (hero), the guides index and the front page journal strip",
-      "rules_met": "No brand mark. The thermometer display is deliberately blank, so no reading is invented. Captioned as an illustration, and the caption says it is not a record of a test."
+      "used_on": "guides/air-fryer-chicken-done.html (hero) and the guides index",
+      "rules_met": "No brand mark. The display is deliberately blank, so no reading is invented. Captioned as an illustration wherever it appears, and the caption says it is not a record of a test."
     },
     {
       "file": "guide-ice-water-check",
@@ -184,17 +221,7 @@
       "generated_by": "AI image generation",
       "depicts_a_real_product": false,
       "used_on": "guides/thermometer-ice-water-check.html (hero) and the guides index",
-      "rules_met": "Shows a generic fold-out instrument rather than P-04 or P-05. No digits on the display. Caption names it as an illustration."
-    },
-    {
-      "file": "guide-leftovers",
-      "alt": "Leftover roast chicken and potatoes being divided into two shallow glass containers on a kitchen counter",
-      "style": "unbranded editorial photograph, generated",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation",
-      "depicts_a_real_product": false,
-      "used_on": "guides/leftovers-two-hour-rule.html (hero), the guides index and the front page seasonal band",
-      "rules_met": "The appliance in the background is unbranded and out of focus; the shallow containers illustrate the quoted guidance rather than a product feature."
+      "rules_met": "Shows a generic fold-out instrument, not P-04 or P-05. No digits on the display. Caption names it as an illustration."
     },
     {
       "file": "meal-prep",
@@ -204,7 +231,7 @@
       "generated_by": "AI image generation, by an earlier session",
       "depicts_a_real_product": false,
       "used_on": "guides/meal-prep-sunday.html (hero) and the guides index",
-      "rules_met": "Row restored on 2026-11-20: the asset had stayed in use while its register row was dropped by a merge, which is what tools/check_image_register.py now prevents."
+      "rules_met": "Row restored on 2026-11-20: the asset stayed in use while its register row was dropped by a merge, which is what tools/check_image_register.py now prevents."
     }
   ],
   "rejected": [

@@ -1,2 +1,4 @@
 User-agent: *
-Allow: /
+# Second published surface, kept for review. Not the site to index.
+# Canonical publication: https://karagemop466-tech.github.io/Affil1/
+Disallow: /

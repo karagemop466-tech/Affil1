@@ -239,6 +239,17 @@
       "quote_note": "Read 2026-11-20. The companion page 'Introduction to robots.txt' (https://developers.google.com/search/docs/crawling-indexing/robots/intro) states separately that a robots.txt file 'is not a mechanism for keeping a web page out of Google'.",
       "status": "read on 2026-11-20",
       "used_for": "Why /Affil1/robots.txt and /Affil1/edition/robots.txt are inert for Google, which keeps FLG-027 open and makes the per-page tag the only control that works."
+    },
+    {
+      "id": "SRC-24",
+      "title": "Cold Food Storage Chart",
+      "url": "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts",
+      "publisher": "FoodSafety.gov (interagency: FDA, USDA, CDC)",
+      "page_date": "Date Last Reviewed September 19, 2023",
+      "quote": "Leftovers \u2014 Cooked meat or poultry: Refrigerator 3 to 4 days; Freezer 2 to 6 months. \u2026 The short time limits for home-refrigerated foods will help keep them from spoiling or becoming dangerous to eat. The guidelines for freezer storage are for quality only\u2014frozen foods stored continuously at 0\u00b0F (-18\u00b0C) or below can be kept indefinitely.",
+      "quote_note": "Fetched and read on 2026-11-20 from the 'Leftovers' rows of the chart and its introductory note. Registered by arena/3e17592d-affil1 because the reheating-leftovers guide cites this page in its own source list while the register held no row for it, so nothing could date the quotation; _tools/check_register_refs.py now fails the build when a guide's declared source has no row.",
+      "status": "read on 2026-11-20",
+      "used_for": "The reheating-leftovers guide's storage windows, and the distinction between a safety limit and a quality limit in the freezer."
     }
   ]
 }

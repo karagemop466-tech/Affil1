@@ -502,11 +502,55 @@ def check_link_state_copy():
             err(f"{page.relative_to(ROOT)}: guide sidebar must state the real tag status")
 
 
+def check_one_indexable_site():
+    """Fail if a second published surface tells a crawler to index it.
+
+    `edition/` is exempt from check_no_stray_pages() because it validates with
+    its own gate, and that exemption used to hide a contradiction: the pages
+    were served with `Allow: /` and a sitemap link, i.e. a complete second site
+    competing with the canonical one for the same product pages.
+
+    This rule is the rule, not a list of names: any published directory that
+    carries its own robots.txt must not permit the crawl, and its HTML must
+    carry `noindex`. Adding a new surface therefore cannot silently reopen the
+    problem.
+    """
+    for robots in sorted(ROOT.rglob("robots.txt")):
+        if robots.parent == ROOT or robots.parent.is_relative_to(ARCHIVE):
+            continue
+        rel_dir = robots.parent.relative_to(ROOT).as_posix()
+        text = robots.read_text(encoding="utf-8", errors="replace")
+        allows = [
+            line.split(":", 1)[1].strip()
+            for line in text.splitlines()
+            if line.lower().startswith("allow:")
+        ]
+        disallows_all = any(
+            line.split(":", 1)[1].strip() == "/"
+            for line in text.splitlines()
+            if line.lower().startswith("disallow:")
+        )
+        if any(a == "/" for a in allows) or not disallows_all:
+            err(f"{rel_dir}/robots.txt permits crawling — a second surface must not "
+                f"be indexable; use `Disallow: /` (canonical site is the root)")
+        html_files = list(robots.parent.rglob("*.html"))
+        missing = [
+            p.relative_to(ROOT).as_posix()
+            for p in html_files
+            if "noindex" not in p.read_text(encoding="utf-8", errors="replace")
+        ]
+        if missing:
+            err(f"{rel_dir}/: {len(missing)} of {len(html_files)} pages lack "
+                f"`noindex` (first: {missing[0]}) — a served second surface must "
+                f"decline indexing on every page")
+
+
 def main():
     for p in sorted(PAGES):
         check_page(p)
     check_sitemap_feed()
     check_no_stray_pages()
+    check_one_indexable_site()
     check_serving_scope()
     check_data()
     check_assets()

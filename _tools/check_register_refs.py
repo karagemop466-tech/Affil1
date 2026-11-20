@@ -134,7 +134,7 @@ def main():
         GUIDES = []
     known = {str(s.get("url", "")).rstrip("/") for s in rows("sources")}
     official = re.compile(r"^https://([a-z0-9.-]+)/(?:.*|)$", re.I)
-    allowed_hosts = {"fsis.usda.gov", "www.fsis.usda.gov", "affiliate-program.amazon.com",
+    allowed_hosts = {"fsis.usda.gov", "www.fsis.usda.gov", "foodsafety.gov", "www.foodsafety.gov", "affiliate-program.amazon.com",
                      "consumer.ftc.gov", "www.ftc.gov", "www.ecfr.gov", "developers.google.com",
                      "support.google.com", "docs.github.com", "sell.amazon.com",
                      "developer-docs.amazon.com", "www.amazon.com"}

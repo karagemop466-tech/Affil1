@@ -116,11 +116,11 @@ def build(page_dir, products, meta):
     therm = categories[1]["items"]
 
     hero = f"""<section class="issue-cover wrap">
-  <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 01</span> THE COUNTERTOP EDIT</p>
-    <h1>The air fryer<br><em>field guide.</em></h1>
-    <p class="cover-dek">Five appliances, chosen and explained: two drawers, one basket, one French door, two probes. Pick the shape that fits your counter, then check the live price on Amazon.</p>
+  <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 02</span> THE HOLIDAY EDIT</p>
+    <h1>Cook the season<br><em>from the counter.</em></h1>
+    <p class="cover-dek">Five appliances, chosen and explained: two drawers, one basket, one French door, two probes. Format first, deals second &mdash; and a gift edit for every kind of cook.</p>
     <div class="cover-actions"><a class="cover-btn" href="#shortlist">See the five picks <span>→</span></a>
-      <a class="cover-link" href="{esc(rel(d, 'fit/index.html'))}">Find your format ↗</a></div></div>
+      <a class="cover-link" href="{esc(rel(d, 'guides/air-fryer-gift-guide.html'))}">Read the gift guide ↗</a></div></div>
   <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
     <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
     <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
@@ -165,19 +165,21 @@ def build(page_dir, products, meta):
   </a>
 </div>""", cls="paths")
 
-    # The band used to be GUIDES[7] plus a paragraph of hand-written hosting copy.
-    # Any change to the order in content.py silently decoupled the two: the front page
-    # was labelled "Seasonal · hosting" and invited the reader to "Read the hosting
-    # guide" underneath the thermometer article. Now the feature is chosen by cluster
-    # and every word in the band comes from the chosen guide's own record, so a
-    # mismatch is not representable.
-    feature = next((g for g in reversed(GUIDES) if g["cluster"] in ("Seasonal", "Cooking")),
-                   GUIDES[-1])
-    feat_href = rel(d, f"guides/{feature['slug']}.html")
-    # The band's supporting line is the guide's own opening paragraph, not a
-    # separate caption someone might have to remember to update.
+    # Select the seasonal feature by slug, not by position: parallel sessions
+    # inserting guides silently shift positional indexes (this happened once). The
+    # fallback is chosen by cluster for the same reason - a positional fallback
+    # would re-create the bug under the slug, since GUIDES[7] is whatever the
+    # seventh contributor happened to append. Everything else in the band, label
+    # included, is read from the chosen record: a band labelled "the gift edit"
+    # once sat above the thermometer article for exactly one index of drift.
+    by_slug = {g["slug"]: g for g in GUIDES}
+    feature = by_slug.get("air-fryer-gift-guide") or next(
+        (g for g in reversed(GUIDES) if g["cluster"] in ("Seasonal", "Cooking")), GUIDES[-1])
     feature_lede = next((para for s in feature["sections"] for para in s.get("p", [])),
                         feature["dek"])
+    feat_href = rel(d, f"guides/{feature['slug']}.html")
+    bf_slug = "black-friday-air-fryer-checklist"
+    bf_href = rel(d, f"guides/{bf_slug}.html") if bf_slug in by_slug else None
     seasonal = section(f"""
 <div class="seasonal">
   <div class="seasonal-media">{img(d, feature['photo'], feature['photo_alt'], sizes='(max-width:820px) 100vw, 520px')}</div>
@@ -187,16 +189,13 @@ def build(page_dir, products, meta):
     <p class="dek">{esc(feature['dek'])}</p>
     <p>{esc(feature_lede)}</p>
     <a class="btn btn-small" href="{esc(feat_href)}">Read the guide</a>
+    {f'<a class="tlink" href="{esc(bf_href)}">The Black Friday checklist <span aria-hidden="true">&rarr;</span></a>' if bf_href else ''}
   </div>
 </div>""", cls="seasonal-band")
 
-    # Most recently updated first, ties broken by the order the guides were added.
-    picks = sorted(range(len(GUIDES)),
-                   key=lambda i: (GUIDES[i]["updated"], i), reverse=True)[:4]
-
     latest = section(f"""
 <div class="sec-head">
-  <div>{eyebrow('The journal')}<h2>Guides worth your ten minutes</h2></div>
+  <div>{eyebrow('The journal')}<h2>Fresh for the season</h2></div>
   <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you. Newest first.</p>
 </div>
 <div class="gcard-grid">
@@ -237,8 +236,8 @@ def build(page_dir, products, meta):
     body = hero + shop + thermo + paths + seasonal + latest + method + capture
     return page(
         d,
-        title="Crisp & Counter \u2014 air fryers and thermometers, checked and explained",
-        description="Five Amazon picks for air frying, each link opened and matched to its live listing: two basket air fryers, one French-door oven and two meat thermometers. Listing sources and disclosure on every page.",
+        title="Crisp & Counter \u2014 air fryer & thermometer buying guides, checked link by link",
+        description="The countertop edit for the holidays: two basket air fryers, a French-door oven and two meat thermometers, each Amazon link opened and matched to its live listing. Gift guide, Black Friday checklist, and question-shaped buying guides.",
         body=body,
         active="index.html",
         canonical="",
