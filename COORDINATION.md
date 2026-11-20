@@ -104,6 +104,15 @@ stale "eight/nine guides" counts corrected to ten · no dead anchors found
 paid-link unit tests 6/6 · `verify_edition.py` 1,965 checks · `_decision-support`
 validator PASS · build reproducible.
 
+### Buyer-decision pass — arena/05771edb-affil1 (claimed 2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Re-verify the five submitted links, add a reviewable Suggestions Workbench and a Pre-Decision Questions register, de-index the second published surface | done | `arena/05771edb-affil1` | `_src/data/products.json`, `_src/data/product-intent.json`, `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/check.py`, build-generated pages, `EXECUTIVE_SUMMARY.md`, `README.md`, this board, `COORDINATION/arena-05771edb-affil1.md` |
+
+Detail, observations and sources: [`COORDINATION/arena-05771edb-affil1.md`](COORDINATION/arena-05771edb-affil1.md).
+No other session had an open claim on these files when this work started.
+
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
 **Release receipt.** [PR #95](https://github.com/karagemop466-tech/Affil1/pull/95) merged into `main` as `8b22041` (2026-11-20). The `Affiliate launch checks` workflow passed on the merge commit ([run 44687880587](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880587)), `Build, check and deploy` succeeded ([run 44687880567](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880567)), and `pages build and deployment` succeeded ([run 44687879639](https://github.com/karagemop466-tech/Affil1/actions/runs/44687879639)). The live design brief at https://karagemop466-tech.github.io/Affil1/suggestions/design.html serves the design pack, topic bank and organic loop.
