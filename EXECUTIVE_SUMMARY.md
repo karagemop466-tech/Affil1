@@ -84,3 +84,9 @@ In order:
 
 Writing more guides before either measurement exists is the option that looks
 like progress and is not.
+
+## Session addendum — arena/ac649871-affil1 (2026-11-20)
+
+Independent verification pass (live fetches): P-01 → dp/B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven, Black) ✓ · P-02 → dp/B09B7SB46R (Emeril Lagasse 26QT French Door) ✓ · P-03 → dp/B08DKYBTPH (Chefman TurboFry 8 Qt, Stainless) ✓ · P-05 → dp/B0DZFD6R9Z (CHEF iQ Sense, Gen3) ✓ · P-04 checkpoint-gated twice here; candidate dp/B0DHZTCNR5 (ThermoMaven 1 Sec Digital Meat Thermometer) confirmed live by direct page check; mapping disputed across sessions (FLG-016). Earlier homepage observations preserved as transient redirects. Slug check: all five slugs are 9 characters vs 10-character ASINs (SP-API Catalog Items reference) → slugs are opaque tokens, never ASINs (FLG-001). Full register with per-record history: `data/confirmations.json` (schema v2).
+
+Ships the self-contained notes edition at `notes/`: shop-style front page leading with the verified shortlist, seven question-first guides, decision desk (suggestions queue with decision gates + pre-decision questions), transparency desk, own sitemap/feed. Disclosure above the fold; `rel="nofollow sponsored"` + `shopnow047c-20` on every outbound product link; no prices/ratings/commissions anywhere; ledger empty by design.

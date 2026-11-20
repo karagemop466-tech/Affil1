@@ -19,6 +19,8 @@ sys.path.insert(0, str(ROOT / "tools"))
 import layout  # noqa: E402
 from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # noqa: E402
 import page_home  # noqa: E402
+import page_fit  # noqa: E402
+import page_design  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
 import page_compare  # noqa: E402
@@ -47,7 +49,7 @@ GENERATED = {
     "products/p-04.html", "products/p-05.html",
     "compare/index.html",
     "questions/index.html",
-    "suggestions/index.html",
+    "suggestions/index.html", "suggestions/design.html", "fit/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
     "operations/ledger.html",
@@ -165,6 +167,9 @@ def main():
     pages.append(write("products/index.html", page_products.build_register("products", products, meta)))
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))
+
+    pages.append(write("fit/index.html", page_fit.build("fit")))
+    pages.append(write("suggestions/design.html", page_design.build("suggestions")))
 
     # compare / questions / suggestions
     pages.append(write("compare/index.html", page_compare.build("compare", products, meta)))
