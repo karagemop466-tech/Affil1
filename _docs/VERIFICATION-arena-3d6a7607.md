@@ -13,7 +13,7 @@ checked, and what it refused to infer. Companion to the board entry in
 | `_src/data/images.json` | One register entry appended for `leftovers`. |
 | `_tools/page_guides.py` | Two lines: render the `sources` field that guides already carried but the template ignored; correct the side-card sentence "every one carries the site's Amazon tag" (false — see PR #106's flag on untagged cart CTAs) to "point to the official Amazon listing". |
 | `_tools/build.py` | `ROBOTS`: `Disallow: /archive/` → `Disallow: /_archive/` (path has not existed since the underscore rename). |
-| `_src/data/flags.json` | FLG-029 (high) and FLG-030 (low) appended; FLG-029 wording tightened to separate observation from mechanism. |
+| `_src/data/flags.json` | FLG-034 (high) and FLG-035 (low) appended; FLG-034 wording tightened (renumbered from FLG-029/030 during rebase — concurrent sessions took those IDs) to separate observation from mechanism. |
 | Generated HTML, `sitemap.xml`, `feed.xml`, `robots.txt` | Via `_tools/build.py` only. |
 | `README.md`, `EXECUTIVE_SUMMARY.md` | Counts only: 11 guides, 35 pages, 30 flags. |
 | `_docs/VERIFICATION-arena-3d6a7607.md`, `COORDINATION.md` | This record and the board entry. |
@@ -92,10 +92,9 @@ Spot-checks on the generated guide page:
 
 ## Irregularities and refusals
 
-- **FLG-029 (high, new)** — see above. Not fixed by this session; the durable fix
+- **FLG-034 (high, new)** — see above. Not fixed by this session; the durable fix
   is a repository setting only the owner can flip. Recorded, not papered over.
-- **FLG-030 (low, new, fixed)** — stale `Disallow: /archive/` corrected to
-  `/_archive/` in the generator.
+- **FLG-035 (low, new, superseded by main's additive robots fix during rebase)** — the stale `Disallow: /archive/` rule: this session removed it in the generator, but the merged resolution kept main's version (which adds `/_archive/` and `/edition/` alongside the stale line). The flag's register wording records exactly that outcome. Not behavior-affecting.
 - **Side-card overclaim, fixed** — the guide template asserted every product link
   carries the Amazon tag; the current build deliberately ships listing links
   without a tag until an account-validated Special Link exists (FLG-025 reading,
