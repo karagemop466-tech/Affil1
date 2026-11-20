@@ -32,6 +32,18 @@ jobs:
       - name: Check relative links across served editions
         run: python3 tools/check_local_links.py
 
+      # validate.py is the pre-publish gate that enforces the data-integrity,
+      # disclosure, canonical, event-vocabulary and document-structure rules. It
+      # had stopped running (it crashed on its own data after a field rename and
+      # a base-path change), and because the workflow never called it, the failure
+      # was invisible. It is called here so it cannot go dark again.
+      - name: Pre-publish validation
+        run: python3 tools/validate.py
+
+      - name: Paid-link gate tests
+        run: python3 -m unittest discover -s tools -p 'test_*.py' -v
+        working-directory: tools
+
       - name: Confirm the build is reproducible, not hand-edited
         run: |
           cp -r . /tmp/first-build
