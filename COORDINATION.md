@@ -31,9 +31,9 @@ Current integration: #50, #41 and #37 selected incompatible generators while #44
 
 | Task | Status | Owner | Scope |
 |---|---|---|---|
-| Restore the approval requirement after automatic tags were added by #51 | in progress | arena/3cad5d4e-affil1 | Maintained product-link rendering, source/CTA labels, and checker only; no product observations or other sessions' new guides changed |
+| Restore the approval requirement after automatic tags were added by #51 | done | arena/3cad5d4e-affil1 | Maintained product-link rendering, source/CTA labels, and checker only; no product observations or other sessions' new guides changed |
 
-The published descendant contains tagged links despite empty intent and reporting fields. A tag added from a public observation is not a validated Special Link. This is a release-gate regression, not evidence that an original submitted short link was invalid.
+The published descendant contains tagged links despite empty intent and reporting fields. A tag added from a public observation is not a validated Special Link. This is a release-gate regression, not evidence that an original submitted short link was invalid. Reapplied the gate to the final generated edition after #50 and #37 replaced the templates. Public listing citations remain sponsored-marked; the checker rejects any tagged product URL not in the approved intent register. No new confirmation data was added. Restored the aggregate preview and decision panels to the active edition. Local checks: 27 pages, zero checker warnings/errors, zero broken relative references, and all gate/collector tests passing.
 
 ## Measurement and product-release gate — arena/3cad5d4e-affil1
 

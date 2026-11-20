@@ -1,6 +1,8 @@
 """About, sources, ledger, brief and the 404 page."""
 
-from layout import (DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
+from release_panels import render as release_panel
+
+from layout import (approved_amazon_urls,DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
                     outbound, page, pagehead, rel, section, table)
 
 
@@ -44,7 +46,7 @@ def build_about(page_dir, sources, meta):
     <p>Until 20 November 2026 this repository served two competing editions of the same shop: a generated one at the root and a hand-written one in a subdirectory, with duplicate pages covering the same five products. Two editions cannot both be the answer a search engine should index. The root build is now canonical, the other edition is preserved under <code class="code">archive/legacy-2026-11-20/</code> with a noindex tag on every page, and the sitemap lists only the canonical URLs. Nothing was deleted; the archive and the git history both keep it.</p>
 
     <h2 id="how-we-link">How the links work</h2>
-    <p>Every product link carries the Associates tag <code class="code">?tag=shopnow047c-20</code>, which the Program Policies require as a URL parameter, and every one is marked <code class="code">rel="sponsored nofollow noopener"</code> and opens in a new tab. Google's own documentation on qualifying outbound links confirms that <code class="code">sponsored</code> is the correct marker for paid or advertising links. That is applied by the build script to every Amazon anchor at once, and a check fails if any is missing it.</p>
+    <p>Only approved Special Links may carry the selected Associates tag. Listing citations are untagged. Every outbound product link is marked <code class="code">rel="sponsored nofollow noopener"</code> and opens in a new tab. Google's own documentation on qualifying outbound links confirms that <code class="code">sponsored</code> is the correct marker for paid or advertising links. That is applied by the build script to every Amazon anchor at once, and a check fails if any is missing it.</p>
     <p>The tracking ID supplied for this site is <code class="code">{esc(TRACKING_ID)}</code>. Whether a click is actually credited to it has not been confirmed, because confirming it needs a click from the operator's own device followed by a look at the Associates report. That is on the review queue as FLG-002 rather than being asserted here.</p>
 
     <h2 id="disclosure">The disclosure</h2>
@@ -156,7 +158,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A single canonical static site: a product-led front page, five picks in two categories, eight question-shaped guides, a per-product note for every item, a comparison table, a decision register of twenty-two questions, a suggestion queue with three paths, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure, an untagged Amazon link or a reintroduced price.</p>
+    <p>A single canonical static site: a product-led front page, five picks in two categories, eight question-shaped guides, a per-product note for every item, a comparison table, a decision register of twenty-two questions, a suggestion queue with three paths, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure, an unapproved tagged Amazon link or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
@@ -165,7 +167,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   <div class="exec-block exec-warn">
     <h2>The one finding that changes the plan</h2>
     <p>The links on this site previously carried no tracking parameter at all, which meant clicks could not be attributed to any account. The five supplied link codes are nine characters and contain lowercase letters, while every ASIN that loaded is ten and uppercase: they are short-link slugs, not identifiers, so the intended product for each link cannot be read from the link and has to come from the Associates dashboard.</p>
-    <p>Every product link now points at the resolved listing with the tag attached, and the build fails if a link is untagged. What still cannot be confirmed without one look inside the account is whether a click is credited.</p>
+    <p>Product links are listing citations until an exact Special Link has dated intent and reporting evidence. Credited clicks are not confirmed.</p>
   </div>
   <div class="exec-block">
     <h2>What could not be verified, and why it matters</h2>
@@ -187,7 +189,7 @@ def build_brief(page_dir, products, questions, flags, meta):
     <div class="exec-stats">
       <div><span>5</span><p>links supplied</p></div>
       <div><span>5</span><p>resolved and transcribed</p></div>
-      <div><span>5</span><p>tagged buy links</p></div>
+      <div><span>{len(approved_amazon_urls())}</span><p>account-confirmed buy links at publication</p></div>
       <div><span>0</span><p>products tested</p></div>
       <div><span>0</span><p>prices shown</p></div>
       <div><span>{n_q}</span><p>questions raised</p></div>
@@ -200,7 +202,7 @@ def build_brief(page_dir, products, questions, flags, meta):
         d,
         title="Executive summary \u2014 Crisp & Counter",
         description="What was built, what was verified against official sources, the one finding that changes the plan, and the next decision \u2014 in four minutes.",
-        body=body,
+        body=body + release_panel(d, "brief/"),
         active="index.html",
         canonical="brief/",
     )
