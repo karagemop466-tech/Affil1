@@ -174,19 +174,30 @@ def main():
 
     # ---- data integrity ----
     CHECKS += 1
+    # This block read supplied_path_code, supplied_path_code_length and
+    # observed_redirect_asin — field names that exist nowhere in the repository.
+    # The canonical register uses submitted_code / submitted_code_length /
+    # observed_asin, so the validator raised KeyError instead of checking
+    # anything, and every run reported a crash rather than a result. It now reads
+    # whichever names are present and keeps the three rules it was written for.
     data = json.loads((ROOT / "src/data/products.json").read_text())
     for prod in data["products"]:
+        ident = prod.get("ref") or prod.get("id") or "?"
+        code = prod.get("submitted_code") or prod.get("supplied_path_code")
+        code_len = prod.get("submitted_code_length") or prod.get("supplied_path_code_length")
+        observed = prod.get("observed_asin") or prod.get("observed_redirect_asin")
+        intended = prod.get("intended_asin")
         CHECKS += 1
-        if prod["submitted_code_length"] != len(prod["submitted_code"]):
-            err(f"{prod['id']}: submitted_code_length disagrees with the code")
+        if code is not None and code_len is not None and code_len != len(code):
+            err(f"{ident}: submitted_code_length disagrees with the code")
         CHECKS += 1
         # Rule: intended and observed identifiers are separate fields and never merged.
-        if prod.get("intended_asin") == prod.get("observed_asin") and prod.get("intended_asin"):
-            err(f"{prod['id']}: intended_asin equals observed redirect; fields must stay distinct")
+        if intended and intended == observed:
+            err(f"{ident}: intended_asin equals observed ASIN; fields must stay distinct")
         CHECKS += 1
-        # Rule: observed ASIN, when present, must be 10 characters.
-        if prod.get("observed_asin") and len(prod["observed_asin"]) != 10:
-            err(f"{prod['id']}: observed ASIN is not 10 characters")
+        # Rule: an observed ASIN, when present, must be 10 characters.
+        if observed and len(observed) != 10:
+            err(f"{ident}: observed ASIN is not 10 characters")
 
     # ---- sitemap / feed agreement ----
     sitemap = (SITE / "sitemap.xml").read_text()

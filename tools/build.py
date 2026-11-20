@@ -26,6 +26,7 @@ import page_guides  # noqa: E402
 import page_compare  # noqa: E402
 import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
+import page_decide  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
 from content import GUIDES  # noqa: E402
@@ -36,7 +37,7 @@ DATA = ROOT / "src" / "data"
 # static asset or an archived edition, and is never touched.
 OWNED = [
     "index.html", "404.html",
-    "guides", "products", "compare", "questions", "suggestions",
+    "guides", "products", "compare", "questions", "suggestions", "decide",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
@@ -50,6 +51,7 @@ GENERATED = {
     "compare/index.html",
     "questions/index.html",
     "suggestions/index.html", "suggestions/design.html", "fit/index.html",
+    "decide/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
     "operations/ledger.html",
@@ -146,6 +148,7 @@ def main():
     sources = load("sources.json")
     questions = load("questions.json")
     suggestions = load("suggestions.json")
+    decisions = load("decisions.json")
     flags = load("flags.json")
     images = load("images.json")
 
@@ -174,6 +177,7 @@ def main():
     # compare / questions / suggestions
     pages.append(write("compare/index.html", page_compare.build("compare", products, meta)))
     pages.append(write("questions/index.html", page_questions.build("questions", questions, meta)))
+    pages.append(write("decide/index.html", page_decide.build("decide", decisions, meta)))
     pages.append(write("suggestions/index.html", page_suggestions.build("suggestions", suggestions, meta)))
 
     # review
@@ -194,6 +198,15 @@ def main():
     missing = GENERATED - built - {"robots.txt"}
     if missing:
         raise SystemExit(f"GENERATED lists files the build never wrote: {sorted(missing)}")
+    # The other direction matters just as much, and until this guard existed only
+    # the first was checked. tools/check.py derives the set of pages it examines
+    # from GENERATED, so a page that is written but not listed is a page the
+    # checker never opens -- while still reporting a clean run. Two guides were
+    # published that way before this was caught.
+    unlisted = built - GENERATED
+    if unlisted:
+        raise SystemExit("build wrote pages that GENERATED does not list, so the checker "
+                         f"would skip them: {sorted(unlisted)}")
     print(f"built {len([p for p in pages if p.endswith('.html')])} pages")
     for p in pages:
         print("  " + p)
