@@ -17,12 +17,12 @@ def build(page_dir, products, meta):
         if r["asin"]:
             listing = product_link(
                 d, f"https://www.amazon.com/dp/{r['asin']}", esc(r["asin"]),
-                aria=f"Open the Amazon listing for {r['ref']} (affiliate link, opens in a new tab)")
+                aria=f"Open the Amazon listing for {r['ref']} (source, opens in a new tab)")
             cap = esc(r["capacity"])
             attrs = esc(r["attributes"])
             shape = esc(r["shape"])
             brand = esc(r["brand"])
-            status = '<span class="pill pill-ok">Identified</span>'
+            status = '<span class="pill pill-ok">Observed</span>'
         else:
             listing = blank(None, "the link never reached a product page")
             cap = attrs = shape = brand = blank(None, "not identified")

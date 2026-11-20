@@ -79,9 +79,12 @@ class LaunchChecks(unittest.TestCase):
                         self.fail('local test server did not start')
                     def post(payload, **overrides):
                         if not isinstance(payload, bytes):
-                            payload = json.dumps(payload).encode()
-                        headers = {'Origin': origin, 'Content-Type': 'text/plain', **overrides}
-                        req = Request(origin+'/Affil1/analytics/collect', data=payload, headers=headers)
+                            item = dict(payload)
+                            item['page'] = item.pop('path').removeprefix('/Affil1/')
+                            item['product'] = item.pop('ref')
+                            payload = json.dumps([item]).encode()
+                        headers = {'Origin': origin, 'Content-Type': 'application/json', **overrides}
+                        req = Request(origin+'/api/e', data=payload, headers=headers)
                         try:
                             with urlopen(req) as res:
                                 return res.status
@@ -91,9 +94,10 @@ class LaunchChecks(unittest.TestCase):
                     page = {'event':'page_view','path':'/Affil1/index.html','ref':None}
                     self.assertEqual(post(page), 204)
                     self.assertEqual(post(dict(page, path='/Affil1/')), 204)
-                    self.assertEqual(post(dict(page, event='search_query_referral')), 204)
-                    self.assertEqual(post(dict(page, event='guide_open', path='/Affil1/guides/basket-or-oven-air-fryer.html')), 204)
-                    self.assertEqual(post(dict(page, event='outbound_click', ref='P-01')), 204)
+                    self.assertEqual(post(dict(page, event='compare_view', path='/Affil1/compare/')), 204)
+                    self.assertEqual(post(dict(page, event='guide_read_75', path='/Affil1/guides/basket-or-oven-air-fryer.html')), 204)
+                    self.assertEqual(post(dict(page, event='outbound_product_click', ref='B0CDY277D3')), 204)
+                    self.assertEqual(post(dict(page, event='flag_page_view', path='/Affil1/review/')), 204)
                     self.assertEqual(post(dict(page, event='report_import')), 400)
                     self.assertEqual(post(dict(page, path='/Affil1/?key=private')), 400)
                     self.assertEqual(post(dict(page, extra='pii')), 400)
@@ -105,7 +109,7 @@ class LaunchChecks(unittest.TestCase):
                             urlopen(origin+hidden)
                         self.assertEqual(e.exception.code, 404)
                     with urlopen(origin+'/Affil1/assets/js/analytics.js') as res:
-                        self.assertIn(b'/Affil1/analytics/collect', res.read())
+                        self.assertIn(b'/api/e', res.read())
                 finally:
                     proc.terminate()
                     proc.wait(timeout=5)
@@ -117,7 +121,7 @@ class LaunchChecks(unittest.TestCase):
             self.assertNotEqual(subprocess.run(command + ['--authorized'],capture_output=True).returncode, 0)
             with sqlite3.connect(db_path) as db:
                 self.assertEqual(dict(db.execute('SELECT event,count FROM counts')),
-                                 dict(page_view=2,outbound_click=1,guide_open=1,search_query_referral=1,report_import=1))
+                                 dict(page_view=2,outbound_product_click=1,guide_read_75=1,compare_view=1,flag_page_view=1,report_import=1))
                 self.assertEqual(db.execute('SELECT eligible_sessions,clicks,reported_orders FROM reports').fetchall(), [(None,1,0)])
                 db.execute("INSERT INTO counts VALUES ('2001-01-01','page_view','/Affil1/','',1)")
                 m.prune(db, 7)

@@ -30,7 +30,7 @@ def product_card(page_dir, p):
     <h3><a href="{esc(href)}">{esc(_short(p))}</a></h3>
     <p>{esc(BUYER_NOTES[p['ref']])}</p>
     <p class="pcard-actions"><a class="tlink" href="{esc(href)}">Product details &rarr;</a>
-      {product_link(page_dir, p['listing_url'], 'View on Amazon &#8599;', cls='tlink tlink-sponsor')}</p>
+      {product_link(page_dir, p['listing_url'], 'Listing source &#8599;', cls='tlink tlink-sponsor')}</p>
   </div>
 </article>"""
 
@@ -75,7 +75,7 @@ def build(page_dir, products, meta):
       <h1>Find the air fryer<br><em>that fits.</em></h1>
       <p class="hero-dek">One basket, two baskets or a countertop oven? Start with what you cook, how much counter space you have, and what you want to wash afterward.</p>
       <p class="hero-actions">
-        <a class="btn" href="{esc(rel(d, 'products/index.html'))}">See the shortlist</a>
+        <a class="btn" href="#compare">See the shortlist</a>
         <a class="btn btn-ghost" href="{esc(rel(d, 'guides/index.html'))}">Start with a guide</a>
       </p>
       <p class="hero-fine">Listing-based comparisons, not hands-on reviews.</p>

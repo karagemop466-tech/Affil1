@@ -29,6 +29,9 @@ import page_review  # noqa: E402
 import page_desk  # noqa: E402
 from content import GUIDES  # noqa: E402
 
+sys.path.insert(0, str(ROOT / "kitchen-build"))
+import readiness  # noqa: E402
+
 DATA = ROOT / "src" / "data"
 
 # The build writes these and nothing else. Anything not listed is another
@@ -50,6 +53,7 @@ GENERATED = {
     "guides/air-fryer-capacity-checklist.html",
     "guides/cleanup-and-counter-space.html",
     "guides/multi-function-kitchen-appliance-questions.html",
+    "guides/holiday-side-dish-capacity.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
@@ -58,7 +62,7 @@ GENERATED = {
     "suggestions/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
-    "operations/ledger.html",
+    "operations/ledger.html", "operations/launch-readiness.html",
     "brief/index.html",
 }
 
@@ -113,7 +117,7 @@ def sitemap(pages):
     that is the URL the canonical tag on that page names."""
     urls = []
     for p in pages:
-        if p == "404.html":
+        if p in ("404.html", "operations/launch-readiness.html"):
             continue
         loc = SITE_URL + "/" + (p[:-len("index.html")] if p.endswith("index.html") else p)
         urls.append(f"  <url><loc>{loc}</loc><lastmod>{BUILD_DATE}</lastmod></url>")
@@ -124,7 +128,7 @@ def sitemap(pages):
 
 def feed(latest_guides):
     items = []
-    for g in latest_guides:
+    for g in sorted(latest_guides, key=lambda g: g["updated"], reverse=True):
         link = f"{SITE_URL}/guides/{g['slug']}.html"
         items.append(f"""  <item>
     <title>{esc(g['title'])}</title>
@@ -166,6 +170,17 @@ def main():
     flags = load("flags.json")
     images = load("images.json")
 
+    intent = json.loads(readiness.INTENT.read_text(encoding="utf-8"))
+    readiness.validate(intent)
+    if {p['ref']: (p['submitted_link'], p['listing_url']) for p in products} != {
+        p['ref']: (p['submitted_link'], p['observed_redirect_target']) for p in intent['records']
+    }:
+        raise SystemExit("Root register and affiliate evidence records disagree")
+    meta["approved_links"] = {
+        p["ref"]: p["approved_special_link"] for p in intent["records"]
+        if readiness.eligible(p, intent["tracking_id_supplied"])
+    }
+
     clean()
     favicon()
 
@@ -198,6 +213,7 @@ def main():
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
+    pages.append(write("operations/launch-readiness.html", readiness.render(intent)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
 
     pages.append(write("sitemap.xml", sitemap(pages)))

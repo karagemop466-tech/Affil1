@@ -13,11 +13,11 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
-from build import GENERATED
+from build import GENERATED, readiness
 
 READINESS_PAGE = "/Affil1/operations/launch-readiness.html"
 
-BROWSER = {'page_view', 'outbound_click', 'guide_open', 'search_query_referral'}
+BROWSER = {e['name'] for e in json.loads((ROOT/'src/data/events.json').read_text())['events']}
 PAGES = {'/Affil1/' + p for p in GENERATED if p.endswith('.html') and p != '404.html'}
 PAGES.add(READINESS_PAGE)
 PAGES |= {p.removesuffix('index.html') for p in PAGES if p.endswith('/index.html')}
@@ -56,10 +56,14 @@ def record(db, item, retention_days):
     name, page, ref = (item[k] for k in ('event', 'path', 'ref'))
     if not isinstance(name, str) or name not in BROWSER or not isinstance(page, str) or page not in PAGES:
         raise ValueError('unexpected event or page')
-    if name == 'guide_open' and not (page.startswith('/Affil1/guides/') and not page.endswith('/index.html') and page.endswith('.html')):
+    if name == 'guide_read_75' and not (page.startswith('/Affil1/guides/') and not page.endswith('/index.html') and page.endswith('.html')):
         raise ValueError('unexpected guide path')
-    if name == 'outbound_click':
-        if not isinstance(ref, str) or not re.fullmatch(r'P-0[1-5]', ref):
+    if name == 'compare_view' and page not in ('/Affil1/compare/', '/Affil1/compare/index.html'):
+        raise ValueError('unexpected comparison path')
+    if name == 'flag_page_view' and page not in ('/Affil1/review/', '/Affil1/review/index.html'):
+        raise ValueError('unexpected review path')
+    if name == 'outbound_product_click':
+        if not isinstance(ref, str) or not re.fullmatch(r'[A-Z0-9]{10}', ref):
             raise ValueError('invalid product reference')
     elif ref is not None:
         raise ValueError('unexpected product reference')
@@ -117,7 +121,7 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        if self.path != '/Affil1/analytics/collect' or not self.analytics_enabled:
+        if self.path != '/api/e' or not self.analytics_enabled:
             return self.respond(404)
         if (self.headers.get('Origin') != self.origin
             or self.headers.get('Sec-Fetch-Site') not in (None, 'same-origin')
@@ -129,12 +133,18 @@ class Handler(SimpleHTTPRequestHandler):
             length = -1
         if not 0 < length <= MAX_BYTES or self.headers.get('Transfer-Encoding'):
             return self.respond(413)
-        if self.headers.get_content_type() != 'text/plain':
+        if self.headers.get_content_type() != 'application/json':
             return self.respond(415)
         try:
-            value = json.loads(self.rfile.read(length))
+            values = json.loads(self.rfile.read(length))
+            if not isinstance(values, list) or len(values) != 1:
+                raise ValueError('expected one event')
+            value = values[0]
+            if not isinstance(value, dict) or set(value) != {'event','page','product'} or not isinstance(value['page'], str):
+                raise ValueError('invalid event')
             with closing(self.db()) as db:
-                record(db, value, self.retention_days)
+                record(db, {'event': value['event'], 'path': '/Affil1/' + value['page'],
+                            'ref': value['product']}, self.retention_days)
         except (ValueError, RecursionError):
             return self.respond(400)
         self.respond(204)
@@ -152,10 +162,10 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_header('Location', '/Affil1/')
             self.end_headers()
             return
-        if path == '/Affil1/analytics/collect':
+        if path == '/api/e':
             return self.respond(405 if self.analytics_enabled else 404)
         if path == '/Affil1/assets/js/analytics.js' and self.analytics_enabled:
-            data = b'window.CC_ANALYTICS_ENDPOINT = "/Affil1/analytics/collect";\n' + (ROOT / 'assets/js/analytics.js').read_bytes()
+            data = b'window.CC_ANALYTICS_ENABLED = true;\n' + (ROOT / 'assets/js/analytics.js').read_bytes()
             self.send_response(200)
             self.send_header('Content-Type', 'text/javascript; charset=utf-8')
             self.send_header('Content-Length', str(len(data)))

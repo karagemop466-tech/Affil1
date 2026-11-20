@@ -81,7 +81,7 @@ def render(doc):
         row.append('Needs final editorial review' if eligible(p, doc['tracking_id_supplied']) else 'Unverified · CTA held')
         rows.append(row)
     findings = [
-        ['Are the listing destinations confirmed intent?', 'No. Five listing pages observed; P-04 previously returned a checkpoint.', 'Validate one link per exact variant in the enrolled Associates workflow. Record the verified destination and tracking report before scaling.', source(AGREEMENT, 'Amazon Operating Agreement')],
+        ['Are the listing destinations confirmed intent?', 'No. Five listing pages observed in this pass. P-04 and P-05 also have contradictory redirect observations.', 'Validate one link per exact variant in the enrolled Associates workflow. Record the verified destination and tracking report before scaling.', source(AGREEMENT, 'Amazon Operating Agreement')],
         ['Are the short links invalid?', 'Unknown. Redirects and absent visible tag parameters do not establish compliance or attribution.', 'Use an Amazon-provided link from the enrolled account; do not append a tag and call it verified.', source(POLICY, 'Amazon Program Policies')],
         ['Can we show price, stock or reviews?', 'No approved feed is connected to this workflow. No commerce fields were transcribed from the fetched pages.', 'Check the current API license, access and display rules before publishing any dynamic data.', source(POLICY, 'Amazon Program Policies')],
         ['Are we collecting clicks or orders?', 'Not on GitHub Pages. The optional same-origin counter has no deployment there. Orders are not browser events.', 'Deploy after a privacy and retention review; import aggregate Associates reports privately, with dates and provenance.', source(PAGES_DOC, 'GitHub Pages hosting docs')],
@@ -96,7 +96,10 @@ def render(doc):
     reg = table(['Ref', 'Submitted slug', 'Observed Amazon listing (source)', 'Intended ASIN', 'Confirmed listing URL', 'Confirmed date', 'Confirmation source', 'Gate'], rows,
                 caption=f"Destination observations · {doc['checked_on']}",
                 note='Blank confirmation fields are unverified. Observed listings are evidence links, not validated affiliate links.')
-    flags = ''.join(f'<li><strong>{esc(p["ref"])}</strong> · {esc(p["prior_discrepancy"])}</li>' for p in doc['records'] if p['prior_discrepancy'])
+    flags = ''.join(f'<li><strong>{esc(p["ref"])}</strong> · {esc(p["prior_discrepancy"])}'
+                    + (f' {source(p["alternate_observed_target"], "Alternate Amazon listing", product=True)["html"]}.'
+                       if p.get("alternate_observed_target") else '') + '</li>'
+                    for p in doc['records'] if p['prior_discrepancy'])
     content = pagehead('Operations desk', 'Affiliate launch readiness',
                        'What readers can use now, what the evidence supports, and what must be checked before monetizing.',
                        meta='Tracking ID supplied: <code>shopnow047c-20</code> · attribution not confirmed')
@@ -104,16 +107,16 @@ def render(doc):
 <p>Keep the buying guides live. The submitted links reached three air-fryer listings and two thermometer listings in this recheck. None has an independently confirmed intended ASIN or confirmed attribution. Product pages should help a reader choose a format first; keep verified purchasing links separate from the evidence register.</p>
 <p>Start with existing guides on capacity and cleanup. Publish the next question only when it answers something the reader cannot get from a listing alone. Keep the scope narrow: no rankings, price quotes, popularity claims, commission estimates or revenue forecasts without admissible evidence.</p>
 <h2>The five submitted links</h2>{reg}
-<p>Amazon defines an <a href="{ASIN}">ASIN</a> as a ten-character identifier; the submitted nine-character slugs are not ASINs.</p>
+<p>Amazon defines an <a rel="noopener" href="{ASIN}">ASIN</a> as a ten-character identifier; the submitted nine-character slugs are not ASINs.</p>
 <h2 id="flagged">Flagged for review</h2><ul>{flags}</ul>
-<p><a href="../reviews/verification-audit.html">Read the historical redirect audit</a> · <a href="../review/">Published review queue</a></p>
+<p><a href="https://github.com/karagemop466-tech/Affil1/blob/main/data/verification-audit.json">Read the historical redirect audit</a> · <a href="../review/">Published review queue</a></p>
 {table(['Decision question', 'What we know now', 'How to close the gap', 'Official source'], findings)}
 <h2 id="suggestions">Suggestions for review</h2>
 {table(['Order', 'Proposal', 'Decision or next test', 'Official source'], proposals)}
 <p><a href="../suggestions/">Use the suggestions board to record accept, hold or reject</a>. A local decision does not publish links or change this site.</p>
 <h2 id="prompt">Design and drafting brief</h2>
 <p>Make the home page feel like the front of a kitchen publication: warm editorial photography, product formats before operations, one question per headline, and one useful next action per card. Illustrations must not pass as product photos. Use an honest editorial byline, not a fabricated tester. On mobile, keep disclosures visible before the content and put operations in a single menu and the footer.</p>
-<p>Give the drafting agent only the approved source packet and a buyer question. Ask for the decision first, a practical example second, and a source beside each product claim. Return a separate evidence checklist and gaps; do not guess missing numbers. A draft is not a publish instruction. Check the <a href="{AGREEMENT}">Associates Agreement</a>, <a href="{FTC}">FTC disclosure guidance</a> and <a href="{GOOGLE_LINKS}">Google paid-link markup</a> before shipping a new CTA.</p>''')
+<p>Give the drafting agent only the approved source packet and a buyer question. Ask for the decision first, a practical example second, and a source beside each product claim. Return a separate evidence checklist and gaps; do not guess missing numbers. A draft is not a publish instruction. Check the <a rel="noopener" href="{AGREEMENT}">Associates Agreement</a>, <a href="{FTC}">FTC disclosure guidance</a> and <a href="{GOOGLE_LINKS}">Google paid-link markup</a> before shipping a new CTA.</p>''')
     canonical = SITE_URL + '/operations/launch-readiness.html'
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
