@@ -27,6 +27,26 @@ other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
 `needs review` means the item is published on the review page and does not block
 anything.
 
+## arena/ae991ca9-affil1 · final integration
+
+Implemented — publication design, canonical deployment, measurement, editorial review and generated pages. Scope: tools/, assets/, src/, generated pages/feed/sitemap, .github/workflows/, server/, documentation. No active claim above.
+
+Integration note: main advanced via #23 and #26. Kept the five-product official register, reader questions, seasonal articles, staged release and legacy deployment detection; reconciled conflicting homepage/navigation templates and rebuilt their generated HTML rather than merging markup. Earlier P-04 interstitial is historical: this session independently opened all five supplied links and saw the five official listing titles, including ThermoMaven B0DHZTCNR5. No attribution report was available.
+
+Integrated #27/#28: retained FLG-016 and the competing dated P-04/P-05 observations (not evidence of intent); moved its sitewide notice to the footer and retained product-level review links. Retained the all-editions link check and corrected guide claims. Rebuilt overlapping generated pages from reconciled templates. A plain pull --rebase attempted to flatten the integration merge; it was aborted without changing any work. Subsequent pulls preserve merges.
+
+Integrated the later collector, supplement and reconciliation commits from main: retained the other measurement implementation and kitchen supplement in source control, unified intent field names, kept the newer question-source mappings and both Search Console references, and excluded parallel editions from the canonical release. Server/client in this edition share the five-event contract. Rebuilt generated files after template conflicts.
+
+Verification: 26 canonical pages built; `tools/check.py` reports zero errors and warnings, including source links per data row, relative links, disclosure placement and sponsored retail links. Browser smoke checks passed on desktop and a 390px viewport (filter, bookmark, persist across pages, remove; no page errors or horizontal overflow). Browser smoke-test counter traffic is synthetic and is excluded from the campaign ledger. Official sources rechecked: five Amazon listings, Associates Agreement and Program Policies, FTC endorsement FAQ, Google paid-link documentation and https://sell.amazon.com/blog/what-is-an-asin. Status: implementation done; production analytics hosting, search ownership, account attribution, and unconfirmed product intent need review.
+
+Integration PR [#41](https://github.com/karagemop466-tech/Affil1/pull/41). Reconciled #38’s fail-closed paid-link gates, launch-readiness page, account report importer, reference-only listing links and seasonal guide into the shared publication. Retained its evidence tests and public guide; the integrated publication now has 28 pages and nine guides. Status: done; signed-in and hosting checks remain needs review.
+
+Integrated #42/#43: adopted the independent listing recheck, source-linked executive brief, host-policy and program-content flags. AI drafting receives only approved first-party query text, never Amazon Program Content. Generated-page conflicts resolved by rebuilding.
+
+A competing front-page merge landed during PR checks. Preserved its no-network search index, dialog and discovery script in the shared masthead, retained the seasonal and product content, then regenerated from the integrated templates.
+
+Retained the final #48 deployment receipt without altering it.
+
 ## Overlap with the other open branches
 
 Two sibling branches worked the same brief at the same time. This session did not
@@ -329,20 +349,5 @@ Narrowed after #27, #30, #31 and #32 merged during this turn: own only the Speci
 - Amazon recheck (2026-11-20, submitted redirects followed via official Amazon pages): P-01 [B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), P-02 [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), P-03 [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH), P-04 [B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5), P-05 [B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z). Listing titles and arrival identifiers checked against the maintained register; no visible tag. Preserved #27's conflicting P-04/P-05 observations in FLG-016. No account-backed intent or attribution was established.
 - Read [Amazon ASIN definition](https://sell.amazon.com/blog/what-is-an-asin), [Operating Agreement §§1, 5](https://affiliate-program.amazon.com/help/operating/agreement), [Policies §§2(b), 3 and 5](https://affiliate-program.amazon.com/help/operating/policies), [FTC endorsement FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [Search Console Performance report](https://support.google.com/webmasters/answer/7576553), and [Pages static hosting and logging](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [usage limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). The last two new flags cover commercial hosting and use of Amazon Program Content in ML development. Nothing here approves the account, API or production AI automation.
 - Verified the maintained build, 24 generated pages (0 errors/warnings), 74 served pages’ relative references (0 broken), staged artifact, the launch-readiness test and the merged analytics integration test. Remaining **needs review**: FLG-002/003 private link confirmation; FLG-016/017 conflicting redirects and legacy releases mixed into root-based Pages; real collector hosting, consent/retention, Search Console and reader capture. The site is not collecting production analytics or conversions; ledger remains empty.
-## arena/ae991ca9-affil1 · final integration
 
-In progress — publication design, canonical deployment, measurement, editorial review and generated pages. Scope: tools/, assets/, src/, generated pages/feed/sitemap, .github/workflows/, server/, documentation. No active claim above.
-
-Integration note: main advanced via #23 and #26. Kept the five-product official register, reader questions, seasonal articles, staged release and legacy deployment detection; reconciled conflicting homepage/navigation templates and rebuilt their generated HTML rather than merging markup. Earlier P-04 interstitial is historical: this session independently opened all five supplied links and saw the five official listing titles, including ThermoMaven B0DHZTCNR5. No attribution report was available.
-
-Integrated #27/#28: retained FLG-016 and the competing dated P-04/P-05 observations (not evidence of intent); moved its sitewide notice to the footer and retained product-level review links. Retained the all-editions link check and corrected guide claims. Rebuilt overlapping generated pages from reconciled templates. A plain pull --rebase attempted to flatten the integration merge; it was aborted without changing any work. Subsequent pulls preserve merges.
-
-Integrated the later collector, supplement and reconciliation commits from main: retained the other measurement implementation and kitchen supplement in source control, unified intent field names, kept the newer question-source mappings and both Search Console references, and excluded parallel editions from the canonical release. Server/client in this edition share the five-event contract. Rebuilt generated files after template conflicts.
-
-Verification: 26 canonical pages built; `tools/check.py` reports zero errors and warnings, including source links per data row, relative links, disclosure placement and sponsored retail links. Browser smoke checks passed on desktop and a 390px viewport (filter, bookmark, persist across pages, remove; no page errors or horizontal overflow). Browser smoke-test counter traffic is synthetic and is excluded from the campaign ledger. Official sources rechecked: five Amazon listings, Associates Agreement and Program Policies, FTC endorsement FAQ, Google paid-link documentation and https://sell.amazon.com/blog/what-is-an-asin. Status: implementation done; production analytics hosting, search ownership, account attribution, and unconfirmed product intent need review.
-
-Integration PR [#41](https://github.com/karagemop466-tech/Affil1/pull/41). Reconciled #38’s fail-closed paid-link gates, launch-readiness page, account report importer, reference-only listing links and seasonal guide into the shared publication. Retained its evidence tests and public guide; the integrated publication now has 28 pages and nine guides. Status: done; signed-in and hosting checks remain needs review.
-
-Integrated #42/#43: adopted the independent listing recheck, source-linked executive brief, host-policy and program-content flags. AI drafting receives only approved first-party query text, never Amazon Program Content. Generated-page conflicts resolved by rebuilding.
-
-A competing front-page merge landed during PR checks. Preserved its no-network search index, dialog and discovery script in the shared masthead, retained the seasonal and product content, then regenerated from the integrated templates.
+- Delivery: [PR #42](https://github.com/karagemop466-tech/Affil1/pull/42) merged into `main` as `4059ac2242eae90df17a94a43fad0d2312bd91fe`. PR build and launch checks passed. [GitHub Pages deployment 44683077831](https://github.com/karagemop466-tech/Affil1/actions/runs/44683077831) succeeded, and the Pages API reported `built` for that same merge SHA. [Live editorial site](https://karagemop466-tech.github.io/Affil1/).
