@@ -230,3 +230,9 @@ Checks: `python3 tools/build.py`, `python3 tools/check.py` (22 generated pages, 
 Rebase after PR #28: a task-board conflict was resolved by retaining both merge/deployment histories and this reconciliation record.
 
 Integration note (eaf80f48): preserved both board entries after the concurrent append conflict. PR #32 owns measurement; this session will not duplicate that work. Additional scope: tools/stage.py to include the new reader assets in Pages artifacts.
+
+### Reader-facing release — eaf80f48
+
+- Updated the maintained templates, not the legacy storefronts. A seasonal cover leads into a filterable five-product shelf, short reading paths and local search. No-JS readers can browse all five cards and follow ordinary links. Disclosures still appear under the masthead and in the footer.
+- Checked the five submitted links against the arrived-at Amazon listing titles on 2026-11-20: [P-01](https://www.amazon.com/dp/B0CDY277D3), [P-02](https://www.amazon.com/dp/B09B7SB46R), [P-03](https://www.amazon.com/dp/B08DKYBTPH), [P-04](https://www.amazon.com/dp/B0DHZTCNR5), [P-05](https://www.amazon.com/dp/B0DZFD6R9Z). These are observations only. FLG-016 remains open because another observation reverses the thermometer pair. None of these landing URLs established the supplied tracking ID or the owner's intent. No price, rank, demand or conversion figures were imported.
+- Checked the [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) for its tagged-link requirement. No new monetized link was constructed or labeled approved. Authorized Associates reports and a production host remain prerequisites, not inferred facts.

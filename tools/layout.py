@@ -29,10 +29,10 @@ AFFILIATE_HINT = __import__("re").compile(
 
 # The only navigation group. Everything else lives in the footer.
 NAV = [
-    ("guides/index.html", "Guides"),
-    ("products/index.html", "Shortlist"),
-    ("compare/index.html", "Compare"),
-    ("brief/index.html", "Site desk"),
+    ("index.html", "The Edit"),
+    ("products/index.html", "Product Shelf"),
+    ("guides/index.html", "Buying Guides"),
+    ("brief/index.html", "Site Desk"),
 ]
 
 FOOTER_GROUPS = [
@@ -118,9 +118,8 @@ def kindle(summary, body):
 def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
-    <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Product links are marked as sponsored. Tracking on the supplied links has not been confirmed.
-      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
+    <span class="info-i" aria-hidden="true">i</span>
+    <p>{DISCLOSURE} <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">How our links work</a></p>
   </div>
 </div>"""
 
@@ -134,16 +133,23 @@ def masthead(page_dir, active=None):
     for target, label in NAV:
         current = ' aria-current="page"' if act and section_of(target) == act else ""
         items.append(f'<a href="{esc(rel(page_dir, target))}"{current}>{esc(label)}</a>')
+    from content import GUIDES
+    catalog = NAV + [("compare/index.html", "Compare kitchen appliances"),
+        ("review/index.html", "Flagged for review"), ("suggestions/index.html", "Suggestions"),
+        ("questions/index.html", "Open questions"), ("operations/ledger.html", "Campaign ledger")]
+    catalog += [(f"guides/{g['slug']}.html", g['title']) for g in GUIDES]
+    products = json.loads((ROOT / 'src/data/products.json').read_text())['products']
+    catalog += [(f"products/{p['ref'].lower()}.html", f"{p['brand']} {p['format_label']}") for p in products]
+    results = ''.join(f'<li><a href="{esc(rel(page_dir, u))}">{esc(t)}</a></li>' for u,t in catalog)
+    mark = '<svg viewBox="0 0 40 40" width="37" height="37" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="20" cy="20" r="18.3"/><path d="m10 10 6 6m-3-9 6 6m-12 0 6 6q3 3 6-1l11 12m-5-9c7-6 8-11 5-13L18 21m-1 3-7 8"/></svg>'
     return f"""<header class="masthead">
+  <div class="editionline"><div class="wrap"><span>THE KITCHEN JOURNAL</span><span>VOL. 01 &nbsp; / &nbsp; NOVEMBER 2026</span></div></div>
   <div class="wrap masthead-inner">
-    <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">
-      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
-      <span class="brand-tag">{SITE_TAGLINE}</span>
-    </a>
-    <nav class="nav" aria-label="Sections">
-      {"".join(items)}
-    </nav>
+    <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">{mark}<span class="brand-name">Crisp <i>&amp;</i> Counter</span></a>
+    <nav class="nav" aria-label="Sections">{"".join(items)}</nav>
+    <button class="find" type="button" hidden data-find aria-label="Search the journal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg><span>Search</span></button>
   </div>
+  <dialog class="searchdesk" aria-labelledby="search-title"><form method="dialog"><button aria-label="Close search">×</button></form><h2 id="search-title">Search the journal</h2><input type="search" placeholder="Try capacity, thermometer, cleanup…" aria-label="Search guides and products"><p role="status"></p><ul>{results}</ul></dialog>
 </header>"""
 
 
@@ -156,6 +162,7 @@ def footer(page_dir):
         groups.append(f'<div class="foot-col"><h2>{esc(heading)}</h2><ul>{rows}</ul></div>')
     return f"""<footer class="site-footer">
   <div class="wrap">
+    <p class="foot-disclosure"><a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">Thermometer link update: two checks found different destinations. Read the source notes &rarr;</a></p>
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
@@ -199,17 +206,18 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
+<link rel="stylesheet" href="{esc(rel(page_dir, 'assets/css/editorial.css'))}">
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
 {body}
 </main>
 {footer(page_dir)}
 <script src="{esc(js)}" defer></script>
+<script src="{esc(rel(page_dir, 'assets/js/discover.js'))}" defer></script>
 <script src="{esc(rel(page_dir, 'assets/js/analytics.js'))}" defer></script>
 </body>
 </html>
