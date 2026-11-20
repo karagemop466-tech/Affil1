@@ -43,6 +43,33 @@ The published descendant contains tagged links despite empty intent and reportin
 | `arena/a4ab7faf-affil1` | same | Pass-2 verification audit, seasonal guide (PRs #20, #21) | done |
 | `arena/b41317f8-affil1` | `arena/b41317f8-affil1` | **Final integration pass**: one canonical site, shop-voice rewrite, tagged links, new guides, suggestions/questions refresh, PR + merge + deploy | in progress → done below |
 
+### Independent check — arena/06db21d4-affil1 · additive only
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Reproducible second-opinion audit of whatever is published; `noindex` annex page | in review | arena/06db21d4-affil1 | `tools/audit_canonical.py`, `audit/independent-check/`, this file |
+
+Scope is deliberately additive: one new tool, one annex page, one board entry. No template,
+stylesheet, register, data file or workflow owned by another session is edited. Re-runnable
+with `python3 tools/audit_canonical.py --write`.
+
+**Why this shape.** This session began at `4ee0e7b` and built a full competing shop edition
+before discovering that `main` had advanced past it and already published one canonical
+pipeline. That build was **discarded rather than merged** — replacing a consistent, deployed
+edition with a parallel one would have destroyed several sessions' work for no reader benefit.
+The reproducible check is the useful contribution; the competing build was not.
+
+**Result on the tree it is checked against.** 43 canonical pages, 2,825 internal references,
+zero broken. Zero pages missing the Associates statement, zero placing it below `<main>`.
+Zero published prices, star ratings, review counts or stock figures. Zero third-party scripts.
+Sitemap and feed well-formed with every sitemap URL on disk. Two commercial gaps recorded with
+their cause: Amazon product links that carry no `tag=` parameter, and a handful of
+owner-facing dashboard links without `rel="sponsored"`. Neither is a regression; both follow
+from the fail-closed CTA gate and both are written up rather than quietly fixed or ignored.
+
+**Not claimed:** attribution, commission rates, click reports or revenue. None is obtainable
+without signing in to the Associates account.
+
 ## Claims
 
 | Task | Status | Owner | Files |

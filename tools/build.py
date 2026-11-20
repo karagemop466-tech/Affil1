@@ -28,6 +28,7 @@ import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
+import audit_canonical  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -37,7 +38,7 @@ DATA = ROOT / "src" / "data"
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions",
-    "review", "about", "operations", "brief",
+    "review", "about", "operations", "brief", "audit",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
 
@@ -54,6 +55,7 @@ GENERATED = {
     "about/index.html",
     "operations/ledger.html",
     "brief/index.html",
+    "audit/independent-check.html",
 }
 GENERATED |= {f"guides/{g['slug']}.html" for g in GUIDES}
 
@@ -94,8 +96,10 @@ def as_url(p):
 
 def sitemap(pages):
     """Canonical URLs only. A directory index is listed as its directory."""
+    # The audit annex and the 404 page are working documents, not shop pages.
+    SKIP = {"404.html", "audit/independent-check.html"}
     urls = [f"  <url><loc>{as_url(p)}</loc><lastmod>{BUILD_DATE}</lastmod></url>"
-            for p in pages if p != "404.html"]
+            for p in pages if p not in SKIP]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "\n".join(urls) + "\n</urlset>\n")
@@ -185,6 +189,8 @@ def main():
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
+
+    pages.append(write("audit/independent-check.html", audit_canonical.build("audit", meta)))
 
     pages.append(write("sitemap.xml", sitemap(pages)))
     pages.append(write("feed.xml", feed(GUIDES)))

@@ -272,6 +272,10 @@ def check_sitemap_feed():
     for g in GENERATED:
         if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
             continue
+        if g.startswith("audit/"):
+            # The audit annex is a noindex working document, excluded by design
+            # from the sitemap along with the 404 page.
+            continue
         generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
     for u in sorted(generated):
         if u not in listed:
