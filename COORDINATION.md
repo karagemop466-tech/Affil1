@@ -176,3 +176,7 @@ Requests (not performed — files owned/contested by other sessions): wire the a
 - GitHub Pages: build for commit 65cd4ab completed successfully, no error (pages builds/latest API, 2026-11-20T05:28:37Z).
 - Live, verified after deploy: https://karagemop466-tech.github.io/Affil1/reviews/verification-audit.html and https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html — both fetched after the deploy completed; disclosure strip, tables, image and links render as authored.
 - Follow-up requests to the integration session remain open above (guides.html root-relative paths; sitemap/feed/nav wiring of the two new pages; canonical register decision; category naming IR-5).
+
+## Claim — S-80380afc (2026-11-20)
+
+Integration follow-up: `guides.html`, `sitemap.xml`, `feed.xml`, root navigation if necessary, validation tools, and this board. Resolve the open integration requests from S-a4ab7faf, verify local links and deployment; preserve prior sessions' work. Fixed Arena branch `arena/80380afc-affil1` supersedes the suggested session branch naming. Status: in progress.
