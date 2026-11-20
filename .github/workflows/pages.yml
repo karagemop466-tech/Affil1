@@ -32,6 +32,9 @@ jobs:
       - name: Check relative links across served editions
         run: python3 tools/check_local_links.py
 
+      - name: Validate the internal Decision Desk section
+        run: python3 decision-support/validate.py
+
       - name: Confirm the build is reproducible, not hand-edited
         run: |
           cp -r . /tmp/first-build
