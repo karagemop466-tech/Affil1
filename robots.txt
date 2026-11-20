@@ -2,4 +2,10 @@
 User-agent: *
 Allow: /
 
+# Preserved sections kept for the record, not part of the shop.
+# One site is indexed: the canonical pages listed in sitemap.xml.
+Disallow: /archive/
+Disallow: /crisp/
+Disallow: /docs/
+
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml

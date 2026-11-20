@@ -1399,6 +1399,12 @@ function robots() {
 User-agent: *
 Allow: /
 
+# Preserved sections kept for the record, not part of the shop.
+# One site is indexed: the canonical pages listed in sitemap.xml.
+Disallow: /archive/
+Disallow: /crisp/
+Disallow: /docs/
+
 Sitemap: ${site.baseUrl}/sitemap.xml
 `;
 }

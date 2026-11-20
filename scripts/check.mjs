@@ -33,6 +33,11 @@ function walk(dir, out = []) {
     // docs/ holds parallel-session documents kept for review, not published
     // pages of this site. Same reasoning as archive/.
     if (e.name === "docs") continue;
+    // crisp/ is a parallel session's preserved section (S-96012762). It ships
+    // its own pages, sitemap and feed under its own conventions and is kept
+    // at its original path for the record. robots.txt disallows it so one
+    // canonical site is indexed. It is not subject to this gate's rules.
+    if (e.name === "crisp") { notes.push(`crisp/ excluded from published-page rules (preserved parallel-session section; robots.txt disallows indexing)`); continue; }
     const full = path.join(dir, e.name);
     if (e.isDirectory()) walk(full, out);
     else if (e.name.endsWith(".html")) out.push(full);
