@@ -35,17 +35,17 @@ PUBLISHED_FILES = {"index.html", "404.html", "feed.xml", "sitemap.xml", "robots.
 def published_set():
     """Exactly the paths tools/build.py writes, read from the generator itself."""
     keep = set(PUBLISHED_FILES)
+    # build.GENERATED is the complete list of paths the builder writes. GUIDES
+    # is a list, so reading it as a mapping made this function fall back to
+    # directory guesses and mark real generated pages as strays.
     try:
         import build  # noqa: F401
-        slugs = list(build.GUIDES.keys())
+        keep |= set(build.GENERATED)
     except Exception as exc:  # noqa: BLE001 - the builder is optional for a dry run
         print(f"note: could not import tools/build.py ({exc}); keeping guides by directory")
-        slugs = None
-    if slugs:
-        keep |= {f"guides/{s}/index.html" for s in slugs}
-    keep.add("guides/index.html")
-    for d in PUBLISHED_DIRS:
-        keep.add(f"{d}/index.html")
+        keep.add("guides/index.html")
+        for d in PUBLISHED_DIRS:
+            keep.add(f"{d}/index.html")
     return keep
 
 

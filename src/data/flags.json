@@ -288,12 +288,12 @@
     {
       "id": "FLG-021",
       "severity": "medium",
-      "title": "tools/validate.py fails on the current product schema",
+      "title": "tools/validate.py was failing on the product schema (fixed in PR #77)",
       "expected": "Every validator in tools/ runs clean against the current data.",
-      "found": "python3 tools/validate.py stops with KeyError 'supplied_path_code_length' on the current src/data/products.json. The build gate tools/check.py passes with 0 errors.",
-      "reading": "Only the legacy validator is affected. The publication gate that runs in CI is not. A validator that fails silently is still a gap, so it is recorded.",
-      "impact": "Nothing on the site depends on tools/validate.py. Either update it to the current schema or retire it and say so in the README.",
-      "blocks": "a clean validator is still owed; nothing else",
+      "found": "python3 tools/validate.py stopped with KeyError 'supplied_path_code_length' because the product schema had been renamed. The validator also pointed at a retired section. Both were fixed in PR #77: field names now match the schema, the validator checks the published pages, and it passes (1441 checks, 0 warnings).",
+      "reading": "The gate had been red on main. That is the reason this flag was raised, and the fix is recorded here.",
+      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",
+      "blocks": "nothing",
       "to_check": [
         "tools/validate.py",
         "src/data/products.json"
