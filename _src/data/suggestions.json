@@ -2,14 +2,15 @@
   "meta": {
     "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
     "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
-    "recommended_first": "S-01 and S-03. One confirms the site can earn; the other makes it findable. Neither needs new content. For decision-making itself, S-28 and S-29 are the cheapest upgrades on the board.",
+    "recommended_first": "S-01 and S-03. One confirms the site can earn; the other makes it findable. Neither needs new content. For decision-making itself, S-34 and S-35 are the cheapest upgrades on the board.",
     "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads.",
     "implemented_this_pass": [
       "S-22",
       "S-23",
       "S-24",
       "S-25"
-    ]
+    ],
+    "what_changed_in_this_pass": "Three rows added (S-26 to S-28) for a reviewer to accept, hold or reject. They were numbered S-22 to S-24 on the branch, then renumbered on merge because a concurrent session had already taken S-22 to S-25. No existing row was reworded and no decision recorded by a reviewer was overwritten."
   },
   "paths": [
     {
@@ -322,6 +323,72 @@
     },
     {
       "id": "S-26",
+      "status": "open",
+      "title": "Never publish a supplied short link as a buy destination — link the /dp/ listing instead",
+      "why": "On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. Independently observed by two sessions and recorded as FLG-028. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.",
+      "effort": "zero — enforce what the build already does",
+      "risk": "None. The cost is that the supplied links stay in the record as evidence rather than as revenue paths, which is what FLG-028 and FLG-003 already say they are.",
+      "depends_on": "nothing",
+      "recommendation": "Adopt as policy. _tools/check.py already fails any buy destination that is not an approved Special Link or a plain /dp/ listing.",
+      "evidence": "FLG-028; _src/data/products.json observation_trail"
+    },
+    {
+      "id": "S-27",
+      "status": "open",
+      "title": "Make the edition's robots.txt agree with its own noindex tag",
+      "why": "Every edition/ page now carries noindex, follow, but edition/robots.txt still says 'Allow: /' and still advertises the edition's own sitemap. The meta tag and the robots file contradict each other at the same URL, and the sitemap invites exactly the crawl the meta tag declines. A crawler is entitled to treat the more permissive instruction as authoritative.",
+      "effort": "one line in the edition generator",
+      "risk": "None for readers: the edition stays fully reachable for review; only the instruction to index it is withdrawn.",
+      "depends_on": "nothing",
+      "recommendation": "Done in this pass (Disallow: /), and enforced — _tools/check.py now fails the build if any published directory below the root permits a crawl or serves a page without noindex.",
+      "evidence": "edition/robots.txt; _tools/check.py check_one_indexable_site"
+    },
+    {
+      "id": "S-28",
+      "status": "open",
+      "title": "Decide what edition/ is for: keep it as a labelled archive, or retire it to _archive/",
+      "why": "edition/ is a complete second publication of 27 pages sitting at a public URL. It no longer asks to be indexed and the build fails if it ever does again, but it is still a second set of product pages describing the same five products with different wording. Two descriptions of one product is a maintenance cost and a source of drift.",
+      "effort": "an afternoon, once the owner decides",
+      "risk": "Retiring it loses the reviewable comparison unless it moves to _archive/ with the rest of the superseded work. Keeping it means someone has to keep both registers honest.",
+      "depends_on": "Q-01, Q-06",
+      "recommendation": "Keep for now — it is the only place the per-page verification dossiers live — but name it as an archive on the page itself",
+      "evidence": "edition/; FLG-008; _tools/check.py check_one_indexable_site"
+    },
+    {
+      "id": "S-29",
+      "status": "open",
+      "title": "Switch Pages from branch-root serving to the staged 37-page edition (owner repository setting)",
+      "why": "Legacy serving publishes the whole branch root. On 2026-11-20 this meant root working files (PUBLISHING_WORKFLOW.md, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md, LICENSE) were publicly served, and every future un-prefixed root directory becomes a live URL by default — the exact exposure class three underscore renames have had to close. The staged edition is already built by CI (`_tools/stage.py`), pre-flighted clean on 2026-11-20 (86 files, 37 pages, every href/src/srcset resolving, 0 missing targets), and the workflow already deploys it when the setting is flipped. A session attempted the flip via API on 2026-11-20 and was refused (HTTP 403: the sandbox integration token lacks Pages write), so it is a repository-owner action: Settings → Pages → Build and deployment → Source: GitHub Actions.",
+      "effort": "minutes — one repository setting; no code change",
+      "risk": "Low. The deploy job only activates after the checks pass, and the same workflow serves the branch root again if the setting is flipped back. The one real cost: URLs outside the staged set (the working files listed above) stop being served — which is the point.",
+      "depends_on": "nothing",
+      "recommendation": "Approve. It is the durable fix three board entries have requested",
+      "evidence": "GitHub Pages REST API, Update information about a GitHub Pages site: https://docs.github.com/en/rest/pages/pages (build_type: legacy | workflow); receipt _data/verification-observations/2026-11-20-arena-d0594bc5.md §E"
+    },
+    {
+      "id": "S-30",
+      "status": "open",
+      "title": "Treat the submitted short links as unresolvable for attribution, whatever their compliance status turns out to be",
+      "why": "A third independent pass on 2026-11-20 found all five submitted link.amazon URLs landing on the Amazon homepage — the same day other passes saw product pages and fetch errors. Three arrival classes in one day means no click through these URLs can be relied on to reach, let alone be credited for, the intended listing. This does not resolve FLG-003 (the links are not being declared invalid); it argues the operational path: only account-validated Special Links pasted through _tools/arm_links.py should ever carry the tracking tag.",
+      "effort": "zero to decide now; the arming itself is the S-01 owner step",
+      "risk": "None. The site already publishes untagged reference links with the observed ASINs; nothing on the reader-facing pages changes until a Special Link is armed.",
+      "depends_on": "Q-03, Q-14",
+      "recommendation": "Adopt as the operating assumption until the Associates account says otherwise",
+      "evidence": "SRC-02; receipt _data/verification-observations/2026-11-20-arena-d0594bc5.md §B"
+    },
+    {
+      "id": "S-31",
+      "status": "open",
+      "title": "Triage the stale open pull requests before the next merge wave",
+      "why": "Roughly twenty pull requests opened on 2026-11-20 predate the current main (several reference directories that have since been underscore-renamed, so their branches cannot merge cleanly). They sit on the board as if reviewable, but approving any of them would reintroduce retired surfaces. Each should be either closed with a one-line reason or explicitly marked needs-rebase, so the next integration session works from an honest queue.",
+      "effort": "under an hour of triage with the PR list and the board open side by side",
+      "risk": "Low, provided every closure names what superseded it — the board's rule against discarding another session's work applies to PRs as much as to files.",
+      "depends_on": "nothing",
+      "recommendation": "Do it before the next feature PR, not after",
+      "evidence": "PR list at https://github.com/karagemop466-tech/Affil1/pulls observed 2026-11-20 06:05–06:45 UTC; board entries 2026-11-20"
+    },
+    {
+      "id": "S-32",
       "status": "implemented",
       "title": "Ship a seasonal issue: holiday cover, gift edit and trend-led guides",
       "why": "The brief asked for a shop that reads like a publication with catchy, timely topics rather than an audit. The front page is now Issue Nº 02, the holiday edit: a gift-guide feature, a Black Friday checklist timed to the live shopping weekend, a wireless-probe buyer's guide and an accessories filter, each written around the question a shopper actually types.",
@@ -333,7 +400,7 @@
       "evidence": "guides/air-fryer-gift-guide.html; guides/black-friday-air-fryer-checklist.html; guides/wireless-thermometer-worth-it.html; guides/air-fryer-accessories-checklist.html; index.html holiday cover"
     },
     {
-      "id": "S-27",
+      "id": "S-33",
       "status": "open",
       "title": "Turn the topic bank into a dated editorial calendar chosen from measured queries",
       "why": "Thirteen guides now exist as editorial hypotheses. The next four should come from Search Console queries, not instinct: the design pack already holds the topic bank and the organic loop, and this decision turns it into slots with dates and an owner per slot. Without it the cadence collapses into bursts.",
@@ -344,7 +411,7 @@
       "decision": "open"
     },
     {
-      "id": "S-28",
+      "id": "S-34",
       "status": "open",
       "title": "Give the comparison page a 'who it suits' decision column instead of more specification text",
       "why": "Decision-making improves when the reader can match themselves to a row. The compare page currently replicates register fields; a short 'suits you if' column drawn from each product's suits list would let a reader eliminate options instead of reading more prose.",
@@ -355,7 +422,7 @@
       "decision": "open"
     },
     {
-      "id": "S-29",
+      "id": "S-35",
       "status": "open",
       "title": "Publish one 'how we choose' method page and link it from the Questions group",
       "why": "The method (open the link, transcribe the listing, say what it changes, leave blanks blank) is currently scattered across the about page, the review pages and the front-page method band. One short page that states the rules in the reader's language is the single best answer to 'why does this shop show no prices' — and it is a trust asset a search snippet can quote.",
@@ -366,7 +433,7 @@
       "decision": "open"
     },
     {
-      "id": "S-30",
+      "id": "S-36",
       "status": "open",
       "title": "Adopt a fortnightly owner question ritual: close the top blocking question before commissioning the next guide",
       "why": "The register shows exactly what is missing before each decision can be made. The failure mode is not ignorance, it is drift: guides get written while the two blocking questions stay open. A dated ritual — one question, one closing artefact, per fortnight — keeps the missing information list shrinking.",

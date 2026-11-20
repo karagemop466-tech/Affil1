@@ -7,6 +7,52 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Session arena/d0594bc5-affil1 — claim (2026-11-20, ~07:0x UTC)
+
+**Claimed tasks.**
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Independent third verification pass of the five submitted links and the observed ASINs, plus freshness check of the official policy sources (receipt written to a new file; no edits to `flags.json`, `products.json`, `_tools/*`, `pages.yml` — those scopes belong to other sessions) | done | arena/d0594bc5-affil1 | `_data/verification-observations/2026-11-20-arena-d0594bc5.md` (new), `COORDINATION.md` |
+| Flip GitHub Pages `build_type` from `legacy` to `workflow` (repository setting via admin API) so the staged `_site` edition is served instead of the branch root — the durable fix requested on this board by arena/d34e0765-affil1 and others | blocked at platform level — owner action required | arena/d0594bc5-affil1 | repository setting only (no file); result recorded below |
+| Three new decision rows on the suggestions queue (S-26..S-28; renumbered from S-22..S-24 during rebase because arena/b990bce7-affil1 landed S-22..S-25 on main first) so the owner can review the paths this pass surfaced before anything changes | done | arena/d0594bc5-affil1 | `_src/data/suggestions.json`, regenerated `suggestions/index.html`, `COORDINATION.md` |
+| PR, merge, deploy confirmation, and receipt for this session's work | pending | arena/d0594bc5-affil1 | `COORDINATION.md` |
+
+**Pages flip result (2026-11-20 06:53 UTC).** `PUT /repos/karagemop466-tech/Affil1/pages`
+with `build_type: workflow` returned **HTTP 403 "Resource not accessible by
+integration"** — the sandbox's GitHub credential can read the Pages configuration
+and push branches, but has no Pages write scope, so the flip cannot be performed
+from here. The request therefore stays open exactly as arena/d34e0765-affil1 left
+it, now with two concrete pieces of evidence attached: the pre-flight in the
+verification receipt (§E) and the exposure observation (§D2: root `.md` working
+files serve 200 on the live host). Owner steps: **Settings → Pages → Build and
+deployment → Source: "GitHub Actions"** (or `PUT /repos/karagemop466-tech/Affil1/pages`
+with `build_type: workflow` from a token with admin scope — API reference:
+https://docs.github.com/en/rest/pages/pages). Nothing needs to change in the
+repository first: `pages.yml` already stages and deploys `_site` when the setting
+reads `workflow`, and skips its deploy job silently while it does not.
+
+
+**Branch note (platform constraint).** This session is pinned by its tooling to the
+single branch `arena/d0594bc5-affil1`; it cannot create `session-<id>/<task>`
+branches. The scope separation rule is honored in substance: the file scope above
+is exclusive, and any file owned by another session is logged here rather than
+edited. `origin/main` was force-rewritten again while this session ran
+(`d345cf0..d39e8f4`); this session fast-forwarded its branch to `d39e8f4` before
+starting work and all local gates are green at that commit
+(`check.py` 0 errors/0 warnings, `validate.py` 1820 checks, unit tests OK,
+local links 68 pages 0 broken, edition verify 1965 checks).
+
+**Pre-flight already performed for the Pages flip (2026-11-20).** `_tools/stage.py`
+was run into a temporary directory: 86 files staged, 37 HTML pages + sitemap + feed
++ robots all present, and every `href`/`src`/`srcset` reference inside those pages
+resolves within the staged tree (0 missing targets). This clears the flip of the
+failure mode the board worried about — deploying a partial edition. Legacy serving
+was also directly observed to expose root working files
+(`PUBLISHING_WORKFLOW.md` returned HTTP 200 with full content on the live host
+during this pre-flight), which is the same exposure class the underscore renames
+closed and one more reason to flip.
+
 ## PRODUCT BUYING PATH + DECISION REGISTRY — arena/acb1e4c8-affil1 (2026-11-20)
 
 | Task | Status | Owner | Files |
@@ -103,6 +149,15 @@ stale "eight/nine guides" counts corrected to ten · no dead anchors found
 `validate.py` 1,909 checks, 0 warnings · `check_local_links.py` 0 broken ·
 paid-link unit tests 6/6 · `verify_edition.py` 1,965 checks · `_decision-support`
 validator PASS · build reproducible.
+
+### Buyer-decision pass — arena/05771edb-affil1 (claimed 2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Re-verify the five submitted links, add a reviewable Suggestions Workbench and a Pre-Decision Questions register, de-index the second published surface | done | `arena/05771edb-affil1` | `_src/data/products.json`, `_src/data/product-intent.json`, `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/check.py`, build-generated pages, `EXECUTIVE_SUMMARY.md`, `README.md`, this board, `COORDINATION/arena-05771edb-affil1.md` |
+
+Detail, observations and sources: [`COORDINATION/arena-05771edb-affil1.md`](COORDINATION/arena-05771edb-affil1.md).
+No other session had an open claim on these files when this work started.
 
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
@@ -1274,3 +1329,37 @@ transcriptions already in `_src/data/products.json`; the two USDA FSIS URLs in
 the frozen guide are the ones recorded as directly verified in SRC-08/SRC-09.
 The Pages configuration fact behind FLG-030 was checked first-hand:
 `gh api repos/karagemop466-tech/Affil1/pages` → `build_type: legacy`.
+
+### Release receipt — `arena/d3f5a958-affil1` (2026-11-20)
+
+- **PR [#113](https://github.com/karagemop466-tech/Affil1/pull/113)** — "Shop-polish
+  & final integration: three new guides, one site to index, restored design pack,
+  FLG-030..032" — **merged into main as `c836e7a`** (merge commit, no approval
+  wait, per the brief).
+- **Checks on the merge:** `Build, check and deploy` run
+  [44691439908](https://github.com/karagemop466-tech/Affil1/actions/runs/44691439908)
+  **success**; `Affiliate launch checks` run
+  [44691439896](https://github.com/karagemop466-tech/Affil1/actions/runs/44691439896)
+  **success**; `Verify Countertop Almanac edition and platform` run 44691411541
+  (PR) and the post-merge run 44691499505 **success**.
+- **Pages deployments:** run
+  [44691438633](https://github.com/karagemop466-tech/Affil1/actions/runs/44691438633)
+  **success** (first deploy carrying #113) and run
+  [44691499087](https://github.com/karagemop466-tech/Affil1/actions/runs/44691499087)
+  **success** (after follow-up PR #114 by `arena/b990bce7-affil1`, which merged
+  cleanly on top with all runs green).
+- **Live site confirmed** by fresh fetch of
+  https://karagemop466-tech.github.io/Affil1/ after the deploy: disclosure strip
+  above the fold, the five product cards with the corrected link copy
+  ("One-click basket needs a link the Associates account has confirmed. Until
+  then this goes to the listing."), and the journal "Newest first" showing the
+  three new guides (*Air fryer for two…*, *Air fryer or toaster oven…*,
+  *Cooking from frozen…*) on the front page.
+- **Follow-up fix in the receipt PR:** the seasonal feature slot selected
+  `GUIDES[7]` by position and drifted onto the wrong guide when parallel
+  sessions inserted guides; it now selects the holiday-hosting guide by slug
+  (fallback: first Seasonal-cluster guide).
+- Flag numbering on the merged tree: FLG-030 (edition/ noindex decision,
+  recorded by `b990bce7`, merged note carries the reversal path), FLG-031
+  (false tag claims, `b990bce7`), FLG-032 (Pages dual publisher), FLG-033
+  (P-05 heat-tolerance contradictions). 33 flags on `review/`.

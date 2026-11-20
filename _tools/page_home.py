@@ -165,6 +165,8 @@ def build(page_dir, products, meta):
   </a>
 </div>""", cls="paths")
 
+    # Select the seasonal feature by slug, not by position: parallel sessions
+    # inserting guides silently shift positional indexes (this happened once).
     by_slug = {g["slug"]: g for g in GUIDES}
     feature = by_slug.get("air-fryer-gift-guide", GUIDES[7])
     feat_href = rel(d, f"guides/{feature['slug']}.html")

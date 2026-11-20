@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suggestions and decisions | Crisp &amp; Counter</title>
-<meta name="description" content="19 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta name="description" content="25 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
 <meta property="og:title" content="Suggestions and decisions | Crisp &amp; Counter">
-<meta property="og:description" content="19 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta property="og:description" content="25 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-counter-w1280.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Suggestions</p>
   <h1>Choose a direction,<br>then choose the rows</h1>
-  <p class="dek">3 coherent paths and 19 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
+  <p class="dek">3 coherent paths and 25 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
   <p class="page-meta">Decisions are stored in your browser only &middot; nothing transmitted &middot; no account</p>
 </div></header>
 <section class="section "><div class="wrap">
@@ -59,7 +59,7 @@
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
-    <p class="decide-count" data-count>0 of 19 decided</p>
+    <p class="decide-count" data-count>0 of 25 decided</p>
   </div>
 </div></div></section>
 <section class="section section-tint"><div class="wrap">
@@ -411,9 +411,135 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
+</article><article class="scard" id="S-26">
+  <div class="scard-head">
+    <span class="scard-id">S-26</span>
+    <h3>Never publish a supplied short link as a buy destination — link the /dp/ listing instead</h3>
+    <span class="scard-effort">zero — enforce what the build already does</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. Independently observed by two sessions and recorded as FLG-028. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>None. The cost is that the supplied links stay in the record as evidence rather than as revenue paths, which is what FLG-028 and FLG-003 already say they are.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Adopt as policy. _tools/check.py already fails any buy destination that is not an approved Special Link or a plain /dp/ listing.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
 </article><article class="scard" id="S-27">
   <div class="scard-head">
     <span class="scard-id">S-27</span>
+    <h3>Make the edition&#x27;s robots.txt agree with its own noindex tag</h3>
+    <span class="scard-effort">one line in the edition generator</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Every edition/ page now carries noindex, follow, but edition/robots.txt still says &#x27;Allow: /&#x27; and still advertises the edition&#x27;s own sitemap. The meta tag and the robots file contradict each other at the same URL, and the sitemap invites exactly the crawl the meta tag declines. A crawler is entitled to treat the more permissive instruction as authoritative.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>None for readers: the edition stays fully reachable for review; only the instruction to index it is withdrawn.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Done in this pass (Disallow: /), and enforced — _tools/check.py now fails the build if any published directory below the root permits a crawl or serves a page without noindex.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-28">
+  <div class="scard-head">
+    <span class="scard-id">S-28</span>
+    <h3>Decide what edition/ is for: keep it as a labelled archive, or retire it to _archive/</h3>
+    <span class="scard-effort">an afternoon, once the owner decides</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>edition/ is a complete second publication of 27 pages sitting at a public URL. It no longer asks to be indexed and the build fails if it ever does again, but it is still a second set of product pages describing the same five products with different wording. Two descriptions of one product is a maintenance cost and a source of drift.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Retiring it loses the reviewable comparison unless it moves to _archive/ with the rest of the superseded work. Keeping it means someone has to keep both registers honest.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-01, Q-06</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Keep for now — it is the only place the per-page verification dossiers live — but name it as an archive on the page itself</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-29">
+  <div class="scard-head">
+    <span class="scard-id">S-29</span>
+    <h3>Switch Pages from branch-root serving to the staged 37-page edition (owner repository setting)</h3>
+    <span class="scard-effort">minutes — one repository setting; no code change</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Legacy serving publishes the whole branch root. On 2026-11-20 this meant root working files (PUBLISHING_WORKFLOW.md, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md, LICENSE) were publicly served, and every future un-prefixed root directory becomes a live URL by default — the exact exposure class three underscore renames have had to close. The staged edition is already built by CI (`_tools/stage.py`), pre-flighted clean on 2026-11-20 (86 files, 37 pages, every href/src/srcset resolving, 0 missing targets), and the workflow already deploys it when the setting is flipped. A session attempted the flip via API on 2026-11-20 and was refused (HTTP 403: the sandbox integration token lacks Pages write), so it is a repository-owner action: Settings → Pages → Build and deployment → Source: GitHub Actions.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. The deploy job only activates after the checks pass, and the same workflow serves the branch root again if the setting is flipped back. The one real cost: URLs outside the staged set (the working files listed above) stop being served — which is the point.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Approve. It is the durable fix three board entries have requested</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-30">
+  <div class="scard-head">
+    <span class="scard-id">S-30</span>
+    <h3>Treat the submitted short links as unresolvable for attribution, whatever their compliance status turns out to be</h3>
+    <span class="scard-effort">zero to decide now; the arming itself is the S-01 owner step</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>A third independent pass on 2026-11-20 found all five submitted link.amazon URLs landing on the Amazon homepage — the same day other passes saw product pages and fetch errors. Three arrival classes in one day means no click through these URLs can be relied on to reach, let alone be credited for, the intended listing. This does not resolve FLG-003 (the links are not being declared invalid); it argues the operational path: only account-validated Special Links pasted through _tools/arm_links.py should ever carry the tracking tag.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>None. The site already publishes untagged reference links with the observed ASINs; nothing on the reader-facing pages changes until a Special Link is armed.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-03, Q-14</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Adopt as the operating assumption until the Associates account says otherwise</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-31">
+  <div class="scard-head">
+    <span class="scard-id">S-31</span>
+    <h3>Triage the stale open pull requests before the next merge wave</h3>
+    <span class="scard-effort">under an hour of triage with the PR list and the board open side by side</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Roughly twenty pull requests opened on 2026-11-20 predate the current main (several reference directories that have since been underscore-renamed, so their branches cannot merge cleanly). They sit on the board as if reviewable, but approving any of them would reintroduce retired surfaces. Each should be either closed with a one-line reason or explicitly marked needs-rebase, so the next integration session works from an honest queue.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low, provided every closure names what superseded it — the board&#x27;s rule against discarding another session&#x27;s work applies to PRs as much as to files.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Do it before the next feature PR, not after</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-33">
+  <div class="scard-head">
+    <span class="scard-id">S-33</span>
     <h3>Turn the topic bank into a dated editorial calendar chosen from measured queries</h3>
     <span class="scard-effort">an hour of scheduling once Q-11 (Search Console) is closed</span>
   </div>
@@ -432,9 +558,9 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-28">
+</article><article class="scard" id="S-34">
   <div class="scard-head">
-    <span class="scard-id">S-28</span>
+    <span class="scard-id">S-34</span>
     <h3>Give the comparison page a &#x27;who it suits&#x27; decision column instead of more specification text</h3>
     <span class="scard-effort">half a day, template only — the suits lists already exist in the register</span>
   </div>
@@ -453,9 +579,9 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-29">
+</article><article class="scard" id="S-35">
   <div class="scard-head">
-    <span class="scard-id">S-29</span>
+    <span class="scard-id">S-35</span>
     <h3>Publish one &#x27;how we choose&#x27; method page and link it from the Questions group</h3>
     <span class="scard-effort">two hours</span>
   </div>
@@ -474,9 +600,9 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-30">
+</article><article class="scard" id="S-36">
   <div class="scard-head">
-    <span class="scard-id">S-30</span>
+    <span class="scard-id">S-36</span>
     <h3>Adopt a fortnightly owner question ritual: close the top blocking question before commissioning the next guide</h3>
     <span class="scard-effort">fifteen minutes a fortnight</span>
   </div>
@@ -552,7 +678,7 @@
   <td></td>
   <td></td>
 </tr><tr>
-  <td><strong>S-26</strong></td>
+  <td><strong>S-32</strong></td>
   <td>Ship a seasonal issue: holiday cover, gift edit and trend-led guides</td>
   <td>2026-11-20</td>
   <td>guides/air-fryer-gift-guide.html; guides/black-friday-air-fryer-checklist.html; guides/wireless-thermometer-worth-it.html; guides/air-fryer-accessories-checklist.html; index.html holiday cover</td>
