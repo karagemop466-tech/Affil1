@@ -905,3 +905,33 @@ What this branch still adds, all of it not present on `main` before this branch:
 Gates after the change: `validate.py` 1550 checks / 0 warnings; `check.py` 0 errors / 0 warnings; `check_local_links.py` 65 pages / 0 broken; `_decision-support/validate.py` PASS; `_platform/verify_edition.py` 1965 checks / 0 errors; `sweep_surfaces.py` would move 0.
 
 **Still open, and it is the real fix.** This is the third time a served directory has exposed working files. Each time the repair has been a rename. The durable fix is one repository setting: `PUT /repos/karagemop466-tech/Affil1/pages` with `build_type: workflow`, so the 30-page `_site` is deployed instead of the branch root. `pages.yml` already supports it and skips the deploy job until it is set. Until then every new root directory is a live URL by default, and this check is a tripwire, not a door.
+
+## Claim — measurement machinery, the owner switch, one indexable edition, and three sourced guides · arena/3e17592d-affil1 · 2026-11-20 UTC
+
+Session ID: `arena/3e17592d-affil1` · Branch: `arena/3e17592d-affil1` · Base: `main` at `2934ed0`
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Repair `_analytics/endpoint.py`: `from build import GENERATED` resolves against a `tools/` directory that no longer exists, so the collector and its whole test suite fail to import while `py_compile` keeps CI green | in progress | arena/3e17592d-affil1 | `_analytics/endpoint.py` |
+| Make the two CI steps that only *appear* to test the machinery actually test it: `unittest discover -s platform` imports CPython's stdlib `platform` package (45 stdlib tests, 0 platform tests) and `py_compile _analytics/endpoint.py` never imports it | in progress | arena/3e17592d-affil1 | `.github/workflows/edition-verify.yml`, `.github/workflows/kitchen-check.yml` |
+| Repair `arm_links.py` — the owner's arming switch reads `_src/_data/product-intent.json` and dies with FileNotFoundError on `--status` | in progress | arena/3e17592d-affil1 | `_tools/arm_links.py` |
+| Remove a false reader-facing claim printed in the sidebar of all 10 published guides: "every one carries the site's Amazon tag". No published link carries a tag (gate withdrew it on 2026-11-20) | in progress | arena/3e17592d-affil1 | `_tools/page_guides.py`, generated `guides/*.html` |
+| Make `edition/` a non-competing annex of one indexable site (noindex + banner + one advertised sitemap), enforced by the edition verifier so it cannot drift back | in progress | arena/3e17592d-affil1 | `_platform/build_edition.py`, `_platform/verify_edition.py`, generated `edition/**` |
+| Three new question-shaped guides sourced to USDA FSIS and the register's listing titles (doneness/thermometer, the ice-water calibration check, the two-hour leftover rule), added to the index, sitemap and feed | in progress | arena/3e17592d-affil1 | `_tools/content.py`, `_tools/page_guides.py` (cluster blurb), generated guide pages |
+| Register the findings and the owner decisions: flags, questions (what we have / what is missing / how to find out), suggestions with paths | in progress | arena/3e17592d-affil1 | `_src/data/flags.json`, `_src/data/questions.json`, `_src/data/suggestions.json`, generated `review/`, `questions/`, `suggestions/` |
+
+Not touched deliberately: `_src/data/products.json`, `_src/data/product-intent.json` (no new link or
+confirmation data is invented here), `_decision-support/**` (PR #84 open), `assets/**`,
+`_tools/layout.py`, `_tools/check.py`, `_tools/build.py`, `_tools/validate.py`,
+`_measurement/**` and `_platform/collector.py` (other sessions' scopes; the duplicate
+collector is flagged below rather than rewritten).
+
+**Defects reproduced locally on `main` at `2934ed0` (each command run in this sandbox):**
+
+1. `python3 _tools/arm_links.py --status` → `FileNotFoundError: .../_src/_data/product-intent.json`.
+2. `python3 -c "import _analytics/endpoint.py"` → `ModuleNotFoundError: No module named 'build'`;
+   `python3 -m unittest test_endpoint` in `_analytics/` → `FAILED (errors=1)`.
+3. `python3 -m unittest discover -s platform -p 'test_*.py'` (the exact CI line) → `Ran 45 tests` from
+   `test.test_support`, i.e. the stdlib; `-s _platform` → `Ran 6 tests` (`_platform/test_platform.py`).
+4. Every generated guide carries the sentence "every one carries the site's Amazon tag" while
+   `grep -c tag=shopnow index.html guides/*.html products/*.html` → 0 occurrences in a link href.
