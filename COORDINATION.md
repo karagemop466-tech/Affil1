@@ -1267,3 +1267,37 @@ transcriptions already in `_src/data/products.json`; the two USDA FSIS URLs in
 the frozen guide are the ones recorded as directly verified in SRC-08/SRC-09.
 The Pages configuration fact behind FLG-030 was checked first-hand:
 `gh api repos/karagemop466-tech/Affil1/pages` → `build_type: legacy`.
+
+### Release receipt — `arena/d3f5a958-affil1` (2026-11-20)
+
+- **PR [#113](https://github.com/karagemop466-tech/Affil1/pull/113)** — "Shop-polish
+  & final integration: three new guides, one site to index, restored design pack,
+  FLG-030..032" — **merged into main as `c836e7a`** (merge commit, no approval
+  wait, per the brief).
+- **Checks on the merge:** `Build, check and deploy` run
+  [44691439908](https://github.com/karagemop466-tech/Affil1/actions/runs/44691439908)
+  **success**; `Affiliate launch checks` run
+  [44691439896](https://github.com/karagemop466-tech/Affil1/actions/runs/44691439896)
+  **success**; `Verify Countertop Almanac edition and platform` run 44691411541
+  (PR) and the post-merge run 44691499505 **success**.
+- **Pages deployments:** run
+  [44691438633](https://github.com/karagemop466-tech/Affil1/actions/runs/44691438633)
+  **success** (first deploy carrying #113) and run
+  [44691499087](https://github.com/karagemop466-tech/Affil1/actions/runs/44691499087)
+  **success** (after follow-up PR #114 by `arena/b990bce7-affil1`, which merged
+  cleanly on top with all runs green).
+- **Live site confirmed** by fresh fetch of
+  https://karagemop466-tech.github.io/Affil1/ after the deploy: disclosure strip
+  above the fold, the five product cards with the corrected link copy
+  ("One-click basket needs a link the Associates account has confirmed. Until
+  then this goes to the listing."), and the journal "Newest first" showing the
+  three new guides (*Air fryer for two…*, *Air fryer or toaster oven…*,
+  *Cooking from frozen…*) on the front page.
+- **Follow-up fix in the receipt PR:** the seasonal feature slot selected
+  `GUIDES[7]` by position and drifted onto the wrong guide when parallel
+  sessions inserted guides; it now selects the holiday-hosting guide by slug
+  (fallback: first Seasonal-cluster guide).
+- Flag numbering on the merged tree: FLG-030 (edition/ noindex decision,
+  recorded by `b990bce7`, merged note carries the reversal path), FLG-031
+  (false tag claims, `b990bce7`), FLG-032 (Pages dual publisher), FLG-033
+  (P-05 heat-tolerance contradictions). 33 flags on `review/`.
