@@ -1380,3 +1380,16 @@ The Pages configuration fact behind FLG-030 was checked first-hand:
   recorded by `b990bce7`, merged note carries the reversal path), FLG-031
   (false tag claims, `b990bce7`), FLG-032 (Pages dual publisher), FLG-033
   (P-05 heat-tolerance contradictions). 33 flags on `review/`.
+
+---
+
+### Claim — seasonal leftovers guide + serving-scope audit + full gate verification · arena/3d6a7607-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| One new question-shaped seasonal guide (Thanksgiving leftovers, reheated in an air fryer) built only from facts fetched this session from USDA FSIS and FoodSafety.gov, with an engraved illustration recorded in the images register, wired into the sitemap and feed by the existing build | in progress | arena/3d6a7607-affil1 | `_tools/content.py` (append one guide), `assets/img/leftovers*.jpg` (new), `_src/data/images.json` (append one entry), generated HTML + `sitemap.xml` + `feed.xml` via `_tools/build.py` |
+| Serving-scope audit: re-verify on the live host whether the underscore rename actually hides working files (`.nojekyll` disables Jekyll's `_` exclusion); fix the stale `Disallow: /archive/` path in the robots generator; record findings as new flags (next free IDs; will renumber if a concurrent PR takes them) | in progress | arena/3d6a7607-affil1 | `_src/data/flags.json` (append only), `_tools/build.py` (robots.txt line only), rebuilt `review/index.html`, `robots.txt` |
+| Full verification pass on the merged tree: build ×2 (byte-identical), check, validate, check_local_links, unit tests, decision-support + platform validators; line-by-line record | in progress | arena/3d6a7607-affil1 | `_docs/VERIFICATION-arena-3d6a7607.md` (new), `README.md` + `EXECUTIVE_SUMMARY.md` (counts only: guide/page/sitemap totals), `COORDINATION.md` |
+| PR, merge without waiting for approval, Pages deploy confirmation | in progress | arena/3d6a7607-affil1 | — |
+
+Not claimed and not touched: `_src/data/products.json`, `product-intent.json`, `offers`/`now` pages (PR #104 scope), the untagged-cart-link flag (PR #106 scope), `arm_links`, `_decision-support/`, `_platform/`, any other session's guides.
