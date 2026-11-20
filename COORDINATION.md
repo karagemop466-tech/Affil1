@@ -143,6 +143,48 @@ Claims (in addition to the table above):
 | 21 | Independent re-verification of all five submitted `link.amazon` links (2026-11-20, this session) | **claimed, in progress** | `data.js`, `data/confirmations.json`, flagged page | Live fetches: B04G1MEwY→dp/B0CDY277D3; B02NbDxp3→dp/B09B7SB46R; B00hJ57DV→dp/B08DKYBTPH; B0f3GKalj→dp/B0DZFD6R9Z; B0c8moW59→`/checkpoint/continue` bot gate (2 attempts, still gated → unverified). |
 | 22 | Final integration + PR + merge + Pages deploy confirmation | **claimed, pending** | PR from `arena/ac649871-affil1`, COORDINATION.md | `git pull --rebase` before every push; conflicts resolved without discarding; link check + XML parse before merge. |
 
+
+## Session `arena/ac649871-affil1` — completion log (2026-11-20)
+
+- **Task 20 done — shop-first design overhaul.** Rewrote `index.html` as a publication/shop
+  front page (verified shortlist leading, guide cluster, seasonal cluster, how-we-verify,
+  decision desk); rewrote `styles.css` as one warm editorial design system covering the
+  class vocabulary of every reader-facing page; 7 guides rebuilt/refreshed on the new system
+  (new seasonal guide `guides/holiday-counter-math.html`); `suggestions.html` and
+  `questions.html` rebuilt as the decision desk (suggestions queue with statuses/effort/
+  dependencies/decision gates; pre-decision questions with have/missing/answer/discovery).
+  Original illustration set added at `assets/img/` (10 images; the holiday guide currently
+  reuses the hero image). Pre-redesign files preserved at `archive/session-ac649871-affil1/`.
+  `/crisp/` untouched. Machinery pages (dashboard, categories, reviews/flagged, privacy,
+  disclosure, executive-summary, guides.html, products, root flagged-for-review) left on
+  their own CSS, with the disclosure strip added where it was missing
+  (categories/air-fryers.html, dashboard.html, guides/cleanup-counter-space.html,
+  privacy.html, reviews/flagged.html) so the statement is above the fold on every page.
+- **Task 21 done — independent re-verification (live fetches, 2026-11-20).**
+  B04G1MEwY→dp/B0CDY277D3 (CHEFMAN 6 Qt Dual Basket) ✓; B02NbDxp3→dp/B09B7SB46R
+  (Emeril Lagasse 26QT French Door) ✓; B00hJ57DV→dp/B08DKYBTPH (Chefman TurboFry 8 Qt) ✓ —
+  an earlier session's homepage observation preserved as a transient redirect;
+  B0f3GKalj→dp/B0DZFD6R9Z (CHEF iQ Sense thermometer) ✓ — same transient note;
+  B0c8moW59→checkpoint on two fetches, stays unverified (FLG-005). New objective check:
+  all five slugs are 9 characters; ASINs are 10-character identifiers per Amazon's
+  SP-API Catalog Items reference, so slugs are recorded as opaque tokens (FLG-001).
+  `data/confirmations.json` rewritten as schema v2 with per-record history; official
+  listing URL and observed redirect remain separate fields.
+- **Outbound links:** every `amazon.com/dp/...` link on the reader path carries
+  `rel="nofollow sponsored noopener"` + `?tag=shopnow047c-20`. Per-link tracking
+  confirmation in the enrolled Associates workflow is still pending (FLG-002/003) —
+  disclosed on the storefront and flagged page.
+- **Verification performed before PR:** CI-style local-reference check on 18 pages (0 broken);
+  disclosure statement present on every reader-facing page; sponsored+tag check on every
+  outbound dp link; sitemap/feed/rss XML parse OK; confirmations.json + campaign-ledger.json
+  JSON parse OK; local smoke test: 13 paths return 200 including /crisp/.
+- Sources verified this session: amazon.com/dp/B0CDY277D3, /dp/B09B7SB46R, /dp/B08DKYBTPH,
+  /dp/B0DZFD6R9Z (official listing pages, titles confirmed on fetch); Associates Operating
+  Agreement & Program Policies; FTC Endorsement Guides FAQ; Amazon SP-API Catalog Items
+  reference (ASIN definition).
+- Irregularities added/updated: FLG-001 (slug length), transient-redirect notes for
+  B00hJ57DV and B0f3GKalj, disclosure strips added to 5 machinery pages that lacked them.
+
 Claims 20–22 were also written to this board at 197e139-time; this block restates them
 on top of the reconciled board after PR #7. If another session has claimed the root
 storefront redesign, that session should note it here — I will re-check open PRs
