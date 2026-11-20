@@ -292,7 +292,8 @@
       "expected": "Every validator in tools/ runs clean against the current data.",
       "found": "python3 tools/validate.py stopped with KeyError 'supplied_path_code_length' because the product schema had been renamed. The validator also pointed at a retired section. Both were fixed in PR #77: field names now match the schema, the validator checks the published pages, and it passes (1441 checks, 0 warnings).",
       "reading": "The gate had been red on main. That is the reason this flag was raised, and the fix is recorded here.",
-      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",      "blocks": "nothing",
+      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",
+      "blocks": "nothing",
       "to_check": [
         "tools/validate.py",
         "src/data/products.json"
@@ -312,6 +313,81 @@
       ],
       "impact": "The comparison table keeps its blank price column by rule, and the site's own price_rule wording was updated to name the deprecation rather than pointing at an API that no longer answers.",
       "blocks": "any live price, rating or availability display, until the sales threshold is met"
+    },
+    {
+      "id": "FLG-023",
+      "severity": "high",
+      "title": "Three surfaces of one repository were crawlable at once, contradicting the site's own 'one site, not two' claim",
+      "expected": "The About page states: 'the other edition is preserved under archive/legacy-2026-11-20/ with a noindex tag on every page'. check.py's header makes the same claim for the whole of archive/.",
+      "found": "Before this pass: 22 of 79 archived pages carried no meta robots tag, and all 7 decision-support pages were crawlable while naming a different brand ('Good Measure Kitchen') and describing four competing shops, two of which are still on disk under archive/. robots.txt contained only Allow: /. A search engine could reach three editions and a set of working papers describing a fourth.",
+      "impact": "robots.txt now disallows /archive/ and /decision-support/, every archived page carries noindex, and every desk page carries noindex, follow. The claim on the About page was narrowed to name the two rules separately.",
+      "reading": "This is the difference between a claim and a check. The noindex claim had been written into prose and into a code comment, and neither was enforced; only the pages an earlier session happened to patch carried the tag.",
+      "blocks": "nothing — corrected in this pass",
+      "to_check": [
+        "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+        "robots.txt",
+        "review/audit.html"
+      ]
+    },
+    {
+      "id": "FLG-024",
+      "severity": "medium",
+      "title": "The affiliate test suite could not be imported, so the gate that stops synthetic tags was never executed",
+      "expected": "A test file in tools/ that proves public observations cannot create an Associates tag is runnable from the repository root.",
+      "found": "tools/test_paid_link_gate.py imported 'layout' by bare name. `python3 -m unittest tools.test_paid_link_gate` failed with ModuleNotFoundError before running a single assertion. No workflow invoked it either, so the failure was invisible.",
+      "impact": "The test now inserts tools/ on sys.path, asserts against the real product register instead of a hard-coded ASIN, and covers four more rejection cases. It passes: 2 tests, 0 failures.",
+      "reading": "A guard nobody runs is a comment. The logic in paid_link_gate.py was correct; only the harness was broken.",
+      "blocks": "nothing — corrected in this pass",
+      "to_check": [
+        "tools/test_paid_link_gate.py",
+        "python3 -m unittest tools.test_paid_link_gate -v"
+      ]
+    },
+    {
+      "id": "FLG-025",
+      "severity": "medium",
+      "title": "Two suggestion queues and two question registers describe one project, with different counts in each",
+      "expected": "One queue a reviewer can choose from, and one register of open questions.",
+      "found": "src/data/suggestions.json lists 21 open/implemented rows (S-01..S-21, now S-28 with this pass's additions). decision-support/suggestions.html lists 28 different rows numbered SUG-01..SUG-28. Questions: 22 in src/data/questions.json (26 after this pass) against 14 in decision-support/questions.html. The Decision Desk landing page still says it holds '28 suggestions' and 'Fourteen questions', which is true of itself and false of the site.",
+      "impact": "Nothing is hidden: the desk states its own counts, and the published Suggestions page now carries a note that the two lists have not been merged. Q-23 and S-22 record the merge as an open task rather than pretending it is already one list.",
+      "reading": "Both queues were built by different sessions from the same brief. Merging them is a judgement about which proposals survive, which is exactly the decision the owner asked to make, so it is queued rather than taken.",
+      "blocks": "S-09 (choose a path) is weaker until it is resolved",
+      "to_check": [
+        "src/data/suggestions.json",
+        "decision-support/suggestions.html",
+        "questions/index.html"
+      ]
+    },
+    {
+      "id": "FLG-026",
+      "severity": "medium",
+      "title": "Photorealistic product imagery is described on every page as an illustration",
+      "expected": "A page that says 'Illustration' next to an image is showing an illustration.",
+      "found": "assets/img/format-basket-w900.jpg, format-oven, instant-thermometer, thermometer and holiday-hosting-counter are photorealistic photographs of a kitchen and an air fryer, presented under the caption 'Illustration' and 'Editorial illustration. It is not a photograph of P-01'. No per-file provenance exists in src/data/images.json.",
+      "impact": "No image was removed by this pass. The misdescription and the missing provenance are published here and in Q-24, and S-23 proposes the file-by-file audit that resolves it.",
+      "reading": "The wording is defensible for a generated image and misleading for a licensed or borrowed one. Without a provenance record nobody can tell which these are — which is the flag.",
+      "blocks": "S-23, Q-24; no page is withdrawn while the audit is outstanding",
+      "to_check": [
+        "assets/img/",
+        "src/data/images.json",
+        "review/images.html"
+      ]
+    },
+    {
+      "id": "FLG-027",
+      "severity": "medium",
+      "title": "README's manual-review links point at pages that were archived out of the published tree",
+      "expected": "A README that tells a reviewer where to check something points at a page that exists on the live site.",
+      "found": "The README links /flagged/, /dashboard/ (and /sources/) as manual review entry points. None of those directories exists in the published build; the canonical equivalents are review/ (flagged register), operations/ledger.html (campaign ledger) and about/index.html#sources (source register). The README also asserts '29 scored proposals' and '22 questions, 5 answered'; the register on the same commit holds 21 rows (28 after this pass) and 10 answered questions of 22 (10 of 26 after this pass).",
+      "impact": "Not corrected in this pass: README.md is documentation, not a published page, and it is edited by several sessions. The four dead links and the two stale counts are published here so the next documentation pass replaces them with review/, operations/ledger.html, about/index.html#sources and computed counts.",
+      "reading": "A reviewer following the README currently lands on a 404 that the site's own 404 page labels correctly, which is at least honest, but it is not an entry point.",
+      "blocks": "nothing",
+      "to_check": [
+        "README.md",
+        "review/index.html",
+        "operations/ledger.html",
+        "about/index.html#sources"
+      ]
     }
   ]
 }
