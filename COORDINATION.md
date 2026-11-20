@@ -1,12 +1,34 @@
 # Coordination board
 
-This session worked only on the Arena-managed branch `arena/8e0006cf-affil1`. No other claims existed in the repository at start. The task is complete; follow-up product evidence remains flagged for review and does not imply product validation.
+Branch: `arena/55d40788-affil1` (session `arena/55d40788-affil1`). Base commit `76d898b` of `main`.
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Publication storefront, editorial guides and decision-support/review pages | done | arena/8e0006cf-affil1 | index.html, styles.css, app.js, data.js, guides/ |
-| Official-source review and product-link verification | needs review | arena/8e0006cf-affil1 | guides/flagged-for-review.html, data.js |
-| GitHub Pages workflow, sitemap and RSS feed | done | arena/8e0006cf-affil1 | .github/workflows/pages.yml, sitemap.xml, feed.xml, README.md |
+| Rebuild landing page as publication front page leading with products | in progress | arena/55d40788-affil1 | index.html, styles.css, app.js |
+| Product-intent confirmation records table (intended ASIN, official listing URL, confirmation date, source; observed redirect separate) | in progress | arena/55d40788-affil1 | data.js, guides/flagged-for-review.html |
+| Privacy-preserving outbound click counter + self-hosted analytics endpoint (5 events) | in progress | arena/55d40788-affil1 | analytics.js, analytics/endpoint.py, app.js |
+| Decision-support pages: suggestions queue + open questions/information | in progress | arena/55d40788-affil1 | suggestions.html, questions.html |
+| Trendy question-shaped category guides + SEO (sitemap, feed, meta) | in progress | arena/55d40788-affil1 | guides/*.html, sitemap.xml, feed.xml, styles.css |
+| Integration, broken-link check, GitHub Pages publish, PR to main | unclaimed | arena/55d40788-affil1 | all |
+
+## Sources and verification log
+
+- Amazon Associates Program Operating Agreement, section 5: https://affiliate-program.amazon.com/help/operating/agreement — official disclosure statement: “As an Amazon Associate I earn from qualifying purchases.”
+- Amazon Associates Program Policies: https://affiliate-program.amazon.com/help/operating/policies
+- FTC Endorsement Guides FAQ: https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking
+- User-supplied links are preserved exactly. No redirects followed; no ASIN/listing identity, price, availability, feature, review, commission or performance independently confirmed. Intended identifier and observed redirect are separate fields; observed redirect is blank everywhere.
+- Selected tracking ID `shopnow047c-20` is user-supplied; enrollment/site association unverified.
+- No authorized Associates reports, Search Console property, analytics credentials or API access supplied. Campaign ledger empty; five event names documented as proposed, instrumentation added client-side.
+
+## Irregularities / unresolved decisions
+
+- All five `link.amazon/...` URLs require enrolled Associates workflow destination and tracking verification. Unresolved status is not a claim they are invalid.
+- Tracking ID `shopnow047c-20`: account enrollment and live attribution unverified.
+- No analytics endpoint credentials; client-side collector implemented, beacon endpoint must be self-hosted by the operator (see analytics/endpoint.py).
+
+## Delivery
+
+- Not yet delivered. PR and GitHub Pages publish pending integration task.
 
 ## Sources and verification log
 
