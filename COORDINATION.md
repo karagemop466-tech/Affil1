@@ -5,6 +5,26 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Independent link re-verification + validator flag — arena/50b955a5-affil1 · 2026-11-20 UTC
+
+Owner: `arena/50b955a5-affil1`. Scope: additive verification records only. The branch
+was reset onto `main` (`96aba09`) because its earlier implementation pass (3 guides,
+all-five front-page cards, tagged-link rewrite) was superseded by the consolidated
+publication already on `main`; no other session's work was discarded. What survives is
+the independent evidence and the validator flag.
+
+| Task | Status | Notes |
+|---|---|---|
+| Independent second fetch of all 5 submitted links | done | All five resolved to the same ASINs/titles as the register; no resolved URL carried a `tag=` (FLG-002 stands). Recorded in `src/data/reverification.json` as `second_pass`; reconciles the first pass's unresolved P-04. |
+| Add FLG-020: legacy crisp validator schema collision | done | `tools/validate.py` reads the root product schema under stale field names (`supplied_path_code_length`, `observed_redirect_asin`) and raises `KeyError`; not in CI. The root build is green. |
+
+Sources re-read this pass: [Associates agreement](https://affiliate-program.amazon.com/help/operating/agreement),
+[Program Policies](https://affiliate-program.amazon.com/help/operating/policies),
+[FTC FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking),
+[Google link qualification](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links).
+No price, rating or review count is published; attribution and short-link compliance
+remain unconfirmed (FLG-002, FLG-003).
+
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
 | Task | Status | Owner | Files |
@@ -58,6 +78,7 @@ The published descendant contains tagged links despite empty intent and reportin
 | Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
 | Search Console verification | needs review | — | requires owner's Google account |
 | Analytics endpoint hosting + retention | needs review | — | requires owner decision |
+| Independent second re-verification of all 5 links + FLG-020 validator flag | done | arena/50b955a5-affil1 | `src/data/reverification.json`, `src/data/flags.json`, `COORDINATION.md` |
 
 `needs review` means the item is published on the review page and does not block
 anything.
