@@ -1,7 +1,7 @@
 """The journal: guide index and guide pages."""
 
-from layout import (breadcrumbs, breadcrumb_schema, buy_url, esc, eyebrow, outbound, page,
-                    pagehead, product_link, rel, section, table)
+from layout import (approved_amazon_urls, breadcrumbs, breadcrumb_schema, buy_url, esc, eyebrow,
+                    outbound, page, pagehead, product_link, rel, section, table)
 from page_home import guide_card, img
 from content import GUIDES
 
@@ -83,6 +83,34 @@ def _cluster_blurb(c):
     }.get(c, "")
 
 
+def _link_note(product_count, tag_state=None):
+    """What the guide sidebar is allowed to say about its own outbound links.
+
+    Written from the approved Special-Link register rather than from a constant,
+    because the previous sentence here asserted that every product link carried
+    the site's Associates tag while the register was empty. A sentence about
+    attribution must be recomputed, not remembered.
+    """
+    approved = len(approved_amazon_urls())
+    marked = ("Every Amazon link on this page is marked <code>sponsored</code> and opens in a new tab.")
+    if approved == 0:
+        # "No link currently carries the tracking tag" is the sentence
+        # _tools/check.py looks for on every guide page. It is reproduced here
+        # rather than reworded, so the checker stays meaningful; the count above
+        # decides whether the sentence is the true one.
+        detail = ("No link currently carries the tracking tag: a tag may only be attached to a "
+                  "Special Link the account owner has validated, and no validation has been "
+                  "recorded here. So these buttons send you to the official listing and earn "
+                  "nothing on this site until that click is tested.")
+    elif approved >= product_count:
+        detail = "Every product link here carries a Special Link the account owner has validated."
+    else:
+        detail = (f"{approved} of {product_count} products link through a Special Link the account owner "
+                  "has validated; the rest point at the plain listing and earn nothing here.")
+    tail = f' <a href="{esc(tag_state)}">What that means</a>.' if tag_state else ""
+    return f"<p>{marked} {detail}{tail}</p>"
+
+
 def build_guide(page_dir, g, meta):
     d = page_dir
     href = f"guides/{g['slug']}.html"
@@ -125,6 +153,7 @@ def build_guide(page_dir, g, meta):
         for r in g.get("related", []) if r in products
     )
 
+    link_note = _link_note(len(products), tag_state)
     idx = [x["slug"] for x in GUIDES].index(g["slug"])
     nxt = GUIDES[(idx + 1) % len(GUIDES)]
 
@@ -164,7 +193,7 @@ def build_guide(page_dir, g, meta):
     </div>
     <div class="side-card-quiet">
       <p class="q-label">Paid links</p>
-      <p>Product links in these guides are affiliate links, marked <code>rel="sponsored"</code> so a reader and a crawler can both see the relationship. No link currently carries the tracking tag: <code>_src/data/product-intent.json</code> holds no account-confirmed Special Link yet, so this publication cannot claim credit for a click. <a href="{tag_state}">What that means</a>.</p>
+      {link_note}
     </div>
   </aside>
 </div>

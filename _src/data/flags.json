@@ -523,6 +523,19 @@
       ]
     },
     {
+      "id": "FLG-036",
+      "severity": "low",
+      "title": "Eighteen pull requests from earlier sessions remain open and unmerged",
+      "expected": "A repository where session work reaches main or is closed with a recorded reason.",
+      "found": "PRs #9, #12, #19, #24, #39, #47, #54, #62, #65, #69, #72, #82, #84, #86, #93, #94, #96 and #102 are open on GitHub as of 2026-11-20. Several predate the current build pipeline (_tools/build.py + _src/data) and describe editions that were superseded or archived.",
+      "impact": "Reviewers cannot tell which of these represent live work and which are historical. Unmerged does not mean rejected; it means nobody has adjudicated.",
+      "reading": "A human with context should triage: merge what still applies, close what the current pipeline already supersedes, and say which in the PR thread. No agent session should bulk-close another session's work silently.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://github.com/karagemop466-tech/Affil1/pulls"
+      ]
+    },
+    {
       "id": "FLG-037",
       "severity": "medium",
       "title": "The /edition/ tree serves a second indexable front door beside the canonical site",
@@ -551,16 +564,32 @@
       ]
     },
     {
-      "id": "FLG-036",
+      "id": "FLG-039",
       "severity": "low",
-      "title": "Eighteen pull requests from earlier sessions remain open and unmerged",
-      "expected": "A repository where session work reaches main or is closed with a recorded reason.",
-      "found": "PRs #9, #12, #19, #24, #39, #47, #54, #62, #65, #69, #72, #82, #84, #86, #93, #94, #96 and #102 are open on GitHub as of 2026-11-20. Several predate the current build pipeline (_tools/build.py + _src/data) and describe editions that were superseded or archived.",
-      "impact": "Reviewers cannot tell which of these represent live work and which are historical. Unmerged does not mean rejected; it means nobody has adjudicated.",
-      "reading": "A human with context should triage: merge what still applies, close what the current pipeline already supersedes, and say which in the PR thread. No agent session should bulk-close another session's work silently.",
+      "title": "Nine generator modules in _tools/ are reachable from neither the build nor any workflow",
+      "expected": "Every file under _tools/ either runs in the build or runs in CI as a check.",
+      "found": "Importing _tools/build.py's module graph resolves 21 of the 31 modules, and the five workflows add validate.py, check_js.py, sweep_surfaces.py, check_deploy_paths.py, research_brief.py and the paid-link tests. Nine content generators are reached by neither: buyer_guides.py, content_extra.py, extra_pages.py, page_sources.py, preview.py, quarantine_legacy.py, shop_build.py, shop_check.py and verify_links.py. Some define guide prose and page templates that supersede nothing. arm_links.py is also unreferenced but is a deliberate owner CLI. extra_pages.py additionally links to /_src/data/reverification.json with a root-absolute URL, which cannot work on a project-pages path.",
+      "impact": "Nothing published changes. The risk is a future session editing content_extra.py or buyer_guides.py and believing it has shipped a guide, because the file names look live and the guides inside them read well. Two competing editorial voices sit in one directory with nothing marking which one the site builds.",
+      "reading": "Most of these were the entry points of editions that were consolidated or archived on 2026-11-20 and whose build entry points were retired. They are kept because _archive/ keeps the editions themselves; the modules are the residue, not an active surface.",
       "blocks": "nothing",
       "to_check": [
-        "https://github.com/karagemop466-tech/Affil1/pulls"
+        "python3 _tools/build.py, then compare the written page list with the page builders that exist in _tools/",
+        "grep -l over .github/workflows for each module name before deleting anything",
+        "an owner decision to move each into _archive/ or wire it into the maintained build"
+      ]
+    },
+    {
+      "id": "FLG-040",
+      "severity": "medium",
+      "title": "A build rule demands one exact sentence about tag status, which will be wrong the day a Special Link is validated",
+      "expected": "A checker should test the state, not a fixed string describing it.",
+      "found": "_tools/check.py fails any guide page that does not contain the literal sentence 'No link currently carries the tracking tag'. The guide sidebar is now generated from the approved Special-Link register, so the sentence is true today and is produced only while the register is empty. The first validated link makes the checker require a false statement.",
+      "impact": "Two possible bad outcomes at the moment attribution starts: either the build goes red on a correct page, or someone satisfies the checker by hard-coding the sentence again. This project has already shipped one hard-coded attribution sentence that was false (FLG-031).",
+      "reading": "The rule should assert the invariant instead: no published Amazon link may carry a tag that the register does not approve. That check already exists in check.py and in test_paid_link_gate.py, so this string test is a duplicate with an expiry date.",
+      "blocks": "nothing today; it decides whether the next register change is caught or worked around",
+      "to_check": [
+        "_tools/check.py, the guides/*.html loop",
+        "_tools/page_guides.py::_link_note"
       ]
     }
   ]
