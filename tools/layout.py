@@ -143,6 +143,14 @@ def disclosure_strip(page_dir):
 
 
 def masthead(page_dir, active=None):
+    from content import GUIDES
+    catalog = NAV + [("compare/index.html", "Compare kitchen appliances"),
+        ("review/index.html", "Flagged for review"), ("suggestions/index.html", "Suggestions"),
+        ("questions/index.html", "Open questions"), ("operations/ledger.html", "Campaign ledger")]
+    catalog += [(f"guides/{g['slug']}.html", g['title']) for g in GUIDES]
+    products = json.loads((ROOT / 'src/data/products.json').read_text())['products']
+    catalog += [(f"products/{p['ref'].lower()}.html", f"{p['brand']} {p['format_label']}") for p in products]
+    results = ''.join(f'<li><a href="{esc(rel(page_dir, u))}">{esc(t)}</a></li>' for u,t in catalog)
     mark = '<svg width="33" height="37" viewBox="0 0 32 38" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M3 25h23c-1 7-5 10-11 10S5 32 3 25zm24 0 4-4M8 19c6-5-3-7 3-13m4 13c6-7-2-8 4-16m3 16c4-4 0-6 4-10"/></svg>'
     desk = ''.join(f'<a href="{esc(rel(page_dir,t))}">{l}</a>' for _,links in FOOTER_GROUPS[2:] for t,l in links)
     def nav(t,l):
@@ -150,7 +158,8 @@ def masthead(page_dir, active=None):
         return f'<a class="pub-link {"on" if current else ""}" href="{esc(rel(page_dir,t))}">{l}</a>'
     return f"""<header class="masthead"><div class="wrap pub-nav"><a class="wordmark" href="{rel(page_dir,'index.html')}">{mark}<span>Crisp <i>&amp;</i> Counter</span></a>
 <nav aria-label="Main navigation">{nav('index.html','The Edit')}{nav('guides/index.html','Buying Guides')}{nav('compare/index.html','Compare')}<details class="desk-menu"><summary>Editorial Desk <span>⌄</span></summary><div>{desk}</div></details></nav>
-<button type="button" class="saved-open" data-root="{rel(page_dir,'products/index.html')}"><svg viewBox="0 0 24 24" width="16" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h12v17l-6-4-6 4z"/></svg> Saved <span data-count-saved>0</span></button></div></header>
+<div class="nav-tools"><button class="find" type="button" hidden data-find aria-label="Search the journal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg><span>Search</span></button><button type="button" class="saved-open" data-root="{rel(page_dir,'products/index.html')}"><svg viewBox="0 0 24 24" width="16" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h12v17l-6-4-6 4z"/></svg> Saved <span data-count-saved>0</span></button></div></div></header>
+<dialog class="searchdesk" aria-labelledby="search-title"><form method="dialog"><button aria-label="Close search">×</button></form><h2 id="search-title">Search the journal</h2><input type="search" placeholder="Try capacity, thermometer, cleanup…" aria-label="Search guides and products"><p role="status"></p><ul>{results}</ul></dialog>
 <dialog id="saved-list"><button class="dialog-close" aria-label="Close saved list">×</button><p class="rubric">YOUR KITCHEN NOTES</p><h2>Saved picks</h2><div id="saved-content"></div></dialog>"""
 
 
@@ -219,6 +228,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 </main>
 {footer(page_dir)}
 <script src="{rel(page_dir, 'assets/js/publication.js')}" defer></script>
+<script src="{rel(page_dir, 'assets/js/discover.js')}" defer></script>
 <script src="{esc(js)}" defer></script>
 <script src="{esc(rel(page_dir, 'assets/js/counter-config.js'))}" defer></script>
 <script src="{esc(rel(page_dir, 'assets/js/analytics.js'))}" defer></script>

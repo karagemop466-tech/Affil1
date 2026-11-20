@@ -207,6 +207,13 @@ The initial shallow checkout made the ancestor appear unrelated and caused a reb
 - `python3 tools/build.py`, `python3 tools/check.py` (22 generated pages, 0 errors), and `python3 tools/check_local_links.py` (65 served HTML files, 0 broken relative file references) pass. The new check does not verify anchors or external URLs. The older `tools/validate.py` fails because the newer product schema is incompatible; this needs reconciliation, not a claim of success.
 - Analytics remains disabled, Search Console and Associates reporting are not connected, and no product-intent, conversion, price or commission data has been invented. Older editions remain inconsistent; consolidation and complete line-by-line verification remain **needs review**, not complete.
 
+## Publication desk — eaf80f48 (2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Front-page publication design, reader guide discovery, fresh source spot checks and integration | in progress | arena/eaf80f48-affil1 | tools/page_home.py, tools/layout.py, new assets/css/editorial.css, assets/js/discover.js, assets/img/edit-*, generated maintained HTML, COORDINATION.md |
+
+Prior integration #27 is merged. This scope does not edit the legacy editions, their data or the other open PRs.
 ### PR and deployment result — arena/c9fc4295-affil1
 
 - [PR #27](https://github.com/karagemop466-tech/Affil1/pull/27) merged as `92a3509c9a56bbd6aa01eef8d7ae0afbb4ab7f06`; the PR build and link checks passed.
@@ -222,6 +229,14 @@ Checks: `python3 tools/build.py`, `python3 tools/check.py` (22 generated pages, 
 
 Rebase after PR #28: a task-board conflict was resolved by retaining both merge/deployment histories and this reconciliation record.
 
+Integration note (eaf80f48): preserved both board entries after the concurrent append conflict. PR #32 owns measurement; this session will not duplicate that work. Additional scope: tools/stage.py to include the new reader assets in Pages artifacts.
+
+### Reader-facing release — eaf80f48
+- PR #40: https://github.com/karagemop466-tech/Affil1/pull/40. Concurrent #42/#43 shared-output conflict resolved by preserving both board histories and regenerating the affected product page from the merged data.
+
+- Updated the maintained templates, not the legacy storefronts. A seasonal cover leads into a filterable five-product shelf, short reading paths and local search. No-JS readers can browse all five cards and follow ordinary links. Disclosures still appear under the masthead and in the footer.
+- Checked the five submitted links against the arrived-at Amazon listing titles on 2026-11-20: [P-01](https://www.amazon.com/dp/B0CDY277D3), [P-02](https://www.amazon.com/dp/B09B7SB46R), [P-03](https://www.amazon.com/dp/B08DKYBTPH), [P-04](https://www.amazon.com/dp/B0DHZTCNR5), [P-05](https://www.amazon.com/dp/B0DZFD6R9Z). These are observations only. FLG-016 remains open because another observation reverses the thermometer pair. None of these landing URLs established the supplied tracking ID or the owner's intent. No price, rank, demand or conversion figures were imported.
+- Checked the [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) for its tagged-link requirement. No new monetized link was constructed or labeled approved. Authorized Associates reports and a production host remain prerequisites, not inferred facts.
 ## Editorial supplement — arena/03232911-affil1
 
 | Task | Scope | Owner | Status | Notes |
@@ -265,6 +280,7 @@ Board-only conflict after PR #31 was resolved by retaining both the editorial su
 A second board-only rebase over PR #32 retained both records; PR #32 subsequently aligned the client and collector contract. Production remains disabled.
 
 Board-only rebase over PR #35 kept both deployment notes.
+Integrated merged #31/#32; retained both task-board histories. Search Console, collector hosting and Associates reports remain unconfirmed.
 
 ## Claim — S-02502b50 · integration edition
 
@@ -296,6 +312,7 @@ Post-merge handoff: #23 and #26 are merged. SG-32 claims the maintained generato
 - Directly re-opened all five Amazon short links on 2026-11-20. This pass observed `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`, `B0DHZTCNR5`, `B0DZFD6R9Z` in supplied order. No `tag` on arrival. During the rebase #27 reported the thermometer destinations in the **opposite order**; retained both reports and the historical P-04 checkpoint, with official listing links in the launch desk and FLG-016. Intent and attribution remain blank; FLG-003 stays unresolved. Rebase conflicts in generated pages were resolved in the source templates then rebuilt, retaining #27’s flags and older-edition notice.
 - Official review: [Amazon ASIN definition](https://sell.amazon.com/blog/what-is-an-asin), [Associates Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), [FTC guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [Google paid-link markup](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links), [Google search performance report](https://support.google.com/webmasters/answer/7576553?hl=en), [GitHub Pages capabilities](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), [USDA thermometer guidance](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers).
 - Verification: 24 maintained pages, zero checker errors/warnings; 67 served HTML files scanned for relative references, zero broken; three aggregate/preflight tests passed. Legacy pages remain separate and may retain previously published unvalidated CTAs; the gate applies to the maintained edition. Existing legacy source mode prevented an artifact-only cutover (#26). Do not use legacy copies as product-intent or attribution evidence.
+Concurrent #38 reconciliation: retained its launch-readiness and Special Link gate, included the seasonal guide from its guide catalogue, used the integrated product evidence renderer and regenerated shared HTML.
 ## Measurement and evidence integration — arena/29fee39e-affil1
 
 | Task | Status | Owner | Scope |
@@ -327,3 +344,5 @@ Verification: 26 canonical pages built; `tools/check.py` reports zero errors and
 Integration PR [#41](https://github.com/karagemop466-tech/Affil1/pull/41). Reconciled #38’s fail-closed paid-link gates, launch-readiness page, account report importer, reference-only listing links and seasonal guide into the shared publication. Retained its evidence tests and public guide; the integrated publication now has 28 pages and nine guides. Status: done; signed-in and hosting checks remain needs review.
 
 Integrated #42/#43: adopted the independent listing recheck, source-linked executive brief, host-policy and program-content flags. AI drafting receives only approved first-party query text, never Amazon Program Content. Generated-page conflicts resolved by rebuilding.
+
+A competing front-page merge landed during PR checks. Preserved its no-network search index, dialog and discovery script in the shared masthead, retained the seasonal and product content, then regenerated from the integrated templates.
