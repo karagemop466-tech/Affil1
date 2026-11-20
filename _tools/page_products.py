@@ -167,7 +167,7 @@ def build_product(page_dir, p, meta):
 <header class="product-hero"><div class="wrap">
   <div class="product-media">
     {img(d, p['photo'], p['photo_alt'], sizes='(max-width:820px) 100vw, 540px', loading='eager')}
-    <span class="illus-tag">Illustration</span>
+    <span class="illus-tag">Image note</span>
     <p class="fig-note">{esc(p['photo_note'])}</p>
   </div>
   <div class="product-copy">

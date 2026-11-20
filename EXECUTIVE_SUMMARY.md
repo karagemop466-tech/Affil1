@@ -3,7 +3,8 @@
 **What:** a live Amazon affiliate publication for air fryers and countertop cooking
 appliances, tracking ID `shopnow047c-20` (supplied by the owner; enrolment unverified).
 **Where:** https://karagemop466-tech.github.io/Affil1/
-**When:** 2026-11-20, integration pass by session `arena/359baa16-affil1`.
+**When:** 2026-11-20, integration pass by session `arena/359baa16-affil1`; counts and
+verification refreshed 2026-11-20 by session `arena/62b049f0-affil1` (see addendum at the end).
 **Repo:** `karagemop466-tech/Affil1`, published from `main` by GitHub Actions.
 
 ## Read this first: the three facts that matter
@@ -16,9 +17,8 @@ further input.
 
 ## What exists now
 
-One canonical site, **32 pages**, rebuilt from `_src/data` on every deploy
-(`_tools/build.py`; counts below are from the 2026-11-20 build and are checked by
-`_tools/check.py`, which reports 0 errors and 0 warnings across all 32):
+One canonical site, rebuilt from `_src/data` on every deploy by `_tools/build.py`
+and checked page by page by `_tools/check.py`:
 
 - a product-led front page with five picks in two categories and a buy button on
   every card;
@@ -34,6 +34,8 @@ One canonical site, **32 pages**, rebuilt from `_src/data` on every deploy
 - a decision register of 24 questions, 10 answered with evidence;
 - a suggestion queue with three coherent paths and 21 proposals, of which some
   are already implemented and are shown with evidence;
+- an owner's "what is left" page (`/now/`), a ranked offers page (`/offers/`, 10
+  weighted offers) and a per-page verification audit (`/verification/`);
 - a **decision registry** (`/decisions/`) of 7 open proposals, each carrying the
   official source and verbatim quote it is checked against, the single missing
   fact, the person who can close it, and an accept/hold/reject control recorded
@@ -80,17 +82,16 @@ Notes that belong with that table, not under it:
   dual-zone vs single basket, capacity, cleanup and counter space, meal-prep Sunday, the
   small-kitchen space audit, multi-function questions, thermometer pairing, holiday hosting
   and holiday side-dish capacity. Each closes by naming what it does not claim.
-- **A shortlist of all five rows**, described only in the seller's own words, each with a
-  sponsored link to its live listing. Four rows carry a stated size or feature transcribed
-  from the listing; P-04 resolved to a thermometer and is presented as one, not as a fourth
-  air fryer.
+- **A shortlist of all five rows**, described only in the seller's own words, each linking
+  only to its observed listing as a labelled reference link. P-04 is flagged (FLG-004,
+  FLG-016) because earlier attempts returned checkpoints and the thermometer pair was
+  swapped in one record; it is presented as a thermometer, not a fourth air fryer.
 - **Topics/cluster pages** so the internal link graph is deliberate, and an editorial
   **queue** published in the open with the reason each candidate is there.
 - **Registers, demoted to the footer where a buyer will not trip over them:** source
   register, flagged register (27 items, each with its source), suggestion board
-  (21 proposals), open questions (24 in the decision register, 10 answered with evidence;
-  14 still blocked and published as such), decision registry (7 proposals), operations
-  dashboard.
+  (21 proposals), open questions (24, 10 answered with evidence; 14 still blocked and
+  published as such), decision registry (7 proposals), operations ledger.
 - **No prices, ratings, review counts or stock anywhere** — enforced by a build-time
   check, not by a promise. Publishing them without a PA/Creators feed is prohibited, and
   a stale price is a false claim. Price tracking and price alerts are recorded on the board
@@ -124,13 +125,13 @@ re-order it.
 ## Decisions waiting for you, in the order that pays
 
 1. Generate Special Links in Associates Central; test one; confirm the click; then
-   `tools/arm_links.py` to arm it. Until then the site publishes reference links, and no click is attributable to the account.
+   `_tools/arm_links.py` to arm it. Until then the site publishes reference links, and no click is attributable to the account.
 2. Verify Search Console (and Bing) on the live host. Nothing editorial should be
    decided before four weeks of real queries exist.
 3. Name an author, or accept that desk-level bylines are the honest state. This is the
    one credibility item that cannot be generated.
 4. Decide the production host (github.io project path vs a custom domain). Canonical URLs,
-   sitemap and feed all rebuild from one constant in `tools/build.py`.
+   sitemap and feed all rebuild from one constant in `_tools/build.py`.
 5. Then, and only then, the volume items: two guides a month, imagery per guide, hub pages
    for situations ("small kitchen, two people"), a downloadable capacity worksheet as the
    linkable asset.

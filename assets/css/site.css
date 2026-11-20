@@ -754,3 +754,22 @@ a.btn:hover{transform:translateY(-1px)}
   .decision-dl{grid-template-columns:1fr;gap:1.1rem}
   .decision-card{padding:1.5rem 1.3rem}
 }
+
+/* ---------- the buy pair on a product card ----------
+   Two doors when the account allows a cart link; one door plus a plain note when
+   it does not. The note is deliberately quiet: it is a statement about the link,
+   not a sales message. */
+.cta-pair{display:flex;flex-wrap:wrap;gap:.5rem;margin:.95rem 0 .5rem}
+.cta{display:inline-flex;flex-direction:column;gap:.1rem;line-height:1.2;
+  padding:.6rem 1rem;border-radius:2px;border:1px solid var(--line-2);
+  font-size:.83rem;font-weight:500;transition:all .15s}
+.cta-buy{background:var(--forest);border-color:var(--forest);color:#fff}
+.cta-buy:hover{background:var(--forest-2);border-color:var(--forest-2);color:#fff}
+.cta-note{background:transparent;color:var(--forest)}
+.cta-note:hover{border-color:var(--forest)}
+.cta-sub{font-size:.66rem;font-weight:400;letter-spacing:.01em;opacity:.72}
+.cta-note-line{margin:.1rem 0 0;font-size:.735rem;color:var(--faint);line-height:1.5;max-width:38ch}
+@media(max-width:680px){
+  .cta-pair{flex-direction:column}
+  .cta{align-items:flex-start}
+}
