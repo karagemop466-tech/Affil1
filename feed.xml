@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"><channel><title>Good Measure Kitchen Notes</title><link>https://karagemop466-tech.github.io/Affil1/</link><description>Question-led kitchen buying guides and evidence notes.</description><language>en-us</language><item><title>Conventional oven or air fryer? — A fit check, not a verdict</title><link>https://karagemop466-tech.github.io/Affil1/guides/oven-or-air-fryer.html</link><guid>oven-or-air-fryer-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>A practical way to compare running costs, capacity and fit for your own kitchen. Product-specific facts unverified.</description></item><item><title>Air-fryer accessories: worth the counter space?</title><link>https://karagemop466-tech.github.io/Affil1/guides/air-fryer-accessories.html</link><guid>air-fryer-accessories-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>A checklist for deciding whether racks, liners and baskets earn their keep. No product-specific recommendations.</description></item><item><title>Basket or oven-style air fryer: what should you compare?</title><link>https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven.html</link><guid>basket-or-oven-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>A practical comparison checklist. Product-specific claims remain unverified.</description></item><item><title>A no-hype checklist for comparing air-fryer capacity</title><link>https://karagemop466-tech.github.io/Affil1/guides/capacity-checklist.html</link><guid>capacity-checklist-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>A household-and-space checklist; no product capacity claims.</description></item><item><title>How to assess cleanup and counter-space trade-offs</title><link>https://karagemop466-tech.github.io/Affil1/guides/cleanup-counterspace.html</link><guid>cleanup-counterspace-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>Practical questions for assessing appliance cleanup and storage.</description></item><item><title>Holiday hosting: what should a counter appliance do for you?</title><link>https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html</link><guid>holiday-hosting-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>A seasonal checklist for choosing or using a compact counter appliance, without product-specific claims.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Crisp &amp; Counter — buying guides</title>
+  <link>https://karagemop466-tech.github.io/Affil1/</link>
+  <atom:link href="https://karagemop466-tech.github.io/Affil1/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Air-fryer buying guides that check the link before they describe the product.</description>
+  <language>en-us</language>
+  <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
+  <copyright>2026 Crisp &amp; Counter</copyright>
+  <item>
+    <title>Basket or oven-style air fryer: what should you compare?</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html</guid>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <description>Two appliances share a name and almost nothing else. Here is the list of differences that actually change how a weeknight goes — and the ones that only look like they do.</description>
+  </item>
+  <item>
+    <title>A no-hype checklist for comparing air-fryer capacity</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist.html</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist.html</guid>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <description>The quart figure on the box answers a question you did not ask. This is the version of the question you did ask.</description>
+  </item>
+  <item>
+    <title>How to assess cleanup and counter-space trade-offs</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space.html</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space.html</guid>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <description>The appliance that gets used is the one that is easy to put away and easy to wash. Both of those are checkable before you buy.</description>
+  </item>
+  <item>
+    <title>Questions to ask before buying a multi-function kitchen appliance</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions.html</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions.html</guid>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <description>Multi-function usually means one thing done well and several things done acceptably. The trick is finding out which is which before it takes up a shelf.</description>
+  </item>
+</channel>
+</rss>
