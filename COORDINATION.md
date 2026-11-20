@@ -1,49 +1,59 @@
 # COORDINATION.md — shared task board
 
-Shared task board for parallel sessions on this repository.
+Shared task board for parallel sessions on this repository. Read this before
+claiming any work.
 
 ## Session log
 
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
-| `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
-
-No other session had an open claim on these files when this work started. Two
-other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
-`arena/96012762-affil1`). Neither was modified, rebased or force-pushed.
+| `arena/fa9307f7-affil1` | same | Build system, publication rewrite, review queue (PR #22) | done |
+| `arena/a4ab7faf-affil1` | same | Pass-2 verification audit, seasonal guide (PRs #20, #21) | done |
+| `arena/b41317f8-affil1` | `arena/b41317f8-affil1` | **Integration pass**: one canonical site, shop-voice rewrite, tagged links, new guides, suggestions/questions refresh, PR + merge + deploy | in progress → done below |
 
 ## Claims
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Publication rewrite, editorial guides, decision pages, review queue | done | arena/fa9307f7-affil1 | `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/` |
-| Link verification against the live Amazon listing | done | arena/fa9307f7-affil1 | `src/data/products.json`, `review/` |
-| Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
+| Consolidate two editions into one canonical site | done | arena/b41317f8-affil1 | root tree, `archive/legacy-2026-11-20/`, `robots.txt`, `sitemap.xml` |
+| Re-verify all five supplied links | done | arena/b41317f8-affil1 | `src/data/products.json` |
+| Tag every Amazon link (Program Policies §2(b)) | done | arena/b41317f8-affil1 | `tools/layout.py`, `tools/check.py` |
+| Shop-voice front page and product pages | done | arena/b41317f8-affil1 | `tools/page_home.py`, `tools/page_products.py`, `assets/css/site.css` |
+| Four new guides, eight total | done | arena/b41317f8-affil1 | `tools/content.py`, `tools/page_guides.py` |
+| Suggestions queue with three paths | done | arena/b41317f8-affil1 | `src/data/suggestions.json`, `tools/page_suggestions.py` |
+| Decision register, 22 questions | done | arena/b41317f8-affil1 | `src/data/questions.json`, `tools/page_questions.py` |
 | Product facts beyond the listing title | needs review | — | `src/data/products.json` |
 | Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
+| Search Console verification | needs review | — | requires owner's Google account |
+| Analytics endpoint hosting + retention | needs review | — | requires owner decision |
 
 `needs review` means the item is published on the review page and does not block
 anything.
 
-## Overlap with the other open branches
+**Open pull requests that were not touched by this session:** #19
+(`arena/e56bd6f7-affil1`, coordination log only), #12 (`arena/c58c5996-affil1`),
+#9 (`arena/4bcd015a-affil1`), #23 (`arena/8206a8d0-affil1`). None was rebased,
+force-pushed, merged or closed here.
 
-Two sibling branches worked the same brief at the same time. This session did not
-merge them, because the three designs conflict structurally:
+## Why this integration pass was needed
 
-- `arena/96012762-affil1` (#7) writes **root-absolute** internal links
-  (`href="/about/"`). On a project Pages path that resolves to
-  `karagemop466-tech.github.io/about/` and 404s. It also publishes every page at
-  both `/compare` and `/compare/index.html`.
-- Both sibling branches use a different brand name and a different URL layout.
+`main` served two competing editions of the same shop: the generated edition at
+the root and a hand-written edition under `crisp/` plus duplicate root pages
+(`products.html`, `questions.html`, `suggestions.html`, `guides.html`,
+`dashboard.html`, `flagged-for-review.html`, `privacy.html`,
+`executive-summary.html`, `disclosure.html`, `categories.html`). They described
+the same five products with different navigation and different URLs. Two editions
+cannot both be the site a search engine indexes, and the brief for this session
+asks explicitly for "one site to index".
 
-What was **reused as corroboration, not copied**: PR #7 independently opened the
-same five links and reached the same four ASINs recorded here. That agreement is
-noted in `review/index.html#FLG-008` because independent confirmation of the same
-observation is worth something, while a shared assumption would not be.
+The earlier coordination note called consolidation a design decision for a final
+integration pass. This is that pass.
 
-Branch `arena/55d40788-affil1` (#6) ships an analytics client and a self-hosted
-collector. The analogue in this tree (`assets/js/analytics.js`) was written for
-this build; it is inert and documented at `review/measurement.html`.
+**What was done with the other edition: archived, not deleted.** Every file moved
+to `archive/legacy-2026-11-20/`, every archived `.html` file carries
+`<meta name="robots" content="noindex, follow">`, and `sitemap.xml` lists only
+canonical URLs. Git history retains the originals. `archive/legacy-2026-11-20/README.md`
+records what moved and why.
 
 ## Sources and verification performed
 
@@ -52,72 +62,51 @@ Every source was requested and read in this session on 2026-11-20.
 | Ref | Source | Used for |
 |---|---|---|
 | SRC-01 | https://affiliate-program.amazon.com/help/operating/agreement | §5 disclosure wording, quoted verbatim |
-| SRC-02 | https://affiliate-program.amazon.com/help/operating/policies | §2(b) Special Links and the price/availability rule |
-| SRC-03 | https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking | Disclosure placement |
-| SRC-04 | https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255 | The regulation behind SRC-03; linked, not quoted |
-| SRC-05 | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links | `rel="sponsored"` is the documented paid-link marker |
+| SRC-02 | https://affiliate-program.amazon.com/help/operating/policies | §2(a)/(b): Special Links must use the Associates ID, and the tag must appear as a URL parameter |
+| SRC-03 | https://affiliate-program.amazon.com/help/operating/policies | §2(b): price/availability only from Amazon-served data or the APIs |
+| SRC-04 | https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking | Disclosure placement: "the closer the disclosure is to your recommendation, the better" |
+| SRC-05 | https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking | "affiliate link" alone may be inadequate; "paid link" beside it is better |
+| SRC-06 | https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255 | Linked, not quoted |
+| SRC-07 | https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links | `rel="sponsored"` is the paid-link marker |
+| SRC-08 | https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers | **Not reached from this environment.** No figures reproduced |
 
-Link verification, performed once per link on 2026-11-20:
+Link verification, one request per link on 2026-11-20:
 
-| Ref | Submitted | Resolved to | Product |
-|---|---|---|---|
-| P-01 | link.amazon/B04G1MEwY | ASIN B0CDY277D3 | CHEFMAN 6 qt dual basket air fryer |
-| P-02 | link.amazon/B02NbDxp3 | ASIN B09B7SB46R | Emeril Lagasse 26 qt French door air fryer oven |
-| P-03 | link.amazon/B00hJ57DV | ASIN B08DKYBTPH | Chefman 8 qt TurboFry |
-| P-04 | link.amazon/B0c8moW59 | **not resolved** | three attempts, continuity page each time |
-| P-05 | link.amazon/B0f3GKalj | ASIN B0DZFD6R9Z | CHEF iQ wireless meat thermometer |
+| Ref | Submitted | Resolved to | Product | Change vs previous record |
+|---|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | B0CDY277D3 | CHEFMAN 6 qt dual basket | unchanged |
+| P-02 | link.amazon/B02NbDxp3 | B09B7SB46R | Emeril Lagasse 26 qt French door | unchanged |
+| P-03 | link.amazon/B00hJ57DV | B08DKYBTPH | Chefman 8 qt TurboFry | unchanged |
+| P-04 | link.amazon/B0c8moW59 | **B0DHZTCNR5** | ThermoMaven digital meat thermometer | **newly resolved** (3 failures in an earlier session) |
+| P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z | CHEF iQ Sense wireless probes | unchanged |
 
-`python3 tools/check.py` → **22 pages, 0 errors, 0 warnings.**
+`python3 tools/build.py` → **26 pages**.
+`python3 tools/check.py` → **26 pages checked, 0 errors, 0 warnings.**
 
-## Irregularities
+## Irregularities found in this pass
 
-All 15 are published at `review/index.html` with source links. The three that
-matter most:
+- **FLG-009 (new, corrected):** the previous build linked to bare
+  `https://www.amazon.com/dp/<ASIN>` with **no tag parameter**, which cannot be
+  attributed to any account and does not meet Program Policies §2(b). Every
+  Amazon destination is now built by `layout.buy_url()` with
+  `?tag=shopnow047c-20`, and `check.py` fails the build on an untagged link.
+- **FLG-004 (downgraded):** P-04 resolved on first attempt this session. The
+  earlier failures are recorded as unexplained, not diagnosed.
+- **FLG-015 (corrected):** two of the five products are thermometers, not one.
+  They are published as their own category.
+- **FLG-008 (new):** two competing editions were live at once; consolidated.
+- **FLG-002 (unchanged):** no resolved URL showed the tag, and no Associates
+  report has been read. Attribution remains unconfirmed.
+- **FLG-016 (new):** buy-button wording ("See it on Amazon") is a compliance
+  judgement logged for owner review before paid traffic.
 
-- **FLG-001** — all five submitted codes are 9 characters; all four ASINs on
-  arrival are 10. They are short-link slugs, not identifiers, so `intended_asin`
-  is null rather than filled with the slug.
-- **FLG-002** — no arrival page showed a tracking tag, so attribution to
-  `shopnow047c-20` is unconfirmed. Not the same as untagged.
-- **FLG-005** — no price, rating, review count or stock anywhere, by rule, with
-  the policy quote on the sources page.
-
-
-- Pull request and merge result: recorded in the PR body and below.
-- GitHub Pages: https://karagemop466-tech.github.io/Affil1/
+All 17 flags are published at `review/index.html` with source links.
 
 ## Merge log
 
-Rebased onto `main` after PRs #18, #20 and #21 merged a parallel edition that had
-already adopted this branch's verified link table. Both editions agree on every
-product fact:
+- PR: see the pull request opened from `arena/b41317f8-affil1` to `main`.
+- Merge result: recorded in the PR body and in the final commit message.
 
-| Ref | Observed ASIN | Both editions agree |
-|---|---|---|
-| P-01 | B0CDY277D3 | yes |
-| P-02 | B09B7SB46R | yes |
-| P-03 | B08DKYBTPH | yes |
-| P-04 | unresolved | yes |
-| P-05 | B0DZFD6R9Z | yes |
+## Public URL
 
-The conflict was structural, not factual: both trees write `index.html`,
-`sitemap.xml`, `feed.xml`, `assets/css/` and `src/data/*.json`. This branch's
-build owns those paths.
-
-**Nothing was deleted from another session's work.** Their pages (`crisp/`,
-`guides.html`, `products.html`, `dashboard.html`, `flagged-for-review.html`,
-`reviews/`, `categories/`, `archive/`, `data/`, `js/`, `css/`, `server/`,
-`analytics/`, `docs/`) are all still in the tree and still served.
-`tools/build.py` now writes only the files in its own `GENERATED` set and will
-not touch anything else; that was verified by dropping a foreign file into
-`guides/` and rebuilding.
-
-One file is retired: `guides/flagged-for-review.html` moves to `review/`. A
-redirect stub could not be added because this build cannot hand-write HTML; the
-front page and footer no longer link to the old path.
-
-Duplicate root pages remain: this build serves `products/`, `questions/` and
-`suggestions/` as directories while the parallel edition serves `products.html`
-and siblings. The front page and footer link only to this build's set.
-Consolidating the two editions is a design decision and is logged as the next
-integration task rather than done here by deletion.
+https://karagemop466-tech.github.io/Affil1/

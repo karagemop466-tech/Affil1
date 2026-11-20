@@ -1,30 +1,32 @@
 # Crisp & Counter
 
-A static Amazon affiliate publication about air fryers and one meat thermometer.
+A static Amazon affiliate publication about air fryers and thermometers.
 Live at **https://karagemop466-tech.github.io/Affil1/**
 
-It is built to one rule: **claim nothing that cannot be sourced.** That shows up
-as an absence of prices, ratings, test results and winners, and as a review page
-that publishes every gap instead of hiding it.
+It is built to be a shop a reader can act on, with one rule underneath:
+**claim nothing that cannot be sourced.** So there are no prices, ratings, review
+counts or test results — and a review page that publishes every gap instead of
+hiding it.
 
 ---
 
-## What is here
+## The site, in one table
 
 | Path | What it is |
 |---|---|
-| `index.html` | Front page. Leads with products and guides. |
-| `guides/` | Four question-shaped buying guides. |
-| `products/` | The five-link register plus one record per product. |
-| `compare/` | Every product side by side, with blank columns left blank. |
-| `questions/` | 15 questions, 4 answered with evidence, 11 open with the artefact that would close each. |
-| `suggestions/` | 12 proposals with an accept / hold / reject control per row. |
-| `review/` | Flagged for review, image policy, measurement plan. |
-| `about/` | Rules, disclosure, privacy, and the source list with quoted wording. |
-| `operations/` | The empty campaign ledger and its provenance rule. |
-| `brief/` | Executive summary. |
-| `src/data/` | The single source of truth. Every fact on the site comes from here. |
-| `tools/` | `build.py` renders the site; `check.py` verifies it. |
+| `index.html` | Publication front page: the edit, two categories, three decision paths, a seasonal feature, the journal |
+| `products/` | The shop: five picks in two categories, plus one note per product |
+| `guides/` | Eight question-shaped buying guides, clustered by the decision they answer |
+| `compare/` | Every product side by side, with blank columns left blank |
+| `questions/` | 22 questions a real decision depends on: what is known, what is missing, what would close it |
+| `suggestions/` | Three paths and 18 proposals, 8 already implemented, with a decision control per row |
+| `review/` | Flagged for review, image policy, measurement plan |
+| `about/` | Rules, disclosure, privacy, and the full source list with quoted wording |
+| `operations/` | The empty campaign ledger and its provenance rule |
+| `brief/` | Executive summary |
+| `src/data/` | The single source of truth. Every fact on the site comes from here |
+| `tools/` | `build.py` renders the site; `check.py` verifies it |
+| `archive/legacy-2026-11-20/` | The superseded edition, kept with `noindex` on every page |
 
 ## Build
 
@@ -45,12 +47,14 @@ Each rule exists because the site makes a matching claim somewhere.
 
 1. **The disclosure strip is above `<main>` on every page** and repeated in the
    footer. Required by Associates Operating Agreement §5; placed high because the
-   FTC says a footer-only disclosure is easy to miss.
-2. **Every Amazon product link carries `rel="sponsored nofollow noopener"`** and
-   opens in a new tab. Google documents `sponsored` as the marker for paid links.
+   FTC says the closer a disclosure is to the recommendation, the better.
+2. **Every Amazon product link carries the Associates tag** `?tag=shopnow047c-20`
+   *and* `rel="sponsored nofollow noopener"`, and opens in a new tab. The tag is
+   required by Program Policies §2(b); `sponsored` is the marker Google documents
+   for paid links.
 3. **No price, star rating, review count or stock phrase appears in visible text.**
-   Associates Program Policies §2(b) permits those only from Amazon-served data or
-   the Creators API / Product Advertising API. Neither is connected.
+   Program Policies §2(b) permits those only from Amazon-served data or the
+   Creators API / Product Advertising API. Neither is connected.
 4. **No test or ranking claim.** Nothing on this site was tested, so no page may
    say otherwise.
 5. **No root-absolute internal links.** GitHub Pages serves this repository from
@@ -60,6 +64,8 @@ Each rule exists because the site makes a matching claim somewhere.
 7. **Every internal link and anchor resolves**, the sitemap matches the built
    pages exactly, and every feed item points at a real page.
 8. **One `<h1>` per page**, every image has alt text, and no inline event handlers.
+9. **One site only.** Any `.html` file in the tree that this build did not
+   generate, and that is not under `archive/`, fails the build.
 
 ## Editing content
 
@@ -69,30 +75,36 @@ the intent.
 
 Product identity lives in `src/data/products.json`. The `intended_asin` and
 `observed_asin` fields are deliberately separate and must never be merged — see
-`review/index.html#FLG-001` for why.
+`review/index.html#FLG-001` for why. Buy destinations are built in exactly one
+place, `layout.buy_url()`, so the tag cannot be forgotten on one page and
+remembered on the next.
 
+## What is verified, and how
 
-## Coexistence with the merged parallel edition
+Five supplied links were opened on 2026-11-20 and each resolved to a live Amazon
+listing. The ASIN, page title and category breadcrumb were transcribed:
 
-`main` also contains a second edition built by a parallel session: a `crisp/`
-sub-site plus root pages such as `products.html`, `questions.html`,
-`dashboard.html` and `flagged-for-review.html`. It independently reached the same
-five link resolutions recorded here, which is why the two data files agree.
+| Ref | Submitted | Landed on |
+|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | B0CDY277D3 — CHEFMAN 6 Quart Dual Basket |
+| P-02 | link.amazon/B02NbDxp3 | B09B7SB46R — Emeril Lagasse 26QT French Door |
+| P-03 | link.amazon/B00hJ57DV | B08DKYBTPH — Chefman 8 Qt TurboFry |
+| P-04 | link.amazon/B0c8moW59 | B0DHZTCNR5 — ThermoMaven digital meat thermometer |
+| P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z — CHEF iQ Sense wireless probes |
 
-This build owns the site **root** and writes only its own generated files; the
-other edition's pages are untouched and remain reachable. Running
-`python3 tools/build.py` therefore cannot damage them. Merging the two editions
-into one was deliberately not attempted here: it is a design decision, and the
-brief says shared navigation and index files change only in a final integration
-pass.
+Policy wording was read from the Operating Agreement §5, the Program Policies
+§2(a)/(b), the FTC's endorsement FAQ and Google's outbound-link documentation in
+the same session. All four are quoted, with links, on `about/index.html#sources`.
 
 ## What is not connected
 
 - No Amazon Product Advertising API / Creators API credentials.
-- No Associates account access, so no intended ASINs, rate card or click report.
+- No Associates account access, so no confirmed click attribution, rate card or
+  click report.
 - No analytics endpoint. `assets/js/analytics.js` is inert by default.
 - No Search Console property.
 - No named author.
+- No mailing list; RSS is the only return channel.
 
 Every one of those is published on the review page rather than described here as
 a future intention.

@@ -1,46 +1,86 @@
-# Affil1 — Executive summary
+# Executive summary
 
-**Project:** Amazon affiliate marketing site (GitHub Pages)
-**Branch:** `arena/f10ea853-affil1` (base `cca8c2a`)
-**Tracking ID:** `shopnow047c-20`
-**Prepared:** 2026-11-20
+**Site:** Crisp & Counter — https://karagemop466-tech.github.io/Affil1/
+**Tracking ID:** shopnow047c-20
+**Date:** 20 November 2026
 
-## What this is
-A buyer-facing affiliate site for air fryers and multi-function kitchen appliances. It reads like a shop/publication, not an audit: product picks lead the front page, every page carries an above-the-fold disclosure, and every outbound product link is marked `sponsored`.
+## What was asked for
 
-## Products submitted (5)
-| # | Submitted link | Intended ASIN | Verified listing | Status |
-|---|---|---|---|---|
-| 1 | https://link.amazon/B04G1MEwY | B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | Verified |
-| 2 | https://link.amazon/B02NbDxp3 | B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Verified |
-| 3 | https://link.amazon/B00hJ57DV | B00hJ57DV | — | Unverified — homepage reached, no product page |
-| 4 | https://link.amazon/B0c8moW59 | B0c8moW59 | — | Unverified — Amazon checkpoint gate |
-| 5 | https://link.amazon/B0f3GKalj | B0f3GKalj | — | Unverified — homepage reached, no product page |
+An Amazon affiliate publication covering five supplied links: product research,
+comparison content, buying guides, click measurement, compliant disclosure, a
+suggestions section the owner can decide from, a clear list of questions that
+must be answered before decisions, and a live site — built and merged without
+further input.
 
-Verified against Amazon.com (official source) on 2026-11-20. Intended ASIN and observed redirect target are stored in separate fields and never merged. Prices, ratings and commissions are blank — not confirmed from an official source, never inferred.
+## What exists now
 
-## Site structure
-- `/` — publication front page: hero, this week’s picks (product grid), buyer-question guides, how it works
-- `/categories/air-fryers.html` — findings table, one row per product, source link per row
-- `/dashboard.html` — entries/findings table + empty campaign ledger + measurement status
-- `/guides/` — four question-shaped guides (working titles)
-- `/suggestions.html` — decision suggestions; review before implementing
-- `/reviews/flagged.html` — Flagged for Review page (irregularities + unverified items)
-- `/disclosure.html` — full Associates statement
-- `/privacy.html` — privacy notice for self-hosted analytics
-- `/sitemap.xml`, `/rss.xml` — for search engines and feed readers
+One canonical site, 26 pages, rebuilt from `src/data` on every deploy:
 
-## Measurement (turned on before content)
-Five defined events: `page_view`, `outbound_click`, `guide_read`, `suggestion_review`, `session_start`. Self-hosted collector at `/analytics/collect` (code: `server/collect.js`); client degrades silently when unreachable. No cookies, no IP logging. Next guide topic chosen from measured queries.
+- a product-led front page with five picks in two categories and a buy button on
+  every card;
+- a product page for each of the five, with stated facts, who it suits, who
+  should skip it, and a one-block provenance record;
+- a side-by-side comparison table;
+- eight question-shaped guides across six clusters;
+- a decision register of 22 questions, 10 answered with evidence;
+- a suggestion queue with three coherent paths and 18 proposals, of which 8 have
+  already been implemented and are shown with evidence;
+- 17 review flags, an image policy, an inert analytics client and an empty
+  campaign ledger with a provenance rule;
+- a build-time checker that fails on a broken link, a missing disclosure, an
+  untagged Amazon link, a reintroduced price, or a second competing edition.
 
-## Campaign ledger
-Empty and intentionally so. Entries (timestamp, source, channel, eligible sessions, clicks, reported orders, provenance report, notes) are added only from authorized first-party reports, with a dated provenance trail. No conversion score or revenue forecast is presented.
+## What was verified, and how
 
-## Compliance gate
-Disclosure above the fold on every page + footer repeat; `rel="nofollow sponsored"` on all outbound product links; review against Amazon Associates Operating Agreement and FTC endorsement guidance before publishing (see `PUBLISHING_WORKFLOW.md`).
+Each of the five supplied links was opened on 2026-11-20 and **all five
+resolved**. The ASIN, page title and category breadcrumb were transcribed:
 
-## Flagged items
-Three of five short links did not resolve to product pages; two verified links redirect to a different ASIN than the short-link slug. All flagged items are published on `/reviews/flagged.html` with source links; they do not block the launch.
+| Ref | Landed on | Product |
+|---|---|---|
+| P-01 | B0CDY277D3 | CHEFMAN 6 qt dual-basket air fryer |
+| P-02 | B09B7SB46R | Emeril Lagasse 26 qt French-door air fryer oven |
+| P-03 | B08DKYBTPH | Chefman 8 qt TurboFry air fryer |
+| P-04 | B0DHZTCNR5 | ThermoMaven digital meat thermometer |
+| P-05 | B0DZFD6R9Z | CHEF iQ Sense wireless meat thermometer |
 
-## Next decisions awaiting review (`/suggestions.html`)
-S-001 price/commission tracking · S-002 replace short links with validated Special Links · S-003 turn on real analytics · S-004 compliance gate in publishing workflow · S-005 brand imagery.
+Amazon's Operating Agreement §5, Program Policies §2(a)/(b), the FTC's
+endorsement FAQ and Google's outbound-link documentation were each read in this
+session and are quoted with links on the sources page.
+
+## The three findings that change the plan
+
+1. **The previous build's buy links had no tracking tag at all.** Program
+   Policies §2(b) requires the Associates ID as a URL parameter, and a bare
+   `/dp/` URL cannot be attributed to any account. Every destination is now built
+   in one function with `?tag=shopnow047c-20`, and the build fails on an untagged
+   link. This was a live defect and it is published on the review page.
+2. **The site was two sites.** A generated edition and a hand-written one served
+   the same five products from different URLs, competing for the same searches.
+   They are consolidated; the other edition is archived with `noindex` on every
+   page, not deleted.
+3. **The fourth link resolves** — to a thermometer, not a fourth air fryer. The
+   catalogue is three air fryers and two thermometers, and the site now says so.
+
+## What still cannot be confirmed
+
+- **Attribution.** No resolved URL showed the tag, and no Associates report has
+  been read. One click from the owner's device plus the Orders report settles it.
+- **Intended ASINs.** The supplied codes are nine-character short-link slugs, not
+  identifiers. Only the account can supply what was intended.
+- **Price, rating, availability.** Not shown anywhere, by rule: Amazon permits
+  them only from Amazon-served data or its APIs, and neither is connected.
+- **Author, traffic, rates, email list.** None exist. All are published as gaps.
+
+No conversion score, revenue forecast or traffic estimate appears anywhere.
+
+## The next decision
+
+In order:
+
+1. Click one product link, then read the Associates report.
+2. Verify Search Console and submit the sitemap.
+3. Choose one path on the suggestions page — shop first, publication first, or
+   measure first — and commit to it before adding anything else.
+
+Writing more guides before either measurement exists is the option that looks
+like progress and is not.
