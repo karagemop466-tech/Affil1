@@ -40,9 +40,10 @@ def build(page_dir, questions, meta):
             {"html": esc(q["question"])},
             {"html": state},
             {"html": blk},
+            {"html": outbound(d,"https://github.com/karagemop466-tech/Affil1/blob/main/src/data/questions.json", "Decision record")},
         ])
-    q_table = table(["Ref", "Question", "Status", "Blocks work"], q_rows,
-                    cls="qtable", caption="15 questions raised, 4 answered")
+    q_table = table(["Ref", "Question", "Status", "Blocks work", "Source"], q_rows,
+                    cls="qtable", caption=f"{len(qs)} questions raised, {len(answered)} answered")
 
     body = f"""{pagehead(
         'Open questions',

@@ -67,9 +67,9 @@ def build_guide(page_dir, g, meta):
 
     body = f"""{pagehead(
         g['kicker'],
-        esc(g['title']).replace(': what should you compare?', ',<br>and what does not matter').replace(' for comparing air-fryer capacity', ',<br>without the marketing'),
+        esc(g['title']),
         esc(g['dek']),
-        meta=f"Updated {esc(g['updated'])} &middot; {g['read_minutes']} min read &middot; no product tested &middot; no prices or ratings",
+        meta=f"Crisp &amp; Counter editorial desk &middot; Updated {esc(g['updated'])} &middot; {g['read_minutes']} min read &middot; no product tested &middot; no prices or ratings",
     )}
 <section class="section"><div class="wrap article-grid">
   <article class="article">

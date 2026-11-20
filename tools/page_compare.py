@@ -46,8 +46,8 @@ def build(page_dir, products, meta):
 
     body = f"""{pagehead(
         'Compare',
-        'Side by side,<br>with nothing measured',
-        'Five products, seven columns. Two of those columns are the sellers talking about their own products. One is a link that was actually opened. The rest are empty.',
+        'Compare the countertop shortlist',
+        'Compare the cooking format, seller-stated capacity and features. Follow each listing to check the model before you buy.',
         meta='No price column &middot; no rating column &middot; no winner column &middot; on purpose',
     )}
 {section(f'''

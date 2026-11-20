@@ -28,10 +28,10 @@
       "id": "SRC-03",
       "title": "FTC Endorsement Guides: What People Are Asking",
       "publisher": "U.S. Federal Trade Commission",
-      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
       "page_date": "no date shown on page",
       "used_for": "Where an affiliate disclosure should sit, and what makes it clear and conspicuous.",
-      "quote": "A disclosure should be placed where it easily catches consumers’ attention and is difficult to miss. … Consumers may miss a disclosure at the bottom of a blog or page.",
+      "quote": "if there’s a connection between an endorser and the marketer that a significant minority of consumers wouldn’t expect and it would affect how they evaluate the endorsement, that connection should be disclosed clearly and conspicuously.",
       "status": "read directly"
     },
     {
@@ -53,17 +53,19 @@
       "used_for": "Confirms that rel=\"sponsored\" is Google's documented marker for paid or advertising links, and that multiple rel values may be combined.",
       "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
       "status": "read directly"
+    },
+    {
+      "id": "SRC-06",
+      "title": "Understanding ASINs",
+      "publisher": "Amazon",
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "page_date": "June 4, 2025",
+      "used_for": "Identifier format and the /dp/ segment.",
+      "quote": "It’s a unique 10-character alphanumeric code assigned to every product listed in the Amazon store.",
+      "status": "read directly"
     }
   ],
   "could_not_verify": [
-    {
-      "item": "Official 10-character ASIN definition on an Amazon-hosted help page",
-      "attempted": [
-        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — a sign-in wall was returned",
-        "https://www.amazon.com/ask/questions/TxJGX2UK4WITXE/ — a seller-written answer, not Amazon's own text"
-      ],
-      "reason": "Amazon's Seller Central help pages require a seller sign-in from this environment. Rather than quote a third-party blog as if it were Amazon, the ASIN length check is presented as an observation about this register's own data."
-    },
     {
       "item": "Amazon Product Advertising API / Creators API access",
       "attempted": [

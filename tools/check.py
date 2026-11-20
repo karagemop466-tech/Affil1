@@ -124,7 +124,7 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
-    r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
+    r"sell\.amazon\.com|sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"www\.ftc\.gov)",
     re.I,
 )
@@ -234,6 +234,10 @@ def check_page(path):
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
 
+    for row in re.findall(r"<tbody>(.*?)</tbody>",text,re.S):
+        for tr in re.findall(r"<tr[^>]*>(.*?)</tr>",row,re.S):
+            if not re.search(r'<a [^>]*href="https://',tr): err(f"{rel}: data row without an official source link")
+
     # --- head essentials ---
     for needle in ("<title>", 'name="description"', 'rel="canonical"'):
         if needle not in text:
@@ -294,8 +298,8 @@ def check_data():
             err(f"products.json: {p['ref']} observed_asin is not 10 characters")
         if p["submitted_code"] != p["submitted_link"].rsplit("/", 1)[-1]:
             err(f"products.json: {p['ref']} submitted_code does not match the link")
-        if p["intended_asin"] == p["observed_asin"] and p["intended_asin"] is not None:
-            err(f"products.json: {p['ref']} intended and observed have been merged")
+        if p["intended_asin"] and not all(p.get(k) for k in ("intent_source","intended_listing_url","intent_confirmed_on")):
+            err(f"products.json: {p['ref']} intended ASIN lacks independent evidence")
 
     for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):
         json.loads((ROOT / "src/data" / name).read_text(encoding="utf-8"))

@@ -48,7 +48,13 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "6 quart total, as two independent 3-quart baskets",
-      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe"
+      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
+      "intended_listing_url": null,
+      "intent_confirmed_on": null,
+      "intent_source": null,
+      "validated_special_link": null,
+      "tracking_report_source": null,
+      "observed_target": "https://www.amazon.com/dp/B0CDY277D3"
     },
     {
       "ref": "P-02",
@@ -88,7 +94,13 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "26 quart",
-      "stated_attributes": "24 one-touch presets; six cooking accessories included"
+      "stated_attributes": "24 one-touch presets; six cooking accessories included",
+      "intended_listing_url": null,
+      "intent_confirmed_on": null,
+      "intent_source": null,
+      "validated_special_link": null,
+      "tracking_report_source": null,
+      "observed_target": "https://www.amazon.com/dp/B09B7SB46R"
     },
     {
       "ref": "P-03",
@@ -99,7 +111,7 @@
       "observed_asin": "B08DKYBTPH",
       "observed_asin_length": 10,
       "listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
-      "listing_title": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "listing_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
       "brand": "Chefman",
       "format": "basket",
       "format_label": "Single-basket air fryer",
@@ -129,7 +141,13 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "8 quart",
-      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel"
+      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
+      "intended_listing_url": null,
+      "intent_confirmed_on": null,
+      "intent_source": null,
+      "validated_special_link": null,
+      "tracking_report_source": null,
+      "observed_target": "https://www.amazon.com/dp/B08DKYBTPH"
     },
     {
       "ref": "P-04",
@@ -172,7 +190,12 @@
       "flag": "FLG-014 (resolved 2026-11-20; see resolution_note)",
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "1-second read stated; ±0.5°F accuracy stated; NIST & NSF certified stated; auto-rotate LED screen; IP67 waterproof stated",
-      "attention": "Second thermometer in the set (with P-05). Instant-read, not wireless. Any guide that treats it as an air fryer would be wrong."
+      "intended_listing_url": null,
+      "intent_confirmed_on": null,
+      "intent_source": null,
+      "validated_special_link": null,
+      "tracking_report_source": null,
+      "observed_target": "https://www.amazon.com/dp/B0DHZTCNR5"
     },
     {
       "ref": "P-05",
@@ -211,9 +234,14 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "attention": "This product sits in a different category from the other four. Any guide that treats it as a fifth air fryer would be wrong. It is routed to its own section.",
       "stated_capacity": "Not applicable — it is a thermometer",
-      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses"
+      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
+      "intended_listing_url": null,
+      "intent_confirmed_on": null,
+      "intent_source": null,
+      "validated_special_link": null,
+      "tracking_report_source": null,
+      "observed_target": "https://www.amazon.com/dp/B0DZFD6R9Z"
     }
   ]
 }

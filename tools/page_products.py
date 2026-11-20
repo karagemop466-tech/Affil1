@@ -8,6 +8,9 @@ FIELDS = [
     ("submitted_link", "Submitted link", "The exact URL supplied by the operator, unchanged."),
     ("submitted_code", "Path code", "The characters after link.amazon/. Kept verbatim, including case."),
     ("intended_asin", "Intended ASIN", "What the operator meant to ship. Blank: it cannot be read from a nine-character slug."),
+    ("intended_listing_url", "Intended listing", "Awaiting account confirmation."),
+    ("intent_confirmed_on", "Confirmation date", "Date of independent intent confirmation."),
+    ("intent_source", "Confirmation source", "Authorized source, not inferred from the redirect."),
     ("observed_asin", "Observed ASIN", "The /dp/ segment of the page that actually loaded. Separate field, never merged with the one above."),
     ("listing_title", "Listing title", "Transcribed from the page reached, including the seller's own punctuation and claims."),
     ("brand", "Brand", "As stated on the listing."),
@@ -65,8 +68,8 @@ def build_register(page_dir, products, meta):
   </div>
   <dl class="reg-stats">
     <div><dt>Links submitted</dt><dd>5</dd></div>
-    <div><dt>Opened successfully</dt><dd>4</dd></div>
-    <div><dt>Unresolved</dt><dd>1</dd></div>
+    <div><dt>Opened successfully</dt><dd>5</dd></div>
+    <div><dt>Unresolved</dt><dd>0</dd></div>
     <div><dt>Tested</dt><dd>0</dd></div>
   </dl>
 </div>
@@ -104,7 +107,7 @@ def _head(d):
         "The register",
         "Five submitted links,<br>opened one by one",
         "What each link actually reaches, transcribed from the page that loaded \u2014 and the fields that stay empty because no official source was available.",
-        meta=f"Checked {esc('20 November 2026')} &middot; 5 links &middot; 4 identified &middot; 0 tested",
+        meta=f"Checked {esc('20 November 2026')} &middot; 5 links &middot; 5 identified &middot; 0 tested",
     )
 
 
@@ -130,8 +133,8 @@ def _thermometer_note(d):
     return f"""<section class="band"><div class="wrap band-inner">
   <div>
     {eyebrow('Read the category path')}
-    <h2>One of these is filed under thermometers</h2>
-    <p>P-05 resolves to a wireless meat thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. The other four are under Small Appliances, then Fryers, then Air Fryers.</p>
+    <h2>Two ways to check temperature</h2>
+    <p>P-05 resolves to a wireless meat thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. P-04 is an instant-read thermometer. The three cooking appliances are filed under Air Fryers.</p>
     <p>That is not a problem with the link. It would be a problem with this site if it presented a thermometer as the fifth air fryer, which is exactly what a site written from the brief alone would have done.</p>
     <p><a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">The thermometer record <span aria-hidden="true">&rarr;</span></a></p>
   </div>
@@ -160,6 +163,7 @@ def build_product(page_dir, p, meta):
         facts.append([
             {"html": f"<strong>{esc(label)}</strong><br><span class='tiny'>{esc(note)}</span>"},
             {"html": cell},
+            {"html": product_link(d,p["listing_url"],"Listing")},
         ])
 
     stated = p.get("title_stated") or []
@@ -167,7 +171,7 @@ def build_product(page_dir, p, meta):
 
     not_stated = [
         [v, {"html": blank(None, "no permitted source")},
-         {"html": f'<a href="{esc(rel(d, "about/index.html"))}#why-blank">Why</a>'}]
+         {"html": product_link(d,p["listing_url"],"Unverified · listing")}]
         for v in p["unverified"]
     ]
 
@@ -190,6 +194,7 @@ def build_product(page_dir, p, meta):
     <p class="lede">Each row below is a field a shopper would normally expect to see. None of them has a source this build is allowed to use, so none of them is filled in.</p>
     {table(['Field', 'Value', 'Reason'], not_stated, cls='fields')}
 
+    <details><summary>Listing and intent record</summary>{table(['Field','Value','Observed source'], facts)}</details>
     <h2>How the link was checked</h2>
     <p>{esc(p['resolution_note'])}</p>
     <p>The submitted link was opened; the page it landed on was read; the ASIN inside the address and the title on the page were transcribed into this record. That is the whole of the check. It establishes identity. It does not establish quality, price or availability.</p>
@@ -197,7 +202,7 @@ def build_product(page_dir, p, meta):
     <div class="cta">
       <div>
         <p class="cta-label">Amazon listing</p>
-        <p>Opens in a new tab. This is an affiliate link{'' if not meta.get('tracking') else ''}.</p>
+        <p>Opens in a new tab. Listing source; attribution is unconfirmed.</p>
       </div>
       {product_link(d, p['listing_url'], 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
     </div>

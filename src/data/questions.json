@@ -7,7 +7,7 @@
     {
       "id": "Q-01",
       "question": "Does each submitted link actually land on the product the owner meant to send readers to?",
-      "what_we_have": "Four of the five land on a live listing, and the arrival ASIN and title were transcribed (P-01, P-02, P-03, P-05).",
+      "what_we_have": "Five observed ASINs and listing titles, recorded separately from the five unconfirmed intended ASINs.",
       "what_is_missing": "The owner's intended ASIN. Every submitted path code is 9 characters; every ASIN observed on arrival is 10. That is evidence the codes are short-link slugs, not identifiers, so the intended product cannot be read off the link itself.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended, then record both values side by side.",
       "answered": false,
@@ -15,12 +15,14 @@
     },
     {
       "id": "Q-02",
-      "question": "Why does one link never resolve?",
-      "what_we_have": "https://link.amazon/B0c8moW59 was requested three times and returned Amazon's /checkpoint/continue interstitial each time. No product page was reached.",
-      "what_is_missing": "Whether the short link is expired, mistyped, region-restricted, or simply challenging this particular client.",
+      "question": "Where did the fourth link land on recheck?",
+      "what_we_have": "The first checks reached a continuity screen; the latest check opened a listing.",
+      "what_is_missing": "The intended ASIN and account attribution.",
       "how_to_close": "Open it once from a normal browser on the owner's own network and note the final URL. If it is dead, re-issue the link from the Associates dashboard.",
-      "answered": false,
-      "blocking": "no — the other four can proceed without it, but P-04 cannot be sold"
+      "answered": true,
+      "blocking": "no",
+      "answer": "ThermoMaven digital meat thermometer, B0DHZTCNR5.",
+      "evidence": "https://www.amazon.com/dp/B0DHZTCNR5"
     },
     {
       "id": "Q-03",
@@ -49,14 +51,14 @@
       "what_is_missing": "Nothing structural. What remains is a legal review of the wording around it, which this build cannot perform.",
       "how_to_close": "A human review against SRC-01 and SRC-03. The placement itself is already above the fold on every page and repeated in the footer.",
       "answered": true,
-      "answer": "The required sentence sits in a strip above the masthead on every page, and repeats in the footer. Each product card carries its own one-line affiliate note so a reader who never scrolls still sees it.",
+      "answer": "The disclosure is below the masthead and repeated in the footer.",
       "evidence": "SRC-01, SRC-03",
       "blocking": "no"
     },
     {
       "id": "Q-06",
       "question": "P-05 is a thermometer, not an air fryer. Does it belong in the same catalogue?",
-      "what_we_have": "The listing title and its category path both put P-05 under Thermometers, not Air Fryers. The other four are all under Air Fryers.",
+      "what_we_have": "P-04 and P-05 both fall under Thermometers & Timers. P-01, P-02 and P-03 fall under Air Fryers.",
       "what_is_missing": "The owner's editorial intent — was the thermometer meant as an accessory to the air-fryer content, or as a separate line?",
       "how_to_close": "One sentence from the owner. Until then the site treats it honestly: it is listed in its own section and never described as an air fryer.",
       "answered": false,
@@ -83,7 +85,7 @@
     {
       "id": "Q-09",
       "question": "What is the actual commission rate for these categories?",
-      "what_we_have": "Nothing. The rate card sits behind an Associates sign-in.",
+      "what_we_have": "No account-specific commission information has been supplied.",
       "what_is_missing": "The owner's own rate card.",
       "how_to_close": "Read it in the Associates dashboard and record it. It is deliberately blank here rather than copied from a blog.",
       "answered": false,
@@ -93,7 +95,7 @@
       "id": "Q-10",
       "question": "Is the analytics endpoint live, and is it lawful to switch on?",
       "what_we_have": "The five event names and a client that stays silent by default.",
-      "what_is_missing": "An endpoint, a privacy notice, a retention period, and a decision on consent for visitors in jurisdictions that require it.",
+      "what_is_missing": "A persistent production collector host and consent review.",
       "how_to_close": "Publish the privacy notice first, then deploy the collector, then enable the beacon. The order matters.",
       "answered": false,
       "blocking": "yes, for measurement — the site works without it"
@@ -105,7 +107,7 @@
       "what_is_missing": "Verification that the sitemap has been submitted and that pages are actually being crawled.",
       "how_to_close": "Search Console verification, then sitemap submission, then check coverage after a few days.",
       "answered": false,
-      "blocking": "no — but nothing will rank until it happens"
+      "blocking": "no — Search Console helps measure indexing; submission does not guarantee ranking"
     },
     {
       "id": "Q-12",
@@ -121,7 +123,7 @@
     {
       "id": "Q-13",
       "question": "What happens if the owner never supplies the missing account data?",
-      "what_we_have": "A site that is compliant but thin: five product records, four of them identified, honest guides, no prices.",
+      "what_we_have": "Five listing records and four buying guides. No validated account attribution.",
       "what_is_missing": "A decision about how long to wait.",
       "how_to_close": "This is an owner decision, not a research one. The site is built to be safe to leave running in this state indefinitely.",
       "answered": true,
@@ -132,7 +134,7 @@
     {
       "id": "Q-14",
       "question": "Are the supplied links Special Links in the sense the agreement means?",
-      "what_we_have": "Four resolve to live Amazon listings. None showed a tag on arrival.",
+      "what_we_have": "Five resolve to live Amazon listings. None showed a tag on arrival.",
       "what_is_missing": "Confirmation that each is tagged with shopnow047c-20. The agreement requires Special Links to use the assigned Associates ID (SRC-02).",
       "how_to_close": "Re-issue each destination as a tagged link from SiteStripe and replace the outbound URL after recording both the old and new value.",
       "answered": false,
@@ -141,7 +143,7 @@
     {
       "id": "Q-15",
       "question": "Is there any traffic, and where would it come from?",
-      "what_we_have": "Nothing. No analytics, no Search Console, no referral data.",
+      "what_we_have": "No authorized production traffic or referral reports.",
       "what_is_missing": "All of it.",
       "how_to_close": "Turn on measurement (Q-10) and verification (Q-11) before assuming any channel works.",
       "answered": false,
