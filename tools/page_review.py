@@ -78,6 +78,7 @@ def build_index(page_dir, flags, meta):
         body=body + release_panel(d, "review/"),
         active="review/index.html",
         canonical="review/",
+        index=False,
     )
 
 
@@ -142,6 +143,7 @@ def build_images(page_dir, images, products, meta):
         body=body,
         active="review/index.html",
         canonical="review/images.html",
+        index=False,
     )
 
 
@@ -188,4 +190,5 @@ def build_measurement(page_dir, meta):
         body=body,
         active="review/index.html",
         canonical="review/measurement.html",
+        index=False,
     )

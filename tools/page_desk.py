@@ -136,6 +136,7 @@ def build_ledger(page_dir, meta):
         body=body,
         active="index.html",
         canonical="operations/ledger.html",
+        index=False,
     )
 
 
@@ -205,6 +206,7 @@ def build_brief(page_dir, products, questions, flags, meta):
         body=body + release_panel(d, "brief/"),
         active="index.html",
         canonical="brief/",
+        index=False,
     )
 
 

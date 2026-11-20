@@ -113,5 +113,6 @@ def build(page_dir, questions, meta):
         body=body,
         active="questions/index.html",
         canonical="questions/",
+        index=False,
         structured=breadcrumb_schema([], "Questions", "questions/"),
     )

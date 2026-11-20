@@ -98,4 +98,4 @@ def build(d):
 <a href="{esc(rel(d, 'questions/index.html'))}">Open questions</a> &middot;
 <a href="{esc(rel(d, 'review/measurement.html'))}">Measurement status</a></p>''')
     return page(d, title='Design decision brief — Crisp & Counter', description='Practical alternatives for the next affiliate publication design, with evidence and release gates.',
-                body=body, active='suggestions/index.html', canonical='suggestions/design.html')
+                body=body, active='suggestions/index.html', canonical='suggestions/design.html', index=False)

@@ -1,33 +1,34 @@
-# Canonical branch-based Pages publication. Superseded editions remain in git.
+# GitHub Pages configuration for the canonical publication.
+#
+# Two builds can serve this repository: Jekyll over the branch (build_type
+# legacy, what is configured today) and the upload from tools/stage.py
+# (build_type workflow). Both must publish the same set of files.
+#
+# The exclude list below is generated from tools/publish.py, which is the single
+# allow-list both routes read. Do not hand-edit it; run
+#
+#     python3 tools/publish.py --write-config
+#
+# and commit the result. Left to itself, Jekyll published the whole repository:
+# /src/data/products.json, /tools/build.py and a second storefront under
+# /archive/ were all reachable on 2026-11-20 (FLG-026).
 plugins: []
 exclude:
+  - .github
+  - .gitignore
+  - COORDINATION
   - COORDINATION.md
   - EXECUTIVE_SUMMARY.md
   - LICENSE
   - PUBLISHING_WORKFLOW.md
   - README.md
+  - _config.yml
   - analytics
   - archive
-  - dashboard
-  - dist
+  - data
+  - decision-support
   - docs
-  - flagged
-  - guides/air-fryer-capacity-checklist/index.html
-  - guides/air-fryer-thanksgiving-overflow/index.html
-  - guides/basket-or-oven-air-fryer/index.html
-  - guides/cleanup-and-counter-space/index.html
-  - guides/dual-basket-math/index.html
-  - guides/first-week-checklist/index.html
-  - guides/frozen-food-nights/index.html
-  - guides/multi-function-kitchen-appliance-questions/index.html
-  - guides/smart-probe-thermometer/index.html
-  - kitchen
-  - kitchen-build
-  - legacy
   - measurement
-  - node_modules
   - server
   - src
   - tools
-  - topics
-  - vendor
