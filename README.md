@@ -19,7 +19,7 @@ The brief had five parts. This is where each one lives:
 |---|---|
 | Read like a shop, not an audit | The generated front page: seasonal feature, shortlist, topics, guides. The registers are one click from the footer, never the front door. |
 | Make it findable | `sitemap.xml`, `feed.xml`, `robots.txt`, canonical tags, Open Graph images, `Article` + `FAQPage` + `BreadcrumbList` structured data, topic clusters with internal links |
-| Make the machinery trustworthy | `tools/build.py` generates every page from `src/data/`; `tools/validate.py` and `tools/check.py` are the gates; GitHub Actions runs them on every push (`pages.yml`, `kitchen-check.yml`) plus a weekly audit |
+| Make the machinery trustworthy | `_tools/build.py` generates every page from `_src/data/`; `_tools/validate.py` and `_tools/check.py` are the gates; GitHub Actions runs them on every push (`pages.yml`, `kitchen-check.yml`) plus a weekly audit |
 | Lead with products, disclose above the fold, mark every link | One `disclosure()` template, one `product_link()` template — a page cannot ship without either |
 | Suggestions and questions before decisions | `/suggestions/` (21 proposals across three paths — 6 implemented, 15 open, a decision control per row), `/questions/` (24 questions, 10 answered with evidence), `/review/` (flagged for review, with sources), `/operations/ledger.html` (empty campaign ledger) |
 
@@ -36,26 +36,26 @@ assets/css/site.css   the only stylesheet
 assets/js/events.js   the five defined events, inert until an endpoint exists
 assets/js/shortlist.js  "Save" on a product card; localStorage only, nothing sent
 assets/img/*.jpg      commissioned illustrations (not product photography)
-src/data/*.json       every fact the site publishes, with its source
-tools/build.py        data → HTML (one template for nav, disclosure, footer)
-tools/check.py        a gate: links, images, disclosure, sponsored marking,
+_src/data/*.json       every fact the site publishes, with its source
+_tools/build.py        data → HTML (one template for nav, disclosure, footer)
+_tools/check.py        a gate: links, images, disclosure, sponsored marking,
                       price prohibition, sitemap/feed agreement
-tools/validate.py     a second gate over the published tree; prints its own check count
-tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
-tools/verify_links.py re-resolve the register against Amazon and report drift
+_tools/validate.py     a second gate over the published tree; prints its own check count
+_tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
+_tools/verify_links.py re-resolve the register against Amazon and report drift
 archive/              five earlier competing surfaces (four storefronts and a parallel
                       integration pass), preserved untouched and non-indexable
 ```
 
-Nothing in the tree is hand-edited except `assets/`, `tools/`, `src/data/`, `docs/`
+Nothing in the tree is hand-edited except `assets/`, `_tools/`, `_src/data/`, `docs/`
 and the markdown files. If you edit a generated `.html` directly, the drift check in
 CI fails and tells you so.
 
 ## Build, check, publish
 
 ```bash
-python3 tools/build.py            # regenerate every page from src/data
-python3 tools/validate.py         # the gate; exits non-zero on any violation
+python3 _tools/build.py            # regenerate every page from _src/data
+python3 _tools/validate.py         # the gate; exits non-zero on any violation
 python3 -m http.server 8207 --bind 0.0.0.0   # preview; open /Affil1/ after linking the parent dir
 ```
 
@@ -68,7 +68,7 @@ cannot quietly fall out of compliance.
 
 ## The rules this site publishes under
 
-Each rule below is enforced by `tools/check.py` and `tools/validate.py`, not just asserted in prose:
+Each rule below is enforced by `_tools/check.py` and `_tools/validate.py`, not just asserted in prose:
 
 1. **Disclosure above the fold on every page, and again in the footer.** The strip
    carries Amazon's required sentence verbatim — *"As an Amazon Associate I earn from
@@ -89,14 +89,14 @@ Each rule below is enforced by `tools/check.py` and `tools/validate.py`, not jus
    destination never resolved has no button at all.
 5. **Intended identifier and observed redirect are separate fields, never merged.**
    The five submitted codes are 9 characters; the destinations this project reached
-   are 10-character ASINs. `intended_asin` stays null — see `src/data/products.json`.
+   are 10-character ASINs. `intended_asin` stays null — see `_src/data/products.json`.
 6. **Every factual cell carries its source**, and an unconfirmed value is left blank
    and listed on `/review/`. Blanks are the honest state, not a gap to fill in.
 
 ## Verification of the five submitted links
 
 Every link was fetched twice by two different sessions on 2026-11-20; the second pass
-is recorded in `src/data/reverification.json`. Values below are what the destination
+is recorded in `_src/data/reverification.json`. Values below are what the destination
 page returned; none of it is a product recommendation and none of it was tested here.
 
 | Entry | Submitted | Destination reached | Note |
@@ -128,13 +128,13 @@ repository can confirm. So:
   is attributable to the account today;
 - the required Associates sentence stays verbatim on every page, above the fold and in the
   footer, because the obligation is not conditional on that state;
-- `src/data/product-intent.json` holds the gate (`associate_enrollment_confirmed`,
+- `_src/data/product-intent.json` holds the gate (`associate_enrollment_confirmed`,
   `site_registered`, `one_link_test_completed`, and `approved_special_link` per product);
-- `tools/check.py` fails the build if any Amazon product link is outside the permitted set
-  (`tools/layout.py` `permitted_amazon_urls()`: an approved Special Link, or the plain listing
+- `_tools/check.py` fails the build if any Amazon product link is outside the permitted set
+  (`_tools/layout.py` `permitted_amazon_urls()`: an approved Special Link, or the plain listing
   of an observed ASIN). A tag therefore appears only after a Special Link is recorded in the
-  register; `tools/test_paid_link_gate.py` runs in CI and asserts this;
-- `tools/arm_links.py` is the owner's switch: `--checklist` prints the steps, and it refuses
+  register; `_tools/test_paid_link_gate.py` runs in CI and asserts this;
+- `_tools/arm_links.py` is the owner's switch: `--checklist` prints the steps, and it refuses
   to arm the site unless `--i-am-the-owner` is passed, so no future automated session can
   start claiming a relationship with Amazon on its own.
 
@@ -154,7 +154,7 @@ block everything else, in order:
 1. **Enrolment** — is `shopnow047c-20` an active tracking ID, and is this site listed
    in the account? No claim is made either way here.
 2. **Special Links** — generate them in Associates Central, paste each into
-   `approved_special_link` via `tools/arm_links.py --i-am-the-owner --link P-01 "<url>"`,
+   `approved_special_link` via `_tools/arm_links.py --i-am-the-owner --link P-01 "<url>"`,
    and confirm one click in the report before arming the other four.
 3. **Search Console** — verify the property and submit the sitemap. The repository's
    `robots.txt` sits below the host root (FLG-027), so this is the required discovery
