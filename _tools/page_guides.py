@@ -94,10 +94,14 @@ def _link_note(product_count, tag_state=None):
     approved = len(approved_amazon_urls())
     marked = ("Every Amazon link on this page is marked <code>sponsored</code> and opens in a new tab.")
     if approved == 0:
-        detail = ("None of them carries this site's Associates tag yet: a tag may only be "
-                  "attached to a Special Link the account owner has validated, and no validation "
-                  "has been recorded here. So these buttons send you to the official listing and "
-                  "earn nothing on this site until that test is run.")
+        # "No link currently carries the tracking tag" is the sentence
+        # _tools/check.py looks for on every guide page. It is reproduced here
+        # rather than reworded, so the checker stays meaningful; the count above
+        # decides whether the sentence is the true one.
+        detail = ("No link currently carries the tracking tag: a tag may only be attached to a "
+                  "Special Link the account owner has validated, and no validation has been "
+                  "recorded here. So these buttons send you to the official listing and earn "
+                  "nothing on this site until that click is tested.")
     elif approved >= product_count:
         detail = "Every product link here carries a Special Link the account owner has validated."
     else:

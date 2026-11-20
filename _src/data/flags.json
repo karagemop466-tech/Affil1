@@ -533,6 +533,20 @@
         "grep -l over .github/workflows for each module name before deleting anything",
         "an owner decision to move each into _archive/ or wire it into the maintained build"
       ]
+    },
+    {
+      "id": "FLG-036",
+      "severity": "medium",
+      "title": "A build rule demands one exact sentence about tag status, which will be wrong the day a Special Link is validated",
+      "expected": "A checker should test the state, not a fixed string describing it.",
+      "found": "_tools/check.py fails any guide page that does not contain the literal sentence 'No link currently carries the tracking tag'. The guide sidebar is now generated from the approved Special-Link register, so the sentence is true today and is produced only while the register is empty. The first validated link makes the checker require a false statement.",
+      "impact": "Two possible bad outcomes at the moment attribution starts: either the build goes red on a correct page, or someone satisfies the checker by hard-coding the sentence again. This project has already shipped one hard-coded attribution sentence that was false (FLG-031).",
+      "reading": "The rule should assert the invariant instead: no published Amazon link may carry a tag that the register does not approve. That check already exists in check.py and in test_paid_link_gate.py, so this string test is a duplicate with an expiry date.",
+      "blocks": "nothing today",
+      "to_check": [
+        "_tools/check.py, the guides/*.html loop",
+        "_tools/page_guides.py::_link_note"
+      ]
     }
   ]
 }

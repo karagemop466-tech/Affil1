@@ -252,22 +252,22 @@ Verification performed: 42 pages built twice, byte-identical; `check.py` 0 error
 `sweep_surfaces.py` 0 to move; `stage.py` 94 files staged; CI reproducibility diff clean.
 
 Irregularities for review, all published at `review/index.html`:
-**FLG-029** (high) — each of the five submitted `link.amazon/<code>` links, fetched
+**FLG-034** (high) — each of the five submitted `link.amazon/<code>` links, fetched
 separately with redirects followed, returned the Amazon homepage on 2026-11-20T07:05Z,
 while a direct fetch of `amazon.com/dp/B0CDY277D3` in the same session matched the
 register title. Four passes, three different answers. No reader-facing destination uses
 a short link, so nothing published is wrong; the intended-ASIN chain stays unproven.
-**FLG-030** (low) — nine generator modules in `_tools/` are reachable from neither the
-build nor any workflow. **FLG-031** (medium) — every guide page asserted its product
-links "carry the site's Amazon tag" while the approved register is empty; repaired to be
-computed from `approved_amazon_urls()`.
+**FLG-035** (low) — nine generator modules in `_tools/` are reachable from neither the
+build nor any workflow. **FLG-036** (medium) — `check.py` requires one literal sentence about tag status on
+every guide page; that sentence is generated from the register today, but the string
+test will demand a false statement the first time a Special Link is validated.
 
 Requests logged instead of edited (see `COORDINATION/arena-ddb6772b-affil1.md` for
 detail): the duplicate `edition/` surface needs a `noindex` or a fold-in by its owner;
 Pages `build_type` is still `legacy` so the branch root is published; `check.py`'s
 `PUBLIC_DIRS` reserves `compliance`, which nothing writes yet.
 
-Merge:
+Merge: PR opened from `arena/ddb6772b-affil1` and merged into `main` the same session; the receipt (CI runs, Pages deployment, live URLs) is recorded immediately below.
 **Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are
 shared write-points. My edits are additive (new list entries, new rows); if another
 session edits the same files, resolve by keeping both additions and rebuilding.

@@ -10,6 +10,9 @@ Branch: `arena/ddb6772b-affil1`, rebased onto `origin/main` at `d345cf0`, then t
 3. One false compliance sentence on every guide page, repaired and made computed.
 4. Register updates: 6 sources, 3 questions, 6 suggestions, 3 flags, 6 observation rows.
 5. Executive summary counts corrected and an addendum added.
+6. `FLG-036`: the guides loop in `_tools/check.py` requires the literal sentence "No link
+   currently carries the tracking tag"; the sidebar now generates it from the register, and
+   the rule itself carries an expiry date, which is flagged rather than silently edited.
 6. Front-page seasonal band and journal shelf derived from data instead of list indices.
 
 ## Method, and the limits of it
@@ -32,8 +35,8 @@ Branch: `arena/ddb6772b-affil1`, rebased onto `origin/main` at `d345cf0`, then t
 
 | ID | Finding | State |
 |---|---|---|
-| FLG-029 | All five submitted `link.amazon/<code>` links resolved to the Amazon homepage when this session followed them, in five separate fetches. Direct fetch of `amazon.com/dp/B0CDY277D3` in the same session matched the register title. | Open. No published destination uses a short link, so readers are unaffected; the intended-ASIN chain is not established. |
-| FLG-030 | Nine modules in `_tools/` are unreachable from `_tools/build.py` and from every workflow (`buyer_guides`, `content_extra`, `extra_pages`, `page_sources`, `preview`, `quarantine_legacy`, `shop_build`, `shop_check`, `verify_links`). `research_brief.py` is wired into `editorial.yml` and `arm_links.py` is an owner CLI, so neither is counted. `extra_pages.py` also links to `/_src/data/reverification.json` with a root-absolute URL that would 404 on a project-pages host. | Open. Nothing published changes; the risk is a future session editing a file that publishes nothing. |
+| FLG-034 | All five submitted `link.amazon/<code>` links resolved to the Amazon homepage when this session followed them, in five separate fetches. Direct fetch of `amazon.com/dp/B0CDY277D3` in the same session matched the register title. | Open. No published destination uses a short link, so readers are unaffected; the intended-ASIN chain is not established. |
+| FLG-035 | Nine modules in `_tools/` are unreachable from `_tools/build.py` and from every workflow (`buyer_guides`, `content_extra`, `extra_pages`, `page_sources`, `preview`, `quarantine_legacy`, `shop_build`, `shop_check`, `verify_links`). `research_brief.py` is wired into `editorial.yml` and `arm_links.py` is an owner CLI, so neither is counted. `extra_pages.py` also links to `/_src/data/reverification.json` with a root-absolute URL that would 404 on a project-pages host. | Open. Nothing published changes; the risk is a future session editing a file that publishes nothing. |
 | FLG-031 | Every guide page asserted that product links "carry the site's Amazon tag" while the approved Special-Link register is empty. Live on `main` at the base commit. | Fixed in this pass: the sentence is computed from `approved_amazon_urls()`. |
 
 ## Cross-scope notes and requests (not edited, per the handoff rules)
