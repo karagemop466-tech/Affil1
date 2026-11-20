@@ -16,6 +16,14 @@ Run after merging a branch that carried its own generated pages:
 Moved files keep their original path under
 `archive/<this-run>/`, and `robots.txt` disallows `/archive/`, so the set-aside
 pages stay reviewable without competing for indexing.
+
+One exception, and it is the same one `tools/check.py` already makes:
+`decision-support/` is a hand-maintained set of working papers that is not built
+by `tools/build.py` and never claims to be. It carries its own validator,
+`decision-support/validate.py`, which `pages.yml` runs on every push, and every
+page in it declares `noindex` and is disallowed in `robots.txt`. Without this
+exception the sweep reports those seven files on every run and the launch gate
+can never be green; with it, a genuine second published surface is still caught.
 """
 
 import argparse
@@ -35,6 +43,21 @@ INTERNAL_SECTIONS = ("decision-support/",)
 PUBLISHED_DIRS = ["guides", "compare", "products", "about", "sources", "suggestions",
                   "questions", "flagged", "legacy", "topics", "dashboard"]
 PUBLISHED_FILES = {"index.html", "404.html", "feed.xml", "sitemap.xml", "robots.txt"}
+
+
+def internal_sections():
+    """Directories that are hand-maintained but explicitly excluded from "one site".
+
+    The list is imported from tools/check.py rather than repeated here, so the
+    two gates cannot drift apart: whatever the page checker excuses, the sweep
+    must excuse too, or CI reports a conflict that does not exist.
+    """
+    try:
+        import check  # noqa: F401
+        return tuple(check.INTERNAL_SECTIONS)
+    except Exception as exc:  # noqa: BLE001 - a missing checker must not crash a sweep
+        print(f"note: could not import tools/check.py ({exc}); using the local list")
+        return tuple(INTERNAL_SECTIONS)
 
 
 def published_set():
@@ -61,6 +84,7 @@ def main():
     args = ap.parse_args()
 
     keep = published_set()
+    internal = internal_sections()
     dest = f"{ARCHIVE_ROOT}/{args.run_label}"
     moved = []
     for path in sorted(ROOT.rglob("*")):

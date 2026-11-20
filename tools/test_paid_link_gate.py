@@ -1,8 +1,21 @@
+"""The paid-link gate: observation never produces a tag.
+
+Run it from the repository root: ``python3 -m unittest tools.test_paid_link_gate``.
+This file used to import ``layout`` by bare name, which resolves only when the
+working directory is ``tools/``; run the documented way it failed at import, so
+the suite that proves the gate could not be executed by anyone following the
+README. The path insert below fixes the harness. The five assertions are
+unchanged, and four more rejection cases are added to the evidence test.
+"""
+import sys
 from datetime import date
+from pathlib import Path
 from unittest import TestCase
 
-from layout import approved_amazon_urls, buy_url, permitted_amazon_urls, product_link
-from paid_link_gate import eligible
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from layout import approved_amazon_urls, buy_url, permitted_amazon_urls, product_link  # noqa: E402
+from paid_link_gate import eligible  # noqa: E402
 
 TAG = 'shopnow047c-20'
 
@@ -45,5 +58,7 @@ class PaidLinkGateTest(TestCase):
                       confirmation_source='https://affiliate-program.amazon.com/home/reports', confirmation_date=date.today().isoformat())
         self.assertTrue(eligible(record, tag))
         for change in [{'tracking_report_reference': None}, {'intended_asin': 'TEST000002'},
-                       {'approved_special_link': listing + '?tag=' + tag + '&tag=other'}]:
+                       {'approved_special_link': listing + '?tag=' + tag + '&tag=other'},
+                       {'confirmation_source': 'https://example.com/reports'},
+                       {'confirmation_date': '2999-01-01'}]:
             self.assertFalse(eligible(record | change, tag))

@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suggestions and decisions | Crisp &amp; Counter</title>
-<meta name="description" content="15 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta name="description" content="22 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
 <meta property="og:title" content="Suggestions and decisions | Crisp &amp; Counter">
-<meta property="og:description" content="15 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+<meta property="og:description" content="22 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-counter-w1280.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Suggestions</p>
   <h1>Choose a direction,<br>then choose the rows</h1>
-  <p class="dek">3 coherent paths and 15 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
+  <p class="dek">3 coherent paths and 22 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
   <p class="page-meta">Decisions are stored in your browser only &middot; nothing transmitted &middot; no account</p>
 </div></header>
 <section class="section "><div class="wrap">
@@ -59,7 +59,7 @@
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
-    <p class="decide-count" data-count>0 of 15 decided</p>
+    <p class="decide-count" data-count>0 of 22 decided</p>
   </div>
 </div></div></section>
 <section class="section section-tint"><div class="wrap">
@@ -411,6 +411,153 @@
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
+</article><article class="scard" id="S-22">
+  <div class="scard-head">
+    <span class="scard-id">S-22</span>
+    <h3>Merge the two suggestion queues before asking anyone to choose</h3>
+    <span class="scard-effort">2 hours</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>The published Suggestions page carries 21 rows numbered S-01..S-21. The Decision Desk working papers carry 28 different rows numbered SUG-01..SUG-28, and the two lists do not overlap one-for-one. A reviewer who reads both sees 49 proposals for one five-product site and cannot tell which list is authoritative. This pass counted both by reading the JSON, not by estimating.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. The merge is mechanical, but whichever rows are dropped must be recorded so nothing is silently lost.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-23</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Do this before S-09 (choose a path). A path chosen against a 49-row backlog is a guess.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-23">
+  <div class="scard-head">
+    <span class="scard-id">S-23</span>
+    <h3>Publish the four supplied photograph files, or record why they are not used</h3>
+    <span class="scard-effort">1 hour plus one provenance note per file</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>assets/img/*.jpg contains both engraved-style illustrations and photorealistic images of air fryers and thermometers. Every page describes its imagery as an illustration, and review/images.html labels all of it AI generated. The photorealistic files are not currently attributed to a generation run, a photographer or a licence, and FLG-020 records a holiday photograph with no recorded origin. Either the provenance is written down per file, or the unprovenanced files come off the site.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Medium. Using an image whose rights are unknown is a copyright and trademark exposure; describing a photorealistic image as an illustration is a misdescription a reader can see.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-21, FLG-020</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Audit provenance file by file before adding any new imagery.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-24">
+  <div class="scard-head">
+    <span class="scard-id">S-24</span>
+    <h3>Make the &#x27;no third-party requests&#x27; claim measurable, or soften it</h3>
+    <span class="scard-effort">1 hour</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>The footer of every page says no cookies, no trackers and no third-party requests. That is true for the page shell today, and it is checked only by a grep for five known tracker hostnames in tools/check.py. It is not a guarantee about a browser extension, a GitHub Pages access log, or anything added next month. The claim is worth keeping only if the check that backs it is named beside it.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. The failure mode is a claim that quietly stops being true.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-10</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Link the claim to the check that enforces it, in the footer and on the privacy section of the About page.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-25">
+  <div class="scard-head">
+    <span class="scard-id">S-25</span>
+    <h3>Record a date and an owner for each of the five observations before the next re-check</h3>
+    <span class="scard-effort">30 minutes</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Link resolution is not stable: the same short link returned a product page on one request and a bot interstitial on another within the same day, and two sessions recorded opposite mappings for two products before agreeing (FLG-016). An observation with no date, no fetcher and no owner cannot be compared with the next one. src/data/reverification.json already stores this for one pass; the product register does not.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. It adds fields, not claims.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-14</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Add the observation metadata to products.json with S-20&#x27;s scheduled re-check.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-26">
+  <div class="scard-head">
+    <span class="scard-id">S-26</span>
+    <h3>Decide what happens to the site if Associates enrolment was never completed</h3>
+    <span class="scard-effort">1 hour of the owner&#x27;s time</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Program Policies 1 require a complete application, name the site, and accept it before Special Links may be displayed; 2(a) says Special Links are permitted after applying. This build cannot see whether shopnow047c-20 is an accepted account. If it is not, the correct state of this site is untagged citation links, not tagged buy buttons. That is a different site, and it should be decided deliberately rather than discovered.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>High if ignored: tagged links from an unenrolled account are the kind of defect that can void commissions across the account, not just on this site.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-03, Q-14</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Answer Q-03 first; this row only decides what to switch off if the answer is no.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-27">
+  <div class="scard-head">
+    <span class="scard-id">S-27</span>
+    <h3>Write the titles buyers actually type, not the titles the site prefers</h3>
+    <span class="scard-effort">15 minutes per guide</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Guide titles are question-shaped and honest, which is the right editorial rule, but several are longer than a search result will display and none was chosen from query data because there is no query data. Search Console (S-03) supplies the queries; until then, each new guide should carry one working title aimed at a phrase a shopper would say out loud, e.g. &#x27;air fryer size for two people&#x27;, and the editorial hypothesis should be recorded beside it.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. The risk is inventing a phrase and calling it a keyword; recording it as a hypothesis prevents that.</dd></div>
+      <div><dt>Depends on</dt><dd>S-03, Q-07</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Apply to the next guide only, then compare against measured queries before retrofitting the nine existing ones.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-28">
+  <div class="scard-head">
+    <span class="scard-id">S-28</span>
+    <h3>Give the five product pages a comparison anchor they can win</h3>
+    <span class="scard-effort">3 hours across five pages</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>A product page with no price, no rating and no review count competes on explanation alone. That is a defensible position only if the page answers a question a listing page cannot: what changes about a weeknight, what gets washed, what does not fit. The pages do some of this today. None of them yet states the one checkable measurement a reader can take in their own kitchen before ordering, which is the thing a listing cannot do for them.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low, provided the measurement is arithmetic the reader can repeat rather than a performance claim.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-18, Q-19</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Pilot on P-01 and P-02 (the two shapes that differ most), then decide whether the pattern generalises.</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
 </article></div></section>
 <section class="section section-tint"><div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">Already done</p><h2>Implemented on 20 November 2026</h2></div>
@@ -460,9 +607,9 @@
 <footer class="site-footer">
   <div class="wrap">
     <p class="foot-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
-    <div class="foot-grid"><div class="foot-col"><h2>Shop</h2><ul><li><a href="../products/index.html">All five picks</a></li><li><a href="../products/p-01.html">Dual-basket air fryer</a></li><li><a href="../products/p-02.html">French-door oven</a></li><li><a href="../products/p-03.html">Single-basket air fryer</a></li><li><a href="../products/p-04.html">Instant-read thermometer</a></li><li><a href="../products/p-05.html">Wireless probe set</a></li></ul></div><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../compare/index.html">Side-by-side table</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>The desk</h2><ul><li><a href="../decide/index.html">Decision gate</a></li><li><a href="../questions/index.html">Open questions</a></li><li><a href="index.html">Suggestions &amp; decisions</a></li><li><a href="design.html">Design decision brief</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li></ul></div><div class="foot-col"><h2>Trust</h2><ul><li><a href="../about/index.html">About &amp; how we link</a></li><li><a href="../about/index.html#sources">Sources</a></li><li><a href="../review/index.html">Flagged for review</a></li><li><a href="../review/images.html">Image policy</a></li><li><a href="../review/measurement.html">Measurement plan</a></li></ul></div></div>
+    <div class="foot-grid"><div class="foot-col"><h2>Shop</h2><ul><li><a href="../products/index.html">All five picks</a></li><li><a href="../products/p-01.html">Dual-basket air fryer</a></li><li><a href="../products/p-02.html">French-door oven</a></li><li><a href="../products/p-03.html">Single-basket air fryer</a></li><li><a href="../products/p-04.html">Instant-read thermometer</a></li><li><a href="../products/p-05.html">Wireless probe set</a></li></ul></div><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../compare/index.html">Side-by-side table</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>The desk</h2><ul><li><a href="../decide/index.html">Decision gate</a></li><li><a href="../questions/index.html">Open questions</a></li><li><a href="index.html">Suggestions &amp; decisions</a></li><li><a href="design.html">Design decision brief</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li></ul></div><div class="foot-col"><h2>Trust</h2><ul><li><a href="../about/index.html">About &amp; how we link</a></li><li><a href="../about/index.html#sources">Sources</a></li><li><a href="../review/index.html">Flagged for review</a></li><li><a href="../review/audit.html">Audit: every claim, checked</a></li><li><a href="../review/images.html">Image policy</a></li><li><a href="../review/measurement.html">Measurement plan</a></li></ul></div></div>
     <div class="foot-bottom">
-      <p>Submitted tracking ID: <code>shopnow047c-20</code>. Attribution remains unverified; only account-confirmed purchase links may use this tag.</p>
+      <p>No Amazon product link on this site carries the Associates tag <code>shopnow047c-20</code> yet: a tag is only emitted through an account-confirmed Special Link (Program Policies 2(b)) and none of the five has one, so every buy button is a plain listing link. That is <a href="../review/index.html#FLG-025">FLG-025</a> &mdash; the honest state, not a finished one.</p>
       <p class="foot-meta">Crisp &amp; Counter &middot; static site &middot; last built 2026-11-20 &middot; no cookies, no trackers, no third-party requests</p>
     </div>
   </div>

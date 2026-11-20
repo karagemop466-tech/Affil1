@@ -174,6 +174,66 @@
       "used_for": "Two specific tests this site's disclosure strip is written against: a single home-page disclosure is not sufficient, and a disclosure hidden behind a DISCLOSURE link is not clear and conspicuous.",
       "quote": "A single disclosure on your home page won’t be sufficient because people visiting your site might read individual reviews or watch individual videos without seeing the disclosure on your home page.",
       "status": "read directly"
+    },
+    {
+      "id": "SRC-18",
+      "title": "Block Search indexing with noindex",
+      "publisher": "Google Search Central",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+      "status": "read directly",
+      "page_date": "page last updated 2025-12-10, read 2026-11-20",
+      "used_for": "Whether a robots.txt disallow removes a page from results, and how noindex is declared.",
+      "quote": "When Googlebot crawls that page and extracts the tag or header, Google will drop that page entirely from Google Search results, regardless of whether other sites link to it. ... Specifying the noindex rule in the robots.txt file is not supported by Google."
+    },
+    {
+      "id": "SRC-19",
+      "title": "Associates Program Policies - Participation Requirements 2(b), General Requirements Applicable to All Special Links",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "status": "read directly",
+      "page_date": "Updated April 14, 2026; read 2026-11-20",
+      "used_for": "That the Associates tag is mandatory on every link placed on the site, and that prices may only be shown where Amazon serves the link or a permitted API supplies the data.",
+      "quote": "All Special Links must be accessed directly from your Site. For example, you must include your Associates ID or “tag” (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site."
+    },
+    {
+      "id": "SRC-20",
+      "title": "Associates Program Policies - IP License 2(i) and 2(k): price disclaimers and the Amazon text disclaimer",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "status": "read directly",
+      "page_date": "Updated April 14, 2026; read 2026-11-20",
+      "used_for": "What must appear beside API-sourced price data and beside API-sourced text, if this site ever connects a feed.",
+      "quote": "You will include a date/time stamp adjacent to your display of pricing or availability information on your application if you obtain Product Advertising Content from Data Feeds ... If you display Product Advertising Content consisting of text on your application, you will include the following disclaimer in plain view to end users of your application: “CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED ‘AS IS’ AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.”"
+    },
+    {
+      "id": "SRC-21",
+      "title": "Associates Program Operating Agreement, section 5 - Identifying Yourself as an Associate",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "status": "read directly",
+      "page_date": "Updated October 15, 2025; read 2026-11-20",
+      "used_for": "The exact disclosure sentence, and the restriction on other public statements about the programme relationship.",
+      "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”"
+    },
+    {
+      "id": "SRC-22",
+      "title": "Creators API - Welcome / Prerequisites",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "status": "read directly",
+      "page_date": "read 2026-11-20",
+      "used_for": "The sales threshold that stands between this site and any price, rating or availability display.",
+      "quote": "To use the Creators API, you must: 1. Be enrolled in the Amazon Associates program for your target marketplace 2. Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API 3. Register for API access through Associates Central 4. Generate API credentials"
+    },
+    {
+      "id": "SRC-23",
+      "title": "Verify your site ownership",
+      "publisher": "Google Search Console Help",
+      "url": "https://support.google.com/webmasters/answer/9008080",
+      "status": "read directly",
+      "page_date": "read 2026-11-20",
+      "used_for": "Which Search Console verification methods exist, and the fact that data accrues before verification but only for a property someone has added.",
+      "quote": "Data is collected for a property as soon as anyone adds it in Search Console, even before verification occurs. However, it takes a few days for data to start to accrue for the property."
     }
   ]
 }

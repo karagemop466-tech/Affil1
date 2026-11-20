@@ -73,6 +73,7 @@ FOOTER_GROUPS = [
         ("about/index.html", "About & how we link"),
         ("about/index.html#sources", "Sources"),
         ("review/index.html", "Flagged for review"),
+        ("review/audit.html", "Audit: every claim, checked"),
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
     ]),
@@ -243,7 +244,7 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code>. Attribution remains unverified; only account-confirmed purchase links may use this tag.</p>
+      <p>No Amazon product link on this site carries the Associates tag <code>{esc(TRACKING_ID)}</code> yet: a tag is only emitted through an account-confirmed Special Link (Program Policies 2(b)) and none of the five has one, so every buy button is a plain listing link. That is <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-025">FLG-025</a> &mdash; the honest state, not a finished one.</p>
       <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
     </div>
   </div>

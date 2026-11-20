@@ -3,7 +3,8 @@
     "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
     "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
     "recommended_first": "S-01 and S-07. One confirms the site can earn; the other makes it findable. Neither needs new content.",
-    "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads."
+    "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads.",
+    "note_on_duplication": "The Decision Desk working papers under decision-support/ carry a separate 28-row list numbered SUG-01..SUG-28. The two queues have not been merged; S-22 records that as an open task rather than pretending there is one list."
   },
   "paths": [
     {
@@ -269,6 +270,83 @@
       "depends_on": "nothing",
       "recommendation": "Adopt as policy and leave it on this page as a recorded refusal",
       "evidence": "SRC-02"
+    },
+    {
+      "id": "S-22",
+      "status": "open",
+      "title": "Merge the two suggestion queues before asking anyone to choose",
+      "why": "The published Suggestions page carries 21 rows numbered S-01..S-21. The Decision Desk working papers carry 28 different rows numbered SUG-01..SUG-28, and the two lists do not overlap one-for-one. A reviewer who reads both sees 49 proposals for one five-product site and cannot tell which list is authoritative. This pass counted both by reading the JSON, not by estimating.",
+      "effort": "2 hours",
+      "risk": "Low. The merge is mechanical, but whichever rows are dropped must be recorded so nothing is silently lost.",
+      "depends_on": "Q-23",
+      "recommendation": "Do this before S-09 (choose a path). A path chosen against a 49-row backlog is a guess.",
+      "decision": "hold"
+    },
+    {
+      "id": "S-23",
+      "status": "open",
+      "title": "Publish the four supplied photograph files, or record why they are not used",
+      "why": "assets/img/*.jpg contains both engraved-style illustrations and photorealistic images of air fryers and thermometers. Every page describes its imagery as an illustration, and review/images.html labels all of it AI generated. The photorealistic files are not currently attributed to a generation run, a photographer or a licence, and FLG-020 records a holiday photograph with no recorded origin. Either the provenance is written down per file, or the unprovenanced files come off the site.",
+      "effort": "1 hour plus one provenance note per file",
+      "risk": "Medium. Using an image whose rights are unknown is a copyright and trademark exposure; describing a photorealistic image as an illustration is a misdescription a reader can see.",
+      "depends_on": "Q-21, FLG-020",
+      "recommendation": "Audit provenance file by file before adding any new imagery.",
+      "decision": "accept"
+    },
+    {
+      "id": "S-24",
+      "status": "open",
+      "title": "Make the 'no third-party requests' claim measurable, or soften it",
+      "why": "The footer of every page says no cookies, no trackers and no third-party requests. That is true for the page shell today, and it is checked only by a grep for five known tracker hostnames in tools/check.py. It is not a guarantee about a browser extension, a GitHub Pages access log, or anything added next month. The claim is worth keeping only if the check that backs it is named beside it.",
+      "effort": "1 hour",
+      "risk": "Low. The failure mode is a claim that quietly stops being true.",
+      "depends_on": "Q-10",
+      "recommendation": "Link the claim to the check that enforces it, in the footer and on the privacy section of the About page.",
+      "decision": "hold"
+    },
+    {
+      "id": "S-25",
+      "status": "open",
+      "title": "Record a date and an owner for each of the five observations before the next re-check",
+      "why": "Link resolution is not stable: the same short link returned a product page on one request and a bot interstitial on another within the same day, and two sessions recorded opposite mappings for two products before agreeing (FLG-016). An observation with no date, no fetcher and no owner cannot be compared with the next one. src/data/reverification.json already stores this for one pass; the product register does not.",
+      "effort": "30 minutes",
+      "risk": "Low. It adds fields, not claims.",
+      "depends_on": "Q-14",
+      "recommendation": "Add the observation metadata to products.json with S-20's scheduled re-check.",
+      "decision": "hold"
+    },
+    {
+      "id": "S-26",
+      "status": "open",
+      "title": "Decide what happens to the site if Associates enrolment was never completed",
+      "why": "Program Policies 1 require a complete application, name the site, and accept it before Special Links may be displayed; 2(a) says Special Links are permitted after applying. This build cannot see whether shopnow047c-20 is an accepted account. If it is not, the correct state of this site is untagged citation links, not tagged buy buttons. That is a different site, and it should be decided deliberately rather than discovered.",
+      "effort": "1 hour of the owner's time",
+      "risk": "High if ignored: tagged links from an unenrolled account are the kind of defect that can void commissions across the account, not just on this site.",
+      "depends_on": "Q-03, Q-14",
+      "recommendation": "Answer Q-03 first; this row only decides what to switch off if the answer is no.",
+      "decision": "hold"
+    },
+    {
+      "id": "S-27",
+      "status": "open",
+      "title": "Write the titles buyers actually type, not the titles the site prefers",
+      "why": "Guide titles are question-shaped and honest, which is the right editorial rule, but several are longer than a search result will display and none was chosen from query data because there is no query data. Search Console (S-03) supplies the queries; until then, each new guide should carry one working title aimed at a phrase a shopper would say out loud, e.g. 'air fryer size for two people', and the editorial hypothesis should be recorded beside it.",
+      "effort": "15 minutes per guide",
+      "risk": "Low. The risk is inventing a phrase and calling it a keyword; recording it as a hypothesis prevents that.",
+      "depends_on": "S-03, Q-07",
+      "recommendation": "Apply to the next guide only, then compare against measured queries before retrofitting the nine existing ones.",
+      "decision": "hold"
+    },
+    {
+      "id": "S-28",
+      "status": "open",
+      "title": "Give the five product pages a comparison anchor they can win",
+      "why": "A product page with no price, no rating and no review count competes on explanation alone. That is a defensible position only if the page answers a question a listing page cannot: what changes about a weeknight, what gets washed, what does not fit. The pages do some of this today. None of them yet states the one checkable measurement a reader can take in their own kitchen before ordering, which is the thing a listing cannot do for them.",
+      "effort": "3 hours across five pages",
+      "risk": "Low, provided the measurement is arithmetic the reader can repeat rather than a performance claim.",
+      "depends_on": "Q-18, Q-19",
+      "recommendation": "Pilot on P-01 and P-02 (the two shapes that differ most), then decide whether the pattern generalises.",
+      "decision": "hold"
     }
   ]
 }

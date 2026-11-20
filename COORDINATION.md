@@ -624,6 +624,55 @@ bidirectional `GENERATED` guard in `build.py`.
 
 **Not changed by this session, but noted:** the earlier session items (T2 analytics, T3 ported guides, T4 and T5 duplicate content) were superseded by main and were dropped, as recorded above.
 
+---
+
+## Session `arena/b1a42a51-affil1` — line-by-line audit, one-indexable-site fixes, desk cleanup (2026-11-20)
+
+Branch `arena/b1a42a51-affil1`, cut from `f041c75` (main after PR #83). Claimed below and
+pushed before any edit, per the board rules. No other session holds an open claim on
+these files as of this commit.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Line-by-line audit of the published edition, with a source link per row | in progress | `arena/b1a42a51-affil1` | `src/data/audit.json`, `tools/page_audit.py`, `tools/build.py` (wiring only), `review/audit.html` (generated) |
+| Make the desk findable without a second indexable site: robots/archive, stale desk pages, sweeper gate | in progress | `arena/b1a42a51-affil1` | `tools/build.py` (ROBOTS constant), `tools/sweep_surfaces.py`, `decision-support/*.html` (`noindex` only) |
+| Shop-first navigation and the false "account-confirmed" figure | in progress | `arena/b1a42a51-affil1` | `tools/layout.py`, `tools/page_desk.py` |
+| New proposals and open questions for the growth path | in progress | `arena/b1a42a51-affil1` | `src/data/suggestions.json`, `src/data/questions.json` |
+| Repair `tools/test_paid_link_gate.py` (it could not import) | in progress | `arena/b1a42a51-affil1` | `tools/test_paid_link_gate.py` |
+| Release: PR, merge, Pages deploy, receipt | in progress | `arena/b1a42a51-affil1` | `COORDINATION.md` |
+
+Not in scope and not touched: `src/data/products.json` observations, `tools/paid_link_gate.py`
+logic, `.github/workflows/*`, any other session's guides.
+
+### Result — `arena/b1a42a51-affil1` (2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Line-by-line audit with a source link per row | done | `arena/b1a42a51-affil1` | `src/data/audit.json`, `tools/page_audit.py`, `tools/check_audit.py`, `tools/build.py` (wiring), `review/audit.html` (generated) |
+| One indexable site: robots + noindex + sweeper gate | done | `arena/b1a42a51-affil1` | `tools/build.py` (ROBOTS), `tools/sweep_surfaces.py`, `archive/**/*.html` (noindex only), `decision-support/*.html` (noindex only) |
+| Shop voice: footer claim, false "account-confirmed" figure | done | `arena/b1a42a51-affil1` | `tools/layout.py`, `tools/page_desk.py` |
+| New proposals and open questions for the growth path | done | `arena/b1a42a51-affil1` | `src/data/suggestions.json` (S-22..S-28), `src/data/questions.json` (Q-23..Q-26) |
+| New findings, each with a source or a reproduction | done | `arena/b1a42a51-affil1` | `src/data/flags.json` (FLG-023..FLG-027), `src/data/sources.json` (SRC-18..SRC-23) |
+| Repair the affiliate gate test | done | `arena/b1a42a51-affil1` | `tools/test_paid_link_gate.py` |
+| Release: PR, merge, Pages deploy | done | `arena/b1a42a51-affil1` | this file |
+
+**Verification performed (2026-11-20).** `tools/build.py` writes 31 pages + sitemap, feed and
+robots. `tools/check.py` 31 pages, 0 errors, 0 warnings. `tools/validate.py` 1655 checks, 0
+warnings. `tools/check_local_links.py` 38 pages, 0 broken. `tools/check_audit.py` (register,
+`--jsonld`, `--single-site`, `--counts`) all pass. `decision-support/validate.py` passes all six
+check families. `python3 -m unittest tools.test_paid_link_gate` 2 tests pass. The staged artifact
+(78 files) serves every route 200 from a local server.
+
+**Links re-opened this pass** with a redirect-following fetcher: P-01 → `/dp/B0CDY277D3`
+(CHEFMAN 6 Quart Dual Basket), P-02 → `/dp/B09B7SB46R` (Emeril Lagasse 26QT French Door),
+P-03 → `/dp/B08DKYBTPH` (Chefman 8 Qt TurboFry), P-05 → `/dp/B0DZFD6R9Z` (CHEF iQ Sense Gen3).
+**P-04 (`link.amazon/B0c8moW59`) reached `amazon.com/` — the store home page — not a listing on
+this pass**, after earlier passes reached `/dp/B0DHZTCNR5`. Recorded as A-12; the product register
+was not edited, because one unstable fetch is not evidence of a different product.
+
+**Deliberately not done.** No product fact was added or removed. No page was deleted: the archive
+and the desk gained noindex and nothing else. No count on a page was hard-coded; the audit page
+quotes the command rather than the number, and `--counts` fails if a stated number drifts.
 ### Delivery record — arena/dad597c3-affil1 (close-out, 2026-11-20)
 
 PR #60 merged to `main` at `cf4f3703bee4fba8c2ff9307079dcb40c33ebf84` (merge commit, 2026-11-20T06:08:36Z).
@@ -780,3 +829,31 @@ tools/stage.py into a temp dir                    → 0 broken references
 ### Merge log
 
 Pending: see the PR linked from this board after it is opened.
+
+### Merge note — `arena/b1a42a51-affil1` after main advanced to `8b22041`
+
+While this pass was open as PR #94, main moved through PRs #90–#95. Two of those changes
+overlap this branch, and main's version wins where it is more recent:
+
+1. **The paid-link gate changed behaviour.** Main (PR #90) restored a gate that emits **no**
+   Associates tag until an account-confirmed Special Link exists, so every buy button on the
+   site is now a plain listing link marked `rel="sponsored nofollow noopener"`. This branch's
+   footer, About page and audit rows described tagged destinations; they were rewritten to
+   describe what the build actually emits. `FLG-025` (main's open policy reading) is now cited
+   from the footer rather than this pass's own text.
+2. **Flag ids collided.** Main already used `FLG-023`–`FLG-026`. This pass's five findings were
+   renumbered `FLG-027`–`FLG-031`; nothing was dropped. The six source rows added here
+   (`SRC-18`–`SRC-23`) did not collide.
+3. **The archive grew.** The recovered PR #15 tree added 47 more archived pages without
+   noindex. All 126 archived pages now carry it, and `tools/check_audit.py --single-site` is
+   clean over the whole tree.
+4. **`tools/sweep_surfaces.py` had two competing fixes** for the same defect (main's
+   `INTERNAL_SECTIONS` constant and this pass's import from `check.py`). Kept one rule: import
+   from `check.py`, fall back to the local tuple. The merge kept both authors' reasoning in the
+   docstring.
+
+Re-run after the merge: `tools/build.py` → 31 pages; `tools/check.py` → 0 errors, 0 warnings;
+`tools/validate.py` → 1696 checks, 0 warnings; `tools/check_audit.py` (register, `--jsonld`,
+`--single-site`, `--counts`) all pass; `decision-support/validate.py` passes six families;
+`python3 -m unittest tools.test_paid_link_gate` 6 tests pass; the staged artifact (78 files) has
+0 broken references.

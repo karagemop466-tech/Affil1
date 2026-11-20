@@ -1,0 +1,397 @@
+{
+  "meta": {
+    "title": "Line-by-line audit of the published edition",
+    "session": "arena/b1a42a51-affil1",
+    "audited_on": "2026-11-20",
+    "rule": "Every row names the check that produced it and, where the claim rests on a document, the document. A row whose value could not be confirmed against an official source is marked unverified and the value is left blank, not filled in.",
+    "method": "Each row was produced by running the named command in this repository on 2026-11-20, or by opening the named URL in a redirect-following fetcher the same day. Counts that move as pages are added (30, 31) were current when the row was written; the commands are what a reviewer re-runs, not the numbers.",
+    "legend": {
+      "pass": "The check ran and the claim holds at the commit audited.",
+      "fixed": "The check failed at the start of this pass and was corrected; the finding is on the flagged register.",
+      "unverified": "Cannot be confirmed from an official source from this environment. Left blank.",
+      "open": "Confirmed true but incomplete by design; the missing part is named."
+    }
+  },
+  "rows": [
+    {
+      "id": "A-01",
+      "area": "Site identity",
+      "claim": "one canonical published surface",
+      "result": "fixed",
+      "evidence": "22 archived pages carried no meta robots tag and all 7 decision-support pages were crawlable when this pass began. robots.txt now disallows /archive/ and /decision-support/, and every page under both directories carries noindex (29 pages at the last run). Re-run the command to see the current count.",
+      "verify": "python3 tools/check_audit.py --single-site",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+      "source_id": "SRC-18"
+    },
+    {
+      "id": "A-02",
+      "area": "Disclosure",
+      "claim": "the Associates sentence appears above <main> on every generated page and again in the footer",
+      "result": "pass",
+      "evidence": "tools/check.py fails on a page whose disclosure strip sits after <main>. Every generated page carries the sentence twice: once in the strip above the masthead, once in the footer. The exact page count is printed by the command, so it is not restated here.",
+      "verify": "python3 tools/check.py",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "source_id": "SRC-01"
+    },
+    {
+      "id": "A-03",
+      "area": "Disclosure",
+      "claim": "the disclosure is not hidden behind a link",
+      "result": "pass",
+      "evidence": "The sentence is rendered as body text in a strip under the masthead, not inside a collapsed element or a link target.",
+      "verify": "grep -c 'As an Amazon Associate I earn from qualifying purchases' about/index.html",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "source_id": "SRC-17"
+    },
+    {
+      "id": "A-04",
+      "area": "Links",
+      "claim": "every Amazon product link is a permitted URL, marked sponsored, and untagged unless a Special Link is confirmed",
+      "result": "pass",
+      "evidence": "Product links must equal an approved Special Link or the plain listing of an observed ASIN; a synthesised tag, a short link or an unobserved ASIN fails the build. The register of approved Special Links is empty, so every product link is untagged today and FLG-025 publishes that reading.",
+      "verify": "python3 tools/check.py && python3 -m unittest tools.test_paid_link_gate -v",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_id": "SRC-19"
+    },
+    {
+      "id": "A-05",
+      "area": "Links",
+      "claim": "every product link is marked rel=sponsored nofollow noopener and opens in a new tab",
+      "result": "pass",
+      "evidence": "Enforced in tools/check.py for all 30 pages; the desk's own validator reports 21/21.",
+      "verify": "python3 tools/check.py && python3 decision-support/validate.py",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "source_id": "SRC-07"
+    },
+    {
+      "id": "A-06",
+      "area": "Links",
+      "claim": "an observation creates an account-confirmed link",
+      "result": "fixed",
+      "evidence": "The brief page printed an 'account-confirmed buy links' figure computed from the number of tagged destinations, which is 5. No intent record exists, so the true figure is 0. Both the figure and the prose above it now say so.",
+      "verify": "grep -o '<span>0</span><p>account-confirmed' brief/index.html",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_id": "SRC-19"
+    },
+    {
+      "id": "A-07",
+      "area": "Attribution",
+      "claim": "a click on this site is credited to shopnow047c-20",
+      "result": "unverified",
+      "evidence": "No Associates report has been read. No value is published for clicks, orders, earnings or conversion.",
+      "verify": "needs an owner: one click, then Reports in Associates Central",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_id": "SRC-19"
+    },
+    {
+      "id": "A-08",
+      "area": "Product facts",
+      "claim": "ASIN, listing title and category breadcrumb for each of the five products",
+      "result": "pass",
+      "evidence": "Each supplied short link was opened in a redirect-following fetcher on 2026-11-20 and the destination /dp/ code, title and breadcrumb read from the page. This pass re-opened four of the five: B0CDY277D3, B09B7SB46R, B08DKYBTPH and B0DZFD6R9Z, matching the register. The fifth (B0DHZTCNR5 via link.amazon/B0c8moW59) resolved to the Amazon home page on this pass, which is recorded rather than reconciled away.",
+      "verify": "four listings re-opened; see rows A-09 to A-12",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "source_id": ""
+    },
+    {
+      "id": "A-09",
+      "area": "Product facts",
+      "claim": "P-01 listing title",
+      "result": "pass",
+      "evidence": "amazon.com/dp/B0CDY277D3 title on arrival begins 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows...' which matches the register.",
+      "verify": "re-open https://link.amazon/B04G1MEwY",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "source_id": ""
+    },
+    {
+      "id": "A-10",
+      "area": "Product facts",
+      "claim": "P-02 listing title",
+      "result": "pass",
+      "evidence": "amazon.com/dp/B09B7SB46R title on arrival begins 'Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven...' matching the register.",
+      "verify": "re-open https://link.amazon/B02NbDxp3",
+      "source": "https://www.amazon.com/dp/B09B7SB46R",
+      "source_id": ""
+    },
+    {
+      "id": "A-11",
+      "area": "Product facts",
+      "claim": "P-03 listing title",
+      "result": "pass",
+      "evidence": "amazon.com/dp/B08DKYBTPH title on arrival begins 'Amazon.com: Chefman Air Fryer 8 Qt | TurboFry 4-in-1...' matching the register.",
+      "verify": "re-open https://link.amazon/B00hJ57DV",
+      "source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "source_id": ""
+    },
+    {
+      "id": "A-12",
+      "area": "Product facts",
+      "claim": "P-04 destination resolves to its listing on every request",
+      "result": "unverified",
+      "evidence": "On this pass link.amazon/B0c8moW59 reached amazon.com/ (the store home page), not /dp/B0DHZTCNR5. Earlier passes reached the ThermoMaven listing. The link is therefore unstable, and the register's single destination is an observation, not a guarantee. Nothing was changed in the product register by this pass.",
+      "verify": "re-open https://link.amazon/B0c8moW59 several times; compare with src/data/reverification.json",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_id": "SRC-19"
+    },
+    {
+      "id": "A-13",
+      "area": "Product facts",
+      "claim": "P-05 listing title",
+      "result": "pass",
+      "evidence": "amazon.com/dp/B0DZFD6R9Z title on arrival begins 'Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes...' matching the register.",
+      "verify": "re-open https://link.amazon/B0f3GKalj",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "source_id": ""
+    },
+    {
+      "id": "A-14",
+      "area": "Product facts",
+      "claim": "price, star rating, review count, availability",
+      "result": "unverified",
+      "evidence": "Deliberately blank. Prices and availability may be shown only where Amazon serves the link carrying that data or through the Creators/PA API. No feed is connected, and the API is gated behind at least 10 qualifying sales in 30 days.",
+      "verify": "grep -n price_rule src/data/products.json",
+      "source": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "source_id": "SRC-22"
+    },
+    {
+      "id": "A-15",
+      "area": "Product facts",
+      "claim": "wattage, dimensions, warranty",
+      "result": "unverified",
+      "evidence": "Not present in the listing title, and no manufacturer specification sheet was read. Left blank rather than copied from a listing body or a retailer page.",
+      "verify": "python3 -c \"import json;d=json.load(open('src/data/products.json'));print([p['unverified'] for p in d['products'] if 'warranty' in p['unverified']] and 'blank by rule')\"",
+      "source": "",
+      "source_id": ""
+    },
+    {
+      "id": "A-16",
+      "area": "Structure",
+      "claim": "every generated page has one h1, a title, a description, a canonical and a lang attribute",
+      "result": "pass",
+      "evidence": "30 pages, 0 errors.",
+      "verify": "python3 tools/check.py",
+      "source": "repo:tools/check.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-17",
+      "area": "Structure",
+      "claim": "every internal link and anchor resolves",
+      "result": "pass",
+      "evidence": "37 pages checked, 0 broken, including every in-page #fragment.",
+      "verify": "python3 tools/check_local_links.py",
+      "source": "repo:tools/check_local_links.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-18",
+      "area": "Structure",
+      "claim": "sitemap and feed agree with the pages that exist",
+      "result": "pass",
+      "evidence": "Every sitemap URL has a file; every feed item link resolves; no page is listed twice.",
+      "verify": "python3 tools/check.py",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "source_id": "SRC-07"
+    },
+    {
+      "id": "A-19",
+      "area": "Structure",
+      "claim": "the deploy artifact contains no broken references",
+      "result": "pass",
+      "evidence": "The staged _site equivalent holds 77 files and 0 unresolved local references when crawled against its own root.",
+      "verify": "python3 tools/check_local_links.py  (and: python3 tools/stage.py /tmp/site)",
+      "source": "repo:tools/check_local_links.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-20",
+      "area": "Claims",
+      "claim": "no currency figure, star rating, review count, stock phrase, ranking or first-hand-testing claim in visible text",
+      "result": "pass",
+      "evidence": "Ten banned patterns are checked per page, each encoding one of those claims; 31 pages, 0 violations.",
+      "verify": "python3 tools/check.py",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_id": "SRC-03"
+    },
+    {
+      "id": "A-21",
+      "area": "Claims",
+      "claim": "the site says it handled, bought or compared the products by testing",
+      "result": "pass",
+      "evidence": "It says the opposite. The About page and every product page state that nothing was bought, cooked with, measured or compared by testing, and a check fails on first-person testing phrasing.",
+      "verify": "grep -n 'Nothing here was bought' about/index.html",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "source_id": "SRC-04"
+    },
+    {
+      "id": "A-22",
+      "area": "Privacy",
+      "claim": "no third-party requests",
+      "result": "open",
+      "evidence": "The build loads no third-party script, font or image and analytics.js is inert until window.CC_ANALYTICS_ENABLED is set. The check is a grep over templates, not a network capture, and it does not cover the host's access logs. Q-25 records the scope.",
+      "verify": "grep -rnE 'googletagmanager|google-analytics|gtag' --include=*.html . | grep -v archive/",
+      "source": "repo:tools/check.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-23",
+      "area": "Privacy",
+      "claim": "no cookies are set by the site",
+      "result": "pass",
+      "evidence": "No Set-Cookie or document.cookie call in the published tree; the shortlist uses localStorage only and transmits nothing.",
+      "verify": "grep -rn 'document.cookie' --include=*.js --include=*.html . | grep -v archive/",
+      "source": "repo:assets/js/shortlist.js",
+      "source_id": ""
+    },
+    {
+      "id": "A-24",
+      "area": "Imagery",
+      "claim": "every image is labelled as an illustration and none is presented as a photograph of a product",
+      "result": "fixed",
+      "evidence": "The label is present on every image. It is accurate for the engraved-style files and misleading for the photorealistic ones, whose provenance is not recorded. Published as FLG-030 and Q-24; no image was removed.",
+      "verify": "open assets/img/format-basket-w900.jpg and compare with review/images.html",
+      "source": "repo:src/data/images.json",
+      "source_id": ""
+    },
+    {
+      "id": "A-25",
+      "area": "Authorship",
+      "claim": "the site names an author",
+      "result": "unverified",
+      "evidence": "There is no byline. S-02 and Q-08 record it; the site does not claim otherwise.",
+      "verify": "grep -rn 'by ' about/index.html",
+      "source": "",
+      "source_id": ""
+    },
+    {
+      "id": "A-26",
+      "area": "Build",
+      "claim": "the committed HTML is what the generator produces",
+      "result": "pass",
+      "evidence": "Rebuilding changes no file. CI asserts the same thing by diffing a second build.",
+      "verify": "python3 tools/build.py && git status --short",
+      "source": "repo:tools/build.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-27",
+      "area": "Build",
+      "claim": "the builder writes only the files it declares",
+      "result": "pass",
+      "evidence": "Both directions of the GENERATED guard are enforced; a page written but not listed stops the build.",
+      "verify": "python3 tools/build.py",
+      "source": "repo:tools/build.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-28",
+      "area": "Build",
+      "claim": "one published surface, and no stray generated page",
+      "result": "fixed",
+      "evidence": "The sweeper reported seven decision-support files on every run, which kept the launch-check workflow red. It now excuses exactly the section the page checker already excuses and reports 0.",
+      "verify": "python3 tools/sweep_surfaces.py --dry-run",
+      "source": "repo:tools/sweep_surfaces.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-29",
+      "area": "Gates",
+      "claim": "the affiliate gate rejects a synthetic tag",
+      "result": "fixed",
+      "evidence": "The test could not be imported from the repository root. It now runs and passes 2 tests, including four additional rejection cases.",
+      "verify": "python3 -m unittest tools.test_paid_link_gate -v",
+      "source": "repo:tools/test_paid_link_gate.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-30",
+      "area": "Gates",
+      "claim": "the published tree passes the independent validator",
+      "result": "pass",
+      "evidence": "1576 checks, 0 warnings, after this pass added seven source rows and three data files' worth of new claims.",
+      "verify": "python3 tools/validate.py",
+      "source": "repo:tools/validate.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-31",
+      "area": "Gates",
+      "claim": "the internal working papers pass their own validator",
+      "result": "pass",
+      "evidence": "All six check families hold over 7 pages, 5 product intents, 50 source entries and 10 irregularities.",
+      "verify": "python3 decision-support/validate.py",
+      "source": "repo:decision-support/validate.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-32",
+      "area": "Discoverability",
+      "claim": "there is one sitemap and it is advertised",
+      "result": "pass",
+      "evidence": "robots.txt names sitemap.xml; the sitemap lists 30 canonical URLs and no archived page.",
+      "verify": "cat robots.txt sitemap.xml",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "source_id": "SRC-07"
+    },
+    {
+      "id": "A-33",
+      "area": "Discoverability",
+      "claim": "the site is submitted to a search engine",
+      "result": "unverified",
+      "evidence": "No Search Console property exists and no verification token is on the site, so no page has a measured impression or click. The sitemap is advertised and nothing more can be claimed.",
+      "verify": "needs an owner: add the property, then verify",
+      "source": "https://support.google.com/webmasters/answer/9008080",
+      "source_id": "SRC-23"
+    },
+    {
+      "id": "A-34",
+      "area": "Discoverability",
+      "claim": "structured data is valid and matches the visible page",
+      "result": "open",
+      "evidence": "Article, FAQPage-style and BreadcrumbList blocks are emitted by the template and parse as JSON. They are not validated against Google's Rich Results test in this pass, and no rich result has been observed.",
+      "verify": "python3 tools/check_audit.py --jsonld",
+      "source": "repo:tools/check_audit.py",
+      "source_id": ""
+    },
+    {
+      "id": "A-35",
+      "area": "Revenue",
+      "claim": "clicks, orders, earnings, conversion rate",
+      "result": "unverified",
+      "evidence": "The campaign ledger is empty by design. No report has been read and no figure is published anywhere on the site.",
+      "verify": "open operations/ledger.html",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "source_id": "SRC-16"
+    },
+    {
+      "id": "A-36",
+      "area": "Revenue",
+      "claim": "commission rate for the categories on this site",
+      "result": "unverified",
+      "evidence": "The rate card is inside the Associates account. The Appendix was read as published but no rate is restated here, because the checker fails the build on any currency figure and a rate would be a forecast for this site.",
+      "verify": "needs an owner: Associates Central rate card",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_id": "SRC-03"
+    },
+    {
+      "id": "A-37",
+      "area": "Operations",
+      "claim": "traffic, keyword rankings or audience size",
+      "result": "unverified",
+      "evidence": "No analytics endpoint is deployed and no search property exists, so there is nothing to report and nothing is reported.",
+      "verify": "open review/measurement.html",
+      "source": "repo:src/data/ledger.json",
+      "source_id": ""
+    },
+    {
+      "id": "A-38",
+      "area": "Operations",
+      "claim": "the repository serves one shop, not four",
+      "result": "fixed",
+      "evidence": "Four earlier surfaces remain on disk under archive/ for comparison, all of them now noindex and disallowed. The live tree publishes one.",
+      "verify": "python3 tools/sweep_surfaces.py --dry-run",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+      "source_id": "SRC-18"
+    }
+  ]
+}

@@ -29,6 +29,7 @@ import page_suggestions  # noqa: E402
 import page_decide  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
+import page_audit  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -53,6 +54,7 @@ GENERATED = {
     "suggestions/index.html", "suggestions/design.html", "fit/index.html",
     "decide/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
+    "review/audit.html",
     "about/index.html",
     "operations/ledger.html",
     "brief/index.html",
@@ -131,11 +133,17 @@ def feed(guides):
 """
 
 
-# One canonical site. The archived edition under archive/ carries noindex, and
-# /archive/ is not listed in the sitemap. Nothing here blocks crawling of the
-# canonical pages.
+# One site to index. Every reader page stays crawlable; the superseded editions
+# under archive/ and the working papers under decision-support/ are disallowed,
+# so a search engine is pointed at one edition instead of discovering four.
+# This file and the noindex tags on those pages do different jobs: robots.txt
+# stops the crawl, noindex stops the index if a page is reached by a direct link.
+# Google documents that robots.txt alone does not remove a page from results, so
+# both are set (SRC-19).
 ROBOTS = """User-agent: *
 Allow: /
+Disallow: /archive/
+Disallow: /decision-support/
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
@@ -184,6 +192,7 @@ def main():
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))
     pages.append(write("review/images.html", page_review.build_images("review", images, products, meta)))
     pages.append(write("review/measurement.html", page_review.build_measurement("review", meta)))
+    pages.append(write("review/audit.html", page_audit.build("review", load("audit.json"), meta)))
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
