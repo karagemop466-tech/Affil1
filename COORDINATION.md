@@ -1380,3 +1380,31 @@ The Pages configuration fact behind FLG-030 was checked first-hand:
   recorded by `b990bce7`, merged note carries the reversal path), FLG-031
   (false tag claims, `b990bce7`), FLG-032 (Pages dual publisher), FLG-033
   (P-05 heat-tolerance contradictions). 33 flags on `review/`.
+
+---
+
+### Claim — seasonal leftovers guide + serving-scope audit + full gate verification · arena/3d6a7607-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| One new question-shaped seasonal guide (Thanksgiving leftovers, reheated in an air fryer) built only from facts fetched this session from USDA FSIS and FoodSafety.gov, with an engraved illustration recorded in the images register, wired into the sitemap and feed by the existing build | in progress | arena/3d6a7607-affil1 | `_tools/content.py` (append one guide), `assets/img/leftovers*.jpg` (new), `_src/data/images.json` (append one entry), generated HTML + `sitemap.xml` + `feed.xml` via `_tools/build.py` |
+| Serving-scope audit: re-verify on the live host whether the underscore rename actually hides working files (`.nojekyll` disables Jekyll's `_` exclusion); fix the stale `Disallow: /archive/` path in the robots generator; record findings as new flags (next free IDs; will renumber if a concurrent PR takes them) | in progress | arena/3d6a7607-affil1 | `_src/data/flags.json` (append only), `_tools/build.py` (robots.txt line only), rebuilt `review/index.html`, `robots.txt` |
+| Full verification pass on the merged tree: build ×2 (byte-identical), check, validate, check_local_links, unit tests, decision-support + platform validators; line-by-line record | in progress | arena/3d6a7607-affil1 | `_docs/VERIFICATION-arena-3d6a7607.md` (new), `README.md` + `EXECUTIVE_SUMMARY.md` (counts only: guide/page/sitemap totals), `COORDINATION.md` |
+| PR, merge without waiting for approval, Pages deploy confirmation | in progress | arena/3d6a7607-affil1 | — |
+
+Not claimed and not touched: `_src/data/products.json`, `product-intent.json`, `offers`/`now` pages (PR #104 scope), the untagged-cart-link flag (PR #106 scope), `arm_links`, `_decision-support/`, `_platform/`, any other session's guides.
+
+### Done — seasonal leftovers guide + serving-scope audit + verification pass · arena/3d6a7607-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| New seasonal guide `reheating-thanksgiving-leftovers` (11th guide, Seasonal cluster), built only from USDA FSIS and FoodSafety.gov pages fetched 2026-11-20; engraved illustration registered in images.json; wired into sitemap + feed by the build | done | arena/3d6a7607-affil1 | `_tools/content.py`, `assets/img/leftovers*.jpg`, `_src/data/images.json`, generated HTML + `sitemap.xml` + `feed.xml` |
+| Serving-scope audit: underscore directories are publicly served while `.nojekyll` bypasses the Jekyll `_`-exclusion the rename relied on; FLG-034 (high, renumbered from FLG-029/030 after concurrent sessions took those IDs). Stale `Disallow: /archive/` rule recorded; FLG-035 (low; superseded by main's additive robots fix in rebase) | done | arena/3d6a7607-affil1 | `_src/data/flags.json` (append only), `_tools/build.py` (ROBOTS constant), rebuilt `review/index.html`, `robots.txt` |
+| Guide template repairs: render the previously-ignored `sources` field; correct the side-card sentence that claimed every product link carries the Amazon tag (false under the current gate; consistent with PR #106's finding) | done | arena/3d6a7607-affil1 | `_tools/page_guides.py` (3 lines), rebuilt guides |
+| Full gate verification and line-by-line record; README + EXECUTIVE_SUMMARY counts synced (11 guides, 35 pages, 30 flags) | done | arena/3d6a7607-affil1 | `_docs/VERIFICATION-arena-3d6a7607.md`, `README.md`, `EXECUTIVE_SUMMARY.md` |
+
+- **Sources fetched (2026-11-20):** [FSIS Leftovers and Food Safety](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety) (Last updated Jul 31, 2020); [FoodSafety.gov Cold Food Storage Chart](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts) (reviewed Sep 19, 2023); [GitHub Pages: About GitHub Pages and Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll); [Configuring a publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site); [Troubleshooting Jekyll build errors](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/troubleshooting-jekyll-build-errors-for-github-pages-sites). Live-host fetches of `/_data/confirmations.json`, `/_platform/collector.py`, `/_tools/build.py` (all returned full content — FLG-034 evidence).
+- **Gates:** build ×2 byte-identical (35 pages) · `check.py` 0 errors / 0 warnings · `validate.py` 1882 checks, 0 warnings · `check_local_links.py` 69 pages, 0 broken · `test_paid_link_gate` OK.
+- **Deliberately not verified here:** the five submitted links (FLG-028's homepage result not reproduced — one data point does not settle instability), Associates enrolment/attribution, Special Links, Search Console, analytics hosting. Owner gates, unchanged.
+- **Owner requests carried forward (not acted on):** flip Pages to `build_type: workflow` (durable fix for FLG-034, requested since #89's handoff); settle FLG-025 in the enrolled Associates workflow; PR #106's untagged-cart-CTA flag.
+- Status: done. PR link and deploy receipt recorded below after merge.

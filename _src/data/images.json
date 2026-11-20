@@ -165,6 +165,16 @@
       "depicts_a_real_product": false,
       "used_on": "Feature slot and OG image",
       "rules_met": "No brand mark, no price, no specification implied, and every page that shows it also carries a note saying it is not a photograph of the product."
+    },
+    {
+      "file": "leftovers",
+      "alt": "An engraved illustration of an open air fryer drawer holding sliced turkey and roasted vegetables, with a food thermometer on the counter beside it",
+      "style": "engraved two-colour illustration",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance drawer and leftovers in the set's engraved print style; width variants (w560, w900) resized from the base file the same session",
+      "depicts_a_real_product": false,
+      "used_on": "Guide: reheating-thanksgiving-leftovers (hero image); guides index card",
+      "rules_met": "No brand mark, no price, no specification implied, and the page that shows it carries a caption saying it is not a photograph of the product. The thermometer drawn beside the drawer is generic and unbranded; it does not depict either thermometer product sold here."
     }
   ],
   "rejected": [

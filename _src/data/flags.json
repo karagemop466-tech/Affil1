@@ -1,493 +1,523 @@
 {
- "meta": {
-  "purpose": "Everything on this site that a reviewer should look at before trusting it. Grouped by severity, not by topic. Each row names what was expected, what was found, and where to check it.",
-  "severity_key": {
-   "high": "Affects whether the site can earn at all, or whether a claim on the site is currently wrong.",
-   "medium": "Affects usefulness or discoverability, not correctness.",
-   "low": "Cosmetic, administrative, or already resolved with a note."
+  "meta": {
+    "purpose": "Everything on this site that a reviewer should look at before trusting it. Grouped by severity, not by topic. Each row names what was expected, what was found, and where to check it.",
+    "severity_key": {
+      "high": "Affects whether the site can earn at all, or whether a claim on the site is currently wrong.",
+      "medium": "Affects usefulness or discoverability, not correctness.",
+      "low": "Cosmetic, administrative, or already resolved with a note."
+    },
+    "reviewed_on": "2026-11-20"
   },
-  "reviewed_on": "2026-11-20"
- },
- "flags": [
-  {
-   "id": "FLG-001",
-   "severity": "high",
-   "title": "Every submitted path code is 9 characters; every ASIN observed on arrival is 10",
-   "expected": "An Amazon Standard Identification Number is a 10-character alphanumeric identifier.",
-   "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. All five destinations now resolve, and they carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z.",
-   "impact": "The intended_asin field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
-   "reading": "The submitted codes are short-link slugs rather than identifiers. The register records what arrived, and keeps the two fields separate.",
-   "blocks": "nothing — but it explains why one column is empty",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/agreement",
-    "Open each supplied link and compare the /dp/ segment to the code in the link"
-   ]
-  },
-  {
-   "id": "FLG-002",
-   "severity": "high",
-   "title": "Attribution to shopnow047c-20 is not confirmed by an Associates report",
-   "expected": "A click from this site appears in the Associates report against the supplied tag.",
-   "found": "The tag was not observed in any URL reached while following the supplied links, and no Associates report has been read. An earlier build appended ?tag=shopnow047c-20 to every Amazon destination anyway; that was withdrawn on 2026-11-20 because a tag invented from a public observation looks like attribution while remaining unconfirmed. The five products now publish as untagged listing links, marked sponsored.",
-   "impact": "The site earns nothing from those clicks and says so in the footer of every page. Adding a tag is a data change, not a code change: one approved intent record per product, and the build tags that product automatically.",
-   "reading": "Two separate questions were being confused: does the destination carry a tag, and does the account register a click. The first is not met yet, because the published links carry no tag. The second needs a click and a dashboard.",
-   "blocks": "any claim that the site can currently earn",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies",
-    "One click from the owner's device, then Reports → Orders in the Associates dashboard"
-   ]
-  },
-  {
-   "id": "FLG-003",
-   "severity": "medium",
-   "title": "The compliance status of the short links themselves is unresolved, not disproven",
-   "expected": "A statement that the supplied link form is or is not permitted.",
-   "found": "The links are of the form link.amazon/<code>. This build could not establish from an official source whether that is an Amazon-issued redirect that applies a tag server-side, or an untagged redirect.",
-   "impact": "The site does not use the short links as click destinations any more; it links to the resolved listing with the tag attached. The short link stays in the record as evidence of what was supplied.",
-   "reading": "Unresolved is not invalid. Nothing on the site calls these links invalid or non-compliant.",
-   "blocks": "nothing",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies"
-   ]
-  },
-  {
-   "id": "FLG-004",
-   "severity": "high",
-   "title": "P-04 failed three times, then resolved — and later observations disagree on which product it is",
-   "expected": "One short link resolves consistently to one product page.",
-   "found": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three attempts in an earlier session. On 2026-11-20 it resolved on the first attempt to B0DHZTCNR5, a ThermoMaven digital meat thermometer. A parallel session later reported the same mapping. See FLG-016.",
-   "impact": "P-04 has a product page, a category and a tagged buy link to the destination reached here. The identity is labelled as observed-and-disputed, not settled.",
-   "reading": "Resolution is a record of one request, not a guarantee about the next. Neither mapping is declared correct.",
-   "blocks": "confident product identity for P-04 and P-05",
-   "to_check": [
-    "https://link.amazon/B0c8moW59",
-    "https://www.amazon.com/dp/B0DHZTCNR5",
-    "https://www.amazon.com/dp/B0DZFD6R9Z"
-   ]
-  },
-  {
-   "id": "FLG-005",
-   "severity": "medium",
-   "title": "No price, rating, review count or stock status — by rule, not by omission",
-   "expected": "A shop normally shows price and rating next to each product.",
-   "found": "Nothing is shown, because neither permitted data path is connected. Program Policies 2(b) allows price and availability only where Amazon serves the link carrying that data, or where it arrives through Creators API or PA API.",
-   "impact": "Buy buttons say what they do and send the reader to Amazon, where the live figure is. No number on this site can go stale.",
-   "reading": "This is the one place where the site is deliberately less useful than a retailer. It is also the only version that stays true.",
-   "blocks": "nothing",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies"
-   ]
-  },
-  {
-   "id": "FLG-006",
-   "severity": "medium",
-   "title": "No author, no byline, no first-hand testing",
-   "expected": "A publication normally names the person whose judgement it is.",
-   "found": "No byline anywhere. The site's claim is narrow and checkable: the links were opened, the listings were read, and the reasoning is shown.",
-   "impact": "Article structured data names the organization, not a person, because inventing an author would be a fiction.",
-   "reading": "An accurate anonymous voice is honest but weak. A named editor with a true biography is the cheapest credibility available, and it is logged as S-03.",
-   "blocks": "the site's ability to claim authority",
-   "to_check": [
-    "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
-   ]
-  },
-  {
-   "id": "FLG-007",
-   "severity": "medium",
-   "title": "Every image on this site is an AI-generated illustration",
-   "expected": "A shop shows the product.",
-   "found": "Every image was generated for this build. None is a photograph of a submitted product. Each is labelled where it appears, and the policy page lists every asset.",
-   "impact": "A reader cannot judge the product from the picture, and the pages say so rather than implying otherwise.",
-   "reading": "Product imagery is licensed material with its own rules. Until a permitted source exists, illustrations are the honest option.",
-   "blocks": "nothing",
-   "to_check": [
-    "review/images.html"
-   ]
-  },
-  {
-   "id": "FLG-008",
-   "severity": "medium",
-   "title": "Two competing editions of this site were served from one repository",
-   "expected": "One canonical site for search engines to index.",
-   "found": "A generated edition at the root and a hand-written edition under crisp/ plus duplicate root pages (products.html, questions.html, suggestions.html, guides.html, dashboard.html and others). They described the same five products with different navigation and different URLs.",
-   "impact": "The duplicates could compete with the canonical pages and split what little authority exists. Internal links pointed into both editions, so navigation was ambiguous.",
-   "reading": "Consolidated on 2026-11-20: the root build is canonical, the duplicate edition is archived under archive/legacy-2026-11-20/ with a noindex tag on every archived page, and the sitemap lists only canonical URLs. Nothing was deleted; git history and the archive both retain the other session's work.",
-   "blocks": "nothing now",
-   "to_check": [
-    "robots.txt",
-    "sitemap.xml",
-    "archive/legacy-2026-11-20/index.html"
-   ],
-   "update_2026_11_20_by_arena_05771edb": "Reopened in a narrower form. A third served surface, edition/ (27 pages), shipped after this consolidation with its own robots.txt saying 'Allow: /' and its own sitemap — a second site telling crawlers to index it. Its pages were given noindex, follow by a later session, but the robots file kept the crawl invitation, so the two instructions contradicted each other at the same URL. Fixed in this pass: edition/robots.txt is 'Disallow: /', and _tools/check.py fails the build if any published directory below the root permits a crawl or serves a page without noindex. Nothing was deleted."
-  },
-  {
-   "id": "FLG-009",
-   "severity": "medium",
-   "title": "Buy links were briefly tagged by synthesis; the tag was withdrawn and the gate restored",
-   "expected": "A tag appears on an Amazon link only when an account-validated Special Link is recorded (Program Policies 2(a)-(b); FLG-025 records the open reading of 2(b)).",
-   "found": "Before 2026-11-20 the build pointed at https://www.amazon.com/dp/<ASIN> with no tag. On 2026-11-20 an earlier build in this branch appended the tag to every observed listing; that made the approved-register check pass by construction and failed its own unit test. The fallback was removed. The current links are plain listing links, marked sponsored.",
-   "impact": "Corrected on 2026-11-20: Amazon product links are built by one function (layout.product_link). The checker fails the build on any Amazon product link outside the permitted set: an account-approved Special Link, or the plain listing of an observed ASIN. No tag is synthesised. Unit tests in tools/test_paid_link_gate.py run in CI.",
-   "reading": "The gate was real and it was live. The defect was a fallback that made the check vacuous; removing it restores what the check is for.",
-   "blocks": "nothing now",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies",
-    "tools/layout.py buy_url()",
-    "tools/check.py tag rule"
-   ]
-  },
-  {
-   "id": "FLG-010",
-   "severity": "low",
-   "title": "Analytics exists in the code but is switched off",
-   "expected": "Measurement before optimisation.",
-   "found": "A cookie-free client and a self-hosted collector are in the repository. Both are inert: there is no deployed endpoint and the client sends nothing by default.",
-   "impact": "No traffic, click or conversion data exists. The campaign ledger is empty on purpose.",
-   "reading": "Switching it on needs a host and a privacy statement first. Doing it in the other order would be a compliance problem for a site whose selling point is compliance.",
-   "blocks": "S-06 and every data-driven decision",
-   "to_check": [
-    "review/measurement.html"
-   ]
-  },
-  {
-   "id": "FLG-011",
-   "severity": "low",
-   "title": "Amazon's own ASIN definition could not be reached from this environment",
-   "expected": "A first-party definition of ASIN to cite.",
-   "found": "Seller Central help pages return a sign-in wall. Public pages that repeat the definition are written by sellers, not by Amazon.",
-   "impact": "The site states the observed shape of an ASIN (ten characters) rather than citing a definition it could not read.",
-   "reading": "The observation is strong enough for the register's purpose: a nine-character slug is not a ten-character identifier.",
-   "blocks": "nothing",
-   "to_check": [
-    "https://sellercentral.amazon.com/help/hub/reference/G201394520"
-   ]
-  },
-  {
-   "id": "FLG-012",
-   "severity": "low",
-   "title": "Food-safety temperatures are not restated on this site",
-   "expected": "A thermometer guide would normally give safe internal temperatures.",
-   "found": "The figures live with food-safety authorities and vary by food and cut. The guide points to the authority rather than copying numbers into a shopping page.",
-   "impact": "One fewer thing on the site that could be wrong, and one more click for the reader.",
-   "reading": "Deliberate omission with a stated reason, not a gap.",
-   "blocks": "nothing",
-   "to_check": [
-    "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
-   ]
-  },
-  {
-   "id": "FLG-013",
-   "severity": "low",
-   "title": "Commission rates are blank",
-   "expected": "A revenue plan would start from the rate card.",
-   "found": "The rate card is behind an Associates sign-in and was not supplied. No forecast is offered.",
-   "impact": "The site makes no revenue claim anywhere.",
-   "reading": "Rates are per category and change; quoting one from memory would be the exact failure mode this site is built to avoid.",
-   "blocks": "any revenue modelling",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies"
-   ]
-  },
-  {
-   "id": "FLG-014",
-   "severity": "low",
-   "title": "The campaign ledger is empty",
-   "expected": "Measurement over time.",
-   "found": "No authorised first-party reports exist, so the ledger has columns and no rows.",
-   "impact": "No conversion score, no revenue forecast, no trend.",
-   "reading": "An empty ledger with a provenance rule is more useful than a full one with invented numbers.",
-   "blocks": "nothing",
-   "to_check": [
-    "operations/ledger.html"
-   ]
-  },
-  {
-   "id": "FLG-015",
-   "severity": "low",
-   "title": "Two of the five products are thermometers, not air fryers",
-   "expected": "The brief describes air fryers; the register holds five links.",
-   "found": "P-04 resolves to a ThermoMaven digital meat thermometer and P-05 to a CHEF iQ wireless probe set. Category path on arrival for both: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
-   "impact": "Thermometers are published as their own category. No guide treats them as a fifth air fryer.",
-   "reading": "Corrected from the earlier build, which described one thermometer and an unresolved fifth link.",
-   "blocks": "nothing",
-   "to_check": [
-    "https://www.amazon.com/dp/B0DHZTCNR5",
-    "https://www.amazon.com/dp/B0DZFD6R9Z"
-   ]
-  },
-  {
-   "id": "FLG-016",
-   "severity": "high",
-   "title": "P-04 and P-05 were mapped to opposite products by two sessions, then reconciled by later observation",
-   "expected": "A short link maps consistently to one listing.",
-   "found": "This session observed P-04 (B0c8moW59) → B0DHZTCNR5 (ThermoMaven) and P-05 (B0f3GKalj) → B0DZFD6R9Z (CHEF iQ Sense). A parallel session recorded the reverse mapping on 2026-11-20. A later fetch by that session reached the same mapping recorded here, and the merged register now agrees with it. Earlier P-04 attempts still reached a checkpoint.",
-   "impact": "The current register is internally consistent and both product pages carry an identity note because the disagreement existed and neither observation proves intent. The intended product remains unconfirmed until the operator checks SiteStripe.",
-   "reading": "Agreement between sessions is corroboration, not proof. Both observations were of the same short link, so a stable redirect is plausible but the intended ASIN is still only knowable from the account.",
-   "blocks": "calling either thermometer's identity settled",
-   "to_check": [
-    "https://link.amazon/B0c8moW59",
-    "https://link.amazon/B0f3GKalj",
-    "https://www.amazon.com/dp/B0DHZTCNR5",
-    "https://www.amazon.com/dp/B0DZFD6R9Z"
-   ]
-  },
-  {
-   "id": "FLG-017",
-   "severity": "medium",
-   "title": "Archived editions contain earlier or conflicting product observations",
-   "expected": "One served edition, one register.",
-   "found": "Three editions had been published from this repository: the generated root edition, a crisp/ sub-site and a kitchen/ sub-site, plus duplicate root pages. Their registers disagree about P-04 in particular.",
-   "impact": "All three are archived under archive/legacy-2026-11-20/ with noindex on every page, and the published artifact is staged from the generated set only. Archived material is a record, not confirmation.",
-   "reading": "Old pages that still rank, or that a reader bookmarks, would otherwise contradict the current register. Archiving plus noindex removes that contradiction without destroying the history.",
-   "blocks": "nothing now",
-   "to_check": [
-    "archive/legacy-2026-11-20/README.md",
-    "tools/stage.py",
-    "sitemap.xml"
-   ]
-  },
-  {
-   "id": "FLG-018",
-   "severity": "medium",
-   "title": "Buy-button wording is a compliance judgement the site cannot make for itself",
-   "expected": "A shop's call to action is usually 'add to basket' or a price.",
-   "found": "Buttons read 'See it on Amazon' and 'Check it on Amazon', each followed by a line stating that price and rating are shown on Amazon. No figure and no implied discount.",
-   "impact": "Nothing on the page displays price or availability, which is what the policy constrains. The reading of the policy is the site's own.",
-   "reading": "Logged for owner review before any paid traffic is sent. If the wording reads as a price claim to the account owner, it is a two-line change.",
-   "blocks": "nothing, but it should be signed off",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies",
-    "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
-   ]
-  },
-  {
-   "id": "FLG-019",
-   "severity": "low",
-   "title": "The site has no Search Console property and no email list",
-   "expected": "A publication measures what it publishes.",
-   "found": "No verification token, no property, no analytics endpoint, no mailing list. RSS is the only channel that works today.",
-   "impact": "The next topic cannot be chosen from measured demand, only from editorial hypotheses.",
-   "reading": "Both are owner actions: Search Console needs the owner's Google account, and email needs a provider and a privacy statement.",
-   "blocks": "S-06, S-07 and Q-20",
-   "to_check": [
-    "suggestions/index.html"
-   ]
-  },
-  {
-   "id": "FLG-020",
-   "severity": "low",
-   "title": "The holiday hosting photograph has no recorded origin",
-   "expected": "Every photograph on the site has an entry in src/data/images.json with its origin, date and generator.",
-   "found": "assets/img/holiday-hosting-counter.jpg is used on the index, the guides index and the holiday hosting guide. It had no images.json entry. Its contents were read directly: an unbranded countertop air fryer beside roasted vegetables and green beans, with a garland in the window.",
-   "reading": "Blank fields mean unknown, not safe. Until the owner records where the file came from, it is not cleared on rights or on whether it depicts a real product.",
-   "impact": "An entry was added with generated_on, generated_by and depicts_a_real_product left null. The guide caption calls the scene illustrative. The owner should confirm the origin or replace the photograph.",
-   "blocks": "a clean image audit for the holiday guide and the index card",
-   "to_check": [
-    "src/data/images.json",
-    "guides/holiday-hosting-air-fryer.html"
-   ]
-  },
-  {
-   "id": "FLG-021",
-   "severity": "medium",
-   "title": "tools/validate.py was failing on the product schema (fixed in PR #77)",
-   "expected": "Every validator in tools/ runs clean against the current data.",
-   "found": "python3 tools/validate.py stopped with KeyError 'supplied_path_code_length' because the product schema had been renamed. The validator also pointed at a retired section. Both were fixed in PR #77: field names now match the schema, the validator checks the published pages, and it passes (1441 checks, 0 warnings).",
-   "reading": "The gate had been red on main. That is the reason this flag was raised, and the fix is recorded here.",
-   "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",
-   "blocks": "nothing",
-   "to_check": [
-    "tools/validate.py",
-    "src/data/products.json"
-   ]
-  },
-  {
-   "id": "FLG-022",
-   "severity": "high",
-   "title": "The only supported route to price and availability data is gated behind 10 qualifying sales",
-   "expected": "A site can decide to add prices once it has a data feed.",
-   "found": "Program Policies §2(b) still names “Creators API or PA API” as the permitted route. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment, at least 10 qualifying sales within the past 30 days, registration through Associates Central, and generated credentials.",
-   "reading": "This turns the site's biggest missing feature into a sequencing problem rather than an engineering one. Prices arrive after the site proves it can sell, not before. A separate clause in the same section adds that a comparison-format price display must also show the lowest used price, which is a second reason this site's comparison table keeps its price column empty.",
-   "to_check": [
-    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
-    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
-    "https://affiliate-program.amazon.com/help/operating/policies"
-   ],
-   "impact": "The comparison table keeps its blank price column by rule, and the site's own price_rule wording was updated to name the deprecation rather than pointing at an API that no longer answers.",
-   "blocks": "any live price, rating or availability display, until the sales threshold is met"
-  },
-  {
-   "id": "FLG-023",
-   "severity": "high",
-   "title": "P-04's destination claim rests on one observation; four recorded passes saw only the bot interstitial",
-   "expected": "One consistent observation status per submitted link, or a published disagreement.",
-   "found": "src/data/products.json and FLG-004/FLG-016 carry P-04 (B0c8moW59) -> B0DHZTCNR5 (ThermoMaven) as resolved. But src/data/reverification.json records P-04 as unresolved (bot interstitial on every attempt), and a fourth independent pass (obs-83e015f6, 2026-11-20 05:18-05:22Z) reached only the /checkpoint/continue interstitial again, as did the recovered PR #15 register and the earliest archived register. Only one session claims to have reached a product page for this link.",
-   "impact": "Any page treating P-04 as an identified product (products/p-04.html, the home shortlist's P-04 buy link) rests on a single disputed observation. Four recorded passes saw no product page.",
-   "reading": "Do not settle by preference. Re-observe from the enrolled Associates workflow (one link, destination and tracking report) and update both registers together. Until then the honest status for P-04 is disputed, and the B0DHZTCNR5 mapping stays visible as one session's observation.",
-   "blocks": "A confident P-04 identity claim; any five-of-five resolved claim.",
-   "to_check": [
-    "src/data/products.json row for P-04",
-    "src/data/reverification.json rows P-04 and additional_passes.obs-83e015f6",
-    "FLG-004 and FLG-016 (the reconciliation this contradicts)",
-    "products/p-04.html identity note"
-   ],
-   "sources": [
-    "https://link.amazon/B0c8moW59",
-    "https://www.amazon.com/checkpoint/continue"
-   ],
-   "raised_by": "session-arena-83e015f6, 2026-11-20"
-  },
-  {
-   "id": "FLG-024",
-   "severity": "medium",
-   "title": "Archived editions still serve live tagged Amazon links",
-   "expected": "Every served Amazon product link passes the same gate as the published tree.",
-   "found": "archive/ holds 25 HTML files from earlier editions, and they carry tag=shopnow047c-20 on Amazon product links. archive/ is preserved untouched, marked noindex and disallowed in robots.txt. Legacy Pages serves the repository root, so those links resolve. tools/check.py does not scan archive/.",
-   "reading": "Editing archived evidence would break the record, so the files were not changed. The owner can choose between a banner on each archived file, or moving archive/ out of the served tree once Pages is set to GitHub Actions (tools/stage.py already supports that).",
-   "impact": "Readers can reach a tagged link from an archived page. Those pages are not in the sitemap, and robots.txt disallows them, so they are not indexed.",
-   "to_check": [
-    "gh api repos/karagemop466-tech/Affil1/pages (build_type, source)",
-    "grep -rl 'shopnow047c-20' archive/"
-   ],
-   "blocks": "a clean compliance attestation of the served tree (not the published pages)"
-  },
-  {
-   "id": "FLG-025",
-   "severity": "high",
-   "title": "Open reading: may plain listing links stay untagged before a Special Link is validated?",
-   "expected": "A written answer from Amazon Associates on whether untagged listing links are permitted on an enrolled site with no validated Special Link yet.",
-   "found": "Program Policies 2(b) says 'you must include your Associates ID or tag ... as a parameter in the URL of each link you place on your Site to an Amazon Site'. The same section opens 'General Requirements Applicable to All Special Links'. Reading A (this build): the tag rule governs Special Links, so a plain listing link is not one. Reading B (an earlier session's reading, FLG-009 history): every link to an Amazon site must carry the ID.",
-   "reading": "Reading A is the more literal one given the section heading. It is still an interpretation, and the cost of being wrong is a policy breach, so it needs the owner's decision in the enrolled workflow.",
-   "impact": "Decides whether the current plain listing buy buttons are acceptable, or whether the owner must enable a tag before the next publication.",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies (section 2(b))",
-    "Ask Associates support in writing, quoting section 2(b), and keep the answer with this register"
-   ],
-   "blocks": "any decision on when to enable the tag"
-  },
-  {
-   "id": "FLG-026",
-   "severity": "medium",
-   "title": "P-01 short link resolved to the Amazon homepage on a 2026-11-20 fetch",
-   "expected": "Each supplied short link resolves to the same product listing on every attempt.",
-   "found": "A fetch of https://link.amazon/B04G1MEwY on 2026-11-20 returned https://www.amazon.com/ (title 'Amazon.com. Spend less. Smile more.'), not the listing. The other four short links returned the /dp/ listings already recorded for P-02, P-03, P-04 and P-05 in the same session.",
-   "reading": "The resolution is unstable, which is a reason not to treat any short link as a destination. The register keeps the listing observation for P-01 and does not promote the short link.",
-   "impact": "Nothing published changes. P-01's identity still rests on repeated observations of /dp/B0CDY277D3, not on the short link.",
-   "to_check": [
-    "https://link.amazon/B04G1MEwY, repeated in a logged-out browser and recorded with the time"
-   ],
-   "blocks": "treating the P-01 short link as verified",
-   "update_2026_11_20_by_arena_05771edb": "Superseded as a single-link finding: later passes the same day found this for all five short links at once. Recorded in FLG-028.",
-   "superseded_by": "FLG-028"
-  },
-  {
-   "id": "FLG-027",
-   "severity": "medium",
-   "title": "The repository's robots.txt sits in a subdirectory of the host, which crawlers are not required to read",
-   "expected": "A robots.txt that crawlers consult before indexing the site.",
-   "found": "Google's robots specification states that robots.txt must be placed in the top-level directory of a site and that crawlers don't check for robots.txt files in subdirectories. This site is served from https://karagemop466-tech.github.io/Affil1/, so its robots.txt publishes at /Affil1/robots.txt — a subdirectory — and Google may never fetch it. The file itself is correctly formatted (re-checked against the specification on 2026-11-20) and excludes /archive/, but its reach cannot be guaranteed from inside a project repository.",
-   "reading": "Discovery does not depend on it: every generated page carries a self-referencing canonical URL, the sitemap lists only the maintained edition, and internal links are relative and resolved. The step that actually puts the sitemap in front of Google is Search Console submission, which needs the owner's account (Q-11, S-03).",
-   "to_check": [
-    "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
-    "https://karagemop466-tech.github.io/Affil1/robots.txt"
-   ],
-   "impact": "Discoverability, not correctness. The file is kept correctly formatted for any crawler that does read it; canonicals and the sitemap carry the load if it is ignored.",
-   "blocks": "nothing — but Search Console submission (Q-11 / S-03) is the required discovery step, not an optional one"
-  },
-  {
-   "id": "FLG-028",
-   "severity": "high",
-   "title": "On 2026-11-20 re-check, all five submitted short links returned the Amazon homepage, not the product pages the register records",
-   "expected": "Each submitted link.amazon.com short link, fetched directly, lands on the /dp/ listing that the register records as its observed destination (product-intent.json, products.json observed_url).",
-   "found": "Re-check on 2026-11-20 (arena/bcd93318-affil1, fetch_page, redirects followed). Every short link returned https://www.amazon.com/ with the title 'Amazon.com. Spend less. Smile more.': B04G1MEwY (P-01), B02NbDxp3 (P-02), B00hJ57DV (P-03), B0c8moW59 (P-04, on two separate attempts), B0f3GKalj (P-05). The direct /dp/ pages for B0CDY277D3 (P-01) and B0DHZTCNR5 (P-04) and B0DZFD6R9Z (P-05) did resolve to the listings the register records (titles confirmed on the same date). Details: _docs/VERIFICATION-arena-bcd93318.md.",
-   "impact": "The register's observed_redirect_target values for the short links rest on earlier fetches. Today's fetches do not reproduce them, so those redirect observations are not currently reproducible. Nothing here changes intended_asin, which stays null.",
-   "reading": "Either the short links redirect differently by request (geography, session, bot handling, or the fetching client) or the earlier redirect records were wrong. The repository cannot tell which from outside Amazon's own tools. This is the same instability already recorded for P-01 and P-04 in FLG-018 and the README, now seen for all five at once. Do not change any observed field on the strength of one fetch in either direction.",
-   "blocks": "Nothing on the site changes automatically. It does mean the 'destination reached' column for the short links is not a stable fact. The Associates one-link test (FLG-003) is the step that would settle it from an enrolled account.",
-   "to_check": [
-    "https://link.amazon/B04G1MEwY",
-    "https://link.amazon/B02NbDxp3",
-    "https://link.amazon/B00hJ57DV",
-    "https://link.amazon/B0c8moW59",
-    "https://link.amazon/B0f3GKalj",
-    "https://www.amazon.com/dp/B0CDY277D3",
-    "https://www.amazon.com/dp/B0DHZTCNR5",
-    "https://www.amazon.com/dp/B0DZFD6R9Z",
-    "https://affiliate-program.amazon.com/help/operating/agreement"
-   ],
-   "corroborated_by": "arena/05771edb-affil1, independently, on a later pass the same day: all five short links returned https://www.amazon.com/. Two sessions, two passes, same result. The later pass also re-opened all five direct /dp/ URLs and found each page title matching the register verbatim — including B09B7SB46R (P-02) and B08DKYBTPH (P-03), which the first pass did not re-check."
-  },
-  {
-   "id": "FLG-029",
-   "severity": "high",
-   "title": "The 'Add to basket' links carry no tag and are not Special Links",
-   "expected": "Every link to an Amazon Site that is meant to earn commission uses the Associates ID as a URL parameter (Program Policies 2(b): 'you must include your Associates ID or \"tag\" ... as a parameter in the URL of each link you place on your Site to an Amazon Site'), and Amazon notes that purchases can be disqualified when 'the links from your site to the relevant Amazon Site are not properly formatted' (Commission Income Statement 2(g)).",
-   "found": "Both the front page and the products page publish five 'Add to basket' links at https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=<ASIN>&Quantity.1=1 with no tag. They are marked rel=\"sponsored\" and labelled 'paid link', so they read as earning links while being incapable of attributing a purchase.",
-   "impact": "A reader who uses them is taken to an Amazon cart that no Associated account is attached to. The site earns nothing, and the button is the most prominent call to action on the page.",
-   "reading": "The cart permalink was added as a reference layer next to the listing link and is treated by the build as a permitted non-tag URL. It is not. Program Policies 2(b) applies to every link placed on the site to an Amazon Site, and the safe reading of a cart permalink is that it is a link to an Amazon Site. Either it carries the tag, or it is not presented as a buy action.",
-   "blocks": "any claim that the primary call to action can earn, and any traffic spend",
-   "to_check": [
-    "https://affiliate-program.amazon.com/help/operating/policies",
-    "_src/data/_links.json cart endpoint row",
-    "One click on an Add to basket button, then Reports → Orders"
-   ],
-   "resolution": "Resolved in code on 2026-11-20 by session arena/acb1e4c8-affil1, during the merge that brought this flag onto the branch. _tools/cta.py no longer builds a cart permalink from an observed ASIN and no longer appends the tag by hand. pair() now renders the cart door only when paid_link_gate holds an account-approved Special Link for that ASIN; otherwise the primary door is the official listing for the observed ASIN via buy_url() -- the same gate every other Amazon link uses -- still marked rel=\"sponsored nofollow noopener\", with a one-line note saying why there is no one-click basket. No published page contains a cart/add.html URL. Regression test: _tools/test_cta_gate.py (4 cases). The remaining question in this flag -- whether a tagged cart permalink is itself a permitted Special Link -- is not answered here and does not need to be until the account issues one; it is D-01 on /decisions/.",
-   "status": "resolved-in-code"
-  },
-  {
-   "id": "FLG-030",
-   "severity": "medium",
-   "title": "A second complete edition of the same five-product shop was indexable under /edition/",
-   "expected": "One site for a search engine to index, which is what the About page claims and what the brief asks for.",
-   "found": "The published tree contains a preserved edition/ build of more than twenty pages, each carrying a self-referencing canonical under /Affil1/edition/, and a sitemap of its own. A canonical pointing at a second copy of the same catalogue does not consolidate anything: it asks a crawler to index two shops. No robots meta instruction was present on any edition page.",
-   "impact": "Every edition page now carries <meta name=\"robots\" content=\"noindex, follow\"> beside its canonical, so the maintained root is the only indexable surface. The edition stays reachable for review and no content changed.",
-   "reading": "The edition is a preserved working copy, not a rival storefront, so it stays in the repository. What it must not do is compete for the same query. Two sessions converged on this decision independently on 2026-11-20 (arena/b990bce7-affil1 and arena/d3f5a958-affil1); the second also added Disallow: /edition/ to robots.txt and wrote the reversal path: remove the noindex metas and the robots line if the owner chooses Countertop Almanac as the canonical brand instead.",
-   "blocks": "nothing",
-   "to_check": [
-    "https://karagemop466-tech.github.io/Affil1/edition/",
-    "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
-   ]
-  },
-  {
-   "id": "FLG-031",
-   "severity": "high",
-   "title": "The site's own copy said every link carried the Amazon tag, and every product page printed the tag beside the button",
-   "expected": "A page describes its own links accurately, in the cautious direction as well as the confident one.",
-   "found": "The sidebar on all ten guides read 'every one carries the site's Amazon tag', and each product page printed 'tag shopnow047c-20' under its buy button. No published URL carries a tag: _src/data/product-intent.json holds no account-confirmed Special Link, so all five destinations are the plain listing. The statements were untrue in the direction that flatters the site, which is the more damaging direction.",
-   "impact": "Both now derive from the paid-link register and say the plain thing: plain listing, no tag, a click is not yet credited. _tools/check.py fails the build if the copy and the register disagree, in either direction.",
-   "reading": "A cautious site is still wrong if it describes its own machinery incorrectly. This is the class of error that survives several review passes because it sounds like the responsible sentence.",
-   "blocks": "nothing — fixed",
-   "to_check": [
-    "https://karagemop466-tech.github.io/Affil1/products/p-01.html",
-    "https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html",
-    "https://affiliate-program.amazon.com/help/operating/policies"
-   ]
-  },
-  {
-   "id": "FLG-032",
-   "severity": "low",
-   "title": "Two publishers are configured for the same Pages site: the legacy branch source and an Actions deploy job",
-   "expected": "One publishing source per GitHub Pages site, so a reviewer can say which pipeline put a page live.",
-   "found": "The repository's Pages configuration reports build_type \"legacy\" (source branch main, path /) while .github/workflows/pages.yml also stages and deploys an artifact when the source is \"workflow\". Both paths appear in run history; the legacy path is what serves pages today.",
-   "impact": "The site serves the repository root, so working directories are public URLs unless underscore-prefixed (see check_serving_scope). The staged _site artifact is built and checked but is not what publishes.",
-   "reading": "Ported from the Decision Desk (IRR-03) and re-verified directly on 2026-11-20 with gh api repos/karagemop466-tech/Affil1/pages, which returned build_type=legacy. A configuration fact, not a content defect.",
-   "blocks": "any claim that the staged artifact is what deploys",
-   "to_check": [
-    "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
-    "Run: gh api repos/karagemop466-tech/Affil1/pages and read build_type"
-   ]
-  },
-  {
-   "id": "FLG-033",
-   "severity": "low",
-   "title": "The P-05 listing pages were recorded as stating several different heat tolerances for one probe set",
-   "expected": "One product listing states one figure for the same specification.",
-   "found": "Session arena/771e5093-affil1 recorded on 2026-11-20 that the CHEF iQ Sense pages it read stated several different heat tolerances across pages (1,400 °C / 1,40 °C, 1,300 °F, 1,500 °F, 1,000 °F), including one amazon.nl page contradicting itself. The observation is carried forward as recorded; it was not re-verified in this session, and no heat-tolerance figure is published on this site.",
-   "impact": "None on the published pages: the site transcribes only the listing title, which states no heat tolerance. The flag exists so the owner checks the current listing before any future content mentions probe heat limits.",
-   "reading": "An upstream-inconsistency note with dated provenance, not a claim about the product. Ported from the Decision Desk (IRR-05) during the 2026-11-20 integration pass.",
-   "blocks": "nothing — it blocks only future copy about heat tolerances",
-   "to_check": [
-    "https://www.amazon.com/dp/B0DZFD6R9Z",
-    "Re-open the amazon.nl listing pages recorded by session arena/771e5093-affil1 and compare the stated heat tolerances line by line"
-   ]
-  }
- ]
+  "flags": [
+    {
+      "id": "FLG-001",
+      "severity": "high",
+      "title": "Every submitted path code is 9 characters; every ASIN observed on arrival is 10",
+      "expected": "An Amazon Standard Identification Number is a 10-character alphanumeric identifier.",
+      "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. All five destinations now resolve, and they carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z.",
+      "impact": "The intended_asin field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
+      "reading": "The submitted codes are short-link slugs rather than identifiers. The register records what arrived, and keeps the two fields separate.",
+      "blocks": "nothing — but it explains why one column is empty",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "Open each supplied link and compare the /dp/ segment to the code in the link"
+      ]
+    },
+    {
+      "id": "FLG-002",
+      "severity": "high",
+      "title": "Attribution to shopnow047c-20 is not confirmed by an Associates report",
+      "expected": "A click from this site appears in the Associates report against the supplied tag.",
+      "found": "The tag was not observed in any URL reached while following the supplied links, and no Associates report has been read. An earlier build appended ?tag=shopnow047c-20 to every Amazon destination anyway; that was withdrawn on 2026-11-20 because a tag invented from a public observation looks like attribution while remaining unconfirmed. The five products now publish as untagged listing links, marked sponsored.",
+      "impact": "The site earns nothing from those clicks and says so in the footer of every page. Adding a tag is a data change, not a code change: one approved intent record per product, and the build tags that product automatically.",
+      "reading": "Two separate questions were being confused: does the destination carry a tag, and does the account register a click. The first is not met yet, because the published links carry no tag. The second needs a click and a dashboard.",
+      "blocks": "any claim that the site can currently earn",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "One click from the owner's device, then Reports → Orders in the Associates dashboard"
+      ]
+    },
+    {
+      "id": "FLG-003",
+      "severity": "medium",
+      "title": "The compliance status of the short links themselves is unresolved, not disproven",
+      "expected": "A statement that the supplied link form is or is not permitted.",
+      "found": "The links are of the form link.amazon/<code>. This build could not establish from an official source whether that is an Amazon-issued redirect that applies a tag server-side, or an untagged redirect.",
+      "impact": "The site does not use the short links as click destinations any more; it links to the resolved listing with the tag attached. The short link stays in the record as evidence of what was supplied.",
+      "reading": "Unresolved is not invalid. Nothing on the site calls these links invalid or non-compliant.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "FLG-004",
+      "severity": "high",
+      "title": "P-04 failed three times, then resolved — and later observations disagree on which product it is",
+      "expected": "One short link resolves consistently to one product page.",
+      "found": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three attempts in an earlier session. On 2026-11-20 it resolved on the first attempt to B0DHZTCNR5, a ThermoMaven digital meat thermometer. A parallel session later reported the same mapping. See FLG-016.",
+      "impact": "P-04 has a product page, a category and a tagged buy link to the destination reached here. The identity is labelled as observed-and-disputed, not settled.",
+      "reading": "Resolution is a record of one request, not a guarantee about the next. Neither mapping is declared correct.",
+      "blocks": "confident product identity for P-04 and P-05",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
+      ]
+    },
+    {
+      "id": "FLG-005",
+      "severity": "medium",
+      "title": "No price, rating, review count or stock status — by rule, not by omission",
+      "expected": "A shop normally shows price and rating next to each product.",
+      "found": "Nothing is shown, because neither permitted data path is connected. Program Policies 2(b) allows price and availability only where Amazon serves the link carrying that data, or where it arrives through Creators API or PA API.",
+      "impact": "Buy buttons say what they do and send the reader to Amazon, where the live figure is. No number on this site can go stale.",
+      "reading": "This is the one place where the site is deliberately less useful than a retailer. It is also the only version that stays true.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "FLG-006",
+      "severity": "medium",
+      "title": "No author, no byline, no first-hand testing",
+      "expected": "A publication normally names the person whose judgement it is.",
+      "found": "No byline anywhere. The site's claim is narrow and checkable: the links were opened, the listings were read, and the reasoning is shown.",
+      "impact": "Article structured data names the organization, not a person, because inventing an author would be a fiction.",
+      "reading": "An accurate anonymous voice is honest but weak. A named editor with a true biography is the cheapest credibility available, and it is logged as S-03.",
+      "blocks": "the site's ability to claim authority",
+      "to_check": [
+        "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+      ]
+    },
+    {
+      "id": "FLG-007",
+      "severity": "medium",
+      "title": "Every image on this site is an AI-generated illustration",
+      "expected": "A shop shows the product.",
+      "found": "Every image was generated for this build. None is a photograph of a submitted product. Each is labelled where it appears, and the policy page lists every asset.",
+      "impact": "A reader cannot judge the product from the picture, and the pages say so rather than implying otherwise.",
+      "reading": "Product imagery is licensed material with its own rules. Until a permitted source exists, illustrations are the honest option.",
+      "blocks": "nothing",
+      "to_check": [
+        "review/images.html"
+      ]
+    },
+    {
+      "id": "FLG-008",
+      "severity": "medium",
+      "title": "Two competing editions of this site were served from one repository",
+      "expected": "One canonical site for search engines to index.",
+      "found": "A generated edition at the root and a hand-written edition under crisp/ plus duplicate root pages (products.html, questions.html, suggestions.html, guides.html, dashboard.html and others). They described the same five products with different navigation and different URLs.",
+      "impact": "The duplicates could compete with the canonical pages and split what little authority exists. Internal links pointed into both editions, so navigation was ambiguous.",
+      "reading": "Consolidated on 2026-11-20: the root build is canonical, the duplicate edition is archived under archive/legacy-2026-11-20/ with a noindex tag on every archived page, and the sitemap lists only canonical URLs. Nothing was deleted; git history and the archive both retain the other session's work.",
+      "blocks": "nothing now",
+      "to_check": [
+        "robots.txt",
+        "sitemap.xml",
+        "archive/legacy-2026-11-20/index.html"
+      ],
+      "update_2026_11_20_by_arena_05771edb": "Reopened in a narrower form. A third served surface, edition/ (27 pages), shipped after this consolidation with its own robots.txt saying 'Allow: /' and its own sitemap — a second site telling crawlers to index it. Its pages were given noindex, follow by a later session, but the robots file kept the crawl invitation, so the two instructions contradicted each other at the same URL. Fixed in this pass: edition/robots.txt is 'Disallow: /', and _tools/check.py fails the build if any published directory below the root permits a crawl or serves a page without noindex. Nothing was deleted."
+    },
+    {
+      "id": "FLG-009",
+      "severity": "medium",
+      "title": "Buy links were briefly tagged by synthesis; the tag was withdrawn and the gate restored",
+      "expected": "A tag appears on an Amazon link only when an account-validated Special Link is recorded (Program Policies 2(a)-(b); FLG-025 records the open reading of 2(b)).",
+      "found": "Before 2026-11-20 the build pointed at https://www.amazon.com/dp/<ASIN> with no tag. On 2026-11-20 an earlier build in this branch appended the tag to every observed listing; that made the approved-register check pass by construction and failed its own unit test. The fallback was removed. The current links are plain listing links, marked sponsored.",
+      "impact": "Corrected on 2026-11-20: Amazon product links are built by one function (layout.product_link). The checker fails the build on any Amazon product link outside the permitted set: an account-approved Special Link, or the plain listing of an observed ASIN. No tag is synthesised. Unit tests in tools/test_paid_link_gate.py run in CI.",
+      "reading": "The gate was real and it was live. The defect was a fallback that made the check vacuous; removing it restores what the check is for.",
+      "blocks": "nothing now",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "tools/layout.py buy_url()",
+        "tools/check.py tag rule"
+      ]
+    },
+    {
+      "id": "FLG-010",
+      "severity": "low",
+      "title": "Analytics exists in the code but is switched off",
+      "expected": "Measurement before optimisation.",
+      "found": "A cookie-free client and a self-hosted collector are in the repository. Both are inert: there is no deployed endpoint and the client sends nothing by default.",
+      "impact": "No traffic, click or conversion data exists. The campaign ledger is empty on purpose.",
+      "reading": "Switching it on needs a host and a privacy statement first. Doing it in the other order would be a compliance problem for a site whose selling point is compliance.",
+      "blocks": "S-06 and every data-driven decision",
+      "to_check": [
+        "review/measurement.html"
+      ]
+    },
+    {
+      "id": "FLG-011",
+      "severity": "low",
+      "title": "Amazon's own ASIN definition could not be reached from this environment",
+      "expected": "A first-party definition of ASIN to cite.",
+      "found": "Seller Central help pages return a sign-in wall. Public pages that repeat the definition are written by sellers, not by Amazon.",
+      "impact": "The site states the observed shape of an ASIN (ten characters) rather than citing a definition it could not read.",
+      "reading": "The observation is strong enough for the register's purpose: a nine-character slug is not a ten-character identifier.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://sellercentral.amazon.com/help/hub/reference/G201394520"
+      ]
+    },
+    {
+      "id": "FLG-012",
+      "severity": "low",
+      "title": "Food-safety temperatures are not restated on this site",
+      "expected": "A thermometer guide would normally give safe internal temperatures.",
+      "found": "The figures live with food-safety authorities and vary by food and cut. The guide points to the authority rather than copying numbers into a shopping page.",
+      "impact": "One fewer thing on the site that could be wrong, and one more click for the reader.",
+      "reading": "Deliberate omission with a stated reason, not a gap.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
+      ]
+    },
+    {
+      "id": "FLG-013",
+      "severity": "low",
+      "title": "Commission rates are blank",
+      "expected": "A revenue plan would start from the rate card.",
+      "found": "The rate card is behind an Associates sign-in and was not supplied. No forecast is offered.",
+      "impact": "The site makes no revenue claim anywhere.",
+      "reading": "Rates are per category and change; quoting one from memory would be the exact failure mode this site is built to avoid.",
+      "blocks": "any revenue modelling",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "FLG-014",
+      "severity": "low",
+      "title": "The campaign ledger is empty",
+      "expected": "Measurement over time.",
+      "found": "No authorised first-party reports exist, so the ledger has columns and no rows.",
+      "impact": "No conversion score, no revenue forecast, no trend.",
+      "reading": "An empty ledger with a provenance rule is more useful than a full one with invented numbers.",
+      "blocks": "nothing",
+      "to_check": [
+        "operations/ledger.html"
+      ]
+    },
+    {
+      "id": "FLG-015",
+      "severity": "low",
+      "title": "Two of the five products are thermometers, not air fryers",
+      "expected": "The brief describes air fryers; the register holds five links.",
+      "found": "P-04 resolves to a ThermoMaven digital meat thermometer and P-05 to a CHEF iQ wireless probe set. Category path on arrival for both: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
+      "impact": "Thermometers are published as their own category. No guide treats them as a fifth air fryer.",
+      "reading": "Corrected from the earlier build, which described one thermometer and an unresolved fifth link.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
+      ]
+    },
+    {
+      "id": "FLG-016",
+      "severity": "high",
+      "title": "P-04 and P-05 were mapped to opposite products by two sessions, then reconciled by later observation",
+      "expected": "A short link maps consistently to one listing.",
+      "found": "This session observed P-04 (B0c8moW59) → B0DHZTCNR5 (ThermoMaven) and P-05 (B0f3GKalj) → B0DZFD6R9Z (CHEF iQ Sense). A parallel session recorded the reverse mapping on 2026-11-20. A later fetch by that session reached the same mapping recorded here, and the merged register now agrees with it. Earlier P-04 attempts still reached a checkpoint.",
+      "impact": "The current register is internally consistent and both product pages carry an identity note because the disagreement existed and neither observation proves intent. The intended product remains unconfirmed until the operator checks SiteStripe.",
+      "reading": "Agreement between sessions is corroboration, not proof. Both observations were of the same short link, so a stable redirect is plausible but the intended ASIN is still only knowable from the account.",
+      "blocks": "calling either thermometer's identity settled",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
+      ]
+    },
+    {
+      "id": "FLG-017",
+      "severity": "medium",
+      "title": "Archived editions contain earlier or conflicting product observations",
+      "expected": "One served edition, one register.",
+      "found": "Three editions had been published from this repository: the generated root edition, a crisp/ sub-site and a kitchen/ sub-site, plus duplicate root pages. Their registers disagree about P-04 in particular.",
+      "impact": "All three are archived under archive/legacy-2026-11-20/ with noindex on every page, and the published artifact is staged from the generated set only. Archived material is a record, not confirmation.",
+      "reading": "Old pages that still rank, or that a reader bookmarks, would otherwise contradict the current register. Archiving plus noindex removes that contradiction without destroying the history.",
+      "blocks": "nothing now",
+      "to_check": [
+        "archive/legacy-2026-11-20/README.md",
+        "tools/stage.py",
+        "sitemap.xml"
+      ]
+    },
+    {
+      "id": "FLG-018",
+      "severity": "medium",
+      "title": "Buy-button wording is a compliance judgement the site cannot make for itself",
+      "expected": "A shop's call to action is usually 'add to basket' or a price.",
+      "found": "Buttons read 'See it on Amazon' and 'Check it on Amazon', each followed by a line stating that price and rating are shown on Amazon. No figure and no implied discount.",
+      "impact": "Nothing on the page displays price or availability, which is what the policy constrains. The reading of the policy is the site's own.",
+      "reading": "Logged for owner review before any paid traffic is sent. If the wording reads as a price claim to the account owner, it is a two-line change.",
+      "blocks": "nothing, but it should be signed off",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+      ]
+    },
+    {
+      "id": "FLG-019",
+      "severity": "low",
+      "title": "The site has no Search Console property and no email list",
+      "expected": "A publication measures what it publishes.",
+      "found": "No verification token, no property, no analytics endpoint, no mailing list. RSS is the only channel that works today.",
+      "impact": "The next topic cannot be chosen from measured demand, only from editorial hypotheses.",
+      "reading": "Both are owner actions: Search Console needs the owner's Google account, and email needs a provider and a privacy statement.",
+      "blocks": "S-06, S-07 and Q-20",
+      "to_check": [
+        "suggestions/index.html"
+      ]
+    },
+    {
+      "id": "FLG-020",
+      "severity": "low",
+      "title": "The holiday hosting photograph has no recorded origin",
+      "expected": "Every photograph on the site has an entry in src/data/images.json with its origin, date and generator.",
+      "found": "assets/img/holiday-hosting-counter.jpg is used on the index, the guides index and the holiday hosting guide. It had no images.json entry. Its contents were read directly: an unbranded countertop air fryer beside roasted vegetables and green beans, with a garland in the window.",
+      "reading": "Blank fields mean unknown, not safe. Until the owner records where the file came from, it is not cleared on rights or on whether it depicts a real product.",
+      "impact": "An entry was added with generated_on, generated_by and depicts_a_real_product left null. The guide caption calls the scene illustrative. The owner should confirm the origin or replace the photograph.",
+      "blocks": "a clean image audit for the holiday guide and the index card",
+      "to_check": [
+        "src/data/images.json",
+        "guides/holiday-hosting-air-fryer.html"
+      ]
+    },
+    {
+      "id": "FLG-021",
+      "severity": "medium",
+      "title": "tools/validate.py was failing on the product schema (fixed in PR #77)",
+      "expected": "Every validator in tools/ runs clean against the current data.",
+      "found": "python3 tools/validate.py stopped with KeyError 'supplied_path_code_length' because the product schema had been renamed. The validator also pointed at a retired section. Both were fixed in PR #77: field names now match the schema, the validator checks the published pages, and it passes (1441 checks, 0 warnings).",
+      "reading": "The gate had been red on main. That is the reason this flag was raised, and the fix is recorded here.",
+      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",
+      "blocks": "nothing",
+      "to_check": [
+        "tools/validate.py",
+        "src/data/products.json"
+      ]
+    },
+    {
+      "id": "FLG-022",
+      "severity": "high",
+      "title": "The only supported route to price and availability data is gated behind 10 qualifying sales",
+      "expected": "A site can decide to add prices once it has a data feed.",
+      "found": "Program Policies §2(b) still names “Creators API or PA API” as the permitted route. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment, at least 10 qualifying sales within the past 30 days, registration through Associates Central, and generated credentials.",
+      "reading": "This turns the site's biggest missing feature into a sequencing problem rather than an engineering one. Prices arrive after the site proves it can sell, not before. A separate clause in the same section adds that a comparison-format price display must also show the lowest used price, which is a second reason this site's comparison table keeps its price column empty.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "The comparison table keeps its blank price column by rule, and the site's own price_rule wording was updated to name the deprecation rather than pointing at an API that no longer answers.",
+      "blocks": "any live price, rating or availability display, until the sales threshold is met"
+    },
+    {
+      "id": "FLG-023",
+      "severity": "high",
+      "title": "P-04's destination claim rests on one observation; four recorded passes saw only the bot interstitial",
+      "expected": "One consistent observation status per submitted link, or a published disagreement.",
+      "found": "src/data/products.json and FLG-004/FLG-016 carry P-04 (B0c8moW59) -> B0DHZTCNR5 (ThermoMaven) as resolved. But src/data/reverification.json records P-04 as unresolved (bot interstitial on every attempt), and a fourth independent pass (obs-83e015f6, 2026-11-20 05:18-05:22Z) reached only the /checkpoint/continue interstitial again, as did the recovered PR #15 register and the earliest archived register. Only one session claims to have reached a product page for this link.",
+      "impact": "Any page treating P-04 as an identified product (products/p-04.html, the home shortlist's P-04 buy link) rests on a single disputed observation. Four recorded passes saw no product page.",
+      "reading": "Do not settle by preference. Re-observe from the enrolled Associates workflow (one link, destination and tracking report) and update both registers together. Until then the honest status for P-04 is disputed, and the B0DHZTCNR5 mapping stays visible as one session's observation.",
+      "blocks": "A confident P-04 identity claim; any five-of-five resolved claim.",
+      "to_check": [
+        "src/data/products.json row for P-04",
+        "src/data/reverification.json rows P-04 and additional_passes.obs-83e015f6",
+        "FLG-004 and FLG-016 (the reconciliation this contradicts)",
+        "products/p-04.html identity note"
+      ],
+      "sources": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/checkpoint/continue"
+      ],
+      "raised_by": "session-arena-83e015f6, 2026-11-20"
+    },
+    {
+      "id": "FLG-024",
+      "severity": "medium",
+      "title": "Archived editions still serve live tagged Amazon links",
+      "expected": "Every served Amazon product link passes the same gate as the published tree.",
+      "found": "archive/ holds 25 HTML files from earlier editions, and they carry tag=shopnow047c-20 on Amazon product links. archive/ is preserved untouched, marked noindex and disallowed in robots.txt. Legacy Pages serves the repository root, so those links resolve. tools/check.py does not scan archive/.",
+      "reading": "Editing archived evidence would break the record, so the files were not changed. The owner can choose between a banner on each archived file, or moving archive/ out of the served tree once Pages is set to GitHub Actions (tools/stage.py already supports that).",
+      "impact": "Readers can reach a tagged link from an archived page. Those pages are not in the sitemap, and robots.txt disallows them, so they are not indexed.",
+      "to_check": [
+        "gh api repos/karagemop466-tech/Affil1/pages (build_type, source)",
+        "grep -rl 'shopnow047c-20' archive/"
+      ],
+      "blocks": "a clean compliance attestation of the served tree (not the published pages)"
+    },
+    {
+      "id": "FLG-025",
+      "severity": "high",
+      "title": "Open reading: may plain listing links stay untagged before a Special Link is validated?",
+      "expected": "A written answer from Amazon Associates on whether untagged listing links are permitted on an enrolled site with no validated Special Link yet.",
+      "found": "Program Policies 2(b) says 'you must include your Associates ID or tag ... as a parameter in the URL of each link you place on your Site to an Amazon Site'. The same section opens 'General Requirements Applicable to All Special Links'. Reading A (this build): the tag rule governs Special Links, so a plain listing link is not one. Reading B (an earlier session's reading, FLG-009 history): every link to an Amazon site must carry the ID.",
+      "reading": "Reading A is the more literal one given the section heading. It is still an interpretation, and the cost of being wrong is a policy breach, so it needs the owner's decision in the enrolled workflow.",
+      "impact": "Decides whether the current plain listing buy buttons are acceptable, or whether the owner must enable a tag before the next publication.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies (section 2(b))",
+        "Ask Associates support in writing, quoting section 2(b), and keep the answer with this register"
+      ],
+      "blocks": "any decision on when to enable the tag"
+    },
+    {
+      "id": "FLG-026",
+      "severity": "medium",
+      "title": "P-01 short link resolved to the Amazon homepage on a 2026-11-20 fetch",
+      "expected": "Each supplied short link resolves to the same product listing on every attempt.",
+      "found": "A fetch of https://link.amazon/B04G1MEwY on 2026-11-20 returned https://www.amazon.com/ (title 'Amazon.com. Spend less. Smile more.'), not the listing. The other four short links returned the /dp/ listings already recorded for P-02, P-03, P-04 and P-05 in the same session.",
+      "reading": "The resolution is unstable, which is a reason not to treat any short link as a destination. The register keeps the listing observation for P-01 and does not promote the short link.",
+      "impact": "Nothing published changes. P-01's identity still rests on repeated observations of /dp/B0CDY277D3, not on the short link.",
+      "to_check": [
+        "https://link.amazon/B04G1MEwY, repeated in a logged-out browser and recorded with the time"
+      ],
+      "blocks": "treating the P-01 short link as verified",
+      "update_2026_11_20_by_arena_05771edb": "Superseded as a single-link finding: later passes the same day found this for all five short links at once. Recorded in FLG-028.",
+      "superseded_by": "FLG-028"
+    },
+    {
+      "id": "FLG-027",
+      "severity": "medium",
+      "title": "The repository's robots.txt sits in a subdirectory of the host, which crawlers are not required to read",
+      "expected": "A robots.txt that crawlers consult before indexing the site.",
+      "found": "Google's robots specification states that robots.txt must be placed in the top-level directory of a site and that crawlers don't check for robots.txt files in subdirectories. This site is served from https://karagemop466-tech.github.io/Affil1/, so its robots.txt publishes at /Affil1/robots.txt — a subdirectory — and Google may never fetch it. The file itself is correctly formatted (re-checked against the specification on 2026-11-20) and excludes /archive/, but its reach cannot be guaranteed from inside a project repository.",
+      "reading": "Discovery does not depend on it: every generated page carries a self-referencing canonical URL, the sitemap lists only the maintained edition, and internal links are relative and resolved. The step that actually puts the sitemap in front of Google is Search Console submission, which needs the owner's account (Q-11, S-03).",
+      "to_check": [
+        "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
+        "https://karagemop466-tech.github.io/Affil1/robots.txt"
+      ],
+      "impact": "Discoverability, not correctness. The file is kept correctly formatted for any crawler that does read it; canonicals and the sitemap carry the load if it is ignored.",
+      "blocks": "nothing — but Search Console submission (Q-11 / S-03) is the required discovery step, not an optional one"
+    },
+    {
+      "id": "FLG-028",
+      "severity": "high",
+      "title": "On 2026-11-20 re-check, all five submitted short links returned the Amazon homepage, not the product pages the register records",
+      "expected": "Each submitted link.amazon.com short link, fetched directly, lands on the /dp/ listing that the register records as its observed destination (product-intent.json, products.json observed_url).",
+      "found": "Re-check on 2026-11-20 (arena/bcd93318-affil1, fetch_page, redirects followed). Every short link returned https://www.amazon.com/ with the title 'Amazon.com. Spend less. Smile more.': B04G1MEwY (P-01), B02NbDxp3 (P-02), B00hJ57DV (P-03), B0c8moW59 (P-04, on two separate attempts), B0f3GKalj (P-05). The direct /dp/ pages for B0CDY277D3 (P-01) and B0DHZTCNR5 (P-04) and B0DZFD6R9Z (P-05) did resolve to the listings the register records (titles confirmed on the same date). Details: _docs/VERIFICATION-arena-bcd93318.md.",
+      "impact": "The register's observed_redirect_target values for the short links rest on earlier fetches. Today's fetches do not reproduce them, so those redirect observations are not currently reproducible. Nothing here changes intended_asin, which stays null.",
+      "reading": "Either the short links redirect differently by request (geography, session, bot handling, or the fetching client) or the earlier redirect records were wrong. The repository cannot tell which from outside Amazon's own tools. This is the same instability already recorded for P-01 and P-04 in FLG-018 and the README, now seen for all five at once. Do not change any observed field on the strength of one fetch in either direction.",
+      "blocks": "Nothing on the site changes automatically. It does mean the 'destination reached' column for the short links is not a stable fact. The Associates one-link test (FLG-003) is the step that would settle it from an enrolled account.",
+      "to_check": [
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV",
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "https://affiliate-program.amazon.com/help/operating/agreement"
+      ],
+      "corroborated_by": "arena/05771edb-affil1, independently, on a later pass the same day: all five short links returned https://www.amazon.com/. Two sessions, two passes, same result. The later pass also re-opened all five direct /dp/ URLs and found each page title matching the register verbatim — including B09B7SB46R (P-02) and B08DKYBTPH (P-03), which the first pass did not re-check."
+    },
+    {
+      "id": "FLG-029",
+      "severity": "high",
+      "title": "The 'Add to basket' links carry no tag and are not Special Links",
+      "expected": "Every link to an Amazon Site that is meant to earn commission uses the Associates ID as a URL parameter (Program Policies 2(b): 'you must include your Associates ID or \"tag\" ... as a parameter in the URL of each link you place on your Site to an Amazon Site'), and Amazon notes that purchases can be disqualified when 'the links from your site to the relevant Amazon Site are not properly formatted' (Commission Income Statement 2(g)).",
+      "found": "Both the front page and the products page publish five 'Add to basket' links at https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=<ASIN>&Quantity.1=1 with no tag. They are marked rel=\"sponsored\" and labelled 'paid link', so they read as earning links while being incapable of attributing a purchase.",
+      "impact": "A reader who uses them is taken to an Amazon cart that no Associated account is attached to. The site earns nothing, and the button is the most prominent call to action on the page.",
+      "reading": "The cart permalink was added as a reference layer next to the listing link and is treated by the build as a permitted non-tag URL. It is not. Program Policies 2(b) applies to every link placed on the site to an Amazon Site, and the safe reading of a cart permalink is that it is a link to an Amazon Site. Either it carries the tag, or it is not presented as a buy action.",
+      "blocks": "any claim that the primary call to action can earn, and any traffic spend",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "_src/data/_links.json cart endpoint row",
+        "One click on an Add to basket button, then Reports → Orders"
+      ],
+      "resolution": "Resolved in code on 2026-11-20 by session arena/acb1e4c8-affil1, during the merge that brought this flag onto the branch. _tools/cta.py no longer builds a cart permalink from an observed ASIN and no longer appends the tag by hand. pair() now renders the cart door only when paid_link_gate holds an account-approved Special Link for that ASIN; otherwise the primary door is the official listing for the observed ASIN via buy_url() -- the same gate every other Amazon link uses -- still marked rel=\"sponsored nofollow noopener\", with a one-line note saying why there is no one-click basket. No published page contains a cart/add.html URL. Regression test: _tools/test_cta_gate.py (4 cases). The remaining question in this flag -- whether a tagged cart permalink is itself a permitted Special Link -- is not answered here and does not need to be until the account issues one; it is D-01 on /decisions/.",
+      "status": "resolved-in-code"
+    },
+    {
+      "id": "FLG-030",
+      "severity": "medium",
+      "title": "A second complete edition of the same five-product shop was indexable under /edition/",
+      "expected": "One site for a search engine to index, which is what the About page claims and what the brief asks for.",
+      "found": "The published tree contains a preserved edition/ build of more than twenty pages, each carrying a self-referencing canonical under /Affil1/edition/, and a sitemap of its own. A canonical pointing at a second copy of the same catalogue does not consolidate anything: it asks a crawler to index two shops. No robots meta instruction was present on any edition page.",
+      "impact": "Every edition page now carries <meta name=\"robots\" content=\"noindex, follow\"> beside its canonical, so the maintained root is the only indexable surface. The edition stays reachable for review and no content changed.",
+      "reading": "The edition is a preserved working copy, not a rival storefront, so it stays in the repository. What it must not do is compete for the same query. Two sessions converged on this decision independently on 2026-11-20 (arena/b990bce7-affil1 and arena/d3f5a958-affil1); the second also added Disallow: /edition/ to robots.txt and wrote the reversal path: remove the noindex metas and the robots line if the owner chooses Countertop Almanac as the canonical brand instead.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/edition/",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ]
+    },
+    {
+      "id": "FLG-031",
+      "severity": "high",
+      "title": "The site's own copy said every link carried the Amazon tag, and every product page printed the tag beside the button",
+      "expected": "A page describes its own links accurately, in the cautious direction as well as the confident one.",
+      "found": "The sidebar on all ten guides read 'every one carries the site's Amazon tag', and each product page printed 'tag shopnow047c-20' under its buy button. No published URL carries a tag: _src/data/product-intent.json holds no account-confirmed Special Link, so all five destinations are the plain listing. The statements were untrue in the direction that flatters the site, which is the more damaging direction.",
+      "impact": "Both now derive from the paid-link register and say the plain thing: plain listing, no tag, a click is not yet credited. _tools/check.py fails the build if the copy and the register disagree, in either direction.",
+      "reading": "A cautious site is still wrong if it describes its own machinery incorrectly. This is the class of error that survives several review passes because it sounds like the responsible sentence.",
+      "blocks": "nothing — fixed",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/products/p-01.html",
+        "https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "FLG-032",
+      "severity": "low",
+      "title": "Two publishers are configured for the same Pages site: the legacy branch source and an Actions deploy job",
+      "expected": "One publishing source per GitHub Pages site, so a reviewer can say which pipeline put a page live.",
+      "found": "The repository's Pages configuration reports build_type \"legacy\" (source branch main, path /) while .github/workflows/pages.yml also stages and deploys an artifact when the source is \"workflow\". Both paths appear in run history; the legacy path is what serves pages today.",
+      "impact": "The site serves the repository root, so working directories are public URLs unless underscore-prefixed (see check_serving_scope). The staged _site artifact is built and checked but is not what publishes.",
+      "reading": "Ported from the Decision Desk (IRR-03) and re-verified directly on 2026-11-20 with gh api repos/karagemop466-tech/Affil1/pages, which returned build_type=legacy. A configuration fact, not a content defect.",
+      "blocks": "any claim that the staged artifact is what deploys",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+        "Run: gh api repos/karagemop466-tech/Affil1/pages and read build_type"
+      ]
+    },
+    {
+      "id": "FLG-033",
+      "severity": "low",
+      "title": "The P-05 listing pages were recorded as stating several different heat tolerances for one probe set",
+      "expected": "One product listing states one figure for the same specification.",
+      "found": "Session arena/771e5093-affil1 recorded on 2026-11-20 that the CHEF iQ Sense pages it read stated several different heat tolerances across pages (1,400 °C / 1,40 °C, 1,300 °F, 1,500 °F, 1,000 °F), including one amazon.nl page contradicting itself. The observation is carried forward as recorded; it was not re-verified in this session, and no heat-tolerance figure is published on this site.",
+      "impact": "None on the published pages: the site transcribes only the listing title, which states no heat tolerance. The flag exists so the owner checks the current listing before any future content mentions probe heat limits.",
+      "reading": "An upstream-inconsistency note with dated provenance, not a claim about the product. Ported from the Decision Desk (IRR-05) during the 2026-11-20 integration pass.",
+      "blocks": "nothing — it blocks only future copy about heat tolerances",
+      "to_check": [
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "Re-open the amazon.nl listing pages recorded by session arena/771e5093-affil1 and compare the stated heat tolerances line by line"
+      ]
+    },
+    {
+      "id": "FLG-034",
+      "severity": "high",
+      "title": "Underscore-prefixed working directories are served publicly by the legacy Pages host; the rename mitigation is inert while .nojekyll bypasses Jekyll's default _-exclusion",
+      "expected": "Working files under _tools/, _src/, _data/, _platform/, _analytics/, _measurement/, _decision-support/ and _archive/ are not reachable from the public host. The underscore rename (session arena/d34e0765-affil1) relies on GitHub Pages' Jekyll build, which by default does not build files or folders that start with _ (https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll, fetched 2026-11-20).",
+      "found": "The repository root carries a .nojekyll file — the standard GitHub Pages switch for bypassing Jekyll processing entirely — so the default underscore exclusion never applies and repo paths serve as-is. That reading matches what the host actually does: live fetches on 2026-11-20 (arena/3d6a7607-affil1) returned full content for https://karagemop466-tech.github.io/Affil1/_data/confirmations.json (the product-intent confirmation register), https://karagemop466-tech.github.io/Affil1/_platform/collector.py (the analytics endpoint source) and https://karagemop466-tech.github.io/Affil1/_tools/build.py (the build source). GitHub's documentation also warns that Pages sites are publicly available even when the repository is private (https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site, fetched 2026-11-20).",
+      "reading": "The two available mitigations conflict with each other. Removing .nojekyll would re-enable the Jekyll exclusion but change how every URL is built mid-flight. Switching Pages to GitHub Actions publishing serves the staged curated _site instead of the branch root, which hides all working files at once and is already supported by pages.yml. That switch is a repository setting (PUT /repos/karagemop466-tech/Affil1/pages with build_type workflow), requested by earlier sessions; FLG-032 records that two publishers are in fact configured, so this flag and FLG-032 should be settled together by the owner. Until then no rename can be treated as hiding anything.",
+      "impact": "Working registers and source code are public URLs. No credential or personal data appears in the sampled files, and the registers are public documents by design; the problem is the class of exposure the earlier renames claimed to close, not a specific secret.",
+      "blocks": "any clean serving-scope attestation of the public host",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/_data/confirmations.json",
+        "https://karagemop466-tech.github.io/Affil1/_platform/collector.py",
+        "https://karagemop466-tech.github.io/Affil1/_tools/build.py",
+        "gh api repos/karagemop466-tech/Affil1/pages (fields: build_type, source)"
+      ]
+    },
+    {
+      "id": "FLG-035",
+      "severity": "low",
+      "title": "robots.txt still carries a Disallow rule naming /archive/, a path that has not existed since the underscore rename",
+      "expected": "Every path named in robots.txt exists at the published host and names the thing it is meant to exclude.",
+      "found": "The merged ROBOTS generator (after PRs #109/#113/#115) lists Disallow: /archive/, Disallow: /_archive/ and Disallow: /edition/. The /_archive/ and /edition/ rules are correct; /archive/ names a directory that ceased to exist when the archived edition moved under _archive/. The merge resolved arena/3d6a7607-affil1's removal of the stale line by keeping main's additive version, so the stale rule remains (arena/3d6a7607-affil1, 2026-11-20).",
+      "reading": "Harmless: a Disallow of a path that serves nothing excludes nothing that exists. Kept on the register so the next session does not read the stale line as evidence that archive/ still exists, and so the generator can be cleaned when someone is in the file anyway.",
+      "impact": "Cosmetic and administrative.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/robots.txt",
+        "_tools/build.py (ROBOTS constant)"
+      ]
+    }
+  ]
 }

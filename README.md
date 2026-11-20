@@ -27,7 +27,7 @@ The brief had five parts. This is where each one lives:
 
 ```
 index.html            publication front page          ← generated
-guides/<slug>/index.html  10 buyer guides              ← generated
+guides/<slug>.html       11 buyer guides              ← generated
 compare/ products/ topics/ about/                     ← generated
 suggestions/ questions/ review/                         ← generated
 operations/ledger.html campaign ledger (empty)          ← generated

@@ -651,3 +651,89 @@ COMPARE_COLUMNS = [
 
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from
 # _src/data/products.json so that a fact can never exist in two places and drift.
+
+
+# Appended 2026-11-20 (arena/3d6a7607-affil1). Every figure below was transcribed
+# on 2026-11-20 from the two official pages listed in `sources`: the USDA FSIS
+# "Leftovers and Food Safety" page (fsis.usda.gov, Last Updated Jul 31, 2020) and
+# the FoodSafety.gov "Cold Food Storage Chart" (foodsafety.gov, Date Last Reviewed
+# September 19, 2023). Nothing here is a product test, and no appliance-specific
+# reheating setting is endorsed: the official rules are about temperature and time.
+GUIDES.append({
+    "slug": "reheating-thanksgiving-leftovers",
+    "cluster": "Seasonal",
+    "related": ["P-04", "P-03"],
+    "title": "Reheating Thanksgiving leftovers in an air fryer: what is safe?",
+    "kicker": "Seasonal kitchen · the day after",
+    "dek": "The fan brings the crunch back. The rules that keep leftovers safe come from a thermometer and a clock, not the appliance \u2014 and the official ones are simpler than most articles make them.",
+    "updated": "2026-11-20",
+    "read_minutes": 6,
+    "photo": "assets/img/leftovers",
+    "photo_alt": "An engraved illustration of an open air fryer drawer holding sliced turkey and roasted vegetables, with a food thermometer on the counter beside it",
+    "photo_caption": "Illustration. Not a photograph of any product sold here.",
+    "sections": [
+        {
+            "h": "The clock starts when the meal ends, not when you feel hungry again",
+            "p": [
+                "USDA's Food Safety and Inspection Service puts the line plainly: bacteria grow rapidly between 40\u00b0F and 140\u00b0F, and within 2 hours of cooking \u2014 or of coming out of an appliance that was keeping it warm \u2014 leftovers must be refrigerated. Perishable food left out longer than 2 hours gets thrown away; if the room is over 90\u00b0F, the window drops to 1 hour.",
+                "On the day itself that rule collides with hospitality. The practical version that respects both: while the table is still up, put a shallow container next to the serving dishes and pack the turkey into it in slices, not in a lump. FSIS's cooling advice is exactly that \u2014 divide large amounts into shallow containers and cut big items into smaller pieces so the cold reaches the middle fast. Slice the breast meat; legs and wings can go in whole.",
+                "None of that is about the air fryer. It is the part of the day-after that decides whether reheating is even on the table.",
+            ],
+        },
+        {
+            "h": "The fridge window, and where the freezer line sits",
+            "p": [
+                "Both of the official charts this guide leans on agree on the refrigerator: cooked meat or poultry keeps 3 to 4 days at 40\u00b0F or below. After that, the rule is the bin, not the sniff test.",
+                "The freezer numbers look different on the two pages until you read their footnotes. FoodSafety.gov's storage chart gives cooked meat or poultry 2 to 6 months in the freezer; FSIS's leftovers page says 3 to 4 months. The chart's own note explains the slack: freezer guidelines are for quality only \u2014 food held continuously at 0\u00b0F stays safe indefinitely, it just loses moisture and flavour over time. So the honest summary is: safe for longer than it is good.",
+            ],
+        },
+        {
+            "h": "The one number that decides the reheat",
+            "p": [
+                "Whatever appliance brings the food back, FSIS's reheating rule is a single sentence: leftovers must reach 165\u00b0F as measured with a food thermometer. Sauces, soups and gravies get their own instruction \u2014 bring them to a rolling boil \u2014 and that is a saucepan job before it is anything else.",
+                "The same page adds two reheating habits that matter more than any setting: cover the food while it reheats, because trapped moisture helps it heat all the way through, and when a microwave was involved, check more than one spot \u2014 FSIS warns that microwaves leave cold spots and says to verify the temperature in several places. That caution is written for microwaves, but checking the middle in two places is the honest way to treat any reheating method, including this one.",
+                "This is also where a thermometer earns its drawer space. An instant-read like the one in the shortlist answers the only question the appliance cannot: what the middle actually reached.",
+            ],
+            "table": {
+                "caption": "Storage and reheating figures, transcribed from the official pages on 2026-11-20",
+                "headers": ["Situation", "Official figure", "Official source"],
+                "rows": [
+                    ["Cooked meat or poultry in the refrigerator, 40\u00b0F or below", "3 to 4 days", {"url": "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts", "label": "FoodSafety.gov · Cold Food Storage Chart"}],
+                    ["Cooked meat or poultry in the freezer, 0\u00b0F or below", "2 to 6 months (quality, not safety)", {"url": "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts", "label": "FoodSafety.gov · Cold Food Storage Chart"}],
+                    ["Perishable food left out at room temperature", "Refrigerate within 2 hours; discard after (1 hour if the room is over 90\u00b0F)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety", "label": "USDA FSIS · Leftovers and Food Safety"}],
+                    ["Reheating leftovers of any kind", "165\u00b0F, measured with a food thermometer", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety", "label": "USDA FSIS · Leftovers and Food Safety"}],
+                    ["Sauces, soups and gravies", "Bring to a rolling boil", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety", "label": "USDA FSIS · Leftovers and Food Safety"}],
+                ],
+            },
+        },
+        {
+            "h": "Where the air fryer genuinely fits \u2014 and where it pulls against the rules",
+            "p": [
+                "Firm pieces with surface to crisp \u2014 roast potatoes, wedges, a breast sliced thick enough to keep its interior moist \u2014 are the leftovers a moving column of hot air treats kindly. Soft or sauced food has nothing to gain, and gravy has an instruction of its own already.",
+                "Here is the tension worth naming: FSIS says cover leftovers to reheat, because moist heat helps the food heat evenly all the way through. A fan appliance is good at the opposite \u2014 dry, moving air that crisps the surface. Those two goals pull in opposite directions, and the safety rule does not decide between them. Cover or uncover is a texture decision. The thermometer check is the safety decision, and only one of the two is negotiable about the number.",
+                "If the basket would be packed solid, run it in batches with space for air to move. That is appliance common sense rather than official instruction, and the manual for the exact model is the authority on how it heats.",
+            ],
+        },
+        {
+            "h": "What the official guidance does not say",
+            "p": [
+                "No federal page endorses an air-fryer reheat, and none publishes a minutes-and-power setting for one. The official rules are about temperature and time, not about which appliance applies them. So when another article hands you \u201c370\u00b0F for 4 minutes\u201d for leftover turkey, that number is the author's machine, not a safety figure \u2014 the same class of unstated provenance this site refuses to publish.",
+                "The official way to think about it: 165\u00b0F in the middle is the requirement; the appliance is just the route. FSIS's note on reheating frozen leftovers without thawing makes the same point in passing \u2014 a saucepan, microwave or oven all qualify, and the only cost is time.",
+            ],
+        },
+        {
+            "h": "Day-after questions, answered from the sources",
+            "items": [
+                ("Reheat straight from the freezer?", "FSIS says it is safe to reheat frozen leftovers without thawing, and that it simply takes longer than reheating thawed food."),
+                ("Refreeze what you already reheated?", "Safe, per FSIS, once the food was reheated to 165\u00b0F with a food thermometer."),
+                ("How long do the extras keep?", "Three to 4 days in the refrigerator. Frozen, quality holds 2 to 6 months for cooked meat or poultry by the chart; safety lasts longer than quality does."),
+                ("What about the gravy?", "Its official instruction is a rolling boil, which is a saucepan instruction. Reheat it with everything else, then judge."),
+            ],
+        },
+    ],
+    "sources": [
+        ("USDA FSIS · Leftovers and Food Safety (Last updated Jul 31, 2020)", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety"),
+        ("FoodSafety.gov · Cold Food Storage Chart (Date last reviewed Sep 19, 2023)", "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts"),
+    ],
+    "closing": "The storage and reheating figures above are transcribed from USDA FSIS and FoodSafety.gov pages fetched on 2026-11-20, and the table links the page each row came from. No product on this site was tested, and no appliance-specific reheating setting is endorsed here \u2014 the manual for your model is the authority on how it heats.",
+})
