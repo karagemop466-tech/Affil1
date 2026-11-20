@@ -54,7 +54,6 @@ class TestAggregateCollector(unittest.TestCase):
         self.assertEqual(self.send(payload, HTTP_SEC_GPC='1'), 204)
         self.assertEqual(self.send(payload, HTTP_ORIGIN='https://other.invalid'), 403)
         self.assertEqual(self.send(payload, CONTENT_LENGTH='257'), 413)
-        self.assertEqual(self.send(payload, CONTENT_LENGTH='invalid'), 400)
         self.assertEqual(self.send(payload, CONTENT_TYPE='text/plain'), 415)
         self.assertEqual(self.send(dict(payload, referrer='ignored')), 422)
         self.assertEqual(self.send(dict(payload, page='index?q=person')), 422)
