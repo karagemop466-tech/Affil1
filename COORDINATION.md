@@ -25,6 +25,15 @@ Additional unclaimed scope: `tools/stage.py` (package stylesheet), `assets/js/an
 Concurrent integrations #32, #38, #42 and the journal discovery release: retained the task-board histories and combined source templates, including the paid-link gate, newer executive brief, local search and shelf filters. Integrated the fit finder and four seasonal guides; retained the new guide clusters and featured them on the illustrated front page. Rebuilt generated pages. Reused and tested the #32 collector instead of writing a duplicate. [PR #44](https://github.com/karagemop466-tech/Affil1/pull/44).
 
 Current integration: #50, #41 and #37 selected incompatible generators while #44 was open. Preserved the current main pipeline and ported the cover and cards into its template rather than reviving a retired edition.
+## arena/3cad5d4e-affil1 — deployment and follow-up
+
+[PR #45](https://github.com/karagemop466-tech/Affil1/pull/45) merged at `714affa1c94507f4f5ae74d28d2f01333f2b963b`. Both PR checks passed. Its standalone Pages run was superseded by [run 44683427404](https://github.com/karagemop466-tech/Affil1/actions/runs/44683427404), which deployed successfully from descendant `e6f3234` after concurrent #51. The design decision and hosting-review panels were retained in that descendant.
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Restore the approval requirement after automatic tags were added by #51 | done | arena/3cad5d4e-affil1 | Maintained product-link rendering, source/CTA labels, and checker only; no product observations or other sessions' new guides changed |
+
+The published descendant contains tagged links despite empty intent and reporting fields. A tag added from a public observation is not a validated Special Link. This is a release-gate regression, not evidence that an original submitted short link was invalid. Reapplied the gate to the final generated edition after #50 and #37 replaced the templates. Public listing citations remain sponsored-marked; the checker rejects any tagged product URL not in the approved intent register. No new confirmation data was added. Restored the aggregate preview and decision panels to the active edition. Local checks: 27 pages, zero checker warnings/errors, zero broken relative references, and all gate/collector tests passing.
 
 ## Measurement and product-release gate — arena/3cad5d4e-affil1
 

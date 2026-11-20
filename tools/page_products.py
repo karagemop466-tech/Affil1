@@ -5,7 +5,7 @@ sits underneath as a short, factual block, not as the headline. Every figure on
 the page is either transcribed from the listing title or visibly blank.
 """
 
-from layout import (AMAZON_NOTE, blank, breadcrumbs, breadcrumb_schema, buy_url,
+from layout import (AMAZON_NOTE, approved_amazon_urls, blank, breadcrumbs, breadcrumb_schema, buy_url,
                     esc, eyebrow, link, outbound, page, pagehead, product_link,
                     rel, section, table)
 from page_home import img, product_card
@@ -206,7 +206,7 @@ def _verification(d, p, asin):
   <div><span class="verify-k">Supplied</span><code>{esc(p['submitted_link'])}</code></div>
   <div><span class="verify-k">Opened</span><span>{esc(p['checked_on'])}</span></div>
   <div><span class="verify-k">Landed on</span><code>/dp/{esc(asin)}</code></div>
-  <div><span class="verify-k">Paid link</span><code>tag={esc('shopnow047c-20')}</code></div>
+  <div><span class="verify-k">Paid link</span><span>{"Account-confirmed" if asin in approved_amazon_urls() else "Not confirmed"}</span></div>
 </div>
 <p class="verify-note">{esc(p['resolution_note'])} The nine-character code in the supplied link is a short-link slug, not an ASIN, so no intended ASIN is recorded. <a class="tlink" href="{esc(rel(d, 'review/index.html'))}">Everything still unverified <span aria-hidden="true">&rarr;</span></a></p>""",
                    cls="")
