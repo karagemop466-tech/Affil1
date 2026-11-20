@@ -563,3 +563,31 @@ ol.tight,ul.tight{margin-top:1rem}
   .pcard-grid.wide .pcard-media{min-height:13rem;aspect-ratio:16/9}
 }
 @media(max-width:620px){.path-grid{grid-template-columns:1fr}}
+
+/* ---------- product record: verdict block, temps table, register note ---------- */
+.verdict{background:var(--card);border:1px solid var(--line-2);border-left:3px solid var(--amber);border-radius:var(--radius);padding:1.5rem 1.6rem;margin:1.9rem 0 2.4rem}
+.verdict .eyebrow{margin-bottom:.5rem}
+.verdict h2{font-size:1.5rem;margin:0 0 .7rem;line-height:1.2}
+.verdict p{font-size:.94rem;line-height:1.65;color:var(--ink-2);margin:0 0 1rem}
+.verdict-cta{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;margin:0!important}
+.verdict-note{font-size:.74rem;color:var(--faint);max-width:24rem;line-height:1.5}
+table.temps td:first-child{font-weight:500;color:var(--ink)}
+table.temps td:nth-child(2){font-variant-numeric:tabular-nums;white-space:nowrap}
+.reg-note{margin-top:1.6rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.45rem}
+.reg-note h3{font-size:1.02rem;margin:0 0 .5rem}
+.reg-note p{font-size:.885rem;line-height:1.62;color:var(--ink-2);margin:0 0 .7rem}
+
+/* ---------- suggestion queue: path list + shipped cards ---------- */
+.path-list{list-style:none;margin:0;padding:0;display:grid;gap:1rem;counter-reset:step}
+.path-list li{display:grid;grid-template-columns:2.6rem 1fr;gap:1.1rem;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem 1.4rem}
+.path-list h3{font-size:1.05rem;margin:0 0 .35rem}
+.path-list p{margin:0;font-size:.9rem;line-height:1.62;color:var(--ink-2)}
+.step-n{font-family:var(--serif);font-size:1.5rem;line-height:1;color:var(--amber);font-style:italic}
+.step-refs{font-size:.7rem!important;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)!important;margin-top:.55rem!important}
+.ship{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.45rem;margin-bottom:1rem}
+.ship-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem}
+.ship h3{font-size:1.05rem;margin:0 0 .5rem}
+.ship p{font-size:.89rem;line-height:1.62;color:var(--ink-2);margin:0 0 .6rem}
+.ship .tiny{margin:0;color:var(--faint)}
+table.queue td:nth-child(2){min-width:16rem}
+table.queue td:nth-child(4),table.queue td:nth-child(6){white-space:nowrap}

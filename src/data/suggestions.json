@@ -1,7 +1,7 @@
 {
   "meta": {
-    "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and — the part that matters — which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
-    "how_to_use": "Read the 'depends on' column. Anything depending on Q-03 or Q-14 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
+    "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and the earlier question that has to be answered before it makes sense to approve. A reviewer can approve a row without reading the whole site; the table at the top exists so the whole queue can be seen at once.",
+    "how_to_use": "Read the 'depends on' column first. Anything depending on Q-03 or Q-14 cannot be approved first, because approving it spends effort on traffic that cannot yet be attributed.",
     "recommended_first": "S-01 and S-02, because they are free, reversible, and unblock the rest."
   },
   "suggestions": [
@@ -37,7 +37,7 @@
     },
     {
       "id": "S-04",
-      "title": "Add one genuinely tested product comparison \u2014 bought, used, and photographed",
+      "title": "Add one genuinely tested product comparison — bought, used, and photographed",
       "why": "This is the single biggest available jump in both usefulness and ranking potential. Every air-fryer page on the internet is currently synthesised from seller copy; a page with a real measurement table, a real cleanup test and real photographs would be materially different.",
       "effort": "a purchase plus several evenings",
       "risk": "Cost. Also, FTC and Amazon rules require the review to be genuine, so the testing must actually happen before the page exists.",
@@ -59,7 +59,7 @@
       "id": "S-06",
       "title": "Switch on measurement before writing guide number five",
       "why": "Four guides exist on hypotheses. A fifth written on another hypothesis adds almost nothing. A fifth written from an actual Search Console query report adds a page that has a reason to exist.",
-      "effort": "an hour of setup, then 2\u20134 weeks of waiting for data",
+      "effort": "an hour of setup, then 2–4 weeks of waiting for data",
       "risk": "Low. The client is already written and stays silent until switched on.",
       "depends_on": "Q-10, Q-11",
       "recommendation": "Do before more content",
@@ -82,7 +82,7 @@
       "effort": "a decision",
       "risk": "Low either way. Keeping it is harmless; removing it loses a link.",
       "depends_on": "Q-06",
-      "recommendation": "Either is defensible \u2014 but decide, so the navigation stops hedging",
+      "recommendation": "Either is defensible — but decide, so the navigation stops hedging",
       "status": "proposed"
     },
     {
@@ -124,6 +124,66 @@
       "depends_on": "S-04",
       "recommendation": "Do together with the testing",
       "status": "proposed"
+    },
+    {
+      "id": "S-13",
+      "title": "Get an official Bing index before chasing Google",
+      "why": "Bing Webmaster Tools accepts a site and a sitemap through a Microsoft account, and it reports queries without needing anything installed on the site. It is the fastest route to a second, independent index, and the data arrives without a consent decision.",
+      "effort": "20 minutes, Microsoft account required",
+      "risk": "None. Read-only reporting; no script is added to the page.",
+      "depends_on": "nothing",
+      "recommendation": "Do in the first week, alongside S-07",
+      "status": "proposed",
+      "source": "https://www.bing.com/webmasters/about",
+      "source_label": "Bing Webmaster Tools"
+    },
+    {
+      "id": "S-14",
+      "title": "Tag and disclose every outbound link, then enforce it in the build",
+      "why": "Amazon's Program Policies require the Associates ID as a URL parameter in each link, and the Commission Income Statement disqualifies purchases that are not correctly tracked because a link was not properly formatted. The build now appends the tag and fails if a link is missing rel=sponsored.",
+      "effort": "done in this pass, about an hour including the check",
+      "risk": "Low and reversible: the tag is one parameter and the pages are generated.",
+      "depends_on": "nothing",
+      "recommendation": "Done: implemented and enforced by tools/check.py",
+      "status": "implemented",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_label": "Associates Program Policies 2(b)"
+    },
+    {
+      "id": "S-15",
+      "title": "Add a category layer so a reader can browse rather than read",
+      "why": "A shop needs more than a shortlist and an essay. Two category pages, air fryers and thermometers, give a shopper a place to land from search and give the products a place to sit together.",
+      "effort": "done in this pass",
+      "risk": "Low. The pages are generated from the same product register, so they cannot drift.",
+      "depends_on": "nothing",
+      "recommendation": "Done: see the Categories menu in the footer",
+      "status": "implemented",
+      "source": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+      "source_label": "USDA FSIS (thermometer category copy)"
+    },
+    {
+      "id": "S-16",
+      "title": "Publish a dated publishing calendar instead of promising one",
+      "why": "A cadence that exists only in a chat message is not a cadence. A public page with dates, a status per slot and the rule for filling it makes the promise checkable by the reader, which is the version that survives a busy month.",
+      "effort": "done in this pass; one line to update per slot",
+      "risk": "Itself: a calendar that goes stale is worse than none. Pair it with the change log in S-10.",
+      "depends_on": "nothing",
+      "recommendation": "Done: see the publishing calendar in the footer",
+      "status": "implemented",
+      "source": "https://search.google.com/search-console/about",
+      "source_label": "Google Search Console"
+    },
+    {
+      "id": "S-17",
+      "title": "Replace the review-page tone on reader pages with an editorial standard",
+      "why": "The earlier front page opened with the verification process. A shopper does not want to audit the site before shopping. The verification still exists; it moved to the review queue and the product records, where a reader who wants it can find it.",
+      "effort": "done in this pass",
+      "risk": "Moderate if done carelessly: moving the uncertainty off the page must not remove it from the site. It has not been removed, only relocated and linked.",
+      "depends_on": "nothing",
+      "recommendation": "Done: front page, product pages and guides rewritten",
+      "status": "implemented",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "source_label": "FTC Endorsement Guides"
     }
   ]
 }

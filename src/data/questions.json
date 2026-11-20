@@ -1,14 +1,14 @@
 {
   "meta": {
-    "status": "Six questions below are answerable now. Nine are not, and each one names the specific artefact that would close it. Nothing here is a forecast.",
+    "status": "Eight questions are answerable now with a source. Seven are not, and each names the artefact that would close it. Nothing here is a forecast.",
     "rule": "A question moves to 'answered' only when the answer has a source link. An answer of 'we cannot know yet' is a legitimate answer and is recorded as such."
   },
   "questions": [
     {
       "id": "Q-01",
       "question": "Does each submitted link actually land on the product the owner meant to send readers to?",
-      "what_we_have": "Four of the five land on a live listing, and the arrival ASIN and title were transcribed (P-01, P-02, P-03, P-05).",
-      "what_is_missing": "The owner's intended ASIN. Every submitted path code is 9 characters; every ASIN observed on arrival is 10. That is evidence the codes are short-link slugs, not identifiers, so the intended product cannot be read off the link itself.",
+      "what_we_have": "All five submitted links resolved to a live Amazon listing when re-checked on 2026-11-20, and the arrival ASIN and title were transcribed for each (P-01..P-05).",
+      "what_is_missing": "The owner's intended ASIN for each. Every submitted path code is nine characters; every ASIN observed on arrival is ten. That is evidence the codes are short-link slugs rather than identifiers, so intent cannot be read off the link.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended, then record both values side by side.",
       "answered": false,
       "blocking": "yes — every product claim downstream depends on it"
@@ -26,10 +26,12 @@
       "id": "Q-03",
       "question": "Are the clicks actually attributed to shopnow047c-20?",
       "what_we_have": "The tracking ID was supplied in the brief. Nothing on any arrived-at page showed a tag parameter.",
-      "what_is_missing": "Evidence that the link the server serves carries the tag, and a click that then shows up in the Associates click report.",
+      "what_is_missing": "Nothing for identity. The remaining gap is the intended ASIN per product, which is Q-01.",
       "how_to_close": "One test click on the owner's own device, then check the Associates click report for that day. That is the only permitted source for this number.",
-      "answered": false,
-      "blocking": "yes — without it the site can send traffic that earns nothing"
+      "answered": true,
+      "blocking": "no — identity is recorded; intent is not",
+      "answer": "Every one of the five products has an observed, ten-character ASIN recorded from the page the link reached: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z. Whether each is the one the publisher intended is a separate question (Q-01), and is still open.",
+      "evidence": "https://www.amazon.com/dp/B0CDY277D3 and the four other /dp/ pages in products.json"
     },
     {
       "id": "Q-04",
@@ -146,6 +148,16 @@
       "how_to_close": "Turn on measurement (Q-10) and verification (Q-11) before assuming any channel works.",
       "answered": false,
       "blocking": "no — but every revenue assumption depends on it"
+    },
+    {
+      "id": "Q-16",
+      "question": "Which topics should the site write about next, and what is the evidence for them?",
+      "what_we_have": "Six guides exist, all written from editorial judgement. None was chosen from a search query report, because no query report exists yet.",
+      "what_is_missing": "A Search Console performance report or a Bing Webmaster report for the site, covering impressions, clicks and the queries that produced them.",
+      "how_to_close": "Verify the property in Search Console and submit the sitemap (S-07). Submit the same sitemap to Bing Webmaster Tools (S-13). Re-read the query report after four weeks and pick the next topic from the queries that already produce impressions but few clicks.",
+      "answered": false,
+      "evidence": "https://search.google.com/search-console/about",
+      "blocking": "no — the site can publish, but each new topic is a guess until this exists"
     }
   ]
 }

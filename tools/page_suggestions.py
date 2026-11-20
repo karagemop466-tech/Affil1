@@ -1,12 +1,57 @@
 """The suggestion queue: proposals a reviewer can accept or reject one at a time."""
 
-from layout import esc, eyebrow, page, pagehead, rel, section
+from layout import esc, eyebrow, outbound, page, pagehead, rel, section, table
 
 
 def build(page_dir, suggestions, meta):
     d = page_dir
     items = suggestions["suggestions"]
     recommended = [s for s in items if s["id"] in ("S-01", "S-02", "S-03")]
+    proposed = [s for s in items if s.get("status") != "implemented"]
+    shipped = [s for s in items if s.get("status") == "implemented"]
+
+    rows = []
+    for s in items:
+        dep = s["depends_on"] if s["depends_on"] != "nothing" else '<span class="tiny">nothing</span>'
+        state = ('<span class="pill pill-ok">Implemented</span>' if s.get("status") == "implemented"
+                 else '<span class="pill pill-warn">Proposed</span>')
+        rows.append([
+            {"html": '<a href="#%s"><strong>%s</strong></a>' % (esc(s["id"]), esc(s["id"]))},
+            {"html": esc(s["title"])},
+            {"html": esc(s["recommendation"])},
+            {"html": esc(s["effort"])},
+            {"html": esc(s["risk"])},
+            {"html": dep},
+            {"html": state},
+        ])
+    queue_table = table(
+        ["Ref", "Proposal", "Recommendation", "Effort", "Risk", "Depends on", "State"],
+        rows, cls="queue",
+        caption="%d proposals, ordered by what they unlock" % len(items),
+        note="Depends-on is the column that matters. A proposal depending on an unanswered question cannot be evaluated until that question is answered, however cheap it looks.",
+    )
+
+    path = [
+        ("1", "Tag and check the links", "S-14", "Without a tracked link, everything downstream measures nothing. It is done and enforced by the build."),
+        ("2", "Confirm one click in the Associates report", "S-01", "The only permitted source of truth for attribution. One click answers what no amount of site work can."),
+        ("3", "Get the site into two indexes", "S-07, S-13", "Search Console and Bing both accept a sitemap and report queries without adding a script to the page."),
+        ("4", "Name the editor, honestly", "S-03", "The cheapest credibility available, provided the biography describes work that actually happened."),
+        ("5", "Then, and only then, commission more guides", "S-06, S-11", "New topics should come from measured queries, not from another round of guesses."),
+    ]
+    path_html = ""
+    for n, title, refs, why in path:
+        path_html += ('<li><span class="step-n">%s</span><div><h3>%s</h3><p>%s</p>'
+                      '<p class="step-refs">%s</p></div></li>') % (n, esc(title), esc(why), esc(refs))
+
+    def shipped_row(s, d):
+        src = ""
+        if s.get("source"):
+            src = '<p class="tiny">Source: <a href="%s" target="_blank" rel="noopener">%s</a></p>' % (
+                esc(s["source"]), esc(s.get("source_label") or s["source"]))
+        return ('<article class="ship" id="%s"><div class="ship-head"><span class="scard-id">%s</span>'
+                '<span class="pill pill-ok">Implemented</span></div><h3>%s</h3><p>%s</p>'
+                '<p class="tiny"><strong>Risk:</strong> %s</p>%s</article>') % (
+            esc(s['id']), esc(s['id']), esc(s['title']), esc(s['why']), esc(s['risk']), src)
 
     def row(s, n):
         return f"""<article class="scard" id="{esc(s['id'])}">
@@ -39,6 +84,12 @@ def build(page_dir, suggestions, meta):
         meta='Nothing on this page changes the site &middot; decisions are stored in your browser only, never sent anywhere',
     )}
 {section(f'''
+{queue_table}''', cls='')}
+{section(f'''
+<div class="sec-head"><div>{eyebrow('If you only do five things')}<h2>An order that holds up</h2></div>
+<p>Each step makes the next one cheaper. Skipping step two means steps three to five are measuring a channel that may not pay.</p></div>
+<ol class="path-list">{path_html}</ol>''', cls='section-tint')}
+{section(f'''
 <div class="decide-intro">
   <div>
     <h2>How to use this page</h2>
@@ -57,7 +108,11 @@ def build(page_dir, suggestions, meta):
 {''.join(row(s, i) for i, s in enumerate(recommended))}''', cls='section-tint')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('The full queue')}<h2>Everything else</h2></div><p>Ordered by what they unlock, not by size.</p></div>
-{''.join(row(s, i) for i, s in enumerate([x for x in items if x['id'] not in ('S-01','S-02','S-03')]))}''', cls='')}
+{''.join(row(s, i) for i, s in enumerate([x for x in proposed if x['id'] not in ('S-01','S-02','S-03')]))}''', cls='')}
+{section(f'''
+<div class="sec-head"><div>{eyebrow('Already shipped')}<h2>Done in the latest pass, with a source</h2></div>
+<p>Recorded rather than deleted, so the queue keeps a history of what was decided and built.</p></div>
+{''.join(shipped_row(s, d) for s in shipped)}''', cls='section-tint')}
 {section(f'''
 <div class="callout">
   <h2>The one recommendation to read twice</h2>

@@ -1,7 +1,7 @@
 """Product register and the per-product records."""
 
-from layout import (blank, esc, eyebrow, link, outbound, page, product_link, rel,
-                    section, table, DISCLOSURE)
+from layout import (blank, esc, eyebrow, link, outbound, page, pagehead,
+                    product_link, rel, section, table, DISCLOSURE)
 from page_home import img
 
 FIELDS = [
@@ -55,38 +55,35 @@ def build_register(page_dir, products, meta):
         note="The code in the link and the ASIN on arrival are different fields and are shown in separate columns on purpose. A nine-character code is not an ASIN."
     )
 
-    body = f"""{_head(d)}
+    body = f"""{pagehead(
+        "The five",
+        "Five products,<br>and the job each one does",
+        "Two air fryers, one French-door oven that fries, and two ways to answer the same question about dinner. Every card says what the job is, what the seller states, and what this site could not check.",
+        meta="Five links checked on 20 November 2026 &middot; nothing tested &middot; no prices shown",
+    )}
 {section(f'''
-<div class="reg-lede">
-  <div>
-    <h2>What this table is</h2>
-    <p>Five links were supplied. The register records the Amazon listing and ASIN observed for each on 20 November 2026, including P-04, which resolved on re-verification. These observations do not establish intended product identity or tracking.</p>
-    <p>Nothing in this table was inferred. Where a value could not be established, the cell is empty and the record says why.</p>
-  </div>
-  <dl class="reg-stats">
-    <div><dt>Links submitted</dt><dd>5</dd></div>
-    <div><dt>Opened successfully</dt><dd>4</dd></div>
-    <div><dt>Unresolved</dt><dd>1</dd></div>
-    <div><dt>Tested</dt><dd>0</dd></div>
-  </dl>
+<div class="pcard-grid wide">
+{''.join(_shop_card(d, p) for p in products)}
 </div>
-{tbl}''', cls='')}
+<p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'compare/index.html'))}">See them side by side &rarr;</a> <span class="sec-foot-note">Seven columns, and the blanks left blank.</span></p>''', cls='')}
 {section(f'''
-<div class="sec-head"><div>{eyebrow('The records')}<h2>One page per product</h2></div>
-<p>Each page carries the same fields, including the ones that are blank. The blank ones are the point.</p></div>
-<div class="pcard-grid">
-{''.join(_mini(d, p) for p in products)}
-</div>''', cls='')}
-{_thermometer_note(d)}
+<div class="sec-head"><div>{eyebrow('The register')}<h2>What was submitted, and what each link reached</h2></div>
+<p>This is the bookkeeping behind the cards above: the link as supplied, the code in it, and the listing that actually opened. It is here so the record can be checked, not so it can be admired.</p></div>
+{tbl}
+<div class="reg-note">
+  <h3>Why the code and the ASIN are different columns</h3>
+  <p>The code in each supplied link is nine characters and contains lowercase letters. Every ASIN observed on arrival is ten characters and uppercase. They are not the same kind of identifier, so they are never shown in the same column and never merged into one field.</p>
+  <p><a class="tlink" href="{esc(rel(d, 'review/index.html'))}#FLG-001">Read the full flag &rarr;</a></p>
+</div>''', cls='section-tint')}
 {section(f'''
-{eyebrow('Reading the register')}
-<h2>Four things a reviewer will want to check</h2>
+<div class="sec-head"><div>{eyebrow('Before you buy from any of them')}<h2>Four questions worth two minutes</h2></div></div>
 <ol class="tight">
-  <li><strong>The codes are nine characters.</strong> B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59 and B0f3GKalj all contain lowercase letters and are all nine characters long. Every ASIN that loaded is ten and uppercase. The codes are short-link slugs, and the earlier version of this register was wrong to treat them as identifiers.</li>
-  <li><strong>Attribution is unconfirmed.</strong> No arrived-at page showed a tag parameter. That does not prove the links are untagged, because a redirect service may apply the tag server-side. It does mean this build cannot confirm that a click is credited to <code class="code">shopnow047c-20</code>.</li>
-  <li><strong>Identity is not quality.</strong> Knowing which product a link opens says nothing about whether the product is any good. No product here was handled.</li>
-  <li><strong>The empty columns are deliberate.</strong> Price, rating, review count and stock status would all require either Amazon-served data or API access. Neither is connected, so they stay empty site-wide.</li>
-</ol>''', cls='')}
+  <li><strong>Measure the gap, not the machine.</strong> Width, depth and height of the space, including the room a door or drawer needs while it is open.</li>
+  <li><strong>Name the meal you cook most.</strong> Then check whether it fits in one layer with air around it. That is your real capacity, whatever the quarts say.</li>
+  <li><strong>Count what you will wash.</strong> Baskets, trays, racks and probes are all separate objects with separate jobs and separate sink space.</li>
+  <li><strong>Check the care instructions in the manual, not the listing.</strong> A claim that a basket is dishwasher-safe is a seller statement until the manufacturer's own document says it for your model.</li>
+</ol>
+<p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'guides/index.html'))}">All six guides &rarr;</a></p>''', cls='')}
 """
     return page(
         d,
@@ -123,6 +120,30 @@ def _mini(d, p):
     <h3><a href="{esc(href)}">{esc(_short(p))}</a></h3>
     <dl class="pcard-specs"><div><dt>Shape</dt><dd>{esc(p['format_label'])}</dd></div><div><dt>ASIN</dt><dd><code class="code">{esc(p['observed_asin'])}</code></dd></div></dl>
     <p class="pcard-actions"><a class="tlink" href="{esc(href)}">Full record <span aria-hidden="true">&rarr;</span></a></p>
+  </div></article>"""
+
+
+def _shop_card(d, p):
+    href = rel(d, f"products/{p['ref'].lower()}.html")
+    use = {
+        "P-01": "A main and a side, at the same time",
+        "P-02": "Trays, pans and family portions",
+        "P-03": "One big batch in one deep basket",
+        "P-04": "A number instead of a guess",
+        "P-05": "Walk away while it cooks",
+    }.get(p["ref"], "")
+    return f"""<article class="pcard">
+  <div class="pcard-media">{img(d, p['photo'], p['photo_alt'], sizes='(max-width:720px) 100vw, 350px')}<span class="illus-tag">Illustration</span></div>
+  <div class="pcard-body">
+    <p class="pcard-ref">{esc(use)}</p>
+    <h3><a href="{esc(href)}">{esc(_short(p))}</a></h3>
+    <dl class="pcard-specs">
+      <div><dt>Format</dt><dd>{esc(p['format_label'])}</dd></div>
+      <div><dt>Seller states</dt><dd>{esc(p['stated_capacity'])}</dd></div>
+      <div><dt>ASIN</dt><dd><code class="code">{esc(p['observed_asin'])}</code></dd></div>
+    </dl>
+    <p class="pcard-actions"><a class="btn btn-small" href="{esc(href)}">What to check</a>{product_link(d, p['special_link'], 'Amazon &#8599;', cls='tlink tlink-sponsor')}</p>
+    <p class="paid-note">Paid link. Price not shown: Amazon does not serve one to this site.</p>
   </div></article>"""
 
 
@@ -178,55 +199,94 @@ def build_product(page_dir, p, meta):
   <figcaption><span class="illus-tag illus-inline">Illustration</span> {esc(p['photo_note'])}</figcaption>
 </figure>"""
 
-    body = f"""{_producthead(p, short, meta)}
+    use_note = {
+        "P-01": ("Buy it if you cook a main and a side on the same night.",
+                 "Two separate 3-quart baskets, a sync-finish function and viewing windows, all as stated in the listing title. Two drawers means two jobs at once; it also means twice as many things to wash."),
+        "P-02": ("Buy it if you want to put a tray, a pan or a plate inside.",
+                 "A 26-quart French-door cavity stated on the listing, with 24 one-touch presets and six accessories included. The oven shape is what lets you use a dish; the trade is counter space and a door that needs room to open."),
+        "P-03": ("Buy it if your usual meal fits in one deep basket.",
+                 "A single 8-quart basket stated on the listing, described as 4-in-1 with a 450&deg;F option. The simplest machine in the set: one drawer, fewer parts, and a shape that suits loose food rather than dishes."),
+        "P-04": ("Buy it if you want a number instead of a guess.",
+                 "A quick-read probe, described in the listing as 1-second with &plusmn;0.5&deg;F accuracy and IP67 waterproofing. Use it for the USDA targets below, which are quoted from the agency and not from the seller."),
+        "P-05": ("Buy it if you would rather walk away while it cooks.",
+                 "A leave-in thermometer, described in the listing as wireless with three probes and a 1000&deg;F heat rating, with air fryers among its stated uses. The probes stay in the food; the reading comes to you."),
+    }.get(p["ref"], ("", ""))
+
+    safe_temps = ""
+    if p["format"] == "thermometer":
+        safe_temps = f"""
+    <h2>What to aim for, from the agency that publishes it</h2>
+    <p class="lede">The one set of numbers on this site that is not a seller's claim. These are minimum internal temperatures published by the USDA Food Safety and Inspection Service, measured with a food thermometer before the food leaves the heat.</p>
+    {table(['Food', 'Minimum internal temperature', 'Rest'], [
+        ['All poultry, including ground poultry and stuffing', '165&nbsp;&deg;F (73.9&nbsp;&deg;C)', '&mdash;'],
+        ['Ground meats', '160&nbsp;&deg;F (71.1&nbsp;&deg;C)', '&mdash;'],
+        ['Beef, pork, veal and lamb steaks, chops and roasts', '145&nbsp;&deg;F (62.8&nbsp;&deg;C)', 'At least 3 minutes'],
+        ['Fish and shellfish', '145&nbsp;&deg;F (62.8&nbsp;&deg;C)', '&mdash;'],
+        ['Leftovers and casseroles', '165&nbsp;&deg;F (73.9&nbsp;&deg;C)', '&mdash;'],
+    ], cls='temps', note='Source: <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart" rel="noopener" target="_blank">USDA FSIS, Safe Minimum Internal Temperature Chart</a>, last updated 14 April 2025. Quoted, not paraphrased.')}
+    <p class="fineprint">This site has not tested any thermometer against a reference instrument. A thermometer that is several degrees out will mislead you confidently, so the manufacturer's calibration instructions matter more than any claim on this page.</p>
+"""
+
+    side = f"""<div class="side-card">
+      <h2>At a glance</h2>
+      <dl class="side-dl">
+        <div><dt>Brand</dt><dd>{esc(p['brand'])}</dd></div>
+        <div><dt>Format</dt><dd>{esc(p['format_label'])}</dd></div>
+        <div><dt>Seller states</dt><dd>{esc(p['stated_capacity'])}</dd></div>
+        <div><dt>ASIN reached</dt><dd><code class="code">{esc(p['observed_asin'])}</code></dd></div>
+        <div><dt>Checked</dt><dd>{esc(p['checked_on'])}</dd></div>
+        <div><dt>Price shown</dt><dd><span class="pill pill-warn">No</span></dd></div>
+        <div><dt>Tested by us</dt><dd><span class="pill pill-warn">No</span></dd></div>
+      </dl>
+    </div>"""
+
+    body = f"""{_producthead(p, short, meta, use_note)}
 <section class="section"><div class="wrap record-grid">
   <div class="record-main">
     {photo}
-    <h2>What the seller states, in the seller's words</h2>
-    <p class="lede">These are not our findings. They are the claims written into the listing title by whoever sells the product, transcribed once and never paraphrased into something stronger. Read them for what the product is positioned as, not for what it does.</p>
-    <ul class="claims">{stated_html}</ul>
+    <div class="verdict">
+      <p class="eyebrow">The short version</p>
+      <h2>{esc(use_note[0])}</h2>
+      <p>{use_note[1]}</p>
+      <p class="verdict-cta">{product_link(d, p['special_link'], 'Check it on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")} <span class="verdict-note">Paid link. No price is shown here because Amazon does not serve one to this site.</span></p>
+    </div>
 
-    <h2>What was not established</h2>
-    <p class="lede">Each row below is a field a shopper would normally expect to see. None of them has a source this build is allowed to use, so none of them is filled in.</p>
-    {table(['Field', 'Value', 'Reason'], not_stated, cls='fields')}
+    <h2>What the seller states, in the seller&rsquo;s words</h2>
+    <p class="lede">Not our findings. These are the claims in the listing title, transcribed once and never paraphrased into something stronger. Read them for what the product is positioned as, not for what it does.</p>
+    <ul class="claims">{stated_html}</ul>
+{safe_temps}
+    <h2>What this page does not know</h2>
+    <p class="lede">Every row below is something a shopper would normally want. None has a source this build is allowed to use, so none is filled in. That is the trade this site makes: no numbers rather than numbers nobody checked.</p>
+    {table(['Field', 'Value', 'Why it is blank'], not_stated, cls='fields')}
 
     <h2>How the link was checked</h2>
     <p>{esc(p['resolution_note'])}</p>
-    <p>The submitted link was opened; the page it landed on was read; the ASIN inside the address and the title on the page were transcribed into this record. That is the whole of the check. It establishes identity. It does not establish quality, price or availability.</p>
+    <p>The submitted link was opened, the page it landed on was read, and the ASIN in the address and the title on the page were transcribed into this record. That establishes which product the link reaches. It says nothing about quality, price or availability &mdash; and it is a dated observation, not a guarantee that the link will reach the same place next month.</p>
 
     <div class="cta">
       <div>
-        <p class="cta-label">Amazon listing</p>
-        <p>Opens in a new tab. This is an affiliate link{'' if not meta.get('tracking') else ''}.</p>
+        <p class="cta-label">The listing</p>
+        <p>Opens Amazon in a new tab. This is a paid link, the price does not change, and nothing about your visit is sent to this site.</p>
       </div>
       {product_link(d, p['special_link'], 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
     </div>
-    <p class="fineprint">{DISCLOSURE} A purchase through this link does not change the price you pay. Whether a click is credited to this site's tracking ID is not confirmed \u2014 see the review queue.</p>
+    <p class="fineprint">{DISCLOSURE} A purchase through this link does not change the price you pay. Whether a click is credited to this site&rsquo;s tracking ID is not yet confirmed &mdash; <a href="{esc(rel(d, 'review/index.html'))}#FLG-002">see the review queue</a>.</p>
   </div>
 
   <aside class="record-side">
-    <div class="side-card">
-      <h2>At a glance</h2>
-      <dl class="side-dl">
-        <div><dt>Reference</dt><dd>{esc(p['ref'])}</dd></div>
-        <div><dt>Brand</dt><dd>{esc(p['brand'])}</dd></div>
-        <div><dt>Shape</dt><dd>{esc(p['format_label'])}</dd></div>
-        <div><dt>ASIN</dt><dd><code class="code">{esc(p['observed_asin'])}</code></dd></div>
-        <div><dt>Checked</dt><dd>{esc(p['checked_on'])}</dd></div>
-        <div><dt>Tested by us</dt><dd><span class="pill pill-warn">No</span></dd></div>
-      </dl>
-    </div>
+    {side}
     <div class="side-card">
       <h2>Next</h2>
       <ul class="side-links">
         <li><a href="{esc(rel(d, 'compare/index.html'))}">Compare all five</a></li>
         <li><a href="{esc(rel(d, 'guides/basket-or-oven-air-fryer.html'))}">Basket or oven?</a></li>
+        <li><a href="{esc(rel(d, 'guides/air-fryer-capacity-checklist.html'))}">Will it fit my batch?</a></li>
         <li><a href="{esc(rel(d, 'questions/index.html'))}">What is still unknown</a></li>
       </ul>
     </div>
     <div class="side-card side-card-quiet">
       <h2>Read this before trusting the page</h2>
-      <p>No product on this site has been bought, used or measured. The photograph above is an illustration. The guide tells you what to check; it cannot tell you that this model passed the check.</p>
+      <p>No product on this site has been bought, used or measured, and the photograph above is an illustration. The page tells you what to check; it cannot tell you that this model passed the check.</p>
     </div>
   </aside>
 </div></section>"""
@@ -252,14 +312,13 @@ def build_product(page_dir, p, meta):
     )
 
 
-def _producthead(p, short, meta):
-    d = ""
+def _producthead(p, short, meta, use_note):
     from layout import pagehead
     return pagehead(
-        f"Record {p['ref']} &middot; checked {p['checked_on']}",
-        f"{esc(short)}<br><span class='head-asin'>{esc(p['observed_asin'])}</span>",
-        f"<strong>{esc(p['brand'])}</strong> &middot; {esc(p['format_label'])}. This record says what the listing states, what was checked, and what remains blank.",
-        meta=f'<span class="pill pill-ok">Identity confirmed</span> <span class="pill pill-warn">Not tested</span> <span class="pill">No price shown</span>',
+        f"{p['ref']} &middot; {p['format_label']} &middot; checked {p['checked_on']}",
+        esc(short),
+        f"<strong>{esc(p['brand'])}</strong>. {esc(use_note[0])} Below: what the seller states, the numbers from the USDA where they apply, and every field this page cannot fill.",
+        meta='<span class="pill pill-ok">Link checked ' + esc(p['checked_on']) + '</span> <span class="pill pill-warn">Not tested</span> <span class="pill">No price shown</span>',
     )
 
 
