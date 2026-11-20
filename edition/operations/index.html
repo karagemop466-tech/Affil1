@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" data-page-slug="operations">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Measurement &amp; Empty Campaign Ledger — Countertop Almanac</title>
+  <meta name="description" content="Five-event privacy-preserving click measurement specification and empty provenance-gated campaign ledger.">
+  <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/edition/operations/">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="Countertop Almanac Buying Guides RSS" href="../feed.xml">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container masthead-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-mark" src="../assets/img/favicon.svg" alt="Countertop Almanac emblem" width="36" height="36">
+        <span>
+          <span class="brand-title">Countertop Almanac</span>
+          <span class="brand-sub">Kitchen Equipment Publication &amp; Verification Desk</span>
+        </span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="../index.html">Shop Shortlist</a> <a href="../categories/index.html">Categories</a> <a href="../guides/index.html">Buying Guides</a> <a href="../compare/index.html">Compare</a> <a href="../suggestions/index.html" aria-current="page">Decision Desk</a>
+      </nav>
+    </div>
+  </header>
+  <div class="disclosure" role="note" aria-label="Affiliate disclosure">
+    <div class="container disclosure-inner">
+      <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Paid links to Amazon are marked <code>rel="sponsored"</code> (selected Tracking ID: <code>shopnow047c-20</code>).</span>
+      <span class="disclosure-meta">
+        <a href="../compliance/index.html">Disclosure &amp; API rules</a> ·
+        <a href="../flagged/index.html">Flagged for Review</a>
+      </span>
+    </div>
+  </div>
+  <main id="main-content" class="container">
+    <section class="hero">
+      <span class="eyebrow">Priority 4 · Evidence-Based Iteration</span>
+      <h1>Privacy-Preserving Measurement &amp; Empty Campaign Ledger</h1>
+      <p class="lede">Click and engagement telemetry is restricted to five aggregate events with zero cookies and full DNT/GPC respect. Campaign Ledger rows are accepted exclusively from signed-in first-party exports via <code>platform/ledger.py</code> — no conversion score or revenue forecast appears anywhere on this site.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Live In-Tab Session Preview (Zero Network Transmission on Static Pages)</h2>
+      <p>Because GitHub Pages is static-only (<a href="../flagged/index.html#FLG-009">FLG-009</a>), outbound beacons stay off until <code>window.COUNTERTOP_COLLECTOR_URL</code> points to a self-hosted <code>platform/collector.py</code> instance. Current tab preview counters:</p>
+      <p><code id="local-event-inspector">page_view: 0 | product_card_click: 0 | guide_to_product_click: 0 | comparison_filter_use: 0 | suggestion_decision: 0</code></p>
+    </section>
+
+    <h2>1. Five Defined Analytics Events (<code>platform/collector.py</code>)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Trigger Condition</th>
+            <th>Allowed Payload Keys</th>
+            <th>Decision Purpose</th>
+            <th>Official Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>page_view</code></td>
+            <td>Document load on any published HTML page when DNT/GPC are not enabled.</td>
+            <td><code>page</code></td>
+            <td>Count aggregate daily page entries across storefront, category, guide, and desk pages.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr>
+            <td><code>product_card_click</code></td>
+            <td>Reader clicks a sponsored Amazon CTA on a storefront, category, comparison, or product dossier card.</td>
+            <td><code>page, product_id</code></td>
+            <td>Measure outbound product click interest per item without user-level tracking or dynamic sub-tags.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr>
+            <td><code>guide_to_product_click</code></td>
+            <td>Reader clicks from an editorial buying guide to a product dossier or outbound sponsored product link.</td>
+            <td><code>page, guide_slug, product_id</code></td>
+            <td>Identify which question-shaped and seasonal guides assist product evaluation.</td>
+            <td><a href="https://support.google.com/webmasters/answer/7576553?hl=en" rel="noopener" target="_blank">S07 · Google Search Console Help</a></td>
+          </tr>
+          <tr>
+            <td><code>comparison_filter_use</code></td>
+            <td>Reader toggles a workflow, category, or counter-footprint filter on the storefront or Compare page.</td>
+            <td><code>page, filter_key</code></td>
+            <td>Learn which buyer constraints (dual-zone timing, single-layer width, sheet-pan oven, leave-in probe) matter most.</td>
+            <td><a href="https://support.google.com/webmasters/answer/7576553?hl=en" rel="noopener" target="_blank">S07 · Google Search Console Help</a></td>
+          </tr>
+          <tr>
+            <td><code>suggestion_decision</code></td>
+            <td>Operator clicks Approve, Hold, or Reject on a suggestion card in the Suggestions Review Queue.</td>
+            <td><code>page, suggestion_id, decision</code></td>
+            <td>Record aggregate governance review actions before implementing site or prompt changes.</td>
+            <td><a href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" rel="noopener" target="_blank">S04 · Federal Trade Commission (FTC)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Campaign Ledger (Intentionally Empty at Launch)</h2>
+    <p>Intentionally empty at launch. Add rows only from authorized first-party reports (Amazon Associates Central Earnings/Orders CSV exports and self-hosted first-party collector summaries). No conversion score, synthetic click count, or revenue forecast is permitted.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>timestamp</th>
+            <th>source</th>
+            <th>channel</th>
+            <th>eligible_sessions</th>
+            <th>clicks</th>
+            <th>reported_orders</th>
+            <th>Official Report Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cell-blank" data-unverified="true"><span class="badge badge-warn">Empty</span></td>
+            <td class="cell-blank" data-unverified="true"><span class="badge badge-warn">Awaiting CSV</span></td>
+            <td class="cell-blank" data-unverified="true"><span class="badge badge-warn">Blank</span></td>
+            <td class="cell-blank" data-unverified="true"><span class="badge badge-warn">Blank</span></td>
+            <td class="cell-blank" data-unverified="true"><span class="badge badge-warn">Blank</span></td>
+            <td class="cell-blank" data-unverified="true"><span class="badge badge-warn">Blank</span></td>
+            <td><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon Associates Central Reports</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>3. Dated Provenance Trail</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Action</th>
+            <th>Actor</th>
+            <th>Provenance Note</th>
+            <th>Official Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>2026-11-20</code></td>
+            <td>Initialized empty Campaign Ledger schema with SHA-256 provenance gate</td>
+            <td><code>session arena/44f81bcd-affil1</code></td>
+            <td>Zero rows recorded: Associates Central reports are account-gated and self-hosted collector is not yet deployed on a live runtime (FLG-009).</td>
+            <td><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon Associates Central — Earnings &amp; Orders Reports</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Shop &amp; Categories</h4>
+          <ul>
+            <li><a href="../index.html">Storefront Shortlist</a></li>
+            <li><a href="../categories/index.html">All Categories</a></li>
+            <li><a href="../categories/air-fryers.html">Countertop Air Fryers (3)</a></li>
+            <li><a href="../categories/thermometers.html">Meat Thermometers (2)</a></li>
+            <li><a href="../compare/index.html">Side-by-Side Comparison</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Buying Guides &amp; Feed</h4>
+          <ul>
+            <li><a href="../guides/index.html">All 8 Buying Guides</a></li>
+            <li><a href="../guides/basket-or-oven-air-fryer.html">Basket vs Oven Air Fryer</a></li>
+            <li><a href="../guides/air-fryer-capacity-checklist.html">Capacity Checklist</a></li>
+            <li><a href="../guides/thanksgiving-countertop-oven-relief.html">Holiday Oven Relief</a></li>
+            <li><a href="../feed.xml">RSS 2.0 Feed</a> · <a href="../sitemap.xml">XML Sitemap</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Decision &amp; Operations Desk</h4>
+          <ul>
+            <li><a href="../suggestions/index.html">Suggestions &amp; Design Prompt Studio</a></li>
+            <li><a href="../questions/index.html">Pre-Decision Questions (12)</a></li>
+            <li><a href="../executive-summary/index.html">Executive Summary</a></li>
+            <li><a href="index.html">Measurement &amp; Empty Campaign Ledger</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Verification &amp; Governance</h4>
+          <ul>
+            <li><a href="../products/index.html">Product-Intent Confirmation Register</a></li>
+            <li><a href="../flagged/index.html">Flagged for Review (10 + 6 Repo Audit)</a></li>
+            <li><a href="../compliance/index.html">Official Sources &amp; Compliance Gate</a></li>
+            <li><a href="../../index.html">Root Storefront Edition</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Outbound product links carry <code>rel="sponsored nofollow noopener"</code>. Prices, customer ratings, review counts, and live stock are shown only on Amazon in accordance with Amazon Associates Program Policies §2(b) and §6(t). Verified line by line on 2026-11-20.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/analytics.js" defer></script>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

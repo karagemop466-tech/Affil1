@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 150" role="img" aria-label="Single-basket 8-quart air fryer diagram">
+  <rect width="260" height="150" rx="10" fill="#f3ede3"/>
+  <rect x="64" y="18" width="132" height="114" rx="16" fill="#595550" stroke="#191816" stroke-width="2"/>
+  <rect x="78" y="28" width="104" height="22" rx="5" fill="#191816"/>
+  <circle cx="130" cy="39" r="4.5" fill="#b84a27"/>
+  <rect x="74" y="58" width="112" height="64" rx="9" fill="#2c2a28" stroke="#dfd8cc" stroke-width="1.5"/>
+  <rect x="124" y="68" width="12" height="44" rx="5" fill="#faf7f2"/>
+</svg>

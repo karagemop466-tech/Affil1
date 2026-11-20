@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-page-slug="questions">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pre-Decision Questions &amp; Missing Information Discovery — Countertop Almanac</title>
+  <meta name="description" content="Clear matrix of pre-decision questions, known facts, missing data, answers, and discovery actions.">
+  <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/edition/questions/">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="Countertop Almanac Buying Guides RSS" href="../feed.xml">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container masthead-inner">
+      <a class="brand" href="../index.html">
+        <img class="brand-mark" src="../assets/img/favicon.svg" alt="Countertop Almanac emblem" width="36" height="36">
+        <span>
+          <span class="brand-title">Countertop Almanac</span>
+          <span class="brand-sub">Kitchen Equipment Publication &amp; Verification Desk</span>
+        </span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="../index.html">Shop Shortlist</a> <a href="../categories/index.html">Categories</a> <a href="../guides/index.html">Buying Guides</a> <a href="../compare/index.html">Compare</a> <a href="../suggestions/index.html" aria-current="page">Decision Desk</a>
+      </nav>
+    </div>
+  </header>
+  <div class="disclosure" role="note" aria-label="Affiliate disclosure">
+    <div class="container disclosure-inner">
+      <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Paid links to Amazon are marked <code>rel="sponsored"</code> (selected Tracking ID: <code>shopnow047c-20</code>).</span>
+      <span class="disclosure-meta">
+        <a href="../compliance/index.html">Disclosure &amp; API rules</a> ·
+        <a href="../flagged/index.html">Flagged for Review</a>
+      </span>
+    </div>
+  </div>
+  <main id="main-content" class="container">
+    <section class="hero">
+      <span class="eyebrow">Pre-Decision Evidence Matrix · 12 Gate Questions</span>
+      <h1>Questions, Known vs Missing Information &amp; Discovery Plan</h1>
+      <p class="lede">Every question that must be answered before scaling ad spend, changing outbound Special Links, publishing technical measurements, or enabling live analytics — grounded strictly in what is verified today versus what remains missing.</p>
+    </section>
+    <div class="filter-bar" data-filter-root data-filter-target="[data-q-row]">
+      <span class="filter-label">Filter by status:</span>
+      <button type="button" class="chip-btn" data-filter-value="all" aria-pressed="true">All 12 questions</button>
+      <button type="button" class="chip-btn" data-filter-value="needs-operator" aria-pressed="false">Needs Operator Account (7)</button>
+      <button type="button" class="chip-btn" data-filter-value="needs-source-fetch" aria-pressed="false">Needs Brand Manual (1)</button>
+      <button type="button" class="chip-btn" data-filter-value="answered-by-policy" aria-pressed="false">Answered by Policy</button>
+      <button type="button" class="chip-btn" data-filter-value="answered-and-enforced" aria-pressed="false">Enforced in CI</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID &amp; State</th>
+            <th>Decision Question</th>
+            <th>What We Already Have (Verified)</th>
+            <th>What We Do Not Have (Missing)</th>
+            <th>Current Working Rule</th>
+            <th>Suggestion to Discover Missing Info</th>
+            <th>Official Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="Q-01" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-01</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>Which exact 10-character ASIN and variant did the operator intend for each of the five submitted link.amazon URLs?</strong><br><span class="disclosure-meta">Gate: Product Intent &amp; Link Attribution</span></td>
+            <td>On 2026-11-20, P-01..P-05 resolved to B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, and B0DZFD6R9Z, whereas all five supplied path slugs are 9 characters long.</td>
+            <td>Signed operator confirmation of intended_asin, official_listing_url, confirmation_date, and confirmation_source for each row.</td>
+            <td>Leave intended_asin and official_listing_url blank in the Product-Intent Confirmation Record and never overwrite them with observed_redirect values.</td>
+            <td>Open each link while signed in to Associates Central, confirm the intended variant/color/size on Amazon.com, and record the 10-character ASIN + official URL in platform/data/products.json.</td>
+            <td><a href="https://sell.amazon.com/blog/what-is-an-asin" rel="noopener" target="_blank">S03 · Amazon Selling Partner Blog</a><br><a href="https://www.amazon.com/dp/B0CDY277D3" rel="sponsored nofollow noopener" target="_blank">S09 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B09B7SB46R" rel="sponsored nofollow noopener" target="_blank">S10 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B08DKYBTPH" rel="sponsored nofollow noopener" target="_blank">S11 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">S12 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">S13 · Amazon.com</a></td>
+          </tr>
+          <tr id="Q-02" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-02</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>Are the five supplied link.amazon URLs approved Associates Special Links that credit Tracking ID shopnow047c-20?</strong><br><span class="disclosure-meta">Gate: Product Intent &amp; Link Attribution</span></td>
+            <td>No tag=shopnow047c-20 query parameter appeared in any landing /dp/ URL fetched on 2026-11-20. Policies §2(a)-(b) require the Associates ID in Special Links, and Commission Income Statement §2(e)/(g) excludes Redirecting Links and improperly formatted links.</td>
+            <td>Associates Central Link Checker output and a verified click-attribution row in Associates Central Reports.</td>
+            <td>Do not claim the short links are invalid; keep their compliance status flagged as unresolved in FLG-003 and avoid paid promotion until attribution is verified.</td>
+            <td>Generate fresh Special Links for shopnow047c-20 in Associates Central / SiteStripe, click one link per product from a non-purchasing test session (respecting §6(u) no self-purchase), and verify click credit in Associates Central Reports after 24 hours.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="Q-03" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-03</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>Why did P-04 (B0c8moW59) and P-05 (B0f3GKalj) show bot checkpoints or swapped thermometer destinations across earlier checks?</strong><br><span class="disclosure-meta">Gate: Product Intent &amp; Link Attribution</span></td>
+            <td>Direct 2026-11-20 fetches resolved P-04 -&gt; B0DHZTCNR5 (ThermoMaven instant-read) and P-05 -&gt; B0DZFD6R9Z (CHEF iQ 3-probe wireless), while earlier sessions observed /checkpoint/continue or a reversed thermometer order.</td>
+            <td>Authenticated residential-browser confirmation from the link creator confirming which short token maps to which thermometer.</td>
+            <td>Publish both the 2026-11-20 direct observation and the historical discrepancy transparently under FLG-006 rather than guessing.</td>
+            <td>Test both short links in a clean desktop browser signed out of automated tooling, capture the HTTP 301/302 Location header chain, and replace both with direct /dp/{intended_asin}?tag=shopnow047c-20 Special Links produced in Associates Central.</td>
+            <td><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">S12 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">S13 · Amazon.com</a></td>
+          </tr>
+          <tr id="Q-04" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-04</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>Is Associates account shopnow047c-20 actively enrolled with https://karagemop466-tech.github.io/Affil1/ listed as an approved Site?</strong><br><span class="disclosure-meta">Gate: Amazon Associates Policy &amp; API Access</span></td>
+            <td>Participation Requirements §1 require enrollment approval and maintaining an accurate list of Sites where Special Links appear; §1(g) forbids Amazon marks in domain names.</td>
+            <td>Associates Central Account Settings -&gt; Edit Your Website and Mobile App List confirmation.</td>
+            <td>The GitHub Pages URL contains no Amazon trademark and displays the verbatim §5 disclosure on every page, but account-list registration is unverified.</td>
+            <td>Log into Associates Central -&gt; Account Settings -&gt; Website and Mobile App List and verify https://karagemop466-tech.github.io/Affil1/ is registered before driving traffic.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="Q-05" data-q-row data-tags="answered-by-policy">
+            <td><strong><code>Q-05</code></strong><br><span class="badge badge-ok">answered-by-policy</span></td>
+            <td><strong>Can the platform display prices, star ratings, customer review counts, stock status, or automated price alerts?</strong><br><span class="disclosure-meta">Gate: Amazon Associates Policy &amp; API Access</span></td>
+            <td>Policies §2(b) restricts price/availability to Amazon-served dynamic links or Creators API / PA API; §6(t) restricts customer reviews/star ratings to Creators API / PA API; §6(y) prohibits price tracking and price alerting unless agreed by Amazon.</td>
+            <td>Approved Creators API / PA API credentials (which require qualifying Associates sales thresholds) and any written Amazon agreement for price tracking.</td>
+            <td>Answered by official policy: NO static prices, star ratings, review counts, stock claims, or price-alert features are permitted right now. All four fields remain blank and flagged (FLG-004).</td>
+            <td>Direct buyers to view live price and availability on Amazon; apply for Creators API / PA API access only after meeting Amazon&#x27;s qualifying sales requirement, and keep §6(y) price-tracking disabled.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="Q-06" data-q-row data-tags="answered-and-enforced">
+            <td><strong><code>Q-06</code></strong><br><span class="badge badge-ok">answered-and-enforced</span></td>
+            <td><strong>Where and how must affiliate compensation be disclosed to satisfy both Amazon and the FTC?</strong><br><span class="disclosure-meta">Gate: Amazon Associates Policy &amp; API Access</span></td>
+            <td>Operating Agreement §5 requires the verbatim statement &quot;As an Amazon Associate I earn from qualifying purchases.&quot; FTC 16 CFR §255.5 and FTC staff FAQ require clear, conspicuous disclosure near recommendations and state that &quot;affiliate link&quot;, &quot;buy now&quot;, or a hidden &quot;DISCLOSURE&quot; button alone is insufficient.</td>
+            <td>Nothing missing on static pages; ongoing human check required if social, video, or email channels are added later.</td>
+            <td>Answered and enforced: every page renders the verbatim §5 sentence + plain-language paid-link notice above &lt;main&gt; and again in &lt;footer&gt;, and every product CTA states &quot;Paid link&quot; with rel=&quot;sponsored nofollow noopener&quot;.</td>
+            <td>Keep platform/verify_edition.py in CI (.github/workflows/edition-verify.yml) so any future page missing the disclosure strip or rel=&quot;sponsored&quot; fails the build.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">S01 · Amazon.com Associates Central</a><br><a href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" rel="noopener" target="_blank">S04 · Federal Trade Commission (FTC)</a><br><a href="https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255" rel="noopener" target="_blank">S05 · Electronic Code of Federal Regulations (eCFR / FTC)</a><br><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" rel="noopener" target="_blank">S06 · Google Search Central</a></td>
+          </tr>
+          <tr id="Q-07" data-q-row data-tags="answered-by-evidence">
+            <td><strong><code>Q-07</code></strong><br><span class="badge badge-ok">answered-by-evidence</span></td>
+            <td><strong>How should the site position three air fryers alongside two meat thermometers without reading like a disjointed link dump?</strong><br><span class="disclosure-meta">Gate: Editorial Positioning &amp; Reader Fit</span></td>
+            <td>Breadcrumbs confirm P-01..P-03 are Air Fryers (dual-basket, French-door oven, single-basket) and P-04..P-05 are Meat Thermometers (instant-read handheld, 3-probe WiFi wireless).</td>
+            <td>Whether the operator plans to expand into a broader countertop-cooking catalog or stay focused on crisp-and-roast appliances.</td>
+            <td>Group the catalog into two explicit categories (Air Fryers and Meat Thermometers) united by one real kitchen job: countertop crisp-and-roast cooking without overcooking proteins.</td>
+            <td>Measure product_card_click and guide_to_product_click across air-fryer vs thermometer guides over the first 30 days before adding a third category.</td>
+            <td><a href="https://www.amazon.com/dp/B0CDY277D3" rel="sponsored nofollow noopener" target="_blank">S09 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B09B7SB46R" rel="sponsored nofollow noopener" target="_blank">S10 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B08DKYBTPH" rel="sponsored nofollow noopener" target="_blank">S11 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">S12 · Amazon.com</a><br><a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">S13 · Amazon.com</a></td>
+          </tr>
+          <tr id="Q-08" data-q-row data-tags="needs-source-fetch">
+            <td><strong><code>Q-08</code></strong><br><span class="badge badge-warn">needs-source-fetch</span></td>
+            <td><strong>What verified product specifications are missing before publishing deeper technical comparisons?</strong><br><span class="disclosure-meta">Gate: Editorial Positioning &amp; Reader Fit</span></td>
+            <td>Seller listing titles state capacity (6 qt as 2×3 qt; 26 qt; 8 qt), probe count (1 handheld; 3 wireless), and high-level modes.</td>
+            <td>Manufacturer-verified exterior H×W×D dimensions, interior basket/tray dimensions, wattage/amperage, cord length, minimum probe insertion depth, and warranty duration.</td>
+            <td>Leave wattage, exterior dimensions, and warranty blank in all comparison tables rather than copying unverified third-party aggregator specs.</td>
+            <td>Retrieve official PDF user manuals from CHEFMAN, Emeril Lagasse, ThermoMaven, and CHEF iQ support portals and cite each manual URL per row before filling blank cells.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255" rel="noopener" target="_blank">S05 · Electronic Code of Federal Regulations (eCFR / FTC)</a></td>
+          </tr>
+          <tr id="Q-09" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-09</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>Where will the self-hosted 5-event analytics endpoint run in production, and what privacy disclosure accompanies it?</strong><br><span class="disclosure-meta">Gate: Measurement, Traffic &amp; Conversion Data</span></td>
+            <td>GitHub Pages is static-only (S08) and logs visitor IPs for security. Policies §3(e) requires accurate disclosure of any cookies, pixels, or data collection.</td>
+            <td>A first-party HTTPS host (e.g., Cloudflare Worker, Fly.io, or VPS) running platform/collector.py and an operator-approved data retention window.</td>
+            <td>Keep client beacons inert by default on GitHub Pages (local session preview only, zero cookies, honoring DNT/GPC) until collectorUrl is pointed at an approved first-party host.</td>
+            <td>Deploy platform/collector.py behind a first-party subdomain, verify zero-PII daily counter storage, update the privacy notice per §3(e), and enable collectorUrl.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" rel="noopener" target="_blank">S08 · GitHub Docs</a></td>
+          </tr>
+          <tr id="Q-10" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-10</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>Which search queries actually bring readers to the site, and which new guides should be written next?</strong><br><span class="disclosure-meta">Gate: Measurement, Traffic &amp; Conversion Data</span></td>
+            <td>Eight buyer-question and seasonal guides are published and listed in sitemap.xml and feed.xml, but zero search volume or ranking claims are made.</td>
+            <td>Verified Google Search Console property ownership and 28–90 days of Search Performance query/page impressions and CTR exports.</td>
+            <td>Treat current article titles strictly as editorial hypotheses; run platform/research_engine.py on exported Search Console CSVs once impressions accumulate.</td>
+            <td>Verify https://karagemop466-tech.github.io/Affil1/ in Google Search Console, submit sitemap.xml, and export the Queries &amp; Pages Performance report monthly.</td>
+            <td><a href="https://support.google.com/webmasters/answer/7576553?hl=en" rel="noopener" target="_blank">S07 · Google Search Console Help</a></td>
+          </tr>
+          <tr id="Q-11" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-11</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>What are the baseline clicks, eligible sessions, conversion rates, and commission rates for these five products?</strong><br><span class="disclosure-meta">Gate: Measurement, Traffic &amp; Conversion Data</span></td>
+            <td>Commission Income Statement §1/§6 governs qualifying purchases and reporting; no authorized Associates report exists yet.</td>
+            <td>Signed-in Associates Central Fee Schedule and exported Associates Orders/Earnings CSV reports.</td>
+            <td>The Campaign Ledger (operations/index.html) is intentionally empty (0 rows), with zero conversion scores or revenue forecasts.</td>
+            <td>After Special Links are validated, export monthly CSV reports from Associates Central Reports (S14) and import them via platform/ledger.py with SHA-256 provenance hashes.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a><br><a href="https://affiliate-program.amazon.com/home/reports" rel="noopener" target="_blank">S14 · Amazon.com Associates Central</a></td>
+          </tr>
+          <tr id="Q-12" data-q-row data-tags="needs-operator">
+            <td><strong><code>Q-12</code></strong><br><span class="badge badge-warn">needs-operator</span></td>
+            <td><strong>Should the publication add opt-in email reader capture, and what legal requirements apply?</strong><br><span class="disclosure-meta">Gate: Editorial Positioning &amp; Reader Fit</span></td>
+            <td>Associates Policies §4 permits Special Links in emails only when communications are solicited (opted into by the recipient) and compliant with CAN-SPAM and Brand Usage Guidelines.</td>
+            <td>Operator sender physical mailing address, unsubscribe handling provider, and decision whether Special Links will ever appear in emails.</td>
+            <td>Hold email capture until a compliant opt-in provider and physical sender address are configured; rely on the shipped RSS feed (feed.xml) for zero-PII subscriptions today.</td>
+            <td>Keep RSS live now; if adding email later, link emails to on-site guides rather than embedding raw Special Links unless opted-in Associates email rules (§4) are certified.</td>
+            <td><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">S02 · Amazon.com Associates Central</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Shop &amp; Categories</h4>
+          <ul>
+            <li><a href="../index.html">Storefront Shortlist</a></li>
+            <li><a href="../categories/index.html">All Categories</a></li>
+            <li><a href="../categories/air-fryers.html">Countertop Air Fryers (3)</a></li>
+            <li><a href="../categories/thermometers.html">Meat Thermometers (2)</a></li>
+            <li><a href="../compare/index.html">Side-by-Side Comparison</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Buying Guides &amp; Feed</h4>
+          <ul>
+            <li><a href="../guides/index.html">All 8 Buying Guides</a></li>
+            <li><a href="../guides/basket-or-oven-air-fryer.html">Basket vs Oven Air Fryer</a></li>
+            <li><a href="../guides/air-fryer-capacity-checklist.html">Capacity Checklist</a></li>
+            <li><a href="../guides/thanksgiving-countertop-oven-relief.html">Holiday Oven Relief</a></li>
+            <li><a href="../feed.xml">RSS 2.0 Feed</a> · <a href="../sitemap.xml">XML Sitemap</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Decision &amp; Operations Desk</h4>
+          <ul>
+            <li><a href="../suggestions/index.html">Suggestions &amp; Design Prompt Studio</a></li>
+            <li><a href="index.html">Pre-Decision Questions (12)</a></li>
+            <li><a href="../executive-summary/index.html">Executive Summary</a></li>
+            <li><a href="../operations/index.html">Measurement &amp; Empty Campaign Ledger</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Verification &amp; Governance</h4>
+          <ul>
+            <li><a href="../products/index.html">Product-Intent Confirmation Register</a></li>
+            <li><a href="../flagged/index.html">Flagged for Review (10 + 6 Repo Audit)</a></li>
+            <li><a href="../compliance/index.html">Official Sources &amp; Compliance Gate</a></li>
+            <li><a href="../../index.html">Root Storefront Edition</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Outbound product links carry <code>rel="sponsored nofollow noopener"</code>. Prices, customer ratings, review counts, and live stock are shown only on Amazon in accordance with Amazon Associates Program Policies §2(b) and §6(t). Verified line by line on 2026-11-20.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/analytics.js" defer></script>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

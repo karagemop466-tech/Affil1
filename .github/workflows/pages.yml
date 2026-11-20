@@ -38,6 +38,9 @@ jobs:
       - name: Validate the internal Decision Desk section
         run: python3 _decision-support/validate.py
 
+      - name: Validate the Countertop Almanac edition and platform
+        run: python3 platform/verify_edition.py
+
       - name: Confirm the build is reproducible, not hand-edited
         run: |
           cp -r . /tmp/first-build

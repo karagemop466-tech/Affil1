@@ -31,7 +31,7 @@ ARCHIVE_ROOT = "_archive"
 # _tools/check.py's INTERNAL_SECTIONS; the decision-support desk is one (see
 # COORDINATION.md — added by session-arena-83e015f6 to unstick the launch
 # gate, which failed on every branch including main).
-INTERNAL_SECTIONS = ("_decision-support/",)
+INTERNAL_SECTIONS = ("_decision-support/", "edition/")
 PUBLISHED_DIRS = ["guides", "compare", "products", "about", "sources", "suggestions",
                   "questions", "flagged", "legacy", "topics", "dashboard"]
 PUBLISHED_FILES = {"index.html", "404.html", "feed.xml", "sitemap.xml", "robots.txt"}
@@ -61,6 +61,10 @@ def main():
     args = ap.parse_args()
 
     keep = published_set()
+    try:
+        from check import INTERNAL_SECTIONS
+    except Exception:  # noqa: BLE001
+        INTERNAL_SECTIONS = ("_decision-support/", "edition/")
     dest = f"{ARCHIVE_ROOT}/{args.run_label}"
     moved = []
     for path in sorted(ROOT.rglob("*")):

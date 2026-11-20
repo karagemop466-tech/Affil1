@@ -1,0 +1,39 @@
+name: Verify Countertop Almanac edition and platform
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-edition:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run data-layer compliance gate
+        run: python3 platform/compliance_gate.py
+
+      - name: Rebuild edition deterministically
+        run: python3 platform/build_edition.py
+
+      - name: Run line-by-line HTML, source-link, anchor & policy verifier
+        run: python3 platform/verify_edition.py
+
+      - name: Confirm edition build is reproducible (zero drift)
+        run: |
+          cp -r edition /tmp/edition-snapshot
+          python3 platform/build_edition.py
+          diff -r -q /tmp/edition-snapshot edition
+
+      - name: Check client JavaScript syntax
+        run: |
+          node --check edition/assets/analytics.js
+          node --check edition/assets/app.js
+
+      - name: Run platform unit & HTTP collector tests
+        run: python3 -m unittest discover -s platform -p 'test_*.py' -v

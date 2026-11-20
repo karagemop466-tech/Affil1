@@ -1,0 +1,335 @@
+{
+  "tracking_id_selected": "shopnow047c-20",
+  "verified_on": "2026-11-20",
+  "separation_invariant": "intent_confirmation (intended_asin, official_listing_url, confirmation_date, confirmation_source, validated_special_link_url) and observed_redirect (observed_asin, observed_redirect_url, observed_tag_param, observed_date) are strictly separate records and must never be merged.",
+  "categories": [
+    {
+      "slug": "air-fryers",
+      "title": "Countertop Air Fryers & Convection Ovens",
+      "short_label": "Air Fryers",
+      "summary": "Three distinct countertop geometries observed across submitted links P-01 through P-03: dual independent 3-quart baskets (6 qt total), a 26-quart French-door countertop convection toaster oven, and an 8-quart single-basket drawer.",
+      "product_ids": ["P-01", "P-02", "P-03"],
+      "source_id": "S09"
+    },
+    {
+      "slug": "thermometers",
+      "title": "Digital & Wireless Meat Thermometers",
+      "short_label": "Meat Thermometers",
+      "summary": "Two complementary temperature tools observed across submitted links P-04 and P-05: a handheld instant-read probe for spot checks and a leave-in three-probe WiFi wireless system for continuous roast or air-fryer tracking.",
+      "product_ids": ["P-04", "P-05"],
+      "source_id": "S12"
+    }
+  ],
+  "products": [
+    {
+      "id": "P-01",
+      "slug": "p-01",
+      "category": "air-fryers",
+      "submitted_url": "https://link.amazon/B04G1MEwY",
+      "submitted_slug": "B04G1MEwY",
+      "submitted_slug_length": 9,
+      "intent_confirmation": {
+        "intended_asin": null,
+        "official_listing_url": null,
+        "confirmation_date": null,
+        "confirmation_source": null,
+        "validated_special_link_url": null,
+        "status": "unverified",
+        "flag_ids": ["FLG-001", "FLG-002", "FLG-003"]
+      },
+      "observed_redirect": {
+        "observed_asin": "B0CDY277D3",
+        "observed_asin_length": 10,
+        "observed_redirect_url": "https://www.amazon.com/dp/B0CDY277D3",
+        "observed_tag_param": null,
+        "observed_date": "2026-11-20",
+        "source_id": "S09",
+        "listing_title_verbatim": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+        "brand_in_title": "CHEFMAN",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "historical_observations": "Consistent across 2026-11-20 verification passes: resolved to /dp/B0CDY277D3 without a tag= query parameter."
+      },
+      "editorial": {
+        "display_name": "CHEFMAN 6-Quart Dual-Basket Air Fryer (2 × 3 Qt)",
+        "role_badge": "Two-Zone Weeknight Format",
+        "format": "dual-basket",
+        "counter_profile": "standard-footprint",
+        "workflow_tags": ["two-foods-at-once", "weeknight-sides", "drawer-cleanup"],
+        "illustration": "assets/img/dual-basket.svg",
+        "illustration_alt": "Editorial line-and-wash diagram of a dual-basket countertop air fryer with two independent pull-out 3-quart drawers",
+        "stated_capacity": "6 quarts total (stated in seller title as 2 independent 3-quart frying baskets)",
+        "stated_features": [
+          "Two independent 3-quart nonstick baskets (seller title)",
+          "Sync Finish & Hi-Fry modes (seller title)",
+          "Easy View front basket windows & Auto Shutoff (seller title)",
+          "Baskets described as dishwasher safe in seller title"
+        ],
+        "best_fit_hypothesis": "Households cooking a main protein and a starch/vegetable side at different temperatures that need to land on the table together.",
+        "tradeoff_note": "Splitting 6 quarts into two 3-quart drawers prioritizes timing coordination over single-piece width; wide flatbreads, whole birds, or casserole dishes will not fit a 3-quart drawer.",
+        "paired_product": "P-04",
+        "related_guides": [
+          "basket-or-oven-air-fryer",
+          "dual-basket-weeknight-timing",
+          "air-fryer-capacity-checklist",
+          "cleanup-and-counter-space"
+        ]
+      },
+      "unverified_fields": {
+        "price": null,
+        "star_rating": null,
+        "review_count": null,
+        "availability": null,
+        "wattage": null,
+        "exterior_dimensions": null,
+        "warranty": null
+      }
+    },
+    {
+      "id": "P-02",
+      "slug": "p-02",
+      "category": "air-fryers",
+      "submitted_url": "https://link.amazon/B02NbDxp3",
+      "submitted_slug": "B02NbDxp3",
+      "submitted_slug_length": 9,
+      "intent_confirmation": {
+        "intended_asin": null,
+        "official_listing_url": null,
+        "confirmation_date": null,
+        "confirmation_source": null,
+        "validated_special_link_url": null,
+        "status": "unverified",
+        "flag_ids": ["FLG-001", "FLG-002", "FLG-003"]
+      },
+      "observed_redirect": {
+        "observed_asin": "B09B7SB46R",
+        "observed_asin_length": 10,
+        "observed_redirect_url": "https://www.amazon.com/dp/B09B7SB46R",
+        "observed_tag_param": null,
+        "observed_date": "2026-11-20",
+        "source_id": "S10",
+        "listing_title_verbatim": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+        "brand_in_title": "Emeril Lagasse",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "historical_observations": "Consistent across 2026-11-20 verification passes: resolved to /dp/B09B7SB46R without a tag= query parameter."
+      },
+      "editorial": {
+        "display_name": "Emeril Lagasse 26-Quart French-Door Air Fryer Toaster Oven",
+        "role_badge": "Multi-Rack Oven Replacement",
+        "format": "french-door-oven",
+        "counter_profile": "large-footprint",
+        "workflow_tags": ["sheet-pan-trays", "holiday-overflow", "toast-and-bake"],
+        "illustration": "assets/img/french-door-oven.svg",
+        "illustration_alt": "Editorial line-and-wash diagram of a French-door countertop convection toaster oven with outward-opening doors and slide-in racks",
+        "stated_capacity": "26 quarts (stated in seller title as Extra Large Interior)",
+        "stated_features": [
+          "French-door countertop convection toaster oven design (seller title)",
+          "24 one-touch preset options (seller title)",
+          "Six cooking accessories included (seller title)"
+        ],
+        "best_fit_hypothesis": "Kitchens replacing a separate toaster oven that want flat-rack capacity for sheet trays, baking pans, and holiday side-dish overflow.",
+        "tradeoff_note": "Demands permanent counter width, overhead heat clearance, front swing space for French doors, and hand-washing/storage for six separate racks and pans.",
+        "paired_product": "P-05",
+        "related_guides": [
+          "basket-or-oven-air-fryer",
+          "multi-function-kitchen-appliance-questions",
+          "thanksgiving-countertop-oven-relief",
+          "crispy-reheat-without-soggy-leftovers"
+        ]
+      },
+      "unverified_fields": {
+        "price": null,
+        "star_rating": null,
+        "review_count": null,
+        "availability": null,
+        "wattage": null,
+        "exterior_dimensions": null,
+        "warranty": null
+      }
+    },
+    {
+      "id": "P-03",
+      "slug": "p-03",
+      "category": "air-fryers",
+      "submitted_url": "https://link.amazon/B00hJ57DV",
+      "submitted_slug": "B00hJ57DV",
+      "submitted_slug_length": 9,
+      "intent_confirmation": {
+        "intended_asin": null,
+        "official_listing_url": null,
+        "confirmation_date": null,
+        "confirmation_source": null,
+        "validated_special_link_url": null,
+        "status": "unverified",
+        "flag_ids": ["FLG-001", "FLG-002", "FLG-003", "FLG-005"]
+      },
+      "observed_redirect": {
+        "observed_asin": "B08DKYBTPH",
+        "observed_asin_length": 10,
+        "observed_redirect_url": "https://www.amazon.com/dp/B08DKYBTPH",
+        "observed_tag_param": null,
+        "observed_date": "2026-11-20",
+        "source_id": "S11",
+        "listing_title_verbatim": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+        "brand_in_title": "Chefman",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "historical_observations": "Resolved directly to /dp/B08DKYBTPH on 2026-11-20; one archived early-session log recorded an Amazon homepage fallback (flagged in FLG-005)."
+      },
+      "editorial": {
+        "display_name": "Chefman TurboFry 8-Quart Single-Basket Air Fryer (4-in-1)",
+        "role_badge": "Wide Single-Drawer Format",
+        "format": "single-basket",
+        "counter_profile": "standard-footprint",
+        "workflow_tags": ["single-layer-batches", "drawer-cleanup", "weeknight-sides"],
+        "illustration": "assets/img/single-basket.svg",
+        "illustration_alt": "Editorial line-and-wash diagram of an 8-quart single-basket air fryer with one wide pull-out drawer",
+        "stated_capacity": "8 quarts in a single XL basket (seller title)",
+        "stated_features": [
+          "Single XL 8-quart nonstick basket (seller title)",
+          "4-in-1 modes: Air Fry, Bake, Dehydrate, Frozen (seller title)",
+          "450°F Hi-Fry option stated in seller title",
+          "Stainless steel finish; basket described as dishwasher-safe in seller title"
+        ],
+        "best_fit_hypothesis": "Cooks who prioritize one undivided floor area for larger cuts, wider batches of fries or wings, and washing only one basket and crisper plate.",
+        "tradeoff_note": "One temperature zone means two foods requiring different heat settings must cook sequentially rather than simultaneously.",
+        "paired_product": "P-04",
+        "related_guides": [
+          "air-fryer-capacity-checklist",
+          "dual-basket-weeknight-timing",
+          "cleanup-and-counter-space",
+          "crispy-reheat-without-soggy-leftovers"
+        ]
+      },
+      "unverified_fields": {
+        "price": null,
+        "star_rating": null,
+        "review_count": null,
+        "availability": null,
+        "wattage": null,
+        "exterior_dimensions": null,
+        "warranty": null
+      }
+    },
+    {
+      "id": "P-04",
+      "slug": "p-04",
+      "category": "thermometers",
+      "submitted_url": "https://link.amazon/B0c8moW59",
+      "submitted_slug": "B0c8moW59",
+      "submitted_slug_length": 9,
+      "intent_confirmation": {
+        "intended_asin": null,
+        "official_listing_url": null,
+        "confirmation_date": null,
+        "confirmation_source": null,
+        "validated_special_link_url": null,
+        "status": "unverified",
+        "flag_ids": ["FLG-001", "FLG-002", "FLG-003", "FLG-006"]
+      },
+      "observed_redirect": {
+        "observed_asin": "B0DHZTCNR5",
+        "observed_asin_length": 10,
+        "observed_redirect_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "observed_tag_param": null,
+        "observed_date": "2026-11-20",
+        "source_id": "S12",
+        "listing_title_verbatim": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+        "brand_in_title": "ThermoMaven",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+        "historical_observations": "Fetched directly on 2026-11-20 to /dp/B0DHZTCNR5. Discrepancy note (FLG-006): earlier automated checks hit /ap/cvf/request or /checkpoint/continue, and one concurrent pass initially recorded P-04 -> B0DZFD6R9Z before later agreeing on B0DHZTCNR5."
+      },
+      "editorial": {
+        "display_name": "ThermoMaven Instant-Read Digital Meat Thermometer",
+        "role_badge": "Spot-Check Instant Probe",
+        "format": "instant-read-probe",
+        "counter_profile": "drawer-tool",
+        "workflow_tags": ["drawer-spot-check", "weeknight-sides", "single-layer-batches"],
+        "illustration": "assets/img/instant-probe.svg",
+        "illustration_alt": "Editorial line-and-wash diagram of a handheld folding instant-read digital meat thermometer",
+        "stated_capacity": "Single fold-out handheld probe (instant spot check, not leave-in)",
+        "stated_features": [
+          "1-second readout & ±0.5°F accuracy stated in seller title (not lab-verified here)",
+          "NIST & NSF certification claim stated in seller title",
+          "Auto-rotate LED screen & IP67 waterproof claim in seller title"
+        ],
+        "best_fit_hypothesis": "Quick drawer-open checks on chicken thighs, pork chops, salmon fillets, or burgers where you test multiple pieces in seconds.",
+        "tradeoff_note": "Handheld spot-check tool only — cannot remain inside closed oven cavities or air-fryer drawers during cooking, and P-04 redirect history carries discrepancy flag FLG-006.",
+        "paired_product": "P-01",
+        "related_guides": [
+          "instant-read-vs-wireless-probe",
+          "dual-basket-weeknight-timing",
+          "thanksgiving-countertop-oven-relief"
+        ]
+      },
+      "unverified_fields": {
+        "price": null,
+        "star_rating": null,
+        "review_count": null,
+        "availability": null,
+        "wattage": null,
+        "exterior_dimensions": null,
+        "warranty": null
+      }
+    },
+    {
+      "id": "P-05",
+      "slug": "p-05",
+      "category": "thermometers",
+      "submitted_url": "https://link.amazon/B0f3GKalj",
+      "submitted_slug": "B0f3GKalj",
+      "submitted_slug_length": 9,
+      "intent_confirmation": {
+        "intended_asin": null,
+        "official_listing_url": null,
+        "confirmation_date": null,
+        "confirmation_source": null,
+        "validated_special_link_url": null,
+        "status": "unverified",
+        "flag_ids": ["FLG-001", "FLG-002", "FLG-003", "FLG-006"]
+      },
+      "observed_redirect": {
+        "observed_asin": "B0DZFD6R9Z",
+        "observed_asin_length": 10,
+        "observed_redirect_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "observed_tag_param": null,
+        "observed_date": "2026-11-20",
+        "source_id": "S13",
+        "listing_title_verbatim": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+        "brand_in_title": "CHEF iQ",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+        "historical_observations": "Fetched directly on 2026-11-20 to /dp/B0DZFD6R9Z. Discrepancy note (FLG-006): one early log hit the Amazon homepage and one concurrent pass initially recorded P-05 -> B0DHZTCNR5 before agreeing on B0DZFD6R9Z."
+      },
+      "editorial": {
+        "display_name": "CHEF iQ Sense Smart Wireless Meat Thermometer (3-Probe Gen3)",
+        "role_badge": "Continuous Multi-Probe Monitor",
+        "format": "wireless-probe-set",
+        "counter_profile": "charging-hub-tool",
+        "workflow_tags": ["leave-in-roast", "holiday-overflow", "two-foods-at-once"],
+        "illustration": "assets/img/wireless-probes.svg",
+        "illustration_alt": "Editorial line-and-wash diagram of a charging hub holding three leave-in wireless meat thermometer probes",
+        "stated_capacity": "Three leave-in wireless probes with charging hub (seller title)",
+        "stated_features": [
+          "3 ultra-thin wireless probes & 5 sensors stated in seller title",
+          "WiFi connectivity & 1000°F heat rating stated in seller title (not lab-tested here)",
+          "Listed by seller for BBQ, Grill, Oven, Smoker, and Air Fryer (Gen3)"
+        ],
+        "best_fit_hypothesis": "Tracking thicker roasts, whole poultry, or simultaneous proteins across a main oven and countertop cooker without opening doors and losing heat.",
+        "tradeoff_note": "Requires charging the hub/probes, pairing WiFi/app software, and sufficient meat thickness to submerge the probe's minimum insertion depth.",
+        "paired_product": "P-02",
+        "related_guides": [
+          "instant-read-vs-wireless-probe",
+          "thanksgiving-countertop-oven-relief",
+          "multi-function-kitchen-appliance-questions"
+        ]
+      },
+      "unverified_fields": {
+        "price": null,
+        "star_rating": null,
+        "review_count": null,
+        "availability": null,
+        "wattage": null,
+        "exterior_dimensions": null,
+        "warranty": null
+      }
+    }
+  ]
+}

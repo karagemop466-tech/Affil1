@@ -356,10 +356,10 @@ def check_assets():
         err("analytics.js: sets a cookie")
 
 
-# Hand-maintained internal sections that ship but are not storefront pages:
-# the Decision Desk publishes its own validator (_decision-support/validate.py,
-# wired in this workflow) and README. See COORDINATION.md session 771e5093.
-INTERNAL_SECTIONS = ("_decision-support/",)
+# Hand-maintained internal sections that ship or validate via their own gate:
+# the Decision Desk (_decision-support/validate.py) and Countertop Almanac
+# edition/ (platform/verify_edition.py), both wired in pages.yml.
+INTERNAL_SECTIONS = ("_decision-support/", "edition/")
 
 
 def check_no_stray_pages():
