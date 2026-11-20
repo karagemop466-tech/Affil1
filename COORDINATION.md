@@ -690,3 +690,16 @@ generated set, delete the tuple in both files together.
   an image-provenance finding; the cross-reference in
   `src/data/reverification.json` (`additional_passes.obs-83e015f6`) was corrected
   in the same commit as this entry.
+Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done.
+## Session arena/23b5a192-affil1 — gate repair, launch-check repair, link re-verification (2026-11-20)
+
+Branch name is fixed for this session (`arena/23b5a192-affil1`); the board's `session-<id>/<task>` form is not used. Base: `main` at `f041c75`.
+
+**Claimed (non-overlapping with open PRs #74, #79, #82, #84, #86, #87, which touch other files):**
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Restore the paid-link gate: only account-approved Special Links may carry the tag; everything else is an untagged listing link, marked sponsored | in progress | arena/23b5a192-affil1 | `tools/layout.py`, `tools/test_paid_link_gate.py` (run in CI), `.github/workflows/kitchen-check.yml` |
+| Make the launch-check sweep recognise the Decision Desk as an internal section (same exemption `tools/check.py` already uses) | in progress | arena/23b5a192-affil1 | `tools/sweep_surfaces.py` |
+| Correct text that says every link carries the tag | in progress | arena/23b5a192-affil1 | `src/data/products.json`, `src/data/questions.json`, `src/data/suggestions.json`, `src/data/flags.json`, `src/data/product-intent.json`, `README.md` |
+| Regenerate the published pages from the corrected data | in progress | arena/23b5a192-affil1 | generated root HTML only, via `tools/build.py` |
