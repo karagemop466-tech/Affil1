@@ -1,6 +1,6 @@
 """Product register and the per-product records."""
 
-from layout import (blank, esc, eyebrow, link, outbound, page, product_link, rel,
+from layout import (approved_cta, blank, esc, eyebrow, link, outbound, page, product_link, rel,
                     section, table, DISCLOSURE)
 from page_home import img
 
@@ -8,6 +8,9 @@ FIELDS = [
     ("submitted_link", "Submitted link", "The exact URL supplied by the operator, unchanged."),
     ("submitted_code", "Path code", "The characters after link.amazon/. Kept verbatim, including case."),
     ("intended_asin", "Intended ASIN", "What the operator meant to ship. Blank: it cannot be read from a nine-character slug."),
+    ("intended_listing_url", "Intended listing URL", "Blank until the intended product is confirmed."),
+    ("intended_confirmed_on", "Intent confirmation date", "Blank until confirmed."),
+    ("intended_confirmation_source", "Intent confirmation source", "Blank until confirmed."),
     ("observed_asin", "Observed ASIN", "The /dp/ segment of the page that actually loaded. Separate field, never merged with the one above."),
     ("listing_title", "Listing title", "Transcribed from the page reached, including the seller's own punctuation and claims."),
     ("brand", "Brand", "As stated on the listing."),
@@ -28,13 +31,13 @@ def build_register(page_dir, products, meta):
     for p in products:
         link_cell = product_link(
             d, p["submitted_link"], esc(p["submitted_code"]),
-            aria=f"Open submitted link {p['ref']} (affiliate link, opens in a new tab)")
+            aria=f"Open submitted link {p['ref']} (source, opens in a new tab)")
         if p["observed_asin"]:
             listing = product_link(
                 d, p["listing_url"], esc(p["observed_asin"]),
-                aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
+                aria=f"Open the Amazon listing for {p['ref']} (source, opens in a new tab)")
             name = esc(_short(p))
-            status = '<span class="pill pill-ok">Identified</span>'
+            status = '<span class="pill pill-ok">Observed</span>'
         else:
             listing = '<span class="blank">&mdash;</span>'
             name = '<span class="blank">&mdash;</span>'
@@ -51,8 +54,8 @@ def build_register(page_dir, products, meta):
     tbl = table(
         ["Ref", "Submitted link", "Code in the link", "Listing reached", "Product", "Status"],
         rows, cls="register",
-        caption="Every submitted link, opened once on 20 November 2026",
-        note="The code in the link and the ASIN on arrival are different fields and are shown in separate columns on purpose. A nine-character code is not an ASIN."
+        caption="Dated destination observations, not confirmed intent",
+        note="The submitted slug and observed listing are different fields. A nine-character code is not an ASIN."
     )
 
     body = f"""{_head(d)}
@@ -65,8 +68,8 @@ def build_register(page_dir, products, meta):
   </div>
   <dl class="reg-stats">
     <div><dt>Links submitted</dt><dd>5</dd></div>
-    <div><dt>Opened successfully</dt><dd>4</dd></div>
-    <div><dt>Unresolved</dt><dd>1</dd></div>
+    <div><dt>Observed destinations</dt><dd>5</dd></div>
+    <div><dt>Intended ASINs confirmed</dt><dd>0</dd></div>
     <div><dt>Tested</dt><dd>0</dd></div>
   </dl>
 </div>
@@ -104,7 +107,7 @@ def _head(d):
         "The register",
         "Five submitted links,<br>opened one by one",
         "What each link actually reaches, transcribed from the page that loaded \u2014 and the fields that stay empty because no official source was available.",
-        meta=f"Checked {esc('20 November 2026')} &middot; 5 links &middot; 4 identified &middot; 0 tested",
+        meta=f"Checked {esc('20 November 2026')} &middot; 5 links &middot; 5 observed &middot; 0 tested",
     )
 
 
@@ -130,10 +133,9 @@ def _thermometer_note(d):
     return f"""<section class="band"><div class="wrap band-inner">
   <div>
     {eyebrow('Read the category path')}
-    <h2>One of these is filed under thermometers</h2>
-    <p>An earlier P-05 observation reached a wireless meat thermometer; a later check reached a different thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. P-04 was unresolved in that earlier check and later reached a thermometer listing.</p>
-    <p>That is not a problem with the link. It would be a problem with this site if it presented a thermometer as the fifth air fryer, which is exactly what a site written from the brief alone would have done.</p>
-    <p><a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">The thermometer record <span aria-hidden="true">&rarr;</span></a></p>
+    <h2>Two thermometer listings</h2>
+    <p>Checks of P-04 and P-05 reached two meat thermometers, but sessions reported conflicting destinations for the supplied short links. Their intended products remain unconfirmed. <a href="{esc(rel(d, 'review/index.html'))}#FLG-016">See the conflicting observations</a>.</p>
+    <p><a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">Wireless thermometer record</a> &middot; <a class="tlink" href="{esc(rel(d, 'products/p-04.html'))}">Instant-read thermometer record</a></p>
   </div>
 </div></section>"""
 
@@ -150,9 +152,9 @@ def build_product(page_dir, p, meta):
     for key, label, note in FIELDS:
         value = p.get(key)
         if key == "submitted_link":
-            cell = product_link(d, value, esc(p["submitted_code"]), aria=f"Open submitted link for {p['ref']} (affiliate link, opens in a new tab)")
+            cell = product_link(d, value, esc(p["submitted_code"]), aria=f"Open submitted link for {p['ref']} (source, opens in a new tab)")
         elif key == "observed_asin":
-            cell = product_link(d, p["listing_url"], esc(value), aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
+            cell = product_link(d, p["listing_url"], esc(value), aria=f"Open the Amazon listing for {p['ref']} (source, opens in a new tab)")
         elif key == "category_path":
             cell = esc(value)
         else:
@@ -160,6 +162,7 @@ def build_product(page_dir, p, meta):
         facts.append([
             {"html": f"<strong>{esc(label)}</strong><br><span class='tiny'>{esc(note)}</span>"},
             {"html": cell},
+            {"html": product_link(d, p["listing_url"], "Amazon listing", aria="Open observed Amazon listing (opens in a new tab)")},
         ])
 
     stated = p.get("title_stated") or []
@@ -167,7 +170,7 @@ def build_product(page_dir, p, meta):
 
     not_stated = [
         [v, {"html": blank(None, "no permitted source")},
-         {"html": f'<a href="{esc(rel(d, "about/index.html"))}#why-blank">Why</a>'}]
+         {"html": product_link(d, p['listing_url'], 'Amazon listing', aria='Open observed Amazon listing (opens in a new tab)')}]
         for v in p["unverified"]
     ]
 
@@ -186,22 +189,27 @@ def build_product(page_dir, p, meta):
     <p class="lede">These are not our findings. They are the claims written into the listing title by whoever sells the product, transcribed once and never paraphrased into something stronger. Read them for what the product is positioned as, not for what it does.</p>
     <ul class="claims">{stated_html}</ul>
 
+    <h2>Product intent and observed destination</h2>
+    <p>Intent fields remain blank until confirmed; observed listing data is kept separate.</p>
+    {table(['Field', 'Value', 'Source to consult'], facts, cls='fields')}
+
     <h2>What was not established</h2>
     <p class="lede">Each row below is a field a shopper would normally expect to see. None of them has a source this build is allowed to use, so none of them is filled in.</p>
     {table(['Field', 'Value', 'Reason'], not_stated, cls='fields')}
 
     <h2>How the link was checked</h2>
     <p>{esc(p['resolution_note'])}</p>
-    <p>The submitted link was opened; the page it landed on was read; the ASIN inside the address and the title on the page were transcribed into this record. That is the whole of the check. It establishes identity. It does not establish quality, price or availability.</p>
+    <p>The submitted link was opened; the page it landed on was read; the ASIN inside the address and the title on the page were transcribed into this record. That establishes what appeared on arrival, not the intended variant, product performance, price or availability.</p>
 
     <div class="cta">
       <div>
         <p class="cta-label">Amazon listing</p>
-        <p>Opens in a new tab. This is an affiliate link{'' if not meta.get('tracking') else ''}.</p>
+        <p>Untagged listing source. This is not an approved affiliate link.</p>
       </div>
-      {product_link(d, p['listing_url'], 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
+      {product_link(d, p['listing_url'], 'Open listing source <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (source, opens in a new tab)")}
     </div>
-    <p class="fineprint">{DISCLOSURE} A purchase through this link does not change the price you pay. Whether a click is credited to this site's tracking ID is not confirmed \u2014 see the review queue.</p>
+{approved_cta(d, p, meta)}
+    <p class="fineprint">The observed redirect does not verify intent or confirm tracking. <a href="../operations/launch-readiness.html">See the launch gate</a>.</p>
   </div>
 
   <aside class="record-side">
@@ -259,7 +267,7 @@ def _producthead(p, short, meta):
         f"Record {p['ref']} &middot; checked {p['checked_on']}",
         f"{esc(short)}<br><span class='head-asin'>{esc(p['observed_asin'])}</span>",
         f"<strong>{esc(p['brand'])}</strong> &middot; {esc(p['format_label'])}. This record says what the listing states, what was checked, and what remains blank.",
-        meta=f'<span class="pill pill-ok">Identity confirmed</span> <span class="pill pill-warn">Not tested</span> <span class="pill">No price shown</span>',
+        meta=f'<span class="pill pill-ok">Destination observed</span> <span class="pill pill-warn">Not tested</span> <span class="pill">No price shown</span>',
     )
 
 
@@ -287,7 +295,7 @@ def _build_unresolved(d, p):
   <p>All four are consistent with what was observed. Choosing between them would require opening it somewhere this session cannot reach, so none is asserted.</p>
 
   <h2>How to close this</h2>
-  <p>Open <a href="{esc(p['submitted_link'])}" rel="sponsored nofollow noopener" target="_blank">link.amazon/B0c8moW59</a> in an ordinary browser and note where it lands. If it is dead, re-issue it from the Associates dashboard. Either way the record above gets a date and a value, and the blank row becomes a product.</p>
+  <p>Open <code>{esc(p['submitted_link'])}</code> in an ordinary browser and note where it lands. If it is dead, re-issue it from the Associates dashboard. Either way the record above gets a date and a value, and the blank row becomes a product.</p>
 
   <div class="cta">
     <div><p class="cta-label">Still open</p><p>This product has no card, no photograph and no buy link until it can be identified.</p></div>

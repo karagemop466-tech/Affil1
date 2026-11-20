@@ -1,6 +1,6 @@
 """Open questions: what is known, what is missing, and what would close it."""
 
-from layout import esc, eyebrow, outbound, page, pagehead, rel, section, table
+from layout import esc, eyebrow, outbound, page, pagehead, product_link, rel, section, table
 
 
 def build(page_dir, questions, meta):
@@ -31,6 +31,22 @@ def build(page_dir, questions, meta):
   {answer}
 </article>"""
 
+    official_sources = {
+        "Q-01": "https://link.amazon/B04G1MEwY", "Q-02": "https://link.amazon/B0c8moW59",
+        "Q-03": "https://affiliate-program.amazon.com/help/operating/policies",
+        "Q-04": "https://affiliate-program.amazon.com/help/operating/policies",
+        "Q-05": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+        "Q-06": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "Q-07": "https://support.google.com/webmasters/answer/7576553",
+        "Q-08": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+        "Q-09": "https://affiliate-program.amazon.com/help/operating/policies",
+        "Q-10": "https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages",
+        "Q-11": "https://support.google.com/webmasters/answer/9008080",
+        "Q-12": "https://affiliate-program.amazon.com/help/operating/policies",
+        "Q-13": "https://affiliate-program.amazon.com/help/operating/agreement",
+        "Q-14": "https://affiliate-program.amazon.com/help/operating/policies",
+        "Q-15": "https://support.google.com/webmasters/answer/7576553",
+    }
     q_rows = []
     for q in qs:
         state = '<span class="pill pill-ok">Answered</span>' if q.get("answered") else '<span class="pill pill-warn">Open</span>'
@@ -40,9 +56,10 @@ def build(page_dir, questions, meta):
             {"html": esc(q["question"])},
             {"html": state},
             {"html": blk},
+            {"html": (product_link(d, official_sources[q["id"]], "Amazon listing", aria="Open Amazon link (opens in a new tab)") if q["id"] in ("Q-01", "Q-02", "Q-06") else outbound(d, official_sources[q["id"]], "Official source"))},
         ])
-    q_table = table(["Ref", "Question", "Status", "Blocks work"], q_rows,
-                    cls="qtable", caption="15 questions raised, 4 answered")
+    q_table = table(["Ref", "Question", "Status", "Blocks work", "Source"], q_rows,
+                    cls="qtable", caption=f"{len(qs)} questions raised, {len(answered)} answered")
 
     body = f"""{pagehead(
         'Open questions',

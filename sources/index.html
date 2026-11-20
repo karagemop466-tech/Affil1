@@ -205,37 +205,37 @@
       <tbody><tr>
   <td><strong>E1</strong></td>
   <td class="mono">page_view</td>
-  <td>A guide, category or register page is rendered</td>
-  <td class="mono" style="font-size:.76rem">path, referrer_host, viewport_class</td>
-  <td>Which pages are reached at all, and from where</td>
+  <td>A maintained page loads</td>
+  <td class="mono" style="font-size:.76rem">page</td>
+  <td>Which pages load</td>
   <td><span class="badge warn">not deployed</span></td>
 </tr><tr>
   <td><strong>E2</strong></td>
   <td class="mono">outbound_product_click</td>
-  <td>A reader activates an outbound link to a product listing</td>
-  <td class="mono" style="font-size:.76rem">product_id, asin, page_path, position_in_page</td>
-  <td>Which products and which positions earn the click</td>
+  <td>An approved, labelled paid product link is activated</td>
+  <td class="mono" style="font-size:.76rem">page, product</td>
+  <td>Which approved product links receive clicks; not attribution or an order.</td>
   <td><span class="badge warn">not deployed</span></td>
 </tr><tr>
   <td><strong>E3</strong></td>
   <td class="mono">guide_read_75</td>
-  <td>A reader reaches 75% of a guide&#x27;s height</td>
-  <td class="mono" style="font-size:.76rem">guide_slug</td>
-  <td>Whether the guide is actually read or merely opened</td>
+  <td>The viewport reaches 75% of the main guide section</td>
+  <td class="mono" style="font-size:.76rem">page</td>
+  <td>Which guides reach the depth threshold (not proof of reading)</td>
   <td><span class="badge warn">not deployed</span></td>
 </tr><tr>
   <td><strong>E4</strong></td>
   <td class="mono">compare_view</td>
-  <td>The comparison page or a comparison table is rendered</td>
-  <td class="mono" style="font-size:.76rem">table_id</td>
-  <td>Whether readers want side-by-side data more than prose</td>
+  <td>The comparison opens</td>
+  <td class="mono" style="font-size:.76rem">page</td>
+  <td>How often comparison opens</td>
   <td><span class="badge warn">not deployed</span></td>
 </tr><tr>
   <td><strong>E5</strong></td>
   <td class="mono">flag_page_view</td>
-  <td>The Flagged for Review page is opened</td>
-  <td class="mono" style="font-size:.76rem">referrer_path</td>
-  <td>Whether the review page is actually consulted, which tells us if the verification work is visible</td>
+  <td>Flagged for Review opens</td>
+  <td class="mono" style="font-size:.76rem">page</td>
+  <td>How often review opens</td>
   <td><span class="badge warn">not deployed</span></td>
 </tr></tbody>
     </table>

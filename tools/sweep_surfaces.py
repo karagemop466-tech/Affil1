@@ -75,7 +75,15 @@ def main():
         if not args.dry_run:
             target = f"{dest}/{rel}"
             pathlib.Path(f"{ROOT}/{dest}").mkdir(parents=True, exist_ok=True)
-            subprocess.run(["git", "mv", "-f", rel, target], check=True, cwd=ROOT)
+            tracked = subprocess.run(["git", "ls-files", "--error-unmatch", rel],
+                                     cwd=ROOT, capture_output=True).returncode == 0
+            if tracked:
+                subprocess.run(["git", "mv", "-f", rel, target], check=True, cwd=ROOT)
+            else:
+                import shutil
+                pathlib.Path(f"{ROOT}/{dest}/{rel}").parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(ROOT / rel), f"{ROOT}/{dest}/{rel}")
+                subprocess.run(["git", "add", "-f", f"{dest}/{rel}"], cwd=ROOT, capture_output=True)
 
     if not args.dry_run:
         for d in sorted((p for p in ROOT.rglob("*") if p.is_dir()), reverse=True):

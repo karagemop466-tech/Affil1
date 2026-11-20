@@ -122,7 +122,7 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
 CITATION_OK = re.compile(
-    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
+    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|sell\.amazon\.com|support\.google\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"www\.ftc\.gov)",
@@ -183,10 +183,19 @@ def check_page(path):
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
     # --- Amazon links must be sponsored ---
+    from build import readiness
+    doc = json.loads(readiness.INTENT.read_text())
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
+            paid = a.get("data-affiliate-ref")
+            if paid:
+                if not any(p["ref"] == paid and p["approved_special_link"] == href
+                           and readiness.eligible(p, doc["tracking_id_supplied"]) for p in doc["records"]):
+                    err(f"{rel}: paid link lacks an approved evidence bundle: {href}")
+            elif not re.fullmatch(r"https://www\.amazon\.com/dp/[A-Z0-9]{10}", href):
+                err(f"{rel}: unknown short link or unapproved commercial URL: {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:
@@ -260,7 +269,7 @@ def check_sitemap_feed():
     from build import GENERATED  # the build's own list, not a second copy
     generated = set()
     for g in GENERATED:
-        if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
+        if g in ("404.html", "operations/launch-readiness.html", "sitemap.xml", "feed.xml", "robots.txt"):
             continue
         generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
     for u in sorted(generated):
@@ -328,7 +337,8 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for spec in json.loads((ROOT / "src/data/events.json").read_text())["events"]:
+        ev = spec["name"]
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:

@@ -28,11 +28,11 @@
       "id": "Q-03",
       "question": "What is the valid ASIN for each of the five products?",
       "needed_info": "The ten-character ASIN shown on each product page and in the owner's Associates record.",
-      "answer": "Four observed redirect targets are recorded and are ten characters long. The fifth supplied link never reached a product page, so its ASIN is blank.",
+      "answer": "All five redirect targets were observed on 2026-11-20; the intended ASINs remain unconfirmed.",
       "status": "partly-answered",
-      "how_to_unblock": "Open B0c8moW59 in a browser, past the interstitial, and read the ASIN from the page or URL.",
-      "source": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
-      "flag": "FLG-005"
+      "how_to_unblock": "Confirm the intended ASIN and listing with the Associates account records for each product.",
+      "source": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "flag": "FLG-001"
     },
     {
       "id": "Q-04",
