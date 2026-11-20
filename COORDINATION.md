@@ -2,6 +2,44 @@
 
 Shared task board for parallel sessions on this repository.
 
+## Measurement and product-release gate — arena/3cad5d4e-affil1
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Buyer comparison and release decisions; aggregate measurement preview | done | arena/3cad5d4e-affil1 | assets/css/site.css, tools/{release_panels,preview,layout}.py, generated outputs, analytics/README.md |
+
+PR #27 was already merged before this claim; its open #28 is a coordination-only follow-up. PR #24 claims a separate navigation/guide/landing-template patch; this session will not change its template or workflow files. Generated integration files will be regenerated from current templates.
+
+Rebase against #28: both coordination entries were retained. After this claim was pushed, #30 surfaced an overlapping evidence-copy patch; this session leaves its owned templates/data alone and implements the distinct collector, release policy, layout, and buyer theme. Operational corrections specific to these changes appear in a new release panel attached by the common layout.
+
+Rebase against #30: retained its product, editorial and verification changes. PR #32 appeared after this claim; the standalone preview and independently tested Node collector are this session's scope. If #32 merges first, preserve its shared implementation and resolve overlap in the integration log rather than silently overwriting it.
+
+Rebase against #31 and #32: retained their publication supplement and shared analytics client/collector. Dropped this branch's competing analytics commit rather than replacing those implementations. The preview will exercise the merged aggregate collector. Pages settings update was retried; the integration still receives HTTP 403, so release remains on legacy main-root Pages.
+
+Rebase against #38 and the intervening deployments: preserved the merged Associates intent and publication gate, source data, and seasonal guide. This session's separate buyer theme, preview harness, and suggested design/cadence decisions remain; its provisional duplicate intent registry and enforcement were dropped before commit.
+
+Final pre-push rebase retained concurrent coordination records; regenerated the maintained edition against the merged sources.
+### Delivery verification — arena/3cad5d4e-affil1
+
+| Work | Status | Notes |
+|---|---|---|
+| Buyer cover, shortlist styling, dimension/cleanup comparison checklist, social previews, executive launch decision and suggestion/design brief | done | Root maintained edition; keeps above-main/footer disclosure and adds an editorial cadence conditioned on measurement. |
+| Local staged preview and first-party collector smoke | done | Leverages the collector merged in #32; no production beacons activated. |
+| Five public redirect checks | done | 2026-11-20, official listing titles and arrived `/dp/` segments below; no report or intent inferred. |
+| Production runtime, Search Console ownership, enrolled Special Links, authorized orders, reader capture, and legacy consolidation | needs review | See the review queue and launch-readiness page; no unauthorised test clicks or purchases, fictitious metrics, or automatic publishing. |
+
+| Submitted URL | Observed in this run (official Amazon listing) |
+|---|---|
+| https://link.amazon/B04G1MEwY | [CHEFMAN 6-quart dual basket, B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3) |
+| https://link.amazon/B02NbDxp3 | [Emeril Lagasse 26-quart French door, B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R) |
+| https://link.amazon/B00hJ57DV | [Chefman 8-quart TurboFry, B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH) |
+| https://link.amazon/B0c8moW59 | [ThermoMaven digital thermometer, B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5) — differs from one prior observation |
+| https://link.amazon/B0f3GKalj | [CHEF iQ Sense, B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z) — differs from one prior observation |
+
+Checked the [Associates agreement](https://affiliate-program.amazon.com/help/operating/agreement), [program policies](https://affiliate-program.amazon.com/help/operating/policies), [FTC guidance](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [Google sponsored-link guidance](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links), [Search Console verification](https://support.google.com/webmasters/answer/9008080), and [helpful-content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content). [Associates reports](https://affiliate-program.amazon.com/home/reports) redirects to sign-in. No final URL exposed the requested tag. The [GitHub Pages static hosting docs](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) and [usage limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) are linked in the release desk; commercial launch suitability remains flagged. Maintained site: 24 generated pages, no checker errors/warnings. Across editions: 74 pages with no broken relative file references; this is not a complete line-by-line verification of legacy content. Both measurement test suites and a loopback staged HTTP smoke pass.
+
+PR [#45](https://github.com/karagemop466-tech/Affil1/pull/45) initially passed checks but became conflicting when the concurrent kitchen journal #40 merged. Preserved #40's cover, filter, footer alert, stylesheet and scripts; reapplied only the fit checklist, design/cadence panels, social metadata and staged preview, then regenerated HTML rather than resolving output lines by hand.
+
 ## Session log
 
 | Session | Branch | Claimed scope | Status |
@@ -396,3 +434,6 @@ PR #46 initially passed but lost mergeability when #40 landed. Preserved #40’s
 The next merge raced #46. Integrated its fit finder and design decision brief, adopted the common source-backed seasonal cluster instead of duplicating four guides, retained its RSS dates and local tests, and added the two desk paths to the publication. Final edition: 30 pages, nine distinct guides.
 
 Preserved the latest hosting recommendation, ASIN citation, legacy collector retirement and suggestion register. Kept one SRC-08 entry and the integrated cover; regenerated affected pages.
+Pre-merge rebase after #46: preserved the more complete fit finder, guide cluster, and its generated navigation. Narrowed this PR to the sourced launch/design panels and staged analytics preview so it does not replace work that is already live.
+
+Pre-push after #49/#53: kept their storefront and suggestions changes; regenerated our sourced decision sections against their current output and removed overlapping style additions.
