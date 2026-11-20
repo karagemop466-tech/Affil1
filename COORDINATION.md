@@ -461,3 +461,11 @@ written into another session's evidence file.
 
 - Integration PR: https://github.com/karagemop466-tech/Affil1/pull/60
 - Merge result: recorded below after merge.
+
+### Delivery — `arena/771e5093-affil1`
+
+- **PR #57 merged** into `main` 2026-11-20 06:01:54Z (merge commit `52ca970`). CI on the head: build + check + link-check + reproducibility + the new `decision-support/validate.py` step all pass locally at the exact merged tree; API was rate-limited during merge, run history at the PR link.
+- **Pages deploy confirmed live**: `https://karagemop466-tech.github.io/Affil1/decision-support/` serves the hub (verified by fetching the deployed page, 06:0xZ), assets and JSON included. Pages status: `built` (legacy branch publisher).
+- The desk was **re-reconciled after merge** against the 05:5xZ consolidation reorg (one brand, 29/29 canonicals, consolidated register, analytics contract fixed): IRR-02 superseded, IRR-04 = register's own "unverified, checkpoint" verdict, IRR-06 re-counted (19 tagged files), IRR-07/08/09/10 narrowed to their real residuals. Follow-up PR carries this + fixes two stale counts the merge had already invalidated.
+- **Still-open requests to integration (unchanged):** REQ-1 (add `decision-support/` to sitemap — now the only section missing from the merged one), REQ-2 (footer link from root index), REQ-5 (choose one publisher; still legacy + conditional Actions), REQ-6 (cross-link IRRs from `review/`). REQ-3 and REQ-4 are **closed by others** (single `data/confirmations.json`; validate step merged into `.github/workflows/pages.yml` in PR #57).
+- **New for integration:** the root brand is now Crisp & Counter while this desk's masthead still reads Good Measure Kitchen — one rename decision settles it; `decision-support/README.md` notes it as pending.
