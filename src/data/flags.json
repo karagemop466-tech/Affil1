@@ -146,14 +146,14 @@
     {
       "id": "FLG-011",
       "severity": "low",
-      "title": "Amazon's own ASIN definition could not be reached from this environment",
+      "title": "ASIN definition located; intent still requires separate evidence",
       "expected": "A citation to an Amazon-hosted page stating that an ASIN is 10 characters.",
-      "found": "sellercentral.amazon.com help pages return a sign-in wall. The public Q&A page that repeats the definition is written by sellers, not Amazon.",
-      "reading": "Rather than cite a third-party blog as though it were Amazon, the length claim is presented as an observation about this register's own data (FLG-001), which anyone can re-check by opening the links.",
+      "found": "Seller Central previously required sign-in. Amazon’s public selling guide provides the definition without sign-in.",
+      "reading": "A ten-character listing identifier is checkable. The short-link slug is not that identifier.",
       "to_check": [
-        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — requires sign-in"
+        "https://sell.amazon.com/blog/what-is-an-asin"
       ],
-      "impact": "No page states the 10-character rule as an Amazon quotation.",
+      "impact": "The definition is sourced in SRC-08. It does not resolve any product-intent field.",
       "blocks": "nothing"
     },
     {
@@ -266,6 +266,19 @@
       ],
       "impact": "Keep any drafting experiment restricted to editorial inputs independently cleared for the intended use.",
       "blocks": "model development using Program Content or Special Links without approval"
+    },
+    {
+      "id": "FLG-020",
+      "severity": "high",
+      "title": "Commercial launch needs a suitable host",
+      "expected": "A host that permits the planned use and supports first-party counting.",
+      "found": "GitHub Pages restricts sites primarily directed at facilitating commercial transactions. This release is an editorial publication. No paid links passed the activation gate.",
+      "reading": "A successful Pages deployment is not permission to run a commercial affiliate business there.",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits"
+      ],
+      "impact": "Use a commercial-capable origin before activating the monetized platform. Move its canonical URLs, sitemap and collector together.",
+      "blocks": "commercial rollout, not publication of the editorial edition"
     }
   ]
 }

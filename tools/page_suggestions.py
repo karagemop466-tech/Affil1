@@ -60,9 +60,10 @@ def build(page_dir, suggestions, meta):
 {''.join(row(s, i) for i, s in enumerate([x for x in items if x['id'] not in ('S-01','S-02','S-03')]))}''', cls='')}
 {section(f'''
 <div class="callout">
-  <h2>The one recommendation to read twice</h2>
+  <h2>Brief for the next kitchen edit</h2>
+  <p><strong>Design prompt:</strong> Open with one dinner decision, not a score. Show the cooking format in a labelled illustration, offer a checklist that works without a purchase, and put the relevant listing beside the exact claim it supports. Keep the evidence desk one click away.</p>
   <p>Everything else on this page adds something. S-11 says stop: do not commission more AI-written guides until either a real test or real search data exists. More synthetic prose makes the site bigger, not better, and it raises the chance the whole publication is treated as one undifferentiated block.</p>
-  <p>The four guides that exist are defensible because they claim little. That is a narrow advantage, and it survives by not being diluted.</p>
+  <p>Review the query and page report weekly. Consider one new guide every two weeks; skip the slot if there is no reader question, original observation or approved source to justify it.</p>
 </div>''', cls='')}"""
     return page(
         d,

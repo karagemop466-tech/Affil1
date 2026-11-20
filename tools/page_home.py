@@ -1,6 +1,6 @@
 """The front page. Leads with products and guides; the machinery lives in the footer."""
 
-from layout import (SITE_NAME, esc, eyebrow, page, product_link, rel, section)
+from layout import (SITE_NAME, esc, eyebrow, page, rel, section)
 from content import GUIDES
 
 
@@ -13,13 +13,6 @@ def img(page_dir, path, alt, *, sizes, cls="", loading="lazy"):
     )
 
 
-BUYER_NOTES = {
-    "P-01": "Cooking dinner and a side? Compare the size of each basket, not just their combined volume.",
-    "P-02": "Want room for a tray? Check the usable rack dimensions and how far the doors swing.",
-    "P-03": "Prefer one basket? Check whether your usual batch fits in a single layer.",
-}
-
-
 def product_card(page_dir, p):
     ref = p['ref']
     href = rel(page_dir, f"products/{ref.lower()}.html")
@@ -30,14 +23,8 @@ def product_card(page_dir, p):
              "P-05":("Wireless monitoring", "CHEF iQ Sense", "Compare probe count and app requirements before you choose.")}
     label,title,note = texts[ref]
     photo, alt = (('assets/img/multifunction','A basket air fryer beside a countertop oven') if ref == 'P-03' else (p['photo'],p['photo_alt']))
-    return f"""<article class="shelf-card" data-category="{'air' if ref in BUYER_NOTES else 'thermo'}"><a class="shelf-media" href="{href}" aria-label="{esc(title)} details">{img(page_dir,photo,alt,sizes='(max-width:720px) 100vw, 380px')}<span class="shelf-label">{esc(label)}</span><span class="art-credit">Illustration</span></a>
+    return f"""<article class="shelf-card" data-category="{'air' if p['format'] in ('basket','oven') else 'thermo'}"><a class="shelf-media" href="{href}" aria-label="{esc(title)} details">{img(page_dir,photo,alt,sizes='(max-width:720px) 100vw, 380px')}<span class="shelf-label">{esc(label)}</span><span class="art-credit">Illustration</span></a>
 <div class="shelf-meta">SHOP NOTE &nbsp; / &nbsp; {ref[-2:]}</div><h3><a href="{href}">{esc(title)}</a></h3><p>{esc(note)}</p><a class="cover-link" href="{href}">View details →</a></article>"""
-
-
-def _short(p):
-    shape = p.get("format_label") or ""
-    brand = p.get("brand") or ""
-    return f"{brand} {shape}".strip()
 
 
 def guide_card(page_dir, g, *, feature=False):
@@ -58,9 +45,6 @@ def guide_card(page_dir, g, *, feature=False):
 
 def build(page_dir, products, meta):
     d = page_dir
-    by_ref = {p["ref"]: p for p in products}
-    mains = [by_ref[r] for r in ("P-01", "P-02", "P-03")]
-
     hero = f"""<section class="cover wrap">
   <div class="cover-copy"><p class="edition"><span></span> THE SEASONAL EDIT <i>/</i> NO. 01</p>
     <h1>The countertop<br><em>edit.</em></h1>

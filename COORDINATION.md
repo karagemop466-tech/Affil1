@@ -321,3 +321,5 @@ Narrowed after #27, #30, #31 and #32 merged during this turn: own only the Speci
 Handoff from merged #27: retain the conflicting redirect observations. No changes to open sibling PRs or their legacy pages.
 
 Rebase: main received #28–35 during implementation. Preserved the independent supplement, evidence reconciliation, and #32's tested Python measurement contract rather than replacing them with a competing protocol. Combined the board entries and regenerated the storefront markup from the integrated templates.
+
+Main advanced again through #38. Kept its paid-link gate, holiday guide, sitemap/feed and launch desk; our shelf links to internal detail pages, not unapproved Special Links. Kept both sides of board-only conflicts and regenerated HTML from the combined templates. Remaining legacy edition consolidation is FLG-017, not part of another branch's release. The Pages configuration API declined the change to artifact-based publishing (HTTP 403); keep the existing main-root deployment.
