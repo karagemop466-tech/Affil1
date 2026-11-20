@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Suggestions queue for Good Measure Kitchen — proposed site and campaign changes to review against evidence before anyone decides or implements."><title>Review suggestions — Good Measure Kitchen</title><link rel="stylesheet" href="styles.css"><link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions.html"><link rel="alternate" type="application/rss+xml" title="Good Measure Kitchen Notes" href="feed.xml"></head><body><header class="masthead wrap"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><nav aria-label="Main navigation"><a href="#guides">Guides</a><a href="#products">Product records</a><a href="#questions">Open questions</a><a href="suggestions.html" aria-current="page">Review suggestions</a><a href="#approach">Our approach</a><details><summary>More</summary><div class="menu"><a href="guides/flagged-for-review.html">Flagged for review</a><a href="questions.html">Questions & evidence</a><a href="#ledger">Campaign ledger</a><a href="feed.xml">RSS feed</a></div></details></nav></header>
+<div class="disclosure"><div class="wrap"><p>As an Amazon Associate I earn from qualifying purchases. <a href="guides/flagged-for-review.html#disclosure">How our links work</a></p></div></div>
+<main class="wrap section">
+  <p class="eyebrow">PUBLICATION DESK · DECISION SUPPORT</p>
+  <h1>Suggestions queue — choose after evidence</h1>
+  <p>Nothing here is implemented yet. Each suggestion is proposed, with the evidence that would need to exist first and the suggested path to a decision. A reviewer picks the best path before any change is made.</p>
+
+  <div class="table-wrap">
+    <table class="decision-table">
+      <thead>
+        <tr><th>#</th><th>Suggestion</th><th>Why it matters</th><th>Evidence needed before implementing</th><th>Suggested path to decide</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td><b>Validate each submitted Amazon link</b> in the enrolled Associates workflow; confirm destination and tracking report before scaling.</td>
+          <td>Protects compliance and reader trust; unverified destinations can send readers anywhere.</td>
+          <td>Intended ASIN confirmed against official listing; confirmation date and source recorded; observed redirect stored in its own field; tracking report evidence.</td>
+          <td>Test one link per product, record all fields, then decide whether to scale to all five.</td>
+          <td class="status unverified">Proposed · awaiting verification</td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td><b>Keep disclosures above the fold on every page</b> and repeat in the footer; review placement near recommendations against Associates Operating Agreement §5 and FTC guidance.</td>
+          <td>Required by Amazon and FTC; placement errors are the most common compliance failure.</td>
+          <td>Current Operating Agreement text; FTC endorsement guidance; a page-by-page placement check.</td>
+          <td>Operator audits every new template before publishing; checklist item on the publishing workflow.</td>
+          <td class="status unverified">Proposed · policy review pending</td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td><b>Publish question-led guides on a cadence</b> (proposed: one every two weeks), add each to the sitemap and RSS feed when genuinely published.</td>
+          <td>Gives search engines something to index and readers a reason to return.</td>
+          <td>Draft guide; editorial review; source citations for any product fact; updated sitemap.xml and feed.xml.</td>
+          <td>Review measured search queries monthly before choosing the next topic.</td>
+          <td class="status unverified">Proposed · cadence not a commitment</td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td><b>Turn on click and conversion measurement</b>: privacy-preserving outbound click counter and self-hosted analytics endpoint recording page_view, outbound_click, guide_open, search_query_referral, report_import.</td>
+          <td>Lets the next topic be chosen from measured queries instead of instinct.</td>
+          <td>Endpoint deployed and self-hosted; privacy notice and consent obligations reviewed; window.__GMK_ANALYTICS_ENABLED set only after those steps.</td>
+          <td>Deploy endpoint.py on operator infrastructure; enable beacon; verify events arrive.</td>
+          <td class="status unverified">Proposed · endpoint code present, not live</td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td><b>Add a campaign ledger</b> with timestamp, source, channel, eligible sessions, clicks and reported orders — only from authorized first-party reports, with dated provenance.</td>
+          <td>Evidence-based iteration: measure before automating optimization.</td>
+          <td>Authorized Associates report access; report import flow; no conversion score or revenue forecast until data exists.</td>
+          <td>Keep ledger empty until the first authorized report arrives.</td>
+          <td class="status unverified">Proposed · empty by design</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td><b>Replace ambiguous outbound links with validated Special Links</b> once one link per product is confirmed in the enrolled workflow.</td>
+          <td>Confirmed tracking and destination before any reader clicks at scale.</td>
+          <td>Tracking report evidence for the tested link; destination confirmed.</td>
+          <td>Do not claim supplied short links are invalid (FLG-003 unresolved); scale only after confirmation.</td>
+          <td class="status unverified">Proposed · blocked on #01</td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td><b>Add trendy, question-shaped articles</b> (e.g. oven vs air-fryer running costs, accessories worth it) as editorial hypotheses, not popularity claims.</td>
+          <td>Catchy, useful topics help real people find the site through search.</td>
+          <td>Drafts reviewed for unverified claims; any product fact tied to an official source or left blank.</td>
+          <td>Publish, add to sitemap/feed, review query data monthly.</td>
+          <td class="status unverified">Proposed · two guides drafted</td>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td><b>Confirm tracking ID shopnow047c-20</b>: account enrollment, country/site association, link generation and attribution.</td>
+          <td>The supplied ID is unverified; earnings attribution depends on it.</td>
+          <td>Enrolled Associates account check; official program policies.</td>
+          <td>Operator verifies in account dashboard; do not infer status from URL appearance.</td>
+          <td class="status unverified">Proposed · account check pending</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="editorial-note">How to use this page: review each suggestion against its evidence column, choose the best path, then implement. Status values reflect evidence state, not priority. Unverified means unverified — not invalid.</p>
+</main>
+<footer><div class="wrap footer-main"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><div class="footer-nav"><b>Explore</b><a href="#guides">Buyer guides</a><a href="#products">Product records</a><a href="guides/flagged-for-review.html">Flagged for review</a></div><div class="footer-nav"><b>Publication desk</b><a href="#questions">Open questions</a><a href="#ledger">Campaign ledger</a><a href="feed.xml">RSS feed</a><a href="#approach">Our approach</a></div></div><div class="wrap footer-bottom"><span>As an Amazon Associate I earn from qualifying purchases.</span><span>© 2026 Good Measure Kitchen · Evidence-led, reader-first.</span></div></footer></body></html>
