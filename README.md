@@ -19,9 +19,9 @@ The brief had five parts. This is where each one lives:
 |---|---|
 | Read like a shop, not an audit | The generated front page: seasonal feature, shortlist, topics, guides. The registers are one click from the footer, never the front door. |
 | Make it findable | `sitemap.xml`, `feed.xml`, `robots.txt`, canonical tags, Open Graph images, `Article` + `FAQPage` + `BreadcrumbList` structured data, topic clusters with internal links |
-| Make the machinery trustworthy | `tools/build.py` generates every page from `src/data/`; `tools/validate.py` is the gate; two GitHub Actions workflows run it (deploy + weekly audit) |
+| Make the machinery trustworthy | `tools/build.py` generates every page from `src/data/`; `tools/validate.py` and `tools/check.py` are the gates; GitHub Actions runs them on every push (`pages.yml`, `kitchen-check.yml`) plus a weekly audit |
 | Lead with products, disclose above the fold, mark every link | One `disclosure()` template, one `product_link()` template — a page cannot ship without either |
-| Suggestions and questions before decisions | `/suggestions/` (29 scored proposals, 2 rejected on policy grounds), `/questions/` (22 questions, 5 answered by this pass), `/flagged/` (irregularities with sources), `/dashboard/` (entries, verification log, empty ledger) |
+| Suggestions and questions before decisions | `/suggestions/` (29 scored proposals, 2 rejected on policy grounds), `/questions/` (22 questions, 5 answered by this pass), `/review/` (flagged for review, with sources), `/operations/ledger.html` (empty campaign ledger) |
 
 ## Layout
 
@@ -29,8 +29,8 @@ The brief had five parts. This is where each one lives:
 index.html            publication front page          ← generated
 guides/<slug>/index.html  9 buyer guides              ← generated
 compare/ products/ topics/ about/                     ← generated
-sources/ suggestions/ questions/ flagged/              ← generated
-dashboard/            entries, verification, ledger    ← generated
+suggestions/ questions/ review/                         ← generated
+operations/ledger.html campaign ledger (empty)          ← generated
 404.html              not-found page                   ← generated
 assets/css/site.css   the only stylesheet
 assets/js/events.js   the five defined events, inert until an endpoint exists
@@ -91,7 +91,7 @@ Each rule below is enforced by `tools/check.py` and `tools/validate.py`, not jus
    The five submitted codes are 9 characters; the destinations this project reached
    are 10-character ASINs. `intended_asin` stays null — see `src/data/products.json`.
 6. **Every factual cell carries its source**, and an unconfirmed value is left blank
-   and listed on `/flagged/`. Blanks are the honest state, not a gap to fill in.
+   and listed on `/review/`. Blanks are the honest state, not a gap to fill in.
 
 ## Verification of the five submitted links
 
@@ -101,15 +101,15 @@ page returned; none of it is a product recommendation and none of it was tested 
 
 | Entry | Submitted | Destination reached | Note |
 |---|---|---|---|
-| P-01 | `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` — CHEFMAN 6 Quart Dual Basket | unstable: interstitial on one attempt |
+| P-01 | `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` — CHEFMAN 6 Quart Dual Basket | unstable: interstitial on one attempt; on a 2026-11-20 fetch it resolved to the Amazon homepage (`amazon.com/`) |
 | P-02 | `link.amazon/B02NbDxp3` | `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French Door | unstable: second attempt only |
 | P-03 | `link.amazon/B00hJ57DV` | `amazon.com/dp/B08DKYBTPH` — Chefman Air Fryer 8 Qt | an earlier archived register wrongly logged this as the homepage |
 | P-04 | `link.amazon/B0c8moW59` | **none** — Amazon continue-shopping interstitial | published as unresolved; no buy button |
 | P-05 | `link.amazon/B0f3GKalj` | `amazon.com/dp/B0DZFD6R9Z` — CHEF iQ Sense thermometer | not an air fryer; gets its own guide |
 
-Manual review entry points: [verification log](https://karagemop466-tech.github.io/Affil1/dashboard/#verification)
-· [source register](https://karagemop466-tech.github.io/Affil1/sources/)
-· [flagged register](https://karagemop466-tech.github.io/Affil1/flagged/)
+Manual review entry points: [verification log](https://karagemop466-tech.github.io/Affil1/review/measurement.html)
+· [source register](https://karagemop466-tech.github.io/Affil1/about/index.html#sources)
+· [flagged register](https://karagemop466-tech.github.io/Affil1/review/)
 
 ## The one finding that decides whether this site can earn
 
@@ -125,13 +125,15 @@ repository can confirm. So:
 
 - every buy button is a **reference link** to the official listing, with no tag, labelled
   as such, and the disclosure strip's plain-language sentence says plainly that no link
-  earns anything today;
+  is attributable to the account today;
 - the required Associates sentence stays verbatim on every page, above the fold and in the
   footer, because the obligation is not conditional on that state;
 - `src/data/product-intent.json` holds the gate (`associate_enrollment_confirmed`,
   `site_registered`, `one_link_test_completed`, and `approved_special_link` per product);
-- `tools/validate.py` fails the build if a tag is published while those flags are false, so
-  the safe state is enforced rather than hoped for;
+- `tools/check.py` fails the build if any Amazon product link is outside the permitted set
+  (`tools/layout.py` `permitted_amazon_urls()`: an approved Special Link, or the plain listing
+  of an observed ASIN). A tag therefore appears only after a Special Link is recorded in the
+  register; `tools/test_paid_link_gate.py` runs in CI and asserts this;
 - `tools/arm_links.py` is the owner's switch: `--checklist` prints the steps, and it refuses
   to arm the site unless `--i-am-the-owner` is passed, so no future automated session can
   start claiming a relationship with Amazon on its own.
@@ -140,7 +142,7 @@ One of the five destinations (`P-04`) resolved only on a third attempt and arriv
 Amazon's `plpRedirect=mhFallback` marker, and `P-05` carries it too. That is Amazon's own
 signal for a merchandised fallback, which is why the register publishes each destination as
 a dated observation, keeps `intended_asin` null, and flags the pair as
-[FLG-018](https://karagemop466-tech.github.io/Affil1/flagged/#FLG-018) rather than presenting the mapping as
+[FLG-018](https://karagemop466-tech.github.io/Affil1/review/#FLG-018) rather than presenting the mapping as
 confirmed. Read each one in a signed-in browser before arming anything.
 
 ## Open questions and blockers

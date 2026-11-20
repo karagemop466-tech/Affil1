@@ -690,3 +690,65 @@ generated set, delete the tuple in both files together.
   an image-provenance finding; the cross-reference in
   `src/data/reverification.json` (`additional_passes.obs-83e015f6`) was corrected
   in the same commit as this entry.
+Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done.
+## Session arena/23b5a192-affil1 — gate repair, launch-check repair, link re-verification (2026-11-20)
+
+Branch name is fixed for this session (`arena/23b5a192-affil1`); the board's `session-<id>/<task>` form is not used. Base: `main` at `f041c75`, rebased onto `1b09bbc` (#87).
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Restore the paid-link gate. Only an account-approved Special Link may carry the tag; a plain listing of an observed ASIN is a sponsored reference link; anything else fails the build | done (PR open) | arena/23b5a192-affil1 | `tools/layout.py`, `tools/check.py`, `tools/test_paid_link_gate.py`, `.github/workflows/kitchen-check.yml` |
+| Make the launch-check sweep recognise the Decision Desk (same exemption `tools/check.py` already has) | done | arena/23b5a192-affil1 | `tools/sweep_surfaces.py` |
+| Correct text that said every link carries the tag, and the "account-confirmed" labels that were false | done | arena/23b5a192-affil1 | `src/data/{products,questions,suggestions,flags,ledger,product-intent}.json`, `README.md`, `PUBLISHING_WORKFLOW.md`, `EXECUTIVE_SUMMARY.md` |
+| Re-observe the five supplied short links (2026-11-20) | done | arena/23b5a192-affil1 | `src/data/product-intent.json` (P-01 note), `README.md` |
+| Regenerate the published pages from the corrected data | done | arena/23b5a192-affil1 | generated root HTML only, via `tools/build.py` |
+| Verification of Amazon Associates requirements (policy text) | done, one reading open | arena/23b5a192-affil1 | FLG-025 |
+| Associates account data, SiteStripe Special Links, one-click attribution test | needs review (owner) | — | requires the account owner; `tools/arm_links.py` |
+| Search Console, analytics hosting, named author, commercial hosting | needs review (owner) | — | see `review/index.html` |
+
+### What was wrong on `main` at `f041c75` (found 2026-11-20)
+
+1. **The paid-link gate passed by construction.** `approved_amazon_urls()` added a tagged fallback for every observed ASIN, so the check "a tagged URL must be in the approved register" compared the register against itself. `tools/test_paid_link_gate.py` failed on `main`, and no CI job ran it.
+2. **Product pages and the front-matter brief said "Account-confirmed" / "5 account-confirmed buy links".** The approved register is empty, so both were false.
+3. **Several registers described the tag as already applied** (FLG-009, questions, products `link_rule`). They are corrected to the gate as now built.
+4. **The Launch-checks workflow was red on `main`** because `sweep_surfaces.py` counted the seven `decision-support/` files as strays. The same exemption `check.py` already grants is now in the sweep, so the one-surface rule still catches any other stray page.
+
+### Decision taken and why
+
+Two readings of Program Policies 2(b) are on the record. This build follows Reading A: §2(b) sits under "General Requirements Applicable to All Special Links", so the tag rule governs Special Links, and a plain listing link is not one. Under Reading A the site publishes sponsored listing links with no tag until an account-validated Special Link exists, which matches the owner's instruction to test one link per product before scaling. Reading B (every Amazon link carries the ID) is recorded as FLG-025 for the owner to settle in writing. Switching to the tag is a one-step change: `tools/arm_links.py` records a validated Special Link, and the gate then permits exactly that URL.
+
+### Sources (read 2026-11-20)
+
+| Source | Used for |
+|---|---|
+| [Associates Program Policies, updated 2026-04-14](https://affiliate-program.amazon.com/help/operating/policies) | §2(a) "Special Links must use the Associates ID we have assigned to you"; §2(b) "General Requirements Applicable to All Special Links", tag as a URL parameter |
+| [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) | §5 disclosure wording (unchanged) |
+| Listing observations, one fetch each, redirects followed: [P-02](https://www.amazon.com/dp/B09B7SB46R), [P-03](https://www.amazon.com/dp/B08DKYBTPH), [P-04](https://www.amazon.com/dp/B0DHZTCNR5), [P-05](https://www.amazon.com/dp/B0DZFD6R9Z) | All four resolved to the listing already recorded. Titles match the register. |
+| `https://link.amazon/B04G1MEwY` (P-01) | Resolved to [amazon.com/](https://www.amazon.com/) on this fetch, not the listing. Recorded as FLG-026. |
+
+Prices and ratings shown on those listing pages were not transcribed, and none appears on the site.
+
+### Checks run on the branch
+
+```
+python3 tools/validate.py                         → 1545 checks, all pass, 0 warnings
+cd tools && python3 -m unittest test_paid_link_gate -v   → 5 tests, OK (failed on main)
+python3 tools/build.py                            → 30 pages; second build byte-identical
+python3 tools/check.py                            → 30 pages, 0 errors, 0 warnings
+python3 tools/check_local_links.py                → 37 pages, 0 broken
+python3 tools/sweep_surfaces.py --dry-run         → would move: 0 (was 7)
+python3 decision-support/validate.py              → PASS
+tools/stage.py into a temp dir                    → 0 broken references
+```
+
+### Irregularities flagged (published on `review/index.html` with sources)
+
+- **FLG-024** (medium): 25 archived HTML files still carry live `tag=shopnow047c-20` links. `archive/` is served by legacy Pages, marked noindex and disallowed in robots.txt. Not edited (evidence).
+- **FLG-025** (high): the two readings of §2(b). Owner decision.
+- **FLG-026** (medium): P-01's short link resolved to the homepage on today's fetch.
+- **FLG-002** and **FLG-009** rewritten to match the gate as built.
+- **Other owner requests (not edited here):** `decision-support/` IRR-06 still says live pages carry the tag; that is no longer true, so the desk owner should re-measure it.
+
+### Merge log
+
+Pending: see the PR linked from this board after it is opened.
