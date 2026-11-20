@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Editorial copy — The Pantry Journal",
+    "rule": "Every factual claim on this site is either (a) transcribed from the seller's own listing title, (b) quoted from an official source with a URL, or (c) framed as a question the reader should ask. Nothing else is stated.",
+    "voice": "Shopkeeper, not auditor. Useful first, transparent second, never the other way round.",
+    "last_editorial_pass": "2026-11-20"
+  },
+  "brand": {
+    "name": "The Pantry Journal",
+    "tagline": "Small appliances, chosen with care",
+    "positioning": "A small, opinionated shop of countertop cooking appliances: air fryers and the thermometers that go with them. Five machines. Three guides. No invented verdicts.",
+    "why_this_name": "A publication name rather than a retailer name, because the value here is judgement, not inventory. 'Journal' also keeps the site clear of Amazon marks, which Associates Program Policies section 6(e) and the Participation Requirements section 1(g) both restrict."
+  },
+  "front": {
+    "kicker": "Countertop cooking · Five machines · Three guides",
+    "h1": "The countertop, decided.",
+    "deck": "Two-drawer air fryers, one French door oven, a single big basket, and two thermometers. We tell you which shape suits which kitchen — and what the listing will not tell you.",
+    "cta_primary": { "label": "See all five", "href": "products/" },
+    "cta_secondary": { "label": "Start with the shape question", "href": "guides/basket-or-oven-air-fryer/" },
+    "hero_caption": "Illustration. These are hand-cooked potatoes, not the appliances — we publish no Amazon product photography."
+  },
+  "sections": {
+    "picks_title": "What we would look at first",
+    "picks_deck": "Five appliances, ordered by the decision they help you make — not by price, because we do not publish prices we cannot stand behind.",
+    "guides_title": "Read before you choose",
+    "guides_deck": "Three guides, each built around one question people actually type into a search box.",
+    "method_title": "How this shop is run",
+    "method_deck": "Four commitments that decide what you will and will not find here."
+  },
+  "commitments": [
+    {
+      "n": "01",
+      "title": "No prices, on purpose",
+      "body": "Amazon only permits a site to show price and availability if Amazon serves that data through the link, or if it arrives through the Creators API or PA API. Neither is connected here, so you will see no price, no star rating and no stock figure anywhere on this site. Click through and Amazon will show you the current numbers — which is the only place they can be correct.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_label": "Associates Program Policies, section 2(b)"
+    },
+    {
+      "n": "02",
+      "title": "Every claim is the listing's claim",
+      "body": "When this site says a machine holds 26 quarts or has three probes, that is the seller's own language on the listing, reproduced and labelled. We do not measure, test or repeat performance claims as our own. Statements framed as questions are exactly that: things worth checking before you buy.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_label": "Associates Program Policies, section 2(b) — no misleading claims"
+    },
+    {
+      "n": "03",
+      "title": "One clear disclosure, before the first link",
+      "body": "As an Amazon Associate we earn from qualifying purchases. That sentence sits in a strip under the masthead on every page, and again in the footer, so you never reach a buy link without having passed it. The FTC asks for disclosures that are clear and conspicuous; the practical test is whether you can weigh the recommendation at the moment you read it.",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "source_label": "FTC Endorsement Guides: What People Are Asking"
+    },
+    {
+      "n": "04",
+      "title": "Nothing about you is measured",
+      "body": "No analytics script, no cookie, no fingerprint, no third-party tag. There is no collector running behind this site, so there is nothing for a consent banner to ask about and nothing to sell. If that changes, this page changes first.",
+      "source": null,
+      "source_label": null
+    }
+  ],
+  "footer": {
+    "blurb": "A small shop of countertop cooking appliances. Researched from the listings and the policy documents, not from press releases.",
+    "colophon": "Set in a system serif and a system sans. Pages are generated from one template so that the disclosure strip and the footer cannot be forgotten."
+  },
+  "affiliate_statement": "As an Amazon Associate I earn from qualifying purchases.",
+  "affiliate_statement_extended": "As an Amazon Associate, The Pantry Journal earns from qualifying purchases. Links marked with a small arrow go to Amazon. If you buy through one, this site may earn a commission at no extra cost to you.",
+  "about": {
+    "h1": "Who writes this, and what they will not do",
+    "deck": "A short statement of method, so you can decide how much to trust the rest.",
+    "paras": [
+      "The Pantry Journal covers countertop cooking appliances: air fryers in the two main shapes, and the thermometers that make cooking with them predictable. It is a small shop on purpose. The alternative — hundreds of near-identical pages — is how buying advice stops being advice.",
+      "Everything factual here comes from one of three places: the seller's own listing title, an official policy or guidance document with a link, or a dated observation recorded by the person who built this site. Where none of those applies, the page asks a question instead of giving an answer.",
+      "There are no prices, star ratings, review counts or stock figures anywhere, and that is a rule rather than an accident. Amazon restricts how associates display that data; without a compliant feed the honest option is to send you to the listing and let it tell you."
+    ],
+    "author_h": "Authorship",
+    "author_body": "This shop was built and is maintained by the account holder of the Amazon Associates ID shopnow047c-20, with drafting and research assistance from an AI agent working from the same sources cited on every page. Every figure on the site was checked against the page it came from on 20 November 2026. Where a value could not be checked, it is blank and listed on the Flagged for review page rather than filled in.",
+    "ai_note": "An honest note on the AI part: the drafting, the page templates and the source checking were done with AI assistance. The sourcing standard was not. If you find a claim that is not traceable to a listing title, a policy document or a dated observation, that is a defect — report it on the Suggestions page and it will be corrected."
+  }
+}

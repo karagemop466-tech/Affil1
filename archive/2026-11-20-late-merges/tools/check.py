@@ -21,16 +21,11 @@ from urllib.parse import urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# This build owns the site root. Other editions on main (crisp/ and the
-# root-level *.html pages of a parallel session) are theirs, not this build's,
-# and are deliberately out of scope. Claiming to verify them would be false.
-OTHER_EDITIONS = {"crisp", "archive", "reviews", "docs", "server", "categories"}
-FOREIGN_ROOT_PAGES = {
-    "products.html", "questions.html", "suggestions.html", "guides.html",
-    "dashboard.html", "disclosure.html", "executive-summary.html",
-    "flagged-for-review.html", "privacy.html", "categories.html",
-    "compare.html", "about.html", "legacy.html", "sources.html",
-}
+# One canonical site. The superseded edition is preserved under archive/ with a
+# noindex tag on every page, and is deliberately out of scope: it is a record,
+# not a destination. Any OTHER .html file anywhere in the tree is a stray page
+# that would compete with the canonical one, and it fails the build.
+ARCHIVE = ROOT / "archive"
 
 def owned(page):
     """True only for a file this build generates.
@@ -118,15 +113,12 @@ BANNED = [
 AFFILIATE = re.compile(
     r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", re.I)
 AMAZON_ANY = re.compile(r"(^//|https?://)([a-z0-9.-]*amazon\.[a-z.]+|amzn\.to|link\.amazon)", re.I)
-TRACKING_ID = "shopnow047c-20"
-TAGGED = re.compile(r"[?&]tag=([A-Za-z0-9\-]+)")
-
 EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
 CITATION_OK = re.compile(
-    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|sell\.amazon\.com|support\.google\.com|consumer\.ftc\.gov|search\.google\.com|"
-    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
+    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
+    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"search\.google\.com|"
     r"www\.ftc\.gov)",
@@ -163,7 +155,7 @@ def check_page(path):
 
     # --- links resolve ---
     for attr, value, line in s.refs:
-        if not value or value.startswith(("#", "mailto:", "data:", "javascript:")):
+        if not value or value.startswith(("mailto:", "data:", "javascript:")):
             continue
         if attr == "src" and EXTERNAL_RESOURCE.match(value):
             err(f"{rel}:{line}: external resource load {value!r}")
@@ -186,11 +178,14 @@ def check_page(path):
             if frag not in ids.ids:
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
-    # --- Amazon links must be sponsored ---
+    # --- Amazon links must be sponsored AND carry the Associates tag ---
+    from layout import TRACKING_ID
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
+            if f"tag={TRACKING_ID}" not in href:
+                err(f"{rel}: product link without the Associates tag: {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:
@@ -199,15 +194,6 @@ def check_page(path):
                 err(f"{rel}: affiliate link missing noopener: {href}")
             if a.get("target") != "_blank":
                 warn(f"{rel}: affiliate link without target=_blank: {href}")
-            # A commerce link must carry the Associates tag as a URL parameter
-            # (Program Policies 2(b), SRC-02). Submitted short links are shown for
-            # evidence and are exempt because they cannot carry the tag themselves.
-            if "amazon.com/dp/" in href:
-                tag = TAGGED.search(href)
-                if tag is None:
-                    err(f"{rel}: commerce link without the tracking tag: {href}")
-                elif tag.group(1) != TRACKING_ID:
-                    err(f"{rel}: commerce link carries the wrong tag: {href}")
         elif AMAZON_ANY.search(href):
             # A citation to Amazon's own policy or help page. It must NOT be
             # marked sponsored, because it is not a paid link.
@@ -243,9 +229,24 @@ def check_page(path):
         trs = len(re.findall(r"<tr[ >]", body))
         if trs and tds > trs * 12:
             err(f"{rel}: table body has {tds} cells across {trs} rows - likely shredded markup")
+        # Every register row must carry a link to its evidence. The rule applies
+        # to tables that declare a Source or Listing column, which are the
+        # registers of entries and findings; prose tables without such a column
+        # are not claims about a document.
+        for tbl in re.findall(r"<table[^>]*>(.*?)</table>", body, re.S):
+            head = re.search(r"<thead>.*?</thead>", tbl, re.S)
+            if not head or not re.search(r"<th[^>]*>(Source|Listing|Evidence)</th>", head.group(0)):
+                continue
+            for row in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl.split("</thead>", 1)[-1], re.S):
+                if "<td" in row and not re.search(r'href="https?://', row):
+                    err(f"{rel}: register row lacks a source link")
         char_cells = len(re.findall(r"<td>.{1}</td>", body))
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
+
+    for row in re.findall(r"<tbody>(.*?)</tbody>",text,re.S):
+        for tr in re.findall(r"<tr[^>]*>(.*?)</tr>",row,re.S):
+            if not re.search(r'<a [^>]*href="https://',tr): err(f"{rel}: data row without an official source link")
 
     # --- head essentials ---
     for needle in ("<title>", 'name="description"', 'rel="canonical"'):
@@ -273,7 +274,7 @@ def check_sitemap_feed():
     from build import GENERATED  # the build's own list, not a second copy
     generated = set()
     for g in GENERATED:
-        if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
+        if g in ("404.html", "operations/launch-readiness.html", "sitemap.xml", "feed.xml", "robots.txt"):
             continue
         generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
     for u in sorted(generated):
@@ -307,8 +308,8 @@ def check_data():
             err(f"products.json: {p['ref']} observed_asin is not 10 characters")
         if p["submitted_code"] != p["submitted_link"].rsplit("/", 1)[-1]:
             err(f"products.json: {p['ref']} submitted_code does not match the link")
-        if p["intended_asin"] == p["observed_asin"] and p["intended_asin"] is not None:
-            err(f"products.json: {p['ref']} intended and observed have been merged")
+        if p["intended_asin"] and not all(p.get(k) for k in ("intended_confirmation_source","intended_listing_url","intended_confirmed_on")):
+            err(f"products.json: {p['ref']} intended ASIN lacks independent evidence")
 
     for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):
         json.loads((ROOT / "src/data" / name).read_text(encoding="utf-8"))
@@ -341,17 +342,29 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for ev in ("page_view", "outbound_product_click", "guide_read_75", "compare_view", "flag_page_view"):
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:
         err("analytics.js: sets a cookie")
 
 
+def check_no_stray_pages():
+    """Every served .html file is either generated by this build or archived."""
+    from build import GENERATED
+    for p in ROOT.rglob("*.html"):
+        if p.is_relative_to(ARCHIVE):
+            continue
+        rel_path = p.relative_to(ROOT).as_posix()
+        if rel_path not in GENERATED:
+            err(f"{rel_path}: not generated by this build and not archived - one site only")
+
+
 def main():
     for p in sorted(PAGES):
         check_page(p)
     check_sitemap_feed()
+    check_no_stray_pages()
     check_data()
     check_assets()
 

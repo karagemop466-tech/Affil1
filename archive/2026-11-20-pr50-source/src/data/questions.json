@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "note": "Buyer-facing question set. Titles are editorial hypotheses. No search-volume, popularity or superiority claim is made anywhere, and none was obtained.",
+    "rule_for_every_guide": "A capability is stated only if it appears in the seller's own listing title. Everything else is framed as a question the reader should ask, not as an answer supplied by this site."
+  },
+  "clusters": [
+    {
+      "id": "C1",
+      "name": "Choose the shape",
+      "intent": "The reader has not decided between a drawer-style basket and a countertop oven.",
+      "guides": ["G1"],
+      "decision_it_resolves": "Which physical form fits the food they actually cook and the counter they actually have."
+    },
+    {
+      "id": "C2",
+      "name": "Size it honestly",
+      "intent": "The reader knows the shape but not how the quart number maps to a meal.",
+      "guides": ["G2"],
+      "decision_it_resolves": "Whether a stated capacity is enough for the number of people they cook for."
+    },
+    {
+      "id": "C3",
+      "name": "Live with it",
+      "intent": "The reader is close to buying and is worried about cleaning and counter footprint.",
+      "guides": ["G3"],
+      "decision_it_resolves": "Whether they will still use the appliance in month three."
+    },
+    {
+      "id": "C4",
+      "name": "Buy the function, not the badge",
+      "intent": "The reader is being sold 'multi-function' and wants a way to test that claim.",
+      "guides": ["G4"],
+      "decision_it_resolves": "Which of the advertised functions they will genuinely use, and which are packaging."
+    }
+  ]
+}
