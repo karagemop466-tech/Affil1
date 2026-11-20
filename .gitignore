@@ -1,23 +1,6 @@
-# Affil1
-
-# Data / logs generated at runtime
-data/events.jsonl
-data/*.jsonl
-
-# OS
+__pycache__/
+*.pyc
 .DS_Store
-Thumbs.db
+node_modules/
 
-# Editors
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Logs
-*.log
-npm-debug.log*
-
-# Caches
-.cache/
-.arena/
+dist/

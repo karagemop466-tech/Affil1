@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "note": "Every entry marked 'read directly' was requested and its wording read in this session on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around.",
+    "retrieved_on": "2026-11-20",
+    "rule": "A quote on this site appears only if it was copied from the page named beside it. Where a page is linked but not quoted, the entry says so."
+  },
+  "sources": [
+    {
+      "id": "SRC-01",
+      "title": "Amazon Associates Program Operating Agreement",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "status": "read directly",
+      "page_date": "read 2026-11-20",
+      "used_for": "Section 5, Identifying Yourself as an Associate \u2014 the required disclosure wording.",
+      "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: \u201cAs an Amazon Associate I earn from qualifying purchases.\u201d"
+    },
+    {
+      "id": "SRC-02",
+      "title": "Amazon Associates Program Policies",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "status": "read directly",
+      "page_date": "Updated April 14, 2026",
+      "used_for": "The tag requirement for Special Links, and the price and availability rule.",
+      "quote": "All Special Links must be accessed directly from your Site. ... you must include your Associates ID or \u201ctag\u201d (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site."
+    },
+    {
+      "id": "SRC-03",
+      "title": "Amazon Associates Program Policies \u2014 price and availability",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "status": "read directly",
+      "page_date": "Updated April 14, 2026",
+      "used_for": "Why no price, rating or stock status appears anywhere on this site.",
+      "quote": "your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API"
+    },
+    {
+      "id": "SRC-04",
+      "title": "FTC Endorsement Guides: What People Are Asking \u2014 affiliate marketing",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "status": "read directly",
+      "page_date": "June 2023",
+      "used_for": "Disclosure placement and wording, including why a bare label is not enough.",
+      "quote": "You should disclose your relationship to the retailer clearly and conspicuously on your site ... As for where to place a disclosure, the guiding principle is that it has to be clear and conspicuous. The closer the disclosure is to your recommendation, the better."
+    },
+    {
+      "id": "SRC-05",
+      "title": "FTC Endorsement Guides \u2014 is \u201caffiliate link\u201d an adequate disclosure?",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "status": "read directly",
+      "page_date": "June 2023",
+      "used_for": "Why the disclosure strip carries a full sentence and a 'Paid links' label rather than a bare tag.",
+      "quote": "Consumers might not understand that \u201caffiliate link\u201d means that the person placing the link is getting paid for purchases made through the link. Similarly, a \u201cbuy now\u201d button would not be adequate. ... \u201cPaid link\u201d right next to an affiliate link should be an adequate disclosure of the nature of the link."
+    },
+    {
+      "id": "SRC-06",
+      "title": "16 CFR Part 255 \u2014 Guides Concerning the Use of Endorsements and Testimonials",
+      "publisher": "U.S. eCFR",
+      "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255",
+      "status": "linked, not quoted",
+      "page_date": "current as of 2026-11-20",
+      "used_for": "The regulation behind the FTC guidance above. Linked for the reader; no wording is quoted from it here.",
+      "quote": ""
+    },
+    {
+      "id": "SRC-07",
+      "title": "Qualify your outbound links to Google",
+      "publisher": "Google Search Central",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "status": "read directly",
+      "page_date": "Last updated 2025-12-10",
+      "used_for": "Why every Amazon product link carries rel=\"sponsored nofollow noopener\".",
+      "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value."
+    },
+    {
+      "id": "SRC-08",
+      "title": "Food Safety Basics \u2014 air fryers",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers",
+      "status": "not reached from this environment",
+      "page_date": "unknown",
+      "used_for": "The authority the thermometer guide points to for safe internal temperatures. It was not read here, so none of its figures are reproduced on this site.",
+      "quote": ""
+    }
+  ]
+}

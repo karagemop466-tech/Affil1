@@ -1,0 +1,245 @@
+{
+  "$schema_comment": "PASS-2 INDEPENDENT VERIFICATION AUDIT. Recorded by session arena/a4ab7faf-affil1 on 2026-11-20. Every observation below was made by directly fetching each submitted URL and recording the final URL and document title exactly as returned. Observations are EVIDENCE, NOT confirmation of submitter intent, and NOT a claim that any submitted link is valid or invalid (status unresolved per FLG-003). Intended-identity fields (submitter statement, Associates tracking report) are null and must only be set from the enrolled Associates workflow. The intended/observed field groups are never merged.",
+  "audit_version": 2,
+  "recorded_at": "2026-11-20",
+  "recorded_by": "arena/a4ab7faf-affil1",
+  "method": {
+    "tool": "Server-side HTTP page fetch following redirects, capturing the final response URL and the document <title>.",
+    "network": "Platform-level outbound fetch (not the sandbox); amazon.com and ftc.gov were reachable.",
+    "window_utc": "2026-11-20T05:15Z to 2026-11-20T05:22Z",
+    "limitations": [
+      "The fetch client appears bot-like to Amazon; landing pages rendered as the mobile 'Product summary presents key product information' variant with plpRedirect=mhFallback. A normal browser may land on a different variant of the same listing.",
+      "An observation is a single point-in-time event. Other sessions fetching the same links on the same date recorded different outcomes for some links (see discrepancies).",
+      "No price, rating, review count, availability, commission or attribution data was recorded: values seen were ambiguous or policy-gated, and must not be inferred."
+    ]
+  },
+  "official_sources_fetched": [
+    {
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "fetched": "2026-11-20",
+      "title": "Amazon.com Associates Central - Associates Program Operating Agreement",
+      "updated_label": "Updated: October 15, 2025",
+      "supports": "Section 5 verbatim: 'You must clearly and prominently state the following... \"As an Amazon Associate I earn from qualifying purchases.\"' Section 1: links 'must properly use the special \"tagged\" link formats we provide' (Special Links)."
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "fetched": "not fetched this pass; cited for operator review",
+      "title": "Amazon Associates Program Policies",
+      "updated_label": null,
+      "supports": "Program policies incorporated by reference into the Operating Agreement (Section 12)."
+    },
+    {
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "fetched": "2026-11-20",
+      "title": "FTC's Endorsement Guides: What People Are Asking",
+      "updated_label": "Guides revised 2023",
+      "supports": "A material connection 'should be disclosed clearly and conspicuously'; includes a dedicated 'What About Affiliate or Network Marketing?' section."
+    },
+    {
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "fetched": "2026-11-20",
+      "title": "Understanding ASIN numbers: Your guide to Amazon's product identification system - Sell on Amazon",
+      "updated_label": "Jun 4, 2025",
+      "supports": "Amazon's definition: 'a unique 10-character alphanumeric code assigned to every product listed in the Amazon store'; 'typically starts with B0'; 'The ASIN appears after \"/dp/\"'. Basis for irregularity IR-1 (submitted codes are 9 characters)."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "fetched": "2026-11-20",
+      "title": "Qualify your outbound links to Google - Google Search Central",
+      "updated_label": "Last updated 2025-12-10 UTC",
+      "supports": "rel=\"sponsored\" marks 'advertisements or paid placements (commonly called paid links)'; multiple rel values may be combined."
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-1",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "submitted_code": "B04G1MEwY",
+      "observed_final_url": "https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-4d1cadbad25f088b&channelId=704&plpRedirect=mhFallback",
+      "observed_final_url_base": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_page_title": "Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen",
+      "observed_category_breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "outcome": "product_page",
+      "observed_at_utc": "2026-11-20T05:16Z",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "Matches session-arena-f10ea853 confirmations.json conf-001 and session-arena-cadaafe7 data/product-intent.json P1 (same listing ASIN and title).",
+      "flag": "Observed listing code (B0CDY277D3, 10 chars) differs from the submitted code (B04G1MEwY, 9 chars)."
+    },
+    {
+      "id": "OBS-2",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "submitted_code": "B02NbDxp3",
+      "observed_final_url": "https://www.amazon.com/dp/B09B7SB46R?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-1b5e31c7d6202911&channelId=704&plpRedirect=mhFallback",
+      "observed_final_url_base": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_page_title": "Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen",
+      "observed_category_breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "outcome": "product_page",
+      "observed_at_utc": "2026-11-20T05:18Z",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "Matches session-arena-f10ea853 conf-002 and session-arena-cadaafe7 P2. DISCREPANCY: the crisp/ edition board entry FLG-005 states this link 'never resolved to a product page (bot checkpoint only)'. Both outcomes were recorded on the same date by different fetches. Not adjudicated here; Amazon responses appear session-dependent.",
+      "flag": "Conflicting historical outcomes; product page observed in this pass."
+    },
+    {
+      "id": "OBS-3",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "submitted_code": "B00hJ57DV",
+      "observed_final_url": "https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-1aea6c4a9cac9bf0&channelId=704&plpRedirect=mhFallback&th=1",
+      "observed_final_url_base": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_page_title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+      "observed_category_breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "outcome": "product_page",
+      "observed_at_utc": "2026-11-20T05:18Z",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "CONTRADICTS session-arena-f10ea853 conf-003, which recorded a redirect to the Amazon homepage with status unverified. A product page was observed in this pass. The crisp/ edition's shop page naming (chefman-turbofry-8-quart) suggests the same listing was observed by that session.",
+      "flag": "IR-2: earlier 'homepage' observation not reproduced; identity remains unconfirmed pending Associates-workflow test."
+    },
+    {
+      "id": "OBS-4",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "submitted_code": "B0c8moW59",
+      "observed_final_url": "https://www.amazon.com/checkpoint/continue?token=v1.rJwhW5U-U24ePM7zbcZCraWXLmDWuxsztoV-H3tXO2E29M8AUVhTV4pAo1t84qAYRq1cIvpyt5MKRVlXInVbnd4P0sLcEgiZx6irEMNEb3GjgiXxD1V6_J35zO8Pm0RfeN2SBx7FT8zZ9xWPnFJaNoHuM4BWVceW2tIfgxmFET9h6fQAwmgzGxkxEc5PydoOu-LqGZ_jl4ZohnVdxJj0eaID9t2FeSA37TVcrbPYEczGjxls5ZWNAufLQV-n3l3JQKi-yGdUFv-dEHCiK5jtmcAt9LRxyV-jDhT_AdzDHYGaUtZsHRtqk7BHwiemrFRVaTOohYph54o10kFPEtVusTlPXBswHsSGz5pHsud8zVNt3cziHnQ2a2p6OXyQVybdf2hK9sRoDLy4MpBJih_iOR5zNYzkKuAkyDcOTmoZjuZHkUuEuBRf40GMD8Yu4FIBLsnls0_mBfmYq8iP3JsKarkDRzP3ghmituS49bOZkEMqPeCDfasRytk4YWp-zp8vutjtutu11GJWk1HMMwtbOXtlQ8o",
+      "observed_final_url_base": "https://www.amazon.com/checkpoint/continue",
+      "observed_page_title": "Amazon.com",
+      "observed_page_text": "To continue, please click the 'Continue shopping' button below.",
+      "outcome": "checkpoint_gate",
+      "observed_at_utc": "2026-11-20T05:19Z",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "Matches session-arena-f10ea853 conf-004 (checkpoint page requiring manual interaction).",
+      "flag": "Product destination not reachable from this client; product identity unobserved. This is an observation, not a claim that the link is invalid."
+    },
+    {
+      "id": "OBS-5",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "submitted_code": "B0f3GKalj",
+      "observed_final_url": "https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&btn_type=ss&gaOptInStatus=true&language=en_US&btn_ref=srctok-5efc65918624c588&channelId=500&plpRedirect=mhFallback&th=1",
+      "observed_final_url_base": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_page_title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen",
+      "observed_category_breadcrumb": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "outcome": "product_page",
+      "observed_at_utc": "2026-11-20T05:21Z",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "CONTRADICTS session-arena-f10ea853 conf-005, which recorded a redirect to the Amazon homepage. A product page was observed in this pass. The crisp/ edition's shop page naming (chef-iq-sense-3-probe-thermometer) suggests the same listing was observed by that session.",
+      "flag": "IR-5: the observed listing is a wireless meat thermometer, not an air fryer. The site's air-fryer-only category framing does not cover this product."
+    },
+    {
+      "id": "OBS-6",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "submitted_code": "B0c8moW59",
+      "observed_final_url_base": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed_page_title": "Amazon.com: ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black : Home & Kitchen",
+      "observed_category_breadcrumb": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "outcome": "product_page",
+      "observed_at_utc": "2026-11-20 (S-8206a8d0 re-verification via fetch_page)",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "Resolves the prior checkpoint-only outcome (OBS-4). All five supplied links now observed to product pages. Tracking tag not observed in resolved URL.",
+      "flag": "Single point-in-time observation; re-check monthly. Intended ASIN and tracking attribution remain unconfirmed."
+    },
+    {
+      "id": "OBS-7",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "submitted_code": "B00hJ57DV",
+      "observed_final_url_base": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_page_title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450 F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+      "observed_category_breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "outcome": "product_page",
+      "observed_at_utc": "2026-11-20 (S-8206a8d0 re-verification)",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "Confirms OBS-3; contradicts root dashboard homepage claim (stale).",
+      "flag": "Root dashboard/categories tables updated to canonical register."
+    },
+    {
+      "id": "OBS-8",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "submitted_code": "B0f3GKalj",
+      "observed_final_url_base": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_page_title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3 : Home & Kitchen",
+      "observed_category_breadcrumb": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "outcome": "product_page",
+      "observed_at_utc": "2026-11-20 (S-8206a8d0 re-verification)",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "agreement_with_prior_records": "Confirms prior crisp P-05; contradicts root dashboard homepage claim (stale).",
+      "flag": "Root dashboard/categories tables updated to canonical register."
+    }
+  ],
+  "irregularities": [
+    {
+      "id": "IR-1",
+      "title": "Submitted codes are not ASIN-format identifiers",
+      "detail": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters. Amazon defines an ASIN as a unique 10-character alphanumeric code (source fetched 2026-11-20: sell.amazon.com/blog/what-is-an-asin). The submitted codes are therefore short-link slugs, not ASINs. Where a product page was observed, the /dp/ code is the ASIN-format identifier. Labels that say 'Intended ASIN' on site pages should read 'Submitted code (short-link slug)'.",
+      "action": "Relabel fields; set intended ASINs only from submitter statement or Associates tracking reports."
+    },
+    {
+      "id": "IR-2",
+      "title": "Same-date observations disagree for three of five links",
+      "detail": "Pass 1 (session-arena-f10ea853) recorded homepage outcomes for B00hJ57DV and B0f3GKalj and a checkpoint for B02NbDxp3; the crisp/ edition recorded a checkpoint for B02NbDxp3; pass 2 (this audit) observed product pages for all three. Amazon returns different responses to different clients/times. A single observation does not establish a stable destination.",
+      "action": "Repeat observations over time with tools/verify_links.py; treat destination as stable only after repeated agreement and an Associates-workflow test."
+    },
+    {
+      "id": "IR-3",
+      "title": "Observed destinations never match the submitted slug",
+      "detail": "In every resolved case the observed /dp/ code differs from the submitted code, so destination_matches_intended_asin is false throughout. Submitter intent remains unconfirmed; no Associates report or submitter statement exists yet.",
+      "action": "Keep intended and observed fields separate; confirm intent only via the enrolled Associates workflow (test one link per product)."
+    },
+    {
+      "id": "IR-4",
+      "title": "Landing-page variant varies by client",
+      "detail": "This pass landed on the mobile 'Product summary' variant (plpRedirect=mhFallback) for all resolved links. Consumer browsers may land on the standard detail page or an intermediate ad. Exact consumer landing behavior is unverified.",
+      "action": "Operator should click each link in a normal signed-in browser as part of the test-one-link runbook and record what renders."
+    },
+    {
+      "id": "IR-5",
+      "title": "Register spans more than air fryers",
+      "detail": "OBS-5 resolved to a wireless meat thermometer listing. The site's air-fryer-only category framing (categories/air-fryers.html, several guide intros) does not cover the full register.",
+      "action": "Request: broaden category naming to 'small kitchen appliances' or add a thermometer category (owners of contested files to integrate)."
+    },
+    {
+      "id": "IR-6",
+      "title": "Attribution and Special Link compliance unverified",
+      "detail": "Observed URLs carry btn_ref=srctok-... and channelId parameters of unknown provenance. Tracking ID shopnow047c-20 is user-supplied; account enrollment and whether these links can earn commission through it are unverified. No claim of validity or invalidity is made (FLG-003 unresolved).",
+      "action": "Test one link per product in the enrolled Associates workflow; confirm destination and tracking report before scaling."
+    },
+    {
+      "id": "IR-7",
+      "title": "No prices, ratings or reviews recorded",
+      "detail": "Prices seen during fetches belonged to ambiguous carousel cards and could not be attributed to the observed listing with confidence. Recording them would be inference, so they are omitted. Policy also gates display of dynamic Amazon data.",
+      "action": "Populate only from Amazon-provided tools/data permitted by the Associates Program Policies, with a dated source."
+    },
+    {
+      "id": "IR-8",
+      "title": "Multiple divergent register schemas exist",
+      "detail": "data/confirmations.json (status 'verified'), data/products.json (all blank), archive/ copies and the crisp/ edition's data/product-intent.json (status 'observed_only') disagree on schema and status vocabulary for the same links.",
+      "action": "Request: integration session to declare one canonical register and mark the others historical."
+    }
+  ],
+  "summary_counts": {
+    "submitted_links": 5,
+    "product_page_observed": 4,
+    "checkpoint_gate_observed": 1,
+    "intent_confirmed": 0,
+    "notes": "Intent confirmation count is zero by design: no submitter statement or Associates report exists yet."
+  }
+}

@@ -1,161 +1,161 @@
-# The Crisp Counter
+# Crisp & Counter
 
-A publication-style shop for four kitchen appliances, built as a static site and
-deployed to GitHub Pages — with the verification layer published next to the
-shop rather than filed away from it.
+A static Amazon affiliate publication about air fryers and thermometers.
+Live at **https://karagemop466-tech.github.io/Affil1/**
 
-**Live site:** https://karagemop466-tech.github.io/Affil1/
-**Associates ID:** `shopnow047c-20`
+It is built to be a shop a reader can act on, with one rule underneath:
+**claim nothing that cannot be sourced.** So there are no prices, ratings, review
+counts or test results — and a review page that publishes every gap instead of
+hiding it.
 
-> As an Amazon Associate I earn from qualifying purchases.
+## Build and test
 
----
+## The site, in one table
 
-## What this repository contains
+The brief had five parts. This is where each one lives:
 
-| Path | What it is |
+| The ask | Where it is answered |
 |---|---|
-| `index.html` | Front page: masthead, disclosure strip, seasonal feature, product shelf, guides |
-| `shop/` | Shop index, four product pages, and one held-link page |
-| `guides/` | Guide index and four question-shaped buying guides |
-| `about/` | Disclosure, sourcing policy, and what the site deliberately does not publish |
-| `summary/` | Executive summary |
-| `records/` | The verification layer: source register, product intent, compliance, measurement, campaign ledger, open questions, suggestions, flagged for review |
-| `data/` | The source of truth. Every table on the site renders from these files |
-| `content/` | Product and guide copy, as data |
-| `lib/` | Site config and rendering primitives |
-| `scripts/build.mjs` | Generates every HTML page, plus sitemap, feed and robots |
-| `scripts/check.mjs` | The build gate. Fails the build on a compliance or link violation |
-| `scripts/test-gate.mjs` | Injects deliberate violations and asserts the gate catches them |
-| `COORDINATION.md` | The shared task board, including the integration log for three parallel sessions |
-| `analytics/endpoint.py` | Self-hosted collector contributed by a parallel session; the candidate host for the click counter |
-| `archive/` | Superseded pages from parallel sessions, preserved rather than deleted. Excluded from the gate |
-| `docs/` | Parallel-session documents kept for review (legacy privacy notice, their executive summary) |
+| `index.html` | Publication front page: the edit, two categories, three decision paths, a seasonal feature, the journal |
+| `products/` | The shop: five picks in two categories, plus one note per product |
+| `guides/` | Nine question-shaped buying guides, clustered by the decision they answer |
+| `compare/` | Every product side by side, with blank columns left blank |
+| `questions/` | 22 questions a real decision depends on: what is known, what is missing, what would close it |
+| `suggestions/` | Three paths and 18 proposals, 8 already implemented, with a decision control per row |
+| `review/` | Flagged for review, image policy, measurement plan |
+| `about/` | Rules, disclosure, privacy, and the full source list with quoted wording |
+| `operations/` | The empty campaign ledger and its provenance rule |
+| `brief/` | Executive summary |
+| `src/data/` | The single source of truth. Every fact on the site comes from here |
+| `tools/` | `build.py` renders the site; `check.py` verifies it |
+| `archive/legacy-2026-11-20/` | The superseded edition, kept with `noindex` on every page |
 
-Everything under `shop/`, `guides/`, `records/`, `about/`, `summary/`,
-`index.html`, `404.html`, `sitemap.xml`, `feed.xml` and `robots.txt` is
-**generated**. Edit `content/`, `data/`, `lib/` or `scripts/build.mjs`, never the
-generated output.
+## Layout
 
-## Commands
-
-```bash
-npm run build    # regenerate the whole site
-npm run check    # run the compliance and link gate
-npm test         # prove the gate catches deliberate violations
-npm run verify   # all three, in order (this is what CI runs)
-npm run serve    # local preview on http://localhost:4321
+```
+index.html            publication front page          ← generated
+guides/<slug>/index.html  9 buyer guides              ← generated
+compare/ products/ topics/ about/                     ← generated
+sources/ suggestions/ questions/ flagged/              ← generated
+dashboard/            entries, verification, ledger    ← generated
+404.html              not-found page                   ← generated
+assets/css/site.css   the only stylesheet
+assets/js/events.js   the five defined events, inert until an endpoint exists
+assets/js/shortlist.js  "Save" on a product card; localStorage only, nothing sent
+assets/img/*.jpg      commissioned illustrations (not product photography)
+src/data/*.json       every fact the site publishes, with its source
+tools/build.py        data → HTML (one template for nav, disclosure, footer)
+tools/validate.py     the gate: links, images, disclosure, sponsored marking,
+                      price prohibition, sitemap/feed agreement
+tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
+tools/verify_links.py re-resolve the register against Amazon and report drift
+archive/              five earlier competing surfaces (four storefronts and a parallel
+                      integration pass), preserved untouched and non-indexable
 ```
 
-No dependencies. Node 20+, standard library only.
+The Python server serves **only** `dist` on port 8000. It enables five same-origin events, honors DNT/GPC, and writes daily aggregate counts to SQLite outside the web root. `PORT` and `COUNTER_DB` are configurable. Use a durable non-public database for an authorized production host. No raw event ingestion, cookies, visitor IDs, referral strings or IP logging by the collector. Do not import preview tests into the campaign ledger.
 
-## The five verification commitments
+GitHub Pages serves static HTML. Its client sends no analytics requests. Native branch publishing uses `_config.yml` exclusions to avoid publishing historical editions or source data. Workflow-based Pages uses `tools/stage.py`. Keep both scopes aligned. No other domains or editions are submitted in the sitemap.
 
-1. **Every table row has a source link.** `records/source-register/` carries a
-   link to the official page behind each claim.
-2. **Unconfirmed values are blank, not guessed.** A row that could not be
-   verified has an empty value cell and an `unverified` badge.
-3. **Intent and observation are separate fields.** `data/product-intent.json`
-   keeps `intended_asin` apart from `observed_redirect_target` and never merges
-   them.
-4. **The ledger is empty on purpose.** `data/campaign-ledger.json` has defined
-   columns and zero rows. No conversion score, no revenue forecast.
-5. **Every open question is published.** `records/questions/` lists the fourteen
-   gaps, what each one blocks, and how to close it.
+## Editorial cadence
 
-## What the site deliberately does not publish
+1. **The disclosure strip is above `<main>` on every page** and repeated in the
+   footer. Required by Associates Operating Agreement §5; placed high because the
+   FTC says the closer a disclosure is to the recommendation, the better.
+2. **Every Amazon product link carries the Associates tag** `?tag=shopnow047c-20`
+   *and* `rel="sponsored nofollow noopener"`, and opens in a new tab. The tag is
+   required by Program Policies §2(b); `sponsored` is the marker Google documents
+   for paid links.
+3. **No price, star rating, review count or stock phrase appears in visible text.**
+   Program Policies §2(b) permits those only from Amazon-served data or the
+   Creators API / Product Advertising API. Neither is connected.
+4. **No test or ranking claim.** Nothing on this site was tested, so no page may
+   say otherwise.
+5. **No root-absolute internal links.** GitHub Pages serves this repository from
+   `/Affil1/`, so `/about/` would 404. Every link is relative and resolved.
+6. **No external resource loading.** Fonts are self-hosted from `assets/fonts`.
+   There is no CDN, no analytics script, no third-party request of any kind.
+7. **Every internal link and anchor resolves**, the sitemap matches the built
+   pages exactly, and every feed item points at a real page.
+8. **One `<h1>` per page**, every image has alt text, and no inline event handlers.
+9. **One site only.** Any `.html` file in the tree that this build did not
+   generate, and that is not under `archive/`, fails the build.
+10. **The published artifact is the generated set.** `tools/stage.py` copies only
+    generated pages plus assets into `_site`, so archived editions can stay in
+    the repository without being published.
 
-- **Prices.** Amazon permits showing a price only when Amazon serves it or when
-  it comes from an approved API, and a copied price is wrong within the hour.
-- **Star ratings and review quotes.** Restricted to data obtained through
-  Amazon's APIs.
-- **Hands-on testing claims.** No product here has been tested by this desk, and
-  the FTC is explicit that you cannot describe experience you have not had.
-- **Rankings and "best of" lists.** A ranking implies a comparison that was
-  actually performed.
+## The rules this site publishes under
 
-Each of these is enforced by the gate, not just by good intentions.
+Each rule below is enforced by `tools/validate.py`, not just asserted in prose:
 
-## The five submitted links, as verified on 2026-11-20
+Product identity lives in `src/data/products.json`. The `intended_asin` and
+`observed_asin` fields are deliberately separate and must never be merged — see
+`review/index.html#FLG-001` for why. Buy destinations are built in exactly one
+place, `layout.buy_url()`, so the tag cannot be forgotten on one page and
+remembered on the next.
 
-| Submitted | Observed destination | Status |
+## What is verified, and how
+
+Five supplied links were opened on 2026-11-20 and each resolved to a live Amazon
+listing. The ASIN, page title and category breadcrumb were transcribed:
+
+| Ref | Submitted | Landed on |
 |---|---|---|
-| `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` — Chefman 6 Qt dual basket | observed only |
-| `link.amazon/B02NbDxp3` | `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French door | observed only |
-| `link.amazon/B00hJ57DV` | `amazon.com/dp/B08DKYBTPH` — Chefman TurboFry 8 Qt | observed only |
-| `link.amazon/B0c8moW59` | none reached | **unresolved — held** |
-| `link.amazon/B0f3GKalj` | `amazon.com/dp/B0DZFD6R9Z` — CHEF iQ Sense thermometer | observed only |
+| P-01 | link.amazon/B04G1MEwY | B0CDY277D3 — CHEFMAN 6 Quart Dual Basket |
+| P-02 | link.amazon/B02NbDxp3 | B09B7SB46R — Emeril Lagasse 26QT French Door |
+| P-03 | link.amazon/B00hJ57DV | B08DKYBTPH — Chefman 8 Qt TurboFry |
+| P-04 | link.amazon/B0c8moW59 | B0DHZTCNR5 — ThermoMaven digital meat thermometer |
+| P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z — CHEF iQ Sense wireless probes |
 
-No intended ASIN has been confirmed for any link. The observations above record
-what each link *did*, which is not the same as what it was *meant* to do.
+Policy wording was read from the Operating Agreement §5, the Program Policies
+§2(a)/(b), the FTC's endorsement FAQ and Google's outbound-link documentation in
+the same session. All four are quoted, with links, on `about/index.html#sources`.
 
-## Repository history note
+## The one finding that decides whether this site can earn
 
-Three agent sessions worked this repository in parallel on 2026-11-20. Their
-work was merged into `main` while this session was building, which produced two
-competing surfaces for the same site. The integration kept this session's
-generated shop as the canonical site and moved the other surface into
-`archive/legacy-surface/`, because publishing both would create exactly the
-duplicate-site problem the brief asks to avoid — and the gate found 129 rule
-violations across the superseded pages. Nothing was deleted. The full account,
-including which of their artifacts were kept live, is in `COORDINATION.md`.
-Where the two surfaces disagree on facts, this session's dated observation is
-newer: it resolved **4 of 5** submitted links; the earlier table recorded 2 of 5.
+- No Amazon Product Advertising API / Creators API credentials.
+- No Associates account access, so no confirmed click attribution, rate card or
+  click report.
+- No analytics endpoint. `assets/js/analytics.js` is inert by default.
+- No Search Console property.
+- No named author.
+- No mailing list; RSS is the only return channel.
 
-## Open items
+## Design layer
 
-See `records/flagged/` for the eight flagged items, and `records/questions/` for
-what each one blocks. The two that need a person rather than an engineering
-session are the unconfirmed intended ASINs and the unresolved question of
-whether the submitted short-link format is a compliant Special Link.
+Typefaces are self-hosted (Fraunces for display, Inter for text) — no external font
+request, so nothing leaks a reader's visit to a third party and the page paints without
+a network round trip. Editorial art is generated for this publication, shipped in
+width variants with `srcset`, and captioned on every use as an illustration: never a
+listing photo, never a brand mark, never in a slot that imitates one. The rule and the
+reason sit in `src/data/images.json`, carried over from the parallel integration pass
+whose artwork and typography this site adopted.
 
-## Deployment
+## Open questions and blockers
 
-GitHub Pages publishes this repository from the **main branch root** (legacy
-build type), so the generated HTML is committed. Because of that,
-`.github/workflows/deploy-pages.yml` is a **gate rather than a deployer**: on
-every push and pull request it
+Twenty-two are listed at [/questions/](https://karagemop466-tech.github.io/Affil1/questions/)
+with the information each one needs. Five were answered by this pass. The ones that
+block everything else, in order:
 
-1. rebuilds the site from `data/` and `content/`,
-2. fails if the committed output differs from that clean build, so generated
-   pages cannot drift from their source of truth,
-3. runs the compliance gate, and
-4. runs the gate's own negative test.
+1. **Enrolment** — is `shopnow047c-20` an active tracking ID, and is this site listed
+   in the account? No claim is made either way here.
+2. **Special Links** — regenerate all five destinations in Associates Central and
+   confirm one click in the report before publishing more.
+3. **Search Console** — verify the property. Until then, every statement about what
+   readers want is reasoning, not evidence.
+4. **An author** — a named human with two true biographical sentences. Bylines stay at
+   desk level because inventing a person who tested these machines would be a
+   fabricated endorsement.
 
-A red run means the published site should not be trusted. To move to a
-workflow-driven deploy instead, change Settings → Pages → Build and deployment →
-Source to *GitHub Actions* and restore the `upload-pages-artifact` /
-`deploy-pages` steps.
+## Editorial rule, in one line
 
-## Licence
+A capability sentence is published only when it quotes the seller's own listing title,
+attributed as such; nothing on this site claims a product was tested, and no figure
+appears that cannot be traced to an official source.
 
-Content and code in this repository are unpublished work product. No licence is
-granted. Amazon product names and trademarks belong to their respective owners.
+## Licence and trademark note
 
----
-
-## Integration state (2026-11-20, final integration session)
-
-This repository has seen several parallel sessions. Their work is **preserved, not
-replaced**:
-
-| Path | What it is |
-|---|---|
-| *(root — the paths above)* | The canonical site: one publication, one sitemap, one feed. |
-| `crisp/` | S-96012762's "Crisp & Counter" section, kept at its original path with its own build and feed. `robots.txt` disallows it so one site is indexed; it is excluded from the published-page gate with a printed note. |
-| `src/`, `tools/`, `docs/MEASUREMENT.md`, `docs/EXECUTIVE-SUMMARY.md` | S-96012762's registers, builder and documents, kept at their original paths. |
-| `archive/legacy-surface/` | The earlier root surface (dashboard, legacy guides, legacy registers), relocated with rename history intact. |
-| `archive/session-*/` | Earlier sessions' own snapshots, where they left them. |
-| `docs/*-parallel-session.md`, `docs/COORDINATION-PR15-integration.md` | Session documents kept for review. |
-| `analytics/endpoint.py`, `data/confirmations.json`, `data/products.json`, `data/ledger.json` | Preserved records; supersession notes point at the canonical registers (`data/product-intent.json`, `data/campaign-ledger.json`). |
-
-Workflow: `.github/workflows/deploy-pages.yml` rebuilds the site from source,
-fails if committed output has drifted, runs the compliance gate, and runs the
-gate's negative self-test. GitHub Pages publishes from the `main` branch root
-(legacy build type); a red gate run means the site should not be published further.
-
-Verification: `data/sources.json` carries the row-level spot-check notes of the
-2026-11-20 integration pass (16 clauses re-read verbatim from the official pages;
-3 rows left blank and flagged unverified). Every product row in
-`data/product-intent.json` keeps intended and observed identifiers in separate
-fields and never merges them.
+Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This
+site is not endorsed by or affiliated with Amazon beyond participation in the Associates
+Program. All listing titles are quoted for identification and are the property of their
+sellers. Illustrations were made for this publication and are captioned as such.

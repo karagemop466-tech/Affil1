@@ -1,36 +1,239 @@
 {
   "meta": {
-    "note": "Buyer-facing question set. Titles are editorial hypotheses. No search-volume, popularity or superiority claim is made anywhere, and none was obtained.",
-    "rule_for_every_guide": "A capability is stated only if it appears in the seller's own listing title. Everything else is framed as a question the reader should ask, not as an answer supplied by this site."
+    "rule": "A question moves to 'answered' only when the answer has a source link or a reproducible check. 'We cannot know yet' is a legitimate answer and is recorded as such.",
+    "status": "Twenty-two questions. Ten are answered. Twelve are open, and each one names the specific document, dashboard or decision that would close it.",
+    "how_to_read": "The blocking column is the useful one. A blocking question means work that depends on it is guesswork until it is answered."
   },
-  "clusters": [
+  "questions": [
     {
-      "id": "C1",
-      "name": "Choose the shape",
-      "intent": "The reader has not decided between a drawer-style basket and a countertop oven.",
-      "guides": ["G1"],
-      "decision_it_resolves": "Which physical form fits the food they actually cook and the counter they actually have."
+      "id": "Q-01",
+      "question": "Did each submitted link land on the product the owner meant to send readers to?",
+      "what_we_have": "All five links now land on a live listing, and the arrival ASIN and title were transcribed on 2026-11-20: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z.",
+      "what_is_missing": "The owner's intended ASIN. The supplied codes are nine characters and lowercase; every ASIN observed is ten and uppercase. The intended product cannot be read off the link itself.",
+      "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended. Record both values side by side, as the register does.",
+      "answered": false,
+      "blocking": "yes \u2014 the product-record fields depend on it",
+      "evidence": ""
     },
     {
-      "id": "C2",
-      "name": "Size it honestly",
-      "intent": "The reader knows the shape but not how the quart number maps to a meal.",
-      "guides": ["G2"],
-      "decision_it_resolves": "Whether a stated capacity is enough for the number of people they cook for."
+      "id": "Q-02",
+      "question": "Why did one link fail to resolve at all?",
+      "what_we_have": "P-04 (link.amazon/B0c8moW59) failed three times in an earlier session and resolved on the first attempt on 2026-11-20 to B0DHZTCNR5, a ThermoMaven digital meat thermometer.",
+      "what_is_missing": "Nothing for the destination. What remains unknown is why the earlier requests hit a continuity page, so no claim is made about the cause.",
+      "how_to_close": "Closed for the destination on 2026-11-20. The cause of the earlier failures is recorded as unexplained rather than diagnosed.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "The link resolves. It opens a ThermoMaven 1 Sec digital meat thermometer, which is a different product category from the three air fryers and is treated as such on the site.",
+      "evidence": "Observation, 2026-11-20: https://link.amazon/B0c8moW59 \u2192 https://www.amazon.com/dp/B0DHZTCNR5"
     },
     {
-      "id": "C3",
-      "name": "Live with it",
-      "intent": "The reader is close to buying and is worried about cleaning and counter footprint.",
-      "guides": ["G3"],
-      "decision_it_resolves": "Whether they will still use the appliance in month three."
+      "id": "Q-03",
+      "question": "Are clicks attributed to shopnow047c-20?",
+      "what_we_have": "Every Amazon destination on the site now carries ?tag=shopnow047c-20, which is what Program Policies 2(b) requires a Special Link to include.",
+      "what_is_missing": "Confirmation from an Associates report that a click was recorded against the tag. No dashboard access is available to this build.",
+      "how_to_close": "Click one link on the live site, then open Reports \u2192 Orders in the Associates dashboard and look for the click against the tag.",
+      "answered": false,
+      "blocking": "yes \u2014 until this is confirmed the site may be sending traffic that does not pay",
+      "evidence": ""
     },
     {
-      "id": "C4",
-      "name": "Buy the function, not the badge",
-      "intent": "The reader is being sold 'multi-function' and wants a way to test that claim.",
-      "guides": ["G4"],
-      "decision_it_resolves": "Which of the advertised functions they will genuinely use, and which are packaging."
+      "id": "Q-04",
+      "question": "Should the site show prices?",
+      "what_we_have": "Program Policies 2(b) permits prices and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API or PA API (SRC-02). Neither is connected.",
+      "what_is_missing": "A decision, and if the answer is yes, API credentials.",
+      "how_to_close": "Either apply for API access and render Amazon-served prices only, or keep prices off the site. Both are compliant; a copied or scraped price is not.",
+      "answered": true,
+      "blocking": "no \u2014 the site is compliant without prices",
+      "answer": "No price, star rating, review count or stock status appears anywhere on this site. Every buy button sends the reader to Amazon, where that data is served live.",
+      "evidence": "SRC-02"
+    },
+    {
+      "id": "Q-05",
+      "question": "Is the disclosure in the right place, and does it say enough?",
+      "what_we_have": "A disclosure strip sits under the masthead on every page, above the content, and is repeated in the footer. It states the Associates relationship in the sentence the Operating Agreement requires.",
+      "what_is_missing": "Nothing structural. The FTC frames placement as a judgement about prominence, and says the closer the disclosure is to the recommendation, the better (SRC-03).",
+      "how_to_close": "Answered by the sources. Reviewing the wording remains an owner decision, not a gap.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "Above the fold on every page, repeated in the footer, and reinforced with a 'Paid links' label next to it. The FTC guidance explicitly treats a bare 'affiliate link' label as possibly insufficient, which is why the strip carries a full sentence as well as the label.",
+      "evidence": "SRC-01, SRC-03"
+    },
+    {
+      "id": "Q-06",
+      "question": "Two of the five products are thermometers. Do they belong on this site?",
+      "what_we_have": "P-04 and P-05 resolve to meat thermometers. Three products are air fryers.",
+      "what_is_missing": "Nothing factual. The question is editorial positioning, and a decision was taken.",
+      "how_to_close": "Answered by deciding to publish thermometers as their own category rather than as a fifth air fryer.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "Yes, in their own section. A probe is a measuring tool that moves between appliances, and it is the cheapest way to make an air fryer predictable. Filing it under Air Fryers would have been inaccurate.",
+      "evidence": "Internal decision, recorded in src/data/products.json meta.categories"
+    },
+    {
+      "id": "Q-07",
+      "question": "Which topics are worth writing next?",
+      "what_we_have": "Eight guides on editorial hypotheses: shape, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers and seasonal hosting.",
+      "what_is_missing": "Search data. No Search Console property is connected, so no topic has been chosen from measured demand.",
+      "how_to_close": "Verify the property, submit the sitemap, wait two to four weeks, then pick the next topic from the queries that actually appear.",
+      "answered": false,
+      "blocking": "no \u2014 but every further guide is a guess until it is answered",
+      "evidence": ""
+    },
+    {
+      "id": "Q-08",
+      "question": "Who is the author, and why should a reader trust them?",
+      "what_we_have": "No named author. The site's claim is narrow and checkable: the links were opened and the listings read.",
+      "what_is_missing": "A person, a biography that describes work that actually happened, and a decision about whether to publish under a name at all.",
+      "how_to_close": "Name an editor and write an accurate bio, or keep the publication anonymous and stop implying personal expertise. Both are honest; the second is weaker for search.",
+      "answered": false,
+      "blocking": "partly \u2014 it caps how much authority the site can claim",
+      "evidence": ""
+    },
+    {
+      "id": "Q-09",
+      "question": "What does each category actually pay?",
+      "what_we_have": "Nothing. Commission rates are set per category in the Associates programme and are visible in the account.",
+      "what_is_missing": "The account's current rate card.",
+      "how_to_close": "Open the Commission Income Statement in the Associates dashboard and record the rate for Home & Kitchen furniture and appliance categories.",
+      "answered": false,
+      "blocking": "no \u2014 but no revenue estimate can be made without it, and none is offered",
+      "evidence": ""
+    },
+    {
+      "id": "Q-10",
+      "question": "Is there an analytics endpoint that can be switched on lawfully?",
+      "what_we_have": "A self-hosted collector (analytics/endpoint.py) and a cookie-free client that records five defined events. Both are inert.",
+      "what_is_missing": "A host for the collector, a retention statement, and a lawful basis for processing IP addresses.",
+      "how_to_close": "Deploy the collector to a host you control, set retention, edit the privacy page with the specifics, then point the client at it.",
+      "answered": false,
+      "blocking": "yes \u2014 measurement work waits on it",
+      "evidence": ""
+    },
+    {
+      "id": "Q-11",
+      "question": "Can this site be indexed, given that it lives on a repository subpath?",
+      "what_we_have": "Every internal link is relative, so the site works at /Affil1/. A sitemap, a robots file and canonical URLs are generated by the build and checked on every run.",
+      "what_is_missing": "Nothing technical. Whether Google has crawled it is a different question, answered by Search Console.",
+      "how_to_close": "Answered in the repository; crawling confirmation is Q-07's dependency.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "Yes. The build refuses to emit a root-absolute internal link, and the Pages workflow fails if the sitemap and the built pages disagree.",
+      "evidence": "tools/check.py, run on every push; see .github/workflows/pages.yml"
+    },
+    {
+      "id": "Q-12",
+      "question": "Does the site make any claim it cannot support?",
+      "what_we_have": "A checker that fails the build on currency figures, star ratings, review counts, stock phrases, sales superlatives and any first-person testing verb.",
+      "what_is_missing": "Nothing automated. The check catches patterns, not meaning, so a human read is still required before publishing new prose.",
+      "how_to_close": "Answered by the automated rules plus editorial review; it is a standing control rather than a one-off.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "Not by construction. Product facts come only from transcribed listing titles; editorial notes describe what a stated feature changes, not a tested result.",
+      "evidence": "tools/check.py BANNED rules; build fails on violation"
+    },
+    {
+      "id": "Q-13",
+      "question": "What if the owner never supplies the missing account data?",
+      "what_we_have": "A site that is compliant and complete without it: five checked links, eight guides, one comparison table.",
+      "what_is_missing": "Nothing that blocks publication. Attribution and rates stay unconfirmed and are published as such.",
+      "how_to_close": "Answered by publishing the gap rather than waiting for it to close.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "The site publishes anyway. Every unconfirmed item is on the Flagged for Review page with the source needed to close it, so the absence is visible rather than hidden.",
+      "evidence": "review/index.html"
+    },
+    {
+      "id": "Q-14",
+      "question": "Are the product links Special Links in the sense the Operating Agreement means?",
+      "what_we_have": "Program Policies 2(a) requires Special Links to use the Associates ID; 2(b) requires the tag as a URL parameter. Every product link now carries ?tag=shopnow047c-20.",
+      "what_is_missing": "Confirmation that the tag is registered and that clicks from this site are being recorded. That can only come from the account.",
+      "how_to_close": "One click from the live site, then the Orders report. The same test closes Q-03.",
+      "answered": false,
+      "blocking": "yes",
+      "evidence": ""
+    },
+    {
+      "id": "Q-15",
+      "question": "Is there any traffic, and where would it come from?",
+      "what_we_have": "No measurement of any kind has been collected. The campaign ledger is deliberately empty.",
+      "what_is_missing": "Analytics (Q-10) and Search Console (Q-07).",
+      "how_to_close": "Do not forecast. Switch on measurement, then read it.",
+      "answered": false,
+      "blocking": "no",
+      "evidence": ""
+    },
+    {
+      "id": "Q-16",
+      "question": "Should one repository serve two competing editions of the same site?",
+      "what_we_have": "It did: a generated edition at the root and a hand-written edition under crisp/ plus a set of duplicate root pages. They described the same five products and could compete with each other in search.",
+      "what_is_missing": "Nothing factual. This was a duplication problem with a clear answer.",
+      "how_to_close": "Answered on 2026-11-20 by consolidating into one canonical edition and archiving the other with noindex.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "One site is indexed. The root build is canonical, the duplicate pages are archived under archive/legacy-2026-11-20/ with a noindex tag, and the sitemap lists only the canonical pages.",
+      "evidence": "robots.txt, sitemap.xml, archive/legacy-2026-11-20/ (noindex meta on every archived page)"
+    },
+    {
+      "id": "Q-17",
+      "question": "Is a github.io subpath the right long-term home?",
+      "what_we_have": "The site is served at karagemop466-tech.github.io/Affil1/ and every link is relative so the subpath works.",
+      "what_is_missing": "A domain decision. A custom domain would need DNS, a CNAME file and canonical URLs rewritten in one place.",
+      "how_to_close": "Decide whether to buy a domain. The build has one constant for the site URL, so the change is small when the decision is made.",
+      "answered": false,
+      "blocking": "no \u2014 but it constrains brand and link equity later",
+      "evidence": ""
+    },
+    {
+      "id": "Q-18",
+      "question": "What may a page say about a product beyond its listing title?",
+      "what_we_have": "Editorial rule: a stated feature may be explained in terms of what it changes for the cook, and nothing may be described as tested, measured or compared in use.",
+      "what_is_missing": "A written house style for the owner to approve or amend.",
+      "how_to_close": "Approve the rule as written on the About page, or amend it there.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "Explain the trade, not the performance. 'Two independent drawers mean two temperatures at once' is a reading of a stated feature. 'Cooked evenly' would be a test claim and is banned by the checker.",
+      "evidence": "tools/check.py; about/index.html#how-we-link"
+    },
+    {
+      "id": "Q-19",
+      "question": "What may a buy button say when the site holds no price data?",
+      "what_we_have": "'See it on Amazon' and 'Check it on Amazon', each followed by a line saying price and rating are shown on Amazon. No figure, no implied discount.",
+      "what_is_missing": "Owner sign-off on the wording. This is a compliance judgement, and the site is not the authority on it.",
+      "how_to_close": "Read the buttons against Program Policies 2(b) and the FTC's affiliate guidance; change the wording if it reads as a price claim.",
+      "answered": false,
+      "blocking": "no \u2014 but it should be reviewed before paid traffic is sent",
+      "evidence": ""
+    },
+    {
+      "id": "Q-20",
+      "question": "How does the site capture readers without a backend?",
+      "what_we_have": "An RSS feed and a prominent link to it. No form, no email list, no third-party service.",
+      "what_is_missing": "A decision about email: a provider, a privacy notice, and a double opt-in flow.",
+      "how_to_close": "Choose a provider and publish the privacy terms, or commit to RSS and stop describing a newsletter as pending.",
+      "answered": false,
+      "blocking": "no",
+      "evidence": ""
+    },
+    {
+      "id": "Q-21",
+      "question": "Can the site show product photographs?",
+      "what_we_have": "Editorial illustrations generated for this publication, each labelled as an illustration and none presented as the product.",
+      "what_is_missing": "A permitted source of product imagery. Amazon product images come with licence conditions, and the Associates programme has its own rules about Program Content.",
+      "how_to_close": "Either obtain images through the permitted API, or commission photography of products actually bought and used. Until then, illustrations stay labelled.",
+      "answered": true,
+      "blocking": "no",
+      "answer": "No product photography is used. Every image is an illustration and says so on the page and in the image policy.",
+      "evidence": "review/images.html"
+    },
+    {
+      "id": "Q-22",
+      "question": "What cadence can this publication actually sustain?",
+      "what_we_have": "Eight guides, written to one standard, each sourced from listing titles and general reasoning rather than tests.",
+      "what_is_missing": "A commitment from the owner. A cadence without an author is a wish.",
+      "how_to_close": "Choose one guide a fortnight or one a month, put it in the publishing workflow document, and hold to it.",
+      "answered": false,
+      "blocking": "no",
+      "evidence": ""
     }
   ]
 }

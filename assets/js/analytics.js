@@ -1,53 +1,44 @@
-// Privacy-preserving measurement. INERT UNTIL CONFIGURED.
-//
-// Design constraints, all deliberate:
-//   * No redirect. The anchor's real href is the Amazon URL, and the browser
-//     navigates to it directly. This keeps the site clear of the "Redirecting
-//     Link" disqualification and the URL-obscuring prohibition (S08, S09).
-//   * No cookie, no localStorage, no session id, no IP collection, no user agent,
-//     no fingerprint. Only an aggregate counter keyed by event name and a small
-//     set of non-identifying values (page path, product id, placement).
-//   * sendBeacon so the request survives the navigation.
-//
-// Set CRISP_ENDPOINT to a URL to turn collection on. While it is null the beacon
-// does nothing and no network request is made. See /records/measurement/.
-(function () {
+/* Opt-in first-party counters. Never set the flag on static GitHub Pages. */
+(() => {
   "use strict";
-
-  var CRISP_ENDPOINT = null; // e.g. "/api/collect" or an absolute HTTPS URL.
-
-  function track(name, payload) {
-    if (!CRISP_ENDPOINT) return;
-    var body = JSON.stringify({
-      e: name,
-      p: payload || {},
-      // Day granularity only. Not a timestamp-to-the-second that could single
-      // out a visitor; the endpoint aggregates by day.
-      d: new Date().toISOString().slice(0, 10),
-      t: "shopnow047c-20"
-    });
-    try {
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(CRISP_ENDPOINT, new Blob([body], { type: "application/json" }));
-      } else {
-        fetch(CRISP_ENDPOINT, { method: "POST", body: body, headers: { "Content-Type": "application/json" }, keepalive: true }).catch(function () {});
-      }
-    } catch (e) { /* measurement must never break navigation */ }
+  if (window.CC_ANALYTICS_ENABLED !== true || navigator.globalPrivacyControl ||
+      navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
+  const script = document.currentScript;
+  const base = new URL("../../", script.src);
+  if (base.origin !== location.origin || !location.pathname.startsWith(base.pathname)) return;
+  const page = location.pathname.slice(base.pathname.length).replace(/(^|\/)index\.html$/, "$1");
+  function track(event, product = null) {
+    fetch("/api/e", {
+      method: "POST", keepalive: true, credentials: "omit", referrerPolicy: "no-referrer",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify([{event, page, product}])
+    }).catch(() => {});
   }
-
-  window.crispTrack = track;
-
-  // page_view
-  track("page_view", { path: location.pathname });
-
-  // outbound_click — fire, then let the browser follow the real link.
-  document.addEventListener("click", function (ev) {
-    var el = ev.target.closest ? ev.target.closest("[data-event='outbound_click']") : null;
-    if (!el) return;
-    track("outbound_click", {
-      product_id: el.getAttribute("data-product") || "",
-      placement: el.getAttribute("data-placement") || ""
-    });
-    // No preventDefault. The navigation is the user's, to Amazon, directly.
-  }, { capture: true });
+  track("page_view");
+  if (page === "compare/") track("compare_view");
+  if (page === "review/") track("flag_page_view");
+  if (/^guides\/[^/]+\.html$/.test(page)) {
+    const main = document.querySelector("main");
+    function checkDepth() {
+      if (!main) return;
+      const box = main.getBoundingClientRect();
+      if (box.height > 0 && box.bottom > 0 && box.top + box.height * 0.75 <= innerHeight) {
+        removeEventListener("scroll", checkDepth);
+        removeEventListener("resize", checkDepth);
+        track("guide_read_75");
+      }
+    }
+    addEventListener("scroll", checkDepth, {passive: true});
+    addEventListener("resize", checkDepth);
+    checkDepth();
+  }
+  function recordClick(event) {
+    const a = event.target.closest?.("a[rel~='sponsored'][data-affiliate-ref]");
+    if (!a || event.defaultPrevented) return;
+    const url = new URL(a.href);
+    const match = /^\/dp\/([A-Z0-9]{10})(?:\/|$)/.exec(url.pathname);
+    if (url.origin === "https://www.amazon.com" && match) track("outbound_product_click", match[1]);
+  }
+  document.addEventListener("click", recordClick);
+  document.addEventListener("auxclick", event => { if (event.button === 1) recordClick(event); });
 })();
