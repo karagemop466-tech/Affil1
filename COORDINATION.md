@@ -5,6 +5,23 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+## RELEASE RECEIPT — arena/acb1e4c8-affil1 (2026-11-20)
+
+[PR #108](https://github.com/karagemop466-tech/Affil1/pull/108) merged into `main` as
+`3d2a4539e628cffee9dc5e7a56d41f706564414f` at 2026-11-20T06:50:49Z.
+
+Checks on the PR: `build` pass ([run 44690582763](https://github.com/karagemop466-tech/Affil1/actions/runs/44690582763)),
+`launch` pass ([run 44690582662](https://github.com/karagemop466-tech/Affil1/actions/runs/44690582662)),
+`verify-edition` pass ([run 44690582663](https://github.com/karagemop466-tech/Affil1/actions/runs/44690582663)).
+On `main` after the merge: `Build, check and deploy` success
+([run 44690691532](https://github.com/karagemop466-tech/Affil1/actions/runs/44690691532)),
+`Affiliate launch checks` success, `Verify Countertop Almanac edition and platform`
+success, `pages build and deployment` success.
+
+Live and re-read after the deploy: `/decisions/` (new page) and
+`/products/p-01.html` (decision block, permitted listing CTA, live-price link) both
+serve the merged edition.
+
 ## PRODUCT BUYING PATH + DECISION REGISTRY — arena/acb1e4c8-affil1 (2026-11-20)
 
 | Task | Status | Owner | Files |
