@@ -104,7 +104,7 @@ GUIDES = [
             {
                 "h": "What the sellers in this register actually state",
                 "p": [
-                    "Four of the five submitted links resolved to listings; the fifth is unresolved and is flagged. Three of those four are air fryers (the fourth is a probe thermometer, which has no capacity to compare). The three titles state 6 quarts across two 3-quart baskets (P-01), 8 quarts in a single basket (P-03), and 26 quarts in a French-door oven (P-02).",
+                    "All five submitted links resolved to listings on re-verification 2026-11-20 (the fifth previously returned only the continue-shopping interstitial). Three are air fryers; two are probe thermometers, which have no capacity to compare. The three titles state 6 quarts across two 3-quart baskets (P-01), 8 quarts in a single basket (P-03), and 26 quarts in a French-door oven (P-02).",
                     "Those are the sellers' figures, repeated as figures. They have not been measured. A quart quoted for a two-basket machine is also counting two separate containers, which is exactly the kind of detail a single capacity number hides \u2014 so if you are comparing P-01 against P-03, compare the 3-quart basket against the 8-quart basket, not the 6 against the 8."
                 ]
             },
@@ -162,7 +162,7 @@ GUIDES = [
             {
                 "h": "What the register can and cannot tell you here",
                 "p": [
-                    "Three of the four resolved listings state in their titles that the basket or baskets are dishwasher-safe, in the sellers' wording (P-01, P-03, and by a different phrasing P-02's accessory set). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
+                    "Three of the resolved listings state in their titles that the basket or baskets are dishwasher-safe, in the sellers' wording (P-01, P-03, and by a different phrasing P-02's accessory set). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
                     "No dimensions are published for any of these products on this site, because dimensions were not confirmed from an official specification sheet in this build. That is a gap, and it is on the review page rather than buried."
                 ]
             }

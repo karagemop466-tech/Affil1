@@ -134,13 +134,13 @@ Owner: S-8206a8d0 on branch `arena/8206a8d0-affil1`. Scope (non-overlapping with
 
 | Task | Status | Notes |
 | --- | --- | --- |
-| SG-31 Re-verify 5 links via official Amazon pages (fetch_page, 2026-11-20) | in progress | P-01..P-03,P-05 confirmed; P-04 now resolves to B0DHZTCNR5 (was checkpoint). Root dashboard (2 verified) is stale — canonical is src/data/products.json. |
-| SG-32 Rebuild root landing as publication front page leading with products | in progress | Current index.html has duplicated/malformed sections (stray </div>, two product grids, two guide grids). |
-| SG-33 Fix guides.html ../ paths (22 broken refs) + static disclosure everywhere | in progress | guides.html sits at root but uses ../ paths. |
-| SG-34 Unify root tables to canonical 5-product register; outbound = dp+tag Special Links | in progress | No prices/ratings published (Program Policies 2(b)). |
-| SG-35 Add 3 trendy seasonal guides + wire sitemap/feed/nav | in progress | Question-shaped, no popularity claims. |
-| SG-36 Analytics: remove localStorage, align 5 events, SEO/canonical/OG/JSON-LD | in progress | Endpoint stays self-hosted, inert until deployed (FLG-009). |
-| SG-37 Validate, build crisp, PR, merge, Pages deploy | pending | Do not merge broken site. |
+| SG-31 Re-verify 5 links via official Amazon pages (fetch_page, 2026-11-20) | done | P-01..P-03,P-05 confirmed; P-04 now resolves to B0DHZTCNR5 (was checkpoint). Root dashboard (2 verified) is stale — canonical is src/data/products.json. |
+| SG-32 Rebuild root landing as publication front page leading with products | done | Current index.html has duplicated/malformed sections (stray </div>, two product grids, two guide grids). |
+| SG-33 Fix guides.html ../ paths (22 broken refs) + static disclosure everywhere | done | guides.html sits at root but uses ../ paths. |
+| SG-34 Unify root tables to canonical 5-product register; outbound = dp+tag Special Links | done | No prices/ratings published (Program Policies 2(b)). |
+| SG-35 Add 3 trendy seasonal guides + wire sitemap/feed/nav | done | Question-shaped, no popularity claims. |
+| SG-36 Analytics: remove localStorage, align 5 events, SEO/canonical/OG/JSON-LD | done | Endpoint stays self-hosted, inert until deployed (FLG-009). |
+| SG-37 Validate, build crisp, PR, merge, Pages deploy | in progress | Do not merge broken site. |
 
 Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official pages):
 - https://link.amazon/B04G1MEwY -> https://www.amazon.com/dp/B0CDY277D3 CHEFMAN 6 Quart Dual Basket (title matches src/data P-01)
@@ -150,3 +150,23 @@ Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official
 - https://link.amazon/B0c8moW59 -> https://www.amazon.com/dp/B0DHZTCNR5 ThermoMaven 1 Sec Professional Digital Meat Thermometer (NEW: previously checkpoint-only; now product page. Updates FLG-005/FLG-014 from unresolved to observed.)
 - Policies re-checked: https://affiliate-program.amazon.com/help/operating/policies (Updated April 14, 2026) and FTC Endorsement Guides FAQ — both reachable, consistent with src/data/compliance.json S01-S13.
 - Tracking tag shopnow047c-20 was NOT observed in any resolved URL; attribution remains unconfirmed (FLG-002 stands). Short-link compliance remains unresolved (FLG-003 stands); no link declared invalid.
+
+### Delivery — S-8206a8d0 (2026-11-20)
+
+- Re-verified all 5 links against amazon.com (fetch_page): P-01 B0CDY277D3, P-02 B09B7SB46R, P-03 B08DKYBTPH, P-04 B0DHZTCNR5 (newly resolved), P-05 B0DZFD6R9Z. Updated `src/data/products.json`, `src/data/flags.json` (FLG-005/014 resolution), `data/confirmations.json`, `data/verification-audit.json` (OBS-6..8).
+- Rebuilt root landing as publication front page leading with products (5 cards, tagged Special Links `amazon.com/dp/<ASIN>?tag=shopnow047c-20`, `rel="sponsored nofollow noopener"`, no prices/ratings). Fixed malformed duplicate sections in old index.html.
+- Fixed `guides.html` 22 broken `../` refs; added static disclosure strip to JS-only pages; added canonicals; fixed `disclosure.html#why-blank` anchor; unified dashboard/categories/products/questions/suggestions/flagged tables to canonical register.
+- Added 3 trendy question-shaped guides: meal-prep-sunday, small-kitchen-counter, thermometer-pairing (+ holiday-hosting wired). Updated sitemap.xml, rss.xml, feed.xml, robots.txt, guides/index.
+- Analytics: removed localStorage (now in-memory only, DNT/GPC honoured), aligned to canonical 5 events (page_view, outbound_product_click, guide_read_75, compare_view, flag_page_view). Endpoint remains self-hosted/inert (FLG-009).
+- Crisp edition: updated `tools/build.py` outbound to tagged Special Links, products/compare to 5, rebuilt `crisp/` (619 validate checks pass).
+- Checks: 0 broken internal refs (excl. archive), disclosure on every root page, 0 unsponsored dp links, 0 published prices, XML parses, `tools/validate.py` 619/619 pass.
+- Remaining blocked (unchanged): FLG-002 tracking attribution, FLG-003 short-link compliance, FLG-004 rates, FLG-006 prices (rule), FLG-009 collector hosting, FLG-011 Search Console, FLG-012 email, FLG-013 author. All published on Flagged for Review; none block merge.
+
+### Rebase log — S-8206a8d0 onto PR #22 (2026-11-20)
+
+`origin/main` advanced to PR #22 (`arena/fa9307f7-affil1`, full Crisp & Counter rewrite owning root `index.html`, `tools/build.py`, `src/data/*`, `sitemap.xml`/`feed.xml`, `.github/workflows/pages.yml`). Rebased `arena/8206a8d0-affil1` onto it; 9 conflicts resolved without discarding either session's work:
+
+- Kept PR #22 versions for: `index.html`, `tools/build.py`, `.github/workflows/pages.yml`, `assets/js/analytics.js`, `feed.xml`, `sitemap.xml`, `guides/index.html` (generated files; hand-edits would fail the reproducibility check). Our Good Measure landing (commit a90a8ea) is superseded at root by the Crisp & Counter front page, which satisfies the same brief (shop-like, products-led, disclosure above fold). Preserved in git history; parallel-edition pages (`dashboard.html`, `products.html`, `guides.html`, `crisp/`, `reviews/`, `categories/`) are untouched by that build and survive.
+- Ported our P-04 re-verification (B0DHZTCNR5) into PR #22's `src/data/products.json` schema (ref/observed_asin), updated FLG-001/FLG-002 counts and `tools/content.py` copy (four→five), rebuilt: `tools/check.py` 22 pages, 0 errors.
+- Kept our additive work: 3 new guides (`guides/meal-prep-sunday.html`, `small-kitchen-counter.html`, `thermometer-pairing.html` — not in GENERATED set, survive rebuild), `guides.html` path fixes, dashboard/categories/products/questions/suggestions/flagged unification, `data/*` audit appends, `crisp/` P-04 sync.
+- Follow-up (not done by deletion): wiring the 3 new guides into the generated sitemap/feed requires extending PR #22's `tools/content.py` GUIDES; logged here for the integration session.
