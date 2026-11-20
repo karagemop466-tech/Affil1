@@ -237,3 +237,17 @@ Claim was pushed before implementation. Shared-board-only rebase conflicts occur
 - Needs review on `/kitchen/flagged.html`: no Associates account validation, live measurement, Search Console property, or reader capture. The ledger is empty, and AI-assisted research/drafting is a scoped proposal, not an autonomous production pipeline.
 
 - PR [#31](https://github.com/karagemop466-tech/Affil1/pull/31): main advanced to #30 during PR checks. Resolved the resulting board-only rebase conflict by retaining both logs and leaving all peer site files unchanged. Deploy outcome is tracked on the PR timeline and Pages builds.
+## arena/7b1823aa-affil1
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Wire maintained publication measurement contract and local collector | done | arena/7b1823aa-affil1 | `assets/js/analytics.js`, `analytics/endpoint.py`, `analytics/test_endpoint.py`, `analytics/README.md` (public wording overlaps PR #27; defer those files) |
+
+- PR #27 merged before the public copy was touched. Expanded claim to `tools/build.py`, `tools/page_review.py`, `review/measurement.html`, `tools/check.py`, and `src/data/events.json`. Rebased over #27; the coordination conflict contained adjacent entries, and both were retained.
+- Verified the five event counters, rejection of unknown fields/routes, cross-origin submission rejection, and DNT/GPC handling with the local HTTP test. The browser client passed syntax validation. The published measurement page uses the same event specification as the collector.
+- Production activation **needs review** ([FLG-009](review/index.html#FLG-009)): [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) is static. No first-party runtime or approved retention policy is configured. No sessions, orders, attribution or commissions were established. Use authorized [Associates reporting](https://affiliate-program.amazon.com/home/reports) for reported orders; do not derive them from clicks.
+
+- Delivery PR: [#32](https://github.com/karagemop466-tech/Affil1/pull/32). Initial merge attempt raced another coordination update; rebased, kept both entries, and reran checks. See the PR timeline and [Pages deployments](https://github.com/karagemop466-tech/Affil1/actions/workflows/pages/pages-build-deployment) for the recorded results.
+- Rebased again over the #28 deployment log; retained both coordination entries.
+- Preserved the parallel session’s source column and updated the now-implemented measurement wording; regenerated the shared page.
+- Rebased over #31, retaining its independent supplement and coordination entry.
