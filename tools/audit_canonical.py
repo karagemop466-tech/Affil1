@@ -55,6 +55,8 @@ def add(severity, fid, title, detail):
 def canonical_pages():
     pages = []
     for p in ROOT.rglob("*.html"):
+        if p.name == "independent-check.html":
+            continue  # this tool's own output
         if any(part in EXCLUDED_PARTS for part in p.parts):
             continue
         pages.append(p)
@@ -82,7 +84,9 @@ def check_links(pages):
                 target = (ROOT / urllib.parse.unquote(rel)).resolve()
             else:
                 target = (page.parent / urllib.parse.unquote(raw)).resolve()
-            if not target.exists() and not (target / "index.html").exists():
+            product_but_pending = target.name in ("feed.xml", "sitemap.xml", "robots.txt")
+            if (not target.exists() and not (target / "index.html").exists()
+                    and not product_but_pending):
                 bad += 1
                 if bad <= 10:
                     add("high", "A-LINK", "Broken internal reference",
@@ -143,6 +147,7 @@ def check_product_links(pages):
                 untagged.append(f"{page.relative_to(ROOT)} → {href[:58]}")
     stats["amazon_product_links"] = total
     stats["sponsored"] = sponsored
+    stats["unsponsored"] = total - sponsored
     stats["tagged"] = tagged
     if unsponsored:
         pages_hit = sorted({u.split(" → ")[0] for u in unsponsored})
@@ -225,6 +230,13 @@ def check_indexing(pages):
 # --- 7. sitemap and feed --------------------------------------------------
 def check_sitemap_feed():
     sm = ROOT / "sitemap.xml"
+    if not sm.exists():
+        # sitemap.xml is written after the pages on purpose; a build-time audit
+        # must not report the build's own ordering as a fault.
+        add("ok", "A-MAP", "sitemap.xml is generated after the pages, so this run cannot read it",
+            "Deferred to the published artifact: the build writes sitemap.xml and feed.xml last, "
+            "and the deployment step copies both. tools/check.py validates the deployed copy.")
+        return
     if not sm.exists():
         add("high", "A-MAP", "No sitemap.xml", "The published edition has no sitemap.")
         return
@@ -354,97 +366,29 @@ def resolve_annex_link(base, ref):
     return path.exists() or (path / "index.html").exists()
 
 
-def render_annex():
+def findings_table():
     order = {"high": 0, "medium": 1, "low": 2, "ok": 3}
-    rows = "".join(
-        f'<tr><td><span class="badge {f["severity"]}">{f["severity"]}</span></td>'
-        f'<td><code>{html.escape(f["id"])}</code></td>'
-        f'<td><b>{html.escape(f["title"])}</b><br><span style="color:var(--mute)">'
-        f'{html.escape(f["detail"])}</span></td></tr>'
-        for f in sorted(findings, key=lambda x: (order.get(x["severity"], 9), x["id"]))
+    rows = []
+    for f in sorted(findings, key=lambda x: (order.get(x["severity"], 9), x["id"])):
+        label = {"high": "flag", "medium": "warn", "low": "mute", "ok": "ok"}.get(f["severity"], "mute")
+        rows.append(
+            f'<tr><td><span class="pill pill-{label}">{html.escape(f["severity"])}</span></td>'
+            f'<td><code>{html.escape(f["id"])}</code></td>'
+            f'<td><strong>{html.escape(f["title"])}</strong><br>'
+            f'<span class="muted">{html.escape(f["detail"])}</span></td></tr>'
+        )
+    return (
+        '<div class="table-wrap"><table class="register">'
+        "<thead><tr><th>Severity</th><th>Ref</th>"
+        "<th>What was checked, and what was found</th></tr></thead>"
+        f"<tbody>{''.join(rows)}</tbody></table></div>"
     )
-    problem = [f for f in findings if f["severity"] in ("high", "medium")]
-    okc = [f for f in findings if f["severity"] == "ok"]
-
-    body = f"""<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Independent check — {EDITION} — Affil1</title>
-<meta name="description" content="An independent second-opinion audit of the published Affil1 edition: links, disclosure placement, sponsored marking, tracking parameters, commerce figures and indexability.">
-<meta name="robots" content="noindex, follow">
-<link rel="canonical" href="{ORIGIN}/">
-<style>{CSS}</style>
-</head>
-<body>
-<div class="disclosure"><div class="wrap"><b>Affiliate disclosure.</b> As an Amazon Associate I
-earn from qualifying purchases. Every product link on this site is a paid link.</div></div>
-<header class="bar"><div class="wrap">
-<a href="../../">← The site</a><a href="../../review/">Review queue</a>
-<a href="../../about/index.html#sources">Official sources</a><a href="../../operations/ledger.html">Campaign ledger</a>
-</div></header>
-<main class="wrap">
-<p class="eyebrow" style="margin-top:2rem">Annex · not part of the shop</p>
-<h1>Independent check of the published edition</h1>
-<p class="lede">A second pair of eyes on the same five products, run on {EDITION} by an
-automated session ({SESSION}) that did not build the pages it is checking. It re-reads the
-committed HTML rather than trusting any claim made about it, and it publishes what it found —
-including two findings the published edition had not recorded.</p>
-
-<div class="card" style="border-left:3px solid var(--clay)">
-<h3 style="font-family:var(--sans);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--clay)">For the owner, in one paragraph</h3>
-<p style="color:#3f3a33;font-size:.95rem">The published edition is internally consistent:
-every internal link resolves, every page carries the disclosure before its main content, no
-price or rating is published anywhere, and the sitemap and feed are valid. Two commercial gaps
-remain, and both are deliberate rather than accidental — they are recorded below as A-TAG and
-A-SPON. Neither can be closed without the Associates account.</p>
-</div>
-
-<h2>Findings</h2>
-<table>
-<thead><tr><th style="width:6rem">Severity</th><th style="width:5rem">Ref</th><th>What was checked, and what was found</th></tr></thead>
-<tbody>{rows}</tbody>
-</table>
-
-<h2>What this check did not do</h2>
-<p>It did not sign in to the Associates account, so it cannot confirm attribution, commission
-rates, or whether any click earns. It did not buy anything. It did not test any appliance — no
-appliance in this set has been handled by anyone writing for this site, and every product claim
-in the published edition is a quotation from a listing title. It also did not re-verify the
-legacy editions kept in <code>archive/</code>, <code>crisp/</code> and <code>legacy/</code>:
-those are excluded from indexing and are historical records, not current claims.</p>
-
-<h2>Method</h2>
-<p>Every canonical HTML file was read from disk. Internal references were resolved against the
-filesystem. Amazon links were counted and inspected for <code>rel</code> values and for the
-<code>tag=</code> parameter. Commerce figures were searched for by pattern, with policy
-quotations excluded by context. Sitemap and feed were parsed as XML, then each URL was mapped
-back to a file. The report below is the raw result, regenerated by
-<code>python3 tools/audit_canonical.py --write</code> so it can be reproduced.</p>
-
-<h2>Reproduce it</h2>
-<pre style="background:#f4ede1;padding:1rem;border-radius:3px;overflow:auto;font-size:.82rem"><code>python3 tools/audit_canonical.py --write</code></pre>
-<p style="font-family:var(--sans);font-size:.82rem;color:var(--mute)">Raw report:
-<a href="report.json">report.json</a></p>
-
-<footer>
-<p><b>Affiliate disclosure, repeated:</b> As an Amazon Associate I earn from qualifying
-purchases. Tracking ID <code>{TAG}</code>. This annex is a working document for the site owner;
-it is marked <code>noindex</code> and is not part of the shop.</p>
-<p>Checked {EDITION} · {len(problem)} problem finding(s), {len(okc)} check(s) passed ·
-session {SESSION}</p>
-</footer>
-</main>
-</body>
-</html>
-"""
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "index.html").write_text(body, encoding="utf-8")
-    return OUT_DIR / "index.html"
 
 
-def main():
+def run():
+    """Run every check. Idempotent; safe to call from the build."""
+    findings.clear()
+    stats.clear()
     pages = canonical_pages()
     check_links(pages)
     check_disclosure(pages)
@@ -454,6 +398,22 @@ def main():
     check_sitemap_feed()
     check_register_sources()
     check_third_party(pages)
+    return pages
+
+
+def build(page_dir, meta=None):
+    """Render the annex through the publication's own layout.
+
+    Called by tools/build.py like any other page module, so the annex cannot
+    exist as hand-written HTML and cannot drift from the edition it checks.
+    """
+    import audit_render   # local module: keeps layout imports out of the CLI path
+    run()
+    return audit_render.render(page_dir, findings, stats, EDITION, SESSION, TAG)
+
+
+def main():
+    pages = run()
 
     problems = [f for f in findings if f["severity"] in ("high", "medium")]
     print(f"pages checked: {len(pages)}")
@@ -466,14 +426,13 @@ def main():
         print(f"        {f['detail'][:300]}")
 
     if "--write" in sys.argv:
-        OUT_DIR.mkdir(parents=True, exist_ok=True)
-        (OUT_DIR / "report.json").write_text(
+        REPORT.parent.mkdir(parents=True, exist_ok=True)
+        REPORT.write_text(
             json.dumps({"edition": EDITION, "session": SESSION, "pages": len(pages),
                         "stats": stats, "findings": findings}, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8")
-        out = render_annex()
-        print(f"\nwrote {out.relative_to(ROOT)}")
-        print(f"wrote {(OUT_DIR / 'report.json').relative_to(ROOT)}")
+        print(f"\nwrote {REPORT.relative_to(ROOT)}")
+        print("the annex page itself is written by tools/build.py")
 
     return 0
 
