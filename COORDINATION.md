@@ -579,3 +579,19 @@ the new `decide/index.html`; `check_sitemap_feed` against the regenerated sitema
 feed; `check_data` over the edited `flags.json`, `suggestions.json` and
 `products.json`; `check_assets` over the analytics client; and the new
 bidirectional `GENERATED` guard in `build.py`.
+
+### Merge log — S-5665c5f2 (2026-11-20)
+
+| PR | Purpose | Merge commit |
+| --- | --- | --- |
+| [#66](https://github.com/karagemop466-tech/Affil1/pull/66) | Reconcile with main; holiday photo provenance (FLG-020); validator flag (FLG-021); board entry | `7eaf1e0` |
+| [#73](https://github.com/karagemop466-tech/Affil1/pull/73) | Restore the holiday `images.json` entry that the #66 rebase dropped | `6f808a1` |
+| [#77](https://github.com/karagemop466-tech/Affil1/pull/77) | `tools/validate.py` matches the current schema and root site, so the Pages gate passes | `6a47888` |
+| [#78](https://github.com/karagemop466-tech/Affil1/pull/78) | `tools/sweep_surfaces.py` reads `build.GENERATED`; reports the 7 real strays | `16050be` |
+| [#80](https://github.com/karagemop466-tech/Affil1/pull/80) | FLG-021 updated to the fixed state | `aa0497e` |
+
+**Pages deploy confirmed at `aa0497e`:** `Build, check and deploy` success; `pages build and deployment` success. The live review page at `review/index.html` shows 21 items with FLG-021 updated. A plain fetch showed a stale 19-item copy, which was CDN caching; a cache-busting query showed the current page.
+
+**Still open:** the `Affiliate launch checks` workflow is red on `aa0497e`. The only failing step is the sweep, which correctly reports 7 files under `decision-support/` that are outside the published pipeline. Owner decision needed: archive them or add them to `tools/build.py`. Nothing in the published site links to them. This does not block the Pages deploy, which is green.
+
+**Not changed by this session, but noted:** the earlier session items (T2 analytics, T3 ported guides, T4 and T5 duplicate content) were superseded by main and were dropped, as recorded above.
