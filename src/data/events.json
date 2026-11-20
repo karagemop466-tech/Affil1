@@ -1,11 +1,11 @@
 {
   "meta": {
-    "purpose": "Five events, defined before any analytics beacon is enabled, so that 'which page works' becomes a question with an answer.",
-    "status": "Client written in assets/js/analytics.js (inert by default); self-hosted collector written in server/collect.js. Nothing is transmitted on static GitHub Pages until a first-party host and privacy notice are live. See FLG-010.",
+    "purpose": "Five events, defined before any code ships, so that 'which page works' becomes a question with an answer.",
+    "status": "Self-hosted counter implemented. Static GitHub Pages does not receive events.",
     "principles": [
-      "first-party only: the collector must live on a first-party host, not a third-party tracker",
-      "no cookie, no persistent user identifier, no IP logging",
-      "aggregate only: no per-visitor profile is stored",
+      "first-party only: the collector must live on the site's own host, not a third party",
+      "No cookie, fingerprint or session identifier; visits are not eligible sessions.",
+      "aggregate only: no per-visitor record is stored, so the data cannot be joined to a person",
       "no Amazon data: nothing about what happens after the click is knowable from this site, and nothing is implied"
     ],
     "explicitly_out_of_scope": "Reported orders, revenue and conversion rate. Those can only come from the Associates dashboard or the API, which this session cannot read. The campaign ledger starts empty and stays empty until authorised first-party reports exist."
@@ -14,55 +14,87 @@
     {
       "id": "E1",
       "name": "page_view",
-      "fires_when": "Every page load",
-      "props": ["path", "date"],
-      "answers": "Which pages are reached at all",
-      "not_collected": ["IP", "user agent string", "cookie", "URL query string"]
+      "fires_when": "A guide, category or register page is rendered",
+      "props": [
+        "page"
+      ],
+      "answers": "Which pages are reached at all, and from where",
+      "not_collected": [
+        "IP",
+        "user agent string",
+        "cookie",
+        "query string of the referrer"
+      ]
     },
     {
       "id": "E2",
-      "name": "outbound_click",
-      "fires_when": "A reader activates an outbound sponsored link to an Amazon product listing",
-      "props": ["ref", "path", "date"],
-      "answers": "Which products and which pages earn the click",
-      "not_collected": ["anything after the click; the destination is Amazon's, not ours"],
+      "name": "outbound_product_click",
+      "fires_when": "A reader activates an outbound link to a product listing",
+      "props": [
+        "page",
+        "asin"
+      ],
+      "answers": "Which products and which positions earn the click",
+      "not_collected": [
+        "anything after the click; the destination is Amazon's, not ours"
+      ],
       "note": "The click is counted locally before navigation. It does not prove a purchase, a session, or a commission."
     },
     {
       "id": "E3",
-      "name": "guide_open",
-      "fires_when": "A reader opens a guide from the front page or guides index",
-      "props": ["path", "date"],
-      "answers": "Which question-shaped guides attract actual readership",
-      "not_collected": ["scroll path, mouse movement, personal identifiers"]
+      "name": "guide_read_75",
+      "fires_when": "A reader reaches 75% of a guide's height",
+      "props": [
+        "page"
+      ],
+      "answers": "Whether the guide is actually read or merely opened",
+      "not_collected": [
+        "time per paragraph, scroll path, mouse movement"
+      ]
     },
     {
       "id": "E4",
-      "name": "search_query_referral",
-      "fires_when": "A visitor arrives from a recognized search engine host",
-      "props": ["path", "date"],
-      "answers": "Whether organic search referrals are landing on guides or product records",
-      "not_collected": ["referrer query string, IP, cookies"]
+      "name": "compare_view",
+      "fires_when": "The comparison page or a comparison table is rendered",
+      "props": [
+        "page"
+      ],
+      "answers": "Whether readers want side-by-side data more than prose",
+      "not_collected": [
+        "individually identifying data of any kind"
+      ]
     },
     {
       "id": "E5",
-      "name": "report_import",
-      "fires_when": "An authorised first-party Associates report is manually imported into the campaign ledger",
-      "props": ["date", "provenance"],
-      "answers": "Maintains a dated provenance trail for reported clicks and orders",
-      "not_collected": ["scraped data or projections"]
+      "name": "flag_page_view",
+      "fires_when": "The Flagged for Review page is opened",
+      "props": [
+        "page"
+      ],
+      "answers": "Whether the review page is actually consulted, which tells us if the verification work is visible",
+      "not_collected": [
+        "identity of the reviewer"
+      ]
     }
   ],
   "collector_design": {
-    "endpoint": "window.CC_ANALYTICS_ENDPOINT (POST, first-party host running server/collect.js)",
-    "payload": "the event name, page path, optional product ref, and date — nothing else",
-    "retention": "aggregate counts per day per event; retention policy must be published before enabling",
-    "opt_out": "Inert by default until privacy notice, retention policy, and consent stance are confirmed",
-    "why_not_deployed": "Deploying it requires a host that can run a process. GitHub Pages serves static files only, so there is nowhere for the collector to run natively. See S-14."
+    "endpoint": "/api/e (POST, same origin)",
+    "payload": "Event name, allowlisted publication page, and optional observed ASIN. Daily aggregate counts only.",
+    "retention": "aggregate counts per day per event per prop value; raw events discarded on write",
+    "opt_out": "Do Not Track and Global Privacy Control headers must be honoured by skipping the send",
+    "why_not_deployed": "Deploying it requires a host that can run a process. GitHub Pages serves static files only, so there is nowhere for the collector to run. A third-party analytics provider would meet the measurement goal but would break the first-party principle and add a disclosure obligation that is not worth it before there is traffic to measure."
   },
   "campaign_ledger": {
     "status": "empty by design",
-    "columns": ["date", "source", "channel", "eligible_sessions", "outbound_clicks", "reported_orders", "provenance"],
+    "columns": [
+      "date",
+      "source",
+      "channel",
+      "eligible_sessions",
+      "outbound_clicks",
+      "reported_orders",
+      "provenance"
+    ],
     "rules": [
       "a row is added only when the figure comes from an authorised first-party report",
       "every row carries the date the figure was pulled and the report it came from",

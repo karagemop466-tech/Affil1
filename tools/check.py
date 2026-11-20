@@ -124,8 +124,9 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
-    r"sellercentral\.amazon\.com|developer-docs\.amazon\.com|developer-docs\.amazon|"
-    r"karagemop466-tech\.github\.io|link\.amazon|github\.com|www\.ftc\.gov)",
+    r"developer-docs\.amazon\.com|"
+    r"sell\.amazon\.com|support\.google\.com|sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
+    r"www\.ftc\.gov|foodsafety\.gov)(?=/|$)",
     re.I,
 )
 
@@ -159,7 +160,7 @@ def check_page(path):
 
     # --- links resolve ---
     for attr, value, line in s.refs:
-        if not value or value.startswith(("#", "mailto:", "data:", "javascript:")):
+        if not value or value.startswith(("mailto:", "data:", "javascript:")):
             continue
         if attr == "src" and EXTERNAL_RESOURCE.match(value):
             err(f"{rel}:{line}: external resource load {value!r}")
@@ -183,10 +184,19 @@ def check_page(path):
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
     # --- Amazon links must be sponsored ---
+    from build import readiness
+    doc = json.loads(readiness.INTENT.read_text())
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
+            paid = a.get("data-affiliate-ref")
+            if paid:
+                if not any(p["ref"] == paid and p["approved_special_link"] == href
+                           and readiness.eligible(p, doc["tracking_id_supplied"]) for p in doc["records"]):
+                    err(f"{rel}: paid link lacks an approved evidence bundle: {href}")
+            elif not re.fullmatch(r"https://www\.amazon\.com/dp/[A-Z0-9]{10}", href):
+                err(f"{rel}: unknown short link or unapproved commercial URL: {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:
@@ -230,9 +240,16 @@ def check_page(path):
         trs = len(re.findall(r"<tr[ >]", body))
         if trs and tds > trs * 12:
             err(f"{rel}: table body has {tds} cells across {trs} rows - likely shredded markup")
+        for row in re.findall(r"<tr[^>]*>(.*?)</tr>", body, re.S):
+            if '<td' in row and 'href="https://' not in row:
+                err(f"{rel}: table row lacks a source link")
         char_cells = len(re.findall(r"<td>.{1}</td>", body))
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
+
+    for row in re.findall(r"<tbody>(.*?)</tbody>",text,re.S):
+        for tr in re.findall(r"<tr[^>]*>(.*?)</tr>",row,re.S):
+            if not re.search(r'<a [^>]*href="https://',tr): err(f"{rel}: data row without an official source link")
 
     # --- head essentials ---
     for needle in ("<title>", 'name="description"', 'rel="canonical"'):
@@ -260,7 +277,7 @@ def check_sitemap_feed():
     from build import GENERATED  # the build's own list, not a second copy
     generated = set()
     for g in GENERATED:
-        if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
+        if g in ("404.html", "operations/launch-readiness.html", "sitemap.xml", "feed.xml", "robots.txt"):
             continue
         generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
     for u in sorted(generated):
@@ -294,8 +311,8 @@ def check_data():
             err(f"products.json: {p['ref']} observed_asin is not 10 characters")
         if p["submitted_code"] != p["submitted_link"].rsplit("/", 1)[-1]:
             err(f"products.json: {p['ref']} submitted_code does not match the link")
-        if p["intended_asin"] == p["observed_asin"] and p["intended_asin"] is not None:
-            err(f"products.json: {p['ref']} intended and observed have been merged")
+        if p["intended_asin"] and not all(p.get(k) for k in ("intended_confirmation_source","intended_listing_url","intended_confirmed_on")):
+            err(f"products.json: {p['ref']} intended ASIN lacks independent evidence")
 
     for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):
         json.loads((ROOT / "src/data" / name).read_text(encoding="utf-8"))
@@ -328,7 +345,7 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for ev in ("page_view", "outbound_product_click", "guide_read_75", "compare_view", "flag_page_view"):
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:

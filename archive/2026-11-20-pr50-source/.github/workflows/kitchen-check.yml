@@ -1,0 +1,15 @@
+name: Affiliate launch checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  launch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 kitchen-build/readiness.py --check
+      - run: python3 -m unittest discover -s kitchen-build -v
+      - run: node --check assets/js/analytics.js

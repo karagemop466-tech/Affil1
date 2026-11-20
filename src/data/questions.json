@@ -1,13 +1,13 @@
 {
   "meta": {
-    "status": "Five questions below are answered with evidence. Ten remain open, and each one names the specific artefact that would close it. Nothing here is a forecast.",
+    "status": "Six questions below are answerable now. Nine are not, and each one names the specific artefact that would close it. Nothing here is a forecast.",
     "rule": "A question moves to 'answered' only when the answer has a source link. An answer of 'we cannot know yet' is a legitimate answer and is recorded as such."
   },
   "questions": [
     {
       "id": "Q-01",
       "question": "Does each submitted link actually land on the product the owner meant to send readers to?",
-      "what_we_have": "All five links resolve to live listings, and each arrival ASIN and title was transcribed (P-01..P-05: 3 Air Fryers and 2 Meat Thermometers).",
+      "what_we_have": "Five observed ASINs and listing titles, recorded separately from the five unconfirmed intended ASINs.",
       "what_is_missing": "The owner's intended ASIN. Every submitted path code is 9 characters; every ASIN observed on arrival is 10. That is evidence the codes are short-link slugs, not identifiers, so the intended product cannot be read off the link itself.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended, then record both values side by side.",
       "answered": false,
@@ -15,14 +15,14 @@
     },
     {
       "id": "Q-02",
-      "question": "Why did P-04 fail to resolve on earlier checks, and what does it point to now?",
-      "what_we_have": "Earlier automated requests to https://link.amazon/B0c8moW59 hit Amazon's /checkpoint/continue interstitial. Two independent re-verifications on 2026-11-20 resolved it directly to ASIN B0DHZTCNR5 (ThermoMaven 1 Sec Professional Digital Meat Thermometer).",
-      "what_is_missing": "Confirmation from the owner that B0DHZTCNR5 is the intended product, and replacement of the intermittent short link with a direct validated Special Link.",
-      "how_to_close": "Confirm B0DHZTCNR5 in the Associates dashboard and issue a validated Special Link (S-02).",
+      "question": "Where did the fourth link land on recheck?",
+      "what_we_have": "The first checks reached a continuity screen; the latest check opened a listing.",
+      "what_is_missing": "The intended ASIN and account attribution.",
+      "how_to_close": "Open it once from a normal browser on the owner's own network and note the final URL. If it is dead, re-issue the link from the Associates dashboard.",
       "answered": true,
-      "answer": "P-04 resolved on 2026-11-20 to ASIN B0DHZTCNR5 (ThermoMaven 1 Sec Professional Digital Meat Thermometer, category Thermometers & Timers > Meat). Earlier failures were Amazon /checkpoint/continue interstitials, confirming that link.amazon redirects can gate automated or repeat fetches intermittently (FLG-004).",
-      "evidence": "products/p-04.html, review/index.html#FLG-004",
-      "blocking": "no — destination observed; owner confirmation of intended ASIN sits under Q-01"
+      "blocking": "no",
+      "answer": "ThermoMaven digital meat thermometer, B0DHZTCNR5.",
+      "evidence": "https://www.amazon.com/dp/B0DHZTCNR5"
     },
     {
       "id": "Q-03",
@@ -49,27 +49,27 @@
       "question": "Is the disclosure in the right place?",
       "what_we_have": "The Operating Agreement requires the exact statement on the site (SRC-01). The FTC says a footer-only disclosure is easy to miss and that proximity to the recommendation matters (SRC-03).",
       "what_is_missing": "Nothing structural. What remains is a legal review of the wording around it, which this build cannot perform.",
-      "how_to_close": "A human review against SRC-01, SRC-03 and 16 CFR Part 255 (SRC-04). The placement itself is already above the fold on every page and repeated in the footer.",
+      "how_to_close": "A human review against SRC-01 and SRC-03. The placement itself is already above the fold on every page and repeated in the footer.",
       "answered": true,
-      "answer": "The required sentence sits in a strip under the masthead above the fold on every page, and repeats in the footer. Every product card and product record repeats the affiliate note beside the outbound link.",
-      "evidence": "SRC-01, SRC-03, SRC-04",
+      "answer": "The disclosure is below the masthead and repeated in the footer.",
+      "evidence": "SRC-01, SRC-03",
       "blocking": "no"
     },
     {
       "id": "Q-06",
-      "question": "Two of the five links (P-04 and P-05) are meat thermometers, not air fryers. Should the site stay a two-category publication?",
-      "what_we_have": "Amazon's category breadcrumbs put P-01, P-02 and P-03 under Air Fryers and both P-04 (ThermoMaven instant-read) and P-05 (CHEF iQ wireless 3-probe) under Thermometers & Timers > Meat.",
-      "what_is_missing": "The owner's long-term niche strategy — keep both Air Fryers and Meat Thermometers as complementary categories, or narrow exclusively to one.",
-      "how_to_close": "One sentence from the owner (see S-08). Until then the site treats both categories cleanly with dedicated category pages (Air Fryers and Meat Thermometers) and a USDA-sourced thermometer guide.",
+      "question": "P-05 is a thermometer, not an air fryer. Does it belong in the same catalogue?",
+      "what_we_have": "P-04 and P-05 both fall under Thermometers & Timers. P-01, P-02 and P-03 fall under Air Fryers.",
+      "what_is_missing": "The owner's editorial intent — was the thermometer meant as an accessory to the air-fryer content, or as a separate line?",
+      "how_to_close": "One sentence from the owner. Until then the site treats it honestly: it is listed in its own section and never described as an air fryer.",
       "answered": false,
-      "blocking": "no — handled cleanly via two dedicated categories"
+      "blocking": "no — handled by separating it"
     },
     {
       "id": "Q-07",
-      "question": "Which guide topics are worth expanding next?",
-      "what_we_have": "Seven question-shaped guides across air fryers, meat thermometers, meal prep and seasonal hosting, clearly labelled as editorial hypotheses.",
+      "question": "Which topics are worth writing about?",
+      "what_we_have": "Four editorial hypotheses, clearly labelled as hypotheses.",
       "what_is_missing": "Any search data at all. No Search Console property, no impressions, no query list, no click data.",
-      "how_to_close": "Verify the property in Search Console, submit the sitemap, wait for impressions, then export the query report and pick the next topic from measured queries.",
+      "how_to_close": "Verify the property in Search Console, submit the sitemap, wait for impressions, then export the query report and pick topics from it. Until then the topic list is a guess and is labelled as one.",
       "answered": false,
       "blocking": "no — but writing more guides before this is guessing"
     },
@@ -85,8 +85,8 @@
     {
       "id": "Q-09",
       "question": "What is the actual commission rate for these categories?",
-      "what_we_have": "Nothing. The rate card sits behind an Associates sign-in.",
-      "what_is_missing": "The owner's own rate card for Home & Kitchen small appliances and kitchen gadgets.",
+      "what_we_have": "No account-specific commission information has been supplied.",
+      "what_is_missing": "The owner's own rate card.",
       "how_to_close": "Read it in the Associates dashboard and record it. It is deliberately blank here rather than copied from a blog.",
       "answered": false,
       "blocking": "no — but no revenue estimate is possible without it, so none is given"
@@ -94,58 +94,58 @@
     {
       "id": "Q-10",
       "question": "Is the analytics endpoint live, and is it lawful to switch on?",
-      "what_we_have": "Five defined events, an inert client in assets/js/analytics.js, and a self-hosted Node collector in server/collect.js.",
-      "what_is_missing": "A first-party host for the collector (GitHub Pages is static), a formal privacy notice, a retention period, and a decision on consent for visitors in jurisdictions that require it.",
-      "how_to_close": "Publish the privacy notice first, deploy the collector on a first-party host, then enable the beacon. The order matters.",
+      "what_we_have": "The five event names and a client that stays silent by default.",
+      "what_is_missing": "A persistent production collector host and consent review.",
+      "how_to_close": "Publish the privacy notice first, then deploy the collector, then enable the beacon. The order matters.",
       "answered": false,
       "blocking": "yes, for measurement — the site works without it"
     },
     {
       "id": "Q-11",
       "question": "Can this site be indexed at all, given the repository path?",
-      "what_we_have": "The site is served from /Affil1/ on github.io. All internal links resolve within that subpath, and sitemap.xml and feed.xml list every canonical URL.",
-      "what_is_missing": "Verification that the sitemap has been submitted in Google Search Console and that pages are actually being crawled.",
+      "what_we_have": "The site is served from a project path on github.io. All internal links resolve within that path and the sitemap lists the same host.",
+      "what_is_missing": "Verification that the sitemap has been submitted and that pages are actually being crawled.",
       "how_to_close": "Search Console verification, then sitemap submission, then check coverage after a few days.",
       "answered": false,
-      "blocking": "no — but nothing will rank reliably until it happens"
+      "blocking": "no — Search Console helps measure indexing; submission does not guarantee ranking"
     },
     {
       "id": "Q-12",
       "question": "Does the site make any claim it cannot support?",
-      "what_we_have": "Every page is machine-checked for banned patterns: no price figure, no star rating, no review count, no stock status, no superlative, no test claim. Food-safety temperatures are sourced directly from USDA FSIS (SRC-06, SRC-07).",
+      "what_we_have": "Every page was machine-checked for banned patterns: no price figure, no star rating, no review count, no stock status, no superlative, no test claim.",
       "what_is_missing": "A human read for tone and implication — a checker cannot catch a sentence that is technically true but suggests more.",
-      "how_to_close": "Read the guides and product pages once with the question 'what would a sceptical reader infer?'",
+      "how_to_close": "Read the three guides and the product pages once with the question 'what would a sceptical reader infer?'",
       "answered": true,
-      "answer": "No page claims testing, ranking or a winner. Every product page states plainly that the product was not tested, and every food-safety temperature cites USDA FSIS directly.",
-      "evidence": "tools/check.py, SRC-06, SRC-07",
+      "answer": "No page claims testing, ranking or a winner. Every product page says plainly that the product was not tested.",
+      "evidence": "tools/check.py",
       "blocking": "no"
     },
     {
       "id": "Q-13",
       "question": "What happens if the owner never supplies the missing account data?",
-      "what_we_have": "A site that is compliant and verified across all five product destinations, with honest guides and zero invented prices or ratings.",
+      "what_we_have": "Five listing records and four buying guides. No validated account attribution.",
       "what_is_missing": "A decision about how long to wait.",
       "how_to_close": "This is an owner decision, not a research one. The site is built to be safe to leave running in this state indefinitely.",
       "answered": true,
-      "answer": "Nothing on the site breaks. It stays accurate because it claims only what was verified. The cost of the missing data is opportunity, not correctness.",
-      "evidence": "Internal build verification (tools/check.py) — stated plainly so it is not mistaken for an external citation.",
+      "answer": "Nothing on the site breaks. It stays accurate because it claims so little. The cost of the missing data is opportunity, not correctness.",
+      "evidence": "No external source: this is a conclusion about the build's own contents, not a citation. Stated plainly so it is not mistaken for one.",
       "blocking": "no"
     },
     {
       "id": "Q-14",
       "question": "Are the supplied links Special Links in the sense the agreement means?",
-      "what_we_have": "All five resolve to live Amazon listings. None showed a tag parameter on arrival.",
+      "what_we_have": "Five resolve to live Amazon listings. None showed a tag on arrival.",
       "what_is_missing": "Confirmation that each is tagged with shopnow047c-20. The agreement requires Special Links to use the assigned Associates ID (SRC-02).",
-      "how_to_close": "Re-issue each destination as a tagged link from SiteStripe, test one click, and replace the outbound URL after recording both the old and new value.",
+      "how_to_close": "Re-issue each destination as a tagged link from SiteStripe and replace the outbound URL after recording both the old and new value.",
       "answered": false,
       "blocking": "yes — this is the difference between a link and a commission"
     },
     {
       "id": "Q-15",
       "question": "Is there any traffic, and where would it come from?",
-      "what_we_have": "Nothing. No analytics running, no Search Console, no referral data.",
+      "what_we_have": "No authorized production traffic or referral reports.",
       "what_is_missing": "All of it.",
-      "how_to_close": "Turn on measurement (Q-10) and Search Console verification (Q-11) before assuming any channel works.",
+      "how_to_close": "Turn on measurement (Q-10) and verification (Q-11) before assuming any channel works.",
       "answered": false,
       "blocking": "no — but every revenue assumption depends on it"
     }

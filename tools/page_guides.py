@@ -1,9 +1,9 @@
 """Guide index and article template."""
 
-from layout import (DISCLOSURE, SITE_NAME, esc, eyebrow, page, pagehead, rel,
+from layout import (AFFILIATE_HINT, DISCLOSURE, SITE_NAME, esc, eyebrow, outbound, page, pagehead, product_link, rel,
                     section, table)
 from content import GUIDES
-from page_home import img, product_card
+from page_home import img
 
 
 def build_index(page_dir, meta):
@@ -17,32 +17,31 @@ def build_index(page_dir, meta):
     <p class="gcard-kicker">{esc(g['kicker'])} &middot; {g['read_minutes']} min</p>
     <h3><a href="{esc(href)}">{esc(g['title'])}</a></h3>
     <p>{esc(g['dek'])}</p>
-    <a class="tlink" href="{esc(href)}">Read guide <span aria-hidden="true">&rarr;</span></a>
+    <a class="tlink" href="{esc(href)}">Read <span aria-hidden="true">&rarr;</span></a>
   </div>
 </article>""")
 
     body = f"""{pagehead(
         'Buying guides',
-        f'{len(GUIDES)} questions worth<br>answering before you buy',
-        'Written to be useful whether or not you click a single link. Each guide is a practical checklist grounded in verified listing facts and official USDA FSIS food-safety charts.',
-        meta='No product was tested &middot; every product claim is quoted from the seller &middot; no prices, ratings or winners',
+        'What are you cooking next?',
+        'Plan a batch, measure the counter, or get the holiday sides out on time. Start with the question that brought you here.',
+        meta='Crisp &amp; Counter Editorial &middot; listing-based buying guides',
     )}
 {section(f'''
 <div class="gcard-grid">{''.join(cards)}</div>
-<p class="sec-foot">Browse by product category: <a href="{esc(rel(d, 'products/air-fryers.html'))}">Air Fryers (3)</a> &middot; <a href="{esc(rel(d, 'products/thermometers.html'))}">Meat Thermometers (2)</a> &middot; <a href="{esc(rel(d, 'about/index.html'))}#why-blank">Why nothing is rated or priced</a>.</p>''')}"""
+<p class="sec-foot">Every guide carries the same disclosure and the same limit: <a href="{esc(rel(d, 'about/index.html'))}#why-blank">nothing here was tested</a>.</p>''')}"""
     return page(
         d,
         title="Buying guides \u2014 Crisp & Counter",
-        description=f"{len(GUIDES)} kitchen buying guides across air fryers and meat thermometers: basket vs. oven, instant-read vs. wireless probes with USDA safe temperatures, capacity, cleanup, meal prep and hosting.",
+        description="Air fryer and thermometer buying guides on batch size, small kitchens, cleanup, and making room for holiday sides.",
         body=body,
         active="guides/index.html",
         canonical="guides/",
     )
 
 
-def build_guide(page_dir, g, products, meta):
+def build_guide(page_dir, g, meta):
     d = page_dir
-    by_ref = {p["ref"]: p for p in products}
     blocks = []
     for i, s in enumerate(g["sections"]):
         parts = [f"<h2>{esc(s['h'])}</h2>"]
@@ -50,7 +49,16 @@ def build_guide(page_dir, g, products, meta):
             parts.append(f"<p>{esc(para)}</p>")
         if s.get("table"):
             t = s["table"]
-            parts.append(table(t["headers"], t["rows"], cls="guide-table", caption=t.get("caption")))
+            rows = []
+            for r in t["rows"]:
+                row_cells = []
+                for cell in r:
+                    if isinstance(cell, dict) and cell.get("url"):
+                        row_cells.append({"html": outbound(d, cell["url"], esc(cell["label"]))})
+                    else:
+                        row_cells.append(cell)
+                rows.append(row_cells)
+            parts.append(table(t["headers"], rows, cls="guide-table", caption=t.get("caption")))
         if s.get("items"):
             parts.append('<dl class="checks">')
             for term, desc in s["items"]:
@@ -63,28 +71,32 @@ def build_guide(page_dir, g, products, meta):
         f'<li><a href="#s{i+1}">{esc(s["h"])}</a></li>' for i, s in enumerate(g["sections"])
     )
 
-    related_html = ""
-    rel_prods = [by_ref[r] for r in g.get("related_refs", []) if r in by_ref]
-    if rel_prods:
-        grid_cls = "pcard-grid pcard-grid-3" if len(rel_prods) == 3 else "pcard-grid wide"
-        related_html = section(f"""
-<div class="sec-head"><div>{eyebrow('Referenced in this guide')}<h2>Listings mentioned above</h2></div>
-<p>Every link below opens the verified Amazon listing as a marked sponsored link, or takes you to the full product-intent record.</p></div>
-<div class="{grid_cls}">
-  {''.join(product_card(d, p, compact=True) for p in rel_prods)}
-</div>""", cls="")
-
     others = [x for x in GUIDES if x["slug"] != g["slug"]][:2]
     next_html = "".join(f"""<a class="next-card" href="{esc(rel(d, 'guides/' + x['slug'] + '.html'))}">
   <p class="gcard-kicker">{esc(x['kicker'])} &middot; {x['read_minutes']} min</p>
   <h3>{esc(x['title'])}</h3>
-  <span class="tlink">Read guide <span aria-hidden="true">&rarr;</span></span></a>""" for x in others)
+  <span class="tlink">Read <span aria-hidden="true">&rarr;</span></span></a>""" for x in others)
 
+    sources = ''.join(f'<li>{(product_link if AFFILIATE_HINT.match(url) else outbound)(d, url, esc(label))}</li>'
+                      for label, url in g.get('sources', []))
+    source_block = f'<div class="prose-block"><h2>Sources</h2><ul>{sources}</ul></div>' if sources else ''
+    related = ''.join(f'<li><a href="{esc(rel(d, path))}">{esc(label)}</a></li>'
+                      for path, label in ((path, {
+                          'products/p-01.html': 'Chefman dual-basket listing details',
+                          'products/p-02.html': 'Emeril Lagasse oven listing details',
+                          'products/p-03.html': 'Chefman TurboFry listing details',
+                          'products/p-04.html': 'ThermoMaven listing details',
+                          'products/p-05.html': 'CHEF iQ listing details',
+                          'fit/index.html': 'Air fryer fit finder',
+                          'guides/thermometer-pairing.html': 'Instant-read or wireless?',
+                          'guides/cleanup-and-counter-space.html': 'Cleanup and counter-space guide',
+                      }[path]) for path in g.get('related', [])))
+    related_block = f'<div class="prose-block"><h2>Where to go next</h2><ul>{related}</ul></div>' if related else ''
     body = f"""{pagehead(
         g['kicker'],
         esc(g['title']),
         esc(g['dek']),
-        meta=f"Updated {esc(g['updated'])} &middot; {g['read_minutes']} min read &middot; no product tested &middot; no prices or ratings",
+        meta=f"By <a href='{esc(rel(d, 'about/index.html'))}#who'>Crisp &amp; Counter Editorial</a> &middot; Updated {esc(g['updated'])} &middot; {g['read_minutes']} min read",
     )}
 <section class="section"><div class="wrap article-grid">
   <article class="article">
@@ -93,23 +105,24 @@ def build_guide(page_dir, g, products, meta):
       <figcaption><span class="illus-tag illus-inline">Illustration</span> {esc(g['photo_caption'])}</figcaption>
     </figure>
     {''.join(blocks)}
+{source_block}
+{related_block}
     <div class="article-end">
       <p class="article-close">{esc(g['closing'])}</p>
-      <p class="fineprint">{DISCLOSURE} Links to Amazon on this site are affiliate links. A purchase through one does not change the price you pay.</p>
+      <p class="fineprint">{DISCLOSURE} Amazon listing links are provided as sources. Tracking has not been confirmed.</p>
     </div>
   </article>
   <aside class="article-side">
     <nav class="toc" aria-label="On this page"><h2>On this page</h2><ol>{toc}</ol></nav>
     <div class="side-card side-card-quiet">
       <h2>The limit</h2>
-      <p>Nothing in this guide comes from testing a product. Product claims come strictly from live listing titles; food-safety figures come strictly from USDA FSIS (<a href="{esc(rel(d, 'about/index.html'))}#sources">Sources</a>).</p>
+      <p>Nothing in this guide comes from using a product. It comes from the questions worth asking and from the sellers' own descriptions. Where a fact was needed and could not be sourced, the guide says so instead of filling it in.</p>
       <p><a href="{esc(rel(d, 'about/index.html'))}#why-blank">Why the gaps exist</a></p>
     </div>
   </aside>
 </div></section>
-{related_html}
 <section class="section section-tint"><div class="wrap">
-  <div class="sec-head"><div>{eyebrow('Keep reading')}<h2>Two more, same standard</h2></div></div>
+  <div class="sec-head"><div>{eyebrow('Keep reading')}<h2>Keep planning your kitchen</h2></div></div>
   <div class="next-grid">{next_html}</div>
 </div></section>"""
 
@@ -118,7 +131,7 @@ def build_guide(page_dir, g, products, meta):
         "@type": "Article",
         "headline": g["title"],
         "description": g["dek"],
-        "datePublished": g["updated"],
+        "datePublished": g.get("published", g["updated"]),
         "dateModified": g["updated"],
         "author": {"@type": "Organization", "name": SITE_NAME},
         "publisher": {"@type": "Organization", "name": SITE_NAME},

@@ -13,6 +13,7 @@ import html
 import json
 import pathlib
 import posixpath
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_NAME = "Crisp & Counter"
@@ -38,26 +39,27 @@ NAV = [
 
 FOOTER_GROUPS = [
     ("Read", [
-        ("guides/index.html", "All buying guides"),
-        ("guides/instant-read-vs-wireless-meat-thermometer.html", "Thermometer & USDA temp guide"),
+        ("guides/index.html", "All guides"),
         ("compare/index.html", "Comparison table"),
         ("feed.xml", "RSS feed"),
+        ("fit/index.html", "Air fryer fit finder"),
     ]),
     ("Catalogue", [
-        ("products/index.html", "All products (register)"),
-        ("products/air-fryers.html", "Air Fryers (3)"),
-        ("products/thermometers.html", "Meat Thermometers (2)"),
+        ("products/index.html", "Product register"),
+        ("products/p-05.html", "The thermometer"),
         ("about/index.html#how-we-link", "How we link"),
     ]),
     ("Review queue", [
         ("review/index.html", "Flagged for review"),
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
-        ("about/index.html#sources", "Sources"),
+        ("operations/launch-readiness.html", "Affiliate launch readiness"),
+        ("sources/index.html", "Sources"),
     ]),
     ("Desk", [
         ("questions/index.html", "Open questions"),
         ("suggestions/index.html", "Suggestions"),
+        ("suggestions/design.html", "Design decision brief"),
         ("operations/ledger.html", "Campaign ledger"),
         ("brief/index.html", "Executive summary"),
         ("about/index.html", "About this site"),
@@ -77,7 +79,7 @@ def rel(page_dir, target):
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
-         aria=None, title=None):
+         aria=None, title=None, affiliate_ref=None):
     # An absolute URL is never passed through rel(): doing so would rewrite
     # "https://host/x" into "../https:/host/x" and produce a 404.
     absolute = target.startswith(("http://", "https://", "mailto:", "#"))
@@ -89,6 +91,8 @@ def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
         attrs.append(f'title="{esc(title)}"')
     if aria:
         attrs.append(f'aria-label="{esc(aria)}"')
+    if affiliate_ref:
+        attrs.append(f'data-affiliate-ref="{esc(affiliate_ref)}"')
     if sponsored:
         attrs.append('rel="sponsored nofollow noopener"')
         attrs.append('target="_blank"')
@@ -104,8 +108,22 @@ def outbound(page_dir, url, label, **kw):
 
 
 def product_link(page_dir, url, label, **kw):
-    """A link to Amazon. Always marked sponsored, always in a new tab."""
+    """Expose only bare observed listing URLs as product evidence."""
+    if url.startswith("https://link.amazon/"):
+        return f'<code class="code">{esc(url)}</code>'
+    if not re.fullmatch(r"https://www\.amazon\.com/dp/[A-Z0-9]{10}", url):
+        raise ValueError("Product evidence must be an untagged listing")
     return link(page_dir, url, label, sponsored=True, **kw)
+
+
+def approved_cta(page_dir, record, meta):
+    """Only the validated intent bundle, not a redirect observation, may supply a buy link."""
+    url = meta.get("approved_links", {}).get(record["ref"])
+    if not url:
+        return ""
+    return ('<p>Paid link: we may earn a commission if you buy through it.</p>'
+            + link(page_dir, url, "Shop on Amazon ↗", cls="btn", sponsored=True,
+                   affiliate_ref=record["ref"]))
 
 
 def kindle(summary, body):
@@ -121,33 +139,30 @@ def kindle(summary, body):
 def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
-    <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Links to Amazon on this site are affiliate links. If you buy through one, this site may earn a commission at no extra cost to you.
-      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
+    <span class="info-icon" aria-hidden="true">i</span><p>{DISCLOSURE} <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Disclosure policy</a></p>
   </div>
 </div>"""
 
 
 def masthead(page_dir, active=None):
-    # section-aware: every page under guides/ should light "Guides".
-    def section_of(path):
-        return path.split("/")[0] if "/" in path else path
-    act = section_of(active) if active else None
-    items = []
-    for target, label in NAV:
-        current = ' aria-current="page"' if act and section_of(target) == act else ""
-        items.append(f'<a href="{esc(rel(page_dir, target))}"{current}>{esc(label)}</a>')
-    return f"""<header class="masthead">
-  <div class="wrap masthead-inner">
-    <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">
-      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
-      <span class="brand-tag">{SITE_TAGLINE}</span>
-    </a>
-    <nav class="nav" aria-label="Sections">
-      {"".join(items)}
-    </nav>
-  </div>
-</header>"""
+    from content import GUIDES
+    catalog = NAV + [("compare/index.html", "Compare kitchen appliances"),
+        ("review/index.html", "Flagged for review"), ("suggestions/index.html", "Suggestions"),
+        ("questions/index.html", "Open questions"), ("operations/ledger.html", "Campaign ledger")]
+    catalog += [(f"guides/{g['slug']}.html", g['title']) for g in GUIDES]
+    products = json.loads((ROOT / 'src/data/products.json').read_text())['products']
+    catalog += [(f"products/{p['ref'].lower()}.html", f"{p['brand']} {p['format_label']}") for p in products]
+    results = ''.join(f'<li><a href="{esc(rel(page_dir, u))}">{esc(t)}</a></li>' for u,t in catalog)
+    mark = '<svg width="33" height="37" viewBox="0 0 32 38" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M3 25h23c-1 7-5 10-11 10S5 32 3 25zm24 0 4-4M8 19c6-5-3-7 3-13m4 13c6-7-2-8 4-16m3 16c4-4 0-6 4-10"/></svg>'
+    desk = ''.join(f'<a href="{esc(rel(page_dir,t))}">{l}</a>' for _,links in FOOTER_GROUPS[2:] for t,l in links)
+    def nav(t,l):
+        current = (not active and t=='index.html') or (active and active.split('/')[0]==t.split('/')[0])
+        return f'<a class="pub-link {"on" if current else ""}" href="{esc(rel(page_dir,t))}">{l}</a>'
+    return f"""<header class="masthead"><div class="wrap pub-nav"><a class="wordmark" href="{rel(page_dir,'index.html')}">{mark}<span>Crisp <i>&amp;</i> Counter</span></a>
+<nav aria-label="Main navigation">{nav('index.html','The Edit')}{nav('guides/index.html','Buying Guides')}{nav('compare/index.html','Compare')}<details class="desk-menu"><summary>Editorial Desk <span>⌄</span></summary><div>{desk}</div></details></nav>
+<div class="nav-tools"><button class="find" type="button" hidden data-find aria-label="Search the journal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg><span>Search</span></button><button type="button" class="saved-open" data-root="{rel(page_dir,'products/index.html')}"><svg viewBox="0 0 24 24" width="16" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h12v17l-6-4-6 4z"/></svg> Saved <span data-count-saved>0</span></button></div></div></header>
+<dialog class="searchdesk" aria-labelledby="search-title"><form method="dialog"><button aria-label="Close search">×</button></form><h2 id="search-title">Search the journal</h2><input type="search" placeholder="Try capacity, thermometer, cleanup…" aria-label="Search guides and products"><p role="status"></p><ul>{results}</ul></dialog>
+<dialog id="saved-list"><button class="dialog-close" aria-label="Close saved list">×</button><p class="rubric">YOUR KITCHEN NOTES</p><h2>Saved picks</h2><div id="saved-content"></div></dialog>"""
 
 
 def footer(page_dir):
@@ -162,15 +177,16 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Tracking ID on this site: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
-      <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
+<div class="foot-meta" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
+      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
+      <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; self-hosted assets · no analytics cookies</p>
     </div>
   </div>
 </footer>"""
 
 
 def page(page_dir, *, title, description, body, active=None, canonical=None,
-         body_class="", structured=None, og_type="website"):
+         body_class="", structured=None, og_type="website", extra_css=None):
     css = rel(page_dir, "assets/css/site.css")
     js = rel(page_dir, "assets/js/site.js")
     feed = rel(page_dir, "feed.xml")
@@ -202,16 +218,22 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
+<link rel="stylesheet" href="{rel(page_dir, 'assets/css/publication.css')}">
+{('<link rel="stylesheet" href="'+esc(rel(page_dir,extra_css))+'">') if extra_css else ''}
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
+
 {body}
 </main>
 {footer(page_dir)}
+<script src="{rel(page_dir, 'assets/js/publication.js')}" defer></script>
+<script src="{rel(page_dir, 'assets/js/discover.js')}" defer></script>
 <script src="{esc(js)}" defer></script>
+<script src="{esc(rel(page_dir, 'assets/js/counter-config.js'))}" defer></script>
 <script src="{esc(rel(page_dir, 'assets/js/analytics.js'))}" defer></script>
 </body>
 </html>

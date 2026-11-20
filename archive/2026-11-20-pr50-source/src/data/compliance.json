@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "retrieved_on": "2026-11-20",
+    "note": "Each entry is a direct quotation from an official source, retrieved and read on the date above. Nothing is paraphrased into a stronger claim than the source makes.",
+    "two_authorities": "Amazon's Associates Program governs whether a link earns and stays in the program. The U.S. FTC governs whether the reader understands what the link is. Both apply; neither substitutes for the other."
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "publisher": "Amazon",
+      "title": "Associates Program Operating Agreement",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "dated": "Updated October 15, 2025",
+      "quote": "The links must properly use the special \u201ctagged\u201d link formats we provide and comply with this Agreement (\u201cSpecial Links\u201d).",
+      "supports": "Affiliate links must be the tagged format Amazon provides."
+    },
+    {
+      "id": "S02",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 2(b) General Requirements Applicable to All Special Links",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "All Special Links must be accessed directly from your Site. For example, you must include your Associates ID or \u201ctag\u201d (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.",
+      "supports": "The Associate ID must appear as a URL parameter on each link. The tagged form is written XXXXX-##, not as a bare short-link slug."
+    },
+    {
+      "id": "S03",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 2(b), prices and availability",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "Product prices and availability may vary from time to time. Because prices for and availability of Products that you have listed on your Site may change, your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API and you comply with the requirements regarding use of Creators API or PA API in the License.",
+      "supports": "This is the reason no price, rating, review count or availability figure appears on this site. No price feed is connected."
+    },
+    {
+      "id": "S04",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 2(b), misleading claims",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "You must not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or any of our policies, promotions, or prices.",
+      "supports": "Why every capability sentence on this site is either quoted from the listing title or omitted."
+    },
+    {
+      "id": "S05",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 6(a) Content on your Site",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "You will not add to, delete from, or otherwise alter any Program Content in any way, including by adding additional information",
+      "supports": "Program Content (Amazon-served images, prices, widgets) cannot be edited or embellished. This site embeds no Amazon images for that reason."
+    },
+    {
+      "id": "S06",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 6(e)/(f) trademarks and search advertising",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "You will not (and you will not seek to) purchase, register or otherwise use any Amazon Mark \u2026 or variations or misspellings of any of those words \u2026 for use in any Search Engine.",
+      "supports": "Site naming and any future paid search must avoid Amazon marks. This site is not named after Amazon."
+    },
+    {
+      "id": "S07",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 Commission Income Statement 2(c),(d),(e)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "any Product purchased by a customer who is referred to an Amazon Site through any advertisement that you purchased, including through participation in bidding or auctions on keywords \u2026 (a \u201cProhibited Paid Search Placement\u201d)",
+      "supports": "Paid search on Amazon marks, and purchases arriving via a search-engine link or a redirecting link, are disqualified. This constrains any paid acquisition plan."
+    },
+    {
+      "id": "S08",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 2(b), limited-time promotions",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "You must remove from your Site any links and related references to limited time promotions as soon as that promotion on the relevant Amazon Site ends.",
+      "supports": "Why this site publishes no deal countdowns or 'today only' claims. A deal page would create an ongoing removal obligation."
+    },
+    {
+      "id": "S09",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 6(g) incentives",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "You will not offer any person or entity any consideration, reward, or incentive (including any money, rebate, discount, points, donation to charity or other organization, or other benefit) for using Special Links.",
+      "supports": "No rewards, rebates or loyalty mechanics may be attached to these links."
+    },
+    {
+      "id": "S10",
+      "publisher": "Amazon",
+      "title": "Associates Program Policies \u2014 3(e) privacy disclosure",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "dated": "Updated April 14, 2026",
+      "quote": "disclosing on your Site accurately and adequately and otherwise satisfying applicable legal requirements, either through a privacy policy or otherwise, the use of cookies, pixels, and other technologies by you and third parties",
+      "supports": "A privacy disclosure is required if any cookie or pixel is used. This site ships none, and says so."
+    },
+    {
+      "id": "S11",
+      "publisher": "U.S. Federal Trade Commission",
+      "title": "FTC Endorsement Guides: What People Are Asking \u2014 affiliate marketing",
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "quote": "You should disclose your relationship to the retailer clearly and conspicuously on your site, so readers can decide how much weight to give your endorsement.",
+      "supports": "The disclosure duty is the site operator's, and it is about the reader's ability to weigh the recommendation."
+    },
+    {
+      "id": "S12",
+      "publisher": "U.S. Federal Trade Commission",
+      "title": "FTC Endorsement Guides: What People Are Asking \u2014 adequacy of wording",
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "quote": "\u201cPaid link\u201d right next to an affiliate link should be an adequate disclosure of the nature of the link.",
+      "supports": "Short, adjacent labelling is acceptable. This site uses a full sentence plus a per-card 'Paid link' label."
+    },
+    {
+      "id": "S13",
+      "publisher": "U.S. Federal Trade Commission",
+      "title": "Guides Concerning the Use of Endorsements and Testimonials in Advertising, 16 CFR Part 255 \u2014 255.5 Example 11",
+      "url": "https://www.ftc.gov/sites/default/files/documents/federal_register_notices/guides-concerning-use-endorsements-and-testimonials-advertising-16-cfr-part-255/091015guidesconcerningtestimonials.pdf",
+      "quote": "Because knowledge of this compensation could affect the weight or credibility site visitors give to the blogger\u2019s reviews, the reviews should clearly and conspicuously disclose the compensation.",
+      "supports": "The affiliate-blog example is directly on point for this site."
+    },
+    {
+      "id": "S14",
+      "publisher": "Amazon",
+      "title": "Selling Partner API \u2014 Catalog Items API v2022-04-01 reference",
+      "url": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
+      "quote": "The Amazon Standard Identification Number (ASIN) of the item.",
+      "supports": "Amazon's own definition of the ASIN field. Used as the authority for treating the ASIN as the checkable identifier, distinct from a short-link slug."
+    }
+  ]
+}

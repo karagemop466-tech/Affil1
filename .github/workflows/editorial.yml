@@ -1,0 +1,28 @@
+name: Weekly editorial research
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+  models: read
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select a topic from authorized evidence only
+        run: python3 tools/research_brief.py brief.txt
+      - name: Draft for review (never publish automatically)
+        if: hashFiles('brief.txt') != ''
+        id: draft
+        uses: actions/ai-inference@b81b2afb8390ee6839b494a404766bef6493c7d9
+        with:
+          prompt-file: brief.txt
+          max-tokens: 1800
+      - uses: actions/upload-artifact@v4
+        if: steps.draft.outcome == 'success'
+        with:
+          name: unpublished-editorial-draft
+          path: ${{ steps.draft.outputs.response-file }}
+          retention-days: 14

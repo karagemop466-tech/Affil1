@@ -13,15 +13,13 @@
       "severity": "high",
       "title": "Every submitted path code is 9 characters; every ASIN observed on arrival is 10",
       "expected": "An Amazon Standard Identification Number is a 10-character alphanumeric identifier.",
-      "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. All five destinations resolve and carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z.",
-      "reading": "The submitted codes are short-link slugs rather than product ASINs. An earlier register on this repository mistakenly placed them in the intended ASIN column. That error is corrected here by keeping intended_asin null until the account owner confirms each ASIN.",
+      "found": "Five nine-character path codes led to five ten-character ASINs. The codes identify links, not the intended listings.",
+      "reading": "The submitted codes are most likely short-link slugs rather than identifiers. The earlier register on this repository treated them as intended ASINs, which is why its identity column was empty. That reading is corrected here.",
       "to_check": [
-        "https://affiliate-program.amazon.com/help/operating/agreement",
-        "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
-        "Open each supplied link and compare the /dp/ segment to the 9-character code in the submitted link"
+        "https://sell.amazon.com/blog/what-is-an-asin"
       ],
-      "impact": "The 'intended_asin' field is null for all five rather than filled with the slug. Intended and observed identifiers are never merged.",
-      "blocks": "nothing — but it explains why the intended ASIN column stays blank until account-owner confirmation"
+      "impact": "The 'intended_asin' field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
+      "blocks": "nothing — but it explains why the register looks emptier than expected"
     },
     {
       "id": "FLG-002",
@@ -32,9 +30,9 @@
       "reading": "This is not proof the links are untagged — the tag may be applied server-side by the short-link service after the arrival page was captured. It is proof that this build could not confirm attribution, which is different.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
-        "One test click from the owner's device, then check the Associates click report for shopnow047c-20"
+        "One click from the owner's device, then the Associates click report"
       ],
-      "impact": "No page claims a click will be attributed. Every product page states that attribution is unconfirmed.",
+      "impact": "No page claims a click will be attributed. The site says attribution is unconfirmed.",
       "blocks": "any revenue expectation"
     },
     {
@@ -43,26 +41,25 @@
       "title": "Compliance status of the short links is unresolved, not disproven",
       "expected": "Special Links may be created by the Associate or supplied by Amazon, and must include the tag as a URL parameter (SRC-02).",
       "found": "The supplied links are of the form link.amazon/<code>. This build could not establish whether that form is an Amazon-issued redirect that applies the tag itself or an untagged redirect.",
-      "reading": "An earlier version of this site implied the links were unusable. That was an overstatement. The honest status is unresolved until tested in the enrolled Associates workflow.",
+      "reading": "An earlier version of this site implied the links were unusable. That was an overstatement. The honest status is unknown.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "impact": "The submitted links remain recorded in the register alongside the observed listing URLs; all outbound Amazon product links are marked sponsored.",
+      "impact": "The links remain on the site, marked sponsored, with attribution described as unconfirmed.",
       "blocks": "nothing"
     },
     {
       "id": "FLG-004",
-      "severity": "medium",
-      "title": "P-04 resolved on re-verification after earlier /checkpoint/continue blocks (intermittent redirects)",
-      "expected": "A short link resolves reliably to its product page on every request.",
-      "found": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three earlier automated requests, then resolved cleanly on two independent re-verifications on 2026-11-20 to ASIN B0DHZTCNR5 (ThermoMaven 1 Sec Professional Digital Meat Thermometer). P-01 also hit a continuity page once before resolving.",
-      "reading": "Intermittent bot-interstitial gating on link.amazon redirects means automated checks can fail unpredictably and shoppers may encounter extra redirect friction compared with validated direct /dp/ Special Links.",
+      "severity": "low",
+      "title": "P-04 now resolves; retain the earlier interstitial observation",
+      "expected": "A short link resolves to a product page.",
+      "found": "On 20 November 2026 the follow-up check reached ThermoMaven, ASIN B0DHZTCNR5. The earlier check stopped at a continuity page.",
+      "reading": "The latest observation verifies a destination, not intent.",
       "to_check": [
-        "https://www.amazon.com/dp/B0DHZTCNR5",
-        "Open https://link.amazon/B0c8moW59 in an ordinary browser and compare the destination against B0DHZTCNR5"
+        "https://www.amazon.com/dp/B0DHZTCNR5"
       ],
-      "impact": "P-04 is now identified and published in the Meat Thermometers category alongside P-05, while both the earlier failure and the later resolution remain dated in its record.",
-      "blocks": "nothing — P-04 is live, though replacing short links with validated Special Links (S-02) remains recommended"
+      "impact": "P-04 is included with thermometers.",
+      "blocks": "Nothing; intent and attribution remain unconfirmed."
     },
     {
       "id": "FLG-005",
@@ -70,7 +67,7 @@
       "title": "No price, rating, review count or stock status — by rule, not by omission",
       "expected": "Program Policies §2(b) permit price and availability only where Amazon serves the data or it arrives via Creators API / PA API.",
       "found": "Neither path is connected.",
-      "reading": "This is the single most common failure in affiliate sites and the most common way an Associates account is closed. Empty is the compliant state.",
+      "reading": "No live merchandising figures are published without a permitted data source.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -83,7 +80,7 @@
       "title": "No author, and no basis for editorial authority",
       "expected": "A publication a reader can assess.",
       "found": "No byline. No first-hand testing. No credential.",
-      "reading": "The guides are therefore written as checklists of buyer questions and official public references, which is what can honestly be produced without hands-on access to the products. That is a real limitation on how much a reader should take from them.",
+      "reading": "The guides are therefore written as checklists of questions, which is what can honestly be produced without access to the products. That is a real limitation on how much a reader should take from them.",
       "to_check": [
         "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
       ],
@@ -93,27 +90,28 @@
     {
       "id": "FLG-007",
       "severity": "medium",
-      "title": "Every photograph on this site is AI-generated editorial illustration",
+      "title": "Every photograph on this site is AI-generated illustration",
       "expected": "Product photography would normally be real.",
-      "found": "All ten editorial images were generated for this publication. None is a photograph of a submitted product. Each is labelled where it appears.",
-      "reading": "Unlabelled AI imagery next to a buy button is a deceptive practice risk. Labelled, it is an editorial convention. The line between the two is thin, which is why every use carries a visible caption.",
+      "found": "All eight images were generated for this build. None is a photograph of a submitted product. Each is labelled where it appears.",
+      "reading": "Unlabelled AI imagery next to a buy button is a deceptive practice risk. Labelled, it is an editorial convention. The line between the two is thin, which is why every use carries a caption.",
       "to_check": [
-        "review/images.html lists every asset, its prompt intent, and every page it appears on"
+        "review/images.html lists every asset, its prompt intent, and every page it appears on",
+        "https://github.com/karagemop466-tech/Affil1/blob/main/src/data/images.json"
       ],
-      "impact": "Captions read 'Editorial illustration. It is not a photograph of this product'.",
+      "impact": "Captions read 'Illustration, not a photo of this product'.",
       "blocks": "nothing, but it caps how persuasive a product page can be"
     },
     {
       "id": "FLG-008",
       "severity": "medium",
-      "title": "Multiple parallel editions coexist in the repository tree",
-      "expected": "One canonical publication with one URL layout.",
-      "found": "Several parallel agent sessions contributed to main before this integration pass. Crisp & Counter owns the root index, sitemap.xml, feed.xml and structured subdirectories; earlier parallel-edition files (such as crisp/, dashboard.html, products.html and standalone guides) remain preserved in the tree rather than deleted.",
-      "reading": "Nothing from another session was silently deleted. The front page, primary navigation, sitemap and RSS feed point exclusively to the canonical Crisp & Counter build so search engines see one coherent publication.",
+      "title": "The commit history says these files were deleted; the repository says they never existed",
+      "expected": "A repository whose history matches its contents.",
+      "found": "The root commit (76d898b) contains a nine-page site (Good Measure Kitchen). The working tree of this branch at start contained the same nine pages. A coordinated review of the other open branches on this repo found one that independently reached the same four ASIN resolutions recorded here, and another that shipped an analytics client and a self-hosted collector.",
+      "reading": "Multiple agent sessions are working the same brief on parallel branches. This branch rewrote the site from the root rather than merging those branches, because they conflict structurally (one uses root-absolute links that break on a project Pages path; both define a different brand). Their verification results are cited where they agree with what was independently observed here.",
       "to_check": [
         "https://github.com/karagemop466-tech/Affil1/pulls?q=is%3Apr"
       ],
-      "impact": "Consolidating or archiving the legacy parallel files is logged as decision S-13 on the Suggestions page for human approval.",
+      "impact": "No other session's branch was deleted, force-pushed or modified.",
       "blocks": "nothing"
     },
     {
@@ -133,42 +131,41 @@
     {
       "id": "FLG-010",
       "severity": "low",
-      "title": "Analytics exists in the code but is switched off",
+      "title": "Pages cannot host the first-party counter",
       "expected": "Measurement before optimisation.",
-      "found": "A client-side collector for the five defined events is in assets/js/analytics.js (and a self-hosted Node endpoint exists in server/collect.js). The client sends nothing until window.CC_ANALYTICS_ENDPOINT is configured, and no backend host is deployed on static GitHub Pages.",
-      "reading": "Shipping a live analytics beacon without a published privacy notice and deployed first-party host would be worse than shipping none. It is deliberately inert.",
+      "found": "The self-hosted edition counts five events by UTC day. Static Pages sends no beacons.",
+      "reading": "No personal identifiers or raw requests are stored by the counter.",
       "to_check": [
-        "review/measurement.html"
+        "https://docs.github.com/en/pages",
+        "https://github.com/karagemop466-tech/Affil1/blob/main/server/publication.py"
       ],
-      "impact": "The site currently measures nothing. Every traffic statement on this site says so.",
+      "impact": "No production traffic or sales figures have been imported.",
       "blocks": "evidence-based iteration, and it is flagged as such"
     },
     {
       "id": "FLG-011",
       "severity": "low",
-      "title": "Seller Central's ASIN length help article sits behind a sign-in wall",
-      "expected": "A public Seller Central citation stating that an ASIN is 10 characters.",
-      "found": "sellercentral.amazon.com help pages return a sign-in wall. Amazon's public Selling Partner API Catalog Items reference (SRC-08) confirms ASIN as the catalog identifier, while the 9-vs-10 character comparison is presented directly as an observation of this register's five links.",
-      "reading": "Rather than cite a third-party blog as though it were Amazon, we cite SRC-08 for the ASIN concept and report the exact character counts observed on all five submitted vs. resolved links.",
+      "title": "ASIN definition confirmed; intended identifiers still unknown",
+      "expected": "A citation to an Amazon-hosted page stating that an ASIN is 10 characters.",
+      "found": "Amazon’s public selling guide defines an ASIN independently of the sign-in-only help page.",
+      "reading": "The nine-character short codes are not ASINs.",
       "to_check": [
-        "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
-        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — requires sign-in"
+        "https://sell.amazon.com/blog/what-is-an-asin"
       ],
-      "impact": "No page cites a third-party blog as an official Amazon policy source.",
+      "impact": "Keep the submitted URL and observed ASIN in separate fields.",
       "blocks": "nothing"
     },
     {
       "id": "FLG-012",
       "severity": "low",
-      "title": "USDA food-safety temperatures are verified; appliance-specific cook times remain unverified",
-      "expected": "Food-safety guidance must come from an official public-health authority, and cook-time claims require testing.",
-      "found": "On 2026-11-20, both the USDA FSIS Safe Minimum Internal Temperature Chart (SRC-06) and USDA FSIS Food Thermometers factsheet (SRC-07) were retrieved directly and verified. Earlier builds could not complete a TLS connection to USDA; that restriction is cleared. However, no air fryer or thermometer on this site has been physically tested.",
-      "reading": "Safe minimum internal temperatures (145°F whole cuts with 3-min rest, 160°F ground meats/eggs, 165°F poultry and leftovers) are published with official USDA citations. Model-specific cook times and doneness presets are still omitted.",
+      "title": "Food-safety guidance is absent because the source was unreachable",
+      "expected": "An air-fryer guide would normally mention safe internal temperatures.",
+      "found": "USDA FSIS pages did not complete a TLS connection from this environment. No substitute source was used.",
+      "reading": "A safety figure sourced from a blog would be worse than no figure. The guides therefore avoid all food-safety claims rather than make them badly.",
       "to_check": [
-        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
-        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers"
+        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
       ],
-      "impact": "The thermometer and hosting guides cite exact USDA FSIS temperatures while making zero untested appliance-time claims.",
+      "impact": "No temperature or doneness guidance appears anywhere on the site.",
       "blocks": "nothing"
     },
     {
@@ -192,7 +189,8 @@
       "found": "No authorised first-party reports exist.",
       "reading": "An empty ledger with a defined schema is the correct starting state. A populated one would have required inventing numbers.",
       "to_check": [
-        "operations/ledger.html"
+        "operations/ledger.html",
+        "https://github.com/karagemop466-tech/Affil1/blob/main/src/data/events.json"
       ],
       "impact": "The ledger shows its columns and states the provenance rule.",
       "blocks": "nothing"
@@ -200,16 +198,74 @@
     {
       "id": "FLG-015",
       "severity": "low",
-      "title": "Two of five products (P-04 and P-05) are Meat Thermometers, not Air Fryers",
-      "expected": "Clarity on how the five links split across Amazon categories.",
-      "found": "Category path on arrival for P-04 (ThermoMaven B0DHZTCNR5) and P-05 (CHEF iQ Sense B0DZFD6R9Z): Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. P-01, P-02 and P-03 sit under Small Appliances > Fryers > Air Fryers.",
-      "reading": "Not an error in the links — the five products form a coherent two-category kitchen set (3 Air Fryers + 2 Meat Thermometers). Treating P-04 or P-05 as air fryers would be wrong.",
+      "title": "P-05 is filed under Thermometers, not Air Fryers",
+      "expected": "Five products in one niche.",
+      "found": "P-04 and P-05 both fall under Thermometers & Timers. P-01, P-02 and P-03 fall under Air Fryers.",
+      "reading": "Not an error in the link — the product really is a thermometer. It is an error to present it as the fifth air fryer, which is how a generated site would have handled it.",
       "to_check": [
-        "https://www.amazon.com/dp/B0DHZTCNR5",
-        "https://www.amazon.com/dp/B0DZFD6R9Z"
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "https://www.amazon.com/dp/B0DHZTCNR5"
       ],
-      "impact": "The site organizes the catalogue into two dedicated categories (Air Fryers and Meat Thermometers) with separate category pages and tailored guides.",
+      "impact": "P-05 has its own section and is never called an air fryer.",
       "blocks": "nothing"
+    },
+    {
+      "id": "FLG-016",
+      "severity": "high",
+      "title": "P-04 and P-05 later observations differ from the earlier register",
+      "expected": "A confirmed intended destination for each supplied link, kept separate from observations.",
+      "found": "On 20 November 2026 one later page-fetch of P-04 reached B0DZFD6R9Z (CHEF iQ Sense); P-05 reached B0DHZTCNR5 (ThermoMaven). Another session reported the opposite mapping on the same date. Earlier P-04 attempts reached a checkpoint.",
+      "reading": "The differing observations are not proof of the intended products or a stable redirect. Do not infer attribution or identify a winner between observations.",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "A sitewide notice marks older records as historical; confirm destinations in the enrolled Associates workflow before replacing product records or scaling links.",
+      "blocks": "confident product-intent attribution for P-04 and P-05"
+    },
+    {
+      "id": "FLG-017",
+      "severity": "medium",
+      "title": "Legacy editions and their registers contain outdated observations",
+      "expected": "One consistent current editorial site and product-intent register.",
+      "found": "Older root pages and the crisp subdirectory remain published and contain earlier or conflicting product observations and legacy registers. The old crisp validator is incompatible with the newer product-data schema.",
+      "reading": "Legacy material is historical and must not be treated as confirmation of a current or intended product.",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "Older editions remain archived in the repository; the Pages build excludes them.",
+      "blocks": "Nothing in the current edition."
+    },
+    {
+      "id": "FLG-018",
+      "severity": "high",
+      "title": "Commercial hosting needs its own policy review",
+      "expected": "The host must allow the planned use.",
+      "found": "GitHub Pages is the current static editorial host. Its published usage limits restrict hosting an online business or a site primarily facilitating transactions.",
+      "reading": "The editorial publication is not checkout or a monetized SaaS. The planned commercial platform needs a suitable host and hosting review before activation.",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits"
+      ],
+      "impact": "Keep production collection and monetization expansion separate from this static publication.",
+      "blocks": "commercial rollout"
+    },
+    {
+      "id": "FLG-019",
+      "severity": "high",
+      "title": "Amazon Program Content is not a model-training dataset",
+      "expected": "Review rights and scope before using Amazon material in any automated workflow.",
+      "found": "Participation Requirements §5 restricts use of Special Links or Program Content to develop machine learning models or related technology without express prior written approval.",
+      "reading": "Do not send Amazon Program Content to a drafting or model pipeline as a default source. The restriction is distinct from price and availability rules.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "Keep any drafting experiment restricted to editorial inputs independently cleared for the intended use.",
+      "blocks": "model development using Program Content or Special Links without approval"
     }
   ]
 }
