@@ -311,7 +311,7 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 
 | Task | Status | Owner | Files touched |
 |---|---|---|---|
-| Decision Desk: executive summary, product-intent register, suggestion board, open questions, official-source register, editorial plan | done (merged via PR from this branch) | `arena/771e5093-affil1` | `decision-support/**` (new, 12 files), `COORDINATION.md` (appended only) |
+| Decision Desk: executive summary, product-intent register, suggestion board, open questions, official-source register, editorial plan | done (merged via PR from this branch) | `arena/771e5093-affil1` | `decision-support/**` (new, 13 files: 7 HTML, CSS/JS/JPG, validator, generated JSON, README), `COORDINATION.md` (appended only) |
 
 - Scope was claimed and pushed **before** any edit, at `54e9dba`.
 - **Deviation, recorded rather than hidden:** the claim listed `EXECUTIVE_SUMMARY.md` and `research/**`
@@ -390,4 +390,5 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 ### Local checks run
 
 - `python3 decision-support/validate.py --json` → PASS, 6 check families, 106 register records written to `decision-support/data/decision-desk.json`.
-- Local HTTP crawl of `decision-support/` (all 7 pages + CSS/JS/JPG/JSON) served from a `python3 -m http.server` mount: every path 200, every local reference and in-page fragment resolves.
+- Local HTTP crawl of `decision-support/` (all 7 pages + CSS/JS/JPG/JSON): every path 200, every local reference and in-page fragment resolves.
+- Post-rebase reconciliation (05:45–05:55Z): `main` advanced twice mid-delivery (PRs #23/#30 etc.). Registers were realigned by session `a4ab7faf`/`8206a8d0`'s `data/verification-audit.json`, which observed destinations for all five links from a platform fetcher. The desk was updated to that state — IRR-02/IRR-04 rewritten as "audit-aligned, workflow-pending" (still third-party observations, not our own), IRR-06/07/09/10 re-measured against the new tree (65 reader-facing files, 57 canonicals, 13 JSON-LD, 17 files/53 hrefs carrying the tag), broken cross-links renamed by other sessions repaired, register entry R-06 added (50 total). Re-validated: PASS.

@@ -4,7 +4,7 @@
  "generated_by": "validate.py --json (parses the same HTML a human reads)",
  "counts": {
   "product_intents": 5,
-  "sources": 49,
+  "sources": 50,
   "irregularities": 10,
   "open_questions": 14,
   "suggestions": 28,
@@ -27,55 +27,55 @@
     "submitted_and_intended": "B04G1MEwY submitted as link.amazon/B04G1MEwY . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
     "candidate_listing": "B0CDY277D3",
     "product": "Chefman 6 Qt Dual Basket Air Fryer Oven (CHEFMAN)",
-    "observed_register_a": "https://www.amazon.com/dp/B0CDY277D3 — recorded as product page reached register A — ../src/data/products.json",
-    "observed_register_b": "same: https://www.amazon.com/dp/B0CDY277D3 register B — ../data/confirmations.json",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0CDY277D3 aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B0CDY277D3 status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
     "observed_this_session": "not observable from this workspace this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Agreement between both registers.",
-    "source": ">Amazon listing (candidate) · full source log"
+    "source": "Amazon listing (candidate) · full source log"
    },
    {
     "id": "P-02",
     "submitted_and_intended": "B02NbDxp3 submitted as link.amazon/B02NbDxp3 . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
     "candidate_listing": "B09B7SB46R",
     "product": "Emeril Lagasse 26QT Multi-Function Air Fryer Toaster Oven",
-    "observed_register_a": "https://www.amazon.com/dp/B09B7SB46R — recorded as product page reached register A — ../src/data/products.json",
-    "observed_register_b": "same: https://www.amazon.com/dp/B09B7SB46R register B — ../data/confirmations.json",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B09B7SB46R aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B09B7SB46R status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
     "observed_this_session": "not observable; ASIN confirmed on amazon.fr and amazon.com.be pages this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Agreement between both registers.",
-    "source": ">Amazon.com.be listing (ASIN shown) · full source log"
+    "source": "Amazon.com.be listing (ASIN shown) · full source log"
    },
    {
     "id": "P-03",
     "submitted_and_intended": "B00hJ57DV submitted as link.amazon/B00hJ57DV . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
     "candidate_listing": "B08DKYBTPH",
     "product": "Chefman Air Fryer 8 Qt TurboFry 4-in-1",
-    "observed_register_a": "https://www.amazon.com/dp/B08DKYBTPH register A — ../src/data/products.json",
-    "observed_register_b": "https://www.amazon.com/ — homepage , flagged “no product destination confirmed” register B — ../data/confirmations.json",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B08DKYBTPH aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B08DKYBTPH status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
     "observed_this_session": "not observable this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Contested. The listing is real; the route is not agreed. IRR-02",
-    "source": ">Amazon listing (ASIN shown) · full source log"
+    "source": "Amazon listing (ASIN shown) · full source log"
    },
    {
     "id": "P-04",
     "submitted_and_intended": "B0c8moW59 submitted as link.amazon/B0c8moW59 . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
     "candidate_listing": "—",
     "product": "ThermoMaven instant-read family (unconfirmed)",
-    "observed_register_a": "no identifier recorded; all fields “unverified” register A — ../src/data/products.json",
-    "observed_register_b": "https://www.amazon.com/checkpoint/continue — bot checkpoint, no product page register B — ../data/confirmations.json",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0DHZTCNR5 aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B0DHZTCNR5 status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
     "observed_this_session": "not observable this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Both registers fail this row. Candidate identifiers conflict: B0DHZTCNR5 vs B0DMDQZTZN. IRR-04",
-    "source": ">Page as captured (different identifier in URL) · full source log"
+    "source": "Page as captured (different identifier in URL) · full source log"
    },
    {
     "id": "P-05",
     "submitted_and_intended": "B0f3GKalj submitted as link.amazon/B0f3GKalj . Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.",
     "candidate_listing": "B0DZFD6R9Z",
     "product": "CHEF iQ Sense (Gen3) wireless meat thermometer",
-    "observed_register_a": "https://www.amazon.com/dp/B0DZFD6R9Z register A — ../src/data/products.json",
-    "observed_register_b": "https://www.amazon.com/ — homepage , flagged “no product destination confirmed” register B — ../data/confirmations.json",
+    "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0DZFD6R9Z aligned to the audit after an initial blank/disputed state — observed_asin",
+    "observed_register_b": "https://www.amazon.com/dp/B0DZFD6R9Z status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
     "observed_this_session": "not observable; ASIN + model CQ60-3C-Z1-E confirmed on amazon.ca, .nl, .in pages this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Contested. Listing is real; the route is not agreed.",
-    "source": ">Amazon.ca listing (ASIN shown) · full source log"
+    "source": "Amazon.ca listing (ASIN shown) · full source log"
    }
   ],
   "sources": [
@@ -421,6 +421,13 @@
     "wording": "shopnow047c-20 is the ID named in the brief. It matches the XXXXX-## shape required by A-06. Whether the account behind it is approved, and whether karagemop466-tech.github.io/Affil1 is listed as one of its Sites, cannot be checked from here.",
     "read": "2026-11-20",
     "status": "unresolved"
+   },
+   {
+    "id": "R-06",
+    "entry": "The same-day audit that aligned the two product registers",
+    "wording": "data/verification-audit.json (sessions a4ab7faf / 8206a8d0 , window 05:15–05:22Z) records, for each submitted link, the final URL and page title as returned by a platform-level fetcher, with its own limitations stated: bot-like mobile landing variant, point-in-time observation, \"observations are EVIDENCE, NOT confirmation of submitter intent\". Intended-identity fields were left null for the enrolled workflow to fill.",
+    "read": "2026-11-20",
+    "status": "third-party in-repo"
    }
   ],
   "irregularities": [
@@ -433,10 +440,10 @@
    },
    {
     "id": "IRR-02",
-    "finding": "Two registers on the same branch contradict each other on three of five links. src/data/products.json records product-page destinations for P-03 and P-05; data/confirmations.json records those same two links landing on the Amazon homepage, and a bot-checkpoint page for P-04.",
-    "evidence": "src/data/products.json ( observed_redirect_asin P-03 B08DKYBTPH , P-05 B0DZFD6R9Z ) vs data/confirmations.json ( observed_redirect_target https://www.amazon.com/ for conf-003 and conf-005). Both dated 2026-11-20.",
-    "action": "Re-run one fetch from a host that can reach amazon.com, capture the whole Location chain, retire whichever register fails to reproduce, and keep exactly one authoritative file.",
-    "severity": "High"
+    "finding": "Two registers on this branch contradicted each other on three of five links — and a later audit settled it. Before this section was drafted, src/data/products.json recorded product-page destinations for P-03/P-05 while data/confirmations.json recorded the Amazon homepage for both and a bot-checkpoint for P-04. An independent same-day audit ( data/verification-audit.json , sessions a4ab7faf / 8206a8d0 ) fetched all five links, observed /dp/ destinations for each, and the registers were aligned to it.",
+    "evidence": "src/data/products.json ( observed_redirect_asin P-03 B08DKYBTPH , P-05 B0DZFD6R9Z ) vs data/confirmations.json as revised at 05:3xZ, which now agrees — with data/verification-audit.json as the third witness. The audit's own limitations note that its fetcher rendered bot-variant mobile pages and that observations are point-in-time.",
+    "action": "Resolved as a contradiction; still open as evidence. The audit came from other sandboxes, so the enrolled workflow must still reproduce destinations before any monetised claim. Keep one authoritative register — there are now three files describing the same five links.",
+    "severity": "Med · was High"
    },
    {
     "id": "IRR-03",
@@ -447,29 +454,29 @@
    },
    {
     "id": "IRR-04",
-    "finding": "P-04 has no confirmable product. Two candidate identifiers, an Amazon checkpoint page where a listing should be, and no register that can name it.",
-    "evidence": "Product evidence row B0DHZTCNR5 · data/confirmations.json conf-004",
-    "action": "Open it in a browser logged out, record what it really shows, then either fix the row or drop the product. Do not publish a card for it in the meantime.",
+    "finding": "P-04's product was named only by a late, third-party observation. Earlier this session it had two competing candidate identifiers, a bot checkpoint where a listing should be, and no register that could name it; the 05:3xZ audit recorded B0c8moW59 reaching amazon.com/dp/B0DHZTCNR5 and the registers updated to match. Nothing here can reproduce that, so the row reads \"observed · pending workflow\", not \"confirmed\".",
+    "evidence": "Product evidence row B0DHZTCNR5 · data/verification-audit.json OBS-4 · data/confirmations.json conf-004 (status listing-checked , intended fields still null)",
+    "action": "The logged-out browser check from Q-01 still applies to all five links; P-04 is the one whose entire evidence base is somebody else's fetch. No card copy, no tagged link, no spec claims until the enrolled workflow lands.",
     "severity": "High"
    },
    {
     "id": "IRR-05",
     "finding": "The CHEF iQ Sense listing contradicts itself on the one number a buyer cares about: heat tolerance appears as 1,40 °C, 1,300 °F, 1,500 °F and 1,000 °F on different captured pages of the same product.",
-    "evidence": ">.ca · >.nl (title 1,300 °F, description 1,500 °F) · >.in (1,000 °F)",
+    "evidence": ".ca · .nl (title 1,300 °F, description 1,500 °F) · .in (1,000 °F)",
     "action": "Print no heat figure. If one is ever needed, quote the seller's page for the marketplace the reader buys from, with the date. A \"how to read spec-sheet conflicts\" angle is a better article than a made-up number.",
     "severity": "Low"
    },
    {
     "id": "IRR-06",
     "finding": "Live reader-facing pages already carry tag=shopnow047c-20 in their outbound links, while the account behind that tag and its registered Sites are unconfirmed. Special Links are permitted \"after you have applied\", and the application must name the Site.",
-    "evidence": "grep -rc 'tag=shopnow047c-20' --include='*.html' . → hits in index.html , four guides/ pages, categories/air-fryers.html , dashboard.html · A-05, A-06, R-05",
+    "evidence": "grep -rl 'tag=shopnow047c-20' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 17 live files carrying 53 tagged hrefs (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft): the root front page, six guides/ pages, categories/air-fryers.html , products.html , dashboard.html and the whole crisp/ edition · A-05, A-06, R-05. The count grew while this desk was being written; the exposure is now site-wide, not a handful of pages.",
     "action": "Confirm enrolment and that karagemop466-tech.github.io/Affil1 is listed as a Site; if not, ship the links untagged until it is. Then do the single-product test and record the attributed click.",
     "severity": "Medium"
    },
    {
     "id": "IRR-07",
-    "finding": "The same kind of page exists in several places at once: root products.html , questions.html , suggestions.html , executive-summary.html , flagged-for-review.html ; also guides/suggestions.html , guides/executive-summary.html , crisp/products/ , crisp/questions/ , crisp/suggestions/ , crisp/flagged/ . 43 HTML files outside archive/ . A crawler sees near-duplicates with no canonical story.",
-    "evidence": "find . -name '*.html' -not -path './archive/*' | wc -l → 43 · rel=\"canonical\" present in only 22 of them · G-01",
+    "finding": "The same kind of page exists in several places at once: root products.html , questions.html , suggestions.html , executive-summary.html , flagged-for-review.html ; also guides/suggestions.html , guides/executive-summary.html , crisp/products/ , crisp/questions/ , crisp/suggestions/ , crisp/flagged/ — plus new root products/ , questions/ , suggestions/ , review/ and reviews/ mirrors of the same page types. 65 reader-facing HTML files outside archive/ and this desk, canonicals on 57 (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft). A crawler sees near-duplicates with no canonical story.",
+    "evidence": "find . -name '*.html' -not -path './archive/*' -not -path './decision-support/*' | wc -l → 65 (was 43 an hour earlier) · rel=\"canonical\" in 57 · crisp/ and the root page-type mirrors still both live · G-01",
     "action": "The final integration pass should choose one canonical set, canonicalise or redirect the rest, and prune archive/ out of the published tree. This is a Google-facing risk before it is an aesthetic one.",
     "severity": "Medium"
    },
@@ -482,14 +489,14 @@
    },
    {
     "id": "IRR-09",
-    "finding": "No structured data anywhere: application/ld+json appears in 0 of 43 HTML files. Articles, breadcrumbs and item lists are invisible to the rich-result machinery, and a \"site name\" in Search is out of reach while the pages live under /Affil1/ .",
-    "evidence": "grep -rl 'application/ld+json' --include='*.html' . | wc -l → 0 · G-06",
+    "finding": "Structured data is partially fixed. application/ld+json appeared in 0 of 43 files when first counted; it is now in 13 of 65 (root front page, the seven guides/ pages with JSON-LD, the five products/p-0n pages) — but crisp/ still has none, and a \"site name\" in Search remains out of reach while the pages live under /Affil1/ .",
+    "evidence": "grep -rl 'application/ld+json' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 13 (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft) · G-06",
     "action": "Add Article + BreadcrumbList to guide pages in the shared templates; skip WebSite site-name markup on a project page. A custom domain is the real fix for the site name.",
     "severity": "Medium"
    },
    {
     "id": "IRR-10",
-    "finding": "Two sitemaps and three feeds that do not know about each other: root sitemap.xml (32 URLs) is the one robots.txt advertises, crisp/sitemap.xml (14 URLs) is unadvertised, and feed.xml , rss.xml and crisp/feed.xml all exist. Neither sitemap lists this Decision Desk section.",
+    "finding": "Two sitemaps and three feeds that do not know about each other: root sitemap.xml (21 URLs, down from 32 as pages were consolidated) is the one robots.txt advertises, crisp/sitemap.xml (14 URLs) is unadvertised, and feed.xml , rss.xml and crisp/feed.xml all exist. Neither sitemap lists this Decision Desk section.",
     "evidence": "cat robots.txt · grep -c '<loc>' sitemap.xml crisp/sitemap.xml → 32 / 14",
     "action": "Merge into one sitemap and one feed at the site root, list every canonical page including decision-support/ , and 301 or drop the rest. Logged as a request to the integration session in COORDINATION.md .",
     "severity": "Low"
@@ -499,7 +506,7 @@
    {
     "id": "Q-01",
     "question": "What are these five products, really?",
-    "what_we_have": "Four candidate listings whose identity is confirmed on official Amazon pages; two registers that disagree on three links; one product with no candidate at all",
+    "what_we_have": "Four candidate listings whose identity is confirmed on official Amazon pages; a same-day audit aligned two registers that had disagreed on three routes — but the audit is another sandbox's observation, and P-04 still rests on it alone",
     "what_is_missing": "Where each submitted short link actually lands, and which ASIN the submitter meant for P-04",
     "how_to_find_out": "Open each link.amazon/… in a logged-out browser with the network tab open; write down the final /dp/ URL. Then re-run from a host that can reach amazon.com and store the whole redirect chain",
     "owner": "you, 10 min",
@@ -535,7 +542,7 @@
    {
     "id": "Q-05",
     "question": "Can a reader reach this site at all, and what do they type to find it?",
-    "what_we_have": "A live URL, a Pages config that publishes from main , and 43 HTML files with no query data whatsoever",
+    "what_we_have": "A live URL, a Pages config that publishes from main , and 65 HTML files with no query data whatsoever",
     "what_is_missing": "Any impression, query or click data. Whether the domain is even indexed",
     "how_to_find_out": "Verify the property in Search Console, submit the single canonical sitemap, wait two weeks, then read the Queries tab. Until then every keyword claim in this project is fiction",
     "owner": "needs an account",
@@ -630,7 +637,7 @@
     "effort": "m",
     "gate": "free",
     "suggestion": "Reconcile the two product registers into one authoritative file",
-    "why": "The same five links are described two ways on the same branch; three rows disagree. Publishing either one as truth is how a wrong listing reaches a buyer. IRR-02",
+    "why": "The same five links were described two ways on the same branch (three rows disagreed); a same-day audit aligned them, but two files still track the same fact and can drift again. Pick one authoritative register. IRR-02",
     "touches": "src/data/products.json · data/confirmations.json"
    },
    {
@@ -639,7 +646,7 @@
     "effort": "m",
     "gate": "free",
     "suggestion": "Re-run the five fetches from a host that can reach amazon.com and store the full redirect chain per link",
-    "why": "This workspace is firewalled to an allow-list, so nobody here has actually seen where the links go. Chain + status codes, timestamped, replaces opinion with evidence. R-02",
+    "why": "A same-day audit saw the destinations, but this workspace (firewalled to an allow-list) never reproduced any of it, and no full Location chain is stored — only final URLs. Chain + status codes, timestamped, replaces a third party's word with ours. R-02",
     "touches": "data/confirmations.json"
    },
    {
@@ -711,7 +718,7 @@
     "effort": "l",
     "gate": "free",
     "suggestion": "Choose one canonical site and redirect or retire the rest; today the same page type exists at the root, under guides/ , under crisp/ and in archive/",
-    "why": "43 HTML files, canonicals on 22. Search engines get a choice of which copy to index, and readers get four tones of the same advice. This is the single biggest quality lever left. IRR-07 · G-01",
+    "why": "65 reader-facing files, canonicals on 57, and the page-type duplication has grown to products/ , questions/ , review/ mirrors as well as crisp/ . Search engines get a choice of which copy to index, and readers get four tones of the same advice. Still the single biggest quality lever left. IRR-07 · G-01",
     "touches": "index.html · crisp/ · guides/ · archive/ · sitemap.xml"
    },
    {
@@ -729,7 +736,7 @@
     "effort": "m",
     "gate": "free",
     "suggestion": "Rebuild the front page as a shop: shelf and seasonal picks above the fold; every dashboard surface reachable from one footer group instead of the masthead",
-    "why": "The brief asks for this explicitly. The register belongs one click away, not in the hero — a buyer arrives for a fryer, not for our sourcing method.",
+    "why": "Half landed while this board was written: the root front page is now products-led with a product grid and no verification preamble. The remaining job is the same treatment for crisp/ , and merging the shelf with it. The register belongs one click away, not in the hero — a buyer arrives for a fryer, not for our sourcing method.",
     "touches": "index.html · crisp/index.html"
    },
    {
@@ -846,7 +853,7 @@
     "effort": "m",
     "gate": "free",
     "suggestion": "Emit Article + BreadcrumbList JSON-LD and a canonical URL on every page from the templates ; skip WebSite site-name markup while the host is github.io/Affil1/",
-    "why": "Zero JSON-LD across 43 files, and Google only supports a site name from the domain root — a project-page subpath can never own one. Fix what is fixable, and do not pretend about the rest. IRR-09 · G-06",
+    "why": "0 → 13 of 65 files gained JSON-LD on 2026-11-20 (root front page, guides, products/p-0n ), which proves the fix is cheap; crisp/ and the mirror pages still have none. Google only supports a site name from the domain root — a project-page subpath can never own one. Fix what is fixable, and do not pretend about the rest. IRR-09 · G-06",
     "touches": "tools/build.py · templates"
    },
    {
@@ -880,6 +887,6 @@
  },
  "links": {
   "product_links_marked_sponsored": "21/21",
-  "documentation_links": 95
+  "documentation_links": 100
  }
 }

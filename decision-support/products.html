@@ -20,8 +20,8 @@
 <section class="hero"><div class="wrap hero-grid">
   <div>
     <p class="eyebrow">The shelf · five links came in</p>
-    <h1>Four of the five now have a name.<br><em>Two of those routes are disputed.</em></h1>
-    <p class="lead">Every product below is listed the way a shop should list it: what it is, who makes it, the question it answers for a buyer, and the exact page we read that from. Nothing is priced, ranked or praised here that we cannot point at — and where two registers on this branch disagree, the disagreement is printed instead of averaged away.</p>
+    <h1>Four of the five now have a name.<br><em>The fifth has an audit trail, not a verdict.</em></h1>
+    <p class="lead">Every product below is listed the way a shop should list it: what it is, who makes it, the question it answers for a buyer, and the exact page we read that from. Nothing is priced, ranked or praised here that we cannot point at — and where two sessions' registers disagreed, the disagreement is printed instead of averaged away — and so is what closed it.</p>
     <div class="cta">
       <a class="button" href="#register">Open the confirmation register</a>
       <a class="button ghost" href="verification.html">See the source log</a>
@@ -65,7 +65,7 @@
       <h3>Chefman Air Fryer 8 Qt · TurboFry 4-in-1</h3>
       <p>Single XL basket, four modes (air fry, bake, reheat, cook from frozen), 450&nbsp;°F <em>Hi-Fry</em>, shake reminder, non-stick dishwasher-safe basket, stainless body; captured listing copy shows 12.75″D × 13.5″W × 10″H and 8&nbsp;quarts.</p>
       <p><strong>The buyer question it answers:</strong> "How much counter does one big basket actually cost?"</p>
-      <p class="quiet">Status: <span class="chip warn">route disputed</span> the Chefman 8 Qt listing at <code>B08DKYBTPH</code> is real and confirmed; what is <em>not</em> agreed is whether your short link reaches it. One register says product page, the other says Amazon homepage. <a href="verification.html#irr-02">IRR-02</a>.</p>
+      <p class="quiet">Status: <span class="chip info">route observed · pending workflow</span> the listing is confirmed real. This desk's two registers disagreed about the destination (product page vs homepage); a later independent audit recorded it reaching <code>amazon.com/dp/B08DKYBTPH</code>, and the registers were aligned to it. The observation stands until the enrolled workflow repeats it — see <a href="verification.html#irr-02">IRR-02</a> for the full sequence.</p>
       <p><a class="button ghost" href="https://www.amazon.com/dp/B08DKYBTPH" rel="sponsored nofollow noopener" target="_blank">Open official listing ↗</a></p>
     </article>
 
@@ -74,7 +74,7 @@
       <h3>"ThermoMaven 1 Sec" — identity not confirmed</h3>
       <p>This is the one we will not dress up. The candidate identifier <code>B0DHZTCNR5</code> surfaced on an official Amazon page whose own address carries a <em>different</em> identifier (<code>B0DMDQZTZN</code>), which is what parent/child variation pages look like. One of those two is the right page; we cannot tell which from a snapshot.</p>
       <p><strong>What is safe to say:</strong> it is a ThermoMaven instant-read thermometer family, advertised on that page with 1-second readings and ±0.5&nbsp;°F accuracy claims.</p>
-      <p class="quiet">Status: <span class="chip bad">flagged, unverified</span> the two registers at least agree it is unresolved — one recorded no identifier, the other recorded an Amazon bot-checkpoint page. No claim and no monetised link until the listing is opened in the enrolled workflow. <a href="questions.html#Q-01">Q-01</a>.</p>
+      <p class="quiet">Status: <span class="chip warn">observed late · still unconfirmed</span> a same-day independent audit recorded this link reaching <code>B0DHZTCNR5</code> after an earlier pass saw only an Amazon checkpoint gate; the registers were aligned to the audit. This workspace cannot reproduce any of that, so no claim and no monetised link here until the enrolled workflow confirms it. <a href="verification.html#irr-04">IRR-04</a>.</p>
       <p><a class="button ghost" href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">Inspect the candidate page ↗</a></p>
     </article>
 
@@ -83,7 +83,7 @@
       <h3>CHEF iQ Sense (Gen3) smart wireless meat thermometer</h3>
       <p>Three ultra-thin probes, a hub, Wi-Fi plus Bluetooth, app alerts, heat-rated probes, dishwasher-safe parts; model number CQ60-3C-Z1-E and ASIN <code>B0DZFD6R9Z</code> both appear in the captured listing pages. Marketing heat tolerance differs by marketplace page (1,300&nbsp;°F on one, 1,500&nbsp;°F on another) — treat the number as unresolved.</p>
       <p><strong>The buyer question it answers:</strong> "When should I actually trust a probe, and what does 'wireless' cost me in setup?"</p>
-      <p class="quiet">Status: <span class="chip warn">route disputed</span> the CHEF iQ Sense listing at <code>B0DZFD6R9Z</code> is real and confirmed across three marketplaces; the destination of your short link is disputed between two registers. Heat-tolerance figures also conflict: <a href="verification.html#irr-05">IRR-05</a>.</p>
+      <p class="quiet">Status: <span class="chip info">route observed · pending workflow</span> the listing is confirmed across three marketplaces. Same history as P-03: registers disagreed, a later audit observed <code>amazon.com/dp/B0DZFD6R9Z</code>, both files now say so. Heat-tolerance figures still conflict: <a href="verification.html#irr-05">IRR-05</a>.</p>
       <p><a class="button ghost" href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">Open official listing ↗</a></p>
     </article>
 
@@ -110,7 +110,7 @@
       <span class="count" data-filter-count></span>
     </div>
 <table data-sortable data-filterable>
-      <caption>Intended vs. observed, kept apart — five submitted links, three registers<small>Register A is <code>src/data/products.json</code> and register B is <code>data/confirmations.json</code>, both already on <code>main</code> and both generated 2026-11-20. They disagree on three of five rows. The third column of observations is what this workspace could see. No field is filled by inference, and the intended identifier is never merged with an observed destination.</small></caption>
+      <caption>Intended vs. observed, kept apart — five submitted links, three registers<small>Register A is <code>src/data/products.json</code> and register B is <code>data/confirmations.json</code>, both already on <code>main</code> and both generated 2026-11-20. Both originally disagreed on three of five rows; a later independent audit (<code>data/verification-audit.json</code>, sessions <code>a4ab7faf</code>/<code>8206a8d0</code>) observed destinations for all five and the registers were aligned to it. The disagreement and its resolution are both kept here. The third column of observations is what this workspace could see. No field is filled by inference, and the intended identifier is never merged with an observed destination.</small></caption>
       <thead><tr><th scope="col">ID</th><th scope="col">Submitted link &amp; intended identifier</th><th scope="col">Candidate official listing</th><th scope="col">Product on that listing</th><th scope="col">Observed redirect — register A</th><th scope="col">Observed redirect — register B</th><th scope="col">Observed redirect — this session</th><th scope="col">Confirmation</th><th scope="col">Source for manual review</th></tr></thead>
       <tbody>
         <tr data-field="open" data-id="P-01">
@@ -118,55 +118,55 @@
           <td class="mono">B04G1MEwY<span class="src">submitted as <code>link.amazon/B04G1MEwY</code>. Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.</span></td>
           <td class="mono">B0CDY277D3</td>
           <td>Chefman 6 Qt Dual Basket Air Fryer Oven (CHEFMAN)</td>
-          <td class="mono">https://www.amazon.com/dp/B0CDY277D3 — recorded as product page reached<span class="src">register A — <code>../src/data/products.json</code></span></td>
-          <td class="mono">same: https://www.amazon.com/dp/B0CDY277D3<span class="src">register B — <code>../data/confirmations.json</code></span></td>
+          <td class="mono">(revised 05:3xZ) https://www.amazon.com/dp/B0CDY277D3<span class="src">aligned to the audit after an initial blank/disputed state — <code>observed_asin</code></span></td>
+          <td class="mono">https://www.amazon.com/dp/B0CDY277D3<span class="src">status "verified" (P-01/02) or "listing-checked" (P-03/04/05); intended-ASIN fields remain null</span></td>
           <td class="mono"><span class="blank">not observable from this workspace</span><span class="src">this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; <code>link.amazon</code> does resolve in DNS</span></td>
           <td><span class="blank">no confirmation date</span><span class="src">Agreement between both registers.</span></td>
-          <td class="src"><a href="https://www.amazon.com/dp/B0CDY277D3 rel="sponsored nofollow noopener" target="_blank">>Amazon listing (candidate)</a> · <a href="verification.html">full source log</a></td>
+          <td class="src"><a href="https://www.amazon.com/dp/B0CDY277D3" rel="sponsored nofollow noopener" target="_blank">Amazon listing (candidate)</a> · <a href="verification.html">full source log</a></td>
         </tr>
         <tr data-field="open" data-id="P-02">
           <td>P-02</td>
           <td class="mono">B02NbDxp3<span class="src">submitted as <code>link.amazon/B02NbDxp3</code>. Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.</span></td>
           <td class="mono">B09B7SB46R</td>
           <td>Emeril Lagasse 26QT Multi-Function Air Fryer Toaster Oven</td>
-          <td class="mono">https://www.amazon.com/dp/B09B7SB46R — recorded as product page reached<span class="src">register A — <code>../src/data/products.json</code></span></td>
-          <td class="mono">same: https://www.amazon.com/dp/B09B7SB46R<span class="src">register B — <code>../data/confirmations.json</code></span></td>
+          <td class="mono">(revised 05:3xZ) https://www.amazon.com/dp/B09B7SB46R<span class="src">aligned to the audit after an initial blank/disputed state — <code>observed_asin</code></span></td>
+          <td class="mono">https://www.amazon.com/dp/B09B7SB46R<span class="src">status "verified" (P-01/02) or "listing-checked" (P-03/04/05); intended-ASIN fields remain null</span></td>
           <td class="mono"><span class="blank">not observable; ASIN confirmed on amazon.fr and amazon.com.be pages</span><span class="src">this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; <code>link.amazon</code> does resolve in DNS</span></td>
           <td><span class="blank">no confirmation date</span><span class="src">Agreement between both registers.</span></td>
-          <td class="src"><a href="https://www.amazon.com.be/dp/B09B7SB46R rel="sponsored nofollow noopener" target="_blank">>Amazon.com.be listing (ASIN shown)</a> · <a href="verification.html">full source log</a></td>
+          <td class="src"><a href="https://www.amazon.com.be/dp/B09B7SB46R" rel="sponsored nofollow noopener" target="_blank">Amazon.com.be listing (ASIN shown)</a> · <a href="verification.html">full source log</a></td>
         </tr>
         <tr data-field="flagged" data-id="P-03">
           <td>P-03</td>
           <td class="mono">B00hJ57DV<span class="src">submitted as <code>link.amazon/B00hJ57DV</code>. Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.</span></td>
           <td class="mono">B08DKYBTPH</td>
           <td>Chefman Air Fryer 8 Qt TurboFry 4-in-1</td>
-          <td class="mono">https://www.amazon.com/dp/B08DKYBTPH<span class="src">register A — <code>../src/data/products.json</code></span></td>
-          <td class="mono">https://www.amazon.com/ — <strong>homepage</strong>, flagged “no product destination confirmed”<span class="src">register B — <code>../data/confirmations.json</code></span></td>
+          <td class="mono">(revised 05:3xZ) https://www.amazon.com/dp/B08DKYBTPH<span class="src">aligned to the audit after an initial blank/disputed state — <code>observed_asin</code></span></td>
+          <td class="mono">https://www.amazon.com/dp/B08DKYBTPH<span class="src">status "verified" (P-01/02) or "listing-checked" (P-03/04/05); intended-ASIN fields remain null</span></td>
           <td class="mono"><span class="blank">not observable</span><span class="src">this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; <code>link.amazon</code> does resolve in DNS</span></td>
           <td><span class="blank">no confirmation date</span><span class="src"><strong>Contested.</strong> The listing is real; the route is not agreed. <a href="verification.html#irr-02">IRR-02</a></span></td>
-          <td class="src"><a href="https://www.amazon.com/dp/B08DKYBTPH rel="sponsored nofollow noopener" target="_blank">>Amazon listing (ASIN shown)</a> · <a href="verification.html">full source log</a></td>
+          <td class="src"><a href="https://www.amazon.com/dp/B08DKYBTPH" rel="sponsored nofollow noopener" target="_blank">Amazon listing (ASIN shown)</a> · <a href="verification.html">full source log</a></td>
         </tr>
         <tr data-field="flagged" data-id="P-04">
           <td>P-04</td>
           <td class="mono">B0c8moW59<span class="src">submitted as <code>link.amazon/B0c8moW59</code>. Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.</span></td>
           <td class="mono">—</td>
           <td>ThermoMaven instant-read family (unconfirmed)</td>
-          <td class="mono">no identifier recorded; all fields “unverified”<span class="src">register A — <code>../src/data/products.json</code></span></td>
-          <td class="mono">https://www.amazon.com/checkpoint/continue — bot checkpoint, no product page<span class="src">register B — <code>../data/confirmations.json</code></span></td>
+          <td class="mono">(revised 05:3xZ) https://www.amazon.com/dp/B0DHZTCNR5<span class="src">aligned to the audit after an initial blank/disputed state — <code>observed_asin</code></span></td>
+          <td class="mono">https://www.amazon.com/dp/B0DHZTCNR5<span class="src">status "verified" (P-01/02) or "listing-checked" (P-03/04/05); intended-ASIN fields remain null</span></td>
           <td class="mono"><span class="blank">not observable</span><span class="src">this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; <code>link.amazon</code> does resolve in DNS</span></td>
           <td><span class="blank">no confirmation date</span><span class="src"><strong>Both registers fail this row.</strong> Candidate identifiers conflict: B0DHZTCNR5 vs B0DMDQZTZN. <a href="verification.html#irr-04">IRR-04</a></span></td>
-          <td class="src"><a href="https://www.amazon.com/dp/B0DMDQZTZN rel="sponsored nofollow noopener" target="_blank">>Page as captured (different identifier in URL)</a> · <a href="verification.html">full source log</a></td>
+          <td class="src"><a href="https://www.amazon.com/dp/B0DMDQZTZN" rel="sponsored nofollow noopener" target="_blank">Page as captured (different identifier in URL)</a> · <a href="verification.html">full source log</a></td>
         </tr>
         <tr data-field="flagged" data-id="P-05">
           <td>P-05</td>
           <td class="mono">B0f3GKalj<span class="src">submitted as <code>link.amazon/B0f3GKalj</code>. Nine characters, so it does not match the published ten-character ASIN format — treat it as a short-link slug, never as a confirmed ASIN.</span></td>
           <td class="mono">B0DZFD6R9Z</td>
           <td>CHEF iQ Sense (Gen3) wireless meat thermometer</td>
-          <td class="mono">https://www.amazon.com/dp/B0DZFD6R9Z<span class="src">register A — <code>../src/data/products.json</code></span></td>
-          <td class="mono">https://www.amazon.com/ — <strong>homepage</strong>, flagged “no product destination confirmed”<span class="src">register B — <code>../data/confirmations.json</code></span></td>
+          <td class="mono">(revised 05:3xZ) https://www.amazon.com/dp/B0DZFD6R9Z<span class="src">aligned to the audit after an initial blank/disputed state — <code>observed_asin</code></span></td>
+          <td class="mono">https://www.amazon.com/dp/B0DZFD6R9Z<span class="src">status "verified" (P-01/02) or "listing-checked" (P-03/04/05); intended-ASIN fields remain null</span></td>
           <td class="mono"><span class="blank">not observable; ASIN + model CQ60-3C-Z1-E confirmed on amazon.ca, .nl, .in pages</span><span class="src">this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; <code>link.amazon</code> does resolve in DNS</span></td>
           <td><span class="blank">no confirmation date</span><span class="src"><strong>Contested.</strong> Listing is real; the route is not agreed.</span></td>
-          <td class="src"><a href="https://www.amazon.ca/dp/B0DZFD6R9Z rel="sponsored nofollow noopener" target="_blank">>Amazon.ca listing (ASIN shown)</a> · <a href="verification.html">full source log</a></td>
+          <td class="src"><a href="https://www.amazon.ca/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">Amazon.ca listing (ASIN shown)</a> · <a href="verification.html">full source log</a></td>
         </tr>
       </tbody>
     </table>
@@ -195,8 +195,8 @@
   <div class="sec-head"><div><p class="eyebrow">One action per product</p><h2>What closes each row</h2></div><p>Four rows close with one browser session inside Associates Central. The fifth needs a decision from you.</p></div>
   <div class="grid g3">
     <div class="card ok"><p class="tag">P-01 · P-02 — the two clean rows</p><h3>Run the enrolled-workflow test</h3><p>Both registers already agree on the destination, so the only missing evidence is the affiliate mechanics: build a link for the candidate ASIN in Associates Central, click it once from a staging page, then check the reports show a click attributed to the expected tag. Record the destination, the date and who confirmed it. One product first, then scale — that is the sequence the brief asks for.</p></div>
-    <div class="card warn"><p class="tag">P-03 · P-05 — the disputed rows</p><h3>Re-run the fetch, then fix the register</h3><p>One register says these short links reach product pages; the other says they land on the Amazon homepage. Re-request both from a machine that can reach amazon.com, capture the full <code>Location</code> chain, and let whichever observation reproduces stand. Until then these two products cannot carry reader-facing copy, and <code>../data/confirmations.json</code> and <code>../src/data/products.json</code> must not both be treated as authoritative. <a href="verification.html#irr-02">IRR-02</a>.</p></div>
-    <div class="card bad"><p class="tag">P-04 — the unnamed row</p><h3>Decide, then either fix or drop</h3><p>Nothing about this link survives verification: no product page, an Amazon checkpoint gate, and two candidate identifiers. Either open it in a normal browser and record which listing the submitter meant, or pull it off the shelf. A thermometer nobody can name should not sit in front of buyers with confident copy.</p></div>
+    <div class="card warn"><p class="tag">P-03 · P-05 — audit-observed rows</p><h3>Confirm the audit, then finish the copy</h3><p>These two rows <em>were</em> the register contradiction: one file said product page, the other said Amazon homepage. A same-day audit observed them reaching <code>/dp/B08DKYBTPH</code> and <code>/dp/B0DZFD6R9Z</code>, and both registers now say so. That is still another sandbox's fetch — the enrolled workflow has to reproduce the destination from a click we make ourselves before reader-facing copy or tagged links go live. <a href="verification.html#irr-02">IRR-02</a>.</p></div>
+    <div class="card bad"><p class="tag">P-04 — the late-named row</p><h3>Decide, then either fix or drop</h3><p>This row started as the worst in the register: a bot checkpoint where a listing should be, two competing identifiers, nothing to publish. The late audit recorded the link reaching <code>B0DHZTCNR5</code>, so it is plausibly fine — but that single third-party observation is the entire case. Reproduce it logged-out and in the workflow; if it holds, give the product a card, if not, pull it off the shelf. A thermometer whose evidence is somebody else's fetch should not sit in front of buyers with confident copy.</p></div>
   </div>
 </section>
 
@@ -205,8 +205,8 @@
 <footer class="site"><div class="wrap"><div class="cols">
   <div><a class="brand" href="index.html"><span class="brand-mark">gm</span><span class="brand-txt"><strong>Good Measure Kitchen</strong><span>Decision Desk</span></span></a><p class="quiet">Working papers for a kitchen-goods affiliate shop that would rather be right than busy. Product facts are snapshots; policy text is quoted; gaps are printed as gaps.</p></div>
   <div><h4>Desk</h4><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="suggestions.html">Suggestions board</a><a href="questions.html">Open questions</a></div>
-  <div><h4>Products</h4><a href="#shelf">The shelf</a><a href="#register">Confirmation register</a><a href="#rules">Compliance gate</a><a href="../guides/flagged-for-review.html">Flagged for review</a></div>
-  <div><h4>Public site</h4><a href="../index.html">Shop front</a><a href="../guides/basket-or-oven.html">Basket or oven-style</a><a href="../guides/capacity-checklist.html">Capacity checklist</a><a href="../guides/cleanup-counterspace.html">Cleanup &amp; counter space</a><a href="../feed.xml">RSS feed</a></div>
+  <div><h4>Products</h4><a href="#shelf">The shelf</a><a href="#register">Confirmation register</a><a href="#rules">Compliance gate</a><a href="../flagged-for-review.html">Flagged for review</a></div>
+  <div><h4>Public site</h4><a href="../index.html">Shop front</a><a href="../guides/basket-or-oven.html">Basket or oven-style</a><a href="../guides/capacity-checklist.html">Capacity checklist</a><a href="../guides/cleanup-counter-space.html">Cleanup &amp; counter space</a><a href="../feed.xml">RSS feed</a></div>
 </div>
 <div class="foot"><span>As an Amazon Associate I earn from qualifying purchases.</span><span>© 2026 Good Measure Kitchen · Decision Desk · sources checked 2026-11-20</span></div>
 </div></footer>
