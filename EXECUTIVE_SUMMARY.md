@@ -178,7 +178,7 @@ Findability + line-by-line re-verification pass on the canonical edition:
 - **Guide number ten.** `meal-prep-sunday` ported from the earlier integration log
   (question-shaped title, seller-transcribed facts only, `Living with it` cluster),
   with its own generated illustration registered in `src/data/images.json`. It flows
-  into the sitemap (29 URLs) and the feed (10 items) through `GUIDES`.
+  into the sitemap (30 URLs) and the feed (10 items) through `GUIDES`.
 - **Every published quote re-checked live on 2026-11-20** against SRC-01..SRC-10:
   Operating Agreement §1 and §5, Program Policies §2(b), the FTC endorsement FAQ
   (placement + affiliate sections), Google's outbound-link qualification, the
@@ -201,8 +201,9 @@ Findability + line-by-line re-verification pass on the canonical edition:
   submission (Q-11 / S-03) is the required discovery step.
 - **No number can drift.** The brief and about pages now count guides, questions,
   flags and image assets from the data at build time instead of hardcoding them.
-- **Checks.** 30 pages, `check.py` 0 errors / 0 warnings, `check_local_links.py`
-  0 broken references, build reproducible.
+- **Checks.** 31 pages, `check.py` 0 errors / 0 warnings, `check_local_links.py`
+  0 broken references across 38 pages, `validate.py` 1603 checks / 0 warnings,
+  build reproducible.
 - **Duplicates dropped, not merged.** Earlier drafts of this pass carried their own
   cadence / consolidation / search / gate suggestions and question ids; main's
   S-12, S-15, Q-16 and Q-22 already hold those, so only genuinely new items were
