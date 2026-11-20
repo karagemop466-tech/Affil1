@@ -28,12 +28,12 @@
     {
       "id": "E2",
       "name": "outbound_product_click",
-      "fires_when": "A sponsored Amazon listing link is activated",
+      "fires_when": "An approved, labelled paid product link is activated",
       "props": [
         "page",
         "product"
       ],
-      "answers": "Which product links receive clicks",
+      "answers": "Which approved product links receive clicks; not attribution or an order.",
       "not_collected": [
         "anything after the click; the destination is Amazon's, not ours"
       ]

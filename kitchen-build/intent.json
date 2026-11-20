@@ -1,0 +1,74 @@
+{
+  "tracking_id_supplied": "shopnow047c-20",
+  "checked_on": "2026-11-20",
+  "method": "Each short link was fetched directly. The /dp/ destination and page title were recorded; ephemeral query parameters are intentionally omitted. Observations do not establish stable redirects, intended products, or attribution.",
+  "records": [
+    {
+      "ref": "P-01",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_label": "Chefman dual-basket air fryer",
+      "prior_discrepancy": null,
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    },
+    {
+      "ref": "P-02",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_label": "Emeril Lagasse French-door air fryer oven",
+      "prior_discrepancy": "A prior pass returned a checkpoint.",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    },
+    {
+      "ref": "P-03",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "observed_redirect_target": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_label": "Chefman TurboFry air fryer",
+      "prior_discrepancy": "A prior pass recorded the Amazon homepage.",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null
+    },
+    {
+      "ref": "P-04",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed_label": "ThermoMaven digital meat thermometer",
+      "prior_discrepancy": "Earlier passes returned a checkpoint. This recheck reached B0DHZTCNR5; stability is unverified. Another session observed the opposite listing on the same date (FLG-016).",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null,
+      "alternate_observed_target": "https://www.amazon.com/dp/B0DZFD6R9Z"
+    },
+    {
+      "ref": "P-05",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_label": "CHEF iQ Sense wireless meat thermometer",
+      "prior_discrepancy": "A prior pass recorded the Amazon homepage. Another session observed the opposite listing on the same date (FLG-016).",
+      "intended_asin": null,
+      "official_listing_url": null,
+      "confirmation_date": null,
+      "confirmation_source": null,
+      "approved_special_link": null,
+      "tracking_report_reference": null,
+      "alternate_observed_target": "https://www.amazon.com/dp/B0DHZTCNR5"
+    }
+  ]
+}

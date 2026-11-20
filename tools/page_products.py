@@ -1,6 +1,6 @@
 """Product register and the per-product records."""
 
-from layout import (blank, esc, eyebrow, link, outbound, page, product_link, rel,
+from layout import (approved_cta, blank, esc, eyebrow, link, outbound, page, product_link, rel,
                     section, table, DISCLOSURE)
 from page_home import img
 
@@ -31,13 +31,13 @@ def build_register(page_dir, products, meta):
     for p in products:
         link_cell = product_link(
             d, p["submitted_link"], esc(p["submitted_code"]),
-            aria=f"Open submitted link {p['ref']} (affiliate link, opens in a new tab)")
+            aria=f"Open submitted link {p['ref']} (source, opens in a new tab)")
         if p["observed_asin"]:
             listing = product_link(
                 d, p["listing_url"], esc(p["observed_asin"]),
-                aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
+                aria=f"Open the Amazon listing for {p['ref']} (source, opens in a new tab)")
             name = esc(_short(p))
-            status = '<span class="pill pill-ok">Identified</span>'
+            status = '<span class="pill pill-ok">Observed</span>'
         else:
             listing = '<span class="blank">&mdash;</span>'
             name = '<span class="blank">&mdash;</span>'
@@ -54,8 +54,8 @@ def build_register(page_dir, products, meta):
     tbl = table(
         ["Ref", "Submitted link", "Code in the link", "Listing reached", "Product", "Status"],
         rows, cls="register",
-        caption="Every submitted link, checked on 20 November 2026",
-        note="The code in the link and the ASIN on arrival are different fields and are shown in separate columns on purpose. A nine-character code is not an ASIN."
+        caption="Dated destination observations, not confirmed intent",
+        note="The submitted slug and observed listing are different fields. A nine-character code is not an ASIN."
     )
 
     body = f"""{_head(d)}
@@ -152,9 +152,9 @@ def build_product(page_dir, p, meta):
     for key, label, note in FIELDS:
         value = p.get(key)
         if key == "submitted_link":
-            cell = product_link(d, value, esc(p["submitted_code"]), aria=f"Open submitted link for {p['ref']} (affiliate link, opens in a new tab)")
+            cell = product_link(d, value, esc(p["submitted_code"]), aria=f"Open submitted link for {p['ref']} (source, opens in a new tab)")
         elif key == "observed_asin":
-            cell = product_link(d, p["listing_url"], esc(value), aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
+            cell = product_link(d, p["listing_url"], esc(value), aria=f"Open the Amazon listing for {p['ref']} (source, opens in a new tab)")
         elif key == "category_path":
             cell = esc(value)
         else:
@@ -199,16 +199,17 @@ def build_product(page_dir, p, meta):
 
     <h2>How the link was checked</h2>
     <p>{esc(p['resolution_note'])}</p>
-    <p>The submitted link was opened; the page it landed on was read; the ASIN inside the address and the title on the page were transcribed into this record. That is the whole of the check. It establishes identity. It does not establish quality, price or availability.</p>
+    <p>The submitted link was opened; the page it landed on was read; the ASIN inside the address and the title on the page were transcribed into this record. That establishes what appeared on arrival, not the intended variant, product performance, price or availability.</p>
 
     <div class="cta">
       <div>
         <p class="cta-label">Amazon listing</p>
-        <p>Opens in a new tab. This is an affiliate link{'' if not meta.get('tracking') else ''}.</p>
+        <p>Untagged listing source. This is not an approved affiliate link.</p>
       </div>
-      {product_link(d, p['listing_url'], 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
+      {product_link(d, p['listing_url'], 'Open listing source <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (source, opens in a new tab)")}
     </div>
-    <p class="fineprint">{DISCLOSURE} A purchase through this link does not change the price you pay. Whether a click is credited to this site's tracking ID is not confirmed \u2014 see the review queue.</p>
+{approved_cta(d, p, meta)}
+    <p class="fineprint">The observed redirect does not verify intent or confirm tracking. <a href="../operations/launch-readiness.html">See the launch gate</a>.</p>
   </div>
 
   <aside class="record-side">
@@ -294,7 +295,7 @@ def _build_unresolved(d, p):
   <p>All four are consistent with what was observed. Choosing between them would require opening it somewhere this session cannot reach, so none is asserted.</p>
 
   <h2>How to close this</h2>
-  <p>Open <a href="{esc(p['submitted_link'])}" rel="sponsored nofollow noopener" target="_blank">link.amazon/B0c8moW59</a> in an ordinary browser and note where it lands. If it is dead, re-issue it from the Associates dashboard. Either way the record above gets a date and a value, and the blank row becomes a product.</p>
+  <p>Open <code>{esc(p['submitted_link'])}</code> in an ordinary browser and note where it lands. If it is dead, re-issue it from the Associates dashboard. Either way the record above gets a date and a value, and the blank row becomes a product.</p>
 
   <div class="cta">
     <div><p class="cta-label">Still open</p><p>This product has no card, no photograph and no buy link until it can be identified.</p></div>

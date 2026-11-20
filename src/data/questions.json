@@ -7,7 +7,7 @@
     {
       "id": "Q-01",
       "question": "Does each submitted link actually land on the product the owner meant to send readers to?",
-      "what_we_have": "All five land on a live listing, and the arrival ASIN and title were transcribed (P-01 B0CDY277D3, P-02 B09B7SB46R, P-03 B08DKYBTPH, P-04 B0DHZTCNR5, P-05 B0DZFD6R9Z).",
+      "what_we_have": "All five destinations reached Amazon listings on the latest pass; the observed ASIN is not a confirmed intended ASIN.",
       "what_is_missing": "The owner's intended ASIN. Every submitted path code is 9 characters; every ASIN observed on arrival is 10. That is evidence the codes are short-link slugs, not identifiers, so the intended product cannot be read off the link itself.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended, then record both values side by side.",
       "answered": false,
@@ -15,12 +15,12 @@
     },
     {
       "id": "Q-02",
-      "question": "Why did one link return a continuity page before it resolved?",
-      "what_we_have": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on first attempts on 2026-11-20, then resolved to ASIN B0DHZTCNR5 (ThermoMaven instant-read thermometer) on a later attempt the same day. Both observations are in the product record.",
-      "what_is_missing": "Whether the challenge is intermittent (client, region, or rate) or a one-off. A redirect that sometimes challenges is not a stable guarantee.",
-      "how_to_close": "Repeat the check in different browser contexts and consult Amazon if needed; the cause of the checkpoint is not established.",
+      "question": "Will P-04 reliably reach the intended product?",
+      "what_we_have": "Earlier requests showed a checkpoint. The latest direct request reached ThermoMaven B0DHZTCNR5.",
+      "what_is_missing": "Stable destination, intended ASIN and tracking evidence.",
+      "how_to_close": "Match the intended variant in SiteStripe and validate the exact destination against an authorized tracking report.",
       "answered": false,
-      "blocking": "no"
+      "blocking": "yes — for the paid CTA"
     },
     {
       "id": "Q-03",
@@ -49,16 +49,16 @@
       "what_is_missing": "Nothing structural. What remains is a legal review of the wording around it, which this build cannot perform.",
       "how_to_close": "A human review against SRC-01 and SRC-03. The placement itself is already above the fold on every page and repeated in the footer.",
       "answered": true,
-      "answer": "The required sentence sits in a strip under the masthead on every page, and repeats in the footer. Each product card carries its own one-line affiliate note so a reader who never scrolls still sees it.",
+      "answer": "The statement sits after the masthead and before the content. It repeats in the footer. An approved paid CTA is labelled beside the link.",
       "evidence": "SRC-01, SRC-03",
       "blocking": "no"
     },
     {
       "id": "Q-06",
-      "question": "P-04 and P-05 are thermometers, not air fryers. Do they belong in the same catalogue?",
-      "what_we_have": "Two of the five resolved listings (P-04 ThermoMaven B0DHZTCNR5 and P-05 CHEF iQ B0DZFD6R9Z) sit under Thermometers & Timers > Meat. The other three are air fryers.",
-      "what_is_missing": "The owner's editorial intent — were the thermometers meant as accessories to the air-fryer content, or as a separate line?",
-      "how_to_close": "One sentence from the owner. Until then the site treats them honestly: three air fryers in the shortlist, two thermometers in their own band, never described as air fryers.",
+      "question": "Do the two thermometer observations belong in the comparison?",
+      "what_we_have": "P-04 and P-05 reached meat-thermometer listings; the other three reached air fryer listings.",
+      "what_is_missing": "The owner's editorial intent — was the thermometer meant as an accessory to the air-fryer content, or as a separate line?",
+      "how_to_close": "Keep the thermometer decision separate from the air-fryer capacity table, and verify why each product was submitted before adding a paid CTA.",
       "answered": false,
       "blocking": "no — handled by separating it"
     },
