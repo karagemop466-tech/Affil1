@@ -28,6 +28,7 @@ import pathlib
 import re
 import sys
 import urllib.parse
+import os
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -268,7 +269,8 @@ def check_register_sources():
     products = json.loads((data / "products.json").read_text(encoding="utf-8"))
     rows = products if isinstance(products, list) else products.get("products", [])
     without = [r.get("ref", "?") for r in rows
-               if not (r.get("source") or r.get("observed_source_url") or r.get("listing_url"))]
+               if not (r.get("source") or r.get("observed_source_url")
+                       or r.get("listing_url") or r.get("observed_url"))]
     stats["register_rows"] = len(rows)
     if without:
         add("medium", "A-SRC", "Register rows without a source link", ", ".join(without))
@@ -278,14 +280,15 @@ def check_register_sources():
 
     # the intended/observed separation
     merged = [r.get("ref", "?") for r in rows
-              if r.get("intended_asin") and r.get("intended_asin") == r.get("asin")]
+              if r.get("intended_asin") and r.get("intended_asin") == r.get("observed_asin")]
     if merged:
         add("high", "A-MERGE", "Intended and observed identifiers are merged",
             ", ".join(merged))
     else:
+        blanks = sum(1 for r in rows if not r.get("intended_asin"))
         add("ok", "A-MERGE", "Intended and observed identifiers stay in separate fields",
-            "No row sets intended_asin equal to the observed ASIN; observed values are "
-            "kept as evidence, not as submitter intent.")
+            f"intended_asin is blank on {blanks} of {len(rows)} rows and is never set to the "
+            "observed ASIN. Observed values stay evidence; submitter intent stays unknown.")
 
 
 # --- 9. no third-party scripts -------------------------------------------
@@ -342,6 +345,15 @@ footer b{color:var(--ink)}
 """
 
 
+def resolve_annex_link(base, ref):
+    """Resolve a relative href from the annex page, fragment and querystring aware."""
+    raw = ref.split("#")[0].split("?")[0]
+    if not raw:
+        return True  # in-page fragment
+    path = pathlib.Path(os.path.normpath(os.path.join(str(base), raw)))
+    return path.exists() or (path / "index.html").exists()
+
+
 def render_annex():
     order = {"high": 0, "medium": 1, "low": 2, "ok": 3}
     rows = "".join(
@@ -369,8 +381,8 @@ def render_annex():
 <div class="disclosure"><div class="wrap"><b>Affiliate disclosure.</b> As an Amazon Associate I
 earn from qualifying purchases. Every product link on this site is a paid link.</div></div>
 <header class="bar"><div class="wrap">
-<a href="../../">← The site</a><a href="../../review/">Flagged for review</a>
-<a href="../../sources/">Official sources</a><a href="../../operations/launch-readiness.html">Launch readiness</a>
+<a href="../../">← The site</a><a href="../../review/">Review queue</a>
+<a href="../../about/index.html#sources">Official sources</a><a href="../../operations/ledger.html">Campaign ledger</a>
 </div></header>
 <main class="wrap">
 <p class="eyebrow" style="margin-top:2rem">Annex · not part of the shop</p>

@@ -68,16 +68,16 @@
       "detail": "9 items. Google supports RSS 2.0 as a sitemap format, so the feed is also a second discovery surface."
     },
     {
-      "severity": "medium",
+      "severity": "ok",
       "id": "A-SRC",
-      "title": "Register rows without a source link",
-      "detail": "P-01, P-02, P-03, P-04, P-05"
+      "title": "Every register row carries an official source link",
+      "detail": "5 product rows, each with the observed Amazon URL it was read from."
     },
     {
       "severity": "ok",
       "id": "A-MERGE",
       "title": "Intended and observed identifiers stay in separate fields",
-      "detail": "No row sets intended_asin equal to the observed ASIN; observed values are kept as evidence, not as submitter intent."
+      "detail": "intended_asin is blank on 5 of 5 rows and is never set to the observed ASIN. Observed values stay evidence; submitter intent stays unknown."
     },
     {
       "severity": "ok",
