@@ -827,3 +827,31 @@ tools/stage.py into a temp dir                    → 0 broken references
 ### Merge log
 
 Pending: see the PR linked from this board after it is opened.
+
+### Merge note — `arena/b1a42a51-affil1` after main advanced to `8b22041`
+
+While this pass was open as PR #94, main moved through PRs #90–#95. Two of those changes
+overlap this branch, and main's version wins where it is more recent:
+
+1. **The paid-link gate changed behaviour.** Main (PR #90) restored a gate that emits **no**
+   Associates tag until an account-confirmed Special Link exists, so every buy button on the
+   site is now a plain listing link marked `rel="sponsored nofollow noopener"`. This branch's
+   footer, About page and audit rows described tagged destinations; they were rewritten to
+   describe what the build actually emits. `FLG-025` (main's open policy reading) is now cited
+   from the footer rather than this pass's own text.
+2. **Flag ids collided.** Main already used `FLG-023`–`FLG-026`. This pass's five findings were
+   renumbered `FLG-027`–`FLG-031`; nothing was dropped. The six source rows added here
+   (`SRC-18`–`SRC-23`) did not collide.
+3. **The archive grew.** The recovered PR #15 tree added 47 more archived pages without
+   noindex. All 126 archived pages now carry it, and `tools/check_audit.py --single-site` is
+   clean over the whole tree.
+4. **`tools/sweep_surfaces.py` had two competing fixes** for the same defect (main's
+   `INTERNAL_SECTIONS` constant and this pass's import from `check.py`). Kept one rule: import
+   from `check.py`, fall back to the local tuple. The merge kept both authors' reasoning in the
+   docstring.
+
+Re-run after the merge: `tools/build.py` → 31 pages; `tools/check.py` → 0 errors, 0 warnings;
+`tools/validate.py` → 1696 checks, 0 warnings; `tools/check_audit.py` (register, `--jsonld`,
+`--single-site`, `--counts`) all pass; `decision-support/validate.py` passes six families;
+`python3 -m unittest tools.test_paid_link_gate` 6 tests pass; the staged artifact (78 files) has
+0 broken references.
