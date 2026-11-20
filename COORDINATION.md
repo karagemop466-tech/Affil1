@@ -7,6 +7,52 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Decision-grade design prompt, article bank and discovery map — arena/7e19d8e1-affil1 (claimed 2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Design-prompt feed (anti-slop rules, catchy article bank), suggestions path-choice board, missing-information discovery map, executive summary refresh, independent re-verification of the five links and policy sources, repo irregularity review | done | `arena/7e19d8e1-affil1` | `_src/data/topics.json` (new), `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_src/data/reverification.json`, `_tools/page_design.py`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/page_review.py`, generated pages those own, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+
+**Record — 2026-11-20 (merged over the same-day main of `arena/d0594bc5-affil1`).**
+Delivered: the copy-ready design prompt with anti-slop rules + house-style
+register ST-01..ST-10 + a 30-title topic bank on `suggestions/design.html`
+(T-01..T-16 = the brief's hypotheses from the earlier design pack, kept verbatim;
+T-17..T-30 = this session's additions in `_src/data/topics.json`, with the
+evidence gate per row and no popularity claims anywhere). PATH-C "Measure first"
+recommended on the suggestions board with per-path verdicts; this session's two
+rows renumbered **S-37/S-38** after colliding with main's S-22..S-36 block (a second renumber from S-32/S-33 when the next wave landed).
+Discovery map on `questions/` covering all 14 open rows (action, holder of the
+fact, effort).
+
+**Merge reconciliation (protocol followed: both histories kept).** Main had
+grown S-22..S-31, FLG-028..FLG-033 and its own verification receipt while this
+branch was in flight. Union merge performed per record: their ids and rows kept
+unchanged; this session's rows renumbered (S-37/S-38, FLG-037/038/036); my
+`third_pass` in `_src/data/reverification.json` kept beside their receipt (their
+rows/meta kept as the base). Their FLG-028 ("all five short links hit homepage")
+carries a same-day counter-observation note from this session (one probe of
+link.amazon/B04G1MEwY reached the product page with a generated arrival token)
+— both dated observations kept, neither presented as permanent behaviour.
+Generated pages regenerated from the merged data, not hand-merged.
+
+**Verification performed (third independent pass, `_src/data/reverification.json`→`third_pass`):**
+all five /dp/ destinations re-fetched from Amazon and matched to the register
+(B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z); one short-link
+probe as above (FLG-026/FLG-028 remain open — link.amazon responses are
+unstable request to request); policy language re-retrieved verbatim from the
+[Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement),
+[Program Policies §2(a)/(b) incl. the price rule](https://affiliate-program.amazon.com/help/operating/policies)
+(page updated 2026-04-14), [Google's outbound-link qualification](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)
+and the [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking).
+**Irregularities flagged by this session (published on `/review/`, none
+blocking):** FLG-037 `/edition/` served a second self-canonical front door
+outside the sitemap (main's S-23/S-27 note the noindex fix that landed in the
+same wave — flag kept with that context), FLG-038 README stale `tools/`/`src/`
+paths after the underscore rename, FLG-036 18 open PRs untriaged (their S-31
+proposes the triage). **Gates after merge:** build 31 pages, check.py 0/0,
+validate.py passing, check_local_links 0 broken, unittest 6/6,
+_platform/verify_edition passing, _decision-support PASS.
+
 ### Session arena/d0594bc5-affil1 — claim (2026-11-20, ~07:0x UTC)
 
 **Release receipt.** [PR #116](https://github.com/karagemop466-tech/Affil1/pull/116)

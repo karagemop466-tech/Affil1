@@ -128,5 +128,98 @@
       "agrees_with": "P-05 destination in the current register; adds a third observation class for the other four rows (homepage arrival), consistent with the earlier archived register that recorded homepage arrivals and with the documented instability of these redirectors. Neither confirms nor refutes any earlier pass: each pass is one request at one moment.",
       "note": "The register fields in src/data/products.json are unchanged by this pass. observed_asin values remain dated observations of earlier successful arrivals; this pass simply records that four of five did not arrive at a product page this time. FLG-003 stance unchanged: the compliance status of link.amazon short links is unresolved, not disproven, and no page calls them invalid."
     }
-  ]
+  ],
+  "third_pass": {
+    "session": "arena/7e19d8e1-affil1",
+    "retrieved_on": "2026-11-20",
+    "method": "Independent third fetch of every observed /dp/ destination, plus one fetch of a submitted short link, plus a fresh retrieval of the policy documents the site's rules quote. Titles and breadcrumbs transcribed from the pages that loaded; nothing inferred; no price, rating or review count transcribed even where Amazon displayed one.",
+    "destinations": [
+      {
+        "id": "P-01",
+        "url": "https://www.amazon.com/dp/B0CDY277D3",
+        "title": "Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen",
+        "breadcrumb": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+        "agrees_with_register": true
+      },
+      {
+        "id": "P-02",
+        "url": "https://www.amazon.com/dp/B09B7SB46R",
+        "title": "Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen",
+        "breadcrumb": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+        "agrees_with_register": true
+      },
+      {
+        "id": "P-03",
+        "url": "https://www.amazon.com/dp/B08DKYBTPH",
+        "title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+        "breadcrumb": "Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers",
+        "agrees_with_register": true
+      },
+      {
+        "id": "P-04",
+        "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "title": "Amazon.com: ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black : Home & Kitchen",
+        "breadcrumb": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
+        "agrees_with_register": true
+      },
+      {
+        "id": "P-05",
+        "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3 : Home & Kitchen",
+        "breadcrumb": "Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat",
+        "agrees_with_register": true
+      }
+    ],
+    "short_link_probe": {
+      "url": "https://link.amazon/B04G1MEwY",
+      "result": "resolved to https://www.amazon.com/dp/B0CDY277D3 with btn_type=ss&btn_ref=srctok-… arrival parameters",
+      "note": "Agrees with the register for P-01 and adds one product-page observation to FLG-026 (an earlier fetch saw a homepage). link.amazon behaviour remains unstable across requests; observations are dated, not guaranteed. The srctok parameter is an arrival token, not evidence of attribution to shopnow047c-20 (FLG-002 stands)."
+    },
+    "policy_checks": [
+      {
+        "ref": "SRC-01",
+        "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+        "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”",
+        "locator": "§5 Identifying Yourself as an Associate",
+        "confirms": "the disclosure sentence the site carries verbatim"
+      },
+      {
+        "ref": "SRC-02",
+        "url": "https://affiliate-program.amazon.com/help/operating/policies",
+        "quote": "Special Links must use the Associates ID we have assigned to you.",
+        "locator": "Participation Requirements §2(a)",
+        "confirms": "tagged Special Links require the assigned Associates ID"
+      },
+      {
+        "ref": "SRC-02b",
+        "url": "https://affiliate-program.amazon.com/help/operating/policies",
+        "quote": "you must include your Associates ID or “tag” (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.",
+        "locator": "Participation Requirements §2(b), under 'General Requirements Applicable to All Special Links'",
+        "confirms": "the tag-as-URL-parameter rule; the site's cautious reading of its scope is recorded as FLG-025"
+      },
+      {
+        "ref": "SRC-03",
+        "url": "https://affiliate-program.amazon.com/help/operating/policies",
+        "quote": "your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API",
+        "locator": "Participation Requirements §2(b), price and availability paragraph",
+        "confirms": "the site-wide prohibition on prices, ratings, review counts and stock figures",
+        "page_note": "Page header reads: Updated: April 14, 2026."
+      },
+      {
+        "ref": "SRC-05",
+        "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+        "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
+        "locator": "rel=\"sponsored\" section; page last updated 2025-12-10",
+        "confirms": "rel=\"sponsored\" on every product link; multiple rel values are allowed"
+      },
+      {
+        "ref": "SRC-04",
+        "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+        "quote": "if there’s a connection between an endorser and the marketer that a significant minority of consumers wouldn’t expect and it would affect how they evaluate the endorsement, that connection should be disclosed clearly and conspicuously",
+        "locator": "opening section of the FAQ",
+        "confirms": "the plain-language disclosure paragraph under the required sentence"
+      }
+    ],
+    "result": "All five destinations agree with the current register. All quoted policy language was re-retrieved from the official pages on 2026-11-20 and matches what the site asserts. No drift found; no field updated."
+  }
 }
