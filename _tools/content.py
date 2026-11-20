@@ -534,8 +534,8 @@ COMPARE_COLUMNS = [
     ("Shape", "Basket, oven or thermometer, read from the title and category path"),
     ("Stated size", "Exactly as the seller words it. Not measured"),
     ("Stated features", "Only what the listing title itself claims"),
-    ("Price", "Blank: Amazon serves it, this site does not hold it"),
-    ("Rating", "Blank: Amazon serves it, this site does not hold it"),
+    ("Price", "Links to the live listing: Amazon serves the number, this site does not hold it"),
+    ("Rating", "Links to the live listing: Amazon serves the number, this site does not hold it"),
 ]
 
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from

@@ -5,6 +5,53 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+## PRODUCT BUYING PATH + DECISION REGISTRY — arena/acb1e4c8-affil1 (2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Product buying-decision record, live-listing CTAs, reviewable decision registry | done | arena/acb1e4c8-affil1 | `_src/data/decisions-registry.json`, `_tools/page_products.py`, `_tools/page_compare.py`, `_tools/page_home.py`, `_tools/layout.py`, `_tools/page_decisions.py`, `_tools/build.py`, `_tools/content.py`, `assets/css/site.css`, `EXECUTIVE_SUMMARY.md`, `_data/verification-observations.ndjson` |
+
+**Problem found.** The site's only call to action read "See listing source" on
+every card, because `layout.product_link()` rewrote any untagged label starting
+"See "/"Check " into that citation phrase. The comparison table carried two
+permanently empty columns (price, rating) and explained at length why they were
+empty. Both statements were true and both made the shop read as an audit.
+
+**Change.** `product_link()` no longer rewrites the label. Product pages open
+with a decision block (choose it if / check before you buy / what it costs you /
+where the price is) fed from a new `_src/data/decisions-registry.json`. The
+compare page gains a second table sorted by decision; its price and rating cells
+are now links to the live listing rather than blanks. A new `/decisions/` page
+gives seven proposals, each with the official document and verbatim quote it is
+checked against, the missing fact, its owner, and accept/hold/reject stored in
+the browser only.
+
+**Not changed, deliberately.** The Associates tag. `paid_link_gate.py` still
+requires an account-issued Special Link, `test_paid_link_gate.py` still asserts
+the approved register is empty, and every destination still goes through
+`buy_url()`. Attaching `?tag=shopnow047c-20` to a URL rebuilt from a redirect
+observation would be a link this project invented; Program Policies 2(a)–(b)
+require the account's own Special Links. Logged as **D-01** on `/decisions/`.
+No price, rating, review count, stock level, test result or ranking was added.
+
+**Verification on this branch:** build 32 pages · `check.py` 0 errors 0 warnings ·
+`check_local_links.py` 0 broken in 66 pages · 6 paid-link tests OK · `validate.py`
+1704 checks 0 warnings · Decision Desk PASS · Almanac 1965 checks 0 errors ·
+`stage.py` 81 files · rebuild produces zero drift.
+
+**Re-verification.** The five `/dp/` listing pages were read on 2026-11-20 and
+each page title matched `products.json`. The supplied short links were **not**
+re-followed, so this is a title check, not a redirect check: FLG-002 (attribution),
+FLG-003 (short-link compliance) and FLG-018 (`plpRedirect=mhFallback`) stay open.
+Observations appended to `_data/verification-observations.ndjson`, each row saying
+so.
+
+**Overlap.** Open PRs #47, #62 and #93 touch `page_home.py`,
+`page_products.py` and `layout.py`. They are unmerged proposals, not merged work.
+If one merges first, resolve in favour of the paid-link gate: each of those
+proposals relaxes it by tagging observed URLs. No branch was rebased or
+force-pushed here, and no other session's files were edited.
+
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
 **Release receipt.** [PR #95](https://github.com/karagemop466-tech/Affil1/pull/95) merged into `main` as `8b22041` (2026-11-20). The `Affiliate launch checks` workflow passed on the merge commit ([run 44687880587](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880587)), `Build, check and deploy` succeeded ([run 44687880567](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880567)), and `pages build and deployment` succeeded ([run 44687879639](https://github.com/karagemop466-tech/Affil1/actions/runs/44687879639)). The live design brief at https://karagemop466-tech.github.io/Affil1/suggestions/design.html serves the design pack, topic bank and organic loop.

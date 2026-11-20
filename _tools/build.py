@@ -26,6 +26,7 @@ import page_guides  # noqa: E402
 import page_compare  # noqa: E402
 import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
+import page_decisions  # noqa: E402
 import page_decide  # noqa: E402
 import page_now  # noqa: E402
 import page_offers  # noqa: E402
@@ -41,7 +42,7 @@ DATA = ROOT / "_src" / "data"
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions", "decide",
-    "now", "offers", "verification",
+    "now", "offers", "verification", "decisions",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
@@ -55,6 +56,7 @@ GENERATED = {
     "compare/index.html",
     "questions/index.html",
     "suggestions/index.html", "suggestions/design.html", "fit/index.html",
+    "decisions/index.html",
     "decide/index.html",
     "now/index.html", "offers/index.html", "verification/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
@@ -190,6 +192,7 @@ def main():
     pages.append(write("offers/index.html", page_offers.build("offers")))
     pages.append(write("verification/index.html", page_crosscheck.build("verification")))
     pages.append(write("suggestions/index.html", page_suggestions.build("suggestions", suggestions, meta)))
+    pages.append(write("decisions/index.html", page_decisions.build("decisions")))
 
     # review
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))

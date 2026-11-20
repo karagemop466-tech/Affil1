@@ -63,7 +63,7 @@ def product_card(page_dir, p):
     <p class="pcard-why">{esc(p['why'])}</p>
     <ul class="chips">{_chips(p)}</ul>
     {cta_pair(page_dir, p)}
-    <p class="pcard-fine">Listing source &middot; {esc(AMAZON_NOTE)}</p>
+    <p class="pcard-fine">{esc(AMAZON_NOTE)}</p>
   </div>
 </article>"""
 
@@ -118,8 +118,8 @@ def build(page_dir, products, meta):
     hero = f"""<section class="issue-cover wrap">
   <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 01</span> THE COUNTERTOP EDIT</p>
     <h1>The air fryer<br><em>field guide.</em></h1>
-    <p class="cover-dek">One basket, two baskets, or French doors? Find the format that fits your counter and the way you cook.</p>
-    <div class="cover-actions"><a class="cover-btn" href="#shortlist">Explore the shortlist <span>→</span></a>
+    <p class="cover-dek">Five appliances, chosen and explained: two drawers, one basket, one French door, two probes. Pick the shape that fits your counter, then check the live price on Amazon.</p>
+    <div class="cover-actions"><a class="cover-btn" href="#shortlist">See the five picks <span>→</span></a>
       <a class="cover-link" href="{esc(rel(d, 'fit/index.html'))}">Find your format ↗</a></div></div>
   <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
     <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>

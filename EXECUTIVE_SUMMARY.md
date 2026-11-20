@@ -17,19 +17,29 @@ further input.
 
 ## What exists now
 
-One canonical site, 34 pages, rebuilt from `_src/data` on every deploy:
+One canonical site, rebuilt from `_src/data` on every deploy by `_tools/build.py`
+and checked page by page by `_tools/check.py`:
 
 - a product-led front page with five picks in two categories and a buy button on
   every card;
-- a product page for each of the five, with stated facts, who it suits, who
-  should skip it, and a one-block provenance record;
-- a side-by-side comparison table;
-- ten question-shaped guides across six clusters;
+- a product page for each of the five, now leading with a **buying decision
+  block** — choose it if / check before you buy / what it costs you / where the
+  live price is — above the stated facts, who it suits, who should skip it, and a
+  one-block provenance record;
+- a comparison page with **two** tables: what the listings state, and what
+  decision each product actually answers. The price and rating cells link to the
+  live listing instead of sitting empty;
+- ten question-shaped guides across six clusters, all in `sitemap.xml` and
+  `feed.xml`;
 - a decision register of 24 questions, 10 answered with evidence;
-- a suggestion queue with three coherent paths and 21 proposals, of which 6 have
-  already been implemented and are shown with evidence (15 open);
+- a suggestion queue with three coherent paths and 21 proposals, of which some
+  are already implemented and are shown with evidence;
 - an owner's "what is left" page (`/now/`), a ranked offers page (`/offers/`, 10
   weighted offers) and a per-page verification audit (`/verification/`);
+- a **decision registry** (`/decisions/`) of 7 open proposals, each carrying the
+  official source and verbatim quote it is checked against, the single missing
+  fact, the person who can close it, and an accept/hold/reject control recorded
+  in the browser only;
 - 27 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
@@ -68,18 +78,20 @@ Notes that belong with that table, not under it:
 
 ## What the site is now
 
-- **10 buyer guides**, question-shaped and seasonal (holiday hosting, holiday sides,
-  meal-prep Sunday, small-kitchen audit, dual-basket math, probe thermometers,
-  capacity, cleanup, shape, multi-function claims), each closing by naming what it does not claim.
-- **A shortlist of all five rows**, described only in the seller's own words, with a
-  save-to-browser list (localStorage, nothing transmitted). Each row links only to the
-  observed listing as a labelled reference link; P-04 is flagged (FLG-004, FLG-016) because
-  its earlier attempts returned checkpoints and the thermometer pair was swapped in one record.
+- **10 buyer guides**, question-shaped and seasonal, across six clusters — basket or oven,
+  dual-zone vs single basket, capacity, cleanup and counter space, meal-prep Sunday, the
+  small-kitchen space audit, multi-function questions, thermometer pairing, holiday hosting
+  and holiday side-dish capacity. Each closes by naming what it does not claim.
+- **A shortlist of all five rows**, described only in the seller's own words, each linking
+  only to its observed listing as a labelled reference link. P-04 is flagged (FLG-004,
+  FLG-016) because earlier attempts returned checkpoints and the thermometer pair was
+  swapped in one record; it is presented as a thermometer, not a fourth air fryer.
 - **Topics/cluster pages** so the internal link graph is deliberate, and an editorial
   **queue** published in the open with the reason each candidate is there.
 - **Registers, demoted to the footer where a buyer will not trip over them:** source
   register, flagged register (27 items, each with its source), suggestion board
-  (21 proposals), open questions (24, 10 answered with evidence), operations ledger.
+  (21 proposals), open questions (24, 10 answered with evidence; 14 still blocked and
+  published as such), decision registry (7 proposals), operations ledger.
 - **No prices, ratings, review counts or stock anywhere** — enforced by a build-time
   check, not by a promise. Publishing them without a PA/Creators feed is prohibited, and
   a stale price is a false claim. Price tracking and price alerts are recorded on the board
@@ -212,3 +224,116 @@ Findability + line-by-line re-verification pass on the canonical edition:
   cadence / consolidation / search / gate suggestions and question ids; main's
   S-12, S-15, Q-16 and Q-22 already hold those, so only genuinely new items were
   kept: Q-23 (market size), Q-24 (self-test budget) and FLG-027.
+
+## Session addendum — arena/acb1e4c8-affil1 (2026-11-20)
+
+This pass took the brief "lead with the products, not with the verification
+process" literally and fixed the place where the site was failing it.
+
+### What was wrong, precisely
+
+The site was not short of care. It was short of a reason to click. Three
+mechanical causes, each verified in the built HTML before being changed:
+
+1. **The only call to action said "See listing source."** `_tools/layout.py`
+   rewrote *every* untagged buy label beginning "See " or "Check " to that
+   citation phrase. A citation verb on a buy button makes a shop read as an
+   audit. Fixed at the source, so no template can reintroduce it.
+2. **The comparison table carried two permanently empty columns.** Price and
+   rating were blank by rule, and the page explained the rule at length. Correct,
+   but a buyer cannot act on a blank cell. The columns now link to the live
+   listing, and a second table sorts the five by *decision* instead of spec.
+3. **The product page buried the decision.** It opened with an illustration
+   caption ("not a photograph of P-01"), then a listing title. It now opens with
+   the product, then a decision block: choose it if / check before you buy /
+   what it costs you / where the price is.
+
+### What was added
+
+- `_src/data/decisions-registry.json` — one decision record per product, each
+  naming the listing it rests on.
+- `/decisions/` — the reviewable decision registry the brief asked for. Seven
+  proposals, each with the official document and verbatim quote it is checked
+  against, the single missing fact, its owner, and an accept/hold/reject control
+  that writes to the browser only.
+
+### What was deliberately not changed
+
+The Associates tag. `_tools/paid_link_gate.py` and `test_paid_link_gate.py` still
+assert that the approved register is **empty**, and every buy destination is
+built by `buy_url()`, which returns a tagged URL only for an account-issued
+Special Link. Putting `?tag=shopnow047c-20` on a URL rebuilt from a redirect
+observation would be a link this project invented; Program Policies 2(a)–(b)
+require Special Links to be the account's own. That stays blocked until the owner
+generates them in Associates Central — it is row **D-01** on `/decisions/`.
+
+### Merge with main, and the cart-link bypass this closed
+
+While this branch worked, `origin/main` advanced 356 commits and then 4 more. Both
+were merged in (never rebased, so no other session's history was rewritten). The
+generated HTML conflicted in 30 files and was resolved by **rebuilding from the
+merged sources**, not by hand-editing output.
+
+The second merge mattered beyond bookkeeping. Main had added `_tools/cta.py`, which
+rendered an "Add to basket" cart permalink for every product and appended the
+Associates tag to a URL this project built itself. That bypasses `buy_url()`, the
+single gate every other Amazon link goes through, and it is precisely what
+`paid_link_gate.py` exists to prevent: Program Policies 2(a)–(b) require the
+account's *own* Special Links, not a tag added to a redirect observation.
+
+Main also logged it independently as **FLG-029**. The two changes are
+complementary — main wrote the flag, this branch closed the defect — so the merge
+was clean. `cta.pair()` now renders in three states:
+
+1. **Cart door**, only when `paid_link_gate` holds an account-approved Special Link
+   for that ASIN.
+2. **Listing door** otherwise: the primary button becomes the official listing for
+   the observed ASIN via `buy_url()` — permitted, still `rel="sponsored nofollow
+   noopener"`, labelled "Live price and stock" — with one quiet line explaining why
+   there is no one-click basket.
+3. **Never** a synthesised tag.
+
+No published page contains a `cart/add.html` URL. `_tools/test_cta_gate.py` asserts
+all three states, including that a permitted listing never degrades to a dead
+"withheld" notice. FLG-029 now carries a resolution and a "resolved in code" pill on
+`/review/`, because a closed flag that still reads as open on the page a reviewer
+trusts is its own defect.
+
+### Verification run on this branch (all green, 2026-11-20)
+
+| Gate | Command | Result |
+|---|---|---|
+| Build | `python3 _tools/build.py` | 35 pages, no errors |
+| Static checks | `python3 _tools/check.py` | 35 pages, 0 errors, 0 warnings |
+| Relative links | `python3 _tools/check_local_links.py` | 69 pages, 0 broken |
+| Paid-link + cart gate | `python3 -m unittest discover -s _tools -p 'test_*.py'` | 10 tests, OK |
+| Pre-publish | `python3 _tools/validate.py` | 1957 checks, 0 warnings |
+| Decision Desk | `python3 _decision-support/validate.py` | PASS, 6 check families |
+| Almanac edition | `python3 _platform/verify_edition.py` | 1965 line checks, 0 errors |
+| Single surface | `python3 _tools/sweep_surfaces.py --dry-run` | 0 files moved |
+| Reproducible | rebuild and `diff -r` | zero drift |
+| Stage | `python3 _tools/stage.py _site` | 87 files, 35 pages |
+
+Sources re-read for this pass: [Associates Program
+Policies](https://affiliate-program.amazon.com/help/operating/policies) (Participation
+Requirements 2(a)–(b): tag as a URL parameter; price and availability only when
+Amazon serves the data or via Creators/PA API), [Google: qualify outbound
+links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)
+(`rel="sponsored"` for paid links).
+
+The five `/dp/` listing pages were read directly on 2026-11-20 —
+[B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3),
+[B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R),
+[B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH),
+[B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5),
+[B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z) — and each page title matched the
+title already transcribed in `_src/data/products.json`. That is a title check, not a
+redirect check: the supplied short links were not re-followed this pass, so it does
+**not** establish where they redirect, confirm the operator's intended ASIN, or
+confirm attribution. FLG-002, FLG-003 and FLG-018 remain open. The five observations
+are appended to `_data/verification-observations.ndjson` with that limitation stated
+in each row.
+
+Nothing in the new copy states a price, rating, review count, stock level, test
+result or ranking. The listing pages carried prices and ratings while being read
+($74.99-tier figures, 4.4-star bands); none were copied, by rule and by check.

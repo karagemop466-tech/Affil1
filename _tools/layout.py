@@ -44,6 +44,7 @@ NAV = [
     ("compare/index.html", "Compare"),
     ("fit/index.html", "Find your fit"),
     ("now/index.html", "What's left"),
+    ("decisions/index.html", "Decisions"),
 ]
 
 FOOTER_GROUPS = [
@@ -65,8 +66,9 @@ FOOTER_GROUPS = [
         ("offers/index.html", "Offers, ranked"),
         ("verification/index.html", "What is verified"),
         ("decide/index.html", "Decision gate"),
+        ("decisions/index.html", "Decision registry"),
         ("questions/index.html", "Open questions"),
-        ("suggestions/index.html", "Suggestions & decisions"),
+        ("suggestions/index.html", "Suggestions queue"),
         ("suggestions/design.html", "Design decision brief"),
         ("brief/index.html", "Executive summary"),
         ("operations/ledger.html", "Campaign ledger"),
@@ -196,8 +198,10 @@ def product_link(page_dir, url, label, **kw):
     if tagged:
         kw['affiliate_ref'] = urlsplit(url).path.rsplit('/', 1)[-1]
     else:
-        if label.startswith(('See ', 'Check ')):
-            label = 'See listing source <span aria-hidden="true">&#8599;</span>'
+        # An untagged destination is a plain reference to an official listing. It
+        # is still marked sponsored (it is a paid link in the FTC/Google sense),
+        # but it carries no attribution claim, so the aria text must not say
+        # "paid link" as though a commission were being tracked.
         if kw.get('aria'):
             kw['aria'] = kw['aria'].replace('paid link, ', '').replace('affiliate link, ', '')
     return link(page_dir, url, label, sponsored=True, **kw)
