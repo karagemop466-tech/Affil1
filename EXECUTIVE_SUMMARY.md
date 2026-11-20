@@ -1,112 +1,86 @@
-# Affil1 — Executive summary
+# Crisp & Counter | November 2026
 
-**Project:** an Amazon Associates publication about countertop cooking appliances
-**Live site:** https://karagemop466-tech.github.io/Affil1/
-**Tracking ID supplied:** `shopnow047c-20`
-**Session:** 2026-11-20
-**Branch merged from:** `arena/47a393a2-affil1`
+**Site:** Crisp & Counter — https://karagemop466-tech.github.io/Affil1/
+**Tracking ID:** shopnow047c-20
+**Date:** 20 November 2026
 
----
+## What was asked for
 
-## 1. What this is, in one paragraph
+An Amazon affiliate publication covering five supplied links: product research,
+comparison content, buying guides, click measurement, compliant disclosure, a
+suggestions section the owner can decide from, a clear list of questions that
+must be answered before decisions, and a live site — built and merged without
+further input.
 
-A 28-page static publication built from `src/data/`, checked by a script that fails
-the build on a broken link, an untagged Amazon link, a missing disclosure or a
-reintroduced price. It leads with five products that were individually opened and
-recorded, follows them with eight question-shaped buying guides, and publishes its
-own gaps rather than filling them: no prices, no ratings, no test results, no
-named author and no revenue claim appear anywhere, because none of those could be
-sourced.
+## What exists now
 
-## 2. The five supplied links, re-opened on 2026-11-20
+One canonical site, 27 pages, rebuilt from `src/data` on every deploy:
 
-| Ref | Submitted | Arrived at | What it is | Tag on arrival |
-|---|---|---|---|---|
-| P-01 | link.amazon/B04G1MEwY | `/dp/B0CDY277D3` | CHEFMAN 6 qt dual-basket air fryer | none |
-| P-02 | link.amazon/B02NbDxp3 | `/dp/B09B7SB46R` | Emeril Lagasse 26 qt French-door air fryer oven | none |
-| P-03 | link.amazon/B00hJ57DV | `/dp/B08DKYBTPH` | Chefman 8 qt TurboFry | none |
-| P-04 | link.amazon/B0c8moW59 | `/dp/B0DHZTCNR5` | ThermoMaven instant-read thermometer | none |
-| P-05 | link.amazon/B0f3GKalj | `/dp/B0DZFD6R9Z` | CHEF iQ Sense wireless thermometer | none |
+- a product-led front page with five picks in two categories and a buy button on
+  every card;
+- a product page for each of the five, with stated facts, who it suits, who
+  should skip it, and a one-block provenance record;
+- a side-by-side comparison table;
+- nine question-shaped guides across six clusters;
+- a decision register of 22 questions, 10 answered with evidence;
+- a suggestion queue with three coherent paths and 18 proposals, of which 8 have
+  already been implemented and are shown with evidence;
+- 19 review flags, an image policy, an inert analytics client and an empty
+  campaign ledger with a provenance rule;
+- a build-time checker that fails on a broken link, a missing disclosure, an
+  untagged Amazon link, a reintroduced price, or a second competing edition.
 
-All five resolved in this session. P-04 had failed three times in an earlier
-session; it resolved on both attempts here, so its record keeps both outcomes.
+## What was verified, and how
 
-## 3. The two findings that matter
+Each of the five supplied links was opened on 2026-11-20 and **all five
+resolved**. The ASIN, page title and category breadcrumb were transcribed:
 
-**a. The buy links were not Special Links.** After the redirects were followed,
-every arrival URL was a bare `/dp/<ASIN>` with no tag, and the site was offering
-those addresses as click targets. Program Policies §2(b) requires the Associates
-ID as a parameter in the URL of each link, and Amazon's own application-review page
-lists untagged links among its reasons for rejection. The build now emits
-`/dp/<ASIN>/?tag=shopnow047c-20`, keeps the submitted code as history, and fails if
-an untagged retail link appears. **Attribution is still unproven** until one click
-shows in the Associates report.
+| Ref | Landed on | Product |
+|---|---|---|
+| P-01 | B0CDY277D3 | CHEFMAN 6 qt dual-basket air fryer |
+| P-02 | B09B7SB46R | Emeril Lagasse 26 qt French-door air fryer oven |
+| P-03 | B08DKYBTPH | Chefman 8 qt TurboFry air fryer |
+| P-04 | B0DHZTCNR5 | ThermoMaven digital meat thermometer |
+| P-05 | B0DZFD6R9Z | CHEF iQ Sense wireless meat thermometer |
 
-**b. Two of the five products are thermometers.** P-04 is an instant-read probe,
-P-05 a wireless probe set. The catalogue is three air fryers and two thermometers,
-in two different Amazon category paths. Every page that said otherwise was
-corrected, and the pair got a guide of their own.
+Amazon's Operating Agreement §5, Program Policies §2(a)/(b), the FTC's
+endorsement FAQ and Google's outbound-link documentation were each read in this
+session and are quoted with links on the sources page.
 
-## 4. What was verified against an official source
+## The three findings that change the plan
 
-| Source | What it settled |
-|---|---|
-| Associates Operating Agreement §5 | The exact required disclosure sentence, quoted verbatim |
-| Associates Program Policies (updated 2026-04-14) §2(a)(b) | Special Links must carry the Associates ID as a URL parameter; price and availability only from Amazon-served data, Creators API or PA API |
-| 16 CFR 255.0(f), via eCFR | "Clear and conspicuous" means difficult to miss; on the internet the disclosure should be unavoidable |
-| Amazon Associates help, application review | Three qualifying sales within 180 days; robust original content, ten posts as a rule of thumb; untagged links are a stated rejection reason |
-| Sell on Amazon, ASIN guide | An ASIN is a unique 10-character alphanumeric code, found after `/dp/` |
-| Google Search Central, outbound links (updated 2025-12-10) | `rel="sponsored"` marks paid placements |
+1. **The previous build's buy links had no tracking tag at all.** Program
+   Policies §2(b) requires the Associates ID as a URL parameter, and a bare
+   `/dp/` URL cannot be attributed to any account. Every destination is now built
+   in one function with `?tag=shopnow047c-20`, and the build fails on an untagged
+   link. This was a live defect and it is published on the review page.
+2. **The site was two sites.** A generated edition and a hand-written one served
+   the same five products from different URLs, competing for the same searches.
+   They are consolidated; the other edition is archived with `noindex` on every
+   page, not deleted.
+3. **The fourth link resolves** — to a thermometer, not a fourth air fryer. The
+   catalogue is three air fryers and two thermometers, and the site now says so.
 
-Full quotes, with the date each was read, are on `/about/#sources`; the pass itself
-is logged row by row on `/review/verification.html`.
+## What still cannot be confirmed
 
-## 5. What the site now contains
+- **Attribution.** No resolved URL showed the tag, and no Associates report has
+  been read. One click from the owner's device plus the Orders report settles it.
+- **Intended ASINs.** The supplied codes are nine-character short-link slugs, not
+  identifiers. Only the account can supply what was intended.
+- **Price, rating, availability.** Not shown anywhere, by rule: Amazon permits
+  them only from Amazon-served data or its APIs, and neither is connected.
+- **Author, traffic, rates, email list.** None exist. All are published as gaps.
 
-| Surface | Status |
-|---|---|
-| Front page | Products first, method second; dated change log; two thermometers in their own band |
-| Product register and five records | All five identified; intended ASIN, observed ASIN and tagged link are three separate fields |
-| Guides | Eight, including the instant-read vs wireless thermometer guide , a seasonal sides guide, and three kitchen-planning guides from the parallel sessions |
-| Compare | Every product side by side, with blanks left blank |
-| Questions | 15 research questions, 6 answered with a source |
-| Before you decide | **New.** 16 decisions in four ordered gates: what is known, what is missing, who can supply it, what artefact closes it |
-| Suggestions | **Rebuilt.** 20 proposals inside three coherent paths, each with impact, effort, risk, reversibility and the decision it depends on |
-| Review queue | 17 flags, severity-ordered, with closed flags kept rather than deleted |
-| Verification log | **New.** 5 links, 7 sources, 9 findings from this pass |
-| Image policy, measurement plan, ledger | Unchanged in substance: illustrations are labelled; analytics is inert; the ledger is empty and says why |
-| `operations/launch-readiness.html` | Operator surface from PR #38: a product-intent record that must validate before a link may be labelled approved. noindex, and not in the sitemap |
+No conversion score, revenue forecast or traffic estimate appears anywhere.
 
-## 6. What is deliberately absent
+## The next decision
 
-- **Prices, ratings, review counts, stock.** No permitted data source is connected.
-- **Test results and rankings.** Nothing was bought or used, so nothing is scored.
-- **A named author.** No name would be true.
-- **Traffic and revenue figures.** No analytics endpoint, no Search Console
-  property, no commission rate read. No forecast is presented anywhere.
-- **A sixth AI-written guide.** S-11 recommends against it until a test or real
-  query data exists.
+In order:
 
-## 7. The next three actions, in order
+1. Click one product link, then read the Associates report.
+2. Verify Search Console and submit the sitemap.
+3. Choose one path on the suggestions page — shop first, publication first, or
+   measure first — and commit to it before adding anything else.
 
-1. **Click one tagged link and read the Associates click report.** Ten minutes.
-   This closes the highest-severity flag and is the only thing between a finished
-   publication and an earning one.
-2. **Confirm the account state and the intended ASIN for each link** (D-02, D-03).
-   Both need account access, which this session does not have.
-3. **Pick a path, not a page.** Path A proves the click. Path B publishes to
-   measured queries once Search Console is verified. Path C buys one appliance and
-   tests it, which is the only route to a page a competitor cannot copy.
-
-Everything a reviewer needs to disagree with is written down, with its source, on
-`/questions/decisions.html` and `/review/verification.html`.
-
-## 8. Where the two parallel sessions disagreed
-
-One thing only, and it is worth naming. PR #38 gated the shop so that no buy link
-existed until the intended destination was confirmed. This branch emits a tagged
-link to the observed destination. Both are defensible; the resolution here is to
-emit the tagged link — without a click there is no report, and without a report the
-intent can never be confirmed — while keeping their preflight as the gate that must
-pass before any link is labelled *approved*. Their tooling, seasonal guide and
-product-card notes are merged in, not replaced.
+Writing more guides before either measurement exists is the option that looks
+like progress and is not.

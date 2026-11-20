@@ -76,43 +76,25 @@
       "depicts_a_real_product": false,
       "used_on": "The decision tools page and the review queue",
       "rules_met": "The handwriting is unreadable so no figure can be read as a sourced value."
-    },
-    {
-      "file": "instant-read",
-      "alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded probe",
-      "depicts_a_real_product": false,
-      "used_on": "Guide: instant-read or probe thermometer",
-      "rules_met": "No brand mark, no model number, no screen value that could be read as a measurement."
-    },
-    {
-      "file": "holiday-table",
-      "alt": "A holiday table with a roast and an unbranded air fryer out of focus on a sideboard",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in the background",
-      "depicts_a_real_product": false,
-      "used_on": "Home, season band",
-      "rules_met": "Appliance is unbranded and out of focus; no price, pack shot or claim implied."
     }
   ],
   "rejected": [
     {
       "idea": "Use the listing's own product photography as the card image",
       "why_not": "Amazon's Program Content rules and the IP licence govern use of listing images and require them to come through permitted Program Content channels. Without PA API or Creators API access there is no permission basis for this build to copy them, so they are not used.",
-      "source": "sources/index.html#SRC-02",
+      "source": "about/index.html#sources",
       "source_id": "SRC-02"
     },
     {
       "idea": "Fetch each listing's live price on page load",
       "why_not": "Explicitly outside what the Program Policies permit without Amazon-served data or API access, and it would also be a third-party request from the reader's browser.",
-      "source": "sources/index.html#SRC-02",
+      "source": "about/index.html#sources",
       "source_id": "SRC-02"
     },
     {
       "idea": "Put a star rating next to each card",
       "why_not": "Same clause. Also unciteable: ratings change and this build cannot timestamp them from a permitted feed.",
-      "source": "sources/index.html#SRC-02",
+      "source": "about/index.html#sources",
       "source_id": "SRC-02"
     }
   ]

@@ -1,44 +1,76 @@
-# Publishing workflow — the compliance gate
+# Publishing workflow
 
-No page or guide publishes until every item below is true. Each line names where
-it is enforced, so the gate is a script rather than a habit.
+How a page gets from an idea to the live site, and what stops it.
 
-## 1. Disclosure (Operating Agreement §5, 16 CFR 255.0(f))
-- [x] Required sentence present on every page, above `<main>` — enforced by `tools/check.py`
-- [x] Repeated in the footer — same check
-- [x] Full statement at `/about/#disclosure`
-- [x] Placement rationale recorded with the regulation quoted on `/about/#sources`
+## Cadence
 
-## 2. Link integrity (Program Policies §2(a)(b), Google paid-link guidance)
-- [x] Every Amazon retail link carries `rel="sponsored nofollow noopener"` and opens in a new tab — enforced
-- [x] Every Amazon retail link carries `tag=shopnow047c-20` as a URL parameter — enforced in this pass
-- [x] Policy citations are *not* marked sponsored — enforced
-- [x] No `link.amazon` short link is offered as a click target — enforced
-- [ ] One click confirmed in the Associates click report — **outstanding, needs account access (D-01)**
+One guide a fortnight. Eight exist. The pace is deliberately slower than the
+category average because each guide has to be written from listing facts and
+general reasoning rather than from a test that did not happen.
 
-## 3. Claims
-- [x] No price, star rating, review count or stock phrase in visible text — enforced
-- [x] No test, ranking or "best" claim — enforced
-- [x] Product attributes only as the seller's own wording, transcribed from the listing title
-- [x] Every illustration labelled as an illustration at the point of use
+A guide is not published to fill a slot. If there is nothing honest to say about
+a topic, the slot is skipped and the RSS feed stays quiet.
 
-## 4. One site for search engines
-- [x] Canonical URLs on every generated page
-- [x] `sitemap.xml` matches the built pages exactly — enforced
-- [x] `feed.xml` items all resolve to real pages — enforced
-- [x] Parallel-edition pages marked `noindex, follow` — enforced by `tools/legacy.py` and checked
-- [ ] Search Console verified and sitemap submitted — **needs the owner's Google account (S-07)**
+## The gate
 
-## 5. Measurement
-- [ ] Analytics endpoint chosen and running — **decision D-13**
-- [ ] Five defined events recorded at the endpoint — client exists and is inert
-- [ ] No cookie, no third-party request — currently true and enforced
+Every change passes through this order. A step that fails stops the chain.
 
-## 6. Publish
-- [x] New guide added to the sitemap and the feed automatically
-- [x] Build reproducible: CI rebuilds and diffs the tree
-- [x] Every internal link and anchor resolves — enforced
-- [ ] Record the reviewer, the date and the decision on the row being approved
+| Step | Check | Who |
+|---|---|---|
+| 1 | Claim: does a source exist for this sentence? If not, cut the sentence, not the standard. | Editor |
+| 2 | Product facts: transcribed from the listing title reached, or blank. | Editor |
+| 3 | Marketing language: no price, rating, review count, stock phrase, or superlative. | `tools/check.py` |
+| 4 | Disclosure: strip above `<main>`, repeated in the footer, "Paid links" label present. | `tools/check.py` |
+| 5 | Links: every Amazon destination tagged, sponsored, nofollow, new tab. | `tools/check.py` |
+| 6 | Structure: one `<h1>`, alt text, resolving internal links and anchors, canonical, description. | `tools/check.py` |
+| 7 | One site: no stray `.html` outside the generated set or `archive/`. | `tools/check.py` |
+| 8 | Reproducible: rebuild and diff — a hand-edited page fails CI. | `.github/workflows/pages.yml` |
+| 9 | Human read of the rendered page on a phone. | Editor |
 
-**Rule:** an unchecked box is not a blocker for the site being live. It is a
-blocker for claiming the thing the box describes.
+## What cannot be automated
+
+Three things need a person, and the build does not pretend otherwise:
+
+- **Whether a sentence is true.** The checker catches patterns, not meaning.
+- **Whether a claim is supported.** A sentence can pass every regex and still be
+  an unsupported opinion dressed as a fact.
+- **Whether the disclosure is prominent enough.** The FTC frames this as a
+  judgement about the reader, not a markup rule.
+
+## Disclosure review
+
+Reviewed at each publication against:
+
+- Associates Program Operating Agreement §5 (required sentence);
+- Associates Program Policies §2(b) (price/availability, and no misleading
+  claims);
+- FTC Endorsement Guides FAQ, affiliate section (placement and wording).
+
+The rule the site applies: the disclosure sits under the masthead on every page,
+the footer repeats it, and every product card carries its own one-line affiliate
+note next to the button. That is one more placement than the minimum, because the
+FTC's guidance is that the closer the disclosure is to the recommendation, the
+better.
+
+## When a link changes destination
+
+1. Open the link. Record the new `/dp/` ASIN, page title and category.
+2. If the ASIN changed, update `observed_asin` in `src/data/products.json`. The
+   buy URL is derived from it, so nothing else needs editing.
+3. Never overwrite `intended_asin` with an observation. The two fields are
+   separate by design.
+4. Rebuild. `check.py` will confirm the new link is tagged and sponsored.
+5. Add a line to the campaign ledger's provenance trail if the change came from a
+   report rather than a manual check.
+
+## When a new product is submitted
+
+1. Open the link once, record where it lands.
+2. If it does not land, publish it as unresolved — a blank row with a flag — not
+   as a guess.
+3. Write the note from the listing title only: what it is, who it suits, what
+   trade the shape implies.
+4. Add it to a category in `products.json` `meta.categories`; the front page and
+   the register both read that list.
+5. Do not write a guide around it until there is something true to say that is
+   not already on the product page.

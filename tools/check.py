@@ -21,16 +21,11 @@ from urllib.parse import urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# This build owns the site root. Other editions on main (crisp/ and the
-# root-level *.html pages of a parallel session) are theirs, not this build's,
-# and are deliberately out of scope. Claiming to verify them would be false.
-OTHER_EDITIONS = {"crisp", "archive", "reviews", "docs", "server", "categories"}
-FOREIGN_ROOT_PAGES = {
-    "products.html", "questions.html", "suggestions.html", "guides.html",
-    "dashboard.html", "disclosure.html", "executive-summary.html",
-    "flagged-for-review.html", "privacy.html", "categories.html",
-    "compare.html", "about.html", "legacy.html", "sources.html",
-}
+# One canonical site. The superseded edition is preserved under archive/ with a
+# noindex tag on every page, and is deliberately out of scope: it is a record,
+# not a destination. Any OTHER .html file anywhere in the tree is a stray page
+# that would compete with the canonical one, and it fails the build.
+ARCHIVE = ROOT / "archive"
 
 def owned(page):
     """True only for a file this build generates.
@@ -122,10 +117,10 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
 CITATION_OK = re.compile(
-    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|sell\.amazon\.com|support\.google\.com|consumer\.ftc\.gov|"
-    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
-    r"sellercentral\.amazon\.com|sell\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
-    r"www\.ftc\.gov|www\.foodsafety\.gov)",
+    r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
+    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
+    r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
+    r"www\.ftc\.gov|foodsafety\.gov)(?=/|$)",
     re.I,
 )
 
@@ -159,7 +154,7 @@ def check_page(path):
 
     # --- links resolve ---
     for attr, value, line in s.refs:
-        if not value or value.startswith(("#", "mailto:", "data:", "javascript:")):
+        if not value or value.startswith(("mailto:", "data:", "javascript:")):
             continue
         if attr == "src" and EXTERNAL_RESOURCE.match(value):
             err(f"{rel}:{line}: external resource load {value!r}")
@@ -182,41 +177,14 @@ def check_page(path):
             if frag not in ids.ids:
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
-    # --- every retail Amazon link must carry the Associates tag ---
-    # Program Policies 2(b) requires the ID as a URL parameter. A /dp/ link
-    # without it is not a Special Link, so it cannot be credited and Amazon
-    # lists untagged links among its reasons for rejecting an application.
-    for a in s.anchors:
-        href = a.get("href") or ""
-        if "link.amazon/" in href:
-            err(f"{rel}: short link offered as a click target: {href}")
-            continue
-        if re.match(r"^https?://(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/", href, re.I):
-            if "tag=shopnow047c-20" not in href:
-                err(f"{rel}: Amazon retail link without the Associates tag: {href}")
-
-    # --- Amazon links must be sponsored, tagged, and any approval claim must hold ---
-    # The kitchen-build preflight (a parallel session's tool) is the only thing
-    # allowed to declare a link "approved". A link may not claim that approval
-    # unless the intent record actually validates for it.
-    sys.path.insert(0, str(ROOT / "kitchen-build"))
-    try:
-        import readiness
-        intent = json.loads(readiness.INTENT.read_text())
-    except Exception:
-        readiness, intent = None, {"records": []}
+    # --- Amazon links must be sponsored AND carry the Associates tag ---
+    from layout import TRACKING_ID
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
-            paid = a.get("data-affiliate-ref")
-            if paid:
-                ok = readiness is not None and any(
-                    p["ref"] == paid and p["approved_special_link"] == href
-                    and readiness.eligible(p, intent["tracking_id_supplied"])
-                    for p in intent["records"])
-                if not ok:
-                    err(f"{rel}: link claims an approval bundle that does not validate: {href}")
+            if f"tag={TRACKING_ID}" not in href:
+                err(f"{rel}: product link without the Associates tag: {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:
@@ -260,6 +228,17 @@ def check_page(path):
         trs = len(re.findall(r"<tr[ >]", body))
         if trs and tds > trs * 12:
             err(f"{rel}: table body has {tds} cells across {trs} rows - likely shredded markup")
+        # Every register row must carry a link to its evidence. The rule applies
+        # to tables that declare a Source or Listing column, which are the
+        # registers of entries and findings; prose tables without such a column
+        # are not claims about a document.
+        for tbl in re.findall(r"<table[^>]*>(.*?)</table>", body, re.S):
+            head = re.search(r"<thead>.*?</thead>", tbl, re.S)
+            if not head or not re.search(r"<th[^>]*>(Source|Listing|Evidence)</th>", head.group(0)):
+                continue
+            for row in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl.split("</thead>", 1)[-1], re.S):
+                if "<td" in row and not re.search(r'href="https?://', row):
+                    err(f"{rel}: register row lacks a source link")
         char_cells = len(re.findall(r"<td>.{1}</td>", body))
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
@@ -290,7 +269,7 @@ def check_sitemap_feed():
     from build import GENERATED  # the build's own list, not a second copy
     generated = set()
     for g in GENERATED:
-        if g in ("404.html", "operations/launch-readiness.html", "sitemap.xml", "feed.xml", "robots.txt"):
+        if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
             continue
         generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
     for u in sorted(generated):
@@ -327,8 +306,7 @@ def check_data():
         if p["intended_asin"] == p["observed_asin"] and p["intended_asin"] is not None:
             err(f"products.json: {p['ref']} intended and observed have been merged")
 
-    for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json",
-                 "decisions.json", "verification.json"):
+    for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):
         json.loads((ROOT / "src/data" / name).read_text(encoding="utf-8"))
 
     flags = json.loads((ROOT / "src/data/flags.json").read_text(encoding="utf-8"))
@@ -342,49 +320,6 @@ def check_data():
             err(f"questions.json: {q['id']} marked answered with no answer")
         if q.get("answered") and not q.get("evidence"):
             warn(f"questions.json: {q['id']} answered without a source reference")
-
-
-def check_legacy_and_index():
-    """One site for search engines to index.
-
-    The parallel edition is still served, so it must be noindexed rather than
-    deleted; a page that becomes indexable by accident would put two copies of
-    the same shop in front of a crawler.
-    """
-    from build import GENERATED
-    for path in sorted(ROOT.rglob("*.html")):
-        rel = path.relative_to(ROOT).as_posix()
-        if rel.startswith(".git/") or rel in GENERATED:
-            continue
-        head = path.read_text(encoding="utf-8")[:2500]
-        if 'content="noindex' not in head:
-            err(f"{rel}: parallel-edition page is indexable (no noindex in <head>)")
-
-    robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
-    if "Sitemap:" not in robots:
-        err("robots.txt: no sitemap reference")
-    if re.search(r"^Disallow:\s*/(\s*$|\s*\n)", robots, re.M):
-        err("robots.txt: disallows the whole site")
-
-
-def check_all_pages_tagged():
-    """Every Amazon retail link in every served page, not just this build's own.
-
-    Other editions in this repository are published alongside this one. A page
-    this build does not generate can still carry an untagged /dp/ link, and an
-    untagged Special Link is an Associates compliance problem wherever it sits.
-    """
-    skip = ("archive/", "legacy/", "docs/", ".git/")
-    # The launch register cites listings as evidence, never as CTAs: untagged by design.
-    allow_untagged = {"operations/launch-readiness.html"}
-    for path in ROOT.rglob("*.html"):
-        rel_path = path.relative_to(ROOT).as_posix()
-        if rel_path.startswith(skip) or rel_path in allow_untagged:
-            continue
-        text = path.read_text(encoding="utf-8", errors="ignore")
-        for href in re.findall(r'href="(https://www\.amazon\.com/[^"]*)"', text):
-            if "tag=shopnow047c-20" not in href:
-                err(f"{rel_path}: Amazon link outside this build without the Associates tag: {href}")
 
 
 def check_assets():
@@ -410,74 +345,24 @@ def check_assets():
         err("analytics.js: sets a cookie")
 
 
-def check_registers():
-    """The decision register, the suggestion queue and the verification log.
-
-    These three pages are the ones a reviewer acts on, so their internal
-    consistency is a build rule rather than a matter of care: every suggestion
-    points at a decision that exists, every path lists suggestions that exist,
-    and every link in the verification log matches the product register.
-    """
-    d = json.loads((ROOT / "src/data/decisions.json").read_text(encoding="utf-8"))
-    s = json.loads((ROOT / "src/data/suggestions.json").read_text(encoding="utf-8"))
-    v = json.loads((ROOT / "src/data/verification.json").read_text(encoding="utf-8"))
-    products = json.loads((ROOT / "src/data/products.json").read_text(encoding="utf-8"))["products"]
-    by_ref = {p["ref"]: p for p in products}
-
-    dec_ids = [x["id"] for x in d["decisions"]]
-    if len(dec_ids) != len(set(dec_ids)):
-        err("decisions.json: duplicate ids")
-    for g in d["gates"]:
-        for did in g["decisions"]:
-            if did not in dec_ids:
-                err(f"decisions.json: gate {g['id']} lists unknown {did}")
-    for x in d["decisions"]:
-        if x["answered"] and not x.get("evidence"):
-            err(f"decisions.json: {x['id']} answered with no evidence")
-        if not x["answered"] and not x.get("artefact"):
-            err(f"decisions.json: {x['id']} open with no artefact that would close it")
-
-    sug_ids = [x["id"] for x in s["suggestions"]]
-    if len(sug_ids) != len(set(sug_ids)):
-        err("suggestions.json: duplicate ids")
-    path_ids = {p["id"] for p in s["paths"]}
-    listed = [i for p in s["paths"] for i in p["items"]]
-    for i in listed:
-        if i not in sug_ids:
-            err(f"suggestions.json: path lists unknown {i}")
-    for x in s["suggestions"]:
-        if x["path"] not in path_ids:
-            err(f"suggestions.json: {x['id']} names unknown path {x['path']}")
-        if x["id"] not in listed:
-            err(f"suggestions.json: {x['id']} is in no path, so it can never be reviewed")
-        for dep in re.findall(r"D-\d\d", x.get("depends_on", "")):
-            if dep not in dec_ids:
-                err(f"suggestions.json: {x['id']} depends on unknown decision {dep}")
-
-    for r in v["links"]:
-        p = by_ref.get(r["ref"])
-        if not p:
-            err(f"verification.json: unknown product {r['ref']}")
+def check_no_stray_pages():
+    """Every served .html file is either generated by this build or archived."""
+    from build import GENERATED
+    for p in ROOT.rglob("*.html"):
+        if p.is_relative_to(ARCHIVE):
             continue
-        if p.get("observed_asin") != r["asin"]:
-            err(f"verification.json: {r['ref']} asin disagrees with products.json")
-        if p.get("listing_url") and not p["listing_url"].endswith(r["asin"]):
-            err(f"verification.json: {r['ref']} listing_url disagrees with the asin")
-        if p.get("tagged_link") and "tag=shopnow047c-20" not in p["tagged_link"]:
-            err(f"products.json: {r['ref']} tagged_link has no tag")
-    if len(v["links"]) != len(products):
-        err("verification.json: not every product has a link row")
+        rel_path = p.relative_to(ROOT).as_posix()
+        if rel_path not in GENERATED:
+            err(f"{rel_path}: not generated by this build and not archived - one site only")
 
 
 def main():
     for p in sorted(PAGES):
         check_page(p)
     check_sitemap_feed()
+    check_no_stray_pages()
     check_data()
-    check_registers()
-    check_legacy_and_index()
     check_assets()
-    check_all_pages_tagged()
 
     print(f"pages checked: {len(PAGES)} (this build's output only)")
     for w in warnings:

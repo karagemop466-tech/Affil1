@@ -6,7 +6,6 @@ from layout import (DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
 
 def build_about(page_dir, sources, meta):
     d = page_dir
-    c = meta.get("counts", {})
     rows = []
     for s in sources["sources"]:
         quote = f'<blockquote class="quote">{esc(s["quote"])}</blockquote>' if s.get("quote") else '<span class="blank">&mdash;</span>'
@@ -21,7 +20,7 @@ def build_about(page_dir, sources, meta):
     unverified = "".join(
         f"""<article class="reject"><h3>{esc(u['item'])}</h3>
         <p><strong>Tried:</strong></p><ul class="tight">{''.join(f'<li><code class="code">{esc(a)}</code></li>' for a in u['attempted'])}</ul>
-        <p>{esc(u['reason'])}</p></article>""" for u in sources["could_not_verify"]
+        <p>{esc(u['reason'])}</p></article>""" for u in sources.get("could_not_verify", [])
     )
 
     body = f"""{pagehead(
@@ -34,15 +33,18 @@ def build_about(page_dir, sources, meta):
 <div class="about-grid">
   <div class="prose-block">
     <h2 id="what">What this site is</h2>
-    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Three air fryers and two thermometers were submitted by the operator of the site. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
+    <p>A short guide to five kitchen things, written for someone standing in a kitchen with a tape measure and a decision to make. Three air fryers and two meat thermometers were submitted by the operator of the site. Each link was opened, followed to its Amazon listing, and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
     <p>It is not a review site. Nothing here was bought, cooked with, measured or compared by testing. That is a real limitation and it is stated on every product page and in every guide rather than in a footnote here.</p>
 
     <h2 id="why-blank">Why so much is blank</h2>
     <p>Amazon's Associates Program Policies, section 2(b), say that a site may show prices and availability only if Amazon serves the link carrying that data, or if the site obtains it through the Creators API or the Product Advertising API. This build has access to neither. So price, star rating, review count and stock status are absent everywhere &mdash; not because they are difficult to copy, but because copying them is the specific thing that clause forbids.</p>
     <p>The same discipline applies to fields nobody regulates: dimensions, wattage and warranty terms were not confirmed from an official specification sheet in this build, so they are empty too. An empty cell is a question mark. A filled-in cell that nobody verified is a lie with a font.</p>
 
+    <h2 id="one-site">One site, not two</h2>
+    <p>Until 20 November 2026 this repository served two competing editions of the same shop: a generated one at the root and a hand-written one in a subdirectory, with duplicate pages covering the same five products. Two editions cannot both be the answer a search engine should index. The root build is now canonical, the other edition is preserved under <code class="code">archive/legacy-2026-11-20/</code> with a noindex tag on every page, and the sitemap lists only the canonical URLs. Nothing was deleted; the archive and the git history both keep it.</p>
+
     <h2 id="how-we-link">How the links work</h2>
-    <p>Every link to Amazon on this site carries <code class="code">rel="sponsored nofollow noopener"</code> and opens in a new tab. Google's own documentation on qualifying outbound links confirms that <code class="code">sponsored</code> is the correct marker for paid or advertising links. That is applied by the build script to every Amazon anchor at once, and a check fails if any is missing it.</p>
+    <p>Every product link carries the Associates tag <code class="code">?tag=shopnow047c-20</code>, which the Program Policies require as a URL parameter, and every one is marked <code class="code">rel="sponsored nofollow noopener"</code> and opens in a new tab. Google's own documentation on qualifying outbound links confirms that <code class="code">sponsored</code> is the correct marker for paid or advertising links. That is applied by the build script to every Amazon anchor at once, and a check fails if any is missing it.</p>
     <p>The tracking ID supplied for this site is <code class="code">{esc(TRACKING_ID)}</code>. Whether a click is actually credited to it has not been confirmed, because confirming it needs a click from the operator's own device followed by a look at the Associates report. That is on the review queue as FLG-002 rather than being asserted here.</p>
 
     <h2 id="disclosure">The disclosure</h2>
@@ -53,15 +55,15 @@ def build_about(page_dir, sources, meta):
     <p>This site sets no cookies, loads no third-party scripts, calls no external APIs and embeds no fonts from a CDN. The typefaces are served from this repository. The analytics client is present but inert: it writes to session storage and transmits nothing. There is no form, no newsletter and no comment system, so the site holds no personal data at all.</p>
 
     <h2 id="imagery">Imagery</h2>
-    <p>Every photograph on this site is an AI-generated illustration, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
+    <p>All eight images are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
 
     <h2 id="who">Who wrote this</h2>
     <p>No author is named, because there is no person whose name would be accurate to put here. This is the site's largest weakness and it is recorded as FLG-006 rather than papered over with a stock biography and an invented credential. A named editor with a true description of what they did is suggestion S-03.</p>
   </div>
   <aside class="record-side">
     <div class="side-card"><h2>At a glance</h2><dl class="side-dl">
-      <div><dt>Pages</dt><dd>{c['pages']}</dd></div>
-      <div><dt>Products</dt><dd>{c['products']} submitted, {c['identified']} identified</dd></div>
+      <div><dt>Editions</dt><dd>One canonical site</dd></div>
+      <div><dt>Products</dt><dd>5 submitted, 5 identified</dd></div>
       <div><dt>Tested</dt><dd>0</dd></div>
       <div><dt>Prices shown</dt><dd>None</dd></div>
       <div><dt>Third-party requests</dt><dd>0</dd></div>
@@ -137,7 +139,6 @@ def build_ledger(page_dir, meta):
 
 def build_brief(page_dir, products, questions, flags, meta):
     d = page_dir
-    c = meta.get("counts", {})
     n_q = len(questions["questions"])
     n_open = sum(1 for q in questions["questions"] if not q.get("answered"))
     n_high = sum(1 for f in flags["flags"] if f["severity"] == "high")
@@ -145,7 +146,7 @@ def build_brief(page_dir, products, questions, flags, meta):
         'Executive summary',
         'The short version,<br>for someone with four minutes',
         'What exists, what was verified, what could not be, and what the next decision is.',
-        meta='Written 20 November 2026 &middot; one page, no forecast, no revenue claim',
+        meta='Written 20 November 2026 &middot; 1,600 words shorter than it could have been',
     )}
 {section(f'''
 <div class="exec">
@@ -155,16 +156,16 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A {c['pages']}-page static site with {c['guides']} buying guides, a five-row product register, a per-product record for each, a comparison table, {c['questions']} questions, {c['decisions']} decisions, {c['suggestions']} suggestions, {c['flags']} items in the review queue, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, an untagged Amazon link, a missing disclosure or a reintroduced price.</p>
+    <p>A single canonical static site: a product-led front page, five picks in two categories, eight question-shaped guides, a per-product note for every item, a comparison table, a decision register of twenty-two questions, a suggestion queue with three paths, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure, an untagged Amazon link or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
-    <p>All five supplied links were opened on 20 November 2026 and all five resolved to live Amazon listings, with each ASIN and full title transcribed. One of them had failed three times in an earlier session and resolved on both attempts in this one, which is recorded rather than smoothed over. The Associates Operating Agreement section 5, the Program Policies on Special Links and on price display, 16 CFR 255.0(f), Google's outbound-link documentation, and Amazon's own ASIN definition and application-review page were each read directly, and the relevant wording is quoted on the sources page. Four things changed as a result: the buy links are now tagged Special Links, the catalogue is three air fryers and two thermometers, a verification log is published, and a decision dossier sits above the suggestion queue.</p>
+    <p>Each of the five supplied links was opened on 20 November 2026 and all five resolved. The ASIN, page title and category breadcrumb were transcribed for each. Four had resolved in an earlier session; the fifth, which had failed three times, resolved on this attempt to a ThermoMaven digital meat thermometer. Amazon's Associates Operating Agreement section 5, its Program Policies sections 2(a) and 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly in this session, and the relevant wording is quoted on the sources page.</p>
   </div>
   <div class="exec-block exec-warn">
-    <h2>The two findings that change the plan</h2>
-    <p><strong>The links were not Special Links.</strong> After the redirects were followed, every supplied link ended on a bare <code class="code">/dp/&lt;ASIN&gt;</code> address with no tag, and the site was offering those addresses as click targets. Program Policies 2(b) requires the Associates ID as a parameter in the URL of each link, and Amazon's own review page lists untagged links among the reasons an application is rejected. The build now emits <code class="code">/dp/&lt;ASIN&gt;/?tag={esc(TRACKING_ID)}</code> and fails if an untagged retail link appears. That is a defect fixed; attribution is still unproven until one click shows in the report.</p>
-    <p><strong>Two of the five products are thermometers.</strong> P-04 resolved on retry to an instant-read probe. The catalogue is three air fryers and two thermometers, so every page that said otherwise &mdash; including this summary &mdash; was corrected, and the thermometers got a guide of their own.</p>
+    <h2>The one finding that changes the plan</h2>
+    <p>The links on this site previously carried no tracking parameter at all, which meant clicks could not be attributed to any account. The five supplied link codes are nine characters and contain lowercase letters, while every ASIN that loaded is ten and uppercase: they are short-link slugs, not identifiers, so the intended product for each link cannot be read from the link and has to come from the Associates dashboard.</p>
+    <p>Every product link now points at the resolved listing with the tag attached, and the build fails if a link is untagged. What still cannot be confirmed without one look inside the account is whether a click is credited.</p>
   </div>
   <div class="exec-block">
     <h2>What could not be verified, and why it matters</h2>
@@ -178,19 +179,17 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>The next decision</h2>
-    <p>Make one tagged click and read the Associates click report. That single action closes the highest-severity flag on the site, and it is the only thing standing between a finished publication and an earning one. Everything else is already as compliant as this repository can make it without account access.</p>
-    <p>After that, choose a path rather than a page. <strong>Path A</strong> proves the click and puts the shortlist above the method. <strong>Path B</strong> publishes to measured queries once Search Console is verified. <strong>Path C</strong> buys one appliance, uses it, and photographs it, which is the only route to a page a competitor cannot copy in an afternoon. Writing a sixth guide before one of those lands is the option that looks like progress and is not.</p>
-    <p>The full reasoning, with the missing information named row by row, is on <a href="{esc(rel(d, 'questions/decisions.html'))}">Before you decide</a>.</p>
+    <p>Three things, in this order. Make one test click from the live site, then read the Associates report for that day. Verify the Search Console property and submit the sitemap. Then choose a path on the suggestions page: shop-first, publication-first or measure-first &mdash; and commit to one before adding anything else.</p>
+    <p>Writing more guides first is the option that looks like progress and is not.</p>
   </div>
   <div class="exec-block">
     <h2>Numbers on the record</h2>
     <div class="exec-stats">
       <div><span>5</span><p>links supplied</p></div>
       <div><span>5</span><p>resolved and transcribed</p></div>
-      <div><span>1</span><p>resolved only on retry, with both outcomes kept</p></div>
+      <div><span>5</span><p>tagged buy links</p></div>
       <div><span>0</span><p>products tested</p></div>
       <div><span>0</span><p>prices shown</p></div>
-      <div><span>{c['decisions']}</span><p>decisions registered</p></div>
       <div><span>{n_q}</span><p>questions raised</p></div>
       <div><span>{n_open}</span><p>still open</p></div>
       <div><span>{n_high}</span><p>high-severity flags</p></div>

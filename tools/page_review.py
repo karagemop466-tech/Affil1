@@ -72,7 +72,7 @@ def build_index(page_dir, flags, meta):
     return page(
         d,
         title="Flagged for review \u2014 Crisp & Counter",
-        description="Every uncertainty on this site in one place: unresolved links, unconfirmed tracking, missing prices, absent authorship and generated imagery, each with the source to check it against.",
+        description="Every uncertainty on this site in one place: unconfirmed tracking, missing prices, absent authorship, generated imagery and the consolidation record, each with the source to check it against.",
         body=body,
         active="review/index.html",
         canonical="review/",
@@ -80,11 +80,22 @@ def build_index(page_dir, flags, meta):
 
 
 def _urlish(text, d):
-    from layout import AFFILIATE_HINT, product_link, tag_url
+    """Render a 'where to check it' entry.
+
+    A listing URL becomes a tagged Special Link, because an Amazon product link
+    without the Associates tag is exactly the defect this site was built to
+    avoid. A short link is shown as text: it cannot carry the tag, so it is
+    evidence rather than a destination. Anything else is a citation.
+    """
+    import re as _re
+    from layout import buy_url, product_link
     if text.startswith("http"):
-        if AFFILIATE_HINT.search(text):
-            return product_link(d, tag_url(text), esc(text),
-                                aria="Open this Amazon listing (affiliate link, opens in a new tab)")
+        m = _re.search(r"/dp/([A-Z0-9]{10})", text)
+        if m:
+            return product_link(d, buy_url(m.group(1)), esc(text),
+                                aria="Open this Amazon listing (paid link, opens in a new tab)")
+        if "link.amazon/" in text:
+            return f'<code class="code">{esc(text)}</code>'
         return outbound(d, text, esc(text))
     return esc(text)
 
@@ -145,12 +156,12 @@ def build_measurement(page_dir, meta):
     body = f"""{pagehead(
         'Measurement plan',
         'Measurement is written,<br>and switched off',
-        'Nine event names are defined, five of them are explained below, a client exists, and nothing is being recorded. That is the current state and it is deliberate.',
+        'Five events are defined, a client exists, and nothing is being recorded. That is the current state and it is deliberate.',
         meta='Beacon disabled by default &middot; no cookies &middot; no third-party requests &middot; no endpoint deployed',
     )}
 {section(f'''
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository; five events carry the campaign, four more are surface signals added by the comparison and review pages. None of it is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
   <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
 </div>
 <h2>What would be measured</h2>
@@ -175,96 +186,4 @@ def build_measurement(page_dir, meta):
         body=body,
         active="review/index.html",
         canonical="review/measurement.html",
-    )
-
-
-def build_verification(page_dir, verification, sources, meta):
-    """The dated line-by-line log: links opened, sources read, findings."""
-    d = page_dir
-    v = verification
-
-    link_rows = []
-    for r in v["links"]:
-        cls = "pill-ok" if r["result"] == "resolved" else "pill-warn"
-        link_rows.append([
-            {"html": f'<a href="{esc(rel(d, "products/" + r["ref"].lower() + ".html"))}"><strong>{esc(r["ref"])}</strong></a>'},
-            {"html": f'<code class="code">{esc(r["submitted"])}</code>'},
-            {"html": f'<code class="code">{esc(r["asin"])}</code>'},
-            {"html": f'<span class="pill {cls}">{esc(r["result"])}</span>'},
-            {"html": esc(r["tag_in_final_url"])},
-            {"html": esc(r["note"])},
-        ])
-
-    src_rows = []
-    for s in sources["sources"]:
-        status_cls = "pill-ok" if s["status"].startswith("read") else "pill-none"
-        src_rows.append([
-            {"html": f'<strong>{esc(s["id"])}</strong>'},
-            {"html": f'<a href="{esc(s["url"])}" target="_blank" rel="noopener">{esc(s["title"])}</a><br><span class="tiny">{esc(s["publisher"])}</span>'},
-            {"html": esc(s.get("read_on", "\u2014"))},
-            {"html": f'<span class="pill {status_cls}">{esc(s["status"])}</span>'},
-            {"html": esc(s["used_for"])},
-        ])
-
-    finding_cards = "".join(f"""<article class="flag" id="{esc(f['id'])}">
-  <div class="flag-top"><span class="flag-id">{esc(f['id'])}</span></div>
-  <h3>{esc(f['title'])}</h3>
-  <dl class="flag-dl">
-    <div><dt>What was observed</dt><dd>{esc(f['what'])}</dd></div>
-    <div><dt>What it means</dt><dd>{esc(f['means'])}</dd></div>
-    <div><dt>What the site did about it</dt><dd>{esc(f['action'])}</dd></div>
-  </dl>
-  <div class="flag-check"><p class="q-label">Check it yourself</p><ul><li>{_urlish(f['check'], d)}</li></ul></div>
-</article>""" for f in v["findings"])
-
-    body = f"""{pagehead(
-        'Verification log',
-        'What was checked,<br>and what came back',
-        f'Every supplied link and every policy claim on this site, re-opened on {esc(v["meta"]["checked_on"])}. {len(v["links"])} links, {len(sources["sources"])} sources, {len(v["findings"])} findings, including one that changes where the money goes.',
-        meta='A row is confirmed here only when this session opened the source and read it',
-    )}
-{section(f'''
-<div class="reg-lede">
-  <div>
-    <h2>Why a log rather than a badge</h2>
-    <p>A verification badge is a claim about a process nobody can see. This page is the process: the link, the
-    date, what came back, and what changed because of it. Where an earlier session recorded something different,
-    both observations are kept, because the disagreement is information.</p>
-    <p>{esc(v['meta']['method'])}</p>
-  </div>
-  <dl class="reg-stats">
-    <div><dt>Links opened</dt><dd>{len(v['links'])}</dd></div>
-    <div><dt>Resolved</dt><dd>{sum(1 for r in v['links'] if r['result'].startswith('resolved'))}</dd></div>
-    <div><dt>Tag seen on arrival</dt><dd>0</dd></div>
-    <div><dt>Sources read</dt><dd>{len(sources['sources'])}</dd></div>
-  </dl>
-</div>
-{table(['Ref', 'Submitted link', 'ASIN on arrival', 'Result', 'Tag in final URL', 'Note'], link_rows, cls='register',
-       caption='Five supplied links, requested on 2026-11-20',
-       note='The submitted link is recorded here as text. It is not offered as a click target anywhere on the site; the buy links are built from the ASIN instead.')}''', cls='')}
-{section(f'''
-<div class="sec-head"><div>{eyebrow('Policy sources')}<h2>What was read, and when</h2></div>
-<p>Quoted wording for each sits on the <a href="{esc(rel(d, 'about/index.html'))}#sources">sources page</a>.</p></div>
-{table(['Ref', 'Source', 'Read on', 'Outcome', 'Used for'], src_rows, cls='sources')}''', cls='section-tint')}
-{section(f'''
-<div class="sec-head"><div>{eyebrow('Findings')}<h2>Nine things this pass changed</h2></div>
-<p>Two of them changed what the site says. One of them changed whether the site can earn.</p></div>
-<div class="dec-stack">{finding_cards}</div>''', cls='')}
-{section(f'''
-<div class="callout">
-  <h2>What is still not verified</h2>
-  <p>Whether a click is credited to <code class="code">shopnow047c-20</code>. That requires a click and a report,
-  and neither exists yet. Until it does, every page on this site describes the links as tagged and the
-  attribution as unconfirmed, which is exactly what is known.</p>
-  <p><a class="tlink" href="{esc(rel(d, 'questions/decisions.html'))}#D-01">The decision that closes it <span aria-hidden="true">&rarr;</span></a></p>
-</div>''', cls='')}"""
-
-    return page(
-        d,
-        title="Verification log \u2014 what was checked on 2026-11-20 \u2014 Crisp & Counter",
-        description=("Every supplied link opened, every policy source read, and nine findings from the pass "
-                     "of 2026-11-20 \u2014 including the missing tracking parameter that the site now builds in."),
-        body=body,
-        active="review/index.html",
-        canonical="review/verification.html",
     )

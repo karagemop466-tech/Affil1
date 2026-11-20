@@ -1,0 +1,57 @@
+name: Weekly site audit
+
+# The compliance state of a page is only true for the hour it was written. This
+# job re-runs the same gate CI runs before publishing, on a schedule, so a dead
+# affiliate destination, a page missing its disclosure, or a reintroduced price
+# figure shows up as a red check instead of a quiet live violation.
+#
+# It publishes nothing. It only reads the repository and fails loudly.
+on:
+  schedule:
+    - cron: "30 6 * * 1"  # Mondays 06:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild from the data layer
+        run: python3 tools/build.py
+
+      - name: Compliance and integrity gate
+        id: gate
+        run: set -o pipefail; python3 tools/check.py | tee gate.log
+
+      - name: Every reference still resolves at the Pages mount
+        run: |
+          mkdir -p "$RUNNER_TEMP/www"
+          python3 tools/stage.py "$RUNNER_TEMP/www/Affil1"
+          (cd "$RUNNER_TEMP/www" && python3 -m http.server 8207 --bind 127.0.0.1 >/dev/null 2>&1 &)
+          for i in $(seq 1 20); do
+            curl -fsS -o /dev/null http://127.0.0.1:8207/Affil1/index.html && break
+            sleep 1
+          done
+          MOUNT=http://127.0.0.1:8207/Affil1 python3 tools/check_deploy_paths.py
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Weekly audit"
+            echo
+            echo "- Rebuild: \`tools/build.py\`"
+            echo "- Gate: \`tools/check.py\` — see the job log for the check count"
+            echo "- Mount-path link check: \`tools/check_deploy_paths.py\`"
+            echo
+            echo "This workflow changes nothing. A failure here means a published page"
+            echo "no longer passes the gate that was true when it shipped; fix the data in"
+            echo "**src/data/**, re-run the build, and update the flagged register."
+          } >> "$GITHUB_STEP_SUMMARY"

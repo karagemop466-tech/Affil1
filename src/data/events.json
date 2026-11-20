@@ -1,6 +1,6 @@
 {
   "meta": {
-    "purpose": "Nine event names are defined before any code ships, so that 'which page works' becomes a question with an answer. Five of them are the ones this site explains on its measurement page.",
+    "purpose": "Five events, defined before any code ships, so that 'which page works' becomes a question with an answer.",
     "status": "Implemented, disabled on static GitHub Pages.",
     "principles": [
       "Same-origin only",
@@ -73,69 +73,6 @@
       "not_collected": [
         "identity of the reviewer"
       ]
-    },
-    {
-      "id": "E6",
-      "name": "guide_open",
-      "fires_when": "A guide page is opened",
-      "props": [
-        "guide"
-      ],
-      "answers": "Which guides get read at all",
-      "not_collected": [
-        "IP",
-        "user agent string",
-        "cookie",
-        "query string of the referrer"
-      ]
-    },
-    {
-      "id": "E7",
-      "name": "outbound_click",
-      "fires_when": "A sponsored link is clicked",
-      "props": [
-        "product_ref",
-        "page"
-      ],
-      "answers": "Which products earn clicks",
-      "not_collected": [
-        "IP",
-        "user agent string",
-        "cookie",
-        "query string of the referrer"
-      ]
-    },
-    {
-      "id": "E8",
-      "name": "search_query_referral",
-      "fires_when": "The arrival came from a search engine",
-      "props": [
-        "host"
-      ],
-      "answers": "Whether search is sending anyone",
-      "not_collected": [
-        "IP",
-        "user agent string",
-        "cookie",
-        "query string of the referrer"
-      ]
-    },
-    {
-      "id": "E9",
-      "name": "report_import",
-      "fires_when": "A first-party Associates report is imported by hand; never a browser event, so the collector rejects it",
-      "props": [
-        "date",
-        "source"
-      ],
-      "answers": "Whether the ledger has any rows",
-      "not_collected": [
-        "IP",
-        "user agent string",
-        "cookie",
-        "query string of the referrer"
-      ],
-      "scope": "operator"
     }
   ],
   "collector_design": {
