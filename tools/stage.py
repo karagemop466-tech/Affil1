@@ -19,6 +19,9 @@ def stage(destination):
            path.stem.endswith(('-w560', '-w760', '-w900', '-w1280')))
     }
     for name in sorted(files):
+        if not (ROOT / name).exists():
+            print(f"stage: skipping missing {name}")
+            continue
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / name, target)
