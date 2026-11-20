@@ -7,6 +7,7 @@ Shared task board for parallel sessions on this repository.
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
+| `arena/c7f7070d-affil1` | `arena/c7f7070d-affil1` | Shop-front polish + re-verification: `src/data/products.json`, `src/data/flags.json`, `src/data/questions.json`, `src/data/suggestions.json`, `tools/content.py`, `tools/build.py`, `tools/page_home.py`, `tools/page_guides.py`, `tools/page_products.py`, `tools/page_compare.py`, `tools/page_desk.py`, `tools/page_review.py`, generated HTML, `COORDINATION.md` | in progress |
 
 No other session had an open claim on these files when this work started. Two
 other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
@@ -21,6 +22,7 @@ other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
 | Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
 | Product facts beyond the listing title | needs review | — | `src/data/products.json` |
 | Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
+| Re-verify all five links fresh + resolve P-04 + shop-front polish (2 new guides, front-page clusters, suggestions/questions expansion) | in progress | arena/c7f7070d-affil1 | `src/data/*.json`, `tools/*.py`, generated HTML |
 
 `needs review` means the item is published on the review page and does not block
 anything.
