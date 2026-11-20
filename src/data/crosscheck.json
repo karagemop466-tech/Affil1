@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "what_this_is": "One row per page on the site. Each row states the strongest thing the page asserts, what a reader has to click to check it, and whether this session was able to check it. It is a cross-artefact audit: the site checked against itself, page by page.",
+    "why_it_exists": "Every other register on this site is organised by topic — flags, questions, sources. None of them answers the question a reviewer actually asks: 'this page says a thing; is it true?' That needs a row per page.",
+    "verdicts": {
+      "holds": "This session opened the source and the claim is supported by it.",
+      "holds-with-caveat": "Supported, but only in a narrower form than the page's wording suggests.",
+      "unverifiable-here": "The claim may be true, but checking it needs access this repository does not have.",
+      "should-be-removed-or-reworded": "The claim, as written, is not supported by anything this session could open."
+    },
+    "method": "Every row was produced by opening the generated page, reading its strongest assertion, then opening the cited source. Where no source is cited, that is recorded as the finding.",
+    "date": "2026-11-20"
+  },
+  "rows": [
+    {
+      "page": "index.html",
+      "section": "Shortlist cards",
+      "claim": "Each of the five picks was 'opened, followed to the Amazon listing it lands on, and matched to the product named here'.",
+      "check": "Open each submitted link and compare the landing title with the name on the card.",
+      "checked": "Yes — all five opened this session.",
+      "verdict": "holds",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "note": "All five destinations agree with the register. Matching a destination is not the same as matching the owner's intent; that is FLG-001."
+    },
+    {
+      "page": "index.html",
+      "section": "Disclosure strip",
+      "claim": "As an Amazon Associate I earn from qualifying purchases.",
+      "check": "Compare the sentence with the Operating Agreement, and compare the placement rule with the FTC guidance.",
+      "checked": "Yes.",
+      "verdict": "holds-with-caveat",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "note": "The sentence is verbatim and required. But 'I earn from qualifying purchases' plus 'this site may earn a commission' is a present-tense claim about a relationship that no Associates report in this repository confirms. The wording is required; the state is unproven."
+    },
+    {
+      "page": "index.html",
+      "section": "\"How this works\" band",
+      "claim": "Ratings, prices and stock are 'left where they belong: on Amazon, changing in real time'.",
+      "check": "Search the page source for a price, a rating or a stock word.",
+      "checked": "Yes — the build gate rejects any of these strings.",
+      "verdict": "holds",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "note": "Consistent with Program Policies 2(b), which permits a price only from an Amazon-served link or the APIs."
+    },
+    {
+      "page": "index.html",
+      "section": "Seasonal feature",
+      "claim": "The band is labelled 'Seasonal · hosting' and headed by a photograph of a kitchen counter.",
+      "check": "Open assets/img/holiday-hosting-counter-w900.jpg and compare it with src/data/images.json's stated rule.",
+      "checked": "Yes — opened this session.",
+      "verdict": "should-be-removed-or-reworded",
+      "source": "",
+      "note": "The image is photoreal. Every other image on the site is an engraving or a wash drawing. images.json says 'illustrative editorial' only. A reader moving from seven drawings to one photo will read the photo as documentation."
+    },
+    {
+      "page": "products/p-01.html … p-05.html",
+      "section": "Feature lists",
+      "claim": "Capacities and features are stated 'in the seller's wording'.",
+      "check": "Open the listing and compare the title text with the quoted phrases.",
+      "checked": "Yes — titles transcribed this session for all five.",
+      "verdict": "holds",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "note": "The quoted capacities (6 qt / two 3 qt, 8 qt, 26 qt) all appear in the listing titles."
+    },
+    {
+      "page": "products/*",
+      "section": "Add-to-cart call to action",
+      "claim": "Adding to basket will open the reader's Amazon cart.",
+      "check": "Open the add.html endpoint and see what Amazon returns.",
+      "checked": "Yes — Amazon returned a sign-in page with an Associates return path.",
+      "verdict": "holds-with-caveat",
+      "source": "https://www.amazon.com/gp/aws/cart/add.html",
+      "note": "The endpoint exists and accepts the URL, but an anonymous visitor is sent to sign in first. The button says 'Opens your Amazon cart'; for a signed-out reader it opens a sign-in page. The button copy now says so."
+    },
+    {
+      "page": "guides/*",
+      "section": "Read-time labels",
+      "claim": "'7 min read', '5 min read' and so on.",
+      "check": "Extract the main text and divide the word count by a plausible reading speed.",
+      "checked": "Yes — one guide measured at about 800 words in the main text.",
+      "verdict": "holds-with-caveat",
+      "source": "",
+      "note": "800 words is roughly 3–4 minutes at 200–250 wpm, not 7. The labels are a self-estimate, not a measurement, and they are generous to the site. Recorded as a wording issue, not a factual claim about a product."
+    },
+    {
+      "page": "compare/index.html",
+      "section": "Side-by-side table",
+      "claim": "Formats and stated capacities can be compared across all five products.",
+      "check": "Each cell against the listing title.",
+      "checked": "Yes.",
+      "verdict": "holds",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "note": "No cell states a price, a rating or an availability. The table compares form factor only."
+    },
+    {
+      "page": "fit/index.html",
+      "section": "Format finder",
+      "claim": "Answers recommend a format, not a specific product.",
+      "check": "Walk the questions and look at the output.",
+      "checked": "Yes — the output names a format.",
+      "verdict": "holds",
+      "source": "",
+      "note": "Important distinction: a recommender that named a product would be making an unverified performance claim. This one does not."
+    },
+    {
+      "page": "about/index.html",
+      "section": "Source register",
+      "claim": "Every factual cell carries a source.",
+      "check": "Open each linked source.",
+      "checked": "Partly — the Amazon and FTC sources opened; two carry caveats recorded on this page.",
+      "verdict": "holds-with-caveat",
+      "source": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "note": "One FTC URL used elsewhere in the repository (consumer.ftc.gov/business-guidance) is a redirect target, not the canonical page. The canonical page opened is the one linked here."
+    },
+    {
+      "page": "review/index.html",
+      "section": "Flag register",
+      "claim": "22 items where the site is less certain than it would like.",
+      "check": "Count the rows and read the severities.",
+      "checked": "Yes — 22 flags, 5 high, 9 medium, 8 low.",
+      "verdict": "holds",
+      "source": "",
+      "note": "Self-consistent. Two new findings from this session are added rather than folded into existing flags, so the count on this page and the count on /verification/ differ by design."
+    },
+    {
+      "page": "questions/index.html",
+      "section": "Question register",
+      "claim": "10 of 22 questions are 'closed with a source or a reproducible check'.",
+      "check": "Open the answer card behind each closed row.",
+      "checked": "Partly.",
+      "verdict": "holds-with-caveat",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "note": "The closed rows rest on policy text, which opened. But the two questions that matter most for revenue (Q-01, Q-03) are both open, so the 'closed' count is not a measure of readiness."
+    },
+    {
+      "page": "offers/index.html",
+      "section": "Ranked board",
+      "claim": "The ranking is arithmetic from stated weights.",
+      "check": "Run python3 tools/page_offers.py --check and compare.",
+      "checked": "Yes — the page and the terminal use the same function.",
+      "verdict": "holds",
+      "source": "",
+      "note": "The weights are judgements. They were changed once during this session, after the first run ranked a tidying task above the task that decides whether any money can arrive; the change is recorded in offers.json rather than applied silently."
+    },
+    {
+      "page": "verification/index.html",
+      "section": "This page",
+      "claim": "Each section's strongest claim has been checked against a source.",
+      "check": "Open the rows above.",
+      "checked": "Yes — this is the record of doing it.",
+      "verdict": "holds-with-caveat",
+      "source": "",
+      "note": "The audit covers the pages this session could open. It is not a guarantee that no weaker claim elsewhere is wrong; it covers the strongest claim on each of the main surfaces."
+    },
+    {
+      "page": "sitemap.xml / feed.xml",
+      "section": "Machine-readable surface",
+      "claim": "The sitemap lists every canonical page and nothing else.",
+      "check": "Compare the URL count with the build's GENERATED set.",
+      "checked": "Yes — 29 URLs against 30 generated pages minus 404.",
+      "verdict": "holds",
+      "source": "https://www.sitemaps.org/protocol.html",
+      "note": "The retired editions under archive/ are absent from the sitemap, which is correct, but 22 of them carry no noindex tag and are live on the host. See the deploy-scope row on /verification/."
+    },
+    {
+      "page": "robots.txt",
+      "section": "Crawl directive",
+      "claim": "Allow: / — everything is crawlable.",
+      "check": "Fetch the host and see what actually resolves.",
+      "checked": "Yes.",
+      "verdict": "should-be-removed-or-reworded",
+      "source": "",
+      "note": "Allow: / is accurate about the host and wrong about the intent: it invites a crawler into /tools/, /src/, /archive/ and five retired storefronts, because the host serves the whole repository. The directive is not the bug; the deploy scope is."
+    }
+  ]
+}

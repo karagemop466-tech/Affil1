@@ -111,7 +111,7 @@ BANNED = [
 # policy pages is a source, not a Special Link, and marking it "sponsored"
 # would misdescribe it. This distinction is enforced rather than described.
 AFFILIATE = re.compile(
-    r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", re.I)
+    r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:(?:dp|gp/product)/|gp/aws/cart/add\.html)|link\.amazon/)", re.I)
 AMAZON_ANY = re.compile(r"(^//|https?://)([a-z0-9.-]*amazon\.[a-z.]+|amzn\.to|link\.amazon)", re.I)
 EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
@@ -121,6 +121,7 @@ CITATION_OK = re.compile(
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"developer-docs\.amazon\.com|sell\.amazon\.com|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
+    r"sitemaps\.org|"
     r"www\.ftc\.gov|foodsafety\.gov)(?=/|$)",
     re.I,
 )

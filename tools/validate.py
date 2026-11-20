@@ -27,7 +27,7 @@ def is_product_link(href):
     """
     if "link.amazon/" in href:
         return True
-    return bool(re.search(r"amazon\.com/(dp|gp/product)/", href))
+    return bool(re.search(r"amazon\.com/(dp|gp/product|gp/aws/cart/add\.html)/?", href))
 
 
 def err(msg):
