@@ -1,5 +1,6 @@
 """The suggestion queue: proposals a reviewer can accept or reject one at a time."""
 
+from release_panels import render as release_panel
 from layout import esc, eyebrow, page, pagehead, rel, section
 
 
@@ -69,7 +70,7 @@ def build(page_dir, suggestions, meta):
         d,
         title="Suggestions \u2014 Crisp & Counter",
         description="Twelve proposed changes to this site, each with its cost, its risk and the open question it depends on \u2014 with a decision control for each so a reviewer can choose a path before anything is built.",
-        body=body,
+        body=body + release_panel(d, "suggestions/"),
         active="suggestions/index.html",
         canonical="suggestions/",
     )
