@@ -669,7 +669,7 @@ Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-aff
 
 **Scope, narrowed.** Claimed files: `_src/data/verification-log.json` (new; was `src/data/`), `_src/data/sources.json` (dates and quotes), the proposals folder (`COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt`, unwired), this section and its record. `_tools/page_desk.py` (brief and About generator, committed at `fa607a4`) and the regenerated `brief/index.html` and `about/index.html` are already in the branch under the owner's gap-closure scope; the integration session should review them. Withdrawn from the first claim: `_tools/build.py`, `_tools/layout.py`, `EXECUTIVE_SUMMARY.md`, and a dashboard page. Those are logged as requests below, not edited here.
 
-**Path rename on main.** `main` renamed `src/`, `tools/`, `analytics/`, `measurement/`, `archive/` and `decision-support/` to `_`-prefixed paths. Merged in `20047b5` with `main` at `a289cf9`. Pages does not publish `_` folders, so the rename moves those files out of public reach.
+**Path rename on main.** `main` renamed `src/`, `tools/`, `analytics/`, `measurement/`, `archive/` and `decision-support/` to `_`-prefixed paths. Merged in `20047b5` with `main` at `a289cf9`; later merged `c13d7ad` as `f757eac`. Pages does not publish `_` folders, so the rename moves those files out of public reach.
 
 **Branch deviation.** The environment fixed the branch name `arena/bba82abd-affil1`; the board's `session-<id>/<task>` convention cannot be followed. Recorded here.
 
@@ -688,7 +688,7 @@ Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-aff
 - `_tools/check_deploy_paths.py` (RVW-08): skip path segments starting with `_`.
 - Pages source (RVW-09): owner decision, legacy root publish or `workflow`.
 
-**Gates on the merged tree (`20047b5`):** build 30 pages, reproducible under the workflow exclusions; check 0 errors, 0 warnings; validate pass; local links 0 broken across 37 pages; sweep would move 0; unit tests 6 of 6; check_js pass; `_analytics/endpoint.py` compiles. Staged artifact (`_tools/stage.py _site`, 30 HTML, `.nojekyll`): `check_deploy_paths` against the staged copy resolves 824 internal references at `/Affil1/` with 0 failures. Before merge, this staged-artifact check stands in for the deploy gate: the deploy job runs only on pushes to `main` and is skipped under the legacy Pages source (RVW-09). PR checks: build and launch.
+**Gates on the merged tree (`f757eac`):** build 65 pages, reproducible under the workflow exclusions; `platform/` edition gate pass (1,965 checks); check 0 errors, 0 warnings; validate pass; local links 0 broken across 65 pages; sweep would move 0; unit tests 6 of 6; check_js pass; `_analytics/endpoint.py` compiles. Staged artifact (`_tools/stage.py _site`, 31 HTML, `.nojekyll`): `check_deploy_paths` against the staged copy resolves 851 internal references at `/Affil1/` with 0 failures. Before merge, this staged-artifact check stands in for the deploy gate: the deploy job runs only on pushes to `main` and is skipped under the legacy Pages source (RVW-09). PR checks: build and launch.
 
 ## Release receipt — session-arena-83e015f6 (final integration, this session)
 

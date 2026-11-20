@@ -279,13 +279,13 @@
       "severity": "low",
       "status": "Resolved as a checker-scope issue. No publication change needed. Re-verified on the merged tree 2026-11-20.",
       "title": "Deploy-path checker counts pages in unpublished underscore folders",
-      "found": "Pages publishes nothing whose path segment starts with '_' (see _config.yml). Run from the repository root, tools/check_deploy_paths.py crawls _decision-support/ and reports 41 HTTP 404 references, all from unpublished pages. Run against the staged artifact (_site, 30 HTML files, .nojekyll present), the same check resolves 824 internal references at /Affil1/ with zero failures. The earlier finding (before main renamed the folders) said the staged artifact omitted decision-support/; under the current layout that omission is by design.",
+      "found": "Pages publishes nothing whose path segment starts with '_' (see _config.yml). Run from the repository root, tools/check_deploy_paths.py crawls _decision-support/ and reports 41 HTTP 404 references, all from unpublished pages. Run against the staged artifact (_site, 30 HTML files, .nojekyll present), the same check resolves 851 internal references at /Affil1/ with zero failures. The earlier finding (before main renamed the folders) said the staged artifact omitted decision-support/; under the current layout that omission is by design.",
       "why_it_matters": "The checker's root crawl is noisy, so a real break could be hidden among the 41. The live site is unaffected.",
       "action": "Cross-scope request to the owner of _tools/check_deploy_paths.py: skip path segments that start with '_' (matching Pages). Not changed in this pass.",
       "sources": [
         "repository file: _config.yml (header comment on the underscore rename)",
         "repository file: _tools/stage.py",
-        "staged artifact check on commit 20047b5 (824 references, 0 failures)"
+        "staged artifact check on commit f757eac (851 references, 0 failures, 31 HTML)"
       ]
     },
     {

@@ -8,7 +8,7 @@ Owner: session `arena/bba82abd-affil1` only. Kept in its own file so parallel se
 
 The first claim (`23b9ba2`) also named `tools/build.py`, `tools/layout.py`, `EXECUTIVE_SUMMARY.md` and a new dashboard. Those were **withdrawn**: they are shared output (site index, navigation, summary) that the board reserves for the integration session. Their work is logged as requests below, not edited.
 
-`main` renamed `src/`, `tools/`, `analytics/`, `measurement/`, `archive/` and `decision-support/` to underscore-prefixed paths (merge `20047b5`). The claim below uses the new paths.
+`main` renamed `src/`, `tools/`, `analytics/`, `measurement/`, `archive/` and `decision-support/` to underscore-prefixed paths (merge `f757eac`). The claim below uses the new paths.
 
 **Claimed files (the only files this session edits from now on):**
 
@@ -61,16 +61,17 @@ Corrections this pass, stated plainly:
 
 Every row in `_src/data/verification-log.json` names the page read, the date, and what the page showed. Reads are `V-01` to `V-16`; findings are RVW-01 to RVW-09.
 
-Gates on the merged tree (`20047b5`, with `main` at `a289cf9`):
+Gates on the merged tree (`f757eac`, with `main` at `c13d7ad`):
 
-- `_tools/build.py`: 30 generated pages; rebuild is byte-identical under the workflow's exclusions.
+- `_tools/build.py`: 65 generated pages; rebuild is byte-identical under the workflow's exclusions.
 - `_tools/check.py`: 0 errors, 0 warnings. (Before this pass: three errors, because the leftover `tools/`, `analytics/` and `measurement/` folders held only cache files. Removed.)
 - `_decision-support/validate.py`: all checks passed.
-- `_tools/check_local_links.py`: 0 broken across 37 pages.
+- `_tools/check_local_links.py`: 0 broken across 65 pages.
 - `_tools/sweep_surfaces.py --dry-run`: would move 0 files.
 - `python3 -m unittest discover -s _tools`: 6 of 6 pass.
 - `_tools/check_js.py`: pass. `_analytics/endpoint.py` compiles.
-- Staged artifact (`_tools/stage.py _site`, 30 HTML, `.nojekyll` present): `check_deploy_paths` run against `_site` resolves 824 internal references at `/Affil1/` with zero failures. Run from the repository root it reports 41 404s, all from unpublished `_decision-support/` pages (RVW-08).
+- `platform/compliance_gate.py`, `platform/build_edition.py`, `platform/verify_edition.py` (the `edition-verify` workflow on `main`): pass; 1,965 line-by-line checks, 0 errors.
+- Staged artifact (`_tools/stage.py _site`, 31 HTML, `.nojekyll` present): `check_deploy_paths` run against `_site` resolves 851 internal references at `/Affil1/` with zero failures. Run from the repository root it reports 41 404s, all from unpublished `_decision-support/` pages (RVW-08).
 
 **Pre-merge deploy evidence.** The deploy job runs only on pushes to `main` and is skipped under the legacy Pages source (RVW-09). The staged-artifact check above is the stand-in for the deploy gate before merge. It is recorded here, and the post-merge run is recorded on PR #96.
 
@@ -78,8 +79,8 @@ Gates on the merged tree (`20047b5`, with `main` at `a289cf9`):
 
 - The environment fixed the branch name `arena/bba82abd-affil1`. The board convention `session-<id>/<task>` cannot be followed. Recorded on the board.
 - `main` was merged into the branch at `1cdd046` with `--allow-unrelated-histories -X theirs`, because the branch base and `main` had unrelated histories. Safe only because the earlier base's tree was a subset of `main`; that was checked. Later merges were ordinary.
-- Merges since: `370b3ce` (c2d1050), `b55f191` (PR #90, 25ade98), `a17882b` (PR #95, 8b22041), `20047b5` (a289cf9, PR #92 and the `_`-prefix rename). The merge at `20047b5` moved `src/data/*` to `_src/data/`, and resolved `about/index.html` by regeneration.
-- `main` moved during the session (`c2d1050`, `25ade98`, `8b22041`, `23fa2e3`, `a289cf9`). Each time it was merged in, not rebased, and checked by ancestry before each push.
+- Merges since: `370b3ce` (c2d1050), `b55f191` (PR #90, 25ade98), `a17882b` (PR #95, 8b22041), `20047b5` (a289cf9, PR #92 and the `_`-prefix rename), `f757eac` (c13d7ad). The merge at `20047b5` moved `src/data/*` to `_src/data/`, and resolved `about/index.html` by regeneration.
+- `main` moved during the session (`c2d1050`, `25ade98`, `8b22041`, `23fa2e3`, `a289cf9`, `c13d7ad`). Merged `c13d7ad` as `f757eac`; the conflicts were `_tools/page_desk.py` and `brief/index.html` (main's computed counts taken, then regenerated) and `COORDINATION.md` (this session's section kept; main has none). Each time it was merged in, not rebased, and checked by ancestry before each push.
 
 ## Irregularities found in this pass
 
@@ -90,7 +91,7 @@ Gates on the merged tree (`20047b5`, with `main` at `a289cf9`):
 - **RVW-05 (low, open):** `EXECUTIVE_SUMMARY.md` counts are stale.
 - **RVW-06 (medium, resolved upstream):** `tools/test_paid_link_gate.py` failed on the old base; PR #90 restored it. 6 of 6 pass.
 - **RVW-07 (medium, open):** `review/index.html` tag and archive-count text is wrong. Cross-scope request.
-- **RVW-08 (low, resolved as checker scope):** the root deploy-path crawl counts unpublished `_decision-support/` pages. The staged artifact passes (824 references).
+- **RVW-08 (low, resolved as checker scope):** the root deploy-path crawl counts unpublished `_decision-support/` pages. The staged artifact passes (851 references).
 - **RVW-09 (medium, open):** the `pages.yml` deploy job is skipped under the legacy Pages source. Owner decision.
 
 Also corrected on the brief page (committed in `fa607a4`, merged):
