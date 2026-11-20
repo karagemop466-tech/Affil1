@@ -43,6 +43,22 @@ def build(page_dir, suggestions, meta):
     open_items = [s for s in items if s.get("status") != "implemented"]
     done = [s for s in items if s.get("status") == "implemented"]
     paths = suggestions.get("paths", [])
+    rec = suggestions.get("meta", {}).get("recommended_path", {})
+
+    def _path_row(p):
+        rec_cell = ""
+        if rec.get("path") == p.get("id"):
+            rec_cell = ' <span class="pill pill-ok">Recommended</span>'
+        return f"""<tr>
+  <td><strong>{esc(p['id'])}</strong> · {esc(p['name'])}{rec_cell}</td>
+  <td>{esc(p.get('verdict', ''))}</td>
+  <td>{esc(p.get('first_moves', p.get('needs', '')))}</td>
+  <td>{esc(p.get('good_if', ''))}</td>
+</tr>"""
+
+    choice_table = f"""<div class="table-scroll"><table class="register">
+<thead><tr><th scope="col">Path</th><th scope="col">Verdict</th><th scope="col">First moves</th><th scope="col">Good if</th></tr></thead>
+<tbody>{"".join(_path_row(p) for p in paths)}</tbody></table></div>"""
 
     path_cards = "".join(f"""<article class="path-card">
   <p class="scard-id">{esc(p['id'])}</p>
@@ -83,7 +99,12 @@ def build(page_dir, suggestions, meta):
 </div>''', cls='')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('Three ways forward')}<h2>Pick a path, not a pile</h2></div>
-<p>Each path needs a different set of rows. Choosing one is the decision this page exists for.</p></div>
+<p>Each path needs a different set of rows. Choosing one is the decision this page exists for — and nothing is implemented until you choose.</p></div>
+<div class="callout"><h2>The best path first: {esc(rec.get('name', ''))} ({esc(rec.get('path', ''))})</h2>
+<p>{esc(rec.get('why', ''))}</p>
+<p><strong>If you can only do one thing:</strong> {esc(rec.get('if_you_can_only_do_one_thing', ''))}</p>
+<p>{esc(rec.get('review_note', ''))}</p></div>
+{choice_table}
 <div class="path-grid paths-three">{path_cards}</div>''', cls='section-tint')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('The queue')}<h2>Open proposals</h2></div>
