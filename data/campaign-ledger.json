@@ -1,0 +1,16 @@
+{
+  "$comment": "CAMPAIGN LEDGER. Deliberately empty. A row may be added ONLY from an authorized first-party report, with a dated provenance note. No estimates, no forecasts, no illustrative values. Every numeric field is null until a report supplies it.",
+  "ledger_version": 1,
+  "opened_at": "2026-11-20",
+  "note": "This ledger was opened empty on purpose. The brief for this project explicitly excludes conversion scores and revenue forecasts. Rows appear only when an Associates Central report is pasted in, and each row must cite which report and which date it came from.",
+  "columns": [
+    { "key": "timestamp", "label": "Timestamp (UTC)", "definition": "When the reported figure was observed, ISO 8601." },
+    { "key": "source", "label": "Source", "definition": "Which authorized first-party report the row came from." },
+    { "key": "channel", "label": "Channel", "definition": "Where the session originated, as the report states it." },
+    { "key": "eligible_sessions", "label": "Eligible sessions", "definition": "Sessions that met the Commission Income Statement session definition (S10)." },
+    { "key": "clicks", "label": "Clicks", "definition": "Outbound clicks recorded on our own origin for the same period." },
+    { "key": "reported_orders", "label": "Reported orders", "definition": "Orders as stated in the first-party report. Never derived." },
+    { "key": "provenance", "label": "Provenance", "definition": "Free text: report name, pull date, who pulled it." }
+  ],
+  "rows": []
+}
