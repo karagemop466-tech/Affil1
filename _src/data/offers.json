@@ -1,0 +1,282 @@
+{
+  "meta": {
+    "what_this_is": "A weights-based offer engine. Instead of a page of prose about what could be decided, each candidate change is scored against six factors, and the page computes and ranks with those numbers in front of the reviewer, who can disagree with the weights.",
+    "open_problem_it_solves": "The site could tell a reader where to click but not what to do next. Prose registers do not answer 'which of these should I do first'. A weighted score does, and it can be challenged factor by factor.",
+    "how_weights_work": "Each factor is 0-3 for every offer. The total is the sum of factor x weight. Effort is subtracted, because an offer that costs an owner weekend is not cheap because it would work. Nothing here is a forecast of revenue; every weight is a judgement and is labelled as one.",
+    "unverified_rule": "Any factor score that depends on information this repository does not hold is marked 'needs'. A 'needs' row is not scored as zero, because zero would read as 'no value'. It is shown as unknown and excluded from the ranking until the missing fact exists.",
+    "method_source": "Plain weighted-sum scoring. Arithmetic only; reproducible with python3 tools/page_offers.py --check.",
+    "weight_change_note": "unblocks-money was raised from weight 3 to 5 after the first run of this page. At weight 3 the ranking put the deploy-scope fix first, because OFF-01's owner-time cost outweighed its value. That was a scoring error, not a finding: an offer that decides whether ANY commission can be earned cannot rank below one that tidies what is served. The change is recorded rather than quietly made. OFF-03 was rescored after the merge with main: it is no longer an open risk to remove, because main already withdrew the synthetic tag. Leaving it scored as urgent would have misranked a problem that is fixed."
+  },
+  "factors": [
+    {
+      "id": "unblocks-money",
+      "label": "Unblocks money",
+      "weight": 5,
+      "question": "If this is not done, can any commission be earned by any other work?",
+      "why": "The heaviest factor, because everything else is decoration if clicks are not credited. Weighted at 5 rather than 3 so that the one offer which decides whether any commission is possible outranks a set of individually useful improvements."
+    },
+    {
+      "id": "honesty",
+      "label": "Reduces a false claim",
+      "weight": 3,
+      "question": "Does this remove something the site currently asserts and cannot prove?"
+    },
+    {
+      "id": "buyer-value",
+      "label": "Helps a buyer decide",
+      "weight": 2,
+      "question": "Does a reader choose better or buy faster because of this?"
+    },
+    {
+      "id": "reach",
+      "label": "Reaches new readers",
+      "weight": 2,
+      "question": "Does this make new people arrive from search or feeds?"
+    },
+    {
+      "id": "owner-time",
+      "label": "Owner time required",
+      "weight": 2,
+      "question": "How many hours or account logins does this need from the owner, not from a session?",
+      "inverted": true,
+      "scale": "0 = a session can do it alone; 3 = needs the owner's account and real work"
+    },
+    {
+      "id": "reversibility",
+      "label": "Safe to reverse",
+      "weight": 1,
+      "question": "If it is wrong, can it be undone without losing money or trust?",
+      "scale": "3 = trivially reversible; 0 = hard to walk back"
+    }
+  ],
+  "offers": [
+    {
+      "id": "OFF-01",
+      "title": "Confirm one Special Link in the Associates account and read the click report",
+      "one_line": "The only task on this list that decides whether the site can earn at all.",
+      "what_changes": "One product's link becomes an account-issued Special Link with a confirmed click, and only that product's links start carrying the tag again. The other four stay untagged until they are confirmed the same way.",
+      "evidence_for": "Program Policies 2(a): 'Special Links enable accurate tracking, reporting, and accrual of commission income.' Nothing in this repository can see the report.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "scores": {
+        "unblocks-money": 3,
+        "honesty": 3,
+        "buyer-value": 0,
+        "reach": 0,
+        "owner-time": 3,
+        "reversibility": 3
+      },
+      "owner_does": "Sign in, open Associates Central, generate one link, click it once, read the report.",
+      "if_it_fails": "Nothing on the site breaks; the register records 'tried, no click credited' and the site's position becomes known rather than assumed.",
+      "blocks": "Every revenue-dependent decision below."
+    },
+    {
+      "id": "OFF-02",
+      "title": "Fix the deploy scope so the published site is only the published site",
+      "one_line": "Stop serving the build scripts, the data registers and five retired storefronts.",
+      "what_changes": "Pages switches from 'deploy from the repository root' to the staged artefact, so /tools/, /src/, /archive/ and the retired editions stop resolving.",
+      "evidence_for": "This session fetched the live https://karagemop466-tech.github.io/Affil1/tools/build.py and .../archive/notes-edition/index.html. Both returned 200 with content. github pages API reports build_type legacy, source.path '/'.",
+      "evidence_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configure-publishing-source",
+      "scores": {
+        "unblocks-money": 0,
+        "honesty": 3,
+        "buyer-value": 1,
+        "reach": 2,
+        "owner-time": 1,
+        "reversibility": 3
+      },
+      "owner_does": "Settings → Pages → Source: GitHub Actions (one dropdown), or fix the path so the staged directory is what is served.",
+      "if_it_fails": "The site would go offline if the workflow is misconfigured; the previous commit stays deployable until it is right, and the owner should verify before closing the tab.",
+      "blocks": "Every 'one site to index' claim the brief makes."
+    },
+    {
+      "id": "OFF-03",
+      "title": "Keep the tag withdrawn until one click is confirmed",
+      "one_line": "Main now publishes no synthetic tag. The next step is to prove one, not to re-add it.",
+      "what_changes": "The register currently publishes zero tagged links: every Amazon destination is the plain listing, which is the honest state while no Special Link is approved. Nothing further should be tagged until a click is seen in the Associates report.",
+      "evidence_for": "Verified in this session: layout.approved_amazon_urls() returns {} and permitted_amazon_urls() contains only plain /dp/ listings and untagged cart permalinks. tools/check.py now refuses any Amazon product URL outside that set. An earlier revision of this repository synthesised ?tag= from a fallback; that is gone.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "scores": {
+        "unblocks-money": 2,
+        "honesty": 3,
+        "buyer-value": -1,
+        "reach": 0,
+        "owner-time": 0,
+        "reversibility": 3
+      },
+      "owner_does": "Nothing. The safe state is live. It changes only when OFF-01 produces a confirmed click.",
+      "if_it_fails": "If a tag is re-added without a confirmed click, the site returns to asserting a relationship it cannot prove; the checker now fails the build in that case.",
+      "blocks": "Nothing, but it is the safest default while OFF-01 is open."
+    },
+    {
+      "id": "OFF-04",
+      "title": "Give every product page an add-to-basket path",
+      "one_line": "A reader who has decided should not have to hunt for the button.",
+      "what_changes": "Cart permalinks replace the single 'See it on Amazon' call to action, with the buyer note kept as the second door.",
+      "evidence_for": "This session opened the add.html endpoint and reached Amazon's sign-in redirect with the Associates return path, so the format is accepted. Without it, every click costs the reader a second decision.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "scores": {
+        "unblocks-money": 1,
+        "honesty": 0,
+        "buyer-value": 3,
+        "reach": 0,
+        "owner-time": 0,
+        "reversibility": 3
+      },
+      "owner_does": "Nothing — shipped on the front page this session; the product pages still use the detail link.",
+      "if_it_fails": "The detail-page link is still beside it, so a reader is never stranded.",
+      "blocks": "Conversion measurement, because the event only exists once the CTA exists."
+    },
+    {
+      "id": "OFF-05",
+      "title": "Re-draw the eight photographic images so the site has one visual language",
+      "one_line": "A photograph beside a buy button reads as evidence. Half the image set was photographic.",
+      "what_changes": "Eight of seventeen in-use images replaced with engravings in the same style as the other nine, including the two on product pages P-02 and P-04.",
+      "evidence_for": "This session opened every image the live pages reference: 8 were photographic renders and 9 were engravings. _src/data/images.json described the set as illustrative only. A product page that says 'not a photograph of P-02' under a photograph of an oven is the exact confusion the rule exists to prevent.",
+      "evidence_url": "",
+      "scores": {
+        "unblocks-money": 0,
+        "honesty": 2,
+        "buyer-value": 1,
+        "reach": 1,
+        "owner-time": 1,
+        "reversibility": 3
+      },
+      "owner_does": "Nothing to approve if the re-draw is acceptable; license real photography only if that is preferred, and then record its provenance.",
+      "if_it_fails": "The replacement images are illustrations, so a weak drawing is a design problem, never a false claim about a product.",
+      "blocks": "Nothing."
+    },
+    {
+      "id": "OFF-06",
+      "title": "Publish one guide, then read the queries before choosing the next",
+      "one_line": "Write where the evidence points, not where instinct does.",
+      "what_changes": "A fortnightly guide, each added to the sitemap and the feed, with the next topic chosen from Search Console queries rather than guesswork.",
+      "evidence_for": "The nine existing guides already cover the four question-shaped topics the brief suggested. Without a query report, a tenth is a guess. Q-07 and S-07 are both open on exactly this.",
+      "evidence_url": "https://support.google.com/webmasters/answer/7576553",
+      "scores": {
+        "unblocks-money": 0,
+        "honesty": 0,
+        "buyer-value": 1,
+        "reach": 3,
+        "owner-time": 2,
+        "reversibility": 3
+      },
+      "owner_does": "Verify the Search Console property once, and hand over read access or a screenshot.",
+      "if_it_fails": "A guide that nobody reads costs writing time, not correctness, and is reversible by unlisting it.",
+      "blocks": "Topic selection, and therefore most of the content plan."
+    },
+    {
+      "id": "OFF-07",
+      "title": "Put a named human on the masthead",
+      "one_line": "Or stop implying one is behind the notes.",
+      "what_changes": "A real byline with two true sentences, or an explicit 'anonymous desk' statement on every page.",
+      "evidence_for": "FTC Endorsement Guides FAQ: an endorsement should reflect the honest opinion of the endorser. A site that reads like an experienced kitchen editor but names nobody is implying an endorser it does not have.",
+      "evidence_url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "scores": {
+        "unblocks-money": 0,
+        "honesty": 3,
+        "buyer-value": 1,
+        "reach": 0,
+        "owner-time": 2,
+        "reversibility": 2
+      },
+      "owner_does": "Supply a name and two true sentences, or approve the anonymous-desk wording.",
+      "if_it_fails": "An invented persona would be worse than the current state, so the fallback is the explicit statement, not a plausible name.",
+      "blocks": "Photography, first-hand testing, and any hands-on content."
+    },
+    {
+      "id": "OFF-08",
+      "title": "Point a real analytics endpoint at the five defined events",
+      "one_line": "Measure before optimising, and measure the events the pages actually fire.",
+      "what_changes": "A self-hosted collector receives page_view, product_click, cart_click, guide_read and search_intent, with no cookies and no third-party script.",
+      "evidence_for": "assets/js/analytics.js already emits the five events into a queue that has no endpoint. Leaving it inert means the next decision is made blind.",
+      "evidence_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits",
+      "scores": {
+        "unblocks-money": 0,
+        "honesty": 0,
+        "buyer-value": 0,
+        "reach": 0,
+        "owner-time": 3,
+        "reversibility": 3
+      },
+      "owner_does": "Choose a host and a retention period, or accept the anonymous aggregate-only fallback.",
+      "if_it_fails": "The queue stays inert; nothing breaks.",
+      "blocks": "Any claim about what readers do."
+    },
+    {
+      "id": "OFF-09",
+      "title": "Move off the repository subpath to an owned domain",
+      "one_line": "A shop at a /Affil1/ path is a shop in a corridor.",
+      "what_changes": "Every canonical, the sitemap, the feed and the OG images point at one domain the owner controls.",
+      "evidence_for": "Pages serves this project from karagemop466-tech.github.io/Affil1/. Canonical URLs, the sitemap and the feed all hardcode that subpath, which means any future move rewrites every page at once.",
+      "evidence_url": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site",
+      "scores": {
+        "unblocks-money": 0,
+        "honesty": 0,
+        "buyer-value": 1,
+        "reach": 2,
+        "owner-time": 2,
+        "reversibility": 2
+      },
+      "owner_does": "Buy a domain and add a CNAME. The DNS and the certificate take a day.",
+      "if_it_fails": "A wrong DNS record takes the site down until it is corrected; the github.io address keeps working meanwhile if configured sequentially.",
+      "blocks": "Serious outreach, because a review site on a repo subpath looks like a test."
+    },
+    {
+      "id": "OFF-10",
+      "title": "Get ten qualifying sales before relying on the Creators API",
+      "one_line": "The price feed is not a build task; it is a consequence of selling.",
+      "what_changes": "Nothing yet. It records the order of operations so no session builds a price feature that cannot be fed.",
+      "evidence_for": "Program Policies 2(b) permits prices only from an Amazon-served link or from the APIs. FLG-022 records that PA-API 5 is deprecated and the Creators API needs at least 10 qualifying sales in the past 30 days.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "scores": {
+        "unblocks-money": 0,
+        "honesty": 0,
+        "buyer-value": 0,
+        "reach": 0,
+        "owner-time": 3,
+        "reversibility": 3
+      },
+      "owner_does": "Sell ten things first. Nothing in a repository can shortcut this.",
+      "if_it_fails": "No fallback is needed; the site simply shows no prices, which is its current and permitted state.",
+      "blocks": "Any price, rating or availability display."
+    }
+  ],
+  "paths": [
+    {
+      "id": "PATH-1",
+      "name": "Make it earn",
+      "summary": "Prove one link pays before improving anything else.",
+      "offers": [
+        "OFF-01",
+        "OFF-03",
+        "OFF-04"
+      ],
+      "why": "Three of the ten offers touch whether money can arrive. The rest touch whether it arrives faster or from further away.",
+      "cost": "One owner session in Associates Central."
+    },
+    {
+      "id": "PATH-2",
+      "name": "Make it honest",
+      "summary": "Remove the claims the repository cannot support, in the cheapest order.",
+      "offers": [
+        "OFF-02",
+        "OFF-05",
+        "OFF-07"
+      ],
+      "why": "Each of these deletes an assertion the site currently makes and cannot prove. None of them needs new content.",
+      "cost": "One Pages setting, one image, two sentences."
+    },
+    {
+      "id": "PATH-3",
+      "name": "Make it found",
+      "summary": "Fix the address, verify the property, then write where the queries say.",
+      "offers": [
+        "OFF-09",
+        "OFF-06",
+        "OFF-08"
+      ],
+      "why": "Search traffic is the only channel that compounds, and it needs a stable address and a report to read.",
+      "cost": "A domain, a verification, and a publishing rhythm."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "purpose": "The cart permalink layer. A reader who has already decided should be able to put the thing in the basket from this page, not click through a product page and hunt for a button.",
+    "observed_on": "2026-11-20",
+    "verification": "This session opened the cart endpoint WITHOUT a tag and WITH one. Without a tag it returns the cart flow; with AssociateTag it returned Amazon's sign-in redirect carrying openid.assoc_handle=amzn_associates_add_to_cart_us and an Associates return path. Both shapes are accepted by Amazon; neither proves a purchase is credited, and nothing here claims it is.",
+    "what_is_verified": "The endpoint accepts the URL shape and returns an Amazon sign-in redirect with the Associates return path. The five ASINs are the destinations observed this session.",
+    "what_is_not_verified": "That a completed purchase through these links is credited to shopnow047c-20. That needs the Associates report, and it is still FLG-002.",
+    "policy_note": "The cart permalink carries no AssociateTag while the register has no approved Special Link. An earlier draft of this file put the tag in the cart URL directly, which reproduced the exact regression tools/layout.permitted_amazon_urls exists to prevent: asserting a relationship the register calls unconfirmed. When arm_links.py records an approved Special Link for a product, the cart URL for that product may carry its tag, and this register says so by pointing at intent, not by hard-coding one.",
+    "automation_note": "There is no scraping, no rotation of destinations, and no cloaking. Plain links, written out in full, one per product."
+  },
+  "cta": {
+    "cart_endpoint": "https://www.amazon.com/gp/aws/cart/add.html",
+    "detail_label": "Read the buyer note",
+    "cart_label": "Add to basket",
+    "cart_sub": "Opens your Amazon cart",
+    "detail_sub": "Sizes, trade-offs, what the seller states"
+  },
+  "links": [
+    {
+      "ref": "P-01",
+      "asin": "B0CDY277D3",
+      "short": "CHEFMAN dual basket",
+      "cart_path": "?ASIN.1=B0CDY277D3&Quantity.1=1",
+      "observed_destination": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "ref": "P-02",
+      "asin": "B09B7SB46R",
+      "short": "Emeril French door",
+      "cart_path": "?ASIN.1=B09B7SB46R&Quantity.1=1",
+      "observed_destination": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "ref": "P-03",
+      "asin": "B08DKYBTPH",
+      "short": "Chefman TurboFry",
+      "cart_path": "?ASIN.1=B08DKYBTPH&Quantity.1=1",
+      "observed_destination": "https://www.amazon.com/dp/B08DKYBTPH"
+    },
+    {
+      "ref": "P-04",
+      "asin": "B0DHZTCNR5",
+      "short": "ThermoMaven instant-read",
+      "cart_path": "?ASIN.1=B0DHZTCNR5&Quantity.1=1",
+      "observed_destination": "https://www.amazon.com/dp/B0DHZTCNR5"
+    },
+    {
+      "ref": "P-05",
+      "asin": "B0DZFD6R9Z",
+      "short": "CHEF iQ Sense",
+      "cart_path": "?ASIN.1=B0DZFD6R9Z&Quantity.1=1",
+      "observed_destination": "https://www.amazon.com/dp/B0DZFD6R9Z"
+    }
+  ]
+}
