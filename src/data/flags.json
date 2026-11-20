@@ -13,22 +13,22 @@
       "severity": "high",
       "title": "Every submitted path code is 9 characters; every ASIN observed on arrival is 10",
       "expected": "An Amazon Standard Identification Number is a 10-character alphanumeric identifier.",
-      "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. The four destinations that resolved carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DZFD6R9Z.",
+      "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. All five destinations now resolve and carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z (P-04 resolved on re-verification 2026-11-20; earlier checkpoint-only outcome preserved in resolution_note).",
       "reading": "The submitted codes are most likely short-link slugs rather than identifiers. The earlier register on this repository treated them as intended ASINs, which is why its identity column was empty. That reading is corrected here.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/agreement",
         "Open each supplied link and compare the /dp/ segment to the code in the link"
       ],
       "impact": "The 'intended_asin' field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
-      "blocks": "nothing \u2014 but it explains why the register looks emptier than expected"
+      "blocks": "nothing — but it explains why the register looks emptier than expected"
     },
     {
       "id": "FLG-002",
       "severity": "high",
       "title": "No supplied link showed the tracking tag on arrival",
       "expected": "Special Links must use the Associates ID assigned to the account (SRC-02).",
-      "found": "None of the four resolving links presented a tag parameter on the page that was reached. The tracking ID shopnow047c-20 was supplied in the brief but was not observed in any resolved URL.",
-      "reading": "This is not proof the links are untagged \u2014 the tag may be applied server-side by the short-link service after the arrival page was captured. It is proof that this build could not confirm attribution, which is different.",
+      "found": "None of the five resolving links presented a tag parameter on the page that was reached. The tracking ID shopnow047c-20 was supplied in the brief but was not observed in any resolved URL.",
+      "reading": "This is not proof the links are untagged — the tag may be applied server-side by the short-link service after the arrival page was captured. It is proof that this build could not confirm attribution, which is different.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "One click from the owner's device, then the Associates click report"
@@ -65,15 +65,15 @@
     {
       "id": "FLG-005",
       "severity": "medium",
-      "title": "No price, rating, review count or stock status \u2014 by rule, not by omission",
-      "expected": "Program Policies \u00a72(b) permit price and availability only where Amazon serves the data or it arrives via Creators API / PA API.",
+      "title": "No price, rating, review count or stock status — by rule, not by omission",
+      "expected": "Program Policies §2(b) permit price and availability only where Amazon serves the data or it arrives via Creators API / PA API.",
       "found": "Neither path is connected.",
       "reading": "This is the single most common failure in affiliate sites and the most common way an Associates account is closed. Empty is the compliant state.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "impact": "A machine check in tools/check.py fails the build if a currency figure, a star rating, a review count or a stock phrase is introduced.",
-      "blocks": "nothing \u2014 the site is deliberately usable without them"
+      "blocks": "nothing — the site is deliberately usable without them"
     },
     {
       "id": "FLG-006",
@@ -149,7 +149,7 @@
       "found": "sellercentral.amazon.com help pages return a sign-in wall. The public Q&A page that repeats the definition is written by sellers, not Amazon.",
       "reading": "Rather than cite a third-party blog as though it were Amazon, the length claim is presented as an observation about this register's own data (FLG-001), which anyone can re-check by opening the links.",
       "to_check": [
-        "https://sellercentral.amazon.com/help/hub/reference/G201394520 \u2014 requires sign-in"
+        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — requires sign-in"
       ],
       "impact": "No page states the 10-character rule as an Amazon quotation.",
       "blocks": "nothing"
@@ -199,7 +199,7 @@
       "title": "P-05 is filed under Thermometers, not Air Fryers",
       "expected": "Five products in one niche.",
       "found": "Category path on arrival: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. The other four are all under Air Fryers.",
-      "reading": "Not an error in the link \u2014 the product really is a thermometer. It is an error to present it as the fifth air fryer, which is how a generated site would have handled it.",
+      "reading": "Not an error in the link — the product really is a thermometer. It is an error to present it as the fifth air fryer, which is how a generated site would have handled it.",
       "to_check": [
         "https://www.amazon.com/dp/B0DZFD6R9Z"
       ],
