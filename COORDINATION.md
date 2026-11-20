@@ -612,15 +612,29 @@ Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-
 
 ---
 
-## Claim — session `arena/44f81bcd-affil1` (started 2026-11-20 UTC)
+## Delivery — session `arena/44f81bcd-affil1` (2026-11-20 UTC)
 
 | Task | Status | Owner | Files touched |
 |---|---|---|---|
-| Policy-gated affiliate platform, verification dashboard, category & buyer-guide publication, design-prompt workbench, pre-decision questions & discovery register, executive summary, and repo-wide line-by-line audit | in progress | `arena/44f81bcd-affil1` | `edition/**`, `platform/**`, `.github/workflows/edition-verify.yml`, `COORDINATION.md` |
+| Countertop Almanac publication & category subpages (`edition/`), policy-gated affiliate platform (`platform/`), 5-event privacy-preserving collector & SHA-256 ledger importer, interactive Suggestions & Design-Prompt Workbench, Pre-Decision Questions register, Executive Summary, and Flagged for Review / repo-wide line-by-line audit | done | `arena/44f81bcd-affil1` | `edition/**`, `platform/**`, `.github/workflows/edition-verify.yml`, `tools/check.py` (`INTERNAL_SECTIONS`), `tools/sweep_surfaces.py` (`INTERNAL_SECTIONS`), `.github/workflows/pages.yml` (`verify_edition.py` step), `COORDINATION.md` |
 
-- **Non-overlapping scope rule:** Active concurrent PRs own `tools/*`, `src/data/*`, `EXECUTIVE_SUMMARY.md`, `INTEGRATION_REVIEW.md`, `shop/**`, and `decision-support/**`. Session `arena/44f81bcd-affil1` touches **only** `edition/**`, `platform/**`, `.github/workflows/edition-verify.yml`, and this section of `COORDINATION.md`.
-- **Cross-scope findings logged for active owners (not overwritten):**
-  1. `tools/validate.py` (claimed by `arena/487e4183-affil1`, PR #54): currently raises `KeyError: 'supplied_path_code_length'` when invoked by `.github/workflows/weekly-audit.yml` because `src/data/products.json` uses `submitted_code_length` / `observed_asin`.
-  2. `src/data/products.json` & `tools/layout.py` (root storefront owners): ensure `intended_asin`, `intended_listing_url`, `intended_confirmed_on`, and `intended_confirmation_source` remain explicitly stored as separate fields from `observed_asin` / `observed_url` (never merged), and keep Special Link status flagged as unresolved (`FLG-002` / `FLG-003`) until verified in the enrolled Associates Central workflow.
-  3. Archived parallel records (`archive/legacy-2026-11-20/` and earlier `data/confirmations.json` / `data.js`): documented on `edition/flagged/index.html` where earlier drafts placed 9-character path codes in `intended_asin` or merged `observed_redirect_target` into `official_listing_url`; preserved as historical audit evidence only.
+### Official sources verified firsthand (2026-11-20)
+- **Amazon Associates Operating Agreement** ([S01](https://affiliate-program.amazon.com/help/operating/agreement), updated Oct 15, 2025): §1 Special Links, §5 verbatim disclosure (`"As an Amazon Associate I earn from qualifying purchases."`).
+- **Amazon Associates Program Policies** ([S02](https://affiliate-program.amazon.com/help/operating/policies), updated Apr 14, 2026): Commission Income Statement §1, §2(e)/(g); Participation Requirements §1(g), §2(a)–(b) (price/availability restricted to Amazon-served links or Creators API / PA API), §3(e) privacy notice, §6(t) customer reviews/star ratings restriction, §6(w) link shorteners, §6(y) prohibition on price-tracking/alerting functionality unless agreed by Amazon.
+- **Amazon Selling Partner ASIN Specification** ([S03](https://sell.amazon.com/blog/what-is-an-asin), Jun 4, 2025): unique 10-character alphanumeric code definition.
+- **FTC Endorsement Guides FAQ & 16 CFR Part 255** ([S04](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [S05](https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255)): clear and conspicuous material-connection disclosure and substantiation of objective claims.
+- **Google Search Central & Search Console Docs** ([S06](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links), [S07](https://support.google.com/webmasters/answer/7576553?hl=en)) & **GitHub Pages Docs** ([S08](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)).
+- **Direct 2026-11-20 verification of all 5 submitted links** (none carried `tag=shopnow047c-20` on arrival; `intended_asin` kept `null` and strictly separate from `observed_asin` across all records):
+  - `P-01` `https://link.amazon/B04G1MEwY` → [B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3) (CHEFMAN 6 Qt Dual Basket Air Fryer Oven)
+  - `P-02` `https://link.amazon/B02NbDxp3` → [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R) (Emeril Lagasse 26QT French Door Air Fryer Toaster Oven)
+  - `P-03` `https://link.amazon/B00hJ57DV` → [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH) (Chefman Air Fryer 8 Qt TurboFry 4-in-1)
+  - `P-04` `https://link.amazon/B0c8moW59` → [B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5) (ThermoMaven 1 Sec Digital Meat Thermometer; historical checkpoint & cross-session swap flagged in `FLG-006`)
+  - `P-05` `https://link.amazon/B0f3GKalj` → [B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z) (CHEF iQ Sense Smart Wireless Meat Thermometer 3-Probe; historical fallback & cross-session swap flagged in `FLG-006`)
+
+### Verification & narrow CI integration notes
+- `platform/verify_edition.py`: **1,965 line-by-line checks passed (0 errors)** across 27 HTML pages + `sitemap.xml` + `feed.xml` (every `<tbody><tr>` row carries an official `https://` source link; verbatim §5 disclosure above `<main>` and in `<footer>`; `rel="sponsored nofollow noopener"` on 100% of product links; zero `$` figures).
+- `platform/test_platform.py`: **6/6 unit & live HTTP collector tests passed** (5 events, `DNT: 1`, `Sec-GPC: 1`, Origin allowlist, SHA-256 Associates CSV ledger import, forecast rejection, Search Console query ranker).
+- **Narrow CI registration (also resolves `S-5665c5f2`'s open `Affiliate launch checks` sweep item):** Added `"edition/"` alongside `"decision-support/"` in `tools/check.py` `INTERNAL_SECTIONS`, taught `tools/sweep_surfaces.py` to honor `INTERNAL_SECTIONS` (`would move: 0 file(s)`), and wired `python3 platform/verify_edition.py` into `.github/workflows/pages.yml`. Verified locally: `tools/check.py` (0 errors), `tools/validate.py` (1,545 checks, 0 warnings), `decision-support/validate.py` (PASS), and `tools/check_deploy_paths.py` over live HTTP at `/Affil1` (**1,841/1,841 references HTTP 200**).
+- Flagged items **needs review** (`FLG-001`..`FLG-010` + repo audit `XR-01`..`XR-06`) published at `https://karagemop466-tech.github.io/Affil1/edition/flagged/`.
+
 

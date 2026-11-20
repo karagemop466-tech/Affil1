@@ -56,6 +56,10 @@ def main():
     args = ap.parse_args()
 
     keep = published_set()
+    try:
+        from check import INTERNAL_SECTIONS
+    except Exception:  # noqa: BLE001
+        INTERNAL_SECTIONS = ("decision-support/", "edition/")
     dest = f"{ARCHIVE_ROOT}/{args.run_label}"
     moved = []
     for path in sorted(ROOT.rglob("*")):
@@ -63,6 +67,8 @@ def main():
             continue
         rel = path.relative_to(ROOT).as_posix()
         if ARCHIVE_ROOT in set(path.relative_to(ROOT).parts) or rel in keep:
+            continue
+        if rel.startswith(INTERNAL_SECTIONS):
             continue
         top = rel.split("/", 1)[0]
         # sweep only generated surfaces: data, tools, docs and assets stay put

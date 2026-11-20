@@ -355,8 +355,9 @@ def check_assets():
 
 # Hand-maintained internal sections that ship but are not storefront pages:
 # the Decision Desk publishes its own validator (decision-support/validate.py,
-# wired in this workflow) and README. See COORDINATION.md session 771e5093.
-INTERNAL_SECTIONS = ("decision-support/",)
+# wired in this workflow) and README, and edition/ publishes its own builder and
+# verifier (platform/verify_edition.py). See COORDINATION.md sessions 771e5093 and 44f81bcd.
+INTERNAL_SECTIONS = ("decision-support/", "edition/")
 
 
 def check_no_stray_pages():
