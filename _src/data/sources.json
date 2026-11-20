@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "note": "Updated 2026-11-20. A page date appears only when the page read in this pass shows it. A quote appears only when it matches the text read in this pass; otherwise it is blank and quote_status says why.",
+    "retrieved_on": "2026-11-20",
+    "rule": "A quote on this site appears only if it was copied from the page named beside it. Where a page is linked but not quoted, the entry says so."
+  },
+  "sources": [
+    {
+      "id": "SRC-01",
+      "title": "Amazon Associates Program Operating Agreement",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "status": "read directly",
+      "page_date": "Updated October 15, 2025 (shown on the page read 2026-11-20)",
+      "used_for": "Section 5, Identifying Yourself as an Associate — the required disclosure wording.",
+      "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-02",
+      "title": "Amazon Associates Program Policies",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "status": "read directly",
+      "page_date": "Updated April 14, 2026 (shown on the page read 2026-11-20)",
+      "used_for": "The tag requirement for Special Links, and the price and availability rule.",
+      "quote": "All Special Links must be accessed directly from your Site. ... you must include your Associates ID or “tag” (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-03",
+      "title": "Amazon Associates Program Policies — price and availability",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "status": "read directly",
+      "page_date": "Updated April 14, 2026 (shown on the page read 2026-11-20)",
+      "used_for": "Why no price, rating or stock status appears anywhere on this site.",
+      "quote": "your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-04",
+      "title": "FTC Endorsement Guides: What People Are Asking — affiliate marketing",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "status": "read directly 2026-11-20 (FTC FAQ, all 12 chunks)",
+      "page_date": "June 2023 (shown at the foot of the page read 2026-11-20)",
+      "used_for": "Disclosure placement and wording, including why a bare label is not enough.",
+      "quote": "You should disclose your relationship to the retailer clearly and conspicuously on your site ... As for where to place a disclosure, the guiding principle is that it has to be clear and conspicuous. The closer the disclosure is to your recommendation, the better.",
+      "quote_status": "matched to the text read on 2026-11-20 (two sentences joined by an ellipsis, in page order)"
+    },
+    {
+      "id": "SRC-05",
+      "title": "FTC Endorsement Guides — is “affiliate link” an adequate disclosure?",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "status": "read directly 2026-11-20 (FTC FAQ, all 12 chunks)",
+      "page_date": "June 2023 (shown at the foot of the page read 2026-11-20)",
+      "used_for": "Why the disclosure strip carries a full sentence and a 'Paid links' label rather than a bare tag.",
+      "quote": "Consumers might not understand that “affiliate link” means that the person placing the link is getting paid for purchases made through the link. Similarly, a “buy now” button would not be adequate. ... “Paid link” right next to an affiliate link should be an adequate disclosure of the nature of the link.",
+      "quote_status": "matched to the text read on 2026-11-20 (three sentences joined by an ellipsis, in page order)"
+    },
+    {
+      "id": "SRC-06",
+      "title": "16 CFR Part 255 — Guides Concerning the Use of Endorsements and Testimonials",
+      "publisher": "U.S. eCFR",
+      "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255",
+      "status": "read directly 2026-11-20 (eCFR part 255, §255.5(a))",
+      "page_date": "eCFR: 'up to date as of 11/18/2026'; source 88 FR 48102, July 26, 2023 (read 2026-11-20)",
+      "used_for": "The federal regulation (§§255.0–255.6, including §255.5 Disclosure of material connections) behind the FTC guidance above.",
+      "quote": "When there exists a connection between the endorser and the seller of the advertised product that might materially affect the weight or credibility of the endorsement, and that connection is not reasonably expected by the audience, such connection must be disclosed clearly and conspicuously.",
+      "quote_status": "matched to the text read on 2026-11-20 (§255.5(a), verbatim)"
+    },
+    {
+      "id": "SRC-07",
+      "title": "Qualify your outbound links to Google",
+      "publisher": "Google Search Central",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "status": "read directly",
+      "page_date": "Last updated 2025-12-10 UTC (read 2026-11-20)",
+      "used_for": "Why every Amazon product link carries rel=\"sponsored nofollow noopener\".",
+      "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-08",
+      "title": "Safe Minimum Internal Temperature Chart",
+      "publisher": "USDA Food Safety and Inspection Service (FSIS)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+      "status": "read directly 2026-11-20",
+      "page_date": "Last Updated: Apr 14, 2025 (read 2026-11-20)",
+      "used_for": "Official minimum safe internal cooking temperatures and rest times reproduced with source links in the thermometer guide.",
+      "quote": "Beef, Pork, Veal and Lamb Steaks, Chops and Roasts | 145 degrees F (62.8 degrees C) and allow to rest for at least 3 minutes",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-09",
+      "title": "Food Thermometers (Kitchen Thermometers)",
+      "publisher": "USDA Food Safety and Inspection Service (FSIS)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+      "status": "read directly 2026-11-20 (four chunks)",
+      "page_date": "Last Updated: Mar 21, 2025 (shown on the last chunk of four, read 2026-11-20)",
+      "used_for": "Confirms visual color cues are unreliable and explains thermometer placement in the thickest part away from bone, fat or gristle.",
+      "quote": "Using a food thermometer is the only reliable way to ensure that foods have been cooked to a safe minimum internal temperature to destroy any harmful microorganisms that may be in the food.",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-10",
+      "title": "Catalog Items API v2022-04-01 Reference",
+      "publisher": "Amazon Selling Partner API (Developer Docs)",
+      "url": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
+      "status": "read directly 2026-11-20",
+      "page_date": "Version: 2022-04-01 (shown on the page read 2026-11-20)",
+      "used_for": "Documents Amazon's official Selling Partner catalog lookup endpoint (GET /catalog/2022-04-01/items/{asin}), distinct from Associates Creators API / PA API.",
+      "quote": "Use the Selling Partner API for Catalog Items to retrieve information about items in the Amazon catalog.",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-11",
+      "title": "PA-API 5 Deprecation Notice",
+      "publisher": "Amazon Associates Central (Creators API documentation)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+      "page_date": "Footer: © 1996-2025, Amazon.com, Inc. No page-level date shown (read 2026-11-20)",
+      "used_for": "Establishes that Product Advertising API 5.0 is deprecated and that the Creators API is the supported successor. Program Policies §2(b) still names both, so a reader following the policy alone would aim at a route that returns 403.",
+      "quote": "The Amazon Product Advertising API 5.0 (PA-API 5) has been deprecated and is being replaced by the Creators API.",
+      "status": "read directly",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-12",
+      "title": "Welcome to Creators API — Prerequisites",
+      "publisher": "Amazon Associates Central (Creators API documentation)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "page_date": "Footer: © 1996-2025, Amazon.com, Inc. No page-level date shown (read 2026-11-20)",
+      "used_for": "The conditions for obtaining the only permitted live product-data feed. This is what turns ‘add prices’ from a build task into a sequence.",
+      "quote": "To use the Creators API, you must: 1. Be enrolled in the Amazon Associates program for your target marketplace 2. Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API 3. Register for API access through Associates Central 4. Generate API credentials",
+      "status": "read directly",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-13",
+      "title": "Creators API — GetItems operation reference",
+      "publisher": "Amazon Associates Central (Creators API documentation)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items",
+      "page_date": "Not read: only the first of three chunks was read; no page date seen",
+      "used_for": "What the permitted feed would actually return (BrowseNodeInfo, Images, ItemInfo, OffersV2), that partnerTag is required on every call, and Amazon's own ASIN examples, which are 10 characters.",
+      "quote": "One or more ItemIds like ASIN that uniquely identify an item.",
+      "status": "partly read (first chunk of three); quote matched",
+      "quote_status": "matched to the text read on 2026-11-20 (first chunk of three; the table cell for itemIds)"
+    },
+    {
+      "id": "SRC-14",
+      "title": "Associates Program Policies — 2(b), price comparison format",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "page_date": "Updated April 14, 2026 (shown on the page read 2026-11-20)",
+      "used_for": "A constraint that applies specifically to a comparison site: if prices are shown alongside prices from other sellers, both the lowest new and the lowest used Amazon price must appear. A second, independent reason the comparison table keeps its price column empty.",
+      "quote": "if you choose to display prices for any Product on your Site in any “comparison” format (including through the use of any price-comparison tool or engine) together with prices for the same or similar products offered through any web site or other means other than an Amazon Site, you must display both the lowest “new” price and, if we provide it to you, the lowest “used” price at which the Product is available on the Amazon Site.",
+      "status": "read directly",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-15",
+      "title": "Associates Program Policies — 2(b), sub-tags for measurement",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "page_date": "Updated April 14, 2026 (shown on the page read 2026-11-20)",
+      "used_for": "The compliant way to attribute performance per page or per product, which is what the measurement plan needs. Available on request, and explicitly forbidden to tie to an identified visitor.",
+      "quote": "Upon your request but subject to our approval, we may issue you additional “sub-tag” Associate IDs that permit you to monitor and optimize the performance of your Special Links by including different sub-tags in the URLs of different Special Links. Under no circumstances may you associate any sub-tag, other ID or reporting provided in connection with the Associates Program with a specific end user of your Site",
+      "status": "read directly",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-16",
+      "title": "Associates Program Operating Agreement — no representation of income",
+      "publisher": "Amazon",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "page_date": "Updated October 15, 2025 (shown on the page read 2026-11-20)",
+      "used_for": "The reason this site publishes no revenue forecast, conversion score or traffic estimate. Amazon itself disclaims any such expectation, so a projection invented here would have no basis.",
+      "quote": "We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.",
+      "status": "read directly",
+      "quote_status": "matched to the text read on 2026-11-20"
+    },
+    {
+      "id": "SRC-17",
+      "title": "FTC's Endorsement Guides: What People Are Asking — disclosure placement",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "page_date": "June 2023 (shown at the foot of the page read 2026-11-20)",
+      "used_for": "Two specific tests this site's disclosure strip is written against: a single home-page disclosure is not sufficient, and a disclosure hidden behind a DISCLOSURE link is not clear and conspicuous.",
+      "quote": "A single disclosure on your home page won’t be sufficient because people visiting your site might read individual reviews or watch individual videos without seeing the disclosure on your home page.",
+      "status": "read directly 2026-11-20 (FTC FAQ, all 12 chunks)",
+      "quote_status": "matched to the text read on 2026-11-20"
+    }
+  ]
+}

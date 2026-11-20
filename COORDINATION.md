@@ -798,3 +798,63 @@ tools/stage.py into a temp dir                    → 0 broken references
 ### Merge log
 
 Pending: see the PR linked from this board after it is opened.
+## Claim — link gate, serving scope, source quotes · arena/d34e0765-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Reinstate the paid-link gate (tags only from an approved intent record) | in progress | arena/d34e0765-affil1 | `tools/layout.py`, `tools/paid_link_gate.py`, `tools/test_paid_link_gate.py`, `tools/check.py` |
+| Stop deploying working papers and raw registers to the public host | in progress | arena/d34e0765-affil1 | `_config.yml` |
+| Correct two source-register quotes that do not appear on their cited pages | in progress | arena/d34e0765-affil1 | `src/data/sources.json`, `decision-support/data/` source rows |
+
+Findings behind the claim, each reproduced locally or read on the live host before claiming:
+
+1. **The published front page says one thing and the code does another.** `index.html` footer: “only account-confirmed purchase links may use this tag.” Four lines away, `tools/layout.py:100-106` attaches `?tag=shopnow047c-20` to every product that has no evidence bundle, and `tools/test_paid_link_gate.py` asserts that must not happen. `python3 -m unittest test_paid_link_gate` fails on the tree as merged in #83. A tag taken from a public observation is not a validated Special Link, and the page currently tells the reader it is.
+2. **Working papers are public.** GitHub Pages is `build_type: legacy` from `main:/` with a root `.nojekyll`, so `_config.yml` excludes never apply. `decision-support/`, `data/confirmations.json`, `src/data/product-intent.json` and `tools/arm_links.py` all return 200 on the live host; none are in `_site`, `sitemap.xml` or the footer. `tools/stage.py` builds the curated 30-page edition, but nothing deploys it.
+3. **Two quotes are attributed to pages that do not contain them.** SRC-09 records “Using a food thermometer is the only reliable way to ensure safety and to determine the ‘doneness’ of meat, poultry, and egg products.” as a verbatim quote from the FSIS *Food Thermometers* page. That page says “Using a food thermometer is the only reliable way to ensure that foods have been cooked to a safe minimum internal temperature…”. SRC-10 records “Retrieves details for an item in the Amazon catalog.” against a reference whose `getCatalogItem` operation reads exactly that, but not at the cited section.
+
+No other session holds these files. Cross-scope requests go in this file, not into other sessions' files.
+
+### Result — link gate, serving scope, source quotes · arena/d34e0765-affil1
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Reinstate the paid-link gate | done | arena/d34e0765-affil1 | `_tools/layout.py`, `_tools/check.py`, `_tools/test_paid_link_gate.py`, `_src/data/{flags,questions,suggestions,products}.json` |
+| Stop deploying working papers | done | arena/d34e0765-affil1 | `_config.yml`, `_tools/{build,check,check_local_links,stage,layout,page_desk}.py`, `.github/workflows/pages.yml`, six renamed directories |
+| Correct source-register quotes | done | arena/d34e0765-affil1 | `_src/data/sources.json`, `_decision-support/index.html` |
+
+**Verification performed, with the command that shows it.**
+
+- `python3 -m unittest discover -s _tools -p 'test_*.py'` — 2 tests, OK. Before this session `test_paid_link_gate` failed on the merged tree.
+- `python3 _tools/check.py` — 0 errors, 0 warnings, and it now carries a `check_serving_scope()` family. Negative test: `mkdir data` produced `FAIL data/: served by legacy Pages — rename to _data/`; removing it restored a clean run.
+- `python3 _tools/check.py` negative test on the tag rule: injecting `?tag=shopnow047c-20` into a product link produced `FAIL … unapproved tagged link`. Restored afterwards.
+- `python3 _tools/build.py && python3 _tools/validate.py && python3 _tools/check_local_links.py && python3 _decision-support/validate.py` — 1545 checks / 0 warnings; 37 pages / 0 broken; desk PASS.
+- The pages.yml reproducibility step was reproduced locally from a copy with no `.git`: rebuild produced 0 differing files.
+- Built HTML before and after the rename was diffed file by file. The only changes are the intentional path sentences on `about/` and the desk pages.
+
+**Sources re-read this session, by direct fetch.** SRC-13 [Creators API GetItems](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items); SRC-09 [FSIS Food Thermometers](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers); SRC-06 [16 CFR 255.5](https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255); SRC-10 [Catalog Items API](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference); SRC-17 [FTC Endorsement FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking). All 17 rows in `_src/data/sources.json` are now confirmed against the page they cite.
+
+**Irregularities found and recorded rather than papered over.**
+
+- SRC-09 carried a quotation that is not on the cited FSIS page. Replaced with the sentence the page does contain; `quote_note` records the correction.
+- SRC-17's `used_for` reads “a single home-page disclosure is not sufficient” without the scope. The FTC answer it quotes is about **free products** from manufacturers, not affiliate links, and the same FAQ says elsewhere that a disclosure at the very top can be overlooked. The quote is accurate; the summary sentence around it is doing less work than it appears to. Recorded here for the owner, not silently rewritten.
+- FLG-002, FLG-009, Q-03, Q-14 and S-01 all described auto-tagging as the correct fix. They now describe the withdrawal.
+- The desk index said “Six working pages” and “Forty-nine register entries” against 7 pages and 50 entries, and dated a row “05:2xZ”. Corrected; the desk validator now passes on its own count.
+
+**Not done, and honest about it.** The live host still serves `main`. Everything above lands only when this branch merges, because `build_type: legacy` deploys `main:/` and no commit on a side branch reaches it. `/data/confirmations.json` returned 200 again on 2026-11-20 *after* the rename, which is the evidence for that statement.
+
+### Handoff — same defect, two sessions · arena/d34e0765-affil1 · 2026-11-20 UTC
+
+`arena/23b5a192-affil1` reached the paid-link-gate defect independently and merged #90 first, with a more thorough fix (six gate tests wired into `kitchen-check.yml`, FLG-023/024/025). I let that stand rather than merge a competing repair, rebased onto it, and dropped my duplicate gate commit. Recorded here so the overlap is visible rather than invisible.
+
+What this branch still adds, all of it not present on `main` before this branch:
+
+| Change | Why |
+|---|---|
+| `archive/`, `docs/`, `measurement/` also underscore-prefixed | They were still served. `docs/` and `measurement/` had no `_config.yml` entry at all. |
+| `check_serving_scope()` in `_tools/check.py` | Nothing detected the original exposure. Negative-tested. |
+| SRC-09 quote replaced; SRC-10 scoped | The SRC-09 sentence is not on the cited FSIS page. |
+| Desk index counts | Said six pages and forty-nine rows against seven and fifty, and carried a `05:2xZ` placeholder. |
+
+**Live-host status after this branch merges.** Pages still serves `main:/`. The rename only hides a directory once it is on `main`. `_tools/stage.py` still builds the curated 30-page `_site`, and `pages.yml` already switches to uploading it when `gh api repos/:owner/:repo/pages` reports `build_type: workflow`. Flipping that setting is what would end root serving for good; it is a repository setting, not a file, so it is recorded as a request rather than performed here.
+
+**Request for the owner or a session with admin scope:** PUT `/repos/karagemop466-tech/Affil1/pages` with `build_type: workflow` so `_site` is served instead of the branch root. Until then the underscore prefixes are the only thing standing between the public web and any working file someone adds without one.

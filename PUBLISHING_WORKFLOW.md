@@ -114,3 +114,21 @@ python3 tools/validate.py # the gate; non-zero exit blocks the deploy job
 
 Reviewer / date / decision: _unfilled — no human reviewer has signed off on this process;
 the state of that gap is published on `/dashboard/#gate` rather than represented as done._
+
+## What is actually published
+
+Pages is configured `build_type: legacy` from `main:/`, and a root `.nojekyll`
+means Jekyll never runs. Two consequences that are easy to get wrong:
+
+1. `_config.yml`'s `exclude` list has no effect. Legacy builds do not apply it.
+2. What *does* apply is Jekyll's underscore rule, because Pages filters the
+   uploaded tree itself: nothing under a path segment starting with `_` is
+   served.
+
+So the working directories are named `_tools/`, `_src/`, `_data/`,
+`_analytics/`, `_server/`, `_decision-support/` and `_archive/`. Renaming one
+back to an un-prefixed name puts raw registers and source code on the public
+web — which is exactly what happened to `/data/confirmations.json` and
+`/tools/arm_links.py`. `_tools/check.py` now fails the build if that recurs, and
+`_tools/stage.py` builds the 30-page curated edition for a move to
+`build_type: workflow`.
