@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard — findings, analysis and campaign ledger | Affil1</title>
 <meta name="description" content="Affil1 dashboard: product findings table, analysis and the empty campaign ledger. Privacy-preserving click measurement is active; no conversion scores or revenue forecasts are presented.">
-<link rel="stylesheet" href="/assets/css/main.css">
-<link rel="alternate" type="application/rss+xml" title="Affil1" href="/rss.xml">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="alternate" type="application/rss+xml" title="Affil1" href="rss.xml">
 </head>
 <body>
 <div id="site-header"></div>
 <main class="container">
   <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
-    <a href="/">Home</a> &rsaquo; Dashboard
+    <a href="index.html">Home</a> &rsaquo; Dashboard
   </nav>
   <section class="section-tight">
     <h1>Dashboard</h1>
@@ -20,7 +20,7 @@
 
     <div class="section-head" style="margin-top:30px;">
       <h2>Entries &amp; findings table</h2>
-      <a class="btn" href="/categories/air-fryers.html">Category page &rarr;</a>
+      <a class="btn" href="categories/air-fryers.html">Category page &rarr;</a>
     </div>
     <table>
       <thead>
@@ -114,13 +114,13 @@
     <ul>
       <li>Outbound click counter: active on every outbound product link (<code>rel="nofollow sponsored"</code>).</li>
       <li>Five defined events recorded: page_view, outbound_click, guide_read, suggestion_review, session_start.</li>
-      <li>Analytics endpoint: self-hosted collector at <code>/analytics/collect</code> (<a href="/server/collect.js">server/collect.js</a>), privacy-preserving — no cookies, no IP logging.</li>
+      <li>Analytics endpoint: self-hosted collector at <code>/analytics/collect</code> (<a href="server/collect.js">server/collect.js</a>), privacy-preserving — no cookies, no IP logging.</li>
       <li>Real analytics: to be turned on once the collector is self-hosted; topics for new guides will be chosen from measured queries.</li>
     </ul>
   </section>
 </main>
 <div id="site-footer"></div>
-<script src="/assets/js/common.js"></script>
-<script src="/assets/js/analytics.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/analytics.js"></script>
 </body>
 </html>

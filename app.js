@@ -1,50 +1,39 @@
-(function () {
-  var list = document.getElementById('product-intent-table');
-  if (!list || !window.PRODUCTS) return;
+(function(){
+  const grid = document.getElementById('product-grid');
+  if (!grid) return;
 
-  window.PRODUCTS.forEach(function (p) {
-    var row = document.createElement('tr');
-    row.className = 'product-row';
+  (window.PRODUCTS || []).forEach((p) => {
+    const card = document.createElement('article');
+    card.className = 'product-card';
 
-    var statusBadge = document.createElement('span');
-    statusBadge.className = 'status status-unverified';
-    statusBadge.textContent = 'UNVERIFIED';
+    const number = document.createElement('span');
+    number.className = 'product-number';
+    number.textContent = '0' + p.id;
 
-    var link = document.createElement('a');
+    const title = document.createElement('h3');
+    title.textContent = 'Intended ASIN ' + p.intendedAsin;
+
+    const chip = document.createElement('span');
+    chip.className = 'product-chip unverified';
+    chip.textContent = 'UNVERIFIED';
+
+    const desc = document.createElement('p');
+    desc.textContent = 'Submitted Amazon link — destination and product identity not yet confirmed.';
+
+    const note = document.createElement('p');
+    note.className = 'quiet';
+    note.style.fontSize = '0.78rem';
+    note.textContent = p.note;
+
+    const link = document.createElement('a');
     link.href = p.submitted;
     link.target = '_blank';
     link.rel = 'sponsored nofollow noopener';
-    link.textContent = 'Check submitted listing';
+    link.textContent = 'Check listing →';
     link.setAttribute('aria-label', 'Open submitted Amazon link ' + p.id + '; destination is unverified');
+    link.className = 'text-link';
 
-    var cells = [
-      { text: String(p.id).padStart(2, '0'), className: 'product-number' },
-      { html: link, className: 'submitted-link' },
-      { text: p.intendedAsin, className: 'intended-asin' },
-      { text: p.officialListingUrl || '—', className: 'official-listing' },
-      { text: p.confirmationDate || '—', className: 'confirmation-date' },
-      { text: p.confirmationSource || '—', className: 'confirmation-source' },
-      { text: p.observedRedirectTarget || '—', className: 'observed-redirect' },
-      { node: statusBadge, className: 'status-cell' }
-    ];
-
-    cells.forEach(function (c) {
-      var td = document.createElement('td');
-      td.className = c.className;
-      if (c.node) td.appendChild(c.node);
-      else if (c.html !== undefined) td.appendChild(c.html);
-      else td.textContent = c.text;
-      row.appendChild(td);
-    });
-
-    list.appendChild(row);
+    card.append(number, title, chip, desc, note, link);
+    grid.appendChild(card);
   });
-
-  /* Record a guide_open analytics event when a guide page finishes loading. */
-  if (window.GoodMeasureAnalytics) {
-    var guideEl = document.querySelector('[data-guide]');
-    if (guideEl && guideEl.getAttribute('data-guide')) {
-      window.GoodMeasureAnalytics.guideOpen(guideEl.getAttribute('data-guide'));
-    }
-  }
 })();
