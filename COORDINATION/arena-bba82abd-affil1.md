@@ -48,7 +48,7 @@ Local gates on the branch (after the last build):
 - `tools/sweep_surfaces.py --dry-run`: **would move 0 files** on the merged tree (main's PR #90 repaired the launch gate; RVW-02 resolved upstream).
 - `tools/test_paid_link_gate.py` and the other tool tests: 6 of 6 pass on the merged tree (RVW-06 resolved upstream by PR #90).
 - JS parse and `analytics/endpoint.py` compile: pass.
-- `tools/check_deploy_paths.py` (served at `/Affil1/`): 1,059 references resolve.
+- `tools/check_deploy_paths.py` (served at `/Affil1/`): 1,059 references resolve on the root publication, which is what Pages serves (legacy, source `main` `/`). Run against the staged artifact it reports 41 404s from `decision-support/`, which stage.py does not copy. This is pre-existing on main (RVW-08).
 
 ## Branch and merge
 

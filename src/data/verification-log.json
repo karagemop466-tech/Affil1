@@ -273,6 +273,20 @@
         "repository file: tools/layout.py (approved_amazon_urls)",
         "repository file: archive/legacy-2026-11-20/"
       ]
+    },
+    {
+      "id": "RVW-08",
+      "severity": "low",
+      "status": "Open. Pre-existing on main; not changed in this pass.",
+      "title": "The staged Pages artifact does not match the root publication for decision-support/",
+      "found": "Pages is configured as legacy, source main '/' (checked via the Pages API on 2026-11-20), so the live site is the repository root. tools/stage.py does not copy decision-support/. Run against the staged artifact, tools/check_deploy_paths.py reports 41 HTTP 404 references, all from decision-support/*.html (editorial-plan, executive-summary, index). Run against the root, the same check resolves all 1,059 references, because decision-support/assets/ exists in the repo. The same 41 failures occur on main's staged artifact, so they predate this branch.",
+      "why_it_matters": "The live site is unaffected under legacy publication. If the Pages source is switched to 'workflow', decision-support/ would be missing from the artifact and its pages would break.",
+      "action": "Owner decision: keep the legacy root publication and treat the staged artifact as a preview only, or copy decision-support/ into the staged set. Not changed here.",
+      "sources": [
+        "repository file: tools/stage.py",
+        "repository file: tools/check_deploy_paths.py",
+        "GitHub Pages API: build_type legacy, source main /"
+      ]
     }
   ]
 }
