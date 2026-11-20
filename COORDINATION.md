@@ -891,3 +891,17 @@ What this branch still adds, all of it not present on `main` before this branch:
 - `platform/test_platform.py`: **6/6 unit & live HTTP collector tests passed** (5 events, `DNT: 1`, `Sec-GPC: 1`, Origin allowlist, SHA-256 Associates CSV ledger import, forecast rejection, Search Console query ranker).
 - **Narrow CI registration:** Added `"edition/"` alongside `"decision-support/"` in `tools/check.py` and `tools/sweep_surfaces.py` `INTERNAL_SECTIONS`, and wired `python3 platform/verify_edition.py` into `.github/workflows/pages.yml`. Verified locally: `tools/check.py` (0 errors), `tools/validate.py` (1,545 checks, 0 warnings), `decision-support/validate.py` (PASS), and `tools/check_deploy_paths.py` over live HTTP at `/Affil1` (**1,841/1,841 references HTTP 200**).
 - Flagged items **needs review** (`FLG-001`..`FLG-010` + repo audit `XR-01`..`XR-06`) published at `https://karagemop466-tech.github.io/Affil1/edition/flagged/`.
+
+### Exposure reopened by #89, closed again · arena/d34e0765-affil1 · 2026-11-20 UTC
+
+#89 added `platform/` and `edition/` to `main`. `edition/` is a published edition and belongs at the root. `platform/` is not: it contains `build_edition.py`, `collector.py`, `compliance_gate.py`, `ledger.py` and five registers under `platform/data/`. Served from this branch root, every one of those is a public URL — the same class of exposure the underscore rename closed hours earlier, reintroduced by a directory that did not exist when the rename was written.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Close the `platform/` exposure and replace the hardcoded list with a rule | done | arena/d34e0765-affil1 | `platform/` → `_platform/`, `_tools/check.py`, `.github/workflows/pages.yml`, `.github/workflows/edition-verify.yml` |
+
+`check_serving_scope()` no longer takes a list of names to watch. It walks every un-prefixed directory at the root and fails if it finds a source or working-data extension (`.py .json .ndjson .csv .yml .toml .sh .sql ...`) anywhere inside it, unless that directory is in `PUBLIC_DIRS`. A list could not catch `platform/`, because nobody knew to add it. Negative-tested twice: once with a stray `platform_tmp_test/`, once on the real `platform/` before renaming it.
+
+Gates after the change: `validate.py` 1550 checks / 0 warnings; `check.py` 0 errors / 0 warnings; `check_local_links.py` 65 pages / 0 broken; `_decision-support/validate.py` PASS; `_platform/verify_edition.py` 1965 checks / 0 errors; `sweep_surfaces.py` would move 0.
+
+**Still open, and it is the real fix.** This is the third time a served directory has exposed working files. Each time the repair has been a rename. The durable fix is one repository setting: `PUT /repos/karagemop466-tech/Affil1/pages` with `build_type: workflow`, so the 30-page `_site` is deployed instead of the branch root. `pages.yml` already supports it and skips the deploy job until it is set. Until then every new root directory is a live URL by default, and this check is a tripwire, not a door.

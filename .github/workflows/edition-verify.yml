@@ -16,18 +16,18 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run data-layer compliance gate
-        run: python3 platform/compliance_gate.py
+        run: python3 _platform/compliance_gate.py
 
       - name: Rebuild edition deterministically
-        run: python3 platform/build_edition.py
+        run: python3 _platform/build_edition.py
 
       - name: Run line-by-line HTML, source-link, anchor & policy verifier
-        run: python3 platform/verify_edition.py
+        run: python3 _platform/verify_edition.py
 
       - name: Confirm edition build is reproducible (zero drift)
         run: |
           cp -r edition /tmp/edition-snapshot
-          python3 platform/build_edition.py
+          python3 _platform/build_edition.py
           diff -r -q /tmp/edition-snapshot edition
 
       - name: Check client JavaScript syntax
