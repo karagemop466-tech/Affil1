@@ -689,3 +689,12 @@ table.register td{vertical-align:top}
 }
 .product-lede{font-size:1rem;color:var(--ink-2);line-height:1.7;max-width:44ch;margin:.2rem 0 1rem}
 .product-lede+ .buy-block{margin-top:1rem}
+
+/* ---------- category heads on the shortlist ---------- */
+.cat-chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.2rem 0 0}
+.cat-chips a{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--ink-2);background:var(--card);border:1px solid var(--line);border-radius:2px;padding:.4rem .7rem}
+.cat-chips a:hover{border-color:var(--forest);color:var(--forest)}
+.cat-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin:2.4rem 0 1.1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.cat-head h3{font-size:1.35rem;margin:0}
+.cat-head p{font-size:.8rem;color:var(--muted);margin:0}
+.cat-head:first-child{margin-top:0}

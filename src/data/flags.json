@@ -161,8 +161,8 @@
       "severity": "low",
       "title": "Food-safety guidance is absent because the source was unreachable",
       "expected": "An air-fryer guide would normally mention safe internal temperatures.",
-      "found": "USDA FSIS pages did not complete a TLS connection from this environment. No substitute source was used.",
-      "reading": "A safety figure sourced from a blog would be worse than no figure. The guides therefore avoid all food-safety claims rather than make them badly.",
+      "found": "A request to the USDA FSIS air-fryer page failed on 2026-11-20 from this build's environment, as it did in the earlier pass. No substitute source was used.",
+      "reading": "A safety figure sourced from a blog would be worse than no figure. The guides therefore avoid all food-safety claims rather than make them badly, and the thermometer guide states why it gives no doneness temperature.",
       "to_check": [
         "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
       ],

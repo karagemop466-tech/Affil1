@@ -58,7 +58,16 @@ def build_register(page_dir, products, meta):
               "A nine-character code is not an ASIN, and the listing column links to the tagged Special Link the site actually uses."),
     )
 
-    cards = "".join(_card(d, p) for p in products)
+    fryers = [p for p in products if p.get("format") in ("basket", "oven")]
+    therms = [p for p in products if p.get("format") == "thermometer"]
+    cards = (
+        f'<div class="cat-head" id="air-fryers"><h3>Air fryers</h3>'
+        f'<p>{len(fryers)} products: two basket shapes and one oven shape.</p></div>'
+        f'<div class="pcard-grid wide">{"".join(_card(d, p) for p in fryers)}</div>'
+        f'<div class="cat-head" id="thermometers"><h3>Thermometers</h3>'
+        f'<p>{len(therms)} products: one instant-read, one wireless multi-probe. A different category, and not called air fryers here.</p></div>'
+        f'<div class="pcard-grid wide">{"".join(_card(d, p) for p in therms)}</div>'
+    )
 
     body = f"""{pagehead(
         'The shortlist',
@@ -74,10 +83,11 @@ def build_register(page_dir, products, meta):
   <div class="stat"><span class="stat-n">0</span><span class="stat-l">products tested</span></div>
   <div class="stat"><span class="stat-n">0</span><span class="stat-l">prices or ratings shown</span></div>
 </div>
+<p class="cat-chips"><a href="#air-fryers">Air fryers &middot; 3</a> <a href="#thermometers">Thermometers &middot; 2</a></p>
 <p class="lede-prose">This is a shortlist, not a leaderboard. Nothing here has been handled, cooked with, measured or ranked, and
 the site says so on every card rather than in a footnote. What has been done is narrower and more useful: each link was
 followed, and the product on the other end was identified.</p>''', cls='')}
-{section(f'<div class="pcard-grid wide">{cards}</div>', cls='shortlist')}
+{section(cards, cls='shortlist')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('The register')}<h2>Every submitted link, and where it lands</h2></div>
 <p>One row per link, with the source column pointing at the Amazon page that was actually reached.</p></div>
