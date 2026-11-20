@@ -29,7 +29,7 @@ def shelf_card(d, p):
     photo = img(d, p['photo'], p['photo_alt'], sizes='(max-width:700px) 92vw, 32vw')
     if p['ref'] == 'P-03':
         photo = img(d, 'assets/img/capacity', 'An illustrated single-layer portion beside a tape measure', sizes='(max-width:700px) 92vw, 32vw')
-    source = product_link(d, p["listing_url"], "Amazon listing ↗", cls="textact")
+    source = product_link(d, p["listing_url"], "Listing source ↗", cls="textact")
     return f'''<article class="shelfcard" data-category="{category}"><a class="shelfphoto" href="{dest}" aria-label="Read about {esc(name)}">{photo}<span>{esc(tag)}</span></a>
     <div class="shelfmeta">FIELD NOTE &nbsp; / &nbsp; {esc(p['ref'][-2:])}</div><h3><a href="{dest}">{esc(name)}</a></h3><p>{esc(note)}</p>
     <a class="textact" href="{dest}">Product details &rarr;</a> &nbsp; {source}</article>'''
@@ -40,7 +40,7 @@ def build(page_dir, products, meta):
     guide = 'guides/basket-or-oven-air-fryer.html'
     seal = '''<svg viewBox="0 0 100 100" width="85" height="85" aria-hidden="true"><defs><path id="ring" d="M50 50m-34 0a34 34 0 1 1 68 0a34 34 0 1 1-68 0"/></defs><circle cx="50" cy="50" r="48" fill="#f4e6b2" stroke="#493c22"/><circle cx="50" cy="50" r="26" fill="none" stroke="#786a45"/><text fill="#493c22" font-size="9.6" letter-spacing="2.15"><textPath href="#ring">KITCHEN FIELD NOTES • C&amp;C • </textPath></text><path d="M41 55q4-19 19-20-1 16-17 19m-4 6 15-20" stroke="#493c22" stroke-width="2" fill="none"/></svg>'''
     hero = f'''<section class="cover"><div class="coverstory"><p class="editionkicker"><span></span> THE FEATURED GUIDE</p><h1>The air fryer<br><em>field guide.</em></h1><p class="coverdek">One basket, two drawers, or French doors? Find the right shape for your counter and the way you cook.</p>
-    <a class="coverbtn" href="{guide}">Read the guide <span>→</span></a><div class="byline">By Crisp &amp; Counter <b>·</b> 7 min read</div></div>
+    <div class="coveractions"><a class="coverbtn" href="{guide}">Read the guide <span>→</span></a><a href="#shelf">Shop the shelf ↓</a></div><div class="byline">By Crisp &amp; Counter <b>·</b> 7 min read</div></div>
     <div class="coverphoto"><img src="assets/img/hero-counter-w1280.jpg" srcset="assets/img/hero-counter-w760.jpg 760w, assets/img/hero-counter-w1280.jpg 1280w" sizes="(max-width:720px) 94vw, 55vw" alt="A sage-green air fryer beside cut lemons on a sunlit kitchen counter" fetchpriority="high"><div class="seal">{seal}</div><span class="figlabel">FIG. 01 &nbsp; / &nbsp; FORMAT ILLUSTRATION</span></div></section>'''
     tabs = '<div class="shelftabs" hidden aria-label="Filter products">'+''.join(f'<button data-filter="{key}" aria-pressed="false">{text}</button>' for key,text in [('air-fryers','Air fryers'),('thermometers','Thermometers'),('all','All products')])+'</div>'
     shelf = f'''<section class="shelf" id="shelf"><div class="division"><span>01</span> SHOP THE EDIT<i></i></div><div class="shelfhead"><h2>The product shelf</h2>{tabs}</div><div class="shelfgrid">{''.join(shelf_card(d,p) for p in products)}</div><p class="shelffoot">Format illustrations, not product photos. <a class="sourcenote" href="review/index.html#FLG-016">Thermometer destination note</a>. <a href="compare/index.html">Compare listings side by side →</a></p></section>'''

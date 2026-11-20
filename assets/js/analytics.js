@@ -33,8 +33,8 @@
     checkDepth();
   }
   function recordClick(event) {
-    const a = event.target.closest?.("a[rel~='sponsored']");
-    if (!a) return;
+    const a = event.target.closest?.("a[rel~='sponsored'][data-affiliate-ref]");
+    if (!a || event.defaultPrevented) return;
     const url = new URL(a.href);
     const match = /^\/dp\/([A-Z0-9]{10})(?:\/|$)/.exec(url.pathname);
     if (url.origin === "https://www.amazon.com" && match) track("outbound_product_click", match[1]);

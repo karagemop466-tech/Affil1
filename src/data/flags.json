@@ -57,8 +57,9 @@
       "found": "Three earlier requests returned a checkpoint. Subsequent sessions reported different product pages for this link; see FLG-016.",
       "reading": "The intended product and stable destination remain unconfirmed.",
       "to_check": [
-        "https://link.amazon/B0c8moW59",
-        "https://www.amazon.com/dp/B0DHZTCNR5"
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "operations/launch-readiness.html"
       ],
       "impact": "The product record retains one observation but is subject to FLG-016.",
       "blocks": "confirmed P-04 intent"
@@ -69,7 +70,7 @@
       "title": "No price, rating, review count or stock status — by rule, not by omission",
       "expected": "Program Policies §2(b) permit price and availability only where Amazon serves the data or it arrives via Creators API / PA API.",
       "found": "Neither path is connected.",
-      "reading": "This is the single most common failure in affiliate sites and the most common way an Associates account is closed. Empty is the compliant state.",
+      "reading": "Do not use dynamic Amazon data unless the exact display method and permissions have been verified.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -120,7 +121,7 @@
       "severity": "low",
       "title": "The site lives on a repository subpath, which changes how every link must be written",
       "expected": "A site at a domain root can use /guides/ style links.",
-      "found": "GitHub Pages serves this repository at /Affil1/. A root-absolute link such as href=\"/about/\" resolves to karagemop466-tech.github.io/about/ and 404s.",
+      "found": "The canonical five browser events are implemented in an optional same-origin collector. The public Pages site does not enable it.",
       "reading": "This is the single most common way a project-pages site ships broken. Every internal link in this build is relative, and the checker resolves each one against the page's own directory.",
       "to_check": [
         "https://docs.github.com/en/pages",
