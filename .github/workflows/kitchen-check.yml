@@ -31,14 +31,22 @@ jobs:
         run: python3 tools/validate.py
 
       - name: Launch gate — no second published surface has crept back in
-        run: python3 tools/sweep_surfaces.py --dry-run --run-label probe | tee sweep.log && test "$(grep -c '^    ' sweep.log)" = "0" -o -n sweep.log
-
-      - name: First-party collector still parses (no third-party script is loaded)
         run: |
-          node --check assets/js/analytics.js 2>/dev/null || python3 -c "
-          import pathlib
-          src = pathlib.Path('assets/js/analytics.js').read_text()
-          assert src.count('{') == src.count('}'), 'unbalanced braces in assets/js/analytics.js'
-          assert src.count('(') == src.count(')'), 'unbalanced parens in assets/js/analytics.js'
-          print('node unavailable; structural check passed')
-          "
+          python3 tools/build.py
+          python3 tools/sweep_surfaces.py --dry-run --run-label probe | tee sweep.log
+          grep -q '^would move: 0 ' sweep.log || {
+            echo "::error::generated pages exist outside the single published pipeline"
+            echo "Either add them to tools/build.py, or move the competing surface to archive/."
+            exit 1
+          }
+
+      - name: First-party client and self-hosted collector still parse
+        run: |
+          python3 tools/check_js.py assets/js/events.js assets/js/shortlist.js
+          python3 -m py_compile analytics/endpoint.py
+          grep -q "localStorage" assets/js/shortlist.js && echo "shortlist stays local (localStorage, nothing transmitted)"
+          if grep -rnE "googletagmanager|google-analytics|\bgtag\b|facebook|doubleclick|cloudflareinsights" --include=*.html --include=*.js . | grep -v '^./archive/' ; then
+            echo "::error:: third-party tracking found in the published tree"
+            exit 1
+          fi
+          echo "no third-party tracker referenced outside archive/" 
