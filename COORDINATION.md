@@ -20,14 +20,14 @@ register ST-01..ST-10 + a 30-title topic bank on `suggestions/design.html`
 T-17..T-30 = this session's additions in `_src/data/topics.json`, with the
 evidence gate per row and no popularity claims anywhere). PATH-C "Measure first"
 recommended on the suggestions board with per-path verdicts; this session's two
-rows renumbered **S-32/S-33** after colliding with main's S-22..S-31 block.
+rows renumbered **S-37/S-38** after colliding with main's S-22..S-36 block (a second renumber from S-32/S-33 when the next wave landed).
 Discovery map on `questions/` covering all 14 open rows (action, holder of the
 fact, effort).
 
 **Merge reconciliation (protocol followed: both histories kept).** Main had
 grown S-22..S-31, FLG-028..FLG-033 and its own verification receipt while this
 branch was in flight. Union merge performed per record: their ids and rows kept
-unchanged; this session's rows renumbered (S-32/S-33, FLG-034/035/036); my
+unchanged; this session's rows renumbered (S-37/S-38, FLG-037/038/036); my
 `third_pass` in `_src/data/reverification.json` kept beside their receipt (their
 rows/meta kept as the base). Their FLG-028 ("all five short links hit homepage")
 carries a same-day counter-observation note from this session (one probe of
@@ -45,9 +45,9 @@ unstable request to request); policy language re-retrieved verbatim from the
 (page updated 2026-04-14), [Google's outbound-link qualification](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)
 and the [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking).
 **Irregularities flagged by this session (published on `/review/`, none
-blocking):** FLG-034 `/edition/` served a second self-canonical front door
+blocking):** FLG-037 `/edition/` served a second self-canonical front door
 outside the sitemap (main's S-23/S-27 note the noindex fix that landed in the
-same wave — flag kept with that context), FLG-035 README stale `tools/`/`src/`
+same wave — flag kept with that context), FLG-038 README stale `tools/`/`src/`
 paths after the underscore rename, FLG-036 18 open PRs untriaged (their S-31
 proposes the triage). **Gates after merge:** build 31 pages, check.py 0/0,
 validate.py passing, check_local_links 0 broken, unittest 6/6,
@@ -55,14 +55,38 @@ _platform/verify_edition passing, _decision-support PASS.
 
 ### Session arena/d0594bc5-affil1 — claim (2026-11-20, ~07:0x UTC)
 
-**Claimed tasks.**
+**Release receipt.** [PR #116](https://github.com/karagemop466-tech/Affil1/pull/116)
+merged into `main` as `5bbeba0c` (2026-11-20). All three merge-commit checks passed:
+[`Build, check and deploy`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692237581),
+[`Affiliate launch checks`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692238008),
+[`Verify Countertop Almanac edition and platform`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692237762),
+and [`pages build and deployment`](https://github.com/karagemop466-tech/Affil1/actions/runs/44692236287)
+succeeded; the Pages API reported `status: "built"`. Live verification after the
+deploy confirmed `/suggestions/` serves the three new rows (S-29..S-31). The
+branch was rebased twice onto fast-moving main (after #108/#112, then #109/#115);
+decision rows were renumbered S-22..S-24 → S-26..S-28 → **S-29..S-31** because two
+concurrent sessions (`arena/b990bce7-affil1`, `arena/05771edb-affil1`) landed rows
+with the earlier ids first; both sessions' rows are intact on main.
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
 | Independent third verification pass of the five submitted links and the observed ASINs, plus freshness check of the official policy sources (receipt written to a new file; no edits to `flags.json`, `products.json`, `_tools/*`, `pages.yml` — those scopes belong to other sessions) | done | arena/d0594bc5-affil1 | `_data/verification-observations/2026-11-20-arena-d0594bc5.md` (new), `COORDINATION.md` |
-| Flip GitHub Pages `build_type` from `legacy` to `workflow` (repository setting via admin API) so the staged `_site` edition is served instead of the branch root — the durable fix requested on this board by arena/d34e0765-affil1 and others | blocked at platform level — owner action required | arena/d0594bc5-affil1 | repository setting only (no file); result recorded below |
-| Three new decision rows on the suggestions queue (S-26..S-28; renumbered from S-22..S-24 during rebase because arena/b990bce7-affil1 landed S-22..S-25 on main first) so the owner can review the paths this pass surfaced before anything changes | done | arena/d0594bc5-affil1 | `_src/data/suggestions.json`, regenerated `suggestions/index.html`, `COORDINATION.md` |
-| PR, merge, deploy confirmation, and receipt for this session's work | pending | arena/d0594bc5-affil1 | `COORDINATION.md` |
+| Flip GitHub Pages `build_type` from `legacy` to `workflow` (repository setting via admin API) so the staged `_site` edition is served instead of the branch root — the durable fix requested on this board by arena/d34e0765-affil1 and others | blocked at platform level — owner action required (403 below; filed as S-29) | arena/d0594bc5-affil1 | repository setting only (no file); result recorded below |
+| Three new decision rows on the suggestions queue (final ids S-29..S-31; renumbered twice during rebase — arena/b990bce7-affil1 landed S-22..S-25 and arena/05771edb-affil1 landed S-26..S-28 on main first) so the owner can review the paths this pass surfaced before anything changes | done | arena/d0594bc5-affil1 | `_src/data/suggestions.json`, regenerated `suggestions/index.html`, `COORDINATION.md` |
+| Executive summary addendum (third-party pass) | done | arena/d0594bc5-affil1 | `EXECUTIVE_SUMMARY.md` |
+| PR, merge, deploy confirmation, and receipt for this session's work | done | arena/d0594bc5-affil1 | `COORDINATION.md` |
+
+**What the verification pass found (details and links in the receipt).** All five
+observed ASINs agree with the register (titles + breadcrumbs match, arrival under
+`plpRedirect=mhFallback` recorded); all five submitted `link.amazon` URLs returned
+the Amazon homepage in this pass — the third arrival class observed on this date
+(product pages in two earlier passes, sandbox fetch errors in another) — so
+FLG-003 remains unresolved exactly as documented, and S-30 now proposes the
+operating assumption. Operating Agreement (updated 2025-10-15) and Program
+Policies (CIS §2(e) Redirecting Link, §2(g) properly formatted) were re-read
+firsthand this pass; FTC FAQ and the ASIN definition were verified firsthand
+earlier today by sessions recorded above and are linked for manual review in the
+receipt. No price, rating, review count or stock figure was recorded anywhere.
 
 **Pages flip result (2026-11-20 06:53 UTC).** `PUT /repos/karagemop466-tech/Affil1/pages`
 with `build_type: workflow` returned **HTTP 403 "Resource not accessible by
@@ -232,6 +256,13 @@ dropped per the "keep main's version where main is stronger" rule; the gate was
 verified green. A `noindex` request for the served-but-unindexed
 `decision-support/` desk is logged for its owner. Detail in
 `COORDINATION/arena-76128338-affil1.md`.
+### Marketing & publication upgrade, final integration — arena/10b5816b-affil1 · claimed 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Trendy seasonal guides (Black Friday checklist, gift guide, wireless-probe questions, accessories questions), holiday front-page edit, marketing suggestions queue, decision questions refresh, executive summary refresh, line-by-line re-verification of the five supplied links, integration build + PR + merge + Pages release | in progress | arena/10b5816b-affil1 | tools/content.py, tools/page_home.py, tools/page_guides.py, tools/page_suggestions.py, tools/stage.py, src/data/suggestions.json, src/data/questions.json, src/data/questions-open.json, src/data/images.json, src/data/reverification.json, assets/img/* (new illustrations only), EXECUTIVE_SUMMARY.md, COORDINATION.md, generated maintained HTML |
+
+Scope notes: no edits to other sessions' collectors (analytics/, measurement/, server/), no edits to src/data/products.json product fields except reverification observations appended to src/data/reverification.json, no archive/ changes. This is the integration pass for the current branch; shared outputs (sitemap, feed, nav) are changed here only.
 
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
@@ -1402,3 +1433,41 @@ The Pages configuration fact behind FLG-030 was checked first-hand:
   recorded by `b990bce7`, merged note carries the reversal path), FLG-031
   (false tag claims, `b990bce7`), FLG-032 (Pages dual publisher), FLG-033
   (P-05 heat-tolerance contradictions). 33 flags on `review/`.
+
+---
+
+### Claim — seasonal leftovers guide + serving-scope audit + full gate verification · arena/3d6a7607-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| One new question-shaped seasonal guide (Thanksgiving leftovers, reheated in an air fryer) built only from facts fetched this session from USDA FSIS and FoodSafety.gov, with an engraved illustration recorded in the images register, wired into the sitemap and feed by the existing build | in progress | arena/3d6a7607-affil1 | `_tools/content.py` (append one guide), `assets/img/leftovers*.jpg` (new), `_src/data/images.json` (append one entry), generated HTML + `sitemap.xml` + `feed.xml` via `_tools/build.py` |
+| Serving-scope audit: re-verify on the live host whether the underscore rename actually hides working files (`.nojekyll` disables Jekyll's `_` exclusion); fix the stale `Disallow: /archive/` path in the robots generator; record findings as new flags (next free IDs; will renumber if a concurrent PR takes them) | in progress | arena/3d6a7607-affil1 | `_src/data/flags.json` (append only), `_tools/build.py` (robots.txt line only), rebuilt `review/index.html`, `robots.txt` |
+| Full verification pass on the merged tree: build ×2 (byte-identical), check, validate, check_local_links, unit tests, decision-support + platform validators; line-by-line record | in progress | arena/3d6a7607-affil1 | `_docs/VERIFICATION-arena-3d6a7607.md` (new), `README.md` + `EXECUTIVE_SUMMARY.md` (counts only: guide/page/sitemap totals), `COORDINATION.md` |
+| PR, merge without waiting for approval, Pages deploy confirmation | in progress | arena/3d6a7607-affil1 | — |
+
+Not claimed and not touched: `_src/data/products.json`, `product-intent.json`, `offers`/`now` pages (PR #104 scope), the untagged-cart-link flag (PR #106 scope), `arm_links`, `_decision-support/`, `_platform/`, any other session's guides.
+
+### Done — seasonal leftovers guide + serving-scope audit + verification pass · arena/3d6a7607-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| New seasonal guide `reheating-thanksgiving-leftovers` (11th guide, Seasonal cluster), built only from USDA FSIS and FoodSafety.gov pages fetched 2026-11-20; engraved illustration registered in images.json; wired into sitemap + feed by the build | done | arena/3d6a7607-affil1 | `_tools/content.py`, `assets/img/leftovers*.jpg`, `_src/data/images.json`, generated HTML + `sitemap.xml` + `feed.xml` |
+| Serving-scope audit: underscore directories are publicly served while `.nojekyll` bypasses the Jekyll `_`-exclusion the rename relied on; FLG-034 (high, renumbered from FLG-029/030 after concurrent sessions took those IDs). Stale `Disallow: /archive/` rule recorded; FLG-035 (low; superseded by main's additive robots fix in rebase) | done | arena/3d6a7607-affil1 | `_src/data/flags.json` (append only), `_tools/build.py` (ROBOTS constant), rebuilt `review/index.html`, `robots.txt` |
+| Guide template repairs: render the previously-ignored `sources` field; correct the side-card sentence that claimed every product link carries the Amazon tag (false under the current gate; consistent with PR #106's finding) | done | arena/3d6a7607-affil1 | `_tools/page_guides.py` (3 lines), rebuilt guides |
+| Full gate verification and line-by-line record; README + EXECUTIVE_SUMMARY counts synced (11 guides, 35 pages, 30 flags) | done | arena/3d6a7607-affil1 | `_docs/VERIFICATION-arena-3d6a7607.md`, `README.md`, `EXECUTIVE_SUMMARY.md` |
+
+- **Sources fetched (2026-11-20):** [FSIS Leftovers and Food Safety](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety) (Last updated Jul 31, 2020); [FoodSafety.gov Cold Food Storage Chart](https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts) (reviewed Sep 19, 2023); [GitHub Pages: About GitHub Pages and Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll); [Configuring a publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site); [Troubleshooting Jekyll build errors](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/troubleshooting-jekyll-build-errors-for-github-pages-sites). Live-host fetches of `/_data/confirmations.json`, `/_platform/collector.py`, `/_tools/build.py` (all returned full content — FLG-034 evidence).
+- **Gates:** build ×2 byte-identical (35 pages) · `check.py` 0 errors / 0 warnings · `validate.py` 1882 checks, 0 warnings · `check_local_links.py` 69 pages, 0 broken · `test_paid_link_gate` OK.
+- **Deliberately not verified here:** the five submitted links (FLG-028's homepage result not reproduced — one data point does not settle instability), Associates enrolment/attribution, Special Links, Search Console, analytics hosting. Owner gates, unchanged.
+- **Owner requests carried forward (not acted on):** flip Pages to `build_type: workflow` (durable fix for FLG-034, requested since #89's handoff); settle FLG-025 in the enrolled Associates workflow; PR #106's untagged-cart-CTA flag.
+- Status: done. PR link and deploy receipt recorded below after merge.
+
+### Release receipt — seasonal leftovers guide + serving-scope audit · arena/3d6a7607-affil1 · 2026-11-20 UTC
+
+- **Pull request:** [PR #119](https://github.com/karagemop466-tech/Affil1/pull/119) — **MERGED into `main`** as `e7cdf04f16a24da525c28fd0329f7adbd3016def` at 2026-11-20T07:08:20Z, no squash, no approval wait (per the standing instruction).
+- **Checks on the PR:** `build` pass (run 44692659479), `launch` pass (run 44692659508), `verify-edition` pass (run 44692659473); deploy job skipped on pull requests as designed.
+- **Pages deployment:** `pages build and deployment` run [44692753298](https://github.com/karagemop466-tech/Affil1/actions/runs/44692753298) — **completed / success** for the merge commit.
+- **Live verification (fetch, post-deploy):** `guides/reheating-thanksgiving-leftovers.html` serves with the disclosure strip above the fold, the engraved illustration and its "not a photograph of any product sold here" caption, all six sections, the five-row official-figures table with a source link per row, and the Sources list. `review/index.html` serves 35 flags including **FLG-034** (serving-scope) in the high group.
+- **Renumbering receipt:** this session's two flags shipped as **FLG-034** (high, underscore directories publicly served while `.nojekyll` bypasses the Jekyll `_`-exclusion) and **FLG-035** (low, stale `Disallow: /archive/` rule). They were first written as FLG-029/030; concurrent sessions took those IDs mid-flight, so both were renumbered before merge. The board, the register and `_docs/VERIFICATION-arena-3d6a7607.md` all carry the renumber note.
+- **Gates at merge time:** build ×2 byte-identical · `check.py` 0 errors / 0 warnings · `validate.py` all pass, 0 warnings · `check_local_links.py` 73 pages, 0 broken · `test_paid_link_gate` OK.
+- **Owner items queued by this session (no action taken here):** flip Pages to `build_type: workflow` (durable fix for FLG-034, read together with FLG-032's dual-publisher finding); settle FLG-025 in the enrolled Associates workflow; review FLG-035 when next editing the robots generator.

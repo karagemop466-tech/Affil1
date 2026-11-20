@@ -1,7 +1,7 @@
 {
   "meta": {
     "rule": "A question moves to 'answered' only when the answer has a source link or a reproducible check. 'We cannot know yet' is a legitimate answer and is recorded as such.",
-    "status": "Twenty-four questions. 10 are answered. 14 are open, and each one names the specific document, dashboard or decision that would close it.",
+    "status": "27 questions. 10 are answered. 17 are open, and each one names the specific document, dashboard or decision that would close it.",
     "how_to_read": "The blocking column is the useful one. A blocking question means work that depends on it is guesswork until it is answered.",
     "discovery_note": "Every open question below carries a discovery block: who can obtain the missing information, what it costs, and the exact action that would close the question. No question is closed by inference; a question stays open until the named artefact exists."
   },
@@ -325,6 +325,36 @@
         "effort": "one purchase decision",
         "action": "Authorise buying one unit and a one-week test window with a written method — or record that hands-on testing is out of scope and the site keeps its careful, listing-only register."
       }
+    },
+    {
+      "id": "Q-25",
+      "question": "Which search queries actually bring people to this site?",
+      "what_we_have": "Thirteen question-shaped guides, each written around a question a shopper plausibly types. They are editorial hypotheses, nothing more: the site has no query data of any kind.",
+      "what_is_missing": "Google Search Console. It is free, it is first-party, and its Performance report answers exactly this question. Until the site is verified there, every topic choice is instinct dressed as strategy.",
+      "how_to_close": "Verify the site in Search Console (DNS or the HTML tag route), submit sitemap.xml, wait 28 days, read Performance > Queries. Then pick the next topic from the measured list instead of the topic bank. Documentation: https://support.google.com/webmasters/answer/7576553",
+      "answered": false,
+      "blocking": "yes — the next topic decision is guesswork until this is answered",
+      "evidence": ""
+    },
+    {
+      "id": "Q-26",
+      "question": "What publishing cadence can be held for three months, and who signs off each issue?",
+      "what_we_have": "A suggestion-board entry for a dated editorial calendar (S-23) and a publishing workflow document. The seasonal issue proves one edition can ship.",
+      "what_is_missing": "An owner decision: cadence (fortnightly is the default proposal), and a named person who approves each issue before it goes out. An unsigned publication drifts; an unsustainable cadence dies in month two.",
+      "how_to_close": "One line in the workflow document: cadence, reviewer, and the rule that an issue ships without the reviewer's sign-off only if it changes nothing but dates.",
+      "answered": false,
+      "blocking": "yes — for the calendar in S-23",
+      "evidence": ""
+    },
+    {
+      "id": "Q-27",
+      "question": "Do the seasonal modules and gift edit change what readers click?",
+      "what_we_have": "Five events defined before any code shipped (page_view, outbound_product_click, guide_read_75, compare_view, flag_page_view), implemented, privacy-preserving, and inert on static hosting because GitHub Pages cannot receive a POST.",
+      "what_is_missing": "A hosted collector endpoint and a first-party report. No click or conversion claim is made anywhere on this site, and none can be made until either the collector is hosted or the Associates report is read.",
+      "how_to_close": "Either host the collector (S-06) with a retention statement, or read the Associates click report (S-01) as the first-party check. Both close the question; the second is cheaper.",
+      "answered": false,
+      "blocking": "no — the site is useful without it, but optimisation is guesswork without it",
+      "evidence": ""
     }
   ]
 }

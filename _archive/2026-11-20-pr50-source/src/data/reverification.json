@@ -103,6 +103,21 @@
       },
       "agrees_with": "the pass above on all five rows, including P-04 unresolved (interstitial on every attempt)",
       "note": "Independently contradicts the P-04 → B0DHZTCNR5 observation recorded in FLG-016 and carried in src/data/products.json. This pass never reached a product page for B0c8moW59; neither did the pass above, nor the recovered PR #15 register, nor the earliest archived register. The B0DHZTCNR5 observation remains on the record as one session's observation. See FLG-023."
+    },
+    {
+      "pass_id": "obs-10b5816b",
+      "session": "arena/10b5816b-affil1 (marketing & publication upgrade, integration)",
+      "retrieved_at_utc": "2026-11-20 (this session's fetch window; exact clock time not recorded by the fetcher)",
+      "method": "Each submitted short link was opened again with an independent page fetcher that follows redirects; the final URL, page title and breadcrumb were read from what actually loaded. Amazon was running its Black Friday Week homepage at the time of this pass, which is recorded because it is part of what the fetcher returned.",
+      "results": {
+        "https://link.amazon/B04G1MEwY": "https://www.amazon.com/ (homepage: 'Amazon.com. Spend less. Smile more.' — no product page reached)",
+        "https://link.amazon/B02NbDxp3": "https://www.amazon.com/ (homepage — no product page reached)",
+        "https://link.amazon/B00hJ57DV": "https://www.amazon.com/ (homepage — no product page reached)",
+        "https://link.amazon/B0c8moW59": "https://www.amazon.com/ (homepage — no product page reached; the B0DHZTCNR5 mapping of FLG-016 did NOT reproduce in this pass)",
+        "https://link.amazon/B0f3GKalj": "https://www.amazon.com/dp/B0DZFD6R9Z (CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3 — matches the current register row P-05)"
+      },
+      "agrees_with": "P-05 destination in the current register; adds a third observation class for the other four rows (homepage arrival), consistent with the earlier archived register that recorded homepage arrivals and with the documented instability of these redirectors. Neither confirms nor refutes any earlier pass: each pass is one request at one moment.",
+      "note": "The register fields in src/data/products.json are unchanged by this pass. observed_asin values remain dated observations of earlier successful arrivals; this pass simply records that four of five did not arrive at a product page this time. FLG-003 stance unchanged: the compliance status of link.amazon short links is unresolved, not disproven, and no page calls them invalid."
     }
   ]
 }

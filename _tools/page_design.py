@@ -143,13 +143,13 @@ def build(d):
 <h2>House-style register</h2></div>
 <p>Ten rules, each with its basis. Three of them are Amazon or FTC rules the build already enforces; the rest are the difference between a publication and a generated feed.</p></div>
 {style_table}
-<p class="table-note">Approving this register is S-32 on the <a href="{esc(rel(d, 'suggestions/index.html'))}">suggestions board</a>. It constrains only future pages; nothing published changes retroactively.</p>''')
+<p class="table-note">Approving this register is S-37 on the <a href="{esc(rel(d, 'suggestions/index.html'))}">suggestions board</a>. It constrains only future pages; nothing published changes retroactively.</p>''')
     body += section(f'''
 <h2>Topic bank — catchy, question-shaped, not invented</h2>
 <p>These are working hypotheses for articles, mapped to the two clusters on the shelf. None is a claim that a topic is trending, that it has search volume, or that any product is best. The <em>before you write it</em> column is the gate: a topic is commissioned only when the named evidence exists, and until then it stays a suggestion. Rows whose guide already ships say so and link to it. This is the surface to review and pick from before any of it is written.</p>
 {table(['Ref', 'Working topic', 'Cluster', 'State', 'Evidence required before writing it', 'Basis'], brief_rows, caption='T-01 to T-16 · the brief’s hypotheses, operationalized — proposals, not a publishing order')}
 <div class="callout"><h2>What this bank is not</h2>
-<p>None of these titles is a claim about search volume, popularity or trend data — no keyword tool was consulted. They are shaped like the questions buyers ask because that is the only defensible way to guess before measurement exists. The gate is S-33: Search Console (S-03) confirms which questions are real, then those topics get written. T-23 (the first-use smell question) is on hold until a citable source exists; a guessed safety answer is the one thing this site cannot ship.</p></div>''')
+<p>None of these titles is a claim about search volume, popularity or trend data — no keyword tool was consulted. They are shaped like the questions buyers ask because that is the only defensible way to guess before measurement exists. The gate is S-38: Search Console (S-03) confirms which questions are real, then those topics get written. T-23 (the first-use smell question) is on hold until a citable source exists; a guessed safety answer is the one thing this site cannot ship.</p></div>''')
     body += section(f'''
 <div class="sec-head"><div><p class="eyebrow"><i></i> THE NEXT WAVE</p>
 <h2>Session additions to the bank</h2></div>

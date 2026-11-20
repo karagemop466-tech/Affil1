@@ -494,6 +494,36 @@
     },
     {
       "id": "FLG-034",
+      "severity": "high",
+      "title": "Underscore-prefixed working directories are served publicly by the legacy Pages host; the rename mitigation is inert while .nojekyll bypasses Jekyll's default _-exclusion",
+      "expected": "Working files under _tools/, _src/, _data/, _platform/, _analytics/, _measurement/, _decision-support/ and _archive/ are not reachable from the public host. The underscore rename (session arena/d34e0765-affil1) relies on GitHub Pages' Jekyll build, which by default does not build files or folders that start with _ (https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll, fetched 2026-11-20).",
+      "found": "The repository root carries a .nojekyll file — the standard GitHub Pages switch for bypassing Jekyll processing entirely — so the default underscore exclusion never applies and repo paths serve as-is. That reading matches what the host actually does: live fetches on 2026-11-20 (arena/3d6a7607-affil1) returned full content for https://karagemop466-tech.github.io/Affil1/_data/confirmations.json (the product-intent confirmation register), https://karagemop466-tech.github.io/Affil1/_platform/collector.py (the analytics endpoint source) and https://karagemop466-tech.github.io/Affil1/_tools/build.py (the build source). GitHub's documentation also warns that Pages sites are publicly available even when the repository is private (https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site, fetched 2026-11-20).",
+      "reading": "The two available mitigations conflict with each other. Removing .nojekyll would re-enable the Jekyll exclusion but change how every URL is built mid-flight. Switching Pages to GitHub Actions publishing serves the staged curated _site instead of the branch root, which hides all working files at once and is already supported by pages.yml. That switch is a repository setting (PUT /repos/karagemop466-tech/Affil1/pages with build_type workflow), requested by earlier sessions; FLG-032 records that two publishers are in fact configured, so this flag and FLG-032 should be settled together by the owner. Until then no rename can be treated as hiding anything.",
+      "impact": "Working registers and source code are public URLs. No credential or personal data appears in the sampled files, and the registers are public documents by design; the problem is the class of exposure the earlier renames claimed to close, not a specific secret.",
+      "blocks": "any clean serving-scope attestation of the public host",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/_data/confirmations.json",
+        "https://karagemop466-tech.github.io/Affil1/_platform/collector.py",
+        "https://karagemop466-tech.github.io/Affil1/_tools/build.py",
+        "gh api repos/karagemop466-tech/Affil1/pages (fields: build_type, source)"
+      ]
+    },
+    {
+      "id": "FLG-035",
+      "severity": "low",
+      "title": "robots.txt still carries a Disallow rule naming /archive/, a path that has not existed since the underscore rename",
+      "expected": "Every path named in robots.txt exists at the published host and names the thing it is meant to exclude.",
+      "found": "The merged ROBOTS generator (after PRs #109/#113/#115) lists Disallow: /archive/, Disallow: /_archive/ and Disallow: /edition/. The /_archive/ and /edition/ rules are correct; /archive/ names a directory that ceased to exist when the archived edition moved under _archive/. The merge resolved arena/3d6a7607-affil1's removal of the stale line by keeping main's additive version, so the stale rule remains (arena/3d6a7607-affil1, 2026-11-20).",
+      "reading": "Harmless: a Disallow of a path that serves nothing excludes nothing that exists. Kept on the register so the next session does not read the stale line as evidence that archive/ still exists, and so the generator can be cleaned when someone is in the file anyway.",
+      "impact": "Cosmetic and administrative.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/robots.txt",
+        "_tools/build.py (ROBOTS constant)"
+      ]
+    },
+    {
+      "id": "FLG-037",
       "severity": "medium",
       "title": "The /edition/ tree serves a second indexable front door beside the canonical site",
       "expected": "One site for search engines to index (the brief). A second public tree should be noindexed, redirected, or merged into the canonical navigation.",
@@ -508,7 +538,7 @@
       ]
     },
     {
-      "id": "FLG-035",
+      "id": "FLG-038",
       "severity": "low",
       "title": "README.md documents tool paths that no longer exist at those names",
       "expected": "A reader following README.md finds the paths it names: tools/build.py, src/data/…",

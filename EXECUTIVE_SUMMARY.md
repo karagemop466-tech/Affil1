@@ -3,6 +3,7 @@
 **What:** a live Amazon affiliate publication for air fryers and countertop cooking
 appliances, tracking ID `shopnow047c-20` (supplied by the owner; enrolment unverified).
 **Where:** https://karagemop466-tech.github.io/Affil1/
+**Latest pass:** 2026-11-20, marketing & publication upgrade, session `arena/10b5816b-affil1` (addendum at the end).
 **When:** 2026-11-20, integration pass by session `arena/359baa16-affil1`; counts and
 verification refreshed 2026-11-20 by session `arena/62b049f0-affil1`; buyer-decision
 pass by session `arena/05771edb-affil1` (each addendum at the end of this file).
@@ -30,8 +31,9 @@ and checked page by page by `_tools/check.py`:
 - a comparison page with **two** tables: what the listings state, and what
   decision each product actually answers. The price and rating cells link to the
   live listing instead of sitting empty;
-- ten question-shaped guides across six clusters, all in `sitemap.xml` and
-  `feed.xml`;
+- eleven question-shaped guides across six clusters, all in `sitemap.xml` and
+  `feed.xml` (one added 2026-11-20: reheating Thanksgiving leftovers, built from
+  USDA FSIS and FoodSafety.gov pages fetched that day);
 - a decision register of 24 questions, 10 answered with evidence and 4 that block
   other work until they are answered;
 - a suggestion queue with three coherent paths and 24 proposals (18 open, 6 already
@@ -43,7 +45,7 @@ and checked page by page by `_tools/check.py`:
   official source and verbatim quote it is checked against, the single missing
   fact, the person who can close it, and an accept/hold/reject control recorded
   in the browser only;
-- 29 review flags, an image policy, an inert analytics client and an empty
+- 35 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
@@ -561,12 +563,67 @@ board, and published its full receipt at
   warnings, `validate.py` all checks pass, unit tests OK, local links 0 broken,
   edition verify 1965 checks pass.
 
+## Marketing & publication pass (2026-11-20, arena/10b5816b-affil1)
+
+The brief for this pass: make the site read like a shop and a publication, not an
+audit; lead with products; publish catchy, question-shaped seasonal content that
+can earn organic traffic; and keep a reviewable decision board in front of any
+change. What shipped:
+
+- **Issue Nº 02, the holiday edit.** The front page now opens on a seasonal cover
+  with a gift-edit feature and the Black Friday checklist, timed against the live
+  shopping weekend (Amazon's own homepage was running its Black Friday Week event
+  when this session fetched it — recorded as a dated observation, not a claim).
+- **Four new question-shaped guides** (the site now holds seventeen), each built only from listing facts in the
+  register: *Which air fryer gift fits which cook?*, *Black Friday air fryer
+  deals: what should you check before you buy?*, *Is a wireless meat thermometer
+  worth it?*, *Which air-fryer accessories will you actually use?*
+- **Three new editorial illustrations** in the house engraving style, registered
+  in the image register with prompts and alt text, labelled as illustrations.
+- **Decision board extended**: S-32 (the seasonal issue, recorded as implemented
+  with evidence), S-33..S-36 (editorial calendar from measured queries,
+  comparison-page decision column, a single 'how we choose' page, and a
+  fortnightly owner-question ritual). Every row stays unimplemented until the
+  owner accepts it on /suggestions/.
+- **Question register extended**: Q-25 (which queries actually arrive — blocked
+  on Search Console), Q-26 (cadence and sign-off), Q-27 (do the seasonal modules
+  change clicks — blocked on measurement).
+- **Third independent verification pass over the five supplied links**
+  (obs-10b5816b). Result, recorded honestly: only P-05 reproduced its registered
+  destination in this pass (B0DZFD6R9Z, CHEF iQ Sense); the other four landed on
+  the Amazon homepage this time. That is consistent with the documented
+  instability of these redirectors and with earlier archived observations; it
+  does not refute the earlier successful arrivals, which remain dated
+  observations. FLG-003 stance unchanged: the short links' compliance status is
+  unresolved, not disproven.
+- **Repository drift resolved, nothing discarded**: concurrent sessions renamed
+  the working directories (`tools/` → `_tools/`, `src/` → `_src/`) and the
+  observation log had ended up only in an archived copy. The two verification
+  passes were restored to the active register verbatim and the incident logged on
+  the coordination board.
+
+### The owner checklist this pass leaves behind, in the order that pays
+
+1. Click one buy link on the live site, then read Reports → Orders in Associates
+   Central. That single check closes FLG-002 / Q-03 and is the only proof that
+   the site can earn (S-01).
+2. Verify Search Console and submit sitemap.xml. Every topic decision before
+   that is instinct; after 28 days it is data (S-03, Q-23).
+3. Choose a path on /suggestions/ (Shop first, Publication first, Measure first),
+   then mark the rows. Nothing on that page has been implemented by anyone
+   pressing a button.
+4. Name an editor, or accept the honest desk-level byline (S-02).
+5. Answer Q-26 in one line: cadence, reviewer, and the sign-off rule.
+
+Everything else — API access, custom domain, product photography, paid
+acquisition — is sequenced behind those five and documented on /suggestions/.
+
 ## Session addendum — arena/7e19d8e1-affil1 (2026-11-20)
 
 Decision-grade design feed, discovery map and a third independent verification
 pass, merged the same day with `arena/d0594bc5-affil1`'s work (both histories
-kept; colliding ids renumbered — this session's rows are S-32/S-33 and
-FLG-034/035/036).
+kept; colliding ids renumbered — this session's rows are S-37/S-38 and
+FLG-037/038/036).
 
 - **Design prompt + token pack + house style + a 30-title topic bank**
   (`suggestions/design.html`). The copy-ready prompt carries the anti-slop rules
@@ -581,8 +638,8 @@ FLG-034/035/036).
 - **Suggestions board answers "which path?" first** (`suggestions/`). PATH-C
   *Measure first* is recommended with the reason, the first moves (S-01 test
   click, S-03 Search Console) and the review gate: choose on the page before
-  anything is implemented. This session's rows: **S-32** (adopt the style
-  register) and **S-33** (open the article bank only where evidence and queries
+  anything is implemented. This session's rows: **S-37** (adopt the style
+  register) and **S-38** (open the article bank only where evidence and queries
   agree).
 - **Every open question carries a discovery route** (`questions/`): the action
   that would close it, who holds the missing fact, and what it costs — 14 rows
@@ -613,10 +670,10 @@ FLG-034/035/036).
   | `rel="sponsored"` marks paid links | [Google: qualify outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links) | matched |
   | Material connection disclosed clearly and conspicuously | [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) | matched |
 
-- **Repo review — three new irregularities, all on `/review/`:** FLG-034 (medium)
+- **Repo review — three new irregularities, all on `/review/`:** FLG-037 (medium)
   the `/edition/` tree served a second self-canonical front door outside the
   sitemap (main's same-day S-23/S-27 landed the noindex fix; flag kept with that
-  context), FLG-035 (low) README.md still names `tools/`/`src/` paths renamed
+  context), FLG-038 (low) README.md still names `tools/`/`src/` paths renamed
   `_tools/`/`_src/`, FLG-036 (low) 18 pull requests from earlier sessions
   remain open and untriaged (main's S-31 proposes the triage). None blocks
   anything; each names what to check.
