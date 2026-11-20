@@ -229,7 +229,7 @@
       "claim": "no third-party requests",
       "result": "open",
       "evidence": "The build loads no third-party script, font or image and analytics.js is inert until window.CC_ANALYTICS_ENABLED is set. The check is a grep over templates, not a network capture, and it does not cover the host's access logs. Q-25 records the scope.",
-      "verify": "grep -rnE 'googletagmanager|google-analytics|gtag' --include=*.html . | grep -v archive/",
+      "verify": "python3 tools/check.py   # the no-third-party-load rule, plus the launch-check grep over published HTML and JS",
       "source": "repo:tools/check.py",
       "source_id": ""
     },
