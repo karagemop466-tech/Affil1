@@ -135,7 +135,7 @@ METRICS = [
     ("Registers deliberately left out of the sitemap", "publish.SITEMAP_EXCLUDE, still crawlable"),
     ("Official sources linked on this site", "src/data/sources.json"),
     ("Review flags published", "src/data/flags.json"),
-    ("Product links re-verified today", "data/verification-observations.ndjson, 2026-11-20"),
+    ("Product links re-verified today", "_data/verification-observations.ndjson, 2026-11-20"),
     ("Prices, ratings or test results published", "enforced by tools/check.py"),
     ("Measured traffic or orders", "no first-party report has been read"),
 ]
@@ -171,13 +171,13 @@ def build(page_dir, meta):
     import json
     import pathlib
     root = pathlib.Path(__file__).resolve().parent.parent
-    flags = json.loads((root / "src/data/flags.json").read_text())["flags"]
-    sources = json.loads((root / "src/data/sources.json").read_text())["sources"]
+    flags = json.loads((root / "_src/data/flags.json").read_text())["flags"]
+    sources = json.loads((root / "_src/data/sources.json").read_text())["sources"]
     guides = __import__("content").GUIDES
     from build import GENERATED
     from publish import SITEMAP_EXCLUDE, in_sitemap
     observations = sum(1 for line in
-                       (root / "data/verification-observations.ndjson").read_text().splitlines()
+                       (root / "_data/verification-observations.ndjson").read_text().splitlines()
                        if line.strip() and '"outcome": "product_page"' in line)
     shipped_today = 0  # nothing on this page claims a verified order or a measured visitor
     actual = {

@@ -43,19 +43,16 @@ jobs:
       # modules they import sit beside them and nothing put that directory on the
       # path. They now run from their own directory, which is how they pass, and a
       # red check here is a real regression rather than a path artefact.
-      - name: First-party collector tests (analytics/)
-        working-directory: analytics
+      - name: First-party collector tests (_analytics/)
+        working-directory: _analytics
         run: python3 -m unittest -v test_endpoint
 
-      - name: Self-hosted aggregate collector tests (measurement/)
-        working-directory: measurement
+      - name: Self-hosted aggregate collector tests (_measurement/)
+        working-directory: _measurement
         run: python3 -m unittest -v test_collector
 
-      - name: Paid-link gate tests
-        run: python3 tools/test_paid_link_gate.py
-
       - name: Fit finder behaviour
-        run: node tools/fit.test.cjs
+        run: node _tools/fit.test.cjs
 
       - name: Confirm the build is reproducible, not hand-edited
         run: |

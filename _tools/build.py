@@ -216,7 +216,9 @@ def main():
     pages.append(write("feed.xml", feed(GUIDES)))
     pages.append(write("robots.txt", ROBOTS))
 
-    built = set(pages)
+    # `pages` also carries the sitemap's own list, so it is not the set of files
+    # this run wrote. Rebuild the written set from disk to keep the guard honest.
+    built = {q for q in GENERATED if (ROOT / q).is_file()}
     missing = GENERATED - built - {"robots.txt"}
     if missing:
         raise SystemExit(f"GENERATED lists files the build never wrote: {sorted(missing)}")
