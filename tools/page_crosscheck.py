@@ -119,7 +119,8 @@ def build(page_dir):
     <p>All 133 tagged links in this repository pointed at a product-detail page. A reader who had
     already decided still had to land, scroll, and find Amazon's own button. The cart endpoint was
     opened to confirm it accepts the URL shape, and is now used on the front page.</p>
-    <p class="finding-fix"><strong>Fix:</strong> shipped this session. Logged as OFF-04, rank 4.</p>
+    <p class="finding-fix"><strong>Shipped:</strong> two cart doors now sit on the front page. Because no
+    Special Link is approved, they carry no tag, so the click is a reference link until OFF-01 lands.</p>
   </article>
 </div>""", cls="")
 

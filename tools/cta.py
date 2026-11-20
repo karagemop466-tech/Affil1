@@ -19,7 +19,7 @@ Rules enforced here, not just documented in prose:
 import json
 import pathlib
 
-from layout import TRACKING_ID, esc, link
+from layout import buy_url, esc, link, rel
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -38,7 +38,13 @@ def cart_url(asin, doc=None):
 
 
 def detail_url(asin):
-    return f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
+    """The detail-page door, built by the same gate as every other Amazon link.
+
+    buy_url returns the account-approved Special Link when the register holds one,
+    and the plain listing otherwise. It never synthesises a tag, which is why this
+    function no longer builds a URL by hand.
+    """
+    return buy_url(asin)
 
 
 def pair(page_dir, product, *, cls="cta-pair", sub=True):

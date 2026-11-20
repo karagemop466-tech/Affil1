@@ -28,9 +28,9 @@
       "claim": "As an Amazon Associate I earn from qualifying purchases.",
       "check": "Compare the sentence with the Operating Agreement, and compare the placement rule with the FTC guidance.",
       "checked": "Yes.",
-      "verdict": "holds-with-caveat",
+      "verdict": "holds",
       "source": "https://affiliate-program.amazon.com/help/operating/agreement",
-      "note": "The sentence is verbatim and required. But 'I earn from qualifying purchases' plus 'this site may earn a commission' is a present-tense claim about a relationship that no Associates report in this repository confirms. The wording is required; the state is unproven."
+      "note": "The sentence is verbatim and required. Since the merge with main the site publishes no synthetic tag, so the disclosure and the link state agree: the relationship is declared as an obligation, not claimed as a credited fact. Attribution is unproven until a click appears in an Associates report (FLG-002)."
     },
     {
       "page": "index.html",
@@ -65,12 +65,12 @@
     {
       "page": "products/*",
       "section": "Add-to-cart call to action",
-      "claim": "Adding to basket will open the reader's Amazon cart.",
+      "claim": "Adding to basket opens the reader's Amazon cart, with no affiliate tag attached.",
       "check": "Open the add.html endpoint and see what Amazon returns.",
       "checked": "Yes — Amazon returned a sign-in page with an Associates return path.",
       "verdict": "holds-with-caveat",
-      "source": "https://www.amazon.com/gp/aws/cart/add.html",
-      "note": "The endpoint exists and accepts the URL, but an anonymous visitor is sent to sign in first. The button copy says 'Opens your Amazon cart' and does not claim a price or a stock state."
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "note": "The endpoint accepts the URL and, for an anonymous visitor, returns a sign-in page first. The permalink carries no AssociateTag, matching the withdrawn-tag state, so the click is a plain reference link and the button does not pretend otherwise."
     },
     {
       "page": "guides/*",

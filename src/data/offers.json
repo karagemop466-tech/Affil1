@@ -5,7 +5,7 @@
     "how_weights_work": "Each factor is 0-3 for every offer. The total is the sum of factor x weight. Effort is subtracted, because an offer that costs an owner weekend is not cheap because it would work. Nothing here is a forecast of revenue; every weight is a judgement and is labelled as one.",
     "unverified_rule": "Any factor score that depends on information this repository does not hold is marked 'needs'. A 'needs' row is not scored as zero, because zero would read as 'no value'. It is shown as unknown and excluded from the ranking until the missing fact exists.",
     "method_source": "Plain weighted-sum scoring. Arithmetic only; reproducible with python3 tools/page_offers.py --check.",
-    "weight_change_note": "unblocks-money was raised from weight 3 to 5 after the first run of this page. At weight 3 the ranking put the deploy-scope fix first, because OFF-01's owner-time cost outweighed its value. That was a scoring error, not a finding: an offer that decides whether ANY commission can be earned cannot rank below one that tidies what is served. The change is recorded rather than quietly made."
+    "weight_change_note": "unblocks-money was raised from weight 3 to 5 after the first run of this page. At weight 3 the ranking put the deploy-scope fix first, because OFF-01's owner-time cost outweighed its value. That was a scoring error, not a finding: an offer that decides whether ANY commission can be earned cannot rank below one that tidies what is served. The change is recorded rather than quietly made. OFF-03 was rescored after the merge with main: it is no longer an open risk to remove, because main already withdrew the synthetic tag. Leaving it scored as urgent would have misranked a problem that is fixed."
   },
   "factors": [
     {
@@ -54,7 +54,7 @@
       "id": "OFF-01",
       "title": "Confirm one Special Link in the Associates account and read the click report",
       "one_line": "The only task on this list that decides whether the site can earn at all.",
-      "what_changes": "One product's link becomes an account-issued Special Link with a confirmed click. The other four stay as they are until it works.",
+      "what_changes": "One product's link becomes an account-issued Special Link with a confirmed click, and only that product's links start carrying the tag again. The other four stay untagged until they are confirmed the same way.",
       "evidence_for": "Program Policies 2(a): 'Special Links enable accurate tracking, reporting, and accrual of commission income.' Nothing in this repository can see the report.",
       "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "scores": {
@@ -90,21 +90,21 @@
     },
     {
       "id": "OFF-03",
-      "title": "Stop asserting a tagged relationship until it is confirmed",
-      "one_line": "Either confirm the tag, or ship untagged reference links and say so.",
-      "what_changes": "The build stops adding ?tag= from a fallback. Buy links stay, but they become honest reference links until OFF-01 lands.",
-      "evidence_for": "tools/paid_link_gate.py is the gate that is supposed to decide this. tools/validate.py does not import it. The generated pages publish the tag anyway. The disclosure strip says 'this site may earn a commission'.",
+      "title": "Keep the tag withdrawn until one click is confirmed",
+      "one_line": "Main now publishes no synthetic tag. The next step is to prove one, not to re-add it.",
+      "what_changes": "The register currently publishes zero tagged links: every Amazon destination is the plain listing, which is the honest state while no Special Link is approved. Nothing further should be tagged until a click is seen in the Associates report.",
+      "evidence_for": "Verified in this session: layout.approved_amazon_urls() returns {} and permitted_amazon_urls() contains only plain /dp/ listings and untagged cart permalinks. tools/check.py now refuses any Amazon product URL outside that set. An earlier revision of this repository synthesised ?tag= from a fallback; that is gone.",
       "evidence_url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "scores": {
-        "unblocks-money": 1,
+        "unblocks-money": 2,
         "honesty": 3,
         "buyer-value": -1,
         "reach": 0,
         "owner-time": 0,
         "reversibility": 3
       },
-      "owner_does": "Nothing — a session can do it. It is listed because it changes what the site claims.",
-      "if_it_fails": "Removing the tag reduces nothing if the tag was never credited, which is the current state, and is restored in one line once OFF-01 confirms.",
+      "owner_does": "Nothing. The safe state is live. It changes only when OFF-01 produces a confirmed click.",
+      "if_it_fails": "If a tag is re-added without a confirmed click, the site returns to asserting a relationship it cannot prove; the checker now fails the build in that case.",
       "blocks": "Nothing, but it is the safest default while OFF-01 is open."
     },
     {

@@ -64,13 +64,14 @@ def build(page_dir):
         },
         {
             "n": "03",
-            "title": "Decide whether to keep the tag on while it is unproven",
-            "time": "one decision, no work",
-            "why": "The pages carry ?tag=shopnow047c-20 because a fallback adds it, not because a gate approved it. "
-                   "That is a claim about a relationship the repository cannot confirm.",
-            "does": "Choose: leave the tag and accept the claim is unverified until step 1, or ship untagged "
-                    "reference links and say so plainly until step 1 confirms.",
-            "then": "Either way the disclosure strip stays, because the obligation does not depend on the tag.",
+            "title": "Add the tag back only after step 1 proves a click",
+            "time": "nothing yet",
+            "why": "The site now publishes no tag at all: every Amazon destination is the plain listing. That is "
+                   "the honest state while no Special Link is approved, and the checker fails the build if a tag "
+                   "reappears without evidence.",
+            "does": "Nothing today. After step 1 confirms a click, record that one approved Special Link and the "
+                    "tag returns for that product only.",
+            "then": "The disclosure strip does not change, because it states an obligation rather than a result.",
             "offer": "OFF-03",
         },
     ]
