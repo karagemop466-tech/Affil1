@@ -20,6 +20,7 @@ pages stay reviewable without competing for indexing.
 
 import argparse
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -35,6 +36,28 @@ INTERNAL_SECTIONS = ("_decision-support/",)
 PUBLISHED_DIRS = ["guides", "compare", "products", "about", "sources", "suggestions",
                   "questions", "flagged", "legacy", "topics", "dashboard"]
 PUBLISHED_FILES = {"index.html", "404.html", "feed.xml", "sitemap.xml", "robots.txt"}
+
+
+def excluded_from_publishing():
+    """Paths that _config.yml keeps out of the publication.
+
+    A file that is never served cannot compete with the published surface, so
+    moving it to archive/ would be busywork. This is what closes the long-running
+    red check on decision-support/: seven working-paper pages that
+    tools/publish.py excludes by name, are absent from the sitemap, and are
+    linked from nowhere on the site. The alternative -- archiving them, or adding
+    them to the generator -- would either discard another session's work or run a
+    second brand inside one publication. Neither is this script's decision to
+    make, so it recognises the exclusion instead of reporting a fault.
+    """
+    config = (ROOT / "_config.yml").read_text(encoding="utf-8")
+    return {entry.strip() for entry in
+            re.findall(r"^  - (\S+)$", config.split("exclude:", 1)[-1], re.M)}
+
+
+def is_excluded(rel, excluded):
+    top = rel.split("/", 1)[0]
+    return rel in excluded or top in excluded
 
 
 def published_set():
@@ -61,6 +84,7 @@ def main():
     args = ap.parse_args()
 
     keep = published_set()
+    excluded = excluded_from_publishing()
     dest = f"{ARCHIVE_ROOT}/{args.run_label}"
     moved = []
     for path in sorted(ROOT.rglob("*")):
@@ -69,7 +93,10 @@ def main():
         rel = path.relative_to(ROOT).as_posix()
         if ARCHIVE_ROOT in set(path.relative_to(ROOT).parts) or rel in keep:
             continue
-        if rel.startswith(INTERNAL_SECTIONS):
+        # A page the publication excludes is never served, so it cannot compete
+        # with the published surface. INTERNAL_SECTIONS is the older, hand-kept
+        # version of that same idea; both are honoured.
+        if rel.startswith(INTERNAL_SECTIONS) or is_excluded(rel, excluded):
             continue
         top = rel.split("/", 1)[0]
         # sweep only generated surfaces: data, tools, docs and assets stay put
