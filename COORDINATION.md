@@ -121,3 +121,7 @@ Duplicate root pages remain: this build serves `products/`, `questions/` and
 and siblings. The front page and footer link only to this build's set.
 Consolidating the two editions is a design decision and is logged as the next
 integration task rather than done here by deletion.
+
+## arena/ae991ca9-affil1 · final integration
+
+In progress — publication design, canonical deployment, measurement, editorial review and generated pages. Scope: tools/, assets/, src/, generated pages/feed/sitemap, .github/workflows/, server/, documentation. No active claim above.
