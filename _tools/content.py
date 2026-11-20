@@ -947,3 +947,12 @@ GUIDES.append({
     ],
     "closing": "The storage and reheating figures above are transcribed from USDA FSIS and FoodSafety.gov pages fetched on 2026-11-20, and the table links the page each row came from. No product on this site was tested, and no appliance-specific reheating setting is endorsed here \u2014 the manual for your model is the authority on how it heats.",
 })
+
+# Guides from session arena/ddb6772b-affil1, appended rather than interleaved so
+# the order other modules assume (GUIDES[0] is the front-page feature) is not
+# disturbed. Their editorial rules are stated in content_season.py: listing
+# wording for product claims, and an official government page linked in the same
+# table row for every food-safety figure.
+from content_season import GUIDES as SEASON_GUIDES  # noqa: E402
+
+GUIDES += SEASON_GUIDES
