@@ -62,12 +62,36 @@ def product_card(page_dir, p):
     <p class="pcard-why">{esc(p['why'])}</p>
     <ul class="chips">{_chips(p)}</ul>
     <p class="pcard-actions">
-      {product_link(page_dir, buy_url(p['observed_asin']), 'See it on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn btn-small', aria=f"Open the Amazon listing for {p['brand']} {p['format_label']} (paid link, opens in a new tab)")}
+      {product_link(page_dir, buy_url(p['observed_asin']), 'See it on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn btn-small', aria=f"Open the Amazon listing for {p['brand']} {p['format_label']} (listing source, opens in a new tab)")}
       <a class="tlink" href="{esc(href)}">Read the note <span aria-hidden="true">&rarr;</span></a>
     </p>
-    <p class="pcard-fine">Paid link &middot; {esc(AMAZON_NOTE)}</p>
+    <p class="pcard-fine">Listing source &middot; {esc(AMAZON_NOTE)}</p>
   </div>
 </article>"""
+
+
+BUYER_NOTES = {
+    "P-01": "Cooking dinner and a side? Compare the size of each basket, not just their combined volume.",
+    "P-02": "Want room for a tray? Check the usable rack dimensions and how far the doors swing.",
+    "P-03": "Prefer one basket? Check whether your usual batch fits in a single layer.",
+}
+
+
+def issue_card(page_dir, p):
+    href = rel(page_dir, f"products/{p['ref'].lower()}.html")
+    art, name, spec = {
+        "P-01": ("dual", "Chefman Dual Basket", "6 qt · Two baskets"),
+        "P-02": ("oven", "Emeril Lagasse French Door", "26 qt · Oven style"),
+        "P-03": ("single", "Chefman TurboFry", "8 qt · Single basket"),
+    }[p['ref']]
+    return f"""<article class="edit-card">
+  <a class="edit-art" href="{esc(href)}" aria-label="Read about {esc(name)}">
+    <img src="{esc(rel(page_dir, 'assets/img/storefront-' + art + '-w900.jpg'))}" loading="lazy" alt="Editorial drawing of the {esc(p['format_label'])} format">
+    <span class="folio">FIG. {esc(p['ref'][-2:])}</span><span class="art-note">Format illustration</span></a>
+  <div class="edit-info"><span class="ink-label">{esc(spec)}</span>
+    <h3><a href="{esc(href)}">{esc(name)}</a></h3><p>{esc(BUYER_NOTES[p['ref']])}</p>
+    <a class="edit-more" href="{esc(href)}">Explore this format →</a>
+  </div></article>"""
 
 
 def guide_card(page_dir, g, *, feature=False):
@@ -93,43 +117,21 @@ def build(page_dir, products, meta):
     air = categories[0]["items"]
     therm = categories[1]["items"]
 
-    hero = f"""<section class="hero">
-  <div class="hero-media">
-    <img src="{esc(rel(d, 'assets/img/hero-counter-w1280.jpg'))}"
-         srcset="{esc(rel(d, 'assets/img/hero-counter-w760.jpg'))} 760w, {esc(rel(d, 'assets/img/hero-counter-w1280.jpg'))} 1280w"
-         sizes="100vw" alt="An unbranded air fryer on a wooden kitchen counter in morning light, with lemons, salt and thyme" fetchpriority="high" decoding="async">
-    <span class="hero-illus">Illustration</span>
-  </div>
-  <div class="wrap hero-inner">
-    <div class="hero-copy">
-      {eyebrow('The kitchen edit · winter 2026')}
-      <h1>Crisp, without<br><em>the guesswork.</em></h1>
-      <p class="hero-dek">Five things worth putting on your counter, chosen for how you actually cook: two air fryers with one drawer, one with two, an oven with a door, and two probes that stop the guessing. Every listing opened and checked before it earned a place.</p>
-      <p class="hero-actions">
-        <a class="btn" href="{esc(rel(d, 'products/index.html'))}">Shop the edit</a>
-        <a class="btn btn-ghost" href="{esc(rel(d, 'guides/index.html'))}">Find your shape</a>
-      </p>
-      <p class="hero-fine">Paid links. Prices live on Amazon, where they are always right.</p>
-    </div>
-  </div>
-</section>
+    hero = f"""<section class="issue-cover wrap">
+  <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 01</span> THE COUNTERTOP EDIT</p>
+    <h1>The air fryer<br><em>field guide.</em></h1>
+    <p class="cover-dek">One basket, two baskets, or French doors? Find the format that fits your counter and the way you cook.</p>
+    <div class="cover-actions"><a class="cover-btn" href="#shortlist">Explore the shortlist <span>→</span></a>
+      <a class="cover-link" href="{esc(rel(d, 'fit/index.html'))}">Find your format ↗</a></div></div>
+  <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
+    <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
+    <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
+</section>"""
 
-<div class="trust-row"><div class="wrap">
-  <p><strong>5 of 5</strong> links opened and matched to a live listing on 20 Nov 2026</p>
-  <p><strong>0</strong> prices or ratings copied &mdash; Amazon serves those, not us</p>
-  <p><strong>Every</strong> product link tagged, sponsored and disclosed</p>
-</div></div>"""
-
-    shop = section(f"""
-<div class="sec-head">
-  <div>{eyebrow('The edit')}<h2>Air fryers, by shape</h2></div>
-  <p>Choose the shape first. Two drawers, one basket, or a door with racks inside &mdash; everything else follows.</p>
-</div>
-<div class="pcard-grid three">
-{''.join(product_card(d, p) for p in air)}
-</div>
-<p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'compare/index.html'))}">Compare all three side by side <span aria-hidden="true">&rarr;</span></a></p>""",
-                    cls="shop")
+    shop = section(f"""<div class="edit-head"><div><p class="ink-label"><i></i> SHOP BY FORMAT</p>
+      <h2>The countertop shortlist<span>.</span></h2></div>
+      <a class="edit-all" href="{esc(rel(d,'products/index.html'))}">All products <span>→</span></a></div>
+      <div class="edit-grid">{''.join(issue_card(d,p) for p in air)}</div>""", cls="edit-shop", sid="shortlist")
 
     thermo = section(f"""
 <div class="sec-head">
@@ -223,7 +225,7 @@ def build(page_dir, products, meta):
     return page(
         d,
         title="Crisp & Counter \u2014 air fryers and thermometers, checked and explained",
-        description="Five Amazon picks for air frying, each link opened and matched to its live listing: two basket air fryers, one French-door oven and two meat thermometers. Paid links disclosed on every page.",
+        description="Five Amazon picks for air frying, each link opened and matched to its live listing: two basket air fryers, one French-door oven and two meat thermometers. Listing sources and disclosure on every page.",
         body=body,
         active="index.html",
         canonical="",

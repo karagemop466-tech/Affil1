@@ -270,6 +270,34 @@
       "to_check": [
         "suggestions/index.html"
       ]
+    },
+    {
+      "id": "FLG-020",
+      "severity": "low",
+      "title": "The holiday hosting photograph has no recorded origin",
+      "expected": "Every photograph on the site has an entry in src/data/images.json with its origin, date and generator.",
+      "found": "assets/img/holiday-hosting-counter.jpg is used on the index, the guides index and the holiday hosting guide. It had no images.json entry. Its contents were read directly: an unbranded countertop air fryer beside roasted vegetables and green beans, with a garland in the window.",
+      "reading": "Blank fields mean unknown, not safe. Until the owner records where the file came from, it is not cleared on rights or on whether it depicts a real product.",
+      "impact": "An entry was added with generated_on, generated_by and depicts_a_real_product left null. The guide caption calls the scene illustrative. The owner should confirm the origin or replace the photograph.",
+      "blocks": "a clean image audit for the holiday guide and the index card",
+      "to_check": [
+        "src/data/images.json",
+        "guides/holiday-hosting-air-fryer.html"
+      ]
+    },
+    {
+      "id": "FLG-021",
+      "severity": "medium",
+      "title": "tools/validate.py fails on the current product schema",
+      "expected": "Every validator in tools/ runs clean against the current data.",
+      "found": "python3 tools/validate.py stops with KeyError 'supplied_path_code_length' on the current src/data/products.json. The build gate tools/check.py passes with 0 errors.",
+      "reading": "Only the legacy validator is affected. The publication gate that runs in CI is not. A validator that fails silently is still a gap, so it is recorded.",
+      "impact": "Nothing on the site depends on tools/validate.py. Either update it to the current schema or retire it and say so in the README.",
+      "blocks": "a clean validator is still owed; nothing else",
+      "to_check": [
+        "tools/validate.py",
+        "src/data/products.json"
+      ]
     }
   ]
 }

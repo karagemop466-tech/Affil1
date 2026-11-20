@@ -17,7 +17,7 @@ import pathlib
 import re
 import sys
 from html.parser import HTMLParser
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -119,6 +119,7 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
+    r"developer-docs\.amazon\.com|sell\.amazon\.com|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"www\.ftc\.gov|foodsafety\.gov)(?=/|$)",
     re.I,
@@ -178,13 +179,13 @@ def check_page(path):
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
     # --- Amazon links must be sponsored AND carry the Associates tag ---
-    from layout import TRACKING_ID
+    from layout import approved_amazon_urls
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
-            if f"tag={TRACKING_ID}" not in href:
-                err(f"{rel}: product link without the Associates tag: {href}")
+            if "tag" in parse_qs(urlparse(href).query, keep_blank_values=True) and href not in approved_amazon_urls().values():
+                err(f"{rel}: unapproved tagged link: {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:

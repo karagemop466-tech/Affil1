@@ -5,6 +5,8 @@ the reader's own browser, which can then be copied out as text. The point is tha
 the owner can choose a path before anything changes.
 """
 
+from release_panels import render as release_panel
+
 from layout import esc, eyebrow, page, pagehead, rel, section
 
 PATHS_CLASS = {"PATH-A": "path-card", "PATH-B": "path-card", "PATH-C": "path-card"}
@@ -104,7 +106,7 @@ def build(page_dir, suggestions, meta):
         d,
         title="Suggestions and decisions | Crisp & Counter",
         description=f"{len(open_items)} proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.",
-        body=body,
+        body=body + release_panel(d, "suggestions/"),
         active="suggestions/index.html",
         canonical="suggestions/",
         structured={"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [

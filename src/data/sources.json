@@ -57,13 +57,13 @@
     },
     {
       "id": "SRC-06",
-      "title": "16 CFR Part 255 \u2014 Guides Concerning the Use of Endorsements and Testimonials",
+      "title": "16 CFR Part 255 — Guides Concerning the Use of Endorsements and Testimonials",
       "publisher": "U.S. eCFR",
       "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255",
-      "status": "linked, not quoted",
-      "page_date": "current as of 2026-11-20",
-      "used_for": "The regulation behind the FTC guidance above. Linked for the reader; no wording is quoted from it here.",
-      "quote": ""
+      "status": "read directly 2026-11-20",
+      "page_date": "Up to date as of 2026-11-18 (88 FR 48102, July 26, 2023)",
+      "used_for": "The federal regulation (§§255.0–255.6, including §255.5 Disclosure of material connections) behind the FTC guidance above.",
+      "quote": "When there exists a connection between the endorser and the seller of the advertised product that might materially affect the weight or credibility of the endorsement, and that connection is not reasonably expected by the audience, such connection must be disclosed clearly and conspicuously."
     },
     {
       "id": "SRC-07",
@@ -77,13 +77,33 @@
     },
     {
       "id": "SRC-08",
-      "title": "Food Safety Basics \u2014 air fryers",
-      "publisher": "USDA Food Safety and Inspection Service",
-      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers",
-      "status": "not reached from this environment",
-      "page_date": "unknown",
-      "used_for": "The authority the thermometer guide points to for safe internal temperatures. It was not read here, so none of its figures are reproduced on this site.",
-      "quote": ""
+      "title": "Safe Minimum Internal Temperature Chart",
+      "publisher": "USDA Food Safety and Inspection Service (FSIS)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+      "status": "read directly 2026-11-20",
+      "page_date": "Last Updated April 14, 2025",
+      "used_for": "Official minimum safe internal cooking temperatures and rest times reproduced with source links in the thermometer guide.",
+      "quote": "Beef, Pork, Veal, and Lamb (Steaks, Chops, Roasts): 145 °F (62.8 °C) and allow to rest for at least 3 minutes. Ground Meats: 160 °F (71.1 °C). All Poultry: 165 °F (73.9 °C). Fish & Shellfish: 145 °F (62.8 °C)."
+    },
+    {
+      "id": "SRC-09",
+      "title": "Food Thermometers (Kitchen Thermometers)",
+      "publisher": "USDA Food Safety and Inspection Service (FSIS)",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+      "status": "read directly 2026-11-20",
+      "page_date": "Current USDA FSIS guidance",
+      "used_for": "Confirms visual color cues are unreliable and explains thermometer placement in the thickest part away from bone, fat or gristle.",
+      "quote": "Using a food thermometer is the only reliable way to ensure safety and to determine the 'doneness' of meat, poultry, and egg products."
+    },
+    {
+      "id": "SRC-10",
+      "title": "Catalog Items API v2022-04-01 Reference",
+      "publisher": "Amazon Selling Partner API (Developer Docs)",
+      "url": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
+      "status": "read directly 2026-11-20",
+      "page_date": "API version 2022-04-01",
+      "used_for": "Documents Amazon's official Selling Partner catalog lookup endpoint (GET /catalog/2022-04-01/items/{asin}), distinct from Associates Creators API / PA API.",
+      "quote": "Retrieves details for an item in the Amazon catalog."
     }
   ]
 }
