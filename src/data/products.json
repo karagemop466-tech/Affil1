@@ -1,12 +1,13 @@
 {
   "meta": {
     "tracking_id_supplied": "shopnow047c-20",
-    "tracking_id_status": "Not confirmed on any page reached in this session. No supplied link showed a tag parameter on arrival.",
+    "tracking_id_status": "Supplied by the operator. Applied by this build as the ?tag= parameter on every outbound Amazon product link, because Program Policies 2(b) requires the Associates ID to appear as a URL parameter. Whether the ID is actually assigned to an active Associates account cannot be checked without account access (FLG-003).",
     "retrieved_on": "2026-11-20",
-    "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result.",
+    "method": "Each supplied link was requested through a page fetcher that follows redirects, on 2026-11-20. The final URL, the page title and the category breadcrumb were read and transcribed. P-01 through P-03 and P-05 resolved on the first request; P-04 returned Amazon's checkout interstitial twice and resolved on the third request. Nothing was inferred from a search result.",
     "field_rule": "intended_asin (what the owner meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. Where a field could not be established it is null.",
     "price_rule": "Program Policies §2(b) (SRC-02) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / PA API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
-    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner."
+    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner.",
+    "affiliate_url_rule": "listing_url is the bare /dp/ address that was actually observed. affiliate_url is that address plus ?tag=shopnow047c-20 and is the only Amazon product URL linked outbound. The two are stored separately so a reviewer can tell a measured destination from a constructed one."
   },
   "products": [
     {
@@ -48,7 +49,18 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "6 quart total, as two independent 3-quart baskets",
-      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe"
+      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
+      "card_title": "Two baskets, two jobs",
+      "buyer_angle": "Two independent baskets and a sync-finish control: the shape of appliance you buy when the chips and the chicken need different times but the same plate.",
+      "suits": [
+        "you often cook two things at once",
+        "you want the second thing to finish with the first"
+      ],
+      "check_first": [
+        "whether each basket is large enough on its own",
+        "the counter space two drawers need when open"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20"
     },
     {
       "ref": "P-02",
@@ -88,7 +100,18 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "26 quart",
-      "stated_attributes": "24 one-touch presets; six cooking accessories included"
+      "stated_attributes": "24 one-touch presets; six cooking accessories included",
+      "card_title": "One big cavity, front doors",
+      "buyer_angle": "A French-door oven with a stated 26-quart interior and six accessories: for trays, plated food and whole meals rather than a drawer you shake.",
+      "suits": [
+        "the food you cook needs to lie flat",
+        "you want to put a pan or a mould inside"
+      ],
+      "check_first": [
+        "the door swing and the space in front of it",
+        "what the six accessories actually are"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20"
     },
     {
       "ref": "P-03",
@@ -129,7 +152,18 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "8 quart",
-      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel"
+      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
+      "card_title": "One basket, one batch",
+      "buyer_angle": "A single 8-quart basket with a stated 450°F high-heat option: the simplest shape here, and the fewest parts to wash.",
+      "suits": [
+        "you cook one thing at a time",
+        "you would rather shake a drawer than turn a tray"
+      ],
+      "check_first": [
+        "how the 8 quarts compare with a two-basket 6",
+        "whether the basket fits your sink"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20"
     },
     {
       "ref": "P-04",
@@ -137,27 +171,53 @@
       "submitted_code": "B0c8moW59",
       "submitted_code_length": 9,
       "intended_asin": null,
-      "observed_asin": null,
-      "observed_asin_length": null,
-      "listing_url": null,
-      "listing_title": null,
-      "brand": null,
-      "format": null,
-      "format_label": "Not identified",
-      "category_path": null,
-      "title_stated": [],
-      "photo": null,
-      "photo_alt": null,
-      "photo_note": null,
-      "checked_on": "2026-11-20",
-      "resolution_note": "Requested three times on 2026-11-20. Every attempt landed on Amazon's /checkpoint/continue interstitial and no product page was reached. No product was guessed to fill the gap.",
-      "identity_confidence": "unresolved",
-      "unverified": [
-        "everything — the destination was never reached"
+      "observed_asin": "B0DHZTCNR5",
+      "observed_asin_length": 10,
+      "listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+      "brand": "ThermoMaven",
+      "format": "thermometer",
+      "format_label": "Instant-read meat thermometer",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "title_stated": [
+        "a one-second reading time, in the seller's wording",
+        "an accuracy figure of ±0.5°F, stated by the seller",
+        "NIST and NSF certification, claimed in the title",
+        "an auto-rotating LED screen",
+        "an IP67 water-resistance rating, stated by the seller"
       ],
-      "flag": "FLG-014",
-      "stated_capacity": null,
-      "stated_attributes": null
+      "photo": "assets/img/thermometer",
+      "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+      "photo_note": "Editorial illustration. It is not a photograph of P-04 and must not be read as one.",
+      "checked_on": "2026-11-20",
+      "resolution_note": "Requested three times on 2026-11-20. The first two attempts landed on Amazon's /checkpoint/continue interstitial; the third resolved to /dp/B0DHZTCNR5. Recorded as observed on that date.",
+      "identity_confidence": "observed",
+      "unverified": [
+        "intended ASIN",
+        "current price",
+        "star rating",
+        "review count",
+        "availability",
+        "accuracy in use",
+        "battery type and life",
+        "what NIST/NSF certification covers",
+        "warranty",
+        "tracking tag on the click"
+      ],
+      "flag": null,
+      "stated_capacity": "Not applicable — it is a thermometer",
+      "stated_attributes": "One-second reading; ±0.5°F accuracy claimed; auto-rotate LED screen; IP67 claimed",
+      "card_title": "A reading in a second",
+      "buyer_angle": "A single-probe instant-read thermometer with a stated one-second response and an auto-rotating screen.",
+      "suits": [
+        "you check one piece at the end of cooking",
+        "you want a reading without leaving a probe in the oven"
+      ],
+      "check_first": [
+        "the seller's accuracy and certification wording",
+        "battery type and how it is replaced"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20"
     },
     {
       "ref": "P-05",
@@ -196,9 +256,20 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "attention": "This product sits in a different category from the other four. Any guide that treats it as a fifth air fryer would be wrong. It is routed to its own section.",
+      "attention": "This product sits in a different category from the air fryers. It is filed under thermometers, and the site never calls it an air fryer.",
       "stated_capacity": "Not applicable — it is a thermometer",
-      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses"
+      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
+      "card_title": "Three probes, no standing by the oven",
+      "buyer_angle": "A wireless thermometer with three probes and a stated 1000°F heat rating: for watching several pieces without opening the door.",
+      "suits": [
+        "you cook more than one piece at once",
+        "you want to monitor without opening the door"
+      ],
+      "check_first": [
+        "app and account requirements",
+        "probe battery life"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20"
     }
   ]
 }

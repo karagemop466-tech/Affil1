@@ -37,28 +37,31 @@ NAV = [
 ]
 
 FOOTER_GROUPS = [
-    ("Read", [
-        ("guides/index.html", "All guides"),
-        ("compare/index.html", "Comparison table"),
+    ("Shop", [
+        ("products/index.html", "The shortlist"),
+        ("compare/index.html", "Compare the five"),
+        ("products/p-02.html", "The oven-style option"),
+        ("products/p-05.html", "The thermometers"),
         ("feed.xml", "RSS feed"),
     ]),
-    ("Catalogue", [
-        ("products/index.html", "Product register"),
-        ("products/p-05.html", "The thermometer"),
-        ("about/index.html#how-we-link", "How we link"),
+    ("Read", [
+        ("guides/index.html", "All guides"),
+        ("guides/basket-or-oven-air-fryer.html", "Basket or oven"),
+        ("guides/air-fryer-capacity-checklist.html", "Capacity checklist"),
+        ("guides/instant-read-or-probe-thermometer.html", "Choosing a thermometer"),
     ]),
     ("Review queue", [
         ("review/index.html", "Flagged for review"),
-        ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
-        ("about/index.html#sources", "Sources"),
+        ("review/images.html", "Image policy"),
+        ("sources/index.html", "Sources and quotations"),
     ]),
     ("Desk", [
         ("questions/index.html", "Open questions"),
-        ("suggestions/index.html", "Suggestions"),
+        ("suggestions/index.html", "Suggestions and decisions"),
         ("operations/ledger.html", "Campaign ledger"),
         ("brief/index.html", "Executive summary"),
-        ("about/index.html", "About this site"),
+        ("about/index.html", "About, disclosure and privacy"),
     ]),
 ]
 
@@ -71,6 +74,8 @@ def esc(value):
 
 def rel(page_dir, target):
     """Relative URL from a page's directory to a target path at the repo root."""
+    if not target:
+        return ""
     return posixpath.relpath(target, page_dir) if page_dir else target
 
 
@@ -104,6 +109,18 @@ def outbound(page_dir, url, label, **kw):
 def product_link(page_dir, url, label, **kw):
     """A link to Amazon. Always marked sponsored, always in a new tab."""
     return link(page_dir, url, label, sponsored=True, **kw)
+
+
+def cite_or_product(page_dir, url, label, **kw):
+    """An Amazon retail URL is a Special Link; anything else is a citation.
+
+    Getting this wrong in either direction is a real error: an unmarked product
+    link breaches the marking claim, and a marked citation misdescribes a policy
+    page as a paid link. So the decision is made from the URL, once.
+    """
+    if AFFILIATE_HINT.search(url):
+        return product_link(page_dir, url, label, **kw)
+    return outbound(page_dir, url, label, **kw)
 
 
 def kindle(summary, body):
@@ -168,19 +185,46 @@ def footer(page_dir):
 
 
 def page(page_dir, *, title, description, body, active=None, canonical=None,
-         body_class="", structured=None, og_type="website"):
+         body_class="", structured=None, og_type="website", breadcrumb=None):
     css = rel(page_dir, "assets/css/site.css")
     js = rel(page_dir, "assets/js/site.js")
     feed = rel(page_dir, "feed.xml")
     home = rel(page_dir, "index.html")
     canon = canonical or ""
-    structured_block = ""
+    graph = []
     if structured:
-        structured_block = (
-            '<script type="application/ld+json">'
-            + json.dumps(structured, ensure_ascii=False)
-            + "</script>\n"
-        )
+        graph.append(structured)
+    if breadcrumb:
+        graph.append({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "name": name,
+                 "item": SITE_URL + "/" + target}
+                for i, (name, target) in enumerate(breadcrumb)
+            ],
+        })
+    structured_block = ""
+    if len(graph) == 1:
+        structured_block = ('<script type="application/ld+json">'
+                            + json.dumps(graph[0], ensure_ascii=False) + "</script>\n")
+    elif graph:
+        structured_block = ('<script type="application/ld+json">'
+                            + json.dumps({"@context": "https://schema.org", "@graph": [
+                                {k: v for k, v in item.items() if k != "@context"} for item in graph]},
+                                ensure_ascii=False) + "</script>\n")
+    crumbs_html = ""
+    if breadcrumb:
+        items = []
+        for i, (name, target) in enumerate(breadcrumb):
+            last = i == len(breadcrumb) - 1
+            if last:
+                items.append(f'<span aria-current="page">{esc(name)}</span>')
+            else:
+                items.append(f'<a href="{esc(rel(page_dir, target))}">{esc(name)}</a>')
+        crumbs_html = ('<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap">'
+                       + ' <span aria-hidden="true">/</span> '.join(items)
+                       + "</div></nav>\n")
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -206,7 +250,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-{body}
+{crumbs_html}{body}
 </main>
 {footer(page_dir)}
 <script src="{esc(js)}" defer></script>

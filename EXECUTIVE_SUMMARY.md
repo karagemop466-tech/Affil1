@@ -1,46 +1,77 @@
-# Affil1 — Executive summary
+# Affil1 — executive summary
 
-**Project:** Amazon affiliate marketing site (GitHub Pages)
-**Branch:** `arena/f10ea853-affil1` (base `cca8c2a`)
+**Project:** Amazon affiliate publication (static site, GitHub Pages)
+**Branch:** `arena/2ed69be3-affil1` (integration pass, base `54b2b45` on `main`)
 **Tracking ID:** `shopnow047c-20`
 **Prepared:** 2026-11-20
+**Live site:** https://karagemop466-tech.github.io/Affil1/
+**Full version with tables:** `brief/index.html`
 
 ## What this is
-A buyer-facing affiliate site for air fryers and multi-function kitchen appliances. It reads like a shop/publication, not an audit: product picks lead the front page, every page carries an above-the-fold disclosure, and every outbound product link is marked `sponsored`.
 
-## Products submitted (5)
-| # | Submitted link | Intended ASIN | Verified listing | Status |
-|---|---|---|---|---|
-| 1 | https://link.amazon/B04G1MEwY | B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | Verified |
-| 2 | https://link.amazon/B02NbDxp3 | B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Verified |
-| 3 | https://link.amazon/B00hJ57DV | B00hJ57DV | — | Unverified — homepage reached, no product page |
-| 4 | https://link.amazon/B0c8moW59 | B0c8moW59 | — | Unverified — Amazon checkpoint gate |
-| 5 | https://link.amazon/B0f3GKalj | B0f3GKalj | — | Unverified — homepage reached, no product page |
+A buyer-facing publication for three air fryers and two thermometers. It reads like a
+shop, not an audit: the front page leads with the products, each product page says what
+the thing is for and what to check before buying, and the verification machinery lives
+behind the cards instead of in front of them.
 
-Verified against Amazon.com (official source) on 2026-11-20. Intended ASIN and observed redirect target are stored in separate fields and never merged. Prices, ratings and commissions are blank — not confirmed from an official source, never inferred.
+## The five products, as verified on 2026-11-20
 
-## Site structure
-- `/` — publication front page: hero, this week’s picks (product grid), buyer-question guides, how it works
-- `/categories/air-fryers.html` — findings table, one row per product, source link per row
-- `/dashboard.html` — entries/findings table + empty campaign ledger + measurement status
-- `/guides/` — four question-shaped guides (working titles)
-- `/suggestions.html` — decision suggestions; review before implementing
-- `/reviews/flagged.html` — Flagged for Review page (irregularities + unverified items)
-- `/disclosure.html` — full Associates statement
-- `/privacy.html` — privacy notice for self-hosted analytics
-- `/sitemap.xml`, `/rss.xml` — for search engines and feed readers
+| # | Submitted link | Intended ASIN | Observed listing | Product | Status |
+|---|---|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | — (not supplied) | [B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3) | CHEFMAN 6 qt dual-basket air fryer | Verified |
+| P-02 | link.amazon/B02NbDxp3 | — | [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R) | Emeril Lagasse 26 qt French-door air fryer oven | Verified |
+| P-03 | link.amazon/B00hJ57DV | — | [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH) | Chefman 8 qt TurboFry basket air fryer | Verified |
+| P-04 | link.amazon/B0c8moW59 | — | [B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5) | ThermoMaven instant-read meat thermometer | Verified on the third attempt |
+| P-05 | link.amazon/B0f3GKalj | — | [B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z) | CHEF iQ Sense wireless meat thermometer | Verified |
 
-## Measurement (turned on before content)
-Five defined events: `page_view`, `outbound_click`, `guide_read`, `suggestion_review`, `session_start`. Self-hosted collector at `/analytics/collect` (code: `server/collect.js`); client degrades silently when unreachable. No cookies, no IP logging. Next guide topic chosen from measured queries.
+Intended ASIN and observed ASIN are separate fields and are never merged. Prices,
+ratings, review counts and availability are blank everywhere: Amazon permits them only
+from data Amazon serves or via its API, and neither is connected.
 
-## Campaign ledger
-Empty and intentionally so. Entries (timestamp, source, channel, eligible sessions, clicks, reported orders, provenance report, notes) are added only from authorized first-party reports, with a dated provenance trail. No conversion score or revenue forecast is presented.
+## What changed in this pass
+
+1. **Tagged Special Links.** Policy §2(b) requires the Associates ID as a URL parameter.
+   The previous build linked to bare `/dp/` addresses; every product link is now
+   `/dp/ASIN?tag=shopnow047c-20` (FLG-016).
+2. **P-04 corrected.** A third request resolved it. The stale "unresolved" copy is gone
+   from the product record and the history is kept in FLG-004.
+3. **Front page rebuilt** as a publication front page: hero, four decision paths, the
+   five products, a feature guide, a season band, and three checkable claims.
+4. **Guides clustered** into shape, size, upkeep and thermometers, with a fifth guide
+   added for thermometers because two of five products are thermometers.
+5. **One site to index.** The superseded parallel edition is marked `noindex` and kept
+   out of the sitemap rather than deleted (FLG-018).
+6. **Suggestion board rebuilt** as a decision tool: 15 proposals, 7 implemented, each
+   with effort, risk, evidence, dependencies and accept/hold/reject.
+7. **Question register rebuilt**: 16 questions, 6 answered with a source, 6 blocking,
+   plus five concrete ways to discover the missing information.
+
+## Measurement
+
+Five events are defined in `assets/js/analytics.js`: `page_view`, `guide_open`,
+`outbound_click`, `search_query_referral`, `report_import`. The client is inert until a
+first-party endpoint is configured; none is deployed, because GitHub Pages cannot run a
+collector. No cookie, no storage, no identifier, no third party. The campaign ledger is
+empty with a defined schema and a provenance rule (FLG-017).
 
 ## Compliance gate
-Disclosure above the fold on every page + footer repeat; `rel="nofollow sponsored"` on all outbound product links; review against Amazon Associates Operating Agreement and FTC endorsement guidance before publishing (see `PUBLISHING_WORKFLOW.md`).
 
-## Flagged items
-Three of five short links did not resolve to product pages; two verified links redirect to a different ASIN than the short-link slug. All flagged items are published on `/reviews/flagged.html` with source links; they do not block the launch.
+- Disclosure strip under the masthead on every page, repeated in the footer, worded as
+  the Operating Agreement §5 requires.
+- Every Amazon product link: `rel="sponsored nofollow noopener"`, new tab, tagged.
+- `tools/check.py` fails the build on a missing disclosure, an unmarked product link, a
+  price or rating phrase, a test claim, a broken link, or a root-absolute link.
 
-## Next decisions awaiting review (`/suggestions.html`)
-S-001 price/commission tracking · S-002 replace short links with validated Special Links · S-003 turn on real analytics · S-004 compliance gate in publishing workflow · S-005 brand imagery.
+## Still unknown (published, not hidden)
+
+Six blocking questions: is the tracking ID active; does a click register; what was the
+intended ASIN for each link; is the account in the right marketplace; is API/image access
+available; what search demand exists. Ten items are flagged on `review/index.html`,
+including the unresolved compliance status of `link.amazon` short links — which this site
+does **not** claim are invalid (FLG-003).
+
+## Decisions waiting for you
+
+`suggestions/index.html` — approve, hold or reject each of the 8 open proposals. The two
+cheapest: click one link and find it in the report (S-02); ask Amazon support three
+questions in writing (S-15).

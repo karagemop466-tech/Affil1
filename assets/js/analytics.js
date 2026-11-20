@@ -1,77 +1,108 @@
-/* Crisp & Counter — analytics client, INERT BY DEFAULT.
+/* Crisp & Counter — first-party event client. Inert unless configured.
  *
- * The five events the brief asked for are defined below. Nothing is recorded
- * and nothing leaves the browser unless a page sets window.CC_ANALYTICS_ENDPOINT
- * to a self-hosted URL. It is not set anywhere in this build, and an endpoint is
- * not deployed, so this file currently does nothing except define five names.
+ * Five events, defined here and nowhere else:
+ *   page_view              a page was rendered
+ *   guide_open             a guide page was opened (fires with page_view on /guides/*)
+ *   outbound_click         a sponsored Amazon link was clicked (records the product ref only)
+ *   search_query_referral  the arrival came from a search engine (records the host, never the query)
+ *   report_import          a first-party Associates report was imported (called by hand, not automatic)
  *
- * What it would store if enabled: the event name, the page path (never the
- * query string), the product reference for a click, and a date. No cookie, no
- * persistent identifier, no IP address, no user agent, no referrer text.
+ * What is never collected: cookies, local storage, fingerprints, IP addresses, user agents, full
+ * referrer URLs, query strings, or anything typed by a reader. The buffer lives in memory and is
+ * discarded when the tab closes.
  *
- * Before enabling: publish a privacy notice, deploy a collector, decide a
- * retention period, and take a view on consent. See review/measurement.html.
+ * The client does nothing until a page sets window.CC_ANALYTICS_ENDPOINT to a first-party URL.
+ * No endpoint is deployed with this build, so today it only defines the names — see
+ * review/measurement.html. Do not point it at a third party: the whole design assumes the
+ * collector is on a host the operator controls.
  */
 (function () {
   "use strict";
 
-  var EVENTS = ["page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"];
+  var EVENTS = [
+    "page_view",
+    "guide_open",
+    "outbound_click",
+    "search_query_referral",
+    "report_import"
+  ];
 
   var endpoint = window.CC_ANALYTICS_ENDPOINT || "";
-  if (!endpoint) {
-    /* Deliberate no-op. Expose the names so they can be inspected, and stop. */
-    window.CC_ANALYTICS = { enabled: false, events: EVENTS.slice(), track: function () {} };
-    return;
-  }
-
   var buffer = [];
 
   function send() {
-    if (!buffer.length) return;
+    if (!endpoint || !buffer.length) return;
     var body = JSON.stringify({ events: buffer.splice(0, buffer.length) });
     try {
       if (navigator.sendBeacon) {
         navigator.sendBeacon(endpoint, new Blob([body], { type: "application/json" }));
       } else {
-        fetch(endpoint, { method: "POST", body: body, keepalive: true, headers: { "Content-Type": "application/json" } });
+        fetch(endpoint, {
+          method: "POST",
+          body: body,
+          keepalive: true,
+          headers: { "Content-Type": "application/json" }
+        });
       }
     } catch (e) {
-      /* A failed beacon must never break the page. */
+      /* A failed beacon must never break a page. */
     }
   }
 
   function track(name, detail) {
     if (EVENTS.indexOf(name) === -1) return;
+    if (!endpoint) return;                    // inert by default, by design
     buffer.push({
       event: name,
-      path: location.pathname,
-      ref: (detail && detail.ref) || null,
+      path: location.pathname,                // no query string, ever
+      ref: (detail && detail.ref) || null,    // product reference for a click
+      host: (detail && detail.host) || null,  // referring host for a search arrival
       date: new Date().toISOString().slice(0, 10)
     });
-    if (buffer.length >= 5) send();
+    if (buffer.length >= 10) send();
   }
+
+  function productRefFrom(href) {
+    var m = /\/dp\/([A-Z0-9]{10})/.exec(href || "");
+    return m ? m[1] : null;
+  }
+
+  function searchHost() {
+    try {
+      var r = document.referrer;
+      if (!r) return null;
+      var h = new URL(r).hostname;
+      return /(^|\.)(google|bing|duckduckgo|yahoo|ecosia|startpage)\./.test(h) ? h : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  document.addEventListener("click", function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest("a[rel~='sponsored']") : null;
+    if (!a) return;
+    track("outbound_click", { ref: productRefFrom(a.getAttribute("href")) });
+    send();
+  }, { passive: true });
 
   document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") send();
   });
 
+  window.addEventListener("pagehide", send);
+
+  window.CC_ANALYTICS = {
+    enabled: Boolean(endpoint),
+    events: EVENTS.slice(),
+    track: track,
+    /* Called by hand when an authorised report is added to the ledger. */
+    reportImport: function (detail) { track("report_import", detail || {}); }
+  };
+
+  if (!endpoint) return;
+
   track("page_view");
-
-  document.addEventListener("click", function (ev) {
-    var a = ev.target.closest("a[rel~='sponsored']");
-    if (!a) return;
-    var m = (a.getAttribute("href") || "").match(/\/(?:dp\/)?(B0[0-9A-Z]{8})/);
-    track("outbound_click", { ref: m ? m[1] : null });
-  });
-
-  if (document.referrer) {
-    try {
-      var host = new URL(document.referrer).hostname;
-      if (/(^|\.)(google|bing|duckduckgo|yahoo|yandex|brave|ecosia)\.[a-z.]+$/.test(host)) {
-        track("search_query_referral");
-      }
-    } catch (e) { /* ignore a malformed referrer */ }
-  }
-
-  window.CC_ANALYTICS = { enabled: true, events: EVENTS.slice(), track: track };
+  if (location.pathname.indexOf("/guides/") !== -1) track("guide_open");
+  var host = searchHost();
+  if (host) track("search_query_referral", { host: host });
 })();

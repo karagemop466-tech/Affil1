@@ -43,7 +43,7 @@ def build_index(page_dir, flags, meta):
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
         ])
     flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects"], flag_rows,
-                       cls="flags", caption="15 items, ordered by severity")
+                       cls="flags", caption=f"{len(fl)} items, ordered by severity")
 
     body = f"""{pagehead(
         'Review queue',
@@ -57,7 +57,7 @@ def build_index(page_dir, flags, meta):
   <div class="stat"><span class="stat-n">{counts['medium']}</span><span class="stat-l">medium &mdash; affects usefulness</span></div>
   <div class="stat"><span class="stat-n">{counts['low']}</span><span class="stat-l">low &mdash; cosmetic or administrative</span></div>
 </div>
-<p class="lede-prose">The three high flags share a cause: this site cannot see inside an Associates account. Everything that requires that view &mdash; which ASIN was intended, whether the tag applies, whether a click is credited &mdash; is unverifiable from outside it. The site responds by claiming less, not by guessing more.</p>''', cls='')}
+<p class="lede-prose">Two of the three high flags come from the same place: this site cannot see inside an Associates account, so which ASIN was intended and whether a click is credited are unverifiable from outside it. The third was a real defect &mdash; outbound links carried no tag parameter &mdash; and it is fixed rather than explained away. The site responds to the rest by claiming less, not by guessing more.</p>''', cls='')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('Index')}<h2>Every flag in one table</h2></div><p>Scan here, then read the card below for the detail and the source to check.</p></div>
 {flag_table}
@@ -108,7 +108,7 @@ def build_images(page_dir, images, products, meta):
         'Image policy',
         'Every photograph here<br>is an illustration',
         images["meta"]["why"],
-        meta='8 generated assets &middot; 0 product photographs &middot; 3 uses declined',
+        meta=f'{len(images["assets"])} generated assets &middot; 0 product photographs &middot; 3 uses declined',
     )}
 {section(f'''
 <h2>The rule</h2>
@@ -137,7 +137,7 @@ def build_measurement(page_dir, meta):
     events = [
         ("page_view", "Every page load", "Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept."),
         ("outbound_click", "Any click on an Amazon link", "Records which product reference was clicked and the page it was clicked from. This is the number that matters for this site."),
-        ("guide_open", "Opening a guide from the index", "Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be."),
+        ("guide_open", "Opening any page under /guides/", "Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be."),
         ("search_query_referral", "Arrival from a search engine", "Records that a referral happened and the referring host, not the query. Search Console supplies queries; this does not try to reconstruct them."),
         ("report_import", "A manual import of an Associates report", "A dated record that a first-party report was added to the ledger, with its provenance. Never an automated scrape."),
     ]
@@ -151,7 +151,7 @@ def build_measurement(page_dir, meta):
 {section(f'''
 <div class="lede-prose">
   <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
-  <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
+  <p>The client keeps its buffer in memory and sends nothing while no endpoint is configured. It sets no cookie, writes nothing to local storage, keeps no identifier that survives a tab, and contacts no third party. It switches on when a page sets <code class="code">window.CC_ANALYTICS_ENDPOINT</code> to a first-party URL, and switching it on without an endpoint and a notice would be a mistake.</p>
 </div>
 <h2>What would be measured</h2>
 {table(['Event', 'Fires when', 'What is stored'], rows, cls='events')}

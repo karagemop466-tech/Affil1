@@ -27,6 +27,7 @@ import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
+import page_sources  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -36,7 +37,7 @@ DATA = ROOT / "src" / "data"
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions",
-    "review", "about", "operations", "brief",
+    "review", "about", "sources", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
 
@@ -50,6 +51,7 @@ GENERATED = {
     "guides/air-fryer-capacity-checklist.html",
     "guides/cleanup-and-counter-space.html",
     "guides/multi-function-kitchen-appliance-questions.html",
+    "guides/instant-read-or-probe-thermometer.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
@@ -58,6 +60,7 @@ GENERATED = {
     "suggestions/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
+    "sources/index.html",
     "operations/ledger.html",
     "brief/index.html",
 }
@@ -139,7 +142,7 @@ def feed(latest_guides):
   <title>{esc(SITE_NAME)} \u2014 buying guides</title>
   <link>{SITE_URL}/</link>
   <atom:link href="{SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Air-fryer buying guides that check the link before they describe the product.</description>
+  <description>Five kitchen tools, five buying guides, and the source links behind every claim.</description>
   <language>en-us</language>
   <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
   <copyright>2026 {esc(SITE_NAME)}</copyright>
@@ -159,7 +162,7 @@ Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 def main():
     products_doc = load("products.json")
     products = products_doc["products"]
-    meta = {"tracking": products_doc["meta"].get("tracking_id_supplied")}
+    meta = {"tracking": products_doc["meta"].get("tracking_id_supplied"), "products": products}
     sources = load("sources.json")
     questions = load("questions.json")
     suggestions = load("suggestions.json")
@@ -197,6 +200,7 @@ def main():
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
+    pages.append(write("sources/index.html", page_sources.build("sources", sources, products, meta)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
 

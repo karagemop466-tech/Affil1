@@ -3,20 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Suggestions — Crisp & Counter</title>
-<meta name="description" content="Twelve proposed changes to this site, each with its cost, its risk and the open question it depends on — with a decision control for each so a reviewer can choose a path before anything is built.">
+<title>Suggestions and decisions — Crisp & Counter</title>
+<meta name="description" content="Fifteen proposed changes with cost, risk, evidence and dependencies, each with an accept / hold / reject control, so a reviewer can choose a path before anything is built.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
-<meta property="og:title" content="Suggestions — Crisp &amp; Counter">
-<meta property="og:description" content="Twelve proposed changes to this site, each with its cost, its risk and the open question it depends on — with a decision control for each so a reviewer can choose a path before anything is built.">
+<meta property="og:title" content="Suggestions and decisions — Crisp &amp; Counter">
+<meta property="og:description" content="Fifteen proposed changes with cost, risk, evidence and dependencies, each with an accept / hold / reject control, so a reviewer can choose a path before anything is built.">
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="../assets/fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://karagemop466-tech.github.io/Affil1/"}, {"@type": "ListItem", "position": 2, "name": "Suggestions", "item": "https://karagemop466-tech.github.io/Affil1/suggestions/"}]}</script>
 </head>
 <body class="">
 <a class="skip" href="#main">Skip to content</a>
@@ -39,295 +40,447 @@
   </div>
 </div>
 <main id="main">
+<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap"><a href="">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Suggestions</span></div></nav>
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Suggestions</p>
-  <h1>Twelve proposals,<br>one decision each</h1>
-  <p class="dek">Each row says what it would change, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented.</p>
-  <p class="page-meta">Nothing on this page changes the site &middot; decisions are stored in your browser only, never sent anywhere</p>
+  <h1>Fifteen proposals,<br>one decision each</h1>
+  <p class="dek">Each row says what it would change, what it costs, what could go wrong, and which open question has to be answered first. Seven are already implemented; the rest are waiting for you.</p>
+  <p class="page-meta">Nothing here needs approval to stay published &middot; decisions are stored in your browser, never sent anywhere</p>
 </div></header>
 <section class="section "><div class="wrap">
 <div class="decide-intro">
   <div>
-    <h2>How to use this page</h2>
-    <p>Work down the list and mark each row. The buttons record your decision in this browser's own storage so you can come back to it. Nothing is transmitted, there is no account, and no one is notified &mdash; the site has no backend by design.</p>
-    <p>When you are ready, use <strong>Copy decisions</strong> to get a plain-text summary you can paste into a message. That is the hand-off: a human deciding, then instructing.</p>
+    <h2>How to use this board</h2>
+    <p>Work down the list and mark each row. The buttons record your decision in this browser's own storage so you can come back to
+    it. Nothing is transmitted, there is no account, and nobody is notified &mdash; the site has no backend by design.</p>
+    <p>When you are ready, use <strong>Copy decisions</strong> to get a plain-text summary to paste into an instruction. That is the
+    hand-off: a person chooses, then the next build acts.</p>
   </div>
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
-    <p class="decide-count" data-count>0 of 12 decided</p>
+    <p class="decide-count" data-count>0 of 8 decided</p>
   </div>
 </div>
-<p class="lede-prose">Order matters more than it looks. Two of these are free and unblock the others, and one of them is a recommendation not to do something. That last one is included because a suggestion queue that only ever says yes is not a decision tool.</p></div></section>
-<section class="section section-tint"><div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">Start here</p><h2>The first three</h2></div><p>Cheap, reversible, and they make the later items worth doing.</p></div>
-<article class="scard" id="S-01">
-  <div class="scard-head">
-    <span class="scard-id">S-01</span>
-    <h3>Get the five links tagged, then test one click and read the report</h3>
-    <span class="scard-effort">about 20 minutes of dashboard work plus one click</span>
-  </div>
-  <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>Four of five destinations are now known. What is still unknown is whether a click on them is attributed to shopnow047c-20. Until one real click shows up in the Associates report, the site is sending readers somewhere that may not pay.</p></div>
-    <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Low. Links can be swapped without changing any prose.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-03, Q-14</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Do this first</dd></div>
-    </dl>
-  </div>
-  <div class="scard-foot">
-    <span class="decide-label">Decision</span>
-    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
-    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
-    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
-    <span class="decide-note" data-note>Undecided</span>
-  </div>
-</article><article class="scard" id="S-02">
+<p class="lede-prose">Order matters more than it looks. Two of these are free and unblock the others, one is a recommendation not to do
+something, and one is a recommendation to stop. A queue that only ever says yes is not a decision tool.</p></div></section>
+<section class="section "><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">The queue</p><h2>Awaiting your decision</h2></div>
+<p>Read the "depends on" line before approving anything.</p></div>
+<div class="scard-list"><article class="scard" id="S-02" data-status="proposed">
   <div class="scard-head">
     <span class="scard-id">S-02</span>
-    <h3>Replace short links with tagged destination links, and keep both values</h3>
-    <span class="scard-effort">about 15 minutes</span>
+    <h3>Prove one click end to end before scaling anything</h3>
+    <span class="scard-cat">Measure &middot; priority 1</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>The short-link indirection is what makes the destination hard to audit. Pointing at the final listing with the tag attached makes every link readable and checkable by anyone who reads the page source.</p></div>
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Click one product link from the live site, then find that click in the Associates report and record the date.</p>
+      <p class="q-label">Why</p><p>An untested affiliate link is a hypothesis. One click turns &#x27;should earn&#x27; into &#x27;earns&#x27; or into a fault worth chasing.</p>
+    </div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Low. Reversible. Keep the submitted link in the register as the historical record.</dd></div>
-      <div><dt>Depends on</dt><dd>S-01</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Do alongside S-01</dd></div>
+      <div><dt>Effort</dt><dd>about 10 minutes plus dashboard lag</dd></div>
+      <div><dt>Risk</dt><dd>None; it is a read-only check.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-07, Q-08</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://affiliate-program.amazon.com/" rel="noopener" target="_blank">Associates Central</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill">Awaiting decision</span></dd></div>
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your call</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-03">
-  <div class="scard-head">
-    <span class="scard-id">S-03</span>
-    <h3>Name a real editor, or stop implying editorial authority</h3>
-    <span class="scard-effort">an hour</span>
-  </div>
-  <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>Right now the site says nothing about who wrote it, which a careful reader notices immediately. The guides are honest and therefore modest; a named person with an accurate bio is the cheapest credibility available.</p></div>
-    <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>None, provided the bio describes work that actually happened. Claiming hands-on testing that did not occur is the one move that would convert this site from careful to deceptive.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-08</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Do within the first week</dd></div>
-    </dl>
-  </div>
-  <div class="scard-foot">
-    <span class="decide-label">Decision</span>
-    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
-    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
-    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
-    <span class="decide-note" data-note>Undecided</span>
-  </div>
-</article></div></section>
-<section class="section "><div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">The full queue</p><h2>Everything else</h2></div><p>Ordered by what they unlock, not by size.</p></div>
-<article class="scard" id="S-04">
-  <div class="scard-head">
-    <span class="scard-id">S-04</span>
-    <h3>Add one genuinely tested product comparison — bought, used, and photographed</h3>
-    <span class="scard-effort">a purchase plus several evenings</span>
-  </div>
-  <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>This is the single biggest available jump in both usefulness and ranking potential. Every air-fryer page on the internet is currently synthesised from seller copy; a page with a real measurement table, a real cleanup test and real photographs would be materially different.</p></div>
-    <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Cost. Also, FTC and Amazon rules require the review to be genuine, so the testing must actually happen before the page exists.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-08</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">The highest-value single investment on this list</dd></div>
-    </dl>
-  </div>
-  <div class="scard-foot">
-    <span class="decide-label">Decision</span>
-    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
-    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
-    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
-    <span class="decide-note" data-note>Undecided</span>
-  </div>
-</article><article class="scard" id="S-05">
-  <div class="scard-head">
-    <span class="scard-id">S-05</span>
-    <h3>Connect the Product Advertising API before showing any price or rating</h3>
-    <span class="scard-effort">an application, plus 3 qualifying sales to unlock it on most accounts</span>
-  </div>
-  <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>It is the only compliant route to live price, availability and rating, and those are the three things shoppers look for before clicking.</p></div>
-    <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>None to the site. The blocker is that eligibility usually requires sales, which requires traffic, which is the thing being built.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-04</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Start the application now; expect to wait</dd></div>
-    </dl>
-  </div>
-  <div class="scard-foot">
-    <span class="decide-label">Decision</span>
-    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
-    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
-    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
-    <span class="decide-note" data-note>Undecided</span>
-  </div>
-</article><article class="scard" id="S-06">
+</article><article class="scard" id="S-06" data-status="proposed">
   <div class="scard-head">
     <span class="scard-id">S-06</span>
-    <h3>Switch on measurement before writing guide number five</h3>
-    <span class="scard-effort">an hour of setup, then 2–4 weeks of waiting for data</span>
+    <h3>Deploy the collector so the five events have somewhere to land</h3>
+    <span class="scard-cat">Measure &middot; priority 2</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>Four guides exist on hypotheses. A fifth written on another hypothesis adds almost nothing. A fifth written from an actual Search Console query report adds a page that has a reason to exist.</p></div>
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Run server/collect.js on a host the operator controls and set window.CC_ANALYTICS_ENDPOINT to its URL.</p>
+      <p class="q-label">Why</p><p>The events are defined and instrumented but inert. GitHub Pages cannot run a collector, so this needs one decision: which host, and who owns the data.</p>
+    </div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Low. The client is already written and stays silent until switched on.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-10, Q-11</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Do before more content</dd></div>
+      <div><dt>Effort</dt><dd>1-2 hours plus a host</dd></div>
+      <div><dt>Risk</dt><dd>Medium: needs a privacy notice and a retention rule before it goes live.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-12</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://karagemop466-tech.github.io/Affil1/review/measurement.html" rel="noopener" target="_blank">Measurement plan</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill">Awaiting decision</span></dd></div>
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your call</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-07">
+</article><article class="scard" id="S-07" data-status="proposed">
   <div class="scard-head">
     <span class="scard-id">S-07</span>
-    <h3>Verify the property in Search Console and submit the sitemap</h3>
-    <span class="scard-effort">15 minutes</span>
+    <h3>Turn on Search Console and let 28 days answer the topic question</h3>
+    <span class="scard-cat">Discover &middot; priority 2</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>Without this the site cannot be found, and the topic question can never be answered with data.</p></div>
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Verify the property, submit sitemap.xml, then read the Queries report after four weeks.</p>
+      <p class="q-label">Why</p><p>No keyword volume, difficulty or impression figure is on this site because none was available. Search Console is free and is the shortest path to real data.</p>
+    </div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>None. Requires the owner&#x27;s Google account, so it cannot be done by an agent.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-11</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Do this week</dd></div>
+      <div><dt>Effort</dt><dd>20 minutes, then wait</dd></div>
+      <div><dt>Risk</dt><dd>None.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-12</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://search.google.com/search-console/about" rel="noopener" target="_blank">Search Console</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill">Awaiting decision</span></dd></div>
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your call</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-08">
+</article><article class="scard" id="S-08" data-status="proposed">
   <div class="scard-head">
     <span class="scard-id">S-08</span>
-    <h3>Decide what P-05 (the thermometer) is doing here</h3>
-    <span class="scard-effort">a decision</span>
+    <h3>Ask five real readers what they nearly bought</h3>
+    <span class="scard-cat">Grow &middot; priority 2</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>It is the only non-air-fryer in the set. It currently has its own honest section, which is fine, but it will not be found by anyone searching for air fryers and it dilutes the site&#x27;s topic focus.</p></div>
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>A five-question interview script, run by hand, recorded in the questions register.</p>
+      <p class="q-label">Why</p><p>The site&#x27;s guide topics are hypotheses. Five conversations would replace guesswork with at least a small amount of evidence, and cost nothing but time.</p>
+    </div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Low either way. Keeping it is harmless; removing it loses a link.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-06</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Either is defensible — but decide, so the navigation stops hedging</dd></div>
+      <div><dt>Effort</dt><dd>2 hours</dd></div>
+      <div><dt>Risk</dt><dd>None. Do not publish quotes as endorsements without consent.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://karagemop466-tech.github.io/Affil1/questions/" rel="noopener" target="_blank">Questions register</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill">Awaiting decision</span></dd></div>
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your call</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-09">
-  <div class="scard-head">
-    <span class="scard-id">S-09</span>
-    <h3>Add a reader-facing &#x27;ask a question&#x27; capture, once a privacy notice exists</h3>
-    <span class="scard-effort">an hour plus a form endpoint</span>
-  </div>
-  <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>The most useful input for the next guide is a real question from a real reader. It also feeds the editorial pipeline with something better than keyword tools.</p></div>
-    <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Handling personal data creates obligations that do not currently exist on this site. Do not ship a form before the notice does.</dd></div>
-      <div><dt>Depends on</dt><dd>Q-10</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">After the privacy notice, not before</dd></div>
-    </dl>
-  </div>
-  <div class="scard-foot">
-    <span class="decide-label">Decision</span>
-    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
-    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
-    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
-    <span class="decide-note" data-note>Undecided</span>
-  </div>
-</article><article class="scard" id="S-10">
+</article><article class="scard" id="S-10" data-status="hold">
   <div class="scard-head">
     <span class="scard-id">S-10</span>
-    <h3>Publish a monthly dated change log on the site</h3>
-    <span class="scard-effort">minutes per month</span>
+    <h3>Add an email capture only when there is something to send</h3>
+    <span class="scard-cat">Grow &middot; priority 3</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>Affiliate content ages badly and silently. A visible &#x27;what changed and when&#x27; line per guide is cheap, and it is also the strongest available signal that a human maintains the site.</p></div>
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>RSS exists today; a newsletter needs a provider, a privacy notice and a publishing cadence.</p>
+      <p class="q-label">Why</p><p>A capture box with no cadence collects addresses and disappoints them.</p>
+    </div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>None. It is already generated by the build&#x27;s page metadata.</dd></div>
-      <div><dt>Depends on</dt><dd>nothing</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Cheap and worth it</dd></div>
+      <div><dt>Effort</dt><dd>30 minutes plus a vendor decision</dd></div>
+      <div><dt>Risk</dt><dd>Medium: an email list is personal data and needs a lawful basis.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-12, Q-13</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://karagemop466-tech.github.io/Affil1/feed.xml" rel="noopener" target="_blank">RSS feed</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-warn">Recommend hold</span></dd></div>
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your call</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-11">
+</article><article class="scard" id="S-11" data-status="hold">
   <div class="scard-head">
     <span class="scard-id">S-11</span>
-    <h3>Do not add more AI-written guides until S-04 or S-06 lands</h3>
-    <span class="scard-effort">none</span>
+    <h3>Stop commissioning AI-written guides until one of them can be tested or measured</h3>
+    <span class="scard-cat">Grow &middot; priority 3</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>This is a recommendation to stop, which belongs on a suggestions page. More synthetic prose raises the site&#x27;s exposure to search-quality demotions and adds no differentiation. The current four guides are defensible precisely because they claim so little.</p></div>
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>No new guide topics until either Search Console data or a hands-on test exists.</p>
+      <p class="q-label">Why</p><p>More synthetic prose makes the site bigger, not better. The current guides are defensible because they claim little; that advantage survives only by not diluting it.</p>
+    </div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Opportunity cost if the judgement is wrong.</dd></div>
-      <div><dt>Depends on</dt><dd>nothing</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">The least popular and most important item on this page</dd></div>
+      <div><dt>Effort</dt><dd>zero</dd></div>
+      <div><dt>Risk</dt><dd>None.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-12</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence">none external</dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-warn">Recommend hold</span></dd></div>
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your call</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article><article class="scard" id="S-12">
+</article><article class="scard" id="S-12" data-status="proposed">
   <div class="scard-head">
     <span class="scard-id">S-12</span>
-    <h3>Replace illustrative imagery with real photographs of the actual products</h3>
-    <span class="scard-effort">an afternoon with a phone and a window</span>
+    <h3>Put a real name and a two-line biography on the byline</h3>
+    <span class="scard-cat">Trust &middot; priority 3</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>The site currently labels every photograph as an illustration. That is honest, but it is also a visible ceiling on how convincing the pages can be. Real photographs of the real units, taken by the owner, remove the caveat entirely.</p></div>
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Replace the organisation byline with a person, once there is a person.</p>
+      <p class="q-label">Why</p><p>A publication has an author. Inventing one would be worse than having none, so the field stays empty until you supply it.</p>
+    </div>
     <dl class="scard-meta">
-      <div><dt>Risk</dt><dd>Low. Requires the products to be in hand.</dd></div>
-      <div><dt>Depends on</dt><dd>S-04</dd></div>
-      <div><dt>Recommendation</dt><dd class="rec">Do together with the testing</dd></div>
+      <div><dt>Effort</dt><dd>5 minutes once supplied</dd></div>
+      <div><dt>Risk</dt><dd>None.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-13</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence">none external</dd></div>
+      <div><dt>Status</dt><dd><span class="pill">Awaiting decision</span></dd></div>
     </dl>
   </div>
   <div class="scard-foot">
-    <span class="decide-label">Decision</span>
+    <span class="decide-label">Your call</span>
     <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
     <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
     <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
     <span class="decide-note" data-note>Undecided</span>
   </div>
-</article></div></section>
+</article><article class="scard" id="S-15" data-status="proposed">
+  <div class="scard-head">
+    <span class="scard-id">S-15</span>
+    <h3>Ask Amazon support three questions in writing</h3>
+    <span class="scard-cat">Discover &middot; priority 2</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Ask whether link.amazon short links are Special Links, what a valid tag parameter looks like on a /dp/ URL, and whether the supplied ID is active.</p>
+      <p class="q-label">Why</p><p>These are the three things no page in this repository can settle, and all three are answerable by the party that owns the program.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>15 minutes</dd></div>
+      <div><dt>Risk</dt><dd>None.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-07, Q-11</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://affiliate-program.amazon.com/contact" rel="noopener" target="_blank">Associates contact</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill">Awaiting decision</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article></div></div></section>
+<section class="section section-tint"><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">Already done</p><h2>Implemented in this build</h2></div>
+<p>Published here so the decision log is complete, not to take credit.</p></div>
+<div class="scard-list"><article class="scard" id="S-01" data-status="done">
+  <div class="scard-head">
+    <span class="scard-id">S-01</span>
+    <h3>Tag every outbound product link with the Associates ID</h3>
+    <span class="scard-cat">Comply &middot; priority 1</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Rebuild each product URL as /dp/ASIN?tag=shopnow047c-20 instead of a bare product address.</p>
+      <p class="q-label">Why</p><p>Program Policies 2(b) requires the Associates ID as a URL parameter on every link to an Amazon Site. The previous build linked to bare /dp/ addresses, so a click could not carry the ID in the URL.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>done in this build</dd></div>
+      <div><dt>Risk</dt><dd>Low: the destination ASIN is unchanged; only the parameter is added.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-07 (does the ID exist and is it active)</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">Program Policies 2(b)</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-ok">Implemented</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-03" data-status="done">
+  <div class="scard-head">
+    <span class="scard-id">S-03</span>
+    <h3>Correct the record on P-04 instead of leaving it unresolved</h3>
+    <span class="scard-cat">Publish &middot; priority 1</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Publish the ThermoMaven ASIN and title, and remove the stale &#x27;unresolved&#x27; wording.</p>
+      <p class="q-label">Why</p><p>The third request resolved. Leaving an out-of-date &#x27;unknown&#x27; on the page would be as misleading as inventing an answer, so the record was corrected and the history kept in FLG-004.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>done in this build</dd></div>
+      <div><dt>Risk</dt><dd>None.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-01</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">P-04 listing</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-ok">Implemented</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-04" data-status="done">
+  <div class="scard-head">
+    <span class="scard-id">S-04</span>
+    <h3>Add a second thermometer guide, because there are now two thermometers</h3>
+    <span class="scard-cat">Grow &middot; priority 2</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Publish a comparison-shaped guide for the two thermometers in the register, using only the sellers&#x27; stated features.</p>
+      <p class="q-label">Why</p><p>Half the register is now thermometers. A publication whose only guides are about air fryers is not serving half its own catalogue, and the two products are different jobs: one instant read, one continuous monitoring.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>done in this build</dd></div>
+      <div><dt>Risk</dt><dd>Low. Claims stay inside the sellers&#x27; own wording.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-01</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored nofollow noopener" target="_blank">P-04</a> <a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored nofollow noopener" target="_blank">P-05</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-ok">Implemented</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-05" data-status="done">
+  <div class="scard-head">
+    <span class="scard-id">S-05</span>
+    <h3>Group the guides into topic clusters instead of a flat list</h3>
+    <span class="scard-cat">Grow &middot; priority 2</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Four guides become three clusters (shape, size, upkeep) plus a thermometer cluster, with a hub page linking each.</p>
+      <p class="q-label">Why</p><p>Internal links are the only ranking signal a static site controls completely, and flat lists share no authority.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>done in this build</dd></div>
+      <div><dt>Risk</dt><dd>Low.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable" rel="noopener" target="_blank">Google: link best practices</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-ok">Implemented</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-09" data-status="done">
+  <div class="scard-head">
+    <span class="scard-id">S-09</span>
+    <h3>Put the compliance gate in the publishing path, not in a document</h3>
+    <span class="scard-cat">Comply &middot; priority 2</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Make tools/check.py the gate: disclosure placement, sponsored rel, no price claims, no test claims, links resolve.</p>
+      <p class="q-label">Why</p><p>A checklist in a markdown file is a promise. A check that fails the build is a gate.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>already wired</dd></div>
+      <div><dt>Risk</dt><dd>None.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://karagemop466-tech.github.io/Affil1/about/#workflow" rel="noopener" target="_blank">Publishing workflow</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-ok">Implemented</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-13" data-status="done">
+  <div class="scard-head">
+    <span class="scard-id">S-13</span>
+    <h3>Keep the two ASIN fields apart, forever</h3>
+    <span class="scard-cat">Comply &middot; priority 3</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>intended_asin and observed_asin are separate fields with a build check that they never merge.</p>
+      <p class="q-label">Why</p><p>An observed redirect is evidence of where a link goes. It is not evidence of what the owner meant to ship, and merging the two would quietly destroy the distinction.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>done</dd></div>
+      <div><dt>Risk</dt><dd>None.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-09</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">Program Policies 2(a)</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-ok">Implemented</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-14" data-status="done">
+  <div class="scard-head">
+    <span class="scard-id">S-14</span>
+    <h3>Retire the duplicate edition by noindex, not by deletion</h3>
+    <span class="scard-cat">Trust &middot; priority 2</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-what">
+      <p class="q-label">What it changes</p><p>Mark the superseded pages noindex and keep them out of the sitemap.</p>
+      <p class="q-label">Why</p><p>Deleting another session&#x27;s work is destructive; leaving two versions of the same five products competing in search is worse for the reader. noindex is reversible.</p>
+    </div>
+    <dl class="scard-meta">
+      <div><dt>Effort</dt><dd>done</dd></div>
+      <div><dt>Risk</dt><dd>Low.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Evidence</dt><dd class="scard-evidence"><a href="https://karagemop466-tech.github.io/Affil1/robots.txt" rel="noopener" target="_blank">robots.txt</a> </dd></div>
+      <div><dt>Status</dt><dd><span class="pill pill-ok">Implemented</span></dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your call</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article></div></div></section>
+<section class="section "><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">The whole board on one screen</p><h2>Fifteen rows</h2></div></div>
+<div class="table-scroll"><table class="register"><caption>Fifteen proposals, seven already implemented in this build</caption><thead><tr><th scope="col">Ref</th><th scope="col">Proposal</th><th scope="col">Area</th><th scope="col">Effort</th><th scope="col">Depends on</th><th scope="col">State</th></tr></thead><tbody><tr><td><a href="#S-01"><strong>S-01</strong></a></td><td>Tag every outbound product link with the Associates ID</td><td>Comply</td><td>done in this build</td><td>Q-07 (does the ID exist and is it active)</td><td>Implemented</td></tr><tr><td><a href="#S-02"><strong>S-02</strong></a></td><td>Prove one click end to end before scaling anything</td><td>Measure</td><td>about 10 minutes plus dashboard lag</td><td>Q-07, Q-08</td><td>Awaiting decision</td></tr><tr><td><a href="#S-03"><strong>S-03</strong></a></td><td>Correct the record on P-04 instead of leaving it unresolved</td><td>Publish</td><td>done in this build</td><td>Q-01</td><td>Implemented</td></tr><tr><td><a href="#S-04"><strong>S-04</strong></a></td><td>Add a second thermometer guide, because there are now two thermometers</td><td>Grow</td><td>done in this build</td><td>Q-01</td><td>Implemented</td></tr><tr><td><a href="#S-05"><strong>S-05</strong></a></td><td>Group the guides into topic clusters instead of a flat list</td><td>Grow</td><td>done in this build</td><td>nothing</td><td>Implemented</td></tr><tr><td><a href="#S-06"><strong>S-06</strong></a></td><td>Deploy the collector so the five events have somewhere to land</td><td>Measure</td><td>1-2 hours plus a host</td><td>Q-12</td><td>Awaiting decision</td></tr><tr><td><a href="#S-07"><strong>S-07</strong></a></td><td>Turn on Search Console and let 28 days answer the topic question</td><td>Discover</td><td>20 minutes, then wait</td><td>Q-12</td><td>Awaiting decision</td></tr><tr><td><a href="#S-08"><strong>S-08</strong></a></td><td>Ask five real readers what they nearly bought</td><td>Grow</td><td>2 hours</td><td>nothing</td><td>Awaiting decision</td></tr><tr><td><a href="#S-09"><strong>S-09</strong></a></td><td>Put the compliance gate in the publishing path, not in a document</td><td>Comply</td><td>already wired</td><td>nothing</td><td>Implemented</td></tr><tr><td><a href="#S-10"><strong>S-10</strong></a></td><td>Add an email capture only when there is something to send</td><td>Grow</td><td>30 minutes plus a vendor decision</td><td>Q-12, Q-13</td><td>Recommended hold</td></tr><tr><td><a href="#S-11"><strong>S-11</strong></a></td><td>Stop commissioning AI-written guides until one of them can be tested or measured</td><td>Grow</td><td>zero</td><td>Q-12</td><td>Recommended hold</td></tr><tr><td><a href="#S-12"><strong>S-12</strong></a></td><td>Put a real name and a two-line biography on the byline</td><td>Trust</td><td>5 minutes once supplied</td><td>Q-13</td><td>Awaiting decision</td></tr><tr><td><a href="#S-13"><strong>S-13</strong></a></td><td>Keep the two ASIN fields apart, forever</td><td>Comply</td><td>done</td><td>Q-09</td><td>Implemented</td></tr><tr><td><a href="#S-14"><strong>S-14</strong></a></td><td>Retire the duplicate edition by noindex, not by deletion</td><td>Trust</td><td>done</td><td>nothing</td><td>Implemented</td></tr><tr><td><a href="#S-15"><strong>S-15</strong></a></td><td>Ask Amazon support three questions in writing</td><td>Discover</td><td>15 minutes</td><td>Q-07, Q-11</td><td>Awaiting decision</td></tr></tbody></table></div><p class="table-note">Implemented rows are kept on the page rather than deleted, because a decision log that hides its completed items cannot be audited.</p></div></section>
 <section class="section "><div class="wrap">
 <div class="callout">
-  <h2>The one recommendation to read twice</h2>
-  <p>Everything else on this page adds something. S-11 says stop: do not commission more AI-written guides until either a real test or real search data exists. More synthetic prose makes the site bigger, not better, and it raises the chance the whole publication is treated as one undifferentiated block.</p>
-  <p>The four guides that exist are defensible because they claim little. That is a narrow advantage, and it survives by not being diluted.</p>
+  <h2>The two rows worth reading twice</h2>
+  <p><strong>S-11</strong> says stop: no new guide topics until either a real test or real search data exists. More synthetic prose
+  makes the site bigger, not better, and it raises the chance the whole publication is read as one undifferentiated block. The five
+  guides that exist are defensible because they claim little; that advantage survives by not being diluted.</p>
+  <p><strong>S-15</strong> is the cheapest thing on the page. Three questions to Amazon's own support channel would settle whether the
+  links earn, whether the short links are valid, and whether the ID is active &mdash; the three things no page in this repository can
+  answer by itself.</p>
 </div></div></section>
+
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="foot-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
-    <div class="foot-grid"><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../compare/index.html">Comparison table</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>Catalogue</h2><ul><li><a href="../products/index.html">Product register</a></li><li><a href="../products/p-05.html">The thermometer</a></li><li><a href="../about/index.html#how-we-link">How we link</a></li></ul></div><div class="foot-col"><h2>Review queue</h2><ul><li><a href="../review/index.html">Flagged for review</a></li><li><a href="../review/images.html">Image policy</a></li><li><a href="../review/measurement.html">Measurement plan</a></li><li><a href="../about/index.html#sources">Sources</a></li></ul></div><div class="foot-col"><h2>Desk</h2><ul><li><a href="../questions/index.html">Open questions</a></li><li><a href="index.html">Suggestions</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../about/index.html">About this site</a></li></ul></div></div>
+    <div class="foot-grid"><div class="foot-col"><h2>Shop</h2><ul><li><a href="../products/index.html">The shortlist</a></li><li><a href="../compare/index.html">Compare the five</a></li><li><a href="../products/p-02.html">The oven-style option</a></li><li><a href="../products/p-05.html">The thermometers</a></li><li><a href="../feed.xml">RSS feed</a></li></ul></div><div class="foot-col"><h2>Read</h2><ul><li><a href="../guides/index.html">All guides</a></li><li><a href="../guides/basket-or-oven-air-fryer.html">Basket or oven</a></li><li><a href="../guides/air-fryer-capacity-checklist.html">Capacity checklist</a></li><li><a href="../guides/instant-read-or-probe-thermometer.html">Choosing a thermometer</a></li></ul></div><div class="foot-col"><h2>Review queue</h2><ul><li><a href="../review/index.html">Flagged for review</a></li><li><a href="../review/measurement.html">Measurement plan</a></li><li><a href="../review/images.html">Image policy</a></li><li><a href="../sources/index.html">Sources and quotations</a></li></ul></div><div class="foot-col"><h2>Desk</h2><ul><li><a href="../questions/index.html">Open questions</a></li><li><a href="index.html">Suggestions and decisions</a></li><li><a href="../operations/ledger.html">Campaign ledger</a></li><li><a href="../brief/index.html">Executive summary</a></li><li><a href="../about/index.html">About, disclosure and privacy</a></li></ul></div></div>
     <div class="foot-bottom">
       <p>Tracking ID on this site: <code>shopnow047c-20</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
       <p class="foot-meta">Crisp &amp; Counter &middot; static site &middot; last built 2026-11-20 &middot; no cookies, no trackers, no third-party requests</p>

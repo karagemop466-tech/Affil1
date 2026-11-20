@@ -16,7 +16,7 @@ def build(page_dir, products, meta):
         }
         if r["asin"]:
             listing = product_link(
-                d, f"https://www.amazon.com/dp/{r['asin']}", esc(r["asin"]),
+                d, p["affiliate_url"], esc(r["asin"]),
                 aria=f"Open the Amazon listing for {r['ref']} (affiliate link, opens in a new tab)")
             cap = esc(r["capacity"])
             attrs = esc(r["attributes"])
@@ -47,7 +47,7 @@ def build(page_dir, products, meta):
     body = f"""{pagehead(
         'Compare',
         'Side by side,<br>with nothing measured',
-        'Five products, seven columns. Two of those columns are the sellers talking about their own products. One is a link that was actually opened. The rest are empty.',
+        'Five products, seven columns. Two of those columns are the sellers describing their own products. One is a link that was actually opened. The rest are empty.',
         meta='No price column &middot; no rating column &middot; no winner column &middot; on purpose',
     )}
 {section(f'''
@@ -72,6 +72,7 @@ def build(page_dir, products, meta):
     return page(
         d,
         title="Compare the five \u2014 Crisp & Counter",
+        breadcrumb=[("Home", ""), ("Compare", "compare/")],
         description="The five submitted products side by side: brand, shape, the capacity and attributes their sellers state, the ASIN each link reached, and the fields left blank.",
         body=body,
         active="compare/index.html",
