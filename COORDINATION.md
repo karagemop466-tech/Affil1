@@ -7,7 +7,8 @@ Shared task board for parallel sessions on this repository.
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
-| `arena/e69a770b-affil1` | `arena/e69a770b-affil1` | Integration & finalization: Executive summary, site verification, suggestions review, GitHub Pages deployment | active |
+| `arena/c9fc4295-affil1` | `arena/c9fc4295-affil1` | Audit and reconcile live editions, correct broken links and disclosure gaps, document differing redirect observations and broaden checks | done |
+| `arena/e69a770b-affil1` | `arena/e69a770b-affil1` | Integration & finalization: Executive summary, line-by-line verification, suggestions review, and GitHub Pages deployment | active |
 
 ## Claims
 
@@ -16,8 +17,9 @@ Shared task board for parallel sessions on this repository.
 | Publication rewrite, editorial guides, decision pages, review queue | done | arena/fa9307f7-affil1 | `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/` |
 | Link verification against the live Amazon listing | done | arena/fa9307f7-affil1 | `src/data/products.json`, `review/` |
 | Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
-| Product facts beyond the listing title | needs review | arena/e69a770b-affil1 | `src/data/products.json` |
-| Associates account data (intended ASINs, rate card, click report) | needs review | arena/e69a770b-affil1 | requires account owner |
+| Product facts beyond the listing title | needs review | arena/c9fc4295-affil1 | `src/data/products.json` |
+| Associates account data (intended ASINs, rate card, click report) | needs review | arena/c9fc4295-affil1 | requires account owner |
+| Audit and reconcile live editions, correct broken links and disclosure gaps, document differing redirect observations and broaden checks | done | arena/c9fc4295-affil1 | COORDINATION.md, root legacy HTML, src/data/, tools/, generated site output and workflow |
 | Executive summary & site verification line-by-line | done | arena/e69a770b-affil1 | `EXECUTIVE_SUMMARY.md`, `questions.html`, `products.html` |
 | Suggestions review & decision path selection | done | arena/e69a770b-affil1 | `suggestions.html` |
 | GitHub Pages deployment & PR merge | done | arena/e69a770b-affil1 | `.github/workflows/pages.yml`, `index.html`, `sitemap.xml` |
@@ -57,12 +59,13 @@ All flagged items are published at `review/index.html` and `flagged-for-review.h
 - PR created from `arena/e69a770b-affil1` to `main` with summary of changes, sources used, and flagged irregularities.
 - PR merged successfully (`gh pr merge`).
 - GitHub Pages deployed successfully: https://karagemop466-tech.github.io/Affil1/
-- PR link: https://github.com/karagemop466-tech/Affil1/pull/29
+- PR link: https://github.com/karagemop466-tech/Affil1/pull/36
 - Merge result: success
 
 ## Overlap with other branches
 
 - Previous sibling branch `arena/fa9307f7-affil1` completed the rewrite and verification.
+- Previous sibling branch `arena/c9fc4295-affil1` completed audit and reconciliation.
 - This session (`arena/e69a770b-affil1`) finalized the executive summary, verified line-by-line, reviewed suggestions, and deployed to GitHub Pages.
 - No conflicts; all files preserved and integrated.
 

@@ -193,7 +193,7 @@ def main():
     # review
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))
     pages.append(write("review/images.html", page_review.build_images("review", images, products, meta)))
-    pages.append(write("review/measurement.html", page_review.build_measurement("review", meta)))
+    pages.append(write("review/measurement.html", page_review.build_measurement("review", meta, load("events.json"))))
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
