@@ -82,7 +82,9 @@ CI reproducibility diff (copy, rebuild, diff -r) → no drift
 
 ## Merge log
 
-See the PR linked from COORDINATION.md. Updated below on merge.
+- [PR #118](https://github.com/karagemop466-tech/Affil1/pull/118) merged into `main` as `d63b2f6`; all four workflows green on the merge commit; `pages build and deployment` run 44694702258 succeeded; the live category pages and the new guide were then fetched from the Pages host and read back.
+- Four rebases/merges onto a `main` that moved under the branch. Resolution rule used every time, and written into `/tmp/merge_main.py` so it is mechanical: build outputs are never hand-merged (main's copy, then regenerate), registers keep main's row at the id and re-file this session's rows at the end of the range, append-only markdown keeps both texts. Rows re-filed this way: SRC-21…24, S-39…41, FLG-039…040. Findings dropped as already published: the short-link flag (main's FLG-028, appended as a third corroboration), the guide tag-sentence flag (main's FLG-031), three board duplicates (S-01, S-12, S-24), two policy sources (SRC-18/19).
+- Follow-up after the merge: the probe guide's classification table now carries a linked source per row, which is what this session claimed in its own editorial rule and had not enforced.
 
 ## Rebase reconciliation (recorded because it removed work, not because it added it)
 

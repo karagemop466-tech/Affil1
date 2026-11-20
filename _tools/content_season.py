@@ -66,14 +66,14 @@ GUIDES = [
                 ],
                 "table": {
                     "caption": "Thermometer types, as classified by USDA FSIS \u2014 Food Thermometers (retrieved 2026-11-20)",
-                    "headers": ["Type", "Speed", "Placement", "Usage note in the source"],
+                    "headers": ["Type", "Speed", "Placement", "Usage note in the source", "Official source"],
                     "rows": [
-                        ["Wireless / smart thermometer", "Left in the food while cooking", "At least 1 inch deep in the thickest part", "Provides live status on internal temperature"],
-                        ["Thermometer fork combination", "2\u201310 seconds", "At least a quarter of an inch in the thickest part", "Not designed to remain in food while cooking"],
-                        ["Thermocouple", "2\u20135 seconds", "A quarter of an inch or deeper as needed", "Fastest reading; works in thick and thin food"],
-                        ["Thermistor", "10 seconds", "At least a half inch deep", "Measures thin and thick food; not designed to remain in food"],
-                        ["Oven cord thermometer", "10 seconds", "At least a half inch deep", "Designed to remain in food in an oven or covered pot; base unit sits on the counter"],
-                        ["Oven-safe bimetal (dial)", "1\u20132 minutes", "2 to 2.5 inches deep in the thickest part", "For roasts, casseroles and soups; not appropriate for thin food"],
+                        ["Wireless / smart thermometer", "Left in the food while cooking", "At least 1 inch deep in the thickest part", "Provides live status on internal temperature", {"url": FSIS_THERMOMETERS, "label": "USDA FSIS \u2014 Food Thermometers"}],
+                        ["Thermometer fork combination", "2\u201310 seconds", "At least a quarter of an inch in the thickest part", "Not designed to remain in food while cooking", {"url": FSIS_THERMOMETERS, "label": "USDA FSIS \u2014 Food Thermometers"}],
+                        ["Thermocouple", "2\u20135 seconds", "A quarter of an inch or deeper as needed", "Fastest reading; works in thick and thin food", {"url": FSIS_THERMOMETERS, "label": "USDA FSIS \u2014 Food Thermometers"}],
+                        ["Thermistor", "10 seconds", "At least a half inch deep", "Measures thin and thick food; not designed to remain in food", {"url": FSIS_THERMOMETERS, "label": "USDA FSIS \u2014 Food Thermometers"}],
+                        ["Oven cord thermometer", "10 seconds", "At least a half inch deep", "Designed to remain in food in an oven or covered pot; base unit sits on the counter", {"url": FSIS_THERMOMETERS, "label": "USDA FSIS \u2014 Food Thermometers"}],
+                        ["Oven-safe bimetal (dial)", "1\u20132 minutes", "2 to 2.5 inches deep in the thickest part", "For roasts, casseroles and soups; not appropriate for thin food", {"url": FSIS_THERMOMETERS, "label": "USDA FSIS \u2014 Food Thermometers"}],
                     ],
                 },
             },
@@ -85,7 +85,9 @@ GUIDES = [
                 ],
             },
         ],
-        "closing": "Every figure and classification in this guide comes from the USDA FSIS pages linked in the table, read on 2026-11-20. The two sentences about products describe what their listings state, and nothing about how they perform.",
+        "sources": [("USDA FSIS \u2014 Food Thermometers: placement, accuracy, calibration and the type table", FSIS_THERMOMETERS),
+                    ("USDA FSIS \u2014 Safe Minimum Internal Temperature Chart", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart")],
+        "closing": "Every figure and classification in this guide comes from the USDA FSIS pages linked in the table and listed under Sources, read on 2026-11-20. The two sentences about products describe what their listings state, and nothing about how they perform.",
     },
 
 ]
