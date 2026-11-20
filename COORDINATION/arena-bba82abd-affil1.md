@@ -1,6 +1,6 @@
 # Session record — arena/bba82abd-affil1
 
-Base: `main` at `1b09bbc` (PR #87) when this session started; later merged with `main` at `c2d1050` (see "Branch and merge"). Owner: session `arena/bba82abd-affil1` only. Kept in its own file so parallel sessions do not conflict on the shared board.
+Base: `main` at `1b09bbc` (PR #87) when this session started; later merged with `main` at `c2d1050` and again at `25ade98` (PR #90) (see "Branch and merge"). Owner: session `arena/bba82abd-affil1` only. Kept in its own file so parallel sessions do not conflict on the shared board.
 
 ## Claim — 2026-11-20 (UTC), narrowed
 
@@ -32,7 +32,7 @@ Generated pages that change as a result: `brief/index.html`, `about/index.html`.
 1. **Dashboard.** Wire `COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt` into `tools/build.py` (import, `OWNED`, `GENERATED`, render call) and add a footer entry in `tools/layout.py`. The generator reads `src/data/` only; each row's source is either an official link or a blank marked unverified.
 2. **Executive summary.** `EXECUTIVE_SUMMARY.md` is stale. Recompute its counts from `src/data/` and rewrite it.
 3. **Verification log.** Decide whether `src/data/verification-log.json` should be published in the site (it is public on the live site today, see RVW-03).
-4. **RVW-01 to RVW-06** in `src/data/verification-log.json` each name an owner decision. See that file.
+4. **RVW-01 and RVW-03 to RVW-05** name owner decisions, and **RVW-07** is a cross-scope correction for `tools/page_review.py`. See `src/data/verification-log.json`.
 
 ## Verification
 
@@ -45,25 +45,28 @@ Local gates on the branch (after the last build):
 - `tools/validate.py`: all checks passed.
 - `tools/check_local_links.py`: 0 broken across 37 pages.
 - `tools/check_deploy_paths.py` (served at `/Affil1/`): 1,059 internal references resolve.
-- `tools/sweep_surfaces.py --dry-run`: **would move 7 files under `decision-support/`**. This is the existing red gate on `main` (see RVW-02). Not fixed here; owned by #84/#86.
+- `tools/sweep_surfaces.py --dry-run`: **would move 0 files** on the merged tree (main's PR #90 repaired the launch gate; RVW-02 resolved upstream).
+- `tools/test_paid_link_gate.py` and the other tool tests: 6 of 6 pass on the merged tree (RVW-06 resolved upstream by PR #90).
 - JS parse and `analytics/endpoint.py` compile: pass.
-- `tools/test_paid_link_gate.py`: **fails on main and on this branch** (RVW-06). No workflow runs it.
+- `tools/check_deploy_paths.py` (served at `/Affil1/`): 1,059 references resolve.
 
 ## Branch and merge
 
 - The environment fixed the branch name `arena/bba82abd-affil1`. The board convention `session-<id>/<task>` cannot be followed. Recorded on the board.
 - `main` was merged into this branch with `git merge --allow-unrelated-histories -X theirs` (merge `1cdd046`) because `main` and the earlier base had unrelated histories. Safe only because the earlier base's tree was a subset of `main`; that was checked. The board's `git pull --rebase` rule was not used for this reason.
+- `main` moved twice while this session ran (`c2d1050`, then `25ade98`). Each time it was merged in with `git merge`, not rebased. The `COORDINATION.md` conflict at `c2d1050` was resolved by keeping both sides. The `brief/index.html` conflict at `25ade98` is a generated file and was regenerated from source, not hand-edited.
 
 ## Irregularities found in this pass
 
 Published on the verification log as RVW-01 to RVW-06. Summary:
 
-- **RVW-01 (high):** PR #82 would remove the Associates tag from every product link. Program Policies §2(b) requires the tag on each Special Link. Owner decision; not merged here.
-- **RVW-02 (high):** `Affiliate launch checks` is red on `main` at the sweep step.
+- **RVW-01 (high, open):** the policy requires the tag on each Special Link. Main (PR #90) now builds untagged listing links. Owner decision; not changed here.
+- **RVW-02 (high, resolved upstream):** `Affiliate launch checks` was red at the sweep step; PR #90 resolved it. Re-checked: `would move: 0`.
 - **RVW-03 (medium):** the live site publishes the repository root, so `_config.yml`'s exclude list does not apply. `COORDINATION.md`, `src/data/`, `tools/` and `archive/` are publicly served.
 - **RVW-04 (low):** the supplied tag `shopnow047c-20` is not in the `XXXXX-##` example format. The policy allows other formats; this is not treated as a defect.
 - **RVW-05 (low):** `EXECUTIVE_SUMMARY.md` counts are stale.
-- **RVW-06 (medium):** `tools/test_paid_link_gate.py` fails on main and no workflow runs it.
+- **RVW-06 (medium, resolved upstream):** `tools/test_paid_link_gate.py` failed; PR #90 restored it. 6 of 6 pass.
+- **RVW-07 (medium, open):** `review/index.html` says the site tags every Amazon link and that 25 archived files carry the tag. Both are wrong on the merged tree (22 legacy HTML files, none tagged; 126 archive HTML files, 39 tagged). Cross-scope request to the owner of `tools/page_review.py`.
 
 Also found and corrected in this pass:
 

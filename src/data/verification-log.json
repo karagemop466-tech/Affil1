@@ -181,9 +181,9 @@
       "id": "RVW-01",
       "severity": "high",
       "title": "PR #82 would remove the Associates tag from every product link, which the official text does not allow",
-      "found": "PR #82 (arena/359baa16-affil1) changes buy_url() so that a product without a validated Special Link is linked untagged. Program Policies §2(b) says a site must include the tag 'as a parameter in the URL of each link you place on your Site to an Amazon Site'. The current build tags every product link.",
+      "found": "PR #82 would remove the Associates tag from every product link. Program Policies §2(b) says a site must include the tag 'as a parameter in the URL of each link you place on your Site to an Amazon Site'. Current state on main after PR #90 (merged 2026-11-20): layout.approved_amazon_urls() returns an empty set, so every product link is an untagged listing link. This is the untagged approach the policy text does not seem to allow, read literally. The register's own link_rule cites §2(b) for the tag requirement.",
       "why_it_matters": "Read literally, an untagged Amazon link is itself outside §2(b). The gate the PR adds is a sound instinct about attribution, but it is applied to the wrong side: the policy asks for the tag, and the unconfirmed part is whether the tag belongs to an enrolled account.",
-      "action": "Not merged by this pass. Decision for the owner: keep the tag and confirm enrolment in Associates Central (FLG-002), or drop the tag and accept the policy reading above. Cross-scope request logged to arena/359baa16-affil1.",
+      "action": "Owner decision, not changed in this pass. Either confirm an Associates enrolment and use the tag on validated Special Links, or accept the untagged listing approach after reading §2(b) with its owner. The review page still describes the earlier tagged design; see RVW-07.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -201,7 +201,8 @@
         "https://github.com/karagemop466-tech/Affil1/actions/runs/44686287239",
         "https://github.com/karagemop466-tech/Affil1/pull/86",
         "https://github.com/karagemop466-tech/Affil1/pull/84"
-      ]
+      ],
+      "status": "Resolved on main by PR #90. Re-checked on the merged tree in this pass: sweep reports 'would move: 0'."
     },
     {
       "id": "RVW-03",
@@ -216,7 +217,8 @@
         "https://karagemop466-tech.github.io/Affil1/src/data/product-intent.json",
         "https://karagemop466-tech.github.io/Affil1/tools/build.py",
         "https://karagemop466-tech.github.io/Affil1/archive/legacy-2026-11-20/README.md"
-      ]
+      ],
+      "status": "Open."
     },
     {
       "id": "RVW-04",
@@ -239,7 +241,8 @@
       "sources": [
         "repository file: EXECUTIVE_SUMMARY.md",
         "repository file: src/data/flags.json"
-      ]
+      ],
+      "status": "Open. EXECUTIVE_SUMMARY.md still says '19 flags' and '29 pages' as of this pass."
     },
     {
       "id": "RVW-06",
@@ -254,6 +257,21 @@
         "repository file: .github/workflows/kitchen-check.yml",
         "repository file: .github/workflows/editorial.yml",
         "repository file: .github/workflows/weekly-audit.yml"
+      ],
+      "status": "Resolved on main by PR #90. Re-checked on the merged tree in this pass: 6 of 6 unit tests pass, including test_paid_link_gate."
+    },
+    {
+      "id": "RVW-07",
+      "severity": "medium",
+      "status": "Open. Cross-scope request to the owner of review/index.html (tools/page_review.py).",
+      "title": "The review page describes a tagging state that PR #90 reversed, and its archive count is wrong",
+      "found": "review/index.html says 'The site now appends ?tag=shopnow047c-20 to every Amazon destination, which is what Program Policies 2(b) requires', and that the archive 'holds 25 HTML files from earlier editions, and they carry tag=shopnow047c-20 on Amazon product links'. Checked on the merged tree: no built page carries the tag in an href; approved_amazon_urls() is empty. archive/legacy-2026-11-20 holds 22 HTML files, none tagged. The whole archive/ tree holds 126 HTML files, 39 of which contain the tag string.",
+      "why_it_matters": "A reviewer reading the review page is told the site tags every link, which the build no longer does. The count is wrong under either reading of 'earlier editions'.",
+      "action": "Correct the sentence and the count in tools/page_review.py to match the build. Not changed here: that file is outside this session's claim.",
+      "sources": [
+        "repository file: review/index.html",
+        "repository file: tools/layout.py (approved_amazon_urls)",
+        "repository file: archive/legacy-2026-11-20/"
       ]
     }
   ]
