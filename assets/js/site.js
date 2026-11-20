@@ -130,3 +130,15 @@
     init();
   }
 })();
+
+// Category navigation is progressive: all five products are visible without JS.
+(() => {
+  const tabs = document.querySelector('.shelf-tabs');
+  if (!tabs) return;
+  const select = category => {
+    tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.filter === category));
+    document.querySelectorAll('.shelf-card').forEach(c => c.hidden = c.dataset.category !== category);
+  };
+  tabs.addEventListener('click', e => {const b=e.target.closest('button'); if(b) select(b.dataset.filter);});
+  select('air'); tabs.hidden = false;
+})();

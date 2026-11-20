@@ -30,10 +30,10 @@ AFFILIATE_HINT = __import__("re").compile(
 
 # The only navigation group. Everything else lives in the footer.
 NAV = [
-    ("guides/index.html", "Guides"),
-    ("products/index.html", "Shortlist"),
+    ("guides/index.html", "Buying guides"),
     ("compare/index.html", "Compare"),
-    ("brief/index.html", "Site desk"),
+    ("brief/index.html", "Editorial desk"),
+    ("products/index.html", "Browse products →"),
 ]
 
 FOOTER_GROUPS = [
@@ -136,9 +136,7 @@ def kindle(summary, body):
 def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
-    <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Product links are marked as sponsored. Tracking on the supplied links has not been confirmed.
-      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
+    <span class="disclosure-icon" aria-hidden="true">ⓘ</span><p>{DISCLOSURE} <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">How we link</a></p>
   </div>
 </div>"""
 
@@ -155,8 +153,9 @@ def masthead(page_dir, active=None):
     return f"""<header class="masthead">
   <div class="wrap masthead-inner">
     <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">
-      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
-      <span class="brand-tag">{SITE_TAGLINE}</span>
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><rect width="48" height="48" rx="12" fill="#314835" stroke="none"/><path d="M9 26h30M13 26v5q0 6 7 6h8q7 0 7-6v-5M12 23q2-8 12-8t12 8ZM22 15v-3h4v3M15 10l-2-3m19 3 2-3"/></svg>
+      <span><span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
+      <span class="brand-tag">The kitchen field guide</span></span>
     </a>
     <nav class="nav" aria-label="Sections">
       {"".join(items)}
@@ -223,8 +222,8 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
 {body}
+<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
 </main>
 {footer(page_dir)}
 <script src="{esc(js)}" defer></script>
