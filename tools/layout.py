@@ -119,33 +119,21 @@ def kindle(summary, body):
 def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
-    <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Links to Amazon on this site are affiliate links. If you buy through one, this site may earn a commission at no extra cost to you.
-      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
+    <span class="info-icon" aria-hidden="true">i</span><p>{DISCLOSURE} <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Disclosure policy</a></p>
   </div>
 </div>"""
 
 
 def masthead(page_dir, active=None):
-    # section-aware: every page under guides/ should light "Guides".
-    def section_of(path):
-        return path.split("/")[0] if "/" in path else path
-    act = section_of(active) if active else None
-    items = []
-    for target, label in NAV:
-        current = ' aria-current="page"' if act and section_of(target) == act else ""
-        items.append(f'<a href="{esc(rel(page_dir, target))}"{current}>{esc(label)}</a>')
-    return f"""<header class="masthead">
-  <div class="wrap masthead-inner">
-    <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">
-      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
-      <span class="brand-tag">{SITE_TAGLINE}</span>
-    </a>
-    <nav class="nav" aria-label="Sections">
-      {"".join(items)}
-    </nav>
-  </div>
-</header>"""
+    mark = '<svg width="33" height="37" viewBox="0 0 32 38" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M3 25h23c-1 7-5 10-11 10S5 32 3 25zm24 0 4-4M8 19c6-5-3-7 3-13m4 13c6-7-2-8 4-16m3 16c4-4 0-6 4-10"/></svg>'
+    desk = ''.join(f'<a href="{esc(rel(page_dir,t))}">{l}</a>' for _,links in FOOTER_GROUPS[2:] for t,l in links)
+    def nav(t,l):
+        current = (not active and t=='index.html') or (active and active.split('/')[0]==t.split('/')[0])
+        return f'<a class="pub-link {"on" if current else ""}" href="{esc(rel(page_dir,t))}">{l}</a>'
+    return f"""<header class="masthead"><div class="wrap pub-nav"><a class="wordmark" href="{rel(page_dir,'index.html')}">{mark}<span>Crisp <i>&amp;</i> Counter</span></a>
+<nav aria-label="Main navigation">{nav('index.html','The Edit')}{nav('guides/index.html','Buying Guides')}{nav('compare/index.html','Compare')}<details class="desk-menu"><summary>Editorial Desk <span>⌄</span></summary><div>{desk}</div></details></nav>
+<button type="button" class="saved-open" data-root="{rel(page_dir,'products/index.html')}"><svg viewBox="0 0 24 24" width="16" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 4h12v17l-6-4-6 4z"/></svg> Saved <span data-count-saved>0</span></button></div></header>
+<dialog id="saved-list"><button class="dialog-close" aria-label="Close saved list">×</button><p class="rubric">YOUR KITCHEN NOTES</p><h2>Saved picks</h2><div id="saved-content"></div></dialog>"""
 
 
 def footer(page_dir):
@@ -200,6 +188,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
+<link rel="stylesheet" href="{rel(page_dir, 'assets/css/publication.css')}">
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
@@ -209,7 +198,9 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {body}
 </main>
 {footer(page_dir)}
+<script src="{rel(page_dir, 'assets/js/publication.js')}" defer></script>
 <script src="{esc(js)}" defer></script>
+<script src="{esc(rel(page_dir, 'assets/js/counter-config.js'))}" defer></script>
 <script src="{esc(rel(page_dir, 'assets/js/analytics.js'))}" defer></script>
 </body>
 </html>

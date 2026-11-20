@@ -36,11 +36,14 @@ jobs:
             exit 1
           fi
 
+      - name: Stage the canonical edition only
+        run: python3 tools/stage.py
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
   deploy:
     if: github.event_name != 'pull_request'
