@@ -18,20 +18,20 @@ further input.
 
 ## What exists now
 
-One canonical site, 34 pages, rebuilt from `_src/data` on every deploy:
+One canonical site, 38 pages, rebuilt from `_src/data` on every deploy:
 
 - a product-led front page with five picks in two categories and a buy button on
   every card;
 - a product page for each of the five, with stated facts, who it suits, who
   should skip it, and a one-block provenance record;
 - a side-by-side comparison table;
-- ten question-shaped guides across six clusters;
-- a decision register of 24 questions, 10 answered with evidence;
-- a suggestion queue with three coherent paths and 21 proposals, of which 6 have
-  already been implemented and are shown with evidence (15 open);
+- fourteen question-shaped guides across six clusters, including the seasonal edit: a gift guide, a Black Friday checklist, a wireless-probe buyer's guide and an accessories filter;
+- a decision register of 27 questions, 10 answered with evidence;
+- a suggestion queue with three coherent paths and 26 proposals, of which 7 have
+  already been implemented and are shown with evidence (19 open);
 - an owner's "what is left" page (`/now/`), a ranked offers page (`/offers/`, 10
   weighted offers) and a per-page verification audit (`/verification/`);
-- 27 review flags, an image policy, an inert analytics client and an empty
+- 28 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
@@ -225,7 +225,7 @@ change. What shipped:
   with a gift-edit feature and the Black Friday checklist, timed against the live
   shopping weekend (Amazon's own homepage was running its Black Friday Week event
   when this session fetched it — recorded as a dated observation, not a claim).
-- **Four new question-shaped guides**, each built only from listing facts in the
+- **Four new question-shaped guides** (the site now holds fourteen), each built only from listing facts in the
   register: *Which air fryer gift fits which cook?*, *Black Friday air fryer
   deals: what should you check before you buy?*, *Is a wireless meat thermometer
   worth it?*, *Which air-fryer accessories will you actually use?*
@@ -236,8 +236,8 @@ change. What shipped:
   comparison-page decision column, a single 'how we choose' page, and a
   fortnightly owner-question ritual). Every row stays unimplemented until the
   owner accepts it on /suggestions/.
-- **Question register extended**: Q-23 (which queries actually arrive — blocked
-  on Search Console), Q-24 (cadence and sign-off), Q-25 (do the seasonal modules
+- **Question register extended**: Q-25 (which queries actually arrive — blocked
+  on Search Console), Q-26 (cadence and sign-off), Q-27 (do the seasonal modules
   change clicks — blocked on measurement).
 - **Third independent verification pass over the five supplied links**
   (obs-10b5816b). Result, recorded honestly: only P-05 reproduced its registered
@@ -264,7 +264,7 @@ change. What shipped:
    then mark the rows. Nothing on that page has been implemented by anyone
    pressing a button.
 4. Name an editor, or accept the honest desk-level byline (S-02).
-5. Answer Q-24 in one line: cadence, reviewer, and the sign-off rule.
+5. Answer Q-26 in one line: cadence, reviewer, and the sign-off rule.
 
 Everything else — API access, custom domain, product photography, paid
 acquisition — is sequenced behind those five and documented on /suggestions/.
