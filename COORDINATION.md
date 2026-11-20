@@ -237,3 +237,9 @@ Claim was pushed before implementation. Shared-board-only rebase conflicts occur
 - Needs review on `/kitchen/flagged.html`: no Associates account validation, live measurement, Search Console property, or reader capture. The ledger is empty, and AI-assisted research/drafting is a scoped proposal, not an autonomous production pipeline.
 
 - PR [#31](https://github.com/karagemop466-tech/Affil1/pull/31): main advanced to #30 during PR checks. Resolved the resulting board-only rebase conflict by retaining both logs and leaving all peer site files unchanged. Deploy outcome is tracked on the PR timeline and Pages builds.
+## Measurement integration — arena/b18eada2-affil1
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Align maintained measurement client with private aggregate collector and test contract | in progress | arena/b18eada2-affil1 | server/collect.js, server/collect.test.js, assets/js/analytics.js, server/README.md |
+Claim rebase: preserved the updated main board and appended this claim.
