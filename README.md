@@ -21,13 +21,13 @@ The brief had five parts. This is where each one lives:
 | Make it findable | `sitemap.xml`, `feed.xml`, `robots.txt`, canonical tags, Open Graph images, `Article` + `FAQPage` + `BreadcrumbList` structured data, topic clusters with internal links |
 | Make the machinery trustworthy | `tools/build.py` generates every page from `src/data/`; `tools/validate.py` and `tools/check.py` are the gates; GitHub Actions runs them on every push (`pages.yml`, `kitchen-check.yml`) plus a weekly audit |
 | Lead with products, disclose above the fold, mark every link | One `disclosure()` template, one `product_link()` template — a page cannot ship without either |
-| Suggestions and questions before decisions | `/suggestions/` (29 scored proposals, 2 rejected on policy grounds), `/questions/` (22 questions, 5 answered by this pass), `/review/` (flagged for review, with sources), `/operations/ledger.html` (empty campaign ledger) |
+| Suggestions and questions before decisions | `/suggestions/` (21 proposals across three paths — 6 implemented, 15 open, a decision control per row), `/questions/` (24 questions, 10 answered with evidence), `/review/` (flagged for review, with sources), `/operations/ledger.html` (empty campaign ledger) |
 
 ## Layout
 
 ```
 index.html            publication front page          ← generated
-guides/<slug>/index.html  9 buyer guides              ← generated
+guides/<slug>/index.html  10 buyer guides              ← generated
 compare/ products/ topics/ about/                     ← generated
 suggestions/ questions/ review/                         ← generated
 operations/ledger.html campaign ledger (empty)          ← generated
@@ -147,7 +147,7 @@ confirmed. Read each one in a signed-in browser before arming anything.
 
 ## Open questions and blockers
 
-Twenty-two are listed at [/questions/](https://karagemop466-tech.github.io/Affil1/questions/)
+Twenty-four are listed at [/questions/](https://karagemop466-tech.github.io/Affil1/questions/)
 with the information each one needs. Five were answered by this pass. The ones that
 block everything else, in order:
 
@@ -156,8 +156,10 @@ block everything else, in order:
 2. **Special Links** — generate them in Associates Central, paste each into
    `approved_special_link` via `tools/arm_links.py --i-am-the-owner --link P-01 "<url>"`,
    and confirm one click in the report before arming the other four.
-3. **Search Console** — verify the property. Until then, every statement about what
-   readers want is reasoning, not evidence.
+3. **Search Console** — verify the property and submit the sitemap. The repository's
+   `robots.txt` sits below the host root (FLG-027), so this is the required discovery
+   path, not an optional one. Until it lands, every statement about what readers want
+   is reasoning, not evidence.
 4. **An author** — a named human with two true biographical sentences. Bylines stay at
    desk level because inventing a person who tested these machines would be a
    fabricated endorsement.

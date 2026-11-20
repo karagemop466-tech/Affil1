@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "privacy_guarantees": [
+    "Zero browser cookies, fingerprinting, or cross-site identifiers.",
+    "Honors navigator.doNotTrack === '1' and navigator.globalPrivacyControl === true.",
+    "Stores aggregate daily counters only (YYYY-MM-DD + event + page_slug + target_key); never logs IP addresses or raw User-Agent strings.",
+    "Inert on static GitHub Pages until window.COUNTERTOP_COLLECTOR_URL is set to an approved first-party HTTPS origin."
+  ],
+  "events": [
+    {
+      "name": "page_view",
+      "trigger": "Document load on any published HTML page when DNT/GPC are not enabled.",
+      "allowed_keys": ["page"],
+      "purpose": "Count aggregate daily page entries across storefront, category, guide, and desk pages.",
+      "source_id": "S02"
+    },
+    {
+      "name": "product_card_click",
+      "trigger": "Reader clicks a sponsored Amazon CTA on a storefront, category, comparison, or product dossier card.",
+      "allowed_keys": ["page", "product_id"],
+      "purpose": "Measure outbound product click interest per item without user-level tracking or dynamic sub-tags.",
+      "source_id": "S02"
+    },
+    {
+      "name": "guide_to_product_click",
+      "trigger": "Reader clicks from an editorial buying guide to a product dossier or outbound sponsored product link.",
+      "allowed_keys": ["page", "guide_slug", "product_id"],
+      "purpose": "Identify which question-shaped and seasonal guides assist product evaluation.",
+      "source_id": "S07"
+    },
+    {
+      "name": "comparison_filter_use",
+      "trigger": "Reader toggles a workflow, category, or counter-footprint filter on the storefront or Compare page.",
+      "allowed_keys": ["page", "filter_key"],
+      "purpose": "Learn which buyer constraints (dual-zone timing, single-layer width, sheet-pan oven, leave-in probe) matter most.",
+      "source_id": "S07"
+    },
+    {
+      "name": "suggestion_decision",
+      "trigger": "Operator clicks Approve, Hold, or Reject on a suggestion card in the Suggestions Review Queue.",
+      "allowed_keys": ["page", "suggestion_id", "decision"],
+      "purpose": "Record aggregate governance review actions before implementing site or prompt changes.",
+      "source_id": "S04"
+    }
+  ]
+}

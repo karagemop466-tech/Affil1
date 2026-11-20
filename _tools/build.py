@@ -136,6 +136,7 @@ def feed(guides):
 # canonical pages.
 ROBOTS = """User-agent: *
 Allow: /
+Disallow: /archive/
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """

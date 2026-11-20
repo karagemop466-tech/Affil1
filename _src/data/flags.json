@@ -28,8 +28,8 @@
       "severity": "high",
       "title": "Attribution to shopnow047c-20 is not confirmed by an Associates report",
       "expected": "A click from this site appears in the Associates report against the supplied tag.",
-      "found": "The tag was not observed in any URL reached while following the supplied links. The site now appends ?tag=shopnow047c-20 to every Amazon destination, which is what Program Policies 2(b) requires, but no report has been read.",
-      "impact": "Links are plain listing links until an account-validated Special Link is recorded, so nothing published is attributable yet. The site says so in its footer and on this page rather than implying success.",
+      "found": "The tag was not observed in any URL reached while following the supplied links, and no Associates report has been read. An earlier build appended ?tag=shopnow047c-20 to every Amazon destination anyway; that was withdrawn on 2026-11-20 because a tag invented from a public observation looks like attribution while remaining unconfirmed. The five products now publish as untagged listing links, marked sponsored.",
+      "impact": "The site earns nothing from those clicks and says so in the footer of every page. Adding a tag is a data change, not a code change: one approved intent record per product, and the build tags that product automatically.",
       "reading": "Two separate questions were being confused: does the destination carry a tag, and does the account register a click. The first is not met yet, because the published links carry no tag. The second needs a click and a dashboard.",
       "blocks": "any claim that the site can currently earn",
       "to_check": [
@@ -375,6 +375,20 @@
         "https://link.amazon/B04G1MEwY, repeated in a logged-out browser and recorded with the time"
       ],
       "blocks": "treating the P-01 short link as verified"
+    },
+    {
+      "id": "FLG-027",
+      "severity": "medium",
+      "title": "The repository's robots.txt sits in a subdirectory of the host, which crawlers are not required to read",
+      "expected": "A robots.txt that crawlers consult before indexing the site.",
+      "found": "Google's robots specification states that robots.txt must be placed in the top-level directory of a site and that crawlers don't check for robots.txt files in subdirectories. This site is served from https://karagemop466-tech.github.io/Affil1/, so its robots.txt publishes at /Affil1/robots.txt — a subdirectory — and Google may never fetch it. The file itself is correctly formatted (re-checked against the specification on 2026-11-20) and excludes /archive/, but its reach cannot be guaranteed from inside a project repository.",
+      "reading": "Discovery does not depend on it: every generated page carries a self-referencing canonical URL, the sitemap lists only the maintained edition, and internal links are relative and resolved. The step that actually puts the sitemap in front of Google is Search Console submission, which needs the owner's account (Q-11, S-03).",
+      "to_check": [
+        "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
+        "https://karagemop466-tech.github.io/Affil1/robots.txt"
+      ],
+      "impact": "Discoverability, not correctness. The file is kept correctly formatted for any crawler that does read it; canonicals and the sitemap carry the load if it is ignored.",
+      "blocks": "nothing — but Search Console submission (Q-11 / S-03) is the required discovery step, not an optional one"
     }
   ]
 }

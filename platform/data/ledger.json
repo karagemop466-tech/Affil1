@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "tracking_id": "shopnow047c-20",
+  "updated_on": "2026-11-20",
+  "policy_note": "Intentionally empty at launch. Add rows only from authorized first-party reports (Amazon Associates Central Earnings/Orders CSV exports and self-hosted first-party collector summaries). No conversion score, synthetic click count, or revenue forecast is permitted.",
+  "required_columns": [
+    "timestamp",
+    "source",
+    "channel",
+    "eligible_sessions",
+    "clicks",
+    "reported_orders"
+  ],
+  "provenance_trail": [
+    {
+      "date": "2026-11-20",
+      "action": "Initialized empty Campaign Ledger schema with SHA-256 provenance gate",
+      "actor": "session arena/44f81bcd-affil1",
+      "authorized_report_attached": false,
+      "source_id": "S14",
+      "note": "Zero rows recorded: Associates Central reports are account-gated and self-hosted collector is not yet deployed on a live runtime (FLG-009)."
+    }
+  ],
+  "entries": []
+}

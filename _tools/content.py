@@ -228,6 +228,55 @@ GUIDES = [
         "closing": "Dishwasher-safe wording on P-01, P-02 and P-03 is the sellers' own claim. No care instruction was checked against a manufacturer's manual in this build.",
     },
     {
+        "slug": "meal-prep-sunday",
+        "cluster": "Living with it",
+        "related": ["P-01", "P-03"],
+        "kicker": "Batch cooking",
+        "title": "Meal-prep Sunday: one basket, two, or an oven?",
+        "dek": "Meal prep fails on geometry, not motivation. Count how many things need the appliance at once \\u2014 then choose the shape that matches that number.",
+        "read_minutes": 5,
+        "photo": "assets/img/meal-prep",
+        "photo_alt": "An unbranded black air fryer beside glass jars of prepped vegetables, a cutting board and an open notebook on a wooden counter",
+        "photo_caption": "Illustration. The appliance and the jars are props, not a photograph of any product on this site.",
+        "updated": "2026-11-20",
+        "sections": [
+            {
+                "h": "The question is sequencing, not capacity",
+                "p": [
+                    "You buy for the week you imagine, then cook for the week you have: one tray of vegetables, one protein, one grain, all wanting the same basket at the same time.",
+                    "So the shape question is really a sequencing question \\u2014 how many batches, in what order, with how much washing in between? A bigger quoted capacity does not answer it. Two smaller containers running in parallel answer it differently from one large container running twice, and neither answer is written on the box."
+                ]
+            },
+            {
+                "h": "Three shapes, three Sunday routines",
+                "items": [
+                    ("Dual-basket (P-01)", "The listing title describes two independent 3-quart baskets with a sync-finish function. The Sunday advantage is parallelism: protein in one basket, vegetables in the other. The cost is width \\u2014 two baskets side by side need the widest counter strip of the basket shapes \\u2014 and two baskets to wash."),
+                    ("Oven-style (P-02)", "The listing title describes a 26-quart French-door cavity with six cooking accessories included. The advantage is stacking: tray above tray, or one large batch that never has to be split. The cost is door swing and depth, plus more parts that come out to wash."),
+                    ("Single-basket (P-03)", "The listing title describes one 8-quart basket. The advantage is simplicity: fill it, run it, empty it. The cost is sequencing \\u2014 the second batch waits while the first rests, which is exactly the Sunday-night bottleneck.")
+                ]
+            },
+            {
+                "h": "A five-minute batch test you can do before buying",
+                "items": [
+                    ("Write the actual menu", "One week of real Sunday dishes, not intentions. Dishes you have cooked before count; aspirational dishes do not."),
+                    ("Count the simultaneous items", "How many of those dishes need the appliance at the same time? That number, not the quart figure, is your batch count."),
+                    ("Measure the strip", "Width and depth of the spot, including door swing for an oven shape or drawer pull-out for a basket shape."),
+                    ("Check the official dimensions", "On the listing or the manual, never a thumbnail. If a number is not published, write 'unknown' next to it rather than estimating."),
+                    ("Decide where batch two waits", "If the answer is 'on the counter, cooling', you need parallelism or a larger cavity. If it is 'back in the oven', you may need a different appliance entirely."),
+                    ("Rehearse once", "Run your current appliance through one ordinary dinner first. Ten minutes of rehearsal answers more than any comparison table.")
+                ]
+            },
+            {
+                "h": "None of this requires a winner",
+                "p": [
+                    "The three products above are described only as their listing titles describe them. This site did not cook with any of them, so it cannot tell you which one survives your Sunday.",
+                    "What it can tell you is the arithmetic: your menu, your counter strip and one honest rehearsal will narrow the field further than any feature list. Do those three, and the purchase decision mostly makes itself."
+                ]
+            }
+        ],
+        "closing": "No product on this site was tested, ranked or scored. The descriptions of P-01, P-02 and P-03 above are the sellers' own wording, transcribed from the listing titles reached on 2026-11-20."
+    },
+    {
         "slug": "small-kitchen-space-audit",
         "cluster": "Living with it",
         "kicker": "Small kitchens",

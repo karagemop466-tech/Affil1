@@ -1,0 +1,403 @@
+{
+  "published_on": "2026-11-20",
+  "cadence_note": "Working editorial hypotheses published on a biweekly review cadence. None of these titles claims search volume, popularity, or hands-on product superiority; future topics are chosen from verified Google Search Console Queries (S07) and aggregate 5-event reader clicks.",
+  "guides": [
+    {
+      "slug": "basket-or-oven-air-fryer",
+      "title": "Basket or oven-style air fryer: what should you compare?",
+      "cluster": "Core Buyer Hypothesis · Format Geometry",
+      "hypothesis_type": "Prompt Core Hypothesis #1",
+      "read_time": "5 min read",
+      "dek": "Pull-out drawers move hot air fast around loose pieces you shake; French-door countertop ovens hold flat sheet trays, toast slices, and shallow baking pans. Compare cavity shape before preset counts.",
+      "featured_products": ["P-01", "P-02", "P-03"],
+      "sections": [
+        {
+          "heading": "Start with how food sits, not how many buttons light up",
+          "paragraphs": [
+            "Every air fryer on this shortlist circulates heated air with a fan, yet the three air-fryer listings observed on Amazon divide into two completely different physical shapes. P-01 (CHEFMAN 6-Quart Dual Basket) and P-03 (Chefman TurboFry 8-Quart) are pull-out drawer machines: food rests on a perforated insert inside closed walls. P-02 (Emeril Lagasse 26-Quart French Door) is a countertop convection toaster oven with outward-swinging doors and slide-in racks.",
+            "If most of your weeknight cooking is cut potatoes, broccoli florets, chicken thighs, dumplings, or frozen snacks that benefit from a mid-cook toss, a pull-out basket lets you grip one handle, shake, and slide the drawer straight back in. If you routinely slide in a quarter-sheet tray, toast four slices of sourdough, or bake in a shallow dish, a rack cavity handles flat cookware that cannot enter a narrow drawer."
+          ]
+        },
+        {
+          "heading": "Door swing vs drawer pull: measure the front of your counter",
+          "paragraphs": [
+            "A basket machine needs straight pull-out clearance directly in front of the housing plus a heat-resistant spot to set a hot drawer when you turn food with tongs. A French-door oven opens two doors outward into the workspace in front of the unit while hot racks slide forward.",
+            "Before clicking through to any listing, measure three zones on your own counter: under-cabinet height (including steam vents), counter depth from backsplash to front lip, and landing space beside the appliance for hot pans."
+          ]
+        },
+        {
+          "heading": "Preset buttons rarely change the underlying hardware",
+          "paragraphs": [
+            "Seller titles highlight preset counts — four functions on P-03, sync-finish and hi-fry on P-01, twenty-four one-touch presets on P-02. Treat presets as time-and-temperature shortcuts rather than distinct cooking engines. What actually separates daily use is whether you have one wide drawer (P-03), two independent drawers (P-01), or multi-rack oven shelves (P-02)."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "Two independent baskets for separate temps/finish sync",
+          "what_to_verify": "Seller title states 6-qt total split into two independent 3-qt baskets with Sync Finish (P-01); exterior dimensions unverified here.",
+          "source_id": "S09"
+        },
+        {
+          "check": "Flat slide-in racks & outward French doors for trays/toast",
+          "what_to_verify": "Seller title states 26-qt French-door convection toaster oven with six accessories (P-02); rack dimensions unverified here.",
+          "source_id": "S10"
+        },
+        {
+          "check": "Single undivided XL basket floor for wider batches",
+          "what_to_verify": "Seller title states 8-qt XL basket with 4-in-1 modes and 450°F Hi-Fry option (P-03); wattage unverified here.",
+          "source_id": "S11"
+        },
+        {
+          "check": "Live price, availability, and customer review eligibility",
+          "what_to_verify": "Checked directly on Amazon; omitted on static pages without Creators API / PA API per Program Policies §2(b) & §6(t).",
+          "source_id": "S02"
+        }
+      ]
+    },
+    {
+      "slug": "air-fryer-capacity-checklist",
+      "title": "A no-hype checklist for comparing air fryer capacity",
+      "cluster": "Core Buyer Hypothesis · Capacity Math",
+      "hypothesis_type": "Prompt Core Hypothesis #2",
+      "read_time": "5 min read",
+      "dek": "Quart numbers measure total air volume, including empty headroom above the food. Browning depends on usable floor area and keeping pieces in a single breathable layer.",
+      "featured_products": ["P-01", "P-03", "P-02"],
+      "sections": [
+        {
+          "heading": "Why 6 quarts in two drawers is not three-quarters of an 8-quart basket",
+          "paragraphs": [
+            "Volume labels look interchangeable until you try to lay down four salmon fillets or a wide flatbread. On P-01, the seller title specifies 6 quarts as two independent 3-quart frying baskets. Dividing volume across a center wall gives you two separate zones, each with the footprint of a compact 3-quart basket.",
+            "On P-03, the seller title specifies a single 8-quart XL basket. Without a divider wall, longer cuts of fish, wider batches of wings, or a round cake pan have continuous floor width — at the cost of running everything at one temperature."
+          ]
+        },
+        {
+          "heading": "Why a 26-quart toaster oven plays by rack-spacing rules",
+          "paragraphs": [
+            "P-02 lists a 26-quart interior in its seller title. Much of a toaster oven's cubic volume comes from vertical height across rack positions. When air-frying on multiple racks at once, top and bottom trays do not always receive identical airflow unless rotated.",
+            "Count capacity by how many portions lie flat without overlapping, not by how much food can be piled vertically to the heating element."
+          ]
+        },
+        {
+          "heading": "Four capacity questions to check on the official listing before buying",
+          "paragraphs": [
+            "Because interior basket length, width, and rack clearance are not stated in the listing titles verified in this pass, leave those measurements unassumed and verify four specifics on the product page or brand manual: (1) interior floor length × width per basket, (2) height from crisper plate to upper guard, (3) whether two racks can cook simultaneously without blocking airflow, and (4) dishwasher rack fit in your own sink or machine."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "Split-volume geometry (P-01)",
+          "what_to_verify": "Stated as 6 quarts across two 3-quart independent baskets; interior basket width/depth unverified.",
+          "source_id": "S09"
+        },
+        {
+          "check": "Undivided single-drawer geometry (P-03)",
+          "what_to_verify": "Stated as 8 quarts in one XL nonstick basket; interior floor dimensions unverified.",
+          "source_id": "S11"
+        },
+        {
+          "check": "Multi-rack cavity volume (P-02)",
+          "what_to_verify": "Stated as 26-quart extra-large interior with six accessories; pan-size compatibility unverified.",
+          "source_id": "S10"
+        },
+        {
+          "check": "Substantiation boundary on capacity claims",
+          "what_to_verify": "16 CFR §255.1 and Associates Policies §2(b) require sticking to verifiable seller/manufacturer specs without invented serving counts.",
+          "source_id": "S05"
+        }
+      ]
+    },
+    {
+      "slug": "cleanup-and-counter-space",
+      "title": "How to assess cleanup and counter-space trade-offs",
+      "cluster": "Core Buyer Hypothesis · Daily Friction",
+      "hypothesis_type": "Prompt Core Hypothesis #3",
+      "read_time": "5 min read",
+      "dek": "The appliance that stays clean in three minutes gets used four nights a week; the one with six greased wire racks often ends up ignored. Match cleanup work to your sink and counter.",
+      "featured_products": ["P-03", "P-01", "P-02"],
+      "sections": [
+        {
+          "heading": "Count every removable part you will wash after a single dinner",
+          "paragraphs": [
+            "A single-basket air fryer (P-03) leaves you with one nonstick drawer and one crisper insert. A dual-basket air fryer (P-01) doubles that when both zones run: two drawers and two inserts, occupying most of a dishwasher's bottom rack.",
+            "A French-door air fryer toaster oven (P-02, listed with six cooking accessories) shifts cleanup from deep nonstick buckets to wire racks, mesh baskets, bake pans, a crumb tray, and exposed interior walls plus glass doors where rendered fat can splatter."
+          ]
+        },
+        {
+          "heading": "Nonstick longevity vs bare metal scrubbing",
+          "paragraphs": [
+            "Both CHEFMAN basket listings (P-01 and P-03) describe their baskets as nonstick and dishwasher-safe in the seller title. Even when a basket is labeled dishwasher-safe, abrasive pads and harsh detergents shorten nonstick life over time, whereas warm soapy hand-washing takes roughly a minute if soaked promptly.",
+            "Exposed stainless or plated wire racks in countertop ovens tolerate firmer scrubbing, but mesh air-fry trays trap baked-on oil in corners if left overnight."
+          ]
+        },
+        {
+          "heading": "Permanent counter parking vs cabinet storage",
+          "paragraphs": [
+            "Few people lift a 26-quart French-door oven into a pantry after dinner — it claims permanent counter real estate. Compact or mid-size basket units are easier to slide back toward the wall when cooled, provided the power cord and rear exhaust vent are never pushed flush against tile or drywall during operation."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "Two drawers + two inserts to wash when using both zones (P-01)",
+          "what_to_verify": "Seller title states two 3-qt nonstick dishwasher-safe baskets with Easy View windows.",
+          "source_id": "S09"
+        },
+        {
+          "check": "One XL drawer + insert to wash (P-03)",
+          "what_to_verify": "Seller title states XL nonstick dishwasher-safe basket in stainless steel housing.",
+          "source_id": "S11"
+        },
+        {
+          "check": "Six oven accessories + interior glass/walls (P-02)",
+          "what_to_verify": "Seller title states six cooking accessories included; individual accessory dishwasher status unverified.",
+          "source_id": "S10"
+        },
+        {
+          "check": "Accurate product description standard",
+          "what_to_verify": "Associates Participation Requirements §3(c) require accurate, non-misleading descriptions of product attributes.",
+          "source_id": "S02"
+        }
+      ]
+    },
+    {
+      "slug": "multi-function-kitchen-appliance-questions",
+      "title": "Questions to ask before buying a multi-function kitchen appliance",
+      "cluster": "Core Buyer Hypothesis · Consolidation Decisions",
+      "hypothesis_type": "Prompt Core Hypothesis #4",
+      "read_time": "6 min read",
+      "dek": "Multi-mode cookers promise to replace three gadgets, but consolidation only pays off if the secondary modes fit your cookware, circuit load, and daily habits.",
+      "featured_products": ["P-02", "P-03", "P-05"],
+      "sections": [
+        {
+          "heading": "1. Which existing appliance will actually leave your counter?",
+          "paragraphs": [
+            "Before buying a 24-preset French-door air fryer toaster oven (P-02) or a 4-in-1 basket unit with Bake and Dehydrate modes (P-03), name the machine you plan to donate or store. If your current slot toaster stays on the counter anyway because you prefer faster vertical toast, a huge toaster-oven combo adds clutter instead of removing it."
+          ]
+        },
+        {
+          "heading": "2. Does your kitchen branch circuit share load with a microwave or kettle?",
+          "paragraphs": [
+            "High-output countertop convection cookers draw substantial wattage on standard household circuits. Because exact wattage and amperage are not stated in the listing titles verified here, check the electrical rating plate or official user manual before running an air fryer simultaneously on the same circuit as an espresso machine, electric kettle, or microwave."
+          ]
+        },
+        {
+          "heading": "3. How will you verify internal doneness when switching modes?",
+          "paragraphs": [
+            "Convection fans brown exterior surfaces faster than conventional still-air ovens. That makes visual color a poor indicator of whether thick poultry or pork has cooked through in the center. Pairing a multi-function oven or air fryer with either a spot-check instant-read probe (P-04) or leave-in wireless probes (P-05) removes guesswork across bake, roast, and air-fry modes."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "24-preset French-door consolidation candidate (P-02)",
+          "what_to_verify": "Seller title lists 24 one-touch preset options and countertop convection cooker format; wattage unverified.",
+          "source_id": "S10"
+        },
+        {
+          "check": "4-in-1 basket mode set (P-03)",
+          "what_to_verify": "Seller title lists Air Fry (450°F Hi-Fry), Bake, Dehydrate, and Frozen modes; temperature floor unverified.",
+          "source_id": "S11"
+        },
+        {
+          "check": "Continuous wireless doneness monitoring across modes (P-05)",
+          "what_to_verify": "Seller title lists 3 ultra-thin wireless probes for Oven, Smoker, Grill, BBQ, and Air Fryer.",
+          "source_id": "S13"
+        },
+        {
+          "check": "Food-safety temperature verification",
+          "what_to_verify": "Consult the official USDA FSIS Safe Minimum Internal Temperature Chart directly before serving.",
+          "source_id": "S15"
+        }
+      ]
+    },
+    {
+      "slug": "dual-basket-weeknight-timing",
+      "title": "Two 3-quart baskets vs one 8-quart drawer: which weeknight setup gets dinner out hot?",
+      "cluster": "Weeknight Workflow · Buyer Comparison",
+      "hypothesis_type": "High-Intent Organic Search Topic",
+      "read_time": "5 min read",
+      "dek": "The real contest between P-01 (2 × 3 qt) and P-03 (1 × 8 qt) is whether your household cooks two incompatible foods at 6:30 p.m. or one big batch of the same dish.",
+      "featured_products": ["P-01", "P-03", "P-04"],
+      "sections": [
+        {
+          "heading": "The two-temperature weeknight bottleneck",
+          "paragraphs": [
+            "Picture a Tuesday dinner of salmon fillets alongside crispy potato wedges. Potatoes want higher heat and roughly twice the time of thin fish fillets. In a single-drawer air fryer (P-03), you cook the potatoes first, tent them on a plate while the fish runs, and accept lukewarm fries — or crowd both in together at a compromise temperature.",
+            "A dual-basket layout (P-01) exists specifically for that split: each 3-quart basket runs independently, and the seller title highlights a Sync Finish mode aimed at bringing two timers to zero together."
+          ]
+        },
+        {
+          "heading": "Where the single 8-quart drawer wins decisively",
+          "paragraphs": [
+            "Now flip the menu: sheet-style nachos on parchment, four bone-in pork chops, a whole small chicken, or a double batch of wings for game night. A dividing wall down the middle of P-01 splits your floor into two smaller rectangles. P-03's undivided 8-quart drawer gives wider pieces room to lie flat without touching."
+          ]
+        },
+        {
+          "heading": "Fast drawer-check routine with an instant-read probe",
+          "paragraphs": [
+            "Pulling a basket open for four seconds to check internal temperature with a fast handheld probe (such as P-04, which states a 1-second readout in its seller title) barely disturbs drawer heat recovery compared with opening a full-size wall oven."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "Dual-zone protein + side timing (P-01)",
+          "what_to_verify": "2 independent 3-quart baskets with Sync Finish and Easy View windows stated in seller title.",
+          "source_id": "S09"
+        },
+        {
+          "check": "Undivided single-batch width (P-03)",
+          "what_to_verify": "8-quart XL single basket with 450°F Hi-Fry option stated in seller title.",
+          "source_id": "S11"
+        },
+        {
+          "check": "Quick drawer-open doneness check (P-04)",
+          "what_to_verify": "Handheld digital meat thermometer observed at B0DHZTCNR5 (note redirect flag FLG-006).",
+          "source_id": "S12"
+        }
+      ]
+    },
+    {
+      "slug": "thanksgiving-countertop-oven-relief",
+      "title": "Holiday oven gridlock: which side dishes move cleanly to the countertop?",
+      "cluster": "Seasonal Hosting · November Kitchen Guide",
+      "hypothesis_type": "Seasonal Organic Search Topic",
+      "read_time": "6 min read",
+      "dek": "When the main oven is locked at one roasting temperature for hours, offloading roasted Brussels sprouts, stuffing crisping, or rehearsal appetizers onto the counter saves the last thirty minutes before dinner.",
+      "featured_products": ["P-02", "P-01", "P-05"],
+      "sections": [
+        {
+          "heading": "Why the final 35 minutes of holiday cooking always jam",
+          "paragraphs": [
+            "While a turkey or prime rib rests under foil, four different dishes suddenly compete for high heat: Brussels sprouts want crisp edges, dinner rolls want gentle warming, green-bean casserole needs bubbling top crumbs, and appetizers need reheating. One main oven cannot hold three temperatures at once."
+          ]
+        },
+        {
+          "heading": "Matching holiday jobs to rack cavities vs pull-out drawers",
+          "paragraphs": [
+            "Shallow casserole dishes, baking pans of rolls, and flat sheet trays belong in a rack-style countertop oven like P-02 (Emeril Lagasse 26-Quart French Door), provided your dish clears the interior walls and door glass.",
+            "Loose, high-moisture vegetables — halved Brussels sprouts, cubed squash, fingerling potatoes — crisp cleanly in pull-out baskets (P-01 or P-03) where shaking redistributes oil and steam vents rapidly."
+          ]
+        },
+        {
+          "heading": "Monitoring two appliances at once without opening doors",
+          "paragraphs": [
+            "Holiday hosting is where multi-probe wireless monitoring (P-05, listed with three ultra-thin wireless probes in its seller title) earns its keep: one probe can stay in the main-oven bird while a second tracks a roast pork loin or stuffed squash on the counter, keeping both doors shut."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "Countertop rack space for holiday baking dishes (P-02)",
+          "what_to_verify": "Seller title states 26-quart extra-large interior and six accessories; measure your casserole dish against manufacturer interior specs before buying.",
+          "source_id": "S10"
+        },
+        {
+          "check": "Two-basket side-dish finishing (P-01)",
+          "what_to_verify": "Two 3-quart baskets allow separate side-dish temperatures simultaneously.",
+          "source_id": "S09"
+        },
+        {
+          "check": "Three-probe continuous roast tracking (P-05)",
+          "what_to_verify": "Seller title states 3 wireless probes, WiFi connectivity, and 1000°F heat rating (observed at B0DZFD6R9Z; see FLG-006).",
+          "source_id": "S13"
+        },
+        {
+          "check": "Safe poultry and roast target temperatures",
+          "what_to_verify": "Verify official minimum internal temperatures directly on the USDA FSIS chart.",
+          "source_id": "S15"
+        }
+      ]
+    },
+    {
+      "slug": "instant-read-vs-wireless-probe",
+      "title": "Instant-read vs leave-in wireless meat thermometers: which probe matches how you cook?",
+      "cluster": "Thermometer Pairing · Precision Doneness",
+      "hypothesis_type": "High-Intent Organic Search Topic",
+      "read_time": "5 min read",
+      "dek": "Handheld instant-read thermometers excel at checking six chicken thighs across an air-fryer drawer; wireless leave-in probes excel at thick roasts where opening the door dumps heat.",
+      "featured_products": ["P-04", "P-05", "P-01", "P-02"],
+      "sections": [
+        {
+          "heading": "Thin weeknight cuts vs thick slow roasts",
+          "paragraphs": [
+            "Thin pork chops, fish fillets, chicken tenders, and smash burgers often lack the depth required to bury a thick wireless leave-in probe past its minimum immersion line. A handheld fold-out probe (P-04, ThermoMaven Instant-Read) lets you crack open an air-fryer drawer, test the thickest center of three different pieces in a few seconds, and pull the thinner pieces early so nothing dries out.",
+            "Thick whole chickens, turkey breasts, chuck roasts, and tri-tip reverse that equation: opening an oven or smoker every ten minutes extends cook time. Leave-in wireless probes (P-05, CHEF iQ Sense 3-Probe) remain inside the meat throughout the cook and send readings to a hub or phone."
+          ]
+        },
+        {
+          "heading": "Battery & setup simplicity vs app-connected tracking",
+          "paragraphs": [
+            "An instant-read thermometer unfolds, reads, rinses clean (check the manufacturer's exact IP rating guidance), and drops back into a utensil drawer with zero WiFi pairing. A wireless probe kit requires keeping the charging dock topped up, pairing an app, and inserting each probe deep enough that ambient air does not skew the tip sensor."
+          ]
+        },
+        {
+          "heading": "Important verification note on links P-04 and P-05",
+          "paragraphs": [
+            "On 2026-11-20 our direct verification observed P-04 -> B0DHZTCNR5 (ThermoMaven) and P-05 -> B0DZFD6R9Z (CHEF iQ Sense), whereas an earlier concurrent check observed the reverse order. Always verify the exact product title on Amazon after clicking before completing checkout (documented in FLG-006)."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "Handheld spot-check probe (P-04)",
+          "what_to_verify": "Seller title states 1-sec digital meat thermometer, ±0.5°F claim, auto-rotate LED, IP67 claim (observed at B0DHZTCNR5; FLG-006).",
+          "source_id": "S12"
+        },
+        {
+          "check": "Leave-in 3-probe wireless kit (P-05)",
+          "what_to_verify": "Seller title states 3 ultra-thin wireless probes, 5 sensors, WiFi, 1000°F rating, Air Fryer/Oven/Grill use (observed at B0DZFD6R9Z; FLG-006).",
+          "source_id": "S13"
+        },
+        {
+          "check": "Official food-safety reference",
+          "what_to_verify": "Always confirm target internal temperatures and rest times at USDA FSIS.",
+          "source_id": "S15"
+        }
+      ]
+    },
+    {
+      "slug": "crispy-reheat-without-soggy-leftovers",
+      "title": "Crispy leftovers without rubbery edges: drawer airflow vs wire-rack toaster ovens",
+      "cluster": "Everyday Utility · Organic Search Topic",
+      "hypothesis_type": "High-Intent Organic Search Topic",
+      "read_time": "4 min read",
+      "dek": "Reheating leftover pizza, fried chicken, or roasted potatoes is often what justifies a countertop cooker's footprint more than new recipes. Here is how basket vs rack geometry handles each.",
+      "featured_products": ["P-03", "P-02", "P-01"],
+      "sections": [
+        {
+          "heading": "Why microwaves steam crusts soft while convection restores crispness",
+          "paragraphs": [
+            "Microwaves excite water molecules inside leftover breading or dough, pushing steam outward into the crust. Circulating dry hot air evaporates surface moisture while crisping rendered fat — which is why both basket air fryers and convection toaster ovens dramatically change leftover texture compared with a microwave."
+          ]
+        },
+        {
+          "heading": "Wide slices & topped flatbreads vs loose fries & wings",
+          "paragraphs": [
+            "Two wide slices of takeout pizza or open-faced melts slide straight onto a flat wire rack in a French-door toaster oven (P-02) or fit side-by-side more easily on an undivided 8-quart drawer floor (P-03) than inside a narrow 3-quart dual-zone drawer (P-01).",
+            "By contrast, leftover fries, tots, egg rolls, and fried chicken pieces re-crisp rapidly in smaller enclosed drawers (P-01 or P-03) because compact chamber volume comes up to heat fast and perforated crisper plates drain excess oil."
+          ]
+        }
+      ],
+      "checklist_rows": [
+        {
+          "check": "Flat wire-rack slice reheating (P-02)",
+          "what_to_verify": "26-quart French-door convection toaster oven with slide-in racks (S10).",
+          "source_id": "S10"
+        },
+        {
+          "check": "Wide single-drawer floor for larger pieces (P-03)",
+          "what_to_verify": "8-quart XL single basket with 450°F Hi-Fry option stated in seller title (S11).",
+          "source_id": "S11"
+        },
+        {
+          "check": "Compact single-portion drawer reheating (P-01)",
+          "what_to_verify": "Run a single 3-quart drawer independently when reheating one small portion (S09).",
+          "source_id": "S09"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 150" role="img" aria-label="Handheld instant-read digital thermometer diagram">
+  <rect width="260" height="150" rx="10" fill="#f3ede3"/>
+  <rect x="34" y="56" width="118" height="38" rx="16" fill="#191816"/>
+  <rect x="52" y="64" width="64" height="22" rx="4" fill="#2b3d34"/>
+  <text x="84" y="79" text-anchor="middle" fill="#a7f3d0" font-family="monospace" font-size="12">PROBE</text>
+  <circle cx="134" cy="75" r="7" fill="#b84a27"/>
+  <line x1="152" y1="75" x2="230" y2="75" stroke="#7c776f" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="230,73 238,75 230,77" fill="#524e48"/>
+</svg>

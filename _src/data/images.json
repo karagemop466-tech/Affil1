@@ -94,6 +94,15 @@
       "depicts_a_real_product": null,
       "used_on": "Index card, guides index and the holiday hosting guide (guides/holiday-hosting-air-fryer.html)",
       "rules_met": "Not verified. Origin not recorded: the file was in the repository before this entry existed. Blank fields mean unknown, not safe (FLG-020)."
+    },
+    {
+      "file": "meal-prep",
+      "alt": "A meal-prep spread on a kitchen counter: containers of roasted vegetables, grains and green beans beside an unbranded air fryer",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded appliance",
+      "depicts_a_real_product": false,
+      "used_on": "Guides: meal-prep-sunday",
+      "rules_met": "No brand mark. No price or spec implied. Labelled as illustration where it appears."
     }
   ],
   "rejected": [

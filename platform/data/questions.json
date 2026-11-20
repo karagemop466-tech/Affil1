@@ -1,0 +1,137 @@
+{
+  "verified_on": "2026-11-20",
+  "questions": [
+    {
+      "id": "Q-01",
+      "gate": "Product Intent & Link Attribution",
+      "question": "Which exact 10-character ASIN and variant did the operator intend for each of the five submitted link.amazon URLs?",
+      "known": "On 2026-11-20, P-01..P-05 resolved to B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, and B0DZFD6R9Z, whereas all five supplied path slugs are 9 characters long.",
+      "missing": "Signed operator confirmation of intended_asin, official_listing_url, confirmation_date, and confirmation_source for each row.",
+      "current_answer": "Leave intended_asin and official_listing_url blank in the Product-Intent Confirmation Record and never overwrite them with observed_redirect values.",
+      "discovery_suggestion": "Open each link while signed in to Associates Central, confirm the intended variant/color/size on Amazon.com, and record the 10-character ASIN + official URL in platform/data/products.json.",
+      "status": "needs-operator",
+      "source_ids": ["S03", "S09", "S10", "S11", "S12", "S13"]
+    },
+    {
+      "id": "Q-02",
+      "gate": "Product Intent & Link Attribution",
+      "question": "Are the five supplied link.amazon URLs approved Associates Special Links that credit Tracking ID shopnow047c-20?",
+      "known": "No tag=shopnow047c-20 query parameter appeared in any landing /dp/ URL fetched on 2026-11-20. Policies §2(a)-(b) require the Associates ID in Special Links, and Commission Income Statement §2(e)/(g) excludes Redirecting Links and improperly formatted links.",
+      "missing": "Associates Central Link Checker output and a verified click-attribution row in Associates Central Reports.",
+      "current_answer": "Do not claim the short links are invalid; keep their compliance status flagged as unresolved in FLG-003 and avoid paid promotion until attribution is verified.",
+      "discovery_suggestion": "Generate fresh Special Links for shopnow047c-20 in Associates Central / SiteStripe, click one link per product from a non-purchasing test session (respecting §6(u) no self-purchase), and verify click credit in Associates Central Reports after 24 hours.",
+      "status": "needs-operator",
+      "source_ids": ["S01", "S02", "S14"]
+    },
+    {
+      "id": "Q-03",
+      "gate": "Product Intent & Link Attribution",
+      "question": "Why did P-04 (B0c8moW59) and P-05 (B0f3GKalj) show bot checkpoints or swapped thermometer destinations across earlier checks?",
+      "known": "Direct 2026-11-20 fetches resolved P-04 -> B0DHZTCNR5 (ThermoMaven instant-read) and P-05 -> B0DZFD6R9Z (CHEF iQ 3-probe wireless), while earlier sessions observed /checkpoint/continue or a reversed thermometer order.",
+      "missing": "Authenticated residential-browser confirmation from the link creator confirming which short token maps to which thermometer.",
+      "current_answer": "Publish both the 2026-11-20 direct observation and the historical discrepancy transparently under FLG-006 rather than guessing.",
+      "discovery_suggestion": "Test both short links in a clean desktop browser signed out of automated tooling, capture the HTTP 301/302 Location header chain, and replace both with direct /dp/{intended_asin}?tag=shopnow047c-20 Special Links produced in Associates Central.",
+      "status": "needs-operator",
+      "source_ids": ["S12", "S13"]
+    },
+    {
+      "id": "Q-04",
+      "gate": "Amazon Associates Policy & API Access",
+      "question": "Is Associates account shopnow047c-20 actively enrolled with https://karagemop466-tech.github.io/Affil1/ listed as an approved Site?",
+      "known": "Participation Requirements §1 require enrollment approval and maintaining an accurate list of Sites where Special Links appear; §1(g) forbids Amazon marks in domain names.",
+      "missing": "Associates Central Account Settings -> Edit Your Website and Mobile App List confirmation.",
+      "current_answer": "The GitHub Pages URL contains no Amazon trademark and displays the verbatim §5 disclosure on every page, but account-list registration is unverified.",
+      "discovery_suggestion": "Log into Associates Central -> Account Settings -> Website and Mobile App List and verify https://karagemop466-tech.github.io/Affil1/ is registered before driving traffic.",
+      "status": "needs-operator",
+      "source_ids": ["S01", "S02"]
+    },
+    {
+      "id": "Q-05",
+      "gate": "Amazon Associates Policy & API Access",
+      "question": "Can the platform display prices, star ratings, customer review counts, stock status, or automated price alerts?",
+      "known": "Policies §2(b) restricts price/availability to Amazon-served dynamic links or Creators API / PA API; §6(t) restricts customer reviews/star ratings to Creators API / PA API; §6(y) prohibits price tracking and price alerting unless agreed by Amazon.",
+      "missing": "Approved Creators API / PA API credentials (which require qualifying Associates sales thresholds) and any written Amazon agreement for price tracking.",
+      "current_answer": "Answered by official policy: NO static prices, star ratings, review counts, stock claims, or price-alert features are permitted right now. All four fields remain blank and flagged (FLG-004).",
+      "discovery_suggestion": "Direct buyers to view live price and availability on Amazon; apply for Creators API / PA API access only after meeting Amazon's qualifying sales requirement, and keep §6(y) price-tracking disabled.",
+      "status": "answered-by-policy",
+      "source_ids": ["S02"]
+    },
+    {
+      "id": "Q-06",
+      "gate": "Amazon Associates Policy & API Access",
+      "question": "Where and how must affiliate compensation be disclosed to satisfy both Amazon and the FTC?",
+      "known": "Operating Agreement §5 requires the verbatim statement \"As an Amazon Associate I earn from qualifying purchases.\" FTC 16 CFR §255.5 and FTC staff FAQ require clear, conspicuous disclosure near recommendations and state that \"affiliate link\", \"buy now\", or a hidden \"DISCLOSURE\" button alone is insufficient.",
+      "missing": "Nothing missing on static pages; ongoing human check required if social, video, or email channels are added later.",
+      "current_answer": "Answered and enforced: every page renders the verbatim §5 sentence + plain-language paid-link notice above <main> and again in <footer>, and every product CTA states \"Paid link\" with rel=\"sponsored nofollow noopener\".",
+      "discovery_suggestion": "Keep platform/verify_edition.py in CI (.github/workflows/edition-verify.yml) so any future page missing the disclosure strip or rel=\"sponsored\" fails the build.",
+      "status": "answered-and-enforced",
+      "source_ids": ["S01", "S04", "S05", "S06"]
+    },
+    {
+      "id": "Q-07",
+      "gate": "Editorial Positioning & Reader Fit",
+      "question": "How should the site position three air fryers alongside two meat thermometers without reading like a disjointed link dump?",
+      "known": "Breadcrumbs confirm P-01..P-03 are Air Fryers (dual-basket, French-door oven, single-basket) and P-04..P-05 are Meat Thermometers (instant-read handheld, 3-probe WiFi wireless).",
+      "missing": "Whether the operator plans to expand into a broader countertop-cooking catalog or stay focused on crisp-and-roast appliances.",
+      "current_answer": "Group the catalog into two explicit categories (Air Fryers and Meat Thermometers) united by one real kitchen job: countertop crisp-and-roast cooking without overcooking proteins.",
+      "discovery_suggestion": "Measure product_card_click and guide_to_product_click across air-fryer vs thermometer guides over the first 30 days before adding a third category.",
+      "status": "answered-by-evidence",
+      "source_ids": ["S09", "S10", "S11", "S12", "S13"]
+    },
+    {
+      "id": "Q-08",
+      "gate": "Editorial Positioning & Reader Fit",
+      "question": "What verified product specifications are missing before publishing deeper technical comparisons?",
+      "known": "Seller listing titles state capacity (6 qt as 2×3 qt; 26 qt; 8 qt), probe count (1 handheld; 3 wireless), and high-level modes.",
+      "missing": "Manufacturer-verified exterior H×W×D dimensions, interior basket/tray dimensions, wattage/amperage, cord length, minimum probe insertion depth, and warranty duration.",
+      "current_answer": "Leave wattage, exterior dimensions, and warranty blank in all comparison tables rather than copying unverified third-party aggregator specs.",
+      "discovery_suggestion": "Retrieve official PDF user manuals from CHEFMAN, Emeril Lagasse, ThermoMaven, and CHEF iQ support portals and cite each manual URL per row before filling blank cells.",
+      "status": "needs-source-fetch",
+      "source_ids": ["S02", "S05"]
+    },
+    {
+      "id": "Q-09",
+      "gate": "Measurement, Traffic & Conversion Data",
+      "question": "Where will the self-hosted 5-event analytics endpoint run in production, and what privacy disclosure accompanies it?",
+      "known": "GitHub Pages is static-only (S08) and logs visitor IPs for security. Policies §3(e) requires accurate disclosure of any cookies, pixels, or data collection.",
+      "missing": "A first-party HTTPS host (e.g., Cloudflare Worker, Fly.io, or VPS) running platform/collector.py and an operator-approved data retention window.",
+      "current_answer": "Keep client beacons inert by default on GitHub Pages (local session preview only, zero cookies, honoring DNT/GPC) until collectorUrl is pointed at an approved first-party host.",
+      "discovery_suggestion": "Deploy platform/collector.py behind a first-party subdomain, verify zero-PII daily counter storage, update the privacy notice per §3(e), and enable collectorUrl.",
+      "status": "needs-operator",
+      "source_ids": ["S02", "S08"]
+    },
+    {
+      "id": "Q-10",
+      "gate": "Measurement, Traffic & Conversion Data",
+      "question": "Which search queries actually bring readers to the site, and which new guides should be written next?",
+      "known": "Eight buyer-question and seasonal guides are published and listed in sitemap.xml and feed.xml, but zero search volume or ranking claims are made.",
+      "missing": "Verified Google Search Console property ownership and 28–90 days of Search Performance query/page impressions and CTR exports.",
+      "current_answer": "Treat current article titles strictly as editorial hypotheses; run platform/research_engine.py on exported Search Console CSVs once impressions accumulate.",
+      "discovery_suggestion": "Verify https://karagemop466-tech.github.io/Affil1/ in Google Search Console, submit sitemap.xml, and export the Queries & Pages Performance report monthly.",
+      "status": "needs-operator",
+      "source_ids": ["S07"]
+    },
+    {
+      "id": "Q-11",
+      "gate": "Measurement, Traffic & Conversion Data",
+      "question": "What are the baseline clicks, eligible sessions, conversion rates, and commission rates for these five products?",
+      "known": "Commission Income Statement §1/§6 governs qualifying purchases and reporting; no authorized Associates report exists yet.",
+      "missing": "Signed-in Associates Central Fee Schedule and exported Associates Orders/Earnings CSV reports.",
+      "current_answer": "The Campaign Ledger (operations/index.html) is intentionally empty (0 rows), with zero conversion scores or revenue forecasts.",
+      "discovery_suggestion": "After Special Links are validated, export monthly CSV reports from Associates Central Reports (S14) and import them via platform/ledger.py with SHA-256 provenance hashes.",
+      "status": "needs-operator",
+      "source_ids": ["S02", "S14"]
+    },
+    {
+      "id": "Q-12",
+      "gate": "Editorial Positioning & Reader Fit",
+      "question": "Should the publication add opt-in email reader capture, and what legal requirements apply?",
+      "known": "Associates Policies §4 permits Special Links in emails only when communications are solicited (opted into by the recipient) and compliant with CAN-SPAM and Brand Usage Guidelines.",
+      "missing": "Operator sender physical mailing address, unsubscribe handling provider, and decision whether Special Links will ever appear in emails.",
+      "current_answer": "Hold email capture until a compliant opt-in provider and physical sender address are configured; rely on the shipped RSS feed (feed.xml) for zero-PII subscriptions today.",
+      "discovery_suggestion": "Keep RSS live now; if adding email later, link emails to on-site guides rather than embedding raw Special Links unless opted-in Associates email rules (§4) are certified.",
+      "status": "needs-operator",
+      "source_ids": ["S02"]
+    }
+  ]
+}

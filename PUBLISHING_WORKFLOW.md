@@ -8,10 +8,17 @@ is how a site ends up non-compliant while looking tidy.
 
 Run locally before pushing:
 
+<<<<<<< HEAD
 ```bash
 python3 tools/build.py    # every page is generated from src/data — never edit HTML by hand
 python3 tools/validate.py # the gate; non-zero exit blocks the deploy job
 ```
+=======
+One guide a fortnight. The count lives on the guides index, not in this
+sentence. The pace is deliberately slower than the
+category average because each guide has to be written from listing facts and
+general reasoning rather than from a test that did not happen.
+>>>>>>> ba31321 (Findability pass: 4 guides ported, home front page, discovery wiring, line-by-line re-verification, Special Links format, intent record)
 
 ## 1 · Disclosure (enforced by the build)
 
@@ -27,6 +34,7 @@ python3 tools/validate.py # the gate; non-zero exit blocks the deploy job
 
 ## 2 · Links (enforced by the build)
 
+<<<<<<< HEAD
 - [x] Every outbound link a reader could buy through carries
       `rel="sponsored nofollow noopener"`, a visible "Paid link" note, and `target="_blank"`.
 - [x] A buy button exists only where a product page was actually reached. An unresolved
@@ -45,6 +53,19 @@ python3 tools/validate.py # the gate; non-zero exit blocks the deploy job
       `python3 tools/arm_links.py --i-am-the-owner --link P-01 "<url>"`. One product first;
       confirm the click in the account's report before arming the rest.
       `tools/verify_links.py` reports destination drift; it cannot confirm attribution.
+=======
+| Step | Check | Who |
+|---|---|---|
+| 1 | Claim: does a source exist for this sentence? If not, cut the sentence, not the standard. | Editor |
+| 2 | Product facts: transcribed from the listing title reached, or blank. | Editor |
+| 3 | Marketing language: no price, rating, review count, stock phrase, or superlative. | `tools/check.py` |
+| 4 | Disclosure: strip above `<main>`, repeated in the footer, "Paid links" label present. | `tools/check.py` |
+| 5 | Links: sponsored, nofollow, new tab on every Amazon anchor; buy URLs tagged only when account-approved, listing citations untagged. | `tools/check.py` |
+| 6 | Structure: one `<h1>`, alt text, resolving internal links and anchors, canonical, description. | `tools/check.py` |
+| 7 | One site: no stray `.html` outside the generated set or `archive/`. | `tools/check.py` |
+| 8 | Reproducible: rebuild and diff — a hand-edited page fails CI. | `.github/workflows/pages.yml` |
+| 9 | Human read of the rendered page on a phone. | Editor |
+>>>>>>> ba31321 (Findability pass: 4 guides ported, home front page, discovery wiring, line-by-line re-verification, Special Links format, intent record)
 
 ## 3 · Claims and endorsement context (human review)
 
