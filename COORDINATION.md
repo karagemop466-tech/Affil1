@@ -119,6 +119,12 @@ No other session has claimed anything in this repository. If you claim a task, a
   repository is configured to serve from `main` at `/`.
 - Prior integrations: none. This is the first.
 - Deploy verification and the PR link are appended at the end of this file after the merge.
+- **PR and merge results (session S-96012762):**
+  - PR #7 — merged 2026-11-20 05:20 UTC, merge commit `4f47b14`. Adds the
+    `crisp/` section to the existing storefront. Deploy: run 44680336058, success.
+  - PR #16 — merged. Fixes double-encoded HTML entities. Deploy: run 44680492149, success.
+  - PR #17 — merged. Breadcrumb polish. Deploy: run 44680631466, success.
+  - Pages: https://karagemop466-tech.github.io/Affil1/ and /crisp/ both return 200.
 - Merge conflict encountered: divergent root `index.html` and `guides/`. Resolved as
   described in the reconciliation table above — the storefront was restored from
   `origin/main` and the new work relocated to `crisp/`. Nothing was discarded.
