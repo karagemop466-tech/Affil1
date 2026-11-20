@@ -127,3 +127,45 @@ No work was discarded.
 Concurrent claims noted (not touched by this session): arena/171b54e4 (publication rebuild), arena/2361a177 (publication rebuild scope), arena/4bcd015a (sourced publication + tools/check_site.py), arena/771e5093 (decision-support hub), arena/96012762 (Crisp & Counter + tools/build.py). Those branches were not merged into main by 05:18 UTC; this session works on its own branch and does not edit their files. Anything of theirs already on `main` is preserved in `archive/` and, where it is the better page, kept in place.
 
 Handoff/takeover note: sessions arena/f10ea853, arena/c58c5996 and arena/55d40788 marked tasks done and merged via PRs #3, #5, #6, #8 — their claims are closed, so this session may integrate their outputs.
+
+## Integration record — session arena/359baa16-affil1 (2026-11-20, 05:12–05:45 UTC)
+
+### Tasks completed (replaces the in-progress table above)
+
+| Task | Status | Files touched | What was verified |
+|---|---|---|---|
+| Independent re-verification of all five submitted links | done | src/data/reverification.json | Each `link.amazon/...` requested a second time on 2026-11-20; destination URL + page title + breadcrumb read from Amazon.com itself. P-01→dp/B0CDY277D3, P-02→dp/B09B7SB46R, P-03→dp/B08DKYBTPH, P-05→dp/B0DZFD6R9Z, P-04→checkpoint only. Matches `src/data/products.json`; contradicts the archived `data/confirmations.json` rows for P-03 and P-05, which logged the homepage. |
+| ASIN-format check on the five supplied codes | done | src/data/products.json, /flagged/ FLG-001 | Every supplied code is 9 characters; every destination ASIN is 10. `intended_asin` left null. Reference: Amazon's Catalog Items API defines the path parameter as the ASIN of the item — https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference |
+| Attribution risk in the submitted link form | done | tools/build.py `tagged_listing_url()`, EXECUTIVE_SUMMARY, /dashboard/#verification | Commission Income Statement §2 disqualifies purchases referred by a "Redirecting Link" (e) and any purchase not tracked because links are "not properly formatted" (g) — https://affiliate-program.amazon.com/help/operating/policies (fetched 2026-11-20). Buy buttons therefore use the tagged official listing URL; the submitted link stays recorded in its own field. |
+| Disclosure wording against Operating Agreement §5 | done | tools/build.py `disclosure()` | §5 requires the exact sentence "As an Amazon Associate I earn from qualifying purchases", clearly and prominently; §6 makes a §5 violation a material breach. Verified verbatim at https://affiliate-program.amazon.com/help/operating/agreement (fetched 2026-11-20). The strip now carries the sentence verbatim plus a plain-language line (FTC "clear and conspicuous"). |
+| Price / rating / image / review-use restrictions encoded as rules | done | PUBLISHING_WORKFLOW.md, src/data/suggestions.json (SUG-25, SUG-26 rejected) | Participation Requirements prohibit price tracking/alerting on an Associate site and restrict Program Content (images, reviews, ratings) to Amazon-served links or the Creators/PA API. Site publishes none; `validate.py` warns on any dollar figure. |
+| Single publication surface at the repository root | done | index.html + 21 generated pages, archive/2026-11-20-integration/ | Four competing surfaces (root storefront, /crisp/, two CSS/JS shells, duplicate guide sets) were found on main. Nothing deleted: all moved to `archive/`, robots-disallowed, noindex, and explained in archive/README.md. `tools/build.py` + `src/data/` now generate the only published surface. |
+| GitHub Pages mount-path defect fixed | done | all pages, tools/check_deploy_paths.py | main carried 205 broken or root-absolute references (verified with a filesystem scan of origin/main). Every page now uses relative links and resolves over HTTP at `/Affil1/`: 486/486 references OK. |
+| CI: gate that cannot be bypassed | done | .github/workflows/pages.yml, tools/validate.py | The Actions workflow previously failed on every push to main (validation step) while Pages served the site through a *legacy branch build* — a red check beside a live URL. Now: rebuild from data → run the gate → fail on committed-output drift → resolve references at the mount → publish. Weekly audit re-runs the same gate. |
+| Editorial expansion: 5 new guides, topics hub, front page | done | tools/content_extra.py, tools/extra_pages.py | Holiday oven-relief plan, frozen weeknights, dual-basket math, smart probe thermometers, first-week checklist. Written to the same rule: capability statements quote the seller's listing title only; each guide names what it does not claim. |
+| Saved shortlist (reader utility) | done | assets/js/shortlist.js, /about/#privacy | localStorage only, nothing transmitted; the privacy copy was rewritten to state exactly that, because the previous text claimed nothing was ever written to storage. |
+| Suggestions board + open questions for decision review | done | src/data/suggestions.json (11 added → 29), src/data/questions-open.json (8 added → 22) | Two new suggestions are rejections on policy grounds (no price alerts, no copied Program Content) so the constraint survives the next session. Five questions answered by this pass; the rest say who must answer. |
+
+### Irregularities flagged for the owner (also published at /flagged/ and /dashboard/)
+
+1. **`gh api /repos/.../pages` reports `build_type: legacy` while the Actions workflow also
+   publishes.** Two deployment paths are racing. Recommend switching Pages to
+   "GitHub Actions" as the source so only the gated artifact publishes. A repo-setting
+   change, not a file change — deliberately left for the owner or the integration session.
+2. **An archived register asserted three links "reached only the homepage"** while another
+   left everything blank; both are now contradicted by two independent passes. Kept in
+   `archive/` for inspection rather than deleted.
+3. **`link.amazon` responses are unstable** — the same URL returned an interstitial to one
+   session and a product page to another. Destinations on this site are dated observations.
+4. **P-05 is a meat thermometer, not an air fryer.** Retained and given its own guide rather
+   than dropped to make the shortlist look coherent.
+5. **No human reviewer exists for this workflow**, so the publication gate is structural only.
+   Recorded on /dashboard/#gate as `needs-review` rather than ticked.
+
+### Handoff
+
+Session arena/171b54e4, arena/2361a177, arena/4bcd015a, arena/771e5093 had claims on this board
+and unmerged branches when this pass started; arena/96012762's `crisp/` publication and data
+layer were merged (PR #7) and are the base this integration extended. Nothing from those branches
+was edited or overwritten here. Any later session should extend `src/data/` and `tools/`, not add
+a fifth front page.
