@@ -28,12 +28,12 @@
     {
       "id": "E2",
       "name": "outbound_product_click",
-      "fires_when": "An approved, labelled paid product link is activated",
+      "fires_when": "A permitted Amazon product link is activated \u2014 an approved Special Link, or the plain listing link the site publishes while the gate is closed. The anchor carries data-affiliate-ref in both cases.",
       "props": [
         "page",
         "product"
       ],
-      "answers": "Which approved product links receive clicks; not attribution or an order.",
+      "answers": "Which approved product links receive clicks from this site. A click count is not attribution: nothing here shows whether a click became an order or earned commission.",
       "not_collected": [
         "anything after the click; the destination is Amazon's, not ours"
       ]

@@ -165,13 +165,22 @@ def product_link(page_dir, url, label, **kw):
     Only a permitted Amazon product URL may be published (permitted_amazon_urls):
     an account-approved Special Link, or the plain listing of an observed ASIN.
     Any other tag, any short link, or any unknown ASIN is refused.
+
+    The listing identifier rides on the anchor as data-affiliate-ref whether or
+    not the URL carries a tag, because that is what the first-party click counter
+    reads (assets/js/analytics.js). A click is an observation about this page; a
+    tag is a claim about attribution, and only the second one stays gated. Before
+    this, the attribute was emitted on tagged links only — so with the gate closed
+    the event the brief asks for first, outbound_product_click, could never fire
+    on a single link the site actually published.
     """
     if AMAZON_PRODUCT.search(url) and url not in permitted_amazon_urls():
         raise ValueError(f'Unapproved Amazon product link: {url}')
+    tail = urlsplit(url).path.rsplit('/', 1)[-1]
+    if AMAZON_PRODUCT.search(url) and re.fullmatch(r"[A-Z0-9]{10}", tail):
+        kw['affiliate_ref'] = tail
     tagged = 'tag' in parse_qs(urlsplit(url).query, keep_blank_values=True)
-    if tagged:
-        kw['affiliate_ref'] = urlsplit(url).path.rsplit('/', 1)[-1]
-    else:
+    if not tagged:
         if label.startswith(('See ', 'Check ')):
             label = 'See listing source <span aria-hidden="true">&#8599;</span>'
         if kw.get('aria'):

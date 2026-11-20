@@ -139,7 +139,7 @@ def build_guide(page_dir, g, meta):
     </div>
     <div class="side-card-quiet">
       <p class="q-label">Paid links</p>
-      <p>Product links in these guides earn a commission. They are marked <code>sponsored</code> and every one carries the site's Amazon tag.</p>
+      <p>Every Amazon link in this guide opens the seller's own listing and is marked <code>sponsored</code>. If a purchase can be credited to this site, the site may earn a commission, at no extra cost to you. The strip at the top of the page says the same thing.</p>
     </div>
   </aside>
 </div>
