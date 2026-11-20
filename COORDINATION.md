@@ -640,21 +640,33 @@ Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-
 
 ## Session arena/bba82abd-affil1 — full-brief review pass (2026-11-20)
 
-Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **in progress**.
+Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **PR open, ready for merge after this record**.
 
-**Scope, narrowed.** Claimed files: `src/data/verification-log.json` (new), `src/data/sources.json` (dates and quotes), `tools/page_desk.py` (brief page only), this section and its record. Withdrawn from the first claim: `tools/build.py`, `tools/layout.py`, `EXECUTIVE_SUMMARY.md` and a dashboard page. The dashboard and summary rewrite are logged as requests for the integration session, not edited here. The dashboard generator is kept as a proposal, unwired.
+**Pull request:** https://github.com/karagemop466-tech/Affil1/pull/96 (`arena/bba82abd-affil1` into `main`). Merge result: recorded as a comment on PR #96 (merge commit, Pages build result). This board entry predates the merge; a branch cannot write to `main` after merging, so the result lives on the PR.
 
-**Shared-output touch, stated.** `src/data/sources.json` (table data) and the brief and About pages change under the owner's explicit gap-closure scope for this session. The integration session should regenerate from them and confirm.
+**Scope, narrowed.** Claimed files: `_src/data/verification-log.json` (new; was `src/data/`), `_src/data/sources.json` (dates and quotes), the proposals folder (`COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt`, unwired), this section and its record. `_tools/page_desk.py` (brief and About generator, committed at `fa607a4`) and the regenerated `brief/index.html` and `about/index.html` are already in the branch under the owner's gap-closure scope; the integration session should review them. Withdrawn from the first claim: `_tools/build.py`, `_tools/layout.py`, `EXECUTIVE_SUMMARY.md`, and a dashboard page. Those are logged as requests below, not edited here.
 
-**Branch deviation.** The environment fixed the branch name `arena/bba82abd-affil1`; the board's `session-<id>/<task>` convention cannot be followed.
+**Path rename on main.** `main` renamed `src/`, `tools/`, `analytics/`, `measurement/`, `archive/` and `decision-support/` to `_`-prefixed paths. Merged in `20047b5` with `main` at `a289cf9`. Pages does not publish `_` folders, so the rename moves those files out of public reach.
 
-**Merge resolution.** `main` (`1b09bbc`, later `c2d1050`) was merged into the branch with `--allow-unrelated-histories -X theirs` (merge `1cdd046`), because the branch base and `main` had unrelated histories. Safe only because the branch's earlier tree was a subset of `main`, which was checked. The `pull --rebase` rule was not used for this reason.
+**Branch deviation.** The environment fixed the branch name `arena/bba82abd-affil1`; the board's `session-<id>/<task>` convention cannot be followed. Recorded here.
 
-**Irregularities** (published in `src/data/verification-log.json`): RVW-01 the untagged listing approach now on main may not satisfy Program Policies §2(b) read literally (high, owner decision); RVW-02 launch-check red (high, resolved upstream by #90); RVW-03 live site publishes `src/data/`, `tools/` and `COORDINATION.md` (medium, open); RVW-04 tag format note (low); RVW-05 `EXECUTIVE_SUMMARY.md` counts stale (low, open); RVW-06 paid-link test failing (medium, resolved upstream by #90); RVW-07 `review/index.html` tag and archive-count text is wrong (medium, cross-scope request). RVW-08 the staged artifact omits `decision-support/`, which the root publication serves (low, pre-existing).
+**Merge resolutions.** `main` merged into the branch at `1cdd046` (with `--allow-unrelated-histories -X theirs`, safe because the earlier base's tree was a subset of `main`), `370b3ce` (c2d1050), `b55f191` (PR #90, 25ade98), `a17882b` (PR #95, 8b22041), and `20047b5` (a289cf9, PR #92 and the `_` rename). The `about/index.html` conflict was resolved by regeneration. The `sources.json` conflict kept the audited register and restored verified quotes from main's version. Pushed as `665e6ef` (merge of `23fa2e3`) and `b4c6ae9` (board) before `20047b5`; `20047b5` is the current head.
 
-**Pull request:** https://github.com/karagemop466-tech/Affil1/pull/96 (`arena/bba82abd-affil1` into `main`). PR checks at head `665e6ef`: build pass, launch pass; the deploy job runs only on pushes to `main`, so it is skipped on the PR. The deploy-equivalent checks ran locally: the workflow's build, check, links, decision-support validate, reproducibility diff and stage steps pass; the root publication (what Pages serves) resolves 1,059 references at `/Affil1/`. This board entry was written before the merge. The merge commit and post-deploy result are recorded on PR #96 and in the `main` run list, not here, because this branch cannot push to `main`.
+**Source quote audit.** All 17 entries in `_src/data/sources.json` were checked against the official text read on 2026-11-20. None is blank. Corrections: FTC SRC-04, 05 and 17 are verbatim (full read, 12 chunks; "June 2023" date shown); eCFR SRC-06 is §255.5(a), verbatim; FSIS thermometer SRC-09 is dated "Last Updated: Mar 21, 2025"; FSIS chart SRC-08 is the verbatim table row, dated "Apr 14, 2025"; SRC-10 is narrowed to a verbatim sentence; SRC-13 is the verbatim `itemIds` sentence (first of three chunks read). Earlier blanking of SRC-04, 05, 06 and 17 was reversed after the full reads.
 
-**Gates on the merged tree (with `main` at `25ade98`):** build reproducible (30 pages); check 0/0; validate pass; local links 0 broken; deploy paths 1,059 references resolve at `/Affil1/`; sweep `would move: 0`; tool unit tests 6/6. Main's PR #90 resolved the launch-gate red and the paid-link test that this branch had listed as open.
+**Irregularities** (published in `_src/data/verification-log.json`): RVW-01 untagged listing links vs. Program Policies §2(b) (high, owner decision); RVW-02 launch-check red (high, resolved upstream by #90); RVW-03 root files still published, `_` rename partly resolved (medium, owner decision); RVW-04 tag format note (low); RVW-05 `EXECUTIVE_SUMMARY.md` counts stale (low, open); RVW-06 paid-link test failing (medium, resolved upstream by #90); RVW-07 `review/index.html` tag and archive-count text is wrong (medium, cross-scope request); RVW-08 the root deploy-path crawl reports 41 false 404s from unpublished `_decision-support/`; the staged artifact passes (resolved as checker scope); RVW-09 `pages.yml` deploy job is skipped under the legacy Pages source (medium, owner decision).
+
+**Cross-scope requests (for the integration session):**
+
+- Wire the dashboard proposal (`COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt`) into `_tools/build.py` and `_tools/layout.py`.
+- `EXECUTIVE_SUMMARY.md` is stale (29 pages, 19 flags; current 30 pages, 26 flags). Rewrite not approved under this claim.
+- Review the brief and About table and label changes in `_tools/page_desk.py`, and confirm the regenerated pages.
+- `review/index.html` (RVW-07): the owner of `_tools/page_review.py` corrects the tag and archive-count statements.
+- `_tools/check_deploy_paths.py` (RVW-08): skip path segments starting with `_`.
+- Pages source (RVW-09): owner decision, legacy root publish or `workflow`.
+
+**Gates on the merged tree (`20047b5`):** build 30 pages, reproducible under the workflow exclusions; check 0 errors, 0 warnings; validate pass; local links 0 broken across 37 pages; sweep would move 0; unit tests 6 of 6; check_js pass; `_analytics/endpoint.py` compiles. Staged artifact (`_tools/stage.py _site`, 30 HTML, `.nojekyll`): `check_deploy_paths` against the staged copy resolves 824 internal references at `/Affil1/` with 0 failures. Before merge, this staged-artifact check stands in for the deploy gate: the deploy job runs only on pushes to `main` and is skipped under the legacy Pages source (RVW-09). PR checks: build and launch.
+
 ## Release receipt — session-arena-83e015f6 (final integration, this session)
 
 **Branch:** `arena/83e015f6-affil1` (base `ff74e5b`). Tasks 18–21 claimed at the top

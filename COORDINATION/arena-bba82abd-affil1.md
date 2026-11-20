@@ -1,83 +1,105 @@
 # Session record — arena/bba82abd-affil1
 
-Base: `main` at `1b09bbc` (PR #87) when this session started; later merged with `main` at `c2d1050` and again at `25ade98` (PR #90) (see "Branch and merge"). Owner: session `arena/bba82abd-affil1` only. Kept in its own file so parallel sessions do not conflict on the shared board.
+Owner: session `arena/bba82abd-affil1` only. Kept in its own file so parallel sessions do not conflict on the shared board. Branch base: `main` at `f041c75`. Pull request: https://github.com/karagemop466-tech/Affil1/pull/96 (into `main`).
 
 ## Claim — 2026-11-20 (UTC), narrowed
 
-**Task: full-brief review pass — verification log, row-level source gaps, empty brief table, board record.**
+**Task: full-brief review pass — verification log, source-register quote audit, brief table and label corrections, board record.**
 
-The first claim (23b9ba2) also named `tools/build.py`, `tools/layout.py`, `EXECUTIVE_SUMMARY.md` and a new dashboard. Those were **withdrawn** before this commit: they are shared output (site index, navigation, summary) and the board reserves them for the integration session. Their work is logged as requests below, not edited.
+The first claim (`23b9ba2`) also named `tools/build.py`, `tools/layout.py`, `EXECUTIVE_SUMMARY.md` and a new dashboard. Those were **withdrawn**: they are shared output (site index, navigation, summary) that the board reserves for the integration session. Their work is logged as requests below, not edited.
 
-Claimed files for this session (the only files it edits):
+`main` renamed `src/`, `tools/`, `analytics/`, `measurement/`, `archive/` and `decision-support/` to underscore-prefixed paths (merge `20047b5`). The claim below uses the new paths.
 
-- `src/data/verification-log.json` — new. Every official-source read made in this pass, what it showed, and the irregularities found. Not wired into the build; served as a data file.
-- `src/data/sources.json` — `page_date` and `quote` corrected to what was read in this pass. Unmatched quotes are blank and flagged (`quote_status`). Table data: gap closure approved by the owner for this session.
-- `tools/page_desk.py` — the brief page only: adds the missing verification table (`_brief_checks`), corrects two false statements on that page (an "account-confirmed" count that counted tagged fallback links; a sentence about the fifth link that the data contradicts), and changes the About page so an unmatched quote shows as flagged rather than as a silent dash. Owner approved the empty brief table as in scope.
+**Claimed files (the only files this session edits from now on):**
+
+- `_src/data/verification-log.json` (was `src/data/`). New. Every official-source read in this pass, what it showed, and the findings RVW-01 to RVW-09.
+- `_src/data/sources.json` (was `src/data/`). Dates and quotes checked against the official text, line by line (see "Source quote audit").
+- `COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt`. A proposed dashboard generator. **Not wired, not built, not in the site.** Held for the integration session.
 - `COORDINATION/arena-bba82abd-affil1.md` (this file) and one section in `COORDINATION.md`.
-- `COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt` — a proposed dashboard generator. **Not wired, not built, not in the site.** Kept as a proposal for the integration session.
 
-Generated pages that change as a result: `brief/index.html`, `about/index.html`. Regenerated with `tools/build.py` (unchanged); the rebuild is byte-identical.
+**Already committed before this narrowing, kept as they are, and in the PR (owner gap-closure scope):**
+
+- `_tools/page_desk.py` (was `tools/page_desk.py`), committed at `fa607a4`. It builds the brief page and the About page. The change adds the verification table (`_brief_checks`), corrects two false statements on the brief (a count that treated tagged fallback links as account-confirmed, and a sentence about the fifth link that the product data contradicts), and shows an unmatched quote as flagged rather than as a silent dash. Scope is not extended further; the integration session should review it.
+- `brief/index.html` and `about/index.html`, regenerated from source with `_tools/build.py` (not hand-edited). These are shared output; see the request list.
 
 **Not claimed and not touched:**
 
-- `tools/build.py`, `tools/layout.py` (navigation, footer, OWNED/GENERATED).
-- `EXECUTIVE_SUMMARY.md` (stale: its counts no longer match).
+- `_tools/build.py`, `_tools/layout.py` (navigation, footer, generated index).
+- `EXECUTIVE_SUMMARY.md` (stale: 29 pages, 19 flags).
+- `_decision-support/` (PR #84, `arena/771e5093-affil1`).
 - Tag fallback and untagged-link rule — PR #82 (`arena/359baa16-affil1`).
-- Launch-check repair and `tools/validate.py` schema — PR #86 (`arena/89ddabf5-affil1`).
-- Decision Desk and `decision-support/` — PR #84 (`arena/771e5093-affil1`).
+- Launch-check repair and `_tools/validate.py` schema — PR #86 (`arena/89ddabf5-affil1`).
 - Collector — PR #87 is merged.
+- The other sessions' records under `COORDINATION/`.
 
 ## Requests for the integration session (logged, not edited)
 
-1. **Dashboard.** Wire `COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt` into `tools/build.py` (import, `OWNED`, `GENERATED`, render call) and add a footer entry in `tools/layout.py`. The generator reads `src/data/` only; each row's source is either an official link or a blank marked unverified.
-2. **Executive summary.** `EXECUTIVE_SUMMARY.md` is stale. Recompute its counts from `src/data/` and rewrite it.
-3. **Verification log.** Decide whether `src/data/verification-log.json` should be published in the site (it is public on the live site today, see RVW-03).
-4. **RVW-01 and RVW-03 to RVW-05** name owner decisions, and **RVW-07** is a cross-scope correction for `tools/page_review.py`. See `src/data/verification-log.json`.
+1. **Dashboard.** Wire `COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt` into `_tools/build.py` (import, `OWNED`, `GENERATED`, render call) and add a footer entry in `_tools/layout.py`. The generator reads `_src/data/` only; each row's source is either an official link or a blank marked unverified.
+2. **Executive summary.** `EXECUTIVE_SUMMARY.md` is stale (29 pages, 19 flags). The current build has 30 pages and `flags.json` holds 26. Recompute from `_src/data/` and rewrite. The rewrite is not approved under this claim.
+3. **Brief and About pages.** The brief's table and label corrections, and the About sources table, are generated by `_tools/page_desk.py`. The integration session should review them and confirm the regenerated output.
+4. **`review/index.html`** (RVW-07). It states that the site appends the tag to every Amazon link and that 25 archived files carry it. Both are wrong: the legacy archive holds 22 HTML files, none tagged. Owner of `_tools/page_review.py` to correct.
+5. **Deploy-path checker** (RVW-08). `_tools/check_deploy_paths.py` should skip path segments starting with `_`, as Pages does. Otherwise it reports 41 false 404s from unpublished `_decision-support/` pages.
+6. **Pages source** (RVW-09). Owner decision: keep legacy root publishing, or switch to `workflow`. Under legacy the `pages.yml` deploy job is skipped by design.
+7. **RVW-01** (policy §2(b), tag on each Special Link) and **RVW-03** (the root publication still includes `COORDINATION.md`, `EXECUTIVE_SUMMARY.md` and `README.md`; the `_` rename has moved `src/`, `tools/`, `archive/` and `decision-support/` out of reach) are owner decisions, unchanged here.
+
+## Source quote audit (17 entries, against the official text read 2026-11-20)
+
+Every quote now either matches the text read in this pass exactly (ellipses join sentences in page order) or is blank and flagged. None is blank.
+
+- Verbatim, verified this pass: SRC-04 and SRC-05 (FTC FAQ, ellipsis-joined; page date "June 2023" shown at the foot of the page), SRC-06 (eCFR §255.5(a), "up to date as of 11/18/2026"), SRC-07 (Google, "Last updated 2025-12-10 UTC"), SRC-08 (FSIS chart table row; "Last Updated: Apr 14, 2025"), SRC-09 (FSIS food thermometers; "Last Updated: Mar 21, 2025"), SRC-11 (PA-API 5 deprecation), SRC-12 (Creators API introduction, prerequisites), SRC-13 (GetItems table cell, first chunk only), SRC-17 (FTC FAQ, home-page disclosure).
+- Narrowed to a verifiable sentence: SRC-10 (SP-API Catalog Items reference, "Use the Selling Partner API for Catalog Items to retrieve information about items in the Amazon catalog."). The earlier "Retrieves details…" wording was not located in the text read and is not used.
+- Verified in an earlier pass: SRC-01, 02, 03, 14, 15, 16 (Associates Operating Agreement and Program Policies).
+
+Corrections this pass, stated plainly:
+
+- Earlier in this session, SRC-04, 05, 06 and 17 were blanked on a partial FTC and eCFR read. The full reads (all 12 FTC chunks, and the §255.5 section) show the wording is verbatim. They are restored, with the matching quote status.
+- SRC-09's thermometer page date was "no date shown" (first chunk only). The last chunk shows "Last Updated: Mar 21, 2025".
+- SRC-13 was narrowed to the verbatim `itemIds` sentence; only the first of three chunks was read, and that is stated in its status.
+- A source-register entry from main's version (SRC-08, a paraphrase of the FSIS chart) was not used: the table row is the verbatim wording.
 
 ## Verification
 
-Every row in `src/data/verification-log.json` names the page read, the date, and what the page showed. Sources read in this pass are listed there as `V-01` to `V-16`. Nothing is taken from another session's notes, with one exception stated in the log's `not_read` field: the five listing titles come from `src/data/products.json` and were read earlier in this session.
+Every row in `_src/data/verification-log.json` names the page read, the date, and what the page showed. Reads are `V-01` to `V-16`; findings are RVW-01 to RVW-09.
 
-Local gates on the branch (after the last build):
+Gates on the merged tree (`20047b5`, with `main` at `a289cf9`):
 
-- `tools/build.py`: 30 generated pages; rebuild reproducible.
-- `tools/check.py`: 0 errors, 0 warnings.
-- `tools/validate.py`: all checks passed.
-- `tools/check_local_links.py`: 0 broken across 37 pages.
-- `tools/check_deploy_paths.py` (served at `/Affil1/`): 1,059 internal references resolve.
-- `tools/sweep_surfaces.py --dry-run`: **would move 0 files** on the merged tree (main's PR #90 repaired the launch gate; RVW-02 resolved upstream).
-- `tools/test_paid_link_gate.py` and the other tool tests: 6 of 6 pass on the merged tree (RVW-06 resolved upstream by PR #90).
-- JS parse and `analytics/endpoint.py` compile: pass.
-- `tools/check_deploy_paths.py` (served at `/Affil1/`): 1,059 references resolve on the root publication, which is what Pages serves (legacy, source `main` `/`). Run against the staged artifact it reports 41 404s from `decision-support/`, which stage.py does not copy. This is pre-existing on main (RVW-08).
+- `_tools/build.py`: 30 generated pages; rebuild is byte-identical under the workflow's exclusions.
+- `_tools/check.py`: 0 errors, 0 warnings. (Before this pass: three errors, because the leftover `tools/`, `analytics/` and `measurement/` folders held only cache files. Removed.)
+- `_decision-support/validate.py`: all checks passed.
+- `_tools/check_local_links.py`: 0 broken across 37 pages.
+- `_tools/sweep_surfaces.py --dry-run`: would move 0 files.
+- `python3 -m unittest discover -s _tools`: 6 of 6 pass.
+- `_tools/check_js.py`: pass. `_analytics/endpoint.py` compiles.
+- Staged artifact (`_tools/stage.py _site`, 30 HTML, `.nojekyll` present): `check_deploy_paths` run against `_site` resolves 824 internal references at `/Affil1/` with zero failures. Run from the repository root it reports 41 404s, all from unpublished `_decision-support/` pages (RVW-08).
+
+**Pre-merge deploy evidence.** The deploy job runs only on pushes to `main` and is skipped under the legacy Pages source (RVW-09). The staged-artifact check above is the stand-in for the deploy gate before merge. It is recorded here, and the post-merge run is recorded on PR #96.
 
 ## Branch and merge
 
 - The environment fixed the branch name `arena/bba82abd-affil1`. The board convention `session-<id>/<task>` cannot be followed. Recorded on the board.
-- `main` was merged into this branch with `git merge --allow-unrelated-histories -X theirs` (merge `1cdd046`) because `main` and the earlier base had unrelated histories. Safe only because the earlier base's tree was a subset of `main`; that was checked. The board's `git pull --rebase` rule was not used for this reason.
-- `main` moved twice while this session ran (`c2d1050`, then `25ade98`). Each time it was merged in with `git merge`, not rebased. The `COORDINATION.md` conflict at `c2d1050` was resolved by keeping both sides. The `brief/index.html` conflict at `25ade98` is a generated file and was regenerated from source, not hand-edited.
+- `main` was merged into the branch at `1cdd046` with `--allow-unrelated-histories -X theirs`, because the branch base and `main` had unrelated histories. Safe only because the earlier base's tree was a subset of `main`; that was checked. Later merges were ordinary.
+- Merges since: `370b3ce` (c2d1050), `b55f191` (PR #90, 25ade98), `a17882b` (PR #95, 8b22041), `20047b5` (a289cf9, PR #92 and the `_`-prefix rename). The merge at `20047b5` moved `src/data/*` to `_src/data/`, and resolved `about/index.html` by regeneration.
+- `main` moved during the session (`c2d1050`, `25ade98`, `8b22041`, `23fa2e3`, `a289cf9`). Each time it was merged in, not rebased, and checked by ancestry before each push.
 
 ## Irregularities found in this pass
 
-Published on the verification log as RVW-01 to RVW-06. Summary:
+- **RVW-01 (high, open):** the policy requires the tag on each Special Link. Product links on the merged tree are untagged (61 product-type links, all `rel="sponsored"`). Owner decision; not changed here.
+- **RVW-02 (high, resolved upstream):** `Affiliate launch checks` was red on `main` (run 44686287239). PR #90 resolved it; the sweep reports 0.
+- **RVW-03 (medium, partly resolved):** the `_` rename on `main` moved `src/`, `tools/`, `archive/`, `analytics/`, `measurement/` and `decision-support/` out of public reach (Pages does not publish `_` folders). Still at the root, which Pages publishes: `COORDINATION.md` (HTTP 200 checked), `EXECUTIVE_SUMMARY.md`, `README.md`, `PUBLISHING_WORKFLOW.md` (present; not individually fetched). Owner decision.
+- **RVW-04 (low):** the supplied tag `shopnow047c-20` is not in the `XXXXX-##` example format. Policy allows other formats; not treated as a defect.
+- **RVW-05 (low, open):** `EXECUTIVE_SUMMARY.md` counts are stale.
+- **RVW-06 (medium, resolved upstream):** `tools/test_paid_link_gate.py` failed on the old base; PR #90 restored it. 6 of 6 pass.
+- **RVW-07 (medium, open):** `review/index.html` tag and archive-count text is wrong. Cross-scope request.
+- **RVW-08 (low, resolved as checker scope):** the root deploy-path crawl counts unpublished `_decision-support/` pages. The staged artifact passes (824 references).
+- **RVW-09 (medium, open):** the `pages.yml` deploy job is skipped under the legacy Pages source. Owner decision.
 
-- **RVW-01 (high, open):** the policy requires the tag on each Special Link. Main (PR #90) now builds untagged listing links. Owner decision; not changed here.
-- **RVW-02 (high, resolved upstream):** `Affiliate launch checks` was red at the sweep step; PR #90 resolved it. Re-checked: `would move: 0`.
-- **RVW-03 (medium):** the live site publishes the repository root, so `_config.yml`'s exclude list does not apply. `COORDINATION.md`, `src/data/`, `tools/` and `archive/` are publicly served.
-- **RVW-04 (low):** the supplied tag `shopnow047c-20` is not in the `XXXXX-##` example format. The policy allows other formats; this is not treated as a defect.
-- **RVW-05 (low):** `EXECUTIVE_SUMMARY.md` counts are stale.
-- **RVW-06 (medium, resolved upstream):** `tools/test_paid_link_gate.py` failed; PR #90 restored it. 6 of 6 pass.
-- **RVW-07 (medium, open):** `review/index.html` says the site tags every Amazon link and that 25 archived files carry the tag. Both are wrong on the merged tree (22 legacy HTML files, none tagged; 126 archive HTML files, 39 tagged). Cross-scope request to the owner of `tools/page_review.py`.
+Also corrected on the brief page (committed in `fa607a4`, merged):
 
-Also found and corrected in this pass:
-
-- `brief/index.html` labelled five tagged fallback links as "account-confirmed buy links". None has an intended ASIN or a confirmation record. Corrected.
-- `brief/index.html` said "seventeen review flags". The register holds 22. Corrected in text.
-- `brief/index.html` said the fifth link "failed three times" and resolved to ThermoMaven. The product data maps ThermoMaven to P-04 and CHEF iQ to P-05. The failure history cannot be verified from this pass. Corrected to what this pass read.
-- `src/data/sources.json` listed "June 2023" for the FTC pages, which show no page date. Replaced.
-- `src/data/sources.json` listed "Current USDA FSIS guidance" and "API version" values not read in this pass. Replaced with the observed dates or marked unverified.
-- Four quotes in `src/data/sources.json` (SRC-04, 05, 06, 17) did not match the text read in this pass. Blanked and flagged. Three quotes that were paraphrases (SRC-08, 09, 10, 13) were replaced by exact sentences from the pages.
+- The brief labelled five tagged fallback links as "account-confirmed buy links". None has an intended ASIN or an account confirmation. Corrected.
+- The brief said "seventeen review flags". The register holds 26 flags on the merged tree; the brief now reads "26 flags for review".
+- The brief said the fifth link "failed three times" and resolved to ThermoMaven. The product data maps ThermoMaven to P-04 and CHEF iQ to P-05, and the failure history cannot be verified in this pass. Corrected to what this pass read.
 
 ## Status
 
-**Done:** claim narrowed; verification log; source-register dates and quotes; brief table and brief corrections; board record.
-**Not done (requests):** dashboard wiring; executive summary rewrite; RVW-01 to RVW-06 owner decisions.
+**Done:** claim narrowed; verification log (RVW-01 to RVW-09); source register quote audit; brief table and brief corrections; gates on the merged tree; board record.
+**Not done (requests and owner decisions):** dashboard wiring; executive summary rewrite; RVW-01, RVW-03, RVW-07, RVW-09 owner decisions; deploy-path checker scope (RVW-08).

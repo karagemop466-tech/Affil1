@@ -208,7 +208,7 @@
       "id": "RVW-03",
       "severity": "medium",
       "title": "Pages publishes the repository root, so the _config.yml exclude list does not apply",
-      "found": "The Pages API reports build_type 'legacy', source branch main, path '/'. The workflow's staging step (tools/stage.py into _site) is not the deployed artifact. The live site serves COORDINATION.md, src/data/product-intent.json, tools/build.py and archive/ (V-12, V-13, V-15, V-16). The repository ships a .nojekyll file (checked). _config.yml's exclude list is a Jekyll setting that the live root publication does not apply.",
+      "found": "The _ rename on main moved src/, tools/, archive/, analytics/, measurement/ and decision-support/ to _-prefixed folders, which Pages does not publish. Still at the repository root, which Pages publishes: COORDINATION.md (HTTP 200 checked 2026-11-20), EXECUTIVE_SUMMARY.md, README.md, PUBLISHING_WORKFLOW.md (present at root; not individually fetched).",
       "why_it_matters": "Files the repository's own exclude list names are public: the board, the register source, the build source and the archive README. Archived HTML carries noindex, which keeps it out of search results but does not stop it being served.",
       "action": "Not changed. Owner decision: keep the root publication and accept it, or publish from a staged artifact (the workflow's 'workflow' source) so the staging step decides what is public.",
       "sources": [
@@ -218,7 +218,7 @@
         "https://karagemop466-tech.github.io/Affil1/tools/build.py",
         "https://karagemop466-tech.github.io/Affil1/archive/legacy-2026-11-20/README.md"
       ],
-      "status": "Open."
+      "status": "Partly resolved by the _ rename on main. Still open for the root files. Owner decision."
     },
     {
       "id": "RVW-04",
@@ -277,14 +277,27 @@
     {
       "id": "RVW-08",
       "severity": "low",
-      "status": "Open. Pre-existing on main; not changed in this pass.",
-      "title": "The staged Pages artifact does not match the root publication for decision-support/",
-      "found": "Pages is configured as legacy, source main '/' (checked via the Pages API on 2026-11-20), so the live site is the repository root. tools/stage.py does not copy decision-support/. Run against the staged artifact, tools/check_deploy_paths.py reports 41 HTTP 404 references, all from decision-support/*.html (editorial-plan, executive-summary, index). Run against the root, the same check resolves all 1,059 references, because decision-support/assets/ exists in the repo. The same 41 failures occur on main's staged artifact, so they predate this branch.",
-      "why_it_matters": "The live site is unaffected under legacy publication. If the Pages source is switched to 'workflow', decision-support/ would be missing from the artifact and its pages would break.",
-      "action": "Owner decision: keep the legacy root publication and treat the staged artifact as a preview only, or copy decision-support/ into the staged set. Not changed here.",
+      "status": "Resolved as a checker-scope issue. No publication change needed. Re-verified on the merged tree 2026-11-20.",
+      "title": "Deploy-path checker counts pages in unpublished underscore folders",
+      "found": "Pages publishes nothing whose path segment starts with '_' (see _config.yml). Run from the repository root, tools/check_deploy_paths.py crawls _decision-support/ and reports 41 HTTP 404 references, all from unpublished pages. Run against the staged artifact (_site, 30 HTML files, .nojekyll present), the same check resolves 824 internal references at /Affil1/ with zero failures. The earlier finding (before main renamed the folders) said the staged artifact omitted decision-support/; under the current layout that omission is by design.",
+      "why_it_matters": "The checker's root crawl is noisy, so a real break could be hidden among the 41. The live site is unaffected.",
+      "action": "Cross-scope request to the owner of _tools/check_deploy_paths.py: skip path segments that start with '_' (matching Pages). Not changed in this pass.",
       "sources": [
-        "repository file: tools/stage.py",
-        "repository file: tools/check_deploy_paths.py",
+        "repository file: _config.yml (header comment on the underscore rename)",
+        "repository file: _tools/stage.py",
+        "staged artifact check on commit 20047b5 (824 references, 0 failures)"
+      ]
+    },
+    {
+      "id": "RVW-09",
+      "severity": "medium",
+      "status": "Open. Owner decision on Pages configuration.",
+      "title": "The deploy job in pages.yml is skipped under the current legacy Pages source",
+      "found": "pages.yml runs the deploy job only when needs.build.outputs.source == 'workflow'. The Pages API reports build_type 'legacy' with source main '/' (checked 2026-11-20). On a push to main, the build job therefore reports the source as legacy and the deploy job is skipped. The live publish is GitHub's legacy build from the repository root (run 'pages build and deployment', success, on 23fa2e3).",
+      "why_it_matters": "The deploy job cannot show 'pass' on main until the Pages source is switched to 'workflow' (a repository setting). Pre-merge deploy evidence therefore comes from the staged artifact check, not from the deploy job.",
+      "action": "Owner decision: keep legacy root publishing (then the deploy job stays skipped by design) or switch the Pages source to 'workflow' (then _site is deployed). Not changed in this pass.",
+      "sources": [
+        "repository file: .github/workflows/pages.yml (deploy job condition)",
         "GitHub Pages API: build_type legacy, source main /"
       ]
     }
