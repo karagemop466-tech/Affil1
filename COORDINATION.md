@@ -595,3 +595,23 @@ bidirectional `GENERATED` guard in `build.py`.
 **Still open:** the `Affiliate launch checks` workflow is red on `aa0497e`. The only failing step is the sweep, which correctly reports 7 files under `decision-support/` that are outside the published pipeline. Owner decision needed: archive them or add them to `tools/build.py`. Nothing in the published site links to them. This does not block the Pages deploy, which is green.
 
 **Not changed by this session, but noted:** the earlier session items (T2 analytics, T3 ported guides, T4 and T5 duplicate content) were superseded by main and were dropped, as recorded above.
+
+---
+
+## Session `arena/b1a42a51-affil1` — line-by-line audit, one-indexable-site fixes, desk cleanup (2026-11-20)
+
+Branch `arena/b1a42a51-affil1`, cut from `f041c75` (main after PR #83). Claimed below and
+pushed before any edit, per the board rules. No other session holds an open claim on
+these files as of this commit.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Line-by-line audit of the published edition, with a source link per row | in progress | `arena/b1a42a51-affil1` | `src/data/audit.json`, `tools/page_audit.py`, `tools/build.py` (wiring only), `review/audit.html` (generated) |
+| Make the desk findable without a second indexable site: robots/archive, stale desk pages, sweeper gate | in progress | `arena/b1a42a51-affil1` | `tools/build.py` (ROBOTS constant), `tools/sweep_surfaces.py`, `decision-support/*.html` (`noindex` only) |
+| Shop-first navigation and the false "account-confirmed" figure | in progress | `arena/b1a42a51-affil1` | `tools/layout.py`, `tools/page_desk.py` |
+| New proposals and open questions for the growth path | in progress | `arena/b1a42a51-affil1` | `src/data/suggestions.json`, `src/data/questions.json` |
+| Repair `tools/test_paid_link_gate.py` (it could not import) | in progress | `arena/b1a42a51-affil1` | `tools/test_paid_link_gate.py` |
+| Release: PR, merge, Pages deploy, receipt | in progress | `arena/b1a42a51-affil1` | `COORDINATION.md` |
+
+Not in scope and not touched: `src/data/products.json` observations, `tools/paid_link_gate.py`
+logic, `.github/workflows/*`, any other session's guides.
