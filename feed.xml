@@ -1,43 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-  <title>Crisp &amp; Counter</title>
-  <link>https://karagemop466-tech.github.io/Affil1/</link>
-  <atom:link href="https://karagemop466-tech.github.io/Affil1/feed.xml" rel="self" type="application/rss+xml" />
-  <description>Plain-language buying guides for countertop cooking appliances.</description>
-  <language>en-us</language>
-  <lastBuildDate>Thu, 20 Nov 2026 09:00:00 +0000</lastBuildDate>
-  <item>
-    <title>Basket or oven-style air fryer: what should you compare?</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer/</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer/</guid>
-    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
-    <category>Choose the shape</category>
-    <description>The two shapes are not rivals in the same contest. They solve different problems, and most buying regret comes from picking the shape that solves the other person&#x27;s problem.</description>
-  </item>
-  <item>
-    <title>A no-hype checklist for comparing air fryer capacity</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist/</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist/</guid>
-    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
-    <category>Size it honestly</category>
-    <description>The quart number on the box is the least useful number on the box. Here is what to compare instead, and why two machines with the same figure can hold very different dinners.</description>
-  </item>
-  <item>
-    <title>How to assess cleanup and counter-space trade-offs</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space/</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space/</guid>
-    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
-    <category>Live with it</category>
-    <description>The appliance you stop using is the one that is annoying to clean or annoying to store. Both are decidable before purchase, from the listing, if you know which lines to read.</description>
-  </item>
-  <item>
-    <title>Questions to ask before buying a multi-function kitchen appliance</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions/</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions/</guid>
-    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
-    <category>Buy the function, not the badge</category>
-    <description>&amp;ldquo;24 presets&amp;rdquo; and &amp;ldquo;multi-function&amp;rdquo; are counts, not capabilities. Here is how to find out which functions you will actually use before you pay for the rest.</description>
-  </item>
-</channel>
-</rss>
+<rss version="2.0"><channel><title>Good Measure Kitchen Notes</title><link>https://karagemop466-tech.github.io/Affil1/</link><description>Question-led kitchen buying guides and evidence notes.</description><language>en-us</language>
+<item><title>Basket or oven-style air fryer: what should you compare?</title><link>https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven.html</link><guid>basket-or-oven-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>A practical comparison checklist. Product-specific claims remain unverified.</description></item>
+<item><title>A no-hype checklist for comparing air-fryer capacity</title><link>https://karagemop466-tech.github.io/Affil1/guides/capacity-checklist.html</link><guid>capacity-checklist-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>A household-and-space checklist; no product capacity claims.</description></item>
+<item><title>How to assess cleanup and counter-space trade-offs</title><link>https://karagemop466-tech.github.io/Affil1/guides/cleanup-counterspace.html</link><guid>cleanup-counterspace-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>Practical questions for assessing appliance cleanup and storage.</description></item>
+<item><title>Air-fryer category dashboard</title><link>https://karagemop466-tech.github.io/Affil1/guides/air-fryer-category.html</link><guid>air-fryer-category-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>All submitted air-fryer product entries in an unverified dashboard table.</description></item>
+<item><title>Suggestions for review</title><link>https://karagemop466-tech.github.io/Affil1/guides/suggestions.html</link><guid>suggestions-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>Suggestions queued for review before any change is implemented.</description></item>
+<item><title>Questions before deciding</title><link>https://karagemop466-tech.github.io/Affil1/guides/pre-decision-questions.html</link><guid>pre-decision-questions-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>Pre-decision questions, information and answers with suggestions to discover missing information.</description></item>
+<item><title>Executive summary</title><link>https://karagemop466-tech.github.io/Affil1/guides/executive-summary.html</link><guid>executive-summary-2026-11-20</guid><pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate><description>Executive summary of scope, tracking ID, verification status, compliance, measurement and next steps.</description></item>
+</channel></rss>

@@ -16,17 +16,31 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "src" / "data"
 SITE_NAME = "Crisp & Counter"
 TRACKING_ID = "shopnow047c-20"
+# The storefront built by the parallel sessions lives at the repo root. This
+# publication is a section within it, so a reader can always get back.
+STORE_HOME = "@STORE@"
 BUILD_DATE = "2026-11-20"
 
 # Canonical host. GitHub Pages serves this repository at this URL.
-SITE_URL = "https://karagemop466-tech.github.io/Affil1"
+SITE_ROOT = "https://karagemop466-tech.github.io/Affil1"
+BASE = "/crisp"
+SITE_URL = SITE_ROOT + BASE
+
+# Relative prefix per page depth. Root of the app is /crisp/; any page below it
+# links back with ../ per level. Absolute root paths would break a project Pages
+# deploy (which serves the repo under /Affil1/), so all links are relative.
+def rel(path):
+    depth = path.strip("/").count("/")
+    if path.endswith("/") and path != "/":
+        depth += 1
+    return "../" * depth if depth else "./"
 
 NAV = [
-    ("/", "Home"),
-    ("/guides/", "Buying guides"),
-    ("/compare/", "Compare"),
-    ("/products/", "All products"),
-    ("/about/", "About"),
+    ("", "Home"),
+    ("guides/", "Buying guides"),
+    ("compare/", "Compare"),
+    ("products/", "All products"),
+    ("about/", "About"),
 ]
 
 
@@ -73,7 +87,7 @@ def masthead(active):
     links = []
     for href, label in NAV:
         cur = ' aria-current="page"' if href == active else ""
-        links.append(f'<a href="{href}"{cur}>{esc(label)}</a>')
+        links.append(f'<a href="/{href}"{cur}>{esc(label)}</a>')
     return f"""<header class="masthead">
   <div class="masthead-inner">
     <a class="brand" href="/">Crisp <span class="amp">&amp;</span> Counter<span class="brand-tag">Kitchen buying guides</span></a>
@@ -119,7 +133,7 @@ def footer():
         <ul>
           <li><a href="/feed.xml">RSS feed</a></li>
           <li><a href="/sitemap.xml">Sitemap</a></li>
-          <li><a href="/legacy/">All registers</a></li>
+          <li><a href="@STORE@">Kitchen Notes storefront</a></li>
           <li><a href="/about/#privacy">Privacy &amp; cookies</a></li>
         </ul>
       </div>
@@ -134,7 +148,7 @@ def footer():
 
 def page(path, title, description, body, active="/", extra_head="", crumbs=None):
     """Write one page. Disclosure is always the first thing under the masthead."""
-    canonical = SITE_URL + path  if path != "/" else SITE_URL + "/"
+    canonical = SITE_URL + (path if path != "/" else "/")
     crumb_html = ""
     if crumbs:
         bits = []
@@ -162,6 +176,7 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None)
 <meta name="twitter:card" content="summary">
 <link rel="alternate" type="application/rss+xml" title="{esc(SITE_NAME)}" href="/feed.xml">
 <link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/events.js" defer></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b1a17'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23c9743a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
 {extra_head}</head>
 <body>
@@ -176,7 +191,16 @@ def page(path, title, description, body, active="/", extra_head="", crumbs=None)
 </body>
 </html>
 """
-    out = ROOT / path.lstrip("/") / "index.html" if path.endswith("/") else ROOT / path.lstrip("/")
+    # Rewrite every root-absolute link to a document-relative one. A project
+    # Pages deploy serves this repo under /Affil1/, so "/guides/" would resolve
+    # to the domain root and 404. Relative links work at any mount point.
+    prefix = rel(path)
+    doc = re.sub(r'(href|src)="/(?!/)', lambda m: f'{m.group(1)}="{prefix or "./"}', doc)
+    doc = doc.replace('url(/assets/', 'url(./assets/')
+    doc = doc.replace("@STORE@", prefix + "../")
+
+    out = (ROOT / BASE.strip("/") / path.lstrip("/") / "index.html") if path.endswith("/") \
+        else (ROOT / BASE.strip("/") / path.lstrip("/"))
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(doc, encoding="utf-8")
     return out
@@ -897,16 +921,32 @@ def build_sitemap():
     urls = ["/", "/guides/", "/compare/", "/products/", "/about/", "/sources/",
             "/suggestions/", "/questions/", "/flagged/", "/legacy/"]
     urls += [f"/guides/{s}/" for s in GUIDES]
-    entries = "".join(
-        f"  <url>\n    <loc>{SITE_URL}{u}</loc>\n    <lastmod>{BUILD_DATE}</lastmod>\n"
-        f"    <changefreq>{'weekly' if u in ('/', '/guides/') else 'monthly'}</changefreq>\n"
-        f"    <priority>{'1.0' if u == '/' else ('0.8' if u.startswith('/guides') else '0.5')}</priority>\n  </url>\n"
-        for u in urls)
-    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{entries}</urlset>
-"""
-    (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
+    entries = []
+    locs = []
+    for u in urls:
+        loc = SITE_URL + u
+        locs.append(loc)
+        entries.append(
+            f"  <url>\n    <loc>{loc}</loc>\n    <lastmod>{BUILD_DATE}</lastmod>\n"
+            f"    <changefreq>{'weekly' if u in ('/', '/guides/') else 'monthly'}</changefreq>\n"
+            f"    <priority>{'1.0' if u == '/' else ('0.8' if u.startswith('/guides') else '0.5')}</priority>\n  </url>\n")
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(entries) + "</urlset>\n")
+    (ROOT / "crisp" / "sitemap.xml").write_text(xml, encoding="utf-8")
+
+    # Union into the repository sitemap that the storefront publishes, so search
+    # engines reach this section too. Existing entries are preserved verbatim.
+    root_map = ROOT / "sitemap.xml"
+    if root_map.exists():
+        existing = root_map.read_text(encoding="utf-8")
+        have = set(re.findall(r"<loc>([^<]+)</loc>", existing))
+        add = [loc for loc in locs if loc not in have]
+        if add:
+            block = "".join(
+                f"  <url><loc>{loc}</loc><lastmod>{BUILD_DATE}</lastmod>"
+                f"<changefreq>monthly</changefreq><priority>0.4</priority></url>\n" for loc in add)
+            existing = existing.replace("</urlset>", block + "</urlset>")
+            root_map.write_text(existing, encoding="utf-8")
 
 
 def build_feed():
@@ -933,11 +973,11 @@ def build_feed():
 </channel>
 </rss>
 """
-    (ROOT / "feed.xml").write_text(xml, encoding="utf-8")
+    (ROOT / "crisp" / "feed.xml").write_text(xml, encoding="utf-8")
 
 
 def build_robots():
-    (ROOT / "robots.txt").write_text(
+    (ROOT / "crisp" / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 
 
@@ -950,32 +990,11 @@ def build_404():
          extra_head='<meta name="robots" content="noindex">')
 
 
-def build_shims():
-    """Root-level redirect stubs so the old flat URLs keep working."""
-    shims = {
-        "sources.html": "/sources/",
-        "suggestions.html": "/suggestions/",
-        "questions.html": "/questions/",
-        "flagged.html": "/flagged/",
-        "products.html": "/products/",
-        "compare.html": "/compare/",
-        "guides.html": "/guides/",
-    }
-    for name, target in shims.items():
-        (ROOT / name).write_text(
-            f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
-            f'<title>Moved</title><link rel="canonical" href="{SITE_URL}{target}">'
-            f'<meta http-equiv="refresh" content="0; url={target}">'
-            f'<meta name="robots" content="noindex"></head>'
-            f'<body><p>This page moved to <a href="{target}">{target}</a>.</p></body></html>',
-            encoding="utf-8")
-
-
 def main():
     # clear generated pages so a deleted page cannot linger
     for d in ["guides", "compare", "products", "about", "sources", "suggestions",
               "questions", "flagged", "legacy"]:
-        p = ROOT / d
+        p = ROOT / "crisp" / d
         if p.exists():
             shutil.rmtree(p)
 
@@ -994,11 +1013,18 @@ def main():
     build_sitemap()
     build_feed()
     build_robots()
-    build_shims()
     build_404()
 
-    n = len(list(ROOT.rglob("*.html"))) - 7  # minus shims
-    print(f"built {n} pages")
+    js_dst = ROOT / "crisp" / "assets" / "js" / "events.js"
+    js_dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / "assets" / "js" / "events.js", js_dst)
+
+    dst = ROOT / "crisp" / "assets" / "css" / "site.css"
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / "assets" / "css" / "site.css", dst)
+
+    n = len(list((ROOT / "crisp").rglob("*.html")))
+    print(f"built {n} pages under /crisp/")
 
 
 if __name__ == "__main__":

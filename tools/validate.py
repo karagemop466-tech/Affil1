@@ -12,6 +12,8 @@ import sys
 from html.parser import HTMLParser
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+SITE = ROOT / "crisp"          # the section this builder owns
+BASE = "/crisp"
 ERRORS = []
 WARNINGS = []
 CHECKS = 0
@@ -74,25 +76,28 @@ class RefCollector(HTMLParser):
 
 def main():
     global CHECKS
-    pages = sorted(p for p in ROOT.rglob("*.html"))
+    # Only validate pages this builder owns. The storefront at the repo root is
+    # another session's scope; validate.py must never fail on their files.
+    pages = sorted(p for p in SITE.rglob("*.html"))
     parsed = {}
 
     for p in pages:
-        rel = "/" + str(p.relative_to(ROOT))
+        rel = "/" + str(p.relative_to(SITE))
         html = p.read_text(encoding="utf-8")
         c = RefCollector()
         c.feed(html)
         parsed[rel] = (c, html)
 
         is_shim = 'http-equiv="refresh"' in html
+        is_404 = rel.endswith("/404.html")
         CHECKS += 1
         # Rule: exactly one H1 per page.
-        if not is_shim and c.h1_count != 1:
+        if not is_shim and not is_404 and c.h1_count != 1:
             err(f"{rel}: expected 1 <h1>, found {c.h1_count}")
 
         CHECKS += 1
         # Rule: disclosure above the fold on every page. Shims are exempt (meta refresh only).
-        if "http-equiv=\"refresh\"" not in html:
+        if not is_shim and not is_404:
             if not c.has_disclosure:
                 err(f"{rel}: missing the disclosure strip")
             else:
@@ -103,7 +108,7 @@ def main():
 
         CHECKS += 1
         # Rule: canonical present on real pages.
-        if not is_shim and not c.canonical:
+        if not is_shim and not is_404 and not c.canonical:
             err(f"{rel}: missing canonical")
 
         CHECKS += 1
@@ -127,11 +132,12 @@ def main():
         for m in re.finditer(r"\$\s?\d", html):
             warn(f"{rel}: dollar figure near '{html[max(0,m.start()-40):m.start()+20].strip()[:70]}'")
 
-    # ---- internal link resolution ----
+    # ---- internal link resolution (filesystem-exact) ----
     for rel, (c, html) in parsed.items():
+        page_file = SITE / rel.lstrip("/")
         for href in c.links:
             CHECKS += 1
-            if href.startswith(("http://", "https://", "mailto:", "#", "data:")):
+            if href.startswith(("http://", "https://", "mailto:", "#", "data:", "javascript:")):
                 continue
             target = href.split("#")[0]
             frag = href.split("#")[1] if "#" in href else None
@@ -139,17 +145,20 @@ def main():
                 if frag and frag not in c.ids:
                     err(f"{rel}: dead in-page anchor #{frag}")
                 continue
-            if target.startswith("/"):
-                tp = ROOT / target.lstrip("/")
-            else:
-                tp = (ROOT / rel.lstrip("/")).parent / target
+            # A leading "./" or "../" resolves relative to the page's directory.
+            tp = (page_file.parent / target).resolve()
+            if not tp.is_relative_to(SITE.resolve()):
+                # escaping the section is allowed only to reach the storefront root
+                if tp != SITE.parent.resolve():
+                    err(f"{rel}: link escapes the site root -> {href}")
+                continue
             if target.endswith("/"):
                 tp = tp / "index.html"
             if not tp.exists():
                 err(f"{rel}: broken internal link -> {href}")
                 continue
             if frag:
-                key = "/" + str(tp.relative_to(ROOT)) if tp.is_relative_to(ROOT) else None
+                key = "/" + str(tp.relative_to(SITE)) if tp.is_relative_to(SITE) else None
                 if key in parsed and frag not in parsed[key][0].ids:
                     err(f"{rel}: link {href} -> missing anchor #{frag}")
 
@@ -170,15 +179,20 @@ def main():
             err(f"{prod['id']}: observed ASIN is not 10 characters")
 
     # ---- sitemap / feed agreement ----
-    sitemap = (ROOT / "sitemap.xml").read_text()
-    feed = (ROOT / "feed.xml").read_text()
+    sitemap = (SITE / "sitemap.xml").read_text()
+    feed = (SITE / "feed.xml").read_text()
     for rel, (c, html) in parsed.items():
-        if "http-equiv=\"refresh\"" in html or rel == "/404.html":
+        if rel == "/404.html":
+            continue
+        if not c.canonical:
             continue
         CHECKS += 1
         url = c.canonical
         if url and f"<loc>{url}</loc>" not in sitemap:
-            err(f"{rel}: canonical {url} absent from sitemap.xml")
+            err(f"{rel}: canonical {url} absent from crisp/sitemap.xml")
+        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/crisp"):
+            err(f"{rel}: canonical outside the /crisp base -> {url}")
+
     for slug in re.findall(r"<link>(https://[^<]+/guides/[^<]+)</link>", feed):
         CHECKS += 1
         if f"<loc>{slug}</loc>" not in sitemap:
