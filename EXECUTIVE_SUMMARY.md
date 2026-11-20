@@ -658,10 +658,14 @@ scale, so the newer copy yielded. The front page's seasonal band and journal she
 data rather than from fixed list indices, which every appending session invalidated.
 
 **Registers.** Four new sources (SRC-21 FSIS Leftovers, SRC-22 FSIS Food
-Thermometers, SRC-23 FSIS Turkey from Farm to Table, SRC-24 FoodSafety.gov chart,
-each with the page's own date or an explicit "no date shown"), three new open
-questions (Q-25, Q-26, Q-27), six new board proposals (S-26 to S-31) and two new
-review flags (FLG-034, FLG-035).
+Thermometers, SRC-23 FSIS Turkey from Farm to Table, SRC-24 FoodSafety.gov chart, each
+with the page's own date or the words "no update date shown"); two Amazon-policy rows
+drafted here were dropped as duplicates of main's SRC-18/SRC-19. Three new open
+questions (Q-25, Q-26, Q-27), three new board proposals (S-37, S-38, S-39, renumbered
+twice because main took S-26…S-31 and then S-32…S-36 under this branch) and two new
+review flags (FLG-036, FLG-037). Three further proposals were dropped as duplicates of
+S-01, S-12 and S-24, and the short-link finding was folded into main's FLG-028 as a
+third corroboration rather than filed again.
 
 **Not a new flag, a third corroboration.** Each of the five submitted
 `link.amazon/<code>` links was fetched separately, redirects followed, by a fetcher
