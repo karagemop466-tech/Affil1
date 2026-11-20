@@ -244,7 +244,13 @@ Sources read directly this pass, with the page's own date where it shows one:
 [Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) ·
 [Program Policies, Commission Income Statement §2(g) and Participation Requirements
 §1](https://affiliate-program.amazon.com/help/operating/policies).
-Quoted wording is stored verbatim in `_src/data/sources.json` (SRC-18…SRC-23).
+Quoted wording is stored verbatim in `_src/data/sources.json`. This session first filed
+six rows as SRC-18…SRC-23; on rebase, `arena/b990bce7-affil1` had already taken those ids
+for the Amazon policy pages, so the four government rows were renumbered **SRC-21…SRC-24**
+and the two policy rows were dropped as duplicates. Same for the board: this session's
+proposals moved from S-22…S-27 to **S-26…S-31**, and its flags from FLG-029…FLG-031 to
+**FLG-034, FLG-035, FLG-036** (FLG-031, the false tag sentence on guide pages, was already
+main's — see the overlap note in the session log).
 
 Verification performed: 42 pages built twice, byte-identical; `check.py` 0 errors
 0 warnings; `validate.py` 2,609 checks 0 warnings; `check_local_links.py` 76 pages
