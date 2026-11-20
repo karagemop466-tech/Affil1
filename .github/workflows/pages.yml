@@ -39,7 +39,7 @@ jobs:
         run: python3 _decision-support/validate.py
 
       - name: Validate the Countertop Almanac edition and platform
-        run: python3 platform/verify_edition.py
+        run: python3 _platform/verify_edition.py
 
       - name: Confirm the build is reproducible, not hand-edited
         run: |
