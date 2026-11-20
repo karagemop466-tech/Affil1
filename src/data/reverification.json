@@ -12,7 +12,9 @@
       "program_policies": "https://affiliate-program.amazon.com/help/operating/policies",
       "operating_agreement": "https://affiliate-program.amazon.com/help/operating/agreement",
       "ftc_endorsement_guides": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
-    }
+    },
+    "third_pass": "A third pass at 05:52 UTC re-resolved P-04 and re-confirmed P-05; the register now has a destination for all five links.",
+    "cross_pass_agreement": "2026-11-20T06:15Z \u2014 verified against origin/main src/data/products.json (identical ASIN set)"
   },
   "rows": [
     {
@@ -57,13 +59,13 @@
       "submitted_link": "https://link.amazon/B0c8moW59",
       "path_code": "B0c8moW59",
       "path_code_length": 9,
-      "observed_listing_url": null,
-      "observed_asin": null,
-      "destination_title": "Amazon.com \u2014 checkpoint / continue-shopping interstitial (https://www.amazon.com/checkpoint/continue)",
+      "observed_listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed_asin": "B0DHZTCNR5",
+      "destination_title": "Amazon.com: ThermoMaven 1 Sec Professional Digital Meat Thermometer, \u00b10.5\u2109 Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black : Home & Kitchen",
       "agrees_with_current_register": true,
       "contradicts_archived_register": false,
-      "discrepancy": "No product destination has been reached by any session on any attempt. The row stays unresolved; it is not declared invalid, and no buy button is published for it.",
-      "status": "unresolved \u2014 bot interstitial on every attempt recorded so far",
+      "discrepancy": "Two sessions, three passes: 05:12 and 05:17 UTC returned only Amazon's continue-shopping interstitial; 05:52 UTC reached a live listing. A parallel session recorded the same product on its own later attempt. The row is no longer 'unresolved' \u2014 but the arrival URL carried plpRedirect=mhFallback, so the destination is recorded as observed, not as the confirmed intended product.",
+      "status": "resolved on a third attempt (05:52 UTC) after two interstitial responses",
       "concurrent_observation": "A parallel integration pass (session arena/c9fc4295-affil1, merged into main as PR #27) recorded differing destinations for P-04 and P-05 on its own attempts and flagged the disagreement rather than resolving it. Preserved here verbatim: this row stays unresolved, and the site publishes no buy button for it."
     },
     {
@@ -77,15 +79,20 @@
       "agrees_with_current_register": true,
       "contradicts_archived_register": true,
       "discrepancy": "An archived register recorded this link as reaching only the Amazon homepage. This fetch and the current register both reach a product page \u2014 and that product is a wireless meat thermometer, not an air fryer, which is why the publication has a thermometer guide rather than pretending the row is a fifth fryer.",
-      "status": "resolved to a product page on a second independent fetch"
+      "status": "resolved to a product page on a second independent fetch",
+      "reconfirmed": "2026-11-20T05:52Z \u2014 same destination, CHEF iQ Sense 3-probe thermometer",
+      "redirect_evidence": "arrival query carried plpRedirect=mhFallback; no tag parameter"
     }
   ],
   "summary": {
-    "links_resolved": 4,
-    "links_unresolved": 1,
+    "links_resolved": 5,
+    "links_unresolved": 0,
     "path_codes_that_are_10_characters": 0,
     "conclusion": "Every submitted path code is 9 characters long. Amazon's own Catalog Items reference treats an ASIN as the item identifier, and every destination ASIN observed on these pages is 10 characters; none of the five supplied codes can be matched to a catalog ASIN as written. The slug is therefore recorded as a short-link path code, never as an intended ASIN.",
     "attribution_conclusion": "None of the five submitted URLs carries a tag parameter, and each works by redirect through an intermediate host. Under the Associates Commission Income Statement, purchases arriving through a Redirecting Link, or through a link that is not properly formatted, are disqualified \u2014 so as submitted these links cannot be attributed to the tracking ID. Replacing them with Special Links generated in Associates Central is the single highest-value change available to this project.",
-    "cross_session_agreement": "Two independent passes on 2026-11-20 reached the same four product destinations and the same unresolved fifth row. A third session's log disagrees about P-04 on some attempts. The register therefore publishes each destination as a dated observation with its source, and the weekly audit exists to notice when one changes."
+    "cross_session_agreement": "Two independent passes on 2026-11-20 reached the same four product destinations and the same unresolved fifth row. A third session's log disagrees about P-04 on some attempts. The register therefore publishes each destination as a dated observation with its source, and the weekly audit exists to notice when one changes.",
+    "attempts_recorded": "P-01: 2 (1 interstitial) \u00b7 P-02: 2 (1 interstitial) \u00b7 P-03: 2 (both product) \u00b7 P-04: 3 (2 interstitial, then product) \u00b7 P-05: 3 (all product)",
+    "fallback_marker_finding": "Three of the five arrival URLs carry plpRedirect=mhFallback and a merchandising placement id, which is Amazon's own signal that a request was answered with a fallback rather than the object the short code was minted for. Destination identity is therefore recorded as an observation with a timestamp and a source, and the intended ASIN field stays null on every row.",
+    "independent_confirmation": "A separate integration pass (merged to main as PR #56/#64 by sessions arena/487a66ea and arena/3cad5d4e) re-resolved the same five submitted links with its own fetches and recorded the same five destinations: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z. Four sessions, three passes, one agreement \u2014 so the destinations are as settled as observation can make them, and the unresolved question stays the one observation cannot answer: which product each 9-character code was minted for."
   }
 }

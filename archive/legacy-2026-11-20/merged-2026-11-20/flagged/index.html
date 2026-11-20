@@ -40,7 +40,7 @@
 <div class="disclosure" role="region" aria-label="Affiliate disclosure">
   <div class="wrap">
     <span class="tag">Disclosure</span>
-    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: links from this site to Amazon are affiliate links, and if you buy through one we may earn a commission at no cost to you. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
+    <span><strong>As an Amazon Associate I earn from qualifying purchases.</strong> In plain words: no button on this site is an affiliate link yet — the links we publish to Amazon are labelled as reference links and earn us nothing. If you buy through one, the price is the same and we get no commission; that changes only once the account owner confirms enrolment and links, which is recorded publicly at /flagged/#FLG-003. <a href="../about/#disclosure">Full disclosure and method</a>.</span>
   </div>
 </div>
 <div class="wrap"><div class="crumbs"><a href="../">Home</a><span class="sep">/</span><span>Flagged for review</span></div></div>
@@ -49,7 +49,7 @@
 <div class="wrap">
   <div class="page-head">
     <h1>Flagged for review</h1>
-    <p>Everything this project could not confirm, and every irregularity found while checking. 17 items: 3 high severity, 10 medium. None of them blocks publication, and none of them is hidden — each states what was observed, what was checked, what it means, and what would resolve it.</p>
+    <p>Everything this project could not confirm, and every irregularity found while checking. 18 items: 5 high severity, 9 medium. None of them blocks publication, and none of them is hidden — each states what was observed, what was checked, what it means, and what would resolve it.</p>
   </div>
 
   <div class="note-box">
@@ -93,41 +93,54 @@
 </article><article class="flag sev-high" id="FLG-003">
   <div class="flag-head">
     <span class="flag-id">FLG-003</span>
-    <h3>Compliance status of the link.amazon short-link host is unresolved</h3>
+    <h3>Submitted links cannot be attributed; the site publishes no affiliate link until enrolment is confirmed</h3>
     <span class="badge bad">high</span>
   </div>
   <dl>
-    <dt>What we observed</dt><dd>The links redirect through a shortener. The program prohibits using a link shortening service in a manner that makes it unclear that the reader is linking to an Amazon site. A redirector that surfaces the Amazon destination is a different case from one that conceals it.</dd>
-    <dt>Why it matters</dt><dd>This determines whether the links can be used at all. It is deliberately left open rather than decided.</dd>
-    <dt>What we could not determine</dt><dd>The exact behaviour is only observable on click, and no official page addresses this host by name in a way that could be cited here. We are explicitly not claiming the links are invalid.</dd>
+    <dt>What we observed</dt><dd>Every submitted URL is link.amazon/&lt;9 chars&gt;, resolves through an Amazon-hosted intermediate, carries share/placement parameters (lv=shuf, btn_type=ss, btn_ref=srctok-*, channelId=500, in two cases plpRedirect=mhFallback) and no tag parameter on any observed arrival.</dd>
+    <dt>Why it matters</dt><dd>Commission Income Statement §2 disqualifies purchases reached through a &quot;Redirecting Link&quot; and any purchase untracked because links are &quot;not properly formatted&quot;; Operating Agreement §2 lets Amazon withhold commission for a violation. So the supplied form cannot earn, and inventing a tagged link without a confirmed enrolled account would assert a relationship this project cannot verify.</dd>
+    <dt>What we could not determine</dt><dd>Whether shopnow047c-20 is enrolled, whether this site is listed in the account, and whether an Associates-generated Special Link for these ASINs resolves to the listings published here.</dd>
     <dt>Source</dt><dd><a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="nofollow noopener" target="_blank">https://affiliate-program.amazon.com/help/operating/agreement</a></dd>
-    <dt>What you can do</dt><dd>Run the one-link test. If the destination is visibly Amazon and the click registers, record that as the measured result and date it.</dd>
+    <dt>What you can do</dt><dd>For each ASIN: generate the Special Link in Associates Central, paste it into approved_special_link in src/data/product-intent.json, publish, click once, and confirm the click in the account&#x27;s report. Do that for one product before all five. Never declare the supplied short links invalid — their owner may have a reason for using them on another surface.</dd>
   </dl>
-</article><article class="flag sev-medium" id="FLG-004">
+</article><article class="flag sev-high" id="FLG-004">
   <div class="flag-head">
     <span class="flag-id">FLG-004</span>
-    <h3>Commission rates are not published, because they sit behind a sign-in</h3>
-    <span class="badge warn">medium</span>
+    <h3>P-04 stayed unresolved for two passes, then resolved to a fallback-flagged listing</h3>
+    <span class="badge bad">high</span>
   </div>
   <dl>
-    <dt>What we observed</dt><dd>The commission schedule URL resolves to an Associates sign-in page rather than a readable rate card.</dd>
+    <dt>What we observed</dt><dd>Attempts at 05:12 and 05:17 UTC returned Amazon&#x27;s /checkpoint/continue interstitial with no product reached. The third attempt, 05:52 UTC, reached amazon.com/dp/B0DHZTCNR5 (ThermoMaven instant-read thermometer) carrying plpRedirect=mhFallback.</dd>
     <dt>Why it matters</dt><dd>Any revenue estimate would need a rate. Guessing one would put a fabricated number into a table that is supposed to be verified.</dd>
     <dt>What we could not determine</dt><dd>The current rates for the relevant categories.</dd>
     <dt>Source</dt><dd><a href="https://affiliate-program.amazon.com/help/operating/policies" rel="nofollow noopener" target="_blank">https://affiliate-program.amazon.com/help/operating/policies</a></dd>
-    <dt>What you can do</dt><dd>Read the rate card while signed in. Until then the rate field stays blank on the site.</dd>
+    <dt>What you can do</dt><dd>Confirm inside Associates Central what B0c8moW59 was minted for. If it is not the ThermoMaven listing, change this row&#x27;s destination and rebuild — the publication is generated from this data, so the register, the product card, the compare table and the thermometer guide all move together.</dd>
+  </dl>
+</article><article class="flag sev-high" id="FLG-018">
+  <div class="flag-head">
+    <span class="flag-id">FLG-018</span>
+    <h3>Three arrival URLs carry plpRedirect=mhFallback: the listing reached may be a fallback, not the intended product</h3>
+    <span class="badge bad">high</span>
+  </div>
+  <dl>
+    <dt>What we observed</dt><dd>On the 05:52 UTC pass, P-04 and P-05 arrived at amazon.com/dp/&lt;ASIN&gt; with query parameters including plpRedirect=mhFallback, sp_phone_homepage_blended, lv=shuf, btn_type=ss, channelId=500 and a btn_ref=srctok-* token. None carried a tag parameter.</dd>
+    <dt>Why it matters</dt><dd>A &#x27;mhFallback&#x27; marker indicates Amazon answered with a merchandised fallback rather than the object the short code resolves to for a signed-in customer. If the destination is a fallback, the product page published here is not the product the owner meant to enrol, commissions land on a different item, and the editorial copy describes the wrong machine. The absence of a tag parameter independently means the click cannot be attributed as submitted.</dd>
+    <dt>What we could not determine</dt><dd>Whether the fallback is per-request, per-session or per-region; whether a signed-in Associates account would land on a different ASIN; and what product each 9-character code was minted for.</dd>
+    <dt>Source</dt><dd><a href="https://link.amazon/B0c8moW59 and https://link.amazon/B0f3GKalj — observed arrival URLs, read 2026-11-20T05:52Z" rel="nofollow noopener" target="_blank">https://link.amazon/B0c8moW59 and https://link.amazon/B0f3GKalj — observed arrival URLs, read 2026-11-20T05:52Z</a></dd>
+    <dt>What you can do</dt><dd>Open each link while signed in to the Associates account, compare the ASIN each one shows against the intended product, and regenerate every buy destination as a Special Link inside Associates Central. Until that is done the register publishes destinations as dated observations and keeps intended_asin null.</dd>
   </dl>
 </article><article class="flag sev-medium" id="FLG-005">
   <div class="flag-head">
     <span class="flag-id">FLG-005</span>
-    <h3>One supplied link never resolved to a product</h3>
+    <h3>A link can be answered with a bot interstitial, so &#x27;unresolved&#x27; is a statement about the attempt</h3>
     <span class="badge warn">medium</span>
   </div>
   <dl>
-    <dt>What we observed</dt><dd>link.amazon/B0c8moW59 returned Amazon&#x27;s /checkpoint/continue continue-shopping interstitial on every attempt, repeated across several minutes. The page is an official Amazon page, but it carries no product identity.</dd>
-    <dt>Why it matters</dt><dd>We cannot name the product, so we cannot describe it, and the site publishes no card and no outbound button for it. Publishing a button for an unidentified product would be the exact hallucination risk this project is guarding against.</dd>
-    <dt>What we could not determine</dt><dd>The product, its ASIN, and its category.</dd>
+    <dt>What we observed</dt><dd>link.amazon/B0c8moW59 returned Amazon&#x27;s /checkpoint/continue interstitial at 05:12 and 05:17 UTC and a live product page at 05:20-ish for a parallel session and at 05:52 UTC for this one. Two passes of the same link produced two different outcomes, hours apart, from the same network.</dd>
+    <dt>Why it matters</dt><dd>An automated check can report a link as dead when it is only being rate-limited. Every register row therefore records the attempt time and the outcome, and &#x27;unresolved&#x27; never becomes &#x27;invalid&#x27;.</dd>
+    <dt>What we could not determine</dt><dd>Whether a signed-in Associates session, a different region, or a later hour changes the result for the links that resolved only intermittently.</dd>
     <dt>Source</dt><dd><a href="https://link.amazon/B0c8moW59" rel="nofollow noopener" target="_blank">https://link.amazon/B0c8moW59</a></dd>
-    <dt>What you can do</dt><dd>Open the link in a normal browser, let the interstitial pass, and read the product name and ASIN from the page. Send both back and the row can be completed.</dd>
+    <dt>What you can do</dt><dd>Re-check from a normal browser before acting on any &#x27;unresolved&#x27; row; treat this flag as a caution about the method as much as about the link.</dd>
   </dl>
 </article><article class="flag sev-medium" id="FLG-006">
   <div class="flag-head">
@@ -184,15 +197,15 @@
 </article><article class="flag sev-medium" id="FLG-014">
   <div class="flag-head">
     <span class="flag-id">FLG-014</span>
-    <h3>Five supplied links, four identified products</h3>
+    <h3>Five supplied links, five destinations observed — with two caveats</h3>
     <span class="badge warn">medium</span>
   </div>
   <dl>
-    <dt>What we observed</dt><dd>Four of the five resolved to identifiable Amazon listings. The fifth returned only a bot check. The site therefore presents four products and states plainly that a fifth was supplied and could not be identified.</dd>
-    <dt>Why it matters</dt><dd>Silently dropping it would misrepresent the brief; inventing it would be worse. Publishing the gap is the only honest option.</dd>
-    <dt>What we could not determine</dt><dd>The fifth product.</dd>
+    <dt>What we observed</dt><dd>All five submitted links now have an observed destination: four were reached on the first or second attempt, one (P-04) only on the third. Three arrivals carried plpRedirect=mhFallback, and none carried a tag parameter. So the count is 5 of 5 for &#x27;a product page was reached&#x27; and 0 of 5 for &#x27;the intended product was confirmed from an official source&#x27;.</dd>
+    <dt>Why it matters</dt><dd>Publishing &#x27;four of five identified, one dead&#x27; would have been as misleading as publishing five confident product cards. Both numbers are true only about the attempts, not about the owner&#x27;s intent.</dd>
+    <dt>What we could not determine</dt><dd>What product each 9-character code was minted for, and whether a tagged Special Link for the intended ASIN resolves to the same page published here.</dd>
     <dt>Source</dt><dd><a href="https://link.amazon/B0c8moW59" rel="nofollow noopener" target="_blank">https://link.amazon/B0c8moW59</a></dd>
-    <dt>What you can do</dt><dd>Open it in a browser and report the product name and ASIN. The site is built so that adding the row is a data edit, not a rebuild.</dd>
+    <dt>What you can do</dt><dd>Read each destination in a signed-in browser against the intended product, then regenerate the five buy links in Associates Central and confirm one click in the report.</dd>
   </dl>
 </article><article class="flag sev-medium" id="FLG-015">
   <div class="flag-head">
@@ -210,11 +223,11 @@
 </article><article class="flag sev-medium" id="FLG-016">
   <div class="flag-head">
     <span class="flag-id">FLG-016</span>
-    <h3>The same short link returns different destinations on different attempts</h3>
+    <h3>The same short link returns different results across attempts (5 of 5 now resolve)</h3>
     <span class="badge warn">medium</span>
   </div>
   <dl>
-    <dt>What we observed</dt><dd>Across three sessions on 2026-11-20: P-01 and P-02 returned Amazon&#x27;s continue-shopping interstitial on one attempt and a product page on another; P-04 has never returned anything but the interstitial; a parallel pass recorded a differing destination for P-04 on its own attempts.</dd>
+    <dt>What we observed</dt><dd>Across three passes on 2026-11-20: P-01 and P-02 returned the interstitial once and a product page once; P-04 returned the interstitial twice and a product page on the third attempt; P-03 and P-05 were stable. Every destination is therefore stored with a retrieval timestamp.</dd>
     <dt>Why it matters</dt><dd>A published link is a promise about where a reader lands. If the destination is unstable, the register must be dated and re-checked, and no page may describe a product as if the mapping were permanent.</dd>
     <dt>What we could not determine</dt><dd>Whether link.amazon applies a fallback (homepage, interstitial, or a merchandising redirect) per request, per session or per region. No official document in this repository states the rule.</dd>
     <dt>Source</dt><dd><a href="https://link.amazon/B0c8moW59 — observed behaviour only; the interstitial page is served by amazon.com" rel="nofollow noopener" target="_blank">https://link.amazon/B0c8moW59 — observed behaviour only; the interstitial page is served by amazon.com</a></dd>
@@ -292,7 +305,7 @@
     <p>In the order that unblocks the most.</p>
   </div>
   <ol class="steps" style="max-width:68ch">
-    <li><strong>Read one product off a browser session.</strong> That clears FLG-005 and FLG-014 and turns four products into five.</li>
+    <li><strong>Read the five destinations off a signed-in browser session.</strong> That settles FLG-004 and FLG-018 — whether each short code means the product this site now publishes, or a fallback Amazon served instead.</li>
     <li><strong>Click one link while signed in.</strong> That answers FLG-002 and FLG-003 with a measurement instead of an inference, and tells you whether any of this can earn.</li>
     <li><strong>Read the rate card.</strong> Clears FLG-004 and makes any future revenue statement possible.</li>
     <li><strong>Decide on the API.</strong> Clears FLG-006, FLG-007 and FLG-015 at once, and is the only route to a page with prices and photographs.</li>
@@ -341,7 +354,7 @@
       </div>
     </div>
     <div class="foot-legal">
-      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by or affiliated with Amazon beyond participation in the Associates Program. Information is provided for general guidance and is not professional advice.</p>
+      <p>&copy; 2026 Crisp &amp; Counter. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is built for participation in the Associates Program; enrolment of this site and its tracking ID is recorded as unconfirmed at /flagged/#FLG-003. This site is not endorsed by or sponsored by Amazon. Information is provided for general guidance and is not professional advice.</p>
       <p style="white-space:nowrap;color:var(--ink-3)">Built 2026-11-20</p>
     </div>
   </div>
