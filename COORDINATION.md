@@ -121,3 +121,32 @@ Duplicate root pages remain: this build serves `products/`, `questions/` and
 and siblings. The front page and footer link only to this build's set.
 Consolidating the two editions is a design decision and is logged as the next
 integration task rather than done here by deletion.
+
+## Session S-8206a8d0 — polished shop front page + verification pass (2026-11-20)
+
+Owner: S-8206a8d0 on branch `arena/8206a8d0-affil1`. Scope (non-overlapping with prior sessions' done work):
+- `src/data/products.json` (P-04 re-verification), `data/confirmations.json`, `data/verification-audit.json` (append OBS-6..OBS-10)
+- Root storefront polish: `index.html`, `assets/css/main.css`, `assets/js/analytics.js`, `assets/js/common.js`
+- Broken-link + disclosure fixes: `guides.html`, `dashboard.html`, `categories/air-fryers.html`, `products.html`, `questions.html`, `suggestions.html`, `guides/*.html` (static disclosure + sponsored source links)
+- New guides: `guides/meal-prep-sunday.html`, `guides/small-kitchen-counter.html`, `guides/thermometer-pairing.html`
+- Findability: `sitemap.xml`, `rss.xml`, `feed.xml`, `robots.txt`, `EXECUTIVE_SUMMARY.md`, `executive-summary.html`
+- Integration: rebuild `crisp/` via `tools/build.py`, run `tools/validate.py`, PR + merge + Pages verify
+
+| Task | Status | Notes |
+| --- | --- | --- |
+| SG-31 Re-verify 5 links via official Amazon pages (fetch_page, 2026-11-20) | in progress | P-01..P-03,P-05 confirmed; P-04 now resolves to B0DHZTCNR5 (was checkpoint). Root dashboard (2 verified) is stale — canonical is src/data/products.json. |
+| SG-32 Rebuild root landing as publication front page leading with products | in progress | Current index.html has duplicated/malformed sections (stray </div>, two product grids, two guide grids). |
+| SG-33 Fix guides.html ../ paths (22 broken refs) + static disclosure everywhere | in progress | guides.html sits at root but uses ../ paths. |
+| SG-34 Unify root tables to canonical 5-product register; outbound = dp+tag Special Links | in progress | No prices/ratings published (Program Policies 2(b)). |
+| SG-35 Add 3 trendy seasonal guides + wire sitemap/feed/nav | in progress | Question-shaped, no popularity claims. |
+| SG-36 Analytics: remove localStorage, align 5 events, SEO/canonical/OG/JSON-LD | in progress | Endpoint stays self-hosted, inert until deployed (FLG-009). |
+| SG-37 Validate, build crisp, PR, merge, Pages deploy | pending | Do not merge broken site. |
+
+Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official pages):
+- https://link.amazon/B04G1MEwY -> https://www.amazon.com/dp/B0CDY277D3 CHEFMAN 6 Quart Dual Basket (title matches src/data P-01)
+- https://link.amazon/B02NbDxp3 -> https://www.amazon.com/dp/B09B7SB46R Emeril Lagasse 26QT French Door (matches P-02)
+- https://link.amazon/B00hJ57DV -> https://www.amazon.com/dp/B08DKYBTPH Chefman Air Fryer 8 Qt TurboFry (matches P-03; contradicts root dashboard homepage claim)
+- https://link.amazon/B0f3GKalj -> https://www.amazon.com/dp/B0DZFD6R9Z CHEF iQ Sense thermometer (matches P-05; contradicts root dashboard homepage claim)
+- https://link.amazon/B0c8moW59 -> https://www.amazon.com/dp/B0DHZTCNR5 ThermoMaven 1 Sec Professional Digital Meat Thermometer (NEW: previously checkpoint-only; now product page. Updates FLG-005/FLG-014 from unresolved to observed.)
+- Policies re-checked: https://affiliate-program.amazon.com/help/operating/policies (Updated April 14, 2026) and FTC Endorsement Guides FAQ — both reachable, consistent with src/data/compliance.json S01-S13.
+- Tracking tag shopnow047c-20 was NOT observed in any resolved URL; attribution remains unconfirmed (FLG-002 stands). Short-link compliance remains unresolved (FLG-003 stands); no link declared invalid.
