@@ -14,7 +14,12 @@
     open.hidden = false;
     open.addEventListener('click', () => {input.value = ''; filter(); desk.showModal(); input.focus();});
     input.addEventListener('input', filter);
-    desk.addEventListener('click', event => {if (event.target === desk && !desk.contains(document.elementFromPoint(event.clientX,event.clientY))) desk.close();});
+    desk.addEventListener('keydown', e => {if (e.key === 'Escape') {e.preventDefault(); desk.close();}});
+    desk.addEventListener('click', e => {
+      if (e.target !== desk) return;
+      const r = desk.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) desk.close();
+    });
   }
   const tabs = document.querySelector('.shelftabs');
   if (!tabs) return;
