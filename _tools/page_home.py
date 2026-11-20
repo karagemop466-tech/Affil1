@@ -167,19 +167,34 @@ def build(page_dir, products, meta):
   </a>
 </div>""", cls="paths")
 
-    feature = GUIDES[7]
+    # The band used to be GUIDES[7] plus a paragraph of hand-written hosting copy.
+    # Any change to the order in content.py silently decoupled the two: the front page
+    # was labelled "Seasonal · hosting" and invited the reader to "Read the hosting
+    # guide" underneath the thermometer article. Now the feature is chosen by cluster
+    # and every word in the band comes from the chosen guide's own record, so a
+    # mismatch is not representable.
+    feature = next((g for g in reversed(GUIDES) if g["cluster"] in ("Seasonal", "Cooking")),
+                   GUIDES[-1])
     feat_href = rel(d, f"guides/{feature['slug']}.html")
+    # The band's supporting line is the guide's own opening paragraph, not a
+    # separate caption someone might have to remember to update.
+    feature_lede = next((para for s in feature["sections"] for para in s.get("p", [])),
+                        feature["dek"])
     seasonal = section(f"""
 <div class="seasonal">
   <div class="seasonal-media">{img(d, feature['photo'], feature['photo_alt'], sizes='(max-width:820px) 100vw, 520px')}</div>
   <div class="seasonal-copy">
-    {eyebrow('Seasonal · hosting')}
+    {eyebrow(f"{feature['cluster']} · {feature['kicker']}")}
     <h2>{esc(feature['title'])}</h2>
     <p class="dek">{esc(feature['dek'])}</p>
-    <p>Work backwards from the moment you sit down and give the air fryer the last twenty minutes, not the first two hours.</p>
-    <a class="btn btn-small" href="{esc(feat_href)}">Read the hosting guide</a>
+    <p>{esc(feature_lede)}</p>
+    <a class="btn btn-small" href="{esc(feat_href)}">Read the guide</a>
   </div>
 </div>""", cls="seasonal-band")
+
+    # Most recently updated first, ties broken by the order the guides were added.
+    picks = sorted(range(len(GUIDES)),
+                   key=lambda i: (GUIDES[i]["updated"], i), reverse=True)[:4]
 
     latest = section(f"""
 <div class="sec-head">
@@ -187,7 +202,7 @@ def build(page_dir, products, meta):
   <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you.</p>
 </div>
 <div class="gcard-grid">
-{''.join(guide_card(d, g) for g in GUIDES[:4])}
+{''.join(guide_card(d, GUIDES[i]) for i in picks)}
 </div>
 <p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'guides/index.html'))}">All {len(GUIDES)} guides <span aria-hidden="true">&rarr;</span></a></p>""",
                     cls="")

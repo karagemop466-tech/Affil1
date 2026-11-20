@@ -67,6 +67,7 @@ def _cluster_blurb(c):
         "Before you buy": "The questions a listing will never volunteer an answer to.",
         "Tools": "Probes, leave-in thermometers, and what they change about cooking with an air fryer.",
         "Seasonal": "Cooking for a crowd, and where a countertop machine genuinely helps.",
+        "Cooking": "Getting food to a safe temperature in a small cavity, and knowing - not guessing - that you did.",
     }.get(c, "")
 
 
@@ -98,6 +99,19 @@ def build_guide(page_dir, g, meta):
                 block.append(f"<div><dt>{esc(term)}</dt><dd>{esc(text)}</dd></div>")
             block.append("</dl>")
         article.append("".join(block))
+
+    # A guide that names a source has to show it. This field existed in the data
+    # for one guide and was never rendered anywhere - evidence in a register the
+    # reader never reaches is not evidence.
+    if g.get("sources"):
+        links = "".join(
+            f'<li>{outbound(d, url, esc(label))}</li>' for label, url in g["sources"]
+        )
+        article.append(
+            '<aside class="note"><p class="note-label">Where this comes from</p>'
+            f'<ul class="side-links">{links}</ul>'
+            "<p>Quoted rather than paraphrased, from the page named above.</p></aside>"
+        )
 
     related = "".join(
         f"""<article class="mini-product">

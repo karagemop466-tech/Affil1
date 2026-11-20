@@ -540,3 +540,232 @@ COMPARE_COLUMNS = [
 
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from
 # _src/data/products.json so that a fact can never exist in two places and drift.
+
+
+# ---------------------------------------------------------------------------
+# Added 2026-11-20 (session arena/3e17592d-affil1): three guides written to the
+# same editorial rule as the set above - a factual sentence ships only with an
+# official source behind it, and the only product facts used are the listing
+# titles transcribed in _src/data/products.json. Each of these answers a question
+# people actually arrive asking, in the words they use, and each one ends at a
+# thermometer or a basket rather than at a verdict.
+# Sources quoted, retrieved and read on 2026-11-20:
+#   https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers
+#   https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety
+# ---------------------------------------------------------------------------
+
+FSIS_THERMOMETERS = ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/"
+                     "food-safety-basics/food-thermometers")
+FSIS_LEFTOVERS = ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/"
+                  "food-safety-basics/leftovers-and-food-safety")
+
+GUIDES.append({
+    "slug": "air-fryer-chicken-done",
+    "cluster": "Cooking",
+    "kicker": "Doneness",
+    "title": "Chicken in an air fryer: how do you know it is actually done?",
+    "dek": "Browning arrives early in a small, fast, windy oven. The advice that has stood for decades is a number, a placement and a warning about trusting colour.",
+    "read_minutes": 5,
+    "photo": "assets/img/guide-chicken-done",
+    "photo_alt": "Roast chicken thighs on a pale board with a digital thermometer probe inserted sideways into the thickest piece",
+    "photo_caption": "Illustration commissioned for this guide. Not a photograph of a product sold here, and not a record of a test.",
+    "updated": "2026-11-20",
+    "related": ["P-04", "P-05", "P-01", "P-03"],
+    "sources": [
+        ["USDA FSIS: Food Thermometers (fact sheet)", FSIS_THERMOMETERS],
+    ],
+    "sections": [
+        {
+            "h": "Why the small machine makes this harder",
+            "p": [
+                "A basket fryer puts a heating element and a fan close to a small amount of food. Skin colours, edges crisp and the room starts to smell finished. What the surface is doing is not a reliable report about the middle.",
+                "This is not an air-fryer problem, it is a chicken problem that an air fryer makes more tempting. The USDA's food-safety service puts it directly: colour and grill marks are not indicators that food is safe to eat, and the only way to know food has been cooked to a safe internal temperature is to use a food thermometer.",
+            ],
+        },
+        {
+            "h": "The number, in the USDA's own words",
+            "p": [
+                "These are the safe minimum internal temperatures from the FSIS fact sheet, transcribed rather than paraphrased. There is nothing air-fryer-specific about them, which is the point: the appliance changes how fast you get there, not where there is.",
+            ],
+            "table": {
+                "headers": ["Food", "Minimum internal temperature (USDA FSIS)"],
+                "rows": [
+                    ["All poultry (breasts, whole bird, legs, thighs, wings, ground poultry, giblets and stuffing)", "165 degrees F"],
+                    ["Ground meats", "160 degrees F"],
+                    ["Beef, pork, veal and lamb (steaks, chops, roasts)", "145 degrees F, then rest at least 3 minutes"],
+                    ["Fish and shellfish", "145 degrees F"],
+                    ["Casseroles", "165 degrees F"],
+                ],
+                "caption": "Read from the FSIS 'Food Thermometers' fact sheet on 2026-11-20. The same page notes that most pathogens are destroyed between 140 and 165 degrees F, and that people may cook to higher temperatures for preference.",
+            },
+        },
+        {
+            "h": "Where the probe goes, and why a drumstick is fussier than a breast",
+            "items": [
+                ("A thick piece", "In the thickest part, avoiding bone, fat and gristle. For poultry parts specifically, FSIS says to insert the thermometer into the thickest area, avoiding the bone."),
+                ("A thin piece", "Through the side, not from the top. The whole sensing area has to reach the centre, which for an instant-read thermometer is usually 2 to 3 inches - a thin chicken breast is shallower than that, which is exactly why people get wrong answers."),
+                ("A hot piece", "Take it off the heat. FSIS suggests removing the food from the pan or basket, laying it on a clean spatula or plate and inserting the probe sideways, rather than burning your fingers over a basket."),
+                ("More than one piece", "Check each one. Size and how the pieces were arranged in the basket means they reach temperature at different times."),
+            ],
+        },
+        {
+            "h": "What the basket has to do with it",
+            "p": [
+                "A basket is a small cavity with one airflow path. How your machine behaves when it is half full rather than shallow, and whether a rack may be used in a given mode, are questions the manual answers and a review section does not, reliably.",
+                "Two things in this edit are worth reading for that reason alone. P-01's listing title leads with 'Easy View Windows' on two 3-quart baskets, which is a design aimed squarely at the moment you would otherwise pull the drawer and lose your heat. P-03's listing title quotes an 8-quart single basket with a '450F Hi-Fry Option'. Both are the seller's wording about their own machine; none of it was tested here, and none of it changes the 165-degree target.",
+            ],
+        },
+        {
+            "h": "The one purchase that settles the question",
+            "p": [
+                "There are two shapes of answer. An instant-read thermometer goes in at the end and tells you once: it is cheap, it is fast, and it forces you to open the basket. A leave-in probe sits in the food while it cooks and tells you continuously, which is the difference between guessing when to look and being told.",
+                "One caution the USDA attaches to leave-in probes applies to any of them: do not leave a food thermometer in the food while it cooks unless the manufacturer's instructions specifically say it can withstand heat and it was designed for that purpose. A probe sold as a leave-in probe is a different object from a fold-out instant-read, whatever it looks like.",
+            ],
+        },
+        {
+            "h": "Three questions, on the plate",
+            "items": [
+                ("What is the piece?", "Thigh, breast, wing and ground poultry are all poultry, and all 165 degrees F. A whole bird is checked in three places."),
+                ("Where did the probe go?", "Thickest part, off the bone, sensing area fully in the food. Through the side if the piece is thin."),
+                ("What did it read?", "165 degrees F. Not a feel, not a colour, not a timer on an app. A number, from the middle."),
+            ],
+        },
+    ],
+    "closing": "Temperatures, placements and the quoted cautions on this page are from the USDA Food Safety and Inspection Service fact sheet 'Food Thermometers', read on 2026-11-20. Descriptions of P-01, P-03, P-04 and P-05 are the sellers' own listing wording, transcribed from the listings reached on 2026-11-20. Nothing on this site was cooked, tested or tasted.",
+})
+
+GUIDES.append({
+    "slug": "thermometer-ice-water-check",
+    "cluster": "Tools",
+    "kicker": "Checking the instrument",
+    "title": "Is your thermometer telling the truth? Two minutes and a glass of ice",
+    "dek": "An instrument that is four degrees out does not look broken. Two tests - one freezing, one boiling - tell you whether to adjust it, forgive it or replace it.",
+    "read_minutes": 6,
+    "photo": "assets/img/guide-ice-water-check",
+    "photo_alt": "A digital instant-read thermometer standing in a tall glass of ice water on a wooden counter",
+    "photo_caption": "Illustration commissioned for this guide. The display is deliberately blank; no reading shown here is a measurement of anything.",
+    "updated": "2026-11-20",
+    "related": ["P-04", "P-05"],
+    "sources": [
+        ["USDA FSIS: Food Thermometers (fact sheet)", FSIS_THERMOMETERS],
+    ],
+    "sections": [
+        {
+            "h": "Why the check exists at all",
+            "p": [
+                "FSIS states that most food thermometers will give an accurate reading within 2 to 4 degrees F. Against a target of 165 degrees F, four degrees is not the difference between safe and unsafe - but it is the difference between a measurement and an opinion, and it is enough to make you distrust the instrument at the moment it matters.",
+                "The reading is also only correct if the thermometer is in the right place. The same page is blunt that an incorrectly inserted thermometer will not reflect the internal temperature of the food. So there are two errors to rule out, and the glass of ice water takes one of them off the table.",
+            ],
+        },
+        {
+            "h": "The ice-water method, step by step",
+            "p": [
+                "This is the FSIS procedure, in their order, with the numbers they give. It is described as best for most thermometers.",
+            ],
+            "items": [
+                ("1. Fill", "Fill a large glass with ice cubes, then add drinking water and stir well."),
+                ("2. Immerse", "Put the stem a minimum of 2 inches into the mixture, touching neither the sides nor the bottom of the glass."),
+                ("3. Wait", "Wait a minimum of 30 seconds, and read it without removing the stem from the water."),
+                ("4. Judge", "It should read 32 degrees F. If it does, the thermometer is calibrated."),
+            ],
+        },
+        {
+            "h": "The boiling-water test, and where it stops being a good idea",
+            "p": [
+                "The second method checks the other end of the range: a stem at least 2 inches deep in a rolling boil, not touching the pot, read after at least 30 seconds. At sea level the thermometer should read 212 degrees F.",
+                "Three caveats come with it, all of them from the same fact sheet. For true accuracy, distilled water must be used. Boiling water's temperature varies with altitude - FSIS says it will most likely boil lower by at least 2 degrees F and perhaps by as much as 5 - and the correct local boiling temperature comes from a Cooperative Extension office or health department, not from a search box. Finally, if the thermometer does not allow manual calibration, FSIS's advice is to replace it rather than correct for it in your head.",
+            ],
+        },
+        {
+            "h": "If the reading is off",
+            "items": [
+                ("Dial thermometers", "Many have a calibration nut under the dial that can be adjusted. Check the manufacturer's instructions before forcing anything."),
+                ("Digital thermometers", "Most have nothing to turn. If it will not calibrate and the ice-water reading is wrong, you are choosing between living with a known offset and buying a new instrument. Digital probes are cheap relative to a bird."),
+                ("Thermometers sold as waterproof", "A housing rating and a sink full of water are different claims. FSIS's general care note is that most thermometers should not be immersed in water and should be washed carefully by hand. Read your own manual before dunking anything."),
+            ],
+        },
+        {
+            "h": "What this means for the two thermometers linked here",
+            "p": [
+                "P-04's listing title states '1 Sec', plus or minus 0.5 degrees F accuracy, NIST and NSF certification and IP67 waterproofing. P-05's listing title states probes that are heat safe to 1000 degrees F, designed to stay in the food, with a phone connection. Those are the sellers' words, transcribed from the listings reached on 2026-11-20, and this site has verified none of them: no certificate was read, no laboratory report was opened.",
+                "That is precisely why the ice-water test is worth two minutes. It converts a marketing sentence into something you know about your own kitchen, with equipment you already own, and it works on a thermometer someone else recommended as well as on one we did not.",
+            ],
+        },
+        {
+            "h": "When to stop fiddling",
+            "p": [
+                "If a fold-out dial reads wrong at 32 degrees F and has no nut to turn, it is a decorative object. If a probe's reading drifts between the ice test and a second ice test an hour later, the drift is the finding, not the number. Buy the cheap instrument, check it once a season, and let the check be the thing you trust rather than the claim on the box.",
+            ],
+        },
+    ],
+    "closing": "Every tolerance, step and caution on this page is quoted from the USDA Food Safety and Inspection Service fact sheet 'Food Thermometers', read on 2026-11-20. The accuracy, certification, waterproof and heat-safety wording attributed to P-04 and P-05 is the sellers' own listing text; none of it was tested or confirmed here.",
+})
+
+GUIDES.append({
+    "slug": "leftovers-two-hour-rule",
+    "cluster": "Seasonal",
+    "kicker": "The day after",
+    "title": "The two-hour rule: what to do with the food that sat out all evening",
+    "dek": "A holiday table is an exercise in bacterial arithmetic. Here is the rule in the government's own words, the numbers that follow it, and the one job a small hot box is genuinely good at.",
+    "read_minutes": 6,
+    "photo": "assets/img/guide-leftovers",
+    "photo_alt": "Leftover roast chicken and potatoes being divided into two shallow glass containers on a kitchen counter",
+    "photo_caption": "Illustration commissioned for this guide. Shallow containers are in the picture on purpose; that part comes from the guidance, not from a stylist.",
+    "updated": "2026-11-20",
+    "related": ["P-01", "P-02", "P-03", "P-04"],
+    "sources": [
+        ["USDA FSIS: Leftovers and Food Safety (fact sheet)", FSIS_LEFTOVERS],
+        ["USDA FSIS: Food Thermometers (fact sheet)", FSIS_THERMOMETERS],
+    ],
+    "sections": [
+        {
+            "h": "The rule, exactly as the USDA states it",
+            "p": [
+                "Bacteria grow rapidly between 40 degrees F and 140 degrees F. Once food is safely cooked, hot food has to be kept at 140 degrees F or warmer. Within 2 hours of cooking - or of coming off whatever is keeping it warm - leftovers must be refrigerated.",
+                "And the part people negotiate about: FSIS says to throw away all perishable foods that have been left at room temperature for more than 2 hours, or 1 hour if the temperature is above 90 degrees F. Reheating is not a pardon for a plate that has been sitting out since the main course.",
+            ],
+        },
+        {
+            "h": "Cooling it quickly is a technique, not a vibe",
+            "items": [
+                ("Divide it", "Large amounts go into shallow containers. A deep pot of soup cools slowly in the middle, which is the window the rule is about."),
+                ("Cut it", "For whole roasts or hams, slice or cut into smaller parts. FSIS's turkey example is specific: slice the breast meat, legs and wings may be left whole."),
+                ("Do not wait for it to reach room temperature", "Hot food can be placed directly in the refrigerator, or rapidly chilled in an ice or cold water bath first. Waiting is the thing being avoided."),
+                ("Seal it", "Cover, wrap airtight or seal in a container: it keeps bacteria out, holds moisture in and stops the leftovers taking on the fridge."),
+            ],
+        },
+        {
+            "h": "How long is 'still fine'",
+            "p": [
+                "Leftovers keep 3 to 4 days in the refrigerator, or 3 to 4 months in the freezer. Frozen leftovers stay safe beyond that window, indefinitely in fact, but lose moisture and flavour - so the freezer limit on that chart is a quality note wearing the clothes of a safety rule.",
+                "Write the date on the container. That single habit is what turns the 3-to-4-day question from a guess into a lookup.",
+            ],
+        },
+        {
+            "h": "Reheating: the number, and the honest trade",
+            "p": [
+                "Reheat leftovers to 165 degrees F as measured with a food thermometer. Sauces, soups and gravies go to a rolling boil instead, and leftovers should be covered while reheating, which retains moisture and helps the food heat all the way through.",
+                "Covering and moisture are the words to notice if your plan is a basket fryer. A small dry convection oven is excellent at reviving a crisp surface and indifferent at keeping moisture inside it - that is the trade, and it is a design property rather than a fault. FSIS's own microwave advice explains why covering matters there: cold spots. The equivalent risk in an air fryer is uneven packing, which is why the same thermometer goes in at the end either way.",
+                "One reassurance from the fact sheet: it is safe to reheat frozen leftovers without thawing them first, in the oven or a saucepan, for casseroles and combination meals. It just takes longer than reheating thawed food.",
+            ],
+        },
+        {
+            "h": "Which format earns its place the next morning",
+            "p": [
+                "Not by magic - by the shape of the food you are reviving. Two 3-quart baskets (P-01, per the seller's title) run a piece of chicken and a pile of potatoes as two jobs with one finish time. A 26-quart French-door oven (P-02, whose listing title states an extra-large interior and 24 one-touch presets) is the one that takes a tray of sides flat, which is where a basket cannot follow. An 8-quart single basket (P-03) is the right answer only when the leftovers are one pile and loose.",
+                "Read those against the containers you actually own. A tray that does not fit is not a small inconvenience on a day when you are feeding people from yesterday's cooking.",
+            ],
+        },
+        {
+            "h": "The day-after checklist",
+            "items": [
+                ("Note the time it came out of the oven", "The 2-hour clock starts there, not when you finish eating."),
+                ("Shallow containers, sliced meat", "Divide before you refrigerate, not after."),
+                ("Date on the lid", "3 to 4 days in the fridge is the whole allowance."),
+                ("165 degrees F on the reheat", "Measured in the thickest part, with a thermometer you have checked."),
+                ("When in doubt", "The guidance is to throw it out. There is no upside to winning that argument."),
+            ],
+        },
+    ],
+    "closing": "Times, temperatures and storage windows are quoted from the USDA Food Safety and Inspection Service fact sheet 'Leftovers and Food Safety' (page states: Last Updated Jul 31, 2020; retrieved 2026-11-20) and from the 'Food Thermometers' fact sheet. Product wording is the sellers' own listing text from the listings reached on 2026-11-20. This site has no test kitchen and is not a substitute for the guidance pages it links.",
+})
