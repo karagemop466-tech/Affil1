@@ -52,6 +52,56 @@ If one merges first, resolve in favour of the paid-link gate: each of those
 proposals relaxes it by tagging observed URLs. No branch was rebased or
 force-pushed here, and no other session's files were edited.
 
+### Reader-polish & accuracy pass — arena/b990bce7-affil1 (2026-11-20 06:40 UTC)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Correct the site's two false statements about the tracking tag, noindex the duplicate edition, hand the masthead back to readers, add a printable counter worksheet, record this pass's short-link behaviour | done | arena/b990bce7-affil1 | `_tools/{layout,check,page_guides,page_products,page_suggestions,page_fit}.py`, `_platform/build_edition.py`, `_src/data/{products,reverification,sources,flags,suggestions,questions}.json`, `assets/css/{storefront,fit}.css`, generated pages, `EXECUTIVE_SUMMARY.md` |
+
+**Scope.** The maintained root edition only. No legacy table, no
+`_decision-support/`, no other session's guides. `_platform/build_edition.py` was
+edited once, to add a `noindex` meta tag to that edition's own shell; no content
+changed there.
+
+**Reconciliation — read this before rebasing.** The branch was cut at `2934ed0`;
+`origin/main` advanced through four merges (`d39e8f4`, then `3d2a453`) while this
+pass ran, and each rebase collided on generated pages plus source files. The rule
+applied was main's version wins, then re-apply only the source edit and let
+`_tools/build.py` regenerate the pages. What that cost, and what changed:
+
+- Main **already** carries FLG-028 for this pass's own 06:40 UTC fetch (another
+  session recorded the same five-homepage result earlier the same day). The new
+  findings were therefore numbered **above** main's highest: **FLG-030** (duplicate
+  indexable edition, fixed) and **FLG-031** (false tag claims in the site's own
+  copy, fixed). Nothing was renumbered over another session's flag.
+- Main's `now/`, `verification/`, `offers/` and `decisions/` pages landed mid-pass
+  and had reintroduced the exact defect being fixed: `NAV` carried "What's left"
+  and "Decisions". The masthead fix was re-applied to main's newer navigation and
+  both surfaces were added to `DESK_SURFACES`; the footer already listed them.
+- Main had softened the product page fine print to `Paid link · <Amazon note>`.
+  That is not the same as saying a click is uncredited, so the register-derived
+  line was re-applied rather than kept.
+
+**Verified line by line, this pass.**
+- Five supplied `link.amazon` URLs requested once each at 06:40 UTC:
+  **all five returned `https://www.amazon.com/`**, none a product page.
+- Five destination listings requested directly: B0CDY277D3, B09B7SB46R,
+  B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z — titles match the register exactly, each
+  arrival carrying `plpRedirect=mhFallback`.
+- Operating Agreement §1 and §5 re-read (updated 2025-10-15); Program Policies and
+  the Commission Income Statement re-read (updated 2026-04-14). SRC-18..20 added;
+  only SRC-20 carries a quote, re-copied from the live page.
+
+**Irregularities → disposition.** False tag claims fixed (FLG-031) · duplicate
+indexable edition fixed (FLG-030) · desk surfaces removed from the masthead ·
+stale "eight/nine guides" counts corrected to ten · no dead anchors found
+(`about/#how-we-link` resolves on main and is where the new copy points).
+
+**Gates at hand-off.** `check.py` 0 errors / 0 warnings (35 pages) ·
+`validate.py` 1,909 checks, 0 warnings · `check_local_links.py` 0 broken ·
+paid-link unit tests 6/6 · `verify_edition.py` 1,965 checks · `_decision-support`
+validator PASS · build reproducible.
+
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
 **Release receipt.** [PR #95](https://github.com/karagemop466-tech/Affil1/pull/95) merged into `main` as `8b22041` (2026-11-20). The `Affiliate launch checks` workflow passed on the merge commit ([run 44687880587](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880587)), `Build, check and deploy` succeeded ([run 44687880567](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880567)), and `pages build and deployment` succeeded ([run 44687879639](https://github.com/karagemop466-tech/Affil1/actions/runs/44687879639)). The live design brief at https://karagemop466-tech.github.io/Affil1/suggestions/design.html serves the design pack, topic bank and organic loop.

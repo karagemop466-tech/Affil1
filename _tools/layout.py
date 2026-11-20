@@ -43,9 +43,14 @@ NAV = [
     ("guides/index.html", "Guides"),
     ("compare/index.html", "Compare"),
     ("fit/index.html", "Find your fit"),
-    ("now/index.html", "What's left"),
-    ("decisions/index.html", "Decisions"),
 ]
+
+# Desk surfaces: the project's own working pages. They stay one click away under
+# the footer's "The desk" heading and never appear in a reader's masthead --
+# "What's left" and "Decisions" were both top-bar items until this pass, which
+# meant a shopper's fifth navigation choice was the project's to-do list.
+DESK_SURFACES = ("now/", "verification/", "offers/", "decisions/", "questions/",
+                 "suggestions/", "review/", "decide/", "operations/", "brief/")
 
 FOOTER_GROUPS = [
     ("Shop", [

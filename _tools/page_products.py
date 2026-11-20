@@ -135,6 +135,16 @@ def _decision_card(d, p, dec):
 </div>"""
 
 
+
+def _link_state_note(asin, tracking):
+    """State the real link status. A tag is named only once a Special Link exists."""
+    if asin in approved_amazon_urls():
+        return (f"Paid link, Amazon Associate tag {tracking} present on this URL &middot; "
+                + AMAZON_NOTE)
+    return ("Paid link label &middot; this URL is the plain Amazon listing and carries no "
+            f"tracking tag, so a click here is not yet credited to {tracking} &middot; "
+            + AMAZON_NOTE)
+
 def build_product(page_dir, p, meta):
     d = page_dir
     ref = p["ref"].lower()
@@ -178,7 +188,7 @@ def build_product(page_dir, p, meta):
     <p class="product-buy">
       {product_link(d, buy_url(asin), 'View it on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['brand']} {p['format_label']} (paid link, opens in a new tab)")}
     </p>
-    <p class="product-fine">Paid link &middot; {esc(AMAZON_NOTE)}</p>
+    <p class="product-fine">{esc(_link_state_note(asin, meta['tracking']))}</p>
     {_conflict_note(d, p)}
     <dl class="fact-list">
       <div><dt>Stated size</dt><dd>{esc(p.get('stated_capacity') or '—')}</dd></div>
@@ -251,7 +261,8 @@ def _verification(d, p, asin):
   <div><span class="verify-k">Landed on</span><code>/dp/{esc(asin)}</code></div>
   <div><span class="verify-k">Paid link</span><span>{"Account-confirmed" if asin in approved_amazon_urls() else "Not confirmed"}</span></div>
 </div>
-<p class="verify-note">{esc(p['resolution_note'])} The nine-character code in the supplied link is a short-link slug, not an ASIN, so no intended ASIN is recorded. <a class="tlink" href="{esc(rel(d, 'review/index.html'))}">Everything still unverified <span aria-hidden="true">&rarr;</span></a></p>""",
+<p class="verify-note">{esc(p['resolution_note'])} The nine-character code in the supplied link is a short-link slug, not an ASIN, so no intended ASIN is recorded.</p>
+<p class="verify-note verify-warn">{esc(p.get('short_link_recheck', ''))} <a class="tlink" href="{esc(rel(d, 'review/index.html'))}#FLG-028">Why that matters <span aria-hidden="true">&rarr;</span></a></p>""",
                    cls="")
 
 

@@ -1,274 +1,324 @@
 {
-  "meta": {
-    "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
-    "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
-    "recommended_first": "S-01 and S-07. One confirms the site can earn; the other makes it findable. Neither needs new content.",
-    "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads."
-  },
-  "paths": [
-    {
-      "id": "PATH-A",
-      "name": "Shop first",
-      "summary": "Make the five product pages as good as they can be, then buy traffic or push it socially.",
-      "needs": "S-03, S-12, S-16",
-      "before_you_choose": "Product pages cannot show a price, so the page has to win on explanation alone. This path is honest but slow until a named author exists.",
-      "good_if": "You can name an editor and want the catalogue to carry the site."
-    },
-    {
-      "id": "PATH-B",
-      "name": "Publication first",
-      "summary": "Keep publishing question-shaped guides and let search traffic arrive before optimising anything.",
-      "needs": "S-07, S-18, S-11",
-      "before_you_choose": "Without Search Console this is writing into the dark. S-07 is 15 minutes and makes the rest measurable.",
-      "good_if": "You enjoy writing and can hold a cadence for three months."
-    },
-    {
-      "id": "PATH-C",
-      "name": "Measure first",
-      "summary": "Switch on analytics and Search Console, collect four weeks of data, then decide what to build.",
-      "needs": "S-06, S-07, S-10",
-      "before_you_choose": "Needs a host for the collector and a privacy statement. That is the only real cost.",
-      "good_if": "You would rather have one well-chosen page than eight guessed ones."
-    }
-  ],
-  "suggestions": [
-    {
-      "id": "S-01",
-      "status": "open",
-      "title": "Click one link, then read the Associates report",
-      "why": "The links do not carry the tag yet. What is still unknown is whether a Special Link from this account would be credited. That is a two-minute test with an answer either way.",
-      "effort": "20 minutes plus one click",
-      "risk": "None. It is a read-only check.",
-      "depends_on": "Q-03, Q-14",
-      "recommendation": "Do this first",
-      "decision": "accept"
-    },
-    {
-      "id": "S-02",
-      "status": "open",
-      "title": "Name an editor, or stop implying editorial authority",
-      "why": "A publication with no byline reads as generated, however careful it is. One named person with an accurate, modest bio is the cheapest credibility available and the thing a reader looks for first.",
-      "effort": "an hour",
-      "risk": "None, provided the bio describes work that actually happened. Claiming hands-on testing that did not occur would convert this site from careful to deceptive.",
-      "depends_on": "Q-08",
-      "recommendation": "Do within the first week",
-      "decision": "accept"
-    },
-    {
-      "id": "S-03",
-      "status": "open",
-      "title": "Switch on Search Console and submit the sitemap",
-      "why": "The next topic should be chosen from queries that exist. Right now every subject is an editorial hypothesis, and the site cannot tell which of the eight guides anyone wanted.",
-      "effort": "15 minutes",
-      "risk": "None. Requires the owner's Google account, so it cannot be done by an agent.",
-      "depends_on": "Q-07, Q-11",
-      "recommendation": "Do this week",
-      "decision": "accept"
-    },
-    {
-      "id": "S-04",
-      "status": "open",
-      "title": "Apply for the Creators API — knowing it is gated behind 10 qualifying sales",
-      "why": "Program Policies §2(b) permits price and availability only where Amazon serves the data or it arrives through the Creators API or PA API. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment plus at least 10 qualifying sales within the past 30 days. The policy text still names both APIs, so following the policy alone would aim at a route that no longer answers.",
-      "effort": "an application, plus qualifying sales on most accounts",
-      "risk": "Low, but the sequence is not negotiable: live prices arrive after the site proves it can sell, not before. A separate clause also requires a comparison-format price display to show the lowest used price as well as the lowest new, which is a second reason the comparison table stays blank.",
-      "depends_on": "S-01, and the 10-qualifying-sales threshold",
-      "recommendation": "Revisit the moment the sales count allows it; do not treat it as a build task",
-      "decision": "hold",
-      "evidence": "SRC-11, SRC-12, SRC-13, SRC-14; FLG-022"
-    },
-    {
-      "id": "S-05",
-      "status": "open",
-      "title": "Buy one air fryer, use it, and publish one genuinely tested comparison",
-      "why": "This is the single biggest jump in both usefulness and ranking potential. Every page in this category is assembled from seller copy; a page with a real measurement table and real photographs would be materially different.",
-      "effort": "a purchase plus several evenings",
-      "risk": "Cost. Also, FTC guidance and the Associates policies require a review to be genuine, so the testing must actually happen before the page exists.",
-      "depends_on": "Q-08",
-      "recommendation": "The highest-value single investment on this list",
-      "decision": "hold"
-    },
-    {
-      "id": "S-06",
-      "status": "open",
-      "title": "Deploy the analytics endpoint, or delete it",
-      "why": "A measurement plan that never measures is decoration. Either host the collector with a retention statement and a privacy page, or remove the code so the claim stops implying something is coming.",
-      "effort": "an hour plus hosting",
-      "risk": "Low, provided retention and IP handling are stated before the client is pointed at it.",
-      "depends_on": "Q-10",
-      "recommendation": "Decide within two weeks",
-      "decision": "hold"
-    },
-    {
-      "id": "S-07",
-      "status": "open",
-      "title": "Do not commission more guides until S-03 or S-05 lands",
-      "why": "Eight guides already cover the decision space honestly. A ninth written from another hypothesis adds volume, not value, and raises the chance the whole publication is treated as one undifferentiated block.",
-      "effort": "none — it is a decision not to act",
-      "risk": "None. It is reversible the moment data arrives.",
-      "depends_on": "nothing",
-      "recommendation": "The least popular and most important item here",
-      "decision": "accept"
-    },
-    {
-      "id": "S-08",
-      "status": "open",
-      "title": "Replace illustrations with photographs of the actual products",
-      "why": "Every image here is an illustration and labelled as one. A shop without product photography asks the reader to imagine the thing, which is exactly the gap a competitor fills.",
-      "effort": "an afternoon with a phone and a window, once a product is in hand",
-      "risk": "Tied to S-05: photographing a product you have not used is a step toward the thing this site avoids.",
-      "depends_on": "S-05",
-      "recommendation": "Do together with testing",
-      "decision": "hold"
-    },
-    {
-      "id": "S-09",
-      "status": "open",
-      "title": "Choose one of the three paths before doing any of the above",
-      "why": "The suggestions are individually sensible and collectively contradictory. 'Shop first' needs photography; 'publication first' needs cadence; 'measure first' needs analytics. Picking a path is what turns this page into a plan.",
-      "effort": "a decision",
-      "risk": "Doing nothing is also a choice, and it is the one that leaves the site as it is.",
-      "depends_on": "nothing",
-      "recommendation": "Pick a path, then only read that path's rows",
-      "decision": "accept"
-    },
-    {
-      "id": "S-10",
-      "status": "open",
-      "title": "Publish a dated change log on the site",
-      "why": "A publication that visibly changes is a publication someone returns to. It also makes 'reviewed on' meaningful rather than decorative.",
-      "effort": "minutes a month",
-      "risk": "None.",
-      "depends_on": "nothing",
-      "recommendation": "Cheap and worth it",
-      "decision": "accept"
-    },
-    {
-      "id": "S-11",
-      "status": "open",
-      "title": "Buy a domain and move off the repository subpath",
-      "why": "Every link on this site is relative because it lives at /Affil1/. A domain removes that constraint, gives the brand somewhere to live, and makes the canonical URL something a reader could say out loud.",
-      "effort": "a purchase, DNS, a CNAME file, one constant in the build",
-      "risk": "Low, if redirects are handled. Doing it after links circulate is more annoying than doing it now.",
-      "depends_on": "Q-17",
-      "recommendation": "Cheapest structural improvement after S-03",
-      "decision": "hold"
-    },
-    {
-      "id": "S-12",
-      "status": "open",
-      "title": "Set a fortnightly publishing cadence and put it in the workflow document",
-      "why": "Organic traffic rewards consistency more than brilliance. One guide a fortnight is achievable at the current standard and is enough to keep the feed and the sitemap alive.",
-      "effort": "one hour of scheduling",
-      "risk": "A cadence with no author behind it becomes a fiction. Do S-02 first.",
-      "depends_on": "S-02",
-      "recommendation": "After a named author exists",
-      "decision": "hold"
-    },
-    {
-      "id": "S-13",
-      "status": "implemented",
-      "title": "Rewrite the storefront in a shop voice instead of an audit voice",
-      "why": "The previous front page led with verification process and repeated 'not tested' on every card. A reader arrives wanting to know what to buy, and left knowing what could not be proven.",
-      "effort": "done",
-      "risk": "Reduced: the provenance detail was moved one click away, not deleted.",
-      "depends_on": "nothing",
-      "recommendation": "Implemented",
-      "implemented_on": "2026-11-20",
-      "evidence": "index.html; the audit material now lives on review/ and about/"
-    },
-    {
-      "id": "S-14",
-      "status": "implemented",
-      "title": "Replace plain listing links with account-validated Special Links, one product at a time, and keep the build refusing anything else",
-      "why": "Program Policies 2(b) requires the Associates ID as a parameter. The earlier build emitted bare /dp/ URLs with no tag, which cannot be attributed to any account.",
-      "effort": "done",
-      "risk": "None; it is enforced in one function and checked on every build.",
-      "depends_on": "Q-14",
-      "recommendation": "Implemented",
-      "implemented_on": "2026-11-20",
-      "evidence": "_tools/layout.py buy_url(); tag rule in _tools/check.py; see FLG-009"
-    },
-    {
-      "id": "S-15",
-      "status": "implemented",
-      "title": "Consolidate two competing editions into one canonical site",
-      "why": "The repository served a generated edition at the root and a hand-written one under crisp/, plus duplicate root pages covering the same products. Two sites describing five products cannot both be the answer.",
-      "effort": "done",
-      "risk": "The other edition was archived rather than deleted, and every archived page carries a noindex tag.",
-      "depends_on": "Q-16",
-      "recommendation": "Implemented",
-      "implemented_on": "2026-11-20",
-      "evidence": "_archive/legacy-2026-11-20/; robots.txt; sitemap.xml; FLG-008"
-    },
-    {
-      "id": "S-16",
-      "status": "implemented",
-      "title": "Publish P-04 as a thermometer instead of an unresolved row",
-      "why": "The fourth link resolves to a ThermoMaven digital meat thermometer. Leaving it as 'unresolved' kept a live product off the site and kept a false gap in the catalogue.",
-      "effort": "done",
-      "risk": "None. The earlier failure is documented rather than erased.",
-      "depends_on": "Q-02",
-      "recommendation": "Implemented",
-      "implemented_on": "2026-11-20",
-      "evidence": "products/p-04.html; FLG-004"
-    },
-    {
-      "id": "S-17",
-      "status": "implemented",
-      "title": "Add structured data, breadcrumbs and share images",
-      "why": "Search engines and social previews both need machine-readable structure. The site had none beyond a WebSite block on the front page.",
-      "effort": "done",
-      "risk": "Reduced: the Article schema names the organization, not an invented person.",
-      "depends_on": "nothing",
-      "recommendation": "Implemented",
-      "implemented_on": "2026-11-20",
-      "evidence": "BreadcrumbList and Article blocks on every guide and product page; og:image on every page"
-    },
-    {
-      "id": "S-18",
-      "status": "implemented",
-      "title": "Give the front page a seasonal feature and a reader channel",
-      "why": "A publication has a current issue. The hosting guide is featured on the front page, and RSS is offered as the way to come back — since no mailing list exists.",
-      "effort": "done",
-      "risk": "None. The RSS block says plainly that there is no mailing list.",
-      "depends_on": "nothing",
-      "recommendation": "Implemented",
-      "implemented_on": "2026-11-20",
-      "evidence": "index.html; feed.xml"
-    },
-    {
-      "id": "S-19",
-      "status": "open",
-      "title": "Request sub-tag Associate IDs so attribution comes from Amazon's own report",
-      "why": "Program Policies §2(b) allows Amazon to issue additional sub-tag Associate IDs on request so an Associate can “monitor and optimize the performance” of different links. A sub-tag per page turns “which guide earns?” into a question Amazon's own report answers, which is far stronger evidence than anything a first-party counter can produce. The same clause forbids tying a sub-tag to an identified visitor, which this site does not do.",
-      "effort": "a support request, then a small change to how each page builds its outbound links",
-      "risk": "Low. Sub-tags are subject to Amazon's approval, so the answer may be no, and nothing else on the site depends on it. It complements S-01 rather than replacing it: S-01 proves a click is credited at all, sub-tags say which page earned it.",
-      "depends_on": "S-01",
-      "recommendation": "Request it in the same dashboard session as S-01",
-      "evidence": "SRC-15"
-    },
-    {
-      "id": "S-20",
-      "status": "open",
-      "title": "Schedule the link re-check so drift is reported rather than discovered",
-      "why": "Every product fact on this site rests on a supplied link resolving to the same listing it did on 2026-11-20. P-04 already showed that the same link can return a product page on one attempt and Amazon's continuity page on another, on the same date. The repository already has the tool for this (_tools/verify_links.py); what is missing is a schedule and a place for the result.",
-      "effort": "an hour to wire the existing tool into a scheduled run and publish its output",
-      "risk": "Medium, and worth stating plainly: an unattended re-check can hit the same interstitial P-04 did, and a false alarm is worse than no alarm. Any automated check must report the outcome and let a human adjudicate. It must never overwrite a verified record on its own.",
-      "depends_on": "nothing",
-      "recommendation": "Build it to report, never to rewrite",
-      "evidence": "FLG-004, FLG-016; _tools/verify_links.py"
-    },
-    {
-      "id": "S-21",
-      "status": "open",
-      "title": "Do not buy paid search, and do not use Amazon marks in any promotion",
-      "why": "Program Policies prohibit purchasing, registering or using any Amazon Mark in a search engine, disqualify purchases arriving through a paid search placement, and state that Associates must not use their tags to claim commissions from another programme on the same traffic. The site also has no measurement that could attribute a click, so paid acquisition would spend money that cannot be accounted for.",
-      "effort": "zero — this is a decision not to spend",
-      "risk": "None from complying. The risk is entirely in ignoring it, and it falls on the account rather than on a page.",
-      "depends_on": "nothing",
-      "recommendation": "Adopt as policy and leave it on this page as a recorded refusal",
-      "evidence": "SRC-02"
-    }
+ "meta": {
+  "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
+  "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
+  "recommended_first": "S-01 and S-07. One confirms the site can earn; the other makes it findable. Neither needs new content.",
+  "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads.",
+  "implemented_this_pass": [
+   "S-22",
+   "S-23",
+   "S-24",
+   "S-25"
   ]
+ },
+ "paths": [
+  {
+   "id": "PATH-A",
+   "name": "Shop first",
+   "summary": "Make the five product pages as good as they can be, then buy traffic or push it socially.",
+   "needs": "S-03, S-12, S-16",
+   "before_you_choose": "Product pages cannot show a price, so the page has to win on explanation alone. This path is honest but slow until a named author exists.",
+   "good_if": "You can name an editor and want the catalogue to carry the site."
+  },
+  {
+   "id": "PATH-B",
+   "name": "Publication first",
+   "summary": "Keep publishing question-shaped guides and let search traffic arrive before optimising anything.",
+   "needs": "S-07, S-18, S-11",
+   "before_you_choose": "Without Search Console this is writing into the dark. S-07 is 15 minutes and makes the rest measurable.",
+   "good_if": "You enjoy writing and can hold a cadence for three months."
+  },
+  {
+   "id": "PATH-C",
+   "name": "Measure first",
+   "summary": "Switch on analytics and Search Console, collect four weeks of data, then decide what to build.",
+   "needs": "S-06, S-07, S-10",
+   "before_you_choose": "Needs a host for the collector and a privacy statement. That is the only real cost.",
+   "good_if": "You would rather have one well-chosen page than eight guessed ones."
+  }
+ ],
+ "suggestions": [
+  {
+   "id": "S-01",
+   "status": "open",
+   "title": "Click one link, then read the Associates report",
+   "why": "The links do not carry the tag yet. What is still unknown is whether a Special Link from this account would be credited. That is a two-minute test with an answer either way.",
+   "effort": "20 minutes plus one click",
+   "risk": "None. It is a read-only check.",
+   "depends_on": "Q-03, Q-14",
+   "recommendation": "Do this first",
+   "decision": "accept"
+  },
+  {
+   "id": "S-02",
+   "status": "open",
+   "title": "Name an editor, or stop implying editorial authority",
+   "why": "A publication with no byline reads as generated, however careful it is. One named person with an accurate, modest bio is the cheapest credibility available and the thing a reader looks for first.",
+   "effort": "an hour",
+   "risk": "None, provided the bio describes work that actually happened. Claiming hands-on testing that did not occur would convert this site from careful to deceptive.",
+   "depends_on": "Q-08",
+   "recommendation": "Do within the first week",
+   "decision": "accept"
+  },
+  {
+   "id": "S-03",
+   "status": "open",
+   "title": "Switch on Search Console and submit the sitemap",
+   "why": "The next topic should be chosen from queries that exist. Right now every subject is an editorial hypothesis, and the site cannot tell which of the eight guides anyone wanted.",
+   "effort": "15 minutes",
+   "risk": "None. Requires the owner's Google account, so it cannot be done by an agent.",
+   "depends_on": "Q-07, Q-11",
+   "recommendation": "Do this week",
+   "decision": "accept"
+  },
+  {
+   "id": "S-04",
+   "status": "open",
+   "title": "Apply for the Creators API — knowing it is gated behind 10 qualifying sales",
+   "why": "Program Policies §2(b) permits price and availability only where Amazon serves the data or it arrives through the Creators API or PA API. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment plus at least 10 qualifying sales within the past 30 days. The policy text still names both APIs, so following the policy alone would aim at a route that no longer answers.",
+   "effort": "an application, plus qualifying sales on most accounts",
+   "risk": "Low, but the sequence is not negotiable: live prices arrive after the site proves it can sell, not before. A separate clause also requires a comparison-format price display to show the lowest used price as well as the lowest new, which is a second reason the comparison table stays blank.",
+   "depends_on": "S-01, and the 10-qualifying-sales threshold",
+   "recommendation": "Revisit the moment the sales count allows it; do not treat it as a build task",
+   "decision": "hold",
+   "evidence": "SRC-11, SRC-12, SRC-13, SRC-14; FLG-022"
+  },
+  {
+   "id": "S-05",
+   "status": "open",
+   "title": "Buy one air fryer, use it, and publish one genuinely tested comparison",
+   "why": "This is the single biggest jump in both usefulness and ranking potential. Every page in this category is assembled from seller copy; a page with a real measurement table and real photographs would be materially different.",
+   "effort": "a purchase plus several evenings",
+   "risk": "Cost. Also, FTC guidance and the Associates policies require a review to be genuine, so the testing must actually happen before the page exists.",
+   "depends_on": "Q-08",
+   "recommendation": "The highest-value single investment on this list",
+   "decision": "hold"
+  },
+  {
+   "id": "S-06",
+   "status": "open",
+   "title": "Deploy the analytics endpoint, or delete it",
+   "why": "A measurement plan that never measures is decoration. Either host the collector with a retention statement and a privacy page, or remove the code so the claim stops implying something is coming.",
+   "effort": "an hour plus hosting",
+   "risk": "Low, provided retention and IP handling are stated before the client is pointed at it.",
+   "depends_on": "Q-10",
+   "recommendation": "Decide within two weeks",
+   "decision": "hold"
+  },
+  {
+   "id": "S-07",
+   "status": "open",
+   "title": "Do not commission more guides until S-03 or S-05 lands",
+   "why": "Ten guides already cover the decision space honestly. An eleventh written from another hypothesis adds volume, not value, and raises the chance the whole publication is treated as one undifferentiated block.",
+   "effort": "none — it is a decision not to act",
+   "risk": "None. It is reversible the moment data arrives.",
+   "depends_on": "nothing",
+   "recommendation": "The least popular and most important item here",
+   "decision": "accept"
+  },
+  {
+   "id": "S-08",
+   "status": "open",
+   "title": "Replace illustrations with photographs of the actual products",
+   "why": "Every image here is an illustration and labelled as one. A shop without product photography asks the reader to imagine the thing, which is exactly the gap a competitor fills.",
+   "effort": "an afternoon with a phone and a window, once a product is in hand",
+   "risk": "Tied to S-05: photographing a product you have not used is a step toward the thing this site avoids.",
+   "depends_on": "S-05",
+   "recommendation": "Do together with testing",
+   "decision": "hold"
+  },
+  {
+   "id": "S-09",
+   "status": "open",
+   "title": "Choose one of the three paths before doing any of the above",
+   "why": "The suggestions are individually sensible and collectively contradictory. 'Shop first' needs photography; 'publication first' needs cadence; 'measure first' needs analytics. Picking a path is what turns this page into a plan.",
+   "effort": "a decision",
+   "risk": "Doing nothing is also a choice, and it is the one that leaves the site as it is.",
+   "depends_on": "nothing",
+   "recommendation": "Pick a path, then only read that path's rows",
+   "decision": "accept"
+  },
+  {
+   "id": "S-10",
+   "status": "open",
+   "title": "Publish a dated change log on the site",
+   "why": "A publication that visibly changes is a publication someone returns to. It also makes 'reviewed on' meaningful rather than decorative.",
+   "effort": "minutes a month",
+   "risk": "None.",
+   "depends_on": "nothing",
+   "recommendation": "Cheap and worth it",
+   "decision": "accept"
+  },
+  {
+   "id": "S-11",
+   "status": "open",
+   "title": "Buy a domain and move off the repository subpath",
+   "why": "Every link on this site is relative because it lives at /Affil1/. A domain removes that constraint, gives the brand somewhere to live, and makes the canonical URL something a reader could say out loud.",
+   "effort": "a purchase, DNS, a CNAME file, one constant in the build",
+   "risk": "Low, if redirects are handled. Doing it after links circulate is more annoying than doing it now.",
+   "depends_on": "Q-17",
+   "recommendation": "Cheapest structural improvement after S-03",
+   "decision": "hold"
+  },
+  {
+   "id": "S-12",
+   "status": "open",
+   "title": "Set a fortnightly publishing cadence and put it in the workflow document",
+   "why": "Organic traffic rewards consistency more than brilliance. One guide a fortnight is achievable at the current standard and is enough to keep the feed and the sitemap alive.",
+   "effort": "one hour of scheduling",
+   "risk": "A cadence with no author behind it becomes a fiction. Do S-02 first.",
+   "depends_on": "S-02",
+   "recommendation": "After a named author exists",
+   "decision": "hold"
+  },
+  {
+   "id": "S-13",
+   "status": "implemented",
+   "title": "Rewrite the storefront in a shop voice instead of an audit voice",
+   "why": "The previous front page led with verification process and repeated 'not tested' on every card. A reader arrives wanting to know what to buy, and left knowing what could not be proven.",
+   "effort": "done",
+   "risk": "Reduced: the provenance detail was moved one click away, not deleted.",
+   "depends_on": "nothing",
+   "recommendation": "Implemented",
+   "implemented_on": "2026-11-20",
+   "evidence": "index.html; the audit material now lives on review/ and about/"
+  },
+  {
+   "id": "S-14",
+   "status": "implemented",
+   "title": "Replace plain listing links with account-validated Special Links, one product at a time, and keep the build refusing anything else",
+   "why": "Program Policies 2(b) requires the Associates ID as a parameter. The earlier build emitted bare /dp/ URLs with no tag, which cannot be attributed to any account.",
+   "effort": "done",
+   "risk": "None; it is enforced in one function and checked on every build.",
+   "depends_on": "Q-14",
+   "recommendation": "Implemented",
+   "implemented_on": "2026-11-20",
+   "evidence": "_tools/layout.py buy_url(); tag rule in _tools/check.py; see FLG-009"
+  },
+  {
+   "id": "S-15",
+   "status": "implemented",
+   "title": "Consolidate two competing editions into one canonical site",
+   "why": "The repository served a generated edition at the root and a hand-written one under crisp/, plus duplicate root pages covering the same products. Two sites describing five products cannot both be the answer.",
+   "effort": "done",
+   "risk": "The other edition was archived rather than deleted, and every archived page carries a noindex tag.",
+   "depends_on": "Q-16",
+   "recommendation": "Implemented",
+   "implemented_on": "2026-11-20",
+   "evidence": "_archive/legacy-2026-11-20/; robots.txt; sitemap.xml; FLG-008"
+  },
+  {
+   "id": "S-16",
+   "status": "implemented",
+   "title": "Publish P-04 as a thermometer instead of an unresolved row",
+   "why": "The fourth link resolves to a ThermoMaven digital meat thermometer. Leaving it as 'unresolved' kept a live product off the site and kept a false gap in the catalogue.",
+   "effort": "done",
+   "risk": "None. The earlier failure is documented rather than erased.",
+   "depends_on": "Q-02",
+   "recommendation": "Implemented",
+   "implemented_on": "2026-11-20",
+   "evidence": "products/p-04.html; FLG-004"
+  },
+  {
+   "id": "S-17",
+   "status": "implemented",
+   "title": "Add structured data, breadcrumbs and share images",
+   "why": "Search engines and social previews both need machine-readable structure. The site had none beyond a WebSite block on the front page.",
+   "effort": "done",
+   "risk": "Reduced: the Article schema names the organization, not an invented person.",
+   "depends_on": "nothing",
+   "recommendation": "Implemented",
+   "implemented_on": "2026-11-20",
+   "evidence": "BreadcrumbList and Article blocks on every guide and product page; og:image on every page"
+  },
+  {
+   "id": "S-18",
+   "status": "implemented",
+   "title": "Give the front page a seasonal feature and a reader channel",
+   "why": "A publication has a current issue. The hosting guide is featured on the front page, and RSS is offered as the way to come back — since no mailing list exists.",
+   "effort": "done",
+   "risk": "None. The RSS block says plainly that there is no mailing list.",
+   "depends_on": "nothing",
+   "recommendation": "Implemented",
+   "implemented_on": "2026-11-20",
+   "evidence": "index.html; feed.xml"
+  },
+  {
+   "id": "S-19",
+   "status": "open",
+   "title": "Request sub-tag Associate IDs so attribution comes from Amazon's own report",
+   "why": "Program Policies §2(b) allows Amazon to issue additional sub-tag Associate IDs on request so an Associate can “monitor and optimize the performance” of different links. A sub-tag per page turns “which guide earns?” into a question Amazon's own report answers, which is far stronger evidence than anything a first-party counter can produce. The same clause forbids tying a sub-tag to an identified visitor, which this site does not do.",
+   "effort": "a support request, then a small change to how each page builds its outbound links",
+   "risk": "Low. Sub-tags are subject to Amazon's approval, so the answer may be no, and nothing else on the site depends on it. It complements S-01 rather than replacing it: S-01 proves a click is credited at all, sub-tags say which page earned it.",
+   "depends_on": "S-01",
+   "recommendation": "Request it in the same dashboard session as S-01",
+   "evidence": "SRC-15"
+  },
+  {
+   "id": "S-20",
+   "status": "open",
+   "title": "Schedule the link re-check so drift is reported rather than discovered",
+   "why": "Every product fact on this site rests on a supplied link resolving to the same listing it did on 2026-11-20. P-04 already showed that the same link can return a product page on one attempt and Amazon's continuity page on another, on the same date. The repository already has the tool for this (_tools/verify_links.py); what is missing is a schedule and a place for the result.",
+   "effort": "an hour to wire the existing tool into a scheduled run and publish its output",
+   "risk": "Medium, and worth stating plainly: an unattended re-check can hit the same interstitial P-04 did, and a false alarm is worse than no alarm. Any automated check must report the outcome and let a human adjudicate. It must never overwrite a verified record on its own.",
+   "depends_on": "nothing",
+   "recommendation": "Build it to report, never to rewrite",
+   "evidence": "FLG-004, FLG-016; _tools/verify_links.py"
+  },
+  {
+   "id": "S-21",
+   "status": "open",
+   "title": "Do not buy paid search, and do not use Amazon marks in any promotion",
+   "why": "Program Policies prohibit purchasing, registering or using any Amazon Mark in a search engine, disqualify purchases arriving through a paid search placement, and state that Associates must not use their tags to claim commissions from another programme on the same traffic. The site also has no measurement that could attribute a click, so paid acquisition would spend money that cannot be accounted for.",
+   "effort": "zero — this is a decision not to spend",
+   "risk": "None from complying. The risk is entirely in ignoring it, and it falls on the account rather than on a page.",
+   "depends_on": "nothing",
+   "recommendation": "Adopt as policy and leave it on this page as a recorded refusal",
+   "evidence": "SRC-02"
+  },
+  {
+   "id": "S-22",
+   "status": "implemented",
+   "title": "Stop claiming the links carry the tracking tag",
+   "why": "Two reader-facing statements said every link carried the site's Amazon tag: the sidebar on all ten guides, and a 'tag shopnow047c-20' line under every buy button. No published URL carries a tag, because the paid-link gate holds no account-confirmed Special Link. A page may not describe its own links wrongly, even in the cautious direction, because the next session will believe the sentence.",
+   "effort": "ten minutes",
+   "risk": "None. The copy now derives from the register and changes by itself when a Special Link is armed.",
+   "depends_on": "none",
+   "recommendation": "Done this pass; enforced by _tools/check.py check_link_state_copy",
+   "decision": "accept"
+  },
+  {
+   "id": "S-23",
+   "status": "implemented",
+   "title": "Give a crawler one site instead of two",
+   "why": "The preserved edition/ tree published more than twenty pages with self-referencing canonicals under /edition/ and no robots instruction. Two copies of the same five products is the duplicate case a search engine resolves by choosing neither.",
+   "effort": "one line in the edition generator",
+   "risk": "None for readers: the edition stays reachable for review, and only the indexing instruction changed.",
+   "depends_on": "none",
+   "recommendation": "Done: every edition page carries noindex, and the maintained root is the only indexable surface",
+   "decision": "accept"
+  },
+  {
+   "id": "S-24",
+   "status": "implemented",
+   "title": "Make the masthead a reader's navigation",
+   "why": "The top bar carried 'What's left' and 'Decisions', which are the project's to-do list and decision register, so a shopper's navigation led out of the shop. The brief asks for one navigation group with every dashboard surface still reachable from the footer.",
+   "effort": "a few lines, plus a check",
+   "risk": "Low: anything removed from the masthead is one click away in the footer, and a check now proves it.",
+   "depends_on": "none",
+   "recommendation": "Done and enforced: a desk surface in the masthead fails the build",
+   "decision": "accept"
+  },
+  {
+   "id": "S-25",
+   "status": "implemented",
+   "title": "Give the reader something to carry to the counter",
+   "why": "Every guide ends in a measurement and there was nowhere to write it down. The fit finder now carries a printable worksheet: two tables, one for the space and one for the food, an empty cell for the reader's number and an empty cell for what the manual requires.",
+   "effort": "an hour",
+   "risk": "None. Nothing is pre-filled, because no dimension on this site came from an official specification sheet, and the sheet says so.",
+   "depends_on": "none",
+   "recommendation": "Done: linked from the Guides index as well as the fit finder",
+   "decision": "accept"
+  }
+ ]
 }

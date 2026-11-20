@@ -129,11 +129,18 @@ def render_shell(
         cur = ' aria-current="page"' if target == active_nav else ""
         nav_items.append(f'<a href="{esc(href)}"{cur}>{esc(label)}</a>')
 
+    # This edition is a preserved, non-canonical duplicate: the maintained shop
+    # publishes at the repository root. It stays reachable for review, but every
+    # page tells a crawler not to index it, so two editions cannot compete for
+    # the same query. A self-referencing canonical does not consolidate a second
+    # copy of the same catalogue. Recorded as FLG-030.
     canon_tag = (
         f'\n  <link rel="canonical" href="{esc(canonical_url(rel_page))}">'
         if include_canonical
         else ""
     )
+    canon_tag += '\n  <meta name="robots" content="noindex, follow">'
+
     page_slug = rel_page.replace("/index.html", "").replace(".html", "") or "home"
 
     return f"""<!DOCTYPE html>

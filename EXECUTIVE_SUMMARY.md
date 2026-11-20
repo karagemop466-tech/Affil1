@@ -337,3 +337,59 @@ in each row.
 Nothing in the new copy states a price, rating, review count, stock level, test
 result or ranking. The listing pages carried prices and ratings while being read
 ($74.99-tier figures, 4.4-star bands); none were copied, by rule and by check.
+
+## Session addendum — arena/b990bce7-affil1 (2026-11-20, 06:40 UTC)
+
+Reader-polish and accuracy pass, re-based onto `3d2a453` after four concurrent
+merges. Five things were wrong, unreachable or missing.
+
+**1. The site described its own links wrongly.** Every guide sidebar said the
+product links carried "the site's Amazon tag", and every product page printed
+"tag shopnow047c-20" under the buy button. No published URL carries a tag: the
+paid-link gate holds no account-confirmed Special Link, so all five destinations
+are the plain listing. Both now derive from the register and say the true thing —
+plain listing, no tag, a click is not yet credited — and `_tools/check.py` fails
+the build if copy and register disagree in either direction (FLG-031).
+
+**2. A second complete edition was indexable.** `edition/` ships more than twenty
+pages with self-referencing canonicals under `/Affil1/edition/` and carried no
+robots instruction, so two copies of the same five products were both indexable.
+Every edition page now carries `noindex, follow` (FLG-030); the maintained root is
+the only indexable surface, which is what the About page already claimed.
+
+**3. The masthead carried the desk.** The top bar included "What's left" and
+"Decisions" — the project's to-do list and its decision register, both added by
+concurrent merges during this pass. The masthead is now Shop · Guides · Compare ·
+Find your fit, every desk page stays one click away in the footer, and a check
+fails if a desk surface returns to the nav or a footer link loses its page.
+
+**4. The supplied short links returned the Amazon home page, again.** Requested at
+06:40 UTC with redirects followed, all five landed on `https://www.amazon.com/`
+and none on a product. Main's FLG-028 records the same result from another
+session; this pass appends its own timestamped record rather than renumbering.
+All five destination listings were then requested directly and all five titles
+matched the register (every arrival carried FLG-018's `plpRedirect=mhFallback`
+marker, which is why no mapping is called confirmed).
+
+**5. Counts had drifted.** Copy said eight and nine guides; there are ten.
+
+**Added for the reader.** A printable counter-fit worksheet on `/fit/`: two empty
+tables, one for the space you have against what the manual requires and one for
+what you cook against what fits, with a print stylesheet and an explicit note that
+nothing is pre-filled because no dimension on this site came from an official
+specification sheet. The Guides index links to it. Article measure and body size
+were raised, and a correction that contradicts an earlier record is now marked
+where it appears rather than only in the register.
+
+**Sources re-read:** Associates Operating Agreement §1 and §5 (2025-10-15),
+Program Policies and the Commission Income Statement (2026-04-14), FTC
+Endorsement Guides. SRC-18..SRC-20 added; the one carrying a verbatim quote has it
+re-copied from the live page, and the two that do not are linked without one.
+
+**Gates:** 35 pages, `check.py` 0/0, `validate.py` 1,909 checks 0 warnings,
+`check_local_links.py` 0 broken, paid-link tests 6/6, `verify_edition.py` 1,965
+checks, build reproducible.
+
+**Still unverifiable, and still the whole story:** whether `shopnow047c-20` is
+active and lists this site, which ASIN each product was meant to be, and whether a
+click is credited. All three are read-only steps inside an Associates account.

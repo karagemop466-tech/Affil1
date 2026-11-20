@@ -1,91 +1,99 @@
 {
-  "meta": {
-    "title": "Independent re-verification of the five submitted links",
-    "session": "arena/359baa16-affil1",
-    "retrieved_on": "2026-11-20",
-    "retrieved_at_utc": "2026-11-20T05:17Z",
-    "method": "Each submitted URL was requested a second time, by a different session, in the same day. Redirects were followed and the destination page's own title and breadcrumb were read. Values below are transcribed from what the destination returned. Nothing was inferred, and no price, rating or review count was recorded because publishing those requires a feed this project does not have.",
-    "why_two_passes": "Two earlier sessions published contradictory registers: one claimed three of the five links reached only the Amazon homepage, another could not reach Amazon at all and left every field blank. A third register matched the destinations below. Only a fresh fetch can settle it, so this session fetched again.",
-    "note_on_instability": "link.amazon responses are not stable from request to request: the same URL returned a bot interstitial for one session and a product page for another. A destination recorded here is an observation, not a guarantee, and it is not an Affiliate Special Link.",
-    "official_sources": {
-      "asin_length": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
-      "program_policies": "https://affiliate-program.amazon.com/help/operating/policies",
-      "operating_agreement": "https://affiliate-program.amazon.com/help/operating/agreement",
-      "ftc_endorsement_guides": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
-    }
+ "meta": {
+  "title": "Independent re-verification of the five submitted links",
+  "session": "arena/359baa16-affil1",
+  "retrieved_on": "2026-11-20",
+  "retrieved_at_utc": "2026-11-20T05:17Z",
+  "method": "Each submitted URL was requested a second time, by a different session, in the same day. Redirects were followed and the destination page's own title and breadcrumb were read. Values below are transcribed from what the destination returned. Nothing was inferred, and no price, rating or review count was recorded because publishing those requires a feed this project does not have.",
+  "why_two_passes": "Two earlier sessions published contradictory registers: one claimed three of the five links reached only the Amazon homepage, another could not reach Amazon at all and left every field blank. A third register matched the destinations below. Only a fresh fetch can settle it, so this session fetched again.",
+  "note_on_instability": "link.amazon responses are not stable from request to request: the same URL returned a bot interstitial for one session and a product page for another. A destination recorded here is an observation, not a guarantee, and it is not an Affiliate Special Link.",
+  "official_sources": {
+   "asin_length": "https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference",
+   "program_policies": "https://affiliate-program.amazon.com/help/operating/policies",
+   "operating_agreement": "https://affiliate-program.amazon.com/help/operating/agreement",
+   "ftc_endorsement_guides": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
   },
-  "rows": [
-    {
-      "id": "P-01",
-      "submitted_link": "https://link.amazon/B04G1MEwY",
-      "path_code": "B04G1MEwY",
-      "path_code_length": 9,
-      "observed_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
-      "observed_asin": "B0CDY277D3",
-      "destination_title": "Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen",
-      "agrees_with_current_register": true,
-      "contradicts_archived_register": false,
-      "status": "resolved to a product page on a second independent fetch"
-    },
-    {
-      "id": "P-02",
-      "submitted_link": "https://link.amazon/B02NbDxp3",
-      "path_code": "B02NbDxp3",
-      "path_code_length": 9,
-      "observed_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
-      "observed_asin": "B09B7SB46R",
-      "destination_title": "Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen",
-      "agrees_with_current_register": true,
-      "contradicts_archived_register": false,
-      "status": "resolved to a product page on a second independent fetch"
-    },
-    {
-      "id": "P-03",
-      "submitted_link": "https://link.amazon/B00hJ57DV",
-      "path_code": "B00hJ57DV",
-      "path_code_length": 9,
-      "observed_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
-      "observed_asin": "B08DKYBTPH",
-      "destination_title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
-      "agrees_with_current_register": true,
-      "contradicts_archived_register": true,
-      "discrepancy": "An archived register (_archive/2026-11-20-integration/_data/confirmations.json) recorded this link as reaching only the Amazon homepage and marked it unverified. That claim is contradicted by this fetch and by the register now on main. Recorded as a correction, not as a settled fact: the link is unstable, so both observations may have been true at their own moment.",
-      "status": "resolved to a product page on a second independent fetch"
-    },
-    {
-      "id": "P-04",
-      "submitted_link": "https://link.amazon/B0c8moW59",
-      "path_code": "B0c8moW59",
-      "path_code_length": 9,
-      "observed_listing_url": null,
-      "observed_asin": null,
-      "destination_title": "Amazon.com \u2014 checkpoint / continue-shopping interstitial (https://www.amazon.com/checkpoint/continue)",
-      "agrees_with_current_register": true,
-      "contradicts_archived_register": false,
-      "discrepancy": "No product destination has been reached by any session on any attempt. The row stays unresolved; it is not declared invalid, and no buy button is published for it.",
-      "status": "unresolved \u2014 bot interstitial on every attempt recorded so far",
-      "concurrent_observation": "A parallel integration pass (session arena/c9fc4295-affil1, merged into main as PR #27) recorded differing destinations for P-04 and P-05 on its own attempts and flagged the disagreement rather than resolving it. Preserved here verbatim: this row stays unresolved, and the site publishes no buy button for it."
-    },
-    {
-      "id": "P-05",
-      "submitted_link": "https://link.amazon/B0f3GKalj",
-      "path_code": "B0f3GKalj",
-      "path_code_length": 9,
-      "observed_listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
-      "observed_asin": "B0DZFD6R9Z",
-      "destination_title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000\u00b0F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen",
-      "agrees_with_current_register": true,
-      "contradicts_archived_register": true,
-      "discrepancy": "An archived register recorded this link as reaching only the Amazon homepage. This fetch and the current register both reach a product page \u2014 and that product is a wireless meat thermometer, not an air fryer, which is why the publication has a thermometer guide rather than pretending the row is a fifth fryer.",
-      "status": "resolved to a product page on a second independent fetch"
-    }
-  ],
-  "summary": {
-    "links_resolved": 4,
-    "links_unresolved": 1,
-    "path_codes_that_are_10_characters": 0,
-    "conclusion": "Every submitted path code is 9 characters long. Amazon's own Catalog Items reference treats an ASIN as the item identifier, and every destination ASIN observed on these pages is 10 characters; none of the five supplied codes can be matched to a catalog ASIN as written. The slug is therefore recorded as a short-link path code, never as an intended ASIN.",
-    "attribution_conclusion": "None of the five submitted URLs carries a tag parameter, and each works by redirect through an intermediate host. Under the Associates Commission Income Statement, purchases arriving through a Redirecting Link, or through a link that is not properly formatted, are disqualified \u2014 so as submitted these links cannot be attributed to the tracking ID. Replacing them with Special Links generated in Associates Central is the single highest-value change available to this project.",
-    "cross_session_agreement": "Two independent passes on 2026-11-20 reached the same four product destinations and the same unresolved fifth row. A third session's log disagrees about P-04 on some attempts. The register therefore publishes each destination as a dated observation with its source, and the weekly audit exists to notice when one changes."
+  "pass_2026_11_20_0640": {
+   "session": "arena/b990bce7-affil1",
+   "retrieved_at_utc": "2026-11-20T06:40Z",
+   "method": "Each of the five supplied short links was requested once, redirects followed, final URL and page title recorded. The five destination listings were then requested directly and their titles and breadcrumbs read.",
+   "short_link_result": "All five arrived at https://www.amazon.com/ — the storefront home page. None reached a product page. This is the third distinct behaviour recorded for the same five URLs on 2026-11-20, and it agrees with FLG-028.",
+   "listing_result": "All five destination listings loaded with titles matching this register exactly: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z.",
+   "not_claimed": "No price, rating or stock figure is recorded even though the pages displayed them: publishing those requires an Amazon-served or API-served feed (Program Policies 2(b)). No intended ASIN is inferred from any redirect."
   }
+ },
+ "rows": [
+  {
+   "id": "P-01",
+   "submitted_link": "https://link.amazon/B04G1MEwY",
+   "path_code": "B04G1MEwY",
+   "path_code_length": 9,
+   "observed_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+   "observed_asin": "B0CDY277D3",
+   "destination_title": "Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen",
+   "agrees_with_current_register": true,
+   "contradicts_archived_register": false,
+   "status": "resolved to a product page on a second independent fetch"
+  },
+  {
+   "id": "P-02",
+   "submitted_link": "https://link.amazon/B02NbDxp3",
+   "path_code": "B02NbDxp3",
+   "path_code_length": 9,
+   "observed_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+   "observed_asin": "B09B7SB46R",
+   "destination_title": "Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen",
+   "agrees_with_current_register": true,
+   "contradicts_archived_register": false,
+   "status": "resolved to a product page on a second independent fetch"
+  },
+  {
+   "id": "P-03",
+   "submitted_link": "https://link.amazon/B00hJ57DV",
+   "path_code": "B00hJ57DV",
+   "path_code_length": 9,
+   "observed_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+   "observed_asin": "B08DKYBTPH",
+   "destination_title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+   "agrees_with_current_register": true,
+   "contradicts_archived_register": true,
+   "discrepancy": "An archived register (_archive/2026-11-20-integration/_data/confirmations.json) recorded this link as reaching only the Amazon homepage and marked it unverified. That claim is contradicted by this fetch and by the register now on main. Recorded as a correction, not as a settled fact: the link is unstable, so both observations may have been true at their own moment.",
+   "status": "resolved to a product page on a second independent fetch"
+  },
+  {
+   "id": "P-04",
+   "submitted_link": "https://link.amazon/B0c8moW59",
+   "path_code": "B0c8moW59",
+   "path_code_length": 9,
+   "observed_listing_url": null,
+   "observed_asin": null,
+   "destination_title": "Amazon.com — checkpoint / continue-shopping interstitial (https://www.amazon.com/checkpoint/continue)",
+   "agrees_with_current_register": true,
+   "contradicts_archived_register": false,
+   "discrepancy": "No product destination has been reached by any session on any attempt. The row stays unresolved; it is not declared invalid, and no buy button is published for it.",
+   "status": "unresolved — bot interstitial on every attempt recorded so far",
+   "concurrent_observation": "A parallel integration pass (session arena/c9fc4295-affil1, merged into main as PR #27) recorded differing destinations for P-04 and P-05 on its own attempts and flagged the disagreement rather than resolving it. Preserved here verbatim: this row stays unresolved, and the site publishes no buy button for it."
+  },
+  {
+   "id": "P-05",
+   "submitted_link": "https://link.amazon/B0f3GKalj",
+   "path_code": "B0f3GKalj",
+   "path_code_length": 9,
+   "observed_listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+   "observed_asin": "B0DZFD6R9Z",
+   "destination_title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen",
+   "agrees_with_current_register": true,
+   "contradicts_archived_register": true,
+   "discrepancy": "An archived register recorded this link as reaching only the Amazon homepage. This fetch and the current register both reach a product page — and that product is a wireless meat thermometer, not an air fryer, which is why the publication has a thermometer guide rather than pretending the row is a fifth fryer.",
+   "status": "resolved to a product page on a second independent fetch"
+  }
+ ],
+ "summary": {
+  "links_resolved": 4,
+  "links_unresolved": 1,
+  "path_codes_that_are_10_characters": 0,
+  "conclusion": "Every submitted path code is 9 characters long. Amazon's own Catalog Items reference treats an ASIN as the item identifier, and every destination ASIN observed on these pages is 10 characters; none of the five supplied codes can be matched to a catalog ASIN as written. The slug is therefore recorded as a short-link path code, never as an intended ASIN.",
+  "attribution_conclusion": "None of the five submitted URLs carries a tag parameter, and each works by redirect through an intermediate host. Under the Associates Commission Income Statement, purchases arriving through a Redirecting Link, or through a link that is not properly formatted, are disqualified — so as submitted these links cannot be attributed to the tracking ID. Replacing them with Special Links generated in Associates Central is the single highest-value change available to this project.",
+  "cross_session_agreement": "Two independent passes on 2026-11-20 reached the same four product destinations and the same unresolved fifth row. A third session's log disagrees about P-04 on some attempts. The register therefore publishes each destination as a dated observation with its source, and the weekly audit exists to notice when one changes."
+ }
 }
