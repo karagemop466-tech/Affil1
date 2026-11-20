@@ -52,15 +52,15 @@ def build_about(page_dir, sources, meta):
     <p>This site sets no cookies, loads no third-party scripts, calls no external APIs and embeds no fonts from a CDN. The typefaces are served from this repository. Saved picks and editorial decisions stay in this browser. The Pages edition sends no analytics. On the self-hosted edition the counter keeps only daily totals by page, event and product, pruning entries older than 90 days on writes. Do Not Track and Global Privacy Control suppress collection. Hosting providers may maintain separate network logs.</p>
 
     <h2 id="imagery">Imagery</h2>
-    <p>All eight photographs are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
+    <p>The photographs are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
 
     <h2 id="who">Who wrote this</h2>
     <p>No author is named, because there is no person whose name would be accurate to put here. This is the site's largest weakness and it is recorded as FLG-006 rather than papered over with a stock biography and an invented credential. A named editor with a true description of what they did is suggestion S-03.</p>
   </div>
   <aside class="record-side">
     <div class="side-card"><h2>At a glance</h2><dl class="side-dl">
-      <div><dt>Pages</dt><dd>26</dd></div>
-      <div><dt>Products</dt><dd>5 submitted, 4 identified</dd></div>
+      <div><dt>Pages</dt><dd>28</dd></div>
+      <div><dt>Products</dt><dd>5 listings observed</dd></div>
       <div><dt>Tested</dt><dd>0</dd></div>
       <div><dt>Prices shown</dt><dd>None</dd></div>
       <div><dt>Third-party requests</dt><dd>0</dd></div>
@@ -149,7 +149,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A publication with eight buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen decision questions, twelve suggestions, a review queue, a source list with quoted wording, an empty campaign ledger, a self-hosted aggregate counter and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <p>A publication with nine buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen decision questions, twelve suggestions, a review queue, a source list with quoted wording, an empty campaign ledger, a self-hosted aggregate counter and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>

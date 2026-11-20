@@ -40,7 +40,7 @@ def build_index(page_dir, flags, meta):
             {"html": f'<span class="pill pill-{"block" if f["severity"]=="high" else ("warn" if f["severity"]=="medium" else "none")}">{esc(f["severity"])}</span>'},
             {"html": esc(f["title"])},
             {"html": esc(f["blocks"])},
-            {"html": _urlish(next(c for c in f["to_check"] if c.startswith("https://")),d)},
+            {"html": _urlish(next(c for c in f["to_check"] if c.startswith("https://") and not c.startswith("https://link.amazon/")),d)},
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
         ])
     flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Source", "Affects"], flag_rows,

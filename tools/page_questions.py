@@ -32,13 +32,13 @@ def build(page_dir, questions, meta):
 </article>"""
 
     official_sources = {
-        "Q-01": "https://link.amazon/B04G1MEwY", "Q-02": "https://link.amazon/B0c8moW59",
+        "Q-01": "https://www.amazon.com/dp/B0CDY277D3", "Q-02": "https://www.amazon.com/dp/B0DHZTCNR5",
         "Q-03": "https://affiliate-program.amazon.com/help/operating/policies",
         "Q-04": "https://affiliate-program.amazon.com/help/operating/policies",
-        "Q-05": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+        "Q-05": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
         "Q-06": "https://www.amazon.com/dp/B0DHZTCNR5",
         "Q-07": "https://support.google.com/webmasters/answer/7576553",
-        "Q-08": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+        "Q-08": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
         "Q-09": "https://affiliate-program.amazon.com/help/operating/policies",
         "Q-10": "https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages",
         "Q-11": "https://support.google.com/webmasters/answer/9008080",
