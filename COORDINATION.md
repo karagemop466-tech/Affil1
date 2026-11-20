@@ -251,3 +251,8 @@ Claim was pushed before implementation. Shared-board-only rebase conflicts occur
 - Rebased again over the #28 deployment log; retained both coordination entries.
 - Preserved the parallel session’s source column and updated the now-implemented measurement wording; regenerated the shared page.
 - Rebased over #31, retaining its independent supplement and coordination entry.
+
+### Delivery — Good Measure Kitchen Notes
+
+- [PR #31](https://github.com/karagemop466-tech/Affil1/pull/31) merged into `main` at `adb5e9834260d07d1128012fa900859a258360d4` on 2026-11-20. [PR build](https://github.com/karagemop466-tech/Affil1/actions/runs/44682671403) and [GitHub Pages release](https://github.com/karagemop466-tech/Affil1/actions/runs/44682695195) both succeeded.
+- Fetched and read the live [front page](https://karagemop466-tech.github.io/Affil1/kitchen/), [Executive summary](https://karagemop466-tech.github.io/Affil1/kitchen/desk.html) and [Flagged for Review](https://karagemop466-tech.github.io/Affil1/kitchen/flagged.html) after deployment. The product intent cells and campaign ledger remain empty by design. Root navigation/feed integration was left to the active integration owner; the supplement includes its own feed and sitemap on the same host.
