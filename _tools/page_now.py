@@ -29,7 +29,7 @@ def build(page_dir):
     questions = _load("questions.json")["questions"]
 
     import sys
-    sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT / "_tools"))
     from page_offers import ranked
 
     scored, unscored = ranked(offers)
@@ -95,7 +95,7 @@ def build(page_dir):
         for f in flags if f.get("severity") == "high"
     ]
     high_table = table(["Ref", "Severity", "What is flagged"], flag_rows, cls="flagtable",
-                       caption=f"The {len(flag_rows)} high-severity flags, unchanged from the review queue")
+                       caption=f"All {len(flag_rows)} high-severity flags, unchanged from the review queue")
 
     body = (
         pagehead(

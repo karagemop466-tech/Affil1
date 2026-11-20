@@ -389,6 +389,27 @@
       ],
       "impact": "Discoverability, not correctness. The file is kept correctly formatted for any crawler that does read it; canonicals and the sitemap carry the load if it is ignored.",
       "blocks": "nothing — but Search Console submission (Q-11 / S-03) is the required discovery step, not an optional one"
+    },
+    {
+      "id": "FLG-028",
+      "severity": "high",
+      "title": "On 2026-11-20 re-check, all five submitted short links returned the Amazon homepage, not the product pages the register records",
+      "expected": "Each submitted link.amazon.com short link, fetched directly, lands on the /dp/ listing that the register records as its observed destination (product-intent.json, products.json observed_url).",
+      "found": "Re-check on 2026-11-20 (arena/bcd93318-affil1, fetch_page, redirects followed). Every short link returned https://www.amazon.com/ with the title 'Amazon.com. Spend less. Smile more.': B04G1MEwY (P-01), B02NbDxp3 (P-02), B00hJ57DV (P-03), B0c8moW59 (P-04, on two separate attempts), B0f3GKalj (P-05). The direct /dp/ pages for B0CDY277D3 (P-01) and B0DHZTCNR5 (P-04) and B0DZFD6R9Z (P-05) did resolve to the listings the register records (titles confirmed on the same date). Details: _docs/VERIFICATION-arena-bcd93318.md.",
+      "impact": "The register's observed_redirect_target values for the short links rest on earlier fetches. Today's fetches do not reproduce them, so those redirect observations are not currently reproducible. Nothing here changes intended_asin, which stays null.",
+      "reading": "Either the short links redirect differently by request (geography, session, bot handling, or the fetching client) or the earlier redirect records were wrong. The repository cannot tell which from outside Amazon's own tools. This is the same instability already recorded for P-01 and P-04 in FLG-018 and the README, now seen for all five at once. Do not change any observed field on the strength of one fetch in either direction.",
+      "blocks": "Nothing on the site changes automatically. It does mean the 'destination reached' column for the short links is not a stable fact. The Associates one-link test (FLG-003) is the step that would settle it from an enrolled account.",
+      "to_check": [
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV",
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "https://affiliate-program.amazon.com/help/operating/agreement"
+      ]
     }
   ]
 }
