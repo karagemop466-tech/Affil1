@@ -1,11 +1,28 @@
-"""Stage only the canonical publication, never the repo or raw campaign data."""
-from build import ROOT, GENERATED
-from shutil import copy2, copytree, rmtree
+#!/usr/bin/env python3
+"""Package only the maintained edition; never upload the repository itself."""
+import shutil
+import sys
+from pathlib import Path
 
-out = ROOT / 'dist'
-rmtree(out, ignore_errors=True)
-for name in GENERATED:
-    dest = out / name
-    dest.parent.mkdir(exist_ok=True, parents=True)
-    copy2(ROOT / name, dest)
-copytree(ROOT / 'assets', out / 'assets')
+from build import GENERATED, ROOT
+
+
+def stage(destination):
+    destination.mkdir(parents=True, exist_ok=True)
+    if any(destination.iterdir()):
+        raise SystemExit(f"Staging directory must be empty: {destination}")
+    files = GENERATED | {'.nojekyll'}
+    files |= {
+        str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*')
+        if path.is_file() and (path.suffix in {'.woff2', '.svg'} or
+           path.name in {'site.css', 'site.js', 'analytics.js', 'publication.css', 'publication.js', 'counter-config.js', 'cover-air-fryer.jpg'} or
+           path.stem.endswith(('-w560', '-w760', '-w900', '-w1280')))
+    }
+    for name in sorted(files):
+        target = destination / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, target)
+
+
+if __name__ == '__main__':
+    stage(Path(sys.argv[1]))

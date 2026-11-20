@@ -153,7 +153,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>An 18-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, fifteen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <p>A 22-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, fifteen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
