@@ -16,12 +16,16 @@ import html
 import json
 import pathlib
 import posixpath
+import re
 from functools import lru_cache
 from urllib.parse import parse_qs, urlsplit
 
 from paid_link_gate import approved_links
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# Any URL that points at an Amazon product page, including short links.
+AMAZON_PRODUCT = re.compile(r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", re.I)
 SITE_NAME = "Crisp & Counter"
 SITE_TAGLINE = "Air fryer & thermometer notes"
 SITE_URL = "https://karagemop466-tech.github.io/Affil1"
@@ -35,11 +39,12 @@ AMAZON_NOTE = "Price, rating and delivery are shown on Amazon, where they are al
 
 # One navigation group. Everything else is reachable from the footer.
 NAV = [
-    ("products/index.html", "Shop"),
+    ("products/index.html", "Shop the edit"),
     ("guides/index.html", "Guides"),
     ("compare/index.html", "Compare"),
-    ("fit/index.html", "Find your fit"),
-    ("now/index.html", "What's left"),
+    ("fit/index.html", "Fit finder"),
+    ("questions/index.html", "Questions"),
+    ("suggestions/index.html", "Suggestions"),
 ]
 
 FOOTER_GROUPS = [
@@ -57,9 +62,6 @@ FOOTER_GROUPS = [
         ("feed.xml", "RSS feed"),
     ]),
     ("The desk", [
-        ("now/index.html", "What's left to do"),
-        ("offers/index.html", "Offers, ranked"),
-        ("verification/index.html", "What is verified"),
         ("decide/index.html", "Decision gate"),
         ("questions/index.html", "Open questions"),
         ("suggestions/index.html", "Suggestions & decisions"),
@@ -92,23 +94,40 @@ def rel(page_dir, target):
 def approved_amazon_urls():
     """Every tagged destination this site may publish, keyed by ASIN.
 
-    A record with a complete evidence bundle supplies its approved Special Link.
-    The rest fall back to the observed ASIN plus the supplied tag, which is what
-    Program Policies require of a Special Link. Attribution stays unconfirmed
-    and is flagged as FLG-002; dropping the tag would guarantee no attribution.
+    Only a record with a complete evidence bundle (see paid_link_gate.eligible)
+    supplies an entry. Observed listings are NOT entries: they are plain reference
+    links (listing_url), so the approved register stays a real gate that a reviewer
+    can inspect (test_paid_link_gate.py asserts it is empty until evidence exists).
     """
     data = json.loads((ROOT / 'src/data/products.json').read_text())
-    approved = approved_links(data['products'], TRACKING_ID)
-    for product in data['products']:
-        asin = product.get('observed_asin')
-        if asin and asin not in approved:
-            approved[asin] = f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
-    return approved
+    return approved_links(data['products'], TRACKING_ID)
+
+
+def listing_url(asin):
+    """The plain official listing for an ASIN, with no tag.
+
+    This is a reference link, not a Special Link. Until an account-validated
+    Special Link is recorded (src/data/product-intent.json, via tools/arm_links.py),
+    no tag is synthesised here and nothing on the site is claimed to be attributed.
+    """
+    return f"https://www.amazon.com/dp/{asin}"
+
+
+@lru_cache(maxsize=1)
+def permitted_amazon_urls():
+    """Every Amazon product URL the site may publish.
+
+    The account-approved Special Links, plus the plain listing for each observed
+    ASIN. Nothing else: no tag the register does not approve, no short link.
+    """
+    data = json.loads((ROOT / 'src/data/products.json').read_text())
+    observed = {p['observed_asin'] for p in data['products'] if p.get('observed_asin')}
+    return frozenset(set(approved_amazon_urls().values()) | {listing_url(a) for a in observed})
 
 
 def buy_url(asin):
-    """The tagged Special Link for an ASIN, always carrying the account tag."""
-    return approved_amazon_urls().get(asin, f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}")
+    """The destination for an ASIN: the approved Special Link, else the plain listing."""
+    return approved_amazon_urls().get(asin, listing_url(asin))
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
@@ -141,10 +160,15 @@ def outbound(page_dir, url, label, **kw):
 
 
 def product_link(page_dir, url, label, **kw):
-    """A link to Amazon. Always marked sponsored, always in a new tab."""
+    """A link to Amazon. Always marked sponsored, always in a new tab.
+
+    Only a permitted Amazon product URL may be published (permitted_amazon_urls):
+    an account-approved Special Link, or the plain listing of an observed ASIN.
+    Any other tag, any short link, or any unknown ASIN is refused.
+    """
+    if AMAZON_PRODUCT.search(url) and url not in permitted_amazon_urls():
+        raise ValueError(f'Unapproved Amazon product link: {url}')
     tagged = 'tag' in parse_qs(urlsplit(url).query, keep_blank_values=True)
-    if tagged and url not in approved_amazon_urls().values():
-        raise ValueError(f'Unapproved Amazon tag: {url}')
     if tagged:
         kw['affiliate_ref'] = urlsplit(url).path.rsplit('/', 1)[-1]
     else:

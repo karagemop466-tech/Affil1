@@ -1,0 +1,86 @@
+{
+  "schema": "product-intent-confirmation v1",
+  "generated": "2026-11-20",
+  "associates_tracking_id": "shopnow047c-20",
+  "fields": {
+    "submitted_link": "The Amazon short link submitted by the user.",
+    "intended_asin": "The ASIN encoded in the submitted short link. Per Amazon, an ASIN is Amazon's checkable product identifier.",
+    "official_listing_url": "The official Amazon listing URL reached after resolving the short link. Left blank when no product destination could be confirmed.",
+    "observed_redirect_target": "The actual destination observed when the short link was fetched. Kept in a separate field from official_listing_url; the two are never merged.",
+    "confirmation_date": "Date the short link was fetched and resolved (local time, UTC per system date).",
+    "source": "Official source used for verification.",
+    "status": "verified when an official Amazon product page was reached; unverified otherwise."
+  },
+  "note": "Do not claim that supplied short links are invalid; their exact compliance status is unresolved. One link per product should be tested in the enrolled Associates workflow before scaling (test-link step not yet performed).",
+  "records": [
+    {
+      "id": "conf-001",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "intended_asin": "B04G1MEwY",
+      "official_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_redirect_target": "https://www.amazon.com/dp/B0CDY277D3",
+      "product_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "confirmation_date": "2026-11-20",
+      "source": "https://www.amazon.com/dp/B0CDY277D3 (reached via https://link.amazon/B04G1MEwY; Amazon.com official site)",
+      "status": "verified",
+      "destination_matches_intended_asin": false
+    },
+    {
+      "id": "conf-002",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "intended_asin": "B02NbDxp3",
+      "official_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_redirect_target": "https://www.amazon.com/dp/B09B7SB46R",
+      "product_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "confirmation_date": "2026-11-20",
+      "source": "https://www.amazon.com/dp/B09B7SB46R (reached via https://link.amazon/B02NbDxp3; Amazon.com official site)",
+      "status": "verified",
+      "destination_matches_intended_asin": false
+    },
+    {
+      "id": "conf-003",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "intended_asin": "B00hJ57DV",
+      "official_listing_url": "",
+      "observed_redirect_target": "https://www.amazon.com/",
+      "product_title": "",
+      "confirmation_date": "2026-11-20",
+      "source": "https://www.amazon.com/ (reached via https://link.amazon/B00hJ57DV; Amazon.com official site)",
+      "status": "unverified",
+      "flag": "Short link resolved to the Amazon homepage, not to a product page. No product destination confirmed. Flagged for review.",
+      "destination_matches_intended_asin": false
+    },
+    {
+      "id": "conf-004",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "intended_asin": "B0c8moW59",
+      "official_listing_url": "",
+      "observed_redirect_target": "https://www.amazon.com/checkpoint/continue (Amazon bot checkpoint / continue-shopping gate)",
+      "product_title": "",
+      "confirmation_date": "2026-11-20",
+      "source": "https://www.amazon.com/checkpoint/continue (reached via https://link.amazon/B0c8moW59; Amazon.com official site)",
+      "status": "unverified",
+      "flag": "Short link reached an Amazon checkpoint page requiring manual interaction. No product page reachable. Flagged for review.",
+      "destination_matches_intended_asin": false
+    },
+    {
+      "id": "conf-005",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "intended_asin": "B0f3GKalj",
+      "official_listing_url": "",
+      "observed_redirect_target": "https://www.amazon.com/",
+      "product_title": "",
+      "confirmation_date": "2026-11-20",
+      "source": "https://www.amazon.com/ (reached via https://link.amazon/B0f3GKalj; Amazon.com official site)",
+      "status": "unverified",
+      "flag": "Short link resolved to the Amazon homepage, not to a product page. No product destination confirmed. Flagged for review.",
+      "destination_matches_intended_asin": false
+    }
+  ],
+  "irregularities": [
+    "Three of five submitted short links did not resolve to an official Amazon product page (homepage or checkpoint).",
+    "For verified links, the observed redirect target ASIN differs from the short-link slug (intended ASIN). Fields are intentionally kept separate.",
+    "Prices, ratings, review counts and commission rates are left blank: they were not confirmed from an official source and must not be inferred."
+  ],
+  "$comment": "SUPERSEDED 2026-11-20 by data/product-intent.json (canonical product-intent confirmation record). This legacy record is kept as history and differs from the canonical register in three ways: (1) it calls two rows 'verified' where the canonical register says observed_only; (2) it copies the observed redirect target into official_listing_url, merging what the canonical register keeps separate; (3) its observations for conf-003 and conf-005 (homepage) were contradicted by later fetches the same day that resolved product pages (see product-intent.json observation_log obs-1/obs-2 and FLG-009). Do not use this file as a source of status. Intent remains unconfirmed for all five links."
+}

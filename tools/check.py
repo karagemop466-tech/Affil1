@@ -111,7 +111,7 @@ BANNED = [
 # policy pages is a source, not a Special Link, and marking it "sponsored"
 # would misdescribe it. This distinction is enforced rather than described.
 AFFILIATE = re.compile(
-    r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:(?:dp|gp/product)/|gp/aws/cart/add\.html)|link\.amazon/)", re.I)
+    r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", re.I)
 AMAZON_ANY = re.compile(r"(^//|https?://)([a-z0-9.-]*amazon\.[a-z.]+|amzn\.to|link\.amazon)", re.I)
 EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
@@ -121,7 +121,6 @@ CITATION_OK = re.compile(
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
     r"developer-docs\.amazon\.com|sell\.amazon\.com|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
-    r"sitemaps\.org|"
     r"www\.ftc\.gov|foodsafety\.gov)(?=/|$)",
     re.I,
 )
@@ -180,13 +179,16 @@ def check_page(path):
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
     # --- Amazon links must be sponsored AND carry the Associates tag ---
-    from layout import approved_amazon_urls
+    # Only permitted Amazon product URLs may be published: an account-approved
+    # Special Link, or the plain listing of an observed ASIN (layout.permitted_amazon_urls).
+    # Any other tag, a short link, or an unobserved ASIN fails here.
+    from layout import permitted_amazon_urls
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
-            if "tag" in parse_qs(urlparse(href).query, keep_blank_values=True) and href not in approved_amazon_urls().values():
-                err(f"{rel}: unapproved tagged link: {href}")
+            if href not in permitted_amazon_urls():
+                err(f"{rel}: Amazon product link is not a permitted URL (unapproved tag, short link or unobserved ASIN): {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:

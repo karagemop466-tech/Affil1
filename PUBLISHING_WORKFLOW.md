@@ -31,10 +31,12 @@ python3 tools/validate.py # the gate; non-zero exit blocks the deploy job
       `rel="sponsored nofollow noopener"`, a visible "Paid link" note, and `target="_blank"`.
 - [x] A buy button exists only where a product page was actually reached. An unresolved
       row gets a link to its flag entry instead — never a guess.
-- [x] No tracking tag is published while enrolment is unconfirmed. `src/data/product-intent.json`
-      is the gate and `tools/validate.py` fails the build if a `tag=` appears while
-      `associate_enrollment_confirmed`, `site_registered` and `one_link_test_completed` are false.
-      Until then every button is a labelled **reference link** to the official listing.
+- [x] No tracking tag is published unless an account-validated Special Link is recorded in
+      `src/data/product-intent.json`. `tools/check.py` fails the build if any Amazon product link
+      is outside `tools/layout.py` `permitted_amazon_urls()` (an approved Special Link, or the
+      plain listing of an observed ASIN). Until a Special Link is recorded every button is a
+      labelled **reference link** to the official listing. The reading of Program Policies 2(b)
+      behind this is an open owner decision (FLG-025).
       Rationale: an untagged redirect through an intermediate host cannot be attributed
       (Commission Income Statement §2(e), §2(g)), and a tag implies a registered site on an
       enrolled account, which this repository cannot verify.

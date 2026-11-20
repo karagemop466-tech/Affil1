@@ -11,7 +11,6 @@ import pathlib
 from layout import (AMAZON_NOTE, esc, eyebrow, link, page, product_link, rel,
                     section, buy_url)
 from content import GUIDES
-from cta import pair as cta_pair
 
 
 def img(page_dir, path, alt, *, sizes, cls="", loading="lazy"):
@@ -62,7 +61,10 @@ def product_card(page_dir, p):
     <h3><a href="{esc(href)}">{esc(p['name'])}</a></h3>
     <p class="pcard-why">{esc(p['why'])}</p>
     <ul class="chips">{_chips(p)}</ul>
-    {cta_pair(page_dir, p)}
+    <p class="pcard-actions">
+      {product_link(page_dir, buy_url(p['observed_asin']), 'See it on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn btn-small', aria=f"Open the Amazon listing for {p['brand']} {p['format_label']} (listing source, opens in a new tab)")}
+      <a class="tlink" href="{esc(href)}">Read the note <span aria-hidden="true">&rarr;</span></a>
+    </p>
     <p class="pcard-fine">Listing source &middot; {esc(AMAZON_NOTE)}</p>
   </div>
 </article>"""

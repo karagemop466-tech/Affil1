@@ -30,7 +30,7 @@
     },
     {
       "timestamp": "2026-11-20",
-      "action": "Buy destination changed from the untagged short link to a tagged listing URL",
+      "action": "Buy destination changed from the short link to the official /dp/ listing URL. A tag was added and withdrawn on 2026-11-20 pending an account-validated Special Link (FLG-009).",
       "note": "Rationale recorded in tools/build.py product_link() and /flagged/ FLG-003; still pending regeneration inside Associates Central."
     },
     {

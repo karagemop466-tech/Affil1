@@ -6,7 +6,7 @@
     "verified_in_session": "5 of 5",
     "method": "Each supplied link was opened through a fetcher that follows redirects. The final /dp/ URL, the page title and the category breadcrumb were read from the page that loaded. Nothing was inferred, and no value was carried over from a search result or from another session's notes.",
     "field_rule": "intended_asin (what the operator meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. The nine-character supplied codes are slugs, not identifiers, so intended_asin stays null for every product.",
-    "link_rule": "Every buy button points at https://www.amazon.com/dp/{observed_asin}?tag=shopnow047c-20. The tag parameter is required by Associates Program Policies 2(b): 'You must include your Associates ID or \"tag\" ... as a parameter in the URL of each link you place on your Site to an Amazon Site.' The bare listing URL is kept as verification evidence and is never used as the click destination.",
+    "link_rule": "Every buy button points at the official listing https://www.amazon.com/dp/{observed_asin}, with no tag, marked sponsored and labelled as a listing source. Program Policies 2(a)-(b) require Special Links to carry the Associates ID as a URL parameter; 2(b) sits under 'General Requirements Applicable to All Special Links', so this site reads the tag rule as governing Special Links, not plain listing links (interpretation flagged for owner review). The tag is added only when an account-validated Special Link is recorded in src/data/product-intent.json (tools/paid_link_gate.py). None is recorded yet, so no link is attributable.",
     "price_rule": "Program Policies §2(b) (SRC-03) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API or PA API. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 (SRC-11), and the Creators API requires at least 10 qualifying sales within the past 30 days (SRC-12). Neither path is connected, so no price, star rating, review count or stock status appears for any product on this site.",
     "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner. Editorial notes say what a stated feature changes about using the appliance; they do not claim an experience of it.",
     "categories": [
@@ -67,7 +67,7 @@
       ],
       "photo": "assets/img/format-basket",
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
-      "photo_note": "Editorial illustration of the dual-basket format. It is not a photograph of P-01 and must not be read as one.",
+      "photo_note": "Editorial illustration. It is not a photograph of P-01 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20. The link resolved straight to the listing; the page title and breadcrumb were read from that page.",
       "identity_confidence": "observed",
@@ -84,8 +84,7 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "6 quart total, as two independent 3-quart baskets",
-      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
-      "photo_style": "engraved illustration"
+      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe"
     },
     {
       "ref": "P-02",
@@ -120,7 +119,7 @@
       ],
       "photo": "assets/img/format-oven",
       "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
-      "photo_note": "This is a photographic image, and it is not a photograph of P-02: it shows a generic countertop oven. Read it as atmosphere, not as documentation of the product.",
+      "photo_note": "Editorial illustration. It is not a photograph of P-02 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20 and resolved to the listing on the first request.",
       "identity_confidence": "observed",
@@ -137,8 +136,7 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "26 quart",
-      "stated_attributes": "24 one-touch presets; six cooking accessories included",
-      "photo_style": "photographic"
+      "stated_attributes": "24 one-touch presets; six cooking accessories included"
     },
     {
       "ref": "P-03",
@@ -174,7 +172,7 @@
       ],
       "photo": "assets/img/format-basket",
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
-      "photo_note": "Editorial illustration of the single-basket format. It is not a photograph of P-03 and must not be read as one.",
+      "photo_note": "Editorial illustration. It is not a photograph of P-03 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20 and resolved to the listings on the first request.",
       "identity_confidence": "observed",
@@ -191,8 +189,7 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "8 quart",
-      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
-      "photo_style": "engraved illustration"
+      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel"
     },
     {
       "ref": "P-04",
@@ -227,7 +224,7 @@
       ],
       "photo": "assets/img/instant-thermometer",
       "photo_alt": "An unbranded folding digital instant-read meat thermometer resting beside a seared chicken breast on a wooden board",
-      "photo_note": "This is a photographic image, and it is not a photograph of P-04: it shows a generic folding probe thermometer. Read it as atmosphere, not as documentation of the product.",
+      "photo_note": "Editorial illustration of an instant-read probe format. It is not a photograph of P-04 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Resolved on this run after failing three times in an earlier session. Verification is a record of this request, not a guarantee about the next one.",
       "identity_confidence": "observed",
@@ -246,8 +243,7 @@
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "One-second reading stated; ±0.5℉ accuracy stated; NIST/NSF certification stated; IP67 waterproof; auto-rotating screen",
       "observation_conflict": true,
-      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity.",
-      "photo_style": "photographic"
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
     },
     {
       "ref": "P-05",
@@ -282,7 +278,7 @@
       ],
       "photo": "assets/img/thermometer",
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
-      "photo_note": "Editorial illustration of the wireless probe format. It is not a photograph of P-05 and must not be read as one.",
+      "photo_note": "Editorial illustration. It is not a photograph of P-05 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20 and resolved to the listing on the first request.",
       "identity_confidence": "observed",
@@ -301,8 +297,7 @@
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
       "observation_conflict": true,
-      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity.",
-      "photo_style": "engraved illustration"
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
     }
   ]
 }
