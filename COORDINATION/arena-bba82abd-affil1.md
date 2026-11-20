@@ -100,7 +100,15 @@ Also corrected on the brief page (committed in `fa607a4`, merged):
 - The brief said "seventeen review flags". The register holds 26 flags on the merged tree; the brief now reads "26 flags for review".
 - The brief said the fifth link "failed three times" and resolved to ThermoMaven. The product data maps ThermoMaven to P-04 and CHEF iQ to P-05, and the failure history cannot be verified in this pass. Corrected to what this pass read.
 
+## Merge decision — held
+
+Head `2e3dc40`. Checks on the PR: `build` pass, `launch` (Affiliate launch checks) pass, `verify-edition` pass, `deploy` skipped (PR events).
+
+The merge condition in the brief is 'build, check, validate, links and deploy all pass'. Four of those pass, and the staged-artifact mount check passes (851 references). The deploy gate cannot pass: the `Build, check and deploy` deploy job runs only when the Pages source is `workflow`. It is `legacy` (`main` `/`), so the job is skipped on every `main` run (checked on `b305af3`, `6eb15b7`, `2934ed0`). No PR or `main` run can show a deploy pass until the owner decides (RVW-09).
+
+**Not merged.** The owner decides one of two: (1) waive the deploy gate for PR #96 and merge on the staged-artifact check, or (2) switch the Pages source to `workflow`, which then makes the deploy job run on `main`. Either way the merge result is recorded on the PR.
+
 ## Status
 
-**Done:** claim narrowed; verification log (RVW-01 to RVW-09); source register quote audit; brief table and brief corrections; gates on the merged tree; board record.
+**Done:** claim narrowed; PR #96 open, not merged (deploy gate, RVW-09); verification log (RVW-01 to RVW-09); source register quote audit; brief table and brief corrections; gates on the merged tree; board record.
 **Not done (requests and owner decisions):** dashboard wiring; executive summary rewrite; RVW-01, RVW-03, RVW-07, RVW-09 owner decisions; deploy-path checker scope (RVW-08).

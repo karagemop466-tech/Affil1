@@ -291,11 +291,11 @@
     {
       "id": "RVW-09",
       "severity": "medium",
-      "status": "Open. Owner decision on Pages configuration.",
+      "status": "Open. Blocks the merge of PR #96 under the brief condition (deploy passes). Owner decision.",
       "title": "The deploy job in pages.yml is skipped under the current legacy Pages source",
       "found": "pages.yml runs the deploy job only when needs.build.outputs.source == 'workflow'. The Pages API reports build_type 'legacy' with source main '/' (checked 2026-11-20). On a push to main, the build job therefore reports the source as legacy and the deploy job is skipped. The live publish is GitHub's legacy build from the repository root (run 'pages build and deployment', success, on 23fa2e3).",
       "why_it_matters": "The deploy job cannot show 'pass' on main until the Pages source is switched to 'workflow' (a repository setting). Pre-merge deploy evidence therefore comes from the staged artifact check, not from the deploy job.",
-      "action": "Owner decision: keep legacy root publishing (then the deploy job stays skipped by design) or switch the Pages source to 'workflow' (then _site is deployed). Not changed in this pass.",
+      "action": "Owner decision, one of: (1) waive the deploy gate for PR #96 and merge on the staged-artifact mount check (851 references, 0 failures); or (2) switch the Pages source to 'workflow' so the deploy job runs on main. Not changed in this pass. The deploy job was skipped on b305af3, 6eb15b7 and 2934ed0.",
       "sources": [
         "repository file: .github/workflows/pages.yml (deploy job condition)",
         "GitHub Pages API: build_type legacy, source main /"

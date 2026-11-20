@@ -663,9 +663,9 @@ Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-
 
 ## Session arena/bba82abd-affil1 — full-brief review pass (2026-11-20)
 
-Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **PR open, ready for merge after this record**.
+Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **PR open; merge held.** All gates pass on `2e3dc40` except the deploy gate, which cannot pass under the configured legacy Pages source: the `Build, check and deploy` deploy job is skipped on every `main` run (checked on `b305af3`, `6eb15b7`, `2934ed0`), so the merge condition 'deploy passes' is not met. Owner decision needed (RVW-09): waive the deploy gate for this PR, merging on the staged-artifact check recorded below, or switch the Pages source to `workflow`.
 
-**Pull request:** https://github.com/karagemop466-tech/Affil1/pull/96 (`arena/bba82abd-affil1` into `main`). Merge result: recorded as a comment on PR #96 (merge commit, Pages build result). This board entry predates the merge; a branch cannot write to `main` after merging, so the result lives on the PR.
+**Pull request:** https://github.com/karagemop466-tech/Affil1/pull/96 (`arena/bba82abd-affil1` into `main`). Merge result: **none; held** (see status). If the owner waives the deploy gate, the merge commit and the post-merge Pages result will be recorded as a comment on PR #96.
 
 **Scope, narrowed.** Claimed files: `_src/data/verification-log.json` (new; was `src/data/`), `_src/data/sources.json` (dates and quotes), the proposals folder (`COORDINATION/arena-bba82abd-affil1-proposals/page_dashboard.py.txt`, unwired), this section and its record. `_tools/page_desk.py` (brief and About generator, committed at `fa607a4`) and the regenerated `brief/index.html` and `about/index.html` are already in the branch under the owner's gap-closure scope; the integration session should review them. Withdrawn from the first claim: `_tools/build.py`, `_tools/layout.py`, `EXECUTIVE_SUMMARY.md`, and a dashboard page. Those are logged as requests below, not edited here.
 
