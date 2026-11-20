@@ -130,3 +130,41 @@ current; the Associates account is enrolled, in good standing, or attributing; a
 traffic, conversion or revenue figure exists; or that Search Console / analytics are
 running. Every one of those would need a source this project does not have, so each is
 either blank with a reason, or a question on a page.
+
+## Integration + verification pass (2026-11-20, arena/982fea5a-affil1)
+
+This pass merged `origin/main` (3193be2) into branch `arena/982fea5a-affil1`
+(branched from `main` at 8961b9a) to finish the integration. Conflict
+resolution: the newer-edition files take main's versions — the maintained root
+edition (generated pages, the paid-link gate, the canonical-five analytics
+client, 21 flags). This pass's reconciliation is retained where main's version
+was stale: `tools/validate.py` was reconciled to the canonical
+`src/data/products.json` schema (`ref`/`submitted_code`/`submitted_code_length`/
+`intended_asin`/`observed_asin`; the retired `crisp/`-era rules removed) and now
+passes. `docs/EXECUTIVE_SUMMARY.md` was deleted by main (the root
+`EXECUTIVE_SUMMARY.md` supersedes it).
+
+### Line-by-line verification of the five submitted links
+
+Fetched through the redirect via fetch_page against official Amazon pages; the
+final URL read, the 10-character ASIN extracted from the `/dp/` segment, and the
+page title transcribed and compared with the register (`src/data/products.json`):
+
+| Submitted link | Resolved to | Title matches register |
+|---|---|---|
+| https://link.amazon/B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | CHEFMAN 6 Quart Dual Basket Air Fryer — yes |
+| https://link.amazon/B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Emeril Lagasse 26QT French Door — yes |
+| https://link.amazon/B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | Chefman Air Fryer 8 Qt TurboFry — yes |
+| https://link.amazon/B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | ThermoMaven 1 Sec — yes (resolved on re-verification 2026-11-20; was checkpoint-only) |
+| https://link.amazon/B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | CHEF iQ Sense — yes |
+
+No arrival URL carried the tracking tag; attribution unconfirmed (FLG-002).
+Sources: the five listing pages; https://affiliate-program.amazon.com/help/operating/policies;
+https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference (ASIN definition).
+
+### Toolchain on the merged tree (2026-11-20)
+
+- `python3 tools/build.py` — 29 pages.
+- `python3 tools/check.py` — 0 errors, 0 warnings.
+- `python3 tools/check_local_links.py` — 0 broken relative references.
+- `python3 tools/validate.py` — 1441 checks, 0 warnings.

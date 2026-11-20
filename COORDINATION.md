@@ -296,6 +296,15 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 2. The owner should confirm the holiday photograph's origin (FLG-020).
 3. Consider recording this session's P-04 observation in `src/data/reverification.json`. That file belongs to `arena/359baa16`, so this session did not edit it.
 
+## arena/982fea5a-affil1 — integration + verification pass (merge with main, 2026-11-20)
+
+- **Merged `origin/main` (3193be2) into the branch** — `git merge origin/main` on 2026-11-20. Conflicts (14): the newer-edition files take main's versions (the maintained root edition — generated pages, the paid-link gate, the canonical-five analytics client, 21 flags); this pass's reconciled `tools/validate.py` was retained. `docs/EXECUTIVE_SUMMARY.md` was deleted by main — the root `EXECUTIVE_SUMMARY.md` supersedes it (this pass appended its pass records to the root summary).
+- **FLG-021 resolved this pass:** `tools/validate.py` reconciled to the canonical `src/data/products.json` schema; passes on the merged tree: 1441 checks, 0 warnings.
+- **Line-by-line verification of the five submitted links** (fetch_page against official Amazon pages, 2026-11-20): link.amazon/B04G1MEwY → https://www.amazon.com/dp/B0CDY277D3; link.amazon/B02NbDxp3 → https://www.amazon.com/dp/B09B7SB46R; link.amazon/B00hJ57DV → https://www.amazon.com/dp/B08DKYBTPH; link.amazon/B0c8moW59 → https://www.amazon.com/dp/B0DHZTCNR5 (resolved on 2026-11-20; was checkpoint-only); link.amazon/B0f3GKalj → https://www.amazon.com/dp/B0DZFD6R9Z. All five titles match the register in `src/data/products.json`. No tag observed on arrival (FLG-002). Sources: the five listing pages, https://affiliate-program.amazon.com/help/operating/policies, https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference.
+- **Toolchain on the merged tree:** `python3 tools/build.py` (29 pages), `python3 tools/check.py` (0 errors, 0 warnings), `python3 tools/check_local_links.py` (0 broken), `python3 tools/validate.py` (1441 checks, 0 warnings). Reproducibility: `build.py` run twice, no diff.
+- **Integration PR:** [#76](https://github.com/karagemop466-tech/Affil1/pull/76) — merged into main on 2026-11-20, merge commit <sha>, state merged.
+- **Pages:** https://karagemop466-tech.github.io/Affil1/ — status built (confirmed after the merge).
+
 ### Verification on this branch
 
 - `python3 tools/build.py` exit 0; `python3 tools/check.py`: 29 pages, 0 errors, 0 warnings; `python3 tools/check_local_links.py`: 29 pages, 0 broken.
