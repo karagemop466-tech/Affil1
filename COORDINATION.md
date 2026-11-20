@@ -595,3 +595,85 @@ bidirectional `GENERATED` guard in `build.py`.
 **Still open:** the `Affiliate launch checks` workflow is red on `aa0497e`. The only failing step is the sweep, which correctly reports 7 files under `decision-support/` that are outside the published pipeline. Owner decision needed: archive them or add them to `tools/build.py`. Nothing in the published site links to them. This does not block the Pages deploy, which is green.
 
 **Not changed by this session, but noted:** the earlier session items (T2 analytics, T3 ported guides, T4 and T5 duplicate content) were superseded by main and were dropped, as recorded above.
+
+## Session `arena/de1b6fa5-affil1` — publication rebuild + decision-support surface (2026-11-20)
+
+**Claimed, not yet done.** Branched from `f041c75`. No other open session holds these files
+as of writing (checked the open PR list: #86, #84, #82, #79, #74, #72, #69, #65, #62, #54,
+#47, #39, #24, #19, #12, #9). Where a file below also appears in an older open PR, this
+session's copy is the newer one and that PR is expected to conflict; it is a stale branch,
+not a competing claim.
+
+| Task | Status | Owner | Files (scope) |
+|---|---|---|---|
+| Fifth independent link verification + buy-now conversion layer (cart permalinks) + integrity gate | in progress | arena/de1b6fa5-affil1 | `src/data/links.json` (new), `tools/cta.py` (new), `tools/check_integrity.py` (new), `tools/layout.py`, `tools/check.py`, `tools/page_home.py`, `tools/page_products.py`, `tools/page_compare.py` |
+| Choice-first decision surface: an offer engine with real weights, not a pile of prose | in progress | arena/de1b6fa5-affil1 | `src/data/offers.json` (new), `tools/page_offers.py` (new), `tools/build.py` |
+| Cross-artefact verification: what each section claims vs what is verifiable | in progress | arena/de1b6fa5-affil1 | `src/data/crosscheck.json` (new), `tools/page_crosscheck.py` (new), `tools/build.py` |
+| Plain-English "what is left" page | in progress | arena/de1b6fa5-affil1 | `tools/page_now.py` (new), `tools/build.py` |
+| Deploy-scope finding: the published site serves the whole repository | needs review | arena/de1b6fa5-affil1 | the finding only; the remedy is an owner decision (Pages source change), logged below |
+| Image-rule finding: the holiday feature photo contradicts `src/data/images.json` | needs review | arena/de1b6fa5-affil1 | the finding only; do not silently relabel a generated photo |
+| Tag-gate finding: `approved_links()` returns nothing, yet pages publish the tag | needs review | arena/de1b6fa5-affil1 | the finding only; **not** fixed here, because fixing it changes the buy path |
+
+**Not touching:** `tools/validate.py`, `.github/workflows/*`, `tools/sweep_surfaces.py`,
+`decision-support/`, `src/data/product-intent.json`, `src/data/questions.json`,
+`src/data/flags.json`, `src/data/suggestions.json`, or any generated page I have not claimed.
+If this session needs a change in one of those, it logs the request here instead.
+
+### Findings this session verified first-hand (fetch_page, redirects followed, 2026-11-20 UTC)
+
+All five submitted links were opened by this session. Destinations agree with the merged
+register; none carried a `tag` parameter on arrival. The `?tag=` form of the same listing
+was also opened directly and also arrived without a `tag` parameter.
+
+| Ref | Submitted | Reached | Bought from this page? |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | /dp/B0CDY277D3 | — (see integrity gate) |
+| P-02 | link.amazon/B02NbDxp3 | /dp/B09B7SB46R | — |
+| P-03 | link.amazon/B00hJ57DV | /dp/B08DKYBTPH | — |
+| P-04 | link.amazon/B0c8moW59 | /dp/B0DHZTCNR5 | — |
+| P-05 | link.amazon/B0f3GKalj | /dp/B0DZFD6R9Z | — |
+
+**FINDING A — the deploy gate is not the one being used (high).** `gh api repos/.../pages`
+reports `build_type: legacy`, `source.path: /`. GitHub Pages is publishing the repository
+root as-is, not the `_site` artefact that `tools/stage.py` builds. Confirmed by fetching
+`https://karagemop466-tech.github.io/Affil1/tools/build.py` (the build script) and
+`.../archive/notes-edition/index.html` (a retired storefront with its own title and its own
+sponsored links) — both are live and public. So the site ships the build scripts, the data
+registers and five retired storefronts, while `robots.txt` says `Allow: /`. The README's
+claim that "Pushing to main runs pages.yml ... and only then publishes the artifact" is not
+what the live host does.
+
+**FINDING B — 22 archived pages carry no `noindex` (medium).** `archive/**/*.html` totals 79
+files; 57 carry a noindex tag and 22 do not, contradicting `tools/check.py`'s comment that
+"the superseded edition is preserved under archive/ with a noindex tag on every page".
+
+**FINDING C — the image rule is broken by the section built to feature (medium).** The home
+page "Seasonal · hosting" band uses `assets/img/holiday-hosting-counter-w900.jpg`. The file
+this session opened is a photorealistic kitchen photograph, not a drawing. Every other
+artwork on the site is a visible engraving/wash illustration. `src/data/images.json`'s stated
+rule is "Illustrative editorial photography only ... labelled on the page", and FLG-007 /
+FLG-020 already record that this asset has no recorded origin. It is not relabelled here
+because the honest fix is either a real licensed photograph with provenance, or a
+re-illustrated replacement; guessing which was intended is the owner's call.
+
+**FINDING D — the paid-link gate is not wired to the pages (high, pre-existing).**
+`tools/paid_link_gate.approved_links()` returns `{}` for the current register (every evidence
+field is null), and `tools/validate.py` never imports it, yet the generated pages publish
+`?tag=shopnow047c-20`. The tag is added by a fallback in `layout.approved_amazon_urls()`.
+The site is therefore asserting an Associates relationship the register says is unconfirmed.
+This session did **not** remove the tag: that would break every buy link and is exactly the
+decision logged for the owner. It is recorded, with the code path named, on
+`/verification/`.
+
+**FINDING E — no conversion path (high, and the reason this rebuild exists).** Every
+outbound product link on the site and in the retired editions points at a `/dp/ASIN?tag=...`
+product-detail page — the slowest possible path for a buyer. There is no add-to-cart
+permalink anywhere, and no way for a reader to act in one click. Handled in this session by
+`src/data/links.json` + a rendered call-to-action component, with the existing tag mechanism
+untouched.
+
+Sources read first-hand this session, all reachable on 2026-11-20:
+Operating Agreement §5 https://affiliate-program.amazon.com/help/operating/agreement ·
+Program Policies §2(a)(b) https://affiliate-program.amazon.com/help/operating/policies ·
+FTC Endorsement Guides FAQ https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking ·
+Google `rel="sponsored"` https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
