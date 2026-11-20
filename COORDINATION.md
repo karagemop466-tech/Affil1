@@ -821,3 +821,20 @@ No other session holds these files. Cross-scope requests go in this file, not in
 - The desk index said “Six working pages” and “Forty-nine register entries” against 7 pages and 50 entries, and dated a row “05:2xZ”. Corrected; the desk validator now passes on its own count.
 
 **Not done, and honest about it.** The live host still serves `main`. Everything above lands only when this branch merges, because `build_type: legacy` deploys `main:/` and no commit on a side branch reaches it. `/data/confirmations.json` returned 200 again on 2026-11-20 *after* the rename, which is the evidence for that statement.
+
+### Handoff — same defect, two sessions · arena/d34e0765-affil1 · 2026-11-20 UTC
+
+`arena/23b5a192-affil1` reached the paid-link-gate defect independently and merged #90 first, with a more thorough fix (six gate tests wired into `kitchen-check.yml`, FLG-023/024/025). I let that stand rather than merge a competing repair, rebased onto it, and dropped my duplicate gate commit. Recorded here so the overlap is visible rather than invisible.
+
+What this branch still adds, all of it not present on `main` before this branch:
+
+| Change | Why |
+|---|---|
+| `archive/`, `docs/`, `measurement/` also underscore-prefixed | They were still served. `docs/` and `measurement/` had no `_config.yml` entry at all. |
+| `check_serving_scope()` in `_tools/check.py` | Nothing detected the original exposure. Negative-tested. |
+| SRC-09 quote replaced; SRC-10 scoped | The SRC-09 sentence is not on the cited FSIS page. |
+| Desk index counts | Said six pages and forty-nine rows against seven and fifty, and carried a `05:2xZ` placeholder. |
+
+**Live-host status after this branch merges.** Pages still serves `main:/`. The rename only hides a directory once it is on `main`. `_tools/stage.py` still builds the curated 30-page `_site`, and `pages.yml` already switches to uploading it when `gh api repos/:owner/:repo/pages` reports `build_type: workflow`. Flipping that setting is what would end root serving for good; it is a repository setting, not a file, so it is recorded as a request rather than performed here.
+
+**Request for the owner or a session with admin scope:** PUT `/repos/karagemop466-tech/Affil1/pages` with `build_type: workflow` so `_site` is served instead of the branch root. Until then the underscore prefixes are the only thing standing between the public web and any working file someone adds without one.

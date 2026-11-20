@@ -92,8 +92,9 @@
       "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
       "status": "read directly 2026-11-20",
       "page_date": "Current USDA FSIS guidance",
-      "used_for": "Confirms visual color cues are unreliable and explains thermometer placement in the thickest part away from bone, fat or gristle.",
-      "quote": "Using a food thermometer is the only reliable way to ensure safety and to determine the 'doneness' of meat, poultry, and egg products."
+      "used_for": "Confirms that colour and firmness are unreliable doneness cues, that a thermometer is the only reliable check, and that it goes in the thickest part away from bone, fat or gristle.",
+      "quote": "Using a food thermometer is the only reliable way to ensure that foods have been cooked to a safe minimum internal temperature to destroy any harmful microorganisms that may be in the food.",
+      "quote_note": "Corrected 2026-11-20: the previous wording did not appear on the cited page."
     },
     {
       "id": "SRC-10",
@@ -103,7 +104,8 @@
       "status": "read directly 2026-11-20",
       "page_date": "API version 2022-04-01",
       "used_for": "Documents Amazon's official Selling Partner catalog lookup endpoint (GET /catalog/2022-04-01/items/{asin}), distinct from Associates Creators API / PA API.",
-      "quote": "Retrieves details for an item in the Amazon catalog."
+      "quote": "Retrieves details for an item in the Amazon catalog.",
+      "quote_note": "Read 2026-11-20: the sentence is under the getCatalogItem operation, not the searchCatalogItems section the row originally implied."
     },
     {
       "id": "SRC-11",
