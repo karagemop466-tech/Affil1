@@ -334,7 +334,8 @@
         "https://link.amazon/B0c8moW59",
         "https://www.amazon.com/checkpoint/continue"
       ],
-      "raised_by": "session-arena-83e015f6, 2026-11-20"
+      "raised_by": "session-arena-83e015f6, 2026-11-20",
+      "third_pass_note": "A third independent pass (arena/7e19d8e1-affil1, 2026-11-20) opened https://www.amazon.com/dp/B0DHZTCNR5 directly and reached the ThermoMaven 1 Sec listing on the first attempt, agreeing with the register. The pass did not re-walk the short link for P-04."
     },
     {
       "id": "FLG-024",
@@ -377,7 +378,8 @@
       ],
       "blocks": "treating the P-01 short link as verified",
       "update_2026_11_20_by_arena_05771edb": "Superseded as a single-link finding: later passes the same day found this for all five short links at once. Recorded in FLG-028.",
-      "superseded_by": "FLG-028"
+      "superseded_by": "FLG-028",
+      "third_pass_note": "A third independent pass (arena/7e19d8e1-affil1, 2026-11-20) fetched https://link.amazon/B04G1MEwY once: it resolved to https://www.amazon.com/dp/B0CDY277D3 with btn_type=ss&btn_ref=srctok-\u2026 parameters (a generated short-link arrival), not to the homepage. One fetch does not refute the earlier homepage observation; link.amazon responses remain unstable request to request, which is the point of this flag."
     },
     {
       "id": "FLG-027",
@@ -413,7 +415,8 @@
         "https://www.amazon.com/dp/B0DZFD6R9Z",
         "https://affiliate-program.amazon.com/help/operating/agreement"
       ],
-      "corroborated_by": "arena/05771edb-affil1, independently, on a later pass the same day: all five short links returned https://www.amazon.com/. Two sessions, two passes, same result. The later pass also re-opened all five direct /dp/ URLs and found each page title matching the register verbatim \u2014 including B09B7SB46R (P-02) and B08DKYBTPH (P-03), which the first pass did not re-check."
+      "corroborated_by": "arena/05771edb-affil1, independently, on a later pass the same day: all five short links returned https://www.amazon.com/. Two sessions, two passes, same result. The later pass also re-opened all five direct /dp/ URLs and found each page title matching the register verbatim \u2014 including B09B7SB46R (P-02) and B08DKYBTPH (P-03), which the first pass did not re-check.",
+      "third_pass_note": "A same-day probe (arena/7e19d8e1-affil1, 2026-11-20) fetched https://link.amazon/B04G1MEwY once and reached the product page https://www.amazon.com/dp/B0CDY277D3 with a generated short-link arrival token \u2014 one product-page observation. It does not refute the homepage observations above: link.amazon responses are unstable request to request (see FLG-003 and FLG-026). Both dated records are kept; neither is presented as the permanent behaviour."
     },
     {
       "id": "FLG-029",
@@ -520,6 +523,47 @@
       ]
     },
     {
+      "id": "FLG-037",
+      "severity": "medium",
+      "title": "The /edition/ tree serves a second indexable front door beside the canonical site",
+      "expected": "One site for search engines to index (the brief). A second public tree should be noindexed, redirected, or merged into the canonical navigation.",
+      "found": "edition/index.html is served publicly with a self-referential canonical (https://karagemop466-tech.github.io/Affil1/edition/), is not listed in sitemap.xml (30 URLs, none under edition/), and robots.txt disallows only /archive/. PR #100 kept edition/ public deliberately as a curated surface and added a gate for working files inside it \u2014 but its indexability was not decided.",
+      "impact": "A crawler that finds /edition/ sees a full second publication that canonicalizes to itself and competes with the root for the same five products and topics.",
+      "reading": "Two clean fixes, owner's choice: add <meta name=\"robots\" content=\"noindex, follow\"> to edition/ pages (keeps the surface readable, removes it from the index), or fold the one useful thing it has into the canonical nav and archive the rest. Either is compliant; the status quo splits the site's search footprint.",
+      "blocks": "nothing \u2014 but it blunts every organic-traffic effort until it is decided",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/edition/",
+        "https://karagemop466-tech.github.io/Affil1/sitemap.xml",
+        "https://karagemop466-tech.github.io/Affil1/robots.txt"
+      ]
+    },
+    {
+      "id": "FLG-038",
+      "severity": "low",
+      "title": "README.md documents tool paths that no longer exist at those names",
+      "expected": "A reader following README.md finds the paths it names: tools/build.py, src/data/\u2026",
+      "found": "The underscore rename (PR #92 lineage, reinforced by PR #100) moved them to _tools/ and _src/. README.md still says tools/ and src/ in 19 places. The CI workflows use the underscored paths and pass, so this is documentation drift, not a build defect.",
+      "impact": "A human reviewer following the README runs a command that fails and may conclude the repo is broken. Trust is the product here; the manual should not send readers to missing paths.",
+      "reading": "Cosmetic until a maintainer touches README.md; then it should be corrected in the same commit.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://github.com/karagemop466-tech/Affil1/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "FLG-036",
+      "severity": "low",
+      "title": "Eighteen pull requests from earlier sessions remain open and unmerged",
+      "expected": "A repository where session work reaches main or is closed with a recorded reason.",
+      "found": "PRs #9, #12, #19, #24, #39, #47, #54, #62, #65, #69, #72, #82, #84, #86, #93, #94, #96 and #102 are open on GitHub as of 2026-11-20. Several predate the current build pipeline (_tools/build.py + _src/data) and describe editions that were superseded or archived.",
+      "impact": "Reviewers cannot tell which of these represent live work and which are historical. Unmerged does not mean rejected; it means nobody has adjudicated.",
+      "reading": "A human with context should triage: merge what still applies, close what the current pipeline already supersedes, and say which in the PR thread. No agent session should bulk-close another session's work silently.",
+      "blocks": "nothing",
+      "to_check": [
+        "https://github.com/karagemop466-tech/Affil1/pulls"
+      ]
+    },
+    {
       "severity": "high",
       "title": "Two CI steps reported green while testing the wrong directory, and the collector could not import",
       "expected": "The gates in front of a deploy run this repository's own tests, and a step that collects nothing fails.",
@@ -532,7 +576,7 @@
         "https://github.com/karagemop466-tech/Affil1/actions",
         "python3 -m unittest discover -s _platform -p 'test_*.py' collects 6 tests; -s platform collected 45 stdlib tests"
       ],
-      "id": "FLG-036"
+      "id": "FLG-039"
     },
     {
       "severity": "medium",
@@ -547,7 +591,7 @@
         "_measurement/collector.py (its RECORDS path and PAGES set)",
         "_platform/collector.py"
       ],
-      "id": "FLG-037"
+      "id": "FLG-040"
     },
     {
       "severity": "medium",
@@ -562,7 +606,7 @@
         "https://developers.google.com/crawling/docs/robots-txt/create-robots-txt",
         "https://karagemop466-tech.github.io/Affil1/edition/"
       ],
-      "id": "FLG-038"
+      "id": "FLG-041"
     },
     {
       "severity": "medium",
@@ -576,10 +620,10 @@
         "python3 _tools/check_image_register.py",
         "python3 _tools/build.py && git diff --stat index.html"
       ],
-      "id": "FLG-039"
+      "id": "FLG-042"
     },
     {
-      "id": "FLG-040",
+      "id": "FLG-043",
       "severity": "medium",
       "title": "A compliance rule that samples one page is not a rule: four pages published what it forbids",
       "expected": "A gate written to hold site-wide holds site-wide, and it reads the attribute it names rather than any mention of it.",
@@ -594,7 +638,7 @@
       ]
     },
     {
-      "id": "FLG-041",
+      "id": "FLG-044",
       "severity": "medium",
       "title": "Two sessions' fixes for the annex contradicted each other: a robots.txt block hid the tag that de-indexes it",
       "expected": "One mechanism per job, and the mechanism that keeps a page out of the index must not be the one that stops a crawler reading the instruction.",

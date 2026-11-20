@@ -138,16 +138,38 @@ def feed(guides):
 """
 
 
-# One canonical site. The archived edition under _archive/ carries noindex, and
-# /_archive/ is not listed in the sitemap. edition/ (Countertop Almanac) is a
-# second publication kept readable but out of the index: every page there
-# carries noindex, follow (FLG-030), and this file disallows it. Nothing here
+# One canonical site. The archived edition under _archive/, the internal
+# decision desk under _decision-support/ and the parallel Countertop Almanac
+# edition under edition/ are all reachable for human review but carry
+# noindex, and none is listed in the sitemap. Disallow their served paths here
+# as well, so a crawler that ignores the meta tag is still blocked. The path
+# must be the served one (/_archive/, not /archive/) — an earlier revision
+# disallowed /archive/, which never matched the real directory. Nothing here
 # blocks crawling of the canonical pages.
+# Why the published file above carries no "Disallow: /edition/" line.
+#
+# The annex at /Affil1/edition/ is a preserved review surface of the same five listings, and
+# main's FLG-037 asks that it stop competing for the index. The mechanism it now uses is a
+# per-page <meta name="robots" content="noindex, follow"> (asserted for all 27 pages by
+# _platform/verify_edition.py). Blocking the crawl would defeat that: Google reads an indexing
+# instruction "only if crawlers are allowed to access the pages that include these settings",
+# while a URL disallowed in robots.txt "can still be indexed if linked to from other sites" -
+# and the shop links to the annex from its review and question pages. A Disallow line here
+# therefore produces indexed annex pages with no description, which is worse than the tag
+# alone. Read 2026-11-20:
+#   https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+#   https://developers.google.com/search/docs/crawling-indexing/robots/intro
+# Two sessions' fixes for the same annex met in main and contradicted each other; FLG-044
+# records the resolution rather than hiding it.
 ROBOTS = """User-agent: *
 Allow: /
-Disallow: /archive/
 Disallow: /_archive/
 
+Disallow: /_decision-support/
+
+# The /edition/ annex is held out of the index by a per-page noindex tag, not by a
+# Disallow rule here: a blocked page cannot show you its tag, and its URLs can still be
+# indexed from the links this site points at it. See _tools/build.py notes and FLG-044.
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
 

@@ -1,7 +1,8 @@
 # arena/3e17592d-affil1 — measurement machinery, the owner switch, one indexable site, three sourced guides
 
 **Session start:** 2026-11-20. **Branch:** `arena/3e17592d-affil1`, cut from `2934ed0`.
-**Status:** complete; PR opened against `main`.
+**Status:** complete; PR #122 opened against `main`, merged through three concurrent
+merge waves (`2934ed0` → `b77e66c` → `b19480f` → `772deef`).
 
 ## Claim
 
@@ -95,3 +96,50 @@ Negative tests, so the new gates are not decoration:
   run — but the mismatch is a one-line change for whoever owns `assets/js/`.
 - `feed.xml` still emits a fixed pubDate, and `robots.txt` remains one path below the host
   root, so it is advisory at best (FLG-027, unchanged, owner-blocked).
+
+
+## Final id map after three merge waves
+
+Main renumbered the registers between each push, so this session's rows were re-pointed
+rather than re-used. The shipped ids are:
+
+| This session's rows | After `2934ed0` | After `b77e66c` | **Final (merged)** |
+|---|---|---|---|
+| CI/import/path defects flag | FLG-028 | FLG-034 | **FLG-039** |
+| three collectors flag | FLG-031 | FLG-035 | **FLG-040** |
+| annex guard flag | FLG-030 | FLG-036 | **FLG-041** |
+| pinned-by-position flag | FLG-037 | FLG-037 | **FLG-042** |
+| sample-not-a-rule flag | FLG-038 | FLG-038 | **FLG-043** |
+| two sessions' fixes collided | — | FLG-039 | **FLG-044** |
+| collector-canonical question | Q-25 | Q-25 | **Q-28** |
+| food-safety-beside-buy-button question | Q-26 | Q-26 | **Q-29** |
+| stale-citation question | Q-27 | Q-27 | **Q-30** |
+| gates-prove-it-ran suggestion | S-24 | S-26 | **S-39** |
+| sourced-guides suggestion | S-22 | S-27 | **S-40** |
+| weekly-cadence suggestion | S-25 | S-28 | **S-41** |
+| ice-water-pilot suggestion | S-27 | S-29 | **S-42** |
+| count-untagged-clicks decision | S-30 | S-30 | **S-43** |
+| sources (FSIS leftovers, robots meta, robots.txt placement, FoodSafety.gov chart) | SRC-18/19/20 | dropped by `-X theirs` | **SRC-21..24** |
+
+**Why this table exists.** Every one of those renumberings was forced by a merge that took
+the other side's ids, and twice it silently changed meaning: once because `-X theirs`
+deleted rows whose ids `main` had reused for different findings (leaving citations that
+resolved to the wrong *document*, which no dangling-id check can see), and once because a
+renumbering pass rewrote a row's own new id again on the way through its fields (FLG-042/043/044
+collided). Both are recorded so the next session does not rediscover them: renumber by
+content, exclude the id field from any rewrite pass, and run `check_register_refs.py` plus a
+duplicate-id count before committing a register merge.
+
+**Third wave, main-side changes absorbed:** main's `air-fryer-gift-guide` front-page feature
+kept (its `by_slug` selection retained; its positional `GUIDES[7]` fallback replaced with a
+cluster fallback, and its hard-coded eyebrow/lede replaced with values read from the record);
+main's `reheating-thanksgiving-leftovers` kept as the single leftovers guide, with my two
+non-overlapping blocks folded into it; main's `Disallow: /_decision-support/` kept; main's
+`Disallow: /edition/` removed with the reason in the generator and in FLG-044.
+
+**CI evidence for the merged branch** (`workflow_dispatch`, runs 44694355364 / 44694358520):
+every step of both jobs success, including the three this session added or rewrote —
+"Every published image has a row in the image register", "Registers cite each other correctly,
+and guides cite registered sources", "First-party client parses and the self-hosted collector
+passes its tests", and "Run platform unit & HTTP collector tests" (which is the step that used
+to run CPython's standard library).

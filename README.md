@@ -43,11 +43,11 @@ _tools/check.py        a gate: links, images, disclosure, sponsored marking,
 _tools/validate.py     a second gate over the published tree; prints its own check count
 _tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
 _tools/verify_links.py re-resolve the register against Amazon and report drift
-archive/              five earlier competing surfaces (four storefronts and a parallel
+_archive/              five earlier competing surfaces (four storefronts and a parallel
                       integration pass), preserved untouched and non-indexable
 ```
 
-Nothing in the tree is hand-edited except `assets/`, `_tools/`, `_src/data/`, `docs/`
+Nothing in the tree is hand-edited except `assets/`, `_tools/`, `_src/data/`, `_docs/`
 and the markdown files. If you edit a generated `.html` directly, the drift check in
 CI fails and tells you so.
 
@@ -107,7 +107,7 @@ page returned; none of it is a product recommendation and none of it was tested 
 | P-04 | `link.amazon/B0c8moW59` | `amazon.com/dp/B0DHZTCNR5` — ThermoMaven 1 Sec Digital Meat Thermometer | resolved only on a third attempt in an earlier pass, with `plpRedirect=mhFallback` ([FLG-018](https://karagemop466-tech.github.io/Affil1/review/#FLG-018)); the product page carries reference links to this listing, with no tag. The 2026-11-20 re-check returned the homepage for the short link ([FLG-028](https://karagemop466-tech.github.io/Affil1/review/#FLG-028)) |
 
 The earlier version of this table said P-04 had no destination and no link. That contradicted
-`src/data/products.json` and the built product pages, which both point to `B0DHZTCNR5`. The
+`_src/data/products.json` and the built product pages, which both point to `B0DHZTCNR5`. The
 table now follows the data.
 
 **2026-11-20 re-check (FLG-028).** All five short links, fetched directly, returned

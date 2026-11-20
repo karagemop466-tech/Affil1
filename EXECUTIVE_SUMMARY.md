@@ -618,6 +618,68 @@ change. What shipped:
 Everything else — API access, custom domain, product photography, paid
 acquisition — is sequenced behind those five and documented on /suggestions/.
 
+## Session addendum — arena/7e19d8e1-affil1 (2026-11-20)
+
+Decision-grade design feed, discovery map and a third independent verification
+pass, merged the same day with `arena/d0594bc5-affil1`'s work (both histories
+kept; colliding ids renumbered — this session's rows are S-37/S-38 and
+FLG-037/038/036).
+
+- **Design prompt + token pack + house style + a 30-title topic bank**
+  (`suggestions/design.html`). The copy-ready prompt carries the anti-slop rules
+  the owner asked for; the house-style register ST-01..ST-10 gives each rule a
+  basis, quoting live policy where the rule is Amazon's or the FTC's. The bank
+  holds T-01..T-16 (the brief's hypotheses, kept verbatim from the earlier
+  design pack) and T-17..T-30 (session additions in `_src/data/topics.json`,
+  each with the evidence required before writing). Every title is an editorial
+  hypothesis — no keyword tool was consulted and no popularity is claimed. The
+  organic loop is stated as publish → sitemap/feed → internal link → measure
+  queries → next topic, with the Search Console gate named.
+- **Suggestions board answers "which path?" first** (`suggestions/`). PATH-C
+  *Measure first* is recommended with the reason, the first moves (S-01 test
+  click, S-03 Search Console) and the review gate: choose on the page before
+  anything is implemented. This session's rows: **S-37** (adopt the style
+  register) and **S-38** (open the article bank only where evidence and queries
+  agree).
+- **Every open question carries a discovery route** (`questions/`): the action
+  that would close it, who holds the missing fact, and what it costs — 14 rows
+  in the discovery map. No question is closed by inference.
+- **Third independent verification pass** (`_src/data/reverification.json` →
+  `third_pass`, beside the same-day receipt of `arena/d0594bc5-affil1`). All five
+  destinations re-fetched from Amazon's own pages and matched to the register:
+
+  | Ref | Destination | Listing title (transcribed 2026-11-20) |
+  |---|---|---|
+  | P-01 | https://www.amazon.com/dp/B0CDY277D3 | CHEFMAN 6 Quart Dual Basket Air Fryer Oven… |
+  | P-02 | https://www.amazon.com/dp/B09B7SB46R | Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven |
+  | P-03 | https://www.amazon.com/dp/B08DKYBTPH | Chefman Air Fryer 8 Qt TurboFry 4-in-1 |
+  | P-04 | https://www.amazon.com/dp/B0DHZTCNR5 | ThermoMaven 1 Sec Professional Digital Meat Thermometer |
+  | P-05 | https://www.amazon.com/dp/B0DZFD6R9Z | CHEF iQ Sense Smart Wireless Meat Thermometer (Gen3) |
+
+  One short-link probe (link.amazon/B04G1MEwY → B0CDY277D3, generated arrival
+  token) is recorded as a counter-observation on FLG-028; link.amazon responses
+  remain unstable request to request, and both dated records are kept.
+  Policy language re-retrieved verbatim on 2026-11-20:
+
+  | Claim | Source (official) | Status |
+  |---|---|---|
+  | Disclosure sentence, verbatim | [Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) | matched |
+  | Special Links must use the assigned Associates ID | [Program Policies §2(a)](https://affiliate-program.amazon.com/help/operating/policies) | matched |
+  | Tag as URL parameter ("XXXXX-##") | [Program Policies §2(b)](https://affiliate-program.amazon.com/help/operating/policies) | matched (scope reading still FLG-025) |
+  | Prices/availability only from Amazon-served links or Creators/PA API | [Program Policies §2(b)](https://affiliate-program.amazon.com/help/operating/policies) (page updated 2026-04-14) | matched |
+  | `rel="sponsored"` marks paid links | [Google: qualify outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links) | matched |
+  | Material connection disclosed clearly and conspicuously | [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) | matched |
+
+- **Repo review — three new irregularities, all on `/review/`:** FLG-037 (medium)
+  the `/edition/` tree served a second self-canonical front door outside the
+  sitemap (main's same-day S-23/S-27 landed the noindex fix; flag kept with that
+  context), FLG-038 (low) README.md still names `tools/`/`src/` paths renamed
+  `_tools/`/`_src/`, FLG-036 (low) 18 pull requests from earlier sessions
+  remain open and untriaged (main's S-31 proposes the triage). None blocks
+  anything; each names what to check.
+- **Still owner-only, still open:** the Associates test click and report read
+  (S-01, Q-03), the SiteStripe intent register (Q-01), Search Console (S-03,
+  Q-07), an editor name (S-02, Q-08).
 
 ---
 
@@ -636,7 +698,7 @@ failing before it was demonstrated passing.
 attribute is arguably a misleading metric and arguably the only way to learn which page works
 before anything is armed. While this branch was open the repository grew a gate that forbids the
 first position, so the code now follows the gate and the alternative is written up as a decision
-row with both paths priced (S-41), not slipped in sideways.
+row with both paths priced (S-43), not slipped in sideways.
 
 **One site, and now a rule that cannot rot.** `edition/` was a second fully indexable publication
 of the same five listings under a second brand. It is now an annex that a crawler is told to leave
@@ -645,7 +707,7 @@ edition verifier — so the next template edit cannot quietly undo it. That pass
 contradiction two sessions had created without noticing: a `Disallow: /edition/` line in the root
 robots.txt blocked the very crawl that had to read the `noindex` tag, which is the one outcome
 that guarantees indexed annex pages with no description. The tag is now the single mechanism
-(FLG-041).
+(FLG-044).
 
 **Two guides, not three — and one better for it.** This session drafted chicken-doneness,
 ice-water calibration and two-hour-leftovers guides. `main` published a leftovers guide in the
@@ -666,6 +728,6 @@ renumbered `SRC-18..20`, and no dangling-id check can see a reference that resol
 
 **Still yours to decide.** Q-28 which collector is canonical (three exist, one reads a dead path),
 Q-29 whether guides may quote food-safety limits beside buy buttons, Q-30 what happens when a
-cited government page changes, S-41 whether to count unattributed clicks. Nothing about arming a
+cited government page changes, S-43 whether to count unattributed clicks. Nothing about arming a
 link changed: the register still holds five `null` approvals, the site still publishes reference
 links only, and no traffic, order, conversion or revenue figure is asserted anywhere.

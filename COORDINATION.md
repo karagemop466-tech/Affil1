@@ -7,6 +7,52 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Decision-grade design prompt, article bank and discovery map — arena/7e19d8e1-affil1 (claimed 2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Design-prompt feed (anti-slop rules, catchy article bank), suggestions path-choice board, missing-information discovery map, executive summary refresh, independent re-verification of the five links and policy sources, repo irregularity review | done | `arena/7e19d8e1-affil1` | `_src/data/topics.json` (new), `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_src/data/reverification.json`, `_tools/page_design.py`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/page_review.py`, generated pages those own, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+
+**Record — 2026-11-20 (merged over the same-day main of `arena/d0594bc5-affil1`).**
+Delivered: the copy-ready design prompt with anti-slop rules + house-style
+register ST-01..ST-10 + a 30-title topic bank on `suggestions/design.html`
+(T-01..T-16 = the brief's hypotheses from the earlier design pack, kept verbatim;
+T-17..T-30 = this session's additions in `_src/data/topics.json`, with the
+evidence gate per row and no popularity claims anywhere). PATH-C "Measure first"
+recommended on the suggestions board with per-path verdicts; this session's two
+rows renumbered **S-37/S-38** after colliding with main's S-22..S-36 block (a second renumber from S-32/S-33 when the next wave landed).
+Discovery map on `questions/` covering all 14 open rows (action, holder of the
+fact, effort).
+
+**Merge reconciliation (protocol followed: both histories kept).** Main had
+grown S-22..S-31, FLG-028..FLG-033 and its own verification receipt while this
+branch was in flight. Union merge performed per record: their ids and rows kept
+unchanged; this session's rows renumbered (S-37/S-38, FLG-037/038/036); my
+`third_pass` in `_src/data/reverification.json` kept beside their receipt (their
+rows/meta kept as the base). Their FLG-028 ("all five short links hit homepage")
+carries a same-day counter-observation note from this session (one probe of
+link.amazon/B04G1MEwY reached the product page with a generated arrival token)
+— both dated observations kept, neither presented as permanent behaviour.
+Generated pages regenerated from the merged data, not hand-merged.
+
+**Verification performed (third independent pass, `_src/data/reverification.json`→`third_pass`):**
+all five /dp/ destinations re-fetched from Amazon and matched to the register
+(B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z); one short-link
+probe as above (FLG-026/FLG-028 remain open — link.amazon responses are
+unstable request to request); policy language re-retrieved verbatim from the
+[Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement),
+[Program Policies §2(a)/(b) incl. the price rule](https://affiliate-program.amazon.com/help/operating/policies)
+(page updated 2026-04-14), [Google's outbound-link qualification](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)
+and the [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking).
+**Irregularities flagged by this session (published on `/review/`, none
+blocking):** FLG-037 `/edition/` served a second self-canonical front door
+outside the sitemap (main's S-23/S-27 note the noindex fix that landed in the
+same wave — flag kept with that context), FLG-038 README stale `tools/`/`src/`
+paths after the underscore rename, FLG-036 18 open PRs untriaged (their S-31
+proposes the triage). **Gates after merge:** build 31 pages, check.py 0/0,
+validate.py passing, check_local_links 0 broken, unittest 6/6,
+_platform/verify_edition passing, _decision-support PASS.
+
 ### Session arena/d0594bc5-affil1 — claim (2026-11-20, ~07:0x UTC)
 
 **Release receipt.** [PR #116](https://github.com/karagemop466-tech/Affil1/pull/116)
@@ -214,9 +260,24 @@ verified green. A `noindex` request for the served-but-unindexed
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Trendy seasonal guides (Black Friday checklist, gift guide, wireless-probe questions, accessories questions), holiday front-page edit, marketing suggestions queue, decision questions refresh, executive summary refresh, line-by-line re-verification of the five supplied links, integration build + PR + merge + Pages release | in progress | arena/10b5816b-affil1 | tools/content.py, tools/page_home.py, tools/page_guides.py, tools/page_suggestions.py, tools/stage.py, src/data/suggestions.json, src/data/questions.json, src/data/questions-open.json, src/data/images.json, src/data/reverification.json, assets/img/* (new illustrations only), EXECUTIVE_SUMMARY.md, COORDINATION.md, generated maintained HTML |
+| Trendy seasonal guides (Black Friday checklist, gift guide, wireless-probe questions, accessories questions), holiday front-page edit, marketing suggestions queue, decision questions refresh, executive summary refresh, line-by-line re-verification of the five supplied links, integration build + PR + merge + Pages release | done | arena/10b5816b-affil1 | tools/content.py, tools/page_home.py, tools/page_guides.py, tools/page_suggestions.py, tools/stage.py, src/data/suggestions.json, src/data/questions.json, src/data/questions-open.json, src/data/images.json, src/data/reverification.json, assets/img/* (new illustrations only), EXECUTIVE_SUMMARY.md, COORDINATION.md, generated maintained HTML |
 
 Scope notes: no edits to other sessions' collectors (analytics/, measurement/, server/), no edits to src/data/products.json product fields except reverification observations appended to src/data/reverification.json, no archive/ changes. This is the integration pass for the current branch; shared outputs (sitemap, feed, nav) are changed here only.
+
+**Release receipt.** [PR #110](https://github.com/karagemop466-tech/Affil1/pull/110) merged into `main` as `b19480f8337c65e8afc2416f5606e4c8a132b663`. All three workflows passed on the PR head and again on the merge commit: [Affiliate launch checks 44693391459](https://github.com/karagemop466-tech/Affil1/actions/runs/44693391459), [Verify Countertop Almanac edition and platform 44693391427](https://github.com/karagemop466-tech/Affil1/actions/runs/44693391427), [Build, check and deploy 44693391371](https://github.com/karagemop466-tech/Affil1/actions/runs/44693391371). [Pages build and deployment 44693390288](https://github.com/karagemop466-tech/Affil1/actions/runs/44693390288) completed successfully, and the live front page serves the holiday edit (Issue Nº 02, gift-edit band, Black Friday checklist, seasonal journal). PR-head checks 44693433701/44693433705/44693433788 also green.
+
+**What shipped (session arena/10b5816b-affil1).** Four question-shaped seasonal guides (gift edit, Black Friday checklist, wireless-probe questions, accessories filter), the holiday front-page issue, three registered editorial illustrations, S-32..S-36 on the suggestion board (S-32 implemented with evidence; S-33..S-36 open for owner decision), Q-25..Q-27 in the question register, a third independent five-link verification pass (obs-10b5816b), and the executive-summary addendum with the ordered owner checklist.
+
+**Sources and verification performed.** All five supplied links opened again live (2026-11-20): only B0f3GKalj reproduced its registered destination (amazon.com/dp/B0DZFD6R9Z, CHEF iQ Sense); the other four landed on the Amazon homepage in this pass — recorded as dated observation obs-10b5816b in `_src/data/reverification.json`, register fields unchanged, FLG-003 stance unchanged (short-link compliance unresolved, not disproven). Product facts in the new guides are transcribed only from listing titles in `_src/data/products.json`. Policy sources: Associates Operating Agreement, Program Policies §2, FTC Endorsement Guides, SP-API ASIN reference, USDA FSIS chart — all previously cited with per-row links.
+
+**Irregularities logged (all resolved without discarding anyone's work).**
+1. Shallow clone: `git pull --rebase` initially tried to replay a merge commit; clone deepened, then merges (not rewrites) were used for drift after the first two rebases.
+2. Working-directory rename (`tools/`→`_tools/`, `src/`→`_src/`): the `additional_passes` verification log ended up only in an archived copy while `flags.json` pointed at it; restored verbatim to the active register (twice — a later merge dropped it again and it was restored again).
+3. Concurrent ID collisions: upstream S-22..S-25 and S-26..S-31, Q-23/Q-24 adopted; this session's rows renumbered to S-32..S-36 and Q-25..Q-27. Four merge conflicts on shared files (COORDINATION.md, reverification, images, questions, suggestions, EXECUTIVE_SUMMARY, generated pages) resolved keeping both sides, then pages regenerated from merged sources.
+4. PR checks did not start while PR #110 was `CONFLICTING` (no merge ref); after merging current `main` the checks triggered and passed.
+
+**Local gates on the merged tree (same commands as CI).** `_tools/build.py` (42 pages pre-#119, 18 guides post), `_tools/check.py` 0 errors/0 warnings, `check_local_links.py` 0 broken, `unittest discover -s _tools` OK, `_decision-support/validate.py` PASS, `_tools/validate.py` all checks passed.
+
 
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
@@ -1425,6 +1486,70 @@ Not claimed and not touched: `_src/data/products.json`, `product-intent.json`, `
 - **Renumbering receipt:** this session's two flags shipped as **FLG-034** (high, underscore directories publicly served while `.nojekyll` bypasses the Jekyll `_`-exclusion) and **FLG-035** (low, stale `Disallow: /archive/` rule). They were first written as FLG-029/030; concurrent sessions took those IDs mid-flight, so both were renumbered before merge. The board, the register and `_docs/VERIFICATION-arena-3d6a7607.md` all carry the renumber note.
 - **Gates at merge time:** build ×2 byte-identical · `check.py` 0 errors / 0 warnings · `validate.py` all pass, 0 warnings · `check_local_links.py` 73 pages, 0 broken · `test_paid_link_gate` OK.
 - **Owner items queued by this session (no action taken here):** flip Pages to `build_type: workflow` (durable fix for FLG-034, read together with FLG-032's dual-publisher finding); settle FLG-025 in the enrolled Associates workflow; review FLG-035 when next editing the robots generator.
+## Claim — one-site indexing & final integration/verification · arena/1623419c-affil1 · 2026-11-20 UTC
+
+Session ID: `arena/1623419c-affil1` · Branch: `arena/1623419c-affil1` · Cut from `main` @ `6eb15b7`.
+
+| Task | Status | Owner | Files (claimed scope) |
+|---|---|---|---|
+| De-index every non-canonical HTML surface so search engines index exactly one site; fix the `robots.txt` `/archive/` → `/_archive/` path bug; re-verify the five links line-by-line; correct the stale README build paths; final integration gate + PR/merge/deploy | in progress | `arena/1623419c-affil1` | `_tools/build.py` (ROBOTS), `_platform/build_edition.py` (head + edition robots), `_decision-support/*.html`, `_archive/**/*.html` (noindex meta only), `README.md`, `COORDINATION.md`, `COORDINATION/arena-1623419c-affil1.md` |
+
+**Rationale.** `main` serves the repo root, so every un-prefixed HTML directory is a live URL. Audit on this branch found **two competing, indexable editions** plus an internal desk and a non-blocked archive, against the brief's "give search engines one site to index":
+
+- `edition/` — 27 HTML pages, **0 noindex**, own permissive `robots.txt` advertising its own `sitemap.xml`. A second edition ("Countertop Almanac") competing with the canonical root "Crisp & Counter".
+- `_decision-support/` — 7 HTML pages, **0 noindex** (internal desk).
+- `_archive/` — 69 of 126 HTML pages **without** noindex, and root `robots.txt` disallows `/archive/` while the real directory is `_archive/`, so the crawler block never matched.
+
+The durable fix (Pages `build_type: workflow`) needs repository admin scope this token does not have (recorded as an owner request). The fix implemented here is the one available without admin: make every non-canonical HTML surface reachable-for-review but `noindex, follow`, and correct the `robots.txt` path so the crawler block actually matches. Root canonical pages, sitemap and feed are unchanged. No data, no product links, no editorial content is altered by this task.
+
+**Cross-scope guard.** `_platform/**`, `_tools/**` (other than `build.py`), `_src/**`, `_analytics/**`, `_measurement/**`, `_server/**`, `edition/**` (other than the generator + robots), and all canonical root generated pages are **read-only** for this task. If a change to another session's file is required, it will be logged here rather than made.
+
+### Work completed — arena/1623419c-affil1 (2026-11-20 UTC)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| De-index non-canonical surfaces + fix robots path + re-verify links + README paths + integration gate | done | `arena/1623419c-affil1` | `_tools/build.py`, `_platform/build_edition.py`, `_decision-support/*.html`, `_archive/**/*.html`, `README.md`, `COORDINATION.md`, `COORDINATION/arena-1623419c-affil1.md` |
+
+**What changed.**
+
+1. `_tools/build.py` `ROBOTS`: the crawler block disallowed `/archive/`, which never
+   matched the served `_archive/` directory. Now `Disallow: /_archive/`,
+   `/edition/`, `/_decision-support/`. Canonical root pages remain indexable.
+2. `_platform/build_edition.py`: added `<meta name="robots" content="noindex, follow">`
+   to the edition head template (all 27 pages) and changed `edition/robots.txt` to
+   `Disallow: /` with no sitemap advertisement. The Countertop Almanac edition stays
+   reachable for human review but is no longer a second indexable edition.
+3. `_decision-support/*.html` (7) and `_archive/**/*.html` (69 that lacked it):
+   injected `<meta name="robots" content="noindex,follow">`. 133/133 internal HTML
+   pages now carry noindex.
+4. `README.md`: corrected documented paths to the real tree (`_tools/`, `_src/data/`,
+   `_archive/`, `_docs/`) so the build commands actually run.
+
+**Line-by-line verification (official Amazon listing pages, fetched 2026-11-20).** All
+five destinations resolve and the observed titles match `_src/data/products.json`
+exactly — no drift:
+
+| Entry | Submitted | Observed ASIN | Official title match |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | B0CDY277D3 | CHEFMAN 6 Qt Dual Basket Air Fryer Oven, 2×3Qt baskets |
+| P-02 | link.amazon/B02NbDxp3 | B09B7SB46R | Emeril Lagasse 26QT French Door, 24 presets, 6 accessories |
+| P-03 | link.amazon/B00hJ57DV | B08DKYBTPH | Chefman 8 Qt TurboFry 4-in-1, 450°F Hi-Fry |
+| P-04 | link.amazon/B0c8moW59 | B0DHZTCNR5 | ThermoMaven 1 Sec, ±0.5℉, NIST&NSF, IP67 |
+| P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z | CHEF iQ Sense, 3 probes, 1000°F, lists Air Fryer |
+
+Every arrival carried `plpRedirect=mhFallback` (FLG-018). No `tag` was observed on
+arrival (FLG-002, unchanged); `intended_asin` stays `null` and is kept separate from
+`observed_asin`. The supplied short links are not declared invalid (FLG-003).
+
+**Gates (all green):** `_tools/build.py` 34 pages reproducible; `_platform/build_edition.py`
+27 pages reproducible; `check.py` 0/0; `validate.py` 1607 checks 0 warnings;
+`check_local_links.py` 65 pages 0 broken; `check_deploy_paths.py` 1645 refs resolve at
+`/Affil1/`; `_decision-support/validate.py` PASS; `verify_edition.py` 1965 checks 0 errors;
+`sweep_surfaces.py --dry-run` moves 0; `check_js.py` clean; paid-link + platform tests pass.
+
+**Still open (owner, not blocked):** enrolment/`tag` confirmation (FLG-002); the
+compliance status of the supplied short links (FLG-003); the P-04/P-05 intended mapping
+(FLG-016); the durable Pages `build_type: workflow` setting (admin scope required).
 
 ## Session `arena/3e17592d-affil1` — measurement machinery, the owner switch, one indexable site (2026-11-20 UTC)
 
@@ -1444,7 +1569,7 @@ pages, a visible note sending readers to the shop, no second advertised sitemap,
 per-page assertions in `verify_edition.py` (2,047 checks, from 1,965) — negative-tested by
 stripping the tag and the note from one page. The root robots.txt's `Disallow: /edition/` is
 gone: blocking the crawl hides the tag that does the work, while a disallowed URL can still be
-indexed from links, so the two mechanisms were producing the worst of both (**FLG-041**).
+indexed from links, so the two mechanisms were producing the worst of both (**FLG-044**).
 
 **Editorial, after a deliberate de-duplication.** Three guides were drafted (chicken doneness,
 the ice-water calibration check, the two-hour leftovers rule). While this branch was open, main
@@ -1460,10 +1585,10 @@ rather than `GUIDES[7]` plus a hand-written caption.
 **Two deviations, stated plainly.** (1) The plan to decouple `data-affiliate-ref` from the tag
 was implemented and then **reverted**: main grew `check_link_copy_state`, whose policy forbids a
 counter hook beside an un-armed link, so the gate's rule won, `cta.py` was brought into line, and
-the owner's choice is now a row on the reviewable queue (**S-41**) with both paths priced. (2)
+the owner's choice is now a row on the reviewable queue (**S-43**) with both paths priced. (2)
 Widening that rule from a single sampled page to every generated page found **four live pages**
 publishing the forbidden attribute — the emitter was fixed, unit-tested at source, and the
-site-wide scan is now in CI (**FLG-040**).
+site-wide scan is now in CI (**FLG-043**).
 
 **Two new gates**, both wired into `kitchen-check.yml` and both negative-tested:
 `check_image_register.py` (a published image without a row in the image-policy register fails the
@@ -1476,7 +1601,7 @@ id against a different row. `main` renumbered `SRC-18..20` during this branch's 
 three citations pointing at the wrong documents — dangling-id checks cannot see it. Registers are
 append-only across sessions; resolve them by **content**, not by id. `SRC-21..24` are this
 session's (the last one registered because main's guide cited a page the register could not date),
-and my rows now run `FLG-036..041`, `Q-28..30`, `S-37..41`.
+and my rows now run `FLG-039..041`, `Q-28..30`, `S-37..41`.
 
 **Verification (2026-11-20, rebased onto `b19480f`):** build 48 pages, no diff on a second build ·
 `check.py` 0 errors 0 warnings · `validate.py` 0 warnings · `check_local_links.py` 79 pages
