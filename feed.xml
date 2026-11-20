@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Crisp &amp; Counter — buying guides</title>
+  <title>Crisp &amp; Counter</title>
   <link>https://karagemop466-tech.github.io/Affil1/</link>
-  <atom:link href="https://karagemop466-tech.github.io/Affil1/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Five kitchen tools, five buying guides, and the source links behind every claim.</description>
+  <atom:link href="https://karagemop466-tech.github.io/Affil1/feed.xml" rel="self" type="application/rss+xml" />
+  <description>Plain-language buying guides for countertop cooking appliances.</description>
   <language>en-us</language>
-  <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
-  <copyright>2026 Crisp &amp; Counter</copyright>
+  <lastBuildDate>Thu, 20 Nov 2026 09:00:00 +0000</lastBuildDate>
   <item>
     <title>Basket or oven-style air fryer: what should you compare?</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>Two appliances share a name and almost nothing else. Here is the list of differences that actually change how a weeknight goes — and the ones that only look like they do.</description>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Choose the shape</category>
+    <description>The two shapes are not rivals in the same contest. They solve different problems, and most buying regret comes from picking the shape that solves the other person&#x27;s problem.</description>
   </item>
   <item>
-    <title>A no-hype checklist for comparing air-fryer capacity</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>The quart figure on the box answers a question you did not ask. This is the version of the question you did ask.</description>
+    <title>A no-hype checklist for comparing air fryer capacity</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Size it honestly</category>
+    <description>The quart number on the box is the least useful number on the box. Here is what to compare instead, and why two machines with the same figure can hold very different dinners.</description>
   </item>
   <item>
     <title>How to assess cleanup and counter-space trade-offs</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>The appliance that gets used is the one that is easy to put away and easy to wash. Both of those are checkable before you buy.</description>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/cleanup-and-counter-space/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Live with it</category>
+    <description>The appliance you stop using is the one that is annoying to clean or annoying to store. Both are decidable before purchase, from the listing, if you know which lines to read.</description>
   </item>
   <item>
     <title>Questions to ask before buying a multi-function kitchen appliance</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>Multi-function usually means one thing done well and several things done acceptably. The trick is finding out which is which before it takes up a shelf.</description>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/multi-function-kitchen-appliance-questions/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Buy the function, not the badge</category>
+    <description>&amp;ldquo;24 presets&amp;rdquo; and &amp;ldquo;multi-function&amp;rdquo; are counts, not capabilities. Here is how to find out which functions you will actually use before you pay for the rest.</description>
   </item>
   <item>
-    <title>Is a countertop oven worth it for holiday sides?</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/holiday-hosting.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>Work backward from serving time, the pans you already own, and what actually needs the main oven.</description>
+    <title>Thanksgiving overflow: what an air fryer actually fixes on the biggest oven day</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/air-fryer-thanksgiving-overflow/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/air-fryer-thanksgiving-overflow/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Cook with it</category>
+    <description>It will not roast the turkey. What it can do is take four sides, the rolls and the reheating off an oven that is already holding a bird for four hours. Here is the plan, and the questions to ask a listing before you believe it.</description>
   </item>
   <item>
-    <title>One basket or two for Sunday meal prep?</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/meal-prep-sunday.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/meal-prep-sunday.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>Sketch one batch of the lunch you actually pack before buying a bigger air fryer.</description>
+    <title>Frozen food nights: four questions that decide whether a basket earns its counter</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/frozen-food-nights/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/frozen-food-nights/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Live with it</category>
+    <description>Most air-fryer purchases are justified on weeknights, not weekends. Before you buy one for the freezer aisle, four questions are worth answering with your own kitchen in front of you.</description>
   </item>
   <item>
-    <title>Will that air fryer fit a small kitchen?</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/small-kitchen-counter.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/small-kitchen-counter.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>Measure the space the appliance uses in motion, not just where it sits.</description>
+    <title>Dual basket or two separate machines? The counter math nobody writes down</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/dual-basket-math/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/dual-basket-math/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Size it right</category>
+    <description>Two baskets in one box looks obviously better than one. The comparison that matters is against two small single-basket machines — on outlets, on cleanup, on cooking floor, and on what happens when one half breaks.</description>
   </item>
   <item>
-    <title>Instant-read or wireless: which thermometer do you need?</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/thermometer-pairing.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/thermometer-pairing.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>Pick for the way you cook: a quick spot check at the end or monitoring during a longer cook.</description>
+    <title>Is a smart probe worth it? Four questions before you spend on a thermometer</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/smart-probe-thermometer/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/smart-probe-thermometer/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Buy smart</category>
+    <description>One of the five links in our register is not an air fryer at all — it is a wireless meat thermometer, in the same shopping basket for the same occasion. So it gets the same treatment: what the listing claims, and what you should ask before paying.</description>
   </item>
   <item>
-    <title>Instant-read or leave-in probe: which thermometer do you actually need?</title>
-    <link>https://karagemop466-tech.github.io/Affil1/guides/instant-read-or-probe-thermometer.html</link>
-    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/instant-read-or-probe-thermometer.html</guid>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-    <description>Both products in this register take a temperature. Only one of them is meant to be left alone while it does it, and that difference decides which is worth your money.</description>
+    <title>Your first week with a new air fryer: a checklist that is not recipes</title>
+    <link>https://karagemop466-tech.github.io/Affil1/guides/first-week-checklist/</link>
+    <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/first-week-checklist/</guid>
+    <pubDate>Thu, 20 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Live with it</category>
+    <description>Everything you should do in the first seven days so the appliance is still on the counter in month six — seasoning the run, learning the hot spots, and setting up the cleanup you will actually keep.</description>
   </item>
 </channel>
 </rss>
