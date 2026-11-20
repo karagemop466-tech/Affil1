@@ -69,7 +69,7 @@ No work was discarded.
 | 16 | Executive summary | done | session-arena-f10ea853 | EXECUTIVE_SUMMARY.md | n/a |
 | 17 | Flagged for Review page(s) | done | both sessions | reviews/flagged.html, guides/flagged-for-review.html | n/a |
 | 18 | Integration: merge with main, re-verify line by line, build check, broken-link check | done | arena/55d40788-affil1 | all | Local reference check passed on 9 pages; sitemap/feed XML parse; smoke test 200 |
-| 19 | PR to main, merge, enable GitHub Pages, confirm deploy | in progress | arena/55d40788-affil1 | PR #6, main branch, repo settings | n/a |
+| 19 | PR to main, merge, enable GitHub Pages, confirm deploy | done | session-arena-f10ea853 (integrating arena/55d40788-affil1 board) | PR #10 https://github.com/karagemop466-tech/Affil1/pull/10, main branch | PR #10 merged (merge commit 481598d); GitHub Pages build + deploy jobs succeeded; site live at https://karagemop466-tech.github.io/Affil1/ with Affil1 shop front page as root index.html and all sessions' work preserved under archive/. |
 
 ## Rules
 
@@ -113,3 +113,8 @@ No work was discarded.
 
 - PR: https://github.com/karagemop466-tech/Affil1/pull/6 — pending merge to
   `main`, then GitHub Pages deploy confirmation.
+
+## Integration record — session-arena-f10ea853 (2026-11-20)
+
+- Fetched all five user-submitted link.amazon URLs against amazon.com (official source): B04G1MEwY -> https://www.amazon.com/dp/B0CDY277D3 (verified product page); B02NbDxp3 -> https://www.amazon.com/dp/B09B7SB46R (verified product page); B00hJ57DV -> https://www.amazon.com/ (homepage, no product page); B0c8moW59 -> Amazon checkpoint gate (no product page reachable); B0f3GKalj -> https://www.amazon.com/ (homepage, no product page). Intended ASIN and observed redirect target kept in separate fields (data/confirmations.json). Unverified destinations flagged, not treated as confirmed — consistent with this board's irregularities section.
+- PR #10 https://github.com/karagemop466-tech/Affil1/pull/10 merged into main (merge commit 481598d). GitHub Pages build + deploy succeeded; site live at https://karagemop466-tech.github.io/Affil1/. Local HTML reference validation passed on all pages before merge. Affil1 shop front page is the active root index.html; other sessions' work retained under archive/.
