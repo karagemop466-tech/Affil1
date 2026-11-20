@@ -21,6 +21,7 @@ from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # n
 import page_home  # noqa: E402
 import page_fit  # noqa: E402
 import page_design  # noqa: E402
+import page_start  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
 import page_compare  # noqa: E402
@@ -37,7 +38,7 @@ DATA = ROOT / "_src" / "data"
 # static asset or an archived edition, and is never touched.
 OWNED = [
     "index.html", "404.html",
-    "guides", "products", "compare", "questions", "suggestions", "decide",
+    "guides", "start", "products", "compare", "questions", "suggestions", "decide",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
@@ -45,6 +46,7 @@ OWNED = [
 GENERATED = {
     "index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
     "guides/index.html",
+    "start/index.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
@@ -183,6 +185,7 @@ def main():
         pages.append(write(f"guides/{g['slug']}.html", page_guides.build_guide("guides", g, meta)))
 
     # products
+    pages.append(write("start/index.html", page_start.build("start", products_doc, GUIDES)))
     pages.append(write("products/index.html", page_products.build_register("products", products, meta)))
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))

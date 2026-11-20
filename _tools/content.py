@@ -480,6 +480,67 @@ GUIDES.append({
 })
 
 
+GUIDES.append({
+    "slug": "turkey-timing-by-weight",
+        "cluster": "Seasonal",
+        "related": ["P-02", "P-04", "P-05"],
+        "title": "Holiday turkey timing: where does an air fryer actually help?",
+        "kicker": "Holiday arithmetic",
+        "dek": "Before you buy anything for Thanksgiving, put your bird on the scale and do this one sum. It decides whether a countertop appliance is sideline help or an oven-shaped mistake.",
+        "updated": "2026-11-20",
+        "read_minutes": 5,
+        "photo": "assets/img/holiday-table",
+        "photo_alt": "A laid holiday table with roast vegetables and serving dishes in warm evening light",
+        "photo_caption": "Editorial illustration of a laid table, not a photograph of a product on this site.",
+        "sources": [
+            ("USDA FSIS \u00b7 Turkey: from farm to table",
+             "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/turkey-farm-table"),
+            ("USDA FSIS \u00b7 Food thermometers (placement and reading)",
+             "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers"),
+        ],
+        "sections": [
+            {
+                "h": "Start with the weight, not the wishlist",
+                "p": [
+                    "Almost every holiday purchase argument is settled by a number that is already on the receipt: the weight of the bird. A countertop air fryer is excellent at a tray of sprouts and hopeless at a whole turkey, and the gap between those two jobs is large.",
+                    "So write the weight down first. Everything below is a way of asking what the oven you already have will do, and what is left over for a second appliance.",
+                ],
+            },
+            {
+                "h": "Three sums worth doing",
+                "items": [
+                    ("Roasting time", "Published roasting guidance is expressed per pound of bird, so the time is a function of weight and the source you follow. Look it up for your bird in the official guide you intend to use rather than trusting a blog's table \u2014 the per-pound figure is the input, not a fixed number of hours."),
+                    ("Oven dwell", "A large bird occupies the whole oven at a stage of the meal when the sides also need heat. That overlap, not the bird itself, is what a countertop appliance solves: it takes the tray of vegetables out of the queue."),
+                    ("Counter clear-down", "A countertop machine has to be cleared, moved, heated and cleaned. Count how long that takes in your kitchen, and whether anyone else can do it while you are pouring."),
+                ],
+            },
+            {
+                "h": "What an air fryer is genuinely good for on the day",
+                "p": [
+                    "Sides that respond to hot moving air: roast potatoes, sprouts, carrots, a tray of stuffing cubes. They cook in batches and they do not need to rest.",
+                    "Anything that has to hold for later needs a warming plan that does not involve re-frying, so make that plan before the day rather than discovering the problem with a full table.",
+                    "A whole bird is not that job. Neither is anything that must be carved and rest, because the resting time is when people sit down.",
+                ],
+            },
+            {
+                "h": "Do not guess the internal temperature",
+                "p": [
+                    "Colour is not a reading. Cook using the official USDA guidance on where to place the food thermometer and what the safe minimum internal temperature is for a whole turkey \u2014 the FSIS page linked below is the source, and this site does not restate the numbers because a figure copied into an affiliate page is exactly the kind of value that goes stale without anyone noticing.",
+                    "This is the strongest argument for one of the two thermometers on the shortlist that has nothing to do with the price: whether you fry the sides in a drawer or roast the bird in the oven, you need one probe you trust.",
+                ],
+            },
+            {
+                "h": "The buy-or-not decision, in one line",
+                "p": [
+                    "If the oven is full for more than an hour and the sides are queuing, a second heat source solves a real problem that day and makes the appliance earn its counter space the rest of the year.",
+                    "If the oven is free while it cooks the bird, a countertop fryer is a nice thing to own and not an answer to Thanksgiving. Buy it for the weeknights, and it will look after the holiday by itself.",
+                ],
+            },
+        ],
+        "closing": "No product on this site was tested, ranked or scored, and no cooking time or internal temperature is restated here: the FSIS pages linked above are the source for both, and they change less than a copied number does.",
+})
+
+
 COMPARE_COLUMNS = [
     ("Product", "Brand and shape as stated on the listing"),
     ("Shape", "Basket, oven or thermometer, read from the title and category path"),

@@ -721,3 +721,42 @@ a.btn:hover{transform:translateY(-1px)}
 .identity-caveat{margin:0 0 1.2rem;padding:.75rem .9rem;border:1px dashed var(--line-2);border-left:2px solid var(--warn);background:#fdf7f2;border-radius:0 3px 3px 0}
 .identity-caveat p{margin:0;font-size:.79rem;line-height:1.55;color:var(--ink-2)}
 .identity-caveat a{border-bottom:1px solid var(--line-2);color:var(--amber-ink)}
+
+/* Sources block at the foot of a guide. Every guide that leans on an official
+   page links it here, next to the claim rather than in a site-wide list. */
+.guide-sources{margin-top:2rem;padding:1.1rem 1.2rem;background:var(--tint,#f6f2e9);border-left:3px solid var(--gold,#e9b44c);border-radius:0 4px 4px 0}
+.guide-sources .q-label{margin:0 0 .5rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.guide-sources ul{margin:0 0 .6rem;padding-left:1.1rem;font-size:.92rem;line-height:1.55}
+.guide-sources li+li{margin-top:.35rem}
+.guide-sources .tiny{margin:0;font-size:.78rem;color:var(--faint)}
+
+/* "Where to start": five buyer situations, each answered by a shape, a
+   measurement and a guide. Two-column cards on wide screens, one otherwise. */
+.start-intro{max-width:70ch;margin:0 0 2.4rem;font-size:1.02rem;line-height:1.65;color:var(--ink-2)}
+.start-intro p+p{margin-top:.9rem}
+.start-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.6rem}
+.start-card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:1.6rem 1.7rem 1.4rem;display:flex;flex-direction:column;gap:.55rem}
+.start-card h3{margin:.1rem 0 .4rem;font-family:var(--serif);font-size:1.32rem;line-height:1.25;color:var(--ink)}
+.start-label{margin:0;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink,#8a6212);font-weight:600}
+.start-look{margin:0;font-weight:600;color:var(--ink);font-size:1.02rem}
+.start-card>p{margin:0;font-size:.95rem;line-height:1.6;color:var(--ink-2)}
+.start-meta{margin:.7rem 0 0;display:grid;gap:.6rem;font-size:.9rem}
+.start-meta div{display:grid;gap:.15rem}
+.start-meta dt{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.start-meta dd{margin:0;color:var(--ink-2);line-height:1.55}
+.start-picks-label{margin:1.2rem 0 .5rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.start-picks,.start-guides{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
+.start-pick{border-top:1px solid var(--line);padding-top:.85rem}
+.start-pick-ref{margin:0 0 .2rem;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.start-pick h4{margin:0 0 .35rem;font-family:var(--serif);font-size:1.12rem}
+.start-pick-why{margin:0 0 .6rem;font-size:.92rem;line-height:1.55;color:var(--ink-2)}
+.start-pick-links{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin:0 0 .4rem}
+.start-guides li{font-size:.94rem;line-height:1.5}
+.start-guide-meta{color:var(--faint);font-size:.84rem}
+.start-close{max-width:70ch}
+.start-close h2{font-family:var(--serif);font-size:1.5rem;margin:0 0 .7rem}
+.start-close p{margin:0 0 .8rem;line-height:1.65;color:var(--ink-2)}
+.start-close .tiny{font-size:.8rem;color:var(--faint)}
+@media(max-width:520px){.start-grid{grid-template-columns:1fr}.start-card{padding:1.2rem}}
+.cover-sub{margin:.9rem 0 0;font-size:.86rem;color:var(--ink-2);opacity:.85}
+.cover-sub a{color:inherit;text-decoration:underline;text-underline-offset:2px}

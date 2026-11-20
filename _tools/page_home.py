@@ -121,8 +121,9 @@ def build(page_dir, products, meta):
   <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 01</span> THE COUNTERTOP EDIT</p>
     <h1>The air fryer<br><em>field guide.</em></h1>
     <p class="cover-dek">One basket, two baskets, or French doors? Find the format that fits your counter and the way you cook.</p>
-    <div class="cover-actions"><a class="cover-btn" href="#shortlist">Explore the shortlist <span>→</span></a>
-      <a class="cover-link" href="{esc(rel(d, 'fit/index.html'))}">Find your format ↗</a></div></div>
+    <div class="cover-actions"><a class="cover-btn" href="{esc(rel(d, 'start/index.html'))}">Start with your situation <span>→</span></a>
+      <a class="cover-link" href="#shortlist">Or browse the shortlist ↓</a></div>
+    <p class="cover-sub"><a href="{esc(rel(d, 'fit/index.html'))}">Fit finder</a> &middot; <a href="{esc(rel(d, 'compare/index.html'))}">Side-by-side table</a> &middot; <a href="{esc(rel(d, 'guides/index.html'))}">All {len(GUIDES)} guides</a></p></div>
   <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
     <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
     <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
