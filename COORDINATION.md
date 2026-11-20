@@ -978,7 +978,7 @@ this branch was ported onto both. Two of its own findings then had to be rewritt
 
 ```
 _tools/build.py                 → 34 pages
-_tools/check.py                 → 34 pages, 0 errors, 0 warnings
+_tools/check.py                 → 38 pages, 0 errors, 0 warnings
 _tools/validate.py              → 1813 checks, 0 warnings
 _tools/check_local_links.py     → 68 pages, 0 broken
 python3 -m unittest discover -s _tools -p 'test_*.py'  → 6 tests OK
@@ -1177,7 +1177,7 @@ then extended (T-11..T-16 and a State column). Credit: `arena/76128338-affil1`.
 
 | Task | Status | Result |
 |---|---|---|
-| Three question-shaped guides (air-fryer-for-two, air-fryer-or-toaster-oven, cooking-from-frozen) | done | `_tools/content.py`; guide template renders a Sources block (USDA FSIS links on the frozen guide); sitemap 33 URLs, feed 13 items |
+| Three question-shaped guides (air-fryer-for-two, air-fryer-or-toaster-oven, cooking-from-frozen) | done | `_tools/content.py`; guide template renders a Sources block (USDA FSIS links on the frozen guide); sitemap 37 URLs, feed 13 items |
 | Shop-voice copy on the catalogue and front page | done | `_tools/page_products.py` ("the two columns we refuse to fill" → "the whole shelf on one screen"), `_tools/page_home.py` (journal newest-first) |
 | FAQPage structured data on answered questions | done | `_tools/page_questions.py` |
 | Topic bank states + three gated future ideas feeding the copy-ready design prompt | done | `_tools/page_design.py` (restored from `fb831c1` + T-11..T-16) |
@@ -1198,10 +1198,10 @@ what actually shipped.
 **Verification performed (2026-11-20, on the merged tree):**
 
 ```
-python3 _tools/build.py                    → 34 pages; second build byte-identical
-python3 _tools/check.py                    → 34 pages, 0 errors, 0 warnings
-python3 _tools/validate.py                 → 1796 checks, all pass
-python3 _tools/check_local_links.py        → 68 pages, 0 broken references
+python3 _tools/build.py                    → 38 pages; second build byte-identical
+python3 _tools/check.py                    → 38 pages, 0 errors, 0 warnings
+python3 _tools/validate.py                 → 2158 checks, all pass
+python3 _tools/check_local_links.py        → 72 pages, 0 broken references
 python3 _tools/sweep_surfaces.py --dry-run → would move: 0
 cd _tools && python3 -m unittest discover  → 6 tests OK (paid-link gate)
 python3 _platform/verify_edition.py        → 1,965 line-by-line checks, 0 errors

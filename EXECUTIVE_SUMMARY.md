@@ -341,9 +341,9 @@ result or ranking. The listing pages carried prices and ratings while being read
 
 ## Addendum — session `arena/d3f5a958-affil1`, 2026-11-20 (shop-polish & integration)
 
-Current build after this session: **34 pages, 13 question-shaped guides, 30
+Current build after this session: **38 pages, 13 question-shaped guides, 32
 review flags**. `_tools/check.py` 0 errors / 0 warnings; `_tools/validate.py`
-1,796 checks pass; `_tools/sweep_surfaces.py` 0 stray surfaces;
+2,158 checks pass; `_tools/sweep_surfaces.py` 0 stray surfaces;
 `_platform/verify_edition.py` 1,965 checks pass; `_decision-support/validate.py`
 PASS; the build is byte-identical on a second run.
 
