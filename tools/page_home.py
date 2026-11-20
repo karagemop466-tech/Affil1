@@ -27,7 +27,7 @@ def product_card(page_dir, p):
         "P-02": ("oven", "Emeril Lagasse French Door", "26 qt · Oven style"),
         "P-03": ("single", "Chefman TurboFry", "8 qt · Single basket"),
     }[p['ref']]
-    return f"""<article class="edit-card">
+    return f"""<article class="edit-card" data-category="air-fryers">
   <a class="edit-art" href="{esc(href)}" aria-label="Read about {esc(name)}">
     <img src="{esc(rel(page_dir, 'assets/img/storefront-' + art + '-w900.jpg'))}" loading="lazy" alt="Editorial drawing of the {esc(p['format_label'])} format">
     <span class="folio">FIG. {esc(p['ref'][-2:])}</span><span class="art-note">Format illustration</span></a>
@@ -35,6 +35,28 @@ def product_card(page_dir, p):
     <h3><a href="{esc(href)}">{esc(name)}</a></h3><p>{esc(BUYER_NOTES[p['ref']])}</p>
     <a class="edit-more" href="{esc(href)}">Explore this format →</a> &nbsp; {product_link(page_dir, p['listing_url'], 'Amazon listing ↗', cls='tlink')}
   </div></article>"""
+
+
+SHELF = {
+    'P-01': ('Two baskets', 'Chefman Dual Basket', 'Two sides on the menu? Check each drawer against the portion you usually cook.'),
+    'P-02': ('Countertop oven', 'Emeril Lagasse French Door', 'Before you make room for the oven, make room for the open doors.'),
+    'P-03': ('Single basket', 'Chefman TurboFry', 'For a tray of wedges, the width of the basket matters as much as the quarts.'),
+    'P-04': ('Instant-read', 'ThermoMaven Digital', 'Compare the grip, display and probe length for a quick check at the stove.'),
+    'P-05': ('Wireless probe', 'CHEF iQ Sense', 'Want to step away from the roast? Check the phone and connection requirements first.'),
+}
+
+
+def shelf_card(d, p):
+    tag, name, note = SHELF[p['ref']]
+    category = 'thermometers' if p['ref'] in ('P-04','P-05') else 'air-fryers'
+    dest = esc(rel(d, f"products/{p['ref'].lower()}.html"))
+    photo = img(d, p['photo'], p['photo_alt'], sizes='(max-width:700px) 92vw, 32vw')
+    if p['ref'] == 'P-03':
+        photo = img(d, 'assets/img/capacity', 'An illustrated single-layer portion beside a tape measure', sizes='(max-width:700px) 92vw, 32vw')
+    source = product_link(d, p["listing_url"], "Listing source ↗", cls="textact")
+    return f'''<article class="shelfcard" data-category="{category}"><a class="shelfphoto" href="{dest}" aria-label="Read about {esc(name)}">{photo}<span>{esc(tag)}</span></a>
+    <div class="shelfmeta">FIELD NOTE &nbsp; / &nbsp; {esc(p['ref'][-2:])}</div><h3><a href="{dest}">{esc(name)}</a></h3><p>{esc(note)}</p>
+    <a class="textact" href="{dest}">Product details &rarr;</a> &nbsp; {source}</article>'''
 
 
 def guide_card(page_dir, g, *, feature=False):
@@ -69,10 +91,12 @@ def build(page_dir, products, meta):
     <figcaption>FIG. 01 &nbsp;/&nbsp; FORMAT ILLUSTRATION</figcaption></figure>
 </section>"""
 
-    shortlist = section(f"""<div class="edit-head"><div><p class="ink-label"><i></i> SHOP BY FORMAT</p>
+    tabs = '<div class="shelftabs" hidden aria-label="Filter products">'+''.join(f'<button data-filter="{key}" aria-pressed="false">{text}</button>' for key,text in [('air-fryers','Air fryers'),('thermometers','Thermometers'),('all','All products')])+'</div>'
+    shortlist = section(f"""<div class="edit-head" id="shelf"><div><p class="ink-label"><i></i> SHOP BY FORMAT</p>
       <h2>The countertop shortlist<span>.</span></h2></div>
       <a class="edit-all" href="{esc(rel(d,'products/index.html'))}">All products <span>→</span></a></div>
-      <div class="edit-grid">{''.join(product_card(d,p) for p in mains)}</div>""", cls="edit-shop", sid="shortlist")
+      {tabs}
+      <div class="edit-grid">{''.join(product_card(d,p) for p in mains)}{''.join(shelf_card(d,p) for p in products if p["ref"] in ("P-04", "P-05"))}</div>""", cls="edit-shop", sid="shortlist")
 
     thermometer = f"""<section class="thermo-band"><div class="wrap thermo-inner">
   <div class="thermo-art">{img(d, 'assets/img/thermometer', 'A probe thermometer resting in a roasted chicken beside a small display unit', sizes='(max-width:720px) 100vw, 420px')}<span class="illus-tag">Illustration</span></div>
