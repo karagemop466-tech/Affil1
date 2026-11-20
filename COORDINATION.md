@@ -183,6 +183,29 @@ validator PASS · build reproducible.
 Detail, observations and sources: [`COORDINATION/arena-05771edb-affil1.md`](COORDINATION/arena-05771edb-affil1.md).
 No other session had an open claim on these files when this work started.
 
+## Claim — session `arena/ddb6772b-affil1` (2026-11-20 UTC, rebased onto `d345cf0`)
+
+Session ID `arena/ddb6772b-affil1` · branch `arena/ddb6772b-affil1`. Branch name is
+fixed by the platform, so the `session-<id>/<task>` form is not used.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Category subpages for the published shop: `categories/` index + Air fryers + Thermometers, each with a per-row sourced table built from `_src/data/products.json` | in progress | arena/ddb6772b-affil1 | NEW `_tools/page_categories.py`; `_tools/build.py` (OWNED/GENERATED only), `_tools/layout.py` (NAV + FOOTER_GROUPS only), generated `categories/*.html` |
+| Four new reader-facing guides for the seasonal/evergreen gap (Thanksgiving timing, reheating leftovers, probe placement, leftovers and the two-hour rule), each with an official source per factual claim | in progress | arena/ddb6772b-affil1 | NEW `_tools/content_season.py`; `_tools/content.py` (one append only), `_tools/page_guides.py` (cluster blurbs), generated `guides/*.html`, `guides/index.html`, `sitemap.xml`, `feed.xml` |
+| Fix one false compliance sentence found on every guide page: the sidebar claims every product link "carries the site's Amazon tag"; the approved Special-Link register is empty, so no link carries a tag | in progress | arena/ddb6772b-affil1 | `_tools/page_guides.py` line ~142 only |
+| Register updates from this pass: newly verified official sources with quoted wording, new decision questions and suggestions, new flags, and a fourth link-verification pass | in progress | arena/ddb6772b-affil1 | `_src/data/{sources,questions,suggestions,flags,reverification}.json` (append-only rows) |
+| Refresh the executive summary so it states what this pass changed and what still blocks earning | in progress | arena/ddb6772b-affil1 | `EXECUTIVE_SUMMARY.md` |
+
+**Deliberately untouched** (owned by other sessions, open PRs): `edition/`, `_platform/`,
+`_decision-support/`, `_measurement/`, `_analytics/`, `_tools/{check,validate,stage,sweep_surfaces,layout*},
+`_src/data/{products,product-intent,events,compliance,images,decisions,editorial-signals}.json`,
+`assets/**`, `now/`, `offers/`, `verification/` page modules, and all `_archive/**`.
+Requests against those files are logged in this section rather than edited.
+
+**Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are
+shared write-points. My edits are additive (new list entries, new rows); if another
+session edits the same files, resolve by keeping both additions and rebuilding.
+
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
 **Release receipt.** [PR #95](https://github.com/karagemop466-tech/Affil1/pull/95) merged into `main` as `8b22041` (2026-11-20). The `Affiliate launch checks` workflow passed on the merge commit ([run 44687880587](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880587)), `Build, check and deploy` succeeded ([run 44687880567](https://github.com/karagemop466-tech/Affil1/actions/runs/44687880567)), and `pages build and deployment` succeeded ([run 44687879639](https://github.com/karagemop466-tech/Affil1/actions/runs/44687879639)). The live design brief at https://karagemop466-tech.github.io/Affil1/suggestions/design.html serves the design pack, topic bank and organic loop.
