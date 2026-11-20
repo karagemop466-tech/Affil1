@@ -69,7 +69,7 @@ No work was discarded.
 | 16 | Executive summary | done | session-arena-f10ea853 | EXECUTIVE_SUMMARY.md | n/a |
 | 17 | Flagged for Review page(s) | done | both sessions | reviews/flagged.html, guides/flagged-for-review.html | n/a |
 | 18 | Integration: merge with main, re-verify line by line, build check, broken-link check | done | arena/55d40788-affil1 | all | Local reference check passed on 9 pages; sitemap/feed XML parse; smoke test 200 |
-| 19 | PR to main, merge, enable GitHub Pages, confirm deploy | in progress | arena/55d40788-affil1 | PR #6, main branch, repo settings | n/a |
+| 19 | PR to main, merge, enable GitHub Pages, confirm deploy | done | arena/55d40788-affil1 | PR #6 merged (commit 197e139); CI fix PR #13 merged; GitHub Pages deploy runs 44680335054 and 44680336058 both success; site live at https://karagemop466-tech.github.io/Affil1/ and passes the CI reference check |
 
 ## Rules
 
@@ -111,5 +111,7 @@ No work was discarded.
 
 ## Delivery
 
-- PR: https://github.com/karagemop466-tech/Affil1/pull/6 — pending merge to
-  `main`, then GitHub Pages deploy confirmation.
+- PR: https://github.com/karagemop466-tech/Affil1/pull/6 — merged to `main` 2026-11-20 (merge commit 197e139).
+- Follow-up CI fix: https://github.com/karagemop466-tech/Affil1/pull/13 — merged.
+- GitHub Pages: https://karagemop466-tech.github.io/Affil1/ — deploy runs 44680335054 (Deploy static site) and 44680336058 (pages build and deployment) both succeeded; live and passing the CI reference check.
+- Merge result: branch `arena/55d40788-affil1` merged into `main`; no work discarded; parallel sessions’ conflicting versions preserved under archive/.
