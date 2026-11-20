@@ -40,20 +40,20 @@ and checked page by page by `_tools/check.py`:
   implemented and shown with evidence), each row carrying cost, risk and the question
   it depends on;
 
-- 19 question-shaped guides across 6 clusters, all in `sitemap.xml` and
+- 21 question-shaped guides across 7 clusters, all in `sitemap.xml` and
   `feed.xml`, plus a category index and two category pages;
-- a decision register of 27 questions, 10 answered with evidence, 17 open and each
+- a decision register of 33 questions, 12 answered with evidence, 21 open and each
    naming the document or dashboard that would close it;
-- a suggestion queue with three coherent paths and 31 proposals, of which some
-  are already implemented and are shown with evidence;
+- a suggestion queue with four coherent paths and 51 proposals, of which some are
+  already implemented and are shown with evidence;
 - an owner's "what is left" page (`/now/`), a ranked offers page (`/offers/`, 10
   weighted offers) and a per-page verification audit (`/verification/`);
 - a **decision registry** (`/decisions/`) of 7 open proposals, each carrying the
   official source and verbatim quote it is checked against, the single missing
   fact, the person who can close it, and an accept/hold/reject control recorded
   in the browser only;
-- 35 review flags, an image policy, an inert analytics client and an empty
-  campaign ledger with a provenance rule;
+- 51 review flags, an image policy with a register checker behind it, an inert
+  analytics client and an empty campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
 

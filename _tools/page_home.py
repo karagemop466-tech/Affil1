@@ -217,7 +217,7 @@ def build(page_dir, products, meta):
   <div>
     {eyebrow('How this works')}
     <h2>We check the link. You check your counter.</h2>
-    <p>Crisp &amp; Counter is a small publication, not a retailer. Each of the five links you see was opened, followed to the Amazon listing it lands on, and matched to the product named here. What we cannot verify, we leave out.</p>
+    <p>Crisp &amp; Counter is a small publication, not a retailer. Every product named here is matched to the official Amazon listing that carries it — read once when the register was written, and again by a second session on 20 November 2026, title and category both. What we cannot verify we leave out rather than round off, and where a route did not repeat the second time, that is written down too, on the <a href="{esc(rel(d, 'verification/recheck.html'))}">verification log</a>.</p>
     <p>The result is a shop with fewer numbers than usual and no invented ones. Ratings, prices and stock are left where they belong: on Amazon, changing in real time.</p>
   </div>
   <ul class="method-list">

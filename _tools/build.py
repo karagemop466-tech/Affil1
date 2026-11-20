@@ -32,6 +32,7 @@ import page_decide  # noqa: E402
 import page_now  # noqa: E402
 import page_offers  # noqa: E402
 import page_crosscheck  # noqa: E402
+import page_recheck  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
 from content import GUIDES  # noqa: E402
@@ -62,6 +63,7 @@ GENERATED = {
     "decisions/index.html",
     "decide/index.html",
     "now/index.html", "offers/index.html", "verification/index.html",
+    "verification/recheck.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
     "operations/ledger.html",
@@ -236,6 +238,7 @@ def main():
     pages.append(write("now/index.html", page_now.build("now")))
     pages.append(write("offers/index.html", page_offers.build("offers")))
     pages.append(write("verification/index.html", page_crosscheck.build("verification")))
+    pages.append(write("verification/recheck.html", page_recheck.build("verification")))
     pages.append(write("suggestions/index.html", page_suggestions.build("suggestions", suggestions, meta)))
     pages.append(write("decisions/index.html", page_decisions.build("decisions")))
 

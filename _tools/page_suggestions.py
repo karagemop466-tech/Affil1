@@ -88,7 +88,7 @@ def build(page_dir, suggestions, meta):
 <div class="decide-intro">
   <div>
     <h2>Read this first</h2>
-    <p>The rows below are individually sensible and collectively contradictory. Product photography is pointless without an author; a publishing cadence is pointless without a name behind it; analytics is pointless if nobody reads the report. That is why the three paths come before the queue.</p>
+    <p>The rows below are individually sensible and collectively contradictory. Product photography is pointless without an author; a publishing cadence is pointless without a name behind it; analytics is pointless if nobody reads the report. That is why the {len(paths)} paths come before the queue.</p>
     <p>Pick one path, then read only the rows it needs. Everything else can wait without the site getting worse.</p>
   </div>
   <div class="decide-tools">
@@ -98,14 +98,14 @@ def build(page_dir, suggestions, meta):
   </div>
 </div>''', cls='')}
 {section(f'''
-<div class="sec-head"><div>{eyebrow('Three ways forward')}<h2>Pick a path, not a pile</h2></div>
+<div class="sec-head"><div>{eyebrow(f'{len(paths)} ways forward')}<h2>Pick a path, not a pile</h2></div>
 <p>Each path needs a different set of rows. Choosing one is the decision this page exists for — and nothing is implemented until you choose.</p></div>
 <div class="callout"><h2>The best path first: {esc(rec.get('name', ''))} ({esc(rec.get('path', ''))})</h2>
 <p>{esc(rec.get('why', ''))}</p>
 <p><strong>If you can only do one thing:</strong> {esc(rec.get('if_you_can_only_do_one_thing', ''))}</p>
 <p>{esc(rec.get('review_note', ''))}</p></div>
 {choice_table}
-<div class="path-grid paths-three">{path_cards}</div>''', cls='section-tint')}
+<div class="path-grid paths-{len(paths)}">{path_cards}</div>''', cls='section-tint')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('The queue')}<h2>Open proposals</h2></div>
 <p>Ordered so the cheap, unblocking rows come first.</p></div>
@@ -126,7 +126,7 @@ def build(page_dir, suggestions, meta):
     return page(
         d,
         title="Suggestions and decisions | Crisp & Counter",
-        description=f"{len(open_items)} proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.",
+        description=f"{len(open_items)} proposed changes with cost, risk and the question each depends on, grouped into {len(paths)} paths a reviewer can choose between before anything is built.",
         body=body + release_panel(d, "suggestions/"),
         active="suggestions/index.html",
         canonical="suggestions/",

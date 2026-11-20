@@ -224,14 +224,14 @@
       "rules_met": "Shows a generic fold-out instrument, not P-04 or P-05. No digits on the display. Caption names it as an illustration."
     },
     {
-      "file": "meal-prep",
-      "alt": "Portioned cooked food in containers on a counter beside an air fryer, mid-week meal preparation",
-      "style": "unbranded editorial photograph, generated",
+      "file": "meal-prep-engraved",
+      "alt": "An engraved illustration of three lidded glass jars in a row beside an unbranded basket air fryer on a counter",
+      "style": "engraved two-colour illustration",
       "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, by an earlier session",
+      "generated_by": "AI image generation, prompted for an unbranded appliance in the set's engraved print style (session arena/769ee00d-affil1); width variants w560 and w900 resized from the same file",
       "depicts_a_real_product": false,
       "used_on": "guides/meal-prep-sunday.html (hero) and the guides index",
-      "rules_met": "Row restored on 2026-11-20: the asset stayed in use while its register row was dropped by a merge, which is what tools/check_image_register.py now prevents."
+      "rules_met": "No brand mark, no price, no specification implied, and the caption on the page says it is not a photograph of a product sold here. It replaces an AI-generated photorealistic render that sat under a buy-adjacent card while this register's own rule forbade photographic imagery -- see the history note."
     },
     {
       "file": "instant-read",
@@ -263,5 +263,6 @@
       "source": "about/index.html#sources",
       "source_id": "SRC-02"
     }
-  ]
+  ],
+  "history": " 2026-11-20 (arena/769ee00d-affil1): a second read of the assets the generated pages actually load found meal-prep.jpg registered as an 'unbranded editorial photograph' while the rule above states that no photographic imagery is used and explains why. The render was not argued about; it was replaced with an engraving in the house style, and the photographic file stays in the tree, unserved, as the record of what was there. Logged as FLG-053."
 }

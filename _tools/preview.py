@@ -10,7 +10,10 @@ from tempfile import TemporaryDirectory
 from stage import stage
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'analytics'))
+# 'analytics' became '_analytics' when the working trees were moved under an underscore
+# so Pages could not serve them; this path was left behind, which made the documented
+# --measurement-demo command die on import. Corrected 2026-11-20 (arena/769ee00d-affil1)
+sys.path.insert(0, str(ROOT / '_analytics'))
 from endpoint import Collector  # noqa: E402
 
 

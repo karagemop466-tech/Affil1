@@ -235,9 +235,9 @@ GUIDES = [
         "title": "Meal-prep Sunday: one basket, two, or an oven?",
         "dek": "Meal prep fails on geometry, not motivation. Count how many things need the appliance at once \u2014 then choose the shape that matches that number.",
         "read_minutes": 5,
-        "photo": "assets/img/meal-prep",
-        "photo_alt": "An unbranded black air fryer beside glass jars of prepped vegetables, a cutting board and an open notebook on a wooden counter",
-        "photo_caption": "Illustration. The appliance and the jars are props, not a photograph of any product on this site.",
+        "photo": "assets/img/meal-prep-engraved",
+        "photo_alt": "An engraved illustration of three lidded glass jars in a row beside an unbranded basket air fryer on a counter",
+        "photo_caption": "Engraved illustration in the house style, drawn for this guide. The appliance is generic: it is not a photograph of either air fryer on this site and shows nothing about either one.",
         "updated": "2026-11-20",
         "sections": [
             {

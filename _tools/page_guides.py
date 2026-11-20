@@ -142,18 +142,12 @@ def build_guide(page_dir, g, meta):
             block.append("</dl>")
         article.append("".join(block))
 
-    # A guide that names a source has to show it. This field existed in the data
-    # for one guide and was never rendered anywhere - evidence in a register the
-    # reader never reaches is not evidence.
-    if g.get("sources"):
-        links = "".join(
-            f'<li>{outbound(d, url, esc(label))}</li>' for label, url in g["sources"]
-        )
-        article.append(
-            '<aside class="note"><p class="note-label">Where this comes from</p>'
-            f'<ul class="side-links">{links}</ul>'
-            "<p>Quoted rather than paraphrased, from the page named above.</p></aside>"
-        )
+    # A guide that names a source has to show it: evidence in a register the reader
+    # never reaches is not evidence. It is shown once, in the Sources block below the
+    # article (see sources_html), and deliberately not also as an in-body aside --
+    # emitting it twice made every guide that quotes an official page end with the
+    # same two links twice, and one session's hand-trim of the duplicated block in
+    # the committed HTML is what the reproducibility step is now written to catch.
 
     related = "".join(
         f"""<article class="mini-product">

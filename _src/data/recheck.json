@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "title": "Second read, 20 November 2026",
+    "session": "arena/769ee00d-affil1",
+    "checked_on": "2026-11-20",
+    "window_utc": "06:52 - 07:10",
+    "what_this_is": "Every row this shop publishes about a product, opened again by a different session on the same day, with the misses printed at the same size as the matches. It is not a restatement of the register: the register records what was seen when it was written, and this page records what a second, independent request saw.",
+    "method": "A read-only page fetch that follows redirects, issued from the agent environment. Two things were read off each official page: the document title, which carries the listing title, and the category breadcrumb. Nothing here was copied from a search result, from another session's notes, or from prior knowledge of a product.",
+    "rule": "A row says 'matched' only when the string on this site is the string the official page served. It says 'not reproduced' when the second request reached somewhere else. Neither verdict is used to edit a stored value, and neither is used to declare an earlier observation wrong.",
+    "what_this_page_is_not": "It is not proof of intent, attribution, price, rating, stock or quality. The intended ASIN stays null for all five rows: the submitted codes are nine characters and an Amazon ASIN is ten, as Amazon's own Creators API reference shows in its examples, so a slug is never written into an ASIN field.",
+    "counting": "5 of 5 official listings matched on the second read. Of the 5 submitted short links, 1 reached its recorded listing, 2 returned the marketplace home page and 2 could not be fetched at all. Two claims this site made about itself turned out not to hold and are corrected on the pages themselves; both are recorded as flags rather than quietly rewritten.",
+    "sources_note": "The machine-readable log kept alongside this register is _data/verification-observations.ndjson, where each session appends its own dated observations without overwriting an earlier one."
+  },
+  "listings": [
+    {
+      "ref": "P-01",
+      "field": "observed ASIN, listing title, category",
+      "published_value": "B0CDY277D3 · CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "official_source": "https://www.amazon.com/dp/B0CDY277D3",
+      "this_session_saw": "Served title 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen'. Breadcrumb Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers.",
+      "verdict": "matched",
+      "checked_at_utc": "2026-11-20T06:52Z",
+      "note": "The 6-quart figure is two independent 3-quart baskets in the seller's own words, which is what the card and the capacity guide both say."
+    },
+    {
+      "ref": "P-02",
+      "field": "observed ASIN, listing title, category",
+      "published_value": "B09B7SB46R · Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "official_source": "https://www.amazon.com/dp/B09B7SB46R",
+      "this_session_saw": "Served title matched the register string. Breadcrumb: the same Air Fryers path.",
+      "verdict": "matched",
+      "checked_at_utc": "2026-11-20T06:57Z",
+      "note": "'24 One-Touch Preset Options' and 'Six Cooking Accessories Included' are the seller's words, attributed as stated features and never as measured ones."
+    },
+    {
+      "ref": "P-03",
+      "field": "observed ASIN, listing title, category",
+      "published_value": "B08DKYBTPH · Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "official_source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "this_session_saw": "Served title matched, including the 450°F Hi-Fry phrase. Breadcrumb: the same Air Fryers path.",
+      "verdict": "matched",
+      "checked_at_utc": "2026-11-20T07:01Z",
+      "note": "The live title carries the registered-trademark glyph on TurboFry; the card drops the glyph and nothing else."
+    },
+    {
+      "ref": "P-04",
+      "field": "observed ASIN, listing title, category",
+      "published_value": "B0DHZTCNR5 · ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+      "official_source": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "this_session_saw": "Served title matched the register string. Breadcrumb Home & Kitchen › Kitchen & Dining › Kitchen Utensils & Gadgets › Thermometers & Timers › Meat.",
+      "verdict": "matched",
+      "checked_at_utc": "2026-11-20T06:59Z",
+      "note": "Accuracy, NIST/NSF and IP67 are the seller's claims and stay labelled as such. The breadcrumb confirms the thermometer filing this site uses."
+    },
+    {
+      "ref": "P-05",
+      "field": "observed ASIN, listing title, category",
+      "published_value": "B0DZFD6R9Z · CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "official_source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "this_session_saw": "Served title matched the register string. Breadcrumb: the same Meat thermometers path.",
+      "verdict": "matched",
+      "checked_at_utc": "2026-11-20T07:00Z",
+      "note": "A two-probe sibling listing appears in the page's own recommendations. This site publishes the three-probe listing, because that is the one the submitted link reached."
+    }
+  ],
+  "short_links": [
+    {
+      "ref": "P-01",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "slug_length": 9,
+      "reached": "https://www.amazon.com/",
+      "document_title": "Amazon.com. Spend less. Smile more.",
+      "verdict": "fell back to the marketplace home page",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "checked_at_utc": "2026-11-20T06:56Z",
+      "note": "No product was reached from the submitted URL in this session. The published buy link for P-01 is the official listing, reached separately and matched, so the reader path does not depend on this."
+    },
+    {
+      "ref": "P-02",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "slug_length": 9,
+      "reached": "https://www.amazon.com/",
+      "document_title": "Amazon.com. Spend less. Smile more.",
+      "verdict": "fell back to the marketplace home page",
+      "source": "https://www.amazon.com/dp/B09B7SB46R",
+      "checked_at_utc": "2026-11-20T07:03Z",
+      "note": "The same fall-through as P-01, with a Black Friday promotion rail in place of a product."
+    },
+    {
+      "ref": "P-05",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "slug_length": 9,
+      "reached": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "document_title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen",
+      "verdict": "reached the recorded listing",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "checked_at_utc": "2026-11-20T07:02Z",
+      "note": "The arrival URL carried plpRedirect=mhFallback and a session token. One link resolving on one request is not evidence that the form is dependable for readers, and it is not evidence of intent."
+    },
+    {
+      "ref": "P-03",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "slug_length": 9,
+      "reached": null,
+      "document_title": null,
+      "verdict": "fetch failed, no observation",
+      "source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "checked_at_utc": "2026-11-20T07:04Z",
+      "note": "Recorded as a gap rather than a result. Nothing was inferred from it."
+    },
+    {
+      "ref": "P-04",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "slug_length": 9,
+      "reached": null,
+      "document_title": null,
+      "verdict": "fetch failed, no observation",
+      "source": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "checked_at_utc": "2026-11-20T07:04Z",
+      "note": "Two attempts on this slug failed in this session, which matches the earlier record that this was the link that repeatedly failed before resolving once."
+    }
+  ],
+  "reading": {
+    "headline": "The listings are solid. The route the operator supplied is not.",
+    "body": "Five of five official pages agree with everything this shop publishes about them: same product, same title, same category. Of the five submitted short links, one reached its recorded listing, two fell through to Amazon's home page, and two could not be reached at all. Three sessions now hold three different accounts of the same five slugs, which is itself the finding: the short form is not a dependable way to name a product, so every buy button here is built from the observed ASIN as a plain official listing URL, and the site claims no attribution until the account reports a click.",
+    "what_would_change_this": "A dated record, made inside the enrolled Associates account, of the exact ASIN the owner means to send readers to, together with the SiteStripe link for it. On that entry the tag can be switched on and the sentence above the buy button can change."
+  },
+  "gaps": [
+    {
+      "id": "RG-01",
+      "gap": "Which ASIN the owner means to send readers to, for each of the five products.",
+      "why_it_blocks": "It is the only thing that lets a buy link carry a tag. Every earning and optimisation question waits behind it.",
+      "how_to_discover": "In Associates Central, open SiteStripe on each intended product page, copy the tagged link for that ASIN, and record the ASIN, the URL and the date in the intent register. The gate in _tools/paid_link_gate.py then arms itself; nothing else has to be rewritten.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "who_can_answer": "The account owner. No public page can supply it."
+    },
+    {
+      "id": "RG-02",
+      "gap": "Whether a click from this site appears anywhere in an Associates report.",
+      "why_it_blocks": "It decides whether the shop earns at all, which is the premise of every later decision on this board.",
+      "how_to_discover": "One click on one tagged link from a signed-out browser, then the Clicks report filtered to that date and that tracking ID. Read-only, and it takes five minutes including the report lag.",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "who_can_answer": "The account owner."
+    },
+    {
+      "id": "RG-03",
+      "gap": "Whether the submitted short links fall through to the home page for real readers too, or only for an automated fetch.",
+      "why_it_blocks": "Nothing, deliberately: no reader is sent through a short link, and the register publishes both readings side by side.",
+      "how_to_discover": "Open each submitted link in an ordinary browser and note the address bar and page title with a date, then append the observation to _data/verification-observations.ndjson. If the answer is 'for readers too', the fix is not a re-check but deleting the short form from the reader-facing copy entirely.",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "who_can_answer": "Anyone with a browser. This session could not, from this environment."
+    },
+    {
+      "id": "RG-04",
+      "gap": "Any query data at all: what people type before they land here.",
+      "why_it_blocks": "Topic choice stays editorial judgement. No page on this site calls a topic trending, and none can until a verified property reports impressions.",
+      "how_to_discover": "Verify the Search Console property for this host, submit the existing sitemap, and read the Performance report after a window long enough to hold data. The build already adds every accepted guide to the sitemap and feed, so nothing needs rebuilding afterwards.",
+      "source": "https://support.google.com/webmasters/answer/7576553",
+      "who_can_answer": "Whoever holds the site's Google account."
+    },
+    {
+      "id": "RG-05",
+      "gap": "A named human author, and a decision on real product photography.",
+      "why_it_blocks": "It caps how much authority the guides may claim, and it gates the hands-on language and the photography that would let the cards read like a shop rather than a register.",
+      "how_to_discover": "One owner decision, recorded on the about page with only the credentials that are true. Photography then needs the physical products or a licensed source: Amazon's own listing imagery is Program Content and cannot simply be copied without a permitted feed.",
+      "source": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "who_can_answer": "The owner."
+    },
+    {
+      "id": "RG-06",
+      "gap": "Whether the site's own checks prove what they claim to prove.",
+      "why_it_blocks": "A gate that cannot fail is worse than no gate, because the pages cite it as the reason a claim is safe.",
+      "how_to_discover": "Read the deploy workflow's reproducibility step and ask what it compares. As of 2026-11-20 it copied the tree *after* the build step had already written into it and diffed the two copies, so it could only catch a non-deterministic generator, never hand-edited or stale committed HTML -- which is how a guide shipped with its source list duplicated in the generator and trimmed by hand in the tree. It now diffs against the commit. Verify by editing any generated page by hand and pushing: the job must fail.",
+      "source": "https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions",
+      "who_can_answer": "Whoever can edit .github/workflows/pages.yml."
+    }
+  ]
+}
