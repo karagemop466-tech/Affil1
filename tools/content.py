@@ -8,6 +8,8 @@ superlative, no winner. If a sentence needs a fact that is not in that file, the
 sentence does not ship.
 """
 
+from buyer_guides import BUYER_GUIDES
+
 GUIDES = [
     {
         "slug": "basket-or-oven-air-fryer",
@@ -226,7 +228,7 @@ GUIDES = [
         ],
         "closing": "No product on this site was tested, ranked or scored. P-05's attributes above are transcribed from its listing title."
     }
-]
+] + BUYER_GUIDES
 
 # Rows for the comparison table. Every cell is either transcribed from a listing
 # title reached on 2026-11-20 or explicitly blank. Blank is a valid value.
