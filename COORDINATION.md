@@ -9,13 +9,36 @@ claiming any work.
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Design-prompt feed (anti-slop rules, catchy article bank), suggestions path-choice board, missing-information discovery map, executive summary refresh, independent re-verification of the five links and policy sources, repo irregularity review | in progress | `arena/7e19d8e1-affil1` | `_src/data/topics.json` (new), `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_src/data/reverification.json`, `_tools/page_design.py`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/page_review.py`, generated pages those own (`suggestions/`, `questions/`, `review/`, `brief/`, `index.html` only if the generator emits it), `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+| Design-prompt feed (anti-slop rules, catchy article bank), suggestions path-choice board, missing-information discovery map, executive summary refresh, independent re-verification of the five links and policy sources, repo irregularity review | done | `arena/7e19d8e1-affil1` | `_src/data/topics.json` (new), `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_src/data/reverification.json`, `_tools/page_design.py`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/page_review.py`, generated pages those own (`suggestions/`, `questions/`, `review/`, `brief/`, `index.html` only if the generator emits it), `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
 
 No other session holds an open claim on these files (all prior claims are
 `done` or `needs review`). Shared tables/sitemap/feed are regenerated only by
 this build's own `python3 _tools/build.py` from `_src/data`, so no hand-edit
 conflicts. Open PRs of other sessions (#9, #12, #19, #24, #39, #47, #54, #62,
 #65, #69, #72, #82, #84, #86, #93, #94, #96, #102) are not touched.
+
+**Record — 2026-11-20.** Delivered: the copy-ready design prompt with anti-slop
+rules + house-style register ST-01..ST-10 + a 14-title article bank in 5
+clusters (working titles, not popularity claims) at `suggestions/design.html`;
+PATH-C "Measure first" recommended on the suggestions board with a per-path
+verdict table and two new rows (S-22 style register, S-23 evidence-gated bank);
+a discovery map on `questions/` covering all 14 open rows (action, holder of the
+fact, effort). **Verification performed this session (third independent pass,
+recorded in `_src/data/reverification.json`→`third_pass`):** all five /dp/
+destinations re-fetched from Amazon and matched to the register
+(B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z); one short-link
+probe (link.amazon/B04G1MEwY → B0CDY277D3, FLG-026 stays open — observations
+are unstable); policy language re-retrieved verbatim from the
+[Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement),
+[Program Policies §2(a)/(b) incl. the price rule](https://affiliate-program.amazon.com/help/operating/policies)
+(page updated 2026-04-14), [Google's outbound-link qualification](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)
+and the [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking).
+**Irregularities flagged for review (published on `/review/`, none blocking):**
+FLG-028 `/edition/` second self-canonical front door outside the sitemap (one
+site to index is not yet true), FLG-029 README stale `tools/`/`src/` paths after
+the underscore rename, FLG-030 18 open PRs untriaged. **Gates:** build 31 pages,
+check.py 0/0, validate.py 1666 checks, check_local_links 0 broken (65 pages),
+unittest 6/6, _platform/verify_edition 1965 checks, _decision-support PASS.
 
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 

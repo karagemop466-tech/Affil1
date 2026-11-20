@@ -208,3 +208,56 @@ Findability + line-by-line re-verification pass on the canonical edition:
   cadence / consolidation / search / gate suggestions and question ids; main's
   S-12, S-15, Q-16 and Q-22 already hold those, so only genuinely new items were
   kept: Q-23 (market size), Q-24 (self-test budget) and FLG-027.
+
+## Session addendum — arena/7e19d8e1-affil1 (2026-11-20)
+
+Decision-grade design feed, discovery map and a third independent verification pass.
+
+- **Design prompt + article bank + house style** (`suggestions/design.html`, fed by
+  `_src/data/topics.json`). The copy-ready prompt now carries the anti-slop rules the
+  owner asked for (no unearned testing claims, no ranking language, no hollow meta,
+  sourced-or-blank). The **house-style register** ST-01..ST-10 gives each rule a basis,
+  quoting the live policy where the rule is Amazon's or the FTC's. The **article bank**
+  holds 14 working titles in 5 clusters (6 map to published guides, 8 are proposals),
+  each with the evidence required before writing and its internal-link cluster. Every
+  title is an editorial hypothesis — no keyword tool was consulted and no popularity
+  is claimed. The **organic-traffic loop** is stated as publish → sitemap/feed →
+  internal link → measure queries → next topic, with the Search Console gate named.
+- **Suggestions board now answers "which path?" first** (`suggestions/`).
+  PATH-C *Measure first* is recommended with the reason, the first moves
+  (S-01 test click, S-03 Search Console) and the review gate: choose on the page
+  before anything is implemented. S-22 (adopt the style register) and S-23 (open the
+  article bank only where evidence and queries agree) are new rows.
+- **Every open question now carries a discovery route** (`questions/`): the action that
+  would close it, who holds the missing fact, and what it costs — 14 rows in the
+  discovery map. No question is closed by inference.
+- **Third independent verification pass** (this session, 2026-11-20, recorded in
+  `_src/data/reverification.json` → `third_pass`). All five destinations re-fetched and
+  transcribed from Amazon's own pages; all five agree with the register. The P-01 short
+  link (`link.amazon/B04G1MEwY`) was fetched once and resolved to
+  `amazon.com/dp/B0CDY277D3` with a generated short-link arrival token — one more
+  product-page observation for FLG-026, which still stands (link.amazon responses are
+  unstable request to request). Policy language re-retrieved verbatim on 2026-11-20:
+
+  | Claim | Source (official) | Status |
+  |---|---|---|
+  | Disclosure sentence, verbatim | [Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) | matched |
+  | Special Links must use the assigned Associates ID | [Program Policies §2(a)](https://affiliate-program.amazon.com/help/operating/policies) | matched |
+  | Tag as URL parameter ("XXXXX-##") | [Program Policies §2(b)](https://affiliate-program.amazon.com/help/operating/policies) | matched (scope reading still FLG-025) |
+  | Prices/availability only from Amazon-served links or Creators/PA API | [Program Policies §2(b)](https://affiliate-program.amazon.com/help/operating/policies) (page updated 2026-04-14) | matched |
+  | `rel="sponsored"` marks paid links | [Google: qualify outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links) | matched |
+  | Material connection disclosed clearly and conspicuously | [FTC Endorsement Guides FAQ](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking) | matched |
+
+- **Repo review — three new irregularities, all on `/review/`:** FLG-028 (medium) the
+  `/edition/` tree serves a second self-canonical front door outside the sitemap;
+  FLG-029 (low) README.md still names `tools/` and `src/` paths that were renamed
+  `_tools/` and `_src/`; FLG-030 (low) 18 pull requests from earlier sessions remain
+  open and untriaged. None blocks anything; each names what to check.
+- **Checks on the final tree.** 31 pages · `check.py` 0 errors / 0 warnings ·
+  `validate.py` 1666 checks / 0 warnings · `check_local_links.py` 0 broken across
+  65 pages · `unittest discover _tools` 6/6 · `_platform/verify_edition.py` 1965
+  checks · `_decision-support/validate.py` PASS.
+- **Still owner-only, still open:** the Associates test click and report read (S-01,
+  Q-03), the SiteStripe intent register (Q-01), Search Console (S-03, Q-07), an editor
+  name (S-02, Q-08). Everything an agent can do is done; these are the four that decide
+  whether the site can earn and what it should say next.
