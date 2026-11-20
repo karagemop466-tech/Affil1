@@ -30,8 +30,9 @@ and checked page by page by `_tools/check.py`:
 - a comparison page with **two** tables: what the listings state, and what
   decision each product actually answers. The price and rating cells link to the
   live listing instead of sitting empty;
-- ten question-shaped guides across six clusters, all in `sitemap.xml` and
-  `feed.xml`;
+- eleven question-shaped guides across six clusters, all in `sitemap.xml` and
+  `feed.xml` (one added 2026-11-20: reheating Thanksgiving leftovers, built from
+  USDA FSIS and FoodSafety.gov pages fetched that day);
 - a decision register of 24 questions, 10 answered with evidence and 4 that block
   other work until they are answered;
 - a suggestion queue with three coherent paths and 24 proposals (18 open, 6 already
@@ -43,7 +44,7 @@ and checked page by page by `_tools/check.py`:
   official source and verbatim quote it is checked against, the single missing
   fact, the person who can close it, and an accept/hold/reject control recorded
   in the browser only;
-- 29 review flags, an image policy, an inert analytics client and an empty
+- 35 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   Amazon product link outside the permitted set (an unapproved tag, a short link, or an unobserved ASIN), a reintroduced price, or a second competing edition.
