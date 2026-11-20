@@ -9,6 +9,8 @@ claiming any work.
 
 ### Decision-grade design prompt, article bank and discovery map — arena/7e19d8e1-affil1 (claimed 2026-11-20)
 
+**Release receipt.** [PR #117](https://github.com/karagemop466-tech/Affil1/pull/117) merged into `main` with its merge commit checks green: [Build, check and deploy](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250440), [Affiliate launch checks](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250362), [Verify Countertop Almanac edition and platform](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250379). [Pages build and deployment](https://github.com/karagemop466-tech/Affil1/actions/runs/44694249535) succeeded; live fetches on 2026-11-20 confirm `suggestions/design.html` serves the prompt, token pack, style register and both topic banks, and `questions/` serves the 27-question register with the 14-row discovery map.
+
 | Task | Status | Owner | Files |
 |---|---|---|---|
 | Design-prompt feed (anti-slop rules, catchy article bank), suggestions path-choice board, missing-information discovery map, executive summary refresh, independent re-verification of the five links and policy sources, repo irregularity review | done | `arena/7e19d8e1-affil1` | `_src/data/topics.json` (new), `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_src/data/reverification.json`, `_tools/page_design.py`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/page_review.py`, generated pages those own, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
