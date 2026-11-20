@@ -876,6 +876,14 @@ FLAGS = [
         "source": "https://support.google.com/webmasters/answer/9128668",
     },
     {
+        "id": "FLG-009",
+        "title": "A dated observed price is republished on the desk pages",
+        "severity": "Needs review",
+        "detail": "The product records page shows three price observations recorded on 20 November 2026, each with the listing URL it was read from. The IP License says Product Advertising Content is obtained through Creators API or PA API, and that it may not be altered. A dated observation of a public price, shown with its source and its date and never shown on a reader-facing page, is a different act from displaying a live price, but the distinction has not been confirmed with the program.",
+        "action": "Ask the program, or a reviewer, whether a dated observed price may appear on an editorial record page. If the answer is no, remove the price rows from the desk and keep only the fact that a price was observed on a given date.",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies",
+    },
+    {
         "id": "FLG-008",
         "title": "The brief asks for an AI layer; the IP License restricts that use",
         "severity": "Needs legal review",
@@ -1134,4 +1142,55 @@ FORBIDDEN_CLAIMS = [
     r"\bnumber one\b",
     r"\btrending\b",
     r"\blimited time\b",
+]
+
+
+# --------------------------------------------------------------------------------------
+# Design direction. These are the instructions a designer or a design model should
+# follow, written so they can be pasted straight into a prompt.
+# --------------------------------------------------------------------------------------
+DESIGN_DIRECTION = [
+    ("Page archetype",
+     "An editorial front page, not a dashboard. One lead story, three product cards, one "
+     "comparison table, one seasonal band, one desk strip. A reader should know what to buy "
+     "before they know what we have not verified."),
+    ("Palette",
+     "Warm paper (#faf8f3), deep sage-green ink (#22362d), a single terracotta accent "
+     "(#c9603d), cream section bands (#f0eee4). No gradients beyond one soft hero wash, no "
+     "neon, no glassmorphism."),
+    ("Type",
+     "A high-contrast serif for headlines and card titles, a neutral humanist sans for "
+     "everything else. Headlines are sentence case. Never uppercase a whole sentence."),
+    ("Card anatomy",
+     "Every product card carries: brand, name, one-line format, a two-column body headed "
+     "\u201cWhy it is on the shelf\u201d and \u201cWhere it might not suit you\u201d, a "
+     "verification chip, and one outbound button. No badge walls, no star ratings, no "
+     "\u201cbest overall\u201d ribbon."),
+    ("Photography",
+     "No stock photos of smiling families. Either a clean product silhouette or nothing. "
+     "Amazon product imagery is Program Content and may only be used under the IP License, so "
+     "it must arrive through the API, not through a page read."),
+    ("Voice",
+     "Second person, short sentences, concrete nouns. Explain the trade-off rather than "
+     "declaring a winner. No exclamation marks, no \u201camazing\u201d, no \u201cgame-changer\u201d, "
+     "no \u201cguaranteed\u201d."),
+    ("Navigation",
+     "One visible navigation group. Everything else lives in the footer. A single search "
+     "affordance over the shelf table, not a site-wide search box."),
+    ("Disclosure",
+     "A full-width dark strip above the masthead on every page, always the same sentence, "
+     "plus a repeat in the footer. It is part of the design, not a legal afterthought."),
+    ("Tables",
+     "One table per reader-facing page. Monospace for identifiers. Blank cells render as "
+     "\u201cNot confirmed\u201d in italic, never as a dash and never with a guess."),
+    ("Motion",
+     "Under 200ms, opacity and transform only. Nothing that moves on scroll. Respect "
+     "prefers-reduced-motion."),
+    ("Imagery and rhythm",
+     "Alternate dense and open sections. Use the seasonal band as a visual reset roughly "
+     "every third screen so the page has a breathing rhythm."),
+    ("What to avoid",
+     "Stock-photo grids, fake urgency, countdown timers, rating stars the reader cannot "
+     "verify, \u201ctop 10\u201d lists, comparison tables with an unearned winner column, and "
+     "any layout that reads as machine-generated filler."),
 ]

@@ -1006,6 +1006,14 @@ def suggestions_page(root):
 <th>Effort</th><th>Depends on</th><th>Risk</th><th>Evidence</th><th>Official reference</th><th>Decision</th></tr></thead>
 <tbody>%(rows)s</tbody></table></div></section>""" % {"g": E(g), "rows": "".join(rows)})
 
+    design_rows = "".join(
+        '<tr><td class="mono">%s</td><td><b>%s</b></td>'
+        '<td class="src-cell"><a href="%s" rel="noopener" target="_blank">%s</a></td></tr>'
+        % (E(area), E(prompt),
+           E(D.SOURCES["ftc"]["url"]), E(D.SOURCES["ftc"]["title"]))
+        for area, prompt in D.DESIGN_DIRECTION
+    )
+
     return """
 <section class="page-head"><div class="wrap"><p class="eyebrow">The desk &middot; Suggestions</p>
 <h1>Suggestions,<br>with a decision slot.</h1>
@@ -1022,6 +1030,15 @@ column, or on a copy, and it becomes the build order.</p></div></section>
 
 %(groups)s
 
+<section class="wrap section section-tight"><div class="section-head"><div>
+<p class="eyebrow">Design direction</p><h2>How the site should look and read.</h2></div>
+<p class="section-note">Written so each line can be pasted straight into a design prompt. The
+design still has to pass the publishing gate on the same page.</p></div>
+<!-- gate:exempt-claims The design direction deliberately names the cliches it forbids. -->
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Area</th><th>Direction</th>
+<th>Authority</th></tr></thead><tbody>%(design)s</tbody></table></div>
+<!-- /gate:exempt-claims --></section>
+
 <section class="wrap section section-tight"><div class="callout callout-wide callout-flag">
 <h3>One suggestion needs legal input first</h3><p>S-14 touches the Associates IP License, which
 restricts using Special Links and Program Content to develop machine learning models without
@@ -1031,6 +1048,7 @@ assistant, and it should be answered in writing before anything is built.</p>
 </div></section>
 """ % {
         "groups": "".join(groups),
+        "design": design_rows,
         "flagspage": E(rel("desk/flagged-for-review.html", root)),
         "policies": E(D.SOURCES["policies"]["url"]),
     }

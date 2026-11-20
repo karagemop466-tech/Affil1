@@ -149,15 +149,27 @@ def check_reader_facing():
     notes.append("3 reader-facing values: checked %d reader-facing pages" % len(set(pages)))
 
 
+EXEMPT_BLOCK = re.compile(
+    r"<!--\s*gate:exempt-claims.*?-->(.*?)<!--\s*/gate:exempt-claims\s*-->", re.S)
+
+
 def check_claims(pages):
+    """Reject unsupportable claim language.
+
+    A block may opt out with the gate:exempt-claims markers. That is used once, for
+    the design direction, which deliberately names the cliches it forbids. Every
+    exemption is counted so it cannot be applied silently."""
+    exemptions = 0
     for page in pages:
         body = read(page)
+        body, n = EXEMPT_BLOCK.subn("", body)
+        exemptions += n
         for pattern in D.FORBIDDEN_CLAIMS:
             m = re.search(pattern, body, re.I)
             if m:
                 fail("4 claims", "%s: unsupported claim language matching %r"
                      % (page, pattern))
-    notes.append("4 claims: checked %d pages" % len(pages))
+    notes.append("4 claims: checked %d pages, %d declared exemption(s)" % (len(pages), exemptions))
 
 
 def check_table_rows(pages):
