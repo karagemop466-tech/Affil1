@@ -121,7 +121,7 @@ def build_images(page_dir, images, products, meta):
         'Image policy',
         'Every photograph here<br>is an illustration',
         images["meta"]["why"],
-        meta='8 generated assets &middot; 0 product photographs &middot; 3 uses declined',
+        meta=f'{len(images["assets"])} generated assets &middot; 0 product photographs &middot; {len(images["rejected"])} uses declined',
     )}
 {section(f'''
 <h2>The rule</h2>

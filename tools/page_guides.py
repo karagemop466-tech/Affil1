@@ -1,7 +1,7 @@
 """The journal: guide index and guide pages."""
 
-from layout import (breadcrumbs, breadcrumb_schema, buy_url, esc, eyebrow, page,
-                    pagehead, product_link, rel, section)
+from layout import (breadcrumbs, breadcrumb_schema, buy_url, esc, eyebrow, outbound, page,
+                    pagehead, product_link, rel, section, table)
 from page_home import guide_card, img
 from content import GUIDES
 
@@ -80,6 +80,18 @@ def build_guide(page_dir, g, meta):
         block = [f"<h2>{esc(s['h'])}</h2>"]
         for para in s.get("p", []):
             block.append(f"<p>{esc(para)}</p>")
+        if s.get("table"):
+            t = s["table"]
+            rows = []
+            for r in t["rows"]:
+                row_cells = []
+                for cell in r:
+                    if isinstance(cell, dict) and cell.get("url"):
+                        row_cells.append({"html": outbound(d, cell["url"], esc(cell["label"]))})
+                    else:
+                        row_cells.append(cell)
+                rows.append(row_cells)
+            block.append(table(t["headers"], rows, cls="guide-table", caption=t.get("caption")))
         if s.get("items"):
             block.append('<dl class="guide-items">')
             for term, text in s["items"]:

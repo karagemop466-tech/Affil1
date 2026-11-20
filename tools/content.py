@@ -368,9 +368,22 @@ GUIDES = [
             {
                 "h": "Where the numbers come from",
                 "p": [
-                    "Safe internal temperatures are published by food safety authorities, not by appliance sellers. Use the USDA's guidance for the food you are cooking rather than a number in a product listing, and treat the thermometer as the instrument that tells you when you have reached it.",
-                    "This site does not restate those figures because they change with the food and the cut, and a single number here would be worse than a link to the authority that maintains them.",
+                    "Safe internal temperatures are published by food safety authorities, not by appliance sellers. USDA FSIS states that visual cues like color are unreliable and that using a food thermometer placed in the thickest part away from bone, fat or gristle is the only reliable way to verify safe internal temperature (SRC-09).",
+                    "The figures below are transcribed directly from the USDA FSIS Safe Minimum Internal Temperature Chart (last updated April 14, 2025; SRC-08), with an official source link on every row:",
                 ],
+                "table": {
+                    "caption": "USDA FSIS Safe Minimum Internal Temperatures (verified 2026-11-20, SRC-08)",
+                    "headers": ["Food", "Safe minimum internal temperature & rest", "Official source"],
+                    "rows": [
+                        ["Beef, pork, veal and lamb steaks, chops and roasts", "145°F (62.8°C) and rest at least 3 minutes", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Ground meats (beef, pork, veal, lamb)", "160°F (71.1°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["All poultry (whole bird, breasts, thighs, wings, ground, stuffing)", "165°F (73.9°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Eggs", "160°F (71.1°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Fish and shellfish", "145°F (62.8°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Leftovers and casseroles", "165°F (73.9°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Ham, fresh or smoked (uncooked)", "145°F (62.8°C) and rest at least 3 minutes", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                    ],
+                },
             },
             {
                 "h": "The cheap upgrade",
