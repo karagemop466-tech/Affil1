@@ -95,11 +95,21 @@ whether the submitted short-link format is a compliant Special Link.
 
 ## Deployment
 
-`.github/workflows/deploy-pages.yml` builds, runs the gate, runs the gate's own
-negative test, and only then publishes. A failing gate blocks the deploy.
+GitHub Pages publishes this repository from the **main branch root** (legacy
+build type), so the generated HTML is committed. Because of that,
+`.github/workflows/deploy-pages.yml` is a **gate rather than a deployer**: on
+every push and pull request it
 
-GitHub Pages must be set to **Source: GitHub Actions** for the workflow to
-publish. Settings → Pages → Build and deployment → Source.
+1. rebuilds the site from `data/` and `content/`,
+2. fails if the committed output differs from that clean build, so generated
+   pages cannot drift from their source of truth,
+3. runs the compliance gate, and
+4. runs the gate's own negative test.
+
+A red run means the published site should not be trusted. To move to a
+workflow-driven deploy instead, change Settings → Pages → Build and deployment →
+Source to *GitHub Actions* and restore the `upload-pages-artifact` /
+`deploy-pages` steps.
 
 ## Licence
 
