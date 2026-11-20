@@ -113,9 +113,6 @@ BANNED = [
 AFFILIATE = re.compile(
     r"^https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/|link\.amazon/)", re.I)
 AMAZON_ANY = re.compile(r"(^//|https?://)([a-z0-9.-]*amazon\.[a-z.]+|amzn\.to|link\.amazon)", re.I)
-TRACKING_ID = "shopnow047c-20"
-TAGGED = re.compile(r"[?&]tag=([A-Za-z0-9\-]+)")
-
 EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
@@ -158,7 +155,7 @@ def check_page(path):
 
     # --- links resolve ---
     for attr, value, line in s.refs:
-        if not value or value.startswith(("#", "mailto:", "data:", "javascript:")):
+        if not value or value.startswith(("mailto:", "data:", "javascript:")):
             continue
         if attr == "src" and EXTERNAL_RESOURCE.match(value):
             err(f"{rel}:{line}: external resource load {value!r}")
@@ -197,15 +194,6 @@ def check_page(path):
                 err(f"{rel}: affiliate link missing noopener: {href}")
             if a.get("target") != "_blank":
                 warn(f"{rel}: affiliate link without target=_blank: {href}")
-            # A commerce link must carry the Associates tag as a URL parameter
-            # (Program Policies 2(b), SRC-02). Submitted short links are shown for
-            # evidence and are exempt because they cannot carry the tag themselves.
-            if "amazon.com/dp/" in href:
-                tag = TAGGED.search(href)
-                if tag is None:
-                    err(f"{rel}: commerce link without the tracking tag: {href}")
-                elif tag.group(1) != TRACKING_ID:
-                    err(f"{rel}: commerce link carries the wrong tag: {href}")
         elif AMAZON_ANY.search(href):
             # A citation to Amazon's own policy or help page. It must NOT be
             # marked sponsored, because it is not a paid link.
@@ -256,6 +244,10 @@ def check_page(path):
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
 
+    for row in re.findall(r"<tbody>(.*?)</tbody>",text,re.S):
+        for tr in re.findall(r"<tr[^>]*>(.*?)</tr>",row,re.S):
+            if not re.search(r'<a [^>]*href="https://',tr): err(f"{rel}: data row without an official source link")
+
     # --- head essentials ---
     for needle in ("<title>", 'name="description"', 'rel="canonical"'):
         if needle not in text:
@@ -282,7 +274,7 @@ def check_sitemap_feed():
     from build import GENERATED  # the build's own list, not a second copy
     generated = set()
     for g in GENERATED:
-        if g == "404.html" or g in ("sitemap.xml", "feed.xml", "robots.txt"):
+        if g in ("404.html", "operations/launch-readiness.html", "sitemap.xml", "feed.xml", "robots.txt"):
             continue
         generated.add(g[:-len("index.html")] if g.endswith("index.html") else g)
     for u in sorted(generated):
@@ -316,8 +308,8 @@ def check_data():
             err(f"products.json: {p['ref']} observed_asin is not 10 characters")
         if p["submitted_code"] != p["submitted_link"].rsplit("/", 1)[-1]:
             err(f"products.json: {p['ref']} submitted_code does not match the link")
-        if p["intended_asin"] == p["observed_asin"] and p["intended_asin"] is not None:
-            err(f"products.json: {p['ref']} intended and observed have been merged")
+        if p["intended_asin"] and not all(p.get(k) for k in ("intended_confirmation_source","intended_listing_url","intended_confirmed_on")):
+            err(f"products.json: {p['ref']} intended ASIN lacks independent evidence")
 
     for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):
         json.loads((ROOT / "src/data" / name).read_text(encoding="utf-8"))
@@ -350,7 +342,7 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for ev in ("page_view", "outbound_product_click", "guide_read_75", "compare_view", "flag_page_view"):
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:

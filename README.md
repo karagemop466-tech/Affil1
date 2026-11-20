@@ -1,4 +1,4 @@
-# Crisp & Counter — an Amazon affiliate publication for countertop cooking
+# Crisp & Counter
 
 A static Amazon affiliate publication about air fryers and thermometers.
 Live at **https://karagemop466-tech.github.io/Affil1/**
@@ -8,7 +8,7 @@ It is built to be a shop a reader can act on, with one rule underneath:
 counts or test results — and a review page that publishes every gap instead of
 hiding it.
 
----
+## Build and test
 
 ## The site, in one table
 
@@ -53,17 +53,11 @@ archive/              five earlier competing surfaces (four storefronts and a pa
                       integration pass), preserved untouched and non-indexable
 ```
 
-Nothing in the tree is hand-edited except `assets/`, `tools/`, `src/data/`, `docs/`
-and the markdown files. If you edit a generated `.html` directly, the drift check in
-CI fails and tells you so.
+The Python server serves **only** `dist` on port 8000. It enables five same-origin events, honors DNT/GPC, and writes daily aggregate counts to SQLite outside the web root. `PORT` and `COUNTER_DB` are configurable. Use a durable non-public database for an authorized production host. No raw event ingestion, cookies, visitor IDs, referral strings or IP logging by the collector. Do not import preview tests into the campaign ledger.
 
-## Build, check, publish
+GitHub Pages serves static HTML. Its client sends no analytics requests. Native branch publishing uses `_config.yml` exclusions to avoid publishing historical editions or source data. Workflow-based Pages uses `tools/stage.py`. Keep both scopes aligned. No other domains or editions are submitted in the sitemap.
 
-```bash
-python3 tools/build.py            # regenerate every page from src/data
-python3 tools/validate.py         # the gate; exits non-zero on any violation
-python3 -m http.server 8207 --bind 0.0.0.0   # preview; open /Affil1/ after linking the parent dir
-```
+## Editorial cadence
 
 1. **The disclosure strip is above `<main>` on every page** and repeated in the
    footer. Required by Associates Operating Agreement §5; placed high because the

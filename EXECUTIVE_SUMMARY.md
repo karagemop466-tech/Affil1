@@ -1,4 +1,4 @@
-# Executive summary — Affil1 / Crisp & Counter
+# Crisp & Counter | November 2026
 
 **Site:** Crisp & Counter — https://karagemop466-tech.github.io/Affil1/
 **Tracking ID:** shopnow047c-20

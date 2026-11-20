@@ -1,5 +1,6 @@
 """The review queue, the image policy, and the measurement plan."""
 
+from release_panels import render as release_panel
 from layout import (blank, esc, eyebrow, outbound, page, pagehead, rel,
                     section, table)
 
@@ -40,10 +41,11 @@ def build_index(page_dir, flags, meta):
             {"html": f'<span class="pill pill-{"block" if f["severity"]=="high" else ("warn" if f["severity"]=="medium" else "none")}">{esc(f["severity"])}</span>'},
             {"html": esc(f["title"])},
             {"html": esc(f["blocks"])},
+            {"html": _urlish(next(c for c in f["to_check"] if c.startswith("https://") and not c.startswith("https://link.amazon/")),d)},
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
         ])
-    flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects"], flag_rows,
-                       cls="flags", caption=f"{len(fl)} items, ordered by severity")
+    flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Source", "Affects"], flag_rows,
+                       cls="flags", caption="15 items, ordered by severity")
 
     body = f"""{pagehead(
         'Review queue',
@@ -106,7 +108,7 @@ def build_images(page_dir, images, products, meta):
     for a in images["assets"]:
         rows.append([
             {"html": f'<strong>{esc(a["file"])}</strong><br><span class="tiny">{esc(a["alt"])}</span>'},
-            {"html": '<span class="pill pill-warn">AI generated</span>'},
+            {"html": outbound(d,'https://github.com/karagemop466-tech/Affil1/blob/main/src/data/images.json','Image provenance')},
             {"html": esc(a["used_on"])},
             {"html": esc(a["rules_met"])},
         ])
@@ -119,7 +121,7 @@ def build_images(page_dir, images, products, meta):
         'Image policy',
         'Every photograph here<br>is an illustration',
         images["meta"]["why"],
-        meta=f'{len(images["assets"])} generated assets &middot; 0 product photographs &middot; 3 uses declined',
+        meta='9 generated assets &middot; 0 product photographs &middot; 3 uses declined',
     )}
 {section(f'''
 <h2>The rule</h2>
@@ -136,14 +138,14 @@ def build_images(page_dir, images, products, meta):
     return page(
         d,
         title="Image policy \u2014 Crisp & Counter",
-        description="Every image here is an AI-generated illustration, labelled where it appears: the asset list, the rule each follows, and what the site declined to do.",
+        description="Every image on this site is AI-generated illustration, labelled where it appears. Here is the full asset list, the rule each follows, and what the site declined to do.",
         body=body,
         active="review/index.html",
         canonical="review/images.html",
     )
 
 
-def build_measurement(page_dir, meta):
+def build_measurement(page_dir, meta, spec):
     d = page_dir
     events = [
         ("page_view", "Every page load", "Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept."),

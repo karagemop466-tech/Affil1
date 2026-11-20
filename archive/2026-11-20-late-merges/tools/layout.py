@@ -16,6 +16,7 @@ import html
 import json
 import pathlib
 import posixpath
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_NAME = "Crisp & Counter"
@@ -75,8 +76,6 @@ def esc(value):
 
 def rel(page_dir, target):
     """Relative URL from a page's directory to a target path at the repo root."""
-    if not target:
-        return ""
     return posixpath.relpath(target, page_dir) if page_dir else target
 
 
@@ -91,7 +90,7 @@ def buy_url(asin):
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
-         aria=None, title=None):
+         aria=None, title=None, affiliate_ref=None):
     # An absolute URL is never passed through rel(): doing so would rewrite
     # "https://host/x" into "../https:/host/x" and produce a 404.
     absolute = target.startswith(("http://", "https://", "mailto:", "#"))
@@ -103,6 +102,8 @@ def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
         attrs.append(f'title="{esc(title)}"')
     if aria:
         attrs.append(f'aria-label="{esc(aria)}"')
+    if affiliate_ref:
+        attrs.append(f'data-affiliate-ref="{esc(affiliate_ref)}"')
     if sponsored:
         attrs.append('rel="sponsored nofollow noopener"')
         attrs.append('target="_blank"')
@@ -115,49 +116,6 @@ def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
 def outbound(page_dir, url, label, **kw):
     """An official-source link. Never sponsored: these are citations."""
     return link(page_dir, url, label, external=True, **kw)
-
-
-WORDS = ("zero one two three four five six seven eight nine ten eleven twelve "
-         "thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty "
-         "twenty-one twenty-two twenty-three twenty-four twenty-five").split()
-
-
-def spelled(n):
-    """Small integers spelled out, because a page that says '21 flags' reads like a log."""
-    return WORDS[n] if 0 <= n < len(WORDS) else str(n)
-
-
-def _load(name):
-    import json
-    import pathlib
-    return json.loads((pathlib.Path(__file__).resolve().parent.parent / "src" / "data" / name).read_text(encoding="utf-8"))
-
-
-def flag_count():
-    return len(_load("flags.json")["flags"])
-
-
-def question_count():
-    return len(_load("questions.json")["questions"])
-
-
-TRACKING_TAG = "shopnow047c-20"
-
-
-def tagged(url):
-    """Every Amazon retail URL leaves this site carrying the Associates tag.
-
-    Policies 2(b) (SRC-02) requires the tracking ID as a parameter of the link,
-    so a bare /dp/ address is corrected here rather than left to each template.
-    A submitted short link is returned unchanged: it is shown as evidence of what
-    the owner sent, and the short-link service cannot carry the tag itself.
-    """
-    import re
-    if not AFFILIATE_HINT.search(url) or "link.amazon/" in url:
-        return url
-    if re.search(r"[?&]tag=", url):
-        return url
-    return url + ("&" if "?" in url else "?") + "tag=" + TRACKING_TAG
 
 
 def product_link(page_dir, url, label, **kw):
@@ -277,6 +235,8 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
+<link rel="stylesheet" href="{rel(page_dir, 'assets/css/publication.css')}">
+{('<link rel="stylesheet" href="'+esc(rel(page_dir,extra_css))+'">') if extra_css else ''}
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
@@ -286,7 +246,10 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {body}
 </main>
 {footer(page_dir)}
+<script src="{rel(page_dir, 'assets/js/publication.js')}" defer></script>
+<script src="{rel(page_dir, 'assets/js/discover.js')}" defer></script>
 <script src="{esc(js)}" defer></script>
+<script src="{esc(rel(page_dir, 'assets/js/counter-config.js'))}" defer></script>
 <script src="{esc(rel(page_dir, 'assets/js/analytics.js'))}" defer></script>
 </body>
 </html>
