@@ -228,9 +228,17 @@ def check_page(path):
         trs = len(re.findall(r"<tr[ >]", body))
         if trs and tds > trs * 12:
             err(f"{rel}: table body has {tds} cells across {trs} rows - likely shredded markup")
-        for row in re.findall(r"<tr[^>]*>(.*?)</tr>", body, re.S):
-            if '<td' in row and 'href="https://' not in row:
-                err(f"{rel}: table row lacks a source link")
+        # Every register row must carry a link to its evidence. The rule applies
+        # to tables that declare a Source or Listing column, which are the
+        # registers of entries and findings; prose tables without such a column
+        # are not claims about a document.
+        for tbl in re.findall(r"<table[^>]*>(.*?)</table>", body, re.S):
+            head = re.search(r"<thead>.*?</thead>", tbl, re.S)
+            if not head or not re.search(r"<th[^>]*>(Source|Listing|Evidence)</th>", head.group(0)):
+                continue
+            for row in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl.split("</thead>", 1)[-1], re.S):
+                if "<td" in row and not re.search(r'href="https?://', row):
+                    err(f"{rel}: register row lacks a source link")
         char_cells = len(re.findall(r"<td>.{1}</td>", body))
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")

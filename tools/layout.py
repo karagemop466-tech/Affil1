@@ -286,7 +286,23 @@ def breadcrumb_schema(trail, current_label, current_path):
     return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items}
 
 
-def table(headers, rows, *, cls="", caption=None, note=None):
+def _src_cell(url):
+    if not url:
+        return '<span class="src-none">no single document</span>'
+    host = url.split("//", 1)[-1].split("/", 1)[0].replace("www.", "")
+    return f'<a rel="noopener" href="{esc(url)}">{esc(host)}</a>'
+
+
+def table(headers, rows, *, cls="", caption=None, note=None, sources=None):
+    """Render a table. ``sources`` adds a final Source column.
+
+    Pass a single URL for a table where every row rests on the same document, or
+    a list with one URL per row. A row without a source link fails the build.
+    """
+    if sources is not None:
+        headers = list(headers) + ["Source"]
+        per_row = sources if isinstance(sources, (list, tuple)) else [sources] * len(rows)
+        rows = [list(r) + [{"html": _src_cell(u)}] for r, u in zip(rows, per_row)]
     head = "".join(f"<th scope=\"col\">{h}</th>" for h in headers)
     body = []
     for row in rows:
