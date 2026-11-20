@@ -376,7 +376,7 @@
     <span class="scard-effort">an hour to wire the existing tool into a scheduled run and publish its output</span>
   </div>
   <div class="scard-body">
-    <div class="scard-why"><p class="q-label">Why</p><p>Every product fact on this site rests on a supplied link resolving to the same listing it did on 2026-11-20. P-04 already showed that the same link can return a product page on one attempt and Amazon&#x27;s continuity page on another, on the same date. The repository already has the tool for this (tools/verify_links.py); what is missing is a schedule and a place for the result.</p></div>
+    <div class="scard-why"><p class="q-label">Why</p><p>Every product fact on this site rests on a supplied link resolving to the same listing it did on 2026-11-20. P-04 already showed that the same link can return a product page on one attempt and Amazon&#x27;s continuity page on another, on the same date. The repository already has the tool for this (_tools/verify_links.py); what is missing is a schedule and a place for the result.</p></div>
     <dl class="scard-meta">
       <div><dt>Risk</dt><dd>Medium, and worth stating plainly: an unattended re-check can hit the same interstitial P-04 did, and a false alarm is worse than no alarm. Any automated check must report the outcome and let a human adjudicate. It must never overwrite a verified record on its own.</dd></div>
       <div><dt>Depends on</dt><dd>nothing</dd></div>
@@ -426,12 +426,12 @@
   <td><strong>S-14</strong></td>
   <td>Replace plain listing links with account-validated Special Links, one product at a time, and keep the build refusing anything else</td>
   <td>2026-11-20</td>
-  <td>tools/layout.py buy_url(); tag rule in tools/check.py; see FLG-009</td>
+  <td>_tools/layout.py buy_url(); tag rule in _tools/check.py; see FLG-009</td>
 </tr><tr>
   <td><strong>S-15</strong></td>
   <td>Consolidate two competing editions into one canonical site</td>
   <td>2026-11-20</td>
-  <td>archive/legacy-2026-11-20/; robots.txt; sitemap.xml; FLG-008</td>
+  <td>_archive/legacy-2026-11-20/; robots.txt; sitemap.xml; FLG-008</td>
 </tr><tr>
   <td><strong>S-16</strong></td>
   <td>Publish P-04 as a thermometer instead of an unresolved row</td>

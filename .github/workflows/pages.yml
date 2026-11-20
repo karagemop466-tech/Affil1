@@ -24,16 +24,19 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build the site
-        run: python3 tools/build.py
+        run: python3 _tools/build.py
 
       - name: Verify every rule the site claims
-        run: python3 tools/check.py
+        run: python3 _tools/check.py
 
       - name: Check relative links across served editions
-        run: python3 tools/check_local_links.py
+        run: python3 _tools/check_local_links.py
+
+      - name: Paid-link gate — a public observation must never create a tag
+        run: python3 -m unittest discover -s _tools -p 'test_*.py' -v
 
       - name: Validate the internal Decision Desk section
-        run: python3 decision-support/validate.py
+        run: python3 _decision-support/validate.py
 
       - name: Validate the Countertop Almanac edition and platform
         run: python3 platform/verify_edition.py
@@ -41,14 +44,14 @@ jobs:
       - name: Confirm the build is reproducible, not hand-edited
         run: |
           cp -r . /tmp/first-build
-          python3 tools/build.py
+          python3 _tools/build.py
           if ! diff -r -q --exclude='.git' --exclude='__pycache__' /tmp/first-build . ; then
             echo "::error::Output is not reproducible. Files were changed by hand rather than by the build."
             exit 1
           fi
 
       - name: Stage the public edition
-        run: python3 tools/stage.py _site
+        run: python3 _tools/stage.py _site
 
       - name: Read the configured Pages source
         id: pages-source

@@ -8,7 +8,7 @@ name: Affiliate launch checks
 # gate for the surface that actually publishes.
 #
 # The archived edition and its original test suite are preserved at
-# archive/2026-11-20-late-merges/ (see the README there for how to restore it).
+# _archive/2026-11-20-late-merges/ (see the README there for how to restore it).
 on:
   pull_request:
   push:
@@ -28,28 +28,28 @@ jobs:
           python-version: "3.11"
 
       - name: Launch gate — disclosure, sponsored marking, price prohibition, registers
-        run: python3 tools/validate.py
+        run: python3 _tools/validate.py
 
       - name: Launch gate — paid-link unit tests (no synthesised tags, approved register only)
-        run: cd tools && python3 -m unittest test_paid_link_gate -v
+        run: cd _tools && python3 -m unittest test_paid_link_gate -v
 
       - name: Launch gate — no second published surface has crept back in
         run: |
-          python3 tools/build.py
-          python3 tools/sweep_surfaces.py --dry-run --run-label probe | tee sweep.log
+          python3 _tools/build.py
+          python3 _tools/sweep_surfaces.py --dry-run --run-label probe | tee sweep.log
           grep -q '^would move: 0 ' sweep.log || {
             echo "::error::generated pages exist outside the single published pipeline"
-            echo "Either add them to tools/build.py, or move the competing surface to archive/."
+            echo "Either add them to _tools/build.py, or move the competing surface to _archive/."
             exit 1
           }
 
       - name: First-party client and self-hosted collector still parse
         run: |
-          python3 tools/check_js.py assets/js/events.js assets/js/shortlist.js
-          python3 -m py_compile analytics/endpoint.py
+          python3 _tools/check_js.py assets/js/events.js assets/js/shortlist.js
+          python3 -m py_compile _analytics/endpoint.py
           grep -q "localStorage" assets/js/shortlist.js && echo "shortlist stays local (localStorage, nothing transmitted)"
-          if grep -rnE "googletagmanager|google-analytics|\bgtag\b|facebook|doubleclick|cloudflareinsights" --include=*.html --include=*.js . | grep -v '^./archive/' ; then
+          if grep -rnE "googletagmanager|google-analytics|\bgtag\b|facebook|doubleclick|cloudflareinsights" --include=*.html --include=*.js . | grep -v '^./_archive/' ; then
             echo "::error:: third-party tracking found in the published tree"
             exit 1
           fi
-          echo "no third-party tracker referenced outside archive/" 
+          echo "no third-party tracker referenced outside _archive/" 

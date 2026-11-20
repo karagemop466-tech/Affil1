@@ -1,4 +1,10 @@
-# Canonical branch-based Pages publication. Superseded editions remain in git.
+# GitHub Pages serves this branch root in legacy mode with a root .nojekyll, so
+# Jekyll never runs and no exclude here takes effect. What actually keeps the
+# working papers off the public host is the underscore rename: Pages publishes
+# nothing whose path segment starts with "_", so _decision-support/, _src/,
+# _data/, _tools/, _analytics/, _server/ and _archive/ are not reachable, while
+# the built shop at the root is. See PUBLISHING_WORKFLOW.md for the check that
+# proves each one returns 404. This list is retained for a Jekyll-mode fallback.
 plugins: []
 exclude:
   - COORDINATION.md

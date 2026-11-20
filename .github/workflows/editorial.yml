@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Select a topic from authorized evidence only
-        run: python3 tools/research_brief.py brief.txt
+        run: python3 _tools/research_brief.py brief.txt
       - name: Draft for review (never publish automatically)
         if: hashFiles('brief.txt') != ''
         id: draft

@@ -24,11 +24,11 @@ jobs:
           python-version: "3.11"
 
       - name: Rebuild from the data layer
-        run: python3 tools/build.py
+        run: python3 _tools/build.py
 
       - name: Compliance and integrity gate
         id: gate
-        run: python3 tools/validate.py | tee gate.log
+        run: python3 _tools/validate.py | tee gate.log
 
       - name: Every reference still resolves at the Pages mount
         run: |
@@ -39,7 +39,7 @@ jobs:
             curl -fsS -o /dev/null http://127.0.0.1:8207/Affil1/index.html && break
             sleep 1
           done
-          MOUNT=http://127.0.0.1:8207/Affil1 python3 tools/check_deploy_paths.py
+          MOUNT=http://127.0.0.1:8207/Affil1 python3 _tools/check_deploy_paths.py
 
       - name: Summary
         if: always()
@@ -47,11 +47,11 @@ jobs:
           {
             echo "## Weekly audit"
             echo
-            echo "- Rebuild: \`tools/build.py\`"
-            echo "- Gate: \`tools/validate.py\` — see the job log for the check count"
-            echo "- Mount-path link check: \`tools/check_deploy_paths.py\`"
+            echo "- Rebuild: \`_tools/build.py\`"
+            echo "- Gate: \`_tools/validate.py\` — see the job log for the check count"
+            echo "- Mount-path link check: \`_tools/check_deploy_paths.py\`"
             echo
             echo "This workflow changes nothing. A failure here means a published page"
             echo "no longer passes the gate that was true when it shipped; fix the data in"
-            echo "**src/data/**, re-run the build, and update the flagged register."
+            echo "**_src/data/**, re-run the build, and update the flagged register."
           } >> "$GITHUB_STEP_SUMMARY"
