@@ -1,6 +1,7 @@
 """Optional first-party host for the generated edition. Not used by GitHub Pages."""
 import argparse
 import csv
+from contextlib import closing
 from datetime import date, datetime, timedelta, timezone
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
@@ -14,8 +15,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 from build import GENERATED
 
+READINESS_PAGE = "/Affil1/operations/launch-readiness.html"
+
 BROWSER = {'page_view', 'outbound_click', 'guide_open', 'search_query_referral'}
 PAGES = {'/Affil1/' + p for p in GENERATED if p.endswith('.html') and p != '404.html'}
+PAGES.add(READINESS_PAGE)
 PAGES |= {p.removesuffix('index.html') for p in PAGES if p.endswith('/index.html')}
 MAX_BYTES = 4096
 
@@ -115,7 +119,9 @@ class Handler(SimpleHTTPRequestHandler):
     def do_POST(self):
         if self.path != '/Affil1/analytics/collect' or not self.analytics_enabled:
             return self.respond(404)
-        if self.headers.get('Origin') != self.origin or self.headers.get('Sec-Fetch-Site') not in (None, 'same-origin'):
+        if (self.headers.get('Origin') != self.origin
+            or self.headers.get('Sec-Fetch-Site') not in (None, 'same-origin')
+            or self.headers.get('Sec-GPC') == '1' or self.headers.get('DNT') == '1'):
             return self.respond(403)
         try:
             length = int(self.headers.get('Content-Length', '-1'))
@@ -127,7 +133,7 @@ class Handler(SimpleHTTPRequestHandler):
             return self.respond(415)
         try:
             value = json.loads(self.rfile.read(length))
-            with self.db() as db:
+            with closing(self.db()) as db:
                 record(db, value, self.retention_days)
         except (ValueError, RecursionError):
             return self.respond(400)
@@ -210,12 +216,12 @@ def main():
             def db(self):
                 return open_db(args.database)
         if args.database:
-            with open_db(args.database):
+            with closing(open_db(args.database)):
                 pass
         with ThreadingHTTPServer(('0.0.0.0', args.port), Configured) as server:
             server.serve_forever()
     else:
-        with open_db(args.database) as db:
+        with closing(open_db(args.database)) as db, db:
             if args.command == 'import-report':
                 import_report(db, args.file)
             elif args.command == 'prune':
