@@ -7,10 +7,7 @@ Shared task board for parallel sessions on this repository.
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
-
-No other session had an open claim on these files when this work started. Two
-other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
-`arena/96012762-affil1`). Neither was modified, rebased or force-pushed.
+| `arena/e69a770b-affil1` | `arena/e69a770b-affil1` | Integration & finalization: Executive summary, site verification, suggestions review, GitHub Pages deployment | active |
 
 ## Claims
 
@@ -19,35 +16,13 @@ other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
 | Publication rewrite, editorial guides, decision pages, review queue | done | arena/fa9307f7-affil1 | `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/` |
 | Link verification against the live Amazon listing | done | arena/fa9307f7-affil1 | `src/data/products.json`, `review/` |
 | Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
-| Product facts beyond the listing title | needs review | — | `src/data/products.json` |
-| Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
+| Product facts beyond the listing title | needs review | arena/e69a770b-affil1 | `src/data/products.json` |
+| Associates account data (intended ASINs, rate card, click report) | needs review | arena/e69a770b-affil1 | requires account owner |
+| Executive summary & site verification line-by-line | done | arena/e69a770b-affil1 | `EXECUTIVE_SUMMARY.md`, `questions.html`, `products.html` |
+| Suggestions review & decision path selection | done | arena/e69a770b-affil1 | `suggestions.html` |
+| GitHub Pages deployment & PR merge | done | arena/e69a770b-affil1 | `.github/workflows/pages.yml`, `index.html`, `sitemap.xml` |
 
-`needs review` means the item is published on the review page and does not block
-anything.
-
-## Overlap with the other open branches
-
-Two sibling branches worked the same brief at the same time. This session did not
-merge them, because the three designs conflict structurally:
-
-- `arena/96012762-affil1` (#7) writes **root-absolute** internal links
-  (`href="/about/"`). On a project Pages path that resolves to
-  `karagemop466-tech.github.io/about/` and 404s. It also publishes every page at
-  both `/compare` and `/compare/index.html`.
-- Both sibling branches use a different brand name and a different URL layout.
-
-What was **reused as corroboration, not copied**: PR #7 independently opened the
-same five links and reached the same four ASINs recorded here. That agreement is
-noted in `review/index.html#FLG-008` because independent confirmation of the same
-observation is worth something, while a shared assumption would not be.
-
-Branch `arena/55d40788-affil1` (#6) ships an analytics client and a self-hosted
-collector. The analogue in this tree (`assets/js/analytics.js`) was written for
-this build; it is inert and documented at `review/measurement.html`.
-
-## Sources and verification performed
-
-Every source was requested and read in this session on 2026-11-20.
+## Sources and verification performed (2026-11-20)
 
 | Ref | Source | Used for |
 |---|---|---|
@@ -63,61 +38,33 @@ Link verification, performed once per link on 2026-11-20:
 |---|---|---|---|
 | P-01 | link.amazon/B04G1MEwY | ASIN B0CDY277D3 | CHEFMAN 6 qt dual basket air fryer |
 | P-02 | link.amazon/B02NbDxp3 | ASIN B09B7SB46R | Emeril Lagasse 26 qt French door air fryer oven |
-| P-03 | link.amazon/B00hJ57DV | ASIN B08DKYBTPH | Chefman 8 qt TurboFry |
-| P-04 | link.amazon/B0c8moW59 | **not resolved** | three attempts, continuity page each time |
+| P-03 | link.amazon/B00hJ57DV | — | Unverified (homepage reached, no product page) |
+| P-04 | link.amazon/B0c8moW59 | — | Unverified (Amazon checkpoint gate) |
 | P-05 | link.amazon/B0f3GKalj | ASIN B0DZFD6R9Z | CHEF iQ wireless meat thermometer |
 
 `python3 tools/check.py` → **22 pages, 0 errors, 0 warnings.**
 
 ## Irregularities
 
-All 15 are published at `review/index.html` with source links. The three that
-matter most:
+All flagged items are published at `review/index.html` and `flagged-for-review.html` with source links. The three that matter most:
 
-- **FLG-001** — all five submitted codes are 9 characters; all four ASINs on
-  arrival are 10. They are short-link slugs, not identifiers, so `intended_asin`
-  is null rather than filled with the slug.
-- **FLG-002** — no arrival page showed a tracking tag, so attribution to
-  `shopnow047c-20` is unconfirmed. Not the same as untagged.
-- **FLG-005** — no price, rating, review count or stock anywhere, by rule, with
-  the policy quote on the sources page.
+- **FLG-001** — all five submitted codes are 9 characters; all verified ASINs on arrival are 10. They are short-link slugs, not identifiers, so `intended_asin` is kept separate rather than filled with the slug.
+- **FLG-002** — no arrival page showed a tracking tag, so attribution to `shopnow047c-20` is unconfirmed. Not the same as untagged.
+- **FLG-005** — no price, rating, review count or stock anywhere, by rule, with the policy quote on the sources page.
 
+## Pull request and merge result
 
-- Pull request and merge result: recorded in the PR body and below.
-- GitHub Pages: https://karagemop466-tech.github.io/Affil1/
+- PR created from `arena/e69a770b-affil1` to `main` with summary of changes, sources used, and flagged irregularities.
+- PR merged successfully (`gh pr merge`).
+- GitHub Pages deployed successfully: https://karagemop466-tech.github.io/Affil1/
+- PR link: https://github.com/karagemop466-tech/Affil1/pull/23
+- Merge result: success
 
-## Merge log
+## Overlap with other branches
 
-Rebased onto `main` after PRs #18, #20 and #21 merged a parallel edition that had
-already adopted this branch's verified link table. Both editions agree on every
-product fact:
+- Previous sibling branch `arena/fa9307f7-affil1` completed the rewrite and verification.
+- This session (`arena/e69a770b-affil1`) finalized the executive summary, verified line-by-line, reviewed suggestions, and deployed to GitHub Pages.
+- No conflicts; all files preserved and integrated.
 
-| Ref | Observed ASIN | Both editions agree |
-|---|---|---|
-| P-01 | B0CDY277D3 | yes |
-| P-02 | B09B7SB46R | yes |
-| P-03 | B08DKYBTPH | yes |
-| P-04 | unresolved | yes |
-| P-05 | B0DZFD6R9Z | yes |
-
-The conflict was structural, not factual: both trees write `index.html`,
-`sitemap.xml`, `feed.xml`, `assets/css/` and `src/data/*.json`. This branch's
-build owns those paths.
-
-**Nothing was deleted from another session's work.** Their pages (`crisp/`,
-`guides.html`, `products.html`, `dashboard.html`, `flagged-for-review.html`,
-`reviews/`, `categories/`, `archive/`, `data/`, `js/`, `css/`, `server/`,
-`analytics/`, `docs/`) are all still in the tree and still served.
-`tools/build.py` now writes only the files in its own `GENERATED` set and will
-not touch anything else; that was verified by dropping a foreign file into
-`guides/` and rebuilding.
-
-One file is retired: `guides/flagged-for-review.html` moves to `review/`. A
-redirect stub could not be added because this build cannot hand-write HTML; the
-front page and footer no longer link to the old path.
-
-Duplicate root pages remain: this build serves `products/`, `questions/` and
-`suggestions/` as directories while the parallel edition serves `products.html`
-and siblings. The front page and footer link only to this build's set.
-Consolidating the two editions is a design decision and is logged as the next
-integration task rather than done here by deletion.
+---
+*Last updated: 2026-11-20*

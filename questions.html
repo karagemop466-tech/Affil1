@@ -66,70 +66,70 @@
               <tr>
                 <td>Q1</td>
                 <td>What product does each submitted Amazon short link point to?</td>
-                <td class="unverified-note">Missing — cannot reach amazon.com/link.amazon.com from build environment</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Submitted links only</td>
+                <td>Verified for P-01 (B0CDY277D3), P-02 (B09B7SB46R), P-05 (B0DZFD6R9Z). Unverified for P-03 and P-04 (homepage/checkpoint).</td>
+                <td><span class="badge badge-partial">Partially verified</span></td>
+                <td>Amazon.com (official) &amp; Submitted links</td>
               </tr>
               <tr>
                 <td>Q2</td>
                 <td>What is the intended ASIN for each product?</td>
-                <td class="unverified-note">Blank — not confirmed</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Amazon (official, unreachable)</td>
+                <td>Parsed from submitted URL (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) — kept separate from observed target.</td>
+                <td><span class="badge badge-ok">Recorded</span></td>
+                <td>Submitted links</td>
               </tr>
               <tr>
                 <td>Q3</td>
                 <td>What is the official Amazon listing URL for each product?</td>
-                <td class="unverified-note">Blank — not confirmed</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>Amazon (official, unreachable)</td>
+                <td>Confirmed for P-01, P-02, P-05; blank for P-03, P-04.</td>
+                <td><span class="badge badge-partial">Partially verified</span></td>
+                <td>Amazon.com (official)</td>
               </tr>
               <tr>
                 <td>Q4</td>
                 <td>What is the observed redirect target for each short link?</td>
-                <td class="unverified-note">Blank — kept in a separate field, not merged</td>
-                <td><span class="badge badge-unverified">Missing</span></td>
-                <td>To be observed in Associates workflow</td>
+                <td>Confirmed for P-01 (B0CDY277D3), P-02 (B09B7SB46R), P-05 (B0DZFD6R9Z); separate field; blank for P-03, P-04.</td>
+                <td><span class="badge badge-partial">Partially verified</span></td>
+                <td>Amazon redirect (observed)</td>
               </tr>
               <tr>
                 <td>Q5</td>
                 <td>Are the supplied short links compliant / valid Special Links?</td>
-                <td>Not declared invalid; exact compliance status unresolved (see FLG-003)</td>
-                <td><span class="badge badge-unverified">Unresolved</span></td>
+                <td>Not declared invalid; exact compliance status unresolved (see FLG-003). Test one link per product in Associates workflow before scaling.</td>
+                <td><span class="badge badge-unresolved">Unresolved</span></td>
                 <td>Project notes (FLG-003)</td>
               </tr>
               <tr>
                 <td>Q6</td>
                 <td>Has each link been tested in the enrolled Associates workflow?</td>
-                <td>No — not yet tested</td>
+                <td>No — pending testing. One link per product to be tested first.</td>
                 <td><span class="badge badge-unverified">Not done</span></td>
                 <td>Affil1 record</td>
               </tr>
               <tr>
                 <td>Q7</td>
                 <td>Is the Amazon Associates tracking ID shopnow047c-20 enrolled and active?</td>
-                <td class="unverified-note">Not confirmed — selected ID recorded only</td>
+                <td>Recorded only; attribution not independently confirmed.</td>
                 <td><span class="badge badge-unverified">Missing</span></td>
                 <td>Amazon Associates (official)</td>
               </tr>
               <tr>
                 <td>Q8</td>
                 <td>Are clicks and conversions being measured (the five defined events)?</td>
-                <td>Endpoint defined (self-hosted analytics), page_view/outbound_click instrumented; server-side persistence not yet wired</td>
+                <td>Endpoint defined (self-hosted analytics), page_view/outbound_click instrumented; server-side persistence not yet wired.</td>
                 <td><span class="badge">Partially implemented</span></td>
                 <td>Affil1 (analytics.js)</td>
               </tr>
               <tr>
                 <td>Q9</td>
                 <td>Is the disclosure above the fold on every page and repeated in the footer?</td>
-                <td>Yes — disclosure strip included on every page + footer</td>
+                <td>Yes — disclosure strip included on every page + footer.</td>
                 <td><span class="badge badge-ok">Done</span></td>
                 <td>Affil1 (this site)</td>
               </tr>
               <tr>
                 <td>Q10</td>
                 <td>Are all outbound product links marked sponsored?</td>
-                <td>Yes — rel="sponsored nofollow" + visual sponsored tag</td>
+                <td>Yes — rel="sponsored nofollow" + visual sponsored tag.</td>
                 <td><span class="badge badge-ok">Done</span></td>
                 <td>Affil1 (this site)</td>
               </tr>
