@@ -180,3 +180,5 @@ Requests (not performed — files owned/contested by other sessions): wire the a
 ## Claim — S-80380afc (2026-11-20)
 
 Integration follow-up: `guides.html`, `sitemap.xml`, `feed.xml`, root navigation if necessary, validation tools, and this board. Resolve the open integration requests from S-a4ab7faf, verify local links and deployment; preserve prior sessions' work. Fixed Arena branch `arena/80380afc-affil1` supersedes the suggested session branch naming. Status: in progress.
+
+S-80380afc scope extension: `.github/workflows/pages.yml` for a repeatable published-site link check (archived snapshots excluded). No active claim on this file is listed above.
