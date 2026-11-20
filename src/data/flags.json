@@ -52,15 +52,15 @@
     {
       "id": "FLG-004",
       "severity": "high",
-      "title": "P-04 could not be resolved at all",
+      "title": "P-04 earlier attempts reached a checkpoint; later observations disagree",
       "expected": "A short link resolves to a product page.",
-      "found": "https://link.amazon/B0c8moW59 was requested three times on 2026-11-20. Each request returned Amazon's /checkpoint/continue interstitial. No product page was reached, so no product, brand, category or ASIN was recorded.",
-      "reading": "Could be an expired link, a typo, a region restriction, or a challenge specific to this client. It was not diagnosed.",
+      "found": "Three earlier requests returned a checkpoint. Subsequent sessions reported different product pages for this link; see FLG-016.",
+      "reading": "The intended product and stable destination remain unconfirmed.",
       "to_check": [
         "Open https://link.amazon/B0c8moW59 in a normal browser and note where it lands"
       ],
-      "impact": "P-04 has no card, no photograph and no buy link. It appears only in the register as an unresolved row.",
-      "blocks": "the fifth product"
+      "impact": "The product record retains one observation but is subject to FLG-016.",
+      "blocks": "confirmed P-04 intent"
     },
     {
       "id": "FLG-005",
@@ -205,6 +205,38 @@
       ],
       "impact": "P-05 has its own section and is never called an air fryer.",
       "blocks": "nothing"
+    },
+    {
+      "id": "FLG-016",
+      "severity": "high",
+      "title": "P-04 and P-05 later observations differ from the earlier register",
+      "expected": "A confirmed intended destination for each supplied link, kept separate from observations.",
+      "found": "On 20 November 2026 one later page-fetch of P-04 reached B0DZFD6R9Z (CHEF iQ Sense); P-05 reached B0DHZTCNR5 (ThermoMaven). Another session reported the opposite mapping on the same date. Earlier P-04 attempts reached a checkpoint.",
+      "reading": "The differing observations are not proof of the intended products or a stable redirect. Do not infer attribution or identify a winner between observations.",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "A sitewide notice marks older records as historical; confirm destinations in the enrolled Associates workflow before replacing product records or scaling links.",
+      "blocks": "confident product-intent attribution for P-04 and P-05"
+    },
+    {
+      "id": "FLG-017",
+      "severity": "medium",
+      "title": "Legacy editions and their registers contain outdated observations",
+      "expected": "One consistent current editorial site and product-intent register.",
+      "found": "Older root pages and the crisp subdirectory remain published and contain earlier or conflicting product observations and legacy registers. The old crisp validator is incompatible with the newer product-data schema.",
+      "reading": "Legacy material is historical and must not be treated as confirmation of a current or intended product.",
+      "to_check": [
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "Consolidation and full re-verification are still required.",
+      "blocks": "consistent site-wide product facts"
     }
   ]
 }

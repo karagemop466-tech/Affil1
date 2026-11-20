@@ -43,7 +43,7 @@ def build_index(page_dir, flags, meta):
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
         ])
     flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects"], flag_rows,
-                       cls="flags", caption="15 items, ordered by severity")
+                       cls="flags", caption=f"{len(fl)} items, ordered by severity")
 
     body = f"""{pagehead(
         'Review queue',
@@ -57,7 +57,7 @@ def build_index(page_dir, flags, meta):
   <div class="stat"><span class="stat-n">{counts['medium']}</span><span class="stat-l">medium &mdash; affects usefulness</span></div>
   <div class="stat"><span class="stat-n">{counts['low']}</span><span class="stat-l">low &mdash; cosmetic or administrative</span></div>
 </div>
-<p class="lede-prose">The three high flags share a cause: this site cannot see inside an Associates account. Everything that requires that view &mdash; which ASIN was intended, whether the tag applies, whether a click is credited &mdash; is unverifiable from outside it. The site responds by claiming less, not by guessing more.</p>''', cls='')}
+<p class="lede-prose">Several high flags share a cause: this site cannot see inside an Associates account. Everything that requires that view &mdash; which ASIN was intended, whether the tag applies, whether a click is credited &mdash; is unverifiable from outside it. The site responds by claiming less, not by guessing more.</p>''', cls='')}
 {section(f'''
 <div class="sec-head"><div>{eyebrow('Index')}<h2>Every flag in one table</h2></div><p>Scan here, then read the card below for the detail and the source to check.</p></div>
 {flag_table}

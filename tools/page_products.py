@@ -131,7 +131,7 @@ def _thermometer_note(d):
   <div>
     {eyebrow('Read the category path')}
     <h2>One of these is filed under thermometers</h2>
-    <p>P-05 resolves to a wireless meat thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. The other four are under Small Appliances, then Fryers, then Air Fryers.</p>
+    <p>An earlier P-05 observation reached a wireless meat thermometer; a later check reached a different thermometer. Amazon's own breadcrumb puts it under Kitchen Utensils &amp; Gadgets, then Thermometers &amp; Timers, then Meat. P-04 was unresolved in that earlier check and later reached a thermometer listing.</p>
     <p>That is not a problem with the link. It would be a problem with this site if it presented a thermometer as the fifth air fryer, which is exactly what a site written from the brief alone would have done.</p>
     <p><a class="tlink" href="{esc(rel(d, 'products/p-05.html'))}">The thermometer record <span aria-hidden="true">&rarr;</span></a></p>
   </div>
