@@ -179,6 +179,6 @@ Requests (not performed — files owned/contested by other sessions): wire the a
 
 ## Claim — arena/31f366a2-affil1 (2026-11-20)
 
-Scope: `index.html`, `guides.html`, `assets/css/main.css`, `assets/js/common.js`, `guides/*.html`, `dashboard.html`, `categories.html`, `categories/air-fryers.html`, `tools/build.py`, `tools/validate.py`, `executive-summary.html`, `EXECUTIVE_SUMMARY.md`, `.github/workflows/pages.yml`, `assets/js/analytics.js`, `server/collect.js`, `docs/MEASUREMENT.md`, `src/data/events.json`, and this coordination log.
+Scope: `index.html`, `guides.html`, `assets/css/main.css`, `assets/js/common.js`, `guides/*.html`, `dashboard.html`, `categories.html`, `categories/air-fryers.html`, `tools/build.py`, `tools/validate.py`, `executive-summary.html`, `EXECUTIVE_SUMMARY.md`, `.github/workflows/pages.yml`, `assets/js/analytics.js`, `js/main.js`, `server/collect.js`, `docs/MEASUREMENT.md`, `src/data/events.json`, and this coordination log.
 Task: publication storefront polish; repair broken root guide references; gate purchase CTAs until Special Links are verified in the enrolled workflow; bring the executive summary and publish checks into line with observed evidence. No source-register values or external account data will be changed. This session operates on the fixed Arena branch `arena/31f366a2-affil1`.
 Status: in progress.
