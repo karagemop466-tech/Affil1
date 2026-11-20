@@ -1,5 +1,6 @@
 """Source-backed kitchen cluster. Listing observations are not product tests."""
 FOOD_SAFETY = 'https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures'
+FSIS_THERMOMETERS = 'https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers'
 
 
 def guide(slug, title, dek, kicker, image, alt, sections, sources, related, closing):
@@ -39,7 +40,7 @@ BUYER_GUIDES = [
           'Cooking tools', 'thermometer', 'Illustrated probe thermometer beside roasted chicken', [
               ('Decide when you need a reading', ['For occasional spot checks, compare the ThermoMaven digital listing as an instant-read example. If you want to monitor during a long cook, compare the CHEF iQ Sense listing as a wireless example. These are two different tasks, so start with the one you do most.']),
               ('Look up limits before you leave a probe in', ['Check the exact manufacturer’s instructions for temperature limits, approved appliances, insertion depth, and how the probe should be secured. For a wireless model also check the app, phone, and connection requirements. Don’t assume a handheld thermometer can stay in a closed, running appliance.']),
-              ('Use the food safety target, not the preset', ['FoodSafety.gov gives different temperature targets for different foods, and some cuts need a rest time. Look up what you’re cooking in the official chart. A longer feature list isn’t a substitute for using the thermometer as directed.']),
-          ], [('Amazon listing: ThermoMaven digital', 'https://www.amazon.com/dp/B0DHZTCNR5'), ('Amazon listing: CHEF iQ Sense', 'https://www.amazon.com/dp/B0DZFD6R9Z'), ('FoodSafety.gov: safe internal temperatures', FOOD_SAFETY)],
+              ('Use the food safety target, not the preset', ['FoodSafety.gov gives different temperature targets for different foods, and some cuts need a rest time. Look up what you’re cooking in the official chart. A longer feature list isn’t a substitute for using the thermometer as directed.', 'The USDA’s own thermometer factsheet adds two numbers worth knowing before you buy: readings are expected to be accurate within 2 to 4 degrees F, and the probe has to sit in the thickest part of the food, away from bone, fat and gristle. It also tells you to read the manufacturer’s instructions for insertion depth, which is the part a listing rarely states.']),
+          ], [('Amazon listing: ThermoMaven digital', 'https://www.amazon.com/dp/B0DHZTCNR5'), ('Amazon listing: CHEF iQ Sense', 'https://www.amazon.com/dp/B0DZFD6R9Z'), ('FoodSafety.gov: safe internal temperatures', FOOD_SAFETY), ('USDA FSIS: food thermometers', FSIS_THERMOMETERS)],
           ['products/p-04.html', 'products/p-05.html'], 'Start with a spot-check model if that’s the only job you need it to do.'),
 ]

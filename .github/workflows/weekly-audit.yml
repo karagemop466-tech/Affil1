@@ -48,7 +48,7 @@ jobs:
             echo "## Weekly audit"
             echo
             echo "- Rebuild: \`tools/build.py\`"
-            echo "- Gate: \`tools/validate.py\` — see the job log for the check count"
+            echo "- Gate: \`tools/check.py\` — see the job log for the check count"
             echo "- Mount-path link check: \`tools/check_deploy_paths.py\`"
             echo
             echo "This workflow changes nothing. A failure here means a published page"

@@ -45,8 +45,9 @@ assets/js/shortlist.js  "Save" on a product card; localStorage only, nothing sen
 assets/img/*.jpg      commissioned illustrations (not product photography)
 src/data/*.json       every fact the site publishes, with its source
 tools/build.py        data → HTML (one template for nav, disclosure, footer)
-tools/validate.py     the gate: links, images, disclosure, sponsored marking,
-                      price prohibition, sitemap/feed agreement
+tools/check.py        the gate: links, images, disclosure, sponsored marking, the
+                      Associates tag on every served page, price prohibition,
+                      sitemap/feed agreement, and the one-event-per-request rule
 tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
 tools/verify_links.py re-resolve the register against Amazon and report drift
 archive/              five earlier competing surfaces (four storefronts and a parallel
@@ -86,7 +87,7 @@ GitHub Pages serves static HTML. Its client sends no analytics requests. Native 
 
 ## The rules this site publishes under
 
-Each rule below is enforced by `tools/validate.py`, not just asserted in prose:
+Each rule below is enforced by `tools/check.py`, not just asserted in prose:
 
 Product identity lives in `src/data/products.json`. The `intended_asin` and
 `observed_asin` fields are deliberately separate and must never be merged — see

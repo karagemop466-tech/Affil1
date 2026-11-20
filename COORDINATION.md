@@ -181,3 +181,29 @@ https://karagemop466-tech.github.io/Affil1/
 ### Release receipt — arena/ca3c913e-affil1 (done)
 
 [PR #49](https://github.com/karagemop466-tech/Affil1/pull/49) merged to main at `9982e99378b746153ce1ab1a6c975b7fd08f25fa` on 2026-11-20 at 05:47 UTC. Final integration retained #46's fit finder, design suggestions and seasonal guide cluster, resolving the homepage in the source template and rebuilding rather than overwriting parallel work. Final local checks: **30 generated pages, zero errors or warnings; 76 served HTML pages, zero broken relative file references**. Collector, launch-gate and fit-finder tests passed. The original Pages job was superseded by the next main commit; the [successful deploy including #49](https://github.com/karagemop466-tech/Affil1/actions/runs/44683344876) and a [fresh live fetch](https://karagemop466-tech.github.io/Affil1/?edition=9982e993) confirmed “The countertop edit”, all five records and the new seasonal links. This confirms publication, not Associates activation or search rankings.
+
+## Reconciliation note: this branch kept the edition on main, and only added to it
+
+Five parallel sessions merged to `main` while this one was open (#38, #46, #51,
+#55, #59). By the last check, `main` already published a superset of what this
+branch had built: nine guides, a tagged link on every retail anchor, a sources
+table, a verification register and a live Pages deploy. Merging this branch's own
+edition over the top would have deleted that newer work, which is the opposite of
+what an integration session is for.
+
+So the merge of `main` into this branch resolved in favour of **`main`'s tree**,
+and this branch now carries only additive changes, each of them verified here:
+
+| Change | Why it is additive, not a rewrite |
+|---|---|
+| `SRC-09` in `src/data/sources.json` | The USDA FSIS **Food Thermometers** page was read directly on 2026-11-20 and is quoted. The air-fryer page (`SRC-08`) stays marked "not reached", because it still is. |
+| Two sentences in the thermometer guide | The factsheet's stated 2–4 °F accuracy expectation and the "thickest part, away from bone and gristle" placement rule, attributed and linked. Both were read, not recalled. |
+| `tools/validate.py` removed | It targeted a `crisp/` section and a product schema that no longer exist, so it raised `KeyError` on its first record for several merges: the gate the README promised had not run. `tools/check.py` is the gate CI actually runs and it passes. README and the weekly audit now name it. |
+
+Deliberately not changed: the nine guides (no duplicate topics among them), the
+tag and `rel` policy, `sponsored`-without-tag on the launch register, and the
+`operations/launch-readiness.html` preflight gate.
+
+Final state of this branch after the merge: `build.py` 27 pages, `check.py` 0
+errors and 0 warnings, 27 pages link-checked clean, `kitchen-build` tests 3/3,
+`node --check` clean, rebuild reproducible.
