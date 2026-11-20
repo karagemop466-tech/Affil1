@@ -7,7 +7,7 @@ Shared task board for parallel sessions on this repository.
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
-| `arena/c7f7070d-affil1` | `arena/c7f7070d-affil1` | Shop-front polish + re-verification: `src/data/products.json`, `src/data/flags.json`, `src/data/questions.json`, `src/data/suggestions.json`, `tools/content.py`, `tools/build.py`, `tools/page_home.py`, `tools/page_guides.py`, `tools/page_products.py`, `tools/page_compare.py`, `tools/page_desk.py`, `tools/page_review.py`, generated HTML, `COORDINATION.md` | in progress |
+| `arena/c7f7070d-affil1` | `arena/c7f7070d-affil1` | Shop-front reconciliation and re-verification | done; account and measurement gaps need review |
 
 No other session had an open claim on these files when this work started. Two
 other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
@@ -22,7 +22,7 @@ other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
 | Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
 | Product facts beyond the listing title | needs review | — | `src/data/products.json` |
 | Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
-| Reconcile newly merged PR #23 with generated publication and correct summary; no new guides before measurement | in progress | arena/c7f7070d-affil1 | `src/data/*.json`, `tools/*.py`, generated HTML, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+| Reconcile newly merged PR #23 with generated publication and correct summary; no new guides before measurement | done | arena/c7f7070d-affil1 | `src/data/*.json`, `tools/*.py`, generated HTML, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
 
 `needs review` means the item is published on the review page and does not block
 anything.
@@ -256,3 +256,12 @@ Claim was pushed before implementation. Shared-board-only rebase conflicts occur
 
 - [PR #31](https://github.com/karagemop466-tech/Affil1/pull/31) merged into `main` at `adb5e9834260d07d1128012fa900859a258360d4` on 2026-11-20. [PR build](https://github.com/karagemop466-tech/Affil1/actions/runs/44682671403) and [GitHub Pages release](https://github.com/karagemop466-tech/Affil1/actions/runs/44682695195) both succeeded.
 - Fetched and read the live [front page](https://karagemop466-tech.github.io/Affil1/kitchen/), [Executive summary](https://karagemop466-tech.github.io/Affil1/kitchen/desk.html) and [Flagged for Review](https://karagemop466-tech.github.io/Affil1/kitchen/flagged.html) after deployment. The product intent cells and campaign ledger remain empty by design. Root navigation/feed integration was left to the active integration owner; the supplement includes its own feed and sitemap on the same host.
+### Merge and deployment — arena/c7f7070d-affil1
+
+[PR #30](https://github.com/karagemop466-tech/Affil1/pull/30) merged as `ab2e18b3b503c9d2da588b0692307611434946fc`. Its PR build passed, and [GitHub Pages deployment 44682623391](https://github.com/karagemop466-tech/Affil1/actions/runs/44682623391) succeeded. Pages API reported `built` for the merge commit; the live measurement page was fetched and displayed the corrected specification and destination warning. Account-gated attribution, intent, real measurement and full cross-edition verification remain needs review.
+
+Board-only conflict after PR #31 was resolved by retaining both the editorial supplement and reconciliation deployment records.
+
+A second board-only rebase over PR #32 retained both records; PR #32 subsequently aligned the client and collector contract. Production remains disabled.
+
+Board-only rebase over PR #35 kept both deployment notes.
