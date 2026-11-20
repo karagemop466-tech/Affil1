@@ -78,41 +78,41 @@
       "rules_met": "The handwriting is unreadable so no figure can be read as a sourced value."
     },
     {
-      "file": "instant-read",
-      "alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+      "file": "instant-thermometer",
+      "alt": "An unbranded folding digital instant-read meat thermometer resting beside a seared chicken breast on a wooden board",
       "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded probe",
+      "generated_by": "AI image generation, prompted for an unbranded folding probe with blank display",
       "depicts_a_real_product": false,
-      "used_on": "Guide: instant-read or probe thermometer",
-      "rules_met": "No brand mark, no model number, no screen value that could be read as a measurement."
+      "used_on": "P-04 product record and the thermometer pairing guide",
+      "rules_met": "Unbranded matte-black folding probe with blank screen so no temperature reading or logo can be mistaken for a product claim."
     },
     {
-      "file": "holiday-table",
-      "alt": "A holiday table with a roast and an unbranded air fryer out of focus on a sideboard",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation, prompted for an unbranded appliance in the background",
-      "depicts_a_real_product": false,
-      "used_on": "Home, season band",
-      "rules_met": "Appliance is unbranded and out of focus; no price, pack shot or claim implied."
+      "file": "holiday-hosting-counter",
+      "alt": "Roasted vegetables on a wooden board and a bowl of green beans beside an unbranded black countertop air fryer",
+      "generated_on": null,
+      "generated_by": null,
+      "depicts_a_real_product": null,
+      "used_on": "Index card, guides index and the holiday hosting guide (guides/holiday-hosting-air-fryer.html)",
+      "rules_met": "Not verified. Origin not recorded: the file was in the repository before this entry existed. Blank fields mean unknown, not safe (FLG-020)."
     }
   ],
   "rejected": [
     {
       "idea": "Use the listing's own product photography as the card image",
       "why_not": "Amazon's Program Content rules and the IP licence govern use of listing images and require them to come through permitted Program Content channels. Without PA API or Creators API access there is no permission basis for this build to copy them, so they are not used.",
-      "source": "sources/index.html#SRC-02",
+      "source": "about/index.html#sources",
       "source_id": "SRC-02"
     },
     {
       "idea": "Fetch each listing's live price on page load",
       "why_not": "Explicitly outside what the Program Policies permit without Amazon-served data or API access, and it would also be a third-party request from the reader's browser.",
-      "source": "sources/index.html#SRC-02",
+      "source": "about/index.html#sources",
       "source_id": "SRC-02"
     },
     {
       "idea": "Put a star rating next to each card",
       "why_not": "Same clause. Also unciteable: ratings change and this build cannot timestamp them from a permitted feed.",
-      "source": "sources/index.html#SRC-02",
+      "source": "about/index.html#sources",
       "source_id": "SRC-02"
     }
   ]

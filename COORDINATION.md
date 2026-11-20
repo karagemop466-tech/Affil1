@@ -33,7 +33,7 @@ Current integration: #50, #41 and #37 selected incompatible generators while #44
 |---|---|---|---|
 | Restore the approval requirement after automatic tags were added by #51 | done | arena/3cad5d4e-affil1 | Maintained product-link rendering, source/CTA labels, and checker only; no product observations or other sessions' new guides changed |
 
-The published descendant contains tagged links despite empty intent and reporting fields. A tag added from a public observation is not a validated Special Link. This is a release-gate regression, not evidence that an original submitted short link was invalid. Reapplied the gate to the final generated edition after #50 and #37 replaced the templates. Public listing citations remain sponsored-marked; the checker rejects any tagged product URL not in the approved intent register. No new confirmation data was added. Restored the aggregate preview and decision panels to the active edition. Local checks: 27 pages, zero checker warnings/errors, zero broken relative references, and all gate/collector tests passing.
+The published descendant contains tagged links despite empty intent and reporting fields. A tag added from a public observation is not a validated Special Link. This is a release-gate regression, not evidence that an original submitted short link was invalid. Reapplied the gate to the final generated edition after #50 and #37 replaced the templates. Public listing citations remain sponsored-marked; the checker rejects any tagged product URL not in the approved intent register. No new confirmation data was added. Restored the aggregate preview and decision panels to the active edition. Local checks: 29 pages, zero checker warnings/errors, zero broken relative references, and all gate/collector tests passing.
 
 ## Measurement and product-release gate — arena/3cad5d4e-affil1
 
@@ -112,9 +112,9 @@ Link verification, one request per link on 2026-11-20:
 | P-04 | link.amazon/B0c8moW59 | **B0DHZTCNR5** | ThermoMaven digital meat thermometer | **newly resolved** (3 failures in an earlier session) |
 | P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z | CHEF iQ Sense wireless probes | unchanged |
 
-`python3 tools/build.py` → **27 pages**.
-`python3 tools/check.py` → **27 pages checked, 0 errors, 0 warnings.**
-`python3 tools/check_local_links.py` → **27 pages, 0 broken references.**
+`python3 tools/build.py` → **29 pages**.
+`python3 tools/check.py` → **29 pages checked, 0 errors, 0 warnings.**
+`python3 tools/check_local_links.py` → **29 pages, 0 broken references.**
 
 ## Irregularities found in this pass
 
@@ -235,7 +235,7 @@ Delivered:
 - `archive/notes-edition/` — archived snapshot of a self-contained shop-first publication (front page leading with verified shortlist, 7 question-first guides incl. seasonal holiday-counter-math, decision desk with suggestions queue S-01…S-10 + decision gates, transparency desk, original illustration set). Preserved under archive/ per the one-site policy; available for porting (suggestions queue + seasonal guide are the distinctive parts).
 - `EXECUTIVE_SUMMARY.md` addendum with the verification table.
 
-Checks before this merge: tools/build.py reproducible; tools/check.py 0 errors; tools/check_local_links.py 0 broken (27 pages); notes snapshot references validated when live.
+Checks before this merge: tools/build.py reproducible; tools/check.py 0 errors; tools/check_local_links.py 0 broken (29 pages); notes snapshot references validated when live.
 
 Request to the integration owner: port the decision-desk suggestions queue (S-01…S-10 gates) into `suggestions/` and consider the holiday-counter-math guide for the guide set if not duplicative; settle FLG-016 in the enrolled Associates workflow.
 
@@ -298,7 +298,7 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 
 ### Verification on this branch
 
-- `python3 tools/build.py` exit 0; `python3 tools/check.py`: 27 pages, 0 errors, 0 warnings; `python3 tools/check_local_links.py`: 27 pages, 0 broken.
+- `python3 tools/build.py` exit 0; `python3 tools/check.py`: 29 pages, 0 errors, 0 warnings; `python3 tools/check_local_links.py`: 29 pages, 0 broken.
 - `python3 tools/validate.py`: fails (FLG-021). Known.
 - Sources read today: Amazon Associates Program Policies (affiliate-program.amazon.com/help/operating/policies, updated April 14, 2026); GitHub Pages documentation (docs.github.com, What is GitHub Pages: visitor IP logging on every Pages visit).
 - Branch history: rebased onto `origin/main` at `9c9040c`. The earlier claim commit (`ef0b721`) was dropped in the rebase: main's board already holds the other sessions' blocks, and this entry replaces that claim. The rebase is linear.

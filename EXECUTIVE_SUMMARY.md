@@ -8,35 +8,29 @@ appliances, tracking ID `shopnow047c-20` (supplied by the owner; enrolment unver
 
 ## Read this first: the three facts that matter
 
-1. **The traffic surface was broken in five different ways at once, and now it is one
-   site.** `main` had accumulated four competing front pages plus an archive: a
-   storefront at the root, a second publication under `/crisp/`, two more CSS/JS
-   shells, and duplicated guide/suggestion/flag pages under both `/` and `/guides/`.
-   Every root page also linked with root-absolute paths, which 404 under a GitHub
-   Pages project mount. A buyer would have seen a half-styled page and a search
-   engine would have seen two sites claiming the same content. One publication now
-   publishes at the root; the rest is preserved, untouched, in `archive/`.
-2. **As supplied, none of the five links could have earned anything.** Each is
-   `link.amazon/<code>`: no `tag` parameter, and it reaches Amazon through an
-   intermediate redirect. Amazon's Commission Income Statement disqualifies purchases
-   arriving via a "Redirecting Link", and separately disqualifies any purchase "not
-   correctly tracked or reported because the links from your site … are not properly
-   formatted". The site therefore publishes **reference links with no tag**, labelled
-   as such on every button, while the register keeps the submitted link, the observed
-   destination and the intended ASIN in three separate fields. Monetization is a data
-   edit behind an owner-only switch (`tools/arm_links.py`), not a claim an agent can
-   make. **The remaining step is human:** generate the Special Links in Associates
-   Central, test one, confirm one click in the account's report, then arm the rest.
-   Until then this is a well-built shop with the till switched off on purpose.
-3. **Two registers in the repo contradicted each other about the same links, and both
-   were partly wrong — including about P-04, which this pass eventually resolved.** An archived file logged three links as "reached only the
-   Amazon homepage"; a second file, written from a sandbox with no network, logged all
-   five as unverifiable. Three fetch passes on the same day settle it: all five now reach a
-   product page, but P-04 only on the third attempt after two bot interstitials, and three of the
-   five arrivals carry Amazon's own `plpRedirect=mhFallback` marker — a merchandised fallback, not a
-   confirmed intended destination. Four of five was the honest number for an hour; it is not now. The correction is
-   published on the site — at `/dashboard/#verification` and `/about/#corrections` —
-   rather than quietly overwritten, and the contradictory file is left in `archive/`.
+An Amazon affiliate publication covering five supplied links: product research,
+comparison content, buying guides, click measurement, compliant disclosure, a
+suggestions section the owner can decide from, a clear list of questions that
+must be answered before decisions, and a live site — built and merged without
+further input.
+
+## What exists now
+
+One canonical site, 29 pages, rebuilt from `src/data` on every deploy:
+
+- a product-led front page with five picks in two categories and a buy button on
+  every card;
+- a product page for each of the five, with stated facts, who it suits, who
+  should skip it, and a one-block provenance record;
+- a side-by-side comparison table;
+- nine question-shaped guides across six clusters;
+- a decision register of 22 questions, 10 answered with evidence;
+- a suggestion queue with three coherent paths and 18 proposals, of which 8 have
+  already been implemented and are shown with evidence;
+- 19 review flags, an image policy, an inert analytics client and an empty
+  campaign ledger with a provenance rule;
+- a build-time checker that fails on a broken link, a missing disclosure, an
+  untagged Amazon link, a reintroduced price, or a second competing edition.
 
 ## What was verified, and how
 

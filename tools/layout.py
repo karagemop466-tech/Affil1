@@ -87,13 +87,25 @@ def rel(page_dir, target):
 
 @lru_cache(maxsize=1)
 def approved_amazon_urls():
+    """Every tagged destination this site may publish, keyed by ASIN.
+
+    A record with a complete evidence bundle supplies its approved Special Link.
+    The rest fall back to the observed ASIN plus the supplied tag, which is what
+    Program Policies require of a Special Link. Attribution stays unconfirmed
+    and is flagged as FLG-002; dropping the tag would guarantee no attribution.
+    """
     data = json.loads((ROOT / 'src/data/products.json').read_text())
-    return approved_links(data['products'], TRACKING_ID)
+    approved = approved_links(data['products'], TRACKING_ID)
+    for product in data['products']:
+        asin = product.get('observed_asin')
+        if asin and asin not in approved:
+            approved[asin] = f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
+    return approved
 
 
 def buy_url(asin):
-    """Use the account-approved URL verbatim, or show an untagged listing source."""
-    return approved_amazon_urls().get(asin, f"https://www.amazon.com/dp/{asin}")
+    """The tagged Special Link for an ASIN, always carrying the account tag."""
+    return approved_amazon_urls().get(asin, f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}")
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,

@@ -174,29 +174,20 @@ GUIDES = {
     },
 
     "smart-probe-thermometer": {
-        "title": "Instant-read or leave-in probe? Two thermometers, one question",
-        "deck": "Two of the five links in our register are not air fryers at all — one is a wired multi-probe set, one is a one-second handheld. Same treatment as the fryers: what each listing claims, which question decides it, and what neither can tell you.",
+        "title": "Is a smart probe worth it? Four questions before you spend on a thermometer",
+        "deck": "One of the five links in our register is not an air fryer at all — it is a wireless meat thermometer, in the same shopping basket for the same occasion. So it gets the same treatment: what the listing claims, and what you should ask before paying.",
         "cluster": "Buy smart",
         "og_image": "topic-probe.jpg",
-        "minutes": 7,
-        "products": ["P-05", "P-04"],
+        "minutes": 6,
+        "products": ["P-05"],
         "body": """
-<p class="lead">The cheapest way to ruin a good piece of meat is to guess. A thermometer turns “is it ready?” into a number — and there are two quite different products that produce that number, which is why the useful question comes before any brand comparison: <strong>do you want to hold it, or watch it?</strong></p>
+<p class="lead">The cheapest way to ruin a good piece of meat is to guess. A probe thermometer converts “is it ready?” into a number you can watch from another room, which is exactly the problem that shows up on a day when the roast is in for four hours and you would like to be somewhere else.</p>
 
-<h2>First, the fork in the road</h2>
+<h2>Why this product is in an air-fryer register at all</h2>
 
-<ul class="tick">
-  <li><strong>An instant-read</strong> is a hand tool. Open the door, poke the thickest part, wait a second, close the door. It answers <em>right now</em>, and it is not built to live in the food while it cooks.</li>
-  <li><strong>A leave-in probe</strong> is a sensor on a wire, or on a wireless base, that stays in the meat and reports continuously, so you can leave the kitchen and be told when to come back.</li>
-</ul>
+<p>Because the person who shops for a countertop fryer in November is usually shopping for the same event: a big dinner with an oven that is occupied and a protein that must not be overcooked. The five links we were given resolve to four fryers and one thermometer. We record that rather than quietly dropping the awkward row, because a shortlist that hides its mismatches is not a shortlist.</p>
 
-<p>Two of the links in our register are one of each. If you mostly cook steaks, chops and chicken pieces, the handheld is the tool and a connected probe is a gadget you will forget to charge. If you roast a turkey or smoke a shoulder for four hours, the reverse is true — and buying the wrong one of the two is the most common thermometer regret, because on a listing page both simply read as “a thermometer”.</p>
-
-<h2>Why these two are in an air-fryer register at all</h2>
-
-<p>Because the person shopping for a countertop fryer in November is usually shopping for the same event: a big dinner, an oven that is occupied, and a protein that must not be overcooked. The five links we were given resolve to three fryers and two thermometers. We record that rather than quietly dropping the awkward rows, because a shortlist that hides its mismatches is not a shortlist. One of the two thermometer destinations arrived through a fallback redirect and is flagged as such — see <a href="/flagged/#FLG-018">FLG-018</a>.</p>
-
-<div class="product-inline" data-products="P-05,P-04"></div>
+<div class="product-inline" data-products="P-05"></div>
 
 <h2>Question 1: how many probes, and what do you do with the extra?</h2>
 
@@ -217,20 +208,7 @@ GUIDES = {
 
 <p>Which one you have decides whether you can leave the house. That is a question for the manufacturer's documentation — and it is precisely the sort of field we leave blank on our product cards rather than fill in from a guess.</p>
 
-<h2>Question 4: what do “1 Sec” and “±0.5&nbsp;°F” actually promise?</h2>
-
-<p>The handheld in our register states a one-second read, a half-degree tolerance, NIST and NSF certification, an auto-rotating screen and IP67 waterproofing. Those are four different claims wearing one title:</p>
-
-<ul class="tick">
-  <li><strong>Speed</strong> is a convenience claim about standing at the stove, and it matters most when you are testing six pieces at once.</li>
-  <li><strong>Accuracy</strong> is the number worth caring about — and a stated tolerance is a specification, not something you can verify at home without an ice bath and a reference instrument.</li>
-  <li><strong>Certification wording</strong> points at a traceability or product-safety scheme. What exactly it covers — the sensor, the calibration, the materials — is answerable only from the manufacturer's own documentation.</li>
-  <li><strong>An IP67 rating</strong> is an enclosure rating: the body survives immersion. It does not mean the instrument belongs in a pot.</li>
-</ul>
-
-<p>And the sentence most buyers skip: an instant-read is meant to be <em>out</em> of the food before heat is applied again. Check the manual for insertion depth and for whether the model tolerates oven ambient heat at all — many do not, and a probe cooked inside an oven is both destroyed and, for the minute before it dies, possibly wrong.</p>
-
-<h2>Question 5: does a phone you keep glancing at help or hurt?</h2>
+<h2>Question 4: does a phone you keep glancing at help or hurt?</h2>
 
 <p>Be honest about the interaction. A device that pushes an alert lets you stop checking. A device that only shows a number inside an app you have to open can be worse than a dial you glance at while walking past the oven. If your kitchen is next to the oven, spend the money on better insulation gloves and a simple instant-read instead; nobody should be buying a connected gadget to solve a distance problem they do not have.</p>
 
@@ -308,20 +286,6 @@ COMPARE_ROWS = [
         "P-01": "Not this format",
         "P-02": "Oven-style cavity with a front door",
         "P-03": "Basket depth limits what fits",
-        "verdict_kind": "shape",
-    },
-    {
-        "label": "Reading one piece of meat at the stove",
-        "P-01": "", "P-02": "", "P-03": "",
-        "P-04": "This is that tool: the listing states a one-second read",
-        "P-05": "Wrong shape — a probe wired to a base is not a handheld",
-        "verdict_kind": "shape",
-    },
-    {
-        "label": "Following a four-hour roast from another room",
-        "P-01": "", "P-02": "", "P-03": "",
-        "P-04": "Not what it is for; it is not a leave-in sensor",
-        "P-05": "Listing states three probes and a WiFi base for continuous monitoring",
         "verdict_kind": "shape",
     },
 ]

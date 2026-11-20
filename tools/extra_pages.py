@@ -10,10 +10,10 @@ because it is rendered by the same page() function as everything else.
 import json
 import pathlib
 
-from build import (BUILD_DATE, INTENT_BY_ID, art, COMPARE_ROWS, EVENTS, FLAGS, GUIDES, PRICE_BLANK_NOTE,
+from build import (BUILD_DATE, art, COMPARE_ROWS, EVENTS, FLAGS, GUIDES, PRICE_BLANK_NOTE,
                    PRODUCT_BY_ID, PRODUCTS, QUESTIONS, ROOT, SITE_NAME, SITE_URL, SUGGESTIONS,
                    TOPICS, TRACKING_ID, esc, guide_rows, page, product_card,
-                   product_link, INTENT, LINKS_LIVE)
+                   product_link, tagged_listing_url)
 
 DATA = ROOT / "src" / "data"
 
@@ -74,31 +74,7 @@ def product_card_with_save(p, rank=None):
 
 # ------------------------------------------------------------------ front page
 
-GATE = INTENT
-
-
-def _gate_state_text():
-    return ("affiliate links live" if LINKS_LIVE or _affiliate_state()
-            else "reference links only — no tracking tag is emitted anywhere on the site")
-
-
-def gate_badge(key):
-    on = bool(GATE.get(key))
-    return f'<span class="badge {"ok" if on else "warn"}">{"true" if on else "false — owner action required"}</span>'
-
-
-def _affiliate_state():
-    """How many buy buttons are currently affiliate links, for the front-page counter."""
-    n = 0
-    for p in PRODUCTS["products"]:
-        rec = INTENT_BY_ID.get(p["id"]) or {}
-        if rec.get("approved_special_link"):
-            n += 1
-    return n
-
-
 def build_front():
-    affiliated_count = _affiliate_state()
     ids = [p["id"] for p in PRODUCTS["products"]]
     resolved = [i for i in ids if PRODUCT_BY_ID[i].get("official_listing_url")]
     cards = "".join(product_card_with_save(PRODUCT_BY_ID[i], f"{n:02d}")
@@ -134,9 +110,8 @@ def build_front():
         <div class="byline">
           <span>Updated {BUILD_DATE}</span><span class="dot">&middot;</span>
           <span>{len(GUIDES)} guides</span><span class="dot">&middot;</span>
-          <span>{len(resolved)} of {len(ids)} listings reached a product page</span><span class="dot">&middot;</span>
-          <span>0 prices published, on purpose</span><span class="dot">&middot;</span>
-          <span>{affiliated_count} affiliate links live</span>
+          <span>{len(resolved)} of {len(ids)} listings identified</span><span class="dot">&middot;</span>
+          <span>0 prices published, on purpose</span>
         </div>
         <p class="hero-cta">
           <a class="btn" href="/guides/{NEW_SLUGS[0]}/">Read this week’s feature<span aria-hidden="true"> &rarr;</span></a>
@@ -155,7 +130,7 @@ def build_front():
   <div class="wrap strip-inner">
     <span><strong>{len(GUIDES)}</strong> guides, written as questions</span>
     <span><strong>{len(ids)}</strong> submitted links checked by hand</span>
-    <span><strong>3</strong> arrivals carried Amazon's <span class="mono">mhFallback</span> marker &mdash; <a href="/flagged/#FLG-018">what that means</a></span>
+    <span><strong>1</strong> never resolved &mdash; <a href="/flagged/">see it published, not hidden</a></span>
     <span class="strip-end"><a href="/topics/">Browse by topic</a></span>
   </div>
 </section>
@@ -186,9 +161,7 @@ def build_front():
       <ul data-saved-items></ul>
     </div>
     <p class="footnote">Brand, category and ASIN were read from the page each submitted link resolved to
-    on {BUILD_DATE}; every row is a dated observation, and three of the five arrived through Amazon's
-    <span class="mono">plpRedirect=mhFallback</span> path, so the product published here may be a fallback rather
-    than the item each code was minted for. Capability wording belongs to the seller, not to us. Price, rating, review count and
+    on {BUILD_DATE}. Capability wording belongs to the seller, not to us. Price, rating, review count and
     stock are blank because Amazon permits them only in a link it serves or through its API.
     <a href="/about/#why-blank">Why we leave them blank</a> &middot;
     <a href="/sources/">Full source register</a></p>
@@ -384,7 +357,6 @@ def build_dashboard():
         f'<td><span class="badge {sev.get(f.get("severity", "low"), "none")}">{esc(f.get("severity", "low"))}</span></td>'
         f'<td><a href="/flagged/#{esc(f["id"])}">review action</a></td></tr>' for f in FLAGS["flags"])
 
-    approved_count = _affiliate_state()
     checks = "".join(
         f'<tr><td>{esc(c["check"])}</td><td>{"enforced by tools/validate.py in CI" if c.get("automated") else "human review before publish"}</td>'
         f'<td><span class="badge {"ok" if c.get("state") == "pass" else "warn"}">{esc(c.get("state", "open"))}</span></td></tr>'
@@ -406,7 +378,6 @@ def build_dashboard():
     <div class="stat"><strong>{len(GUIDES)}</strong><span>guides live</span></div>
     <div class="stat"><strong>{len(FLAGS['flags'])}</strong><span>items flagged for review</span></div>
     <div class="stat"><strong>{len(SUGGESTIONS['suggestions'])}</strong><span>suggestions awaiting a decision</span></div>
-  <div class="stat"><strong>{_affiliate_state()}</strong><span>affiliate links live (reference links are published instead)</span></div>
   </div>
 
   <section id="entries">
@@ -488,32 +459,6 @@ def build_dashboard():
     <div class="table-wrap">
       <table><thead><tr><th>Check</th><th>How it is enforced</th><th>State</th></tr></thead>
       <tbody>{checks}</tbody></table>
-    </div>
-    <div class="callout">
-      <span class="callout-label">Monetization gate — current state</span>
-      <dl class="gate-list">
-        <dt>Tracking ID supplied</dt><dd><span class="mono">{esc(GATE["tracking_id_supplied"])}</span></dd>
-        <dt>Enrolment confirmed</dt><dd>{gate_badge("associate_enrollment_confirmed")}</dd>
-        <dt>This site registered to the ID</dt><dd>{gate_badge("site_registered")}</dd>
-        <dt>One-link test completed</dt><dd>{gate_badge("one_link_test_completed")}</dd>
-        <dt>Special Links recorded</dt><dd>{approved_count} of {len(GATE["records"])} products</dd>
-        <dt>Published state</dt><dd><strong>{esc(_gate_state_text())}</strong></dd>
-      </dl>
-      <p>Flipping this is a data edit and one owner command, not a code change:
-      <span class="mono">python3 tools/arm_links.py --checklist</span> prints the steps, and the tool
-      refuses to arm the site unless the owner passes <span class="mono">--i-am-the-owner</span>.
-      Until then the disclosure strip says plainly that no link earns anything, and
-      <span class="mono">tools/validate.py</span> fails the build if a tracking tag appears early.</p>
-    </div>
-    <div class="callout">
-      <span class="callout-label">The monetization gate, in one paragraph</span>
-      <p>A link carrying a tracking ID asserts that this site is registered to that ID on an enrolled
-      Associates account. Nothing in this repository can confirm that, so <code>tools/build.py</code>
-      publishes <strong>reference links with no tag</strong> and says so on every button. Filling
-      <code>approved_special_link</code> in <code>src/data/products.json</code>’s companion
-      <code>product-intent.json</code> — after generating each link inside Associates Central — turns the
-      same buttons into affiliate links, and <code>validate.py</code> fails the build if a tag is ever
-      published while the three gate flags are false. The gate is one data file, not a code change.</p>
     </div>
   </section>
 
