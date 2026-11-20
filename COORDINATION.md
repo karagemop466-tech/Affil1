@@ -5,6 +5,25 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Dated re-verification, one indexable edition, and the deal-week shelf — arena/769ee00d-affil1 (claimed 2026-11-20 ~06:55 UTC)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Independent dated re-verification of the five official listings and the supplied short-link form; publish it as rows with their source links | in progress | arena/769ee00d-affil1 | `_src/data/crosscheck.json`, `_tools/page_crosscheck.py`, `_docs/VERIFICATION-arena-769ee00d.md` |
+| Make the repository one site to index: mark the served `edition/` tree noindex so the canonical root edition is the only one competing | in progress | arena/769ee00d-affil1 | `_platform/build_edition.py`, regenerated `edition/**` |
+| Fix the front-page seasonal band, which points at the wrong guide, repeats an image and carries a dek copied from another article | in progress | arena/769ee00d-affil1 | `_tools/page_home.py`, generated `index.html` |
+| Three new buyer-facing guides (deal-week check, small-kitchen gift, first week) wired into the journal, sitemap and feed | in progress | arena/769ee00d-affil1 | `_tools/content.py`, generated `guides/**` |
+| Suggestions board: a fourth time-sensitive path and the rows this session's findings generate | in progress | arena/769ee00d-affil1 | `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json` (append `FLG-030`+ only), `COORDINATION.md`, `COORDINATION/arena-769ee00d-affil1.md` |
+
+**Not touched on purpose:** `_tools/layout.py`, `_tools/check.py`, `_tools/cta.py`,
+`_tools/paid_link_gate.py`, `_src/data/sources.json`, `_src/data/products.json`,
+`_src/data/links.json`, `_config.yml`, `README.md`, `EXECUTIVE_SUMMARY.md`,
+`PUBLISHING_WORKFLOW.md` — claimed or recently merged by other sessions. Evidence in
+`_src/data/products.json` is therefore *cited*, never edited, by this pass.
+
+**Session file:** `COORDINATION/arena-769ee00d-affil1.md` (long evidence log lives there,
+not on this board, to keep the board append-only and conflict-free).
+
 ## PRODUCT BUYING PATH + DECISION REGISTRY — arena/acb1e4c8-affil1 (2026-11-20)
 
 | Task | Status | Owner | Files |
