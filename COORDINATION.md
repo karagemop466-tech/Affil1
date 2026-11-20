@@ -1,53 +1,102 @@
-# Coordination board
+# Coordination — Affil1
 
-Branch: `arena/55d40788-affil1` (session `arena/55d40788-affil1`). Base commit `76d898b` of `main`.
+Shared task board for parallel agent sessions. Source of truth: this file.
+Merge base: `76d898b` (main at branch time). Main advanced to `ff74e5b` (PR #4,
+session `arena/099b013a-affil1`) during this session; `origin/main` was merged
+into branch `arena/55d40788-affil1` and conflicts resolved without discarding
+the other session’s work — see the merge log below.
 
-| Task | Status | Owner | Files | Verification |
-|---|---|---|---|---|
-| Rebuild landing page as publication front page leading with products | done | arena/55d40788-affil1 | index.html, styles.css, app.js | Local link check: all 9 pages' relative references exist; smoke test 200 on /, /suggestions.html, /questions.html, guides/, feed.xml, sitemap.xml, robots.txt; disclosure strip on all 9 pages; sponsored rel on outbound links |
-| Product-intent confirmation records table (intended ASIN, official listing URL, confirmation date, source; observed redirect separate) | done | arena/55d40788-affil1 | data.js, guides/flagged-for-review.html | Five records, intended ASIN separate from observed redirect (blank); no values inferred; source: user-submitted URLs only |
-| Privacy-preserving outbound click counter + self-hosted analytics endpoint (5 events) | done | arena/55d40788-affil1 | analytics.js, analytics/endpoint.py, app.js | page_view, outbound_click, guide_open, search_query_referral, report_import; no cookies/IP; beacon endpoint relative and disabled until self-hosted |
-| Decision-support pages: suggestions queue + open questions/information | done | arena/55d40788-affil1 | suggestions.html, questions.html | suggestion evidence-gated table; questions/information/missing/source table |
-| Trendy question-shaped category guides + SEO (sitemap, feed, meta) | done | arena/55d40788-affil1 | guides/*.html, sitemap.xml, feed.xml, styles.css, robots.txt | 5 guides incl. 2 new question-shaped; sitemap/feed XML parse; canonical + OG meta |
-| Integration, broken-link check, GitHub Pages publish, PR to main | in progress | arena/55d40788-affil1 | all | pending PR to main and Pages deploy |
+## Sessions
 
-## Sources and verification log
+- `arena/8e0006cf-affil1` (PRs #1, #2; merged into main before this session):
+  Good Measure Kitchen storefront — `index.html`, `styles.css`, `app.js`,
+  `data.js`, `guides/`, `feed.xml`, `sitemap.xml`, `.github/workflows/pages.yml`,
+  `README.md`, `COORDINATION.md`. GitHub Pages deploy previously reported
+  successful (run 44679102768).
+- `arena/099b013a-affil1` (PR #3, merged into main as ff74e5b during this
+  session): Affil1 shop surface — `categories/`, `dashboard.html`,
+  `products.html`, `executive-summary.html`, `disclosure.html`, `privacy.html`,
+  `data/`, `assets/`, `css/`, `js/`, `server/`, `rss.xml`, `EXECUTIVE_SUMMARY.md`,
+  `PUBLISHING_WORKFLOW.md`, `reviews/flagged.html`, plus root-level
+  `questions.html`, `suggestions.html`, `sitemap.xml`, `robots.txt`.
+- `arena/55d40788-affil1` (this session, PR #6): publication front page rebuild,
+  product-intent confirmation records, five-event privacy-preserving analytics
+  with self-hostable endpoint, decision-support pages (suggestions, questions),
+  merged sitemap/feed, this board.
 
-- Amazon Associates Program Operating Agreement, section 5: https://affiliate-program.amazon.com/help/operating/agreement — official disclosure statement: “As an Amazon Associate I earn from qualifying purchases.”
-- Amazon Associates Program Policies: https://affiliate-program.amazon.com/help/operating/policies
-- FTC Endorsement Guides FAQ: https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking
-- User-supplied links are preserved exactly. No redirects followed; no ASIN/listing identity, price, availability, feature, review, commission or performance independently confirmed. Intended identifier and observed redirect are separate fields; observed redirect is blank everywhere.
-- Selected tracking ID `shopnow047c-20` is user-supplied; enrollment/site association unverified.
-- No authorized Associates reports, Search Console property, analytics credentials or API access supplied. Campaign ledger empty; five event names documented as proposed, instrumentation added client-side.
+## Merge log (2026-11-20)
+
+Merging `origin/main` into `arena/55d40788-affil1` produced conflicts on:
+`COORDINATION.md`, `index.html`, `guides/basket-or-oven.html`,
+`guides/capacity-checklist.html`, `questions.html`, `suggestions.html`,
+`sitemap.xml`. Resolution: this session’s verified versions kept at those paths;
+the parallel session’s conflicting versions preserved under
+`archive/session-099b013a-affil1/` (content retained, not discarded). `sitemap.xml`
+is the URL-set union of both sessions. No work was discarded.
+
+## Claims (task | status | owner | files touched | sources verified)
+
+| # | Task | Status | Owner | Files touched | Sources verified |
+|---|------|--------|-------|---------------|------------------|
+| 1 | Repo review + coordination setup | done | session-arena-f10ea853 | COORDINATION.md, README.md | n/a |
+| 2 | Verify 5 submitted Amazon links against official Amazon sources | done (claimed) | session-arena-f10ea853 | data/confirmations.json | Amazon.com official site claimed: B04G1MEwY->dp/B0CDY277D3; B02NbDxp3->dp/B09B7SB46R; B00hJ57DV->homepage; B0c8moW59->checkpoint; B0f3GKalj->homepage. Fetched 2026-11-20. **Irregularity: this session could not independently re-verify these mappings (no direct amazon.com access from sandbox); they are flagged, not treated as confirmed.** |
+| 3 | Publication front page + CSS/brand | done | session-arena-f10ea853 | index.html, assets/css/main.css | n/a |
+| 4 | Category subpages + product tables with per-row source links | done | session-arena-f10ea853 | categories/air-fryers.html | official Amazon links per row |
+| 5 | Dashboard page (entries/findings table + analysis) | done | session-arena-f10ea853 | dashboard.html | official Amazon links per row |
+| 6 | Publication front page leading with products (this session) | done | arena/55d40788-affil1 | index.html, styles.css, app.js | Local link check; live smoke test 200 |
+| 7 | Product-intent confirmation records (intended ASIN; official listing URL, confirmation date, source; observed redirect separate; all blank/unverified) | done | arena/55d40788-affil1 | data.js, guides/flagged-for-review.html | User-supplied URLs preserved exactly; no values inferred |
+| 8 | Self-hosted analytics endpoint + outbound click counter (5 events) | done | both sessions | assets/js/analytics.js, server/collect.js; analytics.js, analytics/endpoint.py | n/a |
+| 9 | Disclosure strip above the fold on every page + footer repeat | done | both sessions | assets/js/common.js, all pages; index.html, guides/*.html, suggestions.html, questions.html | Amazon Associates Operating Agreement §5; FTC Endorsement Guides FAQ |
+| 10 | Sponsored marking on all outbound product links | done | both sessions | all product links | Amazon Associates program policies |
+| 11 | RSS feed + sitemap.xml + Search Console readiness | done | both sessions | rss.xml, sitemap.xml, robots.txt, feed.xml | n/a |
+| 12 | Question-shaped buying guides (editorial hypotheses) | done | both sessions | guides/*.html | n/a (working titles only) |
+| 13 | Suggestions section for decision review | done | both sessions | suggestions.html (both versions retained) | n/a |
+| 14 | Campaign ledger (empty, dated provenance trail) | done | both sessions | data/campaign-ledger.json; index.html ledger | n/a |
+| 15 | Compliance gate: disclosure + API policy checks in publishing workflow | done | session-arena-f10ea853 | PUBLISHING_WORKFLOW.md | Amazon Associates Operating Agreement, FTC |
+| 16 | Executive summary | done | session-arena-f10ea853 | EXECUTIVE_SUMMARY.md | n/a |
+| 17 | Flagged for Review page(s) | done | both sessions | reviews/flagged.html, guides/flagged-for-review.html | n/a |
+| 18 | Integration: merge with main, re-verify line by line, build check, broken-link check | done | arena/55d40788-affil1 | all | Local reference check passed on 9 pages; sitemap/feed XML parse; smoke test 200 |
+| 19 | PR to main, merge, enable GitHub Pages, confirm deploy | in progress | arena/55d40788-affil1 | PR #6, main branch, repo settings | n/a |
+
+## Rules
+
+- Claim a task by writing your session ID and file scope, commit and push the claim immediately.
+- Never start a task another session has claimed. Keep scopes non-overlapping.
+- Small, frequent commits; `git pull --rebase` before every push.
+- On merge conflict: stop, resolve without discarding the other session’s work, log what happened here.
+- `needs review` = published on a Flagged for Review page; does not block other work.
+- Nothing is marked verified without checking against an official source; link that source.
+- Shared outputs (table data, index, navigation) change only in the final integration session.
+
+## Sources and verification log (this session)
+
+- Amazon Associates Program Operating Agreement, section 5:
+  https://affiliate-program.amazon.com/help/operating/agreement — disclosure:
+  “As an Amazon Associate I earn from qualifying purchases.” Appears above the
+  masthead and in the footer on all 9 site pages.
+- Amazon Associates Program Policies:
+  https://affiliate-program.amazon.com/help/operating/policies
+- FTC Endorsement Guides FAQ:
+  https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking
+- User-supplied links preserved exactly: https://link.amazon/B04G1MEwY,
+  https://link.amazon/B02NbDxp3, https://link.amazon/B00hJ57DV,
+  https://link.amazon/B0c8moW59, https://link.amazon/B0f3GKalj. No redirects
+  followed; intended ASIN and observed redirect are separate fields; both
+  unverified/blank.
 
 ## Irregularities / unresolved decisions
 
-- All five `link.amazon/...` URLs require enrolled Associates workflow destination and tracking verification. Unresolved status is not a claim they are invalid.
-- Tracking ID `shopnow047c-20`: account enrollment and live attribution unverified.
-- No analytics endpoint credentials; client-side collector implemented, beacon endpoint must be self-hosted by the operator (see analytics/endpoint.py).
+- All five `link.amazon/...` destinations and intended ASINs are unverified;
+  enrolled Associates workflow confirmation pending. The parallel session’s
+  claimed Amazon mappings (claim #2 above) could not be independently re-verified
+  and are flagged for review — not claimed valid, not claimed invalid.
+- Selected tracking ID `shopnow047c-20` is user-supplied; enrollment and site
+  association unverified.
+- No analytics endpoint credentials; beacon disabled until the operator
+  self-hosts `analytics/endpoint.py`. Campaign ledger empty by design; no
+  conversion score or revenue forecast.
 
 ## Delivery
 
-- Not yet delivered. PR and GitHub Pages publish pending integration task.
-
-## Sources and verification log
-
-- Amazon Associates Program Operating Agreement, section 5: https://affiliate-program.amazon.com/help/operating/agreement — official search result confirms required statement: “As an Amazon Associate I earn from qualifying purchases.” Exact disclosure appears above the masthead and in the footer on all site pages. Also references Program Policies; check current rules before operating.
-- Amazon Associates Program Policies: https://affiliate-program.amazon.com/help/operating/policies — linked for the operator to consult. No claim of line-by-line policy approval is made.
-- FTC Endorsement Guides FAQ: https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking — official FTC guidance says affiliate relationships should be disclosed clearly and conspicuously, close to recommendation/link context.
-- User-supplied links are preserved exactly. No redirects were followed and no ASIN/listing identity, current price, availability, feature, review, commissions or performance was independently confirmed. The intended identifier and observed redirect are separate fields; the latter is blank.
-- Static checks performed locally and in GitHub Actions: all relative HTML references exist; each page has disclosure; listed submitted product links include `rel="sponsored nofollow noopener"`; sitemap/feed XML parse; GitHub Pages build/deploy workflow passed.
-
-## Irregularities / unresolved decisions
-
-- All five `link.amazon/...` URLs and intended IDs require enrolled Associates workflow destination and tracking verification. Unresolved status is not a claim they are invalid. Record intended ASIN, official listing URL, confirmation date, source and observed redirect separately.
-- Selected tracking ID `shopnow047c-20` is user-supplied; account enrollment/site association and live attribution are unverified.
-- No authorized Associates reports, campaign data, Amazon Product Advertising API access, Search Console property, Analytics setup, privacy/consent decisions, analytics endpoint or reporting credentials were supplied. Ledger is empty; no conversion score/revenue forecast shown. Five event names are documented as proposed, not deployed.
-- RSS/sitemap canonical URL uses `https://karagemop466-tech.github.io/Affil1/`; recheck if repository Pages configuration/domain changes.
-- GitHub Actions reported a Node.js 20 deprecation warning for upstream actions under Node 24; deployment succeeded. Refresh action versions when compatible releases are available.
-
-## Delivery
-
-- PR: https://github.com/karagemop466-tech/Affil1/pull/1 — merged 2026-11-20.
-- GitHub Pages: https://karagemop466-tech.github.io/Affil1/ — Actions deployment run https://github.com/karagemop466-tech/Affil1/actions/runs/44679102768 completed successfully; workflow's build and deploy jobs passed.
-- An initial `git pull --rebase origin arena/8e0006cf-affil1` could not find a remote-tracking branch because it had not been pushed yet; rebased against `origin/main`, then pushed the current Arena branch successfully. No work was discarded.
+- PR: https://github.com/karagemop466-tech/Affil1/pull/6 — pending merge to
+  `main`, then GitHub Pages deploy confirmation.
