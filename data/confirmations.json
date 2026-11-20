@@ -83,9 +83,12 @@
       "destination_matches_intended_asin": false,
       "history": [
         "2026-11-20 session arena/55d40788-affil1: fetch reached a checkpoint page.",
-        "2026-11-20 session arena/ac649871-affil1: two further fetches reached the same checkpoint interstitial. Destination remains unconfirmed — not asserted invalid. Test manually in the enrolled Associates workflow."
+        "2026-11-20 session arena/ac649871-affil1: two further fetches reached the same checkpoint interstitial. Destination remains unconfirmed — not asserted invalid. Test manually in the enrolled Associates workflow.",
+        "2026-11-20 session arena/c9fc4295-affil1 (PR #27): fetch resolved to https://www.amazon.com/dp/B0DHZTCNR5 (later attempts; first attempt checkpointed).",
+        "2026-11-20 session arena/ac649871-affil1: direct fetch of https://www.amazon.com/dp/B0DHZTCNR5 confirms a live official listing page titled 'ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black'. Candidate destination recorded here as an observation from another session + this session's direct page check; this session's own fetches of the submitted short link remained checkpoint-gated, so official_listing_url stays blank and status stays unverified. Mapping dispute across sessions logged as FLG-016."
       ],
-      "flag": "Short link resolves to an Amazon bot-checkpoint page on repeated fetches. No product destination confirmed. Flagged for review (FLG-005)."
+      "flag": "Short link resolves to an Amazon bot-checkpoint page on repeated fetches. No product destination confirmed. Flagged for review (FLG-005).",
+      "observed_listing_candidate": "https://www.amazon.com/dp/B0DHZTCNR5 (ThermoMaven 1 Sec Professional Digital Meat Thermometer, Black; observed by session arena/c9fc4295 via the submitted link; page existence + title verified directly by session arena/ac649871)"
     },
     {
       "id": "conf-005",
@@ -111,6 +114,7 @@
     "FLG-003: Compliance status of link.amazon short links as Associates Special Links is unresolved. Do not assert invalid; do not scale before the test.",
     "FLG-005: One of five links consistently lands on a bot checkpoint; its listing identity is blank.",
     "Transient-redirect note: two links resolved to the Amazon homepage on one session's fetch and to product pages on another session's fetch the same date. Both observations are preserved above; neither was deleted or overwritten.",
-    "Prices, ratings, review counts and commission rates are left blank: Associates policy conditions price display on Amazon-served or API-served data, which this static build does not have. Nothing was inferred."
+    "Prices, ratings, review counts and commission rates are left blank: Associates policy conditions price display on Amazon-served or API-served data, which this static build does not have. Nothing was inferred.",
+    "FLG-016: Sessions disagree on which listing P-04 (B0c8moW59) and P-05 (B0f3GKalj) originally intended. This session and PR #27 both observed P-05 -> dp/B0DZFD6R9Z (CHEF iQ Sense); PR #27 observed P-04 -> dp/B0DHZTCNR5 (ThermoMaven thermometer), while another session reported the two destinations reversed. All observations preserved; identity mapping to be settled by the operator in the enrolled Associates workflow (SiteStripe test-link per product)."
   ]
 }

@@ -80,9 +80,9 @@ window.PRODUCTS = [
     id: 4,
     submitted: 'https://link.amazon/B0c8moW59',
     status: 'pending',
-    title: '',
-    shortTitle: 'Listing pending confirmation',
-    category: 'Unconfirmed',
+    title: 'ThermoMaven 1 Sec Professional Digital Meat Thermometer, \u00b10.5\u2109 Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black',
+    shortTitle: 'ThermoMaven 1 Sec Digital Meat Thermometer (observed destination)',
+    category: 'Identity under review',
     img: 'assets/img/p4.jpg',
     alt: 'Illustration of an unopened parcel with a blank tag',
     blurb: 'This short link currently lands on Amazon\u2019s automated checkpoint page, so no listing could be confirmed. It stays in the review queue — not on the shelf.',
@@ -90,7 +90,7 @@ window.PRODUCTS = [
     observedRedirect: 'https://www.amazon.com/checkpoint/continue (bot-checkpoint interstitial; destination not reachable without an interactive click; observed on two fetches, 2026-11-20)',
     confirmedDate: '',
     source: '',
-    note: 'Unverified, not invalid. Confirm in the enrolled Associates workflow (SiteStripe test-link step) before any promotion.'
+    note: 'Unverified, not invalid. Observed candidate destination dp/B0DHZTCNR5 (ThermoMaven) recorded from session arena/c9fc4295; identity mapping disputed across sessions (FLG-016). Confirm in the enrolled Associates workflow (SiteStripe test-link step) before any promotion.'
   },
   {
     id: 5,
