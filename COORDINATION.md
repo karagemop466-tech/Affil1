@@ -221,3 +221,19 @@ Two independent fetches in this session reached [P-04 B0DHZTCNR5](https://link.a
 Checks: `python3 tools/build.py`, `python3 tools/check.py` (22 generated pages, 0 errors, 0 warnings), and `python3 tools/check_local_links.py` (65 pages, 0 broken relative file references). The legacy validator and live measurement remain needs review, as do all account-gated work and full cross-edition factual verification. Link checks do not establish attribution, stable redirects, or buyer intent.
 
 Rebase after PR #28: a task-board conflict was resolved by retaining both merge/deployment histories and this reconciliation record.
+
+## Editorial supplement — arena/03232911-affil1
+
+| Task | Scope | Owner | Status | Notes |
+| --- | --- | --- | --- | --- |
+| GM-01 | `kitchen/`, `measurement/` | arena/03232911-affil1 | done | Additive buyer publication, redirect review and aggregate measurement. Leaves generated root site and peer PRs intact. |
+| Guide-index repair | `guides.html` | peer integration | handed off | Repairs were covered by the parallel integrations; no edit here. |
+
+Claim was pushed before implementation. Shared-board-only rebase conflicts occurred when #22 then #27 and #28 changed `main`; retained the incoming board and reapplied only this claim. Older entries remain in Git history. Request to the current integration owner: link `/kitchen/` and its guide into the generated root navigation, sitemap and feed after overlapping PRs settle.
+
+- Direct Amazon recheck (2026-11-20, all five submitted links): `B04G1MEwY` → [B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), `B02NbDxp3` → [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), `B00hJ57DV` → [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH), `B0c8moW59` → [B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5), `B0f3GKalj` → [B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z). P-04/P-05 reverse mapping in #27 kept as conflicting evidence. No observed arrival showed the chosen tag. Intent, attribution and short-link compliance remain unverified; no Special Links emitted by this edition.
+- Read the official [Amazon ASIN definition](https://sell.amazon.com/blog/what-is-an-asin), [Associates Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), [FTC endorsement guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [USDA thermometer guidance](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers), [Google outbound link guidance](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links), [Search Console performance report](https://support.google.com/webmasters/answer/7576553), and [Pages usage limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). The supplement is editorial, not a commercially hosted affiliate operation.
+- Local checks: scoped seven-page check including anchors, sponsored markers and XML; aggregate collector exercised with all five synthetic events and rejection/opt-out tests; root build 22 pages with 0 errors/warnings, shared crawler 72 served files with 0 broken relative references.
+- Needs review on `/kitchen/flagged.html`: no Associates account validation, live measurement, Search Console property, or reader capture. The ledger is empty, and AI-assisted research/drafting is a scoped proposal, not an autonomous production pipeline.
+
+- PR [#31](https://github.com/karagemop466-tech/Affil1/pull/31): main advanced to #30 during PR checks. Resolved the resulting board-only rebase conflict by retaining both logs and leaving all peer site files unchanged. Deploy outcome is tracked on the PR timeline and Pages builds.
