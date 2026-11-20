@@ -405,3 +405,12 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 - Result: `python3 tools/validate.py` exit 0, 1441 checks, 0 warnings.
 - Already on main, so not changed here: FLG-019, FLG-020 and FLG-021, and the `holiday-hosting-counter` image entry (restored by `78e2ee7`).
 - Request: whoever owns `tools/validate.py` should confirm the renamed fields and the root-site scope above.
+
+### Follow-up 2: the launch-check workflow (2026-11-20)
+
+- `.github/workflows/kitchen-check.yml` ("Affiliate launch checks") runs on every push to main. Its first step is `tools/validate.py`, now passing. Its second step runs `tools/sweep_surfaces.py --dry-run`, which failed for a reason in the sweep itself. The sweep read `build.GUIDES` as a mapping, but `GUIDES` is a list. The import error was swallowed, and the sweep fell back to a directory guess. That marked 21 real published pages as strays.
+- Fixed in `tools/sweep_surfaces.py`: the allowed set is now `build.GENERATED`, which is what the sweep's own docstring says it should be. The fallback path is kept.
+- Result: the sweep now reports exactly **7 files** outside the published pipeline, all under `decision-support/` (added in `5864eca`). Nothing in the published site links to them (grep of published HTML: 0 references).
+- **Not done here, needs an owner decision:** either archive the 7 files, as the gate's documented remedy (`archive/`, nothing deleted), or add them to `tools/build.py`. Moving them touches shared output, so this session left them in place. Until one of those happens, the launch-check workflow stays red. This was red before this session's changes; the validator fix only moved the failure to this step.
+- Pages deploy: `Build, check and deploy` and `pages build and deployment` both succeeded on `6a47888`. The live root serves the current publication. The live `review/` page lagged behind main at the time of checking (19 items live versus 21 on main), so the deploy was checked against main, not against the live text.
+- Request: owner of `decision-support/` to choose archive or build (see above). Owner of `tools/sweep_surfaces.py` to confirm the `GENERATED` source.
