@@ -58,8 +58,66 @@ site index, navigation) after the other claims below are reconciled.
 | FLG-006 | Pages source is "Deploy from a branch" (legacy) and the token cannot switch it to "GitHub Actions". | Needs repository-admin action. |
 | FLG-007 | No authorized first-party Associates reports, PA API credentials, Search Console property, analytics consent setup or publishing credentials were supplied. | Open — campaign ledger is empty by design. |
 | FLG-008 | This brief asks for an "AI-powered" automation platform. IP License §5 forbids using Special Links or Program Content to develop machine learning models without express prior written approval. | Needs legal review before any model is trained on Amazon content. |
+| FLG-009 | A dated observed price is republished on the desk pages (not on any reader-facing page). The distinction between a dated research observation and displaying Program Content has not been confirmed with the program. | Needs review. |
 
 ## Completion log
 
 - PR #1 "Build evidence-led affiliate publication storefront" — merged to `main`.
 - PR #2 "Record publication verification and Pages deployment" — merged to `main`.
+- PR #3 (this branch) "Rebuild the site as a reader-first publication with an evidence desk" —
+  opened from `arena/2361a177-affil1` and merged to `main`. Link and merge result recorded below.
+
+### Work completed by `arena/2361a177-affil1`
+
+**Site structure.** 22 content pages, all rendered from one source of truth.
+
+| Surface | Path |
+| --- | --- |
+| Publication front page | `index.html` |
+| The shelf (catalogue) | `shop/index.html` |
+| Basket air fryers | `shop/basket-air-fryers.html` |
+| Air fryer ovens | `shop/air-fryer-ovens.html` |
+| Cooking tools & thermometers | `shop/cooking-tools.html` |
+| Guides index (six clusters) | `guides/index.html` |
+| Six question-shaped guides | `guides/basket-or-oven.html`, `guides/capacity-checklist.html`, `guides/cleanup-counterspace.html`, `guides/multifunction-checklist.html`, `guides/do-you-need-a-thermometer.html`, `guides/holiday-hosting-air-fryer.html` |
+| Desk hub | `desk/index.html` |
+| Executive summary | `desk/executive-summary.html` |
+| Product-intent confirmation record | `desk/product-records.html` |
+| Suggestions register (15 proposals + design direction) | `desk/suggestions.html` |
+| Open questions register (8 questions) | `desk/questions.html` |
+| Campaign ledger (empty by design) | `desk/ledger.html` |
+| Publishing gate (8 machine checks, 4 human) | `desk/publishing-gate.html` |
+| Method and sources | `desk/methodology.html` |
+| Flagged for review (9 items) | `desk/flagged-for-review.html` |
+| Redirect stub for the old published URL | `guides/flagged-for-review.html` |
+
+**Mechanism.** `site_data.py` is the single source of truth. `scripts/build_site.py` renders every
+page from it; `scripts/check_site.py` is the publishing gate. The Pages workflow re-renders the
+site, fails the build if the committed HTML has drifted from the renderer, runs the gate, and
+then publishes only the site files.
+
+**Measurement.** `assets/analytics.js` records the five defined events (`page_view`,
+`outbound_click`, `guide_open`, `search_query_referral`, `report_import`). `api/collect.js`
+(zero-dependency Node) and `api/worker.js` (Cloudflare Worker) implement the collector. The
+tracker probes the health endpoint and disables itself if the collector is not deployed, so the
+site never implies measurement that is not happening. The ledger is empty and stays empty until
+an authorised first-party report is imported.
+
+**Verification performed on the rendered site.** `scripts/check_site.py` — disclosure above the
+masthead on all 22 pages; sponsored marking on every Amazon product link and no sponsored
+marking on Amazon documentation citations; no price, rating, review count or availability on the
+13 reader-facing pages; no unsupportable claim language (one declared, counted exemption for the
+design-direction block); every table row carries a link and at least one official-source link;
+every internal link resolves; metadata on every page; sitemap and feed complete; one `h1` per
+page.
+
+**Sources used for every factual claim.** Amazon Associates Program Operating Agreement,
+Amazon Associates Program Policies, Amazon Selling Partner Blog "Understanding ASINs", FTC
+Endorsement Guides, the four observed Amazon product detail pages, GitHub Pages documentation and
+Google Search Console documentation. Full URLs are on `desk/methodology.html`.
+
+### Pull request and merge result
+
+- PR: _pending_
+- Merge result: _pending_
+- GitHub Pages deployment: _pending_
