@@ -1,39 +1,36 @@
-# GitHub Pages serves this branch root in legacy mode with a root .nojekyll, so
-# Jekyll never runs and no exclude here takes effect. What actually keeps the
-# working papers off the public host is the underscore rename: Pages publishes
-# nothing whose path segment starts with "_", so _decision-support/, _src/,
-# _data/, _tools/, _analytics/, _server/ and _archive/ are not reachable, while
-# the built shop at the root is. See PUBLISHING_WORKFLOW.md for the check that
-# proves each one returns 404. This list is retained for a Jekyll-mode fallback.
+# GitHub Pages configuration for the canonical publication.
+#
+# GitHub Pages serves this branch root in legacy mode and the branch carries a
+# root `.nojekyll`, so Jekyll never runs and nothing in this file takes effect on
+# the live host. It is kept for a Jekyll-mode fallback, and it is generated from
+# _tools/publish.py -- run `python3 _tools/publish.py --write-config` and commit
+# the result rather than hand-editing it.
+#
+# One correction to the note this file used to carry: the underscore rename does
+# NOT keep anything off the public host. On 2026-11-20
+# https://karagemop466-tech.github.io/Affil1/_tools/build.py returned the complete
+# build script, and /_src/data/products.json returned the product register, because
+# .nojekyll disables the very Jekyll rule that hides underscore paths. What keeps
+# them off is _tools/publish.py and the route used to publish. See FLG-031.
 plugins: []
 exclude:
+  - .github
+  - .gitignore
+  - COORDINATION
   - COORDINATION.md
   - EXECUTIVE_SUMMARY.md
   - LICENSE
   - PUBLISHING_WORKFLOW.md
   - README.md
+  - _analytics
+  - _archive
+  - _config.yml
+  - _data
+  - _decision-support
+  - _docs
+  - _measurement
+  - _server
+  - _src
+  - _tools
   - analytics
-  - archive
-  - dashboard
-  - dist
-  - docs
-  - flagged
-  - guides/air-fryer-capacity-checklist/index.html
-  - guides/air-fryer-thanksgiving-overflow/index.html
-  - guides/basket-or-oven-air-fryer/index.html
-  - guides/cleanup-and-counter-space/index.html
-  - guides/dual-basket-math/index.html
-  - guides/first-week-checklist/index.html
-  - guides/frozen-food-nights/index.html
-  - guides/multi-function-kitchen-appliance-questions/index.html
-  - guides/smart-probe-thermometer/index.html
-  - kitchen
-  - kitchen-build
-  - legacy
   - measurement
-  - node_modules
-  - server
-  - src
-  - tools
-  - topics
-  - vendor

@@ -1,38 +1,39 @@
 #!/usr/bin/env python3
-"""Package only the maintained edition; never upload the repository itself.
+"""Package only what readers may fetch; never upload the repository itself.
 
-Legacy Pages ignores this and serves the branch root. The root stays safe to
-serve because every working directory is underscore-prefixed (see
-PAGE_HOSTING_PATHS in _tools/check.py, and PUBLISHING_WORKFLOW.md). This script
-remains the way to preview or move to a workflow-based deploy, where _site, not
-the branch, is what gets published.
+The list comes from `_tools/publish.py`, which is the single allow-list that
+`_config.yml`, this script and `_tools/check.py` all read. Before it existed the
+workflow build uploaded a slice while the legacy branch build served the whole
+repository, so `/src/data/products.json`, `/tools/build.py` and a second storefront
+under `/archive/` were all reachable on the public URL.
 """
 import shutil
 import sys
 from pathlib import Path
 
-from build import GENERATED, ROOT
+from publish import public_tree
+
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def stage(destination):
+    destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
     if any(destination.iterdir()):
         raise SystemExit(f"Staging directory must be empty: {destination}")
-    (destination / '.nojekyll').touch()
-    files = set(GENERATED)
-    files |= {
-        str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*')
-        if path.is_file() and (path.suffix in {'.woff2', '.svg'} or
-           path.name in {'editorial.css', 'discover.js', 'storefront.css', 'site.css', 'site.js', 'analytics.js', 'fit.css', 'fit.js'} or
-           path.stem.endswith(('-w560', '-w760', '-w900', '-w1280')))
-    }
+    files = public_tree()
+    missing = []
     for name in sorted(files):
-        if not (ROOT / name).exists():
-            print(f"stage: skipping missing {name}")
+        source = ROOT / name
+        if not source.is_file():
+            missing.append(name)
             continue
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / name, target)
+        shutil.copyfile(source, target)
+    if missing:
+        raise SystemExit(f"stage: the allow-list names files that do not exist: {missing}")
+    print(f"staged {len(files)} files")
 
 
 if __name__ == '__main__':

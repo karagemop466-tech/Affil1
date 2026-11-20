@@ -142,5 +142,6 @@ def build(page_dir, decisions, meta):
         body=body,
         active="decide/index.html",
         canonical="decide/",
+        index=False,
         structured=breadcrumb_schema([], "Decision gate", "decide/"),
     )

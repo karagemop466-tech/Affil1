@@ -209,6 +209,9 @@ def main():
             continue
         CHECKS += 1
         url = c.canonical
+        from publish import in_sitemap
+        if not in_sitemap(rel.lstrip("/")):
+            continue
         if url and f"<loc>{url}</loc>" not in sitemap:
             err(f"{rel}: canonical {url} absent from sitemap.xml")
         if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/"):

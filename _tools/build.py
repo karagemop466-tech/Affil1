@@ -95,9 +95,16 @@ def as_url(p):
 
 
 def sitemap(pages):
-    """Canonical URLs only. A directory index is listed as its directory."""
+    """Canonical URLs a reader could want. A directory index is its directory.
+
+    Which pages belong in a sitemap is decided once, in `publish.in_sitemap`,
+    because three separate gates read the answer: this builder, tools/check.py
+    and tools/validate.py. Duplicating the rule here is how the earlier edition
+    ended up with a sitemap that listed the repository's audit trail.
+    """
+    from publish import in_sitemap
     urls = [f"  <url><loc>{as_url(p)}</loc><lastmod>{BUILD_DATE}</lastmod></url>"
-            for p in pages if p != "404.html"]
+            for p in pages if in_sitemap(p)]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "\n".join(urls) + "\n</urlset>\n")
@@ -134,8 +141,17 @@ def feed(guides):
 # One canonical site. The archived edition under _archive/ carries noindex, and
 # /_archive/ is not listed in the sitemap. Nothing here blocks crawling of the
 # canonical pages.
+# `/archive/` holds superseded editions kept for review. They are deliberately
+# excluded from the Pages build (tools/publish.py) so they are not served at all;
+# the Disallow below is defence in depth for any route that serves them again.
+#
+# The earlier wording here said "/archive/ is not listed in the sitemap", which
+# was true and insufficient: the files were still published and still parseable,
+# and one archive page was a complete second storefront with tagged buy links.
+# See FLG-026.
 ROBOTS = """User-agent: *
 Allow: /
+Disallow: /archive/
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
