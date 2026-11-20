@@ -16,7 +16,7 @@ def build(page_dir, products, meta):
         }
         if r["asin"]:
             listing = product_link(
-                d, f"https://www.amazon.com/dp/{r['asin']}", esc(r["asin"]),
+                d, p["special_link"], esc(r["asin"]),
                 aria=f"Open the Amazon listing for {r['ref']} (affiliate link, opens in a new tab)")
             cap = esc(r["capacity"])
             attrs = esc(r["attributes"])

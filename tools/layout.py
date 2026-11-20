@@ -13,10 +13,11 @@ import html
 import json
 import pathlib
 import posixpath
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_NAME = "Crisp & Counter"
-SITE_TAGLINE = "Kitchen buying guides"
+SITE_TAGLINE = "The countertop edit"
 SITE_URL = "https://karagemop466-tech.github.io/Affil1"
 TRACKING_ID = "shopnow047c-20"
 BUILD_DATE = "2026-11-20"
@@ -29,35 +30,42 @@ AFFILIATE_HINT = __import__("re").compile(
 
 # The only navigation group. Everything else lives in the footer.
 NAV = [
+    ("products/index.html", "Shop"),
     ("guides/index.html", "Guides"),
-    ("products/index.html", "Shortlist"),
     ("compare/index.html", "Compare"),
-    ("brief/index.html", "Site desk"),
+    ("questions/index.html", "Ask"),
 ]
 
 FOOTER_GROUPS = [
+    ("Shop", [
+        ("products/index.html", "All five products"),
+        ("products/p-01.html", "Dual-basket air fryer"),
+        ("products/p-02.html", "French-door oven"),
+        ("products/p-03.html", "Single-basket air fryer"),
+        ("compare/index.html", "Compare everything"),
+    ]),
     ("Read", [
-        ("guides/index.html", "All guides"),
-        ("compare/index.html", "Comparison table"),
+        ("guides/index.html", "Every guide"),
+        ("guides/basket-or-oven-air-fryer.html", "Basket or oven?"),
+        ("guides/air-fryer-capacity-checklist.html", "Capacity checklist"),
+        ("guides/batch-cooking-for-the-week.html", "Batch cooking for the week"),
+        ("guides/hosting-season-air-fryer.html", "Hosting season"),
+    ]),
+    ("Follow", [
         ("feed.xml", "RSS feed"),
+        ("questions/index.html", "Ask a question"),
+        ("about/index.html#editorial", "How we write"),
+        ("about/index.html#disclosure", "Disclosure"),
+        ("privacy.html", "Privacy"),
     ]),
-    ("Catalogue", [
-        ("products/index.html", "Product register"),
-        ("products/p-05.html", "The thermometer"),
-        ("about/index.html#how-we-link", "How we link"),
-    ]),
-    ("Review queue", [
+    ("Desk", [
+        ("suggestions/index.html", "Suggestions queue"),
         ("review/index.html", "Flagged for review"),
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
-        ("about/index.html#sources", "Sources"),
-    ]),
-    ("Desk", [
-        ("questions/index.html", "Open questions"),
-        ("suggestions/index.html", "Suggestions"),
         ("operations/ledger.html", "Campaign ledger"),
         ("brief/index.html", "Executive summary"),
-        ("about/index.html", "About this site"),
+        ("about/index.html", "Sources"),
     ]),
 ]
 
@@ -100,9 +108,32 @@ def outbound(page_dir, url, label, **kw):
     return link(page_dir, url, label, external=True, **kw)
 
 
+def tagged(url):
+    """Return an Amazon product URL carrying the Associates tag.
+
+    Program Policies 2(b) requires the tag as a URL parameter in the link
+    itself, and the Commission Income Statement excludes purchases that are not
+    correctly tracked because a link was not properly formatted. Every product
+    link on this site therefore passes through here.
+
+    The tag is *appended by this function*, so the value in the URL is the
+    supplied tracking ID and nothing else. It is a constructed value, not an
+    observed one: no supplied link showed a tag on arrival (FLG-002), and a
+    tagged link has still not been confirmed inside the Associates account
+    (FLG-018). The build says so on the review page rather than implying
+    otherwise.
+    """
+    if not url or "tag=" in url:
+        return url
+    m = re.match(r"^(https?://(?:(?:[a-z0-9-]+\.)*amazon\.[a-z.]+/(?:dp|gp/product)/[A-Z0-9]{10}))([?#].*)?$", url, re.I)
+    if not m:
+        return url
+    return f"{m.group(1)}?tag={TRACKING_ID}"
+
+
 def product_link(page_dir, url, label, **kw):
-    """A link to Amazon. Always marked sponsored, always in a new tab."""
-    return link(page_dir, url, label, sponsored=True, **kw)
+    """A link to Amazon. Always tagged, always marked sponsored, always new tab."""
+    return link(page_dir, tagged(url), label, sponsored=True, **kw)
 
 
 def kindle(summary, body):
@@ -119,8 +150,9 @@ def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
     <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Product links are marked as sponsored. Tracking on the supplied links has not been confirmed.
-      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
+    <p><strong>{DISCLOSURE}</strong> Every Amazon link on this page is a paid link, marked
+      <code class="disclosure-code">rel="sponsored"</code>, and the price you pay is the same either way.
+      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">How the links work</a>.</p>
   </div>
 </div>"""
 
@@ -159,8 +191,8 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
-      <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
+      <p class="foot-meta">{esc(SITE_NAME)} &middot; a buying guide, not a review site &middot; last updated {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
+      <p class="foot-meta">Tracking ID <code>{esc(TRACKING_ID)}</code> supplied by the publisher; attribution is not yet confirmed in the Associates account. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-002">What that means</a>.</p>
     </div>
   </div>
 </footer>"""
@@ -205,7 +237,6 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
 {body}
 </main>
 {footer(page_dir)}

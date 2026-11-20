@@ -31,7 +31,7 @@ def build_register(page_dir, products, meta):
             aria=f"Open submitted link {p['ref']} (affiliate link, opens in a new tab)")
         if p["observed_asin"]:
             listing = product_link(
-                d, p["listing_url"], esc(p["observed_asin"]),
+                d, p["special_link"], esc(p["observed_asin"]),
                 aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
             name = esc(_short(p))
             status = '<span class="pill pill-ok">Identified</span>'
@@ -152,7 +152,7 @@ def build_product(page_dir, p, meta):
         if key == "submitted_link":
             cell = product_link(d, value, esc(p["submitted_code"]), aria=f"Open submitted link for {p['ref']} (affiliate link, opens in a new tab)")
         elif key == "observed_asin":
-            cell = product_link(d, p["listing_url"], esc(value), aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
+            cell = product_link(d, p["special_link"], esc(value), aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")
         elif key == "category_path":
             cell = esc(value)
         else:
@@ -199,7 +199,7 @@ def build_product(page_dir, p, meta):
         <p class="cta-label">Amazon listing</p>
         <p>Opens in a new tab. This is an affiliate link{'' if not meta.get('tracking') else ''}.</p>
       </div>
-      {product_link(d, p['listing_url'], 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
+      {product_link(d, p['special_link'], 'See the listing on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn', aria=f"Open the Amazon listing for {p['ref']} (affiliate link, opens in a new tab)")}
     </div>
     <p class="fineprint">{DISCLOSURE} A purchase through this link does not change the price you pay. Whether a click is credited to this site's tracking ID is not confirmed \u2014 see the review queue.</p>
   </div>

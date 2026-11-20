@@ -226,6 +226,97 @@ GUIDES = [
         ],
         "closing": "No product on this site was tested, ranked or scored. P-05's attributes above are transcribed from its listing title."
     }
+,
+    {
+        "slug": "batch-cooking-for-the-week",
+        "kicker": "Sunday cooking",
+        "title": "Batch cooking for the week: is one big basket enough?",
+        "dek": "The question that decides between a single-basket fryer and a dual-basket one is not capacity. It is how many times you are willing to stand in front of the machine.",
+        "read_minutes": 6,
+        "photo": "assets/img/cleanup",
+        "photo_alt": "Two containers of prepped vegetables and a tray beside an unbranded air fryer on a counter",
+        "photo_caption": "Illustration of a prep session, not a photograph of any product on this site.",
+        "updated": "2026-11-20",
+        "sections": [
+            {
+                "h": "Count the items, not the portions",
+                "p": [
+                    "A Sunday batch is usually two or three different things: the protein, the potato, the vegetable. Each one needs a different time and often a different temperature. The number that matters is therefore how many separate cooking sessions your week needs, not how many quarts the drawer holds.",
+                    "If the protein and the potato need twenty minutes each at different temperatures, a single basket means two sessions. A dual basket means one, if the two baskets can run on separate settings. That is the whole calculation, and it takes two minutes with your phone's notes app."
+                ]
+            },
+            {
+                "h": "The three-question test",
+                "items": [
+                    ("How many different things need the machine this week?", "Write them down. If the answer is one, capacity decides and the basket shape is irrelevant. If it is three, the number of sessions is the deciding cost."),
+                    ("Do they need different temperatures?", "Two things at the same temperature can share a basket if there is room. Two things that need 400 and 350 cannot, unless the machine has two zones."),
+                    ("Will you wait, or will you abandon it?", "Honestly. If a second twenty-minute session means you will order in instead, the second basket is doing more work than the extra capacity suggests."),
+                    ("What else has to be washed between sessions?", "A raw-meat session followed by a vegetable session means a wash in between, not just a shake. That cost multiplies with every session."),
+                    ("Where do the finished things sit?", "Batch cooking needs landing space. If the only clear surface is the top of the machine, check how hot it runs before you stack containers on it.")
+                ]
+            },
+            {
+                "h": "What this changes in the shortlist",
+                "p": [
+                    "The two cooking formats here sit on opposite sides of that calculation. P-01 is stated by its seller as 6 quarts across two independent 3-quart baskets with a sync-finish function. P-03 is stated as a single 8-quart basket. Neither figure tells you which one is faster on a Sunday, because the number of sessions depends on your menu, not the volume.",
+                    "The oven (P-02) is a different trade again: a stated 26-quart cavity with racks. It can hold more at once, which reduces sessions, but it takes longer to heat a large cavity and it takes counter and door space a drawer does not. Whether that is worth it depends on whether your problem is variety or volume."
+                ]
+            },
+            {
+                "h": "A five-minute rehearsal beats any table",
+                "p": [
+                    "Before you buy for the batch cooking you intend to do, do the batch cooking once with what you already have: a domestic oven and two trays. Note how many times you opened the door, how many things you swapped around, and whether you would do that again on a Sunday night.",
+                    "That fifteen minutes tells you what shape you actually want. It is also free, which makes it the highest-value step in this guide."
+                ]
+            }
+        ],
+        "closing": "Capacity figures are the sellers' own wording from listing titles reached on 2026-11-20. No product on this site was used to cook anything."
+    },
+    {
+        "slug": "hosting-season-air-fryer",
+        "kicker": "Hosting",
+        "title": "Cooking for guests with one countertop appliance: what actually runs late",
+        "dek": "Entertaining is a scheduling problem before it is a cooking problem. Here is where a countertop appliance helps and where it quietly becomes the bottleneck.",
+        "read_minutes": 6,
+        "photo": "assets/img/multifunction",
+        "photo_alt": "A countertop oven and a basket air fryer side by side on a kitchen counter with serving dishes",
+        "photo_caption": "Illustration of a serving setup, not a photograph of any product here.",
+        "updated": "2026-11-20",
+        "sections": [
+            {
+                "h": "The bottleneck is almost never the appliance",
+                "p": [
+                    "When dinner for eight runs late, the cause is usually the oven being occupied by one thing at one temperature while three other things wait. A second heat source helps, but only if it can run at a different temperature and hold food without drying it out.",
+                    "That is the test for any countertop appliance at a gathering: can it take a whole item off the main oven's schedule and keep it warm? A small basket fryer often cannot. A countertop oven can, if it fits the dish."
+                ]
+            },
+            {
+                "h": "What to check before you plan a menu around it",
+                "items": [
+                    ("Does the dish fit, with room for air?", "A casserole dish needs a flat rack and vertical clearance. A deep drawer needs the food loose. Check the interior dimensions on the listing before you write the menu, not after."),
+                    ("Can it hold food without cooking it further?", "Look for a warm or keep-warm setting in the manual. Without one, food goes in, comes out, and goes on a plate that is already cooling."),
+                    ("What is the largest batch, in pieces?", "Count pieces you can serve, not quarts. A dozen wings is a number you can plan a table around."),
+                    ("How many sessions fit before guests arrive?", "If the machine needs twenty minutes per batch and you have three batches, that is an hour of your prep window. Write it on the timeline."),
+                    ("What needs washing between batches?", "Raw meat to vegetarian sides is a wash, not a wipe. That is another ten minutes per transition.")
+                ]
+            },
+            {
+                "h": "Where the shortlist fits",
+                "p": [
+                    "The oven format (P-02, stated by its seller as a 26-quart French-door cavity with 24 presets and six included accessories) is the one that can take a dish off the main oven, because it accepts a tray. The dual-basket machine (P-01, stated as 6 quarts across two 3-quart baskets) is better at producing two hot things at the same moment for a smaller table.",
+                    "A thermometer matters more at a gathering than on a weeknight, and it is the cheapest thing here to justify. Poultry to 165 degrees F, ground meat to 160, whole cuts to 145 with a rest: those are USDA figures, not ours, and they are linked on the thermometer pages."
+                ]
+            },
+            {
+                "h": "The one thing to write down",
+                "p": [
+                    "Before the day, write the timeline on paper: what goes in, at what temperature, for how long, and where it rests. Every appliance decision becomes obvious once the timeline exists, and most of them are about one machine being free at the right minute.",
+                    "If the timeline has two things needing the same machine at the same temperature at the same time, you do not need a bigger appliance. You need a second heat source, or a cold dish."
+                ]
+            }
+        ],
+        "closing": "No product on this site was tested for a gathering or otherwise. Capacity and preset claims are the sellers' wording; food-safety temperatures are cited from the USDA."
+    }
 ]
 
 # Rows for the comparison table. Every cell is either transcribed from a listing

@@ -1,12 +1,13 @@
 {
   "meta": {
     "tracking_id_supplied": "shopnow047c-20",
-    "tracking_id_status": "Not confirmed on any page reached in this session. No supplied link showed a tag parameter on arrival.",
+    "tracking_id_status": "Supplied by the operator. Not observed as a parameter on any page reached in this session (FLG-002). The site now appends the tag itself to /dp/ links, because Program Policies 2(b) requires the Associates ID as a URL parameter in each link; the tag value is therefore constructed from the brief, not observed (FLG-018).",
     "retrieved_on": "2026-11-20",
     "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result. Re-verification 2026-11-20 (S-8206a8d0): P-04 resolved to B0DHZTCNR5; all five now observed.",
     "field_rule": "intended_asin (what the owner meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. Where a field could not be established it is null.",
     "price_rule": "Program Policies §2(b) (SRC-02) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / PA API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
-    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner."
+    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner.",
+    "special_link_rule": "special_link is a constructed field: https://www.amazon.com/dp/<observed_asin>?tag=shopnow047c-20. It is not an observation. listing_url stays untagged because that is what actually loaded. The two are separate fields and are never merged, exactly as intended_asin and observed_asin are separate."
   },
   "products": [
     {
@@ -18,6 +19,8 @@
       "observed_asin": "B0CDY277D3",
       "observed_asin_length": 10,
       "listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "special_link": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+      "special_link_verified": false,
       "listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
       "brand": "CHEFMAN",
       "format": "basket",
@@ -59,6 +62,8 @@
       "observed_asin": "B09B7SB46R",
       "observed_asin_length": 10,
       "listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "special_link": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+      "special_link_verified": false,
       "listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
       "brand": "Emeril Lagasse",
       "format": "oven",
@@ -99,6 +104,8 @@
       "observed_asin": "B08DKYBTPH",
       "observed_asin_length": 10,
       "listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "special_link": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+      "special_link_verified": false,
       "listing_title": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
       "brand": "Chefman",
       "format": "basket",
@@ -140,6 +147,8 @@
       "observed_asin": "B0DHZTCNR5",
       "observed_asin_length": 10,
       "listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "special_link": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20",
+      "special_link_verified": false,
       "listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
       "brand": "ThermoMaven",
       "format": "thermometer",
@@ -183,6 +192,8 @@
       "observed_asin": "B0DZFD6R9Z",
       "observed_asin_length": 10,
       "listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "special_link": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20",
+      "special_link_verified": false,
       "listing_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
       "brand": "CHEF iQ",
       "format": "thermometer",

@@ -533,3 +533,33 @@ ol.tight,ul.tight{margin-top:1rem}
   .pcard-grid.wide .pcard,.pcard-grid.wide .pcard-unresolved{grid-template-columns:1fr}
   .pcard-grid.wide .pcard-media{aspect-ratio:16/10;min-height:0;height:auto}
 }
+
+
+/* ---------- shop front additions (final integration pass) ---------- */
+.pcard-use{font-size:.9rem;line-height:1.6;color:var(--ink-2);margin:0 0 .95rem;flex:0 0 auto}
+.pcard-specs dd{font-size:.845rem;color:var(--ink-2);margin:0}
+.pcard-actions{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;margin:0 0 .55rem}
+.paid-note{font-size:.665rem;color:var(--faint);margin:0;letter-spacing:.01em;line-height:1.5}
+.sec-foot-note{font-size:.78rem;color:var(--faint);margin-left:.75rem}
+.path-grid{grid-template-columns:repeat(4,1fr)}
+.path{display:flex;flex-direction:column;gap:.55rem}
+.path p{font-size:.885rem;line-height:1.6;color:var(--ink-2)}
+.thermo-safe{background:#ffffff1a;border-left:2px solid #e9b44c;padding:.85rem 1rem;font-size:.875rem;line-height:1.62;margin:0 0 1.25rem}
+.thermo-safe a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+.rule-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.15rem}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.35rem 1.45rem}
+.rule h3{font-size:1.05rem;margin:.35rem 0 .5rem}
+.rule p{font-size:.885rem;line-height:1.62;color:var(--ink-2);margin:0}
+.rule-n{font-family:var(--serif);font-size:.8rem;color:var(--amber);letter-spacing:.12em}
+.rule-cost{margin-top:1.4rem;font-size:.86rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem}
+.rule-cost a{text-decoration:underline;text-underline-offset:2px;color:var(--forest)}
+.subscribe-row{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+.disclosure-code{background:#ffffff26;border:0;color:#fff;font-size:.72em;padding:.05em .35em}
+@media(max-width:960px){
+  .path-grid{grid-template-columns:repeat(2,1fr)}
+  .rule-grid{grid-template-columns:1fr}
+  .pcard-grid.wide{grid-template-columns:1fr}
+  .pcard-grid.wide .pcard{grid-template-columns:1fr}
+  .pcard-grid.wide .pcard-media{min-height:13rem;aspect-ratio:16/9}
+}
+@media(max-width:620px){.path-grid{grid-template-columns:1fr}}

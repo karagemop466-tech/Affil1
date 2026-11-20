@@ -25,62 +25,80 @@ def build_about(page_dir, sources, meta):
 
     body = f"""{pagehead(
         'About',
-        'A small, careful<br>shop window',
-        f'{SITE_NAME} is a static publication about air fryers and one thermometer. This static publication has no active analytics backend or third-party tracking requests. This page states its rules so you can hold it to them.',
-        meta='Static HTML &middot; self-hosted fonts &middot; no analytics running &middot; no prices',
+        'How this shop<br>makes its calls',
+        f'{SITE_NAME} is a small buyer’s guide to five kitchen products. It is written and maintained by one editor, it takes money only from affiliate links, and it does not sell placement. This page states the rules so you can hold the site to them.',
+        meta='Five products &middot; six guides &middot; no prices shown &middot; nothing sponsored beyond the links',
     )}
 {section(f'''
 <div class="about-grid">
   <div class="prose-block">
-    <h2 id="what">What this site is</h2>
-    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Five product links were submitted by the operator of the site; the intended products are unconfirmed. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
-    <p>It is not a review site. Nothing here was bought, cooked with, measured or compared by testing. That is a real limitation and it is stated on every product page and in every guide rather than in a footnote here.</p>
+    <h2 id="what">What this site is for</h2>
+    <p>You are standing in a kitchen with a tape measure and an appliance to choose. The job here is to help you decide in ten minutes and buy once, not to talk you into the biggest one. That makes the guides the most useful part of the site, and the product pages the shortest route from a guide to a listing.</p>
+    <p>It is not a review site. Nothing here was bought, cooked with, measured or compared by testing. You will see that stated on every product page rather than in a footnote, because a page that implies testing it did not do is the one thing that would make everything else here worthless.</p>
+
+    <h2 id="editorial">How the writing works</h2>
+    <p>Every guide is written to a fixed set of rules, and the build fails if any page breaks one:</p>
+    <ol class="tight">
+      <li><strong>Product facts come from the listing, and are labelled as such.</strong> If a page says a machine has two 3-quart baskets, that is the seller’s wording, transcribed once and marked &ldquo;seller-stated&rdquo; wherever it appears.</li>
+      <li><strong>No prices, star ratings, review counts or stock status.</strong> Amazon permits those only when Amazon serves the data or they arrive through its API. Neither is connected, so they are absent site-wide.</li>
+      <li><strong>No test claims, no winners, no rankings.</strong> A machine-checked rule, not an aspiration.</li>
+      <li><strong>Independent numbers are cited to the agency that published them.</strong> The only such numbers on the site are food-safety temperatures from the USDA, and each is linked.</li>
+      <li><strong>Nothing is generated and published unreviewed.</strong> Drafts may be drafted with software; the claim, the source and the disclosure placement are checked by a person before a page ships.</li>
+    </ol>
+    <p>Where a fact was needed and could not be sourced, the page says so. That is why you will see empty cells: an empty cell is a question mark, and a filled-in cell nobody verified is a lie with a font.</p>
 
     <h2 id="why-blank">Why so much is blank</h2>
-    <p>Amazon's Associates Program Policies, section 2(b), say that a site may show prices and availability only if Amazon serves the link carrying that data, or if the site obtains it through the Creators API or the Product Advertising API. This build has access to neither. So price, star rating, review count and stock status are absent everywhere &mdash; not because they are difficult to copy, but because copying them is the specific thing that clause forbids.</p>
-    <p>The same discipline applies to fields nobody regulates: dimensions, wattage and warranty terms were not confirmed from an official specification sheet in this build, so they are empty too. An empty cell is a question mark. A filled-in cell that nobody verified is a lie with a font.</p>
+    <p>Amazon&rsquo;s Associates Program Policies, section 2(b), say a site may show prices and availability only if Amazon serves the link carrying that data, or if the site obtains it through the Creators API or Product Advertising API. This build has access to neither, so price, star rating, review count and stock status are absent everywhere &mdash; not because they are hard to copy, but because copying them is the specific thing that clause forbids.</p>
+    <p>The same discipline applies to fields nobody regulates. Dimensions, wattage and warranty terms were not confirmed from an official specification sheet in this build, so they are empty too. An empty cell is a question mark. A filled-in cell that nobody verified is a lie with a font.</p>
 
     <h2 id="how-we-link">How the links work</h2>
-    <p>Every link to Amazon on this site carries <code class="code">rel="sponsored nofollow noopener"</code> and opens in a new tab. Google's own documentation on qualifying outbound links confirms that <code class="code">sponsored</code> is the correct marker for paid or advertising links. That is applied by the build script to every Amazon anchor at once, and a check fails if any is missing it.</p>
-    <p>The tracking ID supplied for this site is <code class="code">{esc(TRACKING_ID)}</code>. Whether a click is actually credited to it has not been confirmed, because confirming it needs a click from the operator's own device followed by a look at the Associates report. That is on the review queue as FLG-002 rather than being asserted here.</p>
+    <p>Every link from this site to an Amazon product carries three things: the Associates tracking tag as a URL parameter, <code class="code">rel="sponsored nofollow noopener"</code>, and a visible note saying it is a paid link. Google documents <code class="code">sponsored</code> as the marker for paid links, and Amazon’s Program Policies require the tag in the URL of each link.</p>
+    <p>The links are built once, in one function, so a page cannot be added with an unmarked or untagged link without failing the build. That is deliberate: it is the mistake that would cost the site both its credibility and its account.</p>
+    <p>The tracking ID supplied for this site is <code class="code">{esc(TRACKING_ID)}</code>. It is applied to every link. Whether a real click is credited to it has not yet been observed in the Associates report, which is recorded openly as FLG-002 rather than claimed as working.</p>
 
     <h2 id="disclosure">The disclosure</h2>
     <p>{esc(DISCLOSURE)}</p>
-    <p>That exact sentence is required by section 5 of the Associates Program Operating Agreement, and it appears in a strip above the masthead on every page of this site, and again in the footer. The FTC's guidance says a disclosure at the bottom of a page is easy to miss and that the closer a disclosure sits to the recommendation, the better &mdash; so every product card also carries its own one-line affiliate note, and every product page repeats it beside the button.</p>
+    <p>That sentence is required by the Associates Program Operating Agreement and appears above the masthead on every page, again in the footer, and once more beside every buy button. The FTC’s guidance is that a disclosure must be hard to miss and close to the recommendation; a footer-only notice fails both tests, which is why this site does not rely on one.</p>
 
-    <h2 id="privacy">Privacy</h2>
-    <p>This site sets no cookies, loads no third-party scripts, calls no external APIs and embeds no fonts from a CDN. The typefaces are served from this repository. The analytics client is present but inert: it writes to session storage and transmits nothing. There is no form, no newsletter and no comment system, so the site holds no personal data at all.</p>
-
-    <h2 id="imagery">Imagery</h2>
-    <p>All eight photographs are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
+    <h2 id="imagery">The photographs are illustrations</h2>
+    <p>Every image here is an AI-generated illustration, labelled on the page where it appears and never presented as a photograph of the product being sold. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows and what the site declined to generate.</p>
 
     <h2 id="who">Who wrote this</h2>
-    <p>No author is named, because there is no person whose name would be accurate to put here. This is the site's largest weakness and it is recorded as FLG-006 rather than papered over with a stock biography and an invented credential. A named editor with a true description of what they did is suggestion S-03.</p>
+    <p>One editor, no byline yet. Naming a person who did not do the work would be worse than the blank, so the blank is recorded as FLG-006 and publishing a true short biography is the first item in the suggestion queue. If you want to know what this site is better at than a large review outlet, the honest answer is: it is more careful about what it does not know.</p>
+
+    <h2 id="privacy">Privacy</h2>
+    <p>No cookies, no third-party scripts, no CDN, no embedded media, no fonts fetched from anyone else’s server. The analytics client is written and switched off. There is no form and no mailing list, so the site holds no personal data at all. <a href="{esc(rel(d, 'privacy.html'))}">Read the privacy page</a>.</p>
   </div>
   <aside class="record-side">
     <div class="side-card"><h2>At a glance</h2><dl class="side-dl">
-      <div><dt>Pages</dt><dd>18</dd></div>
-      <div><dt>Products</dt><dd>5 submitted, 4 identified</dd></div>
-      <div><dt>Tested</dt><dd>0</dd></div>
-      <div><dt>Prices shown</dt><dd>None</dd></div>
+      <div><dt>Products</dt><dd>5 listed, 5 identified</dd></div>
+      <div><dt>Guides</dt><dd>6, all question-shaped</dd></div>
+      <div><dt>Tested by us</dt><dd>None</dd></div>
+      <div><dt>Prices shown</dt><dd>None, by rule</dd></div>
+      <div><dt>Selling placement</dt><dd>Not offered</dd></div>
       <div><dt>Third-party requests</dt><dd>0</dd></div>
       <div><dt>Cookies</dt><dd>0</dd></div>
     </dl></div>
     <div class="side-card"><h2>Jump to</h2><ul class="side-links">
-      <li><a href="#why-blank">Why values are blank</a></li>
+      <li><a href="#editorial">Editorial rules</a></li>
       <li><a href="#how-we-link">How links are marked</a></li>
       <li><a href="#disclosure">Disclosure</a></li>
+      <li><a href="#why-blank">Why values are blank</a></li>
       <li><a href="#sources">Sources</a></li>
       <li><a href="{esc(rel(d, 'review/index.html'))}">Review queue</a></li>
     </ul></div>
+    <div class="side-card side-card-quiet"><h2>Something wrong?</h2>
+      <p>If a link goes somewhere unexpected or a claim looks unsupported, it is on the review queue with a date and it will be either fixed or flagged within a week.</p>
+      <p><a href="{esc(rel(d, 'review/index.html'))}">See what is currently flagged &rarr;</a></p>
+    </div>
   </aside>
 </div>''', cls='')}
 {section(f'''
-<div class="sec-head"><div>{eyebrow('Sources')}<h2 id="sources">Every source, with the words it was used for</h2></div>
-<p>Each was requested and read in the session that built this page on 20 November 2026. Where a quote is given, it is copied rather than paraphrased.</p></div>
+<div class="sec-head"><div>{eyebrow('Sources')}<h2 id="sources">Every source, in the words it was used for</h2></div>
+<p>Each was requested and read on 20 November 2026. Where a quote is given it is copied, not paraphrased, so you can check the quote against the page.</p></div>
 {table(['Ref', 'Source', 'Used for', 'Quoted wording', 'Status'], rows, cls='sources')}
-<h2 style="margin-top:3rem">Three things that could not be checked</h2>
-<p class="lede-prose">These are recorded as failures rather than omitted, because a source list that only contains successes is not a source list.</p>
+<h2 style="margin-top:3rem">Things that could not be checked</h2>
+<p class="lede-prose">A source list that only contains successes is not a source list. These are recorded as failures, and each one is also on the review queue.</p>
 <div class="reject-grid">{unverified}</div>''', cls='')}"""
     return page(
         d,

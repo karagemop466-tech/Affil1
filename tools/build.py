@@ -50,6 +50,8 @@ GENERATED = {
     "guides/air-fryer-capacity-checklist.html",
     "guides/cleanup-and-counter-space.html",
     "guides/multi-function-kitchen-appliance-questions.html",
+    "guides/batch-cooking-for-the-week.html",
+    "guides/hosting-season-air-fryer.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",

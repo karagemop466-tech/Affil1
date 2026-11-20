@@ -1,6 +1,6 @@
 {
   "meta": {
-    "note": "Every entry here was requested and its wording read in this session on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around.",
+    "note": "Every entry here was requested and its wording read on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around.",
     "retrieved_on": "2026-11-20"
   },
   "sources": [
@@ -52,6 +52,36 @@
       "page_date": "Last updated 2025-12-10",
       "used_for": "Confirms that rel=\"sponsored\" is Google's documented marker for paid or advertising links, and that multiple rel values may be combined.",
       "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
+      "status": "read directly"
+    },
+    {
+      "id": "SRC-06",
+      "title": "Safe Minimum Internal Temperature Chart",
+      "publisher": "U.S. Department of Agriculture, Food Safety and Inspection Service",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+      "page_date": "Last Updated: Apr 14, 2025",
+      "used_for": "The only place on this site where a number is quoted as fact rather than as a seller's claim: minimum internal cooking temperatures for the thermometer pages.",
+      "quote": "Cook all food to these minimum internal temperatures, as measured with a food thermometer, before removing food from the heat source. ... All Poultry (Breasts, Whole Bird, Legs, Thighs, Wings, Ground Poultry, Giblets and Stuffing) 165 degrees F (73.9 degrees C). ... Ground Meats 160 degrees F (71.1 degrees C). ... Beef, Pork, Veal and Lamb Steaks, Chops and Roasts 145 degrees F (62.8 degrees C) and allow to rest for at least 3 minutes.",
+      "status": "read directly"
+    },
+    {
+      "id": "SRC-07",
+      "title": "Google Search Console",
+      "publisher": "Google",
+      "url": "https://search.google.com/search-console/about",
+      "page_date": "no date shown on page",
+      "used_for": "What Search Console provides, quoted on the measurement page as the reason queries are measured there rather than reconstructed by the site's own beacon.",
+      "quote": "See which queries bring users to your site. Analyze your impressions, clicks, and position on Google Search. ... Submit sitemaps and individual URLs for crawling.",
+      "status": "read directly"
+    },
+    {
+      "id": "SRC-08",
+      "title": "Bing Webmaster Tools",
+      "publisher": "Microsoft",
+      "url": "https://www.bing.com/webmasters/about",
+      "page_date": "no date shown on page",
+      "used_for": "Second, independent index: the site is submitted here as well as to Google, so discoverability does not depend on one crawler.",
+      "quote": "Get your site's performance data, take advantage of free SEO/GEO tools and analyse insights to improve your page rankings on Bing search results. ... Submit sitemaps and individual URLs for crawling.",
       "status": "read directly"
     }
   ],
