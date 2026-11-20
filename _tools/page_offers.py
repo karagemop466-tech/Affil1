@@ -8,7 +8,7 @@ Here every candidate is scored against the same six factors, the arithmetic is
 shown, and the reviewer can change a weight and see the order move. That is a
 decision surface rather than a to-do list.
 
-Run `python3 tools/page_offers.py --check` to print the arithmetic without
+Run `python3 _tools/page_offers.py --check` to print the arithmetic without
 building a page. It is the same function the page uses, so the numbers on the page
 cannot drift from the numbers in the terminal.
 """
@@ -173,9 +173,9 @@ def build(page_dir, meta=None):
 <div class="callout">
   <h2>The arithmetic says start with {esc(top['offer']['id'])}</h2>
   <p><strong>{esc(top['offer']['title'])}.</strong> {esc(top['offer']['one_line'])}</p>
-  <p>It wins on the two heaviest factors at once: it is the only offer that unblocks money, and it
-  removes the largest claim the site makes without proof. It also needs the most from you, which is
-  exactly why it has not happened yet — and why nothing else moves far until it does.</p>
+  <p>It scores highest on the heaviest factor and ties the maximum on the second, which is why the
+  order puts it first. It also costs more owner time than anything else here, which is exactly why it
+  has not happened yet — and why nothing else moves far until it does.</p>
   <p class="callout-links"><a class="tlink" href="#{esc(top['offer']['id'])}">Read that offer <span aria-hidden="true">&rarr;</span></a></p>
 </div>""", cls="")
 
