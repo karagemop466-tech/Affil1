@@ -1,7 +1,8 @@
 {
   "meta": {
-    "note": "Every entry here was requested and its wording read in this session on 2026-11-20. Where a page could not be reached from this environment, that is stated rather than worked around.",
-    "retrieved_on": "2026-11-20"
+    "note": "Every quotation below was requested from the publisher and read on 2026-11-20. The URL, the page's own 'updated' date where it shows one, and the quoted wording are recorded together so a reviewer can check the quote against the source rather than against this site.",
+    "retrieved_on": "2026-11-20",
+    "rule": "A quotation is reproduced exactly, including the source's own curly quotes and spacing. Where a source could not be reached, that is stated and no substitute was used."
   },
   "sources": [
     {
@@ -10,9 +11,10 @@
       "publisher": "Amazon",
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "page_date": "Updated October 15, 2025",
-      "used_for": "Section 5, Identifying Yourself as an Associate — the required disclosure wording.",
+      "used_for": "Section 5 (Identifying Yourself as an Associate): the required disclosure sentence.",
       "quote": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”",
-      "status": "read directly"
+      "applied_in": "The disclosure strip above <main> on every page, repeated in the footer.",
+      "status": "read directly, 2026-11-20"
     },
     {
       "id": "SRC-02",
@@ -20,9 +22,12 @@
       "publisher": "Amazon",
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "page_date": "Updated April 14, 2026",
-      "used_for": "Participation Requirements §2(b): what Special Links must be, and the rule that price and availability may only appear when Amazon serves them or they arrive through Creators API / PA API.",
-      "quote": "Special Links enable accurate tracking, reporting, and accrual of commission income. Special Links must use the Associates ID we have assigned to you. … Because prices for and availability of Products that you have listed on your Site may change, your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API and you comply with the requirements regarding use of Creators API or PA API in the License.",
-      "status": "read directly"
+      "used_for": "Participation Requirements 2(a) and 2(b): what a Special Link is, the Associates-ID-as-parameter rule, and the price and availability rule.",
+      "quote": "Special Links enable accurate tracking, reporting, and accrual of commission income. Special Links must use the Associates ID we have assigned to you.",
+      "quote_2": "All Special Links must be accessed directly from your Site. For example, you must include your Associates ID or “tag” (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.",
+      "quote_3": "Because prices for and availability of Products that you have listed on your Site may change, your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API and you comply with the requirements regarding use of Creators API or PA API in the License.",
+      "applied_in": "Every outbound product link is /dp/ASIN?tag=shopnow047c-20. No price, rating, review count or stock status appears anywhere.",
+      "status": "read directly, 2026-11-20"
     },
     {
       "id": "SRC-03",
@@ -30,9 +35,11 @@
       "publisher": "U.S. Federal Trade Commission",
       "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
       "page_date": "no date shown on page",
-      "used_for": "Where an affiliate disclosure should sit, and what makes it clear and conspicuous.",
-      "quote": "A disclosure should be placed where it easily catches consumers’ attention and is difficult to miss. … Consumers may miss a disclosure at the bottom of a blog or page.",
-      "status": "read directly"
+      "used_for": "Placement of the affiliate disclosure, and why a footer-only disclosure is insufficient on its own.",
+      "quote": "A disclosure should be placed where it easily catches consumers’ attention and is difficult to miss.",
+      "quote_2": "Consumers may miss a disclosure at the bottom of a blog or page.",
+      "applied_in": "The strip sits under the masthead, before the article, and is repeated in the footer.",
+      "status": "read directly, 2026-11-20"
     },
     {
       "id": "SRC-04",
@@ -40,8 +47,9 @@
       "publisher": "U.S. Federal Trade Commission (eCFR)",
       "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255",
       "page_date": "current edition",
-      "used_for": "The regulation the FTC FAQ interprets. Cited so a reviewer can check the source text.",
+      "used_for": "The regulation the FTC FAQ interprets. Linked for a reviewer; not quoted here.",
       "quote": "",
+      "applied_in": "Cited, not quoted.",
       "status": "linked, not independently quoted in this build"
     },
     {
@@ -50,53 +58,77 @@
       "publisher": "Google Search Central",
       "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
       "page_date": "Last updated 2025-12-10",
-      "used_for": "Confirms that rel=\"sponsored\" is Google's documented marker for paid or advertising links, and that multiple rel values may be combined.",
+      "used_for": "Confirms that rel=\"sponsored\" is the documented marker for paid links and that rel values may be combined.",
       "quote": "Mark links that are advertisements or paid placements (commonly called paid links) with the sponsored value.",
-      "status": "read directly"
+      "applied_in": "rel=\"sponsored nofollow noopener\" on every Amazon product link.",
+      "status": "read directly, 2026-11-20"
     },
     {
       "id": "SRC-06",
-      "title": "Performance report (Search results)",
+      "title": "Performance report (Search results): Overview and basic setup",
       "publisher": "Google Search Console Help",
       "url": "https://support.google.com/webmasters/answer/7576553",
-      "page_date": "No date shown",
-      "used_for": "Search performance queries, impressions and clicks.",
-      "quote": "The Performance report shows important metrics about how your site performs in Google Search results.",
-      "status": "read directly 2026-11-20"
+      "page_date": "No date shown on the page",
+      "used_for": "The only sanctioned way to learn which queries bring visitors, and which pages earn impressions without clicks. It is where the SEO half of this plan gets its numbers, and it is not connected.",
+      "quote": "See how your search traffic changes over time, where it's coming from, and what search queries are most likely to show your site.",
+      "applied_in": "Question Q-14 and the measurement section: search queries are listed as unknown until Search Console is verified, rather than guessed from keyword tools."
     },
     {
       "id": "SRC-07",
       "title": "Verify your site ownership",
       "publisher": "Google Search Console Help",
       "url": "https://support.google.com/webmasters/answer/9008080",
-      "page_date": "No date shown",
-      "used_for": "Ownership verification methods.",
+      "page_date": "No date shown on the page",
+      "used_for": "Names the verification methods available to the owner (HTML file, HTML tag, DNS) and the fact that data starts accruing before verification finishes. The steps this site cannot perform for the owner.",
       "quote": "Ownership verification means proving to Search Console that you own a specific website.",
-      "status": "read directly 2026-11-20"
+      "applied_in": "The publishing workflow's measurement gate: verification is listed as an owner action with three named methods, not as a vague 'set up analytics' item."
+    },
+    {
+      "id": "SRC-08",
+      "title": "Understanding ASINs: Your guide to Amazon's product identification system",
+      "publisher": "Amazon Selling Partner Blog (sell.amazon.com)",
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "page_date": "4 June 2025",
+      "used_for": "Establishes from Amazon's own site that an ASIN is a 10-character alphanumeric code, and that it appears after /dp/ in a product URL. This is the standard the submitted 9-character codes fail.",
+      "quote": "It's a unique 10-character alphanumeric code assigned to every product listed in the Amazon store.",
+      "applied_in": "FLG-001, and the identity section of every product card: observed ASINs are transcribed from the /dp/ segment, submitted codes are kept as submitted and never promoted to intended_asin."
     }
   ],
   "could_not_verify": [
     {
-      "item": "Official 10-character ASIN definition on an Amazon-hosted help page",
+      "item": "Amazon's own definition of ASIN (10 characters, alphanumeric)",
       "attempted": [
-        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — a sign-in wall was returned",
-        "https://www.amazon.com/ask/questions/TxJGX2UK4WITXE/ — a seller-written answer, not Amazon's own text"
+        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — returned a sign-in wall"
       ],
-      "reason": "Amazon's Seller Central help pages require a seller sign-in from this environment. Rather than quote a third-party blog as if it were Amazon, the ASIN length check is presented as an observation about this register's own data."
+      "reason": "Rather than cite a seller-written answer as if it were Amazon's, the ten-character observation is presented as a measurement of this register's own data: every observed ASIN is 10 characters, every supplied slug is 9."
+    },
+    {
+      "item": "USDA FSIS guidance on air-fryer food safety",
+      "attempted": [
+        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers — request failed on 2026-11-20"
+      ],
+      "reason": "No safe-internal-temperature figure appears anywhere on this site. Quoting one from a blog would give it a false provenance, so the guides avoid food-safety claims altogether (FLG-012)."
     },
     {
       "item": "Amazon Product Advertising API / Creators API access",
       "attempted": [
-        "No credentials were supplied and none can be created without the account owner."
+        "No credentials were supplied, and none can be created without the account owner."
       ],
       "reason": "Without API access there is no permitted way to display live price or availability, so none is displayed."
     },
     {
-      "item": "USDA FSIS air-fryer food-safety page",
+      "item": "The Associates rate card, click report and tracking-ID status",
       "attempted": [
-        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
+        "Associates Central requires an account sign-in."
       ],
-      "reason": "The host did not complete a TLS connection from this environment (SSL_ERROR_SYSCALL). No food-safety claim is made anywhere on the site as a result."
+      "reason": "Commission rates, click counts and conversion data are therefore absent. The ledger is empty and says why."
+    },
+    {
+      "item": "Search demand for any topic on this site",
+      "attempted": [
+        "No Search Console property, analytics account or keyword dataset was supplied."
+      ],
+      "reason": "Not one volume, difficulty or impression figure is presented. Guide topics are labelled hypotheses."
     }
   ]
 }
