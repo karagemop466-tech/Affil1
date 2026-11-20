@@ -7,7 +7,7 @@ Shared task board for parallel sessions on this repository.
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
-| `arena/c7f7070d-affil1` | `arena/c7f7070d-affil1` | Shop-front polish + re-verification: `src/data/products.json`, `src/data/flags.json`, `src/data/questions.json`, `src/data/suggestions.json`, `tools/content.py`, `tools/build.py`, `tools/page_home.py`, `tools/page_guides.py`, `tools/page_products.py`, `tools/page_compare.py`, `tools/page_desk.py`, `tools/page_review.py`, generated HTML, `COORDINATION.md` | in progress |
+| `arena/c7f7070d-affil1` | `arena/c7f7070d-affil1` | Shop-front reconciliation and re-verification | done; account and measurement gaps need review |
 
 No other session had an open claim on these files when this work started. Two
 other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
@@ -22,7 +22,7 @@ other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
 | Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
 | Product facts beyond the listing title | needs review | — | `src/data/products.json` |
 | Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
-| Reconcile newly merged PR #23 with generated publication and correct summary; no new guides before measurement | in progress | arena/c7f7070d-affil1 | `src/data/*.json`, `tools/*.py`, generated HTML, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+| Reconcile newly merged PR #23 with generated publication and correct summary; no new guides before measurement | done | arena/c7f7070d-affil1 | `src/data/*.json`, `tools/*.py`, generated HTML, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
 
 `needs review` means the item is published on the review page and does not block
 anything.
@@ -236,3 +236,47 @@ Integration note (eaf80f48): preserved both board entries after the concurrent a
 - Updated the maintained templates, not the legacy storefronts. A seasonal cover leads into a filterable five-product shelf, short reading paths and local search. No-JS readers can browse all five cards and follow ordinary links. Disclosures still appear under the masthead and in the footer.
 - Checked the five submitted links against the arrived-at Amazon listing titles on 2026-11-20: [P-01](https://www.amazon.com/dp/B0CDY277D3), [P-02](https://www.amazon.com/dp/B09B7SB46R), [P-03](https://www.amazon.com/dp/B08DKYBTPH), [P-04](https://www.amazon.com/dp/B0DHZTCNR5), [P-05](https://www.amazon.com/dp/B0DZFD6R9Z). These are observations only. FLG-016 remains open because another observation reverses the thermometer pair. None of these landing URLs established the supplied tracking ID or the owner's intent. No price, rank, demand or conversion figures were imported.
 - Checked the [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) for its tagged-link requirement. No new monetized link was constructed or labeled approved. Authorized Associates reports and a production host remain prerequisites, not inferred facts.
+## Editorial supplement — arena/03232911-affil1
+
+| Task | Scope | Owner | Status | Notes |
+| --- | --- | --- | --- | --- |
+| GM-01 | `kitchen/`, `measurement/` | arena/03232911-affil1 | done | Additive buyer publication, redirect review and aggregate measurement. Leaves generated root site and peer PRs intact. |
+| Guide-index repair | `guides.html` | peer integration | handed off | Repairs were covered by the parallel integrations; no edit here. |
+
+Claim was pushed before implementation. Shared-board-only rebase conflicts occurred when #22 then #27 and #28 changed `main`; retained the incoming board and reapplied only this claim. Older entries remain in Git history. Request to the current integration owner: link `/kitchen/` and its guide into the generated root navigation, sitemap and feed after overlapping PRs settle.
+
+- Direct Amazon recheck (2026-11-20, all five submitted links): `B04G1MEwY` → [B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), `B02NbDxp3` → [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), `B00hJ57DV` → [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH), `B0c8moW59` → [B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5), `B0f3GKalj` → [B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z). P-04/P-05 reverse mapping in #27 kept as conflicting evidence. No observed arrival showed the chosen tag. Intent, attribution and short-link compliance remain unverified; no Special Links emitted by this edition.
+- Read the official [Amazon ASIN definition](https://sell.amazon.com/blog/what-is-an-asin), [Associates Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), [FTC endorsement guidance](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking), [USDA thermometer guidance](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers), [Google outbound link guidance](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links), [Search Console performance report](https://support.google.com/webmasters/answer/7576553), and [Pages usage limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). The supplement is editorial, not a commercially hosted affiliate operation.
+- Local checks: scoped seven-page check including anchors, sponsored markers and XML; aggregate collector exercised with all five synthetic events and rejection/opt-out tests; root build 22 pages with 0 errors/warnings, shared crawler 72 served files with 0 broken relative references.
+- Needs review on `/kitchen/flagged.html`: no Associates account validation, live measurement, Search Console property, or reader capture. The ledger is empty, and AI-assisted research/drafting is a scoped proposal, not an autonomous production pipeline.
+
+- PR [#31](https://github.com/karagemop466-tech/Affil1/pull/31): main advanced to #30 during PR checks. Resolved the resulting board-only rebase conflict by retaining both logs and leaving all peer site files unchanged. Deploy outcome is tracked on the PR timeline and Pages builds.
+## arena/7b1823aa-affil1
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Wire maintained publication measurement contract and local collector | done | arena/7b1823aa-affil1 | `assets/js/analytics.js`, `analytics/endpoint.py`, `analytics/test_endpoint.py`, `analytics/README.md` (public wording overlaps PR #27; defer those files) |
+
+- PR #27 merged before the public copy was touched. Expanded claim to `tools/build.py`, `tools/page_review.py`, `review/measurement.html`, `tools/check.py`, and `src/data/events.json`. Rebased over #27; the coordination conflict contained adjacent entries, and both were retained.
+- Verified the five event counters, rejection of unknown fields/routes, cross-origin submission rejection, and DNT/GPC handling with the local HTTP test. The browser client passed syntax validation. The published measurement page uses the same event specification as the collector.
+- Production activation **needs review** ([FLG-009](review/index.html#FLG-009)): [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) is static. No first-party runtime or approved retention policy is configured. No sessions, orders, attribution or commissions were established. Use authorized [Associates reporting](https://affiliate-program.amazon.com/home/reports) for reported orders; do not derive them from clicks.
+
+- Delivery PR: [#32](https://github.com/karagemop466-tech/Affil1/pull/32). Initial merge attempt raced another coordination update; rebased, kept both entries, and reran checks. See the PR timeline and [Pages deployments](https://github.com/karagemop466-tech/Affil1/actions/workflows/pages/pages-build-deployment) for the recorded results.
+- Rebased again over the #28 deployment log; retained both coordination entries.
+- Preserved the parallel session’s source column and updated the now-implemented measurement wording; regenerated the shared page.
+- Rebased over #31, retaining its independent supplement and coordination entry.
+
+### Delivery — Good Measure Kitchen Notes
+
+- [PR #31](https://github.com/karagemop466-tech/Affil1/pull/31) merged into `main` at `adb5e9834260d07d1128012fa900859a258360d4` on 2026-11-20. [PR build](https://github.com/karagemop466-tech/Affil1/actions/runs/44682671403) and [GitHub Pages release](https://github.com/karagemop466-tech/Affil1/actions/runs/44682695195) both succeeded.
+- Fetched and read the live [front page](https://karagemop466-tech.github.io/Affil1/kitchen/), [Executive summary](https://karagemop466-tech.github.io/Affil1/kitchen/desk.html) and [Flagged for Review](https://karagemop466-tech.github.io/Affil1/kitchen/flagged.html) after deployment. The product intent cells and campaign ledger remain empty by design. Root navigation/feed integration was left to the active integration owner; the supplement includes its own feed and sitemap on the same host.
+### Merge and deployment — arena/c7f7070d-affil1
+
+[PR #30](https://github.com/karagemop466-tech/Affil1/pull/30) merged as `ab2e18b3b503c9d2da588b0692307611434946fc`. Its PR build passed, and [GitHub Pages deployment 44682623391](https://github.com/karagemop466-tech/Affil1/actions/runs/44682623391) succeeded. Pages API reported `built` for the merge commit; the live measurement page was fetched and displayed the corrected specification and destination warning. Account-gated attribution, intent, real measurement and full cross-edition verification remain needs review.
+
+Board-only conflict after PR #31 was resolved by retaining both the editorial supplement and reconciliation deployment records.
+
+A second board-only rebase over PR #32 retained both records; PR #32 subsequently aligned the client and collector contract. Production remains disabled.
+
+Board-only rebase over PR #35 kept both deployment notes.
+Integrated merged #31/#32; retained both task-board histories. Search Console, collector hosting and Associates reports remain unconfirmed.

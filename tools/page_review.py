@@ -134,14 +134,12 @@ def build_images(page_dir, images, products, meta):
     )
 
 
-def build_measurement(page_dir, meta):
+def build_measurement(page_dir, meta, spec):
     d = page_dir
-    # Use the canonical event specification; these are proposed, not collected.
-    import json
-    from pathlib import Path
-    spec = json.loads((Path(__file__).resolve().parent.parent / "src/data/events.json").read_text(encoding="utf-8"))
-    rows = [[{"html": f'<code class="code">{esc(e["name"])}</code>'}, esc(e["fires_when"]), esc(", ".join(e["props"])),
-             {"html": outbound(d, "https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages", "GitHub Pages hosting")}] for e in spec["events"]]
+    events = spec["events"]
+    rows = [[{"html": f'<code class="code">{esc(e["name"])}</code>'},
+             esc(e["fires_when"]), esc(", ".join(e["props"])),
+             {"html": outbound(d, "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages", "GitHub Pages hosting")}] for e in events]
     body = f"""{pagehead(
         'Measurement plan',
         'Measurement is written,<br>and switched off',
@@ -150,16 +148,16 @@ def build_measurement(page_dir, meta):
     )}
 {section(f'''
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. The maintained publication has an inert client; no collector is deployed for it. The five events below are a specification, not evidence that the client implements them.</p>
-  <p>The current client is disabled. Its event names differ from the canonical specification, so alignment and end-to-end testing are required before enabling any collection. A privacy notice, retention decision and consent review are also needed.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
+  <p>The client uses no cookies or browser storage. If enabled on a first-party host, it sends only allowlisted page and event names and, for clicks, the observed product ASIN. The collector keeps daily totals, not visitor records. Scroll depth does not prove reading, and clicks do not prove sessions or orders.</p>
 </div>
 <h2>What would be measured</h2>
-{table(['Proposed event', 'Fires when', 'Proposed properties', 'Hosting context'], rows, cls='events')}
+{table(['Event', 'Fires when', 'What is stored', 'Hosting context'], rows, cls='events')}
 <h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
 <ol class="tight">
   <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
-  <li><strong>A deployed collector.</strong> GitHub Pages serves static files only; a separate collector must be deployed and tested.</li>
-  <li><strong>A retention decision.</strong> Raw event rows have a half-life; the ledger does not. A retention period has to be chosen, not defaulted.</li>
+  <li><strong>A deployed collector.</strong> The endpoint is in this repository and is not hosted anywhere. GitHub Pages serves static files only.</li>
+  <li><strong>A retention decision.</strong> Approve and enforce a retention period for daily totals and their backups.</li>
   <li><strong>A consent decision.</strong> Whether visitor consent is required depends on jurisdiction and on what is collected. That is a legal question, not an engineering one, and it has not been answered.</li>
 </ol>
 <h2 style="margin-top:2.4rem">Why the site currently claims nothing about traffic</h2>

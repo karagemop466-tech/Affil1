@@ -1,74 +1,93 @@
-"""Good Measure Kitchen — self-hosted analytics endpoint.
-
-A minimal, dependency-free HTTP collector for the privacy-preserving client-side
-analytics in analytics.js. It accepts POST /analytics/collect and appends the
-event batch to analytics/events.jsonl.
-
-Privacy design: no IP addresses, User-Agents, cookies or personal data are
-stored. Only the event payload sent by the browser is retained. The endpoint
-must be deployed on the operator's own infrastructure (it is not part of the
-GitHub Pages static site). Set window.__GMK_ANALYTICS_ENABLED = true on pages
-only after the endpoint is live, a privacy notice is published, and any
-applicable consent obligations are reviewed.
-"""
-
+"""Opt-in first-party daily counters. Run behind a same-origin HTTPS proxy."""
 import json
 import os
+import sqlite3
+import sys
+from contextlib import closing
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
-STORE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'events.jsonl')
-HOST = '127.0.0.1'
-PORT = 8765
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tools'))
+from build import GENERATED
+
+DATA = ROOT / 'src/data'
+EVENTS = {e['name'] for e in json.loads((DATA / 'events.json').read_text())['events']}
+PRODUCTS = {p['observed_asin'] for p in json.loads((DATA / 'products.json').read_text())['products']} - {None}
+PAGES = {p.removesuffix('index.html') for p in GENERATED if p.endswith('.html')}
+
+
+def valid(item):
+    if not isinstance(item, dict) or set(item) != {'event', 'page', 'product'}:
+        return False
+    event, page, product = (item[k] for k in ('event', 'page', 'product'))
+    if not isinstance(event, str) or event not in EVENTS or not isinstance(page, str) or page not in PAGES:
+        return False
+    if event == 'outbound_product_click':
+        return isinstance(product, str) and product in PRODUCTS
+    return product is None and (
+        event == 'page_view' or
+        event == 'guide_read_75' and page.startswith('guides/') and page.endswith('.html') or
+        event == 'compare_view' and page == 'compare/' or
+        event == 'flag_page_view' and page == 'review/'
+    )
 
 
 class Collector(BaseHTTPRequestHandler):
-    protocol_version = 'HTTP/1.1'
+    def setup(self):
+        self.request.settimeout(5)
+        super().setup()
 
-    def _send(self, status, body=b''):
+    def reply(self, status):
         self.send_response(status)
-        self.send_header('Content-Type', 'application/json')
-        self.send_header('Content-Length', str(len(body)))
+        self.send_header('Content-Length', '0')
+        self.send_header('Cache-Control', 'no-store')
         self.end_headers()
-        if body:
-            self.wfile.write(body)
 
-    def do_GET(self):  # health check
-        if self.path == '/healthz':
-            self._send(200, b'{"ok":true}')
-        else:
-            self._send(404, b'{"error":"not found"}')
+    def do_GET(self):
+        self.reply(204 if self.path == '/healthz' else 404)
 
     def do_POST(self):
-        if self.path != '/analytics/collect':
-            self._send(404, b'{"error":"not found"}')
-            return
+        if self.path != '/api/e':
+            return self.reply(404)
+        if self.headers.get('Origin') != self.server.site_origin:
+            return self.reply(403)
+        if self.headers.get('DNT') == '1' or self.headers.get('Sec-GPC') == '1':
+            return self.reply(204)
+        if self.headers.get_content_type() != 'application/json':
+            return self.reply(415)
         try:
-            length = int(self.headers.get('Content-Length') or 0)
-            raw = self.rfile.read(length) if length else b''
-            payload = json.loads(raw.decode('utf-8')) if raw else {}
-        except Exception:
-            self._send(400, b'{"error":"invalid json"}')
-            return
+            size = int(self.headers.get('Content-Length', '0'))
+            if not 0 < size <= 4096:
+                return self.reply(413)
+            events = json.loads(self.rfile.read(size))
+        except (ValueError, OSError, RecursionError):
+            return self.reply(400)
+        if not isinstance(events, list) or not 1 <= len(events) <= 10 or not all(map(valid, events)):
+            return self.reply(400)
+        day = datetime.now(timezone.utc).date().isoformat()
+        try:
+            with closing(sqlite3.connect(self.server.database)) as db, db:
+                db.execute('''CREATE TABLE IF NOT EXISTS counts (
+                    day TEXT, event TEXT, page TEXT, product TEXT, total INTEGER,
+                    PRIMARY KEY (day, event, page, product))''')
+                db.executemany('''INSERT INTO counts VALUES (?, ?, ?, ?, 1)
+                    ON CONFLICT(day, event, page, product) DO UPDATE SET total = total + 1''',
+                    [(day, e['event'], e['page'], e['product'] or '') for e in events])
+        except sqlite3.Error:
+            return self.reply(503)
+        self.reply(204)
 
-        events = payload.get('events', [])
-        if not isinstance(events, list):
-            self._send(400, b'{"error":"events must be a list"}')
-            return
-
-        with open(STORE_PATH, 'a', encoding='utf-8') as fh:
-            for event in events:
-                fh.write(json.dumps(event, ensure_ascii=False) + '\n')
-
-        self._send(200, b'{"accepted":' + str(len(events)).encode() + b'}')
-
-    def log_message(self, fmt, *args):  # silence default request logging
-        return
+    def log_message(self, *_):
+        pass
 
 
 def main():
-    server = ThreadingHTTPServer((HOST, PORT), Collector)
-    print('analytics endpoint listening on http://%s:%d' % (HOST, PORT))
-    server.serve_forever()
+    with ThreadingHTTPServer(('127.0.0.1', int(os.environ.get('ANALYTICS_PORT', '8765'))), Collector) as server:
+        server.site_origin = os.environ['ANALYTICS_ORIGIN']
+        server.database = os.environ['ANALYTICS_DATABASE']
+        server.serve_forever()
 
 
 if __name__ == '__main__':
