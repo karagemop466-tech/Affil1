@@ -372,3 +372,21 @@ Rebase included #38's launch readiness and paid-link gate. Resolved template con
 Rebase over #42/#43 retained the new evidence-first executive brief and deployment log. Regenerated product detail from the updated records rather than selecting either side of the generated HTML conflict.
 
 PR #46 initially passed but lost mergeability when #40 landed. Preserved #40’s latest kitchen journal, shelf, category filters, fonts, stylesheet and navigation layout. Integrated Fit Finder and the four featured guide links into that edition instead of bringing back the superseded front page. Rebuilt generated output to resolve the remaining conflicts.
+
+## Independent integration review — `arena/487e4183-affil1`
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Independent source/redirect audit and review of publication proposals; record findings without editing their claimed site files | complete | arena/487e4183-affil1 | COORDINATION.md, INTEGRATION_REVIEW.md |
+| Restore validator compatibility with the product schema introduced in PR #23 | done on branch; merge pending | arena/487e4183-affil1 | tools/validate.py |
+
+Full findings: `INTEGRATION_REVIEW.md` (PR #54). Summary of the audit, dated 2026-11-20:
+
+- Official sources checked: Amazon Associates Operating Agreement and Program Policies, Amazon's ASIN definition (10-character code; the five submitted path tokens are 9 characters and are not confirmed ASINs), FTC Endorsement Guides FAQ, Google Search Console docs, GitHub Pages docs.
+- Five submitted short links observed (dated fetches only; intended ASIN left blank for all; no link declared invalid): `B04G1MEwY`→`/dp/B0CDY277D3`; `B02NbDxp3`→`/dp/B09B7SB46R`; `B00hJ57DV`→homepage in one pass, `/dp/B08DKYBTPH` in another; `B0c8moW59`→`/checkpoint/continue` in early passes, `/dp/B0DHZTCNR5` in the latest pass; `B0f3GKalj`→homepage in one pass, `/dp/B0DZFD6R9Z` in another. Conflicting observations preserved. Tracking attribution and Special Link compliance remain unverified.
+- Deployment finding at review time (`7b236c2`): GitHub Pages is legacy `main:/`, so the maintained 22-page staged edition is not what visitors receive; the full root tree is served and a whole-tree crawl found 53 broken references. Main has since advanced through PRs up to #53 (`8ffe547`) with new editions; repeat the deployment check on the final integration.
+- Link finding at review time: staged product CTAs were sponsored-marked plain `/dp/` URLs with no `tag=shopnow047c-20`. Later PRs (#37, #39, #51) propose tagged links; account enrollment/report verification is still unavailable and must remain flagged.
+- Analytics: endpoint not deployed; `guide_open`/`report_import` were declared but not emitted in the reviewed build. Nothing is claimed as live measurement; the campaign ledger stays empty.
+- Repair in this branch: `tools/validate.py` crashed with `KeyError` after PR #23 renamed product fields. The data-integrity block now accepts both schemas and still enforces code-length, intent/observed separation, and 10-character observed-ASIN rules (619 checks pass; deliberate corruption caught).
+
+Rebase conflict log: each `COORDINATION.md` conflict resolved by keeping the latest main board and appending this section; no other session's files were changed.
