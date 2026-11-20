@@ -17,7 +17,8 @@
       "reading": "The submitted codes are most likely short-link slugs rather than identifiers. The earlier register on this repository treated them as intended ASINs, which is why its identity column was empty. That reading is corrected here.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/agreement",
-        "Open each supplied link and compare the /dp/ segment to the code in the link"
+        "Open each supplied link and compare the /dp/ segment to the code in the link",
+        "https://sell.amazon.com/blog/what-is-an-asin"
       ],
       "impact": "The 'intended_asin' field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
       "blocks": "nothing — but it explains why the register looks emptier than expected"
@@ -146,14 +147,14 @@
     {
       "id": "FLG-011",
       "severity": "low",
-      "title": "Amazon's own ASIN definition could not be reached from this environment",
+      "title": "ASIN definition located; intent still requires separate evidence",
       "expected": "A citation to an Amazon-hosted page stating that an ASIN is 10 characters.",
-      "found": "sellercentral.amazon.com help pages return a sign-in wall. The public Q&A page that repeats the definition is written by sellers, not Amazon.",
-      "reading": "Rather than cite a third-party blog as though it were Amazon, the length claim is presented as an observation about this register's own data (FLG-001), which anyone can re-check by opening the links.",
+      "found": "Seller Central previously required sign-in. Amazon’s public selling guide provides the definition without sign-in.",
+      "reading": "A ten-character listing identifier is checkable. The short-link slug is not that identifier.",
       "to_check": [
-        "https://sellercentral.amazon.com/help/hub/reference/G201394520 — requires sign-in"
+        "https://sell.amazon.com/blog/what-is-an-asin"
       ],
-      "impact": "No page states the 10-character rule as an Amazon quotation.",
+      "impact": "The definition is sourced in SRC-08. It does not resolve any product-intent field.",
       "blocks": "nothing"
     },
     {

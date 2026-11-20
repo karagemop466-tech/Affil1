@@ -82,6 +82,16 @@
       "used_for": "Names the verification methods available to the owner (HTML file, HTML tag, DNS) and the fact that data starts accruing before verification finishes. The steps this site cannot perform for the owner.",
       "quote": "Ownership verification means proving to Search Console that you own a specific website.",
       "applied_in": "The publishing workflow's measurement gate: verification is listed as an owner action with three named methods, not as a vague 'set up analytics' item."
+    },
+    {
+      "id": "SRC-08",
+      "title": "Understanding ASINs: Your guide to Amazon's product identification system",
+      "publisher": "Amazon Selling Partner Blog (sell.amazon.com)",
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "page_date": "4 June 2025",
+      "used_for": "Establishes from Amazon's own site that an ASIN is a 10-character alphanumeric code, and that it appears after /dp/ in a product URL. This is the standard the submitted 9-character codes fail.",
+      "quote": "It's a unique 10-character alphanumeric code assigned to every product listed in the Amazon store.",
+      "applied_in": "FLG-001, and the identity section of every product card: observed ASINs are transcribed from the /dp/ segment, submitted codes are kept as submitted and never promoted to intended_asin."
     }
   ],
   "could_not_verify": [
