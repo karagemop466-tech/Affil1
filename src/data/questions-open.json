@@ -1,6 +1,6 @@
 {
   "meta": {
-    "purpose": "Questions that must be answered before a decision is reasonable, each with the information needed and the state of the answer. Q-15 to Q-22 were added by the integration pass after a second verification run.",
+    "purpose": "Questions, the information needed to answer each one, and whether this session could answer it. 'Blocked' means no official source exists that this session can reach, or the answer requires account access the owner holds and the agent does not.",
     "rule": "A blocked question is not a reason to guess. It is a reason to leave the value blank and say so."
   },
   "questions": [
@@ -143,78 +143,6 @@
       "how_to_unblock": "Re-run tools/validate.py monthly and diff the observed targets against products.json.",
       "source": "https://link.amazon/B04G1MEwY",
       "flag": "FLG-001"
-    },
-    {
-      "id": "Q-15",
-      "question": "Do the five submitted links resolve to Amazon product pages at all?",
-      "needed_info": "Two independent fetch passes, recorded with the date and the destination each request returned.",
-      "answer": "Answered by this pass. Four of five reach a product page: B0CDY277D3 (CHEFMAN dual basket), B09B7SB46R (Emeril Lagasse French door), B08DKYBTPH (Chefman 8 Qt) and B0DZFD6R9Z (CHEF iQ Sense thermometer). One \u2014 B0c8moW59 \u2014 has never reached anything but Amazon's continue-shopping interstitial. Earlier registers in this repository disagreed about exactly these rows, which is why the second pass was run.",
-      "status": "answered",
-      "how_to_unblock": "Nothing to unblock. Re-run the fetch on a schedule (SUG-24) and let the register update; treat every destination as an observation with a date, not a permanent fact.",
-      "source": "src/data/reverification.json (in this repository)"
-    },
-    {
-      "id": "Q-16",
-      "question": "What are the five products, by name and category?",
-      "needed_info": "The listing title and breadcrumb from each destination page.",
-      "answer": "Recorded for the four that resolved, transcribed from the destination page itself. Four are air fryers in Home & Kitchen \u203a Kitchen & Dining \u203a Small Appliances \u203a Fryers \u203a Air Fryers; one is a meat thermometer under Thermometers & Timers \u203a Meat. The fifth row has no name, because no listing was reached.",
-      "status": "answered",
-      "how_to_unblock": "Nothing. If the owner meant a different product by the 9-character code, that correction changes the register and every page built from it.",
-      "source": "https://www.amazon.com/dp/B0CDY277D3"
-    },
-    {
-      "id": "Q-17",
-      "question": "Is the GitHub Pages deployment currently healthy?",
-      "needed_info": "The Actions run history and the Pages build type, not a guess from the URL loading.",
-      "answer": "It was not. Every push to main ran the deploy workflow's validation step and failed, so the Actions deployment was skipped and the site was being served only by the repository's legacy branch build \u2014 a red check on a live URL, which looks fine and proves nothing. This pass replaced the ad-hoc check with the real validator and added a mount-path check.",
-      "status": "answered",
-      "how_to_unblock": "Confirm the next deploy goes green, and decide whether Pages should be served by Actions (build-then-publish) or by the branch build. Both are live in this repository at once today, which is the actual defect.",
-      "source": "https://github.com/karagemop466-tech/Affil1/actions"
-    },
-    {
-      "id": "Q-18",
-      "question": "How many versions of this site exist, and which one publishes?",
-      "needed_info": "A count of competing front pages, stylesheets and navigation shells.",
-      "answer": "Five had accumulated at the root of main: a Good Measure Kitchen storefront, a /crisp/ publication, two further CSS/JS shells and an archive of older attempts. The integration pass promoted one publication to the root, moved the rest to archive/ untouched, and made the archive non-indexable. One brand, one nav, one stylesheet, one disclosure template.",
-      "status": "answered",
-      "how_to_unblock": "Nothing for the owner. Future sessions should extend the published surface via src/data and tools/build.py rather than adding a second front page alongside it.",
-      "source": "archive/2026-11-20-integration/README.md"
-    },
-    {
-      "id": "Q-19",
-      "question": "Is there any traffic data at all to choose the next topic from?",
-      "needed_info": "Search Console query data for the published property, or an equivalent first-party source.",
-      "answer": "Unknown. No property is verified in this repository, no analytics endpoint is deployed, and the campaign ledger is empty by design. The topic queue on /topics/ is therefore stated as reasoning, not as demand.",
-      "status": "blocked-on-account",
-      "how_to_unblock": "Verify the property, wait for four weeks of queries, then re-order the queue. Any 'high search volume' claim made before that would be invented.",
-      "source": "https://affiliate-program.amazon.com/help/operating/policies"
-    },
-    {
-      "id": "Q-20",
-      "question": "What is the production hostname, and does the canonical URL match it?",
-      "needed_info": "A decision: publish at karagemop466-tech.github.io/Affil1/ or point a custom domain at the repository.",
-      "answer": "Unknown, and it matters. Every canonical tag, sitemap entry and feed link is currently written for the github.io project path. A custom domain without rebuilding the data layer would leave the site canonicalising to a host it no longer lives on.",
-      "status": "blocked-on-decision",
-      "how_to_unblock": "Decide the host. SITE_ROOT in tools/build.py is the single place to change; the build rewrites every page, sitemap and feed from it, and tools/validate.py fails the build if a canonical drifts outside that base.",
-      "source": "docs/MEASUREMENT.md"
-    },
-    {
-      "id": "Q-21",
-      "question": "Who signs off a guide before it publishes, and against what?",
-      "needed_info": "A named reviewer, or an accepted decision that the CI gate is the reviewer.",
-      "answer": "No human reviewer exists. Today the automated gate checks structure \u2014 disclosure present, links sponsored and marked, no price figures, images resolve, sitemap agreement \u2014 and cannot check whether a sentence is true. The signature line in PUBLISHING_WORKFLOW.md is still blank in the built pages, and the compliance table says so.",
-      "status": "blocked-on-decision",
-      "how_to_unblock": "Either name a reviewer or record, publicly, that publication is gated by the automated checks and the flagged register alone.",
-      "source": "PUBLISHING_WORKFLOW.md"
-    },
-    {
-      "id": "Q-22",
-      "question": "What does the owner want the site to optimise for in the next 60 days?",
-      "needed_info": "A stated priority: traffic, list building, revenue per visit, or a compliance clean-up before scaling.",
-      "answer": "Unknown from anything in the repository, and the difference changes the order of the board. A traffic priority means publishing volume plus Search Console; a revenue priority means the Special Link test and the one-link experiment first; a trust priority means an author, a corrections log and real photography.",
-      "status": "blocked-on-decision",
-      "how_to_unblock": "Pick one of the three in /suggestions/. The board is sorted so that the first two rows are worth more than the next ten combined.",
-      "source": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
     }
   ]
 }

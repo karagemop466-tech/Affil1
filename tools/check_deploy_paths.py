@@ -44,10 +44,8 @@ class Refs(HTMLParser):
 
 
 def pages():
-    for p in sorted(ROOT.rglob("*.html")):
-        if set(p.relative_to(ROOT).parts) & SKIP_DIRS:
-            continue
-        yield p
+    from build import GENERATED
+    yield from (ROOT/p for p in sorted(GENERATED) if p.endswith('.html'))
 
 
 def main():

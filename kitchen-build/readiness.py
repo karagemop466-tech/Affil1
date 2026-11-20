@@ -117,21 +117,9 @@ def render(doc):
 <h2 id="prompt">Design and drafting brief</h2>
 <p>Make the home page feel like the front of a kitchen publication: warm editorial photography, product formats before operations, one question per headline, and one useful next action per card. Illustrations must not pass as product photos. Use an honest editorial byline, not a fabricated tester. On mobile, keep disclosures visible before the content and put operations in a single menu and the footer.</p>
 <p>Give the drafting agent only the approved source packet and a buyer question. Ask for the decision first, a practical example second, and a source beside each product claim. Return a separate evidence checklist and gaps; do not guess missing numbers. A draft is not a publish instruction. Check the <a rel="noopener" href="{AGREEMENT}">Associates Agreement</a>, <a href="{FTC}">FTC disclosure guidance</a> and <a href="{GOOGLE_LINKS}">Google paid-link markup</a> before shipping a new CTA.</p>''')
-    canonical = SITE_URL + '/operations/launch-readiness.html'
-    return f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Affiliate launch readiness — Crisp &amp; Counter</title>
-<meta name="description" content="Dated product observations, the affiliate publishing gate, and suggested next decisions.">
-<meta name="robots" content="noindex,follow"><link rel="canonical" href="{canonical}">
-<link rel="stylesheet" href="../assets/css/site.css"><link rel="alternate" type="application/rss+xml" href="../feed.xml" title="Crisp &amp; Counter">
-</head><body><a class="skip" href="#main">Skip to content</a><header class="masthead"><div class="wrap masthead-inner">
-<a class="brand" href="../"><span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span><span class="brand-tag">Kitchen buying guides</span></a>
-<nav class="nav" aria-label="Sections"><a href="../guides/">Buying guides</a><a href="../compare/">Compare</a><a href="../review/">Review desk</a></nav></div></header>
-<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure"><div class="wrap disclosure-inner"><p>{DISCLOSURE} <a href="../about/#disclosure">About the disclosure</a></p></div></div>
-<main id="main">{content}</main>
-<footer class="site-footer"><div class="wrap"><p class="foot-disclosure">{DISCLOSURE}</p><p><a href="../brief/">Executive summary</a> · <a href="../operations/ledger.html">Campaign ledger</a> · <a href="../questions/">Open questions</a> · <a href="../suggestions/">Suggestions</a> · <a href="../feed.xml">RSS</a></p></div></footer>
-<script src="../assets/js/analytics.js" defer></script></body></html>
-'''
+    from layout import page
+    return page('operations',title='Affiliate launch readiness — Crisp &amp; Counter',description='Evidence gates before affiliate links go live.',body=content,canonical='operations/launch-readiness.html').replace('<meta charset="utf-8">','<meta charset="utf-8"><meta name="robots" content="noindex,follow">')
+
 
 
 def main():

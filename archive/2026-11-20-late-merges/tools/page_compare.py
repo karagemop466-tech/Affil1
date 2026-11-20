@@ -16,13 +16,13 @@ def build(page_dir, products, meta):
         }
         if r["asin"]:
             listing = product_link(
-                d, p["affiliate_url"], esc(r["asin"]),
-                aria=f"Open the Amazon listing for {r['ref']} (affiliate link, opens in a new tab)")
-            cap = esc(r["capacity"])
+                d, f"https://www.amazon.com/dp/{r['asin']}", esc(r["asin"]),
+                aria=f"Open the Amazon listing for {r['ref']} (opens in a new tab)")
+            cap = blank(r["capacity"], "not applicable")
             attrs = esc(r["attributes"])
             shape = esc(r["shape"])
             brand = esc(r["brand"])
-            status = '<span class="pill pill-ok">Identified</span>'
+            status = '<span class="pill pill-ok">Observed</span>'
         else:
             listing = blank(None, "the link never reached a product page")
             cap = attrs = shape = brand = blank(None, "not identified")
@@ -40,19 +40,19 @@ def build(page_dir, products, meta):
     tbl = table(
         ["Ref", "Brand", "Shape", "Stated capacity", "Stated attributes", "ASIN reached", "Status"],
         rows, cls="compare",
-        caption="Side by side, with nothing measured",
+        caption="Listing details, side by side",
         note="Every word in the capacity and attribute columns is the seller's own wording from the listing title. None of it has been verified by testing, and no product was measured.",
     )
 
     body = f"""{pagehead(
         'Compare',
-        'Side by side,<br>with nothing measured',
-        'Five products, seven columns. Two of those columns are the sellers describing their own products. One is a link that was actually opened. The rest are empty.',
+        'Compare by how you cook',
+        'Three air fryers and two thermometers. Compare designs and listing details, then check the fit and cleanup trade-offs that matter to you.',
         meta='No price column &middot; no rating column &middot; no winner column &middot; on purpose',
     )}
 {section(f'''
 <div class="lede-prose">
-  <p>Most comparison tables rank things. This one cannot, because nothing here was tested, and a rank without a test is an opinion dressed as a measurement.</p>
+  <p>Start with the job: two separate foods, one wider batch, or a tray you already own. For thermometers, decide whether you need a quick spot-check or a probe that stays in while you cook.</p>
   <p>What the table can do is put the sellers' claims next to each other so the shape of the choice is visible. Read the capacity column and you can see a dual-basket machine quoting six quarts across two three-quart baskets sitting beside a single eight-quart basket and a twenty-six-quart oven. Those numbers describe three different kinds of container, which is exactly why a single capacity figure is a poor way to compare.</p>
 </div>
 {tbl}''', cls='')}
@@ -61,7 +61,7 @@ def build(page_dir, products, meta):
 <div class="rule-grid">
   <div class="rule"><span class="rule-n">01</span><h3>The capacity column is a claim</h3><p>Quarts are quoted by the seller and transcribed here unchanged. No basket, cavity or portion was measured. A quart of volume and a quart of usable cooking surface are not the same thing.</p></div>
   <div class="rule"><span class="rule-n">02</span><h3>The attribute column is marketing copy</h3><p>"Sync finish", "one-touch presets" and "dishwasher-safe" are the seller's phrases. Whether a preset produces good food, or a coating survives your dishwasher, is not something a title can tell you.</p></div>
-  <div class="rule"><span class="rule-n">03</span><h3>The empty columns are the honest ones</h3><p>Price, rating, review count and stock would be the most useful columns on the page. They are absent because Amazon permits them only from data Amazon serves or via its API. <a href="{esc(rel(d, 'about/index.html'))}#why-blank">The rule, quoted from the source</a>.</p></div>
+  <div class="rule"><span class="rule-n">03</span><h3>The empty columns are the honest ones</h3><p>Price, rating, review count and stock would be the most useful columns on the page. We do not have an approved source for publishing dynamic listing data. <a href="{esc(rel(d, 'about/index.html'))}#why-blank">The rule, quoted from the source</a>.</p></div>
 </div>''', cls='')}
 {section(f'''
 <div class="callout">
@@ -72,7 +72,6 @@ def build(page_dir, products, meta):
     return page(
         d,
         title="Compare the five \u2014 Crisp & Counter",
-        breadcrumb=[("Home", ""), ("Compare", "compare/")],
         description="The five submitted products side by side: brand, shape, the capacity and attributes their sellers state, the ASIN each link reached, and the fields left blank.",
         body=body,
         active="compare/index.html",
