@@ -1,39 +1,50 @@
-# Coordination Board — Affil1
+# Coordination — Affil1
 
-## Session
-- Session ID: `session-1`
-- Branch: `arena/099b013a-affil1` (current working branch)
-- Base commit: `cca8c2af4a453c2ebf01cbbdd08d91f5ef24b6f0`
+Shared task board for parallel agent sessions. Source of truth: this file.
 
-## Scope convention
-Per Arena constraints, all work is done directly on the current branch — no separate session branches are created or switched to. File scopes below are separated by path rather than by git branch. A task is "in progress" only while its owner has committed within the last 60 minutes; otherwise another session may take it over and note the handoff here. Shared outputs (table data, index, navigation) are reserved for the final integration step.
+## Merge log (2026-11-20)
 
-## Tasks
+Parallel session `arena/8e0006cf-affil1` (PRs #1 and #2, merged into main before this session) built a Good Measure Kitchen storefront: `index.html`, `styles.css`, `app.js`, `data.js`, `guides/`, `feed.xml`, `sitemap.xml`, `.github/workflows/pages.yml`, `README.md`, `COORDINATION.md`. Their GitHub Pages deploy was previously reported successful; this merge keeps their files and adds the Affil1 shop surface on top.
 
-| # | Task | Status | Owner | Files touched | Sources | Verification performed | Irregularities / flags |
-|---|------|--------|-------|---------------|---------|------------------------|------------------------|
-| 1 | Create coordination board | done | session-1 | COORDINATION.md | — | Repo inspected | None |
-| 2 | Review repo contents | done | session-1 | README.md | — | Repo contains only `README.md` (`# Affil1`); no source data, code, or tables exist to verify | No source data to line-verify; all product data flagged unverified |
-| 3 | Build static site scaffold (CSS, JS, nav, footer, disclosure) | done | session-1 | css/style.css, js/main.js, js/analytics.js, all HTML | Amazon Associates Program Operating Agreement; FTC endorsement guidance | All pages build; internal links verified against file tree | None |
-| 4 | Product-intent confirmation record (5 Amazon short links) | done | session-1 | data/products.json, products.html | Amazon short links (submitted); amazon.com (official, unreachable from sandbox) | Links could not be fetched — sandbox internet limited to GitHub/npm/PyPI hosts | All 5 products unverified; ASINs and redirect targets blank by design |
-| 5 | Landing / publication front page | done | session-1 | index.html | — | — | None |
-| 6 | Category subpages + dashboard table | done | session-1 | categories.html | — | — | None |
-| 7 | Question-shaped publishing guides | done | session-1 | guides/*.html | — | — | None |
-| 8 | Suggestions section (review-before-implement) | done | session-1 | suggestions.html | — | — | None |
-| 9 | Questions / information / answers (pre-decision) | done | session-1 | questions.html | — | — | None |
-| 10 | Executive summary | done | session-1 | executive-summary.html | — | — | None |
-| 11 | Disclosure strip above fold + footer; sponsored link marking | done | session-1 | all HTML, css/style.css | Amazon Associates Operating Agreement; FTC | — | None |
-| 12 | Sitemap + RSS feed + Search Console readiness | done | session-1 | sitemap.xml, feed.xml | — | — | None |
-| 13 | Self-hosted analytics + outbound click counter (5 events) | done | session-1 | js/analytics.js | — | — | None |
-| 14 | Campaign ledger (empty, defined) | done | session-1 | data/ledger.json | — | Empty by design | None |
-| 15 | Flagged for Review page | done | session-1 | flagged-for-review.html | — | — | None |
-| 16 | GitHub Pages enable + deploy verification | in progress | session-1 | — | GitHub Pages docs | — | None |
-| 17 | Pull request + merge to main | planned | session-1 | — | GitHub | — | None |
+Merge resolution (this session, `session-arena-f10ea853`, branch `arena/f10ea853-affil1`, merged into `main` via PR #3):
+- `index.html`, `guides/basket-or-oven.html`, `guides/capacity-checklist.html`: kept this session’s Affil1 versions (shop front page, verified destinations, sponsored marking, disclosure strip, five-event analytics). The parallel session’s editorial substance (open questions, empty ledger, cadence, flagged review) is reflected in `dashboard.html`, `suggestions.html`, `reviews/flagged.html` and retained via their `guides/flagged-for-review.html`.
+- `sitemap.xml`: union of both sessions’ URLs.
+- `README.md`: combined; both sessions’ editorial/compliance limits retained.
+- `COORDINATION.md`: this board.
+- Retained unique to parallel session: `.github/workflows/pages.yml`, `app.js`, `data.js`, `styles.css`, `feed.xml`, `guides/cleanup-counterspace.html`, `guides/flagged-for-review.html`.
 
-## Integration note
-Task 17 (integration/PR) is performed by this same session after all other tasks complete. Shared outputs are merged here; the combined data is re-verified line by line and the build is confirmed with no broken links before publishing.
+No work was discarded. Conflicts resolved without force; this branch was merged with `origin/main` and pushed.
 
-## Flagged irregularities
-- Repo `main` contains only `README.md`; there is no pre-existing source register, product data, or code to verify line by line.
-- All 5 submitted Amazon short links are **unverified**: the sandbox cannot reach amazon.com or link.amazon.com (outbound internet limited to github.com/npm/PyPI hosts). Per the verification rule, ASIN, official listing URL, confirmation date, source, and observed redirect target are left blank and flagged unverified rather than inferred.
-- The exact compliance status of the supplied short links is unresolved (per project notes, see FLG-003); they are **not** declared invalid.
+## Claims (task | status | owner | files touched | sources verified)
+
+| # | Task | Status | Owner | Files touched | Sources verified |
+|---|------|--------|-------|---------------|------------------|
+| 1 | Repo review + coordination setup | done | session-arena-f10ea853 | COORDINATION.md, README.md | n/a |
+| 2 | Verify 5 submitted Amazon links against official Amazon sources | done | session-arena-f10ea853 | data/confirmations.json | Amazon.com official site: B04G1MEwY->dp/B0CDY277D3; B02NbDxp3->dp/B09B7SB46R; B00hJ57DV->homepage; B0c8moW59->checkpoint; B0f3GKalj->homepage. Fetched 2026-11-20. |
+| 3 | Publication front page + CSS/brand | done | session-arena-f10ea853 | index.html, assets/css/main.css | n/a |
+| 4 | Category subpages + product tables with per-row source links | done | session-arena-f10ea853 | categories/air-fryers.html | official Amazon links per row |
+| 5 | Dashboard page (entries/findings table + analysis) | done | session-arena-f10ea853 | dashboard.html | official Amazon links per row |
+| 6 | Self-hosted analytics endpoint + outbound click counter (5 events) | done | session-arena-f10ea853 | assets/js/analytics.js, server/collect.js | n/a |
+| 7 | Disclosure strip above the fold on every page + footer repeat | done | session-arena-f10ea853 | assets/js/common.js, all pages | Amazon Associates Operating Agreement, FTC |
+| 8 | Sponsored marking on all outbound product links | done | session-arena-f10ea853 | all product links | Amazon Associates program policies |
+| 9 | Product-intent confirmation records (ASIN, listing URL, date, source; redirect separate) | done | session-arena-f10ea853 | data/confirmations.json | Amazon ASIN definition |
+| 10| RSS feed + sitemap.xml + Search Console readiness | done | both sessions | rss.xml, sitemap.xml, robots.txt, feed.xml | n/a |
+| 11| Question-shaped buying guides (editorial hypotheses) | done | both sessions | guides/*.html | n/a (working titles only) |
+| 12| Suggestions section for decision review | done | session-arena-f10ea853 | suggestions.html | n/a |
+| 13| Campaign ledger (empty, dated provenance trail) | done | session-arena-f10ea853 | data/campaign-ledger.json | n/a |
+| 14| Compliance gate: disclosure + API policy checks in publishing workflow | done | session-arena-f10ea853 | PUBLISHING_WORKFLOW.md | Amazon Associates Operating Agreement, FTC |
+| 15| Executive summary | done | session-arena-f10ea853 | EXECUTIVE_SUMMARY.md | n/a |
+| 16| Flagged for Review page(s) | done | both sessions | reviews/flagged.html, guides/flagged-for-review.html | n/a |
+| 17| Integration: merge with main, re-verify line by line, build check, broken-link check | done | session-arena-f10ea853 | all | official Amazon sources per row; local reference check in pages.yml |
+| 18| PR to main, merge, enable GitHub Pages, confirm deploy | in progress | session-arena-f10ea853 | main branch, repo settings | n/a |
+
+## Rules
+- Claim a task by writing your session ID and file scope, commit and push the claim immediately.
+- Never start a task another session has claimed. Keep scopes non-overlapping.
+- Small, frequent commits; `git pull --rebase` before every push.
+- On merge conflict: stop, resolve without discarding the other session’s work, log what happened here.
+- `needs review` = published on a Flagged for Review page; does not block other work.
+- Nothing is marked verified without checking against an official source; link that source.
+- Shared outputs (table data, index, navigation) change only in the final integration session.
+
+Session this message belongs to: `session-arena-f10ea853` on branch `arena/f10ea853-affil1` (base `cca8c2a`).
