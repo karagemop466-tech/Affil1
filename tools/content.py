@@ -436,6 +436,37 @@ GUIDES = [
 
 # Rows for the comparison table. Every cell is either transcribed from a listing
 # title reached on 2026-11-20 or explicitly blank. Blank is a valid value.
+GUIDES.append({
+    "slug": "holiday-side-dish-capacity",
+    "cluster": "Seasonal",
+    "related": ["P-02", "P-03", "P-05"],
+    "title": "Will your air fryer fit the holiday sides without a queue?",
+    "kicker": "Seasonal kitchen · holiday sides",
+    "dek": "Plan backward from serving time: check the tray, count the batches, and give the meals you already cook more weight than the number on the box.",
+    "updated": "2026-11-20",
+    "read_minutes": 3,
+    "photo": "assets/img/capacity",
+    "photo_alt": "An editorial illustration for comparing air fryer capacity",
+    "photo_caption": "Editorial illustration, not a photograph of any model on this site.",
+    "sections": [
+        {"h": "Start with the side that has to land last", "p": [
+            "Imagine that you want crisp potatoes and roasted vegetables on the table at the same time. Pick the dish you want to cook last. Work backward from that tray, rather than assuming an appliance can take both at once. If you already make that dish in the oven, measure the area you actually use, not the size of the pan rim."
+        ]},
+        {"h": "Make a quick batch plan", "p": [
+            "Sketch the usable rack or basket footprint from the manual for the exact model. Check the manual’s food load and spacing instructions. Split a mock shopping list into the number of loads that fit, allowing for any required preheat, unloading and reload time.",
+            "Example worksheet, not a cooking recommendation: if a recipe you already use takes 18 minutes and your plan needs two sequential loads, that is 36 minutes of recipe time before any turnaround. That number is arithmetic, not a claim about a particular air fryer. If the timing doesn't work, move one side to the oven or choose a dish that doesn't need the fryer."
+        ]},
+        {"h": "Look for the thing that actually frees up the oven", "items": [
+            ("Considering two baskets?", "Look at each basket’s dimensions and check whether each dish fits its own basket. Compare independent controls in the exact manual."),
+            ("Considering a countertop oven?", "Measure the tray you mean to use, plus door travel and the clearances in the manual. Do not assume racks can be used together in every mode."),
+            ("Cooking meat alongside the sides?", "Use a food thermometer and the official USDA guidance for placement and safe minimum internal temperatures. Don’t use colour or recipe timing alone."),
+        ]},
+    ],
+    "sources": [("USDA Food Safety and Inspection Service · Food thermometers", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers")],
+    "closing": "Buy for the batches you cook on ordinary weeks. Solve the holiday bottleneck on paper before spending money on extra capacity.",
+})
+
+
 COMPARE_COLUMNS = [
     ("Product", "Brand and shape as stated on the listing"),
     ("Shape", "Basket, oven or thermometer, read from the title and category path"),

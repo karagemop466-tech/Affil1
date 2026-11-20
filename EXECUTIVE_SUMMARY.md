@@ -14,18 +14,18 @@ further input.
 
 ## What exists now
 
-One canonical site, 26 pages, rebuilt from `src/data` on every deploy:
+One canonical site, 27 pages, rebuilt from `src/data` on every deploy:
 
 - a product-led front page with five picks in two categories and a buy button on
   every card;
 - a product page for each of the five, with stated facts, who it suits, who
   should skip it, and a one-block provenance record;
 - a side-by-side comparison table;
-- eight question-shaped guides across six clusters;
+- nine question-shaped guides across six clusters;
 - a decision register of 22 questions, 10 answered with evidence;
 - a suggestion queue with three coherent paths and 18 proposals, of which 8 have
   already been implemented and are shown with evidence;
-- 17 review flags, an image policy, an inert analytics client and an empty
+- 19 review flags, an image policy, an inert analytics client and an empty
   campaign ledger with a provenance rule;
 - a build-time checker that fails on a broken link, a missing disclosure, an
   untagged Amazon link, a reintroduced price, or a second competing edition.

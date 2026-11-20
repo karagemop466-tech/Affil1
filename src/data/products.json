@@ -30,7 +30,7 @@
         ]
       }
     ],
-    "identity_caveat": "On 2026-11-20 this session observed P-04 -> B0DHZTCNR5 and P-05 -> B0DZFD6R9Z. A parallel session recorded the opposite mapping on the same date. The two observations are published as a conflict (FLG-016); neither is presented as the settled identity, and no product is described as a winner. The buy link uses the destination this session actually reached, and the page says so."
+    "identity_caveat": "On 2026-11-20 this session observed P-04 → B0DHZTCNR5 and P-05 → B0DZFD6R9Z. A parallel session first recorded the opposite mapping, then later agreed with this one. The disagreement is published (FLG-016); neither mapping is presented as proof of intent."
   },
   "products": [
     {
@@ -243,7 +243,7 @@
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "One-second reading stated; ±0.5℉ accuracy stated; NIST/NSF certification stated; IP67 waterproof; auto-rotating screen",
       "observation_conflict": true,
-      "conflict_note": "A parallel session recorded the mapping of P-04 and P-05 the other way round on the same day. This page records the destination this session actually reached, and flags the disagreement rather than resolving it by preference."
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
     },
     {
       "ref": "P-05",
@@ -297,7 +297,7 @@
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
       "observation_conflict": true,
-      "conflict_note": "A parallel session recorded the mapping of P-04 and P-05 the other way round on the same day. This page records the destination this session actually reached, and flags the disagreement rather than resolving it by preference."
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
     }
   ]
 }

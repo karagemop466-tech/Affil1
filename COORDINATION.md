@@ -9,7 +9,7 @@ claiming any work.
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | same | Build system, publication rewrite, review queue (PR #22) | done |
 | `arena/a4ab7faf-affil1` | same | Pass-2 verification audit, seasonal guide (PRs #20, #21) | done |
-| `arena/b41317f8-affil1` | `arena/b41317f8-affil1` | **Integration pass**: one canonical site, shop-voice rewrite, tagged links, new guides, suggestions/questions refresh, PR + merge + deploy | in progress → done below |
+| `arena/b41317f8-affil1` | `arena/b41317f8-affil1` | **Final integration pass**: one canonical site, shop-voice rewrite, tagged links, new guides, suggestions/questions refresh, PR + merge + deploy | in progress → done below |
 
 ## Claims
 
@@ -80,8 +80,9 @@ Link verification, one request per link on 2026-11-20:
 | P-04 | link.amazon/B0c8moW59 | **B0DHZTCNR5** | ThermoMaven digital meat thermometer | **newly resolved** (3 failures in an earlier session) |
 | P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z | CHEF iQ Sense wireless probes | unchanged |
 
-`python3 tools/build.py` → **26 pages**.
-`python3 tools/check.py` → **26 pages checked, 0 errors, 0 warnings.**
+`python3 tools/build.py` → **27 pages**.
+`python3 tools/check.py` → **27 pages checked, 0 errors, 0 warnings.**
+`python3 tools/check_local_links.py` → **27 pages, 0 broken references.**
 
 ## Irregularities found in this pass
 
@@ -100,9 +101,9 @@ Link verification, one request per link on 2026-11-20:
 - **FLG-016 (new):** buy-button wording ("See it on Amazon") is a compliance
   judgement logged for owner review before paid traffic.
 
-All 17 flags are published at `review/index.html` with source links.
+All 19 flags are published at `review/index.html` with source links.
 
-## Reconciliation with main (after rebase)
+## Reconciliation with main (two rounds)
 
 `main` moved four merges ahead while this session was working. On reconciliation,
 `main` carried **three** published editions (generated root, `crisp/` and a
@@ -118,12 +119,24 @@ complementary:
   repository can hold history without publishing it.
 - `measurement/collector.py` and its tests — the self-hosted collector the
   measurement plan refers to.
+- `guides/holiday-side-dish-capacity` — a new seasonal guide from the parallel
+  session, adopted into this build with a cluster and related products rather
+  than archived.
+- The paid-link gate idea from PR #38 is implemented here as `layout.buy_url()`
+  plus the tag rule in `check.py`.
 
 **Conflict in the product record, published rather than resolved by preference:**
-a parallel session observed P-04 → B0DZFD6R9Z and P-05 → B0DHZTCNR5, the reverse
-of this session's observation. Both mappings are recorded in FLG-016, both
-product pages carry an identity note, and neither is called the intended product.
-The operator can settle it in a minute with SiteStripe.
+a parallel session first observed P-04 → B0DZFD6R9Z and P-05 → B0DHZTCNR5, the
+reverse of this session's observation; a later fetch by that session agreed with
+the mapping here (B0DHZTCNR5 / B0DZFD6R9Z). The disagreement is recorded in
+FLG-016, both product pages carry an identity note, and neither mapping is called
+the intended product. The operator can settle it in a minute with SiteStripe.
+
+**Archived in the second round:** `kitchen-build/` (a second generator, whose
+output `operations/launch-readiness.html` linked to untagged `/dp/` URLs),
+`operations/launch-readiness.html`, and `.github/workflows/kitchen-check.yml`.
+Keeping them would have published a second page shell and untagged Special Links.
+They are preserved under `archive/legacy-2026-11-20/`.
 
 ## Merge log
 

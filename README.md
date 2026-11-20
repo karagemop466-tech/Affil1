@@ -16,7 +16,7 @@ hiding it.
 |---|---|
 | `index.html` | Publication front page: the edit, two categories, three decision paths, a seasonal feature, the journal |
 | `products/` | The shop: five picks in two categories, plus one note per product |
-| `guides/` | Eight question-shaped buying guides, clustered by the decision they answer |
+| `guides/` | Nine question-shaped buying guides, clustered by the decision they answer |
 | `compare/` | Every product side by side, with blank columns left blank |
 | `questions/` | 22 questions a real decision depends on: what is known, what is missing, what would close it |
 | `suggestions/` | Three paths and 18 proposals, 8 already implemented, with a decision control per row |

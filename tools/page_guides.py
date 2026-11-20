@@ -33,7 +33,7 @@ def build_index(page_dir):
     body = f"""{pagehead(
         'The journal',
         'Buying guides that<br>start with your question',
-        'Eight guides, each built around one decision a shopper actually faces: which shape, how big, how much washing, and whether the extra feature is worth the counter space.',
+        f'{len(GUIDES)} guides, each built around one decision a shopper actually faces: which shape, how big, how much washing, and whether the extra feature is worth the counter space.',
         meta='Updated 20 November 2026 &middot; no sponsored rankings, no invented test results',
     )}
 {section(f'''
@@ -51,7 +51,7 @@ def build_index(page_dir):
     return page(
         d,
         title="Guides \u2014 air fryers, capacity and thermometers | Crisp & Counter",
-        description="Eight question-shaped buying guides: basket or oven, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers and hosting.",
+        description=f"{len(GUIDES)} question-shaped buying guides: basket or oven, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers and seasonal hosting.",
         body=body,
         active="guides/index.html",
         canonical="guides/",
