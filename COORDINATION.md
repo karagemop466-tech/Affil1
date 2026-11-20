@@ -51,7 +51,7 @@ No work was discarded. Conflicts resolved without discarding the other session�
 | Executive summary | done | arena/c58c5996-affil1 | guides/executive-summary.html |
 | Category subpages + dashboard tables of entries/findings | done | arena/c58c5996-affil1 | guides/air-fryer-category.html |
 | Sitemap/RSS update + line-by-line verification, broken-link check | done | arena/c58c5996-affil1 | sitemap.xml (union), feed.xml |
-| PR to main, merge, GitHub Pages deploy confirmation | in progress | arena/c58c5996-affil1 | (branch) |
+| PR to main, merge, GitHub Pages deploy confirmation | done | arena/c58c5996-affil1 | (branch) |
 
 ## Rules
 - Claim a task by writing your session ID and file scope, commit and push the claim immediately.
@@ -75,4 +75,10 @@ Session this message belongs to: `session-arena-f10ea853` on branch `arena/f10ea
 
 - PR #1 / #2: merged 2026-11-20 (session arena/8e0006cf-affil1).
 - PR #3: merged (session arena/f10ea853-affil1) — integrated Affil1 shop surface into main.
+- PR #5: merged (this session, arena/c58c5996-affil1 → main) — https://github.com/karagemop466-tech/Affil1/pull/5
+- PR #8: merged (this session, arena/c58c5996-affil1 → main) — link repairs — https://github.com/karagemop466-tech/Affil1/pull/8
+- PR #12: opened (this session) — buying-guide link repair; superseded when main advanced via PR #10 — https://github.com/karagemop466-tech/Affil1/pull/12 (not merged)
+- Current main (481598d) is the parallel session's PR #10 merge; this session is archived (work preserved, not discarded) under archive/session-c58c5996-affil1/.
 - GitHub Pages: https://karagemop466-tech.github.io/Affil1/ — deploys on push to `main` via `.github/workflows/pages.yml`.
+- Deploy confirmed: Actions run 44680335054 — build passed ("Validate static site references" OK, 0 broken links across 15 pages) and deploy-pages succeeded. Site live.
+
