@@ -170,3 +170,22 @@ Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official
 - Ported our P-04 re-verification (B0DHZTCNR5) into PR #22's `src/data/products.json` schema (ref/observed_asin), updated FLG-001/FLG-002 counts and `tools/content.py` copy (four→five), rebuilt: `tools/check.py` 22 pages, 0 errors.
 - Kept our additive work: 3 new guides (`guides/meal-prep-sunday.html`, `small-kitchen-counter.html`, `thermometer-pairing.html` — not in GENERATED set, survive rebuild), `guides.html` path fixes, dashboard/categories/products/questions/suggestions/flagged unification, `data/*` audit appends, `crisp/` P-04 sync.
 - Follow-up (not done by deletion): wiring the 3 new guides into the generated sitemap/feed requires extending PR #22's `tools/content.py` GUIDES; logged here for the integration session.
+
+## Session `arena/b6e07e37-affil1` — 5/5 reconciliation, category subpages, USDA-sourced guides & final verification (2026-11-20)
+
+Owner: `arena/b6e07e37-affil1` on branch `arena/b6e07e37-affil1` (rebased onto `main` at `0691fa7`).
+
+Claimed scope (non-overlapping with prior done work; preserves all parallel-edition files untouched):
+- `src/data/products.json`, `src/data/flags.json`, `src/data/questions.json`, `src/data/suggestions.json`, `src/data/sources.json`, `src/data/images.json`, `src/data/events.json`
+- `tools/build.py`, `tools/content.py`, `tools/layout.py`, `tools/page_home.py`, `tools/page_products.py`, `tools/page_compare.py`, `tools/page_guides.py`, `tools/page_questions.py`, `tools/page_review.py`, `tools/page_suggestions.py`, `tools/page_desk.py`, `tools/check.py`
+- `assets/css/site.css`, `assets/img/instant-thermometer*.jpg`
+- Generated outputs in `GENERATED` (`index.html`, `404.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `sitemap.xml`, `feed.xml`, `robots.txt`)
+- `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md`
+
+| Task | Status | Owner | Notes |
+|---|---|---|---|
+| INT-01 Re-verify all 5 Amazon links & official sources (Amazon Policies, FTC, eCFR, Google, USDA FSIS) | in progress | arena/b6e07e37-affil1 | All 5 links verified (3 Air Fryers + 2 Meat Thermometers); USDA FSIS now reachable and verified |
+| INT-02 Reconcile Crisp & Counter templates & data with 5/5 two-category reality + render product-intent confirmation table | in progress | arena/b6e07e37-affil1 | Fixes stale 4/5 copy, adds `products/air-fryers.html` & `products/thermometers.html`, renders `FIELDS` table on product pages |
+| INT-03 Add 3 new question-shaped guides (incl. USDA-verified thermometer/temp guide) wired into `tools/content.py`, `sitemap.xml`, `feed.xml` | in progress | arena/b6e07e37-affil1 | Uses fresh slugs; leaves S-8206a8d0 standalone guides untouched |
+| INT-04 Generate P-04 instant-read illustration, update `EXECUTIVE_SUMMARY.md`, run `build.py` + `check.py` + live preview QA, PR + merge + verify Pages | in progress | arena/b6e07e37-affil1 | Reproducibility & 0-error check required before merge |
+
