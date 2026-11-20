@@ -32,7 +32,39 @@
   ],
   "identity_caveat": "On 2026-11-20 this session observed P-04 → B0DHZTCNR5 and P-05 → B0DZFD6R9Z. A parallel session first recorded the opposite mapping, then later agreed with this one. The disagreement is published (FLG-016); neither mapping is presented as proof of intent.",
   "intent_rule": "intent_* fields record what the owner means to ship, confirmed inside the enrolled Associates account: intended_asin, intended_listing_url, intended_confirmed_on, intent_source. They stay null until that confirmation happens and are never filled from the observed redirect — observed_asin and observed_url record what the link actually opened, and the two sets are never merged. Tagged buy links are emitted only for account-approved URLs (tools/paid_link_gate.py).",
-  "recheck_2026_11_20_0640": "All five supplied link.amazon URLs were requested once each at 06:40 UTC and all five arrived at https://www.amazon.com/. The five destinations were then requested directly and all five titles matched the register. Every arrival carried Amazon's own plpRedirect=mhFallback marker, which is why no mapping is presented as confirmed intent. This agrees with FLG-028."
+  "recheck_2026_11_20_0640": "All five supplied link.amazon URLs were requested once each at 06:40 UTC and all five arrived at https://www.amazon.com/. The five destinations were then requested directly and all five titles matched the register. Every arrival carried Amazon's own plpRedirect=mhFallback marker, which is why no mapping is presented as confirmed intent. This agrees with FLG-028.",
+  "observation_trail": {
+   "purpose": "A dated record of what happened when each link was opened. It exists because the submitted short links have returned different things on different passes; a reader deserves to see that rather than a single averaged claim.",
+   "rule": "Each entry is one request, at one time, by one session. No entry is merged into another and no entry is averaged. An entry is an observation, not a guarantee, and not an Affiliate Special Link.",
+   "entries": [
+    {
+     "pass": "arena/359baa16-affil1",
+     "at_utc": "2026-11-20T05:17Z",
+     "short_links": "4 of 5 reached a /dp/ listing; P-04 reached the bot interstitial",
+     "detail": "_src/data/reverification.json"
+    },
+    {
+     "pass": "arena/23b5a192-affil1",
+     "at_utc": "2026-11-20 (no time recorded)",
+     "short_links": "P-01 reached the Amazon homepage on that attempt",
+     "detail": "FLG-026"
+    },
+    {
+     "pass": "arena/bcd93318-affil1",
+     "at_utc": "2026-11-20",
+     "short_links": "0 of 5 reached a listing; all five returned https://www.amazon.com/",
+     "detail": "FLG-028; _docs/VERIFICATION-arena-bcd93318.md"
+    },
+    {
+     "pass": "arena/05771edb-affil1",
+     "at_utc": "2026-11-20, session time not recorded to the minute",
+     "short_links": "0 of 5 reached a listing; all five returned https://www.amazon.com/",
+     "long_links": "5 of 5 direct /dp/ URLs returned the expected product page, and each page title matched listing_title verbatim",
+     "detail": "FLG-028 corroborated_by; this run"
+    }
+   ],
+   "verdict": "The direct /dp/ URL is the stable destination and is what every buy button uses. The short links are not used as destinations anywhere on the site."
+  }
  },
  "products": [
   {

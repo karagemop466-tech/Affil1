@@ -9,7 +9,8 @@
    "S-23",
    "S-24",
    "S-25"
-  ]
+  ],
+  "what_changed_in_this_pass": "Three rows added (S-26 to S-28) for a reviewer to accept, hold or reject. They were numbered S-22 to S-24 on the branch, then renumbered on merge because a concurrent session had already taken S-22 to S-25. No existing row was reworded and no decision recorded by a reviewer was overwritten."
  },
  "paths": [
   {
@@ -319,6 +320,39 @@
    "depends_on": "none",
    "recommendation": "Done: linked from the Guides index as well as the fit finder",
    "decision": "accept"
+  },
+  {
+   "id": "S-26",
+   "status": "open",
+   "title": "Never publish a supplied short link as a buy destination — link the /dp/ listing instead",
+   "why": "On a later pass on 2026-11-20 every one of the five supplied link.amazon URLs returned the Amazon homepage rather than a product, while all five direct /dp/ URLs returned the right listing with the recorded title. Independently observed by two sessions and recorded as FLG-028. A short link that sometimes lands on the homepage cannot be the button a reader clicks, and it cannot be used to prove which product was meant. The site already works this way; this row records it as a standing rule rather than an accident of the current build.",
+   "effort": "zero — enforce what the build already does",
+   "risk": "None. The cost is that the supplied links stay in the record as evidence rather than as revenue paths, which is what FLG-028 and FLG-003 already say they are.",
+   "depends_on": "nothing",
+   "recommendation": "Adopt as policy. _tools/check.py already fails any buy destination that is not an approved Special Link or a plain /dp/ listing.",
+   "evidence": "FLG-028; _src/data/products.json observation_trail"
+  },
+  {
+   "id": "S-27",
+   "status": "open",
+   "title": "Make the edition's robots.txt agree with its own noindex tag",
+   "why": "Every edition/ page now carries noindex, follow, but edition/robots.txt still says 'Allow: /' and still advertises the edition's own sitemap. The meta tag and the robots file contradict each other at the same URL, and the sitemap invites exactly the crawl the meta tag declines. A crawler is entitled to treat the more permissive instruction as authoritative.",
+   "effort": "one line in the edition generator",
+   "risk": "None for readers: the edition stays fully reachable for review; only the instruction to index it is withdrawn.",
+   "depends_on": "nothing",
+   "recommendation": "Done in this pass (Disallow: /), and enforced — _tools/check.py now fails the build if any published directory below the root permits a crawl or serves a page without noindex.",
+   "evidence": "edition/robots.txt; _tools/check.py check_one_indexable_site"
+  },
+  {
+   "id": "S-28",
+   "status": "open",
+   "title": "Decide what edition/ is for: keep it as a labelled archive, or retire it to _archive/",
+   "why": "edition/ is a complete second publication of 27 pages sitting at a public URL. It no longer asks to be indexed and the build fails if it ever does again, but it is still a second set of product pages describing the same five products with different wording. Two descriptions of one product is a maintenance cost and a source of drift.",
+   "effort": "an afternoon, once the owner decides",
+   "risk": "Retiring it loses the reviewable comparison unless it moves to _archive/ with the rest of the superseded work. Keeping it means someone has to keep both registers honest.",
+   "depends_on": "Q-01, Q-06",
+   "recommendation": "Keep for now — it is the only place the per-page verification dossiers live — but name it as an archive on the page itself",
+   "evidence": "edition/; FLG-008; _tools/check.py check_one_indexable_site"
   }
  ]
 }
