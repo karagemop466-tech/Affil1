@@ -1,12 +1,11 @@
 {
   "meta": {
     "purpose": "Five events, defined before any code ships, so that 'which page works' becomes a question with an answer.",
-    "status": "Self-hosted counter implemented. Static GitHub Pages does not receive events.",
+    "status": "Implemented, disabled on static GitHub Pages.",
     "principles": [
-      "first-party only: the collector must live on the site's own host, not a third party",
-      "No cookie, fingerprint or session identifier; visits are not eligible sessions.",
-      "aggregate only: no per-visitor record is stored, so the data cannot be joined to a person",
-      "no Amazon data: nothing about what happens after the click is knowable from this site, and nothing is implied"
+      "Same-origin only",
+      "No cookies, browser storage or visitor identifiers",
+      "Allowlisted daily aggregate counts only"
     ],
     "explicitly_out_of_scope": "Reported orders, revenue and conversion rate. Those can only come from the Associates dashboard or the API, which this session cannot read. The campaign ledger starts empty and stays empty until authorised first-party reports exist."
   },
@@ -14,11 +13,11 @@
     {
       "id": "E1",
       "name": "page_view",
-      "fires_when": "A guide, category or register page is rendered",
+      "fires_when": "A maintained page loads",
       "props": [
         "page"
       ],
-      "answers": "Which pages are reached at all, and from where",
+      "answers": "Which pages load",
       "not_collected": [
         "IP",
         "user agent string",
@@ -29,25 +28,24 @@
     {
       "id": "E2",
       "name": "outbound_product_click",
-      "fires_when": "A reader activates an outbound link to a product listing",
+      "fires_when": "An approved, labelled paid product link is activated",
       "props": [
         "page",
-        "asin"
+        "product"
       ],
-      "answers": "Which products and which positions earn the click",
+      "answers": "Which approved product links receive clicks; not attribution or an order.",
       "not_collected": [
         "anything after the click; the destination is Amazon's, not ours"
-      ],
-      "note": "The click is counted locally before navigation. It does not prove a purchase, a session, or a commission."
+      ]
     },
     {
       "id": "E3",
       "name": "guide_read_75",
-      "fires_when": "A reader reaches 75% of a guide's height",
+      "fires_when": "The viewport reaches 75% of the main guide section",
       "props": [
         "page"
       ],
-      "answers": "Whether the guide is actually read or merely opened",
+      "answers": "Which guides reach the depth threshold (not proof of reading)",
       "not_collected": [
         "time per paragraph, scroll path, mouse movement"
       ]
@@ -55,11 +53,11 @@
     {
       "id": "E4",
       "name": "compare_view",
-      "fires_when": "The comparison page or a comparison table is rendered",
+      "fires_when": "The comparison opens",
       "props": [
         "page"
       ],
-      "answers": "Whether readers want side-by-side data more than prose",
+      "answers": "How often comparison opens",
       "not_collected": [
         "individually identifying data of any kind"
       ]
@@ -67,11 +65,11 @@
     {
       "id": "E5",
       "name": "flag_page_view",
-      "fires_when": "The Flagged for Review page is opened",
+      "fires_when": "Flagged for Review opens",
       "props": [
         "page"
       ],
-      "answers": "Whether the review page is actually consulted, which tells us if the verification work is visible",
+      "answers": "How often review opens",
       "not_collected": [
         "identity of the reviewer"
       ]
@@ -79,10 +77,10 @@
   ],
   "collector_design": {
     "endpoint": "/api/e (POST, same origin)",
-    "payload": "Event name, allowlisted publication page, and optional observed ASIN. Daily aggregate counts only.",
-    "retention": "aggregate counts per day per event per prop value; raw events discarded on write",
+    "payload": "Array of event, page and product records; product is null except for a click",
+    "retention": "UTC daily aggregates only; approve and enforce a retention period before enabling",
     "opt_out": "Do Not Track and Global Privacy Control headers must be honoured by skipping the send",
-    "why_not_deployed": "Deploying it requires a host that can run a process. GitHub Pages serves static files only, so there is nowhere for the collector to run. A third-party analytics provider would meet the measurement goal but would break the first-party principle and add a disclosure obligation that is not worth it before there is traffic to measure."
+    "why_not_deployed": "GitHub Pages cannot run a process; a first-party HTTPS host and approved privacy controls are required."
   },
   "campaign_ledger": {
     "status": "empty by design",

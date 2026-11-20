@@ -6,234 +6,453 @@ the ones transcribed in src/data/products.json from a listing title the site
 actually reached. No price, no rating, no review count, no test result, no
 superlative, no winner. If a sentence needs a fact that is not in that file, the
 sentence does not ship.
-"""
 
-from buyer_guides import BUYER_GUIDES
+Voice rule: write to the person deciding, in the second person, and keep the
+machinery of verification out of the reading path. A guide is a guide. The
+provenance lives one click away, on the page for the product it describes.
+"""
 
 GUIDES = [
     {
         "slug": "basket-or-oven-air-fryer",
+        "cluster": "Choosing",
         "kicker": "Choosing a shape",
         "title": "Basket or oven-style air fryer: what should you compare?",
-        "dek": "Two appliances share a name and almost nothing else. Here is the list of differences that actually change how a weeknight goes \u2014 and the ones that only look like they do.",
+        "dek": "Two appliances share a name and almost nothing else. These are the differences that change how a weeknight goes, and the ones that only look like they do.",
         "read_minutes": 7,
-        "photo": "assets/img/format-basket",
-        "photo_alt": "Golden potato wedges being lifted out of the drawer of an unbranded basket-style air fryer",
-        "photo_caption": "Illustration of a basket-style drawer, not a photograph of a product on this site.",
+        "photo": "assets/img/format-oven",
+        "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
+        "photo_caption": "Illustration of an oven-style cavity, not a photograph of a product on this site.",
         "updated": "2026-11-20",
+        "related": ["P-01", "P-03", "P-02"],
         "sections": [
             {
-                "h": "The difference is the shape of the space, not the badge",
+                "h": "The difference is the shape of the space",
                 "p": [
-                    "A basket fryer gives you one deep container. Food goes in, the drawer closes, a fan moves hot air over it. An oven-style fryer gives you a shallow cavity with racks, and often a door on the front or two doors that open outward.",
-                    "That is the whole of it. Everything a shopper cares about afterwards \u2014 how much fits, how often you have to intervene, where it lives on the counter, what needs washing \u2014 follows from those two shapes rather than from the brand or the badge on the front."
-                ]
+                    "A basket fryer is one deep container. Food goes in, the drawer closes, a fan moves hot air over it. An oven-style fryer is a shallow cavity with racks, and a door on the front or two doors that open outward.",
+                    "Everything else follows from that. How much fits, how often you intervene, where it lives on the counter, what needs washing \u2014 all of it is downstream of the shape. The brand on the front is not.",
+                ],
             },
             {
-                "h": "What actually changes between them",
+                "h": "What actually changes",
                 "items": [
-                    ("Batch shape", "A basket holds one pile. An oven holds layers. If you cook for four, the difference is whether one round of food is enough or whether you are running the machine twice."),
-                    ("Intervention", "Basket cooking usually means pulling the drawer and shaking. Rack cooking usually means turning pieces and sometimes swapping shelf positions. Neither is better; one of them is more tolerable to you."),
-                    ("Front clearance", "A door that opens outward needs space in front of the machine, and that space is usually the part of the counter you stand in."),
-                    ("Vertical clearance", "A basket needs room above it to lift the drawer out. An oven needs room above the door swing if the door lifts rather than folds."),
-                    ("What you can put in it", "A shallow oven cavity accepts a pan, a small mould or a plate. A deep basket mostly accepts loose food. If you intend to bake or reheat plated food, this is the deciding difference."),
-                    ("Washing", "Baskets are usually one or two pieces. Ovens often ship with a rack, a tray, and sometimes a basket accessory, and each of those is a separate thing to wash and to store.")
-                ]
+                    ("Batch shape", "A basket holds one pile. An oven holds layers. Cooking for four is either one round or two, and this is where you find out which."),
+                    ("Intervention", "Baskets mean pulling a drawer and shaking. Racks mean turning pieces and sometimes swapping shelf positions. Neither is better; one of them will annoy you more."),
+                    ("Front clearance", "A door that opens outward eats the space in front of the machine \u2014 usually the space you stand in."),
+                    ("Vertical clearance", "A drawer needs room above to lift out. A drop-down door needs room below to swing. Check both before you fall in love with a photograph."),
+                    ("What fits inside", "A shallow cavity takes a tray, a pan, a small mould, a plate. A deep drawer mostly takes loose food. If you want to bake or reheat plated food, this decides it."),
+                    ("Washing", "Baskets are one or two pieces. Ovens arrive with a rack, a tray, sometimes an accessory basket, and each one is a separate thing to wash and store."),
+                ],
             },
             {
-                "h": "The three measurements to take before you choose",
+                "h": "Three measurements, four minutes",
                 "p": [
-                    "Do this with a tape, not with a feeling. It takes four minutes and it rules out most of the wrong answers.",
-                    "Width and depth of the spot on the counter, including the space the door or drawer needs while open. Height from counter to the underside of the cabinet above, which is the measurement people forget and then regret. And the distance to the nearest socket, because a short cord quietly decides the layout for you.",
-                    "If a number you need is not published on the official listing or in the manual, write 'unknown' next to it and move on. A blank is more useful than a guess, and it is a reminder to check before you buy."
-                ]
+                    "Do this with a tape rather than a feeling. Width and depth of the counter space, including whatever the door or drawer needs while open. Height from the counter to the underside of the cabinet above. And the distance to the nearest socket, because a short cord quietly decides the layout for you.",
+                    "If a number is not published on the official listing or in the manual, write \u201cunknown\u201d next to it and move on. A blank sends you back to check; a guess sends you to the returns desk.",
+                ],
             },
             {
-                "h": "Where the seller's own wording is the only thing we have",
+                "h": "The two shapes in this edit",
                 "p": [
-                    "Two products in this site's register illustrate the split honestly, using nothing but the words on their listings.",
-                    "P-01 is described by its seller as a 6-quart dual-basket fryer with two independent 3-quart baskets and a sync-finish function. P-02 is described as a 26-quart French-door unit with 24 one-touch presets. Read those two descriptions side by side and you can see the shape of the trade: one is two small deep containers, the other is one large shallow cavity.",
-                    "What this site cannot tell you is whether either is any good. Neither was tested, and no star rating or price appears here because the data has a permitted source and this build does not have access to it."
-                ]
+                    "P-01 is a 6-quart machine with two independent 3-quart drawers and a sync-finish setting, in the seller's wording. P-03 is a single 8-quart basket. P-02 is a 26-quart French-door oven with 24 presets and six accessories, again per the seller.",
+                    "Read those three descriptions side by side and the trade is visible: two small deep containers, one large deep container, or one big shallow cavity. That is the whole decision. Whether any of them cooks well is a different question, and this site does not answer it.",
+                ],
             },
             {
                 "h": "A short way to decide",
                 "p": [
                     "Write down the meal you cook most often and how many people eat it. Then answer one question: does that meal fit in one deep container, or does it need to lie flat on a shelf?",
-                    "If it fits in a container, a basket fryer will probably feel simpler \u2014 fewer parts, fewer decisions, less door space needed. If it needs to lie flat, or if you want to put a pan in it, an oven shape is doing something a basket cannot do.",
-                    "Then check the two numbers you measured against the two products you are considering, and stop. The rest of the specification sheet is not going to change the answer."
-                ]
-            }
+                    "If it fits in a container, a basket will feel simpler: fewer parts, fewer decisions, less door space. If it needs to lie flat, or you want to put a pan in it, an oven shape is doing something a basket cannot.",
+                    "Then check your two measurements against the two machines you are considering, and stop. The rest of the specification sheet will not change the answer.",
+                ],
+            },
         ],
-        "closing": "No product on this site was tested, ranked or scored. The descriptions of P-01 and P-02 above are the sellers' own wording, transcribed from the listing titles reached on 2026-11-20."
+        "closing": "No product on this site was tested, ranked or scored. Descriptions of P-01, P-02 and P-03 are the sellers' own wording, transcribed from the listings reached on 2026-11-20.",
+    },
+    {
+        "slug": "dual-zone-two-baskets",
+        "cluster": "Choosing",
+        "kicker": "Dual zone",
+        "title": "Two baskets or one: is dual-zone worth the counter space?",
+        "dek": "A second drawer is the most seductive feature in the category. It is also the one most often bought for a dinner you cook twice a month.",
+        "read_minutes": 5,
+        "photo": "assets/img/format-basket",
+        "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
+        "photo_caption": "Illustration. Not a photograph of any product sold here.",
+        "updated": "2026-11-20",
+        "related": ["P-01", "P-03"],
+        "sections": [
+            {
+                "h": "What the second basket actually buys you",
+                "p": [
+                    "Two independent drawers let you run two temperatures and two timers at once. That is a real advantage in exactly one situation: two foods, different cooking times, needed on the same plate.",
+                    "The rest of the time it is two containers where one would do. Both get dirty, both get washed, and the machine is wider than the single-basket version of the same thing.",
+                ],
+            },
+            {
+                "h": "The split-capacity trap",
+                "p": [
+                    "A dual-basket machine quoted at 6 quarts might be two 3-quart drawers. A single-basket machine quoted at 8 quarts is one 8-quart basket. Comparing the headline numbers says the first is smaller; comparing what you can actually put in one place says it is a lot smaller.",
+                    "So compare like with like. Drawer against drawer, or total against total, but never one against the other.",
+                ],
+            },
+            {
+                "h": "Questions that settle it quickly",
+                "items": [
+                    ("Do you cook two different foods at the same time more than once a week?", "If yes, dual-zone earns its footprint. If it is a weekend thing, a single basket and a tray in the oven does the same job."),
+                    ("Would the second drawer replace something else on the counter?", "Two drawers can replace a second appliance. That is a genuine win in a small kitchen."),
+                    ("Do you have the width?", "Dual-basket bodies are wider. Measure the gap, then add the clearance the drawers need to pull out."),
+                    ("Would you rather have 8 quarts in one place or 6 in two?", "One big basket for a family portion; two small ones for a two-part dinner."),
+                ],
+            },
+            {
+                "h": "Where sync finish fits",
+                "p": [
+                    "P-01's listing describes a sync-finish function, which is the seller's term for coordinating the two drawers so they finish together. If you are buying two baskets, this is the feature that makes them a system rather than two machines in one box.",
+                    "It is worth checking that the drawers genuinely run independently, because a machine with two compartments and one shared control is a different, cheaper design.",
+                ],
+            },
+            {
+                "h": "The honest summary",
+                "p": [
+                    "Buy the second drawer if your dinners genuinely come in two parts. Buy the single basket if they do not, and spend the saved counter space on something you will use every day.",
+                ],
+            },
+        ],
+        "closing": "P-01's dual-basket and sync-finish descriptions are the seller's wording from the listing reached on 2026-11-20. Nothing here was tested.",
     },
     {
         "slug": "air-fryer-capacity-checklist",
+        "cluster": "Sizing",
         "kicker": "Sizing",
         "title": "A no-hype checklist for comparing air-fryer capacity",
-        "dek": "The quart figure on the box answers a question you did not ask. This is the version of the question you did ask.",
+        "dek": "The quart figure on the box answers a question you did not ask. This is the version you did ask.",
         "read_minutes": 6,
         "photo": "assets/img/capacity",
         "photo_alt": "Food laid out in a single layer on a counter next to a tape measure",
         "photo_caption": "Illustration. The food and the tape are props, not a measurement of any product.",
         "updated": "2026-11-20",
+        "related": ["P-03", "P-01", "P-02"],
         "sections": [
             {
-                "h": "A quart is a volume. You cook with a surface.",
+                "h": "A quart is a volume. You cook on a surface.",
                 "p": [
-                    "Capacity is quoted as a volume because a volume is one number and numbers fit on boxes. But hot air needs to reach the food, and food that is piled up does not get air on the parts that are touching.",
-                    "So the useful question is not 'how many quarts' but 'how much food can sit in a layer that still lets air around it'. Those two questions have different answers, and the second one is not printed anywhere."
-                ]
+                    "Capacity is quoted as a volume because a volume is one number and numbers fit on boxes. But hot air has to reach the food, and food that is piled up does not get air on the parts that are touching.",
+                    "So the useful question is not how many quarts, but how much food can sit in a layer that still lets air around it. Those two questions have different answers, and the second one is not printed anywhere.",
+                ],
             },
             {
-                "h": "What to do instead, in order",
+                "h": "Do this instead, in order",
                 "items": [
-                    ("1. Pick the actual meal", "Not 'food' in general. The specific thing you will cook on a Tuesday: six chicken thighs, a bag of frozen chips, two salmon fillets."),
-                    ("2. Count the pieces", "Write the number down. This converts a vague intention into something you can compare against a drawing."),
-                    ("3. Look for the usable area", "Some manuals show the basket or rack dimensions, or a diagram with food laid out. That drawing is worth more than the quart figure."),
-                    ("4. Check whether it needs a single layer", "Most air-frying guidance assumes space around each piece. If your meal needs a single layer, the layer is your real capacity."),
-                    ("5. Multiply by batches", "If your meal does not fit in one layer, the honest capacity is 'two batches', and you should decide now whether you mind waiting."),
-                    ("6. Take the measurements off the listing", "External width, depth and height, so you know it fits the gap. If they are not published, that is a reason to look at a different listing, not a reason to guess.")
-                ]
+                    ("Pick the actual meal", "Not food in general. The specific thing you cook on a Tuesday: six chicken thighs, a bag of frozen chips, two salmon fillets."),
+                    ("Count the pieces", "Write the number down. It converts a vague intention into something you can compare against a drawing."),
+                    ("Look for the usable area", "Some manuals show basket or rack dimensions, or a diagram with food laid out. That drawing is worth more than the quart figure."),
+                    ("Check whether it needs a single layer", "Most air-frying guidance assumes space around each piece. If your meal needs a single layer, the layer is your real capacity."),
+                    ("Multiply by batches", "If it does not fit in one layer, the honest capacity is two batches. Decide now whether you mind waiting."),
+                    ("Take the external measurements", "Width, depth and height, so you know it fits the gap. If they are not published, look at a different listing rather than guessing."),
+                ],
             },
             {
                 "h": "The trap in the number",
                 "p": [
-                    "A larger quoted capacity usually means a physically larger machine, which needs more counter and, in the oven shape, more door clearance. Compare actual usable dimensions and footprint rather than assuming a fixed relationship.",
-                    "The other trap is the opposite one: buying small to save counter space and then discovering that the meal you cook most often needs two batches. Two batches is not a disaster, but it is a daily tax, and it is worth noticing before you pay it rather than after."
-                ]
+                    "A larger quoted capacity usually means a physically larger machine, which needs more counter and, in the oven shape, more door clearance. There is no configuration where more cooking space comes for the same footprint.",
+                    "The opposite trap is buying small to save counter, then discovering that the meal you cook most often needs two batches. Two batches is not a disaster, but it is a daily tax. Better to notice it before you pay it.",
+                ],
             },
             {
-                "h": "What the sellers in this register actually state",
+                "h": "What the listings in this edit state",
                 "p": [
-                    "All five submitted links resolved to listings on re-verification 2026-11-20 (the fifth previously returned only the continue-shopping interstitial). Three are air fryers; two are probe thermometers, which have no capacity to compare. The three titles state 6 quarts across two 3-quart baskets (P-01), 8 quarts in a single basket (P-03), and 26 quarts in a French-door oven (P-02).",
-                    "Those are the sellers' figures, repeated as figures. They have not been measured. A quart quoted for a two-basket machine is also counting two separate containers, which is exactly the kind of detail a single capacity number hides \u2014 so if you are comparing P-01 against P-03, compare the 3-quart basket against the 8-quart basket, not the 6 against the 8."
-                ]
+                    "P-03 states 8 quarts in a single basket. P-01 states 6 quarts across two 3-quart baskets. P-02 states a 26-quart French-door cavity. Those are sellers' figures, repeated as figures, and none of them was measured.",
+                    "The comparison worth making is P-01's 3-quart drawer against P-03's 8-quart basket, not 6 against 8. One number describes a container you can fill; the other describes two you cannot fill at once.",
+                ],
             },
             {
-                "h": "When the number is genuinely enough",
+                "h": "The one-sentence version",
                 "p": [
-                    "If you cook for one or two, mostly loose food, mostly from frozen, and you do not mind a second batch occasionally, then almost any capacity will work and this checklist is more caution than you need.",
-                    "The checklist earns its keep when three things are true at once: you cook for more than two, the food needs to lie flat, and counter space is tight. That combination is where the quart figure misleads the most."
-                ]
-            }
+                    "Buy the smallest machine that fits your most common meal in one layer, and check the external dimensions before you buy it, not after.",
+                ],
+            },
         ],
-        "closing": "Capacity figures quoted above are transcribed from listing titles reached on 2026-11-20. No product was measured or tested."
+        "closing": "Stated capacities are the sellers' own figures from the listings reached on 2026-11-20. No capacity was measured and no product was tested.",
     },
     {
         "slug": "cleanup-and-counter-space",
-        "kicker": "Everyday cost",
+        "cluster": "Living with it",
+        "kicker": "Living with it",
         "title": "How to assess cleanup and counter-space trade-offs",
-        "dek": "The appliance that gets used is the one that is easy to put away and easy to wash. Both of those are checkable before you buy.",
-        "read_minutes": 5,
+        "dek": "The parts you wash and the space it occupies decide whether you keep using it. Both are checkable in about five minutes.",
+        "read_minutes": 6,
         "photo": "assets/img/cleanup",
-        "photo_alt": "An unbranded air-fryer basket and tray in a sink with a brush and a cloth",
-        "photo_caption": "Illustration of the washing-up step, not a photograph of any product here.",
+        "photo_alt": "A basket and crisper plate drying beside a sink on a kitchen counter",
+        "photo_caption": "Illustration. Not a photograph of any product sold here.",
         "updated": "2026-11-20",
+        "related": ["P-01", "P-02"],
         "sections": [
             {
-                "h": "Count the parts before you count the features",
+                "h": "Count the parts before the features",
                 "p": [
-                    "An air fryer's real cost is paid every time you use it, in washing and in putting it away. That cost is set by how many separate pieces come out and how big they are.",
-                    "A single basket is usually a basket and a crisper plate. A dual-basket machine doubles that. An oven typically adds a rack, a tray, and sometimes a rotisserie or a basket accessory. None of those are bad \u2014 but you wash them, and you store them, and one of them is always slightly too big for the sink."
-                ]
+                    "An air fryer's real cost is paid every time you use it, in washing and putting away. That cost is set by how many separate pieces come out and how big they are.",
+                    "A single basket is usually a basket and a crisper plate. A dual-basket machine doubles that. An oven typically adds a rack, a tray and sometimes a basket accessory. None of that is bad \u2014 but you wash it, you store it, and one piece is always slightly too big for the sink.",
+                ],
             },
             {
-                "h": "The four questions that predict whether you will keep using it",
+                "h": "Four questions that predict whether you keep using it",
                 "items": [
-                    ("Does it fit in your sink?", "Take the internal width and depth of the appliance's largest removable part and compare it with your sink. A tray that does not lie flat gets washed at an angle and gets washed badly."),
-                    ("Where does it live when it is not in use?", "If the answer is 'on the counter', it needs to earn that space permanently. If the answer is 'in a cupboard', check the weight and whether the cupboard is above shoulder height."),
-                    ("What has to move to make room?", "The honest test is not whether it fits, but what leaves the counter to let it in. If you cannot name the thing that moves, you have not made room, you have just added."),
-                    ("How long is the cord, and where is the socket?", "A cord that does not reach means an extension lead across a work surface, which is both a nuisance and something the manufacturer's own instructions may warn against.")
-                ]
+                    ("Does the largest part fit in your sink?", "Measure the removable part, not the machine. A tray that has to be washed at an angle gets washed badly."),
+                    ("Where does it live when it is cold?", "On the counter means it must earn permanent space. In a cupboard means checking the weight and whether the shelf is above shoulder height."),
+                    ("What moves out to let it in?", "The honest test is not whether it fits, but what leaves the counter. If you cannot name the thing, you have not made room, you have added."),
+                    ("How long is the cord, and where is the socket?", "A cord that does not reach means an extension lead across a work surface, which the manufacturer's own instructions may warn against."),
+                ],
             },
             {
                 "h": "Dishwasher-safe is a claim, not a fact you own",
                 "p": [
-                    "Listings often say a basket is dishwasher-safe. Whether that applies to your machine, your detergent and your cycle is a question for the manufacturer's own instructions for the exact model \u2014 and it is worth checking, because a non-stick coating that is ruined by a hot cycle is an expensive way to learn this.",
-                    "Where this site cannot confirm a care instruction from an official manual, it says nothing rather than saying something plausible."
-                ]
+                    "Listings often say a basket is dishwasher-safe. Whether that applies to your machine, your detergent and your cycle is a question for the manufacturer's instructions for that exact model. A coating ruined by a hot cycle is an expensive way to learn this.",
+                    "Where a care instruction could not be confirmed from an official manual, this site says nothing rather than something plausible.",
+                ],
             },
             {
-                "h": "A five-minute layout test",
+                "h": "The five-minute layout test",
                 "p": [
-                    "Before ordering, cut a rectangle of paper to the appliance's published width and depth, put it where the machine would go, and then try to use the kitchen around it for a day. Open the cupboard the paper is blocking. Stand where you normally stand.",
-                    "It sounds excessive. It is also the cheapest way to discover that the thing you were about to buy makes the most-used part of your counter unusable, and it costs one sheet of paper."
-                ]
+                    "Before ordering, cut a rectangle of paper to the published width and depth, put it where the machine would go, and use the kitchen around it for a day. Open the cupboard the paper blocks. Stand where you normally stand.",
+                    "It sounds excessive. It is also the cheapest way to find out that the thing you were about to buy makes the most-used part of the counter unusable \u2014 and it costs one sheet of paper.",
+                ],
             },
             {
-                "h": "What the register can and cannot tell you here",
+                "h": "The trade in one line",
                 "p": [
-                    "Two observed listings state in their titles that the baskets are dishwasher-safe, in the sellers' wording (P-01 and P-03). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
-                    "No dimensions are published for any of these products on this site, because dimensions were not confirmed from an official specification sheet in this build. That is a gap, and it is on the review page rather than buried."
-                ]
-            }
+                    "More capacity means more surface to wash and more counter to give up. The right answer is the smallest machine whose parts you will still be willing to wash in February.",
+                ],
+            },
         ],
-        "closing": "No product on this site was tested. Seller-stated attributes are labelled as such wherever they appear."
+        "closing": "Dishwasher-safe wording on P-01, P-02 and P-03 is the sellers' own claim. No care instruction was checked against a manufacturer's manual in this build.",
+    },
+    {
+        "slug": "small-kitchen-space-audit",
+        "cluster": "Living with it",
+        "kicker": "Small kitchens",
+        "title": "Small kitchen, big appliance: a five-minute space audit",
+        "dek": "Before you compare capacities, find out what your kitchen will actually let you own. It is a shorter list than you think.",
+        "read_minutes": 5,
+        "photo": "assets/img/decision-tools",
+        "photo_alt": "A tape measure and a notepad on a kitchen counter beside a kettle",
+        "photo_caption": "Illustration. Not a photograph of any product sold here.",
+        "updated": "2026-11-20",
+        "related": ["P-03", "P-01", "P-04"],
+        "sections": [
+            {
+                "h": "Measure the gap, not the appliance",
+                "p": [
+                    "Every counter has one gap wide enough for a small appliance and one socket within reach of it. Find both, write the numbers down, and shop inside those numbers. Most of the regret in this category comes from buying to the quart figure and hoping the counter agrees.",
+                    "Include the open state: a drawer that pulls out, a door that drops down, a lid that lifts. The machine is at its largest when it is doing its job.",
+                ],
+            },
+            {
+                "h": "The audit, in five steps",
+                "items": [
+                    ("Photograph the counter as it is", "Not tidied. The photograph is the honest baseline."),
+                    ("Name what leaves", "One thing has to go for something to arrive. If nothing can go, the answer may be a smaller appliance or none."),
+                    ("Check the overhang", "Upper cabinets limit how tall the machine can be and how far a lid can lift."),
+                    ("Check the socket", "Distance and whether the plug shares a circuit with a kettle and a toaster."),
+                    ("Check the cupboard route", "If it will be stored, the path matters: weight, width, and whether you can lift it above shoulder height."),
+                ],
+            },
+            {
+                "h": "Small kitchen, which shape?",
+                "p": [
+                    "A single-basket fryer is the most compact way to air-fry and the easiest to put away. A dual-basket machine is wider but can replace a second appliance, which sometimes nets out smaller overall. A French-door oven is the largest of the three and asks for clear space in front of it.",
+                    "In a genuinely small kitchen the ranking usually comes out single basket, then dual basket if it replaces something, then oven. That is a rule of thumb about footprint, not a judgement about quality.",
+                ],
+            },
+            {
+                "h": "The thermometer exception",
+                "p": [
+                    "A thermometer takes up a drawer and no counter at all, and it is the one item here that makes everything else more predictable. If your kitchen is too small for an appliance, it is not too small for a probe.",
+                ],
+            },
+        ],
+        "closing": "Footprint comparisons are general observations about appliance shape, not measurements of the products on this site. No dimensions were confirmed for any product here.",
     },
     {
         "slug": "multi-function-kitchen-appliance-questions",
+        "cluster": "Before you buy",
         "kicker": "Before you buy",
         "title": "Questions to ask before buying a multi-function kitchen appliance",
-        "dek": "Multi-function usually means one thing done well and several things done acceptably. The trick is finding out which is which before it takes up a shelf.",
+        "dek": "Multi-function usually means one thing done well and several done acceptably. The trick is finding out which is which before it takes a shelf.",
         "read_minutes": 6,
         "photo": "assets/img/multifunction",
         "photo_alt": "An unbranded basket air fryer, countertop oven and probe thermometer on one counter",
         "photo_caption": "Illustration of three appliance shapes, none of them a product sold here.",
         "updated": "2026-11-20",
+        "related": ["P-02", "P-05"],
         "sections": [
             {
                 "h": "Start by naming the one job",
                 "p": [
-                    "Every multi-function appliance has a job it was designed around and a list of jobs it will also attempt. The list is what the marketing talks about. The job is what you will actually use it for.",
-                    "Before comparing anything, write one sentence: 'I want this to make ___ easier.' If you cannot finish that sentence without listing three equally weighted things, you are looking at a category where one good single-purpose appliance and one good pan will serve you better."
-                ]
+                    "Every multi-function appliance has a job it was designed around and a list of jobs it will also attempt. The list is what the marketing talks about; the job is what you will actually use it for.",
+                    "Before comparing anything, finish this sentence: \u201cI want this to make ___ easier.\u201d If you cannot finish it without listing three equally weighted things, one good single-purpose appliance and one good pan will serve you better.",
+                ],
             },
             {
                 "h": "Nine questions, in the order that saves time",
                 "items": [
-                    ("What is the primary job, in the seller's own words?", "The first clause of a listing title is usually the job. Everything after the first pipe or comma is the ambition."),
-                    ("How many of the functions need a separate accessory?", "If three of the advertised functions need parts that live in a cupboard, you have bought a machine and a drawer."),
-                    ("What does the manual say about each function?", "Presets are not the same as capability. A preset is a button that sets a time and a temperature; it does not tell you the result is good."),
+                    ("What is the primary job, in the seller's own words?", "The first clause of a listing title is usually the job. Everything after the first pipe is the ambition."),
+                    ("How many functions need a separate accessory?", "If three advertised functions need parts that live in a cupboard, you have bought a machine and a drawer."),
+                    ("What does the manual say about each function?", "A preset is a button that sets a time and a temperature. It is not evidence that the result is good."),
                     ("How large is it, and where does it go?", "An appliance that does four things but lives in a cupboard does one thing: take up space."),
                     ("How many pieces come out to wash?", "Count them for the function you will use daily, not the one you will use at Christmas."),
                     ("Does it need clearance above or in front?", "Doors that open out and lids that lift both consume the space you stand in."),
-                    ("What is excluded from the warranty, and for how long?", "Read the actual document, not the badge on the box. If the document is not published, that is information."),
+                    ("What is excluded from the warranty, and for how long?", "Read the document, not the badge on the box. If it is not published, that is information too."),
                     ("What happens when one part breaks?", "Accessory availability is the difference between a five-year appliance and an eighteen-month one."),
-                    ("Would two simpler things do the job better?", "The correct answer is sometimes yes, and a multi-function appliance is often the wrong purchase for someone who already owns a good oven.")
-                ]
+                    ("Would two simpler things do it better?", "Sometimes yes. This is the question the listing will never ask you."),
+                ],
             },
             {
                 "h": "The preset trap",
                 "p": [
-                    "A count of presets is the easiest number to put on a box and the least informative. Twenty-four presets can be twenty-four combinations of the same two settings on the same heating element.",
-                    "When a listing leads with a preset count, read the rest of the title for the things that constrain the experience: the size of the cavity, the number of racks, whether the door opens flat, how many accessories are included. Those are the parts you cannot change later."
-                ]
+                    "A count of presets is the easiest number to print on a box and the least informative. Twenty-four presets can be twenty-four combinations of the same two settings on the same heating element.",
+                    "When a listing leads with a preset count, read the rest of the title for the things that constrain the experience: cavity size, rack count, whether the door opens flat, how many accessories are included. Those are the parts you cannot change later.",
+                ],
             },
             {
-                "h": "Where the thermometer fits, and where it does not",
+                "h": "Where a thermometer fits, and where it does not",
                 "p": [
-                    "An earlier observation associated P-05 with a wireless meat thermometer. Another observation reached a different thermometer; the intended destination remains unconfirmed. See the review queue before relying on either identification.",
-                    "That is a useful illustration of the multi-function question rather than an exception to it. A probe does one job \u2014 it tells you the internal temperature of something \u2014 and it does that job in an oven, a pan, a smoker or an air fryer. It is a single-purpose tool that travels between appliances, which is often a better purchase than an appliance that claims to do the thermometer's job as one of nine features.",
-                    "This site has not tested it, and its accuracy is not stated here."
-                ]
+                    "P-05 is not an air fryer. It is a wireless meat thermometer whose listing states three probes and a 1000\u00b0F heat rating, and which names air fryers among its intended uses. P-04 is the instant-read version of the same idea.",
+                    "That is a useful illustration of the multi-function question rather than an exception to it. A probe does one job \u2014 it tells you the internal temperature of something \u2014 and it does that job in an oven, a pan, a smoker or an air fryer. A single-purpose tool that travels between appliances is often a better purchase than an appliance that claims to do the thermometer's job as one of nine features.",
+                ],
             },
             {
                 "h": "A decision rule that holds up",
                 "p": [
-                    "Buy for the job you do weekly. Rent, borrow or use a pan for the job you do twice a year.",
-                    "If a multi-function appliance is the only way to get the weekly job done in the space you have, it is the right purchase. If it is a way to avoid choosing, it will end up in the cupboard by March."
-                ]
-            }
+                    "Buy for the job you do weekly. Borrow, or use a pan, for the job you do twice a year.",
+                    "If a multi-function appliance is the only way to get the weekly job done in the space you have, it is the right purchase. If it is a way to avoid choosing, it will be in the cupboard by March.",
+                ],
+            },
         ],
-        "closing": "No product on this site was tested, ranked or scored. P-05's attributes above are transcribed from its listing title."
-    }
-] + BUYER_GUIDES
+        "closing": "No product on this site was tested, ranked or scored. P-04 and P-05 attributes are transcribed from their listing titles, reached on 2026-11-20.",
+    },
+    {
+        "slug": "thermometer-pairing",
+        "cluster": "Tools",
+        "kicker": "Tools",
+        "title": "Do you need a meat thermometer for an air fryer?",
+        "dek": "An air fryer is very good at browning and completely blind to the middle. A probe is how you fix the second part.",
+        "read_minutes": 6,
+        "photo": "assets/img/thermometer",
+        "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
+        "photo_caption": "Illustration. Not a photograph of any product sold here.",
+        "updated": "2026-11-20",
+        "related": ["P-04", "P-05"],
+        "sections": [
+            {
+                "h": "The problem a probe solves",
+                "p": [
+                    "Air frying is fast and dry, and the window between cooked and overdone is short \u2014 especially for chicken pieces, pork and fish. Recipes give times, but times assume a size, a starting temperature and a machine. A probe replaces all three assumptions with one reading.",
+                    "It also lets you stop opening the drawer. Every time you open it, heat leaves and the timer becomes a suggestion.",
+                ],
+            },
+            {
+                "h": "Two kinds of thermometer, two jobs",
+                "items": [
+                    ("Instant read", "You open the appliance, insert the probe, read the number, wipe it and put it away. P-04 states a one-second reading, \u00b10.5\u2109 accuracy, and an IP67 rating, in the seller's wording. Best for quick checks and thin pieces."),
+                    ("Leave-in wireless", "The probe stays in the food while it cooks and reports to a base or a phone. P-05 states three probes, wireless operation, a 1000\u00b0F heat rating and names air fryers among its uses, per the seller. Best for roasts, whole birds and long cooks."),
+                ],
+            },
+            {
+                "h": "Which one for an air fryer?",
+                "p": [
+                    "If you mostly cook pieces \u2014 thighs, wings, fish, vegetables \u2014 an instant read is enough and lives in a drawer. If you cook whole birds or large roasts, a leave-in probe earns its keep because you cannot read the centre without opening the door.",
+                    "Check the heat rating against how you cook. A probe rated well above your cooking temperature is one less thing to think about; one rated close to it is a thing to remember.",
+                ],
+            },
+            {
+                "h": "Where the numbers come from",
+                "p": [
+                    "Safe internal temperatures are published by food safety authorities, not by appliance sellers. USDA FSIS states that visual cues like color are unreliable and that using a food thermometer placed in the thickest part away from bone, fat or gristle is the only reliable way to verify safe internal temperature (SRC-09).",
+                    "The figures below are transcribed directly from the USDA FSIS Safe Minimum Internal Temperature Chart (last updated April 14, 2025; SRC-08), with an official source link on every row:",
+                ],
+                "table": {
+                    "caption": "USDA FSIS Safe Minimum Internal Temperatures (verified 2026-11-20, SRC-08)",
+                    "headers": ["Food", "Safe minimum internal temperature & rest", "Official source"],
+                    "rows": [
+                        ["Beef, pork, veal and lamb steaks, chops and roasts", "145°F (62.8°C) and rest at least 3 minutes", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Ground meats (beef, pork, veal, lamb)", "160°F (71.1°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["All poultry (whole bird, breasts, thighs, wings, ground, stuffing)", "165°F (73.9°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Eggs", "160°F (71.1°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Fish and shellfish", "145°F (62.8°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Leftovers and casseroles", "165°F (73.9°C)", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                        ["Ham, fresh or smoked (uncooked)", "145°F (62.8°C) and rest at least 3 minutes", {"url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart", "label": "USDA FSIS chart"}],
+                    ],
+                },
+            },
+            {
+                "h": "The cheap upgrade",
+                "p": [
+                    "If you are choosing between a bigger air fryer and a thermometer, the thermometer is usually the better first purchase. Capacity changes how much you can cook; temperature changes whether it is any good.",
+                ],
+            },
+        ],
+        "closing": "P-04 and P-05 specifications are the sellers' claims from listings reached on 2026-11-20. No thermometer was tested and no accuracy was independently measured.",
+    },
+    {
+        "slug": "holiday-hosting-air-fryer",
+        "cluster": "Seasonal",
+        "kicker": "Seasonal",
+        "title": "Hosting with an air fryer: what actually scales",
+        "dek": "The appliance that feeds two beautifully is not automatically the one that feeds eight. Here is where the arithmetic changes.",
+        "read_minutes": 6,
+        "photo": "assets/img/holiday-hosting-counter",
+        "photo_alt": "A crowded holiday kitchen counter with serving dishes and an air fryer in the corner of the frame",
+        "photo_caption": "Illustration. Not a photograph of any product sold here.",
+        "updated": "2026-11-20",
+        "related": ["P-02", "P-01", "P-05"],
+        "sections": [
+            {
+                "h": "Capacity does not scale the way guests do",
+                "p": [
+                    "Doubling the number of people does not double the basket. It doubles the number of batches, and each batch is a separate ten to twenty minutes when the machine is unavailable for anything else.",
+                    "That is fine if the air fryer is doing one component \u2014 the crisp thing, the roasted vegetables, the reheated leftovers. It is a problem if it is expected to be the oven.",
+                ],
+            },
+            {
+                "h": "The three jobs an air fryer does well at a gathering",
+                "items": [
+                    ("The crisp side dish", "Roast potatoes, sprouts, wedges, breaded things. Small volume, high impact, and better fresh than held."),
+                    ("The reheat", "Leftovers and make-ahead items come back closer to fresh than a microwave manages."),
+                    ("The overflow", "When the main oven is full, a countertop oven-style air fryer is a second cavity with its own temperature."),
+                ],
+            },
+            {
+                "h": "What it does badly at a gathering",
+                "p": [
+                    "Holding food warm. Air fryers are at their worst when asked to wait; the texture that makes them worth having goes soft under a lid. If timing matters, cook in waves and accept that the last wave is the good one.",
+                    "Cooking a large single item. A whole bird needs a cavity, not a drawer \u2014 and even then, a 26-quart oven-style machine is not a substitute for a full-size oven on the day.",
+                ],
+            },
+            {
+                "h": "The setup that works",
+                "p": [
+                    "One oven-style machine for volume and a probe for the thing you cannot see into. P-02 states a 26-quart cavity and six accessories; P-05 states three leave-in probes. Together they cover the two failure modes of a hosted dinner: not enough space, and not knowing when the middle is done.",
+                    "If you already own a full-size oven, the air fryer's job is the side dish and the overflow. Buy for that, not for the fantasy of replacing the oven.",
+                ],
+            },
+            {
+                "h": "A note on timing the table",
+                "p": [
+                    "Work backwards from the moment you sit down, and give the air fryer the last twenty minutes rather than the first two hours. Everything that can be made ahead should be, and everything that must be crisp should be last.",
+                ],
+            },
+        ],
+        "closing": "P-02 and P-05 descriptions are the sellers' wording from listings reached on 2026-11-20. Nothing here was tested.",
+    },
+]
 
 # Rows for the comparison table. Every cell is either transcribed from a listing
 # title reached on 2026-11-20 or explicitly blank. Blank is a valid value.
 GUIDES.append({
     "slug": "holiday-side-dish-capacity",
+    "cluster": "Seasonal",
+    "related": ["P-02", "P-03", "P-05"],
     "title": "Will your air fryer fit the holiday sides without a queue?",
     "kicker": "Seasonal kitchen · holiday sides",
     "dek": "Plan backward from serving time: check the tray, count the batches, and give the meals you already cook more weight than the number on the box.",
@@ -262,14 +481,13 @@ GUIDES.append({
 
 
 COMPARE_COLUMNS = [
-    ("Product", "The register reference and the brand as stated on the listing"),
-    ("Shape", "Basket, oven or other \u2014 read from the listing title and category path"),
-    ("Stated capacity", "Exactly as the seller words it. Not measured"),
-    ("Stated attributes", "Only what the listing title itself claims"),
-    ("Listing", "The destination the submitted link actually reached"),
-    ("Not stated here", "Values with no permitted source, left blank on purpose")
+    ("Product", "Brand and shape as stated on the listing"),
+    ("Shape", "Basket, oven or thermometer, read from the title and category path"),
+    ("Stated size", "Exactly as the seller words it. Not measured"),
+    ("Stated features", "Only what the listing title itself claims"),
+    ("Price", "Blank: Amazon serves it, this site does not hold it"),
+    ("Rating", "Blank: Amazon serves it, this site does not hold it"),
 ]
 
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from
 # src/data/products.json so that a fact can never exist in two places and drift.
-

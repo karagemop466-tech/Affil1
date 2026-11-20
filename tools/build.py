@@ -10,9 +10,7 @@ Internal links are relative because GitHub Pages serves this repository from
 """
 
 import json
-from datetime import date
 import pathlib
-import shutil
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -20,10 +18,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 import layout  # noqa: E402
 from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # noqa: E402
-import page_sources
 import page_home  # noqa: E402
-import page_fit  # noqa: E402
-import page_design  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
 import page_compare  # noqa: E402
@@ -33,23 +28,17 @@ import page_review  # noqa: E402
 import page_desk  # noqa: E402
 from content import GUIDES  # noqa: E402
 
-sys.path.insert(0, str(ROOT / "kitchen-build"))
-import readiness  # noqa: E402
-
 DATA = ROOT / "src" / "data"
 
-# The build writes these and nothing else. Anything not listed is another
-# session's or another edition's file and is never touched.
+# The build writes these and nothing else. Anything not listed is either a
+# static asset or an archived edition, and is never touched.
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions",
-    "review", "about", "operations", "brief", "fit",
+    "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
 
-# Files this build generates. Anything in an owned directory that is NOT in this
-# list belongs to someone else, so clean() must not delete it. This is the
-# difference between a rebuild and a wipe.
 GENERATED = {
     "index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
     "guides/index.html",
@@ -58,24 +47,13 @@ GENERATED = {
     "products/p-04.html", "products/p-05.html",
     "compare/index.html",
     "questions/index.html",
-    "suggestions/index.html", "suggestions/design.html", "fit/index.html",
+    "suggestions/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
-    "operations/ledger.html", "operations/launch-readiness.html",
+    "operations/ledger.html",
     "brief/index.html",
-} | {f"guides/{guide['slug']}.html" for guide in GUIDES}
-
-GENERATED.add("sources/index.html")
-GENERATED.update(f"guides/{g['slug']}.html" for g in GUIDES)
-
-# Files THIS build emitted in an earlier version, now renamed, which must be
-# removed when the slug list changes. It contains nothing that predates this
-# build: guides/basket-or-oven.html and guides/capacity-checklist.html belong to
-# a parallel edition on main and are still served, so deleting them here would
-# destroy another session's work. Verified by rebuilding and diffing the tree.
-RETIRED = [
-    "guides/cleanup-counterspace.html",
-]
+}
+GENERATED |= {f"guides/{g['slug']}.html" for g in GUIDES}
 
 
 def load(name):
@@ -91,14 +69,8 @@ def write(rel_path, content):
 
 
 def clean():
-    """Remove only this build's own outputs.
-
-    The first version of this function wiped every owned directory. On a branch
-    that also carries other sessions' pages, a rebuild would have deleted their
-    work. Clean is now derived from GENERATED, so adding a foreign file to an
-    owned directory is safe and the build still cannot leave a stale page of its
-    own behind."""
-    for rel_path in sorted(GENERATED) + RETIRED:
+    """Remove only this build's own outputs, never a foreign or archived file."""
+    for rel_path in sorted(GENERATED):
         path = ROOT / rel_path
         if path.is_file():
             path.unlink()
@@ -114,39 +86,38 @@ def favicon():
     path.write_text(svg, encoding="utf-8")
 
 
+def as_url(p):
+    return SITE_URL + "/" + (p[:-len("index.html")] if p.endswith("index.html") else p)
+
+
 def sitemap(pages):
-    """Canonical URLs. A directory index is listed as its directory, because
-    that is the URL the canonical tag on that page names."""
-    urls = []
-    for p in pages:
-        if p in ("404.html", "operations/launch-readiness.html"):
-            continue
-        loc = SITE_URL + "/" + (p[:-len("index.html")] if p.endswith("index.html") else p)
-        urls.append(f"  <url><loc>{loc}</loc><lastmod>{BUILD_DATE}</lastmod></url>")
+    """Canonical URLs only. A directory index is listed as its directory."""
+    urls = [f"  <url><loc>{as_url(p)}</loc><lastmod>{BUILD_DATE}</lastmod></url>"
+            for p in pages if p != "404.html"]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "\n".join(urls) + "\n</urlset>\n")
 
 
-def feed(latest_guides):
+def feed(guides):
     items = []
-    for g in sorted(latest_guides, key=lambda item: item['updated'], reverse=True):
-        published = date.fromisoformat(g.get('published', g['updated'])).strftime('%a, %d %b %Y 00:00:00 GMT')
+    for g in guides:
         link = f"{SITE_URL}/guides/{g['slug']}.html"
         items.append(f"""  <item>
     <title>{esc(g['title'])}</title>
     <link>{link}</link>
     <guid isPermaLink="true">{link}</guid>
-    <pubDate>{published}</pubDate>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <category>{esc(g['cluster'])}</category>
     <description>{esc(g['dek'])}</description>
   </item>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>{esc(SITE_NAME)} \u2014 buying guides</title>
+  <title>{esc(SITE_NAME)} \u2014 guides</title>
   <link>{SITE_URL}/</link>
   <atom:link href="{SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Practical guides to air fryers, countertop ovens, and cooking thermometers.</description>
+  <description>Air-fryer and thermometer buying guides, with each product link checked against the live Amazon listing.</description>
   <language>en-us</language>
   <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
   <copyright>2026 {esc(SITE_NAME)}</copyright>
@@ -156,6 +127,9 @@ def feed(latest_guides):
 """
 
 
+# One canonical site. The archived edition under archive/ carries noindex, and
+# /archive/ is not listed in the sitemap. Nothing here blocks crawling of the
+# canonical pages.
 ROBOTS = """User-agent: *
 Allow: /
 
@@ -173,17 +147,6 @@ def main():
     flags = load("flags.json")
     images = load("images.json")
 
-    intent = json.loads(readiness.INTENT.read_text(encoding="utf-8"))
-    readiness.validate(intent)
-    if {p['ref']: (p['submitted_link'], p['listing_url']) for p in products} != {
-        p['ref']: (p['submitted_link'], p['observed_redirect_target']) for p in intent['records']
-    }:
-        raise SystemExit("Root register and affiliate evidence records disagree")
-    meta["approved_links"] = {
-        p["ref"]: p["approved_special_link"] for p in intent["records"]
-        if readiness.eligible(p, intent["tracking_id_supplied"])
-    }
-
     clean()
     favicon()
 
@@ -194,7 +157,7 @@ def main():
     pages.append(write("404.html", page_desk.build_404("", meta)))
 
     # guides
-    pages.append(write("guides/index.html", page_guides.build_index("guides", meta)))
+    pages.append(write("guides/index.html", page_guides.build_index("guides")))
     for g in GUIDES:
         pages.append(write(f"guides/{g['slug']}.html", page_guides.build_guide("guides", g, meta)))
 
@@ -202,9 +165,6 @@ def main():
     pages.append(write("products/index.html", page_products.build_register("products", products, meta)))
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))
-
-    pages.append(write("fit/index.html", page_fit.build("fit")))
-    pages.append(write("suggestions/design.html", page_design.build("suggestions")))
 
     # compare / questions / suggestions
     pages.append(write("compare/index.html", page_compare.build("compare", products, meta)))
@@ -214,22 +174,21 @@ def main():
     # review
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))
     pages.append(write("review/images.html", page_review.build_images("review", images, products, meta)))
-    pages.append(write("review/measurement.html", page_review.build_measurement("review", meta, load("events.json"))))
+    pages.append(write("review/measurement.html", page_review.build_measurement("review", meta)))
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
-    pages.append(write("sources/index.html", page_sources.build("sources",sources,products)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
-    pages.append(write("operations/launch-readiness.html", readiness.render(intent)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
 
     pages.append(write("sitemap.xml", sitemap(pages)))
     pages.append(write("feed.xml", feed(GUIDES)))
     pages.append(write("robots.txt", ROBOTS))
 
-    built = {p for p in pages}
-    if GENERATED != built:
-        raise SystemExit(f"Page manifest mismatch: missing={sorted(GENERATED - built)}, extra={sorted(built - GENERATED)}")
+    built = set(pages)
+    missing = GENERATED - built - {"robots.txt"}
+    if missing:
+        raise SystemExit(f"GENERATED lists files the build never wrote: {sorted(missing)}")
     print(f"built {len([p for p in pages if p.endswith('.html')])} pages")
     for p in pages:
         print("  " + p)

@@ -1,14 +1,44 @@
-/* Self-hosted counting only. The static Pages build has no collector. */
+/* Opt-in first-party counters. Never set the flag on static GitHub Pages. */
 (() => {
- if (!(window.CC_COUNTER || window.CC_ANALYTICS_ENABLED) || navigator.doNotTrack === '1' || navigator.globalPrivacyControl) return;
- const page = new URL(document.querySelector('[rel=canonical]').href).pathname.replace(/^\/Affil1\//,'').replace(/(^|\/)$/, '$1index.html');
- const send = (event, asin='') => fetch('/api/e', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(window.CC_COUNTER ? [event,page,asin] : {event,path:location.pathname,...(asin?{ref:asin}:{})}),credentials:'omit',referrerPolicy:'no-referrer',keepalive:true}).catch(()=>{});
- send('page_view');
- if(page==='compare/index.html') send('compare_view');
- if(page==='review/index.html') send('flag_page_view');
- if(/^guides\/(?!index)/.test(page)) {
-   const read=()=>{if(scrollY+innerHeight>=document.documentElement.scrollHeight*.75){send('guide_read_75');removeEventListener('scroll',read)}};
-   addEventListener('scroll',read,{passive:true});read();
- }
- document.addEventListener('click',e=>{const a=e.target.closest('a[rel~=sponsored]');if(a) send('outbound_product_click',a.href.match(/\/dp\/(\w{10})/)?.[1]||'')});
+  "use strict";
+  if (window.CC_ANALYTICS_ENABLED !== true || navigator.globalPrivacyControl ||
+      navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
+  const script = document.currentScript;
+  const base = new URL("../../", script.src);
+  if (base.origin !== location.origin || !location.pathname.startsWith(base.pathname)) return;
+  const page = location.pathname.slice(base.pathname.length).replace(/(^|\/)index\.html$/, "$1");
+  function track(event, product = null) {
+    fetch("/api/e", {
+      method: "POST", keepalive: true, credentials: "omit", referrerPolicy: "no-referrer",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify([{event, page, product}])
+    }).catch(() => {});
+  }
+  track("page_view");
+  if (page === "compare/") track("compare_view");
+  if (page === "review/") track("flag_page_view");
+  if (/^guides\/[^/]+\.html$/.test(page)) {
+    const main = document.querySelector("main");
+    function checkDepth() {
+      if (!main) return;
+      const box = main.getBoundingClientRect();
+      if (box.height > 0 && box.bottom > 0 && box.top + box.height * 0.75 <= innerHeight) {
+        removeEventListener("scroll", checkDepth);
+        removeEventListener("resize", checkDepth);
+        track("guide_read_75");
+      }
+    }
+    addEventListener("scroll", checkDepth, {passive: true});
+    addEventListener("resize", checkDepth);
+    checkDepth();
+  }
+  function recordClick(event) {
+    const a = event.target.closest?.("a[rel~='sponsored'][data-affiliate-ref]");
+    if (!a || event.defaultPrevented) return;
+    const url = new URL(a.href);
+    const match = /^\/dp\/([A-Z0-9]{10})(?:\/|$)/.exec(url.pathname);
+    if (url.origin === "https://www.amazon.com" && match) track("outbound_product_click", match[1]);
+  }
+  document.addEventListener("click", recordClick);
+  document.addEventListener("auxclick", event => { if (event.button === 1) recordClick(event); });
 })();
