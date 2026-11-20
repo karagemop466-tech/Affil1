@@ -102,7 +102,7 @@ Also corrected on the brief page (committed in `fa607a4`, merged):
 
 ## Merge decision — held
 
-Head `2e3dc40`. Checks on the PR: `build` pass, `launch` (Affiliate launch checks) pass, `verify-edition` pass, `deploy` skipped (PR events).
+Head `6880c87`. Checks on the PR: `build` pass, `launch` (Affiliate launch checks) pass, `verify-edition` pass, `deploy` skipped (PR events).
 
 The merge condition in the brief is 'build, check, validate, links and deploy all pass'. Four of those pass, and the staged-artifact mount check passes (851 references). The deploy gate cannot pass: the `Build, check and deploy` deploy job runs only when the Pages source is `workflow`. It is `legacy` (`main` `/`), so the job is skipped on every `main` run (checked on `b305af3`, `6eb15b7`, `2934ed0`). No PR or `main` run can show a deploy pass until the owner decides (RVW-09).
 

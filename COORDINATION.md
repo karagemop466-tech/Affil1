@@ -663,7 +663,7 @@ Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-
 
 ## Session arena/bba82abd-affil1 — full-brief review pass (2026-11-20)
 
-Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **PR open; merge held.** All gates pass on `2e3dc40` except the deploy gate, which cannot pass under the configured legacy Pages source: the `Build, check and deploy` deploy job is skipped on every `main` run (checked on `b305af3`, `6eb15b7`, `2934ed0`), so the merge condition 'deploy passes' is not met. Owner decision needed (RVW-09): waive the deploy gate for this PR, merging on the staged-artifact check recorded below, or switch the Pages source to `workflow`.
+Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **PR open; merge held.** All gates pass on `6880c87` except the deploy gate, which cannot pass under the configured legacy Pages source: the `Build, check and deploy` deploy job is skipped on every `main` run (checked on `b305af3`, `6eb15b7`, `2934ed0`), so the merge condition 'deploy passes' is not met. Owner decision needed (RVW-09): waive the deploy gate for this PR, merging on the staged-artifact check recorded below, or switch the Pages source to `workflow`.
 
 **Pull request:** https://github.com/karagemop466-tech/Affil1/pull/96 (`arena/bba82abd-affil1` into `main`). Merge result: **none; held** (see status). If the owner waives the deploy gate, the merge commit and the post-merge Pages result will be recorded as a comment on PR #96.
 
