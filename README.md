@@ -1,34 +1,27 @@
-# Crisp & Counter
+# Crisp & Counter — an Amazon affiliate publication for countertop cooking
 
-A static Amazon affiliate publication about air fryers and thermometers.
-Live at **https://karagemop466-tech.github.io/Affil1/**
+One site, one brand, one stylesheet. Question-led buying guides for air fryers and
+countertop cooking appliances, a shortlist assembled from links that were actually
+resolved by hand, and a public register of everything that could not be confirmed.
 
-It is built to be a shop a reader can act on, with one rule underneath:
-**claim nothing that cannot be sourced.** So there are no prices, ratings, review
-counts or test results — and a review page that publishes every gap instead of
-hiding it.
+**Live:** https://karagemop466-tech.github.io/Affil1/
+**Associates tracking ID supplied by the owner:** `shopnow047c-20` (enrolment and
+attribution are **not** verified — see [Open questions](#open-questions-and-blockers))
+**Prepared:** 2026-11-20 by session `arena/359baa16-affil1` (integration pass)
 
-## Build and test
+---
 
-## The site, in one table
+## What this repository is for
 
 The brief had five parts. This is where each one lives:
 
 | The ask | Where it is answered |
 |---|---|
-| `index.html` | Publication front page: the edit, two categories, three decision paths, a seasonal feature, the journal |
-| `products/` | The shop: five picks in two categories, plus one note per product |
-| `guides/` | Nine question-shaped buying guides, clustered by the decision they answer |
-| `compare/` | Every product side by side, with blank columns left blank |
-| `questions/` | 22 questions a real decision depends on: what is known, what is missing, what would close it |
-| `suggestions/` | Three paths and 18 proposals, 8 already implemented, with a decision control per row |
-| `review/` | Flagged for review, image policy, measurement plan |
-| `about/` | Rules, disclosure, privacy, and the full source list with quoted wording |
-| `operations/` | The empty campaign ledger and its provenance rule |
-| `brief/` | Executive summary |
-| `src/data/` | The single source of truth. Every fact on the site comes from here |
-| `tools/` | `build.py` renders the site; `check.py` verifies it |
-| `archive/legacy-2026-11-20/` | The superseded edition, kept with `noindex` on every page |
+| Read like a shop, not an audit | The generated front page: seasonal feature, shortlist, topics, guides. The registers are one click from the footer, never the front door. |
+| Make it findable | `sitemap.xml`, `feed.xml`, `robots.txt`, canonical tags, Open Graph images, `Article` + `FAQPage` + `BreadcrumbList` structured data, topic clusters with internal links |
+| Make the machinery trustworthy | `tools/build.py` generates every page from `src/data/`; `tools/validate.py` is the gate; two GitHub Actions workflows run it (deploy + weekly audit) |
+| Lead with products, disclose above the fold, mark every link | One `disclosure()` template, one `product_link()` template — a page cannot ship without either |
+| Suggestions and questions before decisions | `/suggestions/` (29 scored proposals, 2 rejected on policy grounds), `/questions/` (22 questions, 5 answered by this pass), `/flagged/` (irregularities with sources), `/dashboard/` (entries, verification log, empty ledger) |
 
 ## Layout
 
@@ -53,83 +46,101 @@ archive/              five earlier competing surfaces (four storefronts and a pa
                       integration pass), preserved untouched and non-indexable
 ```
 
-The Python server serves **only** `dist` on port 8000. It enables five same-origin events, honors DNT/GPC, and writes daily aggregate counts to SQLite outside the web root. `PORT` and `COUNTER_DB` are configurable. Use a durable non-public database for an authorized production host. No raw event ingestion, cookies, visitor IDs, referral strings or IP logging by the collector. Do not import preview tests into the campaign ledger.
+Nothing in the tree is hand-edited except `assets/`, `tools/`, `src/data/`, `docs/`
+and the markdown files. If you edit a generated `.html` directly, the drift check in
+CI fails and tells you so.
 
-GitHub Pages serves static HTML. Its client sends no analytics requests. Native branch publishing uses `_config.yml` exclusions to avoid publishing historical editions or source data. Workflow-based Pages uses `tools/stage.py`. Keep both scopes aligned. No other domains or editions are submitted in the sitemap.
+## Build, check, publish
 
-## Editorial cadence
+```bash
+python3 tools/build.py            # regenerate every page from src/data
+python3 tools/validate.py         # the gate; exits non-zero on any violation
+python3 -m http.server 8207 --bind 0.0.0.0   # preview; open /Affil1/ after linking the parent dir
+```
 
-1. **The disclosure strip is above `<main>` on every page** and repeated in the
-   footer. Required by Associates Operating Agreement §5; placed high because the
-   FTC says the closer a disclosure is to the recommendation, the better.
-2. **Every Amazon product link carries the Associates tag** `?tag=shopnow047c-20`
-   *and* `rel="sponsored nofollow noopener"`, and opens in a new tab. The tag is
-   required by Program Policies §2(b); `sponsored` is the marker Google documents
-   for paid links.
-3. **No price, star rating, review count or stock phrase appears in visible text.**
-   Program Policies §2(b) permits those only from Amazon-served data or the
-   Creators API / Product Advertising API. Neither is connected.
-4. **No test or ranking claim.** Nothing on this site was tested, so no page may
-   say otherwise.
-5. **No root-absolute internal links.** GitHub Pages serves this repository from
-   `/Affil1/`, so `/about/` would 404. Every link is relative and resolved.
-6. **No external resource loading.** Fonts are self-hosted from `assets/fonts`.
-   There is no CDN, no analytics script, no third-party request of any kind.
-7. **Every internal link and anchor resolves**, the sitemap matches the built
-   pages exactly, and every feed item points at a real page.
-8. **One `<h1>` per page**, every image has alt text, and no inline event handlers.
-9. **One site only.** Any `.html` file in the tree that this build did not
-   generate, and that is not under `archive/`, fails the build.
-10. **The published artifact is the generated set.** `tools/stage.py` copies only
-    generated pages plus assets into `_site`, so archived editions can stay in
-    the repository without being published.
+Deploy is automatic: pushing to `main` runs
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml), which rebuilds, runs
+the gate, fails if the committed HTML differs from the build, resolves every
+reference at the Pages project mount, and only then publishes the artifact. A weekly
+audit (`weekly-audit.yml`) re-runs the same gate against a live snapshot so a page
+cannot quietly fall out of compliance.
 
 ## The rules this site publishes under
 
 Each rule below is enforced by `tools/validate.py`, not just asserted in prose:
 
-Product identity lives in `src/data/products.json`. The `intended_asin` and
-`observed_asin` fields are deliberately separate and must never be merged — see
-`review/index.html#FLG-001` for why. Buy destinations are built in exactly one
-place, `layout.buy_url()`, so the tag cannot be forgotten on one page and
-remembered on the next.
+1. **Disclosure above the fold on every page, and again in the footer.** The strip
+   carries Amazon's required sentence verbatim — *"As an Amazon Associate I earn from
+   qualifying purchases."* — followed by a plain-language version, because the FTC's
+   test is whether a reader understands the relationship, not whether they found a
+   legal page. Source: [Associates Program Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement)
+   (retrieved 2026-11-20) and [FTC Endorsement Guides](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking).
+2. **No price, star rating, review count or stock figure anywhere.** Amazon permits
+   those only in a link it serves itself or through the Creators/PA API. This site has
+   no feed, so it has no numbers — and a validator fails the build if a `$` + digit
+   appears in a page. Source: [Associates Program Policies](https://affiliate-program.amazon.com/help/operating/policies).
+3. **No price tracking or price alerts.** The Participation Requirements prohibit
+   price-tracking or price-alerting functionality on an Associate site. Recorded as a
+   rejected suggestion ([/suggestions/](docs note: SUG-25, SUG-26)) so the next session
+   does not "improve" the site into a violation.
+4. **Buy buttons only where a listing was actually reached**, with
+   `rel="sponsored nofollow noopener"` and a visible "Paid link" note. A row whose
+   destination never resolved has no button at all.
+5. **Intended identifier and observed redirect are separate fields, never merged.**
+   The five submitted codes are 9 characters; the destinations this project reached
+   are 10-character ASINs. `intended_asin` stays null — see `src/data/products.json`.
+6. **Every factual cell carries its source**, and an unconfirmed value is left blank
+   and listed on `/flagged/`. Blanks are the honest state, not a gap to fill in.
 
-## What is verified, and how
+## Verification of the five submitted links
 
-Five supplied links were opened on 2026-11-20 and each resolved to a live Amazon
-listing. The ASIN, page title and category breadcrumb were transcribed:
+Every link was fetched twice by two different sessions on 2026-11-20; the second pass
+is recorded in `src/data/reverification.json`. Values below are what the destination
+page returned; none of it is a product recommendation and none of it was tested here.
 
-| Ref | Submitted | Landed on |
-|---|---|---|
-| P-01 | link.amazon/B04G1MEwY | B0CDY277D3 — CHEFMAN 6 Quart Dual Basket |
-| P-02 | link.amazon/B02NbDxp3 | B09B7SB46R — Emeril Lagasse 26QT French Door |
-| P-03 | link.amazon/B00hJ57DV | B08DKYBTPH — Chefman 8 Qt TurboFry |
-| P-04 | link.amazon/B0c8moW59 | B0DHZTCNR5 — ThermoMaven digital meat thermometer |
-| P-05 | link.amazon/B0f3GKalj | B0DZFD6R9Z — CHEF iQ Sense wireless probes |
+| Entry | Submitted | Destination reached | Note |
+|---|---|---|---|
+| P-01 | `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` — CHEFMAN 6 Quart Dual Basket | unstable: interstitial on one attempt |
+| P-02 | `link.amazon/B02NbDxp3` | `amazon.com/dp/B09B7SB46R` — Emeril Lagasse 26QT French Door | unstable: second attempt only |
+| P-03 | `link.amazon/B00hJ57DV` | `amazon.com/dp/B08DKYBTPH` — Chefman Air Fryer 8 Qt | an earlier archived register wrongly logged this as the homepage |
+| P-04 | `link.amazon/B0c8moW59` | **none** — Amazon continue-shopping interstitial | published as unresolved; no buy button |
+| P-05 | `link.amazon/B0f3GKalj` | `amazon.com/dp/B0DZFD6R9Z` — CHEF iQ Sense thermometer | not an air fryer; gets its own guide |
 
-Policy wording was read from the Operating Agreement §5, the Program Policies
-§2(a)/(b), the FTC's endorsement FAQ and Google's outbound-link documentation in
-the same session. All four are quoted, with links, on `about/index.html#sources`.
+Manual review entry points: [verification log](https://karagemop466-tech.github.io/Affil1/dashboard/#verification)
+· [source register](https://karagemop466-tech.github.io/Affil1/sources/)
+· [flagged register](https://karagemop466-tech.github.io/Affil1/flagged/)
 
 ## The one finding that decides whether this site can earn
 
-- No Amazon Product Advertising API / Creators API credentials.
-- No Associates account access, so no confirmed click attribution, rate card or
-  click report.
-- No analytics endpoint. `assets/js/analytics.js` is inert by default.
-- No Search Console property.
-- No named author.
-- No mailing list; RSS is the only return channel.
+None of the five submitted URLs carries a `tag` parameter, and each reaches Amazon through
+an intermediate redirect. Under the Commission Income Statement, a purchase reached through
+a "Redirecting Link" is disqualified, as is any purchase "not correctly tracked or reported
+because the links … are not properly formatted" — so in that form they cannot be attributed
+to `shopnow047c-20` at all.
 
-## Design layer
+The site is therefore **gated, not guessed**. Publishing a tracking tag asserts that this
+site is listed on an enrolled Associates account for that ID, which nothing in this
+repository can confirm. So:
 
-Typefaces are self-hosted (Fraunces for display, Inter for text) — no external font
-request, so nothing leaks a reader's visit to a third party and the page paints without
-a network round trip. Editorial art is generated for this publication, shipped in
-width variants with `srcset`, and captioned on every use as an illustration: never a
-listing photo, never a brand mark, never in a slot that imitates one. The rule and the
-reason sit in `src/data/images.json`, carried over from the parallel integration pass
-whose artwork and typography this site adopted.
+- every buy button is a **reference link** to the official listing, with no tag, labelled
+  as such, and the disclosure strip's plain-language sentence says plainly that no link
+  earns anything today;
+- the required Associates sentence stays verbatim on every page, above the fold and in the
+  footer, because the obligation is not conditional on that state;
+- `src/data/product-intent.json` holds the gate (`associate_enrollment_confirmed`,
+  `site_registered`, `one_link_test_completed`, and `approved_special_link` per product);
+- `tools/validate.py` fails the build if a tag is published while those flags are false, so
+  the safe state is enforced rather than hoped for;
+- `tools/arm_links.py` is the owner's switch: `--checklist` prints the steps, and it refuses
+  to arm the site unless `--i-am-the-owner` is passed, so no future automated session can
+  start claiming a relationship with Amazon on its own.
+
+One of the five destinations (`P-04`) resolved only on a third attempt and arrived with
+Amazon's `plpRedirect=mhFallback` marker, and `P-05` carries it too. That is Amazon's own
+signal for a merchandised fallback, which is why the register publishes each destination as
+a dated observation, keeps `intended_asin` null, and flags the pair as
+[FLG-018](https://karagemop466-tech.github.io/Affil1/flagged/#FLG-018) rather than presenting the mapping as
+confirmed. Read each one in a signed-in browser before arming anything.
 
 ## Open questions and blockers
 
@@ -139,8 +150,9 @@ block everything else, in order:
 
 1. **Enrolment** — is `shopnow047c-20` an active tracking ID, and is this site listed
    in the account? No claim is made either way here.
-2. **Special Links** — regenerate all five destinations in Associates Central and
-   confirm one click in the report before publishing more.
+2. **Special Links** — generate them in Associates Central, paste each into
+   `approved_special_link` via `tools/arm_links.py --i-am-the-owner --link P-01 "<url>"`,
+   and confirm one click in the report before arming the other four.
 3. **Search Console** — verify the property. Until then, every statement about what
    readers want is reasoning, not evidence.
 4. **An author** — a named human with two true biographical sentences. Bylines stay at

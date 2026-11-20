@@ -29,7 +29,7 @@ def build(page_dir, products, meta):
         return {"html": ""}
 
     headers = [c[0] for c in COMPARE_COLUMNS] + ["Listing"]
-    rows = [[cell(p, c[0]) for c in COMPARE_COLUMNS] for p in products]
+    rows = [[cell(p, c[0]) for c in COMPARE_COLUMNS] + [cell(p, "Listing")] for p in products]
 
     tbl = table(headers, rows, cls="compare",
                 caption="All five, side by side, on 20 November 2026",

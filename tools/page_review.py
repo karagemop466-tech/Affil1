@@ -1,5 +1,7 @@
 """The review queue, the image policy, and the measurement plan."""
 
+from release_panels import render as release_panel
+
 from layout import (blank, esc, eyebrow, outbound, page, pagehead, rel,
                     section, table)
 
@@ -73,7 +75,7 @@ def build_index(page_dir, flags, meta):
         d,
         title="Flagged for review \u2014 Crisp & Counter",
         description="Every uncertainty on this site in one place: unconfirmed tracking, missing prices, absent authorship, generated imagery and the consolidation record, each with the source to check it against.",
-        body=body,
+        body=body + release_panel(d, "review/"),
         active="review/index.html",
         canonical="review/",
     )
@@ -119,7 +121,7 @@ def build_images(page_dir, images, products, meta):
         'Image policy',
         'Every photograph here<br>is an illustration',
         images["meta"]["why"],
-        meta='8 generated assets &middot; 0 product photographs &middot; 3 uses declined',
+        meta=f'{len(images["assets"])} generated assets &middot; 0 product photographs &middot; {len(images["rejected"])} uses declined',
     )}
 {section(f'''
 <h2>The rule</h2>

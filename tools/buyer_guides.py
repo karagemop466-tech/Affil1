@@ -1,11 +1,21 @@
 """Source-backed kitchen cluster. Listing observations are not product tests."""
 FOOD_SAFETY = 'https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures'
+USDA_TEMP_CHART = 'https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart'
+USDA_THERMOMETERS = 'https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers'
 
 
 def guide(slug, title, dek, kicker, image, alt, sections, sources, related, closing):
+    sec_list = []
+    for item in sections:
+        if len(item) == 3:
+            h, p, tbl = item
+            sec_list.append(dict(h=h, p=p, table=tbl))
+        else:
+            h, p = item
+            sec_list.append(dict(h=h, p=p))
     return dict(slug=slug, title=title, dek=dek, kicker=kicker, photo=f'assets/img/{image}',
                 photo_alt=alt, photo_caption='A format illustration, not a photograph of a listed product.',
-                updated='2026-11-20', read_minutes=3, sections=[dict(h=h, p=p) for h, p in sections],
+                updated='2026-11-20', read_minutes=4, sections=sec_list,
                 sources=sources, related=related, closing=closing)
 
 
@@ -35,11 +45,32 @@ BUYER_GUIDES = [
           ], [('Amazon listing: Emeril Lagasse French-door oven', 'https://www.amazon.com/dp/B09B7SB46R'), ('Amazon listing: Chefman TurboFry', 'https://www.amazon.com/dp/B08DKYBTPH')],
           ['fit/index.html', 'guides/cleanup-and-counter-space.html'], 'If you have to move the appliance each time you open it, consider a different spot or a different shape.'),
     guide('thermometer-pairing', 'Instant-read or wireless: which thermometer do you need?',
-          'Pick for the way you cook: a quick spot check at the end or monitoring during a longer cook.',
-          'Cooking tools', 'thermometer', 'Illustrated probe thermometer beside roasted chicken', [
-              ('Decide when you need a reading', ['For occasional spot checks, compare the ThermoMaven digital listing as an instant-read example. If you want to monitor during a long cook, compare the CHEF iQ Sense listing as a wireless example. These are two different tasks, so start with the one you do most.']),
+          'Pick for the way you cook: a quick spot check at the end or monitoring during a longer cook — paired with the official USDA FSIS safe minimum internal temperature chart.',
+          'Cooking tools', 'instant-thermometer', 'An unbranded folding digital instant-read meat thermometer resting beside a seared chicken breast on a wooden board', [
+              ('Decide when you need a reading', ['For occasional spot checks, compare the ThermoMaven digital listing (P-04) as an instant-read example. If you want to monitor during a long cook, compare the CHEF iQ Sense listing (P-05) as a wireless three-probe example. These are two different tasks, so start with the one you do most.']),
               ('Look up limits before you leave a probe in', ['Check the exact manufacturer’s instructions for temperature limits, approved appliances, insertion depth, and how the probe should be secured. For a wireless model also check the app, phone, and connection requirements. Don’t assume a handheld thermometer can stay in a closed, running appliance.']),
-              ('Use the food safety target, not the preset', ['FoodSafety.gov gives different temperature targets for different foods, and some cuts need a rest time. Look up what you’re cooking in the official chart. A longer feature list isn’t a substitute for using the thermometer as directed.']),
-          ], [('Amazon listing: ThermoMaven digital', 'https://www.amazon.com/dp/B0DHZTCNR5'), ('Amazon listing: CHEF iQ Sense', 'https://www.amazon.com/dp/B0DZFD6R9Z'), ('FoodSafety.gov: safe internal temperatures', FOOD_SAFETY)],
+              ('Use the official USDA safe minimum internal temperature chart', [
+                  'USDA FSIS states that visual cues like color are unreliable and that using a food thermometer is the only reliable way to verify safe internal temperature (SRC-10). Insert the probe into the thickest part of the food, away from bone, fat or gristle.',
+                  'The figures below are transcribed directly from the USDA FSIS Safe Minimum Internal Temperature Chart (last updated April 14, 2025; SRC-09):'
+              ], {
+                  'caption': 'USDA FSIS Safe Minimum Internal Temperatures (verified 2026-11-20, SRC-09)',
+                  'headers': ['Food', 'Safe minimum internal temperature & rest', 'Official source'],
+                  'rows': [
+                      ['Beef, pork, veal and lamb steaks, chops and roasts', '145°F (62.8°C) and rest at least 3 minutes', {'url': USDA_TEMP_CHART, 'label': 'USDA FSIS chart'}],
+                      ['Ground meats (beef, pork, veal, lamb)', '160°F (71.1°C)', {'url': USDA_TEMP_CHART, 'label': 'USDA FSIS chart'}],
+                      ['All poultry (whole bird, breasts, thighs, wings, ground, stuffing)', '165°F (73.9°C)', {'url': USDA_TEMP_CHART, 'label': 'USDA FSIS chart'}],
+                      ['Eggs', '160°F (71.1°C)', {'url': USDA_TEMP_CHART, 'label': 'USDA FSIS chart'}],
+                      ['Fish and shellfish', '145°F (62.8°C)', {'url': USDA_TEMP_CHART, 'label': 'USDA FSIS chart'}],
+                      ['Leftovers and casseroles', '165°F (73.9°C)', {'url': USDA_TEMP_CHART, 'label': 'USDA FSIS chart'}],
+                      ['Ham, fresh or smoked (uncooked)', '145°F (62.8°C) and rest at least 3 minutes', {'url': USDA_TEMP_CHART, 'label': 'USDA FSIS chart'}],
+                  ],
+              }),
+          ], [
+              ('Amazon listing: ThermoMaven digital (P-04)', 'https://www.amazon.com/dp/B0DHZTCNR5'),
+              ('Amazon listing: CHEF iQ Sense (P-05)', 'https://www.amazon.com/dp/B0DZFD6R9Z'),
+              ('USDA FSIS: Safe Minimum Internal Temperature Chart (SRC-09)', USDA_TEMP_CHART),
+              ('USDA FSIS: Food Thermometers (SRC-10)', USDA_THERMOMETERS),
+              ('FoodSafety.gov: safe internal temperatures', FOOD_SAFETY),
+          ],
           ['products/p-04.html', 'products/p-05.html'], 'Start with a spot-check model if that’s the only job you need it to do.'),
 ]

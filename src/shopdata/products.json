@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "title": "Product register — The Pantry Journal",
+    "tracking_id_supplied": "shopnow047c-20",
+    "tracking_id_status": "not observed on any supplied link",
+    "observed_on": "2026-11-20",
+    "observation_window_utc": "2026-11-20T05:36Z to 2026-11-20T05:44Z",
+    "method": "Each supplied link.amazon URL was requested directly, redirects were followed, and the destination page title, breadcrumb and /dp/ code were read from the page that returned. Values below are transcribed from that response. Nothing is inferred.",
+    "excluded_by_policy": {
+      "fields": ["price", "availability", "star_rating", "review_count", "bestseller_rank"],
+      "why": "Amazon Associates Program Policies section 2(b) permits showing prices and availability only where Amazon serves the link carrying that data, or where it is obtained through the Creators API or PA API. No such feed is connected to this site. Ratings and review counts are seller- and Amazon-supplied dynamic content and are omitted for the same reason. Their absence is a policy decision, not an oversight.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies"
+    },
+    "confirmations_that_only_the_account_owner_can_make": [
+      "Whether each supplied link is attributed to tracking ID shopnow047c-20",
+      "Whether each supplied link is an enrolled Special Link",
+      "The commission rate that applies to each category"
+    ],
+    "source_definition_asin": {
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "quote": "a unique 10-character alphanumeric code assigned to every product listed in the Amazon store",
+      "checked_on": "2026-11-20"
+    }
+  },
+  "products": [
+    {
+      "id": "PJ-01",
+      "slug": "chefman-6-quart-dual-basket",
+      "brand": "CHEFMAN",
+      "short_name": "6 Quart Dual Basket Air Fryer Oven",
+      "display_title": "Chefman 6 Quart Dual Basket Air Fryer",
+      "category": "air-fryers",
+      "type_label": "Dual-basket air fryer",
+      "shape": "Two drawers",
+      "asin": "B0CDY277D3",
+      "listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "affiliate_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+      "submitted_link": "https://link.amazon/B04G1MEwY",
+      "submitted_code": "B04G1MEwY",
+      "submitted_code_length": 9,
+      "listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "observed_final_url": "https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-0710b7a4f0d14338&channelId=704&plpRedirect=mhFallback",
+      "observed_at_utc": "2026-11-20T05:36Z",
+      "image": "crisp-potatoes.jpg",
+      "image_alt": "Golden roast potatoes in a shallow ceramic bowl, salted and tossed with rosemary.",
+      "deck": "Two independent drawers, each the size of a small basket fryer. The listing is explicit about the split: 6 quarts total means 2 x 3 quarts, not one deep 6-quart basket.",
+      "quick_take": "The most useful thing about this machine, if the listing is accurate, is the split. Two 3-quart drawers means two foods at two temperatures, finishing together via a sync claim. It is not the same thing as a single large basket, and the difference decides who should buy it.",
+      "claims": [
+        { "text": "6 quart total capacity", "kind": "listing claim" },
+        { "text": "2 independent 3-quart baskets", "kind": "listing claim" },
+        { "text": "Sync Finish", "kind": "listing claim, undefined in the title" },
+        { "text": "Easy View Windows", "kind": "listing claim" },
+        { "text": "Hi-Fry", "kind": "listing claim, undefined in the title" },
+        { "text": "Auto Shutoff", "kind": "listing claim" },
+        { "text": "Nonstick, dishwasher-safe baskets", "kind": "listing claim" }
+      ],
+      "suits_if": [
+        "You regularly cook two different things at once — protein in one drawer, vegetables in the other.",
+        "Your household is two to four people, and 3 quarts per drawer matches how much you actually cook in one go.",
+        "You want the food visible without opening a door."
+      ],
+      "check_before_buying": [
+        "Measure your counter depth. Two drawers that pull forward need clear space in front, not just beside.",
+        "Ask what happens to the second drawer's timer when you open the first — that is what sync really means in practice.",
+        "Confirm whether both drawers can run different temperatures simultaneously, not only different times."
+      ],
+      "not_verified": ["price", "availability", "star rating", "review count", "wattage", "external dimensions", "cord length", "warranty terms", "what Hi-Fry or Sync Finish actually do"],
+      "read_next": ["air-fryer-capacity-checklist", "basket-or-oven-air-fryer"]
+    },
+    {
+      "id": "PJ-02",
+      "slug": "emeril-lagasse-26qt-french-door",
+      "brand": "Emeril Lagasse",
+      "short_name": "26QT French Door Multi-Function Air Fryer Toaster Oven",
+      "display_title": "Emeril Lagasse 26QT French Door Air Fryer Oven",
+      "category": "air-fryers",
+      "type_label": "French-door air fryer oven",
+      "shape": "Oven with two doors",
+      "asin": "B09B7SB46R",
+      "listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "affiliate_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+      "submitted_link": "https://link.amazon/B02NbDxp3",
+      "submitted_code": "B02NbDxp3",
+      "submitted_code_length": 9,
+      "listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "observed_final_url": "https://www.amazon.com/dp/B09B7SB46R?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-77f54b7c4a256532&channelId=704&plpRedirect=mhFallback",
+      "observed_at_utc": "2026-11-20T05:38Z",
+      "image": "roast-board.jpg",
+      "image_alt": "A carved roast chicken resting on a wooden board with thyme and a carving knife.",
+      "deck": "An oven with French doors and an air-fry mode, sold as one appliance. The 26-quart figure is the interior, not a basket, so the comparison with a drawer fryer is not like for like.",
+      "quick_take": "This is the choice for someone who wants one countertop box that replaces a toaster oven and approximates a fryer. The trade is speed and clean-up: a large interior takes longer to heat than a small drawer, and shelves wipe down instead of lifting out.",
+      "claims": [
+        { "text": "26 quart interior", "kind": "listing claim" },
+        { "text": "French door design", "kind": "listing claim" },
+        { "text": "24 one-touch preset options", "kind": "listing claim" },
+        { "text": "Countertop convection cooker", "kind": "listing claim" },
+        { "text": "Six cooking accessories included", "kind": "listing claim" }
+      ],
+      "suits_if": [
+        "You want toast, roast and air-fry from one box and have the counter for it.",
+        "You cook flat things — tray bakes, wings, vegetables in a single layer — more often than you shake a basket.",
+        "Someone in the house wants to see and reach the food through a door rather than pull a hot drawer."
+      ],
+      "check_before_buying": [
+        "Measure the full open-door swing plus the depth of the machine. French doors are friendly to a wall behind, not to a narrow aisle.",
+        "Do the arithmetic on the 24 presets: presets are programs, not extra capability. Ask whether you can set temperature and time yourself.",
+        "Check what the six accessories are before assuming you need them."
+      ],
+      "not_verified": ["price", "availability", "star rating", "review count", "wattage", "external dimensions", "warranty terms", "what each of the 24 presets does"],
+      "read_next": ["basket-or-oven-air-fryer", "multi-function-appliance-questions"]
+    },
+    {
+      "id": "PJ-03",
+      "slug": "chefman-turbofry-8-quart",
+      "brand": "Chefman",
+      "short_name": "TurboFry 8 Qt Air Fryer",
+      "display_title": "Chefman TurboFry 8 Qt Air Fryer",
+      "category": "air-fryers",
+      "type_label": "Single-basket air fryer",
+      "shape": "One deep drawer",
+      "asin": "B08DKYBTPH",
+      "listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "affiliate_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+      "submitted_link": "https://link.amazon/B00hJ57DV",
+      "submitted_code": "B00hJ57DV",
+      "submitted_code_length": 9,
+      "listing_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "observed_final_url": "https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-2189f4dab9032c5f&channelId=704&plpRedirect=mhFallback&th=1",
+      "observed_at_utc": "2026-11-20T05:39Z",
+      "image": "crisp-potatoes.jpg",
+      "image_alt": "Golden roast potatoes in a shallow ceramic bowl, salted and tossed with rosemary.",
+      "deck": "One deep basket, 8 quarts, four named modes. This is the least complicated shape in the set, and for a lot of kitchens that is the whole argument.",
+      "quick_take": "A single basket is easy to understand and easy to clean. Eight quarts is genuinely large for one drawer, which cuts both ways: more food per batch, and a basket that takes up more of the sink when it is time to wash it.",
+      "claims": [
+        { "text": "8 quart capacity", "kind": "listing claim" },
+        { "text": "4-in-1: bake, dehydrate, frozen and air fry", "kind": "listing claim" },
+        { "text": "450°F Hi-Fry option", "kind": "listing claim" },
+        { "text": "XL nonstick dishwasher-safe basket", "kind": "listing claim" },
+        { "text": "Stainless steel body", "kind": "listing claim" }
+      ],
+      "suits_if": [
+        "You cook one thing at a time and want a big, uncomplicated basket.",
+        "You would rather shake a drawer than open a door and rotate two trays.",
+        "You have a cupboard the basket can go into when it is not in use."
+      ],
+      "check_before_buying": [
+        "Measure the sink. An 8-quart basket is the part that decides whether you clean it or resent it.",
+        "Check the height under your wall cabinets if the machine has to live under one — the lid or handle needs clearance.",
+        "Ask whether bake and dehydrate run at their own temperatures or reuse fry settings."
+      ],
+      "not_verified": ["price", "availability", "star rating", "review count", "wattage", "external dimensions", "warranty terms", "dehydrate temperature range"],
+      "read_next": ["cleanup-and-counter-space", "air-fryer-capacity-checklist"]
+    },
+    {
+      "id": "PJ-04",
+      "slug": "thermomaven-instant-read-thermometer",
+      "brand": "ThermoMaven",
+      "short_name": "1 Sec Digital Meat Thermometer",
+      "display_title": "ThermoMaven Instant-Read Meat Thermometer",
+      "category": "thermometers",
+      "type_label": "Instant-read digital thermometer",
+      "shape": "Handheld probe",
+      "asin": "B0DHZTCNR5",
+      "listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "affiliate_url": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20",
+      "submitted_link": "https://link.amazon/B0c8moW59",
+      "submitted_code": "B0c8moW59",
+      "submitted_code_length": 9,
+      "listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "observed_final_url": "https://www.amazon.com/dp/B0DHZTCNR5?lv=shuf&btn_type=ss&gaOptInStatus=true&_encoding=UTF8&sp_csd=d2lkZ2V0TmFtZT1zcF9waG9uZV9ob21lcGFnZV9ibGVuZGVk&language=en_US&content-id=amzn1.sym.4582c56b-139d-4168-9db2-822c68889360&ie=UTF8&btn_ref=srctok-3fc2944d621f80c1&channelId=500&plpRedirect=mhFallback",
+      "observed_at_utc": "2026-11-20T05:41Z",
+      "image": "roast-board.jpg",
+      "image_alt": "A carved roast chicken resting on a wooden board with thyme and a carving knife.",
+      "deck": "The cheapest useful piece of kit in this set, and the one that answers a food-safety question rather than a convenience one.",
+      "quick_take": "An instant-read is not an accessory. It is how you check that the middle of a chicken is at 165°F instead of hoping. This listing claims a one-second read and half a degree of accuracy; treat both as the seller's claim until you have checked it against a known temperature.",
+      "claims": [
+        { "text": "1 second read time", "kind": "listing claim" },
+        { "text": "±0.5°F accuracy", "kind": "listing claim, unverified" },
+        { "text": "NIST and NSF certified", "kind": "listing claim, certificate not shown" },
+        { "text": "Auto-rotating LED screen", "kind": "listing claim" },
+        { "text": "IP67 waterproof", "kind": "listing claim" }
+      ],
+      "suits_if": [
+        "You cook chicken, pork or leftovers and want a number rather than a guess.",
+        "You want a thermometer that lives in a drawer and needs no app, battery pairing or charging ritual.",
+        "You are buying your first one and want to spend little."
+      ],
+      "check_before_buying": [
+        "Check it in ice water when it arrives. A glass of ice and water reads 32°F if the instrument is honest.",
+        "Ask whether the probe folds away. A bare probe in a drawer is a probe that gets bent.",
+        "Confirm the battery type before buying, so a dead battery is not a dead thermometer."
+      ],
+      "not_verified": ["price", "availability", "star rating", "review count", "battery type", "battery life", "probe length", "certification documents", "accuracy in independent testing"],
+      "read_next": ["the-dial-is-not-the-temperature"]
+    },
+    {
+      "id": "PJ-05",
+      "slug": "chef-iq-sense-wireless-thermometer",
+      "brand": "CHEF iQ",
+      "short_name": "Sense Smart Wireless Meat Thermometer",
+      "display_title": "CHEF iQ Sense Wireless Meat Thermometer",
+      "category": "thermometers",
+      "type_label": "Wireless leave-in thermometer",
+      "shape": "Probes and hub",
+      "asin": "B0DZFD6R9Z",
+      "listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "affiliate_url": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20",
+      "submitted_link": "https://link.amazon/B0f3GKalj",
+      "submitted_code": "B0f3GKalj",
+      "submitted_code_length": 9,
+      "listing_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "observed_final_url": "https://www.amazon.com/dp/B0DZFD6R9Z?lv=shuf&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&btn_type=ss&gaOptInStatus=true&language=en_US&btn_ref=srctok-15c87a8b6e264a7a&channelId=500&plpRedirect=mhFallback&th=1",
+      "observed_at_utc": "2026-11-20T05:43Z",
+      "image": "roast-board.jpg",
+      "image_alt": "A carved roast chicken resting on a wooden board with thyme and a carving knife.",
+      "deck": "A leave-in probe that talks to a phone. It answers a different question from a handheld: not what is the temperature now, but when will it be ready.",
+      "quick_take": "This is for the cook who puts something in the oven and wants to leave the room. It is not a replacement for an instant-read, because you still need a second opinion when you are checking several pieces. 'Unlimited Range' is the seller's phrase; what it really depends on is your WiFi.",
+      "claims": [
+        { "text": "3 ultra-thin probes", "kind": "listing claim" },
+        { "text": "WiFi, described as unlimited range", "kind": "listing claim, conditional on network" },
+        { "text": "1000°F heat safe", "kind": "listing claim" },
+        { "text": "5 sensors", "kind": "listing claim" },
+        { "text": "Works in BBQ, grill, oven, smoker and air fryer", "kind": "listing claim" },
+        { "text": "Gen3", "kind": "seller's generation label" }
+      ],
+      "suits_if": [
+        "You roast, smoke or grill and want an alert before the food is overdone.",
+        "You cook more than one piece at a time and want a probe in each.",
+        "You are comfortable with a phone app in the kitchen."
+      ],
+      "check_before_buying": [
+        "Ask what happens without WiFi. If the app is the only display, a dropped connection is a blind cook.",
+        "Check the maximum probe temperature against how you cook, and read '1000°F heat safe' as the probe's limit, not the oven's.",
+        "Confirm the app's platform requirements and whether it needs an account."
+      ],
+      "not_verified": ["price", "availability", "star rating", "review count", "battery life", "charging method", "app platform support", "probe diameter", "accuracy in independent testing"],
+      "read_next": ["the-dial-is-not-the-temperature"]
+    }
+  ]
+}

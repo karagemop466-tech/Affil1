@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "note": "Guides in 'published' state are complete and appear in the sitemap and the RSS feed. Guides in 'draft' state publish their question and an honest note about what is missing — no filler is generated to fill the page.",
+    "editorial_calendar": [
+      { "slot": "2026-11-20", "guide": "basket-or-oven-air-fryer", "status": "published" },
+      { "slot": "2026-11-20", "guide": "air-fryer-capacity-checklist", "status": "published" },
+      { "slot": "2026-11-20", "guide": "cleanup-and-counter-space", "status": "published" },
+      { "slot": "2026-11-27", "guide": "multi-function-appliance-questions", "status": "draft" },
+      { "slot": "2026-12-04", "guide": "the-dial-is-not-the-temperature", "status": "draft" }
+    ],
+    "next_topics_found_where": "Search Console queries and the site's own page-view counts, once either exists. Until then, topics are hypotheses and are labelled as such."
+  },
+  "guides": [
+    {
+      "slug": "basket-or-oven-air-fryer",
+      "status": "published",
+      "kicker": "The shape question",
+      "title": "Basket or oven-style air fryer: what should you compare?",
+      "short_title": "Basket or oven-style?",
+      "deck": "The first decision is not brand or size. It is whether you want a drawer you shake or a door you open — and everything else follows from that.",
+      "read_time": "6 min",
+      "updated": "2026-11-20",
+      "hero_related": "PJ-01",
+      "sections": [
+        {
+          "h": "Start with the food, not the machine",
+          "paras": [
+            "Write down what you actually cook in a normal week. Not what you would like to cook. If that list is mostly things you would shake in a bag of oil and salt — chips, wings, vegetables, prawns — a basket is the shape that fits the habit. If it is mostly flat things on a tray, or things you would put in a toaster oven, the door is the better fit.",
+            "This is the single most useful distinction in the category, and it is the one most product pages skip, because a shape is harder to sell than a number."
+          ]
+        },
+        {
+          "h": "What a basket gives you",
+          "paras": [
+            "A basket machine is a hot box with a removable drawer. You pull the drawer, shake it, push it back. There is no tray to rotate, no door to open into a hot kitchen, and the part that gets dirty lifts out in one piece.",
+            "The physical constraint is that a basket is deep. Food sits in a pile, so the layer that crisps best is the layer in contact with the moving air. Overfill it and you are steaming the bottom half.",
+            "Two-drawer versions are a genuinely different proposition from one big drawer. Two independent 3-quart baskets are not the same as a single 6-quart basket, even though both listings can say six quarts. Two drawers buy you two temperatures at once. One drawer buys you depth."
+          ],
+          "list": [
+            "Best for: chips, wings, vegetables, anything you would shake.",
+            "Watch for: how much food you can put in without crowding the air path.",
+            "Ask before buying: can both drawers run different temperatures at the same time?"
+          ]
+        },
+        {
+          "h": "What an oven gives you",
+          "paras": [
+            "An oven-style air fryer is a small convection oven with an air-fry mode. You get a flat interior, usually one or two shelves, and a door. That means tray bakes, toast, reheating, and food laid out in a single layer rather than piled in a drawer.",
+            "The trade is thermal mass. A large interior takes longer to come to temperature than a small drawer, and the surfaces that get dirty are the walls of the cavity, not a basket you can carry to the sink. French-door versions make the interior easier to reach without pulling a hot tray towards you, which is a real advantage for anyone who has to be careful around heat."
+          ],
+          "list": [
+            "Best for: tray bakes, toast, single-layer cooking, roasting a joint.",
+            "Watch for: door swing plus machine depth. Measure both, not one.",
+            "Ask before buying: are the presets just programs, or can I set temperature and time myself?"
+          ]
+        },
+        {
+          "h": "Four comparisons that actually change the answer",
+          "paras": [
+            "Ignore 'air fry' as a feature name; almost everything in this category claims it. Compare these instead."
+          ],
+          "table": {
+            "caption": "What to compare, by shape",
+            "cols": ["Question", "Basket", "Oven"],
+            "rows": [
+              ["How do I get the food out?", "Pull a drawer. One hot part to handle.", "Open a door, reach in, pull a tray."],
+              ["Can I cook two things differently?", "Only with two drawers, otherwise sequentially.", "Yes, on separate shelves, if the machine allows different shelf settings."],
+              ["What gets dirty?", "The basket and crisper plate, which lift out.", "The cavity walls, the shelves and the door glass."],
+              ["What does it occupy on the counter?", "A deep footprint with clearance in front.", "A wide, shallow footprint with clearance for the door."]
+            ]
+          }
+        },
+        {
+          "h": "The size trap",
+          "paras": [
+            "Quarts are not comparable across shapes. A 6-quart basket is a volume of food. A 26-quart oven is a volume of air. The oven number will always look larger and does not mean more chips in one batch, because chips need to be spread out, not stacked.",
+            "If capacity is your deciding factor, read the capacity guide rather than the spec sheet."
+          ]
+        },
+        {
+          "h": "What we do not know",
+          "paras": [
+            "This guide does not tell you which machine is better. We have not tested these appliances, and we do not publish performance claims we cannot source. What is on the product pages is the seller's own listing language, labelled as such, plus the questions worth asking before you spend money."
+          ]
+        }
+      ],
+      "products": ["PJ-01", "PJ-02", "PJ-03"],
+      "faq": [
+        {
+          "q": "Is an oven-style air fryer just a convection oven?",
+          "a": "Mechanically, an air fryer is a small convection oven with a high-velocity fan. The practical differences are size, preheat time and how you load the food. We describe the shapes and their trade-offs rather than making a claim about which is 'really' an air fryer."
+        },
+        {
+          "q": "Are two drawers better than one big basket?",
+          "a": "Only if you cook two different things at once often enough to notice. Two drawers cost you depth per drawer; one basket costs you the ability to run two temperatures. Count how often you would use the second drawer in a normal week."
+        },
+        {
+          "q": "Do I need a multi-function appliance?",
+          "a": "If the machine will replace a toaster oven or a dehydrator you already use, the extra modes earn their space. If it will only ever run in air-fry mode, you are paying for a larger cavity to heat."
+        }
+      ],
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "next": ["air-fryer-capacity-checklist", "cleanup-and-counter-space"]
+    },
+    {
+      "slug": "air-fryer-capacity-checklist",
+      "status": "published",
+      "kicker": "The sizing question",
+      "title": "A no-hype checklist for comparing air-fryer capacity",
+      "short_title": "Capacity checklist",
+      "deck": "The number on the box is a volume, not a portion. Here is how to turn it into something you can check against your own kitchen in five minutes.",
+      "read_time": "5 min",
+      "updated": "2026-11-20",
+      "hero_related": "PJ-03",
+      "sections": [
+        {
+          "h": "Why quarts mislead",
+          "paras": [
+            "A quart is a volume. Chips, wings and vegetables need surface, not depth. A deep basket can hold six quarts of food and still crisp only the handful of pieces touching the moving air. Meanwhile an oven with a much larger interior might hold fewer chips in a single layer than a basket does in a loose pile.",
+            "So the useful question is not 'how many quarts' but 'how much food can I spread out in one go, and how many times will I have to repeat that on a weeknight'."
+          ]
+        },
+        {
+          "h": "The five-minute check",
+          "paras": [
+            "Do this before you look at a single product page."
+          ],
+          "list": [
+            "Count the people you cook for on a normal night, not a holiday.",
+            "Decide what one batch has to achieve: a side dish, or the whole meal.",
+            "Write down the largest thing you would put in it — a whole chicken, a tray of vegetables, four portions of chips.",
+            "Measure the counter space you are willing to give up permanently, in width and in depth.",
+            "Measure the sink. Whatever lifts out has to fit in it."
+          ]
+        },
+        {
+          "h": "Turning that into a shortlist",
+          "paras": [
+            "Two to four people eating a side dish from one batch is a different requirement from two people cooking a whole meal in the machine. A dual-basket machine lets you split the job — protein in one drawer, vegetables in the other — which changes the capacity question from 'how big' to 'how divisible'.",
+            "A large single basket is the simplest answer if you cook one thing at a time. An oven is the answer if the food wants to lie flat. Neither is bigger in the way the spec sheet implies."
+          ],
+          "table": {
+            "caption": "Capacity, read by shape",
+            "cols": ["Shape", "What the number measures", "The check that matters"],
+            "rows": [
+              ["Single basket", "Usable volume of one drawer", "Does a single layer of your usual food fit without crowding?"],
+              ["Dual basket", "Two drawers, each smaller", "Do you need two temperatures, or just more room?"],
+              ["Oven", "Interior volume of the cavity", "Does your food lie flat on one shelf, and does the door swing clear?"]
+            ]
+          }
+        },
+        {
+          "h": "The two numbers sellers leave out",
+          "paras": [
+            "External dimensions and weight. They are the numbers that decide whether the machine lives on your counter or in a cupboard, and they are rarely in the listing title. If a page on this site cannot cite them from the listing, they are listed as unverified rather than estimated.",
+            "The second omission is noise. No listing title in our set states a decibel figure, so we make no claim about how loud any of these machines is."
+          ]
+        }
+      ],
+      "products": ["PJ-01", "PJ-02", "PJ-03"],
+      "faq": [
+        {
+          "q": "Is a bigger air fryer always better?",
+          "a": "No. A larger cavity takes longer to heat and takes up more counter. The right size is the smallest one that fits a single layer of what you actually cook."
+        },
+        {
+          "q": "Does a 6-quart dual basket hold as much as a 6-quart single basket?",
+          "a": "Not in the same way. Two 3-quart drawers hold two separate loads. One 6-quart basket holds a deeper pile, which is better for some foods and worse for crisping others."
+        },
+        {
+          "q": "Why is there no price or rating next to the sizes?",
+          "a": "Because Amazon permits showing price, availability and Amazon-supplied review data only under conditions this site does not currently meet. Rather than publish stale numbers, we publish none and send you to the listing."
+        }
+      ],
+      "sources": ["https://affiliate-program.amazon.com/help/operating/policies"],
+      "next": ["basket-or-oven-air-fryer", "cleanup-and-counter-space"]
+    },
+    {
+      "slug": "cleanup-and-counter-space",
+      "status": "published",
+      "kicker": "The living-with-it question",
+      "title": "How to assess cleanup and counter-space trade-offs",
+      "short_title": "Cleanup & counter space",
+      "deck": "The appliance you resent is the one that does not fit. Six questions that decide whether a machine earns a permanent place on your counter.",
+      "read_time": "4 min",
+      "updated": "2026-11-20",
+      "hero_related": "PJ-02",
+      "sections": [
+        {
+          "h": "Measure the space the machine needs, not the space it occupies",
+          "paras": [
+            "Every air fryer needs more room than its own footprint. A drawer needs clear space in front of it to pull out, plus room for your hand. A door needs its swing. A machine under a wall cabinet needs clearance above for the lid, the handle or the exhaust.",
+            "The mistake is measuring the gap on the counter and not the volume around it. Take the tape measure to the actual place the machine will live, and measure the path it has to travel in and out of the cupboard if that is where it will go."
+          ]
+        },
+        {
+          "h": "Then measure the sink",
+          "paras": [
+            "The part that gets washed is the part that decides whether you use the machine on a Tuesday. A large single basket is easy to clean and awkward to fit in a small sink. An oven's shelves and cavity need wiping in place, which is less work per use but harder to do properly.",
+            "If the removable parts do not fit flat in your sink, you will end up cleaning them at an angle, badly."
+          ]
+        },
+        {
+          "h": "Six questions, in order",
+          "paras": ["Run these against any machine you are considering. They take two minutes and eliminate most of them."],
+          "list": [
+            "Does the removable part fit flat in my sink?",
+            "Is there clear space in front of the machine for a drawer or a door?",
+            "Is there clearance above it for the lid, handle or vents?",
+            "Can I reach the back of the interior without pulling the machine out?",
+            "Are the surfaces that get dirty removable, or do they have to be wiped in place?",
+            "Where does the cord go, and is there a socket that is not behind the machine?"
+          ]
+        },
+        {
+          "h": "The counter-space maths nobody does",
+          "paras": [
+            "An appliance on the counter is a permanent rent payment on your kitchen. If it saves you ten minutes a week but occupies the only workspace you have, the trade is bad regardless of how well it cooks.",
+            "The honest test: would you still want it if it never went in a cupboard? If the answer is no, the machine will end up in the cupboard, and then it will stop being used. That is not a product failure. It is a sizing failure."
+          ]
+        }
+      ],
+      "products": ["PJ-01", "PJ-02", "PJ-03"],
+      "faq": [
+        {
+          "q": "Are dishwasher-safe baskets actually dishwasher-safe?",
+          "a": "The listings in our set claim dishwasher-safe baskets. We reproduce the claim and label it as the seller's. Whether the coating survives years of dishwasher cycles is exactly the kind of thing a listing will not tell you."
+        },
+        {
+          "q": "Is an oven-style air fryer harder to clean than a basket?",
+          "a": "Different, rather than harder. A basket is one part you can soak. An oven is a cavity you wipe, plus shelves and door glass. Which one you find more annoying depends on your sink and your patience."
+        },
+        {
+          "q": "Does a bigger machine take longer to clean?",
+          "a": "Usually more surface, but the number of parts matters more than the size. Count the parts that touch food before you count the quarts."
+        }
+      ],
+      "sources": [],
+      "next": ["basket-or-oven-air-fryer", "air-fryer-capacity-checklist"]
+    },
+    {
+      "slug": "multi-function-appliance-questions",
+      "status": "draft",
+      "kicker": "Queued",
+      "title": "Questions to ask before buying a multi-function kitchen appliance",
+      "short_title": "Multi-function questions",
+      "deck": "Scheduled for the week of 27 November 2026. The page below states what it will cover and what it will not claim.",
+      "read_time": "—",
+      "updated": "2026-11-20",
+      "hero_related": "PJ-02",
+      "sections": [
+        {
+          "h": "What this guide will cover",
+          "paras": [
+            "Multi-function appliances sell on the number of modes. This guide will work through which modes are genuinely separate capabilities and which are the same heating element with a different label — and how to tell from a listing before you buy.",
+            "It will not rank the modes, claim a machine is good at any of them, or repeat any performance claim that is not in a seller's listing."
+          ]
+        },
+        {
+          "h": "Why it is not written yet",
+          "paras": [
+            "Writing it well needs facts this site does not hold: what each preset actually does on the machines we cover, and whether the modes run at independent temperatures. Those are in the manuals, not the listing titles. Publishing a guess would break the rule this site is built on, so the page says so and waits."
+          ]
+        }
+      ],
+      "products": ["PJ-02"],
+      "faq": [],
+      "sources": [],
+      "next": ["basket-or-oven-air-fryer"]
+    },
+    {
+      "slug": "the-dial-is-not-the-temperature",
+      "status": "draft",
+      "kicker": "Queued",
+      "title": "The dial is not the temperature: what a thermometer actually tells you",
+      "short_title": "The dial is not the temperature",
+      "deck": "Scheduled for the week of 4 December 2026. A short guide to reading an instant-read against USDA's safe minimum internal temperatures.",
+      "read_time": "—",
+      "updated": "2026-11-20",
+      "hero_related": "PJ-04",
+      "sections": [
+        {
+          "h": "What this guide will cover",
+          "paras": [
+            "Oven dials and air-fryer presets set an air temperature, not a food temperature. This guide will explain the difference, how to take a reading properly, and where to find the official minimum internal temperatures rather than a blog's version of them."
+          ]
+        },
+        {
+          "h": "The one sourced fact already available",
+          "paras": [
+            "USDA's Food Safety and Inspection Service publishes a safe minimum internal temperature chart: poultry to 165°F, ground meats to 160°F, whole cuts of beef, pork, veal and lamb to 145°F with a three-minute rest, and leftovers to 165°F. That chart is the authority this guide will cite, and it is linked in the sources on this page.",
+            "The rest of the guide waits on one thing: a checked reading from the thermometers in this shop. Until we have that, the page will not claim either one is accurate."
+          ]
+        }
+      ],
+      "products": ["PJ-04", "PJ-05"],
+      "faq": [],
+      "sources": ["https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart"],
+      "next": ["basket-or-oven-air-fryer"]
+    }
+  ]
+}
