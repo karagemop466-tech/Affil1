@@ -106,3 +106,21 @@ broken · `_tools/check_image_register.py` 0 errors (2 pre-existing "registered 
 unreferenced" warnings for `holiday-table` and `feature-holiday`) · `_tools` unit tests
 OK · `_analytics` OK · `_measurement` OK · `_decision-support/validate.py` PASS ·
 `_platform/verify_edition.py` 2,230 checks 0 errors.
+
+## Release receipt
+
+[PR #130](https://github.com/karagemop466-tech/Affil1/pull/130) merged into `main` as
+`0cb598a6cd8029ce8cb98e256fb5137a76dc5851` (2026-11-20 08:01:35 UTC). Checks on the merge
+commit: `build` pass, `launch` pass, `verify-edition` pass, `deploy` skipped as designed on a
+`legacy` Pages configuration. `pages build and deployment` run `44699295011` succeeded;
+`gh api repos/karagemop466-tech/Affil1/pages` reports `status: "built"`.
+
+Post-deploy read of the live host: `verification/recheck.html` renders both registers (5 matched
+rows with their listing sources; the two home-page fall-throughs and two failed fetches listed
+beside them, plus the six-row gap map); the front page carries the holiday edit with its gift
+band; `guides/meal-prep-sunday.html` loads `assets/img/meal-prep-engraved`. Nothing on the shop
+surfaces was left pointing at a short link.
+
+Carried over, unfixed by choice: the product cards still print the one-click-basket explanation,
+which is transparency rather than sales copy and belongs to whoever owns `cta.py`; and the
+`_platform/README.md` path drift noted above.
