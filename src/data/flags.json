@@ -292,7 +292,8 @@
       "expected": "Every validator in tools/ runs clean against the current data.",
       "found": "python3 tools/validate.py stopped with KeyError 'supplied_path_code_length' because the product schema had been renamed. The validator also pointed at a retired section. Both were fixed in PR #77: field names now match the schema, the validator checks the published pages, and it passes (1441 checks, 0 warnings).",
       "reading": "The gate had been red on main. That is the reason this flag was raised, and the fix is recorded here.",
-      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",      "blocks": "nothing",
+      "impact": "The Pages workflow runs validate.py before deploy, so the gate is green again. Keep the record so a future rename is caught.",
+      "blocks": "nothing",
       "to_check": [
         "tools/validate.py",
         "src/data/products.json"
@@ -312,6 +313,27 @@
       ],
       "impact": "The comparison table keeps its blank price column by rule, and the site's own price_rule wording was updated to name the deprecation rather than pointing at an API that no longer answers.",
       "blocks": "any live price, rating or availability display, until the sales threshold is met"
+    },
+    {
+      "id": "FLG-023",
+      "severity": "high",
+      "title": "P-04's destination claim rests on one observation; four recorded passes saw only the bot interstitial",
+      "expected": "One consistent observation status per submitted link, or a published disagreement.",
+      "found": "src/data/products.json and FLG-004/FLG-016 carry P-04 (B0c8moW59) -> B0DHZTCNR5 (ThermoMaven) as resolved. But src/data/reverification.json records P-04 as unresolved (bot interstitial on every attempt), and a fourth independent pass (obs-83e015f6, 2026-11-20 05:18-05:22Z) reached only the /checkpoint/continue interstitial again, as did the recovered PR #15 register and the earliest archived register. Only one session claims to have reached a product page for this link.",
+      "impact": "Any page treating P-04 as an identified product (products/p-04.html, the home shortlist's P-04 buy link) rests on a single disputed observation. Four recorded passes saw no product page.",
+      "reading": "Do not settle by preference. Re-observe from the enrolled Associates workflow (one link, destination and tracking report) and update both registers together. Until then the honest status for P-04 is disputed, and the B0DHZTCNR5 mapping stays visible as one session's observation.",
+      "blocks": "A confident P-04 identity claim; any five-of-five resolved claim.",
+      "to_check": [
+        "src/data/products.json row for P-04",
+        "src/data/reverification.json rows P-04 and additional_passes.obs-83e015f6",
+        "FLG-004 and FLG-016 (the reconciliation this contradicts)",
+        "products/p-04.html identity note"
+      ],
+      "sources": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/checkpoint/continue"
+      ],
+      "raised_by": "session-arena-83e015f6, 2026-11-20"
     }
   ]
 }

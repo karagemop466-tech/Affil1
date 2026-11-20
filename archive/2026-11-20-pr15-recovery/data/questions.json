@@ -1,0 +1,161 @@
+{
+  "$comment": "DECISION-READINESS REGISTER. Each row is a question that must be answered before a decision can reasonably be made. 'have' = what we actually hold, with a source id where one exists. 'missing' = what we do not hold. 'blocks' = the decision it gates. 'how_to_get' = a concrete way to obtain it. Nothing here is answered by inference.",
+  "register_version": 1,
+  "updated_at": "2026-11-20",
+  "questions": [
+    {
+      "id": "Q-01",
+      "question": "Which ASIN did each of the five short links intend to point at?",
+      "have": "Observed redirect targets for four of five links (P1, P2, P3, P5). A redirect is evidence of behaviour, not a statement of intent.",
+      "missing": "A statement from the owner, or an Associates tracking report, naming the intended ASIN for each link.",
+      "why_it_matters": "Amazon identifies products by ASIN (S22). Without intent, we cannot tell a correct link from a link that redirects to the wrong variant.",
+      "blocks": "Publishing final product pages, and any claim that a link is correct.",
+      "who_can_answer": "Link owner",
+      "how_to_get": "Owner confirms each intended ASIN, or exports a dated click report from Associates Central showing the landing ASIN per link.",
+      "current_handling": "Four products published on observed ASINs, marked observed_only. One link unresolved."
+    },
+    {
+      "id": "Q-02",
+      "question": "What is the compliance status of the link.amazon short-link format?",
+      "have": "The Program Policies require Special Links with the Associates tag, and prohibit shortening that obscures an Amazon destination (S02, S03). The supplied links use link.amazon and carry no visible tag in the submitted form.",
+      "missing": "Amazon's own statement on whether link.amazon links generated inside Associates Central count as Special Links, and how the tag is carried.",
+      "why_it_matters": "If the format is non-compliant, publishing it puts the account at risk. If it is compliant, publishing it is fine. Both readings are available and neither is established.",
+      "blocks": "Whether to keep short links anywhere on the site.",
+      "who_can_answer": "Amazon Associates support, or the owner's own Associates Central link generator",
+      "how_to_get": "Regenerate one link in Associates Central's link builder and compare the resulting URL shape; optionally open a support case.",
+      "current_handling": "Treated as unresolved (FLG-003). No claim made either way. Outbound anchors use the canonical /dp/ URL with the supplied tag."
+    },
+    {
+      "id": "Q-03",
+      "question": "Is shopnow047c-20 an approved, active Store ID?",
+      "have": "The tag string as supplied by the owner. It contains no Amazon mark, which satisfies S13.",
+      "missing": "Confirmation that the ID is enrolled and in good standing. Associates Central requires sign-in (S17).",
+      "why_it_matters": "An unapproved tag earns nothing, and the site would be advertising a track that does not exist.",
+      "blocks": "Any revenue expectation, and every claim on the measurement page.",
+      "who_can_answer": "Associates account holder",
+      "how_to_get": "Sign in to Associates Central and read the Store ID and account status.",
+      "current_handling": "Tag is used as supplied. No revenue is claimed anywhere."
+    },
+    {
+      "id": "Q-04",
+      "question": "What commission rate applies to each of these product categories?",
+      "have": "The Commission Income Statement appendix links to a rate schedule (S17).",
+      "missing": "The schedule itself. The URL redirects to sign-in, so no rate could be read.",
+      "why_it_matters": "Category rates decide which products are worth featuring and which guides are worth writing.",
+      "blocks": "Any ranking of products by commission potential, and the choice of the fifth guide topic.",
+      "who_can_answer": "Associates account holder",
+      "how_to_get": "Open the Standard Commission Income schedule while signed in, or read the rate card in Associates Central.",
+      "current_handling": "No commission percentage appears anywhere on the site."
+    },
+    {
+      "id": "Q-05",
+      "question": "Is there real search demand for the four guide topics?",
+      "have": "Four working titles, chosen as editorial hypotheses. No volume, difficulty, or interest data.",
+      "missing": "Search Console query data, or any keyword tool export. Search Console is not connected.",
+      "why_it_matters": "The brief says pick the next topic from measured queries, not instinct. Without measurement the cadence is guesswork.",
+      "blocks": "Guide five, and the decision to scale content volume.",
+      "who_can_answer": "Owner (property verification), then data",
+      "how_to_get": "Verify the Pages URL in Search Console, submit sitemap.xml, wait for impressions.",
+      "current_handling": "Guides published as stated hypotheses, with an explicit note that popularity is not claimed."
+    },
+    {
+      "id": "Q-06",
+      "question": "Where will the click endpoint actually run?",
+      "have": "A defined, documented endpoint contract and a client beacon (SG-05). No server.",
+      "missing": "A host for the write-only endpoint, and the retention period for the counters.",
+      "why_it_matters": "Until a host exists, the beacon fires into nothing and every click count is zero.",
+      "blocks": "Reporting any click number as real.",
+      "who_can_answer": "Owner",
+      "how_to_get": "Pick a host (a small function endpoint is enough) and set its retention window.",
+      "current_handling": "Beacon is inert and says so. The measurement page shows zero and labels it as not connected."
+    },
+    {
+      "id": "Q-07",
+      "question": "Who is the author of record?",
+      "have": "An organisation byline: 'the shopnow047c-20 desk'.",
+      "missing": "A real person's name, and their basis for writing about kitchen appliances.",
+      "why_it_matters": "Authorship is the difference between a publication and a generated site, and the FTC rules on untested product claims (S19) make an author's actual experience the limiting factor on what can be said.",
+      "blocks": "First-person testing claims, and the author page.",
+      "who_can_answer": "Owner",
+      "how_to_get": "Supply a name and a one-line credential.",
+      "current_handling": "No first-person claims anywhere. Copy is written as comparison criteria, not as verdicts."
+    },
+    {
+      "id": "Q-08",
+      "question": "What is the canonical base URL, and is it the only host in play?",
+      "have": "GitHub Pages is enabled and built, publishing from main at the repo's Pages URL (S21).",
+      "missing": "Confirmation that no custom domain or second host will also serve the site.",
+      "why_it_matters": "Two hosts serving the same pages split ranking signals and create duplicate canonicals (S20).",
+      "blocks": "Canonical, sitemap, and feed absolute URLs.",
+      "who_can_answer": "Owner",
+      "how_to_get": "Confirm whether a custom domain is planned. If yes, change one constant in the data file and rebuild.",
+      "current_handling": "One base URL constant, self-referencing canonicals, one sitemap, one feed."
+    },
+    {
+      "id": "Q-09",
+      "question": "What privacy notice and consent basis apply to the click counter?",
+      "have": "A counter designed to store no identifier: no cookie, no IP, no user agent, no session id. Only an aggregate per-product, per-day count.",
+      "missing": "A written privacy notice, and a decision on whether the counter is even personal data under the applicable regime.",
+      "why_it_matters": "The Participation Requirements put the data-disclosure duty on the associate (S24). Aggregate counters are low risk; an unwritten notice is still a gap.",
+      "blocks": "Turning the counter on in production.",
+      "who_can_answer": "Owner, with legal review if the site serves EU or UK readers",
+      "how_to_get": "Publish a short privacy notice describing the counter, then enable the endpoint.",
+      "current_handling": "Counter shipped inert. No third-party script, so no third-party cookie."
+    },
+    {
+      "id": "Q-10",
+      "question": "Were these five products chosen for a reason we can state?",
+      "have": "Five links. Four resolved to three air fryers and one meat thermometer.",
+      "missing": "Any stated selection criterion, and any evidence they are the owner's actual recommendations.",
+      "why_it_matters": "A shop needs a reason to stock what it stocks. Without one, the shelf is arbitrary and the copy cannot honestly say why these five.",
+      "blocks": "A 'why we picked these' section, and any ranking.",
+      "who_can_answer": "Owner",
+      "how_to_get": "State the criterion in one sentence, or send a wider list to choose from.",
+      "current_handling": "No ranking, no 'best of' claim. Pages describe decision criteria instead."
+    },
+    {
+      "id": "Q-11",
+      "question": "Is the fifth guide topic, or any future topic, already covered better elsewhere?",
+      "have": "Four published guides. No competitive analysis.",
+      "missing": "Any view of what already ranks for these questions.",
+      "why_it_matters": "Publishing into a saturated query with a thin page wastes the cadence.",
+      "blocks": "Cadence decisions after guide four.",
+      "who_can_answer": "Owner, or a later session with research scope",
+      "how_to_get": "Run a small competitive review per candidate topic before writing.",
+      "current_handling": "Not attempted. Flagged rather than guessed."
+    },
+    {
+      "id": "Q-12",
+      "question": "What does 'conversion' mean here, and who reports it?",
+      "have": "A defined event list, and an empty ledger schema (S10, S11).",
+      "missing": "The reporting relationship: only Amazon's own reports can legitimately supply reported orders.",
+      "why_it_matters": "Self-reported conversion numbers are unverifiable. Anything not from a first-party report cannot enter the ledger.",
+      "blocks": "Any conversion rate shown on the site.",
+      "who_can_answer": "Owner",
+      "how_to_get": "Commit to pasting numbers only from Associates Central reports, with a dated provenance note.",
+      "current_handling": "Ledger is empty by design and says so."
+    },
+    {
+      "id": "Q-13",
+      "question": "Do the products have variant ambiguity that a single ASIN hides?",
+      "have": "Two of the four resolved listings offer multiple sizes or probe counts at their own URLs.",
+      "missing": "Which variant the owner intends for each.",
+      "why_it_matters": "An ASIN can be variant-specific. The April 2026 change narrows onsite commission to the same ASIN variant as the linked detail page (S15 context). Linking a 3-probe page when the intent was 2 probes earns on the wrong item.",
+      "blocks": "Final confirmation of P2 and P5.",
+      "who_can_answer": "Owner",
+      "how_to_get": "State the intended variant alongside the ASIN.",
+      "current_handling": "Published pages describe the family and the observed listing; no variant claim is made."
+    },
+    {
+      "id": "Q-14",
+      "question": "What happens if a listing is delisted or the ASIN changes?",
+      "have": "A build gate that checks internal links, and a dated observation per product.",
+      "missing": "An outbound link-health check, which cannot run in the build without network access at build time.",
+      "why_it_matters": "Amazon requires removal of Program Content that is no longer displayed (S02, content clause). A dead product page is a compliance defect, not just a bad link.",
+      "blocks": "Nothing today. Becomes blocking once traffic is meaningful.",
+      "who_can_answer": "Engineering",
+      "how_to_get": "Add a scheduled workflow that fetches each outbound URL weekly and opens an issue on failure.",
+      "current_handling": "Recorded as a known gap on the Flagged for Review page."
+    }
+  ]
+}

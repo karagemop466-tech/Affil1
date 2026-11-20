@@ -54,3 +54,10 @@ Base: `f041c75` on `main`. Owned files: `measurement/collector.py` only.
 ## Status
 
 Done for the scope of this session. Merge and deployment are recorded in the PR section below.
+
+## Delivery record
+
+- [PR #87](https://github.com/karagemop466-tech/Affil1/pull/87) merged to `main` as `1b09bbc28296ba1088bc6a08cc2ccb62d25d4f60` (merge commit, `--merge`).
+- PR checks: `Build, check and deploy` success; `Affiliate launch checks` failure on the pre-existing sweep (see irregularity 1). It was not caused by this change and was not silenced.
+- `pages build and deployment` on `1b09bbc`: **success** (run 44686496689). Live front page fetched after deploy and renders the current edition.
+- Follow-up: this record is committed in a separate PR, which is not itself recorded here.
