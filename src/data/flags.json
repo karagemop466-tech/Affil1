@@ -31,10 +31,10 @@
       "reading": "This is not proof the links are untagged — the tag may be applied server-side by the short-link service after the arrival page was captured. It is proof that this build could not confirm attribution, which is different.",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
-        "One click from the owner's device, then the Associates click report"
+        "https://affiliate-program.amazon.com/home/reports"
       ],
       "impact": "No page claims a click will be attributed. The site says attribution is unconfirmed.",
-      "blocks": "any revenue expectation"
+      "blocks": "tagged replacement links and revenue claims"
     },
     {
       "id": "FLG-003",
@@ -214,7 +214,7 @@
       "severity": "high",
       "title": "P-04 and P-05 later observations differ from the earlier register",
       "expected": "A confirmed intended destination for each supplied link, kept separate from observations.",
-      "found": "On 20 November 2026 one later page-fetch of P-04 reached B0DZFD6R9Z (CHEF iQ Sense); P-05 reached B0DHZTCNR5 (ThermoMaven). Another session reported the opposite mapping on the same date. Earlier P-04 attempts reached a checkpoint.",
+      "found": "On 20 November 2026 one later page-fetch of P-04 reached B0DZFD6R9Z (CHEF iQ Sense); P-05 reached B0DHZTCNR5 (ThermoMaven). Another session reported the opposite mapping on the same date. Earlier P-04 attempts reached a checkpoint. This integration recheck again reached P-04 B0DHZTCNR5 and P-05 B0DZFD6R9Z; the opposite observation remains on record.",
       "reading": "The differing observations are not proof of the intended products or a stable redirect. Do not infer attribution or identify a winner between observations.",
       "to_check": [
         "https://link.amazon/B0c8moW59",
@@ -240,6 +240,32 @@
       ],
       "impact": "Consolidation and full re-verification are still required.",
       "blocks": "consistent site-wide product facts"
+    },
+    {
+      "id": "FLG-018",
+      "severity": "high",
+      "title": "Commercial hosting needs its own policy review",
+      "expected": "The host must allow the planned use.",
+      "found": "GitHub Pages is the current static editorial host. Its published usage limits restrict hosting an online business or a site primarily facilitating transactions.",
+      "reading": "The editorial publication is not checkout or a monetized SaaS. The planned commercial platform needs a suitable host and hosting review before activation.",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits"
+      ],
+      "impact": "Keep production collection and monetization expansion separate from this static publication.",
+      "blocks": "commercial rollout"
+    },
+    {
+      "id": "FLG-019",
+      "severity": "high",
+      "title": "Amazon Program Content is not a model-training dataset",
+      "expected": "Review rights and scope before using Amazon material in any automated workflow.",
+      "found": "Participation Requirements §5 restricts use of Special Links or Program Content to develop machine learning models or related technology without express prior written approval.",
+      "reading": "Do not send Amazon Program Content to a drafting or model pipeline as a default source. The restriction is distinct from price and availability rules.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "impact": "Keep any drafting experiment restricted to editorial inputs independently cleared for the intended use.",
+      "blocks": "model development using Program Content or Special Links without approval"
     }
   ]
 }
