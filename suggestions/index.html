@@ -4,14 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Suggestions and decisions | Crisp &amp; Counter</title>
+<<<<<<< HEAD
 <meta name="description" content="25 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+=======
+<meta name="description" content="24 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+>>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
 <meta property="og:title" content="Suggestions and decisions | Crisp &amp; Counter">
+<<<<<<< HEAD
 <meta property="og:description" content="25 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+=======
+<meta property="og:description" content="24 proposed changes with cost, risk and the question each depends on, grouped into three paths a reviewer can choose between before anything is built.">
+>>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/suggestions/">
 <meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-counter-w1280.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +54,11 @@
 <header class="pagehead"><div class="wrap">
   <p class="eyebrow">Suggestions</p>
   <h1>Choose a direction,<br>then choose the rows</h1>
+<<<<<<< HEAD
   <p class="dek">3 coherent paths and 25 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
+=======
+  <p class="dek">3 coherent paths and 24 individual proposals. Each proposal says what it changes, what it costs, what could go wrong, and which open question has to be answered before it makes sense to approve. Nothing here has been implemented by pressing a button.</p>
+>>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
   <p class="page-meta">Decisions are stored in your browser only &middot; nothing transmitted &middot; no account</p>
 </div></header>
 <section class="section "><div class="wrap">
@@ -59,7 +71,11 @@
   <div class="decide-tools">
     <button type="button" class="btn btn-small" data-action="copy">Copy decisions</button>
     <button type="button" class="btn btn-ghost btn-small" data-action="reset">Clear all</button>
+<<<<<<< HEAD
     <p class="decide-count" data-count>0 of 25 decided</p>
+=======
+    <p class="decide-count" data-count>0 of 24 decided</p>
+>>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
   </div>
 </div></div></section>
 <section class="section section-tint"><div class="wrap">
@@ -521,6 +537,51 @@
     <span class="scard-id">S-31</span>
     <h3>Triage the stale open pull requests before the next merge wave</h3>
     <span class="scard-effort">under an hour of triage with the PR list and the board open side by side</span>
+<<<<<<< HEAD
+=======
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Roughly twenty pull requests opened on 2026-11-20 predate the current main (several reference directories that have since been underscore-renamed, so their branches cannot merge cleanly). They sit on the board as if reviewable, but approving any of them would reintroduce retired surfaces. Each should be either closed with a one-line reason or explicitly marked needs-rebase, so the next integration session works from an honest queue.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low, provided every closure names what superseded it — the board&#x27;s rule against discarding another session&#x27;s work applies to PRs as much as to files.</dd></div>
+      <div><dt>Depends on</dt><dd>nothing</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Do it before the next feature PR, not after</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-32">
+  <div class="scard-head">
+    <span class="scard-id">S-32</span>
+    <h3>Retire or wire the ten orphaned generator modules in _tools/</h3>
+    <span class="scard-effort">an hour to read each and decide</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>Ten files in _tools/ look like live editorial entry points and are not reachable from the build. The next session that edits one of them will publish nothing and believe it did.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Deleting content that a reviewer still wants. Move them under _archive/ with the editions they built rather than deleting.</dd></div>
+      <div><dt>Depends on</dt><dd>FLG-036</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Accept in the next integration pass, not in a content pass</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-33">
+  <div class="scard-head">
+    <span class="scard-id">S-33</span>
+    <h3>Add a dated &#x27;checked against the source&#x27; line to every guide that quotes a figure</h3>
+    <span class="scard-effort">one template change plus one register field</span>
+>>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
   </div>
   <div class="scard-body">
     <div class="scard-why"><p class="q-label">Why</p><p>Roughly twenty pull requests opened on 2026-11-20 predate the current main (several reference directories that have since been underscore-renamed, so their branches cannot merge cleanly). They sit on the board as if reviewable, but approving any of them would reintroduce retired surfaces. Each should be either closed with a one-line reason or explicitly marked needs-rebase, so the next integration session works from an honest queue.</p></div>
@@ -612,6 +673,27 @@
       <div><dt>Risk</dt><dd>None. The only risk is adopting it and skipping it.</dd></div>
       <div><dt>Depends on</dt><dd>Q-03 (click attribution) is the top of the queue; Q-23/Q-24 follow</dd></div>
       <div><dt>Recommendation</dt><dd class="rec">Accept, and record each closing artefact on the questions page the same day</dd></div>
+    </dl>
+  </div>
+  <div class="scard-foot">
+    <span class="decide-label">Your decision</span>
+    <button type="button" class="decide" data-decision="accept" aria-pressed="false">Accept</button>
+    <button type="button" class="decide" data-decision="hold" aria-pressed="false">Hold</button>
+    <button type="button" class="decide" data-decision="reject" aria-pressed="false">Reject</button>
+    <span class="decide-note" data-note>Undecided</span>
+  </div>
+</article><article class="scard" id="S-34">
+  <div class="scard-head">
+    <span class="scard-id">S-34</span>
+    <h3>Choose one indexable taxonomy: categories as the shop, the register as the appendix</h3>
+    <span class="scard-effort">one line of metadata plus a rebuild</span>
+  </div>
+  <div class="scard-body">
+    <div class="scard-why"><p class="q-label">Why</p><p>/products/ and /categories/ currently both describe five products, both in the sitemap. The shop-facing one should win the index and the register-facing one should stay reachable for checking, not compete. Precedent: S-23 and S-15 settled the same question at edition scale, which is why the decision is worth ten minutes rather than a debate.</p></div>
+    <dl class="scard-meta">
+      <div><dt>Risk</dt><dd>Low. Reversible, and the checker still sees every page either way.</dd></div>
+      <div><dt>Depends on</dt><dd>Q-26</dd></div>
+      <div><dt>Recommendation</dt><dd class="rec">Do this before any promotion or paid push sends traffic to a URL you may retire</dd></div>
     </dl>
   </div>
   <div class="scard-foot">

@@ -165,10 +165,25 @@ def build(page_dir, products, meta):
   </a>
 </div>""", cls="paths")
 
+<<<<<<< HEAD
     # Select the seasonal feature by slug, not by position: parallel sessions
     # inserting guides silently shift positional indexes (this happened once).
     by_slug = {g["slug"]: g for g in GUIDES}
     feature = by_slug.get("air-fryer-gift-guide", GUIDES[7])
+=======
+    # The seasonal slot's standing copy is written for the holiday-hosting guide,
+    # so select it by slug rather than by position: parallel sessions inserting
+    # guides silently shifted GUIDES[7] onto a different guide once already.
+    feature = next((g for g in GUIDES if g["slug"] == "holiday-hosting-air-fryer"),
+                   next((g for g in GUIDES if g.get("cluster") == "Seasonal"), GUIDES[-1]))
+    # The extra line below is copy for the hosting guide specifically. If the
+    # selection falls through to a different seasonal piece, the standing sentence
+    # would be describing someone else's article, so it is only shown when the
+    # sentence and the article still belong to each other.
+    standing = ("Work backwards from the moment you sit down and give the air fryer "
+                "the last twenty minutes, not the first two hours."
+                if feature["slug"] == "holiday-hosting-air-fryer" else "")
+>>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
     feat_href = rel(d, f"guides/{feature['slug']}.html")
     bf_href = rel(d, "guides/black-friday-air-fryer-checklist.html")
     seasonal = section(f"""
@@ -178,9 +193,14 @@ def build(page_dir, products, meta):
     {eyebrow('Seasonal · the gift edit')}
     <h2>{esc(feature['title'])}</h2>
     <p class="dek">{esc(feature['dek'])}</p>
+<<<<<<< HEAD
     <p>Shopping the weekend instead? The checklist version is here too &mdash; what to measure, what to read, and what to ignore until the shape question is answered.</p>
     <a class="btn btn-small" href="{esc(feat_href)}">Read the gift guide</a>
     <a class="tlink" href="{esc(bf_href)}">The Black Friday checklist <span aria-hidden="true">&rarr;</span></a>
+=======
+    {f'<p>{esc(standing)}</p>' if standing else ''}
+    <a class="btn btn-small" href="{esc(feat_href)}">Read the hosting guide</a>
+>>>>>>> 9fd1b5a (Reconcile the guide set with main: keep probe placement, retire three duplicates, renumber the registers (arena/ddb6772b-affil1))
   </div>
 </div>""", cls="seasonal-band")
 

@@ -535,7 +535,7 @@
       ]
     },
     {
-      "id": "FLG-036",
+      "id": "FLG-037",
       "severity": "medium",
       "title": "A build rule demands one exact sentence about tag status, which will be wrong the day a Special Link is validated",
       "expected": "A checker should test the state, not a fixed string describing it.",

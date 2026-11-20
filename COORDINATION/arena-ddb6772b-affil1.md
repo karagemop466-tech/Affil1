@@ -5,12 +5,15 @@ Branch: `arena/ddb6772b-affil1`, rebased onto `origin/main` at `d345cf0`, then t
 
 ## Scope delivered
 
-1. `/categories/` index + `air-fryers` + `thermometers` subpages.
-2. Four new reader-facing guides with per-row official sourcing.
+1. `/categories/` index + `air-fryers` + `thermometers` subpages, wired into nav,
+   footer, sitemap and feed.
+2. One new guide with per-row official sourcing (`where-to-put-the-probe`); three
+   others drafted here were retired on rebase against main's `holiday-hosting-air-fryer`
+   and `reheating-thanksgiving-leftovers`, and the module records why.
 3. One false compliance sentence on every guide page, repaired and made computed.
-4. Register updates: 4 sources (SRC-21…SRC-24, after two duplicates were dropped on
-   rebase), 3 questions (Q-25…Q-27), 6 suggestions (S-26…S-31), 3 flags (FLG-034,
-   FLG-035, FLG-036) and 6 observation rows in `_data/verification-observations.ndjson`.
+4. Register updates: 4 sources (SRC-21…SRC-24), 3 questions (Q-25…Q-27), 3 suggestions
+   (S-32…S-34), 2 flags (FLG-036, FLG-037), a third corroboration appended to main's
+   FLG-028, and 6 observation rows in `_data/verification-observations.ndjson`.
 5. Executive summary counts corrected and an addendum added.
 6. `FLG-036`: the guides loop in `_tools/check.py` requires the literal sentence "No link
    currently carries the tracking tag"; the sidebar now generates it from the register, and
@@ -80,3 +83,23 @@ CI reproducibility diff (copy, rebuild, diff -r) → no drift
 ## Merge log
 
 See the PR linked from COORDINATION.md. Updated below on merge.
+
+## Rebase reconciliation (recorded because it removed work, not because it added it)
+
+Two rebases onto a moving `origin/main` (through `bcef8b6`, PR #121). Everything that
+collided was resolved by keeping main's row and renumbering or dropping mine:
+
+| Drafted here | State on main | Resolution |
+|---|---|---|
+| 4 guides | 4 more guides published by other sessions | 1 kept, 3 retired as duplicate coverage |
+| short-link instability flag | already FLG-028, corroborated by two sessions | no new flag; third corroboration appended |
+| false tag-sentence flag + fix | already FLG-031 + S-22, wording fixed | no new flag; fix made *computed*, which theirs is not |
+| fortnightly cadence proposal | already S-12 | dropped |
+| masthead/nav trimming proposal | already S-24, implemented | dropped |
+| SiteStripe arming proposal | already S-14/S-26 | dropped |
+| 2 Amazon-policy sources | already SRC-18/SRC-19 | dropped; 4 USDA rows renumbered to SRC-21…SRC-24 |
+| front-page `GUIDES[-4:]` and seasonal-by-newest | main fixed the same defect by slug | main's version kept; my only addition is suppressing standing copy whose article is no longer selected |
+| `check.py` literal-sentence rule (mine) | rule exists on main | kept as FLG-037, because the rule can outlive the fact it asserts |
+
+`_data/verification-observations.ndjson`, `_src/data/*.json` id renumbering, and the
+retired-guide note in `_tools/content_season.py` are the audit trail for all of it.

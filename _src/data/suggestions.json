@@ -442,6 +442,39 @@
       "depends_on": "Q-03 (click attribution) is the top of the queue; Q-23/Q-24 follow",
       "recommendation": "Accept, and record each closing artefact on the questions page the same day",
       "decision": "open"
+    },
+    {
+      "id": "S-37",
+      "status": "proposed",
+      "title": "Add a dated 'checked against the source' line to every guide that quotes a figure",
+      "why": "The guides that quote federal numbers are the most durable content on the site and the most perishable. A dated line turns 'trust us' into 'trust this, and here is when it was last read'.",
+      "effort": "one template change plus one register field",
+      "risk": "It makes staleness visible, which is the point but is also uncomfortable in November.",
+      "depends_on": "Q-27",
+      "recommendation": "Accept alongside S-22",
+      "decision": "proposed"
+    },
+    {
+      "id": "S-38",
+      "status": "proposed",
+      "title": "Choose one indexable taxonomy: categories as the shop, the register as the appendix",
+      "why": "/products/ and /categories/ currently both describe five products, both in the sitemap. The shop-facing one should win the index and the register-facing one should stay reachable for checking, not compete. Precedent: S-23 and S-15 settled the same question at edition scale, which is why the decision is worth ten minutes rather than a debate.",
+      "effort": "one line of metadata plus a rebuild",
+      "risk": "Low. Reversible, and the checker still sees every page either way.",
+      "depends_on": "Q-26",
+      "recommendation": "Do this before any promotion or paid push sends traffic to a URL you may retire",
+      "decision": "proposed"
+    },
+    {
+      "id": "S-39",
+      "status": "proposed",
+      "title": "Retire or wire the ten orphaned generator modules in _tools/",
+      "why": "Ten files in _tools/ look like live editorial entry points and are not reachable from the build. The next session that edits one of them will publish nothing and believe it did.",
+      "effort": "an hour to read each and decide",
+      "risk": "Deleting content that a reviewer still wants. Move them under _archive/ with the editions they built rather than deleting.",
+      "depends_on": "FLG-036",
+      "recommendation": "Accept in the next integration pass, not in a content pass",
+      "decision": "proposed"
     }
   ]
 }

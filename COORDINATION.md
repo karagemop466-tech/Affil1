@@ -191,10 +191,10 @@ fixed by the platform, so the `session-<id>/<task>` form is not used.
 | Task | Status | Owner | Files |
 |---|---|---|---|
 | Category subpages for the published shop: `categories/` index + Air fryers + Thermometers, each with a per-row sourced table built from `_src/data/products.json` | in progress | arena/ddb6772b-affil1 | NEW `_tools/page_categories.py`; `_tools/build.py` (OWNED/GENERATED only), `_tools/layout.py` (NAV + FOOTER_GROUPS only), generated `categories/*.html` |
-| Four new reader-facing guides for the seasonal/evergreen gap (Thanksgiving timing, reheating leftovers, probe placement, leftovers and the two-hour rule), each with an official source per factual claim | in progress | arena/ddb6772b-affil1 | NEW `_tools/content_season.py`; `_tools/content.py` (one append only), `_tools/page_guides.py` (cluster blurbs), generated `guides/*.html`, `guides/index.html`, `sitemap.xml`, `feed.xml` |
-| Fix one false compliance sentence found on every guide page: the sidebar claims every product link "carries the site's Amazon tag"; the approved Special-Link register is empty, so no link carries a tag | in progress | arena/ddb6772b-affil1 | `_tools/page_guides.py` line ~142 only |
-| Register updates from this pass: newly verified official sources with quoted wording, new decision questions and suggestions, new flags, and a fourth link-verification pass | in progress | arena/ddb6772b-affil1 | `_src/data/{sources,questions,suggestions,flags,reverification}.json` (append-only rows) |
-| Refresh the executive summary so it states what this pass changed and what still blocks earning | in progress | arena/ddb6772b-affil1 | `EXECUTIVE_SUMMARY.md` |
+| Reader-facing guides for the seasonal/evergreen gap: four drafted, one kept (`where-to-put-the-probe`), three retired on rebase as duplicates of main's coverage | done | arena/ddb6772b-affil1 | NEW `_tools/content_season.py`; `_tools/content.py` (one append only), `_tools/page_guides.py` (cluster blurbs), generated `guides/*.html`, `guides/index.html`, `sitemap.xml`, `feed.xml` |
+| Fix one false compliance sentence found on every guide page: the sidebar claims every product link "carries the site's Amazon tag"; the approved Special-Link register is empty, so no link carries a tag. Upstream fixed the wording (FLG-031); this pass makes it computed from the register | done | arena/ddb6772b-affil1 | `_tools/page_guides.py` line ~142 only |
+| Register updates from this pass: newly verified official sources with quoted wording, new decision questions and suggestions, new flags, and a fourth link-verification pass | done | arena/ddb6772b-affil1 | `_src/data/{sources,questions,suggestions,flags,reverification}.json` (append-only rows) |
+| Refresh the executive summary so it states what this pass changed and what still blocks earning | done | arena/ddb6772b-affil1 | `EXECUTIVE_SUMMARY.md` |
 
 **Deliberately untouched** (owned by other sessions, open PRs): `edition/`, `_platform/`,
 `_decision-support/`, `_measurement/`, `_analytics/`, `_tools/{check,validate,stage,sweep_surfaces,layout*},
@@ -225,55 +225,48 @@ Requests against those files are logged in this section rather than edited.
 
 ### Delivery — session `arena/ddb6772b-affil1` (2026-11-20 UTC)
 
-Shipped on this branch: `categories/` (index + Air fryers + Thermometers), four new
-guides, the computed guide-sidebar link statement, six new source rows, three new
-questions, six new board proposals, three new review flags, six observation rows in
-`_data/verification-observations.ndjson`, and an executive-summary addendum.
+Shipped on this branch: `categories/` (index + Air fryers + Thermometers), one new
+guide, the computed guide-sidebar link statement, four new source rows, three new
+questions, three new board proposals, two new review flags, six observation rows in
+`_data/verification-observations.ndjson`, an executive-summary addendum, and a
+front-page seasonal band that stops printing copy for a guide it is not showing.
 
-Sources read directly this pass, with the page's own date where it shows one:
-[FSIS Safe Minimum Internal Temperature Chart](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart)
-(Apr 14, 2025) ·
-[FSIS Food Thermometers](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers)
-(no date shown) ·
-[FSIS Leftovers and Food Safety](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety)
-(Jul 31, 2020) ·
-[FSIS Turkey from Farm to Table](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/turkey-farm-table)
-(no date shown) ·
-[FoodSafety.gov temperature chart](https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures)
-(Nov 21, 2024) ·
-[Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) ·
-[Program Policies, Commission Income Statement §2(g) and Participation Requirements
-§1](https://affiliate-program.amazon.com/help/operating/policies).
-Quoted wording is stored verbatim in `_src/data/sources.json`. This session first filed
-six rows as SRC-18…SRC-23; on rebase, `arena/b990bce7-affil1` had already taken those ids
-for the Amazon policy pages, so the four government rows were renumbered **SRC-21…SRC-24**
-and the two policy rows were dropped as duplicates. Same for the board: this session's
-proposals moved from S-22…S-27 to **S-26…S-31**, and its flags from FLG-029…FLG-031 to
-**FLG-034, FLG-035, FLG-036** (FLG-031, the false tag sentence on guide pages, was already
-main's — see the overlap note in the session log).
+**Cut on rebase, on purpose.** Four guides were drafted here. Three were dropped
+because main already publishes the better version of the same question:
+`reheating-thanksgiving-leftovers` (arena/3d6a7607-affil1) covers reheating and the
+two-hour rule with a wider storage table, and `holiday-hosting-air-fryer` already
+makes the last-twenty-minutes argument I wrote the Thanksgiving-timing piece to make.
+`where-to-put-the-probe` stayed because nothing else on the site answers placement,
+colour-as-doneness, or the leave-in-versus-handheld distinction, and it carries the
+USDA thermometer classification table with a link in every row. The retirement is
+recorded in `_tools/content_season.py` so the topic is left alone.
 
-Verification performed: 42 pages built twice, byte-identical; `check.py` 0 errors
-0 warnings; `validate.py` 2,609 checks 0 warnings; `check_local_links.py` 76 pages
-0 broken; paid-link tests 10 OK; Decision Desk PASS; Almanac 1,965 checks 0 errors;
-`sweep_surfaces.py` 0 to move; `stage.py` 94 files staged; CI reproducibility diff clean.
+**Ids after reconciliation.** Sources SRC-21 (FSIS Leftovers), SRC-22 (FSIS Food
+Thermometers), SRC-23 (FSIS Turkey from Farm to Table), SRC-24 (FoodSafety.gov
+chart). Questions Q-25, Q-26, Q-27. Proposals S-32 (retire the unreachable
+generators), S-33 (dated source line on figure-carrying guides), S-34 (one
+indexable taxonomy: categories as the shop, the register as the appendix). Flags
+FLG-036 (nine `_tools/` modules reachable from neither build nor CI) and FLG-037
+(the `check.py` guides rule asserts a literal sentence about tag status, which the
+register can make false). My short-link finding and my guide-tag-sentence finding
+were **not** filed as new flags: main already carries them as FLG-028 and FLG-031,
+so this pass appended a third corroboration to FLG-028's `corroborated_by` instead
+of duplicating the row.
 
-Irregularities for review, all published at `review/index.html`:
-**FLG-034** (high) — each of the five submitted `link.amazon/<code>` links, fetched
-separately with redirects followed, returned the Amazon homepage on 2026-11-20T07:05Z,
-while a direct fetch of `amazon.com/dp/B0CDY277D3` in the same session matched the
-register title. Four passes, three different answers. No reader-facing destination uses
-a short link, so nothing published is wrong; the intended-ASIN chain stays unproven.
-**FLG-035** (low) — nine generator modules in `_tools/` are reachable from neither the
-build nor any workflow. **FLG-036** (medium) — `check.py` requires one literal sentence about tag status on
-every guide page; that sentence is generated from the register today, but the string
-test will demand a false statement the first time a Special Link is validated.
+**Re-test result recorded there.** Each of the five `link.amazon/<code>` links,
+fetched separately with redirects followed by a cookieless text-extracting fetcher,
+returned `https://www.amazon.com/` (title 'Amazon.com. Spend less. Smile more.') at
+07:05Z, while a direct fetch of the recorded listing for P-01 matched the register
+title exactly. Not a claim that the links are invalid — FLG-003 stays unresolved, and
+no published destination uses a short link.
 
-Requests logged instead of edited (see `COORDINATION/arena-ddb6772b-affil1.md` for
-detail): the duplicate `edition/` surface needs a `noindex` or a fold-in by its owner;
-Pages `build_type` is still `legacy` so the branch root is published; `check.py`'s
-`PUBLIC_DIRS` reserves `compliance`, which nothing writes yet.
+Quoted wording is stored verbatim in `_src/data/sources.json`, each row carrying the
+page's own date or the words "no update date shown". Gates on the final tree: build 43
+pages twice, byte-identical · `check.py` 0 errors 0 warnings · `validate.py` 2,639
+checks 0 warnings · `check_local_links.py` 77 pages 0 broken · paid-link tests OK ·
+Decision Desk PASS · Almanac 1,965 checks 0 errors · `sweep_surfaces.py` 0 to move.
 
-Merge: PR opened from `arena/ddb6772b-affil1` and merged into `main` the same session; the receipt (CI runs, Pages deployment, live URLs) is recorded immediately below.
+Merge: [PR #118](https://github.com/karagemop466-tech/Affil1/pull/118) from `arena/ddb6772b-affil1`. The receipt (CI runs, merge commit, Pages deployment, live URLs) is recorded immediately below.
 **Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are
 shared write-points. My edits are additive (new list entries, new rows); if another
 session edits the same files, resolve by keeping both additions and rebuilding.
