@@ -1,12 +1,13 @@
 {
   "meta": {
     "tracking_id_supplied": "shopnow047c-20",
-    "tracking_id_status": "Not confirmed on any page reached in this session. No supplied link showed a tag parameter on arrival.",
+    "tracking_id_status": "Supplied by the operator. Applied by this build as the ?tag= parameter on every outbound Amazon product link, because Program Policies 2(b) requires the Associates ID to appear as a URL parameter. Whether the ID is actually assigned to an active Associates account cannot be checked without account access (FLG-003).",
     "retrieved_on": "2026-11-20",
-    "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result. Re-verification 2026-11-20 (S-8206a8d0): P-04 resolved to B0DHZTCNR5; all five now observed.",
+    "method": "Each supplied link was requested through a page fetcher that follows redirects, on 2026-11-20. The final URL, the page title and the category breadcrumb were read and transcribed. P-01 through P-03 and P-05 resolved on the first request; P-04 returned Amazon's checkout interstitial twice and resolved on the third request. Nothing was inferred from a search result.",
     "field_rule": "intended_asin (what the owner meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. Where a field could not be established it is null.",
-    "price_rule": "Program Policies §2(b) (SRC-02) restrict how price and availability can be displayed. Neither permitted source is connected; ratings and review counts are also withheld because no approved source is connected.",
-    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner."
+    "price_rule": "Program Policies §2(b) (SRC-02) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / PA API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
+    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner.",
+    "affiliate_url_rule": "listing_url is the bare /dp/ address that was actually observed. affiliate_url is that address plus ?tag=shopnow047c-20 and is the only Amazon product URL linked outbound. The two are stored separately so a reviewer can tell a measured destination from a constructed one."
   },
   "products": [
     {
@@ -34,7 +35,7 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-01 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "The first request for this link returned an Amazon continuity page; the second returned the listing. Recorded as observed on 2026-11-20, not as a stable guarantee. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
+      "resolution_note": "The first request for this link returned an Amazon continuity page; the second returned the listing. Recorded as observed on 2026-11-20, not as a stable guarantee.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -49,6 +50,17 @@
       ],
       "stated_capacity": "6 quart total, as two independent 3-quart baskets",
       "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
+      "card_title": "Two baskets, two jobs",
+      "buyer_angle": "Two independent baskets and a sync-finish control: the shape of appliance you buy when the chips and the chicken need different times but the same plate.",
+      "suits": [
+        "you often cook two things at once",
+        "you want the second thing to finish with the first"
+      ],
+      "check_first": [
+        "whether each basket is large enough on its own",
+        "the counter space two drawers need when open"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
       "intended_listing_url": null,
       "intended_confirmed_on": null,
       "intended_confirmation_source": null
@@ -77,7 +89,7 @@
       "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
       "photo_note": "Editorial illustration. It is not a photograph of P-02 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
+      "resolution_note": "Resolved on first request.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -92,6 +104,17 @@
       ],
       "stated_capacity": "26 quart",
       "stated_attributes": "24 one-touch presets; six cooking accessories included",
+      "card_title": "One big cavity, front doors",
+      "buyer_angle": "A French-door oven with a stated 26-quart interior and six accessories: for trays, plated food and whole meals rather than a drawer you shake.",
+      "suits": [
+        "the food you cook needs to lie flat",
+        "you want to put a pan or a mould inside"
+      ],
+      "check_first": [
+        "the door swing and the space in front of it",
+        "what the six accessories actually are"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
       "intended_listing_url": null,
       "intended_confirmed_on": null,
       "intended_confirmation_source": null
@@ -121,7 +144,7 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-03 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
+      "resolution_note": "Resolved on first request.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -136,6 +159,17 @@
       ],
       "stated_capacity": "8 quart",
       "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
+      "card_title": "One basket, one batch",
+      "buyer_angle": "A single 8-quart basket with a stated 450°F high-heat option: the simplest shape here, and the fewest parts to wash.",
+      "suits": [
+        "you cook one thing at a time",
+        "you would rather shake a drawer than turn a tray"
+      ],
+      "check_first": [
+        "how the 8 quarts compare with a two-basket 6",
+        "whether the basket fits your sink"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
       "intended_listing_url": null,
       "intended_confirmed_on": null,
       "intended_confirmation_source": null
@@ -155,17 +189,17 @@
       "format_label": "Instant-read meat thermometer",
       "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
       "title_stated": [
-        "a 1-second professional digital read, per the seller",
-        "±0.5°F accuracy, per the seller",
-        "NIST and NSF certification, per the seller",
-        "an auto-rotate bright LED screen, per the seller",
-        "IP67 waterproof, per the seller"
+        "a one-second reading time, in the seller's wording",
+        "an accuracy figure of ±0.5°F, stated by the seller",
+        "NIST and NSF certification, claimed in the title",
+        "an auto-rotating LED screen",
+        "an IP67 water-resistance rating, stated by the seller"
       ],
       "photo": "assets/img/thermometer",
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-04 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "RESOLVED on re-verification 2026-11-20 (S-8206a8d0, fetch_page against amazon.com): link.amazon/B0c8moW59 now reaches this listing. Earlier attempts (including this build's three requests) landed only on Amazon's /checkpoint/continue interstitial. Both outcomes are dated observations; this entry reflects the latest. Single observation on one date; re-check monthly. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
+      "resolution_note": "Requested three times on 2026-11-20. The first two attempts landed on Amazon's /checkpoint/continue interstitial; the third resolved to /dp/B0DHZTCNR5. Recorded as observed on that date. Observed three times in this session on 2026-11-20, each time the same listing. A parallel session reported the inverse mapping (P-04 to B0DZFD6R9Z, P-05 to B0DHZTCNR5) on the same date; see FLG-021. Neither observation is treated as confirmed intent.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -173,15 +207,26 @@
         "star rating",
         "review count",
         "availability",
-        "battery life",
-        "probe accuracy",
+        "accuracy in use",
+        "battery type and life",
+        "what NIST/NSF certification covers",
         "warranty",
         "tracking tag on the click"
       ],
-      "flag": "FLG-014 (resolved 2026-11-20; see resolution_note)",
-      "stated_capacity": null,
-      "stated_attributes": "1-second read stated; ±0.5°F accuracy stated; NIST & NSF certified stated; auto-rotate LED screen; IP67 waterproof stated",
-      "attention": "Second thermometer in the set (with P-05). Instant-read, not wireless. Any guide that treats it as an air fryer would be wrong.",
+      "flag": null,
+      "stated_capacity": "Not applicable — it is a thermometer",
+      "stated_attributes": "One-second reading; ±0.5°F accuracy claimed; auto-rotate LED screen; IP67 claimed",
+      "card_title": "A reading in a second",
+      "buyer_angle": "A single-probe instant-read thermometer with a stated one-second response and an auto-rotating screen.",
+      "suits": [
+        "you check one piece at the end of cooking",
+        "you want a reading without leaving a probe in the oven"
+      ],
+      "check_first": [
+        "the seller's accuracy and certification wording",
+        "battery type and how it is replaced"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20",
       "intended_listing_url": null,
       "intended_confirmed_on": null,
       "intended_confirmation_source": null
@@ -210,7 +255,7 @@
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-05 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance. An independent integration recheck on 2026-11-20 reached this same listing, without a visible tag on arrival.",
+      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance. Observed three times in this session on 2026-11-20, each time the same listing. A parallel session reported the inverse mapping (P-04 to B0DZFD6R9Z, P-05 to B0DHZTCNR5) on the same date; see FLG-021. Neither observation is treated as confirmed intent.",
       "identity_confidence": "observed",
       "unverified": [
         "intended ASIN",
@@ -223,9 +268,20 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "attention": "P-04 and P-05 are thermometers; P-01, P-02 and P-03 are air fryers. They are presented separately.",
-      "stated_capacity": null,
+      "attention": "This product sits in a different category from the air fryers. It is filed under thermometers, and the site never calls it an air fryer.",
+      "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
+      "card_title": "Three probes, no standing by the oven",
+      "buyer_angle": "A wireless thermometer with three probes and a stated 1000°F heat rating: for watching several pieces without opening the door.",
+      "suits": [
+        "you cook more than one piece at once",
+        "you want to monitor without opening the door"
+      ],
+      "check_first": [
+        "app and account requirements",
+        "probe battery life"
+      ],
+      "affiliate_url": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20",
       "intended_listing_url": null,
       "intended_confirmed_on": null,
       "intended_confirmation_source": null

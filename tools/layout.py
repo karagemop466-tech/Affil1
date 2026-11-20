@@ -13,7 +13,6 @@ import html
 import json
 import pathlib
 import posixpath
-import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_NAME = "Crisp & Counter"
@@ -30,39 +29,39 @@ AFFILIATE_HINT = __import__("re").compile(
 
 # The only navigation group. Everything else lives in the footer.
 NAV = [
-    ("index.html", "The Edit"),
-    ("products/index.html", "Product Shelf"),
-    ("guides/index.html", "Buying Guides"),
-    ("fit/index.html", "Fit Finder"),
-    ("brief/index.html", "Site Desk"),
+    ("guides/index.html", "Guides"),
+    ("products/index.html", "Products"),
+    ("compare/index.html", "Compare"),
+    ("questions/index.html", "Questions"),
+    ("suggestions/index.html", "Suggestions"),
 ]
 
 FOOTER_GROUPS = [
+    ("Shop", [
+        ("products/index.html", "The shortlist"),
+        ("compare/index.html", "Compare the five"),
+        ("products/p-02.html", "The oven-style option"),
+        ("products/p-05.html", "The thermometers"),
+        ("feed.xml", "RSS feed"),
+    ]),
     ("Read", [
         ("guides/index.html", "All guides"),
-        ("compare/index.html", "Comparison table"),
-        ("feed.xml", "RSS feed"),
-        ("fit/index.html", "Air fryer fit finder"),
-    ]),
-    ("Catalogue", [
-        ("products/index.html", "Product register"),
-        ("products/p-05.html", "The thermometer"),
-        ("about/index.html#how-we-link", "How we link"),
+        ("guides/basket-or-oven-air-fryer.html", "Basket or oven"),
+        ("guides/air-fryer-capacity-checklist.html", "Capacity checklist"),
+        ("guides/instant-read-or-probe-thermometer.html", "Choosing a thermometer"),
     ]),
     ("Review queue", [
         ("review/index.html", "Flagged for review"),
-        ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
-        ("operations/launch-readiness.html", "Affiliate launch readiness"),
-        ("about/index.html#sources", "Sources"),
+        ("review/images.html", "Image policy"),
+        ("sources/index.html", "Sources and quotations"),
     ]),
     ("Desk", [
         ("questions/index.html", "Open questions"),
-        ("suggestions/index.html", "Suggestions"),
-        ("suggestions/design.html", "Design decision brief"),
+        ("suggestions/index.html", "Suggestions and decisions"),
         ("operations/ledger.html", "Campaign ledger"),
         ("brief/index.html", "Executive summary"),
-        ("about/index.html", "About this site"),
+        ("about/index.html", "About, disclosure and privacy"),
     ]),
 ]
 
@@ -75,11 +74,13 @@ def esc(value):
 
 def rel(page_dir, target):
     """Relative URL from a page's directory to a target path at the repo root."""
+    if not target:
+        return ""
     return posixpath.relpath(target, page_dir) if page_dir else target
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
-         aria=None, title=None, affiliate_ref=None):
+         aria=None, title=None):
     # An absolute URL is never passed through rel(): doing so would rewrite
     # "https://host/x" into "../https:/host/x" and produce a 404.
     absolute = target.startswith(("http://", "https://", "mailto:", "#"))
@@ -91,8 +92,6 @@ def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
         attrs.append(f'title="{esc(title)}"')
     if aria:
         attrs.append(f'aria-label="{esc(aria)}"')
-    if affiliate_ref:
-        attrs.append(f'data-affiliate-ref="{esc(affiliate_ref)}"')
     if sponsored:
         attrs.append('rel="sponsored nofollow noopener"')
         attrs.append('target="_blank"')
@@ -107,23 +106,64 @@ def outbound(page_dir, url, label, **kw):
     return link(page_dir, url, label, external=True, **kw)
 
 
+WORDS = ("zero one two three four five six seven eight nine ten eleven twelve "
+         "thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty "
+         "twenty-one twenty-two twenty-three twenty-four twenty-five").split()
+
+
+def spelled(n):
+    """Small integers spelled out, because a page that says '21 flags' reads like a log."""
+    return WORDS[n] if 0 <= n < len(WORDS) else str(n)
+
+
+def _load(name):
+    import json
+    import pathlib
+    return json.loads((pathlib.Path(__file__).resolve().parent.parent / "src" / "data" / name).read_text(encoding="utf-8"))
+
+
+def flag_count():
+    return len(_load("flags.json")["flags"])
+
+
+def question_count():
+    return len(_load("questions.json")["questions"])
+
+
+TRACKING_TAG = "shopnow047c-20"
+
+
+def tagged(url):
+    """Every Amazon retail URL leaves this site carrying the Associates tag.
+
+    Policies 2(b) (SRC-02) requires the tracking ID as a parameter of the link,
+    so a bare /dp/ address is corrected here rather than left to each template.
+    A submitted short link is returned unchanged: it is shown as evidence of what
+    the owner sent, and the short-link service cannot carry the tag itself.
+    """
+    import re
+    if not AFFILIATE_HINT.search(url) or "link.amazon/" in url:
+        return url
+    if re.search(r"[?&]tag=", url):
+        return url
+    return url + ("&" if "?" in url else "?") + "tag=" + TRACKING_TAG
+
+
 def product_link(page_dir, url, label, **kw):
-    """Expose only bare observed listing URLs as product evidence."""
-    if url.startswith("https://link.amazon/"):
-        return f'<code class="code">{esc(url)}</code>'
-    if not re.fullmatch(r"https://www\.amazon\.com/dp/[A-Z0-9]{10}", url):
-        raise ValueError("Product evidence must be an untagged listing")
-    return link(page_dir, url, label, sponsored=True, **kw)
+    """A link to Amazon. Always tagged, always marked sponsored, always a new tab."""
+    return link(page_dir, tagged(url), label, sponsored=True, **kw)
 
 
-def approved_cta(page_dir, record, meta):
-    """Only the validated intent bundle, not a redirect observation, may supply a buy link."""
-    url = meta.get("approved_links", {}).get(record["ref"])
-    if not url:
-        return ""
-    return ('<p>Paid link: we may earn a commission if you buy through it.</p>'
-            + link(page_dir, url, "Shop on Amazon ↗", cls="btn", sponsored=True,
-                   affiliate_ref=record["ref"]))
+def cite_or_product(page_dir, url, label, **kw):
+    """An Amazon retail URL is a Special Link; anything else is a citation.
+
+    Getting this wrong in either direction is a real error: an unmarked product
+    link breaches the marking claim, and a marked citation misdescribes a policy
+    page as a paid link. So the decision is made from the URL, once.
+    """
+    if AFFILIATE_HINT.search(url):
+        return product_link(page_dir, url, label, **kw)
+    return outbound(page_dir, url, label, **kw)
 
 
 def kindle(summary, body):
@@ -139,8 +179,9 @@ def kindle(summary, body):
 def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
-    <span class="info-i" aria-hidden="true">i</span>
-    <p>{DISCLOSURE} <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">How our links work</a></p>
+    <span class="disclosure-tag">Disclosure</span>
+    <p>{DISCLOSURE} Links to Amazon on this site are affiliate links. If you buy through one, this site may earn a commission at no extra cost to you.
+      <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
   </div>
 </div>"""
 
@@ -154,23 +195,16 @@ def masthead(page_dir, active=None):
     for target, label in NAV:
         current = ' aria-current="page"' if act and section_of(target) == act else ""
         items.append(f'<a href="{esc(rel(page_dir, target))}"{current}>{esc(label)}</a>')
-    from content import GUIDES
-    catalog = NAV + [("compare/index.html", "Compare kitchen appliances"),
-        ("review/index.html", "Flagged for review"), ("suggestions/index.html", "Suggestions"),
-        ("questions/index.html", "Open questions"), ("operations/ledger.html", "Campaign ledger")]
-    catalog += [(f"guides/{g['slug']}.html", g['title']) for g in GUIDES]
-    products = json.loads((ROOT / 'src/data/products.json').read_text())['products']
-    catalog += [(f"products/{p['ref'].lower()}.html", f"{p['brand']} {p['format_label']}") for p in products]
-    results = ''.join(f'<li><a href="{esc(rel(page_dir, u))}">{esc(t)}</a></li>' for u,t in catalog)
-    mark = '<svg viewBox="0 0 40 40" width="37" height="37" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="20" cy="20" r="18.3"/><path d="m10 10 6 6m-3-9 6 6m-12 0 6 6q3 3 6-1l11 12m-5-9c7-6 8-11 5-13L18 21m-1 3-7 8"/></svg>'
     return f"""<header class="masthead">
-  <div class="editionline"><div class="wrap"><span>THE KITCHEN JOURNAL</span><span>VOL. 01 &nbsp; / &nbsp; NOVEMBER 2026</span></div></div>
   <div class="wrap masthead-inner">
-    <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">{mark}<span class="brand-name">Crisp <i>&amp;</i> Counter</span></a>
-    <nav class="nav" aria-label="Sections">{"".join(items)}</nav>
-    <button class="find" type="button" hidden data-find aria-label="Search the journal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg><span>Search</span></button>
+    <a class="brand" href="{esc(rel(page_dir, 'index.html'))}">
+      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
+      <span class="brand-tag">{SITE_TAGLINE}</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      {"".join(items)}
+    </nav>
   </div>
-  <dialog class="searchdesk" aria-labelledby="search-title"><form method="dialog"><button aria-label="Close search">×</button></form><h2 id="search-title">Search the journal</h2><input type="search" placeholder="Try capacity, thermometer, cleanup…" aria-label="Search guides and products"><p role="status"></p><ul>{results}</ul></dialog>
 </header>"""
 
 
@@ -183,11 +217,10 @@ def footer(page_dir):
         groups.append(f'<div class="foot-col"><h2>{esc(heading)}</h2><ul>{rows}</ul></div>')
     return f"""<footer class="site-footer">
   <div class="wrap">
-    <p class="foot-disclosure"><a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">Thermometer link update: two checks found different destinations. Read the source notes &rarr;</a></p>
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
+      <p>Tracking ID on this site: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
       <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
     </div>
   </div>
@@ -195,23 +228,46 @@ def footer(page_dir):
 
 
 def page(page_dir, *, title, description, body, active=None, canonical=None,
-         body_class="", structured=None, og_type="website", extra_css=None):
+         body_class="", structured=None, og_type="website", breadcrumb=None):
     css = rel(page_dir, "assets/css/site.css")
     js = rel(page_dir, "assets/js/site.js")
     feed = rel(page_dir, "feed.xml")
     home = rel(page_dir, "index.html")
     canon = canonical or ""
-    css_extra = f'<link rel="stylesheet" href="{esc(rel(page_dir, extra_css))}">' if extra_css else ""
-    structured_block = ""
+    graph = []
     if structured:
-        structured_block = (
-            '<script type="application/ld+json">'
-            + json.dumps(structured, ensure_ascii=False)
-            + "</script>\n"
-        )
-    destination_note = ''
-    if canon in {"products/p-04.html", "products/p-05.html"}:
-        destination_note = f'''<div class="wrap" role="note"><p><strong>Link note:</strong> Checks of the submitted thermometer links reached differing destinations. This page describes the specific listing, not a confirmed intended destination. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the observations</a>.</p></div>'''
+        graph.append(structured)
+    if breadcrumb:
+        graph.append({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "name": name,
+                 "item": SITE_URL + "/" + target}
+                for i, (name, target) in enumerate(breadcrumb)
+            ],
+        })
+    structured_block = ""
+    if len(graph) == 1:
+        structured_block = ('<script type="application/ld+json">'
+                            + json.dumps(graph[0], ensure_ascii=False) + "</script>\n")
+    elif graph:
+        structured_block = ('<script type="application/ld+json">'
+                            + json.dumps({"@context": "https://schema.org", "@graph": [
+                                {k: v for k, v in item.items() if k != "@context"} for item in graph]},
+                                ensure_ascii=False) + "</script>\n")
+    crumbs_html = ""
+    if breadcrumb:
+        items = []
+        for i, (name, target) in enumerate(breadcrumb):
+            last = i == len(breadcrumb) - 1
+            if last:
+                items.append(f'<span aria-current="page">{esc(name)}</span>')
+            else:
+                items.append(f'<a href="{esc(rel(page_dir, target))}">{esc(name)}</a>')
+        crumbs_html = ('<nav class="crumbs" aria-label="Breadcrumb"><div class="wrap">'
+                       + ' <span aria-hidden="true">/</span> '.join(items)
+                       + "</div></nav>\n")
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -231,20 +287,16 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/fraunces-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
-<link rel="stylesheet" href="{esc(rel(page_dir, 'assets/css/editorial.css'))}">
-{css_extra}
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-{destination_note}
-{body}
+{crumbs_html}{body}
 </main>
 {footer(page_dir)}
 <script src="{esc(js)}" defer></script>
-<script src="{esc(rel(page_dir, 'assets/js/discover.js'))}" defer></script>
 <script src="{esc(rel(page_dir, 'assets/js/analytics.js'))}" defer></script>
 </body>
 </html>

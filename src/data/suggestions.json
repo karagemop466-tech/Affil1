@@ -1,128 +1,292 @@
 {
   "meta": {
-    "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and — the part that matters — which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
-    "how_to_use": "Read the 'depends on' column. Anything depending on Q-03 or Q-14 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
-    "recommended_first": "S-01 and S-02, because they are free, reversible, and unblock the rest."
+    "purpose": "A decision queue, not a to-do list. Each row says what it changes, what it costs, what could go wrong, the evidence behind it, and which open question has to be answered first.",
+    "how_to_use": "Read the 'depends on' line before approving. Mark each row accept, hold or reject; the page stores the mark in your own browser and can copy the whole set as text. Nothing is transmitted.",
+    "counts": {
+      "total": 15,
+      "done": 7,
+      "proposed": 6,
+      "hold": 2
+    }
   },
   "suggestions": [
     {
       "id": "S-01",
-      "title": "Get the five links tagged, then test one click and read the report",
-      "why": "Five of five destinations are now known. What is still unknown is whether a click on them is attributed to shopnow047c-20. Until one real click shows up in the Associates report, the site is sending readers somewhere that may not pay.",
-      "effort": "about 20 minutes of dashboard work plus one click",
-      "risk": "Low. Links can be swapped without changing any prose.",
-      "depends_on": "Q-03, Q-14",
+      "category": "Comply",
+      "priority": 1,
+      "title": "Tag every outbound product link with the Associates ID",
+      "what": "Rebuild each product URL as /dp/ASIN?tag=shopnow047c-20 instead of a bare product address.",
+      "why": "Program Policies 2(b) requires the Associates ID as a URL parameter on every link to an Amazon Site. The previous build linked to bare /dp/ addresses, so a click could not carry the ID in the URL.",
+      "evidence": [
+        {
+          "label": "Program Policies 2(b)",
+          "url": "https://affiliate-program.amazon.com/help/operating/policies"
+        }
+      ],
+      "effort": "done in this build",
+      "risk": "Low: the destination ASIN is unchanged; only the parameter is added.",
+      "depends_on": "Q-07 (does the ID exist and is it active)",
+      "recommendation": "Implemented",
+      "status": "done"
+    },
+    {
+      "id": "S-02",
+      "category": "Measure",
+      "priority": 1,
+      "title": "Prove one click end to end before scaling anything",
+      "what": "Click one product link from the live site, then find that click in the Associates report and record the date.",
+      "why": "An untested affiliate link is a hypothesis. One click turns 'should earn' into 'earns' or into a fault worth chasing.",
+      "evidence": [
+        {
+          "label": "Associates Central",
+          "url": "https://affiliate-program.amazon.com/"
+        }
+      ],
+      "effort": "about 10 minutes plus dashboard lag",
+      "risk": "None; it is a read-only check.",
+      "depends_on": "Q-07, Q-08",
       "recommendation": "Do this first",
       "status": "proposed"
     },
     {
-      "id": "S-02",
-      "title": "Replace short links with tagged destination links, and keep both values",
-      "why": "The short-link indirection is what makes the destination hard to audit. Pointing at the final listing with the tag attached makes every link readable and checkable by anyone who reads the page source.",
-      "effort": "about 15 minutes",
-      "risk": "Low. Reversible. Keep the submitted link in the register as the historical record.",
-      "depends_on": "S-01",
-      "recommendation": "Do alongside S-01",
-      "status": "proposed"
-    },
-    {
       "id": "S-03",
-      "title": "Name a real editor, or stop implying editorial authority",
-      "why": "Right now the site says nothing about who wrote it, which a careful reader notices immediately. The guides are honest and therefore modest; a named person with an accurate bio is the cheapest credibility available.",
-      "effort": "an hour",
-      "risk": "None, provided the bio describes work that actually happened. Claiming hands-on testing that did not occur is the one move that would convert this site from careful to deceptive.",
-      "depends_on": "Q-08",
-      "recommendation": "Do within the first week",
-      "status": "proposed"
+      "category": "Publish",
+      "priority": 1,
+      "title": "Correct the record on P-04 instead of leaving it unresolved",
+      "what": "Publish the ThermoMaven ASIN and title, and remove the stale 'unresolved' wording.",
+      "why": "The third request resolved. Leaving an out-of-date 'unknown' on the page would be as misleading as inventing an answer, so the record was corrected and the history kept in FLG-004.",
+      "evidence": [
+        {
+          "label": "P-04 listing",
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5"
+        }
+      ],
+      "effort": "done in this build",
+      "risk": "None.",
+      "depends_on": "Q-01",
+      "recommendation": "Implemented",
+      "status": "done"
     },
     {
       "id": "S-04",
-      "title": "Add one genuinely tested product comparison — bought, used, and photographed",
-      "why": "First-hand measurements and original photographs could add useful evidence, but any effect on rankings is unknown.",
-      "effort": "a purchase plus several evenings",
-      "risk": "Cost. Also, FTC and Amazon rules require the review to be genuine, so the testing must actually happen before the page exists.",
-      "depends_on": "Q-08",
-      "recommendation": "The highest-value single investment on this list",
-      "status": "proposed"
+      "category": "Grow",
+      "priority": 2,
+      "title": "Add a second thermometer guide, because there are now two thermometers",
+      "what": "Publish a comparison-shaped guide for the two thermometers in the register, using only the sellers' stated features.",
+      "why": "Half the register is now thermometers. A publication whose only guides are about air fryers is not serving half its own catalogue, and the two products are different jobs: one instant read, one continuous monitoring.",
+      "evidence": [
+        {
+          "label": "P-04",
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5"
+        },
+        {
+          "label": "P-05",
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z"
+        }
+      ],
+      "effort": "done in this build",
+      "risk": "Low. Claims stay inside the sellers' own wording.",
+      "depends_on": "Q-01",
+      "recommendation": "Implemented",
+      "status": "done"
     },
     {
       "id": "S-05",
-      "title": "Connect the Product Advertising API before showing any price or rating",
-      "why": "Access to approved Amazon data may enable permitted product data displays, subject to current program and API rules.",
-      "effort": "Application and integration; eligibility must be checked with Amazon.",
-      "risk": "Eligibility and access are not yet confirmed.",
-      "depends_on": "Q-04",
-      "recommendation": "Start the application now; expect to wait",
-      "status": "proposed"
+      "category": "Grow",
+      "priority": 2,
+      "title": "Group the guides into topic clusters instead of a flat list",
+      "what": "Four guides become three clusters (shape, size, upkeep) plus a thermometer cluster, with a hub page linking each.",
+      "why": "Internal links are the only ranking signal a static site controls completely, and flat lists share no authority.",
+      "evidence": [
+        {
+          "label": "Google: link best practices",
+          "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+        }
+      ],
+      "effort": "done in this build",
+      "risk": "Low.",
+      "depends_on": "nothing",
+      "recommendation": "Implemented",
+      "status": "done"
     },
     {
       "id": "S-06",
-      "title": "Switch on measurement before writing guide number five",
-      "why": "Four guides exist on hypotheses. A fifth written on another hypothesis adds almost nothing. A fifth written from an actual Search Console query report adds a page that has a reason to exist.",
-      "effort": "an hour of setup, then 2–4 weeks of waiting for data",
-      "risk": "Low. The client is already written and stays silent until switched on.",
-      "depends_on": "Q-10, Q-11",
-      "recommendation": "Do before more content",
+      "category": "Measure",
+      "priority": 2,
+      "title": "Deploy the collector so the five events have somewhere to land",
+      "what": "Run server/collect.js on a host the operator controls and set window.CC_ANALYTICS_ENDPOINT to its URL.",
+      "why": "The events are defined and instrumented but inert. GitHub Pages cannot run a collector, so this needs one decision: which host, and who owns the data.",
+      "evidence": [
+        {
+          "label": "Measurement plan",
+          "url": "https://karagemop466-tech.github.io/Affil1/review/measurement.html"
+        }
+      ],
+      "effort": "1-2 hours plus a host",
+      "risk": "Medium: needs a privacy notice and a retention rule before it goes live.",
+      "depends_on": "Q-12",
+      "recommendation": "Approve the host, not the vendor",
       "status": "proposed"
     },
     {
       "id": "S-07",
-      "title": "Verify the property in Search Console and submit the sitemap",
-      "why": "Search Console can report search performance and accept sitemap submissions; indexing and traffic are not guaranteed.",
-      "effort": "15 minutes",
-      "risk": "None. Requires the owner's Google account, so it cannot be done by an agent.",
-      "depends_on": "Q-11",
-      "recommendation": "Do this week",
+      "category": "Discover",
+      "priority": 2,
+      "title": "Turn on Search Console and let 28 days answer the topic question",
+      "what": "Verify the property, submit sitemap.xml, then read the Queries report after four weeks.",
+      "why": "No keyword volume, difficulty or impression figure is on this site because none was available. Search Console is free and is the shortest path to real data.",
+      "evidence": [
+        {
+          "label": "Search Console",
+          "url": "https://search.google.com/search-console/about"
+        }
+      ],
+      "effort": "20 minutes, then wait",
+      "risk": "None.",
+      "depends_on": "Q-12",
+      "recommendation": "Approve",
       "status": "proposed"
     },
     {
       "id": "S-08",
-      "title": "Decide how the two thermometers fit the catalogue",
-      "why": "P-04 and P-05 are thermometers, not air fryers. Their relationship to the broader publication is an editorial decision; their category is kept distinct.",
-      "effort": "a decision",
-      "risk": "Low either way. Keeping it is harmless; removing it loses a link.",
-      "depends_on": "Q-06",
-      "recommendation": "Either is defensible — but decide, so the navigation stops hedging",
+      "category": "Grow",
+      "priority": 2,
+      "title": "Ask five real readers what they nearly bought",
+      "what": "A five-question interview script, run by hand, recorded in the questions register.",
+      "why": "The site's guide topics are hypotheses. Five conversations would replace guesswork with at least a small amount of evidence, and cost nothing but time.",
+      "evidence": [
+        {
+          "label": "Questions register",
+          "url": "https://karagemop466-tech.github.io/Affil1/questions/"
+        }
+      ],
+      "effort": "2 hours",
+      "risk": "None. Do not publish quotes as endorsements without consent.",
+      "depends_on": "nothing",
+      "recommendation": "Approve",
       "status": "proposed"
     },
     {
       "id": "S-09",
-      "title": "Add a reader-facing 'ask a question' capture, once a privacy notice exists",
-      "why": "The most useful input for the next guide is a real question from a real reader. It also feeds the editorial pipeline with something better than keyword tools.",
-      "effort": "an hour plus a form endpoint",
-      "risk": "Handling personal data creates obligations that do not currently exist on this site. Do not ship a form before the notice does.",
-      "depends_on": "Q-10",
-      "recommendation": "After the privacy notice, not before",
-      "status": "proposed"
+      "category": "Comply",
+      "priority": 2,
+      "title": "Put the compliance gate in the publishing path, not in a document",
+      "what": "Make tools/check.py the gate: disclosure placement, sponsored rel, no price claims, no test claims, links resolve.",
+      "why": "A checklist in a markdown file is a promise. A check that fails the build is a gate.",
+      "evidence": [
+        {
+          "label": "Publishing workflow",
+          "url": "https://karagemop466-tech.github.io/Affil1/about/#workflow"
+        }
+      ],
+      "effort": "already wired",
+      "risk": "None.",
+      "depends_on": "nothing",
+      "recommendation": "Implemented",
+      "status": "done"
     },
     {
       "id": "S-10",
-      "title": "Publish a monthly dated change log on the site",
-      "why": "Affiliate content ages badly and silently. A visible 'what changed and when' line per guide is cheap, and it is also the strongest available signal that a human maintains the site.",
-      "effort": "minutes per month",
-      "risk": "None. It is already generated by the build's page metadata.",
-      "depends_on": "nothing",
-      "recommendation": "Cheap and worth it",
-      "status": "proposed"
+      "category": "Grow",
+      "priority": 3,
+      "title": "Add an email capture only when there is something to send",
+      "what": "RSS exists today; a newsletter needs a provider, a privacy notice and a publishing cadence.",
+      "why": "A capture box with no cadence collects addresses and disappoints them.",
+      "evidence": [
+        {
+          "label": "RSS feed",
+          "url": "https://karagemop466-tech.github.io/Affil1/feed.xml"
+        }
+      ],
+      "effort": "30 minutes plus a vendor decision",
+      "risk": "Medium: an email list is personal data and needs a lawful basis.",
+      "depends_on": "Q-12, Q-13",
+      "recommendation": "Hold",
+      "status": "hold"
     },
     {
       "id": "S-11",
-      "title": "Do not add more AI-written guides until S-04 or S-06 lands",
-      "why": "This is a recommendation to stop, which belongs on a suggestions page. More synthetic prose raises the site's exposure to search-quality demotions and adds no differentiation. The current four guides are defensible precisely because they claim so little.",
-      "effort": "none",
-      "risk": "Opportunity cost if the judgement is wrong.",
-      "depends_on": "nothing",
-      "recommendation": "The least popular and most important item on this page",
-      "status": "proposed"
+      "category": "Grow",
+      "priority": 3,
+      "title": "Stop commissioning AI-written guides until one of them can be tested or measured",
+      "what": "No new guide topics until either Search Console data or a hands-on test exists.",
+      "why": "More synthetic prose makes the site bigger, not better. The current guides are defensible because they claim little; that advantage survives only by not diluting it.",
+      "evidence": [],
+      "effort": "zero",
+      "risk": "None.",
+      "depends_on": "Q-12",
+      "recommendation": "Hold, deliberately",
+      "status": "hold"
     },
     {
       "id": "S-12",
-      "title": "Replace illustrative imagery with real photographs of the actual products",
-      "why": "The site currently labels every photograph as an illustration. That is honest, but it is also a visible ceiling on how convincing the pages can be. Real photographs of the real units, taken by the owner, remove the caveat entirely.",
-      "effort": "an afternoon with a phone and a window",
-      "risk": "Low. Requires the products to be in hand.",
-      "depends_on": "S-04",
-      "recommendation": "Do together with the testing",
+      "category": "Trust",
+      "priority": 3,
+      "title": "Put a real name and a two-line biography on the byline",
+      "what": "Replace the organisation byline with a person, once there is a person.",
+      "why": "A publication has an author. Inventing one would be worse than having none, so the field stays empty until you supply it.",
+      "evidence": [],
+      "effort": "5 minutes once supplied",
+      "risk": "None.",
+      "depends_on": "Q-13",
+      "recommendation": "Needs your input",
+      "status": "proposed"
+    },
+    {
+      "id": "S-13",
+      "category": "Comply",
+      "priority": 3,
+      "title": "Keep the two ASIN fields apart, forever",
+      "what": "intended_asin and observed_asin are separate fields with a build check that they never merge.",
+      "why": "An observed redirect is evidence of where a link goes. It is not evidence of what the owner meant to ship, and merging the two would quietly destroy the distinction.",
+      "evidence": [
+        {
+          "label": "Program Policies 2(a)",
+          "url": "https://affiliate-program.amazon.com/help/operating/policies"
+        }
+      ],
+      "effort": "done",
+      "risk": "None.",
+      "depends_on": "Q-09",
+      "recommendation": "Implemented and enforced",
+      "status": "done"
+    },
+    {
+      "id": "S-14",
+      "category": "Trust",
+      "priority": 2,
+      "title": "Retire the duplicate edition by noindex, not by deletion",
+      "what": "Mark the superseded pages noindex and keep them out of the sitemap.",
+      "why": "Deleting another session's work is destructive; leaving two versions of the same five products competing in search is worse for the reader. noindex is reversible.",
+      "evidence": [
+        {
+          "label": "robots.txt",
+          "url": "https://karagemop466-tech.github.io/Affil1/robots.txt"
+        }
+      ],
+      "effort": "done",
+      "risk": "Low.",
+      "depends_on": "nothing",
+      "recommendation": "Implemented",
+      "status": "done"
+    },
+    {
+      "id": "S-15",
+      "category": "Discover",
+      "priority": 2,
+      "title": "Ask Amazon support three questions in writing",
+      "what": "Ask whether link.amazon short links are Special Links, what a valid tag parameter looks like on a /dp/ URL, and whether the supplied ID is active.",
+      "why": "These are the three things no page in this repository can settle, and all three are answerable by the party that owns the program.",
+      "evidence": [
+        {
+          "label": "Associates contact",
+          "url": "https://affiliate-program.amazon.com/contact"
+        }
+      ],
+      "effort": "15 minutes",
+      "risk": "None.",
+      "depends_on": "Q-07, Q-11",
+      "recommendation": "Approve",
       "status": "proposed"
     }
   ]

@@ -1,151 +1,267 @@
 {
   "meta": {
-    "status": "Six questions below are answerable now. Nine are not, and each one names the specific artefact that would close it. Nothing here is a forecast.",
-    "rule": "A question moves to 'answered' only when the answer has a source link. An answer of 'we cannot know yet' is a legitimate answer and is recorded as such."
+    "purpose": "The decision register. Each row is a question the site's next move depends on, the information that would answer it, whether this session could answer it, and who holds the missing piece.",
+    "rule": "A question is marked answered only when the answer has a source link. 'Unknown' is recorded as unknown. Nothing here is a forecast, and no missing value has been estimated.",
+    "verified_on": "2026-11-20",
+    "counts": {
+      "total": 16,
+      "answered": 6,
+      "open": 10,
+      "blocking": 6
+    }
   },
   "questions": [
     {
       "id": "Q-01",
-      "question": "Does each submitted link actually land on the product the owner meant to send readers to?",
-      "what_we_have": "All five destinations reached Amazon listings on the latest pass; the observed ASIN is not a confirmed intended ASIN.",
-      "what_is_missing": "The owner's intended ASIN. Every submitted path code is 9 characters; every ASIN observed on arrival is 10. That is evidence the codes are short-link slugs, not identifiers, so the intended product cannot be read off the link itself.",
-      "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended, then record both values side by side.",
-      "answered": false,
-      "blocking": "yes — every product claim downstream depends on it"
+      "question": "What does each supplied link actually open?",
+      "short": "All five now resolve; the ASIN and listing title are recorded for each.",
+      "what_we_have": "Five links were requested on 2026-11-20. Each final /dp/ address, page title and category breadcrumb was transcribed into src/data/products.json. P-04 needed three requests; it returned the checkout interstitial twice.",
+      "what_is_missing": "Nothing for identity of destination. The owner's intent is a separate question (Q-09).",
+      "answer": "P-01 B0CDY277D3 (CHEFMAN dual-basket air fryer) · P-02 B09B7SB46R (Emeril Lagasse French-door oven) · P-03 B08DKYBTPH (Chefman 8-quart basket) · P-04 B0DHZTCNR5 (ThermoMaven instant-read thermometer) · P-05 B0DZFD6R9Z (CHEF iQ wireless thermometer).",
+      "evidence": [
+        {
+          "label": "P-01 listing",
+          "url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "label": "P-02 listing",
+          "url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "label": "P-03 listing",
+          "url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        {
+          "label": "P-04 listing",
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5"
+        },
+        {
+          "label": "P-05 listing",
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z"
+        }
+      ],
+      "answered": true,
+      "blocking": "no",
+      "owner": "agent"
     },
     {
       "id": "Q-02",
-      "question": "Will P-04 reliably reach the intended product?",
-      "what_we_have": "Earlier requests showed a checkpoint. The latest direct request reached ThermoMaven B0DHZTCNR5.",
-      "what_is_missing": "Stable destination, intended ASIN and tracking evidence.",
-      "how_to_close": "Match the intended variant in SiteStripe and validate the exact destination against an authorized tracking report.",
-      "answered": false,
-      "blocking": "yes — for the paid CTA"
+      "question": "Is the required affiliate disclosure wording known, and is it on every page?",
+      "short": "Yes. The sentence is quoted from the Operating Agreement and appears twice on every page.",
+      "what_we_have": "The Operating Agreement states the required sentence in section 5. The build inserts it in a strip below the masthead and again in the footer of every generated page, and tools/check.py fails if either is missing or if the strip falls after <main>.",
+      "what_is_missing": "Nothing on wording or placement.",
+      "answer": "“As an Amazon Associate I earn from qualifying purchases.” — quoted verbatim from section 5, and the FTC's guidance that a disclosure must be where it easily catches attention is why the strip sits above the fold rather than only in the footer.",
+      "evidence": [
+        {
+          "label": "Operating Agreement §5",
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement"
+        },
+        {
+          "label": "FTC endorsement FAQ",
+          "url": "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+        }
+      ],
+      "answered": true,
+      "blocking": "no",
+      "owner": "agent"
     },
     {
       "id": "Q-03",
-      "question": "Are the clicks actually attributed to shopnow047c-20?",
-      "what_we_have": "The tracking ID was supplied in the brief. Nothing on any arrived-at page showed a tag parameter.",
-      "what_is_missing": "Evidence that the link the server serves carries the tag, and a click that then shows up in the Associates click report.",
-      "how_to_close": "One test click on the owner's own device, then check the Associates click report for that day. That is the only permitted source for this number.",
-      "answered": false,
-      "blocking": "yes — without it the site can send traffic that earns nothing"
+      "question": "May this site show prices, star ratings, review counts or stock status?",
+      "short": "Only from Amazon-served data or the API. Neither is connected, so every such column is blank.",
+      "what_we_have": "Program Policies 2(b) restricts price and availability to links Amazon serves with that data, or data obtained through Creators API / PA API. No credentials exist for either.",
+      "what_is_missing": "API access, if the operator wants live prices (Q-14).",
+      "answer": "No price, rating, review count or stock phrase appears anywhere in visible text. tools/check.py fails the build if one does.",
+      "evidence": [
+        {
+          "label": "Program Policies 2(b)",
+          "url": "https://affiliate-program.amazon.com/help/operating/policies"
+        }
+      ],
+      "answered": true,
+      "blocking": "no",
+      "owner": "agent"
     },
     {
       "id": "Q-04",
-      "question": "Should the site show prices?",
-      "what_we_have": "Amazon's Program Policies allow showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API or PA API (SRC-02).",
-      "what_is_missing": "A decision, and if the answer is yes, API credentials.",
-      "how_to_close": "Either apply for API access and render Amazon-served prices only, or keep prices off the site. Both are compliant; a scraped price is not.",
+      "question": "Is every paid link marked in the way search engines document?",
+      "short": "Yes: rel=\"sponsored nofollow noopener\" on every Amazon product link, with a visible 'affiliate link' label.",
+      "what_we_have": "Google documents the sponsored value as the marker for paid links and permits combining rel values.",
+      "what_is_missing": "Nothing.",
+      "answer": "Every product link carries all three rel values, target=\"_blank\", and an aria-label that says it is an affiliate link.",
+      "evidence": [
+        {
+          "label": "Google: qualify outbound links",
+          "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+        }
+      ],
       "answered": true,
-      "answer": "No price, star rating, review count or stock status appears anywhere on this site, because neither permitted data path is connected.",
-      "evidence": "SRC-02",
-      "blocking": "no — the site is compliant without prices"
+      "blocking": "no",
+      "owner": "agent"
     },
     {
       "id": "Q-05",
-      "question": "Is the disclosure in the right place?",
-      "what_we_have": "The Operating Agreement requires the exact statement on the site (SRC-01). The FTC says a footer-only disclosure is easy to miss and that proximity to the recommendation matters (SRC-03).",
-      "what_is_missing": "Nothing structural. What remains is a legal review of the wording around it, which this build cannot perform.",
-      "how_to_close": "A human review against SRC-01 and SRC-03. The placement itself is already above the fold on every page and repeated in the footer.",
+      "question": "Does an Amazon link have to carry the Associates ID as a URL parameter?",
+      "short": "Yes, in the policy's own words. The previous build did not, and that is now fixed.",
+      "what_we_have": "Program Policies 2(b) states the requirement directly.",
+      "what_is_missing": "Confirmation that shopnow047c-20 is an active ID (Q-07).",
+      "answer": "“you must include your Associates ID or ‘tag’ (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.” Every outbound product link is now /dp/ASIN?tag=shopnow047c-20.",
+      "evidence": [
+        {
+          "label": "Program Policies 2(b)",
+          "url": "https://affiliate-program.amazon.com/help/operating/policies"
+        }
+      ],
       "answered": true,
-      "answer": "The statement sits after the masthead and before the content. It repeats in the footer. An approved paid CTA is labelled beside the link.",
-      "evidence": "SRC-01, SRC-03",
-      "blocking": "no"
+      "blocking": "no",
+      "owner": "agent"
     },
     {
       "id": "Q-06",
-      "question": "Do the two thermometer observations belong in the comparison?",
-      "what_we_have": "P-04 and P-05 reached meat-thermometer listings; the other three reached air fryer listings.",
-      "what_is_missing": "The owner's editorial intent — was the thermometer meant as an accessory to the air-fryer content, or as a separate line?",
-      "how_to_close": "Keep the thermometer decision separate from the air-fryer capacity table, and verify why each product was submitted before adding a paid CTA.",
-      "answered": false,
-      "blocking": "no — handled by separating it"
+      "question": "Was any product on this site tested, handled or measured?",
+      "short": "No. Nothing here is a review, a ranking or a recommendation.",
+      "what_we_have": "No product was purchased, opened or used. Every product fact is quoted from the seller's listing title.",
+      "what_is_missing": "Nothing; this is a statement of what the site did.",
+      "answer": "Zero products tested. The site says so on every product page and in its structured data.",
+      "evidence": [
+        {
+          "label": "Product register",
+          "url": "https://karagemop466-tech.github.io/Affil1/products/"
+        }
+      ],
+      "answered": true,
+      "blocking": "no",
+      "owner": "agent"
     },
     {
       "id": "Q-07",
-      "question": "Which topics are worth writing about?",
-      "what_we_have": "Four editorial hypotheses, clearly labelled as hypotheses.",
-      "what_is_missing": "Any search data at all. No Search Console property, no impressions, no query list, no click data.",
-      "how_to_close": "Verify the property in Search Console, submit the sitemap, wait for impressions, then export the query report and pick topics from it. Until then the topic list is a guess and is labelled as one.",
+      "question": "Is shopnow047c-20 an assigned, active Associates tracking ID?",
+      "short": "Unverified. The ID was supplied by you; only the Associates dashboard can confirm it.",
+      "what_we_have": "The string, supplied in the brief, and applied to every link.",
+      "what_is_missing": "A screenshot or export from the Associates account showing the ID, its status and its marketplace.",
+      "how_to_close": "Associates Central > Account Settings: confirm the tracking ID and that the account is active, then record the marketplace.",
+      "answer": "Unknown.",
+      "evidence": [],
       "answered": false,
-      "blocking": "no — but writing more guides before this is guessing"
+      "blocking": "yes — an inactive or wrong ID means no click can earn",
+      "owner": "operator"
     },
     {
       "id": "Q-08",
-      "question": "Who is the author, and why should a reader trust them?",
-      "what_we_have": "Nothing. There is no named person, no credentials, no first-hand testing.",
-      "what_is_missing": "A real byline and a real basis for it. This is the single largest trust gap on the site and cannot be automated away.",
-      "how_to_close": "A named editor with a short, accurate bio. Claiming testing that did not happen would breach both the FTC guides and the Operating Agreement, so the bio must describe what the writer actually did.",
+      "question": "Does a click on one of these links appear in the Associates click report?",
+      "short": "Not yet measured. One tagged click and the report would settle it.",
+      "what_we_have": "Tagged links that satisfy the URL-parameter requirement.",
+      "what_is_missing": "An authorised click report, or a single test click observed end to end.",
+      "how_to_close": "Click one product link from the live site, wait for the dashboard to update, and export the click row with its date.",
+      "answer": "Unknown.",
+      "evidence": [],
       "answered": false,
-      "blocking": "partly — it limits how much authority the guides can claim"
+      "blocking": "yes — this is the difference between a site that can earn and one that cannot",
+      "owner": "operator"
     },
     {
       "id": "Q-09",
-      "question": "What is the actual commission rate for these categories?",
-      "what_we_have": "Nothing. The rate card sits behind an Associates sign-in.",
-      "what_is_missing": "The owner's own rate card.",
-      "how_to_close": "Read it in the Associates dashboard and record it. It is deliberately blank here rather than copied from a blog.",
+      "question": "Which product did you intend each supplied link to point at?",
+      "short": "Unknown for all five. The intended ASIN field stays empty rather than being filled with a guess.",
+      "what_we_have": "An observed ASIN for each link. Every supplied path code is 9 characters; every ASIN on arrival is 10. The codes are short-link slugs, not identifiers.",
+      "what_is_missing": "The intended ASIN per product, from SiteStripe or the product list in the account.",
+      "how_to_close": "In the Associates dashboard, copy the tagged link for each intended ASIN and record it beside the observed one.",
+      "answer": "Unknown.",
+      "evidence": [],
       "answered": false,
-      "blocking": "no — but no revenue estimate is possible without it, so none is given"
+      "blocking": "yes — an observed destination is not the same as an intended one",
+      "owner": "operator"
     },
     {
       "id": "Q-10",
-      "question": "Is the analytics endpoint live, and is it lawful to switch on?",
-      "what_we_have": "The five event names and a client that stays silent by default.",
-      "what_is_missing": "An endpoint, a privacy notice, a retention period, and a decision on consent for visitors in jurisdictions that require it.",
-      "how_to_close": "Publish the privacy notice first, then deploy the collector, then enable the beacon. The order matters.",
+      "question": "What commission rate applies to each category, and in which marketplace?",
+      "short": "Blank. Rates live behind the Associates sign-in and were not supplied.",
+      "what_we_have": "Category paths transcribed from each listing: four under air fryers, one under meat thermometers.",
+      "what_is_missing": "The Commission Income Statement for the account's marketplace.",
+      "how_to_close": "Export the rate card from Associates Central and record the date it was read.",
+      "answer": "Unknown.",
+      "evidence": [],
       "answered": false,
-      "blocking": "yes, for measurement — the site works without it"
+      "blocking": "no — it affects forecasting, not publishing",
+      "owner": "operator"
     },
     {
       "id": "Q-11",
-      "question": "Can this site be indexed at all, given the repository path?",
-      "what_we_have": "The site is served from a project path on github.io. All internal links resolve within that path and the sitemap lists the same host.",
-      "what_is_missing": "Verification that the sitemap has been submitted and that pages are actually being crawled.",
-      "how_to_close": "Search Console verification, then sitemap submission, then check coverage after a few days.",
+      "question": "Are link.amazon short links acceptable Special Links?",
+      "short": "Unresolved, not disproven. Nothing here claims they are invalid.",
+      "what_we_have": "The links resolve to real listings. No official Amazon page was found that describes link.amazon short links in terms a reviewer could cite.",
+      "what_is_missing": "An official statement about the redirector, or a tracked click observed end to end.",
+      "how_to_close": "Ask Associates support in writing, or observe a click from the short link land in the report under the ID.",
+      "answer": "Unresolved.",
+      "evidence": [],
       "answered": false,
-      "blocking": "no — but nothing will rank until it happens"
+      "blocking": "no — the site does not depend on them; it links from the observed ASIN",
+      "owner": "operator"
     },
     {
       "id": "Q-12",
-      "question": "Does the site make any claim it cannot support?",
-      "what_we_have": "Every page was machine-checked for banned patterns: no price figure, no star rating, no review count, no stock status, no superlative, no test claim.",
-      "what_is_missing": "A human read for tone and implication — a checker cannot catch a sentence that is technically true but suggests more.",
-      "how_to_close": "Read the three guides and the product pages once with the question 'what would a sceptical reader infer?'",
-      "answered": true,
-      "answer": "No page claims testing, ranking or a winner. Every product page says plainly that the product was not tested.",
-      "evidence": "tools/check.py",
-      "blocking": "no"
+      "question": "What search demand exists for these topics?",
+      "short": "No data. Not one volume or difficulty figure is presented anywhere on this site.",
+      "what_we_have": "Four guide topics, labelled as editorial hypotheses rather than known demand.",
+      "what_is_missing": "Search Console impressions, or any keyword dataset the operator authorises.",
+      "how_to_close": "Verify the site in Search Console, then read the Queries report after 28 days and record it in the campaign ledger.",
+      "answer": "Unknown.",
+      "evidence": [],
+      "answered": false,
+      "blocking": "yes — topic choice cannot be evidence-based without it",
+      "owner": "operator"
     },
     {
       "id": "Q-13",
-      "question": "What happens if the owner never supplies the missing account data?",
-      "what_we_have": "Five product records with observed destinations, guides and no prices; intended identities and attribution remain unconfirmed.",
-      "what_is_missing": "A decision about how long to wait.",
-      "how_to_close": "This is an owner decision, not a research one. The site is built to be safe to leave running in this state indefinitely.",
-      "answered": true,
-      "answer": "Nothing on the site breaks. It stays accurate because it claims so little. The cost of the missing data is opportunity, not correctness.",
-      "evidence": "No external source: this is a conclusion about the build's own contents, not a citation. Stated plainly so it is not mistaken for one.",
-      "blocking": "no"
+      "question": "Who is the author of this publication?",
+      "short": "No named author. The byline is the site itself, which is true and verifiable.",
+      "what_we_have": "An organisation-level byline in structured data.",
+      "what_is_missing": "A person, a short biography and the basis of any expertise claimed.",
+      "how_to_close": "Supply a name and a two-sentence biography; it will be added to every guide and to the about page.",
+      "answer": "Unknown.",
+      "evidence": [],
+      "answered": false,
+      "blocking": "no",
+      "owner": "operator"
     },
     {
       "id": "Q-14",
-      "question": "Are the supplied links Special Links in the sense the agreement means?",
-      "what_we_have": "Five reached listings in this check. No arrival URL displayed the supplied tag; that alone cannot establish attribution.",
-      "what_is_missing": "Confirmation that each is tagged with shopnow047c-20. The agreement requires Special Links to use the assigned Associates ID (SRC-02).",
-      "how_to_close": "Re-issue each destination as a tagged link from SiteStripe and replace the outbound URL after recording both the old and new value.",
+      "question": "Will API or product-image access be granted?",
+      "short": "Not connected. This is what would unlock prices, availability and licensed imagery.",
+      "what_we_have": "A list of what is blocked without it (Q-03).",
+      "what_is_missing": "PA-API or Creators API credentials, and a decision on whether to use licensed Amazon imagery.",
+      "how_to_close": "Apply through the Associates account; eligibility usually requires qualifying sales first.",
+      "answer": "Unknown.",
+      "evidence": [],
       "answered": false,
-      "blocking": "yes — this is the difference between a link and a commission"
+      "blocking": "yes — for prices, availability and images",
+      "owner": "operator"
     },
     {
       "id": "Q-15",
-      "question": "Is there any traffic, and where would it come from?",
-      "what_we_have": "Nothing. No analytics, no Search Console, no referral data.",
-      "what_is_missing": "All of it.",
-      "how_to_close": "Turn on measurement (Q-10) and verification (Q-11) before assuming any channel works.",
+      "question": "What is the baseline conversion, and against what is it measured?",
+      "short": "No baseline exists. The ledger is empty by design, not by omission.",
+      "what_we_have": "A defined ledger schema with a provenance column.",
+      "what_is_missing": "One month of first-party reports.",
+      "how_to_close": "Export clicks and ordered items monthly, record the report date, and never estimate a missing cell.",
+      "answer": "Unknown.",
+      "evidence": [],
       "answered": false,
-      "blocking": "no — but every revenue assumption depends on it"
+      "blocking": "no",
+      "owner": "operator"
+    },
+    {
+      "id": "Q-16",
+      "question": "Which marketplace is the audience in?",
+      "short": "All five links resolve on amazon.com. The audience is not confirmed.",
+      "what_we_have": "US listings and US category breadcrumbs.",
+      "what_is_missing": "A statement of the target marketplace or country.",
+      "how_to_close": "Confirm the Associates marketplace; if it is not amazon.com, every link needs re-verification.",
+      "answer": "Unknown.",
+      "evidence": [],
+      "answered": false,
+      "blocking": "yes — a wrong marketplace sends readers to the wrong store",
+      "owner": "operator"
     }
   ]
 }

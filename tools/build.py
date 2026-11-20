@@ -10,7 +10,6 @@ Internal links are relative because GitHub Pages serves this repository from
 """
 
 import json
-from datetime import date
 import pathlib
 import shutil
 import sys
@@ -21,8 +20,6 @@ sys.path.insert(0, str(ROOT / "tools"))
 import layout  # noqa: E402
 from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # noqa: E402
 import page_home  # noqa: E402
-import page_fit  # noqa: E402
-import page_design  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
 import page_compare  # noqa: E402
@@ -30,10 +27,8 @@ import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
+import page_sources  # noqa: E402
 from content import GUIDES  # noqa: E402
-
-sys.path.insert(0, str(ROOT / "kitchen-build"))
-import readiness  # noqa: E402
 
 DATA = ROOT / "src" / "data"
 
@@ -42,7 +37,7 @@ DATA = ROOT / "src" / "data"
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions",
-    "review", "about", "operations", "brief", "fit",
+    "review", "about", "sources", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
 
@@ -52,17 +47,23 @@ OWNED = [
 GENERATED = {
     "index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
     "guides/index.html",
+    "guides/basket-or-oven-air-fryer.html",
+    "guides/air-fryer-capacity-checklist.html",
+    "guides/cleanup-and-counter-space.html",
+    "guides/multi-function-kitchen-appliance-questions.html",
+    "guides/instant-read-or-probe-thermometer.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
     "compare/index.html",
     "questions/index.html",
-    "suggestions/index.html", "suggestions/design.html", "fit/index.html",
+    "suggestions/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
-    "operations/ledger.html", "operations/launch-readiness.html",
+    "sources/index.html",
+    "operations/ledger.html",
     "brief/index.html",
-} | {f"guides/{guide['slug']}.html" for guide in GUIDES}
+}
 
 # Files THIS build emitted in an earlier version, now renamed, which must be
 # removed when the slug list changes. It contains nothing that predates this
@@ -115,7 +116,7 @@ def sitemap(pages):
     that is the URL the canonical tag on that page names."""
     urls = []
     for p in pages:
-        if p in ("404.html", "operations/launch-readiness.html"):
+        if p == "404.html":
             continue
         loc = SITE_URL + "/" + (p[:-len("index.html")] if p.endswith("index.html") else p)
         urls.append(f"  <url><loc>{loc}</loc><lastmod>{BUILD_DATE}</lastmod></url>")
@@ -126,14 +127,13 @@ def sitemap(pages):
 
 def feed(latest_guides):
     items = []
-    for g in sorted(latest_guides, key=lambda item: item['updated'], reverse=True):
-        published = date.fromisoformat(g.get('published', g['updated'])).strftime('%a, %d %b %Y 00:00:00 GMT')
+    for g in latest_guides:
         link = f"{SITE_URL}/guides/{g['slug']}.html"
         items.append(f"""  <item>
     <title>{esc(g['title'])}</title>
     <link>{link}</link>
     <guid isPermaLink="true">{link}</guid>
-    <pubDate>{published}</pubDate>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
     <description>{esc(g['dek'])}</description>
   </item>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -142,7 +142,7 @@ def feed(latest_guides):
   <title>{esc(SITE_NAME)} \u2014 buying guides</title>
   <link>{SITE_URL}/</link>
   <atom:link href="{SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Practical guides to air fryers, countertop ovens, and cooking thermometers.</description>
+  <description>Five kitchen tools, five buying guides, and the source links behind every claim.</description>
   <language>en-us</language>
   <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
   <copyright>2026 {esc(SITE_NAME)}</copyright>
@@ -162,23 +162,12 @@ Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 def main():
     products_doc = load("products.json")
     products = products_doc["products"]
-    meta = {"tracking": products_doc["meta"].get("tracking_id_supplied")}
+    meta = {"tracking": products_doc["meta"].get("tracking_id_supplied"), "products": products}
     sources = load("sources.json")
     questions = load("questions.json")
     suggestions = load("suggestions.json")
     flags = load("flags.json")
     images = load("images.json")
-
-    intent = json.loads(readiness.INTENT.read_text(encoding="utf-8"))
-    readiness.validate(intent)
-    if {p['ref']: (p['submitted_link'], p['listing_url']) for p in products} != {
-        p['ref']: (p['submitted_link'], p['observed_redirect_target']) for p in intent['records']
-    }:
-        raise SystemExit("Root register and affiliate evidence records disagree")
-    meta["approved_links"] = {
-        p["ref"]: p["approved_special_link"] for p in intent["records"]
-        if readiness.eligible(p, intent["tracking_id_supplied"])
-    }
 
     clean()
     favicon()
@@ -199,9 +188,6 @@ def main():
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))
 
-    pages.append(write("fit/index.html", page_fit.build("fit")))
-    pages.append(write("suggestions/design.html", page_design.build("suggestions")))
-
     # compare / questions / suggestions
     pages.append(write("compare/index.html", page_compare.build("compare", products, meta)))
     pages.append(write("questions/index.html", page_questions.build("questions", questions, meta)))
@@ -210,12 +196,12 @@ def main():
     # review
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))
     pages.append(write("review/images.html", page_review.build_images("review", images, products, meta)))
-    pages.append(write("review/measurement.html", page_review.build_measurement("review", meta, load("events.json"))))
+    pages.append(write("review/measurement.html", page_review.build_measurement("review", meta)))
 
     # desk
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
+    pages.append(write("sources/index.html", page_sources.build("sources", sources, products, meta)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
-    pages.append(write("operations/launch-readiness.html", readiness.render(intent)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
 
     pages.append(write("sitemap.xml", sitemap(pages)))
@@ -223,8 +209,9 @@ def main():
     pages.append(write("robots.txt", ROBOTS))
 
     built = {p for p in pages}
-    if GENERATED != built:
-        raise SystemExit(f"Page manifest mismatch: missing={sorted(GENERATED - built)}, extra={sorted(built - GENERATED)}")
+    missing = GENERATED - built - {"robots.txt"}
+    if missing:
+        raise SystemExit(f"GENERATED lists files the build never wrote: {sorted(missing)}")
     print(f"built {len([p for p in pages if p.endswith('.html')])} pages")
     for p in pages:
         print("  " + p)

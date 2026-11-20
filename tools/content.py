@@ -99,14 +99,14 @@ GUIDES = [
             {
                 "h": "The trap in the number",
                 "p": [
-                    "A larger quoted capacity usually means a physically larger machine, which needs more counter and, in the oven shape, more door clearance. Compare actual usable dimensions and footprint rather than assuming a fixed relationship.",
+                    "A larger quoted capacity usually means a physically larger machine, which needs more counter and, in the oven shape, more door clearance. There is no configuration where you get more cooking space for the same footprint.",
                     "The other trap is the opposite one: buying small to save counter space and then discovering that the meal you cook most often needs two batches. Two batches is not a disaster, but it is a daily tax, and it is worth noticing before you pay it rather than after."
                 ]
             },
             {
                 "h": "What the sellers in this register actually state",
                 "p": [
-                    "All five submitted links resolved to listings on re-verification 2026-11-20 (the fifth previously returned only the continue-shopping interstitial). Three are air fryers; two are probe thermometers, which have no capacity to compare. The three titles state 6 quarts across two 3-quart baskets (P-01), 8 quarts in a single basket (P-03), and 26 quarts in a French-door oven (P-02).",
+                    "All five submitted links resolved to listings on 2026-11-20. Three are air fryers; the other two are thermometers, which have no capacity to compare. The three air-fryer titles state 6 quarts across two 3-quart baskets (P-01), 8 quarts in a single basket (P-03), and 26 quarts in a French-door oven (P-02).",
                     "Those are the sellers' figures, repeated as figures. They have not been measured. A quart quoted for a two-basket machine is also counting two separate containers, which is exactly the kind of detail a single capacity number hides \u2014 so if you are comparing P-01 against P-03, compare the 3-quart basket against the 8-quart basket, not the 6 against the 8."
                 ]
             },
@@ -164,7 +164,7 @@ GUIDES = [
             {
                 "h": "What the register can and cannot tell you here",
                 "p": [
-                    "Two observed listings state in their titles that the baskets are dishwasher-safe, in the sellers' wording (P-01 and P-03). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
+                    "Two of the five listings state in their titles that the basket is dishwasher-safe, in the sellers' wording (P-01 and P-03). The oven product says nothing about the dishwasher and is not counted. These are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
                     "No dimensions are published for any of these products on this site, because dimensions were not confirmed from an official specification sheet in this build. That is a gap, and it is on the review page rather than buried."
                 ]
             }
@@ -213,9 +213,9 @@ GUIDES = [
             {
                 "h": "Where the thermometer fits, and where it does not",
                 "p": [
-                    "An earlier observation associated P-05 with a wireless meat thermometer. Another observation reached a different thermometer; the intended destination remains unconfirmed. See the review queue before relying on either identification.",
+                    "Two of the products submitted for this site are not air fryers. P-05 is a wireless meat thermometer whose listing states three probes and a 1000\u00b0F heat rating and names air fryers among its intended uses; P-04 is an instant-read thermometer with a stated one-second response.",
                     "That is a useful illustration of the multi-function question rather than an exception to it. A probe does one job \u2014 it tells you the internal temperature of something \u2014 and it does that job in an oven, a pan, a smoker or an air fryer. It is a single-purpose tool that travels between appliances, which is often a better purchase than an appliance that claims to do the thermometer's job as one of nine features.",
-                    "This site has not tested it, and its accuracy is not stated here."
+                    "This site has not tested either, and no accuracy was measured here."
                 ]
             },
             {
@@ -232,35 +232,6 @@ GUIDES = [
 
 # Rows for the comparison table. Every cell is either transcribed from a listing
 # title reached on 2026-11-20 or explicitly blank. Blank is a valid value.
-GUIDES.append({
-    "slug": "holiday-side-dish-capacity",
-    "title": "Will your air fryer fit the holiday sides without a queue?",
-    "kicker": "Seasonal kitchen · holiday sides",
-    "dek": "Plan backward from serving time: check the tray, count the batches, and give the meals you already cook more weight than the number on the box.",
-    "updated": "2026-11-20",
-    "read_minutes": 3,
-    "photo": "assets/img/capacity",
-    "photo_alt": "An editorial illustration for comparing air fryer capacity",
-    "photo_caption": "Editorial illustration, not a photograph of any model on this site.",
-    "sections": [
-        {"h": "Start with the side that has to land last", "p": [
-            "Imagine that you want crisp potatoes and roasted vegetables on the table at the same time. Pick the dish you want to cook last. Work backward from that tray, rather than assuming an appliance can take both at once. If you already make that dish in the oven, measure the area you actually use, not the size of the pan rim."
-        ]},
-        {"h": "Make a quick batch plan", "p": [
-            "Sketch the usable rack or basket footprint from the manual for the exact model. Check the manual’s food load and spacing instructions. Split a mock shopping list into the number of loads that fit, allowing for any required preheat, unloading and reload time.",
-            "Example worksheet, not a cooking recommendation: if a recipe you already use takes 18 minutes and your plan needs two sequential loads, that is 36 minutes of recipe time before any turnaround. That number is arithmetic, not a claim about a particular air fryer. If the timing doesn't work, move one side to the oven or choose a dish that doesn't need the fryer."
-        ]},
-        {"h": "Look for the thing that actually frees up the oven", "items": [
-            ("Considering two baskets?", "Look at each basket’s dimensions and check whether each dish fits its own basket. Compare independent controls in the exact manual."),
-            ("Considering a countertop oven?", "Measure the tray you mean to use, plus door travel and the clearances in the manual. Do not assume racks can be used together in every mode."),
-            ("Cooking meat alongside the sides?", "Use a food thermometer and the official USDA guidance for placement and safe minimum internal temperatures. Don’t use colour or recipe timing alone."),
-        ]},
-    ],
-    "sources": [("USDA Food Safety and Inspection Service · Food thermometers", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers")],
-    "closing": "Buy for the batches you cook on ordinary weeks. Solve the holiday bottleneck on paper before spending money on extra capacity.",
-})
-
-
 COMPARE_COLUMNS = [
     ("Product", "The register reference and the brand as stated on the listing"),
     ("Shape", "Basket, oven or other \u2014 read from the listing title and category path"),
@@ -272,3 +243,132 @@ COMPARE_COLUMNS = [
 
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from
 # src/data/products.json so that a fact can never exist in two places and drift.
+
+
+# Topic clusters. The brief asked for clusters rather than a flat list of
+# articles; this is the map the guides index and the front page both read, so a
+# cluster cannot exist in the navigation without a guide behind it.
+CLUSTERS = [
+    {
+        "slug": "basket-or-oven-air-fryer",
+        "name": "Shape",
+        "question": "Basket or oven-style: which shape suits my kitchen?",
+        "dek": "Two appliances share a name and almost nothing else. Start here if you have not chosen a shape yet.",
+    },
+    {
+        "slug": "air-fryer-capacity-checklist",
+        "name": "Size",
+        "question": "Will it actually cook enough for my table?",
+        "dek": "A quart figure is a volume; you cook on a surface. Convert one into the other before you spend anything.",
+    },
+    {
+        "slug": "cleanup-and-counter-space",
+        "name": "Upkeep",
+        "question": "Will I still be using it in March?",
+        "dek": "The parts you wash and the space it occupies decide that more than any feature on the box.",
+    },
+    {
+        "slug": "instant-read-or-probe-thermometer",
+        "name": "Thermometers",
+        "question": "Instant-read or leave-in probe: which do I need?",
+        "dek": "One gives you a number in a second. The other watches several pieces while you do something else.",
+    },
+]
+
+GUIDES.append({
+    "slug": "instant-read-or-probe-thermometer",
+    "kicker": "Thermometers",
+    "title": "Instant-read or leave-in probe: which thermometer do you actually need?",
+    "dek": "Both products in this register take a temperature. Only one of them is meant to be left alone while it does it, and that difference decides which is worth your money.",
+    "read_minutes": 6,
+    "photo": "assets/img/instant-read",
+    "photo_alt": "A thin probe thermometer inserted into a roasted chicken resting on a wooden board",
+    "photo_caption": "Illustration of a probe in a roast. Not a photograph of either thermometer on this site.",
+    "updated": "2026-11-20",
+    "sections": [
+        {
+            "h": "The difference is who is holding it",
+            "p": [
+                "An instant-read thermometer is a hand tool. You open the oven, insert the probe, read a number, take it out and close the door. It takes a moment and it costs you that moment.",
+                "A leave-in probe is a monitoring device. The probe stays in the food, a cable or a radio link carries the reading away, and you look at it when you want to. It costs more money and less attention, and it is a different purchase even though both are sold as \u2018a meat thermometer\u2019."
+            ]
+        },
+        {
+            "h": "What the two sellers in this register state",
+            "p": [
+                "P-04 is described in its listing title as a one-second professional digital meat thermometer with a stated accuracy of plus or minus 0.5 degrees Fahrenheit, an auto-rotating LED screen and an IP67 water-resistance rating. Its category path on arrival is Meat Thermometers.",
+                "P-05 is described as a wireless thermometer with three ultra-thin probes, five sensors, a stated 1000 degrees Fahrenheit heat rating, WiFi range, and a list of intended uses that includes air fryers. It is filed in the same Meat Thermometers category.",
+                "Those are the sellers' words, transcribed. Neither accuracy figure was measured here, and neither product was used."
+            ]
+        },
+        {
+            "h": "Five questions that pick the product for you",
+            "items": [
+                ("How many pieces are you checking at once?", "One piece, once, at the end: an instant-read does the job. Several pieces, checked repeatedly: probes you can leave in place stop you opening the oven to find out."),
+                ("Do you want to stand next to the oven?", "A leave-in probe is worth its price when the answer is no \u2014 a long roast, a smoker, a bird that needs an hour and a half of your evening elsewhere."),
+                ("Where will the probe live when it is not in use?", "Three probes means three thin objects to keep track of. One probe means one. This is a real cost in a cutlery drawer."),
+                ("What does the reading travel through?", "A cable limits you to the oven door; a wireless link has its own requirements, which the listing states and the manual explains. Read the manual before assuming the range applies to your kitchen."),
+                ("How is it cleaned, and what happens when the battery goes?", "Water-resistance ratings are claims about specific conditions. Replacing a battery is either trivial or a reason the device gets retired, and it is worth knowing which before you buy.")
+            ]
+        },
+        {
+            "h": "What a thermometer cannot do for you",
+            "p": [
+                "It reports a number; it does not make the food better. Carry-over heat, resting time, the thickness of the piece and where you actually placed the probe all change what that number means, and none of them are properties of the device.",
+                "This site gives no doneness temperatures. The USDA food-safety page that would be the correct source did not load from this build's environment, and a figure taken from a blog would look sourced without being sourced. The gap is recorded on the flags page (FLG-012) rather than filled with a plausible number."
+            ]
+        },
+        {
+            "h": "A short way to decide",
+            "p": [
+                "If you cook one piece at a time and want to know when it is done, buy the cheaper kind of tool: a single probe you read by hand. If you cook several pieces or a long roast and you would rather not open the door to check, the money goes on the monitoring, not on the screen.",
+                "If you are unsure, the instant-read is the safer first purchase. It is useful in every oven you will ever own, it does not depend on an app, and it does not need to be paired with anything to work."
+            ]
+        }
+    ],
+    "closing": "No product on this site was tested. The attributes above are the sellers' own wording, transcribed from listing titles reached on 2026-11-20.",
+})
+
+
+# Working titles for the editor, not published articles. Each is a hypothesis
+# about what a reader might search for; none carries a volume figure, because no
+# keyword or Search Console data exists for this site. A title moves out of this
+# list and into GUIDES only when it can be written without inventing a fact.
+ARTICLE_IDEAS = [
+    {
+        "title": "Air fryer for two: when a 3-quart basket is the right size",
+        "cluster": "Size",
+        "why": "One listing quotes a per-basket figure and another a single-basket one. A reader cooking for two is deciding between two small baskets and one large one, and nobody writes that decision down plainly.",
+        "missing": "Search demand and the basket dimensions, which no listing title states.",
+    },
+    {
+        "title": "The 20-minute weeknight: what a two-basket fryer actually changes",
+        "cluster": "Shape",
+        "why": "The sync-finish feature is the one thing a dual-basket machine offers that a single basket cannot. A piece on the timing problem, not the product, would earn its place.",
+        "missing": "Cooking times. This site has no tested timings and will not invent them.",
+    },
+    {
+        "title": "French door or pull-out drawer: the small-kitchen version of the choice",
+        "cluster": "Shape",
+        "why": "Door clearance is the deciding measurement in a narrow kitchen and it is absent from every listing title here.",
+        "missing": "Published dimensions, from the manufacturer's own manual.",
+    },
+    {
+        "title": "What 'dishwasher-safe' means for a nonstick basket",
+        "cluster": "Upkeep",
+        "why": "Two listings use the phrase. Whether it applies to a hot cycle and a particular detergent is a care-instruction question, and care instructions are published by manufacturers.",
+        "missing": "A manufacturer care instruction that can be quoted.",
+    },
+    {
+        "title": "Two probes or three: what multi-probe monitoring changes on a Sunday roast",
+        "cluster": "Thermometers",
+        "why": "P-05 states three probes and five sensors. The useful article is about what you do differently with a second reading, not about the probe count.",
+        "missing": "Any doneness temperature. The USDA page was unreachable, so the article cannot carry a number.",
+    },
+    {
+        "title": "The paper rectangle test: counter-space maths before you buy",
+        "cluster": "Upkeep",
+        "why": "It is the cheapest piece of advice on this site and it does not need a product fact at all, which makes it safe to publish now.",
+        "missing": "Nothing factual. It is a method, not a claim.",
+    },
+]
