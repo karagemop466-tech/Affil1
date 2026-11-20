@@ -159,7 +159,7 @@ def check_page(path):
 
     # --- links resolve ---
     for attr, value, line in s.refs:
-        if not value or value.startswith(("#", "mailto:", "data:", "javascript:")):
+        if not value or value.startswith(( "mailto:", "data:", "javascript:")):
             continue
         if attr == "src" and EXTERNAL_RESOURCE.match(value):
             err(f"{rel}:{line}: external resource load {value!r}")
@@ -294,8 +294,11 @@ def check_data():
             err(f"products.json: {p['ref']} observed_asin is not 10 characters")
         if p["submitted_code"] != p["submitted_link"].rsplit("/", 1)[-1]:
             err(f"products.json: {p['ref']} submitted_code does not match the link")
-        if p["intended_asin"] == p["observed_asin"] and p["intended_asin"] is not None:
-            err(f"products.json: {p['ref']} intended and observed have been merged")
+        # Independent evidence can legitimately confirm the same ASIN as the redirect.
+        fields = [p[k] for k in ("intended_asin", "intended_listing_url", "intended_confirmed_on", "intended_confirmation_source")]
+        if any(v is not None for v in fields):
+            if not all(fields) or fields[1] != f"https://www.amazon.com/dp/{fields[0]}":
+                err(f"products.json: {p['ref']} incomplete product-intent confirmation")
 
     for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):
         json.loads((ROOT / "src/data" / name).read_text(encoding="utf-8"))

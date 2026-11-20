@@ -53,6 +53,7 @@ def build_index(page_dir, flags, meta):
         meta=f'{counts["high"]} high &middot; {counts["medium"]} medium &middot; {counts["low"]} low &middot; none of these block the site from being live',
     )}
 {section(f'''
+<aside class="note"><h2>Commercial launch: hosting review</h2><p>This Pages edition is an editorial publication. Before launching a business primarily intended to facilitate transactions, move it to a suitable commercial host. <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">GitHub Pages usage limits</a>.</p></aside>
 <div class="stat-row">
   <div class="stat stat-warn"><span class="stat-n">{counts['high']}</span><span class="stat-l">high &mdash; affects money or correctness</span></div>
   <div class="stat"><span class="stat-n">{counts['medium']}</span><span class="stat-l">medium &mdash; affects usefulness</span></div>
@@ -110,7 +111,7 @@ def build_images(page_dir, images, products, meta):
         'Image policy',
         'Every photograph here<br>is an illustration',
         images["meta"]["why"],
-        meta='8 generated assets &middot; 0 product photographs &middot; 3 uses declined',
+        meta=f'{len(images["assets"])} registered assets &middot; 0 product photographs &middot; 3 uses declined',
     )}
 {section(f'''
 <h2>The rule</h2>

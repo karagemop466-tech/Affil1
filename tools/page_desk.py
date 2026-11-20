@@ -52,7 +52,7 @@ def build_about(page_dir, sources, meta):
     <p>This site sets no cookies, loads no third-party scripts, calls no external APIs and embeds no fonts from a CDN. The typefaces are served from this repository. The analytics client is present but inert: it writes to session storage and transmits nothing. There is no form, no newsletter and no comment system, so the site holds no personal data at all.</p>
 
     <h2 id="imagery">Imagery</h2>
-    <p>All eight photographs are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
+    <p>The photographs and cover drawings are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
 
     <h2 id="who">Who wrote this</h2>
     <p>No author is named, because there is no person whose name would be accurate to put here. This is the site's largest weakness and it is recorded as FLG-006 rather than papered over with a stock biography and an invented credential. A named editor with a true description of what they did is suggestion S-03.</p>
@@ -139,7 +139,7 @@ def build_brief(page_dir, products, questions, flags, meta):
         'Executive summary',
         'The short version,<br>for someone with four minutes',
         'What exists, what was verified, what could not be, and what the next decision is.',
-        meta='Written 20 November 2026 &middot; 1,600 words shorter than it could have been',
+        meta='Edition note &middot; 20 November 2026',
     )}
 {section(f'''
 <div class="exec">
@@ -149,7 +149,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A 22-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <p>A 22-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, seventeen review flags, a source list with quoted wording, an empty campaign ledger, a tested five-event collector disabled on Pages and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
@@ -173,7 +173,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   <div class="exec-block">
     <h2>The next decision</h2>
     <p>Three things, in this order. Tag the links from SiteStripe and make one test click, then read the Associates report for that day. Verify the Search Console property and submit the sitemap. Then choose between the two paths that actually improve the site: buy one product and test it properly, or wait for query data before writing another guide.</p>
-    <p>Writing more guides first is the option that looks like progress and is not.</p>
+    <p>Review query evidence monthly. Publish at most one new guide per fortnight, and skip the slot if there is no documented reader question or original test. Check the sitemap and RSS feed in the same release. Read the <a href="https://support.google.com/webmasters/answer/7576553">Search Console performance report guide</a>.</p>
   </div>
   <div class="exec-block">
     <h2>Numbers on the record</h2>

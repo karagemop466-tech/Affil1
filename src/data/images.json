@@ -1,7 +1,7 @@
 {
   "meta": {
     "why": "The brief asks for a polished, image-led storefront. There is a real tension in that: Amazon's Program Policies bar misleading claims about a Product, and an AI-generated 'photo' of a product placed next to a buy button reads to most shoppers as a photo of that product. This page states the rule the site follows so a reviewer can challenge it.",
-    "rule": "Illustrative editorial photography only, capped at 3 uses on a page, labelled on the page, never presenting a feature the listing does not state, never depicting a brand mark, and never in a card that imitates a product-listing image slot.",
+    "rule": "Use labelled editorial illustrations to explain a format, never as proof of the appearance or performance of a specific model. Do not reproduce listing photographs or brand marks.",
     "source_for_misleading_claims": "SRC-02"
   },
   "assets": [
@@ -11,7 +11,7 @@
       "generated_on": "2026-11-20",
       "generated_by": "AI image generation, prompted for an unbranded appliance",
       "depicts_a_real_product": false,
-      "used_on": "Home, front page hero",
+      "used_on": "Original cover, retained in the repository",
       "rules_met": "No brand mark. No price or spec implied. Labelled in the page's image note."
     },
     {
@@ -76,6 +76,42 @@
       "depicts_a_real_product": false,
       "used_on": "The decision tools page and the review queue",
       "rules_met": "The handwriting is unreadable so no figure can be read as a sourced value."
+    },
+    {
+      "file": "storefront-hero",
+      "alt": "Basket fryer with garlic and rosemary",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation",
+      "depicts_a_real_product": false,
+      "used_on": "Front page, countertop issue",
+      "rules_met": "Engraved format illustration, captioned on the plate; not a product photograph."
+    },
+    {
+      "file": "storefront-dual",
+      "alt": "Two-drawer air fryer",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation",
+      "depicts_a_real_product": false,
+      "used_on": "Front page, countertop issue",
+      "rules_met": "Engraved format illustration, captioned on the plate; not a product photograph."
+    },
+    {
+      "file": "storefront-oven",
+      "alt": "French-door countertop oven",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation",
+      "depicts_a_real_product": false,
+      "used_on": "Front page, countertop issue",
+      "rules_met": "Engraved format illustration, captioned on the plate; not a product photograph."
+    },
+    {
+      "file": "storefront-single",
+      "alt": "Single-drawer air fryer",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation",
+      "depicts_a_real_product": false,
+      "used_on": "Front page, countertop issue",
+      "rules_met": "Engraved format illustration, captioned on the plate; not a product photograph."
     }
   ],
   "rejected": [
