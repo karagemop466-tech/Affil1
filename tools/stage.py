@@ -11,7 +11,8 @@ def stage(destination):
     destination.mkdir(parents=True, exist_ok=True)
     if any(destination.iterdir()):
         raise SystemExit(f"Staging directory must be empty: {destination}")
-    files = GENERATED | {'.nojekyll'}
+    (destination / '.nojekyll').touch()
+    files = set(GENERATED)
     files |= {
         str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*')
         if path.is_file() and (path.suffix in {'.woff2', '.svg'} or
