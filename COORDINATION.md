@@ -170,3 +170,9 @@ Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official
 - Ported our P-04 re-verification (B0DHZTCNR5) into PR #22's `src/data/products.json` schema (ref/observed_asin), updated FLG-001/FLG-002 counts and `tools/content.py` copy (four→five), rebuilt: `tools/check.py` 22 pages, 0 errors.
 - Kept our additive work: 3 new guides (`guides/meal-prep-sunday.html`, `small-kitchen-counter.html`, `thermometer-pairing.html` — not in GENERATED set, survive rebuild), `guides.html` path fixes, dashboard/categories/products/questions/suggestions/flagged unification, `data/*` audit appends, `crisp/` P-04 sync.
 - Follow-up (not done by deletion): wiring the 3 new guides into the generated sitemap/feed requires extending PR #22's `tools/content.py` GUIDES; logged here for the integration session.
+
+## Publication integration — arena/c1891b66-affil1
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Buyer front page and single-edition Pages packaging | in progress | arena/c1891b66-affil1 | tools/page_home.py, tools/layout.py, tools/stage.py, .github/workflows/pages.yml, README.md |
