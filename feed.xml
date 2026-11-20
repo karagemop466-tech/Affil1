@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Affil1 — Buying guides and product notes</title>
+    <link>https://karagemop466-tech.github.io/Affil1/</link>
+    <description>Question-shaped buying guides and product research for smart kitchen and home purchases. Published by Affil1 (tracking ID shopnow047c-20).</description>
+    <lastBuildDate>Fri, 20 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <language>en-US</language>
+    <managingEditor>affil1@example.com (Affil1 editorial)</managingEditor>
+    <webMaster>affil1@example.com (Affil1 editorial)</webMaster>
+    <atom:link href="https://karagemop466-tech.github.io/Affil1/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Basket or oven-style air fryer: what should you compare?</title>
+      <link>https://karagemop466-tech.github.io/Affil1/guides/buying-guide-air-fryer.html</link>
+      <guid isPermaLink="true">https://karagemop466-tech.github.io/Affil1/guides/buying-guide-air-fryer.html</guid>
+      <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+      <description>A no-hype frame for comparing air fryer capacity, counter space, and cleanup before you buy.</description>
+      <category>buying guide</category>
+      <category>air fryer</category>
+    </item>
+  </channel>
+</rss>
