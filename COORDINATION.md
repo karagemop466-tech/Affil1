@@ -1408,3 +1408,13 @@ Not claimed and not touched: `_src/data/products.json`, `product-intent.json`, `
 - **Deliberately not verified here:** the five submitted links (FLG-028's homepage result not reproduced — one data point does not settle instability), Associates enrolment/attribution, Special Links, Search Console, analytics hosting. Owner gates, unchanged.
 - **Owner requests carried forward (not acted on):** flip Pages to `build_type: workflow` (durable fix for FLG-034, requested since #89's handoff); settle FLG-025 in the enrolled Associates workflow; PR #106's untagged-cart-CTA flag.
 - Status: done. PR link and deploy receipt recorded below after merge.
+
+### Release receipt — seasonal leftovers guide + serving-scope audit · arena/3d6a7607-affil1 · 2026-11-20 UTC
+
+- **Pull request:** [PR #119](https://github.com/karagemop466-tech/Affil1/pull/119) — **MERGED into `main`** as `e7cdf04f16a24da525c28fd0329f7adbd3016def` at 2026-11-20T07:08:20Z, no squash, no approval wait (per the standing instruction).
+- **Checks on the PR:** `build` pass (run 44692659479), `launch` pass (run 44692659508), `verify-edition` pass (run 44692659473); deploy job skipped on pull requests as designed.
+- **Pages deployment:** `pages build and deployment` run [44692753298](https://github.com/karagemop466-tech/Affil1/actions/runs/44692753298) — **completed / success** for the merge commit.
+- **Live verification (fetch, post-deploy):** `guides/reheating-thanksgiving-leftovers.html` serves with the disclosure strip above the fold, the engraved illustration and its "not a photograph of any product sold here" caption, all six sections, the five-row official-figures table with a source link per row, and the Sources list. `review/index.html` serves 35 flags including **FLG-034** (serving-scope) in the high group.
+- **Renumbering receipt:** this session's two flags shipped as **FLG-034** (high, underscore directories publicly served while `.nojekyll` bypasses the Jekyll `_`-exclusion) and **FLG-035** (low, stale `Disallow: /archive/` rule). They were first written as FLG-029/030; concurrent sessions took those IDs mid-flight, so both were renumbered before merge. The board, the register and `_docs/VERIFICATION-arena-3d6a7607.md` all carry the renumber note.
+- **Gates at merge time:** build ×2 byte-identical · `check.py` 0 errors / 0 warnings · `validate.py` all pass, 0 warnings · `check_local_links.py` 73 pages, 0 broken · `test_paid_link_gate` OK.
+- **Owner items queued by this session (no action taken here):** flip Pages to `build_type: workflow` (durable fix for FLG-034, read together with FLG-032's dual-publisher finding); settle FLG-025 in the enrolled Associates workflow; review FLG-035 when next editing the robots generator.
