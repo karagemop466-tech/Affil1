@@ -1,101 +1,85 @@
-/* Good Measure Kitchen — privacy-preserving analytics.
- *
- * Self-hosted (same-origin) analytics endpoint contract:
- *   POST /api/analytics/collect  { event, ...payload }
- *
- * Notes:
- * - This is a STATIC GitHub Pages site. The /api/analytics/collect route is a
- *   reserved same-origin path; until a backend is wired and authorized, posts
- *   fail and events are queued in localStorage so nothing is lost.
- * - No personal data, no IP addresses, no fingerprinting, no cross-site tracking.
- * - Event set (proposed, not deployed until access/privacy/consent is confirmed):
- *     page_view, outbound_click, guide_open, search_query_referral, report_import
- * - Outbound clicks on sponsored product links are counted here; the conversion
- *   ledger itself stays empty until authorized first-party reports exist.
- */
-
-(function () {
-  var ENDPOINT = '/api/analytics/collect';
-  var STORAGE_KEY = 'gm_analytics_queue';
-  var SESSION_KEY = 'gm_session_id';
-  var MAX_QUEUE = 50;
-
-  function sessionId() {
-    var sid = localStorage.getItem(SESSION_KEY);
-    if (!sid) {
-      sid = (Math.random().toString(36) + Date.now().toString(36)).slice(2, 14);
-      try { localStorage.setItem(SESSION_KEY, sid); } catch (e) {}
+/* Good Measure Kitchen — privacy-preserving client-side analytics.
+   Five defined events: page_view, outbound_click, guide_open, search_query_referral,
+   report_import. No cookies, no personal data, no third-party scripts. Events are
+   held in memory and sent as one best-effort beacon batch. The beacon endpoint is
+   relative (/analytics/collect) so no third party is contacted; it must be
+   self-hosted by the operator (see analytics/endpoint.py) before any data leaves
+   the browser. Until enabled, nothing is sent anywhere. */
+(function(){
+  const ENDPOINT = '/analytics/collect';
+  const BATCH_LIMIT = 6;
+  const EVENTS = [];
+  const SESSION_KEY = 'gmk:session';
+  let sessionId = null;
+  try {
+    sessionId = localStorage.getItem(SESSION_KEY);
+    if (!sessionId) {
+      sessionId = (globalThis.crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + '.' + String(Math.random()));
+      localStorage.setItem(SESSION_KEY, sessionId);
     }
-    return sid;
-  }
+  } catch (e) { sessionId = String(Date.now()); }
 
-  function queue(event, payload) {
-    var item = { t: new Date().toISOString(), s: sessionId(), e: event, p: payload || {} };
-    var q = [];
-    try { q = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) {}
-    if (q.length >= MAX_QUEUE) q.shift();
-    q.push(item);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(q)); } catch (e) {}
-    flush();
+  function enabled() { return !!globalThis.__GMK_ANALYTICS_ENABLED; }
+
+  function track(name, payload) {
+    if (!enabled()) return;
+    EVENTS.push({
+      name: name,
+      session: sessionId,
+      path: location.pathname,
+      referrer: document.referrer || '',
+      ts: new Date().toISOString(),
+      ...payload
+    });
+    if (EVENTS.length >= BATCH_LIMIT) flush();
   }
 
   function flush() {
-    var q = [];
-    try { q = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) {}
-    if (!q.length) return;
-    if (navigator && navigator.sendBeacon) {
-      var form = new FormData();
-      q.forEach(function (item) { form.append('events[]', JSON.stringify(item)); });
-      navigator.sendBeacon(ENDPOINT, form);
-      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-      return;
+    if (!enabled() || !EVENTS.length) return;
+    const batch = EVENTS.splice(0, EVENTS.length);
+    const payload = JSON.stringify({ events: batch });
+    if (globalThis.navigator && navigator.sendBeacon) {
+      navigator.sendBeacon(ENDPOINT, payload);
+    } else {
+      fetch(ENDPOINT, {
+        method: 'POST',
+        body: payload,
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' }
+      }).catch(function(){});
     }
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', ENDPOINT, true);
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.onload = function () {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-      }
-    };
-    xhr.onerror = function () {};
-    try { xhr.send(JSON.stringify({ events: q })); } catch (e) {}
   }
 
-  function track(event, payload) {
-    queue(event, payload);
+  /* 1. page_view — fired on every page load */
+  track('page_view');
+
+  /* 4. search_query_referral — fired when the reader arrived from a search engine */
+  if (/(google|bing|duckduckgo|yahoo|yandex|brave|ecosia)\./i.test(document.referrer || '')) {
+    track('search_query_referral');
   }
 
-  /* Auto page view on load. */
-  if (typeof window !== 'undefined') {
-    track('page_view', { path: window.location.pathname, referrer: document.referrer || '' });
-
-    /* Outbound-click counter: intercept clicks on sponsored outbound product links. */
-    document.addEventListener('click', function (ev) {
-      var link = ev.target.closest && ev.target.closest('a[href]');
-      if (!link) return;
-      var href = link.getAttribute('href') || '';
-      var rel = link.getAttribute('rel') || '';
-      var isOutbound = href.startsWith('http://') || href.startsWith('https://');
-      var isSponsored = rel.indexOf('sponsored') !== -1;
-      if (isOutbound && isSponsored) {
-        var productId = '';
-        var m = href.match(/[Bb][0-9]{2}[A-Z0-9]{7}/);
-        if (m) productId = m[0];
-        track('outbound_click', {
-          url: href,
-          product: productId,
-          label: link.textContent ? link.textContent.trim().slice(0, 80) : ''
-        });
-      }
-    });
-
-    /* Expose helpers for guides and dashboards to record the remaining events. */
-    window.GoodMeasureAnalytics = {
-      track: track,
-      guideOpen: function (guide) { track('guide_open', { guide: guide }); },
-      searchReferral: function (query) { track('search_query_referral', { query: query }); },
-      reportImport: function (source) { track('report_import', { source: source }); }
-    };
+  /* 3. guide_open — fired when a buyer guide loads */
+  if (document.body && document.body.dataset.guide === 'true') {
+    track('guide_open');
   }
+
+  /* 2. outbound_click — interception of every sponsored outbound link.
+     Records destination separately from the navigation itself. */
+  globalThis.addEventListener('click', function(event) {
+    const link = event.target.closest('a[rel*="sponsored"]');
+    if (!link) return;
+    track('outbound_click', { destination: link.href, text: (link.textContent || '').trim() });
+    /* Navigation proceeds normally; the beacon is best-effort. */
+  }, { capture: true, passive: true });
+
+  /* 5. report_import — reserved. Fired only when campaign ledger records are
+     imported from an authorized first-party report. No import UI exists yet;
+    call gmkAnalytics.track('report_import', { source, records }) from that flow. */
+
+  globalThis.addEventListener('visibilitychange', function() {
+    if (document.hidden) flush();
+  });
+  globalThis.addEventListener('beforeunload', function() { flush(); });
+
+  globalThis.gmkAnalytics = { track: track, flush: flush, enabled: enabled };
 })();

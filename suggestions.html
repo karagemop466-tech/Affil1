@@ -1,80 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decision suggestions — review before implementing | Affil1</title>
-<meta name="description" content="Suggestions for improving the site and affiliate program. Review each suggestion and choose the best path before implementing any changes. Nothing here is implemented until reviewed.">
-<link rel="stylesheet" href="/assets/css/main.css">
-<link rel="alternate" type="application/rss+xml" title="Affil1" href="/rss.xml">
-</head>
-<body>
-<div id="site-header"></div>
-<main class="container">
-  <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
-    <a href="/">Home</a> &rsaquo; Suggestions
-  </nav>
-  <section class="section-tight">
-    <h1>Decision suggestions</h1>
-    <p>This section is a review inbox, not a to-do list. Review each suggestion, choose the best path, and record a decision before anything is implemented. No suggestion here has been approved.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Suggestions queue for Good Measure Kitchen — proposed site and campaign changes to review against evidence before anyone decides or implements."><title>Review suggestions — Good Measure Kitchen</title><link rel="stylesheet" href="styles.css"><link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/suggestions.html"><link rel="alternate" type="application/rss+xml" title="Good Measure Kitchen Notes" href="feed.xml"></head><body><header class="masthead wrap"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><nav aria-label="Main navigation"><a href="#guides">Guides</a><a href="#products">Product records</a><a href="#questions">Open questions</a><a href="suggestions.html" aria-current="page">Review suggestions</a><a href="#approach">Our approach</a><details><summary>More</summary><div class="menu"><a href="guides/flagged-for-review.html">Flagged for review</a><a href="questions.html">Questions & evidence</a><a href="#ledger">Campaign ledger</a><a href="feed.xml">RSS feed</a></div></details></nav></header>
+<div class="disclosure"><div class="wrap"><p>As an Amazon Associate I earn from qualifying purchases. <a href="guides/flagged-for-review.html#disclosure">How our links work</a></p></div></div>
+<main class="wrap section">
+  <p class="eyebrow">PUBLICATION DESK · DECISION SUPPORT</p>
+  <h1>Suggestions queue — choose after evidence</h1>
+  <p>Nothing here is implemented yet. Each suggestion is proposed, with the evidence that would need to exist first and the suggested path to a decision. A reviewer picks the best path before any change is made.</p>
 
-    <div class="section-head" style="margin-top:22px;">
-      <h2>Open for review</h2>
-    </div>
+  <div class="table-wrap">
+    <table class="decision-table">
+      <thead>
+        <tr><th>#</th><th>Suggestion</th><th>Why it matters</th><th>Evidence needed before implementing</th><th>Suggested path to decide</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td><b>Validate each submitted Amazon link</b> in the enrolled Associates workflow; confirm destination and tracking report before scaling.</td>
+          <td>Protects compliance and reader trust; unverified destinations can send readers anywhere.</td>
+          <td>Intended ASIN confirmed against official listing; confirmation date and source recorded; observed redirect stored in its own field; tracking report evidence.</td>
+          <td>Test one link per product, record all fields, then decide whether to scale to all five.</td>
+          <td class="status unverified">Proposed · awaiting verification</td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td><b>Keep disclosures above the fold on every page</b> and repeat in the footer; review placement near recommendations against Associates Operating Agreement §5 and FTC guidance.</td>
+          <td>Required by Amazon and FTC; placement errors are the most common compliance failure.</td>
+          <td>Current Operating Agreement text; FTC endorsement guidance; a page-by-page placement check.</td>
+          <td>Operator audits every new template before publishing; checklist item on the publishing workflow.</td>
+          <td class="status unverified">Proposed · policy review pending</td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td><b>Publish question-led guides on a cadence</b> (proposed: one every two weeks), add each to the sitemap and RSS feed when genuinely published.</td>
+          <td>Gives search engines something to index and readers a reason to return.</td>
+          <td>Draft guide; editorial review; source citations for any product fact; updated sitemap.xml and feed.xml.</td>
+          <td>Review measured search queries monthly before choosing the next topic.</td>
+          <td class="status unverified">Proposed · cadence not a commitment</td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td><b>Turn on click and conversion measurement</b>: privacy-preserving outbound click counter and self-hosted analytics endpoint recording page_view, outbound_click, guide_open, search_query_referral, report_import.</td>
+          <td>Lets the next topic be chosen from measured queries instead of instinct.</td>
+          <td>Endpoint deployed and self-hosted; privacy notice and consent obligations reviewed; window.__GMK_ANALYTICS_ENABLED set only after those steps.</td>
+          <td>Deploy endpoint.py on operator infrastructure; enable beacon; verify events arrive.</td>
+          <td class="status unverified">Proposed · endpoint code present, not live</td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td><b>Add a campaign ledger</b> with timestamp, source, channel, eligible sessions, clicks and reported orders — only from authorized first-party reports, with dated provenance.</td>
+          <td>Evidence-based iteration: measure before automating optimization.</td>
+          <td>Authorized Associates report access; report import flow; no conversion score or revenue forecast until data exists.</td>
+          <td>Keep ledger empty until the first authorized report arrives.</td>
+          <td class="status unverified">Proposed · empty by design</td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td><b>Replace ambiguous outbound links with validated Special Links</b> once one link per product is confirmed in the enrolled workflow.</td>
+          <td>Confirmed tracking and destination before any reader clicks at scale.</td>
+          <td>Tracking report evidence for the tested link; destination confirmed.</td>
+          <td>Do not claim supplied short links are invalid (FLG-003 unresolved); scale only after confirmation.</td>
+          <td class="status unverified">Proposed · blocked on #01</td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td><b>Add trendy, question-shaped articles</b> (e.g. oven vs air-fryer running costs, accessories worth it) as editorial hypotheses, not popularity claims.</td>
+          <td>Catchy, useful topics help real people find the site through search.</td>
+          <td>Drafts reviewed for unverified claims; any product fact tied to an official source or left blank.</td>
+          <td>Publish, add to sitemap/feed, review query data monthly.</td>
+          <td class="status unverified">Proposed · two guides drafted</td>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td><b>Confirm tracking ID shopnow047c-20</b>: account enrollment, country/site association, link generation and attribution.</td>
+          <td>The supplied ID is unverified; earnings attribution depends on it.</td>
+          <td>Enrolled Associates account check; official program policies.</td>
+          <td>Operator verifies in account dashboard; do not infer status from URL appearance.</td>
+          <td class="status unverified">Proposed · account check pending</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <article class="sugg">
-      <div class="decide">S-001 &middot; Proposed &middot; Owner: site editor</div>
-      <p><strong>Suggestion:</strong> Add price and commission tracking to each product row once pricing is confirmed from an official source.</p>
-      <p><strong>Why:</strong> Buyers act on price; commission potential drives link placement decisions.</p>
-      <p><strong>Blocker:</strong> Prices are blank today because they were not confirmed from an official source — nothing may be inferred or filled in.</p>
-      <p><strong>Paths:</strong> (a) Wait for authorized first-party price reports, then add a verified price column; (b) add a manual “check price” step with dated source; (c) decline until Associates reporting provides it.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-001'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <article class="sugg unvoted">
-      <div class="decide">S-002 &middot; Proposed &middot; Owner: site editor</div>
-      <p><strong>Suggestion:</strong> Replace the remaining three short links with validated Amazon Special Links after testing one link per product in the enrolled Associates workflow.</p>
-      <p><strong>Why:</strong> Special Links carry the tracking ID explicitly; current short links resolve to homepages or checkpoints for three of five products.</p>
-      <p><strong>Constraint:</strong> Do not claim the supplied short links are invalid — their exact compliance status is unresolved (see Flagged for Review). Test one link per product first, confirm destination and tracking report, then scale.</p>
-      <p><strong>Paths:</strong> (a) Enroll/test in Associates SiteStripe, generate Special Links for the two verified ASINs; (b) re-submit the three broken short links to the source; (c) hold.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-002'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <article class="sugg unvoted">
-      <div class="decide">S-003 &middot; Proposed &middot; Owner: site editor</div>
-      <p><strong>Suggestion:</strong> Turn on real analytics (self-hosted collector at /analytics/collect) and choose the next guide topic from measured queries instead of instinct.</p>
-      <p><strong>Why:</strong> Editorial cadence should be data-driven; five events are already instrumented (page_view, outbound_click, guide_read, suggestion_review, session_start).</p>
-      <p><strong>Blocker:</strong> The collector endpoint must be self-hosted outside GitHub Pages before events reach a server.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-003'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <article class="sugg unvoted">
-      <div class="decide">S-004 &middot; Proposed &middot; Owner: compliance</div>
-      <p><strong>Suggestion:</strong> Add the compliance gate check to the publishing workflow: disclosure placement + endorsement context reviewed against the Amazon Associates Operating Agreement and FTC guidance before any page publishes.</p>
-      <p><strong>Paths:</strong> (a) Adopt PUBLISHING_WORKFLOW.md as a pre-publish checklist; (b) expand with legal review step; (c) decline.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-004'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <article class="sugg unvoted">
-      <div class="decide">S-005 &middot; Proposed &middot; Owner: editorial</div>
-      <p><strong>Suggestion:</strong> Add imagery and brand assets (logo, seasonal hero image) so the site reads as published rather than generated.</p>
-      <p><strong>Why:</strong> Publication polish path (authorship, navigation, brand, imagery, seasons, clusters) builds trust.</p>
-      <p><strong>Paths:</strong> (a) Commission or generate brand imagery; (b) keep CSS-only placeholders; (c) use only manufacturer images with confirmed rights.</p>
-      <button class="btn" style="margin-top:10px;" onclick="affil1SuggestionReviewed('S-005'); alert('Review recorded (no personal data stored). Decision still pending.')">Mark reviewed &rarr;</button>
-    </article>
-
-    <div class="section-head" style="margin-top:40px;">
-      <h2>Decided</h2>
-    </div>
-    <p style="color:var(--muted);font-size:0.9rem;">No decisions yet. When a suggestion is decided, it moves here with the chosen path, date and reviewer.</p>
-
-    <div class="flag">
-      <strong>Rule:</strong> no suggestion is implemented until someone reviews it and chooses a path. Implementation notes go in the pull request, never directly on the live site.
-    </div>
-  </section>
+  <p class="editorial-note">How to use this page: review each suggestion against its evidence column, choose the best path, then implement. Status values reflect evidence state, not priority. Unverified means unverified — not invalid.</p>
 </main>
-<div id="site-footer"></div>
-<script src="/assets/js/common.js"></script>
-<script src="/assets/js/analytics.js"></script>
-</body>
-</html>
+<footer><div class="wrap footer-main"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><div class="footer-nav"><b>Explore</b><a href="#guides">Buyer guides</a><a href="#products">Product records</a><a href="guides/flagged-for-review.html">Flagged for review</a></div><div class="footer-nav"><b>Publication desk</b><a href="#questions">Open questions</a><a href="#ledger">Campaign ledger</a><a href="feed.xml">RSS feed</a><a href="#approach">Our approach</a></div></div><div class="wrap footer-bottom"><span>As an Amazon Associate I earn from qualifying purchases.</span><span>© 2026 Good Measure Kitchen · Evidence-led, reader-first.</span></div></footer></body></html>

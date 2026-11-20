@@ -2,78 +2,181 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Good Measure Kitchen — question-led kitchen buyer guides. Compare air-fryer formats, capacity, cleanup and counter space before you buy. Independent editorial research; no popularity or performance claims without evidence.">
+  <meta property="og:title" content="Good Measure Kitchen — Buy with a little more clarity">
+  <meta property="og:description" content="Question-led kitchen buyer guides: air-fryer formats, capacity, cleanup and counter space. Independent editorial research; no unverified claims.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/">
+  <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/">
   <link rel="alternate" type="application/rss+xml" title="Good Measure Kitchen Notes" href="feed.xml">
-  <meta name="description" content="Thoughtful, practical kitchen buying guides: compare air-fryer formats, capacity, cleanup and counter space before you buy. Product links are submitted and unverified until checked against official sources.">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
   <title>Good Measure Kitchen — Buy with a little more clarity</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="disclosure">As an Amazon Associate I earn from qualifying purchases. <a href="guides/flagged-for-review.html#disclosure">How our links work</a></div>
-  <header class="masthead wrap"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><nav aria-label="Main navigation"><a href="#guides">Guides</a><a href="#products">Products</a><a href="#questions">Open questions</a><a href="#suggestions">Suggestions for review</a><details><summary>More</summary><div class="menu"><a href="guides/flagged-for-review.html">Flagged for review</a><a href="#ledger">Campaign ledger</a><a href="#approach">Our approach</a><a href="feed.xml">RSS feed</a></div></details></nav></header>
+  <header class="masthead wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#guides">Guides</a>
+      <a href="#products">Product records</a>
+      <a href="#questions">Open questions</a>
+      <a href="suggestions.html">Review suggestions</a>
+      <a href="#approach">Our approach</a>
+      <details><summary>More</summary>
+        <div class="menu">
+          <a href="guides/flagged-for-review.html">Flagged for review</a>
+          <a href="questions.html">Questions & evidence</a>
+          <a href="#ledger">Campaign ledger</a>
+          <a href="feed.xml">RSS feed</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+  <div class="disclosure">
+    <div class="wrap">
+      <p>As an Amazon Associate I earn from qualifying purchases. <a href="guides/flagged-for-review.html#disclosure">How our links work</a></p>
+    </div>
+  </div>
   <main>
-    <section class="hero wrap"><div class="hero-copy"><p class="eyebrow">THE KITCHEN EDIT · FIELD NOTES FOR REAL LIFE</p><h1>Make room for<br><em>the right choice.</em></h1><p class="lead">Useful, no-hype guides for choosing kitchen gear that fits your counter, your cooking and your cleanup tolerance. Product links are shown exactly as submitted and remain unverified until checked against official sources.</p><a class="button" href="#guides">Explore the guides <span>↘</span></a><p class="quiet">Independent editorial research. No popularity or performance claims without evidence.</p></div><div class="hero-art" aria-label="Illustration of an air fryer and ingredients"><div class="art-stamp">BUY<br>BETTER,<br>NOT MORE</div><div class="appliance"><div class="appliance-top"></div><div class="appliance-face"><div class="screen"></div><div class="handle"></div></div><div class="appliance-foot"></div></div><span class="food food-one">✳</span><span class="food food-two">●</span><span class="food food-three">✦</span><span class="art-caption">A considered kitchen starts with the right questions.</span></div></section>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">THE KITCHEN EDIT · FIELD NOTES FOR REAL LIFE</p>
+        <h1>Make room for<br><em>the right choice.</em></h1>
+        <p class="lead">Useful, no-hype guides for choosing kitchen gear that fits your counter, your cooking and your cleanup tolerance. Products are presented exactly as submitted — nothing here is verified, ranked or endorsed.</p>
+        <a class="button" href="#guides">Explore the guides <span>↘</span></a>
+        <p class="quiet">Independent editorial research. No popularity or performance claims without evidence.</p>
+      </div>
+    </section>
 
-    <section class="ticker"><div class="wrap ticker-inner"><span>GOOD QUESTIONS FIRST</span><span>✳</span><span>REAL-LIFE TRADE-OFFS</span><span>✳</span><span>NO MADE-UP WINNERS</span><span>✳</span><span>GOOD QUESTIONS FIRST</span></div></section>
-
-    <!-- Lead with the products: product-intent confirmation record. -->
     <section class="wrap section" id="products">
-      <div class="section-head"><div><p class="eyebrow">THE PRODUCT REGISTER · UNVERIFIED</p><h2>Five submitted links.<br><em>Still being checked.</em></h2></div><p>We lead with the products, not with the verification process. Every row below is a record of intent, not a recommendation. Intended ASINs are parsed from the submitted short links; official listing URLs, confirmation dates, sources and observed redirect targets are blank until confirmed in the enrolled Associates workflow. Intended and observed identifiers are kept in separate fields.</p></div>
-      <div class="table-wrap"><table class="product-table">
-        <thead>
-          <tr><th>#</th><th>Submitted link</th><th>Intended ASIN</th><th>Official listing URL</th><th>Confirmed date</th><th>Confirmed source</th><th>Observed redirect target</th><th>Status</th></tr>
-        </thead>
-        <tbody id="product-intent-table"></tbody>
-      </table></div>
-      <p class="empty-note">Blank cells are unverified, not invalid. Nothing here is inferred or filled in. Review each record in the <a href="guides/flagged-for-review.html#products">flagged-for-review queue</a> before acting on any link.</p>
+      <div class="section-head">
+        <p class="eyebrow">PRODUCTS SUBMITTED FOR REVIEW</p>
+        <h2>Lead with the products.</h2>
+        <p>Five links were submitted. Their destinations, product identities and tracking behavior have not been confirmed. Each card shows exactly what was submitted and what still needs checking — nothing more.</p>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
     </section>
 
     <section class="wrap section" id="guides">
-      <div class="section-head"><div><p class="eyebrow">THE BUYER'S NOTEBOOK</p><h2>Start with what matters.</h2></div><p>Not a ranked list. A small collection of practical questions to make the next decision easier.</p></div>
-      <div class="guide-grid">
-        <article class="guide-card feature"><div class="card-art art-basket"><span>01 / FORMAT</span><i>↗</i></div><div class="card-body"><p class="tag">CHOOSING A STYLE · 6 MIN READ</p><h3><a href="guides/basket-or-oven.html">Basket or oven-style air fryer: what should you compare?</a></h3><p>Think through batch size, footprint, cooking habits and how much versatility you’ll actually use.</p><a class="text-link" href="guides/basket-or-oven.html">Read the guide <span>→</span></a></div></article>
-        <article class="guide-card"><div class="card-art art-capacity"><span>02 / CAPACITY</span><i>◌</i></div><div class="card-body"><p class="tag">SPACE & SERVINGS · 5 MIN READ</p><h3><a href="guides/capacity-checklist.html">A no-hype checklist for comparing air-fryer capacity</a></h3><p>Translate the number on a box into the counter space and portions you need.</p><a class="text-link" href="guides/capacity-checklist.html">Read the guide <span>→</span></a></div></article>
-        <article class="guide-card"><div class="card-art art-cleanup"><span>03 / CLEANUP</span><i>✳</i></div><div class="card-body"><p class="tag">EVERYDAY USE · 4 MIN READ</p><h3><a href="guides/cleanup-counterspace.html">How to assess cleanup and counter-space trade-offs</a></h3><p>A simple way to check whether convenience survives the washing-up and storage.</p><a class="text-link" href="guides/cleanup-counterspace.html">Read the guide <span>→</span></a></div></article>
-      </div>
-      <p class="editorial-note">These are editorial hypotheses and practical checklists—not claims about search volume, product superiority or popularity.</p>
-    </section>
-
-    <section class="wrap section questions-band" id="questions">
-      <div class="wrap"><p class="eyebrow">BEFORE THE NEXT DECISION</p><h2>What we need to know.</h2>
-        <div class="qa">
-          <div class="qa-item"><p class="q">01 · What are these products?</p><p class="a">Official listing URLs, intended ASINs, product names, exact variants and confirmation dates are unverified.</p><p class="i">Missing: official listing, matching ASIN, confirmation date, source, observed redirect.</p><p class="a"><a href="guides/pre-decision-questions.html#q1">See the full question and suggested discovery →</a></p></div>
-          <div class="qa-item"><p class="q">02 · Can these links be used with this account?</p><p class="a">Tracking ID shopnow047c-20 supplied by user; enrollment and association unverified.</p><p class="i">Missing: account enrollment, country/site association, link-generation confirmation, tracking-report evidence.</p><p class="a"><a href="guides/pre-decision-questions.html#q2">See the full question and suggested discovery →</a></p></div>
-          <div class="qa-item"><p class="q">03 · What does the evidence say about price, features and reviews?</p><p class="a">Nothing product-specific verified.</p><p class="i">Missing: current market-specific details with timestamp and traceable source.</p><p class="a"><a href="guides/pre-decision-questions.html#q3">See the full question and suggested discovery →</a></p></div>
-          <div class="qa-item"><p class="q">04 · Are clicks and conversions measurable?</p><p class="a">No authorized data or analytics endpoint configured.</p><p class="i">Missing: first-party reports, API authorization, analytics deployment, privacy review.</p><p class="a"><a href="guides/pre-decision-questions.html#q4">See the full question and suggested discovery →</a></p></div>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">THE BUYER'S NOTEBOOK</p>
+          <h2>Start with what matters.</h2>
         </div>
-        <a class="text-link" href="guides/pre-decision-questions.html">Read all pre-decision questions and answers <span>→</span></a>
+        <p>Not a ranked list. A small collection of practical questions to make the next decision easier.</p>
+      </div>
+      <div class="guide-grid">
+        <article class="guide-card feature">
+          <div class="card-art art-basket">01 / FORMAT</div>
+          <div class="card-body">
+            <p class="tag">CHOOSING A STYLE · 6 MIN READ</p>
+            <h3><a href="guides/basket-or-oven.html">Basket or oven-style air fryer: what should you compare?</a></h3>
+            <p>Think through batch size, footprint, cooking habits and how much versatility you’ll actually use.</p>
+            <a class="text-link" href="guides/basket-or-oven.html">Read the guide <span>→</span></a>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="card-art art-capacity">02 / CAPACITY</div>
+          <div class="card-body">
+            <p class="tag">SPACE & SERVINGS · 5 MIN READ</p>
+            <h3><a href="guides/capacity-checklist.html">A no-hype checklist for comparing air-fryer capacity</a></h3>
+            <p>Translate the number on a box into the counter space and portions you need.</p>
+            <a class="text-link" href="guides/capacity-checklist.html">Read the guide <span>→</span></a>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="card-art art-cleanup">03 / CLEANUP</div>
+          <div class="card-body">
+            <p class="tag">EVERYDAY USE · 4 MIN READ</p>
+            <h3><a href="guides/cleanup-counterspace.html">How to assess cleanup and counter-space trade-offs</a></h3>
+            <p>A simple way to check whether convenience survives the washing-up and storage.</p>
+            <a class="text-link" href="guides/cleanup-counterspace.html">Read the guide <span>→</span></a>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="card-art art-format">04 / COST</div>
+          <div class="card-body">
+            <p class="tag">RUNNING COSTS · 5 MIN READ</p>
+            <h3><a href="guides/oven-or-air-fryer.html">Conventional oven or air fryer: which one actually suits your weeknight?</a></h3>
+            <p>Compare how each appliance fits your meals, your counter and your energy bill — without assuming a winner.</p>
+            <a class="text-link" href="guides/oven-or-air-fryer.html">Read the guide <span>→</span></a>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="card-art art-accessories">05 / EXTRAS</div>
+          <div class="card-body">
+            <p class="tag">ACCESSORIES · 4 MIN READ</p>
+            <h3><a href="guides/air-fryer-accessories.html">Air-fryer accessories: worth the counter space?</a></h3>
+            <p>Ask whether racks, liners and baskets add real flexibility or just extra washing and storage.</p>
+            <a class="text-link" href="guides/air-fryer-accessories.html">Read the guide <span>→</span></a>
+          </div>
+        </article>
+      </div>
+      <p class="editorial-note">These are editorial hypotheses and practical checklists—not claims about search volume, product superiority or popularity. New guides are published as questions, not verdicts.</p>
+    </section>
+
+    <section class="questions-band" id="questions">
+      <div class="wrap">
+        <p class="eyebrow">BEFORE THE NEXT DECISION</p>
+        <h2>What we need to know.</h2>
+        <div class="question-grid">
+          <div><span>01</span><h3>What are these products?</h3><p>Official listing URLs, intended ASINs, product names, exact variants and confirmation dates are unverified. Check each in Amazon’s enrolled Associates workflow.</p></div>
+          <div><span>02</span><h3>What does the evidence say?</h3><p>Price, availability, features, reviews and commissions need current official sources or authorized reports. None are populated as facts here.</p></div>
+          <div><span>03</span><h3>Who is the reader?</h3><p>Household size, counter dimensions, budget, cooking use and cleanup preferences are unknown. Discover them with reader interviews and Search Console queries.</p></div>
+          <div><span>04</span><h3>Can measurement go live?</h3><p>Confirm Analytics/Search Console ownership, privacy notice, consent obligations, API access and report permissions before collecting or automating data.</p></div>
+        </div>
+        <a class="text-link" href="questions.html">See the full questions, suggested evidence and review queue →</a>
       </div>
     </section>
 
-    <section class="wrap section" id="suggestions">
-      <div class="section-head"><div><p class="eyebrow">SUGGESTIONS QUEUE</p><h2>Review before implementing.</h2></div><p>Suggestions are collected here so someone can review them and choose the best path before any change is implemented. Nothing is automated into the site without review.</p></div>
-      <div class="qa">
-        <div class="suggestion"><p class="tag">HIGH · VALIDATE LINKS</p><p>In the enrolled Associates workflow, verify each intended ASIN/listing, record source and date, observe redirects separately, and test tracking reports before scaling.</p></div>
-        <div class="suggestion"><p class="tag">MEDIUM · FACTUAL COMPARISONS</p><p>After identity is confirmed, compare only sourced attributes relevant to format, capacity, cleanup and dimensions. Leave unknown cells blank.</p></div>
-        <div class="suggestion"><p class="tag">MEDIUM · QUESTION-LED GUIDES</p><p>Publish one question-led guide every two weeks; add factual sources, author attribution and publication/update dates; update sitemap and feed when published.</p></div>
-        <div class="suggestion"><p class="tag">LOW · MEASUREMENT</p><p>Instrument privacy-preserving outbound-click events and the self-hosted analytics endpoint only after data access, privacy notice/consent and retention decisions.</p></div>
+    <section class="wrap section cadence">
+      <div>
+        <p class="eyebrow">A PUBLISHING RHYTHM</p>
+        <h2>Small, useful, consistent.</h2>
+        <p>Proposed start: one question-led guide every two weeks. Update the sitemap and feed when a guide is genuinely published; review measured queries monthly before choosing the next topic. This is a proposed cadence, not a claim of scheduled automation.</p>
       </div>
-      <a class="text-link" href="guides/suggestions.html">Review the full suggestions queue <span>→</span></a>
+      <div class="cadence-box"><span>WEEK 01</span><b>Research &amp; source-check</b><span>WEEK 02</span><b>Write, review, publish</b><span>MONTHLY</span><b>Review authorized query data</b></div>
     </section>
 
-    <section class="wrap section exec">
-      <h2>Executive summary</h2>
-      <p>Good Measure Kitchen is a reader-first, evidence-led affiliate editorial site for kitchen buying decisions. Five product links were submitted and remain <b>unverified</b>; no ASIN, listing, price, feature, review, commission, ranking or revenue claim is populated without an official source. The selected Associates tracking ID <code>shopnow047c-20</code> is user-supplied and not independently confirmed. Disclosure appears above the fold and in the footer on every page; all outbound product links carry <code>rel="sponsored nofollow noopener"</code>. Measurement infrastructure (outbound-click counter plus five analytics events) is built but not live until authorization and privacy review are complete.</p>
-      <p><a class="text-link" href="guides/executive-summary.html">Read the full executive summary <span>→</span></a></p>
+    <section class="ledger wrap" id="ledger">
+      <div>
+        <p class="eyebrow">EVIDENCE BEFORE OPTIMIZATION</p>
+        <h2>Campaign ledger</h2>
+        <p>Empty by design. Add records only from authorized first-party reports, with a dated provenance trail. No conversion score or revenue forecast.</p>
+      </div>
+      <div class="table-wrap"><table class="ledger">
+        <thead><tr><th>Date</th><th>Source</th><th>Channel</th><th>Eligible sessions</th><th>Clicks</th><th>Reported orders</th></tr></thead>
+        <tbody><tr><td colspan="6" class="empty">No authorized report data recorded yet.</td></tr></tbody>
+      </table></div>
     </section>
-
-    <section class="wrap section cadence"><div><p class="eyebrow">A PUBLISHING RHYTHM</p><h2>Small, useful, consistent.</h2><p>Proposed start: one question-led guide every two weeks. Update the sitemap and feed when a guide is genuinely published; review measured queries monthly before choosing the next topic. This is a proposed cadence, not a claim of scheduled automation.</p></div><div class="cadence-box"><span>WEEK 01</span><b>Research & source-check</b><span>WEEK 02</span><b>Write, review, publish</b><span>MONTHLY</span><b>Review authorized query data</b></div></section>
-
-    <section class="ledger wrap" id="ledger"><div><p class="eyebrow">EVIDENCE BEFORE OPTIMIZATION</p><h2>Campaign ledger</h2><p>Empty by design. Add records only from authorized first-party reports, with a dated provenance trail. No conversion score or revenue forecast.</p></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Source</th><th>Channel</th><th>Eligible sessions</th><th>Clicks</th><th>Reported orders</th></tr></thead><tbody><tr><td colspan="6">No authorized report data recorded yet.</td></tr></tbody></table></div></section>
-
-    <section class="wrap section decision" id="approach"><div class="section-head"><div><p class="eyebrow">OUR EDITORIAL PROMISE</p><h2>Good advice starts<br>with honest limits.</h2></div><p>We separate what we know from what still needs a source. No invented ratings, prices, review summaries, or “best overall” badges.</p></div><div class="principles"><div><b>01</b><h3>Show the trade-offs</h3><p>Explain the questions that help match a format to the reader’s needs—not a universal winner.</p></div><div><b>02</b><h3>Link with context</h3><p>Product links are affiliate links. We disclose that relationship and keep intended listing details distinct from observed redirects.</p></div><div><b>03</b><h3>Measure with permission</h3><p>Use authorized first-party reports for clicks and orders. Until available, the campaign ledger stays empty.</p></div></div></section>
   </main>
 
-  <footer><div class="wrap footer-main"><a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a><div class="footer-nav"><b>Explore</b><a href="#guides">Buyer guides</a><a href="#products">Product register</a><a href="guides/flagged-for-review.html">Flagged for review</a></div><div class="footer-nav"><b>Publication desk</b><a href="#questions">Open questions</a><a href="#suggestions">Suggestions for review</a><a href="#ledger">Campaign ledger</a><a href="#approach">Our approach</a><a href="feed.xml">RSS feed</a></div></div><div class="wrap footer-bottom"><span>As an Amazon Associate I earn from qualifying purchases.</span><span>© 2026 Good Measure Kitchen · Evidence-led, reader-first.</span></div></footer>
-  <script src="data.js"></script><script src="analytics.js"></script><script src="app.js"></script>
+  <footer>
+    <div class="wrap footer-main">
+      <a class="brand" href="index.html"><span class="brand-mark">gm</span><span>GOOD MEASURE<span class="brand-sub">KITCHEN NOTES</span></span></a>
+      <div class="footer-nav">
+        <b>Explore</b>
+        <a href="#guides">Buyer guides</a>
+        <a href="#products">Product records</a>
+        <a href="guides/flagged-for-review.html">Flagged for review</a>
+      </div>
+      <div class="footer-nav">
+        <b>Publication desk</b>
+        <a href="#questions">Open questions</a>
+        <a href="suggestions.html">Review suggestions</a>
+        <a href="#ledger">Campaign ledger</a>
+        <a href="feed.xml">RSS feed</a>
+        <a href="#approach">Our approach</a>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>As an Amazon Associate I earn from qualifying purchases.</span>
+      <span>© 2026 Good Measure Kitchen · Evidence-led, reader-first.</span>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="analytics.js"></script>
 </body>
 </html>
