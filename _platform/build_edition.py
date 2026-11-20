@@ -134,6 +134,25 @@ def render_shell(
         if include_canonical
         else ""
     )
+    # One host, one site to index. This edition and the generated shop at the
+    # repository root describe the same five listings under two brands, so a
+    # search engine has to be told which one to read. Self-canonical plus
+    # noindex is Google's documented combination for a page that stays
+    # crawlable and keeps its links while leaving the results; pointing the
+    # canonical at the shop's home page would instead assert that the two pages
+    # are the same page, which is not true.
+    # Sources, read 2026-11-20:
+    #   https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+    #     "noindex — Do not show this page, media, or resource in search results." and
+    #     "these settings can be read and followed only if crawlers are allowed to
+    #     access the pages that include these settings" (hence follow, not nofollow).
+    #   https://developers.google.com/search/docs/crawling-indexing/robots/intro
+    #     robots.txt "is not a mechanism for keeping a web page out of Google".
+    #   https://developers.google.com/crawling/docs/robots-txt/create-robots-txt
+    #     "The robots.txt file must be located at the root of the site host to which
+    #     it applies… It cannot be placed in a subdirectory." — which is why the
+    #     edition/robots.txt below declares nothing.
+    robots_meta = '\n  <meta name="robots" content="noindex, follow">'
     page_slug = rel_page.replace("/index.html", "").replace(".html", "") or "home"
 
     return f"""<!DOCTYPE html>
@@ -142,7 +161,7 @@ def render_shell(
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{esc(title)} — {esc(SITE_TITLE)}</title>
-  <meta name="description" content="{esc(description)}">{canon_tag}
+  <meta name="description" content="{esc(description)}">{robots_meta}{canon_tag}
   <link rel="icon" href="{esc(fav_href)}" type="image/svg+xml">
   <link rel="alternate" type="application/rss+xml" title="{esc(SITE_TITLE)} Buying Guides RSS" href="{esc(feed_href)}">
   <link rel="stylesheet" href="{esc(css_href)}">
@@ -170,6 +189,14 @@ def render_shell(
         <a href="{esc(rel_href(rel_page, 'compliance/index.html'))}">Disclosure &amp; API rules</a> ·
         <a href="{esc(rel_href(rel_page, 'flagged/index.html'))}">Flagged for Review</a>
       </span>
+    </div>
+  </div>
+  <div class="annex-note" role="note">
+    <div class="container annex-inner">
+      <span><strong>This is the verification annex.</strong> The reader edition of this
+      publication &mdash; the shop, the guides and the product notes &mdash; is published at
+      the site root, and it is the copy this project asks search engines to read.</span>
+      <a class="btn btn-sm" href="{esc(root_store_href)}">Go to the shop</a>
     </div>
   </div>
   <main id="main-content" class="container">
@@ -1651,9 +1678,17 @@ def build_all() -> list[str]:
 
     write_text(EDITION_DIR / "sitemap.xml", build_sitemap(list(pages.keys())))
     write_text(EDITION_DIR / "feed.xml", build_rss_feed(guides_doc))
+    # Deliberately permissive, and it declares no sitemap. Two verified reasons:
+    # a robots.txt only counts at the root of the host (developers.google.com/crawling/
+    # docs/robots-txt/create-robots-txt), so this file changes nothing for a crawler; and
+    # blocking these paths would stop Googlebot reading the noindex tag that actually
+    # keeps this annex out of the index (developers.google.com/search/docs/crawling-
+    # indexing/robots/intro). The annex sitemap is still written to disk as a record of
+    # what the build published; discovery of the shop happens through the host's own
+    # robots.txt and Search Console, which the owner has not yet verified.
     write_text(
         EDITION_DIR / "robots.txt",
-        f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n",
+        "User-agent: *\nAllow: /\n",
     )
     return sorted(pages.keys())
 
