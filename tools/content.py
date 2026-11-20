@@ -8,6 +8,8 @@ superlative, no winner. If a sentence needs a fact that is not in that file, the
 sentence does not ship.
 """
 
+from buyer_guides import BUYER_GUIDES
+
 GUIDES = [
     {
         "slug": "basket-or-oven-air-fryer",
@@ -226,7 +228,7 @@ GUIDES = [
         ],
         "closing": "No product on this site was tested, ranked or scored. P-05's attributes above are transcribed from its listing title."
     }
-]
+] + BUYER_GUIDES
 
 # Rows for the comparison table. Every cell is either transcribed from a listing
 # title reached on 2026-11-20 or explicitly blank. Blank is a valid value.
@@ -271,11 +273,3 @@ COMPARE_COLUMNS = [
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from
 # src/data/products.json so that a fact can never exist in two places and drift.
 
-# Seasonal archive brought into the publication shell; topics are editorial, not trend data.
-for slug,title,kicker,photo,dek,sections,close in [
- ('holiday-hosting','Can a countertop oven help with a holiday dinner?','Holiday hosting','format-oven','Start with the side dish that never quite fits in the main oven.', [('Name the dish that gets crowded out','Pick the actual serving dish, not an imaginary tray. Measure it from handle to handle. Ask for the usable rack dimensions and the clearance above the food before comparing oven capacities.'),('Work backward from serving time','Sketch the last half hour on paper. If potatoes and stuffing both need the same tray at the same time, the extra appliance only helps if one entire dish fits. Check where a hot tray will land when the door opens.')], 'If the dish already fits your main oven on a different shelf, try that arrangement before buying anything.'),
- ('meal-prep-sunday','Which air fryer fits your Sunday batch cook?','Meal prep','capacity','Two baskets or one big batch? Write the menu before you count the quarts.', [('Draw your Sunday in batches','Put each dish on a slip of paper. Lay the slips out in cooking order. A second basket is useful when two small dishes need different settings. It will not turn two small drawers into one wide tray.'),('Count the resets','After the first batch, what needs washing, what needs reheating, and where does the finished food go? Compare those steps for a single basket, a pair of drawers and a rack oven.')], 'The useful comparison is how many times you have to start over.'),
- ('small-kitchen-counter','Will the drawer open on your small counter?','Small kitchens','cleanup','The appliance footprint is only the first rectangle worth measuring.', [('Mark two footprints','Tape out the closed appliance using its official dimensions. Then mark the working area: open drawer or doors, a place to set hot parts, and the manufacturer’s specified clearances. If the manual gives no figure, ask rather than guess.'),('Walk dinner through the space','Stand where you usually chop vegetables. Reach for a bowl, open a cupboard and carry a tray to the sink. A machine can fit its rectangle and still occupy the one clear patch you need to cook.')], 'Keep the tape down for an ordinary meal. You will learn more about the counter than a product photo can tell you.'),
- ('thermometer-pairing','Instant-read or wireless: which kitchen thermometer fits?','Cooking tools','thermometer','Decide whether you want a spot check or a reading while food cooks.', [('Choose a moment, not a feature list','Think about the last meal when you wanted a temperature reading. Were you checking several pieces at the end, or following one roast without opening the oven? Start your shortlist there.'),('Check the manual before putting a probe inside','Look up the permitted heat range, insertion depth and where the display or transmitter must sit. Do not leave a handheld thermometer in an appliance unless the manual explicitly allows it. For wireless models, check phone compatibility and whether the app works the way you intend to use it.')], 'Buy for the reading you need, not the longest list of connected features.')]:
-    sample=next(g for g in GUIDES if g['photo'].endswith(photo)) if any(g['photo'].endswith(photo) for g in GUIDES) else None
-    GUIDES.append(dict(slug=slug,title=title,kicker=kicker,dek=dek,read_minutes=2,photo='assets/img/'+photo,photo_alt=sample['photo_alt'] if sample else 'Illustrated kitchen equipment on a working countertop',photo_caption='Editorial illustration of the format, not a product photograph.',updated='2026-11-20',sections=[dict(h=h,p=[p]) for h,p in sections],closing=close))

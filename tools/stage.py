@@ -16,7 +16,7 @@ def stage(destination):
     files |= {
         str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*')
         if path.is_file() and (path.suffix in {'.woff2', '.svg'} or
-           path.name in {'site.css', 'site.js', 'analytics.js', 'publication.css', 'publication.js', 'discover.js', 'counter-config.js', 'cover-air-fryer.jpg'} or
+           path.name in {'site.css', 'site.js', 'analytics.js', 'publication.css', 'publication.js', 'discover.js', 'fit.css', 'fit.js', 'counter-config.js', 'cover-air-fryer.jpg'} or
            path.stem.endswith(('-w560', '-w760', '-w900', '-w1280')))
     }
     for name in sorted(files):

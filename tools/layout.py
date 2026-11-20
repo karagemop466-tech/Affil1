@@ -42,6 +42,7 @@ FOOTER_GROUPS = [
         ("guides/index.html", "All guides"),
         ("compare/index.html", "Comparison table"),
         ("feed.xml", "RSS feed"),
+        ("fit/index.html", "Air fryer fit finder"),
     ]),
     ("Catalogue", [
         ("products/index.html", "Product register"),
@@ -58,6 +59,7 @@ FOOTER_GROUPS = [
     ("Desk", [
         ("questions/index.html", "Open questions"),
         ("suggestions/index.html", "Suggestions"),
+        ("suggestions/design.html", "Design decision brief"),
         ("operations/ledger.html", "Campaign ledger"),
         ("brief/index.html", "Executive summary"),
         ("about/index.html", "About this site"),
@@ -184,7 +186,7 @@ def footer(page_dir):
 
 
 def page(page_dir, *, title, description, body, active=None, canonical=None,
-         body_class="", structured=None, og_type="website"):
+         body_class="", structured=None, og_type="website", extra_css=None):
     css = rel(page_dir, "assets/css/site.css")
     js = rel(page_dir, "assets/js/site.js")
     feed = rel(page_dir, "feed.xml")
@@ -217,6 +219,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 <link rel="preload" href="{esc(rel(page_dir, 'assets/fonts/inter-latin-400-normal.woff2'))}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{esc(css)}">
 <link rel="stylesheet" href="{rel(page_dir, 'assets/css/publication.css')}">
+{('<link rel="stylesheet" href="'+esc(rel(page_dir,extra_css))+'">') if extra_css else ''}
 {structured_block}</head>
 <body class="{esc(body_class)}">
 <a class="skip" href="#main">Skip to content</a>
