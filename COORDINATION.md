@@ -780,3 +780,30 @@ tools/stage.py into a temp dir                    → 0 broken references
 ### Merge log
 
 Pending: see the PR linked from this board after it is opened.
+
+
+Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done.
+
+## arena/35959dfb-affil1 — reader-facing release pass (2026-11-20)
+
+Claimed before any edit. Base: `f041c75` (main). Session: `arena/35959dfb-affil1`.
+
+| Task | Status | Owner | Scope (files touched) |
+|---|---|---|---|
+| Re-verify all five supplied links against amazon.com and record today's observations | in progress | arena/35959dfb-affil1 | `data/verification-observations.ndjson` (append only) |
+| Fix the two red-by-staleness tests in CI (`analytics/test_endpoint.py`, `measurement/test_collector.py`) | in progress | arena/35959dfb-affil1 | `analytics/test_endpoint.py`, `measurement/test_collector.py` |
+| Make the Pages workflow run every check the repo documents, including the two test suites | in progress | arena/35959dfb-affil1 | `.github/workflows/pages.yml` |
+| Close the published-surface leaks: archived pages without `noindex`, `robots.txt` not disallowing `/archive/`, un-staged stylesheet/JS dependencies, unregistered `decision-support/` section | in progress | arena/35959dfb-affil1 | `tools/build.py`, `tools/stage.py`, `tools/check.py`, `.nojekyll`-adjacent config only |
+| Reader-facing add: **Where to start** (`start/index.html`) — five buyer situations, each answered with a shortlist and its reasons | in progress | arena/35959dfb-affil1 | `tools/page_start.py` (new), `tools/build.py`, `tools/layout.py` (nav only) |
+| Reader-facing add: **Editor's desk / decision register** (`editorial/index.html`) — the suggestions-and-decisions surface the brief asks for, in reader voice | in progress | arena/35959dfb-affil1 | `tools/page_editorial.py` (new), `src/data/editorial.json` (new) |
+| Restate FLG-001 and FLG-016 in today's observation, and add FLG-023 (published-surface leaks), FLG-024 (CI red on stale tests), FLG-025 (measurement inert) | in progress | arena/35959dfb-affil1 | `src/data/flags.json` |
+
+**Not touched by this session:** `src/data/products.json` substance (title/breadcrumb facts
+unchanged), `src/data/suggestions.json`, `src/data/questions.json`, `decision-support/*`,
+`archive/*`. No generator file owned by an earlier merged session is rewritten; the two new
+pages are new modules registered in `tools/build.py`.
+
+**Coordination note:** `tools/sweep_surfaces.py` moves files by default. A dry run was
+mistakenly executed as a real run at 06:2xZ and immediately reverted (`git checkout --
+decision-support`); no commit carried the move. Any session running it should pass
+`--dry-run` first. This is logged so the next session does not repeat it.
