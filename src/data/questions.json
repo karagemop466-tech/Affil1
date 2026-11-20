@@ -29,7 +29,7 @@
     {
       "id": "Q-03",
       "question": "Are clicks attributed to shopnow047c-20?",
-      "what_we_have": "Every Amazon destination on the site now carries ?tag=shopnow047c-20, which is what Program Policies 2(b) requires a Special Link to include.",
+      "what_we_have": "No tracking tag is published anywhere on this site. Every Amazon destination is built by one function, `buy_url()` in tools/layout.py, which returns the official listing URL untagged unless `src/data/products.json` carries a complete evidence bundle for that ASIN (intended ASIN, official listing, the Special Link exactly as Associates Central generated it, the report proving a click landed, who confirmed it and when). `tools/test_paid_link_gate.py` asserts the empty set and `tools/check.py` fails the build on any unapproved tagged href, so the safe state is enforced in CI rather than remembered. The owner flips it with `python3 tools/arm_links.py --checklist`.",
       "what_is_missing": "Confirmation from an Associates report that a click was recorded against the tag. No dashboard access is available to this build.",
       "how_to_close": "Click one link on the live site, then open Reports \u2192 Orders in the Associates dashboard and look for the click against the tag.",
       "answered": false,
@@ -145,7 +145,7 @@
     {
       "id": "Q-14",
       "question": "Are the product links Special Links in the sense the Operating Agreement means?",
-      "what_we_have": "Program Policies 2(a) requires Special Links to use the Associates ID; 2(b) requires the tag as a URL parameter. Every product link now carries ?tag=shopnow047c-20.",
+      "what_we_have": "No tracking tag is published anywhere on this site. Every Amazon destination is built by one function, `buy_url()` in tools/layout.py, which returns the official listing URL untagged unless `src/data/products.json` carries a complete evidence bundle for that ASIN (intended ASIN, official listing, the Special Link exactly as Associates Central generated it, the report proving a click landed, who confirmed it and when). `tools/test_paid_link_gate.py` asserts the empty set and `tools/check.py` fails the build on any unapproved tagged href, so the safe state is enforced in CI rather than remembered. The owner flips it with `python3 tools/arm_links.py --checklist`.",
       "what_is_missing": "Confirmation that the tag is registered and that clicks from this site are being recorded. That can only come from the account.",
       "how_to_close": "One click from the live site, then the Orders report. The same test closes Q-03.",
       "answered": false,
@@ -176,7 +176,7 @@
     {
       "id": "Q-17",
       "question": "Is a github.io subpath the right long-term home?",
-      "what_we_have": "The site is served at karagemop466-tech.github.io/Affil1/ and every link is relative so the subpath works.",
+      "what_we_have": "No tracking tag is published anywhere on this site. Every Amazon destination is built by one function, `buy_url()` in tools/layout.py, which returns the official listing URL untagged unless `src/data/products.json` carries a complete evidence bundle for that ASIN (intended ASIN, official listing, the Special Link exactly as Associates Central generated it, the report proving a click landed, who confirmed it and when). `tools/test_paid_link_gate.py` asserts the empty set and `tools/check.py` fails the build on any unapproved tagged href, so the safe state is enforced in CI rather than remembered. The owner flips it with `python3 tools/arm_links.py --checklist`.",
       "what_is_missing": "A domain decision. A custom domain would need DNS, a CNAME file and canonical URLs rewritten in one place.",
       "how_to_close": "Decide whether to buy a domain. The build has one constant for the site URL, so the change is small when the decision is made.",
       "answered": false,

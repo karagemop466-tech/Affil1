@@ -88,25 +88,37 @@ def rel(page_dir, target):
 
 @lru_cache(maxsize=1)
 def approved_amazon_urls():
-    """Every tagged destination this site may publish, keyed by ASIN.
+    """Tagged destinations this site may publish, keyed by ASIN.
 
-    A record with a complete evidence bundle supplies its approved Special Link.
-    The rest fall back to the observed ASIN plus the supplied tag, which is what
-    Program Policies require of a Special Link. Attribution stays unconfirmed
-    and is flagged as FLG-002; dropping the tag would guarantee no attribution.
+    Only a record with a complete evidence bundle qualifies: the intended ASIN, the
+    official listing, the Special Link exactly as Associates Central generated it, the
+    report that proves a click landed, who confirmed it and when. That is what
+    `tools/test_paid_link_gate.py` asserts, and it is the reason an observed redirect
+    cannot mint a tag by itself — a tag is an assertion that this site is registered to
+    that ID on an enrolled account, and only the account owner can make it.
+
+    When the set is empty the site still links to every product, untagged, and says so.
     """
-    data = json.loads((ROOT / 'src/data/products.json').read_text())
-    approved = approved_links(data['products'], TRACKING_ID)
-    for product in data['products']:
-        asin = product.get('observed_asin')
-        if asin and asin not in approved:
-            approved[asin] = f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}"
-    return approved
+    data = json.loads((ROOT / "src/data/products.json").read_text())
+    return approved_links(data["products"], TRACKING_ID)
 
 
 def buy_url(asin):
-    """The tagged Special Link for an ASIN, always carrying the account tag."""
-    return approved_amazon_urls().get(asin, f"https://www.amazon.com/dp/{asin}?tag={TRACKING_ID}")
+    """The buy destination for an ASIN: the approved Special Link if there is one.
+
+    No fallback tag is appended here. An unregistered or improperly formatted link is
+    the publisher's breach under Operating Agreement §2, and the Commission Income
+    Statement already disqualifies purchases that cannot be tracked — so a hand-built
+    `?tag=` is worse than an honest untagged link, not better.
+    """
+    approved = approved_amazon_urls()
+    if asin in approved:
+        return approved[asin]
+    return f"https://www.amazon.com/dp/{asin}"
+
+
+def is_affiliate(url):
+    return bool(url) and "tag=" in url
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
@@ -153,14 +165,22 @@ def product_link(page_dir, url, label, **kw):
     return link(page_dir, url, label, sponsored=True, **kw)
 
 
-def buy_button(page_dir, product, label="See it on Amazon", *, cls="btn"):
-    """The primary call to action on a product card or page."""
+def buy_button(page_dir, product, label="View on Amazon", *, cls="btn"):
+    """The primary call to action on a product card or page.
+
+    Same button either way; the wording follows the link. A tagged destination is
+    described to the reader as a paid link, an untagged one as a reference link, so no
+    page ever claims a relationship with Amazon that the data does not support.
+    """
+    url = buy_url(product["observed_asin"])
+    paid = is_affiliate(url)
+    kind = "paid link" if paid else "reference link, not an affiliate link"
     return product_link(
         page_dir,
-        buy_url(product["observed_asin"]),
+        url,
         f'{label} <span aria-hidden="true">&#8599;</span>',
         cls=cls,
-        aria=f"Open the Amazon listing for {product['brand']} {product['format_label']} (paid link, opens in a new tab)",
+        aria=f"Open the Amazon listing for {product['brand']} {product['format_label']} ({kind}, opens in a new tab)",
     )
 
 

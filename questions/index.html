@@ -74,7 +74,7 @@
   <div class="qcard-top"><span class="q-num">Q-03</span><span class="pill pill-warn">Open</span> <span class="pill pill-block">Blocks work</span></div>
   <h3>Are clicks attributed to shopnow047c-20?</h3>
   <dl class="q-dl">
-    <div><dt>What we have</dt><dd>Every Amazon destination on the site now carries ?tag=shopnow047c-20, which is what Program Policies 2(b) requires a Special Link to include.</dd></div>
+    <div><dt>What we have</dt><dd>No tracking tag is published anywhere on this site. Every Amazon destination is built by one function, `buy_url()` in tools/layout.py, which returns the official listing URL untagged unless `src/data/products.json` carries a complete evidence bundle for that ASIN (intended ASIN, official listing, the Special Link exactly as Associates Central generated it, the report proving a click landed, who confirmed it and when). `tools/test_paid_link_gate.py` asserts the empty set and `tools/check.py` fails the build on any unapproved tagged href, so the safe state is enforced in CI rather than remembered. The owner flips it with `python3 tools/arm_links.py --checklist`.</dd></div>
     <div><dt>What is missing</dt><dd>Confirmation from an Associates report that a click was recorded against the tag. No dashboard access is available to this build.</dd></div>
   </dl>
   <div class="q-answer"><p class="q-label">What would close it</p><p>Click one link on the live site, then open Reports → Orders in the Associates dashboard and look for the click against the tag.</p></div>
@@ -90,7 +90,7 @@
   <div class="qcard-top"><span class="q-num">Q-14</span><span class="pill pill-warn">Open</span> <span class="pill pill-block">Blocks work</span></div>
   <h3>Are the product links Special Links in the sense the Operating Agreement means?</h3>
   <dl class="q-dl">
-    <div><dt>What we have</dt><dd>Program Policies 2(a) requires Special Links to use the Associates ID; 2(b) requires the tag as a URL parameter. Every product link now carries ?tag=shopnow047c-20.</dd></div>
+    <div><dt>What we have</dt><dd>No tracking tag is published anywhere on this site. Every Amazon destination is built by one function, `buy_url()` in tools/layout.py, which returns the official listing URL untagged unless `src/data/products.json` carries a complete evidence bundle for that ASIN (intended ASIN, official listing, the Special Link exactly as Associates Central generated it, the report proving a click landed, who confirmed it and when). `tools/test_paid_link_gate.py` asserts the empty set and `tools/check.py` fails the build on any unapproved tagged href, so the safe state is enforced in CI rather than remembered. The owner flips it with `python3 tools/arm_links.py --checklist`.</dd></div>
     <div><dt>What is missing</dt><dd>Confirmation that the tag is registered and that clicks from this site are being recorded. That can only come from the account.</dd></div>
   </dl>
   <div class="q-answer"><p class="q-label">What would close it</p><p>One click from the live site, then the Orders report. The same test closes Q-03.</p></div>
@@ -134,7 +134,7 @@
   <div class="qcard-top"><span class="q-num">Q-17</span><span class="pill pill-warn">Open</span></div>
   <h3>Is a github.io subpath the right long-term home?</h3>
   <dl class="q-dl">
-    <div><dt>What we have</dt><dd>The site is served at karagemop466-tech.github.io/Affil1/ and every link is relative so the subpath works.</dd></div>
+    <div><dt>What we have</dt><dd>No tracking tag is published anywhere on this site. Every Amazon destination is built by one function, `buy_url()` in tools/layout.py, which returns the official listing URL untagged unless `src/data/products.json` carries a complete evidence bundle for that ASIN (intended ASIN, official listing, the Special Link exactly as Associates Central generated it, the report proving a click landed, who confirmed it and when). `tools/test_paid_link_gate.py` asserts the empty set and `tools/check.py` fails the build on any unapproved tagged href, so the safe state is enforced in CI rather than remembered. The owner flips it with `python3 tools/arm_links.py --checklist`.</dd></div>
     <div><dt>What is missing</dt><dd>A domain decision. A custom domain would need DNS, a CNAME file and canonical URLs rewritten in one place.</dd></div>
   </dl>
   <div class="q-answer"><p class="q-label">What would close it</p><p>Decide whether to buy a domain. The build has one constant for the site URL, so the change is small when the decision is made.</p></div>

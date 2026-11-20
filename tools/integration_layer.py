@@ -296,6 +296,12 @@ def verification_body() -> str:
   <p class="micro">Closing this gap is a data edit and one owner command
   (<code>python3 tools/arm_links.py --checklist</code>) rather than a code change, and the build fails if a
   tracking tag is ever published while these fields are false.</p>
+  <p class="micro"><strong>Correction recorded 2026-11-20:</strong> earlier pages in this repository stated that
+  every Amazon destination had been changed to carry <code>?tag=shopnow047c-20</code>. That is not the published
+  state, and it is not the safe one: a tag asserts that this site is registered to that ID on an enrolled account,
+  which no source in this repository can confirm, and an unregistered or improperly formatted link is the
+  publisher&rsquo;s breach. The destinations are untagged listing URLs until the gate above is closed, and
+  <code>tools/test_paid_link_gate.py</code> plus <code>tools/check.py</code> now enforce that in CI.</p>
 </div></section>
 
 <section class="section"><div class="wrap">
