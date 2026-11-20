@@ -41,6 +41,7 @@ DATA = ROOT / "_src" / "data"
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions", "decide",
+    "now", "offers", "verification",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
