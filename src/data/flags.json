@@ -162,15 +162,19 @@
     {
       "id": "FLG-012",
       "severity": "low",
-      "title": "Food-safety guidance is absent because the source was unreachable",
+      "title": "Air-fryer-specific food-safety guidance is still unavailable",
       "expected": "An air-fryer guide would normally mention safe internal temperatures.",
-      "found": "USDA FSIS pages did not complete a TLS connection from this environment. No substitute source was used.",
-      "reading": "A safety figure sourced from a blog would be worse than no figure. The guides therefore avoid all food-safety claims rather than make them badly.",
+      "found": "The USDA FSIS air-fryer page does not complete a TLS connection from this environment. The general chart at FoodSafety.gov does load, and was read directly.",
+      "reading": "Safe internal temperatures are published officially and are now cited from that chart with its review date. What is still missing is guidance specific to air fryers, and no such guidance is invented.",
       "to_check": [
-        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers"
+        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/air-fryers",
+        "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures"
       ],
-      "impact": "No temperature or doneness guidance appears anywhere on the site.",
-      "blocks": "nothing"
+      "impact": "No air-fryer-specific doneness guidance appears. General temperature targets are cited, not copied.",
+      "blocks": "nothing",
+      "detail": "The USDA FSIS air-fryer page still cannot be reached from the build environment. The official safe-minimum-temperature chart at FoodSafety.gov was read directly on 2026-11-20 and is now cited with its review date, so the site no longer states that no official figure exists. Narrowed, not closed: no air-fryer-specific guidance is quoted.",
+      "status": "narrowed",
+      "resolution_note": "Cite FoodSafety.gov (SRC-08); quote no figure that is not on that chart."
     },
     {
       "id": "FLG-013",

@@ -10,10 +10,10 @@
 
 ## 1. What this is, in one paragraph
 
-A 26-page static publication built from `src/data/`, checked by a script that fails
+A 28-page static publication built from `src/data/`, checked by a script that fails
 the build on a broken link, an untagged Amazon link, a missing disclosure or a
 reintroduced price. It leads with five products that were individually opened and
-recorded, follows them with six question-shaped buying guides, and publishes its
+recorded, follows them with eight question-shaped buying guides, and publishes its
 own gaps rather than filling them: no prices, no ratings, no test results, no
 named author and no revenue claim appear anywhere, because none of those could be
 sourced.
@@ -67,7 +67,7 @@ is logged row by row on `/review/verification.html`.
 |---|---|
 | Front page | Products first, method second; dated change log; two thermometers in their own band |
 | Product register and five records | All five identified; intended ASIN, observed ASIN and tagged link are three separate fields |
-| Guides | Six, including the instant-read vs wireless thermometer guide and a seasonal sides guide that cites the USDA |
+| Guides | Eight, including the instant-read vs wireless thermometer guide , a seasonal sides guide, and three kitchen-planning guides from the parallel sessions |
 | Compare | Every product side by side, with blanks left blank |
 | Questions | 15 research questions, 6 answered with a source |
 | Before you decide | **New.** 16 decisions in four ordered gates: what is known, what is missing, who can supply it, what artefact closes it |

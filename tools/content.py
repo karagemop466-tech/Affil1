@@ -8,6 +8,8 @@ superlative, no winner. If a sentence needs a fact that is not in that file, the
 sentence does not ship.
 """
 
+from buyer_guides import BUYER_GUIDES
+
 GUIDES = [
     {
         "slug": "basket-or-oven-air-fryer",
@@ -236,6 +238,10 @@ GUIDES = [
         "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
         "photo_caption": "Illustration. It is not a photograph of either thermometer on this site.",
         "updated": "2026-11-20",
+        "sources": [
+            ("FoodSafety.gov: Cook to a Safe Minimum Internal Temperature",
+             "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures")
+        ],
         "sections": [
             {
                 "h": "The question is not accuracy. It is where you are standing.",
@@ -268,7 +274,7 @@ GUIDES = [
             {
                 "h": "What this guide will not tell you",
                 "p": [
-                    "It will not tell you a safe internal temperature. The United States Department of Agriculture publishes that guidance, and the page could not be reached from the environment this site was built in; a temperature figure copied from a blog would be worse than no figure, so none appears here.",
+                    "It will not tell you a safe internal temperature, because that number belongs to the food, not to the thermometer, and it is published officially. FoodSafety.gov \u2014 the USDA, FDA and CDC food-safety portal \u2014 lists 165\u00b0F (74\u00b0C) for all poultry, 160\u00b0F (71\u00b0C) for ground meat and sausage, and 145\u00b0F (63\u00b0C) with a three-minute rest for steaks, roasts and chops. Read them from the chart rather than from this page: it carries its own review date (November 21, 2024 when this was written), it can be revised, and a site that reprints an official table eventually becomes a stale copy of it. The link is in the sources below.",
                     "It will not tell you which of the two is more accurate, because accuracy claims are made by sellers and this site has tested nothing. And it will not tell you which one to buy: that depends on whether you cook one thing at a time or several, and whether you want to walk away."
                 ]
             },
@@ -283,38 +289,10 @@ GUIDES = [
         ],
         "closing": "No product on this site was tested, ranked or scored. Every attribute above is quoted from a listing title reached on 2026-11-20. No temperature or food-safety figure appears because the official source could not be reached."
     }
-]
+] + [g for g in BUYER_GUIDES if g["slug"] != "thermometer-pairing"]
 
-# Seasonal guide, contributed by the parallel session (PR #38). Kept because it asks
-# a question the summer guides do not, and cites the USDA rather than inventing a
-# food-safety figure. It makes no price claim and names no winner.
-GUIDES.append({
-    "slug": "holiday-side-dish-capacity",
-    "title": "Will your air fryer fit the holiday sides without a queue?",
-    "kicker": "Seasonal kitchen · holiday sides",
-    "dek": "Plan backward from serving time: check the tray, count the batches, and give the meals you already cook more weight than the number on the box.",
-    "updated": "2026-11-20",
-    "read_minutes": 3,
-    "photo": "assets/img/capacity",
-    "photo_alt": "An editorial illustration for comparing air fryer capacity",
-    "photo_caption": "Editorial illustration, not a photograph of any model on this site.",
-    "sections": [
-        {"h": "Start with the side that has to land last", "p": [
-            "Imagine that you want crisp potatoes and roasted vegetables on the table at the same time. Pick the dish you want to cook last. Work backward from that tray, rather than assuming an appliance can take both at once. If you already make that dish in the oven, measure the area you actually use, not the size of the pan rim."
-        ]},
-        {"h": "Make a quick batch plan", "p": [
-            "Sketch the usable rack or basket footprint from the manual for the exact model. Check the manual’s food load and spacing instructions. Split a mock shopping list into the number of loads that fit, allowing for any required preheat, unloading and reload time.",
-            "Example worksheet, not a cooking recommendation: if a recipe you already use takes 18 minutes and your plan needs two sequential loads, that is 36 minutes of recipe time before any turnaround. That number is arithmetic, not a claim about a particular air fryer. If the timing doesn't work, move one side to the oven or choose a dish that doesn't need the fryer."
-        ]},
-        {"h": "Look for the thing that actually frees up the oven", "items": [
-            ("Considering two baskets?", "Look at each basket’s dimensions and check whether each dish fits its own basket. Compare independent controls in the exact manual."),
-            ("Considering a countertop oven?", "Measure the tray you mean to use, plus door travel and the clearances in the manual. Do not assume racks can be used together in every mode."),
-            ("Cooking meat alongside the sides?", "Use a food thermometer and the official USDA guidance for placement and safe minimum internal temperatures. Don’t use colour or recipe timing alone."),
-        ]},
-    ],
-    "sources": [("USDA Food Safety and Inspection Service · Food thermometers", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers")],
-    "closing": "Buy for the batches you cook on ordinary weeks. Solve the holiday bottleneck on paper before spending money on extra capacity.",
-})
+# The cluster's thermometer guide is excluded above: this build already answers
+# that question, and two guides for one query is duplication, not coverage.
 
 # Rows for the comparison table. Every cell is either transcribed from a listing
 # title reached on 2026-11-20 or explicitly blank. Blank is a valid value.

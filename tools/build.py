@@ -59,7 +59,9 @@ GENERATED = {
     "guides/cleanup-and-counter-space.html",
     "guides/multi-function-kitchen-appliance-questions.html",
     "guides/thermometer-instant-or-wireless.html",
-    "guides/holiday-side-dish-capacity.html",
+    "guides/holiday-hosting.html",
+    "guides/meal-prep-sunday.html",
+    "guides/small-kitchen-counter.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
@@ -80,6 +82,8 @@ GENERATED = {
 # destroy another session's work. Verified by rebuilding and diffing the tree.
 RETIRED = [
     "guides/cleanup-counterspace.html",
+    "guides/holiday-side-dish-capacity.html",
+    "guides/thermometer-pairing.html",
 ]
 
 

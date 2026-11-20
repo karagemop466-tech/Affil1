@@ -83,6 +83,16 @@
       "status": "read directly, verbatim",
       "read_on": "2026-11-20",
       "finding": "This is the single most consequential source for the plan: it ties the tag defect to account rejection, and it sets a ten-post content bar the site currently clears on count but not on originality."
+    },
+    {
+      "id": "SRC-08",
+      "title": "Cook to a Safe Minimum Internal Temperature",
+      "publisher": "FoodSafety.gov (USDA / FDA / CDC)",
+      "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+      "page_date": "Last reviewed November 21, 2024",
+      "used_for": "The only food-safety temperature figures quoted anywhere on this site. Cited instead of the FSIS air-fryer page, which could not be reached from the build environment.",
+      "quote": "Always use a food thermometer to check whether meat has reached a safe minimum internal temperature that is hot enough to kill harmful germs that cause food poisoning.",
+      "status": "read directly 2026-11-20"
     }
   ],
   "could_not_verify": [

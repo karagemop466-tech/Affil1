@@ -137,3 +137,27 @@ validated intent bundle override the observed destination when one exists.
 
 After the merge: `python3 tools/build.py` → 26 pages; `python3 tools/check.py` →
 0 errors, 0 warnings; rebuild diffed clean.
+
+
+## Second merge, same day (PR #46)
+
+`main` moved again while this branch was being rebased onto #38: PR #46
+(`arena/487a66ea-affil1`) added a "fit finder", an editorial cluster and a decision
+brief. Merged the same way — their content is kept, this branch's rules still
+apply — and the duplication that two sessions producing guides inevitably
+creates was removed rather than published twice.
+
+| Duplicate | Resolution |
+|---|---|
+| `thermometer-pairing` (theirs) vs `thermometer-instant-or-wireless` (ours) | One guide kept. Ours stays, and now cites the official FoodSafety.gov chart that theirs relied on. |
+| `holiday-side-dish-capacity` (#38) vs `holiday-hosting` (#46) | `holiday-hosting` kept: it asks a narrower question and cites a source. The other slug is in `RETIRED` and is deleted by the next build. |
+| Their guide sources link to `/dp/<ASIN>` without a tag | `page_guides` now routes every Amazon source through `tag_url()`, so a listing cited as evidence is a compliant Special Link too |
+
+Verified in this pass, read directly on 2026-11-20: FoodSafety.gov "Cook to a Safe
+Minimum Internal Temperature" (USDA/FDA/CDC), last reviewed 2024-11-21 — poultry
+165°F, ground meat 160°F, whole cuts 145°F plus a 3-minute rest. Recorded as SRC-08
+and quoted nowhere else on the site. FLG-012 narrows from "no food-safety guidance
+at all" to "no air-fryer-specific guidance".
+
+State after both merges: 28 pages, 8 guides, 0 errors, 0 warnings, rebuild
+reproducible, 77 legacy pages link-checked clean, `kitchen-build` tests green.
