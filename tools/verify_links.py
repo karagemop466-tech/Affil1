@@ -1,180 +1,143 @@
 #!/usr/bin/env python3
-"""verify_links.py — repeatable observation runbook for the submitted product links.
+"""Re-resolve the register against Amazon and report drift. Read-only.
 
-Part of the Affil1 verification layer (session arena/a4ab7faf-affil1, 2026-11-20).
+This is the automated half of the "test one link before you scale" instruction, and
+the boundary of what an agent may do:
 
-What this tool does (and deliberately does not do):
-  * Fetches each submitted short link, follows redirects, and records the final
-    URL, HTTP status and document <title> as one observation.
-  * Appends observations to an append-only NDJSON log. It NEVER edits
-    data/confirmations.json, data/product-intent.json or any other register.
-    Observations are evidence; confirmation of submitter intent may only come
-    from the enrolled Amazon Associates workflow (a tracking report or an
-    explicit submitter statement). See reviews/verification-audit.html.
+  * it requests each submitted link once, sequentially, with a polite delay;
+  * it records the destination URL, the HTTP status and the page <title> only;
+  * it never parses, stores or prints a price, a star rating, a review count or an
+    availability string. Those are Program Content: Amazon permits them only when it
+    serves the link that carries the data, or through the Creators/PA API. A site
+    without a feed must not build one by scraping, and must not build price tracking
+    or alerts at all (Participation Requirements).
 
-Usage:
-    python3 tools/verify_links.py                  # observe all registered links
-    python3 tools/verify_links.py --out PATH       # NDJSON output path (default
-                                                   # data/verification-observations.ndjson)
-    python3 tools/verify_links.py --url https://... [--url https://...]
-    python3 tools/verify_links.py --timeout 25
-    python3 tools/verify_links.py --stability      # also compare vs the last
-                                                   # observation of each link
+What it does NOT do is the part it cannot do: confirming that a click is attributed to
+`shopnow047c-20`. That is visible only inside the enrolled Associates account, so this
+script reports the register and stops. The confirmation stays a human action by design.
 
-Exit codes: 0 = all fetches completed (any outcome, including fetch_error),
-            1 = unexpected internal error, 2 = usage error.
+Usage
+  python3 tools/verify_links.py            # drift report against src/data/products.json
+  python3 tools/verify_links.py --json     # machine-readable, for a scheduled job
+  REGISTER=https://example.test python3 tools/verify_links.py --base-url ...
+
+Network egress to amazon.com must be permitted by the environment; if it is not, this
+exits with a clear message rather than writing an empty "verified" row.
 """
+
 from __future__ import annotations
 
 import argparse
 import json
+import pathlib
 import re
 import sys
-import urllib.request
+import time
 import urllib.error
-from datetime import datetime, timezone
-from pathlib import Path
+import urllib.parse
+import urllib.request
 
-SUBMITTED_LINKS = [
-    "https://link.amazon/B04G1MEwY",
-    "https://link.amazon/B02NbDxp3",
-    "https://link.amazon/B00hJ57DV",
-    "https://link.amazon/B0c8moW59",
-    "https://link.amazon/B0f3GKalj",
-]
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+REGISTER = ROOT / "src" / "data" / "products.json"
 
-DEFAULT_OUT = Path("data/verification-observations.ndjson")
-USER_AGENT = ("Affil1-verification-runbook/1.0 (observation-only; not a crawler; "
-              "records are evidence, not confirmations)")
-TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.IGNORECASE | re.DOTALL)
-MAX_REDIRECTS = 10
+# Only these fields may be written back; anything else is an editorial decision.
+ALLOWED_UPDATES = ("observed_listing_url", "observed_redirect_asin", "destination_title",
+                   "http_status", "retrieved_on", "notes")
+
+UA = "CrispCounterLinkCheck/1.0 (site integrity check; single request per submitted link)"
+
+# Guard: if a fetched title contains one of these, the field is dropped, not stored.
+PRICEISH = re.compile(r"\$\s?\d|\bstars?\b|\breviews?\b|in stock|availability", re.I)
 
 
-def now_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
-def clean_title(html: str) -> str | None:
-    m = TITLE_RE.search(html)
-    if not m:
-        return None
-    title = re.sub(r"\s+", " ", m.group(1)).strip()
-    return title or None
-
-
-def observe(url: str, timeout: float) -> dict:
-    """Fetch one URL, following redirects. Returns an observation record."""
-    rec: dict = {
-        "observed_at_utc": now_iso(),
-        "submitted_link": url,
-        "tool": "tools/verify_links.py 1.0",
-        "outcome": None,
-        "http_status": None,
-        "final_url": None,
-        "redirect_chain": [],
-        "page_title": None,
-        "fetch_error": None,
-        "note": "Observation only. Not a confirmation of submitter intent. "
-                "Status of submitted links remains unresolved (FLG-003).",
-    }
-    chain: list[str] = []
-    req = urllib.request.Request(
-        url, headers={"User-Agent": USER_AGENT, "Accept": "text/html"}
-    )
+def fetch(url: str, timeout: int = 25):
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:  # nosec B310
-            body = resp.read(262144).decode("utf-8", "replace")
-            rec["http_status"] = resp.status
-            rec["final_url"] = resp.geturl()
-            chain = [r.geturl() for r in resp.history] if hasattr(resp, "history") else []
-            rec["page_title"] = clean_title(body)
-            final = rec["final_url"] or ""
-            if "/checkpoint/" in final:
-                rec["outcome"] = "checkpoint_gate"
-            elif re.search(r"/(?:dp|gp/product)/([A-Z0-9]{10})(?:[/?]|$)", final):
-                rec["outcome"] = "product_page"
-                rec["observed_dp_code"] = re.search(
-                    r"/(?:dp|gp/product)/([A-Z0-9]{10})(?:[/?]|$)", final
-                ).group(1)
-            else:
-                rec["outcome"] = "non_product_page"
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            body = resp.read(400_000).decode("utf-8", "replace")
+            return resp.status, resp.geturl(), body
     except urllib.error.HTTPError as e:
-        rec["outcome"] = "http_error"
-        rec["http_status"] = e.code
-        rec["fetch_error"] = f"HTTPError: {e.code} {e.reason}"
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as e:
-        rec["outcome"] = "fetch_error"
-        rec["fetch_error"] = f"{type(e).__name__}: {e}"
-    rec["redirect_chain"] = chain
-    return rec
+        return e.code, url, ""
+    except Exception as e:  # noqa: BLE001 - a network failure is a result, not a crash
+        return None, url, f"__error__{type(e).__name__}: {e}"
 
 
-def last_observation(path: Path, link: str) -> dict | None:
-    if not path.exists():
-        return None
-    found = None
-    for line in path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        try:
-            rec = json.loads(line)
-        except json.JSONDecodeError:
-            print(f"  ! skipping malformed NDJSON line in {path}", file=sys.stderr)
-            continue
-        if rec.get("submitted_link") == link:
-            found = rec
-    return found
+def title_of(html: str):
+    m = re.search(r"<title[^>]*>(.*?)</title>", html, re.S | re.I)
+    return re.sub(r"\s+", " ", m.group(1)).strip() if m else ""
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--url", action="append", default=[],
-                    help="observe this URL instead of the registered list (repeatable)")
-    ap.add_argument("--out", default=str(DEFAULT_OUT),
-                    help=f"NDJSON output path (default {DEFAULT_OUT})")
-    ap.add_argument("--timeout", type=float, default=20.0,
-                    help="per-request timeout in seconds (default 20)")
-    ap.add_argument("--stability", action="store_true",
-                    help="compare each result with the last observation of the same link")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--json", action="store_true", help="emit JSON instead of a report")
+    ap.add_argument("--write", action="store_true",
+                    help="update src/data/products.json with observed fields (never with inferences)")
+    ap.add_argument("--delay", type=float, default=3.0, help="seconds between requests")
     args = ap.parse_args()
 
-    links = args.url or SUBMITTED_LINKS
-    out_path = Path(args.out)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+    data = json.loads(REGISTER.read_text(encoding="utf-8"))
+    today = time.strftime("%Y-%m-%d")
+    rows, blocked = [], 0
 
-    print(f"Observation run — {now_iso()} — {len(links)} link(s) -> {out_path}")
-    print("Reminder: an observation is evidence, not a confirmation. Only the\n"
-          "enrolled Associates workflow (tracking report / submitter statement)\n"
-          "may set intended ASINs or change a register's status fields.\n")
+    for p in data["products"]:
+        link = p["supplied_link"]
+        status, final, body = fetch(link)
+        if body.startswith("__error__"):
+            print(f"NO NETWORK: {body[len('__error__'):]}", file=sys.stderr)
+            print("Nothing was written. An unreachable register is not a verified one.", file=sys.stderr)
+            return 2
+        title = title_of(body)
+        if PRICEISH.search(title):
+            title = "(title suppressed: contained price or rating wording)"
+        asin = None
+        m = re.search(r"/dp/([A-Z0-9]{10})", final)
+        if m:
+            asin = m.group(1)
+        reached_product = bool(asin)
+        drift = reached_product != bool(p.get("observed_redirect_asin")) or (
+            reached_product and asin != p.get("observed_redirect_asin"))
+        if not reached_product:
+            blocked += 1
+        rows.append({
+            "id": p["id"],
+            "submitted_link": link,
+            "http_status": status,
+            "final_url": final,
+            "observed_redirect_asin": asin,
+            "destination_title": title,
+            "recorded_asin": p.get("observed_redirect_asin"),
+            "drift": drift,
+            "retrieved_on": today,
+        })
+        time.sleep(args.delay)
 
-    for link in links:
-        rec = observe(link, args.timeout)
-        outcome = rec["outcome"]
-        detail = rec.get("observed_dp_code") or rec.get("fetch_error") or ""
-        print(f"  {link}\n    -> {outcome} {detail} "
-              f"(status={rec['http_status']}, title={bool(rec['page_title'])})")
-        if args.stability:
-            prev = last_observation(out_path, link)
-            if prev:
-                same = prev.get("outcome") == outcome and (
-                    prev.get("observed_dp_code") == rec.get("observed_dp_code")
-                )
-                print(f"    stability: {'SAME as last observation' if same else 'CHANGED vs last observation ' + str(prev.get('observed_at_utc'))}")
-            else:
-                print("    stability: no prior observation recorded")
-        with out_path.open("a", encoding="utf-8") as fh:
-            fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    if args.write:
+        for p in data["products"]:
+            r = next(x for x in rows if x["id"] == p["id"])
+            p["observed_listing_url"] = r["final_url"] if r["observed_redirect_asin"] else None
+            p["observed_redirect_asin"] = r["observed_redirect_asin"]
+            p["destination_title"] = r["destination_title"]
+            p["http_status"] = r["http_status"]
+            p["retrieved_on"] = r["retrieved_on"]
+            if r["drift"]:
+                p["notes"] = (p.get("notes") or "") + f" Drift observed {today}; re-checked by tools/verify_links.py."
+        REGISTER.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+        print(f"wrote observed fields to {REGISTER.relative_to(ROOT)}")
 
-    print(f"\nAppended {len(links)} observation(s) to {out_path}. "
-          "The log is append-only; no register was modified.")
-    print("Next human step: test one link per product in the enrolled Associates\n"
-          "workflow and record destination + tracking-report evidence separately.")
+    if args.json:
+        print(json.dumps({"retrieved_on": today, "rows": rows}, indent=2))
+    else:
+        print(f"Register re-resolution — {today}")
+        print(f"{'entry':6} {'status':7} {'observed ASIN':14} {'recorded ASIN':14} drift")
+        for r in rows:
+            print(f"{r['id']:6} {str(r['http_status']):7} {str(r['observed_redirect_asin']):14} "
+                  f"{str(r['recorded_asin']):14} {'YES — update the register' if r['drift'] else 'no'}")
+        print(f"\n{len(rows) - blocked}/{len(rows)} reached a product page; {blocked} did not and stay unresolved.")
+        print("Not collected, by policy: price, rating, review count, availability, stock, warranty.")
+        print("Still required from a human: replace each destination with a Special Link generated in")
+        print("Associates Central and confirm one click in the account's own report. This script cannot.")
     return 0
 
 
 if __name__ == "__main__":
-    try:
-        sys.exit(main())
-    except KeyboardInterrupt:
-        sys.exit(130)
+    sys.exit(main())
