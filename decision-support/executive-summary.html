@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/decision-support/executive-summary.html">
+<title>Executive summary — what this project is, and where it stands — Good Measure Kitchen · Decision Desk</title>
+<meta name="description" content="A one-sitting summary of the affiliate project: the assets, the verified constraints, what is live, what is blocked, the honest economics, and the recommended next four weeks.">
+<link rel="stylesheet" href="assets/desk.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="disclosure"><div class="wrap"><span><b>As an Amazon Associate I earn from qualifying purchases.</b></span><span>Executive summary · internal document, not a revenue projection.</span></div></div>
+
+<header class="masthead"><div class="wrap">
+  <a class="brand" href="index.html"><span class="brand-mark">gm</span><span class="brand-txt"><strong>Good Measure Kitchen</strong><span>Decision Desk · internal edition</span></span></a>
+  <nav aria-label="Decision Desk"><a href="index.html">Desk</a><a href="executive-summary.html" aria-current="page">Executive summary</a><a href="products.html">Products</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Open questions</a><a href="verification.html">Sources &amp; flags</a><a href="editorial-plan.html">Editorial plan</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <p class="eyebrow">Read this first · ten minutes, no jargon</p>
+    <h1>A shop with good bones<br><em>and three missing bolts.</em></h1>
+    <p class="lead">The brief asked for an automated, compliant, traffic-winning Amazon affiliate platform. What exists today is a hand-written editorial site with an unusually honest evidence trail, five product links nobody has confirmed, and an automation layer that policy will not let us build yet. This page states the distance between those three things — and what closes it.</p>
+    <div class="cta"><a class="button" href="#verdict">The verdict</a><a class="button ghost" href="#plan">Next four weeks</a></div>
+  </div>
+  <div class="card ok">
+    <p class="tag">The one-line version</p>
+    <h3>Confirm the links, name the author, pick the publisher</h3>
+    <p>Everything else in this project is downstream of three confirmations that together take about an hour of a person's time inside the Associates dashboard. No model can substitute for them, because they are account facts, not research questions.</p>
+  </div>
+</div></section>
+
+<div class="ticker"><div class="wrap"><span>Public site is live on GitHub Pages</span><i>✳</i><span>43 HTML files, 8 sessions' worth</span><i>✳</i><span>0 prices published, on purpose</span><i>✳</i><span>0 structured-data blocks, by accident</span><i>✳</i><span>revenue forecast: not made</span></div></div>
+
+<main id="main">
+
+<section class="section wrap anchor-pad" id="verdict">
+  <div class="sec-head"><div><p class="eyebrow">Assessment</p><h2>The verdict</h2></div><p>Scored against the six priorities in the brief. "Met" means the requirement is satisfied and demonstrable; "partial" means the artefact exists but its evidence does not.</p></div>
+  <div class="table-wrap"><table data-sortable>
+    <caption>Six brief priorities, scored<small>The scoring is ours; the evidence each row points at is not.</small></caption>
+    <thead><tr><th scope="col">Priority in the brief</th><th scope="col">State today</th><th scope="col">Evidence</th><th scope="col">Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>Read like a shop, not an audit</td><td>Two reader-facing sections exist (a storefront at the root and <em>Crisp &amp; Counter</em>), both with disclosure strips, guide cards and a product shelf. They are also four parallel sites wearing two different brand names, which no reader can parse.</td><td class="src"><a href="../index.html">live root</a> · <a href="verification.html#irr-07">IRR-07</a></td><td><span class="chip warn">partial</span></td></tr>
+      <tr><td>Make it findable</td><td>Pages serves the site; a robots file advertises one sitemap; feeds and canonicals are inconsistent; zero JSON-LD. Search Console is not connected because no property was supplied.</td><td class="src"><a href="editorial-plan.html#mechanics">mechanics table</a> · <a href="verification.html#irr-09">IRR-09</a></td><td><span class="chip warn">partial</span></td></tr>
+      <tr><td>Make the machinery trustworthy</td><td>Build, link-validation and content-generation scripts exist and are run in CI. But three analytics modules post to two endpoints that nothing receives, and Pages is configured with a second publisher active.</td><td class="src"><a href="verification.html#irr-08">IRR-08</a> · <a href="verification.html#irr-03">IRR-03</a></td><td><span class="chip warn">partial</span></td></tr>
+      <tr><td>Lead with products, not the verification process</td><td>The product shelf exists and now leads with named products; the register is one click away rather than the whole page. Still unmonetised until the links are confirmed.</td><td class="src"><a href="products.html">the shelf</a></td><td><span class="chip ok">met in shape, gated in substance</span></td></tr>
+      <tr><td>Question-shaped guides, then measure arrivals</td><td>Guides exist and are question-shaped. Measurement does not: no analytics owner, no query data, so topic selection is still opinion.</td><td class="src"><a href="editorial-plan.html">editorial plan</a> · <a href="questions.html#Q-05">Q-05</a></td><td><span class="chip warn">half met</span></td></tr>
+      <tr><td>Click and conversion measurement</td><td>An event contract and five event names are defined; the ledger is empty by design and no collector can run on the current host.</td><td class="src"><a href="#economics">economics</a> · IRR-08</td><td><span class="chip bad">not met, and partly unmeetable here</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="section tight wrap anchor-pad" id="assets">
+  <div class="sec-head"><div><p class="eyebrow">Inventory</p><h2>What exists</h2></div><p>Eight sessions have written into this repository. Nothing below is marketing copy — it is the count of what has to be reconciled.</p></div>
+  <div class="grid g4">
+    <div class="card kpi"><b>43</b><span>HTML files</span><small>excluding <code>archive/</code>; the same page types recur at the root, in <code>guides/</code> and under <code>crisp/</code>.</small></div>
+    <div class="card kpi"><b>5</b><span>submitted links</span><small>4 have a confirmed listing identity; 3 of 5 have a <em>disputed route</em>; 1 has no product at all.</small></div>
+    <div class="card kpi"><b>2</b><span>brand identities</span><small>Good Measure Kitchen Notes at the root, Crisp &amp; Counter under <code>crisp/</code>. Both ship disclosure; neither links the other consistently.</small></div>
+    <div class="card kpi"><b>0</b><span>prices published</span><small>correctly — the policy does not permit it without an Amazon-served link or API access.</small></div>
+    <div class="card kpi"><b>12</b><span>guides planned</span><small>three in cluster 1, four in cluster 2, five in cluster 3, four of them already drafted.</small></div>
+    <div class="card kpi"><b>49</b><span>source-register entries</span><small>each quoting an official page read on 2026-11-20, or saying plainly that it could not be read.</small></div>
+    <div class="card kpi"><b>10</b><span>flagged irregularities</span><small>published on the site, non-blocking, each with a reproduction command.</small></div>
+    <div class="card kpi"><b>1</b><span>live URL</span><small><a href="https://karagemop466-tech.github.io/Affil1/">karagemop466-tech.github.io/Affil1/</a>, published by the legacy branch publisher from <code>main</code>.</small></div>
+  </div>
+</section>
+
+<section class="section tight wrap anchor-pad" id="economics">
+  <div class="sec-head"><div><p class="eyebrow">The part with numbers in it</p><h2>Honest economics</h2></div><p>Every figure here is a term, not a forecast. There is deliberately no revenue projection in this project, because there is no report data and no API access to build one from.</p></div>
+  <div class="grid g2">
+    <div class="card"><h3>What a commission is</h3><p>A percentage of <strong>Qualifying Revenue</strong>, which Amazon defines as what it actually receives for the purchase <em>less</em> shipping, gift-wrapping, handling, taxes, service charges, credits, rebates, card-processing fees and bad debt. The rate itself lives in the Commission Income Statement Appendix; the number for these categories was not readable without an account, so it is blank here — not estimated.</p><p class="quiet"><a href="verification.html#register">A-21</a> · <a href="verification.html#register">A-33 (unresolved)</a></p></div>
+    <div class="card"><h3>How long you have</h3><p>24 hours from the click for the session to matter, 89 days for a carted item to be ordered, 180 days for it to ship and be paid. A reader who clicks at midnight and buys on Saturday has bought nothing for us.</p><p class="quiet"><a href="verification.html#register">A-19, A-20</a></p></div>
+    <div class="card"><h3>The four gates ahead of us</h3><ul class="tight"><li><strong>3 qualifying sales in 180 days</strong> — or the application is withdrawn, and a rejected ID cannot be reinstated.</li><li><strong>10 qualifying sales in the last 30 days</strong> — the eligibility floor for Creators API / PA API access.</li><li><strong>≥10 posts of robust original content</strong> — Amazon's own rule of thumb at review.</li><li><strong>Site named in the application</strong> — links on an unlisted property are not permitted.</li></ul><p class="quiet"><a href="verification.html#register">A-31, A-32, A-29, A-15</a></p></div>
+    <div class="card"><h3>What is paid, and when</h3><p>About 60 days after the month's end. Minimum payout: 10 USD by direct deposit, 10 USD by gift card (2,000 USD cap), 100 USD by cheque with a 15 USD processing fee. An account idle for three years can have accrued income withheld on seven days' notice.</p><p class="quiet"><a href="verification.html#register">A-27</a></p></div>
+  </div>
+  <p class="note"><strong>The consequence for the roadmap.</strong> The brief's headline ambition — an agent that researches products, reads prices and reviews, and optimises campaigns automatically — is gated behind the ten-sales-in-thirty-days threshold, and price display is gated behind the same API. So the only serious sequence is: publish something a person would read → earn three real sales → keep ten in a rolling month → <em>then</em> automate. The gates are not obstacles around the business; they are the business's entry requirements.</p>
+</section>
+
+<section class="section tight wrap anchor-pad" id="risks">
+  <div class="sec-head"><div><p class="eyebrow">What could go wrong</p><h2>Risks, ranked by what they cost</h2></div><p>Ranked by consequence, not likelihood. The top two are recoverable only by losing the account, which is why they sit above the traffic questions.</p></div>
+  <div class="grid g3">
+    <div class="card bad"><p class="tag">Existential</p><h3>Tagged links on an unconfirmed account</h3><p>Live pages already carry <code>tag=shopnow047c-20</code>. If that account is not approved for this URL, the links are Special Links on a site that wasn't named in the application — and §2 lets Amazon withhold all commission income, not just the affected ones.</p><p class="quiet">Mitigation: confirm, or ship untagged until confirmed. An hour of checking. <a href="questions.html#Q-02">Q-02</a></p></div>
+    <div class="card bad"><p class="tag">Existential</p><h3>Account closure at the 180-day mark</h3><p>The account either produces three qualifying sales or is withdrawn, and a rejected ID cannot be reinstated. A site with no traffic and no confirmed products has no route to three sales.</p><p class="quiet">Mitigation: the front page, the guide cadence and the disclosure work <em>is</em> the compliance mitigation. <a href="suggestions.html">Path B</a></p></div>
+    <div class="card warn"><p class="tag">Reputational</p><h3>A shop that reads like a form</h3><p>Duplicated sections, internal task codes in navigation, no author, no prices, and caveats above the fold. Each is individually defensible and collectively fatal to trust — and to the "not AI slop" instruction in the brief.</p><p class="quiet">Mitigation: one brand, one nav, real bylines, product-first pages. <a href="questions.html#Q-08">Q-08</a>, <a href="questions.html#Q-10">Q-10</a></p></div>
+    <div class="card warn"><p class="tag">Strategic</p><h3>Optimising what cannot be measured</h3><p>Three analytics modules, no receiver, and a host that cannot run one. Any dashboard built now would report the emptiness of a bucket.</p><p class="quiet">Mitigation: one contract, or a stated local-only ledger. <a href="questions.html#Q-07">Q-07</a></p></div>
+    <div class="card warn"><p class="tag">Strategic</p><h3>Duplicate content teaching search engines to ignore us</h3><p>Four ways to reach "products", three ways to reach a feed, canonicals on half the pages. Not a penalty waiting to happen so much as a site with no single identity to rank.</p><p class="quiet">Mitigation: canonical set + 301s + one sitemap. <a href="verification.html#irr-07">IRR-07</a></p></div>
+    <div class="card info"><p class="tag">Operational</p><h3>Automation drift on live pages</h3><p>A promotion that ends and stays mentioned; a listing that changes and the page that doesn't. Both are named in policy as the publisher's problem.</p><p class="quiet">Mitigation: dated provenance on every claim, and an <code>expires_at</code> field enforced by the build. Suggestions <a href="suggestions.html#board">S-08, S-09</a></p></div>
+  </div>
+</section>
+
+<section class="section tight wrap anchor-pad" id="plan">
+  <div class="sec-head"><div><p class="eyebrow">Recommended</p><h2>The next four weeks</h2></div><p>Written so that each week ends with something a reader or a search engine would notice, and nothing depends on an answer we do not yet have.</p></div>
+  <div class="table-wrap"><table data-sortable>
+    <caption>Week by week<small>Week 0 is the gate. It is short on purpose.</small></caption>
+    <thead><tr><th scope="col">When</th><th scope="col">Work</th><th scope="col">Who</th><th scope="col">Done means</th></tr></thead>
+    <tbody>
+      <tr><td>Week 0</td><td>Confirm enrolment and registered Site for the tag; re-run the five fetches and settle the register contradiction; name or drop P-04</td><td>Account owner + one agent session</td><td>One authoritative product register, five rows with either a dated confirmation or a blank and a flag</td></tr>
+      <tr><td>Week 1</td><td>Merge to one shop: single brand, one navigation, canonicals everywhere, one sitemap, one feed, archive out of the published tree; JSON-LD from the template</td><td>Integration session</td><td>One HTML file per page type; CI fails on a missing disclosure or an untagged sponsored link; 100% canonical coverage</td></tr>
+      <tr><td>Week 2</td><td>Ship the shelf properly: product-first front page, named author with a bio, per-block "we have not tested this" lines, editorial-standards and corrections route</td><td>Editorial + one agent</td><td>Front page above the fold = products and questions; zero internal task codes in reader chrome</td></tr>
+      <tr><td>Week 3</td><td>Publish guides 02 and 07 from the plan; each with dated sources, sibling links and an entry in the sitemap and feed</td><td>Agent + human read-aloud pass</td><td>Two guides that pass the six slop checks; no price, no rating, no rank</td></tr>
+      <tr><td>Week 4</td><td>Connect Search Console, submit, read the first queries; freeze the event contract and choose the analytics destination (hosted or honestly local-only)</td><td>Account owner + one agent</td><td>A property with data, a privacy page that matches what the code does, and the next topic chosen from a query list instead of a hunch</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card ok"><h3>What "good" looks like in a month</h3><p>One site, five confirmed-and-tagged products, twelve planned guides with two published, a working query feed, and a ledger that is still empty but whose columns are provably fed by an authorised report.</p></div>
+    <div class="card tint"><h3>What we are not claiming</h3><p>No ranking. No conversion rate. No revenue. No "best air fryer". No statement that the short links are invalid — only that their compliance status is unresolved in the brief and remains so after this review.</p></div>
+    <div class="card accent"><h3>What to decide today</h3><p>Three things: whether the tag stays until enrolment is confirmed, which section is the shop, and whose name goes on the articles. Every other row in this desk follows from those answers.</p></div>
+  </div>
+</section>
+
+<section class="section tight wrap">
+  <div class="sec-head"><div><p class="eyebrow">Read on</p><h2>The rest of the desk</h2></div><p>Six pages, all cross-linked, none of them a summary of this one.</p></div>
+  <div class="grid g3">
+    <div class="card"><h3><a href="products.html">The shelf</a></h3><p>Five products with names, sources and a register that keeps intent and observation apart.</p></div>
+    <div class="card"><h3><a href="suggestions.html">The suggestion board</a></h3><p>28 changes across three paths, with adopt / park / reject and an export you can hand to a build session.</p></div>
+    <div class="card"><h3><a href="questions.html">Open questions</a></h3><p>14 questions, 9 settled answers, and the distinction between what is missing and what is unknowable from here.</p></div>
+    <div class="card"><h3><a href="verification.html">Sources &amp; flags</a></h3><p>49 register entries with verbatim policy text, and 10 irregularities with commands to reproduce them.</p></div>
+    <div class="card"><h3><a href="editorial-plan.html">Editorial plan</a></h3><p>Twelve guides in three clusters, a fortnightly cadence with stop conditions, and the per-page findability checklist.</p></div>
+    <div class="card"><h3><a href="../COORDINATION.md">Coordination log</a></h3><p>Who touched what, in which order, and the requests this session left for the integration pass.</p></div>
+  </div>
+</section>
+
+</main>
+<footer class="site"><div class="wrap"><div class="cols">
+  <div><a class="brand" href="index.html"><span class="brand-mark">gm</span><span class="brand-txt"><strong>Good Measure Kitchen</strong><span>Decision Desk</span></span></a><p class="quiet">An executive summary that would rather say "not confirmed" than sell a forecast. That is the entire thesis of this project.</p></div>
+  <div><h4>Sections</h4><a href="#verdict">Verdict</a><a href="#assets">Inventory</a><a href="#economics">Economics</a><a href="#risks">Risks</a><a href="#plan">Next four weeks</a></div>
+  <div><h4>Desk</h4><a href="index.html">Overview</a><a href="products.html">Products</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Open questions</a><a href="verification.html">Sources</a></div>
+  <div><h4>Public site</h4><a href="../index.html">Shop front</a><a href="../crisp/index.html">Crisp &amp; Counter</a><a href="../guides/flagged-for-review.html">Flagged for review</a><a href="../executive-summary.html">Root executive summary</a></div>
+</div>
+<div class="foot"><span>As an Amazon Associate I earn from qualifying purchases.</span><span>© 2026 Good Measure Kitchen · no revenue forecast is presented in this document</span></div>
+</div></footer>
+<script src="assets/desk.js"></script>
+</body>
+</html>

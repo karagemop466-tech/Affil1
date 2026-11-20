@@ -302,3 +302,92 @@ This matches `src/data/products.json`. P-04 resolved on a fetch after the earlie
 - `python3 tools/validate.py`: fails (FLG-021). Known.
 - Sources read today: Amazon Associates Program Policies (affiliate-program.amazon.com/help/operating/policies, updated April 14, 2026); GitHub Pages documentation (docs.github.com, What is GitHub Pages: visitor IP logging on every Pages visit).
 - Branch history: rebased onto `origin/main` at `9c9040c`. The earlier claim commit (`ef0b721`) was dropped in the rebase: main's board already holds the other sessions' blocks, and this entry replaces that claim. The rebase is linear.
+
+---
+
+## Session `arena/771e5093-affil1` — Decision Desk (2026-11-20, ~05:11–05:40 UTC)
+
+### Claim and scope actually used
+
+| Task | Status | Owner | Files touched |
+|---|---|---|---|
+| Decision Desk: executive summary, product-intent register, suggestion board, open questions, official-source register, editorial plan | done (merged via PR from this branch) | `arena/771e5093-affil1` | `decision-support/**` (new, 12 files), `COORDINATION.md` (appended only) |
+
+- Scope was claimed and pushed **before** any edit, at `54e9dba`.
+- **Deviation, recorded rather than hidden:** the claim listed `EXECUTIVE_SUMMARY.md` and `research/**`
+  at the repository root. While this session worked, `main` advanced and another session added
+  root `EXECUTIVE_SUMMARY.md`, `products.html`, `questions.html`, `suggestions.html`,
+  `executive-summary.html` and `guides/*`. Nothing was overwritten and no file outside
+  `decision-support/**` was edited except this appendix. The executive summary and research
+  register therefore live at `decision-support/executive-summary.html` and
+  `decision-support/verification.html`.
+- Rebase conflict on `COORDINATION.md` (main's rewritten board vs. this session's claim block) was
+  resolved by keeping main's board in full and appending this section. No other session's text was
+  discarded. Rebased onto `origin/main` at the point of writing.
+
+### Verification performed (official sources, read 2026-11-20)
+
+- Amazon Associates Program Operating Agreement — `https://affiliate-program.amazon.com/help/operating/agreement`
+  (page states "Updated: October 15, 2025"). §1 Special Links; §5 exact disclosure sentence; §6 material-breach clause.
+- Amazon Associates Program Policies — `https://affiliate-program.amazon.com/help/operating/policies`
+  (page states "Updated: April 14, 2026"). Commission Income Statement §1–§2 (24-hour session, 89-day cart,
+  180-day fulfilment, disqualified-purchase list (c)(d)(e)(g)(k), Qualifying Revenue definition); §5 tag
+  limitations; §6 payment timing and Payment Minimum Chart; Participation Requirements §1 (originality,
+  unsuitable sites, trademark-in-domain, re-join restriction), §2(a)–(b) (Special Links after applying, tag
+  format, no bookmarking, **no per-user sub-tagging**, price/availability only via served link or
+  Creators/PA API, comparison-format rule, no misleading claims, promotion expiry, no links on Amazon).
+- Amazon ASIN definition — `https://sell.amazon.com/blog/what-is-an-asin`: "unique 10-character alphanumeric code",
+  typically starting "B0", shown after `/dp/`. Used to test the five submitted identifiers (all 9 characters).
+- Creators API prerequisites — `https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction` and
+  `https://affiliate-program.amazon.com/creatorsapi`: "at least 10 qualifying sales within the past 30 days to
+  access the PA API through the Creators API". Cross-checked with
+  `https://webservices.amazon.com/paapi5/documentation/troubleshooting/error-messages.html` (`AssociateNotEligible`).
+- Associates application review / dormancy — `https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM`
+  and `.../G7MJTPEP9NC3YKMG`: three qualifying sales in 180 days, personal orders excluded, "a good rule of thumb
+  is at least 10 posts", rejected IDs cannot be reinstated.
+- FTC — `https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255` §255.0(f) "clear and conspicuous"
+  (source: 88 FR 48102, July 26, 2023) and `https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking`
+  (material connection to a "significant minority" test; "no safe harbor").
+- Google Search Central — `https://developers.google.com/search/docs/essentials/spam-policies`: "Thin affiliation"
+  definition, the "good affiliate sites" sentence, and the site-reputation worked example on authorship/editorial
+  responsibility. `https://developers.google.com/search/docs/appearance/site-names`: site name only from the
+  domain/subdomain root, not a subdirectory.
+- IANA Root Zone Database — `https://www.iana.org/domains/root/db/.amazon`: `.amazon` is a generic TLD managed by
+  "Amazon Registry Services, Inc.", which is why `link.amazon` is a plausible Amazon-operated host.
+
+### Product-link checks
+
+- Five official-domain listing pages were read for the candidate identifiers (`B0CDY277D3`, `B08DKYBTPH`,
+  `B09B7SB46R`, `B0DMDQZTZN`/`B0DHZTCNR5`, `B0DZFD6R9Z`). Four are confirmed as real product listings for the
+  products named; one (P-04) is ambiguous because the page URL and its own product-information block carry
+  different identifiers.
+- **Not verified, and left blank:** where each submitted `link.amazon/…` link actually goes. This sandbox's egress
+  allow-list permits DNS but blocks HTTPS to `amazon.com`, so no redirect chain was observed here. No redirect was
+  followed, simulated or inferred, and the intended identifier and observed destination are kept in separate columns.
+
+### Irregularities flagged for review (published at `decision-support/verification.html#irregularities`, non-blocking)
+
+1. **IRR-01** all five submitted identifiers are 9 characters against Amazon's published 10-character ASIN format; none of the five URLs is in tagged Special-Link form.
+2. **IRR-02** two registers on the same branch contradict each other on three of five links: `src/data/products.json` records product-page destinations for P-03/P-05, `data/confirmations.json` records `https://www.amazon.com/` (homepage) for those same two and a bot-checkpoint page for P-04. Both dated 2026-11-20. Needs a re-run from a host that can reach Amazon.
+3. **IRR-03** GitHub Pages is configured `build_type: "legacy"` (source branch `main`, path `/`) while `.github/workflows/pages.yml` also runs a `deploy-pages` job; runs were cancelled by its own `cancel-in-progress` concurrency group at 05:19:55Z. One publisher should be chosen.
+4. **IRR-04** P-04 cannot be named: two candidate identifiers, no confirmed listing, register says "unverified: everything".
+5. **IRR-05** the CHEF iQ Sense pages state four different heat tolerances (1,400 °C/1,40 °C, 1,300 °F, 1,500 °F, 1,000 °F) for one product; `amazon.nl` contradicts itself on a single page.
+6. **IRR-06** six published pages already embed `tag=shopnow047c-20` (`index.html`, four `guides/` pages, `categories/air-fryers.html`, `dashboard.html`) while enrolment and registered-Site status for that tag are unconfirmed.
+7. **IRR-07** 43 HTML files outside `archive/`, four reader-facing surfaces covering the same subjects under two brand names, canonicals on 22 of them, `archive/` published to the web.
+8. **IRR-08** three analytics modules and two incompatible endpoints (`/api/collect` vs `/analytics/collect`), with no receiver available on a static Pages host; `js/analytics.js:13-22` documents the requirement itself.
+9. **IRR-09** `application/ld+json` appears in 0 of 43 HTML files; a "site name" is unreachable at a `/Affil1/` subpath per Google's own rule.
+10. **IRR-10** two sitemaps (32 and 14 URLs) and three feeds; only the root sitemap is advertised in `robots.txt`; neither lists `decision-support/`.
+
+### Requests for the final integration session (files outside this scope, so logged rather than edited)
+
+- **REQ-1 → `sitemap.xml`:** add the seven `decision-support/*.html` URLs (or the directory URL) to the single canonical sitemap once the sitemap is merged (IRR-10).
+- **REQ-2 → `index.html`, `crisp/index.html` footers:** add one "How we work · Decision Desk" link to `decision-support/index.html`. Keep it out of the reader-facing masthead; the brief asks for dashboards to be reachable from the footer and one navigation group.
+- **REQ-3 → `src/data/products.json`, `data/confirmations.json`:** resolve IRR-02 by re-observation and keep exactly one authoritative register; do not average the two.
+- **REQ-4 → `.github/workflows/pages.yml`:** extend the reference-validation step to cover `decision-support/*.html` (it currently validates `index.html` and `guides/*.html` only). `decision-support/validate.py --json` runs standalone and passes.
+- **REQ-5 → repo Pages settings:** pick one publisher (IRR-03) before any further "deploy verified by CI" claim is recorded here.
+- **REQ-6 → `guides/flagged-for-review.html`:** cross-link IRR-01…IRR-10 so both flag surfaces agree; `decision-desk.json` is machine-readable input for it.
+
+### Local checks run
+
+- `python3 decision-support/validate.py --json` → PASS, 6 check families, 106 register records written to `decision-support/data/decision-desk.json`.
+- Local HTTP crawl of `decision-support/` (all 7 pages + CSS/JS/JPG/JSON) served from a `python3 -m http.server` mount: every path 200, every local reference and in-page fragment resolves.
