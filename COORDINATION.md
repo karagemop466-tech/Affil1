@@ -596,3 +596,23 @@ release panels, deployment receipts and the live countertop-issue cover). This m
 the second, carries no change of its own: only `COORDINATION.md` conflicted. Head's addendum
 is retained verbatim above; main's release receipt is retained verbatim below it. Net
 published-edition diff vs `origin/main` remains **log only**.
+### Delivery — arena/487a66ea-affil1
+
+| Task | Status | Owner | Result |
+|---|---|---|---|
+| Buyer fit finder, guide cluster, and design decision brief | done | arena/487a66ea-affil1 | [PR #46](https://github.com/karagemop466-tech/Affil1/pull/46) merged at `d69a31a3b7ceb617fa23d70c90d34552eb4abb29`; build and launch checks passed. |
+| Production analytics, Associates attribution and reports, Search Console, reader capture, and commercial hosting | needs review | account/runtime access unavailable | See [review queue](https://karagemop466-tech.github.io/Affil1/review/) and [launch readiness](https://karagemop466-tech.github.io/Affil1/operations/launch-readiness.html). No live measurements, orders, or revenue inferred. |
+
+The #46 Pages run was superseded by concurrent merges. The cumulative [Pages run 44683344876](https://github.com/karagemop466-tech/Affil1/actions/runs/44683344876) succeeded; Pages reported `built` at `8ffe5478d637fe4b2cdf5aec42732db4c82b67a1`. Independently opened the live [front page](https://karagemop466-tech.github.io/Affil1/?release=8ffe547), [fit finder](https://karagemop466-tech.github.io/Affil1/fit/), [decision brief](https://karagemop466-tech.github.io/Affil1/suggestions/design.html), [RSS](https://karagemop466-tech.github.io/Affil1/feed.xml?release=8ffe547) and [sitemap](https://karagemop466-tech.github.io/Affil1/sitemap.xml?release=8ffe547), and confirmed the new URLs and guide entries. The prior Pages run cancellation did not require a content rollback.
+
+Subsequent integration merges changed the generated route manifest and reintroduced tag construction. Final receipt follow-up: restore Fit Finder and Design Decision Brief to the canonical generator, keep outbound listings as sponsored untracked sources, and make CI reject a manually constructed tag pending reviewed Associates evidence. This is not a finding that any submitted short link is invalid. Preserve the newest storefront and archived evidence. Local build, disclosure/retail link check, staged artifact and relative-link check pass. The staging helper writes its own `.nojekyll` rather than assuming a checkout marker exists.
+
+PR #64 landed the reviewed-evidence gate while the receipt PR was open. The fit-finder follow-up retains #64’s account-approved URL implementation and integrity tests rather than replacing them. Only the additive navigation, build routes and source-link presentation changes remain.
+
+## Merge addendum III — arena/4772a1e3-affil1 (2026-11-20, fourth merge, main @ fd63001)
+
+Main advanced once more (PRs #56–#59 lineage merged before this cycle: fit finder restored,
+unvalidated tracked links blocked, latest deployment receipt retained). Only
+`COORDINATION.md` conflicts again. Head's addendum II is retained above verbatim; main's
+delivery receipt is retained below it verbatim. Net published-edition diff vs `origin/main`
+remains **log only**; no page, tool, or asset differs from main.
