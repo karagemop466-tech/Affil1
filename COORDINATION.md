@@ -202,6 +202,72 @@ fixed by the platform, so the `session-<id>/<task>` form is not used.
 `assets/**`, `now/`, `offers/`, `verification/` page modules, and all `_archive/**`.
 Requests against those files are logged in this section rather than edited.
 
+## Claim — session `arena/ddb6772b-affil1` (2026-11-20 UTC, rebased onto `d345cf0`)
+
+Session ID `arena/ddb6772b-affil1` · branch `arena/ddb6772b-affil1`. Branch name is
+fixed by the platform, so the `session-<id>/<task>` form is not used.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Category subpages for the published shop: `categories/` index + Air fryers + Thermometers, each with a per-row sourced table built from `_src/data/products.json` | done | arena/ddb6772b-affil1 | NEW `_tools/page_categories.py`; `_tools/build.py` (OWNED/GENERATED only), `_tools/layout.py` (NAV + FOOTER_GROUPS only), generated `categories/*.html` |
+| Four new reader-facing guides for the seasonal/evergreen gap (Thanksgiving timing, reheating leftovers, probe placement, leftovers and the two-hour rule), each with an official source per factual claim | done | arena/ddb6772b-affil1 | NEW `_tools/content_season.py`; `_tools/content.py` (one append only), `_tools/page_guides.py` (cluster blurbs), generated `guides/*.html`, `guides/index.html`, `sitemap.xml`, `feed.xml` |
+| Fix one false compliance sentence found on every guide page: the sidebar claims every product link "carries the site's Amazon tag"; the approved Special-Link register is empty, so no link carries a tag | done | arena/ddb6772b-affil1 | `_tools/page_guides.py` line ~142 only |
+| Register updates from this pass: newly verified official sources with quoted wording, new decision questions and suggestions, new flags, and a fourth link-verification pass | done | arena/ddb6772b-affil1 | `_src/data/{sources,questions,suggestions,flags,reverification}.json` (append-only rows) |
+| Refresh the executive summary so it states what this pass changed and what still blocks earning | done | arena/ddb6772b-affil1 | `EXECUTIVE_SUMMARY.md` |
+
+**Deliberately untouched** (owned by other sessions, open PRs): `edition/`, `_platform/`,
+`_decision-support/`, `_measurement/`, `_analytics/`, `_tools/{check,validate,stage,sweep_surfaces,layout*},
+`_src/data/{products,product-intent,events,compliance,images,decisions,editorial-signals}.json`,
+`assets/**`, `now/`, `offers/`, `verification/` page modules, and all `_archive/**`.
+Requests against those files are logged in this section rather than edited.
+
+
+
+### Delivery — session `arena/ddb6772b-affil1` (2026-11-20 UTC)
+
+Shipped on this branch: `categories/` (index + Air fryers + Thermometers), four new
+guides, the computed guide-sidebar link statement, six new source rows, three new
+questions, six new board proposals, three new review flags, six observation rows in
+`_data/verification-observations.ndjson`, and an executive-summary addendum.
+
+Sources read directly this pass, with the page's own date where it shows one:
+[FSIS Safe Minimum Internal Temperature Chart](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart)
+(Apr 14, 2025) ·
+[FSIS Food Thermometers](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers)
+(no date shown) ·
+[FSIS Leftovers and Food Safety](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety)
+(Jul 31, 2020) ·
+[FSIS Turkey from Farm to Table](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/turkey-farm-table)
+(no date shown) ·
+[FoodSafety.gov temperature chart](https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures)
+(Nov 21, 2024) ·
+[Operating Agreement §5](https://affiliate-program.amazon.com/help/operating/agreement) ·
+[Program Policies, Commission Income Statement §2(g) and Participation Requirements
+§1](https://affiliate-program.amazon.com/help/operating/policies).
+Quoted wording is stored verbatim in `_src/data/sources.json` (SRC-18…SRC-23).
+
+Verification performed: 42 pages built twice, byte-identical; `check.py` 0 errors
+0 warnings; `validate.py` 2,609 checks 0 warnings; `check_local_links.py` 76 pages
+0 broken; paid-link tests 10 OK; Decision Desk PASS; Almanac 1,965 checks 0 errors;
+`sweep_surfaces.py` 0 to move; `stage.py` 94 files staged; CI reproducibility diff clean.
+
+Irregularities for review, all published at `review/index.html`:
+**FLG-029** (high) — each of the five submitted `link.amazon/<code>` links, fetched
+separately with redirects followed, returned the Amazon homepage on 2026-11-20T07:05Z,
+while a direct fetch of `amazon.com/dp/B0CDY277D3` in the same session matched the
+register title. Four passes, three different answers. No reader-facing destination uses
+a short link, so nothing published is wrong; the intended-ASIN chain stays unproven.
+**FLG-030** (low) — nine generator modules in `_tools/` are reachable from neither the
+build nor any workflow. **FLG-031** (medium) — every guide page asserted its product
+links "carry the site's Amazon tag" while the approved register is empty; repaired to be
+computed from `approved_amazon_urls()`.
+
+Requests logged instead of edited (see `COORDINATION/arena-ddb6772b-affil1.md` for
+detail): the duplicate `edition/` surface needs a `noindex` or a fold-in by its owner;
+Pages `build_type` is still `legacy` so the branch root is published; `check.py`'s
+`PUBLIC_DIRS` reserves `compliance`, which nothing writes yet.
+
+Merge:
 **Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are
 shared write-points. My edits are additive (new list entries, new rows); if another
 session edits the same files, resolve by keeping both additions and rebuilding.

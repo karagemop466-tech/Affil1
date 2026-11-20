@@ -39,6 +39,13 @@ and checked page by page by `_tools/check.py`:
 - a suggestion queue with three coherent paths and 24 proposals (18 open, 6 already
   implemented and shown with evidence), each row carrying cost, risk and the question
   it depends on;
+
+- fourteen question-shaped guides across seven clusters, all in `sitemap.xml`
+  and `feed.xml`, plus a category index and two category pages;
+- a decision register of 27 questions, 10 answered with evidence, 17 open and each
+   naming the document or dashboard that would close it;
+- a suggestion queue with three coherent paths and 31 proposals, of which some
+  are already implemented and are shown with evidence;
 - an owner's "what is left" page (`/now/`), a ranked offers page (`/offers/`, 10
   weighted offers) and a per-page verification audit (`/verification/`);
 - a **decision registry** (`/decisions/`) of 7 open proposals, each carrying the
@@ -83,10 +90,13 @@ Notes that belong with that table, not under it:
 
 ## What the site is now
 
-- **10 buyer guides**, question-shaped and seasonal, across six clusters — basket or oven,
+- **14 buyer guides**, question-shaped and seasonal, across seven clusters — basket or oven,
   dual-zone vs single basket, capacity, cleanup and counter space, meal-prep Sunday, the
   small-kitchen space audit, multi-function questions, thermometer pairing, holiday hosting
-  and holiday side-dish capacity. Each closes by naming what it does not claim.
+  and holiday side-dish capacity, plus four added on 2026-11-20: Thanksgiving oven-traffic
+  timing, reheating leftovers, thermometer probe placement and the two-hour rule. The four
+  newest carry a table whose rows link to the federal page each figure was read from. Each
+  guide closes by naming what it does not claim.
 - **A shortlist of all five rows**, described only in the seller's own words, each linking
   only to its observed listing as a labelled reference link. P-04 is flagged (FLG-004,
   FLG-016) because earlier attempts returned checkpoints and the thermometer pair was
@@ -96,7 +106,13 @@ Notes that belong with that table, not under it:
 - **Registers, demoted to the footer where a buyer will not trip over them:** source
   register, flagged register (29 items, each with its source), suggestion board
   (24 proposals), open questions (24, 10 answered with evidence; 14 still blocked and
+
+  register, flagged register (35 items, each with its source), suggestion board
+  (31 proposals), open questions (27, 10 answered with evidence; 17 still blocked and
   published as such), decision registry (7 proposals), operations ledger.
+- **Two category subpages** (`/categories/air-fryers/`, `/categories/thermometers/`) under a
+  category index, so the URL a shopper lands on is organised by what they are buying rather
+  than by the register's reference numbers.
 - **No prices, ratings, review counts or stock anywhere** — enforced by a build-time
   check, not by a promise. Publishing them without a PA/Creators feed is prohibited, and
   a stale price is a false claim. Price tracking and price alerts are recorded on the board
@@ -617,3 +633,60 @@ change. What shipped:
 
 Everything else — API access, custom domain, product photography, paid
 acquisition — is sequenced behind those five and documented on /suggestions/.
+
+---
+
+## Addendum — session `arena/ddb6772b-affil1`, 2026-11-20 UTC
+
+Base `d345cf0`, rebased through `bcef8b6`. This pass changed the reader-facing
+surface, the source registers, and one false sentence about attribution. It also
+cut most of what it had drafted, because main had already published the better
+version of it — that part is recorded here rather than quietly deleted.
+
+**What shipped.** `/categories/` with an index and two subpages (Air fryers,
+Thermometers): the same register regrouped by what a shopper is buying, every row
+linked to the listing it was transcribed from, and an explicit statement of what the
+page cannot tell you. `PUBLIC_DIRS` in `_tools/check.py` had already reserved
+`categories`; nothing had ever written it. One guide was kept — probe placement, a
+question no other page answered — with every figure transcribed from a US-government
+page opened the same day and linked in the same table row. Three more drafted here
+(reheating leftovers, the two-hour rule, Thanksgiving oven timing) were dropped on
+rebase: main already publishes `reheating-thanksgiving-leftovers`, and
+`holiday-hosting-air-fryer` already argues the last-twenty-minutes point. Two guides
+making one argument is the duplication this project consolidated away at edition
+scale, so the newer copy yielded. The front page's seasonal band and journal shelf are now derived from the
+data rather than from fixed list indices, which every appending session invalidated.
+
+**Registers.** Four new sources (SRC-21 FSIS Leftovers, SRC-22 FSIS Food
+Thermometers, SRC-23 FSIS Turkey from Farm to Table, SRC-24 FoodSafety.gov chart,
+each with the page's own date or an explicit "no date shown"), three new open
+questions (Q-25, Q-26, Q-27), six new board proposals (S-26 to S-31) and two new
+review flags (FLG-034, FLG-035).
+
+**Not a new flag, a third corroboration.** Each of the five submitted
+`link.amazon/<code>` links was fetched separately, redirects followed, by a fetcher
+with no cookies and no region. All five returned the Amazon site homepage rather
+than a listing; a direct fetch of the listing recorded for P-01 in the same session
+matched the register title exactly. Four passes over the day, three different
+answers. Nothing published uses a short link as a destination, so no reader is
+affected; what is unproven is the hop from "the operator submitted this" to "this
+page is about that product". This pass is recorded as a third corroboration inside
+**FLG-028**, which already stated the finding, and as six dated rows in
+`_data/verification-observations.ndjson`. It is not a finding that the links are
+invalid: FLG-003 stays unresolved and the register still says so.
+
+**Two sessions, one defect.** The guide sidebar sentence asserting that every
+product link "carries the site's Amazon tag" was found and fixed here and,
+independently, upstream (`FLG-031`, `S-22`). Upstream's flag and the `check.py` rule
+that guards the sentence stand as the record. What this pass adds is that the
+sentence is *computed* from `approved_amazon_urls()`
+(`_tools/page_guides.py::_link_note`) rather than re-worded, so it cannot outlive the
+register state; and **FLG-037** records that the guard is a literal-string test,
+which will start demanding a false sentence the day a Special Link is validated.
+
+**Gates after this pass:** 42 pages built twice, byte-identical · `check.py` 0 errors
+0 warnings · `validate.py` 0 warnings · `check_local_links.py` 0 broken · paid-link
+tests OK · Decision Desk PASS · Almanac edition checks 0 errors · `sweep_surfaces.py`
+0 to move · `stage.py` staging complete · CI reproducibility diff clean. No price,
+rating, review count, stock level, test result or ranking was added; the listing page
+read during verification displayed both, and neither was transcribed.

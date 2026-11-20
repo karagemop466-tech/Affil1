@@ -37,9 +37,14 @@ CATEGORIES = [
                 "Capacity means nothing until you know which of those two things you are buying, which is why this "
                 "page starts with shape and ends with the measurements you have to take yourself."),
         "filter": "air-fryers",
-        "guides": ["basket-or-oven-air-fryer", "dual-zone-two-baskets", "air-fryer-capacity-checklist",
-                   "cleanup-and-counter-space", "reheating-leftovers-without-the-soggy-middle",
-                   "thanksgiving-air-fryer-timing"],
+        # The shelf is the guides that answer a shopper's question about this shape,
+        # in reading order: choose, size, live with, then the season. Slugs are listed
+        # rather than filtered by cluster so the order is editorial and not alphabetical;
+        # build_category skips any slug the site no longer publishes.
+        "guides": ["basket-or-oven-air-fryer", "air-fryer-or-toaster-oven", "dual-zone-two-baskets",
+                   "air-fryer-for-two", "air-fryer-capacity-checklist", "cooking-from-frozen",
+                   "cleanup-and-counter-space", "reheating-thanksgiving-leftovers",
+                   "holiday-hosting-air-fryer"],
         "honest": ("What this page cannot tell you: how any of these cooks, how loud it is, how long it lasts, or "
                    "what it costs. Those are not omissions we can fix by writing harder. A listing page does not "
                    "carry them in a form this site is allowed to republish, and nothing here has been measured."),
@@ -58,8 +63,8 @@ CATEGORIES = [
                 "and safe minimum temperatures is quoted with its source, because that is the part worth getting "
                 "right."),
         "filter": "thermometers",
-        "guides": ["where-to-put-the-probe", "thermometer-pairing", "leftovers-and-the-two-hour-rule",
-                   "multi-function-kitchen-appliance-questions"],
+        "guides": ["thermometer-pairing", "where-to-put-the-probe",
+                   "multi-function-kitchen-appliance-questions", "reheating-thanksgiving-leftovers"],
         "honest": ("What this page cannot tell you: whether either probe is rated to stay inside a running air "
                    "fryer at the temperature you plan to use. That is in the manufacturer's instructions for the "
                    "exact model, and no listing title here says it. Check before you leave a probe in anything."),
@@ -244,7 +249,10 @@ def _product_block(p, d, approved, index):
 def build_category(page_dir, cat):
     d = page_dir
     items = _in(cat["filter"])
-    guides = [g for g in GUIDES if g["slug"] in cat["guides"]]
+    # Resolve by slug, then restore the editorial order named above; a slug that no
+    # longer exists is skipped instead of crashing the build.
+    wanted = {s: i for i, s in enumerate(cat["guides"])}
+    guides = sorted((g for g in GUIDES if g["slug"] in wanted), key=lambda g: wanted[g["slug"]])
     approved = approved_amazon_urls()
 
     blocks = "".join(_product_block(p, d, approved, i) for i, p in enumerate(items))

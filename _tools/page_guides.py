@@ -80,7 +80,6 @@ def _cluster_blurb(c):
         "Before you buy": "The questions a listing will never volunteer an answer to.",
         "Tools": "Probes, leave-in thermometers, and what they change about cooking with an air fryer.",
         "Seasonal": "Cooking for a crowd, and where a countertop machine genuinely helps.",
-        "Food safety": "The published numbers behind the habits \u2014 quoted from the federal pages, with the link in the same row.",
     }.get(c, "")
 
 
