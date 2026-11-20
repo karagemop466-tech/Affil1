@@ -28,7 +28,7 @@
     "candidate_listing": "B0CDY277D3",
     "product": "Chefman 6 Qt Dual Basket Air Fryer Oven (CHEFMAN)",
     "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0CDY277D3 aligned to the audit after an initial blank/disputed state — observed_asin",
-    "observed_register_b": "https://www.amazon.com/dp/B0CDY277D3 status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_register_b": "https://www.amazon.com/dp/B0CDY277D3 consolidated register, 06:0xZ: conf-001/002/003/005 verified , conf-004 unverified (checkpoint, twice); intended-ASIN fields still null — observations, not intent",
     "observed_this_session": "not observable from this workspace this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Agreement between both registers.",
     "source": "Amazon listing (candidate) · full source log"
@@ -39,7 +39,7 @@
     "candidate_listing": "B09B7SB46R",
     "product": "Emeril Lagasse 26QT Multi-Function Air Fryer Toaster Oven",
     "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B09B7SB46R aligned to the audit after an initial blank/disputed state — observed_asin",
-    "observed_register_b": "https://www.amazon.com/dp/B09B7SB46R status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_register_b": "https://www.amazon.com/dp/B09B7SB46R consolidated register, 06:0xZ: conf-001/002/003/005 verified , conf-004 unverified (checkpoint, twice); intended-ASIN fields still null — observations, not intent",
     "observed_this_session": "not observable; ASIN confirmed on amazon.fr and amazon.com.be pages this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Agreement between both registers.",
     "source": "Amazon.com.be listing (ASIN shown) · full source log"
@@ -50,7 +50,7 @@
     "candidate_listing": "B08DKYBTPH",
     "product": "Chefman Air Fryer 8 Qt TurboFry 4-in-1",
     "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B08DKYBTPH aligned to the audit after an initial blank/disputed state — observed_asin",
-    "observed_register_b": "https://www.amazon.com/dp/B08DKYBTPH status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_register_b": "https://www.amazon.com/dp/B08DKYBTPH consolidated register, 06:0xZ: conf-001/002/003/005 verified , conf-004 unverified (checkpoint, twice); intended-ASIN fields still null — observations, not intent",
     "observed_this_session": "not observable this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Contested. The listing is real; the route is not agreed. IRR-02",
     "source": "Amazon listing (ASIN shown) · full source log"
@@ -61,7 +61,7 @@
     "candidate_listing": "—",
     "product": "ThermoMaven instant-read family (unconfirmed)",
     "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0DHZTCNR5 aligned to the audit after an initial blank/disputed state — observed_asin",
-    "observed_register_b": "https://www.amazon.com/dp/B0DHZTCNR5 status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_register_b": "https://www.amazon.com/dp/B0DHZTCNR5 consolidated register, 06:0xZ: conf-001/002/003/005 verified , conf-004 unverified (checkpoint, twice); intended-ASIN fields still null — observations, not intent",
     "observed_this_session": "not observable this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Both registers fail this row. Candidate identifiers conflict: B0DHZTCNR5 vs B0DMDQZTZN. IRR-04",
     "source": "Page as captured (different identifier in URL) · full source log"
@@ -72,7 +72,7 @@
     "candidate_listing": "B0DZFD6R9Z",
     "product": "CHEF iQ Sense (Gen3) wireless meat thermometer",
     "observed_register_a": "(revised 05:3xZ) https://www.amazon.com/dp/B0DZFD6R9Z aligned to the audit after an initial blank/disputed state — observed_asin",
-    "observed_register_b": "https://www.amazon.com/dp/B0DZFD6R9Z status \"verified\" (P-01/02) or \"listing-checked\" (P-03/04/05); intended-ASIN fields remain null",
+    "observed_register_b": "https://www.amazon.com/dp/B0DZFD6R9Z consolidated register, 06:0xZ: conf-001/002/003/005 verified , conf-004 unverified (checkpoint, twice); intended-ASIN fields still null — observations, not intent",
     "observed_this_session": "not observable; ASIN + model CQ60-3C-Z1-E confirmed on amazon.ca, .nl, .in pages this session, 2026-11-20 — egress allow-list blocks HTTP to amazon.com; link.amazon does resolve in DNS",
     "confirmation": "no confirmation date Contested. Listing is real; the route is not agreed.",
     "source": "Amazon.ca listing (ASIN shown) · full source log"
@@ -440,10 +440,10 @@
    },
    {
     "id": "IRR-02",
-    "finding": "Two registers on this branch contradicted each other on three of five links — and a later audit settled it. Before this section was drafted, src/data/products.json recorded product-page destinations for P-03/P-05 while data/confirmations.json recorded the Amazon homepage for both and a bot-checkpoint for P-04. An independent same-day audit ( data/verification-audit.json , sessions a4ab7faf / 8206a8d0 ) fetched all five links, observed /dp/ destinations for each, and the registers were aligned to it — but a different session's fetch reports the two thermometer routes swapped (repo flag FLG-016 ), so at least one of those observations is wrong and none is reproducible from here.",
+    "finding": "Two registers on this branch contradicted each other on three of five links — and a later audit settled it. Before this section was drafted, src/data/products.json recorded product-page destinations for P-03/P-05 while data/confirmations.json recorded the Amazon homepage for both and a bot-checkpoint for P-04. An independent same-day audit ( data/verification-audit.json , sessions a4ab7faf / 8206a8d0 ) fetched all five links, observed /dp/ destinations for each, and the registers were aligned to it — but a different session's fetch reports the two thermometer routes swapped (repo flag FLG-016 ); the endgame at 06:0xZ is a single consolidated data/confirmations.json with per-row history — four destinations verified , P-04 unverified (checkpoint twice). The arc is the lesson: three files describing one fact produced the churn; one dated register with a stored history keeps it checkable, and the workflow test remains the gate no register can self-issue.",
     "evidence": "src/data/products.json ( observed_redirect_asin P-03 B08DKYBTPH , P-05 B0DZFD6R9Z ) vs data/confirmations.json archived at archive/2026-11-20-integration/data/confirmations.json ; the live successor fields are observed_asin in src/data/products.json and FLG-004/016 in src/data/flags.json as revised at 05:3xZ, which now agrees — with data/verification-audit.json now archived at archive/2026-11-20-integration/data/verification-audit.json by the 05:5xZ reorganisation — note the archive copy is still published on Pages as the third witness. The audit's own limitations note that its fetcher rendered bot-variant mobile pages and that observations are point-in-time.",
-    "action": "Resolved as a contradiction; still open as evidence. The audit came from other sandboxes, so the enrolled workflow must still reproduce destinations before any monetised claim. Keep one authoritative register — there are now three files describing the same five links.",
-    "severity": "Med · was High"
+    "action": "Superseded — the contradiction closed by consolidation. One register with stored history replaced the three-file mess; its four verified rows are still other sandboxes' fetches, so the workflow test remains the gate no register can self-issue.",
+    "severity": "Low · was High"
    },
    {
     "id": "IRR-03",
@@ -468,35 +468,35 @@
    },
    {
     "id": "IRR-06",
-    "finding": "Live reader-facing pages already carry tag=shopnow047c-20 in their outbound links, while the account behind that tag and its registered Sites are unconfirmed. Special Links are permitted \"after you have applied\", and the application must name the Site.",
-    "evidence": "grep -rl 'tag=shopnow047c-20' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 17 live files carrying 53 tagged hrefs (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft): the root front page, six guides/ pages, categories/air-fryers.html , products.html , dashboard.html and the whole crisp/ edition · A-05, A-06, R-05. The count grew while this desk was being written; the exposure is now site-wide, not a handful of pages.",
+    "finding": "Still open, and it grew. Live reader-facing pages carry tag=shopnow047c-20 in their outbound links, while the account behind that tag and its registered Sites are unconfirmed. Special Links are permitted \"after you have applied\", and the application must name the Site.",
+    "evidence": "grep -rl 'tag=shopnow047c-20' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 19 live files (53+ tagged hrefs) (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft): the root front page, six guides/ pages, categories/air-fryers.html , products.html , dashboard.html and the whole crisp/ edition · A-05, A-06, R-05. The count grew while this desk was being written; the exposure is now site-wide, not a handful of pages.",
     "action": "Confirm enrolment and that karagemop466-tech.github.io/Affil1 is listed as a Site; if not, ship the links untagged until it is. Then do the single-product test and record the attributed click.",
     "severity": "Medium"
    },
    {
     "id": "IRR-07",
-    "finding": "The same kind of page exists in several places at once: root products.html , questions.html , suggestions.html , executive-summary.html , flagged-for-review.html ; also guides/suggestions.html , guides/executive-summary.html , crisp/products/ , crisp/questions/ , crisp/suggestions/ , crisp/flagged/ — plus new root products/ , questions/ , suggestions/ , review/ and reviews/ mirrors of the same page types. 65 reader-facing HTML files outside archive/ and this desk, canonicals on 57 (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft). A crawler sees near-duplicates with no canonical story.",
+    "finding": "Largely fixed by the 05:5xZ consolidation — the residue is the archive. Originally: the same kind of page existed in several places at once: root products.html , questions.html , suggestions.html , executive-summary.html , flagged-for-review.html ; also guides/suggestions.html , guides/executive-summary.html , crisp/products/ , crisp/questions/ , crisp/suggestions/ , crisp/flagged/ — plus new root products/ , questions/ , suggestions/ , review/ and reviews/ mirrors of the same page types. 65 reader-facing HTML files outside archive/ and this desk, canonicals on 57 (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft). A crawler sees near-duplicates with no canonical story.",
     "evidence": "find . -name '*.html' -not -path './archive/*' -not -path './decision-support/*' | wc -l → 65 (was 43 an hour earlier) · rel=\"canonical\" in 57 · crisp/ and the root page-type mirrors still both live · G-01",
-    "action": "The final integration pass should choose one canonical set, canonicalise or redirect the rest, and prune archive/ out of the published tree. This is a Google-facing risk before it is an aesthetic one.",
+    "action": "One file per page type now, canonicals on 29 of 29 served files (re-measured 06:05Z). The remaining exposure is archive/… : dozens of superseded pages that Pages still serves and could still index. Add a robots exclusion or deploy-time prune, and settle legacy -style redirects for old URLs. Still a Google-facing risk before it is an aesthetic one.",
     "severity": "Medium"
    },
    {
     "id": "IRR-08",
-    "finding": "Measurement is written three times with two incompatible endpoints, and nowhere can it land: js/analytics.js beacons to /api/collect , analytics.js and assets/js/analytics.js beacons to /analytics/collect , and GitHub Pages serves no such POST handler.",
-    "evidence": "js/analytics.js:22 · analytics.js:9 · server/collect.js , analytics/endpoint.py are never invoked by a static host · the code says so itself: \"on GitHub Pages it requires a serverless…\"",
-    "action": "One contract, one file, and a stated destination: either a hosted endpoint, or the local-only ledger that already exists in data/campaign-ledger.json . Until then, no page may say clicks are being recorded.",
+    "finding": "Half fixed: the three analytics scripts were consolidated into one inert-by-default module ( js/analytics.js beacons to /api/collect , analytics.js and assets/js/analytics.js beacons to /analytics/collect , gated behind window.CRISP_ANALYTICS_ENDPOINT ) — but the endpoint still has nowhere to land: GitHub Pages serves no such POST handler.",
+    "evidence": "assets/js/events.js:15 ( ENDPOINT = window.CRISP_ANALYTICS_ENDPOINT || null , \"inert until a first-party host exists\") · analytics/endpoint.py + tests exist, unhosted · ledger at data/campaign-ledger.json",
+    "action": "What is left is exactly what the code says: a first-party host for the collector, or an honest local-only ledger. The contract question is answered; the infrastructure question is not. Until then, no page may say clicks are being recorded.",
     "severity": "Medium"
    },
    {
     "id": "IRR-09",
-    "finding": "Structured data is partially fixed. application/ld+json appeared in 0 of 43 files when first counted; it is now in 13 of 65 (root front page, the seven guides/ pages with JSON-LD, the five products/p-0n pages) — but crisp/ still has none, and a \"site name\" in Search remains out of reach while the pages live under /Affil1/ .",
-    "evidence": "grep -rl 'application/ld+json' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 13 (re-measured 2026-11-20 05:45Z, after `main` advanced past this section's first draft) · G-06",
+    "finding": "Structured data is mostly fixed: application/ld+json went 0 of 43 → 13 of 65 → 20 of 29 served files after consolidation. The residual: the remaining nine (mainly about , brief , review , this desk's neighbours) carry none, and a \"site name\" in Search remains out of reach while the pages live under /Affil1/ .",
+    "evidence": "grep -rl 'application/ld+json' --include='*.html' . | grep -vE 'archive|decision-support' | wc -l → 20 of 29 (re-checked 06:05Z) · G-06",
     "action": "Add Article + BreadcrumbList to guide pages in the shared templates; skip WebSite site-name markup on a project page. A custom domain is the real fix for the site name.",
     "severity": "Medium"
    },
    {
     "id": "IRR-10",
-    "finding": "Two sitemaps and three feeds that do not know about each other: root sitemap.xml (21 URLs, down from 32 as pages were consolidated) is the one robots.txt advertises, crisp/sitemap.xml (14 URLs) is unadvertised, and feed.xml , rss.xml and crisp/feed.xml all exist. Neither sitemap lists this Decision Desk section.",
+    "finding": "Mostly resolved by consolidation: one root sitemap.xml (28 URLs) and one feed.xml ; the second sitemap and two of the three feeds are now archive-only. Still open: the root sitemap lists neither, down from 32 as pages were consolidated) is the one robots.txt advertises, crisp/sitemap.xml (14 URLs) is unadvertised, and feed.xml , rss.xml and crisp/feed.xml all exist. Neither sitemap lists this Decision Desk section.",
     "evidence": "cat robots.txt · grep -c '<loc>' sitemap.xml crisp/sitemap.xml → 32 / 14",
     "action": "Merge into one sitemap and one feed at the site root, list every canonical page including decision-support/ , and 301 or drop the rest. Logged as a request to the integration session in COORDINATION.md .",
     "severity": "Low"
@@ -572,8 +572,8 @@
     "what_we_have": "Root index.html , crisp/index.html , guides/index.html , categories.html , dashboard.html , products.html — plus an archive/ of superseded sessions",
     "what_is_missing": "One canonical home, and a rule for what happens to the rest",
     "how_to_find_out": "A person decides the brand (one name, one nav). The mechanical half — canonicals, 301s, sitemap merge — an agent can then finish in a day",
-    "owner": "you, a decision",
-    "severity": "blocks the front page"
+    "owner": "answered 05:5xZ",
+    "severity": "resolved — consolidation chose one root brand; the desk's rename is the only remnant"
    },
    {
     "id": "Q-09",
@@ -674,7 +674,7 @@
     "gate": "free",
     "suggestion": "Resolve or remove P-04 — the product with no confirmable name",
     "why": "Two candidate identifiers, a checkpoint page, and no register that can name it. A shop that cannot say what it is selling should stop displaying it. IRR-04",
-    "touches": "products.html · crisp/products/index.html"
+    "touches": "products/p-04.html · data/confirmations.json"
    },
    {
     "id": "S-06",
@@ -718,7 +718,7 @@
     "effort": "l",
     "gate": "free",
     "suggestion": "Choose one canonical site and redirect or retire the rest; today the same page type exists at the root, under guides/ , under crisp/ and in archive/",
-    "why": "65 reader-facing files, canonicals on 57, and the page-type duplication has grown to products/ , questions/ , review/ mirrors as well as crisp/ . Search engines get a choice of which copy to index, and readers get four tones of the same advice. Still the single biggest quality lever left. IRR-07 · G-01",
+    "why": "Mostly landed 05:5xZ: consolidation collapsed the mirrors to one file per page type with canonicals on 29 of 29 served files, so search engines no longer choose between copies. What this suggestion still owns: the published archive/ (still served, still indexable) and 301s for retired URLs. Still the biggest remaining quality lever, just a smaller one. IRR-07 · G-01",
     "touches": "index.html · crisp/ · guides/ · archive/ · sitemap.xml"
    },
    {
@@ -728,7 +728,7 @@
     "gate": "blocked",
     "suggestion": "Named authors with a real bio, photo and contact route; one byline per article",
     "why": "Google's own worked example for a defensible commercial section turns on \"Authorship, editorial responsibility, and affiliate links are clearly marked\". Anonymous advice is the tell that makes a page read as generated. G-04",
-    "touches": "crisp/about/ · guide templates"
+    "touches": "about/ · guide templates"
    },
    {
     "id": "S-12",
@@ -736,7 +736,7 @@
     "effort": "m",
     "gate": "free",
     "suggestion": "Rebuild the front page as a shop: shelf and seasonal picks above the fold; every dashboard surface reachable from one footer group instead of the masthead",
-    "why": "Half landed while this board was written: the root front page is now products-led with a product grid and no verification preamble. The remaining job is the same treatment for crisp/ , and merging the shelf with it. The register belongs one click away, not in the hero — a buyer arrives for a fryer, not for our sourcing method.",
+    "why": "Landed during review: the root front page is products-led with no verification preamble, and the merge with crisp/ happened via the consolidation reorg — crisp/ is gone. Remaining: keep it that way in every rebuild. The register belongs one click away, not in the hero — a buyer arrives for a fryer, not for our sourcing method.",
     "touches": "index.html · crisp/index.html"
    },
    {
@@ -826,7 +826,7 @@
     "effort": "m",
     "gate": "free",
     "suggestion": "Consolidate the three analytics files into one module with one endpoint, and label the destination truthfully — either a hosted collector or \"counts live in your browser only\"",
-    "why": "js/analytics.js posts to /api/collect , the other two to /analytics/collect , and a GitHub Pages deploy answers neither. Two contracts, zero receivers. IRR-08",
+    "why": "Contract half is done: one inert-by-default module now, endpoint behind window.CRISP_ANALYTICS_ENDPOINT . Zero receivers remains true: GitHub Pages answers no POST. The decision left is where the collector gets hosted. IRR-08",
     "touches": "js/analytics.js · analytics.js · assets/js/analytics.js · server/collect.js"
    },
    {
@@ -853,7 +853,7 @@
     "effort": "m",
     "gate": "free",
     "suggestion": "Emit Article + BreadcrumbList JSON-LD and a canonical URL on every page from the templates ; skip WebSite site-name markup while the host is github.io/Affil1/",
-    "why": "0 → 13 of 65 files gained JSON-LD on 2026-11-20 (root front page, guides, products/p-0n ), which proves the fix is cheap; crisp/ and the mirror pages still have none. Google only supports a site name from the domain root — a project-page subpath can never own one. Fix what is fixable, and do not pretend about the rest. IRR-09 · G-06",
+    "why": "0 → 20 of 29 files carry JSON-LD after the consolidation (root, guides, products/p-0n ), which proves the fix is cheap; crisp/ and the mirror pages still have none. Google only supports a site name from the domain root — a project-page subpath can never own one. Fix what is fixable, and do not pretend about the rest. IRR-09 · G-06",
     "touches": "tools/build.py · templates"
    },
    {
@@ -880,13 +880,13 @@
     "effort": "s",
     "gate": "free",
     "suggestion": "Settle how this site is deployed: either point Pages at GitHub Actions or remove the deploy job, and stop the queue from cancelling itself mid-publish",
-    "why": "Pages reports the legacy branch publisher while the workflow also tries to deploy, and runs were cancelled by cancel-in-progress during this session. A deploy you cannot attribute is a deploy you cannot trust. IRR-03",
+    "why": "Pages still reports the legacy branch publisher while the workflow's deploy job stays conditional on source == workflow ; runs were cancelled by cancel-in-progress during this desk's review. A deploy you cannot attribute is a deploy you cannot trust. IRR-03",
     "touches": ".github/workflows/pages.yml · repo settings"
    }
   ]
  },
  "links": {
   "product_links_marked_sponsored": "21/21",
-  "documentation_links": 136
+  "documentation_links": 135
  }
 }
