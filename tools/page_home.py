@@ -160,7 +160,7 @@ def build(page_dir, products, meta):
     guides = section(f"""
 <div class="sec-head">
   <div>{eyebrow('Buying guides')}<h2>Written to be useful before you click</h2></div>
-  <p>Four guides. Every product claim in them is the seller's own wording, quoted. Nothing was tested, so nothing is rated.</p>
+  <p>Four guides. Every product claim in them is the seller's own wording, quoted. Nothing was tested, so nothing is rated. Also read our <a href="{esc(rel(d, 'guides/holiday-hosting.html'))}">holiday hosting checklist</a> and <a href="{esc(rel(d, 'reviews/verification-audit.html'))}">independent verification audit</a>.</p>
 </div>
 <div class="gcard-grid">
   {guide_card(d, GUIDES[0], feature=True)}

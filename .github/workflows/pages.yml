@@ -27,6 +27,9 @@ jobs:
       - name: Verify every rule the site claims
         run: python3 tools/check.py
 
+      - name: Check links across published pages
+        run: python3 tools/check_site_links.py
+
       - name: Confirm the build is reproducible, not hand-edited
         run: |
           cp -r . /tmp/first-build

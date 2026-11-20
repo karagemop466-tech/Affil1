@@ -68,7 +68,6 @@ GENERATED = {
 # a parallel edition on main and are still served, so deleting them here would
 # destroy another session's work. Verified by rebuilding and diffing the tree.
 RETIRED = [
-    "guides/cleanup-counterspace.html",
 ]
 
 
@@ -132,6 +131,13 @@ def feed(latest_guides):
     <guid isPermaLink="true">{link}</guid>
     <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
     <description>{esc(g['dek'])}</description>
+  </item>""")
+    items.append(f"""  <item>
+    <title>Holiday hosting: what should a counter appliance do for you?</title>
+    <link>{SITE_URL}/guides/holiday-hosting.html</link>
+    <guid isPermaLink="true">{SITE_URL}/guides/holiday-hosting.html</guid>
+    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+    <description>A seasonal checklist without product-specific claims.</description>
   </item>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -200,7 +206,7 @@ def main():
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
 
-    pages.append(write("sitemap.xml", sitemap(pages)))
+    pages.append(write("sitemap.xml", sitemap(pages + ["guides/holiday-hosting.html", "reviews/verification-audit.html"])))
     pages.append(write("feed.xml", feed(GUIDES)))
     pages.append(write("robots.txt", ROBOTS))
 
