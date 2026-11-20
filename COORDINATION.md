@@ -322,16 +322,29 @@ page's own date or the words "no update date shown". Gates on the final tree (47
 
 **Follow-up on the same branch.** After the merge, the surviving guide was found not to satisfy this session's own sourcing rule: its USDA classification table carried the figures as text with no link per row. Fixed by giving the table an "Official source" column (six row links to the FSIS page it was transcribed from) and an article-level Sources block, which also puts the row under `check.py`'s per-row-link rule so the gap cannot come back. **Follow-up receipt.** [PR #125](https://github.com/karagemop466-tech/Affil1/pull/125) merged into `main` as `b0b8ccd`. On that commit `Affiliate launch checks`, `Build, check and deploy`, `Verify Countertop Almanac edition and platform` and `pages build and deployment` all completed successfully. Read back from the live URL https://karagemop466-tech.github.io/Affil1/guides/where-to-put-the-probe.html: the classification table carries a "Official source" column with a link to the FSIS page in all six rows, the article ends with a Sources list of the two federal pages, the disclosure strip still precedes the content, and the product cards render as untagged `See on Amazon` links, consistent with the empty Special-Link register. This session's work is therefore fully live; no item in its scope remains unmerged.
 
-### Cross-scope repair — `arena/ddb6772b-affil1` (2026-11-20)
+### Cross-scope finding — `arena/ddb6772b-affil1` (2026-11-20): already repaired upstream
 
-| Task | Status | Owner | Files |
-|---|---|---|---|
-| `.github/workflows/edition-verify.yml` pointed its test step at `discover -s platform`, a directory that has not existed since the `_platform` rename; the step ran CPython's own `test.test_support` suite (45 tests) and reported success while this repository's 6 platform tests never ran. Retargeted to `_platform`. | done | arena/ddb6772b-affil1 | `.github/workflows/edition-verify.yml`, `_src/data/flags.json` (FLG-041) |
+While closing out, this session found that `edition-verify.yml`'s step
+`python3 -m unittest discover -s platform` points at a directory that has not existed
+since the `_platform` rename. `unittest` resolves the name to CPython's stdlib
+`platform` package, so the step ran 45 `test.test_support` tests and reported success
+while this repository's `_platform/test_platform.py` never ran in CI. Reproduced
+locally: `-s platform` → 45 tests OK, `-s _platform` → our 6 tests.
 
-Filed because the shared workflow belongs to no session's claim and the failure mode
-is a class, not a typo: a green CI step that verifies nothing. `_platform/` itself was
-not modified. `python3 -m unittest discover -s _platform -p 'test_*.py' -v` → 6 tests OK;
-`python3 _platform/compliance_gate.py` → 0 errors.
+**No change was made here.** `arena/3e17592d-affil1` had already fixed it on `main` as
+[FLG-045](https://github.com/karagemop466-tech/Affil1/commit/feb3cfd) with a better
+repair than mine: the step now targets `_platform` *and* fails when discovery collects
+nothing, so a name that resolves to the wrong place can never look green again — mine
+only corrected the path. FLG-045 also names two further vacuous steps this session had
+not found (`kitchen-check.yml` compiling an `_analytics/endpoint.py` that cannot import;
+`_tools/arm_links.py` reading `_src/_data/`, a path that does not exist).
+
+This session's duplicate flag row was deleted rather than renumbered, and a draft PR
+carrying the path-only fix was closed instead of merged, so the board does not record
+two claims for one repair. Kept here because FLG-045's own rule is the transferable
+part: *if a command can succeed while collecting zero tests, it is not a gate.* Anyone
+citing a "platform unit & HTTP collector tests" pass on this board before `2934ed0` is
+citing a step that tested nothing.
 
 
 **Session closed.** Nothing in `arena/ddb6772b-affil1`'s claim is left in progress. Files returned to other owners: none were held. Unresolved items are on the board as FLG-028/029/036/037/038/039/040 and S-01/S-39/S-40/S-41, all of which need an owner action (one Associates click, the Pages `build_type` setting, a taxonomy decision) rather than more code.

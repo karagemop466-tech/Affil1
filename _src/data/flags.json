@@ -696,20 +696,6 @@
         "_platform/verify_edition.py (permitted_amazon_destinations)",
         "https://karagemop466-tech.github.io/Affil1/edition/"
       ]
-    },
-    {
-      "id": "FLG-052",
-      "severity": "high",
-      "title": "A publishing-workflow test step ran CPython's own tests instead of this project's, and passed",
-      "expected": "`Verify Countertop Almanac edition and platform` runs the data layer's unit and HTTP-collector tests, so a regression in the collector cannot reach main on a green check.",
-      "found": "The step ran `python3 -m unittest discover -s platform`. The directory is `_platform` since the rename that closed the `platform/` exposure; no `platform/` exists. `unittest discover` does not error on a missing start directory that resolves to an importable module: `platform` is a standard-library module, so discovery took `/usr/lib/python3.11` and ran `test.test_support` -- 45 interpreter tests, 1 skipped, exit 0. The six tests in `_platform/test_platform.py`, which do cover the collector and the ledger, were never run in CI.",
-      "impact": "One of the two workflows guarding the data layer has been reporting success without testing the repository. Every merge that relied on it, including the ones this week, treated a vacuous green as evidence. Nothing published is known to be wrong because of it -- `_platform/verify_edition.py` and `_platform/compliance_gate.py` do run on every push, and both were green locally and in CI for this branch -- but the collector and ledger regressions that step was written to catch were not caught by anything.",
-      "reading": "The failure mode is worth keeping in mind as a class, not just this line: a discovery command pointed at a wrong path can be green because it found something else to run. Any CI step whose test count is not asserted is capable of this. The fix corrects the path; the durable fix is for the step to assert a minimum number of tests, or for the suites to be run by a command that fails when it finds nothing.",
-      "blocks": "nothing right now; it decides whether the next data-layer change can be trusted on CI alone",
-      "to_check": [
-        "python3 -m unittest discover -s _platform -p 'test_*.py' -v   # should list the project's own tests",
-        "gh run view <latest verify-edition run id> --log  # confirm the step names test_platform, not test.test_support"
-      ]
     }
   ]
 }
