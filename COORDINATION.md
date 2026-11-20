@@ -793,3 +793,31 @@ Findings behind the claim, each reproduced locally or read on the live host befo
 3. **Two quotes are attributed to pages that do not contain them.** SRC-09 records “Using a food thermometer is the only reliable way to ensure safety and to determine the ‘doneness’ of meat, poultry, and egg products.” as a verbatim quote from the FSIS *Food Thermometers* page. That page says “Using a food thermometer is the only reliable way to ensure that foods have been cooked to a safe minimum internal temperature…”. SRC-10 records “Retrieves details for an item in the Amazon catalog.” against a reference whose `getCatalogItem` operation reads exactly that, but not at the cited section.
 
 No other session holds these files. Cross-scope requests go in this file, not into other sessions' files.
+
+### Result — link gate, serving scope, source quotes · arena/d34e0765-affil1
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Reinstate the paid-link gate | done | arena/d34e0765-affil1 | `_tools/layout.py`, `_tools/check.py`, `_tools/test_paid_link_gate.py`, `_src/data/{flags,questions,suggestions,products}.json` |
+| Stop deploying working papers | done | arena/d34e0765-affil1 | `_config.yml`, `_tools/{build,check,check_local_links,stage,layout,page_desk}.py`, `.github/workflows/pages.yml`, six renamed directories |
+| Correct source-register quotes | done | arena/d34e0765-affil1 | `_src/data/sources.json`, `_decision-support/index.html` |
+
+**Verification performed, with the command that shows it.**
+
+- `python3 -m unittest discover -s _tools -p 'test_*.py'` — 2 tests, OK. Before this session `test_paid_link_gate` failed on the merged tree.
+- `python3 _tools/check.py` — 0 errors, 0 warnings, and it now carries a `check_serving_scope()` family. Negative test: `mkdir data` produced `FAIL data/: served by legacy Pages — rename to _data/`; removing it restored a clean run.
+- `python3 _tools/check.py` negative test on the tag rule: injecting `?tag=shopnow047c-20` into a product link produced `FAIL … unapproved tagged link`. Restored afterwards.
+- `python3 _tools/build.py && python3 _tools/validate.py && python3 _tools/check_local_links.py && python3 _decision-support/validate.py` — 1545 checks / 0 warnings; 37 pages / 0 broken; desk PASS.
+- The pages.yml reproducibility step was reproduced locally from a copy with no `.git`: rebuild produced 0 differing files.
+- Built HTML before and after the rename was diffed file by file. The only changes are the intentional path sentences on `about/` and the desk pages.
+
+**Sources re-read this session, by direct fetch.** SRC-13 [Creators API GetItems](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items); SRC-09 [FSIS Food Thermometers](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers); SRC-06 [16 CFR 255.5](https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255); SRC-10 [Catalog Items API](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference); SRC-17 [FTC Endorsement FAQ](https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking). All 17 rows in `_src/data/sources.json` are now confirmed against the page they cite.
+
+**Irregularities found and recorded rather than papered over.**
+
+- SRC-09 carried a quotation that is not on the cited FSIS page. Replaced with the sentence the page does contain; `quote_note` records the correction.
+- SRC-17's `used_for` reads “a single home-page disclosure is not sufficient” without the scope. The FTC answer it quotes is about **free products** from manufacturers, not affiliate links, and the same FAQ says elsewhere that a disclosure at the very top can be overlooked. The quote is accurate; the summary sentence around it is doing less work than it appears to. Recorded here for the owner, not silently rewritten.
+- FLG-002, FLG-009, Q-03, Q-14 and S-01 all described auto-tagging as the correct fix. They now describe the withdrawal.
+- The desk index said “Six working pages” and “Forty-nine register entries” against 7 pages and 50 entries, and dated a row “05:2xZ”. Corrected; the desk validator now passes on its own count.
+
+**Not done, and honest about it.** The live host still serves `main`. Everything above lands only when this branch merges, because `build_type: legacy` deploys `main:/` and no commit on a side branch reaches it. `/data/confirmations.json` returned 200 again on 2026-11-20 *after* the rename, which is the evidence for that statement.
