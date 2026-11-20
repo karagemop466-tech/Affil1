@@ -1,77 +1,41 @@
-/* Crisp & Counter — analytics client, INERT BY DEFAULT.
- *
- * The five events the brief asked for are defined below. Nothing is recorded
- * and nothing leaves the browser unless a page sets window.CC_ANALYTICS_ENDPOINT
- * to a self-hosted URL. It is not set anywhere in this build, and an endpoint is
- * not deployed, so this file currently does nothing except define five names.
- *
- * What it would store if enabled: the event name, the page path (never the
- * query string), the product reference for a click, and a date. No cookie, no
- * persistent identifier, no IP address, no user agent, no referrer text.
- *
- * Before enabling: publish a privacy notice, deploy a collector, decide a
- * retention period, and take a view on consent. See review/measurement.html.
- */
+/* Inert until an approved HTTPS collector is configured. No browser storage. */
 (function () {
-  "use strict";
+  'use strict';
+  // report_import belongs to the authorized reporting ledger, not the browser.
+  if (!window.CC_ANALYTICS_ENDPOINT || navigator.globalPrivacyControl ||
+      navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+  var endpoint;
+  try { endpoint = new URL(window.CC_ANALYTICS_ENDPOINT, location.href); }
+  catch (_) { return; }
+  if (endpoint.protocol !== 'https:' || endpoint.username || endpoint.password || endpoint.search || endpoint.hash) return;
 
-  var EVENTS = ["page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"];
-
-  var endpoint = window.CC_ANALYTICS_ENDPOINT || "";
-  if (!endpoint) {
-    /* Deliberate no-op. Expose the names so they can be inspected, and stop. */
-    window.CC_ANALYTICS = { enabled: false, events: EVENTS.slice(), track: function () {} };
-    return;
-  }
-
-  var buffer = [];
-
-  function send() {
-    if (!buffer.length) return;
-    var body = JSON.stringify({ events: buffer.splice(0, buffer.length) });
+  function send(events) {
     try {
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(endpoint, new Blob([body], { type: "application/json" }));
-      } else {
-        fetch(endpoint, { method: "POST", body: body, keepalive: true, headers: { "Content-Type": "application/json" } });
-      }
-    } catch (e) {
-      /* A failed beacon must never break the page. */
-    }
+      fetch(endpoint.href, {
+        method: 'POST', body: JSON.stringify(events), keepalive: true,
+        credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'error'
+      }).catch(function () {});
+    } catch (_) { /* Measurement must not interrupt navigation. */ }
   }
 
-  function track(name, detail) {
-    if (EVENTS.indexOf(name) === -1) return;
-    buffer.push({
-      event: name,
-      path: location.pathname,
-      ref: (detail && detail.ref) || null,
-      date: new Date().toISOString().slice(0, 10)
-    });
-    if (buffer.length >= 5) send();
+  var pathname = location.pathname;
+  var events = ['page_view'];
+  if (/\/compare\/(?:index\.html)?$/.test(pathname)) events.push('compare_view');
+  if (/\/review\/(?:index\.html)?$/.test(pathname)) events.push('flag_page_view');
+  send(events);
+  if (/\/guides\/(?!index\.html$)[^/]+\.html$/.test(pathname)) {
+    var read = function () {
+      var root = document.documentElement;
+      if (root.scrollHeight <= innerHeight || scrollY <= 0 || scrollY + innerHeight < root.scrollHeight * 0.75) return;
+      removeEventListener('scroll', read);
+      send(['guide_read_75']);
+    };
+    addEventListener('scroll', read, { passive: true });
   }
-
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "hidden") send();
-  });
-
-  track("page_view");
-
-  document.addEventListener("click", function (ev) {
-    var a = ev.target.closest("a[rel~='sponsored']");
-    if (!a) return;
-    var m = (a.getAttribute("href") || "").match(/\/(?:dp\/)?(B0[0-9A-Z]{8})/);
-    track("outbound_click", { ref: m ? m[1] : null });
-  });
-
-  if (document.referrer) {
-    try {
-      var host = new URL(document.referrer).hostname;
-      if (/(^|\.)(google|bing|duckduckgo|yahoo|yandex|brave|ecosia)\.[a-z.]+$/.test(host)) {
-        track("search_query_referral");
-      }
-    } catch (e) { /* ignore a malformed referrer */ }
+  function click(event) {
+    var link = event.target.closest && event.target.closest('a[rel~="sponsored"]');
+    if (link && /^(www\.amazon\.com|link\.amazon)$/.test(link.hostname)) send(['outbound_product_click']);
   }
-
-  window.CC_ANALYTICS = { enabled: true, events: EVENTS.slice(), track: track };
+  document.addEventListener('click', click);
+  document.addEventListener('auxclick', function (event) { if (event.button === 1) click(event); });
 })();

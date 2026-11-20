@@ -241,6 +241,8 @@ Claim was pushed before implementation. Shared-board-only rebase conflicts occur
 
 | Task | Status | Owner | Scope |
 |---|---|---|---|
-| Align maintained measurement client with private aggregate collector and test contract | in progress | arena/b18eada2-affil1 | server/collect.js, server/collect.test.js, assets/js/analytics.js, server/README.md |
+| Align maintained measurement client with private aggregate collector and test contract | done | arena/b18eada2-affil1 | server/collect.js, server/collect.test.js, assets/js/analytics.js, server/README.md |
 Claim rebase: preserved the updated main board and appended this claim.
 - Scope extension: `tools/page_review.py` and generated `review/measurement.html`, limited to aligning measurement documentation. Prior review and link integration is marked done above.
+- Verified GitHub Pages is static against [GitHub documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages). The aggregate collector passed its HTTP contract test. Rebuilt and checked 22 maintained pages and 65 served pages' relative file references. Production analytics and authorized report import remain needs review; no data was imported and this pass makes no new product or tracking claims.
+- Second rebase: preserved the incoming canonical event names and sourced measurement table, then aligned the client, collector and checker to those names. The collector deliberately omits the proposed properties.

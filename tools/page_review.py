@@ -140,7 +140,7 @@ def build_measurement(page_dir, meta):
     import json
     from pathlib import Path
     spec = json.loads((Path(__file__).resolve().parent.parent / "src/data/events.json").read_text(encoding="utf-8"))
-    rows = [[{"html": f'<code class="code">{esc(e["name"])}</code>'}, esc(e["fires_when"]), esc(", ".join(e["props"])),
+    rows = [[{"html": f'<code class="code">{esc(e["name"])}</code>'}, esc(e["fires_when"]), esc("Daily count only"),
              {"html": outbound(d, "https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages", "GitHub Pages hosting")}] for e in spec["events"]]
     body = f"""{pagehead(
         'Measurement plan',
@@ -150,16 +150,16 @@ def build_measurement(page_dir, meta):
     )}
 {section(f'''
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. The maintained publication has an inert client; no collector is deployed for it. The five events below are a specification, not evidence that the client implements them.</p>
-  <p>The current client is disabled. Its event names differ from the canonical specification, so alignment and end-to-end testing are required before enabling any collection. A privacy notice, retention decision and consent review are also needed.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. The maintained publication has a client and an aggregate collector, but neither is live.</p>
+  <p>The current client is disabled. It honors Global Privacy Control and Do Not Track and sends only event names when enabled. Reported orders belong in the authorized reporting ledger, not the browser endpoint. A privacy notice, retention decision and consent review are also needed.</p>
 </div>
 <h2>What would be measured</h2>
-{table(['Proposed event', 'Fires when', 'Proposed properties', 'Hosting context'], rows, cls='events')}
+{table(['Proposed event', 'Fires when', 'Stored when enabled', 'Hosting context'], rows, cls='events')}
 <h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
 <ol class="tight">
   <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
   <li><strong>A deployed collector.</strong> GitHub Pages serves static files only; a separate collector must be deployed and tested.</li>
-  <li><strong>A retention decision.</strong> Raw event rows have a half-life; the ledger does not. A retention period has to be chosen, not defaulted.</li>
+  <li><strong>A retention decision.</strong> Choose and enforce a retention period for daily totals and review proxy logs separately.</li>
   <li><strong>A consent decision.</strong> Whether visitor consent is required depends on jurisdiction and on what is collected. That is a legal question, not an engineering one, and it has not been answered.</li>
 </ol>
 <h2 style="margin-top:2.4rem">Why the site currently claims nothing about traffic</h2>

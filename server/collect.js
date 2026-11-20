@@ -1,77 +1,58 @@
-/* Affil1 — self-hosted analytics endpoint
-   Run this on your own host (Node.js, no dependencies). It accepts
-   POST /analytics/collect with newline-delimited JSON events and appends
-   them to data/events.jsonl. GitHub Pages is static, so this endpoint must
-   be self-hosted separately; the client (assets/js/analytics.js) degrades
-   silently when the endpoint is unreachable.
+/* Aggregate-only collector for the maintained Crisp & Counter edition. */
+const http = require('node:http');
+const fs = require('node:fs');
+const path = require('node:path');
 
-   Privacy design:
-   - No cookies, no IP addresses, no user identifiers beyond a random
-     session id generated in the browser and stored in sessionStorage.
-   - Events are append-only; nothing is ever edited or deleted here.
-   - Rotate events.jsonl regularly and purge anything that is not needed.
+const browserEvents = new Set(['page_view', 'outbound_product_click', 'guide_read_75', 'compare_view', 'flag_page_view']);
 
-   Usage:
-     node server/collect.js        # listens on port 8080 (or $PORT)
-*/
-
-var http = require("http");
-var fs = require("fs");
-var path = require("path");
-
-var PORT = process.env.PORT || 8080;
-var DATA_DIR = path.join(__dirname, "..", "data");
-var EVENTS_FILE = path.join(DATA_DIR, "events.jsonl");
-
-function ensureDataDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-function appendEvent(line) {
-  ensureDataDir();
-  fs.appendFileSync(EVENTS_FILE, line + "\n", { encoding: "utf8" });
-}
-
-var server = http.createServer(function (req, res) {
-  var url = new URL(req.url || "/", "http://localhost");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Cache-Control", "no-store");
-
-  if (req.method === "OPTIONS") {
-    res.writeHead(204);
-    return res.end();
+function createCollector({ origin, directory }) {
+  if (!origin || new URL(origin).origin !== origin || !/^https?:\/\//.test(origin) || !path.isAbsolute(directory)) {
+    throw new Error('Set an exact site origin and an absolute private storage directory');
   }
-
-  if (url.pathname === "/analytics/collect" && req.method === "POST") {
-    var body = [];
-    req.on("data", function (chunk) { body.push(chunk); });
-    req.on("end", function () {
-      var text = Buffer.concat(body).toString("utf8").trim();
-      if (!text) {
-        res.writeHead(400); return res.end("empty body");
+  fs.mkdirSync(directory, { recursive: true, mode: 0o700 });
+  return http.createServer({ requestTimeout: 10000 }, (req, res) => {
+    const end = status => { res.statusCode = status; res.end(); };
+    res.setHeader('Cache-Control', 'no-store');
+    if (req.url === '/health' && req.method === 'GET') return end(204);
+    if (req.url !== '/analytics/collect') return end(404);
+    if (req.headers.origin !== origin) return end(403);
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    if (req.method !== 'POST') return end(405);
+    if (req.headers['sec-gpc'] === '1' || req.headers.dnt === '1') return end(204);
+    if (req.headers['content-type']?.split(';')[0] !== 'text/plain') return end(415);
+    let bytes = 0;
+    const chunks = [];
+    req.on('error', () => {});
+    req.on('data', chunk => {
+      bytes += chunk.length;
+      if (bytes > 512) {
+        if (!res.writableEnded) { res.setHeader('Connection', 'close'); end(413); }
+        return;
       }
-      text.split("\n").forEach(function (line) {
-        line = line.trim();
-        if (line) appendEvent(line);
-      });
-      res.writeHead(204);
-      res.end();
+      chunks.push(chunk);
     });
-    return;
-  }
+    req.on('end', () => {
+      if (res.writableEnded) return;
+      let events;
+      try { events = JSON.parse(Buffer.concat(chunks).toString('utf8')); }
+      catch { return end(400); }
+      // The report import event must come from an authorized ledger, never a beacon.
+      if (!Array.isArray(events) || !events.length || events.length > 10 || events.some(event => !browserEvents.has(event))) return end(400);
+      try {
+        const file = path.join(directory, new Date().toISOString().slice(0, 10) + '.json');
+        const counts = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+        for (const event of events) counts[event] = (counts[event] || 0) + 1;
+        fs.writeFileSync(file + '.tmp', JSON.stringify(counts) + '\n', { mode: 0o600 });
+        fs.renameSync(file + '.tmp', file);
+        return end(204);
+      } catch { return end(503); }
+    });
+  });
+}
 
-  if (url.pathname === "/health" && req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    return res.end(JSON.stringify({ ok: true }));
-  }
-
-  res.writeHead(404);
-  res.end("not found");
-});
-
-server.listen(PORT, function () {
-  console.log("Affil1 analytics collector listening on :%d", PORT);
-  console.log("Events append to %s", EVENTS_FILE);
-});
+module.exports = { createCollector };
+if (require.main === module) {
+  createCollector({ origin: process.env.ANALYTICS_ORIGIN, directory: process.env.ANALYTICS_DIRECTORY || '' })
+    .listen(Number(process.env.PORT || 8080), process.env.HOST || '127.0.0.1');
+}

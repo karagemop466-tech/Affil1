@@ -328,7 +328,7 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for ev in ("page_view", "outbound_product_click", "guide_read_75", "compare_view", "flag_page_view"):
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:
