@@ -35,6 +35,25 @@ jobs:
       - name: Validate the internal Decision Desk section
         run: python3 decision-support/validate.py
 
+      # These suites have existed in the repository without ever running in CI.
+      # Both were red when run from the repository root on 2026-11-20, because the
+      # modules they import sit beside them and nothing put that directory on the
+      # path. They now run from their own directory, which is how they pass, and a
+      # red check here is a real regression rather than a path artefact.
+      - name: First-party collector tests (analytics/)
+        working-directory: analytics
+        run: python3 -m unittest -v test_endpoint
+
+      - name: Self-hosted aggregate collector tests (measurement/)
+        working-directory: measurement
+        run: python3 -m unittest -v test_collector
+
+      - name: Paid-link gate tests
+        run: python3 tools/test_paid_link_gate.py
+
+      - name: Fit finder behaviour
+        run: node tools/fit.test.cjs
+
       - name: Confirm the build is reproducible, not hand-edited
         run: |
           cp -r . /tmp/first-build

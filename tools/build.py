@@ -21,6 +21,8 @@ from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # n
 import page_home  # noqa: E402
 import page_fit  # noqa: E402
 import page_design  # noqa: E402
+import page_start  # noqa: E402
+import page_editorial  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
 import page_compare  # noqa: E402
@@ -37,7 +39,7 @@ DATA = ROOT / "src" / "data"
 # static asset or an archived edition, and is never touched.
 OWNED = [
     "index.html", "404.html",
-    "guides", "products", "compare", "questions", "suggestions", "decide",
+    "guides", "start", "editorial", "products", "compare", "questions", "suggestions", "decide",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
@@ -45,6 +47,8 @@ OWNED = [
 GENERATED = {
     "index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
     "guides/index.html",
+    "start/index.html",
+    "editorial/index.html",
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
@@ -95,9 +99,16 @@ def as_url(p):
 
 
 def sitemap(pages):
-    """Canonical URLs only. A directory index is listed as its directory."""
+    """Canonical URLs a reader could want. A directory index is its directory.
+
+    Which pages belong in a sitemap is decided once, in `publish.in_sitemap`,
+    because three separate gates read the answer: this builder, tools/check.py
+    and tools/validate.py. Duplicating the rule here is how the earlier edition
+    ended up with a sitemap that listed the repository's audit trail.
+    """
+    from publish import in_sitemap
     urls = [f"  <url><loc>{as_url(p)}</loc><lastmod>{BUILD_DATE}</lastmod></url>"
-            for p in pages if p != "404.html"]
+            for p in pages if in_sitemap(p)]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "\n".join(urls) + "\n</urlset>\n")
@@ -134,8 +145,17 @@ def feed(guides):
 # One canonical site. The archived edition under archive/ carries noindex, and
 # /archive/ is not listed in the sitemap. Nothing here blocks crawling of the
 # canonical pages.
+# `/archive/` holds superseded editions kept for review. They are deliberately
+# excluded from the Pages build (tools/publish.py) so they are not served at all;
+# the Disallow below is defence in depth for any route that serves them again.
+#
+# The earlier wording here said "/archive/ is not listed in the sitemap", which
+# was true and insufficient: the files were still published and still parseable,
+# and one archive page was a complete second storefront with tagged buy links.
+# See FLG-030.
 ROBOTS = """User-agent: *
 Allow: /
+Disallow: /archive/
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
@@ -167,6 +187,8 @@ def main():
         pages.append(write(f"guides/{g['slug']}.html", page_guides.build_guide("guides", g, meta)))
 
     # products
+    pages.append(write("start/index.html", page_start.build("start", products_doc, GUIDES)))
+    pages.append(write("editorial/index.html", page_editorial.build("editorial", {"built": BUILD_DATE})))
     pages.append(write("products/index.html", page_products.build_register("products", products, meta)))
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))

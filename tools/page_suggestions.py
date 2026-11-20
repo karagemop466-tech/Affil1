@@ -109,6 +109,7 @@ def build(page_dir, suggestions, meta):
         body=body + release_panel(d, "suggestions/"),
         active="suggestions/index.html",
         canonical="suggestions/",
+        index=False,
         structured={"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://karagemop466-tech.github.io/Affil1/"},
             {"@type": "ListItem", "position": 2, "name": "Suggestions", "item": "https://karagemop466-tech.github.io/Affil1/suggestions/"},

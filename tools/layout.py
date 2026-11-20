@@ -39,6 +39,7 @@ AMAZON_NOTE = "Price, rating and delivery are shown on Amazon, where they are al
 
 # One navigation group. Everything else is reachable from the footer.
 NAV = [
+    ("start/index.html", "Where to start"),
     ("products/index.html", "Shop the edit"),
     ("guides/index.html", "Guides"),
     ("compare/index.html", "Compare"),
@@ -58,10 +59,12 @@ FOOTER_GROUPS = [
     ]),
     ("Read", [
         ("guides/index.html", "All guides"),
+        ("start/index.html", "Where to start"),
         ("compare/index.html", "Side-by-side table"),
         ("feed.xml", "RSS feed"),
     ]),
     ("The desk", [
+        ("editorial/index.html", "Editor's desk"),
         ("decide/index.html", "Decision gate"),
         ("questions/index.html", "Open questions"),
         ("suggestions/index.html", "Suggestions & decisions"),

@@ -70,6 +70,30 @@ def _cluster_blurb(c):
     }.get(c, "")
 
 
+def guide_sources(d, g):
+    """Every official source a guide leans on, linked where the claim is made.
+
+    `sources` was present on two guides and rendered on neither, so a claim that
+    relied on an FSIS page had no visible citation. A guide with no `sources` key
+    renders nothing rather than an empty heading.
+    """
+    entries = g.get("sources") or []
+    if not entries:
+        return ""
+    items = "".join(
+        f'<li>{outbound(d, url, esc(label))}</li>' for label, url in entries
+    )
+    return (
+        '<div class="guide-sources">'
+        '<p class="q-label">Sources for this guide</p>'
+        f'<ul>{items}</ul>'
+        '<p class="tiny">Official pages, read on the date this guide was updated. '
+        'Where a figure is regulated \u2014 cooking times, safe internal temperatures \u2014 '
+        'this site links the source rather than restating the number.</p>'
+        '</div>'
+    )
+
+
 def build_guide(page_dir, g, meta):
     d = page_dir
     href = f"guides/{g['slug']}.html"
@@ -129,6 +153,7 @@ def build_guide(page_dir, g, meta):
   <article class="article-body">
     {''.join(article)}
     <p class="article-close">{esc(g['closing'])}</p>
+    {guide_sources(d, g)}
   </article>
   <aside class="article-side">
     <div class="side-card">

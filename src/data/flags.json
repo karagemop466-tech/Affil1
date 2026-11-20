@@ -375,6 +375,72 @@
         "https://link.amazon/B04G1MEwY, repeated in a logged-out browser and recorded with the time"
       ],
       "blocks": "treating the P-01 short link as verified"
+    },
+    {
+      "id": "FLG-027",
+      "severity": "high",
+      "title": "The GitHub Pages branch build published the whole repository, including a second storefront",
+      "expected": "A published site serves the pages a reader needs and nothing else. COORDINATION.md records a consolidated single edition with the archive quarantined.",
+      "found": "Fetched on 2026-11-20 from the live site: /src/data/products.json returns the product register, /tools/build.py is reachable, /data/confirmations.json is reachable, and /archive/notes-edition/ serves a complete second storefront ('Good Measure Kitchen') with its own hero, five product cards, tagged buy links pointing at https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20, and no noindex tag.",
+      "impact": "Fixed. tools/publish.py is now the single allow-list of public files; tools/stage.py, _config.yml and a new gate in tools/check.py all read it, so the legacy build and the workflow build publish the same 107 files and a new file at the repository root is private until deliberately published.",
+      "reading": "Two independent defects. First, pages.github.io is configured as build_type legacy with source main /, so Jekyll publishes every file _config.yml does not exclude; the exclude list covered docs and tools but not src, data, or archive. Second, the archive pages that COORDINATION.md describes as noindexed are only partly so: 22 of 79 archived HTML files had no robots meta tag, and the quarantine script that was supposed to add it writes into the working tree rather than into the published output.",
+      "blocks": "nothing going forward; the fix is in this branch. Reviewers should confirm the live site stops serving /src/, /tools/ and /archive/ after the merge.",
+      "to_check": [
+        "tools/publish.py",
+        "_config.yml",
+        "tools/stage.py",
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+        "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
+      ],
+      "sources": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/checkpoint/continue"
+      ],
+      "raised_by": "session-arena-83e015f6, 2026-11-20"
+    },
+    {
+      "id": "FLG-028",
+      "severity": "high",
+      "title": "The sitemap advertised the audit trail instead of the shop",
+      "expected": "A sitemap lists the pages a site wants indexed, and every URL in it returns 200.",
+      "found": "sitemap.xml listed 30 URLs, of which 21 were registers and working papers: review/ (3 pages), questions/, suggestions/ (2), decide/, brief/, operations/ledger.html. The shop itself - the front page, five product pages, comparison, fit finder - was the remaining minority.",
+      "reading": "A crawler reading this sitemap was told the site is about its own verification process. That is the opposite of the brief's 'one site to index and a reason to rank it', and it was the single largest findability defect in the build. It also contradicted the site's own stated purpose in its meta description.",
+      "to_check": [
+        "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+        "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
+      ],
+      "impact": "Fixed. Sitemap membership is now decided once, in publish.in_sitemap, and read by build.py, check.py and validate.py. The sitemap lists 20 URLs: front page, ten guides and their index, five product pages and their index, comparison, fit finder. The excluded registers keep their canonical URLs, stay crawlable and stay reachable from the footer.",
+      "blocks": "nothing; owners should re-submit the sitemap in Search Console once a property exists"
+    },
+    {
+      "id": "FLG-029",
+      "severity": "medium",
+      "title": "Two guides carried source lists that the page template never rendered",
+      "expected": "A guide that rests a claim on an official page links that page where the claim is made.",
+      "found": "GUIDES entries for holiday-hosting-air-fryer and holiday-side-dish-capacity both carry a 'sources' key naming the USDA FSIS food-thermometers page. tools/page_guides.py never read the key, so neither guide rendered a citation. The food-safety instruction in the seasonal guide was therefore uncited on the page.",
+      "reading": "A data field that no template reads is worse than a missing field, because it looks like the citation exists. The initial fix attempt also revealed that inserting a new GUIDE as a bare dict into the GUIDES list literal is fragile: the file uses both a list literal and GUIDES.append() calls, and the two styles must not be mixed mid-list.",
+      "to_check": [
+        "tools/page_guides.py",
+        "tools/content.py",
+        "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers"
+      ],
+      "impact": "Fixed. guide_sources() renders a Sources block under the article for any guide that declares sources, and the two FSIS pages were fetched and read on 2026-11-20 before being linked. The new holiday-turkey guide ships with two sources from the start.",
+      "blocks": "nothing"
+    },
+    {
+      "id": "FLG-030",
+      "severity": "medium",
+      "title": "Four test suites shipped in the repository and never ran in a workflow",
+      "expected": "A test suite that exists runs in CI, or it is deleted.",
+      "found": "analytics/test_endpoint.py, measurement/test_collector.py, tools/test_paid_link_gate.py and tools/fit.test.cjs were all present and all absent from every workflow. Run from the repository root, both Python suites fail with ModuleNotFoundError, because they import a sibling module (endpoint, collector) and nothing puts their own directory on sys.path. They pass when run from their own directory.",
+      "reading": "A check that never runs is a claim, not a check. The failure mode is the same one FLG-021 recorded for tools/validate.py: the repository's own documentation called these the gate while CI never executed them.",
+      "to_check": [
+        ".github/workflows/pages.yml",
+        "analytics/test_endpoint.py",
+        "measurement/test_collector.py"
+      ],
+      "impact": "Fixed. All four suites now run in the Pages workflow. The two Python suites run with working-directory set to their own folder rather than being given a path shim, so the constraint is recorded instead of hidden.",
+      "blocks": "nothing"
     }
   ]
 }
