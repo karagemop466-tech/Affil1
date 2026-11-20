@@ -23,6 +23,10 @@ the other session’s work — see the merge log below.
   product-intent confirmation records, five-event privacy-preserving analytics
   with self-hostable endpoint, decision-support pages (suggestions, questions),
   merged sitemap/feed, this board.
+- `arena/c58c5996-affil1` (PR #5, merged into main as ed46d41 during this
+  session): integrated front page + CSS/JS/data/feed variants, plus unique pages
+  `guides/air-fryer-category.html`, `guides/executive-summary.html`,
+  `guides/pre-decision-questions.html`, `guides/suggestions.html`.
 
 ## Merge log (2026-11-20)
 
@@ -33,6 +37,15 @@ Merging `origin/main` into `arena/55d40788-affil1` produced conflicts on:
 the parallel session’s conflicting versions preserved under
 `archive/session-099b013a-affil1/` (content retained, not discarded). `sitemap.xml`
 is the URL-set union of both sessions. No work was discarded.
+
+Second merge: origin/main (ed46d41, session arena/c58c5996-affil1) into
+arena/55d40788-affil1 produced conflicts on COORDINATION.md, analytics.js,
+app.js, data.js, feed.xml, index.html, sitemap.xml, styles.css.
+Resolution: this session's verified versions kept at those paths; the parallel
+session's conflicting versions preserved under
+archive/session-c58c5996-affil1/; their unique guide pages under guides/
+were retained. sitemap.xml re-computed as the URL-set union of both sessions.
+No work was discarded.
 
 ## Claims (task | status | owner | files touched | sources verified)
 
