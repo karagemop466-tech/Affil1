@@ -6,6 +6,7 @@ is the hand-off point: a human decides, then instructs.
 """
 
 from layout import cite_or_product, esc, eyebrow, page, pagehead, rel, section, table
+from content import ARTICLE_IDEAS
 
 
 def _evidence(links):
@@ -104,6 +105,14 @@ something, and one is a recommendation to stop. A queue that only ever says yes 
 <div class="sec-head"><div>{eyebrow('The whole board on one screen')}<h2>Fifteen rows</h2></div></div>
 {tbl}''', cls='')}
 {section(f'''
+<div class="sec-head"><div>{eyebrow('Editorial ideas, unpublished')}<h2>Six working titles</h2></div>
+<p>Hypotheses about what a reader might search for. No volume, difficulty or traffic figure is attached to any of them, because none exists for this site.</p></div>
+{table(['Working title', 'Cluster', 'Why it might earn a read', 'What is missing before it can be written'],
+       [[{"html": f"<strong>{esc(a['title'])}</strong>"}, esc(a['cluster']), esc(a['why']), esc(a['missing'])] for a in ARTICLE_IDEAS],
+       cls="register", caption="Editorial backlog: not written, not scheduled, not measured",
+       note="A title moves out of this table and into the guides only when every sentence in it can be written without inventing a fact.")}
+<p class="sec-foot">This is the answer to "what should we publish next": six candidates, and not one of them has evidence behind it yet. <a href="{esc(rel(d, 'questions/index.html'))}#Q-12">Q-12</a> is the question that would change that.</p>''', cls='section-tint')}
+{section(f'''
 <div class="callout">
   <h2>The two rows worth reading twice</h2>
   <p><strong>S-11</strong> says stop: no new guide topics until either a real test or real search data exists. More synthetic prose
@@ -117,8 +126,8 @@ something, and one is a recommendation to stop. A queue that only ever says yes 
     return page(
         d,
         title="Suggestions and decisions \u2014 Crisp & Counter",
-        description=("Fifteen proposed changes with cost, risk, evidence and dependencies, each with an accept / hold / reject "
-                     "control, so a reviewer can choose a path before anything is built."),
+        description=("Fifteen proposed changes with cost, risk, evidence and dependencies, each with accept / hold / reject, "
+                     "so a path can be chosen before anything is built."),
         body=body,
         active="suggestions/index.html",
         canonical="suggestions/",

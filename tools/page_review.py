@@ -72,7 +72,7 @@ def build_index(page_dir, flags, meta):
     return page(
         d,
         title="Flagged for review \u2014 Crisp & Counter",
-        description="Every uncertainty on this site in one place: unresolved links, unconfirmed tracking, missing prices, absent authorship and generated imagery, each with the source to check it against.",
+        description="Every uncertainty in one place: unresolved links, unconfirmed tracking, missing prices, no named author, generated imagery \u2014 each with a source to check.",
         body=body,
         active="review/index.html",
         canonical="review/",
@@ -125,7 +125,7 @@ def build_images(page_dir, images, products, meta):
     return page(
         d,
         title="Image policy \u2014 Crisp & Counter",
-        description="Every image on this site is AI-generated illustration, labelled where it appears. Here is the full asset list, the rule each follows, and what the site declined to do.",
+        description="Every image here is an AI-generated illustration, labelled where it appears: the asset list, the rule each follows, and what the site declined to do.",
         body=body,
         active="review/index.html",
         canonical="review/images.html",

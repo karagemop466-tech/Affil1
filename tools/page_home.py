@@ -239,8 +239,8 @@ def build(page_dir, products, meta):
     return page(
         d,
         title="Crisp & Counter \u2014 five kitchen tools, checked link by link",
-        description=("An independent kitchen publication: three air fryers, one oven-style fryer and two thermometers, "
-                     "each Amazon listing opened and recorded, with buying guides built around the decision rather than the badge."),
+        description=("Three air fryers, one oven-style fryer and two thermometers: every Amazon link opened and recorded, "
+                     "with buying guides built around the decision, not the badge."),
         body=body,
         canonical="",
         body_class="home",

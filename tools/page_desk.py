@@ -102,8 +102,8 @@ def build_about(page_dir, sources, meta):
     return page(
         d,
         title="About, disclosure and privacy \u2014 Crisp & Counter",
-        description=("What this site is, why price and ratings are absent, how every Amazon link is tagged and marked, the disclosure "
-                     "required by Amazon's Operating Agreement, and the privacy position of a site with no backend."),
+        description=("What this site is, why prices and ratings are absent, how every Amazon link is tagged and marked, the "
+                     "required disclosure, and the privacy position."),
         body=body,
         canonical="about/",
         breadcrumb=[("Home", ""), ("About", "about/")],
@@ -148,8 +148,8 @@ traffic figure that has not been measured, and a conversion assumption with noth
     return page(
         d,
         title="Campaign ledger \u2014 Crisp & Counter",
-        description=("An empty campaign ledger with its columns and provenance rule defined: date, source, channel, eligible "
-                     "sessions, clicks, reported orders and a note a stranger could follow."),
+        description=("An empty campaign ledger with its columns and provenance rule: date, source, channel, eligible sessions, "
+                     "clicks, reported orders, and a provenance note."),
         body=body,
         canonical="operations/ledger.html",
         breadcrumb=[("Home", ""), ("Campaign ledger", "operations/ledger.html")],
@@ -269,8 +269,8 @@ quotations is on the <a href="{esc(rel(d, 'sources/index.html'))}">sources page<
     return page(
         d,
         title="Executive summary \u2014 Crisp & Counter",
-        description=("Five submitted links verified, a five-guide publication built around them, the decisions taken, the "
-                     "questions that block the next move, and everything the site does not claim."),
+        description=("Five links verified, five guides built around them, the decisions taken, the questions still blocking, "
+                     "and everything the site does not claim."),
         body=body,
         canonical="brief/",
         breadcrumb=[("Home", ""), ("Executive summary", "brief/")],

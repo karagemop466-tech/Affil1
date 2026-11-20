@@ -108,8 +108,8 @@ def build(page_dir, sources, products, meta):
     return page(
         d,
         title="Sources and quotations \u2014 Crisp & Counter",
-        description=("The official documents behind this site's claims: Amazon's Operating Agreement and Program Policies, the "
-                     "FTC endorsement guidance, Google's outbound-link documentation, and the listing behind every product fact."),
+        description=("The official documents behind this site: Amazon's Operating Agreement and Program Policies, FTC "
+                     "guidance and Google's link rules."),
         body=body,
         canonical="sources/",
         breadcrumb=[("Home", ""), ("Sources", "sources/")],

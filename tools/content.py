@@ -162,7 +162,7 @@ GUIDES = [
             {
                 "h": "What the register can and cannot tell you here",
                 "p": [
-                    "Three of the five listings state in their titles that the basket or baskets are dishwasher-safe, in the sellers' wording (P-01 and P-03 explicitly; P-02 says nothing about the dishwasher and is not counted here). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
+                    "Two of the five listings state in their titles that the basket is dishwasher-safe, in the sellers' wording (P-01 and P-03). The oven product says nothing about the dishwasher and is not counted. These are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
                     "No dimensions are published for any of these products on this site, because dimensions were not confirmed from an official specification sheet in this build. That is a gap, and it is on the review page rather than buried."
                 ]
             }
@@ -326,3 +326,47 @@ GUIDES.append({
     ],
     "closing": "No product on this site was tested. The attributes above are the sellers' own wording, transcribed from listing titles reached on 2026-11-20.",
 })
+
+
+# Working titles for the editor, not published articles. Each is a hypothesis
+# about what a reader might search for; none carries a volume figure, because no
+# keyword or Search Console data exists for this site. A title moves out of this
+# list and into GUIDES only when it can be written without inventing a fact.
+ARTICLE_IDEAS = [
+    {
+        "title": "Air fryer for two: when a 3-quart basket is the right size",
+        "cluster": "Size",
+        "why": "One listing quotes a per-basket figure and another a single-basket one. A reader cooking for two is deciding between two small baskets and one large one, and nobody writes that decision down plainly.",
+        "missing": "Search demand and the basket dimensions, which no listing title states.",
+    },
+    {
+        "title": "The 20-minute weeknight: what a two-basket fryer actually changes",
+        "cluster": "Shape",
+        "why": "The sync-finish feature is the one thing a dual-basket machine offers that a single basket cannot. A piece on the timing problem, not the product, would earn its place.",
+        "missing": "Cooking times. This site has no tested timings and will not invent them.",
+    },
+    {
+        "title": "French door or pull-out drawer: the small-kitchen version of the choice",
+        "cluster": "Shape",
+        "why": "Door clearance is the deciding measurement in a narrow kitchen and it is absent from every listing title here.",
+        "missing": "Published dimensions, from the manufacturer's own manual.",
+    },
+    {
+        "title": "What 'dishwasher-safe' means for a nonstick basket",
+        "cluster": "Upkeep",
+        "why": "Two listings use the phrase. Whether it applies to a hot cycle and a particular detergent is a care-instruction question, and care instructions are published by manufacturers.",
+        "missing": "A manufacturer care instruction that can be quoted.",
+    },
+    {
+        "title": "Two probes or three: what multi-probe monitoring changes on a Sunday roast",
+        "cluster": "Thermometers",
+        "why": "P-05 states three probes and five sensors. The useful article is about what you do differently with a second reading, not about the probe count.",
+        "missing": "Any doneness temperature. The USDA page was unreachable, so the article cannot carry a number.",
+    },
+    {
+        "title": "The paper rectangle test: counter-space maths before you buy",
+        "cluster": "Upkeep",
+        "why": "It is the cheapest piece of advice on this site and it does not need a product fact at all, which makes it safe to publish now.",
+        "missing": "Nothing factual. It is a method, not a claim.",
+    },
+]

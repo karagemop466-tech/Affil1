@@ -67,8 +67,8 @@ def build_index(page_dir, meta):
     return page(
         d,
         title="Buying guides \u2014 five checklists for kitchen decisions | Crisp & Counter",
-        description=("Five buying guides organised into clusters: basket or oven, real capacity, cleanup and counter space, "
-                     "multi-function appliances, and choosing a thermometer. No test claims, no invented prices."),
+        description=("Five buying guides in four clusters: shape, capacity, cleanup and thermometers. No test claims, no "
+                     "invented prices, no winners."),
         body=body,
         active="guides/index.html",
         canonical="guides/",

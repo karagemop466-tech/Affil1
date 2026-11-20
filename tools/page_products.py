@@ -61,10 +61,10 @@ def build_register(page_dir, products, meta):
     fryers = [p for p in products if p.get("format") in ("basket", "oven")]
     therms = [p for p in products if p.get("format") == "thermometer"]
     cards = (
-        f'<div class="cat-head" id="air-fryers"><h3>Air fryers</h3>'
+        f'<div class="cat-head" id="air-fryers"><h2>Air fryers</h2>'
         f'<p>{len(fryers)} products: two basket shapes and one oven shape.</p></div>'
         f'<div class="pcard-grid wide">{"".join(_card(d, p) for p in fryers)}</div>'
-        f'<div class="cat-head" id="thermometers"><h3>Thermometers</h3>'
+        f'<div class="cat-head" id="thermometers"><h2>Thermometers</h2>'
         f'<p>{len(therms)} products: one instant-read, one wireless multi-probe. A different category, and not called air fryers here.</p></div>'
         f'<div class="pcard-grid wide">{"".join(_card(d, p) for p in therms)}</div>'
     )
@@ -111,8 +111,8 @@ followed, and the product on the other end was identified.</p>''', cls='')}
     return page(
         d,
         title="The shortlist \u2014 five kitchen tools, checked link by link | Crisp & Counter",
-        description=("All five submitted Amazon links, each opened and recorded: the ASIN reached, the listing title in the "
-                     "seller's words, what each product is for, and the fields deliberately left blank."),
+        description=("All five submitted Amazon links, each opened and recorded: the ASIN reached, the seller's title, what "
+                     "each product is for, and what stays blank."),
         body=body,
         active="products/index.html",
         canonical="products/",

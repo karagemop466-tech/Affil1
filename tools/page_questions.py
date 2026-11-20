@@ -121,8 +121,8 @@ def build(page_dir, questions, meta):
     return page(
         d,
         title="Open questions and the information register | Crisp & Counter",
-        description=(f"{len(qs)} questions the next decision depends on: what is known with a source, what is missing, who holds "
-                     "it, and the specific export or document that would close each one."),
+        description=(f"{len(qs)} questions the next decision depends on: what is known with a source, what is missing, "
+                     "and the export that would close each one."),
         body=body,
         active="questions/index.html",
         canonical="questions/",
