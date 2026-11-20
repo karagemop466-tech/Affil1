@@ -86,8 +86,10 @@ def _urlish(text, d):
     if text.startswith("http"):
         if AFFILIATE_HINT.search(text):
             return product_link(d, text, esc(text),
-                                aria="Open this Amazon listing (affiliate link, opens in a new tab)")
+                                aria="Open this Amazon listing (source, opens in a new tab)")
         return outbound(d, text, esc(text))
+    if text == 'operations/launch-readiness.html':
+        return f'<a href="{esc(rel(d, text))}">Affiliate launch readiness</a>'
     return esc(text)
 
 
@@ -137,6 +139,9 @@ def build_images(page_dir, images, products, meta):
 
 def build_measurement(page_dir, meta, spec):
     d = page_dir
+    from pathlib import Path
+    import json
+    spec = json.loads((Path(__file__).resolve().parents[1] / "src/data/events.json").read_text())
     events = spec["events"]
     rows = [[{"html": f'<code class="code">{esc(e["name"])}</code>'},
              esc(e["fires_when"]), esc(", ".join(e["props"])),
@@ -150,10 +155,10 @@ def build_measurement(page_dir, meta, spec):
 {section(f'''
 <div class="lede-prose">
   <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
-  <p>The client uses no cookies or browser storage. If enabled on a first-party host, it sends only allowlisted page and event names and, for clicks, the observed product ASIN. The collector keeps daily totals, not visitor records. Scroll depth does not prove reading, and clicks do not prove sessions or orders.</p>
+  <p>The optional first-party host counts events by date and page. The client sets no cookie or identifier and does not send queries, referring hosts or reader-level details. GitHub Pages does not enable it. See the <a href="../operations/launch-readiness.html">launch readiness checklist</a>.</p>
 </div>
 <h2>What would be measured</h2>
-{table(['Event', 'Fires when', 'What is stored', 'Hosting context'], rows, cls='events')}
+{table(['Event', 'Fires when', 'Properties', 'Hosting context'], rows, cls='events')}
 <h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
 <ol class="tight">
   <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
@@ -162,7 +167,7 @@ def build_measurement(page_dir, meta, spec):
   <li><strong>A consent decision.</strong> Whether visitor consent is required depends on jurisdiction and on what is collected. That is a legal question, not an engineering one, and it has not been answered.</li>
 </ol>
 <h2 style="margin-top:2.4rem">Why the site currently claims nothing about traffic</h2>
-<p>Every traffic statement on this site is an absence: no sessions, no clicks, no conversions, no revenue. That is not modesty. With the beacon off, the site genuinely has no numbers, and inventing plausible ones would be the single fastest way to make everything else on the site untrustworthy.</p>
+<p>Traffic, clicks and orders have not been measured here. Missing measurements do not mean zero activity. That is not modesty. With the beacon off, the site genuinely has no numbers, and inventing plausible ones would be the single fastest way to make everything else on the site untrustworthy.</p>
 <div class="callout">
   <h2>What the campaign ledger holds</h2>
   <p>Nothing. It has a defined schema &mdash; date, source, channel, eligible sessions, clicks, reported orders &mdash; and every row has to arrive with a provenance note. <a href="{esc(rel(d, 'operations/ledger.html'))}">See the empty ledger</a>.</p>

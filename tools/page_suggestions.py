@@ -61,7 +61,7 @@ def build(page_dir, suggestions, meta):
 {section(f'''
 <div class="callout">
   <h2>A brief for the next issue</h2>
-  <p><strong>Proposed angle:</strong> “Can the holiday sides share a tray?” Start with the dish the reader wants to cook. Compare the width of their pan with the model’s usable rack or basket dimensions. If neither the listing nor the manual supplies that measurement, say so; a quart figure is not a substitute.</p>
+  <p><strong>Proposed follow-up:</strong> “Will my quarter-sheet pan fit behind French doors?” Start with the dish the reader wants to cook. Compare the width of their pan with the model’s usable rack or basket dimensions. If neither the listing nor the manual supplies that measurement, say so; a quart figure is not a substitute.</p>
   <p><strong>Design prompt:</strong> Use a single annotated format illustration, a two-column fit checklist, and a link to the model record beside the decision. Label the illustration. Don’t add a medal, sale price, star score or invented test result.</p>
   <p><strong>Decision gate:</strong> This is a seasonal hypothesis, not a trend. Review the verified property’s <a href="https://support.google.com/webmasters/answer/7576553">query report</a> monthly. Commission the piece only if a query or a documented reader question supports it and a primary source can answer it. Otherwise revise an existing guide.</p>
 </div>''', cls='')}"""

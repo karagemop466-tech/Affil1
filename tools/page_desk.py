@@ -33,7 +33,7 @@ def build_about(page_dir, sources, meta):
 <div class="about-grid">
   <div class="prose-block">
     <h2 id="what">What this site is</h2>
-    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Five product links were submitted by the operator of the site; the intended products are unconfirmed. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
+    <p>A short guide to a small number of kitchen appliances, written for someone standing in a kitchen with a tape measure and a decision to make. Five destinations were observed, including two thermometers; product intent remains unconfirmed. Each link was opened and the destination recorded. The guides around them describe what to check, in what order, and why.</p>
     <p>It is not a review site. Nothing here was bought, cooked with, measured or compared by testing. That is a real limitation and it is stated on every product page and in every guide rather than in a footnote here.</p>
 
     <h2 id="why-blank">Why so much is blank</h2>
@@ -46,7 +46,7 @@ def build_about(page_dir, sources, meta):
 
     <h2 id="disclosure">The disclosure</h2>
     <p>{esc(DISCLOSURE)}</p>
-    <p>That exact sentence is required by section 5 of the Associates Program Operating Agreement, and it appears in a strip above the masthead on every page of this site, and again in the footer. The FTC's guidance says a disclosure at the bottom of a page is easy to miss and that the closer a disclosure sits to the recommendation, the better &mdash; so every product card also carries its own one-line affiliate note, and every product page repeats it beside the button.</p>
+    <p>That exact sentence is required by section 5 of the Associates Program Operating Agreement, and it appears in a strip after the masthead on every page of this site, and again in the footer. The FTC's guidance says a disclosure at the bottom of a page is easy to miss and that the closer a disclosure sits to the recommendation, the better &mdash; so an approved affiliate link will also be labelled paid next to the button. Listing citations are untagged.</p>
 
     <h2 id="privacy">Privacy</h2>
     <p>This site sets no cookies, loads no third-party scripts, calls no external APIs and embeds no fonts from a CDN. The typefaces are served from this repository. The analytics client is present but inert: it writes to session storage and transmits nothing. There is no form, no newsletter and no comment system, so the site holds no personal data at all.</p>
@@ -145,15 +145,15 @@ def build_brief(page_dir, products, questions, flags, meta):
 <div class="exec">
   <div class="exec-block">
     <h2>What was asked for</h2>
-    <p>An Amazon affiliate publication covering five supplied links: product research, comparison content, buying guides, click measurement and a compliant disclosure layer, built as a live GitHub Pages site and merged without further input.</p>
+    <p>An Amazon affiliate publication covering five supplied links: product research, comparison content, buying guides, click measurement and a compliant disclosure layer, published on GitHub Pages with a separate gate for paid links.</p>
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A 22-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, seventeen review flags, a source list with quoted wording, an empty campaign ledger, a tested five-event collector disabled on Pages and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <p>A static site with question-led buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, a review queue, a source list with quoted wording, an empty campaign ledger, a tested five-event collector disabled on Pages and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
-    <p>All five supplied links reached Amazon listings on 20 November 2026; P-04 returned a continuity page on earlier attempts. Observed ASINs and listing titles were transcribed, but intended products remain unconfirmed. Amazon's Associates Operating Agreement section 5, its Program Policies section 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly, and the relevant wording is quoted on the sources page.</p>
+    <p>All five supplied links reached listings on the latest check. P-04 had previously returned a checkpoint; later passes reported both thermometer listings in different orders for P-04 and P-05. This observation does not confirm the intended ASIN or attribution. Amazon's Associates Operating Agreement section 5, its Program Policies section 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly, and the relevant wording is quoted on the sources page.</p>
   </div>
   <div class="exec-block exec-warn">
     <h2>The one finding that changes the plan</h2>

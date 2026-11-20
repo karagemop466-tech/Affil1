@@ -13,6 +13,7 @@ import html
 import json
 import pathlib
 import posixpath
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE_NAME = "Crisp & Counter"
@@ -51,6 +52,7 @@ FOOTER_GROUPS = [
         ("review/index.html", "Flagged for review"),
         ("review/images.html", "Image policy"),
         ("review/measurement.html", "Measurement plan"),
+        ("operations/launch-readiness.html", "Affiliate launch readiness"),
         ("about/index.html#sources", "Sources"),
     ]),
     ("Desk", [
@@ -75,7 +77,7 @@ def rel(page_dir, target):
 
 
 def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
-         aria=None, title=None):
+         aria=None, title=None, affiliate_ref=None):
     # An absolute URL is never passed through rel(): doing so would rewrite
     # "https://host/x" into "../https:/host/x" and produce a 404.
     absolute = target.startswith(("http://", "https://", "mailto:", "#"))
@@ -87,6 +89,8 @@ def link(page_dir, target, label, *, cls=None, external=False, sponsored=False,
         attrs.append(f'title="{esc(title)}"')
     if aria:
         attrs.append(f'aria-label="{esc(aria)}"')
+    if affiliate_ref:
+        attrs.append(f'data-affiliate-ref="{esc(affiliate_ref)}"')
     if sponsored:
         attrs.append('rel="sponsored nofollow noopener"')
         attrs.append('target="_blank"')
@@ -102,8 +106,22 @@ def outbound(page_dir, url, label, **kw):
 
 
 def product_link(page_dir, url, label, **kw):
-    """A link to Amazon. Always marked sponsored, always in a new tab."""
+    """Expose only bare observed listing URLs as product evidence."""
+    if url.startswith("https://link.amazon/"):
+        return f'<code class="code">{esc(url)}</code>'
+    if not re.fullmatch(r"https://www\.amazon\.com/dp/[A-Z0-9]{10}", url):
+        raise ValueError("Product evidence must be an untagged listing")
     return link(page_dir, url, label, sponsored=True, **kw)
+
+
+def approved_cta(page_dir, record, meta):
+    """Only the validated intent bundle, not a redirect observation, may supply a buy link."""
+    url = meta.get("approved_links", {}).get(record["ref"])
+    if not url:
+        return ""
+    return ('<p>Paid link: we may earn a commission if you buy through it.</p>'
+            + link(page_dir, url, "Shop on Amazon ↗", cls="btn", sponsored=True,
+                   affiliate_ref=record["ref"]))
 
 
 def kindle(summary, body):

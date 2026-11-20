@@ -33,7 +33,7 @@ def product_card(page_dir, p):
     <span class="folio">FIG. {esc(p['ref'][-2:])}</span><span class="art-note">Format illustration</span></a>
   <div class="edit-info"><span class="ink-label">{esc(spec)}</span>
     <h3><a href="{esc(href)}">{esc(name)}</a></h3><p>{esc(BUYER_NOTES[p['ref']])}</p>
-    <a class="edit-more" href="{esc(href)}">Explore this format →</a>
+    <a class="edit-more" href="{esc(href)}">Explore this format →</a> &nbsp; {product_link(page_dir, p['listing_url'], 'Amazon listing ↗', cls='tlink')}
   </div></article>"""
 
 
