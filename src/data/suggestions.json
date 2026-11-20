@@ -37,7 +37,7 @@
       "id": "S-01",
       "status": "open",
       "title": "Click one link, then read the Associates report",
-      "why": "The links now carry the tag the policy requires. What is still unknown is whether a click is credited. That is a two-minute test with an answer either way.",
+      "why": "The links do not carry the tag yet. What is still unknown is whether a Special Link from this account would be credited. That is a two-minute test with an answer either way.",
       "effort": "20 minutes plus one click",
       "risk": "None. It is a read-only check.",
       "depends_on": "Q-03, Q-14",
@@ -181,7 +181,7 @@
     {
       "id": "S-14",
       "status": "implemented",
-      "title": "Tag every Amazon link and make the build refuse untagged ones",
+      "title": "Replace plain listing links with account-validated Special Links, one product at a time, and keep the build refusing anything else",
       "why": "Program Policies 2(b) requires the Associates ID as a parameter. The earlier build emitted bare /dp/ URLs with no tag, which cannot be attributed to any account.",
       "effort": "done",
       "risk": "None; it is enforced in one function and checked on every build.",

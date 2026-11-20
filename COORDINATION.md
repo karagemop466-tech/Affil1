@@ -5,6 +5,32 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Expand the design brief into a reviewable design pack: design-token pack, catchy topic bank, organic loop | done | arena/76128338-affil1 | `tools/page_design.py`, `suggestions/design.html`, `COORDINATION.md`, `COORDINATION/arena-76128338-affil1.md` |
+
+**What it does.** Adds the two things the copy-ready design prompt was missing
+and that a reviewer can approve before implementation: a concrete **design-token
+pack** (typography, colour, layout, imagery, disclosure, accessibility — each
+with a Basis that cites official guidance or flags itself as a design decision),
+and a **topic bank** of ten catchy, question-shaped article ideas mapped to the
+air-fryer and thermometer clusters, each naming the evidence required before it
+is written. None is a claim about popularity, search volume or product
+superiority. Also states the organic loop (publish → sitemap/RSS → internal
+link → measure → next topic) and names Search Console as the instrument that
+closes it.
+
+**Reconciliation note.** This branch was cut from `f041c75`; `origin/main` was
+rewritten by concurrent integration sessions to `8e3c7de` and the branch was
+rebased onto it. The launch-gate sweep fix this session first drafted was
+**already on main** (session `arena/83e015f6`, PR #79), so the duplicate was
+dropped per the "keep main's version where main is stronger" rule; the gate was
+verified green. A `noindex` request for the served-but-unindexed
+`decision-support/` desk is logged for its owner. Detail in
+`COORDINATION/arena-76128338-affil1.md`.
+
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
 | Task | Status | Owner | Files |
@@ -645,3 +671,159 @@ was not edited, because one unstable fetch is not evidence of a different produc
 **Deliberately not done.** No product fact was added or removed. No page was deleted: the archive
 and the desk gained noindex and nothing else. No count on a page was hard-coded; the audit page
 quotes the command rather than the number, and `--counts` fails if a stated number drifts.
+### Delivery record — arena/dad597c3-affil1 (close-out, 2026-11-20)
+
+PR #60 merged to `main` at `cf4f3703bee4fba8c2ff9307079dcb40c33ebf84` (merge commit, 2026-11-20T06:08:36Z).
+
+- `Build, check and deploy` on the merge push: **success** (run 44685712779).
+- `pages build and deployment`: **success** (run 44685712219). Live front page `https://karagemop466-tech.github.io/Affil1/` fetched after the deploy and renders the published edition (release panels, shortlist, decision brief, guide cluster).
+- `Affiliate launch checks` (kitchen-check.yml): **fails on the first gate-skipping step**, `tools/sweep_surfaces.py` — it reports the seven `decision-support/` files added by arena/771e5093-affil1 as outside the published pipeline. This failure pre-exists on main (the same gate failed on #80 before this PR) and is the owner decision that lane already requested (archive them, or add them to the build). This PR changed only COORDINATION.md, so it cannot clear or cause that gate; it is recorded here, not silenced.
+- PR #60 merged with the failing check by explicit decision, recorded in the PR body: the gate's subject is the published surface; the PR contains no site/output/build file, and the failure is identical on main without it.
+- Nothing in this delivery claims Associates enrolment, tagged-click attribution, Search Console verification, or revenue/traffic figures. FLG-002 / FLG-003 / FLG-016 remain open and published.
+- The drafts superseded at rebase time (EXECUTIVE_SUMMARY rewrite, S-13…S-19, Q-16…Q-18, OBS-9…13, page_desk count fix, validate shim) remain in this branch's reflog and PR #60's earlier pushes; local tag `backup/dad597c3-pre-rebase` holds the pre-first-reset state.
+## arena/7755f499-affil1 — collector repair
+
+Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done. Merged as PR #87 (`1b09bbc`); Pages deploy success. Record: `COORDINATION/arena-7755f499-affil1.md`.
+## Release receipt — session-arena-83e015f6 (final integration, this session)
+
+**Branch:** `arena/83e015f6-affil1` (base `ff74e5b`). Tasks 18–21 claimed at the top
+of this board.
+
+**What this session did, in order:**
+
+1. **Line-by-line verification (fourth independent pass).** Fetched all five
+   submitted short links against Amazon.com official site (2026-11-20 05:18–05:22Z).
+   Results agree with `src/data/reverification.json` on every row: P-01 →
+   B0CDY277D3, P-02 → B09B7SB46R, P-03 → B08DKYBTPH, P-05 → B0DZFD6R9Z, P-04 →
+   bot interstitial only. Recorded as `additional_passes.obs-83e015f6` in
+   `src/data/reverification.json`.
+   **New finding (now FLG-023):** `src/data/products.json` carries P-04 → B0DHZTCNR5
+   (per FLG-016's reconciliation) while `reverification.json` and four recorded
+   passes saw no product page for that link. Published as a disagreement in
+   `src/data/flags.json` (FLG-023; the first FLG-020 id was taken by a concurrent
+   session's image-provenance flag and this record was renumbered), not settled
+   by preference.
+2. **Source-register spot-check.** Re-read 16 policy clauses verbatim from the
+   official pages (Operating Agreement §5–6, updated Oct 15 2025; Program Policies,
+   updated Apr 14 2026 — Commission Income Statement §1/§6 and Participation
+   Requirements §1–3). One row downgraded to unverified: the Seller Central
+   ASIN-definition page errors without sign-in, so the 10-character shape stays an
+   observation (row-level notes in
+   `archive/2026-11-20-pr15-recovery/data/sources.json`). FTC pages blocked the
+   fetcher in this pass; official URLs retained for manual review.
+3. **Recovered and archived PR #15.** Branch `integration-main` (the "one
+   canonical site" integration) was closed and deleted without merging at
+   2026-11-20 05:23:56Z. Its tree was recovered from `refs/pull/15/head`,
+   temporarily adopted, then superseded by main's later single-pipeline
+   reconciliations and preserved whole under
+   `archive/2026-11-20-pr15-recovery/` (84 files: its build gate, source
+   register, product-intent record, generated edition and three original
+   editorial images). Nothing deleted.
+4. **Merge with main, no work discarded.** `origin/main` merged twice (post-#63,
+   post-#57) with main's tree preferred for shared paths; my unique delta
+   archived per repository convention; records folded in additively.
+5. **Gate run on the merged tree:** `tools/build.py` → 29 pages;
+   `tools/check.py` → 0 errors, 0 warnings; `tools/check_local_links.py` →
+   0 broken.
+
+**Data-register reconciliation (earlier in the session):** three legacy registers
+(`data/confirmations.json`, `data/products.json`, `data/ledger.json` at the
+pre-merge paths) disagreed on status vocabulary and on P-03/P-05 observations.
+They carry supersession notes pointing at the canonical registers and are
+preserved under `archive/2026-11-20-pr15-recovery/data/`.
+
+**PR and deploy record:** appended below after the merge.
+
+**Cross-scope edit, logged here per the handoff rules (session-arena-83e015f6):**
+`tools/sweep_surfaces.py` — added `INTERNAL_SECTIONS = ("decision-support/",)` and
+a skip in `main()`, mirroring `tools/check.py`'s same tuple. Rationale: the
+"Affiliate launch checks" gate (`would move: 0`) failed on every branch,
+including main's own pushes, because the sweep wanted to set aside the
+hand-maintained decision desk that PR #57 had already exempted in `check.py`.
+Both workflows are green afterwards. If the desk is later folded into the
+generated set, delete the tuple in both files together.
+
+### PR and deploy record — session-arena-83e015f6 (final)
+
+- **PR:** https://github.com/karagemop466-tech/Affil1/pull/79 — "Final integration:
+  merge records, archive PR #15 recovery, fourth link-verification pass
+  (obs-83e015f6) and FLG-020" — **MERGED** 2026-11-20T06:20:32Z as merge commit
+  `8e3c7de` (merge commit method, no waiting for approval, per the brief).
+- **Merge result on main:** `Build, check and deploy` run 44687119168 **success**;
+  `Affiliate launch checks` run 44687119192 **success** — the first green run of
+  that gate on this repository (it had failed on every branch, including main's
+  own pushes, until `tools/sweep_surfaces.py` was aligned with `tools/check.py`
+  on the `decision-support/` desk; cross-scope edit logged above); `pages build
+  and deployment` run 44687118207 **success** — GitHub Pages deployed.
+- **Live site confirmed** (fetched after deploy): the publication front page
+  (disclosure above the fold, five tagged sponsored product links with
+  `?tag=shopnow047c-20`, question-led guides, seasonal feature) and
+  `review/` (the full flagged-for-review table with a source link per row) both
+  serve the merged build at https://karagemop466-tech.github.io/Affil1/.
+- **Follow-up correction record:** the flag first written as FLG-020 during this
+  session was renumbered **FLG-023** after a concurrent session took FLG-020 for
+  an image-provenance finding; the cross-reference in
+  `src/data/reverification.json` (`additional_passes.obs-83e015f6`) was corrected
+  in the same commit as this entry.
+Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done.
+## Session arena/23b5a192-affil1 — gate repair, launch-check repair, link re-verification (2026-11-20)
+
+Branch name is fixed for this session (`arena/23b5a192-affil1`); the board's `session-<id>/<task>` form is not used. Base: `main` at `f041c75`, rebased onto `1b09bbc` (#87).
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Restore the paid-link gate. Only an account-approved Special Link may carry the tag; a plain listing of an observed ASIN is a sponsored reference link; anything else fails the build | done (PR open) | arena/23b5a192-affil1 | `tools/layout.py`, `tools/check.py`, `tools/test_paid_link_gate.py`, `.github/workflows/kitchen-check.yml` |
+| Make the launch-check sweep recognise the Decision Desk (same exemption `tools/check.py` already has) | done | arena/23b5a192-affil1 | `tools/sweep_surfaces.py` |
+| Correct text that said every link carries the tag, and the "account-confirmed" labels that were false | done | arena/23b5a192-affil1 | `src/data/{products,questions,suggestions,flags,ledger,product-intent}.json`, `README.md`, `PUBLISHING_WORKFLOW.md`, `EXECUTIVE_SUMMARY.md` |
+| Re-observe the five supplied short links (2026-11-20) | done | arena/23b5a192-affil1 | `src/data/product-intent.json` (P-01 note), `README.md` |
+| Regenerate the published pages from the corrected data | done | arena/23b5a192-affil1 | generated root HTML only, via `tools/build.py` |
+| Verification of Amazon Associates requirements (policy text) | done, one reading open | arena/23b5a192-affil1 | FLG-025 |
+| Associates account data, SiteStripe Special Links, one-click attribution test | needs review (owner) | — | requires the account owner; `tools/arm_links.py` |
+| Search Console, analytics hosting, named author, commercial hosting | needs review (owner) | — | see `review/index.html` |
+
+### What was wrong on `main` at `f041c75` (found 2026-11-20)
+
+1. **The paid-link gate passed by construction.** `approved_amazon_urls()` added a tagged fallback for every observed ASIN, so the check "a tagged URL must be in the approved register" compared the register against itself. `tools/test_paid_link_gate.py` failed on `main`, and no CI job ran it.
+2. **Product pages and the front-matter brief said "Account-confirmed" / "5 account-confirmed buy links".** The approved register is empty, so both were false.
+3. **Several registers described the tag as already applied** (FLG-009, questions, products `link_rule`). They are corrected to the gate as now built.
+4. **The Launch-checks workflow was red on `main`** because `sweep_surfaces.py` counted the seven `decision-support/` files as strays. The same exemption `check.py` already grants is now in the sweep, so the one-surface rule still catches any other stray page.
+
+### Decision taken and why
+
+Two readings of Program Policies 2(b) are on the record. This build follows Reading A: §2(b) sits under "General Requirements Applicable to All Special Links", so the tag rule governs Special Links, and a plain listing link is not one. Under Reading A the site publishes sponsored listing links with no tag until an account-validated Special Link exists, which matches the owner's instruction to test one link per product before scaling. Reading B (every Amazon link carries the ID) is recorded as FLG-025 for the owner to settle in writing. Switching to the tag is a one-step change: `tools/arm_links.py` records a validated Special Link, and the gate then permits exactly that URL.
+
+### Sources (read 2026-11-20)
+
+| Source | Used for |
+|---|---|
+| [Associates Program Policies, updated 2026-04-14](https://affiliate-program.amazon.com/help/operating/policies) | §2(a) "Special Links must use the Associates ID we have assigned to you"; §2(b) "General Requirements Applicable to All Special Links", tag as a URL parameter |
+| [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) | §5 disclosure wording (unchanged) |
+| Listing observations, one fetch each, redirects followed: [P-02](https://www.amazon.com/dp/B09B7SB46R), [P-03](https://www.amazon.com/dp/B08DKYBTPH), [P-04](https://www.amazon.com/dp/B0DHZTCNR5), [P-05](https://www.amazon.com/dp/B0DZFD6R9Z) | All four resolved to the listing already recorded. Titles match the register. |
+| `https://link.amazon/B04G1MEwY` (P-01) | Resolved to [amazon.com/](https://www.amazon.com/) on this fetch, not the listing. Recorded as FLG-026. |
+
+Prices and ratings shown on those listing pages were not transcribed, and none appears on the site.
+
+### Checks run on the branch
+
+```
+python3 tools/validate.py                         → 1545 checks, all pass, 0 warnings
+cd tools && python3 -m unittest test_paid_link_gate -v   → 5 tests, OK (failed on main)
+python3 tools/build.py                            → 30 pages; second build byte-identical
+python3 tools/check.py                            → 30 pages, 0 errors, 0 warnings
+python3 tools/check_local_links.py                → 37 pages, 0 broken
+python3 tools/sweep_surfaces.py --dry-run         → would move: 0 (was 7)
+python3 decision-support/validate.py              → PASS
+tools/stage.py into a temp dir                    → 0 broken references
+```
+
+### Irregularities flagged (published on `review/index.html` with sources)
+
+- **FLG-024** (medium): 25 archived HTML files still carry live `tag=shopnow047c-20` links. `archive/` is served by legacy Pages, marked noindex and disallowed in robots.txt. Not edited (evidence).
+- **FLG-025** (high): the two readings of §2(b). Owner decision.
+- **FLG-026** (medium): P-01's short link resolved to the homepage on today's fetch.
+- **FLG-002** and **FLG-009** rewritten to match the gate as built.
+- **Other owner requests (not edited here):** `decision-support/` IRR-06 still says live pages carry the tag; that is no longer true, so the desk owner should re-measure it.
+
+### Merge log
+
+Pending: see the PR linked from this board after it is opened.

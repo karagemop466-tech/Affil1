@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measurement — five events, no identifiers, endpoint off | The Crisp Counter</title>
+<meta name="description" content="The outbound-click counter design: five defined events, no cookie or identifier, fire-and-forget rather than a redirect, and currently switched off because no endpoint is configured.">
+<link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/records/measurement/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Crisp Counter">
+<meta property="og:title" content="Measurement — five events, no identifiers, endpoint off | The Crisp Counter">
+<meta property="og:description" content="The outbound-click counter design: five defined events, no cookie or identifier, fire-and-forget rather than a redirect, and currently switched off because no endpoint is configured.">
+<meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/records/measurement/">
+<meta property="og:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-kitchen.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://karagemop466-tech.github.io/Affil1/assets/img/hero-kitchen.jpg">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"The Crisp Counter","url":"https://karagemop466-tech.github.io/Affil1/","description":"Kitchen tools, chosen by what you actually cook.","publisher":{"@type":"Organization","name":"The Crisp Counter","url":"https://karagemop466-tech.github.io/Affil1/","logo":"https://karagemop466-tech.github.io/Affil1/assets/img/hero-kitchen.jpg","description":"Kitchen tools, chosen by what you actually cook."}}]</script>
+<link rel="alternate" type="application/rss+xml" title="The Crisp Counter &mdash; guides and new products" href="https://karagemop466-tech.github.io/Affil1/feed.xml">
+<link rel="stylesheet" href="https://karagemop466-tech.github.io/Affil1/assets/css/site.css">
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="brand" href="https://karagemop466-tech.github.io/Affil1/">
+      <span class="brand-mark">The <em>Crisp</em> Counter</span>
+      <span class="brand-kicker">Kitchen tools</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Main"><a href="https://karagemop466-tech.github.io/Affil1/shop/">Shop</a><a href="https://karagemop466-tech.github.io/Affil1/guides/">Guides</a><a href="https://karagemop466-tech.github.io/Affil1/about/">About</a></nav>
+  </div>
+</header>
+
+<!-- Disclosure strip: directly under the masthead, present on every page. S01 / S18. -->
+<div class="disclosure" role="complementary" aria-label="Affiliate disclosure">
+  <div class="wrap">
+    <span class="disclosure-badge">Sponsored links</span>
+    <span>As an Amazon Associate I earn from qualifying purchases. Outbound product links go to Amazon and are affiliate links. <a href="https://karagemop466-tech.github.io/Affil1/about/#disclosure">How this works</a></span>
+  </div>
+</div>
+
+<main id="main">
+
+<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://karagemop466-tech.github.io/Affil1/">Home</a><span aria-hidden="true">/</span><a href="https://karagemop466-tech.github.io/Affil1/records/">Records</a><span aria-hidden="true">/</span><span aria-current="page">Measurement</span></nav></div>
+<div class="page-head">
+  <div class="wrap">
+    <h1>Measurement</h1>
+    <p>Five events, one rule: count the click without following the reader. The counter is built and shipped, and it is currently swinging at nothing because no endpoint has been configured.</p>
+  </div>
+</div>
+<div class="wrap">
+  <div class="stat-row">
+    <div class="stat"><div class="n">5</div><div class="l">Defined events</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Click counts recorded</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">Cookies set</div></div>
+    <div class="stat"><div class="n">Off</div><div class="l">Endpoint</div></div>
+  </div>
+
+  <div class="callout" style="margin-top:30px">
+    <h3>Read this before reading anything into a number</h3>
+    <p>The client beacon makes no network request at all while <code>CRISP_ENDPOINT</code> is unset. Every count on this page is therefore zero because nothing is being measured &mdash; not because nobody clicked. Web Analytics are not connected either. Treat this page as a wiring diagram, not a report.</p>
+  </div>
+
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Event</th><th>When it fires</th><th>Payload (non-identifying)</th><th>Status</th></tr></thead>
+      <tbody><tr>
+      <td><code>page_view</code></td>
+      <td>A page finishes loading.</td>
+      <td><code>path</code></td>
+      <td><span class="badge badge-open">endpoint off</span></td>
+    </tr><tr>
+      <td><code>outbound_click</code></td>
+      <td>A reader activates an outbound Amazon control. Fired on a real activation; the browser performs the navigation itself.</td>
+      <td><code>product_id</code>, <code>placement</code></td>
+      <td><span class="badge badge-open">endpoint off</span></td>
+    </tr><tr>
+      <td><code>guide_read</code></td>
+      <td>A reader reaches the end of a guide.</td>
+      <td><code>guide_id</code></td>
+      <td><span class="badge badge-open">endpoint off</span></td>
+    </tr><tr>
+      <td><code>record_open</code></td>
+      <td>A reader opens a records or flagged-for-review page.</td>
+      <td><code>record_id</code></td>
+      <td><span class="badge badge-open">endpoint off</span></td>
+    </tr><tr>
+      <td><code>suggestion_decide</code></td>
+      <td>An owner marks a suggestion accepted, rejected, or deferred on the suggestions page.</td>
+      <td><code>suggestion_id</code>, <code>state</code></td>
+      <td><span class="badge badge-open">endpoint off</span></td>
+    </tr></tbody>
+    </table>
+  </div>
+
+  <h2 style="font-family:var(--display);font-size:26px;margin:44px 0 6px">The endpoint contract</h2>
+  <p style="color:var(--ink-2);font-size:15px;max-width:78ch;margin:0 0 16px">What a host has to implement, written down so the design cannot drift once someone deploys it:</p>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>Requirement</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Accepts</td><td><code>POST</code> of a JSON body: <code>{ e, p, d, t }</code> where <code>d</code> is a date at day granularity.</td></tr>
+        <tr><td>Stores</td><td>An aggregate counter increment keyed by <code>e</code>, <code>p.path</code> or <code>p.product_id</code>, <code>p.placement</code>, and <code>d</code>.</td></tr>
+        <tr><td>Must not store</td><td>IP address, user agent, referrer string, cookies, or any request header that identifies a device.</td></tr>
+        <tr><td>Must not do</td><td>Issue a redirect, set a cookie, or return anything the browser needs. The response is fire-and-forget.</td></tr>
+        <tr><td>Retention</td><td>Decided by the operator and stated publicly before the endpoint goes live. See open question <a href="https://karagemop466-tech.github.io/Affil1/records/questions/">Q-06</a>.</td></tr>
+        <tr><td>Precondition</td><td>A published privacy notice naming the counter. See <a href="https://karagemop466-tech.github.io/Affil1/records/questions/">Q-09</a>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 style="font-family:var(--display);font-size:26px;margin:44px 0 6px">Why it is not a redirect</h2>
+  <p style="color:var(--ink-2);font-size:15px;max-width:78ch;margin:0 0 16px">The obvious way to count an outbound click is to route it through <code>/go/&lt;id&gt;</code> and issue a 302. That design creates two problems the Associates policies speak to directly: purchases referred through an intermediate site that does not require an affirmative click are disqualified, and associates may not obscure the url of the site containing their links. A fire-and-forget beacon avoids both, because the reader's browser navigates to Amazon itself and the counter never touches the navigation.</p>
+  <p style="color:var(--ink-2);font-size:15px;max-width:78ch;margin:0 0 16px">The cost of that choice is honest to state: a blocked beacon under-counts, and the figure can never be reconciled exactly against Amazon's own session count. That is acceptable, because Amazon's reports are the only authoritative conversion source anyway.</p>
+
+  <div class="record-note">
+    <strong>What would make this real.</strong> Three things, in order: a host for the endpoint, a published privacy notice, then a retention period set and stated. Until all three exist the counter stays off, because a half-configured counter collects data someone has to be responsible for.
+  </div>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="https://karagemop466-tech.github.io/Affil1/">
+          <span class="brand-mark">The <em>Crisp</em> Counter</span>
+        </a>
+        <p>Kitchen tools, chosen by what you actually cook. A small, honest shop for kitchen tools &mdash; organised by what you cook, not by what is on offer.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul><li><a href="https://karagemop466-tech.github.io/Affil1/shop/">All products</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/shop/#air-fryers">Air fryers</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/shop/#thermometers">Thermometers</a></li></ul>
+      </div><div>
+        <h4>Guides</h4>
+        <ul><li><a href="https://karagemop466-tech.github.io/Affil1/guides/">All guides</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/guides/basket-vs-oven-air-fryer/">Basket vs. oven style</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/guides/air-fryer-capacity-checklist/">Capacity checklist</a></li></ul>
+      </div><div>
+        <h4>Records</h4>
+        <ul><li><a href="https://karagemop466-tech.github.io/Affil1/records/">Record index</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/source-register/">Source register</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/product-intent/">Product intent</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/compliance/">Compliance</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/measurement/">Measurement</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/campaign-ledger/">Campaign ledger</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/questions/">Open questions</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/suggestions/">Suggestions</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/records/flagged/">Flagged for review</a></li></ul>
+      </div><div>
+        <h4>About</h4>
+        <ul><li><a href="https://karagemop466-tech.github.io/Affil1/about/">How this shop works</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/summary/">Executive summary</a></li><li><a href="https://karagemop466-tech.github.io/Affil1/feed.xml">RSS feed</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-disclosure">
+      <strong>As an Amazon Associate I earn from qualifying purchases.</strong>
+      Every outbound product link on this site is a sponsored affiliate link and is marked as such, with the destination listing named on the control.
+      This site does not publish prices, star ratings, or review quotes, and makes no claim to have tested any product.
+      Product details are quoted from the Amazon listing titles and feature text and are linked to their source on each page.
+      <div class="footer-meta">
+        <span>Associates ID shopnow047c-20</span>
+        <span>Records verified 2026-11-20</span>
+        <span><a href="https://karagemop466-tech.github.io/Affil1/records/">All records</a></span>
+        <span><a href="https://karagemop466-tech.github.io/Affil1/feed.xml">RSS</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://karagemop466-tech.github.io/Affil1/assets/js/site.js" defer></script>
+<script src="https://karagemop466-tech.github.io/Affil1/assets/js/analytics.js" defer></script>
+</body>
+</html>

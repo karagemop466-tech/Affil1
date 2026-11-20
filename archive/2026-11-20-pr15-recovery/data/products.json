@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Product-intent confirmation record",
+    "trackingId": "shopnow047c-20",
+    "note": "SUPERSEDED 2026-11-20 by data/product-intent.json (canonical). Statuses below are aligned to the canonical register: four links observed to resolve to product pages (observed_only), one unresolved. Intended ASINs remain unconfirmed for all five; the 9-character short-link slugs are not ASINs. Earlier notes in this file claiming the build environment could not reach Amazon were true of one build sandbox only and are retracted."
+  },
+  "products": [
+    {
+      "id": "prod-1",
+      "submittedLink": "https://link.amazon/B04G1MEwY",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "https://www.amazon.com/dp/B0CDY277D3",
+      "redirectTargetSource": "",
+      "status": "observed_only",
+      "verificationNote": "Observed destination recorded 2026-11-20 against Amazon.com official site (see data/product-intent.json observation_log obs-1/obs-2). Intended ASIN unconfirmed. Observation is evidence only.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-2",
+      "submittedLink": "https://link.amazon/B02NbDxp3",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "https://www.amazon.com/dp/B09B7SB46R",
+      "redirectTargetSource": "",
+      "status": "observed_only",
+      "verificationNote": "Observed destination recorded 2026-11-20 against Amazon.com official site (see data/product-intent.json observation_log obs-1/obs-2). Intended ASIN unconfirmed. Observation is evidence only.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-3",
+      "submittedLink": "https://link.amazon/B00hJ57DV",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "https://www.amazon.com/dp/B08DKYBTPH",
+      "redirectTargetSource": "",
+      "status": "observed_only",
+      "verificationNote": "Observed destination recorded 2026-11-20 against Amazon.com official site (see data/product-intent.json observation_log obs-1/obs-2). Intended ASIN unconfirmed. Observation is evidence only.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-4",
+      "submittedLink": "https://link.amazon/B0c8moW59",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "",
+      "redirectTargetSource": "",
+      "status": "unresolved",
+      "verificationNote": "Observed destination recorded 2026-11-20 against Amazon.com official site (see data/product-intent.json observation_log obs-1/obs-2). Intended ASIN unconfirmed. Observation is evidence only.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-5",
+      "submittedLink": "https://link.amazon/B0f3GKalj",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "redirectTargetSource": "",
+      "status": "observed_only",
+      "verificationNote": "Observed destination recorded 2026-11-20 against Amazon.com official site (see data/product-intent.json observation_log obs-1/obs-2). Intended ASIN unconfirmed. Observation is evidence only.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    }
+  ]
+}

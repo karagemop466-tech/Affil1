@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review — irregularities and unverified items | Affil1</title>
+<meta name="description" content="Affil1 Flagged for Review page: irregularities and unverified items with source links. These do not block the site; they are published so they can be reviewed after launch.">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="alternate" type="application/rss+xml" title="Affil1" href="/rss.xml">
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+  <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
+    <a href="/">Home</a> &rsaquo; Flagged for Review
+  </nav>
+  <section class="section-tight">
+    <h1>Flagged for Review</h1>
+    <p>Irregularities and unverified items found during line-by-line verification. They do not block the launch; they are published here so they can be reviewed after the site is live.</p>
+
+    <h2>Unverified submitted links</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:4px;">#</th>
+          <th>Submitted link</th>
+          <th>Intended ASIN</th>
+          <th>Observed redirect target</th>
+          <th>Issue</th>
+          <th>Source checked</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><a class="source-link" href="https://link.amazon/B00hJ57DV" rel="nofollow sponsored" target="_blank">https://link.amazon/B00hJ57DV</a></td>
+          <td><code>B00hJ57DV</code></td>
+          <td><code>https://www.amazon.com/</code> (Amazon homepage)</td>
+          <td>No product page reached; product title and listing URL left blank</td>
+          <td><a class="source-link" href="https://www.amazon.com/" target="_blank">Amazon.com homepage</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a class="source-link" href="https://link.amazon/B0c8moW59" rel="nofollow sponsored" target="_blank">https://link.amazon/B0c8moW59</a></td>
+          <td><code>B0c8moW59</code></td>
+          <td>Amazon checkpoint / continue-shopping gate</td>
+          <td>Manual-interaction gate; no product page reachable</td>
+          <td><a class="source-link" href="https://www.amazon.com/checkpoint/continue" target="_blank">Amazon.com checkpoint</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><a class="source-link" href="https://link.amazon/B0f3GKalj" rel="nofollow sponsored" target="_blank">https://link.amazon/B0f3GKalj</a></td>
+          <td><code>B0f3GKalj</code></td>
+          <td><code>https://www.amazon.com/</code> (Amazon homepage)</td>
+          <td>No product page reached; product title and listing URL left blank</td>
+          <td><a class="source-link" href="https://www.amazon.com/" target="_blank">Amazon.com homepage</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Verified links with mismatched identifiers</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:4px;">#</th>
+          <th>Submitted link</th>
+          <th>Intended ASIN (slug)</th>
+          <th>Observed redirect target (destination ASIN)</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><a class="source-link" href="https://link.amazon/B04G1MEwY" rel="nofollow sponsored" target="_blank">https://link.amazon/B04G1MEwY</a></td>
+          <td><code>B04G1MEwY</code></td>
+          <td>B0CDY277D3</td>
+          <td>Short-link slug is not the destination ASIN. Fields kept separate; never merged.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a class="source-link" href="https://link.amazon/B02NbDxp3" rel="nofollow sponsored" target="_blank">https://link.amazon/B02NbDxp3</a></td>
+          <td><code>B02NbDxp3</code></td>
+          <td>B09B7SB46R</td>
+          <td>Short-link slug is not the destination ASIN. Fields kept separate; never merged.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Values left blank (never inferred)</h2>
+    <ul>
+      <li>Prices, star ratings, review counts and commission potential for all five products — not confirmed from an official source.</td>
+      <li>Product titles for B00hJ57DV, B0c8moW59, B0f3GKalj — no product page was reached.</li>
+    </ul>
+
+    <h2>Compliance notes</h2>
+    <ul>
+      <li>The supplied short links are not claimed invalid; their exact compliance status is unresolved.</li>
+      <li>One link per product should be tested in the enrolled Associates workflow (destination + tracking report) before scaling.</li>
+      <li>Every outbound product link on this site carries <code>rel="nofollow sponsored"</code>; disclosure appears above the fold and in the footer on every page.</li>
+    </ul>
+
+    <p class="note" style="margin-top:24px;color:var(--muted);font-size:0.85rem;">Full machine-readable records: <a href="/data/confirmations.json">data/confirmations.json</a>. Sources: Amazon.com official site, fetched 2026-11-20.</p>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="/assets/js/common.js"></script>
+<script src="/assets/js/analytics.js"></script>
+</body>
+</html>

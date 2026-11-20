@@ -29,8 +29,8 @@
       "title": "Attribution to shopnow047c-20 is not confirmed by an Associates report",
       "expected": "A click from this site appears in the Associates report against the supplied tag.",
       "found": "The tag was not observed in any URL reached while following the supplied links. The site now appends ?tag=shopnow047c-20 to every Amazon destination, which is what Program Policies 2(b) requires, but no report has been read.",
-      "impact": "Links are now structurally correct. Whether they are credited is still unknown, and the site says so in its footer and on this page rather than implying success.",
-      "reading": "Two separate questions were being confused: does the destination carry a tag, and does the account register a click. The first is fixed. The second needs a click and a dashboard.",
+      "impact": "Links are plain listing links until an account-validated Special Link is recorded, so nothing published is attributable yet. The site says so in its footer and on this page rather than implying success.",
+      "reading": "Two separate questions were being confused: does the destination carry a tag, and does the account register a click. The first is not met yet, because the published links carry no tag. The second needs a click and a dashboard.",
       "blocks": "any claim that the site can currently earn",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
@@ -122,11 +122,11 @@
     {
       "id": "FLG-009",
       "severity": "medium",
-      "title": "The previous edition's buy links carried no tag at all",
-      "expected": "Every Special Link includes the Associates ID as a tag parameter (Program Policies 2(b)).",
-      "found": "The previous build pointed at https://www.amazon.com/dp/<ASIN> with no query string, which cannot be attributed to any account. This is recorded against this repository's own earlier output, not against the operator.",
-      "impact": "Corrected on 2026-11-20: every Amazon destination is now built by a single function that appends ?tag=shopnow047c-20, and the checker fails the build if any Amazon product link lacks the tag.",
-      "reading": "This was a real defect and it was live. Publishing it here costs less than hoping nobody noticed.",
+      "title": "Buy links were briefly tagged by synthesis; the tag was withdrawn and the gate restored",
+      "expected": "A tag appears on an Amazon link only when an account-validated Special Link is recorded (Program Policies 2(a)-(b); FLG-025 records the open reading of 2(b)).",
+      "found": "Before 2026-11-20 the build pointed at https://www.amazon.com/dp/<ASIN> with no tag. On 2026-11-20 an earlier build in this branch appended the tag to every observed listing; that made the approved-register check pass by construction and failed its own unit test. The fallback was removed. The current links are plain listing links, marked sponsored.",
+      "impact": "Corrected on 2026-11-20: Amazon product links are built by one function (layout.product_link). The checker fails the build on any Amazon product link outside the permitted set: an account-approved Special Link, or the plain listing of an observed ASIN. No tag is synthesised. Unit tests in tools/test_paid_link_gate.py run in CI.",
+      "reading": "The gate was real and it was live. The defect was a fallback that made the check vacuous; removing it restores what the check is for.",
       "blocks": "nothing now",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
@@ -317,6 +317,68 @@
     {
       "id": "FLG-023",
       "severity": "high",
+      "title": "P-04's destination claim rests on one observation; four recorded passes saw only the bot interstitial",
+      "expected": "One consistent observation status per submitted link, or a published disagreement.",
+      "found": "src/data/products.json and FLG-004/FLG-016 carry P-04 (B0c8moW59) -> B0DHZTCNR5 (ThermoMaven) as resolved. But src/data/reverification.json records P-04 as unresolved (bot interstitial on every attempt), and a fourth independent pass (obs-83e015f6, 2026-11-20 05:18-05:22Z) reached only the /checkpoint/continue interstitial again, as did the recovered PR #15 register and the earliest archived register. Only one session claims to have reached a product page for this link.",
+      "impact": "Any page treating P-04 as an identified product (products/p-04.html, the home shortlist's P-04 buy link) rests on a single disputed observation. Four recorded passes saw no product page.",
+      "reading": "Do not settle by preference. Re-observe from the enrolled Associates workflow (one link, destination and tracking report) and update both registers together. Until then the honest status for P-04 is disputed, and the B0DHZTCNR5 mapping stays visible as one session's observation.",
+      "blocks": "A confident P-04 identity claim; any five-of-five resolved claim.",
+      "to_check": [
+        "src/data/products.json row for P-04",
+        "src/data/reverification.json rows P-04 and additional_passes.obs-83e015f6",
+        "FLG-004 and FLG-016 (the reconciliation this contradicts)",
+        "products/p-04.html identity note"
+      ],
+      "sources": [
+        "https://link.amazon/B0c8moW59",
+        "https://www.amazon.com/checkpoint/continue"
+      ],
+      "raised_by": "session-arena-83e015f6, 2026-11-20"
+    },
+    {
+      "id": "FLG-024",
+      "severity": "medium",
+      "title": "Archived editions still serve live tagged Amazon links",
+      "expected": "Every served Amazon product link passes the same gate as the published tree.",
+      "found": "archive/ holds 25 HTML files from earlier editions, and they carry tag=shopnow047c-20 on Amazon product links. archive/ is preserved untouched, marked noindex and disallowed in robots.txt. Legacy Pages serves the repository root, so those links resolve. tools/check.py does not scan archive/.",
+      "reading": "Editing archived evidence would break the record, so the files were not changed. The owner can choose between a banner on each archived file, or moving archive/ out of the served tree once Pages is set to GitHub Actions (tools/stage.py already supports that).",
+      "impact": "Readers can reach a tagged link from an archived page. Those pages are not in the sitemap, and robots.txt disallows them, so they are not indexed.",
+      "to_check": [
+        "gh api repos/karagemop466-tech/Affil1/pages (build_type, source)",
+        "grep -rl 'shopnow047c-20' archive/"
+      ],
+      "blocks": "a clean compliance attestation of the served tree (not the published pages)"
+    },
+    {
+      "id": "FLG-025",
+      "severity": "high",
+      "title": "Open reading: may plain listing links stay untagged before a Special Link is validated?",
+      "expected": "A written answer from Amazon Associates on whether untagged listing links are permitted on an enrolled site with no validated Special Link yet.",
+      "found": "Program Policies 2(b) says 'you must include your Associates ID or tag ... as a parameter in the URL of each link you place on your Site to an Amazon Site'. The same section opens 'General Requirements Applicable to All Special Links'. Reading A (this build): the tag rule governs Special Links, so a plain listing link is not one. Reading B (an earlier session's reading, FLG-009 history): every link to an Amazon site must carry the ID.",
+      "reading": "Reading A is the more literal one given the section heading. It is still an interpretation, and the cost of being wrong is a policy breach, so it needs the owner's decision in the enrolled workflow.",
+      "impact": "Decides whether the current plain listing buy buttons are acceptable, or whether the owner must enable a tag before the next publication.",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies (section 2(b))",
+        "Ask Associates support in writing, quoting section 2(b), and keep the answer with this register"
+      ],
+      "blocks": "any decision on when to enable the tag"
+    },
+    {
+      "id": "FLG-026",
+      "severity": "medium",
+      "title": "P-01 short link resolved to the Amazon homepage on a 2026-11-20 fetch",
+      "expected": "Each supplied short link resolves to the same product listing on every attempt.",
+      "found": "A fetch of https://link.amazon/B04G1MEwY on 2026-11-20 returned https://www.amazon.com/ (title 'Amazon.com. Spend less. Smile more.'), not the listing. The other four short links returned the /dp/ listings already recorded for P-02, P-03, P-04 and P-05 in the same session.",
+      "reading": "The resolution is unstable, which is a reason not to treat any short link as a destination. The register keeps the listing observation for P-01 and does not promote the short link.",
+      "impact": "Nothing published changes. P-01's identity still rests on repeated observations of /dp/B0CDY277D3, not on the short link.",
+      "to_check": [
+        "https://link.amazon/B04G1MEwY, repeated in a logged-out browser and recorded with the time"
+      ],
+      "blocks": "treating the P-01 short link as verified"
+    },
+    {
+      "id": "FLG-027",
+      "severity": "high",
       "title": "Three surfaces of one repository were crawlable at once, contradicting the site's own 'one site, not two' claim",
       "expected": "The About page states: 'the other edition is preserved under archive/legacy-2026-11-20/ with a noindex tag on every page'. check.py's header makes the same claim for the whole of archive/.",
       "found": "Before this pass: 22 of 79 archived pages carried no meta robots tag, and all 7 decision-support pages were crawlable while naming a different brand ('Good Measure Kitchen') and describing four competing shops, two of which are still on disk under archive/. robots.txt contained only Allow: /. A search engine could reach three editions and a set of working papers describing a fourth.",
@@ -330,7 +392,7 @@
       ]
     },
     {
-      "id": "FLG-024",
+      "id": "FLG-028",
       "severity": "medium",
       "title": "The affiliate test suite could not be imported, so the gate that stops synthetic tags was never executed",
       "expected": "A test file in tools/ that proves public observations cannot create an Associates tag is runnable from the repository root.",
@@ -344,7 +406,7 @@
       ]
     },
     {
-      "id": "FLG-025",
+      "id": "FLG-029",
       "severity": "medium",
       "title": "Two suggestion queues and two question registers describe one project, with different counts in each",
       "expected": "One queue a reviewer can choose from, and one register of open questions.",
@@ -359,7 +421,7 @@
       ]
     },
     {
-      "id": "FLG-026",
+      "id": "FLG-030",
       "severity": "medium",
       "title": "Photorealistic product imagery is described on every page as an illustration",
       "expected": "A page that says 'Illustration' next to an image is showing an illustration.",
@@ -374,7 +436,7 @@
       ]
     },
     {
-      "id": "FLG-027",
+      "id": "FLG-031",
       "severity": "medium",
       "title": "README's manual-review links point at pages that were archived out of the published tree",
       "expected": "A README that tells a reviewer where to check something points at a page that exists on the live site.",

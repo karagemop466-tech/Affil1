@@ -29,7 +29,7 @@
     {
       "id": "Q-03",
       "question": "Are clicks attributed to shopnow047c-20?",
-      "what_we_have": "Every Amazon destination on the site now carries ?tag=shopnow047c-20, which is what Program Policies 2(b) requires a Special Link to include.",
+      "what_we_have": "No Amazon link on the site carries ?tag=shopnow047c-20 yet. Program Policies 2(a)-(b) require a Special Link to use the Associates ID; a Special Link generated in Associates Central and validated by one test click has not been recorded.",
       "what_is_missing": "Confirmation from an Associates report that a click was recorded against the tag. No dashboard access is available to this build.",
       "how_to_close": "Click one link on the live site, then open Reports → Orders in the Associates dashboard and look for the click against the tag.",
       "answered": false,
@@ -145,7 +145,7 @@
     {
       "id": "Q-14",
       "question": "Are the product links Special Links in the sense the Operating Agreement means?",
-      "what_we_have": "Program Policies 2(a) requires Special Links to use the Associates ID; 2(b) requires the tag as a URL parameter. Every product link now carries ?tag=shopnow047c-20.",
+      "what_we_have": "Program Policies 2(a) requires Special Links to use the Associates ID; 2(b) requires the tag as a URL parameter. No product link carries the tag yet; buy buttons are plain listing links, marked sponsored and labelled as listing sources.",
       "what_is_missing": "Confirmation that the tag is registered and that clicks from this site are being recorded. That can only come from the account.",
       "how_to_close": "One click from the live site, then the Orders report. The same test closes Q-03.",
       "answered": false,
