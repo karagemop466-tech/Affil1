@@ -30,10 +30,9 @@ AFFILIATE_HINT = __import__("re").compile(
 # The only navigation group. Everything else lives in the footer.
 NAV = [
     ("guides/index.html", "Guides"),
-    ("products/index.html", "Products"),
+    ("products/index.html", "Shortlist"),
     ("compare/index.html", "Compare"),
-    ("questions/index.html", "Questions"),
-    ("suggestions/index.html", "Suggestions"),
+    ("brief/index.html", "Site desk"),
 ]
 
 FOOTER_GROUPS = [
@@ -120,7 +119,7 @@ def disclosure_strip(page_dir):
     return f"""<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
   <div class="wrap disclosure-inner">
     <span class="disclosure-tag">Disclosure</span>
-    <p>{DISCLOSURE} Links to Amazon on this site are affiliate links. If you buy through one, this site may earn a commission at no extra cost to you.
+    <p>{DISCLOSURE} Product links are marked as sponsored. Tracking on the supplied links has not been confirmed.
       <a href="{esc(rel(page_dir, 'about/index.html'))}#disclosure">Read the full disclosure</a>.</p>
   </div>
 </div>"""
@@ -160,7 +159,7 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
-      <p>Tracking ID on this site: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
+      <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
       <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; no cookies, no trackers, no third-party requests</p>
     </div>
   </div>

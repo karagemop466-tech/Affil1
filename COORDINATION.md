@@ -170,3 +170,16 @@ Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official
 - Ported our P-04 re-verification (B0DHZTCNR5) into PR #22's `src/data/products.json` schema (ref/observed_asin), updated FLG-001/FLG-002 counts and `tools/content.py` copy (four→five), rebuilt: `tools/check.py` 22 pages, 0 errors.
 - Kept our additive work: 3 new guides (`guides/meal-prep-sunday.html`, `small-kitchen-counter.html`, `thermometer-pairing.html` — not in GENERATED set, survive rebuild), `guides.html` path fixes, dashboard/categories/products/questions/suggestions/flagged unification, `data/*` audit appends, `crisp/` P-04 sync.
 - Follow-up (not done by deletion): wiring the 3 new guides into the generated sitemap/feed requires extending PR #22's `tools/content.py` GUIDES; logged here for the integration session.
+
+## Publication integration — arena/c1891b66-affil1
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Buyer front page and single-edition Pages packaging | done | arena/c1891b66-affil1 | tools/page_home.py, tools/layout.py, tools/stage.py, .github/workflows/pages.yml, README.md |
+
+- Rechecked the [Associates agreement](https://affiliate-program.amazon.com/help/operating/agreement), [program policies](https://affiliate-program.amazon.com/help/operating/policies), [paid-link markup](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links), and [Pages publishing sources](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site). Product evidence was retained from the prior source register; this pass did not establish new product facts or verify account data.
+- Build and checker: 22 maintained pages, zero errors or warnings; staged package checked for missing HTML links and assets. The GitHub Pages API reports legacy publishing from `main` root. Switching to an artifact-only workflow returned HTTP 403, so the main-branch release remains the available publication path. The custom workflow stages the maintained edition and deploys only if custom Actions is selected.
+- Pending: authorized Associates link confirmation and reporting, Search Console ownership, production analytics hosting and review, and reader capture. No estimates substituted.
+- Rebase handoff: main merged #23 and #25 while #26 was open. Retained both sessions’ records, P-04 re-verification, guides, and executive-summary changes. Resolved the generated homepage conflict in the template and rebuilt; both thermometer records now have separate homepage paths.
+
+- Integration PR: [#26](https://github.com/karagemop466-tech/Affil1/pull/26). The authoritative merge and deployment outcomes are linked from the PR timeline and [Pages runs](https://github.com/karagemop466-tech/Affil1/actions/workflows/pages/pages-build-deployment).
