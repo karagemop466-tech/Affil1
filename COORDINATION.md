@@ -609,3 +609,7 @@ PR #60 merged to `main` at `cf4f3703bee4fba8c2ff9307079dcb40c33ebf84` (merge com
 ## arena/7755f499-affil1 — collector repair
 
 Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done.
+
+## Session arena/bba82abd-affil1 — full-brief review pass (2026-11-20)
+
+Claim, scope, verification and irregularities: [`COORDINATION/arena-bba82abd-affil1.md`](COORDINATION/arena-bba82abd-affil1.md). Status: **in progress**.
