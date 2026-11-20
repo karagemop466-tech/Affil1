@@ -179,6 +179,6 @@ Requests (not performed — files owned/contested by other sessions): wire the a
 
 ## Claim — arena/31f366a2-affil1 (2026-11-20)
 
-Scope: `index.html`, `guides.html`, `assets/css/main.css`, and this coordination log.
+Scope: `index.html`, `guides.html`, `assets/css/main.css`, `assets/js/common.js`, and this coordination log.
 Task: storefront polish and correction of the root guides page's broken relative references. No source-register values or external account data will be changed. This session operates on the fixed Arena branch `arena/31f366a2-affil1`.
 Status: in progress.
