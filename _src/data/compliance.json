@@ -2,7 +2,9 @@
   "meta": {
     "retrieved_on": "2026-11-20",
     "note": "Each entry is a direct quotation from an official source, retrieved and read on the date above. Nothing is paraphrased into a stronger claim than the source makes.",
-    "two_authorities": "Amazon's Associates Program governs whether a link earns and stays in the program. The U.S. FTC governs whether the reader understands what the link is. Both apply; neither substitutes for the other."
+    "two_authorities": "Amazon's Associates Program governs whether a link earns and stays in the program. The U.S. FTC governs whether the reader understands what the link is. Both apply; neither substitutes for the other.",
+    "reverified_on": "2026-11-20",
+    "reverification_note": "Every quote in this file was re-checked word by word against the live source on 2026-11-20. S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12 and S14 matched their sources verbatim. S13's quote was correct but its citation was wrong: the 2009 Federal Register PDF it named ends section 255.5 at Example 9 and does not contain the sentence. The sentence is Example 11 of the current section 255.5 on eCFR (16 CFR Part 255, as amended 88 FR 48102, July 26, 2023), where it was re-fetched and matched verbatim on 2026-11-20. The citation now points there."
   },
   "sources": [
     {
@@ -113,9 +115,9 @@
     },
     {
       "id": "S13",
-      "publisher": "U.S. Federal Trade Commission",
-      "title": "Guides Concerning the Use of Endorsements and Testimonials in Advertising, 16 CFR Part 255 \u2014 255.5 Example 11",
-      "url": "https://www.ftc.gov/sites/default/files/documents/federal_register_notices/guides-concerning-use-endorsements-and-testimonials-advertising-16-cfr-part-255/091015guidesconcerningtestimonials.pdf",
+      "publisher": "U.S. Federal Trade Commission (eCFR)",
+      "title": "16 CFR Part 255 \u2014 \u00a7255.5(b) Example 11 (current text)",
+      "url": "https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255",
       "quote": "Because knowledge of this compensation could affect the weight or credibility site visitors give to the blogger\u2019s reviews, the reviews should clearly and conspicuously disclose the compensation.",
       "supports": "The affiliate-blog example is directly on point for this site."
     },

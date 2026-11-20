@@ -375,6 +375,20 @@
         "https://link.amazon/B04G1MEwY, repeated in a logged-out browser and recorded with the time"
       ],
       "blocks": "treating the P-01 short link as verified"
+    },
+    {
+      "id": "FLG-027",
+      "severity": "medium",
+      "title": "The repository's robots.txt sits in a subdirectory of the host, which crawlers are not required to read",
+      "expected": "A robots.txt that crawlers consult before indexing the site.",
+      "found": "Google's robots specification states that robots.txt must be placed in the top-level directory of a site and that crawlers don't check for robots.txt files in subdirectories. This site is served from https://karagemop466-tech.github.io/Affil1/, so its robots.txt publishes at /Affil1/robots.txt — a subdirectory — and Google may never fetch it. The file itself is correctly formatted (re-checked against the specification on 2026-11-20) and excludes /archive/, but its reach cannot be guaranteed from inside a project repository.",
+      "reading": "Discovery does not depend on it: every generated page carries a self-referencing canonical URL, the sitemap lists only the maintained edition, and internal links are relative and resolved. The step that actually puts the sitemap in front of Google is Search Console submission, which needs the owner's account (Q-11, S-03).",
+      "to_check": [
+        "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
+        "https://karagemop466-tech.github.io/Affil1/robots.txt"
+      ],
+      "impact": "Discoverability, not correctness. The file is kept correctly formatted for any crawler that does read it; canonicals and the sitemap carry the load if it is ignored.",
+      "blocks": "nothing — but Search Console submission (Q-11 / S-03) is the required discovery step, not an optional one"
     }
   ]
 }

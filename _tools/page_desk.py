@@ -1,6 +1,12 @@
 """About, sources, ledger, brief and the 404 page."""
 
 from release_panels import render as release_panel
+import json as _json
+import pathlib as _pathlib
+
+from content import GUIDES as _GUIDES
+
+_asset_n = len(_json.load(open(_pathlib.Path(__file__).resolve().parent.parent / "src" / "data" / "images.json", encoding="utf-8"))["assets"])
 
 from layout import (approved_amazon_urls,DISCLOSURE, SITE_NAME, TRACKING_ID, blank, esc, eyebrow,
                     outbound, page, pagehead, rel, section, table)
@@ -57,10 +63,10 @@ def build_about(page_dir, sources, meta):
     <p>This site sets no cookies, loads no third-party scripts, calls no external APIs and embeds no fonts from a CDN. The typefaces are served from this repository. The analytics client is present but inert: it writes to session storage and transmits nothing. There is no form, no newsletter and no comment system, so the site holds no personal data at all.</p>
 
     <h2 id="imagery">Imagery</h2>
-    <p>All eight images are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
+    <p>All {_asset_n} images are AI-generated illustrations, labelled where they appear and never presented as a photograph of a product. <a href="{esc(rel(d, 'review/images.html'))}">Every asset is listed</a> with the rule it follows.</p>
 
     <h2 id="who">Who wrote this</h2>
-    <p>No author is named, because there is no person whose name would be accurate to put here. This is the site's largest weakness and it is recorded as FLG-006 rather than papered over with a stock biography and an invented credential. A named editor with a true description of what they did is suggestion S-03.</p>
+    <p>No author is named, because there is no person whose name would be accurate to put here. This is the site's largest weakness and it is recorded as FLG-006 rather than papered over with a stock biography and an invented credential. A named editor with a true description of what they did is suggestion S-02.</p>
   </div>
   <aside class="record-side">
     <div class="side-card"><h2>At a glance</h2><dl class="side-dl">
@@ -144,6 +150,8 @@ def build_brief(page_dir, products, questions, flags, meta):
     n_q = len(questions["questions"])
     n_open = sum(1 for q in questions["questions"] if not q.get("answered"))
     n_high = sum(1 for f in flags["flags"] if f["severity"] == "high")
+    n_flags = len(flags["flags"])
+    n_guides = len(_GUIDES)
     body = f"""{pagehead(
         'Executive summary',
         'The short version,<br>for someone with four minutes',
@@ -158,7 +166,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A single canonical static site: a product-led front page, five picks in two categories, eight question-shaped guides, a per-product note for every item, a comparison table, a decision register of twenty-two questions, a suggestion queue with three paths, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure, an unapproved tagged Amazon link or a reintroduced price.</p>
+    <p>A single canonical static site: a product-led front page, five picks in two categories, {n_guides} question-shaped guides, a per-product note for every item, a comparison table, a decision register of {n_q} questions, a suggestion queue with three paths, {n_flags} entries in the review queue, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure, an unapproved tagged Amazon link or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>

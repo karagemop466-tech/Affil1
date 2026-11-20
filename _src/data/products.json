@@ -30,7 +30,8 @@
         ]
       }
     ],
-    "identity_caveat": "On 2026-11-20 this session observed P-04 → B0DHZTCNR5 and P-05 → B0DZFD6R9Z. A parallel session first recorded the opposite mapping, then later agreed with this one. The disagreement is published (FLG-016); neither mapping is presented as proof of intent."
+    "identity_caveat": "On 2026-11-20 this session observed P-04 → B0DHZTCNR5 and P-05 → B0DZFD6R9Z. A parallel session first recorded the opposite mapping, then later agreed with this one. The disagreement is published (FLG-016); neither mapping is presented as proof of intent.",
+    "intent_rule": "intent_* fields record what the owner means to ship, confirmed inside the enrolled Associates account: intended_asin, intended_listing_url, intended_confirmed_on, intent_source. They stay null until that confirmation happens and are never filled from the observed redirect — observed_asin and observed_url record what the link actually opened, and the two sets are never merged. Tagged buy links are emitted only for account-approved URLs (tools/paid_link_gate.py)."
   },
   "products": [
     {
@@ -40,6 +41,9 @@
       "submitted_code": "B04G1MEwY",
       "submitted_code_length": 9,
       "intended_asin": null,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intent_source": null,
       "observed_asin": "B0CDY277D3",
       "observed_asin_length": 10,
       "observed_url": "https://www.amazon.com/dp/B0CDY277D3",
@@ -93,6 +97,9 @@
       "submitted_code": "B02NbDxp3",
       "submitted_code_length": 9,
       "intended_asin": null,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intent_source": null,
       "observed_asin": "B09B7SB46R",
       "observed_asin_length": 10,
       "observed_url": "https://www.amazon.com/dp/B09B7SB46R",
@@ -145,6 +152,9 @@
       "submitted_code": "B00hJ57DV",
       "submitted_code_length": 9,
       "intended_asin": null,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intent_source": null,
       "observed_asin": "B08DKYBTPH",
       "observed_asin_length": 10,
       "observed_url": "https://www.amazon.com/dp/B08DKYBTPH",
@@ -198,6 +208,9 @@
       "submitted_code": "B0c8moW59",
       "submitted_code_length": 9,
       "intended_asin": null,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intent_source": null,
       "observed_asin": "B0DHZTCNR5",
       "observed_asin_length": 10,
       "observed_url": "https://www.amazon.com/dp/B0DHZTCNR5",
@@ -252,6 +265,9 @@
       "submitted_code": "B0f3GKalj",
       "submitted_code_length": 9,
       "intended_asin": null,
+      "intended_listing_url": null,
+      "intended_confirmed_on": null,
+      "intent_source": null,
       "observed_asin": "B0DZFD6R9Z",
       "observed_asin_length": 10,
       "observed_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
