@@ -410,6 +410,21 @@
         "https://www.amazon.com/dp/B0DZFD6R9Z",
         "https://affiliate-program.amazon.com/help/operating/agreement"
       ]
+    },
+    {
+      "id": "FLG-029",
+      "severity": "high",
+      "title": "The 'Add to basket' links carry no tag and are not Special Links",
+      "expected": "Every link to an Amazon Site that is meant to earn commission uses the Associates ID as a URL parameter (Program Policies 2(b): 'you must include your Associates ID or \"tag\" ... as a parameter in the URL of each link you place on your Site to an Amazon Site'), and Amazon notes that purchases can be disqualified when 'the links from your site to the relevant Amazon Site are not properly formatted' (Commission Income Statement 2(g)).",
+      "found": "Both the front page and the products page publish five 'Add to basket' links at https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=<ASIN>&Quantity.1=1 with no tag. They are marked rel=\"sponsored\" and labelled 'paid link', so they read as earning links while being incapable of attributing a purchase.",
+      "impact": "A reader who uses them is taken to an Amazon cart that no Associated account is attached to. The site earns nothing, and the button is the most prominent call to action on the page.",
+      "reading": "The cart permalink was added as a reference layer next to the listing link and is treated by the build as a permitted non-tag URL. It is not. Program Policies 2(b) applies to every link placed on the site to an Amazon Site, and the safe reading of a cart permalink is that it is a link to an Amazon Site. Either it carries the tag, or it is not presented as a buy action.",
+      "blocks": "any claim that the primary call to action can earn, and any traffic spend",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "_src/data/_links.json cart endpoint row",
+        "One click on an Add to basket button, then Reports → Orders"
+      ]
     }
   ]
 }

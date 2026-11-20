@@ -54,12 +54,12 @@ def build(page_dir):
             "n": "02",
             "title": "Change one Pages setting",
             "time": "two minutes",
-            "why": "The live site is currently serving its own source code and five retired storefronts. "
-                   "Search engines are being invited into all of it by robots.txt.",
+            "why": "The live host serves the working papers as well as the shop: the build tools, the data "
+                   "registers and the retired editions all resolve. robots.txt invites crawlers into all of it.",
             "does": "Repository Settings → Pages → set the source to GitHub Actions so the staged build is what "
                     "gets published, not the repository root.",
-            "then": "Everything under /tools/, /src/, /archive/ and /decision-support/ stops resolving, and the "
-                    "site a crawler sees is the site the build makes.",
+            "then": "Everything outside the published tree stops resolving, and the site a crawler sees is "
+                    "the site the build makes.",
             "offer": "OFF-02",
         },
         {
@@ -114,7 +114,7 @@ def build(page_dir):
         + section(f"""
 <div class="callout">
   <h2>If you only do one thing</h2>
-  <p>Step 1. The site is already published, already dislclosed above the fold, already marked as paid links, and
+  <p>Step 1. The site is already published, already disclosed above the fold, already marked as paid links, and
   already free of invented prices and ratings. What it cannot do is tell you whether any of it is being credited
   to you. Ten minutes in Associates Central converts that from a question into a fact.</p>
   <p class="callout-links">
@@ -123,18 +123,18 @@ def build(page_dir):
 </div>""", cls="section-tint")
         + section(f"""
 <div class="sec-head"><div>{eyebrow('What is already done')}<h2>The list is shorter than it looks</h2></div>
-<p>These were finished before this page existed. They are the reason only three steps remain.</p></div>
+<p>The reason the list of work is as short as it is.</p></div>
 <div class="donelist">
   <div><span class="pill pill-ok">Done</span><p>Five product links opened and matched to their destinations, by three separate sessions.</p></div>
   <div><span class="pill pill-ok">Done</span><p>A disclosure strip above the fold on every page, with the required sentence verbatim, plus a plain-language version.</p></div>
   <div><span class="pill pill-ok">Done</span><p>Every outbound Amazon link marked <code>rel="sponsored nofollow noopener"</code>.</p></div>
   <div><span class="pill pill-ok">Done</span><p>No price, rating, review count or stock figure anywhere, enforced by the build gate.</p></div>
-  <div><span class="pill pill-ok">Done</span><p>Nine question-shaped guides, a sitemap, an RSS feed, structured data and canonical tags.</p></div>
+  <div><span class="pill pill-ok">Done</span><p>Question-shaped guides, a sitemap, an RSS feed, structured data and canonical tags.</p></div>
   <div><span class="pill pill-ok">Done</span><p>An add-to-basket path on the front page, so a decided reader can act in one click.</p></div>
 </div>""", cls="")
         + section(f"""
-<div class="sec-head"><div>{eyebrow('The part that blocks everything')}<h2>The five high flags</h2></div>
-<p>Unchanged from the review queue. All five trace back to not being able to see inside an Associates account.</p></div>
+<div class="sec-head"><div>{eyebrow('The part that blocks everything')}<h2>The high flags</h2></div>
+<p>Unchanged from the review queue. Nearly all of them trace back to one thing: not being able to see inside an Associates account.</p></div>
 {high_table}
 <p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'review/index.html'))}">All 22 flags <span aria-hidden="true">&rarr;</span></a></p>""", cls="section-tint")
         + section(f"""

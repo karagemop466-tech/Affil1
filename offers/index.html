@@ -56,9 +56,9 @@
 <div class="callout">
   <h2>The arithmetic says start with OFF-01</h2>
   <p><strong>Confirm one Special Link in the Associates account and read the click report.</strong> The only task on this list that decides whether the site can earn at all.</p>
-  <p>It wins on the two heaviest factors at once: it is the only offer that unblocks money, and it
-  removes the largest claim the site makes without proof. It also needs the most from you, which is
-  exactly why it has not happened yet — and why nothing else moves far until it does.</p>
+  <p>It scores highest on the heaviest factor and ties the maximum on the second, which is why the
+  order puts it first. It also costs more owner time than anything else here, which is exactly why it
+  has not happened yet — and why nothing else moves far until it does.</p>
   <p class="callout-links"><a class="tlink" href="#OFF-01">Read that offer <span aria-hidden="true">&rarr;</span></a></p>
 </div></div></section><section class="section "><div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">The offers</p><h2>What each one actually changes</h2></div>
@@ -85,7 +85,7 @@
   <p class="offer-lede">Main now publishes no synthetic tag. The next step is to prove one, not to re-add it.</p>
   <dl class="q-dl">
     <div><dt>What changes</dt><dd>The register currently publishes zero tagged links: every Amazon destination is the plain listing, which is the honest state while no Special Link is approved. Nothing further should be tagged until a click is seen in the Associates report.</dd></div>
-    <div><dt>Why this rests on evidence</dt><dd>Verified in this session: layout.approved_amazon_urls() returns {} and permitted_amazon_urls() contains only plain /dp/ listings and untagged cart permalinks. tools/check.py now refuses any Amazon product URL outside that set. An earlier revision of this repository synthesised ?tag= from a fallback; that is gone.</dd></div>
+    <div><dt>Why this rests on evidence</dt><dd>Verified in this session: layout.approved_amazon_urls() returns {} and permitted_amazon_urls() contains only plain /dp/ listings and untagged cart permalinks. _tools/check.py refuses any Amazon product URL outside that set. An earlier revision synthesised ?tag= from a fallback; that is gone.</dd></div>
     <div><dt>What the owner does</dt><dd>Nothing. The safe state is live. It changes only when OFF-01 produces a confirmed click.</dd></div>
     <div><dt>If it goes wrong</dt><dd>If a tag is re-added without a confirmed click, the site returns to asserting a relationship it cannot prove; the checker now fails the build in that case.</dd></div>
     <div><dt>What it unlocks</dt><dd>Nothing, but it is the safest default while OFF-01 is open.</dd></div>
@@ -100,8 +100,8 @@
   <h3>Fix the deploy scope so the published site is only the published site</h3>
   <p class="offer-lede">Stop serving the build scripts, the data registers and five retired storefronts.</p>
   <dl class="q-dl">
-    <div><dt>What changes</dt><dd>Pages switches from &#x27;deploy from the repository root&#x27; to the staged artefact, so /tools/, /src/, /archive/ and the retired editions stop resolving.</dd></div>
-    <div><dt>Why this rests on evidence</dt><dd>This session fetched the live https://karagemop466-tech.github.io/Affil1/tools/build.py and .../archive/notes-edition/index.html. Both returned 200 with content. github pages API reports build_type legacy, source.path &#x27;/&#x27;.</dd></div>
+    <div><dt>What changes</dt><dd>Pages switches from &#x27;deploy from the repository root&#x27; to the staged artefact, so the tooling, the data registers, /_archive/ and the retired editions stop resolving.</dd></div>
+    <div><dt>Why this rests on evidence</dt><dd>This session fetched the live https://karagemop466-tech.github.io/Affil1/tools/build.py and .../archive/notes-edition/index.html. Both returned 200 with content. The pages API reports build_type legacy, source.path &quot;/&quot;.</dd></div>
     <div><dt>What the owner does</dt><dd>Settings → Pages → Source: GitHub Actions (one dropdown), or fix the path so the staged directory is what is served.</dd></div>
     <div><dt>If it goes wrong</dt><dd>The site would go offline if the workflow is misconfigured; the previous commit stays deployable until it is right, and the owner should verify before closing the tab.</dd></div>
     <div><dt>What it unlocks</dt><dd>Every &#x27;one site to index&#x27; claim the brief makes.</dd></div>
@@ -132,7 +132,7 @@
   <h3>Re-draw the eight photographic images so the site has one visual language</h3>
   <p class="offer-lede">A photograph beside a buy button reads as evidence. Half the image set was photographic.</p>
   <dl class="q-dl">
-    <div><dt>What changes</dt><dd>Eight of seventeen in-use images replaced with engravings in the same style as the other nine, including the two on product pages P-02 and P-04.</dd></div>
+    <div><dt>What changes</dt><dd>Eight photographic images replaced with engravings in the same style as the rest of the set, including the two on product pages P-02 and P-04.</dd></div>
     <div><dt>Why this rests on evidence</dt><dd>This session opened every image the live pages reference: 8 were photographic renders and 9 were engravings. _src/data/images.json described the set as illustrative only. A product page that says &#x27;not a photograph of P-02&#x27; under a photograph of an oven is the exact confusion the rule exists to prevent.</dd></div>
     <div><dt>What the owner does</dt><dd>Nothing to approve if the re-draw is acceptable; license real photography only if that is preferred, and then record its provenance.</dd></div>
     <div><dt>If it goes wrong</dt><dd>The replacement images are illustrations, so a weak drawing is a design problem, never a false claim about a product.</dd></div>

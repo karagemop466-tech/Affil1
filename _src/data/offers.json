@@ -73,8 +73,8 @@
       "id": "OFF-02",
       "title": "Fix the deploy scope so the published site is only the published site",
       "one_line": "Stop serving the build scripts, the data registers and five retired storefronts.",
-      "what_changes": "Pages switches from 'deploy from the repository root' to the staged artefact, so /tools/, /src/, /archive/ and the retired editions stop resolving.",
-      "evidence_for": "This session fetched the live https://karagemop466-tech.github.io/Affil1/tools/build.py and .../archive/notes-edition/index.html. Both returned 200 with content. github pages API reports build_type legacy, source.path '/'.",
+      "what_changes": "Pages switches from 'deploy from the repository root' to the staged artefact, so the tooling, the data registers, /_archive/ and the retired editions stop resolving.",
+      "evidence_for": "This session fetched the live https://karagemop466-tech.github.io/Affil1/tools/build.py and .../archive/notes-edition/index.html. Both returned 200 with content. The pages API reports build_type legacy, source.path \"/\".",
       "evidence_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configure-publishing-source",
       "scores": {
         "unblocks-money": 0,
@@ -93,7 +93,7 @@
       "title": "Keep the tag withdrawn until one click is confirmed",
       "one_line": "Main now publishes no synthetic tag. The next step is to prove one, not to re-add it.",
       "what_changes": "The register currently publishes zero tagged links: every Amazon destination is the plain listing, which is the honest state while no Special Link is approved. Nothing further should be tagged until a click is seen in the Associates report.",
-      "evidence_for": "Verified in this session: layout.approved_amazon_urls() returns {} and permitted_amazon_urls() contains only plain /dp/ listings and untagged cart permalinks. tools/check.py now refuses any Amazon product URL outside that set. An earlier revision of this repository synthesised ?tag= from a fallback; that is gone.",
+      "evidence_for": "Verified in this session: layout.approved_amazon_urls() returns {} and permitted_amazon_urls() contains only plain /dp/ listings and untagged cart permalinks. _tools/check.py refuses any Amazon product URL outside that set. An earlier revision synthesised ?tag= from a fallback; that is gone.",
       "evidence_url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "scores": {
         "unblocks-money": 2,
@@ -130,7 +130,7 @@
       "id": "OFF-05",
       "title": "Re-draw the eight photographic images so the site has one visual language",
       "one_line": "A photograph beside a buy button reads as evidence. Half the image set was photographic.",
-      "what_changes": "Eight of seventeen in-use images replaced with engravings in the same style as the other nine, including the two on product pages P-02 and P-04.",
+      "what_changes": "Eight photographic images replaced with engravings in the same style as the rest of the set, including the two on product pages P-02 and P-04.",
       "evidence_for": "This session opened every image the live pages reference: 8 were photographic renders and 9 were engravings. _src/data/images.json described the set as illustrative only. A product page that says 'not a photograph of P-02' under a photograph of an oven is the exact confusion the rule exists to prevent.",
       "evidence_url": "",
       "scores": {
