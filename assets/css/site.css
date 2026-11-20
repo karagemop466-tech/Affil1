@@ -1030,13 +1030,13 @@ a:focus-visible, button:focus-visible {
 .feature-body p { margin: 0; font-size: .92rem; color: var(--ink-2); }
 .feature-meta { margin-top: auto !important; font-size: .74rem !important; color: var(--ink-3) !important; }
 
-/* first feature on the front page is the big one */
-.section > .feature-card { flex-direction: row; }
-.section > .feature-card .card-media { flex: 0 0 46%; border-bottom: 0; border-right: 1px solid var(--line); }
-.section > .feature-card .card-media img { height: 100%; min-height: 300px; }
-.section > .feature-card .feature-body { padding: 30px 34px; gap: 12px; }
-.section > .feature-card .feature-body h3 { font-size: clamp(1.5rem, 2.6vw, 2.15rem); }
-.section > .feature-card .feature-body p { font-size: 1rem; }
+/* first feature on the front page is the big one (it sits inside .wrap) */
+.wrap > .feature-card { flex-direction: row; }
+.wrap > .feature-card .card-media { flex: 0 0 46%; border-bottom: 0; border-right: 1px solid var(--line); }
+.wrap > .feature-card .card-media img { height: 100%; min-height: 320px; }
+.wrap > .feature-card .feature-body { padding: 32px 36px; gap: 12px; }
+.wrap > .feature-card .feature-body h3 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); }
+.wrap > .feature-card .feature-body p { font-size: 1.02rem; line-height: 1.55; }
 
 /* --- shortlist: save-to-list ----------------------------------- */
 .save-btn {
@@ -1094,10 +1094,10 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-media { order: -1; }
-  .card-rail, .split, .section > .feature-card { grid-template-columns: 1fr; }
-  .section > .feature-card { flex-direction: column; }
-  .section > .feature-card .card-media { flex: none; border-right: 0; border-bottom: 1px solid var(--line); }
-  .section > .feature-card .card-media img { min-height: 0; height: 200px; }
+  .card-rail, .split { grid-template-columns: 1fr; }
+  .wrap > .feature-card { flex-direction: column; }
+  .wrap > .feature-card .card-media { flex: none; border-right: 0; border-bottom: 1px solid var(--line); }
+  .wrap > .feature-card .card-media img { min-height: 0; height: 200px; }
   .topic-block li { grid-template-columns: 1fr; gap: 4px; }
   .strip-inner .strip-end { margin-left: 0; }
 }
