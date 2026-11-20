@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Product-intent confirmation record",
+    "trackingId": "shopnow047c-20",
+    "note": "Per the verification rule, every value that cannot be confirmed from an official source is left blank and flagged unverified. Nothing is inferred. The sandbox cannot reach amazon.com or link.amazon.com, so all five submitted short links are unverified as of the build date. The exact compliance status of the supplied short links is unresolved (see FLG-003); they are not declared invalid."
+  },
+  "products": [
+    {
+      "id": "prod-1",
+      "submittedLink": "https://link.amazon/B04G1MEwY",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "",
+      "redirectTargetSource": "",
+      "status": "unverified",
+      "verificationNote": "Could not reach Amazon/link.amazon from the build environment. ASIN, listing URL, confirmation date, source, and redirect target left blank by design.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-2",
+      "submittedLink": "https://link.amazon/B02NbDxp3",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "",
+      "redirectTargetSource": "",
+      "status": "unverified",
+      "verificationNote": "Could not reach Amazon/link.amazon from the build environment. ASIN, listing URL, confirmation date, source, and redirect target left blank by design.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-3",
+      "submittedLink": "https://link.amazon/B00hJ57DV",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "",
+      "redirectTargetSource": "",
+      "status": "unverified",
+      "verificationNote": "Could not reach Amazon/link.amazon from the build environment. ASIN, listing URL, confirmation date, source, and redirect target left blank by design.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-4",
+      "submittedLink": "https://link.amazon/B0c8moW59",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "",
+      "redirectTargetSource": "",
+      "status": "unverified",
+      "verificationNote": "Could not reach Amazon/link.amazon from the build environment. ASIN, listing URL, confirmation date, source, and redirect target left blank by design.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    },
+    {
+      "id": "prod-5",
+      "submittedLink": "https://link.amazon/B0f3GKalj",
+      "intendedAsin": "",
+      "officialListingUrl": "",
+      "confirmationDate": "",
+      "source": "",
+      "observedRedirectTarget": "",
+      "redirectTargetSource": "",
+      "status": "unverified",
+      "verificationNote": "Could not reach Amazon/link.amazon from the build environment. ASIN, listing URL, confirmation date, source, and redirect target left blank by design.",
+      "sponsored": true,
+      "rel": "sponsored nofollow"
+    }
+  ]
+}
