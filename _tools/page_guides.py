@@ -128,6 +128,16 @@ def build_guide(page_dir, g, meta):
     idx = [x["slug"] for x in GUIDES].index(g["slug"])
     nxt = GUIDES[(idx + 1) % len(GUIDES)]
 
+    sources_html = ""
+    if g.get("sources"):
+        lis = "".join(
+            f'<li>{outbound(d, url, esc(label))}</li>' for label, url in g["sources"]
+        )
+        sources_html = (
+            '<div class="article-sources"><p class="q-label">Sources</p>'
+            f'<ul class="side-links">{lis}</ul></div>'
+        )
+
     body = f"""{breadcrumbs(d, [("guides/index.html", "Guides")])}
 <header class="article-head"><div class="wrap narrow">
   {eyebrow(g['cluster'] + ' · ' + str(g['read_minutes']) + ' min read')}
@@ -143,6 +153,7 @@ def build_guide(page_dir, g, meta):
   <article class="article-body">
     {''.join(article)}
     <p class="article-close">{esc(g['closing'])}</p>
+    {sources_html}
   </article>
   <aside class="article-side">
     <div class="side-card">
