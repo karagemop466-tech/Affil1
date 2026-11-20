@@ -425,7 +425,7 @@
    {
     "id": "R-06",
     "entry": "The same-day audit that aligned the two product registers",
-    "wording": "data/verification-audit.json (sessions a4ab7faf / 8206a8d0 , window 05:15–05:22Z) records, for each submitted link, the final URL and page title as returned by a platform-level fetcher, with its own limitations stated: bot-like mobile landing variant, point-in-time observation, \"observations are EVIDENCE, NOT confirmation of submitter intent\". Intended-identity fields were left null for the enrolled workflow to fill.",
+    "wording": "data/verification-audit.json (sessions a4ab7faf / 8206a8d0 , window 05:15–05:22Z) records, for each submitted link, the final URL and page title as returned by a platform-level fetcher, with its own limitations stated: bot-like mobile landing variant, point-in-time observation, \"observations are EVIDENCE, NOT confirmation of submitter intent\". Intended-identity fields were left null for the enrolled workflow to fill. A later observation contradicts its thermometer pair (FLG-016), which is exactly why these rows stay open.",
     "read": "2026-11-20",
     "status": "third-party in-repo"
    }
@@ -440,7 +440,7 @@
    },
    {
     "id": "IRR-02",
-    "finding": "Two registers on this branch contradicted each other on three of five links — and a later audit settled it. Before this section was drafted, src/data/products.json recorded product-page destinations for P-03/P-05 while data/confirmations.json recorded the Amazon homepage for both and a bot-checkpoint for P-04. An independent same-day audit ( data/verification-audit.json , sessions a4ab7faf / 8206a8d0 ) fetched all five links, observed /dp/ destinations for each, and the registers were aligned to it.",
+    "finding": "Two registers on this branch contradicted each other on three of five links — and a later audit settled it. Before this section was drafted, src/data/products.json recorded product-page destinations for P-03/P-05 while data/confirmations.json recorded the Amazon homepage for both and a bot-checkpoint for P-04. An independent same-day audit ( data/verification-audit.json , sessions a4ab7faf / 8206a8d0 ) fetched all five links, observed /dp/ destinations for each, and the registers were aligned to it — but a different session's fetch reports the two thermometer routes swapped (repo flag FLG-016 ), so at least one of those observations is wrong and none is reproducible from here.",
     "evidence": "src/data/products.json ( observed_redirect_asin P-03 B08DKYBTPH , P-05 B0DZFD6R9Z ) vs data/confirmations.json as revised at 05:3xZ, which now agrees — with data/verification-audit.json as the third witness. The audit's own limitations note that its fetcher rendered bot-variant mobile pages and that observations are point-in-time.",
     "action": "Resolved as a contradiction; still open as evidence. The audit came from other sandboxes, so the enrolled workflow must still reproduce destinations before any monetised claim. Keep one authoritative register — there are now three files describing the same five links.",
     "severity": "Med · was High"
