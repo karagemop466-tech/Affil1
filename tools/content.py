@@ -162,7 +162,7 @@ GUIDES = [
             {
                 "h": "What the register can and cannot tell you here",
                 "p": [
-                    "Three of the resolved listings state in their titles that the basket or baskets are dishwasher-safe, in the sellers' wording (P-01, P-03, and by a different phrasing P-02's accessory set). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
+                    "Two observed listings state in their titles that the baskets are dishwasher-safe, in the sellers' wording (P-01 and P-03). Those are seller statements, not manufacturer care instructions, and this site has not checked them against a manual.",
                     "No dimensions are published for any of these products on this site, because dimensions were not confirmed from an official specification sheet in this build. That is a gap, and it is on the review page rather than buried."
                 ]
             }
@@ -211,7 +211,7 @@ GUIDES = [
             {
                 "h": "Where the thermometer fits, and where it does not",
                 "p": [
-                    "One of the products submitted for this site (P-05) is not an air fryer. It is a wireless meat thermometer whose listing states three probes and a 1000\u00b0F heat rating, and which names air fryers among its intended uses.",
+                    "An earlier observation associated P-05 with a wireless meat thermometer. Another observation reached a different thermometer; the intended destination remains unconfirmed. See the review queue before relying on either identification.",
                     "That is a useful illustration of the multi-function question rather than an exception to it. A probe does one job \u2014 it tells you the internal temperature of something \u2014 and it does that job in an oven, a pan, a smoker or an air fryer. It is a single-purpose tool that travels between appliances, which is often a better purchase than an appliance that claims to do the thermometer's job as one of nine features.",
                     "This site has not tested it, and its accuracy is not stated here."
                 ]

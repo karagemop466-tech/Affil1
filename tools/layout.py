@@ -205,7 +205,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
-<div class="wrap" role="note"><p><strong>Destination update:</strong> A later check reached a listing for P-04 and a different listing for P-05. Earlier product records below are historical observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
+<div class="wrap" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
 {body}
 </main>
 {footer(page_dir)}
