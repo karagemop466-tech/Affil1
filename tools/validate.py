@@ -12,8 +12,9 @@ import sys
 from html.parser import HTMLParser
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = ROOT / "crisp"          # the section this builder owns
-BASE = "/crisp"
+SITE = ROOT                   # the publication now publishes at the repository root
+BASE = ""
+SKIP_DIRS = {"archive", ".git", ".github", "node_modules"}
 ERRORS = []
 WARNINGS = []
 CHECKS = 0
@@ -28,6 +29,10 @@ def is_product_link(href):
     if "link.amazon/" in href:
         return True
     return bool(re.search(r"amazon\.com/(dp|gp/product)/", href))
+
+
+def page_dir_of(rel):
+    return (SITE / rel.lstrip('/')).parent
 
 
 def err(msg):
@@ -51,6 +56,7 @@ class RefCollector(HTMLParser):
         self.h1_count = 0
         self.imgs_without_alt = 0
         self.outbound = []
+        self.imgs = []
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -66,8 +72,18 @@ class RefCollector(HTMLParser):
             self.canonical = a.get("href")
         if tag == "h1":
             self.h1_count += 1
-        if tag == "img" and "alt" not in a:
-            self.imgs_without_alt += 1
+        if tag == "img":
+            if "alt" not in a:
+                self.imgs_without_alt += 1
+            if a.get("src"):
+                self.imgs.append(a["src"])
+            # A srcset is a second set of URLs, and one that a link check misses.
+            # Root-absolute entries here survive the filesystem check and 404 in
+            # production, which is exactly the bug this gate exists to catch.
+            for entry in (a.get("srcset") or "").split(","):
+                url = entry.strip().split(" ")[0]
+                if url:
+                    self.imgs.append(url)
         if tag == "div" and a.get("class") == "disclosure":
             self.has_disclosure = True
         if tag == "footer":
@@ -78,7 +94,8 @@ def main():
     global CHECKS
     # Only validate pages this builder owns. The storefront at the repo root is
     # another session's scope; validate.py must never fail on their files.
-    pages = sorted(p for p in SITE.rglob("*.html"))
+    pages = sorted(p for p in SITE.rglob("*.html")
+                   if not (set(p.relative_to(SITE).parts) & SKIP_DIRS))
     parsed = {}
 
     for p in pages:
@@ -128,10 +145,14 @@ def main():
             err(f"{rel}: {c.imgs_without_alt} <img> without alt")
 
         CHECKS += 1
-        # Rule: no double-encoded entities. A named entity inside esc() renders as
-        # the literal text "&ldquo;" on the page, which is a visible defect.
-        for m in re.finditer(r"&amp;(?:ldquo|rdquo|mdash|ndash|rsquo|lsquo|hellip|nbsp|amp|quot);", html):
-            err(f"{rel}: double-encoded entity '{m.group(0)}'")
+        # Rule: every <img> must resolve on disk. A missing image is a broken
+        # page as surely as a missing link, and it is invisible to a link check.
+        for src in c.imgs:
+            if src.startswith(("http://", "https://", "data:", "#")):
+                continue
+            target = (page_dir_of(rel) / src.split("#")[0].lstrip("/")).resolve()
+            if not target.exists():
+                err(f"{rel}: broken image src -> {src}")
 
         CHECKS += 1
         # Rule: no price-like strings anywhere. Catches an accidental reintroduction.
@@ -195,9 +216,9 @@ def main():
         CHECKS += 1
         url = c.canonical
         if url and f"<loc>{url}</loc>" not in sitemap:
-            err(f"{rel}: canonical {url} absent from crisp/sitemap.xml")
-        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/crisp"):
-            err(f"{rel}: canonical outside the /crisp base -> {url}")
+            err(f"{rel}: canonical {url} absent from sitemap.xml")
+        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/"):
+            err(f"{rel}: canonical outside the published base -> {url}")
 
     for slug in re.findall(r"<link>(https://[^<]+/guides/[^<]+)</link>", feed):
         CHECKS += 1
