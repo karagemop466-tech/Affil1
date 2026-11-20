@@ -1,0 +1,10 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Local collector output. Never commit collected visitor data.
+data/
+api/data/
+
+# Build artefacts
+_site/
