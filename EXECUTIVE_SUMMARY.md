@@ -267,20 +267,52 @@ observation would be a link this project invented; Program Policies 2(a)–(b)
 require Special Links to be the account's own. That stays blocked until the owner
 generates them in Associates Central — it is row **D-01** on `/decisions/`.
 
+### Merge with main, and the cart-link bypass this closed
+
+While this branch worked, `origin/main` advanced 356 commits and then 4 more. Both
+were merged in (never rebased, so no other session's history was rewritten). The
+generated HTML conflicted in 30 files and was resolved by **rebuilding from the
+merged sources**, not by hand-editing output.
+
+The second merge mattered beyond bookkeeping. Main had added `_tools/cta.py`, which
+rendered an "Add to basket" cart permalink for every product and appended the
+Associates tag to a URL this project built itself. That bypasses `buy_url()`, the
+single gate every other Amazon link goes through, and it is precisely what
+`paid_link_gate.py` exists to prevent: Program Policies 2(a)–(b) require the
+account's *own* Special Links, not a tag added to a redirect observation.
+
+Main also logged it independently as **FLG-029**. The two changes are
+complementary — main wrote the flag, this branch closed the defect — so the merge
+was clean. `cta.pair()` now renders in three states:
+
+1. **Cart door**, only when `paid_link_gate` holds an account-approved Special Link
+   for that ASIN.
+2. **Listing door** otherwise: the primary button becomes the official listing for
+   the observed ASIN via `buy_url()` — permitted, still `rel="sponsored nofollow
+   noopener"`, labelled "Live price and stock" — with one quiet line explaining why
+   there is no one-click basket.
+3. **Never** a synthesised tag.
+
+No published page contains a `cart/add.html` URL. `_tools/test_cta_gate.py` asserts
+all three states, including that a permitted listing never degrades to a dead
+"withheld" notice. FLG-029 now carries a resolution and a "resolved in code" pill on
+`/review/`, because a closed flag that still reads as open on the page a reviewer
+trusts is its own defect.
+
 ### Verification run on this branch (all green, 2026-11-20)
 
 | Gate | Command | Result |
 |---|---|---|
-| Build | `python3 _tools/build.py` | 32 pages, no errors |
-| Static checks | `python3 _tools/check.py` | 32 pages, 0 errors, 0 warnings |
-| Relative links | `python3 _tools/check_local_links.py` | 66 pages, 0 broken |
-| Paid-link gate | `python3 -m unittest discover -s _tools -p 'test_*.py'` | 6 tests, OK |
-| Pre-publish | `python3 _tools/validate.py` | 1704 checks, 0 warnings |
+| Build | `python3 _tools/build.py` | 35 pages, no errors |
+| Static checks | `python3 _tools/check.py` | 35 pages, 0 errors, 0 warnings |
+| Relative links | `python3 _tools/check_local_links.py` | 69 pages, 0 broken |
+| Paid-link + cart gate | `python3 -m unittest discover -s _tools -p 'test_*.py'` | 10 tests, OK |
+| Pre-publish | `python3 _tools/validate.py` | 1957 checks, 0 warnings |
 | Decision Desk | `python3 _decision-support/validate.py` | PASS, 6 check families |
 | Almanac edition | `python3 _platform/verify_edition.py` | 1965 line checks, 0 errors |
 | Single surface | `python3 _tools/sweep_surfaces.py --dry-run` | 0 files moved |
 | Reproducible | rebuild and `diff -r` | zero drift |
-| Stage | `python3 _tools/stage.py _site` | 81 files, 32 pages |
+| Stage | `python3 _tools/stage.py _site` | 87 files, 35 pages |
 
 Sources re-read for this pass: [Associates Program
 Policies](https://affiliate-program.amazon.com/help/operating/policies) (Participation
