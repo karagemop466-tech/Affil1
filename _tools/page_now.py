@@ -95,7 +95,7 @@ def build(page_dir):
         for f in flags if f.get("severity") == "high"
     ]
     high_table = table(["Ref", "Severity", "What is flagged"], flag_rows, cls="flagtable",
-                       caption="The five high-severity flags, unchanged from the review queue")
+                       caption=f"All {len(flag_rows)} high-severity flags, unchanged from the review queue")
 
     body = (
         pagehead(
