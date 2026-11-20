@@ -124,7 +124,7 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
     r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
-    r"sell\.amazon\.com|sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
+    r"sell\.amazon\.com|support\.google\.com|sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
     r"www\.ftc\.gov)",
     re.I,
 )
@@ -298,7 +298,7 @@ def check_data():
             err(f"products.json: {p['ref']} observed_asin is not 10 characters")
         if p["submitted_code"] != p["submitted_link"].rsplit("/", 1)[-1]:
             err(f"products.json: {p['ref']} submitted_code does not match the link")
-        if p["intended_asin"] and not all(p.get(k) for k in ("intent_source","intended_listing_url","intent_confirmed_on")):
+        if p["intended_asin"] and not all(p.get(k) for k in ("intended_confirmation_source","intended_listing_url","intended_confirmed_on")):
             err(f"products.json: {p['ref']} intended ASIN lacks independent evidence")
 
     for name in ("sources.json", "questions.json", "suggestions.json", "flags.json", "images.json"):

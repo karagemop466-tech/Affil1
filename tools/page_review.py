@@ -133,11 +133,10 @@ def build_images(page_dir, images, products, meta):
     )
 
 
-def build_measurement(page_dir, meta):
+def build_measurement(page_dir, meta, spec):
     d = page_dir
     import json
     from layout import ROOT
-    spec=json.loads((ROOT/'src/data/events.json').read_text())
     rows=[[e['name'],e['fires_when'],', '.join(e['props']),{'html':outbound(d,'https://github.com/karagemop466-tech/Affil1/blob/main/src/data/events.json','Event definition')}] for e in spec['events']]
     body=pagehead('Privacy & measurement','What gets counted?','Clicks are a signal of interest. Only an authorized Associates report can establish orders.')+section('<p>The self-hosted edition accepts the five events below at its own /api/e endpoint. The static GitHub Pages edition sends none: Pages cannot run the collector.</p>'+table(['Event','Trigger','Dimensions','Source'],rows)+'<p>Only daily totals are written. No IP, raw URL, query, referrer, user agent, cookie or visitor ID is stored by the counter. Entries older than 90 days are pruned on writes. Do Not Track and Global Privacy Control suppress collection. Saved picks and editorial decisions stay in your browser.</p><p>Do not mix preview or test activity with campaign reports. A permanent production collector and consent review remain open.</p>')
     return page(d,title='Privacy and measurement — Crisp &amp; Counter',description='Five first-party event definitions and their privacy limits.',body=body,canonical='review/measurement.html')

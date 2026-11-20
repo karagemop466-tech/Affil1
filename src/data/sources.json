@@ -55,7 +55,7 @@
       "status": "read directly"
     },
     {
-      "id": "SRC-06",
+      "id": "SRC-08",
       "title": "Understanding ASINs",
       "publisher": "Amazon",
       "url": "https://sell.amazon.com/blog/what-is-an-asin",
@@ -63,6 +63,26 @@
       "used_for": "Identifier format and the /dp/ segment.",
       "quote": "It’s a unique 10-character alphanumeric code assigned to every product listed in the Amazon store.",
       "status": "read directly"
+    },
+    {
+      "id": "SRC-06",
+      "title": "Performance report (Search results)",
+      "publisher": "Google Search Console Help",
+      "url": "https://support.google.com/webmasters/answer/7576553",
+      "page_date": "No date shown",
+      "used_for": "Search performance queries, impressions and clicks.",
+      "quote": "The Performance report shows important metrics about how your site performs in Google Search results.",
+      "status": "read directly 2026-11-20"
+    },
+    {
+      "id": "SRC-07",
+      "title": "Verify your site ownership",
+      "publisher": "Google Search Console Help",
+      "url": "https://support.google.com/webmasters/answer/9008080",
+      "page_date": "No date shown",
+      "used_for": "Ownership verification methods.",
+      "quote": "Ownership verification means proving to Search Console that you own a specific website.",
+      "status": "read directly 2026-11-20"
     }
   ],
   "could_not_verify": [

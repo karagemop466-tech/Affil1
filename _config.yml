@@ -47,3 +47,5 @@ exclude:
   - suggestions.html
   - tools
   - vendor
+  - kitchen
+  - measurement
