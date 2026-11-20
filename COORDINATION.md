@@ -265,3 +265,67 @@ Delivered:
 Checks before this merge: tools/build.py reproducible; tools/check.py 0 errors; tools/check_local_links.py 0 broken (27 pages); notes snapshot references validated when live.
 
 Request to the integration owner: port the decision-desk suggestions queue (S-01…S-10 gates) into `suggestions/` and consider the holiday-counter-math guide for the guide set if not duplicative; settle FLG-016 in the enrolled Associates workflow.
+
+
+### Release receipt — arena/b6e07e37-affil1 (done)
+
+Reconciled cleanly against `main` (`4f42810`, after PR #63 and PR #64) while preserving 100% of the canonical consolidated publication and paid-link gate. Direct official source verification completed on 2026-11-20: upgraded `SRC-06` ([eCFR 16 CFR Part 255](https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-255), current through 2026-11-18) from linked-only to verbatim §255.5 wording; upgraded `SRC-08` to directly verified [USDA FSIS Safe Minimum Internal Temperature Chart](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart) (updated Apr 14, 2025); added `SRC-09` ([USDA FSIS Food Thermometers](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers)) and `SRC-10` ([Amazon SP-API Catalog Items v2022-04-01 Reference](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference)). Embedded the official USDA FSIS temperature table (with an official USDA FSIS link on every row) in `guides/thermometer-pairing.html`, added bespoke unbranded instant-read thermometer illustration (`assets/img/instant-thermometer{,-w560,-w900}.jpg`) for `P-04`, and registered it dynamically in `src/data/images.json` / `review/images.html`. All 5 Amazon short links re-verified on 2026-11-20 (`intended_asin` kept separate from `observed_asin`; attribution to `shopnow047c-20` remains flagged until verified in Associates Central). Tracked in [PR #67](https://github.com/karagemop466-tech/Affil1/pull/67).
+
+
+## Delivery record — session arena/ac649871-affil1
+
+- **PR:** https://github.com/karagemop466-tech/Affil1/pull/61 — **MERGED into `main`** (merge commit `2399120`, 2026-11-20T05:54:48Z) after three successive integration rounds with concurrently-merging sessions (PRs #37/#59/#68 era), each resolved without discarding the other session's work.
+- **Deploy:** GitHub Pages build for merge commit `2399120` completed successfully; live site confirmed serving the merged content at https://karagemop466-tech.github.io/Affil1/ (product shelf incl. P-04 destination note + FLG-016 link, guides incl. seasonal, disclosure above the fold).
+- **Landed:** `data/confirmations.json` v2 register (independent verification pass + slug-format check + per-record history), `EXECUTIVE_SUMMARY.md` addendum, this board's session block, and `archive/notes-edition/` (preserved shop-first alternative design: verified shortlist front page, 7 guides, decision desk with suggestions queue S-01…S-10, transparency desk, illustration set).
+- **Open requests for the integration owner:** port the decision-desk suggestions gates into the generated suggestions section; settle FLG-016 (P-04 intended mapping) in the enrolled Associates workflow; confirm tag attribution for `shopnow047c-20` (FLG-002/003) via one SiteStripe test link per product before scaling.
+
+## Session S-5665c5f2 — branch `arena/5665c5f2-affil1` (2026-11-20)
+
+Owner: session `5665c5f2` on branch `arena/5665c5f2-affil1`. Status: **PR #66 merged** at `7eaf1e0` (https://github.com/karagemop466-tech/Affil1/pull/66).
+
+Follow-up: the merge in PR #66 dropped the `holiday-hosting-counter` entry in `src/data/images.json`. The cause was a rebase conflict that was resolved in favour of main on that file. The entry is restored in a follow-up PR. FLG-020 and FLG-021 were not affected and are on main. Branch name follows the board convention `arena/<id>-affil1`; the branch name is fixed for this session.
+
+### What happened
+
+This session branched from `92a3509` and worked for most of the day. `origin/main` then moved through PRs #30, #37, #41 and #50 to `9c9040c`, which covers the same ground. Before opening a PR, every change on the session branch was checked against current main. Most of it was already done on main, so this session **dropped its own versions** and kept only what main still lacks.
+
+| Session item | Result on main at `9c9040c` | Action |
+| --- | --- | --- |
+| T1 Re-verify the five links | Done by `arena/359baa16` in `src/data/reverification.json`. Its P-04 row is unresolved (checkpoint). | Re-fetched this session. See the observation below. Not duplicated. |
+| T2 Client analytics aligned to events, collector | `assets/js/analytics.js` has the five events, sends nothing unless `CC_ANALYTICS_ENABLED`, honours GPC/DNT, sets no cookie. `measurement/collector.py` stores aggregate counts only, in SQLite, counted for operator-approved products only. `tools/check.py` compares client events to `events.json` and forbids cookies. | **Dropped** this session's versions. Main's are stronger. |
+| T3 Wire orphaned guides | Main has its own guide series (10 guides, dated). The four orphan ports are not on main and would duplicate it. | **Dropped**. |
+| T4 Irregularity log, cadence, gate | FLG-001..019 on main. Cadence is S-12 and Q-22. Legacy editions are S-15 and Q-16. Tag rule is `tools/check.py` line 186. | Two new flags added (FLG-020, FLG-021) below. |
+| T5 Executive summary, suggestions, questions | Main has S-01..S-18 and Q-01..Q-22. The duplicates would collide with main's IDs. | **Dropped**. |
+| Tag fix on product links | All product links on main's live pages carry `tag=shopnow047c-20`. Only `archive/` holds untagged links. | **Not needed**; FLG-009 records the old state. |
+
+### Changes in this PR
+
+- `src/data/images.json`: entry for `holiday-hosting-counter`, with `generated_on`, `generated_by` and `depicts_a_real_product` left null (FLG-020).
+- `src/data/flags.json`: **FLG-020** holiday photo has no recorded origin. **FLG-021** `tools/validate.py` fails on the current product schema (`KeyError: 'supplied_path_code_length'`).
+- `review/index.html`, `review/images.html`: regenerated by `tools/build.py`.
+- `COORDINATION.md`: this entry.
+
+### Observation recorded today (no change to registers)
+
+Direct fetches on 2026-11-20 from this session:
+
+- P-01 `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`
+- P-02 `https://link.amazon/B02NbDxp3` → `https://www.amazon.com/dp/B09B7SB46R`
+- P-03 `https://link.amazon/B00hJ57DV` → `https://www.amazon.com/dp/B08DKYBTPH`
+- P-04 `https://link.amazon/B0c8moW59` → `https://www.amazon.com/dp/B0DHZTCNR5` (resolved this session)
+- P-05 `https://link.amazon/B0f3GKalj` → `https://www.amazon.com/dp/B0DZFD6R9Z`
+
+This matches `src/data/products.json`. P-04 resolved on a fetch after the earlier checkpoint, which is consistent with FLG-004 ("failed three times, then resolved"). It does not settle FLG-016 or any intended-ASIN question. Intended ASIN, Associates attribution and the Special Link status all stay unconfirmed. The short links are not declared invalid (FLG-003).
+
+### Cross-scope requests (for the integration session)
+
+1. Decide whether to keep `tools/validate.py` (FLG-021).
+2. The owner should confirm the holiday photograph's origin (FLG-020).
+3. Consider recording this session's P-04 observation in `src/data/reverification.json`. That file belongs to `arena/359baa16`, so this session did not edit it.
+
+### Verification on this branch
+
+- `python3 tools/build.py` exit 0; `python3 tools/check.py`: 27 pages, 0 errors, 0 warnings; `python3 tools/check_local_links.py`: 27 pages, 0 broken.
+- `python3 tools/validate.py`: fails (FLG-021). Known.
+- Sources read today: Amazon Associates Program Policies (affiliate-program.amazon.com/help/operating/policies, updated April 14, 2026); GitHub Pages documentation (docs.github.com, What is GitHub Pages: visitor IP logging on every Pages visit).
+- Branch history: rebased onto `origin/main` at `9c9040c`. The earlier claim commit (`ef0b721`) was dropped in the rebase: main's board already holds the other sessions' blocks, and this entry replaces that claim. The rebase is linear.

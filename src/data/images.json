@@ -76,6 +76,24 @@
       "depicts_a_real_product": false,
       "used_on": "The decision tools page and the review queue",
       "rules_met": "The handwriting is unreadable so no figure can be read as a sourced value."
+    },
+    {
+      "file": "instant-thermometer",
+      "alt": "An unbranded folding digital instant-read meat thermometer resting beside a seared chicken breast on a wooden board",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded folding probe with blank display",
+      "depicts_a_real_product": false,
+      "used_on": "P-04 product record and the thermometer pairing guide",
+      "rules_met": "Unbranded matte-black folding probe with blank screen so no temperature reading or logo can be mistaken for a product claim."
+    },
+    {
+      "file": "holiday-hosting-counter",
+      "alt": "Roasted vegetables on a wooden board and a bowl of green beans beside an unbranded black countertop air fryer",
+      "generated_on": null,
+      "generated_by": null,
+      "depicts_a_real_product": null,
+      "used_on": "Index card, guides index and the holiday hosting guide (guides/holiday-hosting-air-fryer.html)",
+      "rules_met": "Not verified. Origin not recorded: the file was in the repository before this entry existed. Blank fields mean unknown, not safe (FLG-020)."
     }
   ],
   "rejected": [
