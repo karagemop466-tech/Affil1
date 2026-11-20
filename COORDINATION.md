@@ -211,7 +211,7 @@ The initial shallow checkout made the ancestor appear unrelated and caused a reb
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Front-page publication design, reader guide discovery, fresh source spot checks and integration | in progress | arena/eaf80f48-affil1 | tools/page_home.py, tools/layout.py, new assets/css/editorial.css, assets/js/discover.js, assets/img/edit-*, generated maintained HTML, COORDINATION.md |
+| Front-page publication design, reader guide discovery, fresh source spot checks and integration | done | arena/eaf80f48-affil1 | tools/page_home.py, tools/layout.py, new assets/css/editorial.css, assets/js/discover.js, assets/img/edit-*, generated maintained HTML, COORDINATION.md |
 
 Prior integration #27 is merged. This scope does not edit the legacy editions, their data or the other open PRs.
 ### PR and deployment result — arena/c9fc4295-affil1
@@ -232,6 +232,8 @@ Rebase after PR #28: a task-board conflict was resolved by retaining both merge/
 Integration note (eaf80f48): preserved both board entries after the concurrent append conflict. PR #32 owns measurement; this session will not duplicate that work. Additional scope: tools/stage.py to include the new reader assets in Pages artifacts.
 
 ### Reader-facing release — eaf80f48
+
+**Delivery:** [PR #40](https://github.com/karagemop466-tech/Affil1/pull/40) merged at `6c7a224` on 2026-11-20. Its build and launch checks passed. The first Pages run was cancelled as main advanced; the [successful Pages deployment](https://github.com/karagemop466-tech/Affil1/actions/runs/44683220523) shipped descendant `8761544`, whose only subsequent file change was this board. [Live publication](https://karagemop466-tech.github.io/Affil1/). Final integration checks: 24 maintained pages, zero errors/warnings; 74 served HTML files checked for relative file links, zero broken. Browser checked local search, Escape dismissal, both shelf categories and 375px layout. Collector and launch-gate tests passed. This verifies delivery, not production click or purchase attribution.
 - PR #40: https://github.com/karagemop466-tech/Affil1/pull/40. Concurrent #42/#43 shared-output conflict resolved by preserving both board histories and regenerating the affected product page from the merged data.
 
 - Updated the maintained templates, not the legacy storefronts. A seasonal cover leads into a filterable five-product shelf, short reading paths and local search. No-JS readers can browse all five cards and follow ordinary links. Disclosures still appear under the masthead and in the footer.
