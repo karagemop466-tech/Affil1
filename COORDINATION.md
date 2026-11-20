@@ -2,14 +2,14 @@
 
 Branch: `arena/55d40788-affil1` (session `arena/55d40788-affil1`). Base commit `76d898b` of `main`.
 
-| Task | Status | Owner | Files |
-|---|---|---|---|
-| Rebuild landing page as publication front page leading with products | in progress | arena/55d40788-affil1 | index.html, styles.css, app.js |
-| Product-intent confirmation records table (intended ASIN, official listing URL, confirmation date, source; observed redirect separate) | in progress | arena/55d40788-affil1 | data.js, guides/flagged-for-review.html |
-| Privacy-preserving outbound click counter + self-hosted analytics endpoint (5 events) | in progress | arena/55d40788-affil1 | analytics.js, analytics/endpoint.py, app.js |
-| Decision-support pages: suggestions queue + open questions/information | in progress | arena/55d40788-affil1 | suggestions.html, questions.html |
-| Trendy question-shaped category guides + SEO (sitemap, feed, meta) | in progress | arena/55d40788-affil1 | guides/*.html, sitemap.xml, feed.xml, styles.css |
-| Integration, broken-link check, GitHub Pages publish, PR to main | unclaimed | arena/55d40788-affil1 | all |
+| Task | Status | Owner | Files | Verification |
+|---|---|---|---|---|
+| Rebuild landing page as publication front page leading with products | done | arena/55d40788-affil1 | index.html, styles.css, app.js | Local link check: all 9 pages' relative references exist; smoke test 200 on /, /suggestions.html, /questions.html, guides/, feed.xml, sitemap.xml, robots.txt; disclosure strip on all 9 pages; sponsored rel on outbound links |
+| Product-intent confirmation records table (intended ASIN, official listing URL, confirmation date, source; observed redirect separate) | done | arena/55d40788-affil1 | data.js, guides/flagged-for-review.html | Five records, intended ASIN separate from observed redirect (blank); no values inferred; source: user-submitted URLs only |
+| Privacy-preserving outbound click counter + self-hosted analytics endpoint (5 events) | done | arena/55d40788-affil1 | analytics.js, analytics/endpoint.py, app.js | page_view, outbound_click, guide_open, search_query_referral, report_import; no cookies/IP; beacon endpoint relative and disabled until self-hosted |
+| Decision-support pages: suggestions queue + open questions/information | done | arena/55d40788-affil1 | suggestions.html, questions.html | suggestion evidence-gated table; questions/information/missing/source table |
+| Trendy question-shaped category guides + SEO (sitemap, feed, meta) | done | arena/55d40788-affil1 | guides/*.html, sitemap.xml, feed.xml, styles.css, robots.txt | 5 guides incl. 2 new question-shaped; sitemap/feed XML parse; canonical + OG meta |
+| Integration, broken-link check, GitHub Pages publish, PR to main | in progress | arena/55d40788-affil1 | all | pending PR to main and Pages deploy |
 
 ## Sources and verification log
 
