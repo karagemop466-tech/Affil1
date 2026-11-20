@@ -27,10 +27,12 @@ appliances, tracking ID `shopnow047c-20` (supplied by the owner; enrolment unver
    Associates Central, test one link, confirm one click in the account's report, then
    scale. Until then this site is a well-built shop with the door handle unbolted.
 3. **Two registers in the repo contradicted each other about the same links, and both
-   were partly wrong.** An archived file logged three links as "reached only the
+   were partly wrong — including about P-04, which this pass eventually resolved.** An archived file logged three links as "reached only the
    Amazon homepage"; a second file, written from a sandbox with no network, logged all
-   five as unverifiable. A fresh double pass (two sessions, same day) resolves it: four
-   reach product pages, one never leaves Amazon's bot interstitial. The correction is
+   five as unverifiable. Three fetch passes on the same day settle it: all five now reach a
+   product page, but P-04 only on the third attempt after two bot interstitials, and three of the
+   five arrivals carry Amazon's own `plpRedirect=mhFallback` marker — a merchandised fallback, not a
+   confirmed intended destination. Four of five was the honest number for an hour; it is not now. The correction is
    published on the site — at `/dashboard/#verification` and `/about/#corrections` —
    rather than quietly overwritten, and the contradictory file is left in `archive/`.
 
@@ -49,7 +51,7 @@ Statement](https://affiliate-program.amazon.com/help/operating/policies) §2, an
 | P-01 | `link.amazon/B04G1MEwY` | `amazon.com/dp/B0CDY277D3` | CHEFMAN 6 Quart Dual Basket Air Fryer Oven |
 | P-02 | `link.amazon/B02NbDxp3` | `amazon.com/dp/B09B7SB46R` | Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven |
 | P-03 | `link.amazon/B00hJ57DV` | `amazon.com/dp/B08DKYBTPH` | Chefman Air Fryer 8 Qt TurboFry 4-in-1 |
-| P-04 | `link.amazon/B0c8moW59` | none — continue-shopping interstitial | unresolved; no buy button published |
+| P-04 | `link.amazon/B0c8moW59` | `amazon.com/dp/B0DHZTCNR5` — ThermoMaven 1 Sec instant-read thermometer | resolved on the third attempt (05:52 UTC); arrival carried `plpRedirect=mhFallback` |
 | P-05 | `link.amazon/B0f3GKalj` | `amazon.com/dp/B0DZFD6R9Z` | CHEF iQ Sense Smart Wireless Meat Thermometer |
 
 Notes that belong with that table, not under it:
@@ -102,7 +104,8 @@ re-order it.
 | FLG-001 | Five 9-character codes, not ASINs | The intended product identity cannot be read from any official source |
 | FLG-002 | Tracking-ID attribution unconfirmed | Only the enrolled account's click report can confirm it |
 | FLG-003 | Compliance status of `link.amazon` destinations unresolved | Redirect + no tag: cannot be attributed as published; not declared invalid |
-| FLG-004 | P-04 never resolved | No product page reached; no button published |
+| FLG-004 | P-04 resolved only on a third attempt | Two interstitials, then a fallback-flagged listing |
+| FLG-018 | Three arrivals carry `plpRedirect=mhFallback` | The published destination may be a fallback, not the intended product |
 | FLG-007 | Wattage, dimensions, warranty, noise blank | Not confirmable from an official source with this access |
 | FLG-014 | Contradiction between archived registers on P-03/P-05 | Recorded as a correction with both observations dated |
 | new | Two Pages deployments racing | Pages is set to a legacy branch build while Actions also publishes; owner decision on which is canonical |
