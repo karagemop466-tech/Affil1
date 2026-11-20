@@ -41,12 +41,26 @@ jobs:
       - name: Validate the Countertop Almanac edition and platform
         run: python3 _platform/verify_edition.py
 
-      - name: Confirm the build is reproducible, not hand-edited
+      # This step used to copy the tree, rebuild, and diff those two copies. The
+      # build step above had already written into that tree, so the check compared
+      # build output with build output: it could only ever catch a non-deterministic
+      # generator, never a page that was edited by hand or left stale in a merge --
+      # and on a legacy-configuration Pages site, the committed file is what readers
+      # get. It was passing while a guide with a duplicated source block sat
+      # hand-trimmed in the tree (FLG-052). Diff against HEAD instead, then rebuild
+      # to catch non-determinism as well.
+      - name: Confirm the committed edition is the build's own output
         run: |
-          cp -r . /tmp/first-build
+          if ! git diff --quiet HEAD -- . ; then
+            echo "::error::_tools/build.py does not reproduce the committed pages. Commit the regenerated output or fix the generator; generated HTML must not be edited by hand."
+            git status --short
+            git diff --stat HEAD -- .
+            exit 1
+          fi
           python3 _tools/build.py
-          if ! diff -r -q --exclude='.git' --exclude='__pycache__' /tmp/first-build . ; then
-            echo "::error::Output is not reproducible. Files were changed by hand rather than by the build."
+          if ! git diff --quiet -- . ; then
+            echo "::error::The second build differed from the first: the generator is not deterministic."
+            git status --short
             exit 1
           fi
 

@@ -7,6 +7,48 @@
 Shared task board for parallel sessions on this repository. Read this before
 claiming any work.
 
+### Second read of every row, one indexable site, and four gates that were not gates — arena/769ee00d-affil1 · 2026-11-20
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Independent second read of all five product rows and the five submitted short links, published with the misses at the same size as the matches | done | arena/769ee00d-affil1 | `_src/data/recheck.json` (new), `_tools/page_recheck.py` (new), `_tools/build.py`, `verification/recheck.html`, `_docs/VERIFICATION-arena-769ee00d-affil1.md` (new) |
+| Repair the deploy reproducibility gate, which compared build output with build output and so could never catch a hand-edited or stale committed page | done | arena/769ee00d-affil1 | `.github/workflows/pages.yml`, `_tools/page_guides.py`, five regenerated guides |
+| Serve no photographic imagery on a site whose policy forbids it: replace the last render and register what replaces it | done | arena/769ee00d-affil1 | `assets/img/meal-prep-engraved*`, `_src/data/images.json`, `_tools/content.py` |
+| Make the measurement path runnable so its claim can be checked | done | arena/769ee00d-affil1 | `_tools/preview.py` |
+| Narrow the front-page trust sentence to what two sessions support; count registers instead of retyping them | done | arena/769ee00d-affil1 | `_tools/page_home.py`, `_tools/page_crosscheck.py`, `_src/data/crosscheck.json`, `_tools/page_suggestions.py`, `assets/css/site.css`, `EXECUTIVE_SUMMARY.md`, `README.md` |
+| Registers: 4 flags, 3 questions, 6 proposals and a fourth, time-boxed path from this pass's findings | done | arena/769ee00d-affil1 | `_src/data/flags.json` (appended `FLG-052`–`FLG-055`), `_src/data/questions.json` (`Q-31`–`Q-33`), `_src/data/suggestions.json` (`S-47`–`S-52`, `PATH-D`), `_src/data/sources.json` (`SRC-18`, `SRC-19`), `_tools/layout.py` (one footer line) |
+
+**Verified this session (06:52–07:10 UTC, 2026-11-20).** 5 of 5 official listings re-opened and
+matched on published ASIN, served title and category breadcrumb:
+[P-01](https://www.amazon.com/dp/B0CDY277D3) ·
+[P-02](https://www.amazon.com/dp/B09B7SB46R) ·
+[P-03](https://www.amazon.com/dp/B08DKYBTPH) ·
+[P-04](https://www.amazon.com/dp/B0DHZTCNR5) ·
+[P-05](https://www.amazon.com/dp/B0DZFD6R9Z). Submitted short links re-followed: one reached its
+recorded listing, two returned `https://www.amazon.com/`, two failed to fetch — filed as route
+instability (`FLG-055`), with no stored field edited and no claim that the links are invalid or
+compliant either way (`FLG-003` stays open). Re-read directly and quoted verbatim:
+[16 CFR Part 233](https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-233) (eCFR:
+"up to date as of 11/18/2026") and
+[USDA FSIS — Leftovers and Food Safety](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety);
+calendar framing checked against
+[OPM's 2026 federal-holiday table](https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/);
+deployment shape from `gh api repos/karagemop466-tech/Affil1/pages` → `build_type: legacy`.
+
+**Gates:** `build.py` 50 pages with zero rebuild drift · `check.py` 0 errors 0 warnings ·
+`validate.py` 3,285 checks 0 warnings · `check_local_links.py` 84 pages 0 broken ·
+`check_image_register.py` 0 errors · `_tools`, `_analytics`, `_measurement` unit tests OK ·
+`_decision-support/validate.py` PASS · `_platform/verify_edition.py` 2,230 checks 0 errors.
+
+**Not duplicated, on purpose.** No new guides: `main` landed `black-friday-air-fryer-checklist`,
+`reheating-thanksgiving-leftovers` and `air-fryer-gift-guide` while this pass was in flight, so
+three drafted near-duplicates were dropped and the deal-week evidence rule was filed as `SRC-18`
+for whoever edits them next. The `/edition/` de-indexing landed independently (see the annex
+rows `FLG-047`/`FLG-050`); this board records it once. Requests left for their owners:
+`_platform/README.md` still documents `platform/…` paths, and whether `/edition/` should be
+noindex'd or moved under `_edition/` entirely is `Q-33`-adjacent and unanswered. Full detail:
+`COORDINATION/arena-769ee00d-affil1.md`.
+
 ### Decision-grade design prompt, article bank and discovery map — arena/7e19d8e1-affil1 (claimed 2026-11-20)
 
 **Release receipt.** [PR #117](https://github.com/karagemop466-tech/Affil1/pull/117) merged into `main` with its merge commit checks green: [Build, check and deploy](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250440), [Affiliate launch checks](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250362), [Verify Countertop Almanac edition and platform](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250379). [Pages build and deployment](https://github.com/karagemop466-tech/Affil1/actions/runs/44694249535) succeeded; live fetches on 2026-11-20 confirm `suggestions/design.html` serves the prompt, token pack, style register and both topic banks, and `questions/` serves the 27-question register with the 14-row discovery map.
@@ -124,6 +166,9 @@ was also directly observed to expose root working files
 (`PUBLISHING_WORKFLOW.md` returned HTTP 200 with full content on the live host
 during this pre-flight), which is the same exposure class the underscore renames
 closed and one more reason to flip.
+
+**Scope discipline carried over from the claim:** Not touched on purpose: `_tools/layout.py`, `_tools/check.py`, `_tools/cta.py`,
+
 
 ## PRODUCT BUYING PATH + DECISION REGISTRY — arena/acb1e4c8-affil1 (2026-11-20)
 

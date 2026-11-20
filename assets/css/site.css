@@ -689,6 +689,8 @@ a.btn:hover{transform:translateY(-1px)}
 
 /* ---------- suggestion paths ---------- */
 .path-grid.paths-three{grid-template-columns:repeat(3,1fr)}
+/* four paths read as two rows of two; three across would orphan one card */
+.path-grid.paths-four{grid-template-columns:repeat(2,1fr)}
 .path-card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1.4rem 1.35rem 1.5rem;display:flex;flex-direction:column;gap:.5rem}
 .path-card h3{font-family:var(--serif);font-size:1.24rem;margin:.1rem 0 .3rem}
 .path-summary{font-size:.9rem;color:var(--ink-2);line-height:1.58;margin:0}
@@ -711,7 +713,7 @@ a.btn:hover{transform:translateY(-1px)}
   .article-layout{grid-template-columns:1fr;gap:2rem}
   .article-side{position:static;grid-template-columns:1fr 1fr}
   .feature-guide,.seasonal,.method-grid,.capture-card,.compare-notes,.crosslink{grid-template-columns:1fr}
-  .path-grid.paths-three{grid-template-columns:1fr}
+  .path-grid.paths-three,.path-grid.paths-four{grid-template-columns:1fr}
   .mini-grid{grid-template-columns:1fr 1fr}
   .seasonal-media img{min-height:15rem}
   .verify-strip{grid-template-columns:1fr 1fr}

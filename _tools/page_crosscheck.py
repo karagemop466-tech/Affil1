@@ -54,6 +54,9 @@ def build(page_dir):
     d = page_dir
     doc = load()
     rows = doc["rows"]
+    # A hard-coded count on this page went stale the day a flag was added, which is
+    # the same class of mistake the page exists to catch: read it from the register.
+    n_flags = len(json.loads((ROOT / "_src/data/flags.json").read_text(encoding="utf-8"))["flags"])
     counts = {k: 0 for k in VERDICT_PILL}
     for r in rows:
         counts[r["verdict"]] += 1
@@ -155,7 +158,8 @@ def build(page_dir):
   main surface, which is where an error does the most damage. A weaker sentence elsewhere can still be wrong,
   and finding it needs the same treatment: open the page, read the claim, open the source.</p>
   <p class="callout-links">
-    <a class="tlink" href="{esc(rel(d, 'review/index.html'))}">The 22 pre-existing flags <span aria-hidden="true">&rarr;</span></a>
+    <a class="tlink" href="{esc(rel(d, 'review/index.html'))}">The {n_flags} items flagged for review <span aria-hidden="true">&rarr;</span></a>
+    <a class="tlink" href="{esc(rel(d, 'verification/recheck.html'))}">The second read of every product row <span aria-hidden="true">&rarr;</span></a>
     <a class="tlink" href="{esc(rel(d, 'offers/index.html'))}">What to change, ranked <span aria-hidden="true">&rarr;</span></a>
   </p>
 </div>""", cls="")

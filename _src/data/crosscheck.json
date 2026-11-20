@@ -15,12 +15,12 @@
     {
       "page": "index.html",
       "section": "Shortlist cards",
-      "claim": "Each of the five picks was 'opened, followed to the Amazon listing it lands on, and matched to the product named here'.",
-      "check": "Open each submitted link and compare the landing title with the name on the card.",
-      "checked": "Yes — all five opened this session.",
-      "verdict": "holds",
+      "claim": "Every pick is matched to the official Amazon listing that carries it, and the front page says the links were 'opened, followed to the Amazon listing it lands on'.",
+      "check": "Re-follow each submitted link and compare where it actually lands with the listing named on the card.",
+      "checked": "Yes — all five official listings re-read on 2026-11-20, and the five submitted links re-followed.",
+      "verdict": "holds-with-caveat",
       "source": "https://www.amazon.com/dp/B0CDY277D3",
-      "note": "All five destinations agree with the register. Matching a destination is not the same as matching the owner's intent; that is FLG-001."
+      "note": "5 of 5 listings matched on title and breadcrumb. The route from the submitted short link is the caveat: one reached its recorded listing, two fell through to Amazon's home page and two would not fetch, so a sentence about following the link is not reproducible from outside the account. The front-page wording was narrowed to what two sessions can support, and the row-level evidence sits on the second-read log. Intent stays FLG-001; this is FLG-055."
     },
     {
       "page": "index.html",
