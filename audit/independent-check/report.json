@@ -1,19 +1,19 @@
 {
   "edition": "2026-11-20",
   "session": "arena/06db21d4-affil1",
-  "pages": 43,
+  "pages": 29,
   "stats": {
-    "internal_references": 2825,
+    "internal_references": 1270,
     "broken_references": 0,
     "pages_missing_disclosure": 0,
     "pages_disclosure_below_main": 0,
-    "amazon_product_links": 174,
-    "sponsored": 166,
-    "tagged": 17,
+    "amazon_product_links": 51,
+    "sponsored": 51,
+    "tagged": 0,
     "commerce_figure_hits": 0,
-    "indexable_pages": 42,
-    "noindex_pages": 1,
-    "sitemap_urls": 29,
+    "indexable_pages": 29,
+    "noindex_pages": 0,
+    "sitemap_urls": 28,
     "feed_items": 9,
     "register_rows": 5,
     "third_party_scripts": 0
@@ -23,43 +23,43 @@
       "severity": "ok",
       "id": "A-LINK",
       "title": "Every internal reference resolves",
-      "detail": "2825 relative and site-absolute references checked across 43 pages."
+      "detail": "1270 relative and site-absolute references checked across 29 pages."
     },
     {
       "severity": "ok",
       "id": "A-DISC",
       "title": "Every page carries the Associates statement",
-      "detail": "All 43 canonical pages state “As an Amazon Associate I earn from qualifying purchases”. 43 place it before <main>, above the fold."
+      "detail": "All 29 canonical pages state “As an Amazon Associate I earn from qualifying purchases”. 29 place it before <main>, above the fold."
     },
     {
-      "severity": "medium",
+      "severity": "ok",
       "id": "A-SPON",
-      "title": "Amazon product links without rel=sponsored",
-      "detail": "8 of 174, on: dashboard/index.html. These are the owner's dashboard and operations surfaces rather than the shop pages every reader sees, but they are still clickable links to Amazon and the fix is one attribute."
+      "title": "Every Amazon product link is marked sponsored",
+      "detail": "51 of 51 links carry rel=\"sponsored\"."
     },
     {
       "severity": "high",
       "id": "A-TAG",
       "title": "Amazon product links without the Associates tag",
-      "detail": "157 of 174 point at a bare /dp/ URL with no tag=shopnow047c-20 parameter. Amazon's Program Policies require the Associate ID as a parameter in the URL of each link placed on the site to an Amazon Site, which is why the published CTAs are gated until an enrolled Special Link exists. The bare links are the evidence citations on the register and product pages, which point at the listing that was actually read. Examples: compare/index.html → https://www.amazon.com/dp/B0CDY277D3; compare/index.html → https://www.amazon.com/dp/B09B7SB46R; compare/index.html → https://www.amazon.com/dp/B08DKYBTPH; compare/index.html → https://www.amazon.com/dp/B0DHZTCNR5; compare/index.html → https://www.amazon.com/dp/B0DZFD6R9Z; dashboard/index.html → https://www.amazon.com/dp/B0CDY277D3"
+      "detail": "51 of 51 point at a bare /dp/ URL with no tag=shopnow047c-20 parameter. Amazon's Program Policies require the Associate ID as a parameter in the URL of each link placed on the site to an Amazon Site, which is why the published CTAs are gated until an enrolled Special Link exists. The bare links are the evidence citations on the register and product pages, which point at the listing that was actually read. Examples: guides/air-fryer-capacity-checklist.html → https://www.amazon.com/dp/B08DKYBTPH; guides/air-fryer-capacity-checklist.html → https://www.amazon.com/dp/B0CDY277D3; guides/air-fryer-capacity-checklist.html → https://www.amazon.com/dp/B09B7SB46R; guides/basket-or-oven-air-fryer.html → https://www.amazon.com/dp/B0CDY277D3; guides/basket-or-oven-air-fryer.html → https://www.amazon.com/dp/B08DKYBTPH; guides/basket-or-oven-air-fryer.html → https://www.amazon.com/dp/B09B7SB46R"
     },
     {
       "severity": "ok",
       "id": "A-NUM",
       "title": "No price, rating, review count or stock figure is published",
-      "detail": "43 pages scanned for currency amounts, star ratings, review counts and stock claims. None found. This is required by Program Policies §2(b) while no Amazon-served price feed is connected."
+      "detail": "29 pages scanned for currency amounts, star ratings, review counts and stock claims. None found. This is required by Program Policies §2(b) while no Amazon-served price feed is connected."
     },
     {
       "severity": "ok",
       "id": "A-IDX",
       "title": "One edition is indexable and it declares its canonicals",
-      "detail": "42 indexable pages, all with rel=canonical; 1 page deliberately noindex (operations/launch-readiness.html). Note that legacy editions are separated by directory and excluded from the sitemap rather than by a robots meta tag on each file."
+      "detail": "29 indexable pages, all with rel=canonical; 0 page deliberately noindex (none). Note that legacy editions are separated by directory and excluded from the sitemap rather than by a robots meta tag on each file."
     },
     {
       "severity": "ok",
       "id": "A-MAP",
       "title": "sitemap.xml is well-formed and every URL resolves",
-      "detail": "29 URLs, all present on disk, protocol-valid XML."
+      "detail": "28 URLs, all present on disk, protocol-valid XML."
     },
     {
       "severity": "ok",
@@ -68,10 +68,10 @@
       "detail": "9 items. Google supports RSS 2.0 as a sitemap format, so the feed is also a second discovery surface."
     },
     {
-      "severity": "ok",
+      "severity": "medium",
       "id": "A-SRC",
-      "title": "Every register row carries an official source link",
-      "detail": "5 product rows, each with the observed Amazon URL it was read from."
+      "title": "Register rows without a source link",
+      "detail": "P-01, P-02, P-03, P-04, P-05"
     },
     {
       "severity": "ok",

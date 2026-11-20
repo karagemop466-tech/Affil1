@@ -76,15 +76,6 @@
       "depicts_a_real_product": false,
       "used_on": "The decision tools page and the review queue",
       "rules_met": "The handwriting is unreadable so no figure can be read as a sourced value."
-    },
-    {
-      "file": "cover-air-fryer",
-      "alt": "Sage basket air fryer on a sunlit kitchen counter",
-      "generated_on": "2026-11-20",
-      "generated_by": "AI image generation",
-      "depicts_a_real_product": false,
-      "used_on": "November cover story",
-      "rules_met": "Unbranded format illustration, not a product listing image."
     }
   ],
   "rejected": [

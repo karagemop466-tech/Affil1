@@ -18,8 +18,7 @@ class Parser(HTMLParser):
 
 def main():
     errors = []
-    from build import GENERATED
-    pages = [ROOT/p for p in GENERATED if p.endswith('.html')]
+    pages = [p for p in ROOT.rglob('*.html') if not EXCLUDE.intersection(p.relative_to(ROOT).parts)]
     for page in pages:
         parser = Parser()
         parser.feed(page.read_text(encoding='utf-8'))
