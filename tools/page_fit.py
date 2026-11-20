@@ -22,13 +22,12 @@ def build(d):
       <a class="tlink" href="{esc(rel(d, f'products/{ref}.html'))}">See a listing example &rarr;</a></article>'''
       for key, _, _, title, note, ref in PATHS)
     return page(d, title="Air fryer fit finder — Crisp & Counter",
-                description="Choose the way you cook, then check basket space, tray size and room to open the appliance before you buy.", active="fit/index.html", canonical="fit/", body=f'''
-<link rel="stylesheet" href="{esc(rel(d, 'assets/css/fit.css'))}">
+                description="Choose the way you cook, then check basket space, tray size and room to open the appliance before you buy.", active="fit/index.html", canonical="fit/", extra_css="assets/css/fit.css", body=f'''
 <section class="fit-hero"><div class="wrap fit-hero-grid">
   <div><p class="eyebrow">The countertop edit / shopping tool</p>
   <h1>Make room for<br><em>the right air fryer.</em></h1>
   <p class="dek">A quick way to narrow the field, with a short checklist to take to the listing or manual.</p></div>
-  <figure><img src="{esc(rel(d, 'assets/img/decision-tools-w900.jpg'))}" alt="" width="900" loading="eager"><figcaption>Editorial illustration</figcaption></figure>
+  <figure><img src="{esc(rel(d, 'assets/img/decision-tools-w900.jpg'))}" alt="A tape measure and open kitchen notebook on a wooden table" width="900" loading="eager"><figcaption>Editorial illustration</figcaption></figure>
 </div></section>
 <section class="section"><div class="wrap fit-grid">
   <div><form id="fit-form" hidden><fieldset><legend>What do you want it to do most often?</legend>{choices}</fieldset></form>

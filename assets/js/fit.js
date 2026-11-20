@@ -11,7 +11,7 @@
     const match = results.find(result => result.dataset.fitResult === selected);
     for (const result of results) result.hidden = Boolean(match && result !== match);
     heading.textContent = match ? 'Your starting point' : 'Three routes to a shortlist';
-    status.textContent = match ? match.querySelector('h3').textContent + '. See the checklist below.' : '';
+    status.textContent = match ? match.querySelector('h3').textContent + '. See the measurement checklist.' : '';
   }
   form.hidden = false;
   form.addEventListener('change', update);

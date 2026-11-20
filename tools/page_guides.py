@@ -1,6 +1,6 @@
 """Guide index and article template."""
 
-from layout import (DISCLOSURE, SITE_NAME, esc, eyebrow, outbound, page, pagehead, rel,
+from layout import (AFFILIATE_HINT, DISCLOSURE, SITE_NAME, esc, eyebrow, outbound, page, pagehead, product_link, rel,
                     section)
 from content import GUIDES
 from page_home import img
@@ -23,9 +23,9 @@ def build_index(page_dir, meta):
 
     body = f"""{pagehead(
         'Buying guides',
-        'Questions worth answering before you buy',
-        'These are written to be useful whether or not you buy anything through this site. Each one is a checklist, because a checklist is what can honestly be produced without access to the products.',
-        meta='No product was tested &middot; every product claim is quoted from the seller &middot; no prices, ratings or winners',
+        'What are you cooking next?',
+        'Plan a batch, measure the counter, or get the holiday sides out on time. Start with the question that brought you here.',
+        meta='Crisp &amp; Counter Editorial &middot; listing-based buying guides',
     )}
 {section(f'''
 <div class="gcard-grid">{''.join(cards)}</div>
@@ -33,7 +33,7 @@ def build_index(page_dir, meta):
     return page(
         d,
         title="Buying guides \u2014 Crisp & Counter",
-        description="Air-fryer buying guides: basket versus oven, usable capacity, holiday batch planning, cleanup and counter space.",
+        description="Air fryer and thermometer buying guides on batch size, small kitchens, cleanup, and making room for holiday sides.",
         body=body,
         active="guides/index.html",
         canonical="guides/",
@@ -65,15 +65,26 @@ def build_guide(page_dir, g, meta):
   <h3>{esc(x['title'])}</h3>
   <span class="tlink">Read <span aria-hidden="true">&rarr;</span></span></a>""" for x in others)
 
-    sources = "".join(f"<li>{outbound(d, url, esc(label))}</li>" for label, url in g.get("sources", []))
-    if sources:
-        sources = f"<h2>Sources</h2><ul>{sources}</ul>"
-
+    sources = ''.join(f'<li>{(product_link if AFFILIATE_HINT.match(url) else outbound)(d, url, esc(label))}</li>'
+                      for label, url in g.get('sources', []))
+    source_block = f'<div class="prose-block"><h2>Sources</h2><ul>{sources}</ul></div>' if sources else ''
+    related = ''.join(f'<li><a href="{esc(rel(d, path))}">{esc(label)}</a></li>'
+                      for path, label in ((path, {
+                          'products/p-01.html': 'Chefman dual-basket listing details',
+                          'products/p-02.html': 'Emeril Lagasse oven listing details',
+                          'products/p-03.html': 'Chefman TurboFry listing details',
+                          'products/p-04.html': 'ThermoMaven listing details',
+                          'products/p-05.html': 'CHEF iQ listing details',
+                          'fit/index.html': 'Air fryer fit finder',
+                          'guides/thermometer-pairing.html': 'Instant-read or wireless?',
+                          'guides/cleanup-and-counter-space.html': 'Cleanup and counter-space guide',
+                      }[path]) for path in g.get('related', [])))
+    related_block = f'<div class="prose-block"><h2>Where to go next</h2><ul>{related}</ul></div>' if related else ''
     body = f"""{pagehead(
         g['kicker'],
-        esc(g['title']).replace(': what should you compare?', ',<br>and what does not matter').replace(' for comparing air-fryer capacity', ',<br>without the marketing'),
+        esc(g['title']),
         esc(g['dek']),
-        meta=f"Crisp &amp; Counter editorial desk &middot; Updated {esc(g['updated'])} &middot; {g['read_minutes']} min read &middot; no product tested &middot; no prices or ratings",
+        meta=f"By <a href='{esc(rel(d, 'about/index.html'))}#who'>Crisp &amp; Counter Editorial</a> &middot; Updated {esc(g['updated'])} &middot; {g['read_minutes']} min read",
     )}
 <section class="section"><div class="wrap article-grid">
   <article class="article">
@@ -82,10 +93,11 @@ def build_guide(page_dir, g, meta):
       <figcaption><span class="illus-tag illus-inline">Illustration</span> {esc(g['photo_caption'])}</figcaption>
     </figure>
     {''.join(blocks)}
-{sources}
+{source_block}
+{related_block}
     <div class="article-end">
       <p class="article-close">{esc(g['closing'])}</p>
-      <p class="fineprint">{DISCLOSURE} A paid link is labelled beside the link. No product in this guide was tested.</p>
+      <p class="fineprint">{DISCLOSURE} Amazon listing links are provided as sources. Tracking has not been confirmed.</p>
     </div>
   </article>
   <aside class="article-side">
@@ -98,7 +110,7 @@ def build_guide(page_dir, g, meta):
   </aside>
 </div></section>
 <section class="section section-tint"><div class="wrap">
-  <div class="sec-head"><div>{eyebrow('Keep reading')}<h2>Two more, same standard</h2></div></div>
+  <div class="sec-head"><div>{eyebrow('Keep reading')}<h2>Keep planning your kitchen</h2></div></div>
   <div class="next-grid">{next_html}</div>
 </div></section>"""
 
@@ -107,7 +119,7 @@ def build_guide(page_dir, g, meta):
         "@type": "Article",
         "headline": g["title"],
         "description": g["dek"],
-        "datePublished": g["updated"],
+        "datePublished": g.get("published", g["updated"]),
         "dateModified": g["updated"],
         "author": {"@type": "Organization", "name": SITE_NAME},
         "publisher": {"@type": "Organization", "name": SITE_NAME},
