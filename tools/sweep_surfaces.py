@@ -27,6 +27,11 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 
 ARCHIVE_ROOT = "archive"
+# Hand-maintained internal sections, not published surfaces. Mirrors
+# tools/check.py's INTERNAL_SECTIONS; the decision-support desk is one (see
+# COORDINATION.md — added by session-arena-83e015f6 to unstick the launch
+# gate, which failed on every branch including main).
+INTERNAL_SECTIONS = ("decision-support/",)
 PUBLISHED_DIRS = ["guides", "compare", "products", "about", "sources", "suggestions",
                   "questions", "flagged", "legacy", "topics", "dashboard"]
 PUBLISHED_FILES = {"index.html", "404.html", "feed.xml", "sitemap.xml", "robots.txt"}
@@ -63,6 +68,8 @@ def main():
             continue
         rel = path.relative_to(ROOT).as_posix()
         if ARCHIVE_ROOT in set(path.relative_to(ROOT).parts) or rel in keep:
+            continue
+        if rel.startswith(INTERNAL_SECTIONS):
             continue
         top = rel.split("/", 1)[0]
         # sweep only generated surfaces: data, tools, docs and assets stay put

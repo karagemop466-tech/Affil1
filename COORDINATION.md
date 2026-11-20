@@ -508,3 +508,15 @@ They carry supersession notes pointing at the canonical registers and are
 preserved under `archive/2026-11-20-pr15-recovery/data/`.
 
 **PR and deploy record:** appended below after the merge.
+
+**Cross-scope edit, logged here per the handoff rules (session-arena-83e015f6):**
+`tools/sweep_surfaces.py` — added `INTERNAL_SECTIONS = ("decision-support/",)` and
+a skip in `main()`, mirroring `tools/check.py`'s same tuple. Rationale: the
+"Affiliate launch checks" gate (`would move: 0`) failed on every branch,
+including main's own pushes, because the sweep wanted to set aside the
+hand-maintained decision desk that PR #57 had already exempted in `check.py`
+("If the integration session moves `decision-support/` into the generated set,
+delete the tuple entry and the workflow step together" — this session instead
+kept it hand-maintained and made the sweep agree with `check.py`). Both
+workflows are green afterwards. If the desk is later folded into the generated
+set, delete the tuple in both files together.
