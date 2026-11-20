@@ -26,7 +26,7 @@ def build_about(page_dir, sources, meta):
     body = f"""{pagehead(
         'About',
         'A small, careful<br>shop window',
-        f'{SITE_NAME} is a static publication about air fryers and one thermometer. This static publication has no active analytics backend or third-party tracking requests. This page states its rules so you can hold it to them.',
+        f'{SITE_NAME} is a static publication about air fryers and thermometers. This static publication has no active analytics backend or third-party tracking requests. This page states its rules so you can hold it to them.',
         meta='Static HTML &middot; self-hosted fonts &middot; no analytics running &middot; no prices',
     )}
 {section(f'''
@@ -60,7 +60,7 @@ def build_about(page_dir, sources, meta):
   <aside class="record-side">
     <div class="side-card"><h2>At a glance</h2><dl class="side-dl">
       <div><dt>Pages</dt><dd>18</dd></div>
-      <div><dt>Products</dt><dd>5 submitted, 4 identified</dd></div>
+      <div><dt>Products</dt><dd>5 submitted, 5 observed</dd></div>
       <div><dt>Tested</dt><dd>0</dd></div>
       <div><dt>Prices shown</dt><dd>None</dd></div>
       <div><dt>Third-party requests</dt><dd>0</dd></div>
@@ -94,21 +94,17 @@ def build_about(page_dir, sources, meta):
 
 def build_ledger(page_dir, meta):
     d = page_dir
-    rows = [
-        [{"html": blank(None)}, {"html": blank(None)}, {"html": blank(None)},
-         {"html": blank(None)}, {"html": blank(None)}, {"html": blank(None)},
-         {"html": blank(None)}]
-    ]
+    rows = []
     body = f"""{pagehead(
         'Campaign ledger',
         'An empty ledger,<br>with its columns defined',
         'The brief asked for measurement before optimisation. The measurable unit here is a row, and a row needs a provenance note. There are none yet.',
-        meta='0 rows &middot; 0 sessions &middot; 0 clicks &middot; 0 reported orders &middot; no forecast',
+        meta='0 ledger rows &middot; traffic and reported orders unmeasured &middot; no forecast',
     )}
 {section(f'''
 <div class="lede-prose">
   <p>A ledger is only worth keeping if every row can be traced back to a report somebody was authorised to read. The columns below are therefore fixed in advance, and the rule is that a row is added only when the value comes from an authorised first-party report, with the date and the source recorded alongside it.</p>
-  <p>There are no rows. Not because the table was forgotten, but because no Associates report has been supplied, no analytics endpoint is live, and there is no traffic to measure. A table with six plausible numbers in it would be the most damaging thing this site could publish.</p>
+  <p>There are no rows. Not because the table was forgotten, but because no Associates report has been supplied, no analytics endpoint is live, and no traffic has been measured. A table with six plausible numbers in it would be the most damaging thing this site could publish.</p>
 </div>
 {table(['Date', 'Source', 'Channel', 'Eligible sessions', 'Clicks', 'Reported orders', 'Provenance note'], rows, cls='ledger')}
 <h2 style="margin-top:2.4rem">The provenance rule</h2>
@@ -157,7 +153,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
-    <p>Each of the five supplied links was opened once on 20 November 2026. Four resolved to live Amazon listings. The ASIN and full listing title were transcribed for each of those four. The fifth returned a continuity page on three attempts and remains unidentified. Amazon's Associates Operating Agreement section 5, its Program Policies section 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly, and the relevant wording is quoted on the sources page.</p>
+    <p>All five supplied links reached Amazon listings on 20 November 2026; P-04 returned a continuity page on earlier attempts. Observed ASINs and listing titles were transcribed, but intended products remain unconfirmed. Amazon's Associates Operating Agreement section 5, its Program Policies section 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly, and the relevant wording is quoted on the sources page.</p>
   </div>
   <div class="exec-block exec-warn">
     <h2>The one finding that changes the plan</h2>
@@ -183,8 +179,8 @@ def build_brief(page_dir, products, questions, flags, meta):
     <h2>Numbers on the record</h2>
     <div class="exec-stats">
       <div><span>5</span><p>links supplied</p></div>
-      <div><span>4</span><p>resolved and transcribed</p></div>
-      <div><span>1</span><p>unresolved, published as a blank</p></div>
+      <div><span>5</span><p>resolved and transcribed</p></div>
+      <div><span>0</span><p>intended ASINs confirmed</p></div>
       <div><span>0</span><p>products tested</p></div>
       <div><span>0</span><p>prices shown</p></div>
       <div><span>{n_q}</span><p>questions raised</p></div>

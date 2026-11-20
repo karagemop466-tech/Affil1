@@ -41,8 +41,9 @@ def build_index(page_dir, flags, meta):
             {"html": esc(f["title"])},
             {"html": esc(f["blocks"])},
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
+            {"html": _urlish(next((c for c in f.get("to_check", []) if c.startswith("https://")), "https://affiliate-program.amazon.com/help/operating/agreement"), d)},
         ])
-    flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects"], flag_rows,
+    flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects", "Source to consult"], flag_rows,
                        cls="flags", caption=f"{len(fl)} items, ordered by severity")
 
     body = f"""{pagehead(
@@ -98,6 +99,7 @@ def build_images(page_dir, images, products, meta):
             {"html": '<span class="pill pill-warn">AI generated</span>'},
             {"html": esc(a["used_on"])},
             {"html": esc(a["rules_met"])},
+            {"html": outbound(d, "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking", "FTC guidance")},
         ])
     rejected = "".join(
         f'<article class="reject"><h3>{esc(r["idea"])}</h3><p>{esc(r["why_not"])}</p>'
@@ -114,7 +116,7 @@ def build_images(page_dir, images, products, meta):
 <h2>The rule</h2>
 <p class="lede-prose">{esc(images['meta']['rule'])}</p>
 <h2 style="margin-top:2.4rem">Every asset</h2>
-{table(['Asset', 'Source', 'Appears on', 'How the rule is met'], rows, cls='assets')}
+{table(['Asset', 'Source', 'Appears on', 'How the rule is met', 'Related guidance'], rows, cls='assets')}
 <h2 style="margin-top:2.4rem">Three things this site declined to do</h2>
 <div class="reject-grid">{rejected}</div>
 <div class="callout">
@@ -134,14 +136,12 @@ def build_images(page_dir, images, products, meta):
 
 def build_measurement(page_dir, meta):
     d = page_dir
-    events = [
-        ("page_view", "Every page load", "Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept."),
-        ("outbound_click", "Any click on an Amazon link", "Records which product reference was clicked and the page it was clicked from. This is the number that matters for this site."),
-        ("guide_open", "Opening a guide from the index", "Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be."),
-        ("search_query_referral", "Arrival from a search engine", "Records that a referral happened and the referring host, not the query. Search Console supplies queries; this does not try to reconstruct them."),
-        ("report_import", "A manual import of an Associates report", "A dated record that a first-party report was added to the ledger, with its provenance. Never an automated scrape."),
-    ]
-    rows = [[{"html": f'<code class="code">{esc(n)}</code>'}, esc(t), esc(w)] for n, t, w in events]
+    # Use the canonical event specification; these are proposed, not collected.
+    import json
+    from pathlib import Path
+    spec = json.loads((Path(__file__).resolve().parent.parent / "src/data/events.json").read_text(encoding="utf-8"))
+    rows = [[{"html": f'<code class="code">{esc(e["name"])}</code>'}, esc(e["fires_when"]), esc(", ".join(e["props"])),
+             {"html": outbound(d, "https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages", "GitHub Pages hosting")}] for e in spec["events"]]
     body = f"""{pagehead(
         'Measurement plan',
         'Measurement is written,<br>and switched off',
@@ -150,15 +150,15 @@ def build_measurement(page_dir, meta):
     )}
 {section(f'''
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
-  <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. The maintained publication has an inert client; no collector is deployed for it. The five events below are a specification, not evidence that the client implements them.</p>
+  <p>The current client is disabled. Its event names differ from the canonical specification, so alignment and end-to-end testing are required before enabling any collection. A privacy notice, retention decision and consent review are also needed.</p>
 </div>
 <h2>What would be measured</h2>
-{table(['Event', 'Fires when', 'What is stored'], rows, cls='events')}
+{table(['Proposed event', 'Fires when', 'Proposed properties', 'Hosting context'], rows, cls='events')}
 <h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
 <ol class="tight">
   <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
-  <li><strong>A deployed collector.</strong> The endpoint is in this repository and is not hosted anywhere. GitHub Pages serves static files only.</li>
+  <li><strong>A deployed collector.</strong> GitHub Pages serves static files only; a separate collector must be deployed and tested.</li>
   <li><strong>A retention decision.</strong> Raw event rows have a half-life; the ledger does not. A retention period has to be chosen, not defaulted.</li>
   <li><strong>A consent decision.</strong> Whether visitor consent is required depends on jurisdiction and on what is collected. That is a legal question, not an engineering one, and it has not been answered.</li>
 </ol>
