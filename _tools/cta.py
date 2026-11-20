@@ -108,9 +108,15 @@ def pair(page_dir, product, *, cls="cta-pair", sub=True):
     listing = buy_url(asin)
     view_line = "View it on Amazon" if not sub else (
         'View it on Amazon <span class="cta-sub">Live price and stock</span>')
+    # No data-affiliate-ref here, on purpose: that attribute is the hook the
+    # first-party click counter reads, and _tools/check.py refuses to publish it
+    # beside an untagged link, because a count of clicks the account cannot
+    # attribute would be read as performance evidence. data-cta stays, so the
+    # presentation is unchanged. The attribute appears again the moment
+    # buy_url() returns an approved Special Link, i.e. in the cart branch above.
     buy_a = (
         f'<a class="cta cta-buy" href="{esc(listing)}" rel="sponsored nofollow noopener"'
-        f' target="_blank" data-affiliate-ref="{esc(asin)}" data-cta="listing"'
+        f' target="_blank" data-cta="listing"'
         f' aria-label="Open the Amazon listing for the {esc(product["brand"])} '
         f'{esc(product["format_label"])} (paid link, opens in a new tab)">{view_line}</a>'
     )

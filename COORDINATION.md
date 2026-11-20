@@ -293,11 +293,11 @@ recorded in `_tools/content_season.py` so the topic is left alone.
 Thermometers), SRC-23 (FSIS Turkey from Farm to Table), SRC-24 (FoodSafety.gov
 chart). Questions Q-25, Q-26, Q-27. Proposals **S-41** (retire or wire the nine unreachable generators),
 **S-39** (dated source line on every figure-carrying guide), **S-40** (one indexable
-taxonomy: categories as the shop, the register as the appendix). Flags **FLG-039**
-(generators) and **FLG-040** (the `check.py` literal-sentence rule). Every one of these
+taxonomy: categories as the shop, the register as the appendix). Flags **FLG-045**
+(generators) and **FLG-046** (the `check.py` literal-sentence rule). Every one of these
 ids moved two or three times because main kept taking the range under this branch; each
 time main's row was kept verbatim and mine was re-filed, never merged into theirs. Flags
-**FLG-039** (nine `_tools/` modules reachable from neither build nor CI) and **FLG-040**
+**FLG-045** (nine `_tools/` modules reachable from neither build nor CI) and **FLG-046**
 (the `check.py` guides rule asserts a literal sentence about tag status, which the
 register can make false). My short-link finding and my guide-tag-sentence finding
 were **not** filed as new flags: main already carries them as FLG-028 and FLG-031,
@@ -1644,3 +1644,67 @@ arrival (FLG-002, unchanged); `intended_asin` stays `null` and is kept separate 
 **Still open (owner, not blocked):** enrolment/`tag` confirmation (FLG-002); the
 compliance status of the supplied short links (FLG-003); the P-04/P-05 intended mapping
 (FLG-016); the durable Pages `build_type: workflow` setting (admin scope required).
+
+## Session `arena/3e17592d-affil1` — measurement machinery, the owner switch, one indexable site (2026-11-20 UTC)
+
+**Full record:** `COORDINATION/arena-3e17592d-affil1.md`. **PR:** #122 (this branch → `main`).
+
+**Shipped.** Four defects reproduced on `2934ed0`, fixed, and each shown failing before it was
+shown passing: `_analytics/endpoint.py` imported `build` from a `tools/` path that has been
+`_tools/` since the Pages hide (the collector and its suite could not import, while CI's
+`py_compile` kept the lane green); `edition-verify.yml` ran `unittest discover -s platform`,
+which resolved to **CPython's stdlib package** — 45 stdlib tests reported, 0 platform tests; the
+owner's arming switch `_tools/arm_links.py` read `_src/_data/product-intent.json` and died with
+`FileNotFoundError` before printing any state; and reader-facing copy asserted a tracking tag the
+gate had withheld (guide sidebars, product fine print, the annex disclosure).
+
+`edition/` is now a **guarded** annex rather than a decided one: `noindex, follow` on all 27
+pages, a visible note sending readers to the shop, no second advertised sitemap, and three
+per-page assertions in `verify_edition.py` (2,047 checks, from 1,965) — negative-tested by
+stripping the tag and the note from one page. The root robots.txt's `Disallow: /edition/` is
+gone: blocking the crawl hides the tag that does the work, while a disallowed URL can still be
+indexed from links, so the two mechanisms were producing the worst of both (**FLG-050**).
+
+**Editorial, after a deliberate de-duplication.** Three guides were drafted (chicken doneness,
+the ice-water calibration check, the two-hour leftovers rule). While this branch was open, main
+published `reheating-thanksgiving-leftovers`, which covers the third one better and is already in
+the sitemap and feed — so **my duplicate was withdrawn** and its two non-overlapping blocks
+(the cooling mechanics and the day-after checklist) were folded into main's guide instead. The
+two remaining guides are live, each quoting a USDA FSIS fact sheet fetched and read this session,
+with every product sentence restricted to the seller's listing wording and a closing note stating
+that nothing was tested. Guide `sources` now render (a field that existed unread), product pages
+carry "guides that involve this one", and the front-page band is derived from the chosen record
+rather than `GUIDES[7]` plus a hand-written caption.
+
+**Two deviations, stated plainly.** (1) The plan to decouple `data-affiliate-ref` from the tag
+was implemented and then **reverted**: main grew `check_link_copy_state`, whose policy forbids a
+counter hook beside an un-armed link, so the gate's rule won, `cta.py` was brought into line, and
+the owner's choice is now a row on the reviewable queue (**S-43**) with both paths priced. (2)
+Widening that rule from a single sampled page to every generated page found **four live pages**
+publishing the forbidden attribute — the emitter was fixed, unit-tested at source, and the
+site-wide scan is now in CI (**FLG-049**).
+
+**Two new gates**, both wired into `kitchen-check.yml` and both negative-tested:
+`check_image_register.py` (a published image without a row in the image-policy register fails the
+build — a merge had dropped one while the page still loaded it) and `check_register_refs.py`
+(citations between registers must resolve, must cover the citing record's own subject, and a
+guide's declared source URL must exist as a dated register row).
+
+**Caution for the next merge.** `-X theirs` and `-X ours` both silently republish a *renumbered*
+id against a different row. `main` renumbered `SRC-18..20` during this branch's life, which left
+three citations pointing at the wrong documents — dangling-id checks cannot see it. Registers are
+append-only across sessions; resolve them by **content**, not by id. `SRC-21..24` are this
+session's (the last one registered because main's guide cited a page the register could not date),
+and my rows now run `FLG-045..041`, `Q-28..30`, `S-37..41`.
+
+**Verification (2026-11-20, rebased onto `b19480f`):** build 48 pages, no diff on a second build ·
+`check.py` 0 errors 0 warnings · `validate.py` 0 warnings · `check_local_links.py` 79 pages
+0 broken · image register 0 errors (2 pre-existing "registered but unused" warnings) · register
+refs 0 errors · tests `_tools` 11 / `_analytics` 1 / `_platform` 6 OK ·
+`_decision-support/validate.py` PASS · `verify_edition.py` 2,047 checks 0 errors ·
+`sweep_surfaces --dry-run` would move 0 · `arm_links --status` prints state · `arm_links --link`
+without `--i-am-the-owner` refuses with exit 3 and writes nothing.
+
+**Nothing was armed.** `_src/data/product-intent.json` untouched — five `null` approvals, three
+`null` confirmations, `published state: reference links only`. No traffic, order, conversion,
+revenue or popularity figure is claimed anywhere in this pass.

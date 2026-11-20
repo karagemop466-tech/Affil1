@@ -40,6 +40,8 @@ class PageAuditParser(HTMLParser):
         self.ids: set[str] = set()
         self.h1_count = 0
         self.canonical: str | None = None
+        self.meta_robots: str | None = None
+        self.annex_note = False
         self.rss_link: str | None = None
         self.has_disclosure_before_main = False
         self.seen_main = False
@@ -72,6 +74,10 @@ class PageAuditParser(HTMLParser):
             self.in_footer = True
         if tag == "h1":
             self.h1_count += 1
+        if tag == "meta" and amap.get("name") == "robots":
+            self.meta_robots = amap.get("content")
+        if tag == "div" and amap.get("class") == "annex-note":
+            self.annex_note = True
         if tag == "link":
             if amap.get("rel") == "canonical":
                 self.canonical = amap.get("href")
@@ -158,6 +164,18 @@ def verify_edition(edition_dir: pathlib.Path = EDITION_DIR) -> tuple[list[str], 
         if not parser.rss_link:
             errors.append(f"{rel_name}: missing RSS autodiscovery link")
 
+        # One host, one site to index. This edition and the generated shop at the
+        # repository root publish the same five listings, so every page of the
+        # annex has to carry the two things that keep it from competing: a noindex
+        # rule the crawler can read, and a visible pointer to the reader edition.
+        # Checked here rather than trusted, because a template edit can drop it.
+        checks += 2
+        if "noindex" not in (parser.meta_robots or ""):
+            errors.append(f"{rel_name}: missing <meta name=\"robots\" content=\"noindex, follow\"> "
+                          f"— the annex would compete with the root publication for the index")
+        if not parser.annex_note:
+            errors.append(f"{rel_name}: missing the annex note that points readers to the shop")
+
         # Every <tbody><tr> row must carry at least one official https:// source link
         for row_line, ext_urls in parser.tbody_rows:
             checks += 1
@@ -212,6 +230,15 @@ def verify_edition(edition_dir: pathlib.Path = EDITION_DIR) -> tuple[list[str], 
             if parts.fragment and target_path in parsed_pages:
                 if parts.fragment not in parsed_pages[target_path].ids:
                     errors.append(f"{rel_name}:{line}: missing target anchor {href}")
+
+    # The annex must not advertise a second sitemap: a robots.txt only counts at the
+    # host root (developers.google.com/crawling/docs/robots-txt/create-robots-txt), so
+    # this line could only ever mislead a reader of the file into thinking the annex
+    # has its own indexable sitemap.
+    robots_txt = (edition_dir / "robots.txt").read_text(encoding="utf-8")
+    checks += 1
+    if "Sitemap:" in robots_txt:
+        errors.append("edition/robots.txt: advertises a sitemap for a noindex annex")
 
     # XML Sitemap & RSS Feed validation
     sitemap_xml = (edition_dir / "sitemap.xml").read_text(encoding="utf-8")

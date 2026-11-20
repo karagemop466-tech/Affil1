@@ -477,8 +477,20 @@ def check_link_state_copy():
         else:
             if "not yet credited" not in sample:
                 err("link copy: no tag is armed, so the product page must say a click is not credited")
-            if "data-affiliate-ref" in sample:
+            if 'data-affiliate-ref="' in sample:
                 err("link copy: data-affiliate-ref is published with no armed link, so the counter would count untracked clicks")
+
+    # The same test on every generated page, not on p-01 alone. When that rule was
+    # written the front page, the shortlist, the review queue and the suggestion
+    # page were all publishing the attribute through cta.py and the gate stayed
+    # green, because the only file it opened was clean. The scan looks for the
+    # attribute with a value, so a page that merely discusses the attribute in
+    # prose (the review queue does) is not mistaken for markup.
+    if not armed:
+        for page in PAGES:
+            if 'data-affiliate-ref="' in page.read_text(encoding="utf-8"):
+                err(f"{page.relative_to(ROOT).as_posix()}: publishes a data-affiliate-ref value with "
+                    f"no armed link; the counter would count clicks that cannot be attributed")
 
     for page in (ROOT / "guides").glob("*.html"):
         if page.name == "index.html":

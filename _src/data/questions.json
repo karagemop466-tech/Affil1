@@ -9,14 +9,14 @@
     {
       "id": "Q-01",
       "question": "Did each submitted link land on the product the owner meant to send readers to?",
-      "what_we_have": "All five submitted short links reached a live listing on an earlier pass on 2026-11-20, with arrival ASINs and titles transcribed: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z. Two later passes the same day reached no listing at all — all five short links returned https://www.amazon.com/. The five direct /dp/ URLs were re-opened and every page title matched the record. See FLG-028.",
+      "what_we_have": "All five submitted short links reached a live listing on an earlier pass on 2026-11-20, with arrival ASINs and titles transcribed: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z. Two later passes the same day reached no listing at all \u2014 all five short links returned https://www.amazon.com/. The five direct /dp/ URLs were re-opened and every page title matched the record. See FLG-028.",
       "what_is_missing": "Two things, and they are different. First, the owner's intended ASIN: the supplied codes are nine characters and lowercase, the observed ASINs are ten and uppercase, and intent cannot be read off a redirect that behaves differently on different passes. Second, a stable destination for the short link form itself.",
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended. Record both values side by side, as the register does.",
       "answered": false,
-      "blocking": "yes — the product-record fields depend on it",
+      "blocking": "yes \u2014 the product-record fields depend on it",
       "evidence": "",
       "discovery": {
-        "who": "Owner — Associates Central (SiteStripe)",
+        "who": "Owner \u2014 Associates Central (SiteStripe)",
         "effort": "10 minutes",
         "action": "Open SiteStripe for each of the five products, copy the tagged link for the exact ASIN intended, and record intended and observed values side by side in _src/data/product-intent.json."
       }
@@ -37,14 +37,14 @@
       "question": "Are clicks attributed to shopnow047c-20?",
       "what_we_have": "No Amazon link on the site carries ?tag=shopnow047c-20 yet. Program Policies 2(a)-(b) require a Special Link to use the Associates ID; a Special Link generated in Associates Central and validated by one test click has not been recorded.",
       "what_is_missing": "Confirmation from an Associates report that a click was recorded against the tag. No dashboard access is available to this build.",
-      "how_to_close": "Click one link on the live site, then open Reports → Orders in the Associates dashboard and look for the click against the tag.",
+      "how_to_close": "Click one link on the live site, then open Reports \u2192 Orders in the Associates dashboard and look for the click against the tag.",
       "answered": false,
-      "blocking": "yes — until this is confirmed the site may be sending traffic that does not pay",
+      "blocking": "yes \u2014 until this is confirmed the site may be sending traffic that does not pay",
       "evidence": "",
       "discovery": {
-        "who": "Owner — Associates account",
+        "who": "Owner \u2014 Associates account",
         "effort": "2 minutes plus one click",
-        "action": "Click one product link on the live site, then open Reports → Orders in the Associates dashboard and look for the click against shopnow047c-20. Either answer closes the question."
+        "action": "Click one product link on the live site, then open Reports \u2192 Orders in the Associates dashboard and look for the click against shopnow047c-20. Either answer closes the question."
       }
     },
     {
@@ -54,7 +54,7 @@
       "what_is_missing": "A decision, and if the answer is yes, API credentials.",
       "how_to_close": "Either apply for API access and render Amazon-served prices only, or keep prices off the site. Both are compliant; a copied or scraped price is not.",
       "answered": true,
-      "blocking": "no — the site is compliant without prices",
+      "blocking": "no \u2014 the site is compliant without prices",
       "answer": "No price, star rating, review count or stock status appears anywhere on this site. Every buy button sends the reader to Amazon, where that data is served live.",
       "evidence": "SRC-02"
     },
@@ -87,10 +87,10 @@
       "what_is_missing": "Search data. No Search Console property is connected, so no topic has been chosen from measured demand.",
       "how_to_close": "Verify the property, submit the sitemap, wait two to four weeks, then pick the next topic from the queries that actually appear.",
       "answered": false,
-      "blocking": "no — but every further guide is a guess until it is answered",
+      "blocking": "no \u2014 but every further guide is a guess until it is answered",
       "evidence": "",
       "discovery": {
-        "who": "Owner — Google account",
+        "who": "Owner \u2014 Google account",
         "effort": "15 minutes of setup, then 28 days of waiting",
         "action": "Verify a Search Console property for the site, submit sitemap.xml, and read the Performance queries report after 28 days. The measured queries choose the next topic; the article bank is the menu."
       }
@@ -102,12 +102,12 @@
       "what_is_missing": "A person, a biography that describes work that actually happened, and a decision about whether to publish under a name at all.",
       "how_to_close": "Name an editor and write an accurate bio, or keep the publication anonymous and stop implying personal expertise. Both are honest; the second is weaker for search.",
       "answered": false,
-      "blocking": "partly — it caps how much authority the site can claim",
+      "blocking": "partly \u2014 it caps how much authority the site can claim",
       "evidence": "",
       "discovery": {
         "who": "Owner",
         "effort": "one honest conversation",
-        "action": "Name a real editor with an accurate, modest bio — or decide the publication stays explicitly unsigned and the copy says so. Claiming hands-on testing that never happened would make the problem worse, not better."
+        "action": "Name a real editor with an accurate, modest bio \u2014 or decide the publication stays explicitly unsigned and the copy says so. Claiming hands-on testing that never happened would make the problem worse, not better."
       }
     },
     {
@@ -117,10 +117,10 @@
       "what_is_missing": "The account's current rate card.",
       "how_to_close": "Open the Commission Income Statement in the Associates dashboard and record the rate for Home & Kitchen furniture and appliance categories.",
       "answered": false,
-      "blocking": "no — but no revenue estimate can be made without it, and none is offered",
+      "blocking": "no \u2014 but no revenue estimate can be made without it, and none is offered",
       "evidence": "",
       "discovery": {
-        "who": "Owner — Associates account",
+        "who": "Owner \u2014 Associates account",
         "effort": "5 minutes",
         "action": "Open the Commission Income Statement in Associates Central and record the category rates with the date seen. Until then the site publishes no revenue figure of any kind."
       }
@@ -128,16 +128,16 @@
     {
       "id": "Q-10",
       "question": "Is there an analytics endpoint that can be switched on lawfully?",
-      "what_we_have": "A self-hosted collector (_analytics/endpoint.py) and a cookie-free client that records five defined events. Both are inert.",
+      "what_we_have": "A self-hosted collector (_analytics/endpoint.py) and a cookie-free client that records five defined events. Both are inert. Added 2026-11-20 by arena/3e17592d-affil1: the collector could not import at all (_analytics/endpoint.py inserted a 'tools' path before importing build, and that directory has been _tools/ since the Pages rename), so its suite failed to load while CI's py_compile step kept the lane green; repaired, and its test passes in kitchen-check now. The click handler is a separate open choice, not a defect: assets/js/analytics.js counts only anchors carrying data-affiliate-ref, which the site deliberately omits while no Special Link is armed, and the alternative is the decision row S-43.",
       "what_is_missing": "A host for the collector, a retention statement, and a lawful basis for processing IP addresses.",
       "how_to_close": "Deploy the collector to a host you control, set retention, edit the privacy page with the specifics, then point the client at it.",
       "answered": false,
-      "blocking": "yes — measurement work waits on it",
+      "blocking": "yes \u2014 measurement work waits on it",
       "evidence": "",
       "discovery": {
-        "who": "Owner — hosting decision",
+        "who": "Owner \u2014 hosting decision",
         "effort": "an afternoon, or a decision to delete",
-        "action": "Choose whether to host the analytics collector off GitHub Pages and publish a privacy and retention note — or delete the inert client and record the refusal. Both are compliant; limbo is not."
+        "action": "Choose whether to host the analytics collector off GitHub Pages and publish a privacy and retention note \u2014 or delete the inert client and record the refusal. Both are compliant; limbo is not."
       }
     },
     {
@@ -183,9 +183,9 @@
       "blocking": "yes",
       "evidence": "",
       "discovery": {
-        "who": "Owner — Associates account",
+        "who": "Owner \u2014 Associates account",
         "effort": "20 minutes",
-        "action": "Generate one Special Link per product in Associates Central, test each once, and record the confirmation in the intent register — intended ASIN, listing URL, date and source in one field, observed redirect in a separate field, never merged."
+        "action": "Generate one Special Link per product in Associates Central, test each once, and record the confirmation in the intent register \u2014 intended ASIN, listing URL, date and source in one field, observed redirect in a separate field, never merged."
       }
     },
     {
@@ -198,7 +198,7 @@
       "blocking": "no",
       "evidence": "",
       "discovery": {
-        "who": "Owner — Search Console",
+        "who": "Owner \u2014 Search Console",
         "effort": "answers only after data exists",
         "action": "Read the Performance report 28 days after S-03 lands. Until then the honest answer is 'unknown', and any traffic claim would be invented."
       }
@@ -206,7 +206,7 @@
     {
       "id": "Q-16",
       "question": "Should one repository serve two competing editions of the same site?",
-      "what_we_have": "It did: a generated edition at the root and a hand-written edition under crisp/ plus a set of duplicate root pages. They described the same five products and could compete with each other in search.",
+      "what_we_have": "It did: a generated edition at the root and a hand-written edition under crisp/ plus a set of duplicate root pages. They described the same five products and could compete with each other in search. Added 2026-11-20 by arena/3e17592d-affil1: the annex needed guarding, not only deciding - all 27 pages now carry noindex, follow, a visible note pointing readers to the shop, and no second advertised sitemap, and verify_edition.py asserts all three per page (2,047 checks; negative-tested by stripping the tag and the note from one page). One contradiction was removed on the way: a root robots.txt 'Disallow: /edition/' blocks the crawl that has to read the noindex tag, while a disallowed URL can still be indexed from links, which the shop's own review and question pages provide (FLG-050).",
       "what_is_missing": "Nothing factual. This was a duplication problem with a clear answer.",
       "how_to_close": "Answered on 2026-11-20 by consolidating into one canonical edition and archiving the other with noindex.",
       "answered": true,
@@ -221,10 +221,10 @@
       "what_is_missing": "A domain decision. A custom domain would need DNS, a CNAME file and canonical URLs rewritten in one place.",
       "how_to_close": "Decide whether to buy a domain. The build has one constant for the site URL, so the change is small when the decision is made.",
       "answered": false,
-      "blocking": "no — but it constrains brand and link equity later",
+      "blocking": "no \u2014 but it constrains brand and link equity later",
       "evidence": "",
       "discovery": {
-        "who": "Owner — budget",
+        "who": "Owner \u2014 budget",
         "effort": "one decision",
         "action": "Decide whether to buy a domain and move off the repository subpath. Check GitHub Pages' usage limits first: Pages is not for sites primarily intended to facilitate commercial transactions."
       }
@@ -247,10 +247,10 @@
       "what_is_missing": "Owner sign-off on the wording. This is a compliance judgement, and the site is not the authority on it.",
       "how_to_close": "Read the buttons against Program Policies 2(b) and the FTC's affiliate guidance; change the wording if it reads as a price claim.",
       "answered": false,
-      "blocking": "no — but it should be reviewed before paid traffic is sent",
+      "blocking": "no \u2014 but it should be reviewed before paid traffic is sent",
       "evidence": "",
       "discovery": {
-        "who": "Owner — with the agreement open",
+        "who": "Owner \u2014 with the agreement open",
         "effort": "one review pass",
         "action": "Review the two CTA strings ('See listing source', the tracked variant) against the Operating Agreement, ideally with Associates support in writing. The site keeps the neutral wording meanwhile."
       }
@@ -265,7 +265,7 @@
       "blocking": "no",
       "evidence": "",
       "discovery": {
-        "who": "Owner — privacy decision",
+        "who": "Owner \u2014 privacy decision",
         "effort": "choose a channel or record a refusal",
         "action": "RSS is live and needs no data. A newsletter needs a processor, a double opt-in and a privacy note; a browser-only shortlist already exists and transmits nothing. Pick one and record why."
       }
@@ -291,22 +291,22 @@
       "blocking": "no",
       "evidence": "",
       "discovery": {
-        "who": "Owner — calendar",
+        "who": "Owner \u2014 calendar",
         "effort": "one recurring slot",
         "action": "Commit to a fortnightly or monthly writing slot the calendar can actually keep. The build adds every accepted guide to the sitemap and feed automatically, so the cadence is the only missing part."
       }
     },
     {
       "id": "Q-23",
-      "question": "How big is the market this site is writing into — and does that change what is worth publishing?",
+      "question": "How big is the market this site is writing into \u2014 and does that change what is worth publishing?",
       "what_we_have": "Nothing on this site depends on market size: guides are written from listing facts and general reasoning, and the queue says not to commission more until measurement lands (S-07).",
       "what_is_missing": "Search volume per question theme. The only permitted source is a query report from a verified Search Console property (Q-11), not an estimate from a tool that will not show its method.",
       "how_to_close": "Verify the Search Console property, submit the sitemap, wait for a sample of real queries, then rank future topics by observed demand instead of instinct.",
       "answered": false,
-      "blocking": "no — it informs topic choice (Q-07) but blocks nothing today",
+      "blocking": "no \u2014 it informs topic choice (Q-07) but blocks nothing today",
       "evidence": "",
       "discovery": {
-        "who": "Nobody — until measurement exists",
+        "who": "Nobody \u2014 until measurement exists",
         "effort": "28 days of query data",
         "action": "Treat Search Console impressions as the only demand signal this site will accept. Keyword-tool volumes are estimates sold as facts; this publication will not buy that."
       }
@@ -318,12 +318,12 @@
       "what_is_missing": "A budget and a decision from the owner. Without one, 'tested' remains a word this site never uses, which is the honest position but also the ceiling on its usefulness.",
       "how_to_close": "The owner sets a budget for one unit of the cheapest submitted product (or declines on the record); the purchase and the test protocol then enter the ledger with provenance.",
       "answered": false,
-      "blocking": "no — but it is the gate in front of S-05",
+      "blocking": "no \u2014 but it is the gate in front of S-05",
       "evidence": "",
       "discovery": {
-        "who": "Owner — budget",
+        "who": "Owner \u2014 budget",
         "effort": "one purchase decision",
-        "action": "Authorise buying one unit and a one-week test window with a written method — or record that hands-on testing is out of scope and the site keeps its careful, listing-only register."
+        "action": "Authorise buying one unit and a one-week test window with a written method \u2014 or record that hands-on testing is out of scope and the site keeps its careful, listing-only register."
       }
     },
     {
@@ -333,7 +333,7 @@
       "what_is_missing": "Google Search Console. It is free, it is first-party, and its Performance report answers exactly this question. Until the site is verified there, every topic choice is instinct dressed as strategy.",
       "how_to_close": "Verify the site in Search Console (DNS or the HTML tag route), submit sitemap.xml, wait 28 days, read Performance > Queries. Then pick the next topic from the measured list instead of the topic bank. Documentation: https://support.google.com/webmasters/answer/7576553",
       "answered": false,
-      "blocking": "yes — the next topic decision is guesswork until this is answered",
+      "blocking": "yes \u2014 the next topic decision is guesswork until this is answered",
       "evidence": ""
     },
     {
@@ -343,7 +343,7 @@
       "what_is_missing": "An owner decision: cadence (fortnightly is the default proposal), and a named person who approves each issue before it goes out. An unsigned publication drifts; an unsustainable cadence dies in month two.",
       "how_to_close": "One line in the workflow document: cadence, reviewer, and the rule that an issue ships without the reviewer's sign-off only if it changes nothing but dates.",
       "answered": false,
-      "blocking": "yes — for the calendar in S-23",
+      "blocking": "yes \u2014 for the calendar in S-23",
       "evidence": ""
     },
     {
@@ -353,8 +353,38 @@
       "what_is_missing": "A hosted collector endpoint and a first-party report. No click or conversion claim is made anywhere on this site, and none can be made until either the collector is hosted or the Associates report is read.",
       "how_to_close": "Either host the collector (S-06) with a retention statement, or read the Associates click report (S-01) as the first-party check. Both close the question; the second is cheaper.",
       "answered": false,
-      "blocking": "no — the site is useful without it, but optimisation is guesswork without it",
+      "blocking": "no \u2014 the site is useful without it, but optimisation is guesswork without it",
       "evidence": ""
+    },
+    {
+      "question": "Which first-party collector is canonical, and does the owner accept running it?",
+      "what_we_have": "Three exist: _analytics/endpoint.py (validates against the build's own page list; repaired and passing on 2026-11-20), _measurement/collector.py (reads a register path that no longer exists, so it fails closed permanently and for the wrong reason, and validates an older page scheme) and _platform/collector.py, which belongs to the annex. The client side is one file, assets/js/analytics.js, inert until a host sets CC_ANALYTICS_ENABLED, and its click handler only sees anchors carrying data-affiliate-ref, which the site now deliberately omits while no Special Link is armed (S-30).",
+      "what_is_missing": "One decision and one host: which file is the collector, what it may store, for how long, and who runs the process. GitHub Pages cannot run a process, so nothing in this repository can be switched on from inside it.",
+      "how_to_close": "Adopt the smallest correct one (_analytics/endpoint.py, because its allowlist comes from the build rather than a hand-typed list), archive the other two with a note naming the session that wrote them, then answer the hosting and retention half of Q-10 and record the first day's counts in the ledger with provenance. Recorded as FLG-045.",
+      "answered": false,
+      "blocking": "yes \u2014 it blocks any promise of click or conversion measurement",
+      "evidence": "",
+      "id": "Q-28"
+    },
+    {
+      "question": "May a guide that ends in a buy button quote government food-safety limits, and who owns that risk?",
+      "what_we_have": "Several guides quote USDA FSIS fact sheets sentence for sentence - safe minimum internal temperatures, probe placement for thin foods, the ice-water and boiling-water calibration procedures, the two-hour limit for perishable food left out, the 3-to-4-day storage window - each with a link to the page quoted and a closing note stating that nothing on this site was tested. The quotations were read from the .gov pages on 2026-11-20, not from a search result or a snippet.",
+      "what_is_missing": "The owner's view on whether health-adjacent guidance next to affiliate links is wanted at all, and whether it should carry a review step. There is no food-safety reviewer here, so the only control today is that the site quotes rather than advises.",
+      "how_to_close": "Either accept the rule as written (quote the agency, link the page, add no interpretation) or restrict guides to non-health questions. Both are defensible; the choice decides which topics in the bank can ever ship. If a reviewer is wanted, name them before the next such article, not after.",
+      "answered": false,
+      "blocking": "no \u2014 but it decides which future topics can ship",
+      "evidence": "SRC-08, SRC-09, SRC-21",
+      "id": "Q-29"
+    },
+    {
+      "question": "What happens to a quoted guide when the official page it cites changes?",
+      "what_we_have": "Every source in the register carries a retrieval date and, where the publisher states one, a page date - one fact sheet used by the leftovers guide says on its face that it was last updated Jul 31, 2020. The weekly workflow re-runs the gate against a live snapshot, but it checks links, disclosure and the price ban; it does not check whether a cited page still says the quoted thing.",
+      "what_is_missing": "A refresh rule: which guides are re-read against their sources, how often, and what happens when a quote no longer appears (fix the quote, or date-stamp it and move the page to /review/). Without it, a correct article becomes a stale one silently.",
+      "how_to_close": "Add a source_review_due date to each guide record and extend the weekly audit to fetch each cited .gov page and diff the quoted sentence; anything that no longer matches is flagged automatically rather than edited in place. Cheaper to build now, at 16 guides, than after 60.",
+      "answered": false,
+      "blocking": "no \u2014 it is maintenance",
+      "evidence": "SRC-21 (page states: Last Updated Jul 31, 2020)",
+      "id": "Q-30"
     }
   ]
 }

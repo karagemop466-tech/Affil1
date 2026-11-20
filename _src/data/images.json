@@ -202,6 +202,46 @@
       "depicts_a_real_product": false,
       "used_on": "Guide: reheating-thanksgiving-leftovers (hero image); guides index card",
       "rules_met": "No brand mark, no price, no specification implied, and the page that shows it carries a caption saying it is not a photograph of the product. The thermometer drawn beside the drawer is generic and unbranded; it does not depict either thermometer product sold here."
+    },
+    {
+      "file": "guide-chicken-done",
+      "alt": "Roast chicken thighs on a pale board with a digital thermometer probe inserted sideways into the thickest piece",
+      "style": "unbranded editorial photograph, generated",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded basket fryer and a plain probe with a blank display",
+      "depicts_a_real_product": false,
+      "used_on": "guides/air-fryer-chicken-done.html (hero) and the guides index",
+      "rules_met": "No brand mark. The display is deliberately blank, so no reading is invented. Captioned as an illustration wherever it appears, and the caption says it is not a record of a test."
+    },
+    {
+      "file": "guide-ice-water-check",
+      "alt": "A digital instant-read thermometer standing in a tall glass of ice water on a wooden counter",
+      "style": "unbranded editorial photograph, generated",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation",
+      "depicts_a_real_product": false,
+      "used_on": "guides/thermometer-ice-water-check.html (hero) and the guides index",
+      "rules_met": "Shows a generic fold-out instrument, not P-04 or P-05. No digits on the display. Caption names it as an illustration."
+    },
+    {
+      "file": "meal-prep",
+      "alt": "Portioned cooked food in containers on a counter beside an air fryer, mid-week meal preparation",
+      "style": "unbranded editorial photograph, generated",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, by an earlier session",
+      "depicts_a_real_product": false,
+      "used_on": "guides/meal-prep-sunday.html (hero) and the guides index",
+      "rules_met": "Row restored on 2026-11-20: the asset stayed in use while its register row was dropped by a merge, which is what tools/check_image_register.py now prevents."
+    },
+    {
+      "file": "instant-read",
+      "alt": "A digital instant-read thermometer held over a cooked chicken breast on a board",
+      "style": "unbranded editorial photograph, generated",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, by the category/guide session",
+      "depicts_a_real_product": false,
+      "used_on": "index.html, guides/index.html, categories/index.html, categories/thermometers/index.html, guides/where-to-put-the-probe.html",
+      "rules_met": "Row added by tools/check_image_register.py's failure on the 772deef merge: the asset was published on five pages while the image-policy register had no row for it, which left the site's own image policy incomplete. No brand mark, no price or specification implied."
     }
   ],
   "rejected": [
