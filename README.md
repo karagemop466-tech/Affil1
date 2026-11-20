@@ -1,8 +1,19 @@
-# Affil1 — Crisp & Counter
+# Affil1
 
-An Amazon Associates publication for countertop cooking appliances.
+An Amazon Associates site for countertop cooking appliances. It has two sections,
+built by different sessions and merged without either discarding the other.
 
-**Live site:** https://karagemop466-tech.github.io/Affil1/
+| Section | URL | Contents |
+| --- | --- | --- |
+| **Good Measure Kitchen Notes** | https://karagemop466-tech.github.io/Affil1/ | Storefront, guide set, dashboard, categories, flagged review |
+| **Crisp & Counter** | https://karagemop466-tech.github.io/Affil1/crisp/ | Publication front page, 4 guides, compare, products, and the register set |
+
+Both disclose the affiliate relationship above the fold and neither publishes a
+price without an Amazon-served feed.
+
+## Crisp & Counter (`crisp/`)
+
+Live: https://karagemop466-tech.github.io/Affil1/crisp/
 
 ## What this is
 
@@ -11,14 +22,14 @@ anything else. No prices, ratings, review counts or stock figures appear
 anywhere, because Amazon permits them only when Amazon serves the data or it
 arrives through its API — and no such feed is connected here.
 
-## Layout
+## Layout of `crisp/`
 
 ```
-index.html                 front page (generated)
-guides/                    four question-shaped buying guides (generated)
-compare/                   form-factor comparison (generated)
-products/                  identifier register (generated)
-about/  sources/  suggestions/  questions/  flagged/  legacy/
+crisp/index.html           front page (generated)
+crisp/guides/              four question-shaped buying guides (generated)
+crisp/compare/             form-factor comparison (generated)
+crisp/products/            identifier register (generated)
+crisp/about/  sources/  suggestions/  questions/  flagged/  legacy/
 src/data/*.json            the single source of truth for every figure and claim
 src/data/products.json     product observations, intended vs observed identifiers kept apart
 src/data/compliance.json   verbatim policy quotations with URLs
@@ -33,12 +44,15 @@ docs/MEASUREMENT.md        the five events, and why none is live
 COORDINATION.md            shared task board for parallel sessions
 ```
 
+All links inside `crisp/` are relative, because GitHub Pages serves this repo
+under `/Affil1/` and absolute root paths would 404 there.
+
 Pages are **generated**. Edit the JSON in `src/data/` or the copy in
 `tools/content.py`, then:
 
 ```bash
-python3 tools/build.py
-python3 tools/validate.py
+python3 tools/build.py      # renders crisp/ from src/data + tools/content.py
+python3 tools/validate.py   # 600 checks, scoped to crisp/ only
 ```
 
 Do not hand-edit the HTML: it is overwritten on the next build. This is
@@ -58,7 +72,10 @@ Everything else is framed as a question the reader should ask, or omitted.
 - No third-party scripts, no cookies, no tracking.
 - Policy citations are backed by verbatim quotations with source URLs.
 
-Unverified items are published at `/flagged/` with source links.
+Unverified items are published at `crisp/flagged/` with source links.
+
+`tools/validate.py` validates only `crisp/`. The storefront at the repo root is
+another session's scope and is not policed by this tool.
 
 ## Known gaps
 
