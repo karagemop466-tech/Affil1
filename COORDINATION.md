@@ -147,3 +147,25 @@ Scope (additive; new files only, no edits to files in any open PR's scope):
 3. `guides/holiday-hosting.html` — seasonal question-shaped guide (holiday-hosting season; no product or performance claims).
 4. `tools/verify_links.py` — repeatable observation runbook (append-only NDJSON; never mutates confirmation records; gate: operator review).
 Requests (not performed — files owned/contested by other sessions): wire the audit page and seasonal guide into sitemap.xml/feed.xml/nav; cross-link from reviews/flagged.html.
+
+## Verification record — arena/a4ab7faf-affil1 (pass-2 audit, 2026-11-20)
+
+### Sources verified (fetched directly this session; links for manual review)
+- Amazon Associates Operating Agreement — fetched 2026-11-20, page states "Updated: October 15, 2025". §5 disclosure wording confirmed verbatim; §1 Special Links "tagged link formats" requirement confirmed: https://affiliate-program.amazon.com/help/operating/agreement
+- Amazon Associates Program Policies — cited for operator review (incorporated by reference, Agreement §12): https://affiliate-program.amazon.com/help/operating/policies
+- FTC Endorsement Guides: What People Are Asking — fetched 2026-11-20; "clearly and conspicuously" + dedicated affiliate-marketing section confirmed: https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking
+- Amazon official ASIN definition — fetched 2026-11-20 (sell.amazon.com/blog/what-is-an-asin): "unique 10-character alphanumeric code… appears after /dp/". Basis of IR-1 (all five submitted codes are 9 characters ⇒ short-link slugs, not ASINs).
+- Google Search Central outbound-link qualification — fetched 2026-11-20 (developers.google.com/search/docs/crawling-indexing/qualify-outbound-links): rel="sponsored" for paid placements; multiple rel values allowed.
+- Five submitted link.amazon/... URLs — fetched individually 05:15–05:22 UTC; final URLs + page titles recorded in data/verification-audit.json (OBS-1..OBS-5).
+
+### Verification performed
+- Direct fetch of all five submitted links (see above). Results: 4 product pages, 1 checkpoint gate. Two outcomes CONTRADICT pass-1 records (B00hJ57DV and B0f3GKalj: pass-1 said Amazon homepage; pass 2 observed product listings). Logged as IR-2, not adjudicated; pass-1 records retained untouched.
+- Independent corroboration: session-arena-cadaafe7's data/product-intent.json (PR #11) independently recorded the same four listings (B0CDY277D3, B09B7SB46R, B08DKYBTPH-via-shop-slug, B0DZFD6R9Z) — cross-session agreement noted in the audit.
+- tools/verify_links.py executed (200-observed test run on a github.com URL); NDJSON log written; py_compile clean.
+- Local checks: all relative references in the two new pages resolve; sitemap/feed/rss XML parse; disclosure strip present on both new pages; 10 outbound product links in the audit page carry rel="sponsored nofollow noopener"; no root-absolute paths in new pages.
+
+### Requests for the integration session (files owned/contested — not edited by this session)
+1. **guides.html (root) is broken on main**: it uses `../`-relative paths (../css/style.css, ../feed.xml, ../products.html, …) although it sits at the root — 21 broken references found by a repo-wide reference scan. Existing CI (pages.yml) only scans index.html and guides/*.html, so this passes CI while broken for readers. Fix paths or scope the CI check to all root-level pages.
+2. Wire reviews/verification-audit.html and guides/holiday-hosting.html into sitemap.xml, feed.xml and site navigation (additive rows/links only).
+3. IR-8: declare one canonical product register; mark data/products.json + archive/ copies historical.
+4. IR-5: register spans air fryers AND a meat thermometer (B0DZFD6R9Z observed) — category naming should reflect that.
