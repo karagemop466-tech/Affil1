@@ -72,7 +72,7 @@
     {
       "id": "Q-07",
       "question": "Which topics are worth writing next?",
-      "what_we_have": "Eight guides on editorial hypotheses: shape, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers and seasonal hosting.",
+      "what_we_have": "Ten guides on editorial hypotheses: shape, dual-zone, capacity, cleanup, small kitchens, multi-function appliances, thermometers, seasonal hosting, meal-prep geometry and holiday side-dish capacity.",
       "what_is_missing": "Search data. No Search Console property is connected, so no topic has been chosen from measured demand.",
       "how_to_close": "Verify the property, submit the sitemap, wait two to four weeks, then pick the next topic from the queries that actually appear.",
       "answered": false,
@@ -102,9 +102,9 @@
     {
       "id": "Q-10",
       "question": "Is there an analytics endpoint that can be switched on lawfully?",
-      "what_we_have": "Five events are defined in code and a client exists (assets/js/analytics.js), inert until a host sets CC_ANALYTICS_ENABLED. Two defects were removed on 2026-11-20: the collector at _analytics/endpoint.py could not import at all (it looked for a 'tools' directory that has been underscore-prefixed since), so its test suite failed to load while CI's py_compile step kept the pipeline green; and outbound_product_click could never fire, because data-affiliate-ref was emitted only on tagged links and the gate publishes untagged ones. Permitted product links now carry the identifier attribute either way.",
-      "what_is_missing": "A host for the collector, a retention statement, a lawful basis for any IP logging - and a decision about which of the three collectors survives (Q-25). GitHub Pages cannot run a process, so nothing here can be turned on from the repository alone.",
-      "how_to_close": "Pick the collector, deploy it behind same-origin HTTPS, set retention, edit the privacy statement with the specifics, then point the client at it and record the first day's counts in the ledger with provenance.",
+      "what_we_have": "A self-hosted collector (_analytics/endpoint.py) and a cookie-free client that records five defined events. Both are inert. Added 2026-11-20 by arena/3e17592d-affil1: the collector could not import at all (_analytics/endpoint.py inserted a 'tools' path on sys.path before importing build, and that directory has been _tools/ since the Pages rename), so its test suite failed to load while CI's py_compile step kept the pipeline green. Repaired, and its suite passes. The click handler is a separate open choice, not a defect: assets/js/analytics.js counts only anchors carrying data-affiliate-ref, which the site deliberately omits while no Special Link is armed (S-30, FLG-038).",
+      "what_is_missing": "A host for the collector, a retention statement, and a lawful basis for processing IP addresses.",
+      "how_to_close": "Deploy the collector to a host you control, set retention, edit the privacy page with the specifics, then point the client at it.",
       "answered": false,
       "blocking": "yes \u2014 measurement work waits on it",
       "evidence": ""
@@ -165,9 +165,9 @@
     {
       "id": "Q-16",
       "question": "Should one repository serve two competing editions of the same site?",
-      "what_we_have": "Both editions are on disk and were served from one host: the generated shop at the repository root and the Countertop Almanac edition under /edition/, 27 pages, each describing the same five listings. On 2026-11-20 the root build was made canonical and the annex was made non-competing: every annex page carries 'noindex, follow', shows a visible note pointing readers to the shop, and no longer advertises a second sitemap. _platform/verify_edition.py asserts all three per page and was negative-tested.",
-      "what_is_missing": "A decision about the annex's future now that it is out of the index: fold its registers into the shop's tables, or retire it after the owner has read it. The duplication is harmless to a crawler now and still costs a reader two brands.",
-      "how_to_close": "Owner picks one of the two, in writing, on the suggestions page. Folding is a template job for a session that owns tools/page_products.py; retiring is a move into _archive/ plus a redirect note. See FLG-030.",
+      "what_we_have": "It did: a generated edition at the root and a hand-written edition under crisp/ plus a set of duplicate root pages. They described the same five products and could compete with each other in search. Added 2026-11-20 by arena/3e17592d-affil1: the answer above held for the archived duplicate but not for edition/, which was still a second fully indexable publication of the same five listings (27 pages, own canonicals, own sitemap, own feed, a 'Sitemap:' line in edition/robots.txt that no crawler reads). The annex now carries 'noindex, follow' on every page, shows a visible note pointing readers to the shop, and no longer advertises a second sitemap; verify_edition.py asserts all three per page and was negative-tested by stripping the tag and the note from one page (FLG-030, FLG-036). Fold-or-retire remains the owner's call, since the duplication is now harmless to a crawler and still visible to a reader.",
+      "what_is_missing": "Nothing factual. This was a duplication problem with a clear answer.",
+      "how_to_close": "Answered on 2026-11-20 by consolidating into one canonical edition and archiving the other with noindex.",
       "answered": true,
       "blocking": "no",
       "answer": "One site is indexed. The root build is canonical, the duplicate pages are archived under _archive/legacy-2026-11-20/ with a noindex tag, and the sitemap lists only the canonical pages.",
@@ -228,7 +228,7 @@
     {
       "id": "Q-22",
       "question": "What cadence can this publication actually sustain?",
-      "what_we_have": "Eight guides, written to one standard, each sourced from listing titles and general reasoning rather than tests.",
+      "what_we_have": "Ten guides, written to one standard, each sourced from listing titles and general reasoning rather than tests.",
       "what_is_missing": "A commitment from the owner. A cadence without an author is a wish.",
       "how_to_close": "Choose one guide a fortnight or one a month, put it in the publishing workflow document, and hold to it.",
       "answered": false,
@@ -256,34 +256,34 @@
       "evidence": ""
     },
     {
-      "id": "Q-25",
       "question": "Which first-party collector is canonical, and does the owner accept running it?",
-      "what_we_have": "Three exist: _analytics/endpoint.py (imports the build's own page list, now repaired, suite passing), _measurement/collector.py (reads a register path that no longer exists and validates an older page scheme, so it fails closed permanently and for the wrong reason) and _platform/collector.py, which belongs to the annex. Each has a different idea of what a 'page' is.",
-      "what_is_missing": "One decision and one host. Which file is the collector, what it may store, for how long, and who runs the process. Nothing in a GitHub Pages repository can host it.",
-      "how_to_close": "Adopt the smallest correct one (_analytics/endpoint.py, because it validates against the build's own GENERATED set rather than a hand-typed list), archive the other two with a note, then answer Q-10's hosting and retention half. Recorded as FLG-031.",
+      "what_we_have": "Three exist: _analytics/endpoint.py (validates against the build's own page list; repaired and passing on 2026-11-20), _measurement/collector.py (reads a register path that no longer exists, so it fails closed permanently and for the wrong reason, and validates an older page scheme) and _platform/collector.py, which belongs to the annex. The client side is one file, assets/js/analytics.js, inert until a host sets CC_ANALYTICS_ENABLED, and its click handler only sees anchors carrying data-affiliate-ref, which the site now deliberately omits while no Special Link is armed (S-30).",
+      "what_is_missing": "One decision and one host: which file is the collector, what it may store, for how long, and who runs the process. GitHub Pages cannot run a process, so nothing in this repository can be switched on from inside it.",
+      "how_to_close": "Adopt the smallest correct one (_analytics/endpoint.py, because its allowlist comes from the build rather than a hand-typed list), archive the other two with a note naming the session that wrote them, then answer the hosting and retention half of Q-10 and record the first day's counts in the ledger with provenance. Recorded as FLG-035.",
       "answered": false,
-      "blocking": "yes - it blocks any promise of click or conversion measurement",
-      "evidence": ""
+      "blocking": "yes \u2014 it blocks any promise of click or conversion measurement",
+      "evidence": "",
+      "id": "Q-25"
     },
     {
-      "id": "Q-26",
       "question": "May a guide that ends in a buy button quote government food-safety limits, and who owns that risk?",
-      "what_we_have": "Three guides now quote USDA FSIS fact sheets sentence for sentence - safe minimum internal temperatures, probe placement for thin foods, the ice-water and boiling-water calibration checks, the two-hour limit for perishable food left out - each with a link to the page it came from, and each closing note stating that nothing on the site was tested. The quotations were read from the .gov pages on 2026-11-20, not from a search result.",
-      "what_is_missing": "A view from the owner on whether health-adjacent guidance next to affiliate links is wanted at all, and whether it should carry a review step. This site has no food-safety reviewer, so the only control today is that it quotes rather than advises.",
-      "how_to_close": "Either accept the rule as written (quote the agency, link the page, add no interpretation) or restrict guides to non-health questions; both are defensible, and the choice changes the topic bank. If a reviewer is wanted, name them before the next such article, not after.",
+      "what_we_have": "Several guides quote USDA FSIS fact sheets sentence for sentence - safe minimum internal temperatures, probe placement for thin foods, the ice-water and boiling-water calibration procedures, the two-hour limit for perishable food left out, the 3-to-4-day storage window - each with a link to the page quoted and a closing note stating that nothing on this site was tested. The quotations were read from the .gov pages on 2026-11-20, not from a search result or a snippet.",
+      "what_is_missing": "The owner's view on whether health-adjacent guidance next to affiliate links is wanted at all, and whether it should carry a review step. There is no food-safety reviewer here, so the only control today is that the site quotes rather than advises.",
+      "how_to_close": "Either accept the rule as written (quote the agency, link the page, add no interpretation) or restrict guides to non-health questions. Both are defensible; the choice decides which topics in the bank can ever ship. If a reviewer is wanted, name them before the next such article, not after.",
       "answered": false,
-      "blocking": "no - but it decides which future topics can ship",
-      "evidence": "SRC-08, SRC-09, SRC-18"
+      "blocking": "no \u2014 but it decides which future topics can ship",
+      "evidence": "SRC-08, SRC-09, SRC-21",
+      "id": "Q-26"
     },
     {
-      "id": "Q-27",
       "question": "What happens to a quoted guide when the official page it cites changes?",
-      "what_we_have": "Every quoted source in the register carries a retrieval date, and one of the pages used by the leftovers guide states on its face that it was last updated Jul 31, 2020. The weekly workflow re-runs the gate against a live snapshot, but it checks links, disclosure and price bans - not whether a cited page still says the quoted thing.",
-      "what_is_missing": "A refresh rule: which guides are re-read against their sources, how often, and what happens to a page whose quote has moved (fix the quote, or date-stamp and flag it). Without it, a correct 2026 article silently becomes a stale one.",
-      "how_to_close": "Add a source_review_due date per guide to the editorial register and extend the weekly audit to fetch each cited .gov page and diff the quoted sentence; anything that no longer appears moves to /review/ automatically rather than being quietly edited.",
+      "what_we_have": "Every source in the register carries a retrieval date and, where the publisher states one, a page date - one fact sheet used by the leftovers guide says on its face that it was last updated Jul 31, 2020. The weekly workflow re-runs the gate against a live snapshot, but it checks links, disclosure and the price ban; it does not check whether a cited page still says the quoted thing.",
+      "what_is_missing": "A refresh rule: which guides are re-read against their sources, how often, and what happens when a quote no longer appears (fix the quote, or date-stamp it and move the page to /review/). Without it, a correct article becomes a stale one silently.",
+      "how_to_close": "Add a source_review_due date to each guide record and extend the weekly audit to fetch each cited .gov page and diff the quoted sentence; anything that no longer matches is flagged automatically rather than edited in place. Cheaper to build now, at 16 guides, than after 60.",
       "answered": false,
-      "blocking": "no - it is maintenance, and it is cheap while there are 13 guides",
-      "evidence": "SRC-18 (page states: Last Updated Jul 31, 2020)"
+      "blocking": "no \u2014 it is maintenance",
+      "evidence": "SRC-21 (page states: Last Updated Jul 31, 2020)",
+      "id": "Q-27"
     }
   ]
 }

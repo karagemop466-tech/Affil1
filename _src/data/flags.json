@@ -393,61 +393,185 @@
     {
       "id": "FLG-028",
       "severity": "high",
-      "title": "Two CI steps reported green while testing the wrong directory, and the collector could not import",
-      "expected": "The gates that stand in front of a deploy run this repository's own tests, and any step that collects nothing is a failure.",
-      "found": "Three defects, each reproduced on main at 2934ed0 on 2026-11-20. (1) edition-verify.yml ran 'python3 -m unittest discover -s platform'; the directory has been _platform since the Pages rename, so unittest imported CPython's stdlib platform package and printed 'Ran 45 tests' from test.test_support while running none of the platform suite. (2) kitchen-check.yml ran only 'py_compile' over _analytics/endpoint.py, which does not import at all: it inserts ROOT/'tools' on sys.path and then 'from build import GENERATED', so the module and its test suite both raised ModuleNotFoundError. (3) _tools/arm_links.py reads _src/_data/product-intent.json, which does not exist, so the owner's arming switch died with FileNotFoundError on --status before printing any state.",
-      "impact": "Any release receipt on this board that cites the 'platform unit & HTTP collector tests' step as evidence was citing a step that did not test the platform. Repaired on branch arena/3e17592d-affil1: both steps now target _platform and _analytics, each fails when discovery collects nothing (negative-tested against an empty directory and against the singular 'Ran 1 test' line), and the collector's suite passes. No product observation, confirmation or revenue figure changed.",
-      "reading": "A check that passes on code it never imported is worse than no check, because it gets quoted afterwards as verification. The general rule for the next session: if a command can succeed while collecting zero tests, it is not a gate.",
-      "blocks": "nothing \u2014 repaired here, recorded so earlier receipts can be re-read",
+      "title": "On 2026-11-20 re-check, all five submitted short links returned the Amazon homepage, not the product pages the register records",
+      "expected": "Each submitted link.amazon.com short link, fetched directly, lands on the /dp/ listing that the register records as its observed destination (product-intent.json, products.json observed_url).",
+      "found": "Re-check on 2026-11-20 (arena/bcd93318-affil1, fetch_page, redirects followed). Every short link returned https://www.amazon.com/ with the title 'Amazon.com. Spend less. Smile more.': B04G1MEwY (P-01), B02NbDxp3 (P-02), B00hJ57DV (P-03), B0c8moW59 (P-04, on two separate attempts), B0f3GKalj (P-05). The direct /dp/ pages for B0CDY277D3 (P-01) and B0DHZTCNR5 (P-04) and B0DZFD6R9Z (P-05) did resolve to the listings the register records (titles confirmed on the same date). Details: _docs/VERIFICATION-arena-bcd93318.md.",
+      "impact": "The register's observed_redirect_target values for the short links rest on earlier fetches. Today's fetches do not reproduce them, so those redirect observations are not currently reproducible. Nothing here changes intended_asin, which stays null.",
+      "reading": "Either the short links redirect differently by request (geography, session, bot handling, or the fetching client) or the earlier redirect records were wrong. The repository cannot tell which from outside Amazon's own tools. This is the same instability already recorded for P-01 and P-04 in FLG-018 and the README, now seen for all five at once. Do not change any observed field on the strength of one fetch in either direction.",
+      "blocks": "Nothing on the site changes automatically. It does mean the 'destination reached' column for the short links is not a stable fact. The Associates one-link test (FLG-003) is the step that would settle it from an enrolled account.",
       "to_check": [
-        "https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions",
-        "https://github.com/karagemop466-tech/Affil1/actions",
-        "python3 -m unittest discover -s _platform -p 'test_*.py' (6 tests) versus -s platform (45 stdlib tests)"
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV",
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "https://affiliate-program.amazon.com/help/operating/agreement"
       ]
     },
     {
       "id": "FLG-029",
       "severity": "high",
-      "title": "Reader-facing pages asserted a tracking tag that the paid-link gate had withheld",
-      "expected": "A page may not imply that a purchase can be credited to an Associates account while the intent register records no confirmation, and the disclosure has to stay true in both gate states.",
-      "found": "All 10 published guides carried a sidebar sentence reading 'Product links in these guides earn a commission. They are marked sponsored and every one carries the site's Amazon tag', and every product page's fine print read 'Paid link \u00b7 \u2026 \u00b7 tag shopnow047c-20'. The hrefs on those same pages are plain https://www.amazon.com/dp/ listing links with no tag parameter (0 tagged hrefs in the generated tree, measured 2026-11-20), and _src/data/product-intent.json records associate_enrollment_confirmed, site_registered and one_link_test_completed as null. The rel='sponsored' marking claim was true; the attribution claim was not.",
-      "impact": "The guide wording and the product fine print now follow the URL that is actually on the page: an untagged permitted link reads 'Listing source \u00b7 \u2026 \u00b7 this link carries no tracking tag, so nothing here can be credited to an account yet', and the tagged wording becomes available the moment arm_links.py records an approved Special Link. The annex's disclosure line, which printed the tracking ID as though it were applied, was amended in the same pass. The verbatim Associates sentence is untouched on every page.",
-      "reading": "Wording that describes a gate state rather than the current state is a defect that reads like confidence. It was rewritten to be conditional in both directions, not deleted, because the disclosure obligation does not depend on the gate.",
-      "blocks": "nothing \u2014 wording corrected on this branch",
+      "title": "The 'Add to basket' links carry no tag and are not Special Links",
+      "expected": "Every link to an Amazon Site that is meant to earn commission uses the Associates ID as a URL parameter (Program Policies 2(b): 'you must include your Associates ID or \"tag\" ... as a parameter in the URL of each link you place on your Site to an Amazon Site'), and Amazon notes that purchases can be disqualified when 'the links from your site to the relevant Amazon Site are not properly formatted' (Commission Income Statement 2(g)).",
+      "found": "Both the front page and the products page publish five 'Add to basket' links at https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=<ASIN>&Quantity.1=1 with no tag. They are marked rel=\"sponsored\" and labelled 'paid link', so they read as earning links while being incapable of attributing a purchase.",
+      "impact": "A reader who uses them is taken to an Amazon cart that no Associated account is attached to. The site earns nothing, and the button is the most prominent call to action on the page.",
+      "reading": "The cart permalink was added as a reference layer next to the listing link and is treated by the build as a permitted non-tag URL. It is not. Program Policies 2(b) applies to every link placed on the site to an Amazon Site, and the safe reading of a cart permalink is that it is a link to an Amazon Site. Either it carries the tag, or it is not presented as a buy action.",
+      "blocks": "any claim that the primary call to action can earn, and any traffic spend",
       "to_check": [
-        "https://affiliate-program.amazon.com/help/operating/agreement",
-        "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
-        "python3 _tools/arm_links.py --status (now runs; prints 'published state: reference links only')"
-      ]
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "_src/data/_links.json cart endpoint row",
+        "One click on an Add to basket button, then Reports \u2192 Orders"
+      ],
+      "resolution": "Resolved in code on 2026-11-20 by session arena/acb1e4c8-affil1, during the merge that brought this flag onto the branch. _tools/cta.py no longer builds a cart permalink from an observed ASIN and no longer appends the tag by hand. pair() now renders the cart door only when paid_link_gate holds an account-approved Special Link for that ASIN; otherwise the primary door is the official listing for the observed ASIN via buy_url() -- the same gate every other Amazon link uses -- still marked rel=\"sponsored nofollow noopener\", with a one-line note saying why there is no one-click basket. No published page contains a cart/add.html URL. Regression test: _tools/test_cta_gate.py (4 cases). The remaining question in this flag -- whether a tagged cart permalink is itself a permitted Special Link -- is not answered here and does not need to be until the account issues one; it is D-01 on /decisions/.",
+      "status": "resolved-in-code"
     },
     {
       "id": "FLG-030",
       "severity": "medium",
-      "title": "The host was publishing two branded publications of the same five listings, both indexable",
-      "expected": "One site for a search engine to index, with one sitemap, one feed and one set of canonical URLs.",
-      "found": "The generated shop at the repository root (Crisp & Counter, 34 pages) and the Countertop Almanac edition under /edition/ (27 pages) describe the same five listings under different mastheads, each with self-referencing canonical URLs, its own sitemap.xml, its own feed.xml and its own RSS autodiscovery link; the annex also advertised its own sitemap in edition/robots.txt. No crawler rule could have resolved it: a robots.txt file must sit at the root of the host and cannot be placed in a subdirectory, so neither /Affil1/robots.txt nor /Affil1/edition/robots.txt is read at all (see FLG-027), and robots.txt is explicitly not a mechanism for keeping a page out of Google.",
-      "impact": "All 27 annex pages now emit <meta name=\"robots\" content=\"noindex, follow\">, carry a visible 'This is the verification annex' note linking to the shop, and no longer advertise a second sitemap. verify_edition.py asserts the tag, the note and the robots file on every page (2,047 line-by-line checks, up from 1,965) and was negative-tested by stripping the tag and the note from one page. The shop's sitemap was already correct and is unchanged. Open half: whether the annex is eventually folded into the shop's tables or retired (Q-16).",
-      "reading": "Deleting another session's edition would have destroyed reviewable work; pointing a search engine at one of the two is the smaller, reversible act. 'follow' is deliberate: a blocked crawl cannot read the tag that does the work.",
-      "blocks": "nothing \u2014 the annex stays reachable for review",
+      "title": "A second complete edition of the same five-product shop was indexable under /edition/",
+      "expected": "One site for a search engine to index, which is what the About page claims and what the brief asks for.",
+      "found": "The published tree contains a preserved edition/ build of more than twenty pages, each carrying a self-referencing canonical under /Affil1/edition/, and a sitemap of its own. A canonical pointing at a second copy of the same catalogue does not consolidate anything: it asks a crawler to index two shops. No robots meta instruction was present on any edition page.",
+      "impact": "Every edition page now carries <meta name=\"robots\" content=\"noindex, follow\"> beside its canonical, so the maintained root is the only indexable surface. The edition stays reachable for review and no content changed.",
+      "reading": "The edition is a preserved working copy, not a rival storefront, so it stays in the repository. What it must not do is compete for the same query. Two sessions converged on this decision independently on 2026-11-20 (arena/b990bce7-affil1 and arena/d3f5a958-affil1); the second also added Disallow: /edition/ to robots.txt and wrote the reversal path: remove the noindex metas and the robots line if the owner chooses Countertop Almanac as the canonical brand instead.",
+      "blocks": "nothing",
       "to_check": [
-        "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
-        "https://developers.google.com/crawling/docs/robots-txt/create-robots-txt",
-        "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+        "https://karagemop466-tech.github.io/Affil1/edition/",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
       ]
     },
     {
       "id": "FLG-031",
+      "severity": "high",
+      "title": "The site's own copy said every link carried the Amazon tag, and every product page printed the tag beside the button",
+      "expected": "A page describes its own links accurately, in the cautious direction as well as the confident one.",
+      "found": "The sidebar on all ten guides read 'every one carries the site's Amazon tag', and each product page printed 'tag shopnow047c-20' under its buy button. No published URL carries a tag: _src/data/product-intent.json holds no account-confirmed Special Link, so all five destinations are the plain listing. The statements were untrue in the direction that flatters the site, which is the more damaging direction.",
+      "impact": "Both now derive from the paid-link register and say the plain thing: plain listing, no tag, a click is not yet credited. _tools/check.py fails the build if the copy and the register disagree, in either direction.",
+      "reading": "A cautious site is still wrong if it describes its own machinery incorrectly. This is the class of error that survives several review passes because it sounds like the responsible sentence.",
+      "blocks": "nothing \u2014 fixed",
+      "to_check": [
+        "https://karagemop466-tech.github.io/Affil1/products/p-01.html",
+        "https://karagemop466-tech.github.io/Affil1/guides/basket-or-oven-air-fryer.html",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ]
+    },
+    {
+      "id": "FLG-032",
+      "severity": "low",
+      "title": "Two publishers are configured for the same Pages site: the legacy branch source and an Actions deploy job",
+      "expected": "One publishing source per GitHub Pages site, so a reviewer can say which pipeline put a page live.",
+      "found": "The repository's Pages configuration reports build_type \"legacy\" (source branch main, path /) while .github/workflows/pages.yml also stages and deploys an artifact when the source is \"workflow\". Both paths appear in run history; the legacy path is what serves pages today.",
+      "impact": "The site serves the repository root, so working directories are public URLs unless underscore-prefixed (see check_serving_scope). The staged _site artifact is built and checked but is not what publishes.",
+      "reading": "Ported from the Decision Desk (IRR-03) and re-verified directly on 2026-11-20 with gh api repos/karagemop466-tech/Affil1/pages, which returned build_type=legacy. A configuration fact, not a content defect.",
+      "blocks": "any claim that the staged artifact is what deploys",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+        "Run: gh api repos/karagemop466-tech/Affil1/pages and read build_type"
+      ]
+    },
+    {
+      "id": "FLG-033",
+      "severity": "low",
+      "title": "The P-05 listing pages were recorded as stating several different heat tolerances for one probe set",
+      "expected": "One product listing states one figure for the same specification.",
+      "found": "Session arena/771e5093-affil1 recorded on 2026-11-20 that the CHEF iQ Sense pages it read stated several different heat tolerances across pages (1,400 \u00b0C / 1,40 \u00b0C, 1,300 \u00b0F, 1,500 \u00b0F, 1,000 \u00b0F), including one amazon.nl page contradicting itself. The observation is carried forward as recorded; it was not re-verified in this session, and no heat-tolerance figure is published on this site.",
+      "impact": "None on the published pages: the site transcribes only the listing title, which states no heat tolerance. The flag exists so the owner checks the current listing before any future content mentions probe heat limits.",
+      "reading": "An upstream-inconsistency note with dated provenance, not a claim about the product. Ported from the Decision Desk (IRR-05) during the 2026-11-20 integration pass.",
+      "blocks": "nothing \u2014 it blocks only future copy about heat tolerances",
+      "to_check": [
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "Re-open the amazon.nl listing pages recorded by session arena/771e5093-affil1 and compare the stated heat tolerances line by line"
+      ]
+    },
+    {
+      "severity": "high",
+      "title": "Two CI steps reported green while testing the wrong directory, and the collector could not import",
+      "expected": "The gates in front of a deploy run this repository's own tests, and a step that collects nothing fails.",
+      "found": "Three defects, each reproduced on main at 2934ed0 on 2026-11-20. (1) edition-verify.yml ran 'python3 -m unittest discover -s platform'; the directory has been _platform since the Pages rename, so unittest imported CPython's stdlib platform package and printed 'Ran 45 tests' from test.test_support while running none of the platform suite. (2) kitchen-check.yml ran only py_compile over _analytics/endpoint.py, which does not import at all: it inserted ROOT/'tools' on sys.path before 'from build import GENERATED', so the module and its own test suite both raised ModuleNotFoundError. (3) _tools/arm_links.py read _src/_data/product-intent.json, a path that does not exist, so the owner's arming switch died with FileNotFoundError on --status before printing any state.",
+      "impact": "Any release receipt on this board citing the 'platform unit & HTTP collector tests' step as evidence was citing a step that did not test the platform. Repaired on arena/3e17592d-affil1: the steps now target _platform and _analytics, each fails when discovery collects nothing (negative-tested against an empty directory and against the singular 'Ran 1 test' line), arm_links.py runs and still refuses to write without --i-am-the-owner, and the collector's suite passes. No product observation or revenue figure changed.",
+      "reading": "A check that passes on code it never imported is worse than no check, because it gets quoted afterwards as verification. Rule for the next session: if a command can succeed while collecting zero tests, it is not a gate.",
+      "blocks": "nothing \u2014 repaired here, recorded so earlier receipts can be re-read",
+      "to_check": [
+        "https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions",
+        "https://github.com/karagemop466-tech/Affil1/actions",
+        "python3 -m unittest discover -s _platform -p 'test_*.py' collects 6 tests; -s platform collected 45 stdlib tests"
+      ],
+      "id": "FLG-034"
+    },
+    {
       "severity": "medium",
       "title": "Three first-party collectors exist, and one of them can never match the published site",
-      "expected": "One collector with a page allowlist that matches the URLs the site actually publishes.",
-      "found": "_analytics/endpoint.py (imports the build's GENERATED set; broken until this branch, now importing and passing its suite), _measurement/collector.py (reads src/data/product-intent.json, a path that no longer exists, so its approved-link allowlist always resolves to empty, and it validates page names 'probe', 'flagged' and 'desk' from an older URL scheme that the shop does not use) and _platform/collector.py (the annex's own). Nothing in the published pages can be measured by more than one of them, and only the first is exercised by CI.",
-      "impact": "_measurement/ and _platform/collector.py were left untouched: they are other sessions' scopes, so the finding is recorded rather than silently rewritten. The practical consequence today is nil, because no collector is enabled - the client stays inert until CC_ANALYTICS_ENABLED is set by a host that does not exist yet.",
-      "reading": "The click event is now structurally capable of firing, because permitted product links carry data-affiliate-ref whether or not they are tagged (FLG-029's template). Choosing and deploying a collector is a separate owner decision (Q-25, Q-10).",
-      "blocks": "Q-25 (which collector is canonical) blocks any real measurement rollout",
+      "expected": "One collector, whose page allowlist matches the URLs the site publishes.",
+      "found": "_analytics/endpoint.py (imports the build's own GENERATED page set; broken until this branch, now importing and passing its suite), _measurement/collector.py (reads src/data/product-intent.json, a path that no longer exists, so its approved-link allowlist always resolves empty and it fails closed for the wrong reason; it also validates page names 'probe', 'flagged' and 'desk' from an older URL scheme the shop does not use) and _platform/collector.py, which belongs to the annex. Only the first is exercised by CI.",
+      "impact": "_measurement/ and _platform/collector.py were left untouched: they are other sessions' scopes, so the finding is recorded rather than silently rewritten, and the request to consolidate is logged on the board. Practical consequence today is nil, because no collector is enabled: the client stays inert until a host sets CC_ANALYTICS_ENABLED.",
+      "reading": "The click event still cannot fire, and that is now a policy rather than an accident: _tools/check.py fails the build if an untagged product link carries data-affiliate-ref, on the grounds that counting clicks the account cannot attribute produces a number that looks like evidence. The alternative - count untagged listing clicks explicitly as unattributed observations - is one line in layout.py plus this sentence, and it is the owner's call (S-30).",
+      "blocks": "Q-25 blocks any real measurement rollout",
       "to_check": [
         "_analytics/endpoint.py and _analytics/test_endpoint.py",
-        "_measurement/collector.py (see its RECORDS path and PAGES set)",
+        "_measurement/collector.py (its RECORDS path and PAGES set)",
         "_platform/collector.py"
+      ],
+      "id": "FLG-035"
+    },
+    {
+      "severity": "medium",
+      "title": "The annex's de-indexing had no guard, advertised a second sitemap, and named the tracking ID as if applied",
+      "expected": "A rule that is enforced cannot be undone by the next template edit; a non-indexed annex advertises no sitemap; and a disclosure does not imply attribution the register withholds.",
+      "found": "FLG-030 recorded the decision to noindex /edition/ and the tag was emitted, but nothing checked it: verify_edition.py asserted no robots meta, no reader-facing pointer, and edition/robots.txt still printed 'Sitemap: https://karagemop466-tech.github.io/Affil1/edition/sitemap.xml' for a publication deliberately out of the index. The annex disclosure also read 'Paid links to Amazon are marked rel=\"sponsored\" (selected Tracking ID: shopnow047c-20)', which a reader can take to mean the links carry that ID; none do.",
+      "impact": "Closed on this branch: all 27 annex pages carry a visible 'This is the verification annex' note linking to the shop, the per-subdirectory robots.txt no longer declares a sitemap (a subdirectory robots.txt is not read at all, so the line was decoration with a misleading implication), the disclosure now says the tag is applied only to links the account confirms, and verify_edition.py asserts the tag, the note and the robots file on every page (2,047 checks, up from 1,965). Negative-tested: stripping the tag and the note from edition/index.html fails the verifier with two errors.",
+      "reading": "'noindex, follow' rather than a robots.txt block, deliberately: robots.txt is explicitly not a mechanism for keeping a page out of Google, and blocking the crawl would hide the very tag that does it.",
+      "blocks": "nothing \u2014 the fold-or-retire choice stays open on Q-16",
+      "to_check": [
+        "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+        "https://developers.google.com/crawling/docs/robots-txt/create-robots-txt",
+        "https://karagemop466-tech.github.io/Affil1/edition/"
+      ],
+      "id": "FLG-036"
+    },
+    {
+      "severity": "medium",
+      "title": "Two reader-facing blocks were pinned by position and index rather than by content, and drifted",
+      "expected": "A generated page cannot state something about an article it is not actually showing.",
+      "found": "The front page's seasonal band was hard-coded as GUIDES[7] with a hand-written paragraph and a call to action ('Read the hosting guide') copied from a different guide, so as soon as the register grew the band read 'Seasonal \u00b7 hosting' above the thermometer article. Separately, a merge on 2026-11-20 dropped the image-register row for an illustration that guides/meal-prep-sunday.html still loads, leaving the site's own image policy page incomplete on a live surface.",
+      "impact": "The feature is now chosen by cluster (the newest Seasonal or Cooking guide) with every word taken from that guide's own record, so a mismatch is not representable; the register row was restored; and _tools/check_image_register.py fails the launch gate when any generated page loads an assets/img file the register does not describe (0 errors, 2 warnings now; negative-tested by deleting a row, which returns 1 error).",
+      "reading": "Both are the same failure mode as a stale claim in prose: a number or a sentence chosen by position instead of by meaning. Prefer deriving from the record, and check the derivation in CI.",
+      "blocks": "nothing \u2014 repaired here",
+      "to_check": [
+        "python3 _tools/check_image_register.py",
+        "python3 _tools/build.py && git diff --stat index.html"
+      ],
+      "id": "FLG-037"
+    },
+    {
+      "id": "FLG-038",
+      "severity": "medium",
+      "title": "A compliance rule that samples one page is not a rule: four pages published what it forbids",
+      "expected": "A gate written to hold site-wide holds site-wide, and it reads the attribute it names rather than any mention of it.",
+      "found": "check.py asserts that no data-affiliate-ref value may be published while no Special Link is armed, because a counted click that cannot be attributed reads as performance evidence. It checked that by opening products/p-01.html. The attribute was being emitted by cta.py on the front page, the shortlist, the review queue and the suggestions page - nine links on four pages - and the gate stayed green, because the one file it sampled happened not to use that component. The same rule also matched the bare word, so a page discussing the attribute (the review queue does) would have failed it once it looked wider.",
+      "impact": "Closed on this branch: cta.py no longer attaches the counter hook to an untagged listing link, the rule now scans every page the build generates, it looks for the attribute with a value rather than the word, and a unit test asserts the emitter's output so the fix cannot be undone from the template side. Verified both ways: the widened rule passes on the built tree, and re-injecting one data-affiliate-ref value into index.html makes it fail with one error and a non-zero exit.",
+      "reading": "A sample is not a sweep. Where a rule is about a property of the whole surface, either check every page or say plainly in the rule's own comment which subset it covers, so the next session does not read a green tick as a site-wide guarantee.",
+      "blocks": "nothing - repaired here, and the owner's choice about counting untagged clicks at all is recorded as S-30",
+      "to_check": [
+        "python3 -m unittest discover -s _tools -p 'test_*.py' (11 tests)",
+        "_tools/check.py (check_link_copy_state)",
+        "_tools/cta.py and _tools/test_cta_gate.py"
+      ]
+    },
+    {
+      "id": "FLG-039",
+      "severity": "medium",
+      "title": "Two sessions' fixes for the annex contradicted each other: a robots.txt block hid the tag that de-indexes it",
+      "expected": "One mechanism per job, and the mechanism that keeps a page out of the index must not be the one that stops a crawler reading the instruction.",
+      "found": "On 2026-11-20 two sessions independently de-indexed /Affil1/edition/. One emitted <meta name=\"robots\" content=\"noindex, follow\"> on all 27 pages; the other added 'Disallow: /edition/' to the generated root robots.txt. Merged together the two cancel out: Google reads an indexing instruction 'only if crawlers are allowed to access the pages that include these settings', while a URL disallowed in robots.txt 'can still be indexed if linked to from other sites' - and the shop links to the annex from its review and question pages. The combined state was therefore the worst of both: annex pages eligible to appear in results, with no description, and no way to see why.",
+      "impact": "Closed here by removing the Disallow line and recording why in the generator's own comment, leaving noindex, follow as the single mechanism. Nothing else about the annex changed: it stays reachable, its 27 pages keep their tags, and _platform/verify_edition.py still asserts the tag, the reader note and the absence of a second advertised sitemap (2,047 checks). Sources: developers.google.com/search/docs/crawling-indexing/robots-meta-tag and .../robots/intro, both read 2026-11-20.",
+      "reading": "A conflict between two correct-looking fixes is invisible in review if each is judged alone, and a diff-based merge will happily take both. Where two sessions patch the same policy from different ends, the integration pass has to read the resulting behaviour, not just the resulting hunks.",
+      "blocks": "nothing - repaired here",
+      "to_check": [
+        "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+        "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
+        "https://karagemop466-tech.github.io/Affil1/robots.txt"
       ]
     }
   ]

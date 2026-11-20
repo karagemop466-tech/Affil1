@@ -179,36 +179,66 @@
     },
     {
       "id": "SRC-18",
+      "title": "Associates Program Policies \u2014 Participation Requirements and the 180-day review",
+      "publisher": "Amazon Associates Central",
+      "page_date": "Updated April 14, 2026",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "used_for": "The Site-list requirement, the three-qualifying-sales / 180-day review, and the prohibition on price-tracking and price-alert functionality.",
+      "quote": "",
+      "status": "read directly 2026-11-20"
+    },
+    {
+      "id": "SRC-19",
+      "title": "Associates Program Policies \u2014 Commission Income Statement, Redirecting Links and link formatting",
+      "publisher": "Amazon Associates Central",
+      "page_date": "Updated April 14, 2026",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies#Associates%20Program%20Fee%20Statement",
+      "used_for": "Why a purchase arriving through a redirecting link, or through a link that is not properly formatted, is disqualified from commission \u2014 the reason the supplied short links cannot be attributed as submitted.",
+      "quote": "",
+      "status": "read directly 2026-11-20"
+    },
+    {
+      "id": "SRC-20",
+      "title": "Associates Program Operating Agreement \u2014 Section 1, Special Links",
+      "publisher": "Amazon Associates Central",
+      "page_date": "Updated October 15, 2025",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "used_for": "The definition of a Special Link, quoted verbatim.",
+      "quote": "The links must properly use the special \u201ctagged\u201d link formats we provide and comply with this Agreement (\u201cSpecial Links\u201d).",
+      "status": "read directly 2026-11-20"
+    },
+    {
+      "id": "SRC-21",
       "title": "Leftovers and Food Safety (fact sheet)",
       "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety",
       "publisher": "USDA Food Safety and Inspection Service",
       "page_date": "Page states: Last Updated Jul 31, 2020",
       "quote": "Bacteria grow rapidly between the temperatures of 40\u00b0 F and 140\u00b0 F. After food is safely cooked, hot food must be kept hot at 140\u00b0 F or warmer to prevent bacterial growth. Within 2 hours of cooking food or after it is removed from an appliance keeping it warm, leftovers must be refrigerated. Throw away all perishable foods that have been left in room temperature for more than 2 hours (1 hour if the temperature is over 90\u00b0 F, such as at an outdoor picnic during summer).",
-      "quote_note": "Fetched and read on 2026-11-20. Quoted sentence-for-sentence from the 'Keep Food out of the Danger Zone' section. The storage window used by the guide ('3 to 4 days', '3 to 4 months') is from the 'Store Leftovers Safely' section of the same page, and the 165\u00b0 F reheat figure from 'Reheat Leftovers Safely'.",
+      "quote_note": "Fetched and read on 2026-11-20 from the 'Keep Food out of the Danger Zone' section. Two further figures used by the guide are from the same page: 'Store Leftovers Safely' (3 to 4 days refrigerated, 3 to 4 months frozen) and 'Reheat Leftovers Safely' (165\u00b0 F, sauces and soups to a rolling boil, cover to reheat). Numbered SRC-21 because SRC-18 through SRC-20 were already taken by the Amazon-policy rows merged from main on the same day.",
       "status": "read on 2026-11-20",
-      "used_for": "The two-hour-rule guide: the temperature range, the 2-hour and 1-hour limits, shallow containers, storage windows and the reheat temperature."
+      "used_for": "The two-hour-rule guide: the temperature range, the 2-hour and 1-hour limits, shallow containers and division, storage windows, and the reheat temperature."
     },
     {
-      "id": "SRC-19",
+      "id": "SRC-22",
       "title": "Robots meta tag, data-nosnippet, and X-Robots-Tag specifications",
       "url": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
       "publisher": "Google Search Central",
       "page_date": "",
       "quote": "noindex \u2014 Do not show this page, media, or resource in search results. \u2026 Keep in mind that these settings can be read and followed only if crawlers are allowed to access the pages that include these settings.",
-      "quote_note": "Read 2026-11-20. The page also documents comma-separated combinations such as 'noindex, follow'.",
+      "quote_note": "Read 2026-11-20. The same page documents comma-separated combinations and states that the robots meta tag controls indexing and serving, while robots.txt controls crawling; that difference is why the annex uses 'noindex, follow' and not a crawl block.",
       "status": "read on 2026-11-20",
-      "used_for": "Why the annex carries noindex, follow rather than a robots.txt exclusion: the tag has to be reachable for it to work."
+      "used_for": "Why the annex carries noindex, follow (FLG-030, FLG-036): the tag has to be reachable for it to work at all."
     },
     {
-      "id": "SRC-20",
+      "id": "SRC-23",
       "title": "How to write and submit a robots.txt file",
       "url": "https://developers.google.com/crawling/docs/robots-txt/create-robots-txt",
       "publisher": "Google Crawling Infrastructure",
       "page_date": "",
       "quote": "Your site can have only one robots.txt file. The robots.txt file must be located at the root of the site host to which it applies. \u2026 It cannot be placed in a subdirectory (for example, at https://example.com/pages/robots.txt).",
-      "quote_note": "Read 2026-11-20. The companion page 'Introduction to robots.txt' states separately that robots.txt 'is not a mechanism for keeping a web page out of Google'.",
+      "quote_note": "Read 2026-11-20. The companion page 'Introduction to robots.txt' (https://developers.google.com/search/docs/crawling-indexing/robots/intro) states separately that a robots.txt file 'is not a mechanism for keeping a web page out of Google'.",
       "status": "read on 2026-11-20",
-      "used_for": "Why /Affil1/robots.txt and /Affil1/edition/robots.txt are both inert for Google, and why the annex is controlled by a per-page tag instead (FLG-027, FLG-030)."
+      "used_for": "Why /Affil1/robots.txt and /Affil1/edition/robots.txt are inert for Google, which keeps FLG-027 open and makes the per-page tag the only control that works."
     }
   ]
 }

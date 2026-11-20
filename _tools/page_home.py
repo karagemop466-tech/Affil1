@@ -11,6 +11,7 @@ import pathlib
 from layout import (AMAZON_NOTE, esc, eyebrow, link, page, product_link, rel,
                     section, buy_url)
 from content import GUIDES
+from cta import pair as cta_pair
 
 
 def img(page_dir, path, alt, *, sizes, cls="", loading="lazy"):
@@ -61,11 +62,8 @@ def product_card(page_dir, p):
     <h3><a href="{esc(href)}">{esc(p['name'])}</a></h3>
     <p class="pcard-why">{esc(p['why'])}</p>
     <ul class="chips">{_chips(p)}</ul>
-    <p class="pcard-actions">
-      {product_link(page_dir, buy_url(p['observed_asin']), 'See it on Amazon <span aria-hidden="true">&#8599;</span>', cls='btn btn-small', aria=f"Open the Amazon listing for {p['brand']} {p['format_label']} (listing source, opens in a new tab)")}
-      <a class="tlink" href="{esc(href)}">Read the note <span aria-hidden="true">&rarr;</span></a>
-    </p>
-    <p class="pcard-fine">Listing source &middot; {esc(AMAZON_NOTE)}</p>
+    {cta_pair(page_dir, p)}
+    <p class="pcard-fine">{esc(AMAZON_NOTE)}</p>
   </div>
 </article>"""
 
@@ -120,8 +118,8 @@ def build(page_dir, products, meta):
     hero = f"""<section class="issue-cover wrap">
   <div class="issue-text"><p class="issue-line"><span class="edition">ISSUE Nº 01</span> THE COUNTERTOP EDIT</p>
     <h1>The air fryer<br><em>field guide.</em></h1>
-    <p class="cover-dek">One basket, two baskets, or French doors? Find the format that fits your counter and the way you cook.</p>
-    <div class="cover-actions"><a class="cover-btn" href="#shortlist">Explore the shortlist <span>→</span></a>
+    <p class="cover-dek">Five appliances, chosen and explained: two drawers, one basket, one French door, two probes. Pick the shape that fits your counter, then check the live price on Amazon.</p>
+    <div class="cover-actions"><a class="cover-btn" href="#shortlist">See the five picks <span>→</span></a>
       <a class="cover-link" href="{esc(rel(d, 'fit/index.html'))}">Find your format ↗</a></div></div>
   <figure class="cover-art"><img fetchpriority="high" src="{esc(rel(d,'assets/img/storefront-hero-w1280.jpg'))}" alt="An engraved illustration of a basket air fryer with garlic and rosemary">
     <span class="cover-seal" aria-hidden="true">KITCHEN<br><b>✳</b><br>EDITION</span>
@@ -199,10 +197,10 @@ def build(page_dir, products, meta):
     latest = section(f"""
 <div class="sec-head">
   <div>{eyebrow('The journal')}<h2>Guides worth your ten minutes</h2></div>
-  <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you.</p>
+  <p>Question-shaped, answer-first, and honest about what a listing can and cannot tell you. Newest first.</p>
 </div>
 <div class="gcard-grid">
-{''.join(guide_card(d, GUIDES[i]) for i in picks)}
+{''.join(guide_card(d, g) for g in list(reversed(GUIDES))[:4])}
 </div>
 <p class="sec-foot"><a class="tlink" href="{esc(rel(d, 'guides/index.html'))}">All {len(GUIDES)} guides <span aria-hidden="true">&rarr;</span></a></p>""",
                     cls="")

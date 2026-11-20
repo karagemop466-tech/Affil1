@@ -106,6 +106,18 @@ def build(page_dir, questions, meta):
   <p>Not the answered questions. The blocking ones: whether a click is credited to the tag, and whether there is a lawful way to measure. Everything else can wait; those two decide whether the rest is worth doing.</p>
   <p class="callout-links"><a class="tlink" href="{esc(rel(d, 'suggestions/index.html'))}">Decide a path <span aria-hidden="true">&rarr;</span></a></p>
 </div>''', cls='')}"""
+    faq = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q["question"],
+                "acceptedAnswer": {"@type": "Answer", "text": q.get("answer", "")},
+            }
+            for q in answered if q.get("answer")
+        ],
+    }
     return page(
         d,
         title="Questions and what would close them | Crisp & Counter",
@@ -113,5 +125,5 @@ def build(page_dir, questions, meta):
         body=body,
         active="questions/index.html",
         canonical="questions/",
-        structured=breadcrumb_schema([], "Questions", "questions/"),
+        structured=[breadcrumb_schema([], "Questions", "questions/"), faq],
     )

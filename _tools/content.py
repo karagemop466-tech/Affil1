@@ -233,7 +233,7 @@ GUIDES = [
         "related": ["P-01", "P-03"],
         "kicker": "Batch cooking",
         "title": "Meal-prep Sunday: one basket, two, or an oven?",
-        "dek": "Meal prep fails on geometry, not motivation. Count how many things need the appliance at once \\u2014 then choose the shape that matches that number.",
+        "dek": "Meal prep fails on geometry, not motivation. Count how many things need the appliance at once \u2014 then choose the shape that matches that number.",
         "read_minutes": 5,
         "photo": "assets/img/meal-prep",
         "photo_alt": "An unbranded black air fryer beside glass jars of prepped vegetables, a cutting board and an open notebook on a wooden counter",
@@ -244,15 +244,15 @@ GUIDES = [
                 "h": "The question is sequencing, not capacity",
                 "p": [
                     "You buy for the week you imagine, then cook for the week you have: one tray of vegetables, one protein, one grain, all wanting the same basket at the same time.",
-                    "So the shape question is really a sequencing question \\u2014 how many batches, in what order, with how much washing in between? A bigger quoted capacity does not answer it. Two smaller containers running in parallel answer it differently from one large container running twice, and neither answer is written on the box."
+                    "So the shape question is really a sequencing question \u2014 how many batches, in what order, with how much washing in between? A bigger quoted capacity does not answer it. Two smaller containers running in parallel answer it differently from one large container running twice, and neither answer is written on the box."
                 ]
             },
             {
                 "h": "Three shapes, three Sunday routines",
                 "items": [
-                    ("Dual-basket (P-01)", "The listing title describes two independent 3-quart baskets with a sync-finish function. The Sunday advantage is parallelism: protein in one basket, vegetables in the other. The cost is width \\u2014 two baskets side by side need the widest counter strip of the basket shapes \\u2014 and two baskets to wash."),
+                    ("Dual-basket (P-01)", "The listing title describes two independent 3-quart baskets with a sync-finish function. The Sunday advantage is parallelism: protein in one basket, vegetables in the other. The cost is width \u2014 two baskets side by side need the widest counter strip of the basket shapes \u2014 and two baskets to wash."),
                     ("Oven-style (P-02)", "The listing title describes a 26-quart French-door cavity with six cooking accessories included. The advantage is stacking: tray above tray, or one large batch that never has to be split. The cost is door swing and depth, plus more parts that come out to wash."),
-                    ("Single-basket (P-03)", "The listing title describes one 8-quart basket. The advantage is simplicity: fill it, run it, empty it. The cost is sequencing \\u2014 the second batch waits while the first rests, which is exactly the Sunday-night bottleneck.")
+                    ("Single-basket (P-03)", "The listing title describes one 8-quart basket. The advantage is simplicity: fill it, run it, empty it. The cost is sequencing \u2014 the second batch waits while the first rests, which is exactly the Sunday-night bottleneck.")
                 ]
             },
             {
@@ -529,13 +529,124 @@ GUIDES.append({
 })
 
 
+GUIDES.append({
+    "slug": "air-fryer-for-two",
+    "cluster": "Sizing",
+    "related": ["P-01", "P-03", "P-02"],
+    "title": "Air fryer for two: what size actually fits a two-person dinner?",
+    "kicker": "Sizing · cooking for two",
+    "dek": "Two people do not need a big machine; they need the right cooking surface. Here is the arithmetic that replaces the quart figure.",
+    "updated": "2026-11-20",
+    "read_minutes": 5,
+    "photo": "assets/img/capacity",
+    "photo_alt": "A single layer of food laid out beside a tape measure on a counter",
+    "photo_caption": "Editorial illustration. The tape measure is the point; the food is not a product on this site.",
+    "sections": [
+        {"h": "The quart figure is answering the wrong question", "p": [
+            "Capacity on a box is a volume. Dinner for two is a surface: one layer of protein, maybe one side, and enough space between pieces that the air can move. A machine can hold six quarts of piled food and still only cook the top layer properly.",
+            "For two people, the honest question is not how many quarts. It is whether your usual dinner, laid out in one layer, fits the basket or rack you would actually use.",
+        ]},
+        {"h": "What a two-person dinner usually needs", "items": [
+            ("One layer of protein", "Two chicken thighs, two fillets, four sausages \u2014 laid flat, not stacked. If the pieces touch, they steam where they touch."),
+            ("One side, in the same drawer or the second one", "This is where a second basket earns its keep for two people: dinner in one, potatoes in the other, landing together."),
+            ("Room to grow, honestly", "If you cook for friends even once a month, size for that night. If you never do, a smaller machine heats faster and washes easier."),
+        ]},
+        {"h": "The shelf, read for two", "p": [
+            "P-01 is described by the seller as 6 quarts total, in two independent 3-quart baskets. For two people that is a dinner-and-a-side machine, with each drawer small enough that a single layer is the natural way to load it.",
+            "P-03 is a single 8-quart basket. One batch, one shake, and the whole dinner can share the space if it shares a temperature. P-02 is a 26-quart French-door oven: a tray for two with room to spare, and a machine that is quietly replacing your toaster oven rather than sitting beside it.",
+        ]},
+        {"h": "A five-minute fit check", "p": [
+            "Take the tray or pan you cook dinner in now and measure the area its food actually covers. That number is the cooking surface you are used to. Compare it against the basket or rack dimensions in the exact model's manual \u2014 not the product photos.",
+            "Then measure the counter space, the height to the cabinet above, and the distance to the socket. For two people the machine stays out permanently or it stops being used; the footprint question is really a question about habit.",
+        ]},
+        {"h": "When two is really three or four", "p": [
+            "If a parent, a teenager or a regular guest turns dinner for two into dinner for three, the one-layer rule starts to bite. That is the point at which a second drawer or a rack format stops being an upgrade and starts being the difference between one round and two.",
+        ]},
+    ],
+    "closing": "No product on this site was tested, ranked or scored. The size figures above are the sellers' own wording from listing titles reached on 2026-11-20, and the arithmetic is about your kitchen, not a cooking result.",
+})
+
+GUIDES.append({
+    "slug": "air-fryer-or-toaster-oven",
+    "cluster": "Choosing",
+    "related": ["P-02", "P-01", "P-03"],
+    "title": "Air fryer or toaster oven: which one earns the counter space?",
+    "kicker": "Choosing · counter politics",
+    "dek": "One browns from all sides in a drawer; one toasts and bakes behind a door. The honest comparison is about space, washing, and the food you actually cook.",
+    "updated": "2026-11-20",
+    "read_minutes": 6,
+    "photo": "assets/img/format-oven",
+    "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
+    "photo_caption": "Illustration of an oven-style cavity, not a photograph of a product on this site.",
+    "sections": [
+        {"h": "Same job, two different machines", "p": [
+            "Both exist to put browned, hot food on a plate without heating a full-sized oven. A basket air fryer does it in one deep container with a fan close to the food. A toaster oven does it in a shallow box with racks and a door.",
+            "The category names blur on purpose \u2014 the listing behind P-02 calls itself a French door multi-function air fryer toaster oven, in the seller's wording. What separates machines is not the badge. It is the shape of the space and what that shape lets you put inside.",
+        ]},
+        {"h": "What actually changes on a weeknight", "items": [
+            ("Intervention", "A drawer means pulling it out and shaking. A rack means turning pieces and sometimes swapping shelf positions. Pick the one that matches how patient you are at 7pm."),
+            ("What fits", "A shallow cavity takes a tray, a pan, a small mould, a plate of leftovers. A deep drawer mostly takes loose food. If you reheat plated food, this row decides it."),
+            ("Washing", "Baskets are one or two pieces. An oven arrives with a rack, a tray, sometimes an accessory set \u2014 P-02's listing states six accessories \u2014 and each one is a separate thing to wash and store."),
+            ("Front clearance", "A door that opens outward eats the space in front of the machine: usually the space you stand in. French doors swing sideways, which is gentler in a galley kitchen."),
+            ("Height", "A drawer needs room above to lift out full. Check the cabinet above before you commit."),
+        ]},
+        {"h": "The counter-space trade, honestly", "p": [
+            "A toaster oven is wider and shallower; a basket fryer is squarer and taller. Neither is compact in the way a kettle is compact. The machine that wins your counter is the one whose shape matches the slot you have \u2014 and the one that replaces something else beats the one that joins something else.",
+            "If a toaster oven already lives on your counter, the question becomes whether P-02-style machines would replace it outright. If nothing is being replaced, a basket machine adds capability with a smaller footprint argument.",
+        ]},
+        {"h": "A short way to decide", "p": [
+            "Write down the meal you cook most often and whether it needs to lie flat. If it fits in a container \u2014 fries, wings, vegetables tossed in oil \u2014 a drawer is simpler. If it needs a tray, a pan, or a door you can watch through, the oven shape is doing something a basket cannot.",
+            "Then measure the slot: width, depth including door travel, height to the cabinet, and the socket. The spec sheet after that will not change the answer.",
+        ]},
+    ],
+    "closing": "No product on this site was tested, ranked or scored. Descriptions of P-01, P-02 and P-03 are the sellers' own wording, transcribed from the listings reached on 2026-11-20.",
+})
+
+GUIDES.append({
+    "slug": "cooking-from-frozen",
+    "cluster": "Living with it",
+    "related": ["P-03", "P-04", "P-05"],
+    "title": "Cooking from frozen in an air fryer: what to check before you trust the packet",
+    "kicker": "Everyday · from frozen",
+    "dek": "Frozen food goes from convenient to disappointing in about four mistakes. All of them are checkable before dinner, not after it.",
+    "updated": "2026-11-20",
+    "read_minutes": 5,
+    "photo": "assets/img/format-basket",
+    "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
+    "photo_caption": "Illustration of a basket format, not a photograph of a product on this site.",
+    "sections": [
+        {"h": "The packet is writing for a different appliance", "p": [
+            "Frozen food instructions assume a conventional oven: slower air, a longer window between browned and overdone. An air fryer moves hot air hard and close to the food, so the outside can finish well before the middle does \u2014 especially with breaded pieces and anything with a frozen core.",
+            "The packet is still the right starting point. It is just a starting point, and the machine you own is the one that gets the last word.",
+        ]},
+        {"h": "Three checks before you press start", "items": [
+            ("One layer, or commit to shaking", "Piled frozen food thaws into a single mass and steams. If one layer will not fit, plan the shake interval at the start, not when you smell it."),
+            ("Preheat, or not, deliberately", "Some manuals state a preheat, some do not. Check the exact model's manual and then keep doing the same thing every time \u2014 consistency is what makes your own notes useful."),
+            ("Leave gaps you can see through", "Air is the heat source. Pieces that touch cook where they touch."),
+        ]},
+        {"h": "The doneness problem frozen food hides", "p": [
+            "Browning is not proof of doneness, and with frozen meat the gap between the two is at its widest. This is where a thermometer stops being an accessory: P-04 is described by its seller as a one-second instant-read, and P-05 as a leave-in wireless probe set \u2014 the first for quick checks, the second for watching the middle come up without opening the machine.",
+            "For the temperatures that matter, use the official USDA FSIS guidance rather than a number from a blog. The safe minimum internal temperature chart is published, dated, and free to read.",
+        ]},
+        {"h": "Keep a one-line log", "p": [
+            "When something works, write one line: the setting, the time, the shake interval, the product. Tape it inside a cupboard. That note \u2014 not the packet, not this guide \u2014 becomes the instruction manual for your machine and your freezer.",
+        ]},
+    ],
+    "sources": [
+        ("USDA FSIS \u00b7 Safe Minimum Internal Temperature Chart", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart"),
+        ("USDA FSIS \u00b7 Food thermometers", "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers"),
+    ],
+    "closing": "No product on this site was tested, ranked or scored. P-04 and P-05 attributes are the sellers' wording from listing titles reached on 2026-11-20. Food-safety temperatures are not restated here; follow the USDA chart at the source.",
+})
+
+
 COMPARE_COLUMNS = [
     ("Product", "Brand and shape as stated on the listing"),
     ("Shape", "Basket, oven or thermometer, read from the title and category path"),
     ("Stated size", "Exactly as the seller words it. Not measured"),
     ("Stated features", "Only what the listing title itself claims"),
-    ("Price", "Blank: Amazon serves it, this site does not hold it"),
-    ("Rating", "Blank: Amazon serves it, this site does not hold it"),
+    ("Price", "Links to the live listing: Amazon serves the number, this site does not hold it"),
+    ("Rating", "Links to the live listing: Amazon serves the number, this site does not hold it"),
 ]
 
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from

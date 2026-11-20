@@ -129,30 +129,21 @@ def render_shell(
         cur = ' aria-current="page"' if target == active_nav else ""
         nav_items.append(f'<a href="{esc(href)}"{cur}>{esc(label)}</a>')
 
+    # This edition is a preserved, non-canonical duplicate: the maintained shop
+    # publishes at the repository root. It stays reachable for review, but every
+    # page tells a crawler not to index it, so two editions cannot compete for
+    # the same query. A self-referencing canonical does not consolidate a second
+    # copy of the same catalogue. Recorded as FLG-030, and the three assertions in
+    # verify_edition.py (tag, reader note, no advertised second sitemap) are what
+    # keep it true after the next template edit; removing the tag and the note from
+    # one page makes that verifier fail, which was checked on 2026-11-20.
     canon_tag = (
         f'\n  <link rel="canonical" href="{esc(canonical_url(rel_page))}">'
         if include_canonical
         else ""
     )
-    # One host, one site to index. This edition and the generated shop at the
-    # repository root describe the same five listings under two brands, so a
-    # search engine has to be told which one to read. Self-canonical plus
-    # noindex is Google's documented combination for a page that stays
-    # crawlable and keeps its links while leaving the results; pointing the
-    # canonical at the shop's home page would instead assert that the two pages
-    # are the same page, which is not true.
-    # Sources, read 2026-11-20:
-    #   https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
-    #     "noindex — Do not show this page, media, or resource in search results." and
-    #     "these settings can be read and followed only if crawlers are allowed to
-    #     access the pages that include these settings" (hence follow, not nofollow).
-    #   https://developers.google.com/search/docs/crawling-indexing/robots/intro
-    #     robots.txt "is not a mechanism for keeping a web page out of Google".
-    #   https://developers.google.com/crawling/docs/robots-txt/create-robots-txt
-    #     "The robots.txt file must be located at the root of the site host to which
-    #     it applies… It cannot be placed in a subdirectory." — which is why the
-    #     edition/robots.txt below declares nothing.
-    robots_meta = '\n  <meta name="robots" content="noindex, follow">'
+    canon_tag += '\n  <meta name="robots" content="noindex, follow">'
+
     page_slug = rel_page.replace("/index.html", "").replace(".html", "") or "home"
 
     return f"""<!DOCTYPE html>
@@ -161,7 +152,7 @@ def render_shell(
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{esc(title)} — {esc(SITE_TITLE)}</title>
-  <meta name="description" content="{esc(description)}">{robots_meta}{canon_tag}
+  <meta name="description" content="{esc(description)}">{canon_tag}
   <link rel="icon" href="{esc(fav_href)}" type="image/svg+xml">
   <link rel="alternate" type="application/rss+xml" title="{esc(SITE_TITLE)} Buying Guides RSS" href="{esc(feed_href)}">
   <link rel="stylesheet" href="{esc(css_href)}">

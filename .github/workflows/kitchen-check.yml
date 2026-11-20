@@ -46,6 +46,12 @@ jobs:
       # py_compile only parses. It passed while _analytics/endpoint.py was failing
       # to import at all, so the collector's own test suite — the one file that
       # would have caught it — was never run anywhere in CI. It runs here now.
+      - name: Every published image has a row in the image register
+        run: python3 _tools/check_image_register.py
+
+      - name: Registers cite each other correctly, and guides cite registered sources
+        run: python3 _tools/check_register_refs.py
+
       - name: First-party client parses and the self-hosted collector passes its tests
         run: |
           python3 _tools/check_js.py assets/js/events.js assets/js/shortlist.js

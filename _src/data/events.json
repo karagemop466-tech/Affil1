@@ -28,15 +28,16 @@
     {
       "id": "E2",
       "name": "outbound_product_click",
-      "fires_when": "A permitted Amazon product link is activated \u2014 an approved Special Link, or the plain listing link the site publishes while the gate is closed. The anchor carries data-affiliate-ref in both cases.",
+      "fires_when": "An armed product link is activated: a link carrying the Associates tag and the data-affiliate-ref identifier. While the paid-link gate is closed the site publishes untagged listing links with no ref attribute, and _tools/check.py fails the build if one is published with a ref - so today this event has nothing to fire on, by design rather than by oversight.",
       "props": [
         "page",
         "product"
       ],
-      "answers": "Which approved product links receive clicks from this site. A click count is not attribution: nothing here shows whether a click became an order or earned commission.",
+      "answers": "Which approved product links receive clicks. A click count is not attribution: nothing here shows whether a click became an order or earned a commission.",
       "not_collected": [
         "anything after the click; the destination is Amazon's, not ours"
-      ]
+      ],
+      "blocked_by": "Q-03 and S-01: the tracking tag has to be confirmed on an enrolled account and one Special Link tested before a counted click means anything. See S-30 for the alternative the owner may prefer."
     },
     {
       "id": "E3",

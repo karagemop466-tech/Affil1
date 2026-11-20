@@ -26,7 +26,11 @@ import page_guides  # noqa: E402
 import page_compare  # noqa: E402
 import page_questions  # noqa: E402
 import page_suggestions  # noqa: E402
+import page_decisions  # noqa: E402
 import page_decide  # noqa: E402
+import page_now  # noqa: E402
+import page_offers  # noqa: E402
+import page_crosscheck  # noqa: E402
 import page_review  # noqa: E402
 import page_desk  # noqa: E402
 from content import GUIDES  # noqa: E402
@@ -38,6 +42,7 @@ DATA = ROOT / "_src" / "data"
 OWNED = [
     "index.html", "404.html",
     "guides", "products", "compare", "questions", "suggestions", "decide",
+    "now", "offers", "verification", "decisions",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
 ]
@@ -51,7 +56,9 @@ GENERATED = {
     "compare/index.html",
     "questions/index.html",
     "suggestions/index.html", "suggestions/design.html", "fit/index.html",
+    "decisions/index.html",
     "decide/index.html",
+    "now/index.html", "offers/index.html", "verification/index.html",
     "review/index.html", "review/images.html", "review/measurement.html",
     "about/index.html",
     "operations/ledger.html",
@@ -132,14 +139,28 @@ def feed(guides):
 
 
 # One canonical site. The archived edition under _archive/ carries noindex, and
-# /_archive/ is not listed in the sitemap. Nothing here blocks crawling of the
-# canonical pages.
+# /_archive/ is not listed in the sitemap. edition/ (Countertop Almanac) is a
+# second publication kept readable but out of the index: every page there
+# carries noindex, follow (FLG-030), and this file disallows it. Nothing here
+# blocks crawling of the canonical pages.
 ROBOTS = """User-agent: *
 Allow: /
 Disallow: /archive/
+Disallow: /_archive/
 
 Sitemap: https://karagemop466-tech.github.io/Affil1/sitemap.xml
 """
+
+
+# No "Disallow: /edition/". The annex at /Affil1/edition/ is kept out of the index by
+# a noindex meta tag on each of its pages (FLG-030, FLG-036), and blocking the crawl
+# defeats that: Google reads a indexing tag "only if crawlers are allowed to access the
+# pages that include these settings", while a URL disallowed in robots.txt "can still be
+# indexed if linked to from other sites" - so a Disallow line here produces indexed
+# annex pages with no description, which is the worse outcome of the two. Sources:
+#   https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
+#   https://developers.google.com/search/docs/crawling-indexing/robots/intro
+# A subdirectory robots.txt is not read at all, so edition/robots.txt cannot say this.
 
 
 def main():
@@ -179,7 +200,13 @@ def main():
     pages.append(write("compare/index.html", page_compare.build("compare", products, meta)))
     pages.append(write("questions/index.html", page_questions.build("questions", questions, meta)))
     pages.append(write("decide/index.html", page_decide.build("decide", decisions, meta)))
+
+    # the choice surface: what is left, what to do first, what each page claims
+    pages.append(write("now/index.html", page_now.build("now")))
+    pages.append(write("offers/index.html", page_offers.build("offers")))
+    pages.append(write("verification/index.html", page_crosscheck.build("verification")))
     pages.append(write("suggestions/index.html", page_suggestions.build("suggestions", suggestions, meta)))
+    pages.append(write("decisions/index.html", page_decisions.build("decisions")))
 
     # review
     pages.append(write("review/index.html", page_review.build_index("review", flags, meta)))
