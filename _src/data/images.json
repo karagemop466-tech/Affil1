@@ -232,6 +232,16 @@
       "depicts_a_real_product": false,
       "used_on": "guides/meal-prep-sunday.html (hero) and the guides index",
       "rules_met": "Row restored on 2026-11-20: the asset stayed in use while its register row was dropped by a merge, which is what tools/check_image_register.py now prevents."
+    },
+    {
+      "file": "instant-read",
+      "alt": "A digital instant-read thermometer held over a cooked chicken breast on a board",
+      "style": "unbranded editorial photograph, generated",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, by the category/guide session",
+      "depicts_a_real_product": false,
+      "used_on": "index.html, guides/index.html, categories/index.html, categories/thermometers/index.html, guides/where-to-put-the-probe.html",
+      "rules_met": "Row added by tools/check_image_register.py's failure on the 772deef merge: the asset was published on five pages while the image-policy register had no row for it, which left the site's own image policy incomplete. No brand mark, no price or specification implied."
     }
   ],
   "rejected": [

@@ -20,6 +20,7 @@ import layout  # noqa: E402
 from layout import page, rel, esc, eyebrow, SITE_NAME, SITE_URL, BUILD_DATE  # noqa: E402
 import page_home  # noqa: E402
 import page_fit  # noqa: E402
+import page_categories  # noqa: E402
 import page_design  # noqa: E402
 import page_products  # noqa: E402
 import page_guides  # noqa: E402
@@ -41,7 +42,7 @@ DATA = ROOT / "_src" / "data"
 # static asset or an archived edition, and is never touched.
 OWNED = [
     "index.html", "404.html",
-    "guides", "products", "compare", "questions", "suggestions", "decide",
+    "guides", "products", "categories", "compare", "questions", "suggestions", "decide",
     "now", "offers", "verification", "decisions",
     "review", "about", "operations", "brief",
     "sitemap.xml", "feed.xml", "robots.txt",
@@ -53,6 +54,8 @@ GENERATED = {
     "products/index.html",
     "products/p-01.html", "products/p-02.html", "products/p-03.html",
     "products/p-04.html", "products/p-05.html",
+    "categories/index.html", "categories/air-fryers/index.html",
+    "categories/thermometers/index.html",
     "compare/index.html",
     "questions/index.html",
     "suggestions/index.html", "suggestions/design.html", "fit/index.html",
@@ -214,6 +217,12 @@ def main():
     pages.append(write("products/index.html", page_products.build_register("products", products, meta)))
     for p in products:
         pages.append(write(f"products/{p['ref'].lower()}.html", page_products.build_product("products", p, meta)))
+
+    # categories: the reader-facing grouping of the same register
+    pages.append(write("categories/index.html", page_categories.build_index("categories")))
+    for cat in page_categories.CATEGORIES:
+        pages.append(write(f"categories/{cat['slug']}/index.html",
+                             page_categories.build_category(f"categories/{cat['slug']}", cat)))
 
     pages.append(write("fit/index.html", page_fit.build("fit")))
     pages.append(write("suggestions/design.html", page_design.build("suggestions")))

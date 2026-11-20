@@ -969,6 +969,15 @@ GUIDES.append({
 })
 
 
+# Guides from session arena/ddb6772b-affil1, appended rather than interleaved so
+# the order other modules assume (GUIDES[0] is the front-page feature) is not
+# disturbed. Their editorial rules are stated in content_season.py: listing
+# wording for product claims, and an official government page linked in the same
+# table row for every food-safety figure.
+from content_season import GUIDES as SEASON_GUIDES  # noqa: E402
+
+GUIDES += SEASON_GUIDES
+
 # URLs read and quoted on 2026-11-20; the register rows that date them are
 # SRC-09 (food thermometers) and SRC-21 (leftovers), see _src/data/sources.json.
 FSIS_THERMOMETERS = ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/"

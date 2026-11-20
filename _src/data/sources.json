@@ -209,17 +209,46 @@
     },
     {
       "id": "SRC-21",
-      "title": "Leftovers and Food Safety (fact sheet)",
-      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety",
+      "title": "USDA FSIS \u2014 Leftovers and Food Safety",
       "publisher": "USDA Food Safety and Inspection Service",
-      "page_date": "Page states: Last Updated Jul 31, 2020",
-      "quote": "Bacteria grow rapidly between the temperatures of 40\u00b0 F and 140\u00b0 F. After food is safely cooked, hot food must be kept hot at 140\u00b0 F or warmer to prevent bacterial growth. Within 2 hours of cooking food or after it is removed from an appliance keeping it warm, leftovers must be refrigerated. Throw away all perishable foods that have been left in room temperature for more than 2 hours (1 hour if the temperature is over 90\u00b0 F, such as at an outdoor picnic during summer).",
-      "quote_note": "Fetched and read on 2026-11-20 from the 'Keep Food out of the Danger Zone' section. Two further figures used by the guide are from the same page: 'Store Leftovers Safely' (3 to 4 days refrigerated, 3 to 4 months frozen) and 'Reheat Leftovers Safely' (165\u00b0 F, sauces and soups to a rolling boil, cover to reheat). Numbered SRC-21 because SRC-18 through SRC-20 were already taken by the Amazon-policy rows merged from main on the same day.",
-      "status": "read on 2026-11-20",
-      "used_for": "The two-hour-rule guide: the temperature range, the 2-hour and 1-hour limits, shallow containers and division, storage windows, and the reheat temperature."
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety",
+      "status": "read directly",
+      "page_date": "Page shows 'Last Updated: Jul 31, 2020'",
+      "used_for": "The two-hour rule, the 40\u2013140\u00b0F danger zone, 3-to-4-day refrigerator and 3-to-4-month freezer figures, the 165\u00b0F reheat target, shallow-container cooling, microwave cold spots, and refreezing after a 165\u00b0F reheat.",
+      "quote": "Bacteria grow rapidly between the temperatures of 40\u00b0 F and 140\u00b0 F. After food is safely cooked, hot food must be kept hot at 140\u00b0 F or warmer to prevent bacterial growth. Within 2 hours of cooking food or after it is removed from an appliance keeping it warm, leftovers must be refrigerated."
     },
     {
       "id": "SRC-22",
+      "title": "USDA FSIS \u2014 Food Thermometers (Kitchen Thermometers)",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/food-thermometers",
+      "status": "read directly",
+      "page_date": "No update date shown on the page as retrieved 2026-11-20",
+      "used_for": "Probe placement, the 2-to-4\u00b0F accuracy range, the ice-water and boiling-water calibration checks, the thermometer type/speed/placement table, and the warning not to leave a thermometer in food unless the manufacturer designs it for that.",
+      "quote": "The food thermometer should be placed in the thickest part of the food, away from bone, fat or gristle. For thin foods, the food thermometer should be inserted through the side until it reaches the center of the food."
+    },
+    {
+      "id": "SRC-23",
+      "title": "USDA FSIS \u2014 Turkey from Farm to Table",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/poultry/turkey-farm-table",
+      "status": "read directly",
+      "page_date": "No update date shown on the page as retrieved 2026-11-20",
+      "used_for": "Thawing timing (about 1 day per 4\u20135 pounds in the refrigerator), the 1-to-2-day and storage-time table, the 325\u00b0F cooking timetable framing, the 165\u00b0F three-place check, stuffing guidance, and the 20-minute stand.",
+      "quote": "A whole turkey is safe cooked to a minimum internal temperature of 165 \u00b0F throughout the bird. Always use a food thermometer to check the internal temperature of your turkey and stuffing."
+    },
+    {
+      "id": "SRC-24",
+      "title": "FoodSafety.gov \u2014 Cook to a Safe Minimum Internal Temperature",
+      "publisher": "USDA/FSIS, HHS and FDA joint chart",
+      "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+      "status": "read directly",
+      "page_date": "Page shows 'Date Last Reviewed: November 21, 2024'",
+      "used_for": "The consumer-facing chart used as the second source for the 165\u00b0F leftovers and poultry figures quoted in the guides.",
+      "quote": "Always use a food thermometer to check whether meat has reached a safe minimum internal temperature that is hot enough to kill harmful germs that cause food poisoning."
+    },
+    {
+      "id": "SRC-25",
       "title": "Robots meta tag, data-nosnippet, and X-Robots-Tag specifications",
       "url": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
       "publisher": "Google Search Central",
@@ -230,7 +259,7 @@
       "used_for": "Why the annex carries noindex, follow (FLG-030, FLG-036): the tag has to be reachable for it to work at all."
     },
     {
-      "id": "SRC-23",
+      "id": "SRC-26",
       "title": "How to write and submit a robots.txt file",
       "url": "https://developers.google.com/crawling/docs/robots-txt/create-robots-txt",
       "publisher": "Google Crawling Infrastructure",
@@ -241,7 +270,7 @@
       "used_for": "Why /Affil1/robots.txt and /Affil1/edition/robots.txt are inert for Google, which keeps FLG-027 open and makes the per-page tag the only control that works."
     },
     {
-      "id": "SRC-24",
+      "id": "SRC-27",
       "title": "Cold Food Storage Chart",
       "url": "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts",
       "publisher": "FoodSafety.gov (interagency: FDA, USDA, CDC)",

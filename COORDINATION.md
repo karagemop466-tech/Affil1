@@ -9,6 +9,8 @@ claiming any work.
 
 ### Decision-grade design prompt, article bank and discovery map — arena/7e19d8e1-affil1 (claimed 2026-11-20)
 
+**Release receipt.** [PR #117](https://github.com/karagemop466-tech/Affil1/pull/117) merged into `main` with its merge commit checks green: [Build, check and deploy](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250440), [Affiliate launch checks](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250362), [Verify Countertop Almanac edition and platform](https://github.com/karagemop466-tech/Affil1/actions/runs/44694250379). [Pages build and deployment](https://github.com/karagemop466-tech/Affil1/actions/runs/44694249535) succeeded; live fetches on 2026-11-20 confirm `suggestions/design.html` serves the prompt, token pack, style register and both topic banks, and `questions/` serves the 27-question register with the 14-row discovery map.
+
 | Task | Status | Owner | Files |
 |---|---|---|---|
 | Design-prompt feed (anti-slop rules, catchy article bank), suggestions path-choice board, missing-information discovery map, executive summary refresh, independent re-verification of the five links and policy sources, repo irregularity review | done | `arena/7e19d8e1-affil1` | `_src/data/topics.json` (new), `_src/data/suggestions.json`, `_src/data/questions.json`, `_src/data/flags.json`, `_src/data/reverification.json`, `_tools/page_design.py`, `_tools/page_suggestions.py`, `_tools/page_questions.py`, `_tools/page_review.py`, generated pages those own, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
@@ -228,6 +230,98 @@ validator PASS · build reproducible.
 
 Detail, observations and sources: [`COORDINATION/arena-05771edb-affil1.md`](COORDINATION/arena-05771edb-affil1.md).
 No other session had an open claim on these files when this work started.
+
+## Claim — session `arena/ddb6772b-affil1` (2026-11-20 UTC, rebased onto `d345cf0`)
+
+Session ID `arena/ddb6772b-affil1` · branch `arena/ddb6772b-affil1`. Branch name is
+fixed by the platform, so the `session-<id>/<task>` form is not used.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Category subpages for the published shop: `categories/` index + Air fryers + Thermometers, each with a per-row sourced table built from `_src/data/products.json` | in progress | arena/ddb6772b-affil1 | NEW `_tools/page_categories.py`; `_tools/build.py` (OWNED/GENERATED only), `_tools/layout.py` (NAV + FOOTER_GROUPS only), generated `categories/*.html` |
+| Reader-facing guides for the seasonal/evergreen gap: four drafted, one kept (`where-to-put-the-probe`), three retired on rebase as duplicates of main's coverage | done | arena/ddb6772b-affil1 | NEW `_tools/content_season.py`; `_tools/content.py` (one append only), `_tools/page_guides.py` (cluster blurbs), generated `guides/*.html`, `guides/index.html`, `sitemap.xml`, `feed.xml` |
+| Fix one false compliance sentence found on every guide page: the sidebar claims every product link "carries the site's Amazon tag"; the approved Special-Link register is empty, so no link carries a tag. Upstream fixed the wording (FLG-031); this pass makes it computed from the register | done | arena/ddb6772b-affil1 | `_tools/page_guides.py` line ~142 only |
+| Register updates from this pass: newly verified official sources with quoted wording, new decision questions and suggestions, new flags, and a fourth link-verification pass | done | arena/ddb6772b-affil1 | `_src/data/{sources,questions,suggestions,flags,reverification}.json` (append-only rows) |
+| Refresh the executive summary so it states what this pass changed and what still blocks earning | done | arena/ddb6772b-affil1 | `EXECUTIVE_SUMMARY.md` |
+
+**Deliberately untouched** (owned by other sessions, open PRs): `edition/`, `_platform/`,
+`_decision-support/`, `_measurement/`, `_analytics/`, `_tools/{check,validate,stage,sweep_surfaces,layout*},
+`_src/data/{products,product-intent,events,compliance,images,decisions,editorial-signals}.json`,
+`assets/**`, `now/`, `offers/`, `verification/` page modules, and all `_archive/**`.
+Requests against those files are logged in this section rather than edited.
+
+## Claim — session `arena/ddb6772b-affil1` (2026-11-20 UTC, rebased onto `d345cf0`)
+
+Session ID `arena/ddb6772b-affil1` · branch `arena/ddb6772b-affil1`. Branch name is
+fixed by the platform, so the `session-<id>/<task>` form is not used.
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Category subpages for the published shop: `categories/` index + Air fryers + Thermometers, each with a per-row sourced table built from `_src/data/products.json` | done | arena/ddb6772b-affil1 | NEW `_tools/page_categories.py`; `_tools/build.py` (OWNED/GENERATED only), `_tools/layout.py` (NAV + FOOTER_GROUPS only), generated `categories/*.html` |
+| Four new reader-facing guides for the seasonal/evergreen gap (Thanksgiving timing, reheating leftovers, probe placement, leftovers and the two-hour rule), each with an official source per factual claim | done | arena/ddb6772b-affil1 | NEW `_tools/content_season.py`; `_tools/content.py` (one append only), `_tools/page_guides.py` (cluster blurbs), generated `guides/*.html`, `guides/index.html`, `sitemap.xml`, `feed.xml` |
+| Fix one false compliance sentence found on every guide page: the sidebar claims every product link "carries the site's Amazon tag"; the approved Special-Link register is empty, so no link carries a tag | done | arena/ddb6772b-affil1 | `_tools/page_guides.py` line ~142 only |
+| Register updates from this pass: newly verified official sources with quoted wording, new decision questions and suggestions, new flags, and a fourth link-verification pass | done | arena/ddb6772b-affil1 | `_src/data/{sources,questions,suggestions,flags,reverification}.json` (append-only rows) |
+| Refresh the executive summary so it states what this pass changed and what still blocks earning | done | arena/ddb6772b-affil1 | `EXECUTIVE_SUMMARY.md` |
+
+**Deliberately untouched** (owned by other sessions, open PRs): `edition/`, `_platform/`,
+`_decision-support/`, `_measurement/`, `_analytics/`, `_tools/{check,validate,stage,sweep_surfaces,layout*},
+`_src/data/{products,product-intent,events,compliance,images,decisions,editorial-signals}.json`,
+`assets/**`, `now/`, `offers/`, `verification/` page modules, and all `_archive/**`.
+Requests against those files are logged in this section rather than edited.
+
+
+
+### Delivery — session `arena/ddb6772b-affil1` (2026-11-20 UTC)
+
+Shipped on this branch: `categories/` (index + Air fryers + Thermometers), one new
+guide, the computed guide-sidebar link statement, four new source rows, three new
+questions, three new board proposals, two new review flags, six observation rows in
+`_data/verification-observations.ndjson`, an executive-summary addendum, and a
+front-page seasonal band that stops printing copy for a guide it is not showing.
+
+**Cut on rebase, on purpose.** Four guides were drafted here. Three were dropped
+because main already publishes the better version of the same question:
+`reheating-thanksgiving-leftovers` (arena/3d6a7607-affil1) covers reheating and the
+two-hour rule with a wider storage table, and `holiday-hosting-air-fryer` already
+makes the last-twenty-minutes argument I wrote the Thanksgiving-timing piece to make.
+`where-to-put-the-probe` stayed because nothing else on the site answers placement,
+colour-as-doneness, or the leave-in-versus-handheld distinction, and it carries the
+USDA thermometer classification table with a link in every row. The retirement is
+recorded in `_tools/content_season.py` so the topic is left alone.
+
+**Ids after reconciliation.** Sources SRC-21 (FSIS Leftovers), SRC-22 (FSIS Food
+Thermometers), SRC-23 (FSIS Turkey from Farm to Table), SRC-24 (FoodSafety.gov
+chart). Questions Q-25, Q-26, Q-27. Proposals **S-41** (retire or wire the nine unreachable generators),
+**S-39** (dated source line on every figure-carrying guide), **S-40** (one indexable
+taxonomy: categories as the shop, the register as the appendix). Flags **FLG-045**
+(generators) and **FLG-046** (the `check.py` literal-sentence rule). Every one of these
+ids moved two or three times because main kept taking the range under this branch; each
+time main's row was kept verbatim and mine was re-filed, never merged into theirs. Flags
+**FLG-045** (nine `_tools/` modules reachable from neither build nor CI) and **FLG-046**
+(the `check.py` guides rule asserts a literal sentence about tag status, which the
+register can make false). My short-link finding and my guide-tag-sentence finding
+were **not** filed as new flags: main already carries them as FLG-028 and FLG-031,
+so this pass appended a third corroboration to FLG-028's `corroborated_by` instead
+of duplicating the row.
+
+**Re-test result recorded there.** Each of the five `link.amazon/<code>` links,
+fetched separately with redirects followed by a cookieless text-extracting fetcher,
+returned `https://www.amazon.com/` (title 'Amazon.com. Spend less. Smile more.') at
+07:05Z, while a direct fetch of the recorded listing for P-01 matched the register
+title exactly. Not a claim that the links are invalid — FLG-003 stays unresolved, and
+no published destination uses a short link.
+
+Quoted wording is stored verbatim in `_src/data/sources.json`, each row carrying the
+page's own date or the words "no update date shown". Gates on the final tree (47 pages, 19 guides, after three rebases onto a moving
+`main`): build byte-identical twice · `check.py` 0 errors 0 warnings · `validate.py`
+2,884 checks 0 warnings · `check_local_links.py` 81 pages 0 broken · paid-link tests OK
+· Decision Desk PASS · Almanac 1,965 checks 0 errors · `sweep_surfaces.py` 0 to move ·
+`stage.py` complete.
+
+Merge: [PR #118](https://github.com/karagemop466-tech/Affil1/pull/118) from `arena/ddb6772b-affil1`. The receipt (CI runs, merge commit, Pages deployment, live URLs) is recorded immediately below.
+**Overlap notice:** `_tools/build.py`, `_tools/layout.py` and the four registers are
+shared write-points. My edits are additive (new list entries, new rows); if another
+session edits the same files, resolve by keeping both additions and rebuilding.
 
 ### Reader-polish design pack — arena/76128338-affil1 (claimed 2026-11-20)
 
@@ -1569,7 +1663,7 @@ pages, a visible note sending readers to the shop, no second advertised sitemap,
 per-page assertions in `verify_edition.py` (2,047 checks, from 1,965) — negative-tested by
 stripping the tag and the note from one page. The root robots.txt's `Disallow: /edition/` is
 gone: blocking the crawl hides the tag that does the work, while a disallowed URL can still be
-indexed from links, so the two mechanisms were producing the worst of both (**FLG-044**).
+indexed from links, so the two mechanisms were producing the worst of both (**FLG-050**).
 
 **Editorial, after a deliberate de-duplication.** Three guides were drafted (chicken doneness,
 the ice-water calibration check, the two-hour leftovers rule). While this branch was open, main
@@ -1588,7 +1682,7 @@ counter hook beside an un-armed link, so the gate's rule won, `cta.py` was broug
 the owner's choice is now a row on the reviewable queue (**S-43**) with both paths priced. (2)
 Widening that rule from a single sampled page to every generated page found **four live pages**
 publishing the forbidden attribute — the emitter was fixed, unit-tested at source, and the
-site-wide scan is now in CI (**FLG-043**).
+site-wide scan is now in CI (**FLG-049**).
 
 **Two new gates**, both wired into `kitchen-check.yml` and both negative-tested:
 `check_image_register.py` (a published image without a row in the image-policy register fails the
@@ -1601,7 +1695,7 @@ id against a different row. `main` renumbered `SRC-18..20` during this branch's 
 three citations pointing at the wrong documents — dangling-id checks cannot see it. Registers are
 append-only across sessions; resolve them by **content**, not by id. `SRC-21..24` are this
 session's (the last one registered because main's guide cited a page the register could not date),
-and my rows now run `FLG-039..041`, `Q-28..30`, `S-37..41`.
+and my rows now run `FLG-045..041`, `Q-28..30`, `S-37..41`.
 
 **Verification (2026-11-20, rebased onto `b19480f`):** build 48 pages, no diff on a second build ·
 `check.py` 0 errors 0 warnings · `validate.py` 0 warnings · `check_local_links.py` 79 pages

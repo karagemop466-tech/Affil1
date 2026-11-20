@@ -166,30 +166,38 @@ def build(page_dir, products, meta):
 </div>""", cls="paths")
 
     # Select the seasonal feature by slug, not by position: parallel sessions
-    # inserting guides silently shift positional indexes (this happened once). The
-    # fallback is chosen by cluster for the same reason - a positional fallback
-    # would re-create the bug under the slug, since GUIDES[7] is whatever the
-    # seventh contributor happened to append. Everything else in the band, label
-    # included, is read from the chosen record: a band labelled "the gift edit"
-    # once sat above the thermometer article for exactly one index of drift.
+    # inserting guides silently shift positional indexes (this happened once, and
+    # GUIDES[7] was the fallback that let it happen). If the named guide is gone,
+    # fall back to the newest guide in the Seasonal cluster rather than to whatever
+    # happens to sit at index 7.
     by_slug = {g["slug"]: g for g in GUIDES}
-    feature = by_slug.get("air-fryer-gift-guide") or next(
-        (g for g in reversed(GUIDES) if g["cluster"] in ("Seasonal", "Cooking")), GUIDES[-1])
-    feature_lede = next((para for s in feature["sections"] for para in s.get("p", [])),
-                        feature["dek"])
+    seasonal_pool = [g for g in GUIDES if g.get("cluster") == "Seasonal"]
+    feature = (by_slug.get("air-fryer-gift-guide")
+               or (seasonal_pool[-1] if seasonal_pool else GUIDES[-1]))
+    # The line under the dek is copy for the gift edit specifically. Shown only when
+    # the gift guide is the guide actually being displayed, so the front page cannot
+    # advertise one article while linking another.
+    standing = ("Shopping the weekend instead? The checklist version is here too \u2014 "
+                "what to measure, what to read, and what to ignore until the shape "
+                "question is answered."
+                if feature["slug"] == "air-fryer-gift-guide" else "")
     feat_href = rel(d, f"guides/{feature['slug']}.html")
-    bf_slug = "black-friday-air-fryer-checklist"
-    bf_href = rel(d, f"guides/{bf_slug}.html") if bf_slug in by_slug else None
+    # The secondary link is only emitted when the guide it points at exists, so a
+    # session retiring that piece cannot leave the front page holding a dead link.
+    bf_href = rel(d, "guides/black-friday-air-fryer-checklist.html")
+    bf_link = (f'<a class="tlink" href="{esc(bf_href)}">The Black Friday checklist '
+               f'<span aria-hidden="true">&rarr;</span></a>'
+               if "black-friday-air-fryer-checklist" in by_slug else "")
     seasonal = section(f"""
 <div class="seasonal">
   <div class="seasonal-media">{img(d, feature['photo'], feature['photo_alt'], sizes='(max-width:820px) 100vw, 520px')}</div>
   <div class="seasonal-copy">
-    {eyebrow(f"{feature['cluster']} · {feature['kicker']}")}
+    {eyebrow('Seasonal · the gift edit')}
     <h2>{esc(feature['title'])}</h2>
     <p class="dek">{esc(feature['dek'])}</p>
-    <p>{esc(feature_lede)}</p>
+    {f'<p>{esc(standing)}</p>' if standing else ''}
     <a class="btn btn-small" href="{esc(feat_href)}">Read the guide</a>
-    {f'<a class="tlink" href="{esc(bf_href)}">The Black Friday checklist <span aria-hidden="true">&rarr;</span></a>' if bf_href else ''}
+    {bf_link}
   </div>
 </div>""", cls="seasonal-band")
 

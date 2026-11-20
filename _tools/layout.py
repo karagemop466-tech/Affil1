@@ -40,6 +40,7 @@ AMAZON_NOTE = "Price, rating and delivery are shown on Amazon, where they are al
 # One navigation group. Everything else is reachable from the footer.
 NAV = [
     ("products/index.html", "Shop"),
+    ("categories/index.html", "Categories"),
     ("guides/index.html", "Guides"),
     ("compare/index.html", "Compare"),
     ("fit/index.html", "Find your fit"),
@@ -55,6 +56,9 @@ DESK_SURFACES = ("now/", "verification/", "offers/", "decisions/", "questions/",
 FOOTER_GROUPS = [
     ("Shop", [
         ("products/index.html", "All five picks"),
+        ("categories/index.html", "Browse by category"),
+        ("categories/air-fryers/index.html", "Air fryers"),
+        ("categories/thermometers/index.html", "Thermometers"),
         ("products/p-01.html", "Dual-basket air fryer"),
         ("products/p-02.html", "French-door oven"),
         ("products/p-03.html", "Single-basket air fryer"),

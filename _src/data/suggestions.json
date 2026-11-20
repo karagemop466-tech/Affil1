@@ -479,6 +479,39 @@
       "decision": "accept"
     },
     {
+      "id": "S-39",
+      "status": "proposed",
+      "title": "Add a dated 'checked against the source' line to every guide that quotes a figure",
+      "why": "The guides that quote federal numbers are the most durable content on the site and the most perishable. A dated line turns 'trust us' into 'trust this, and here is when it was last read'.",
+      "effort": "one template change plus one register field",
+      "risk": "It makes staleness visible, which is the point but is also uncomfortable in November.",
+      "depends_on": "Q-27",
+      "recommendation": "Accept alongside S-22",
+      "decision": "proposed"
+    },
+    {
+      "id": "S-40",
+      "status": "proposed",
+      "title": "Choose one indexable taxonomy: categories as the shop, the register as the appendix",
+      "why": "/products/ and /categories/ currently both describe five products, both in the sitemap. The shop-facing one should win the index and the register-facing one should stay reachable for checking, not compete. Precedent: S-23 and S-15 settled the same question at edition scale, which is why the decision is worth ten minutes rather than a debate.",
+      "effort": "one line of metadata plus a rebuild",
+      "risk": "Low. Reversible, and the checker still sees every page either way.",
+      "depends_on": "Q-26",
+      "recommendation": "Do this before any promotion or paid push sends traffic to a URL you may retire",
+      "decision": "proposed"
+    },
+    {
+      "id": "S-41",
+      "status": "proposed",
+      "title": "Retire or wire the nine generator modules in _tools/ that nothing runs",
+      "why": "Ten files in _tools/ look like live editorial entry points and are not reachable from the build. The next session that edits one of them will publish nothing and believe it did.",
+      "effort": "an hour to read each and decide",
+      "risk": "Deleting content that a reviewer still wants. Move them under _archive/ with the editions they built rather than deleting.",
+      "depends_on": "FLG-039",
+      "recommendation": "Accept in the next integration pass, not in a content pass",
+      "decision": "proposed"
+    },
+    {
       "status": "implemented",
       "title": "Make every gate prove it ran, and repair the two switches that could not",
       "why": "The pipeline's own evidence was inflated: a CI step that discovered CPython's stdlib tests reported 45 passes while running none of this repository's platform suite, another checked the collector's syntax while the module could not import, and the owner's arming switch crashed on a path left over from the Pages rename. All three were reported as verified in earlier receipts.",
@@ -486,8 +519,8 @@
       "risk": "A step that used to pass silently can now fail a build. That is the point, and each was run green locally first.",
       "depends_on": "nothing",
       "recommendation": "Keep. Apply the same rule to any future step: assert the test ran, not that the command exited zero.",
-      "evidence": "FLG-040 \u00b7 .github/workflows/edition-verify.yml, .github/workflows/kitchen-check.yml, _tools/arm_links.py",
-      "id": "S-39"
+      "evidence": "FLG-046 \u00b7 .github/workflows/edition-verify.yml, .github/workflows/kitchen-check.yml, _tools/arm_links.py",
+      "id": "S-42"
     },
     {
       "status": "implemented",
@@ -498,7 +531,7 @@
       "depends_on": "nothing",
       "recommendation": "Keep, and extend the same sourcing rule to every future guide.",
       "evidence": "SRC-09, SRC-21 \u00b7 guides/air-fryer-chicken-done.html, guides/thermometer-ice-water-check.html, guides/leftovers-two-hour-rule.html",
-      "id": "S-40"
+      "id": "S-43"
     },
     {
       "status": "open",
@@ -509,7 +542,7 @@
       "depends_on": "the question on the health-adjacent rule, and the refresh rule",
       "recommendation": "Adopt. Next two candidates that need no new sourcing: reheating without a microwave, and what a 'dehydrate' setting actually claims.",
       "evidence": "SRC-08, SRC-09 \u00b7 suggestions/design.html",
-      "id": "S-41"
+      "id": "S-44"
     },
     {
       "status": "open",
@@ -520,18 +553,18 @@
       "depends_on": "Q-24 (the same budget question, one tier down)",
       "recommendation": "Do it as the pilot for any self-test policy before considering S-05's full appliance purchase.",
       "evidence": "SRC-09 \u00b7 questions/index.html",
-      "id": "S-42"
+      "id": "S-45"
     },
     {
-      "id": "S-43",
+      "id": "S-46",
       "status": "open",
       "title": "Decide whether the counter counts untagged clicks, or does not run at all until the account is armed",
-      "why": "The brief asks for click measurement before anything else; the enforced gate says a click on a link that cannot be attributed should not be counted, because an unattributed count dressed up as a metric is exactly the kind of claim this repository has been flagging all day. Both positions are defensible and they cannot both be true, so the choice has to be the owner's rather than a session's. Today the site takes the second position consistently: cta.py emits no counter hook on an untagged listing link, and _tools/check.py enforces that on every generated page (FLG-040 records the state before this branch, when the rule sampled one file and four pages disagreed with it).",
+      "why": "The brief asks for click measurement before anything else; the enforced gate says a click on a link that cannot be attributed should not be counted, because an unattributed count dressed up as a metric is exactly the kind of claim this repository has been flagging all day. Both positions are defensible and they cannot both be true, so the choice has to be the owner's rather than a session's. Today the site takes the second position consistently: cta.py emits no counter hook on an untagged listing link, and _tools/check.py enforces that on every generated page (FLG-046 records the state before this branch, when the rule sampled one file and four pages disagreed with it).",
       "effort": "Path A (leave it as the gate has it): zero, and the register already says measurement is blocked behind Q-03. Path B (count untagged listing clicks as unattributed observations): restore the hook in _tools/cta.py, rewrite the p-01 assertion and the site-wide scan in _tools/check.py to require instead the sentence that says a counted click is not an attributed one, and update the E2 record in _src/data/events.json, which this branch restored to the gate's wording.",
       "risk": "Path A risks a site that ships with no idea which page works. Path B risks a number being read as performance evidence by someone who does not read the sentence under it. Path B also has to survive a reviewer's question about whether counting clicks on links Amazon cannot attribute invites any obligation in the Program Policies; nothing here claims it does or does not.",
       "depends_on": "Q-03 (are clicks attributed at all) and Q-10 / Q-28 (a host and a collector)",
       "recommendation": "Choose Path A for launch week, and revisit when one Special Link has been recorded and tested: at that point the counter has real links to count and the argument disappears. If the owner wants reader data before then, Path B is legitimate only with the 'not attributed' wording published beside the dashboard, not inside it.",
-      "evidence": "FLG-041 \u00b7 _tools/check.py (link-copy assertions) \u00b7 _src/data/events.json"
+      "evidence": "FLG-047 \u00b7 _tools/check.py (link-copy assertions) \u00b7 _src/data/events.json"
     }
   ]
 }
