@@ -427,6 +427,48 @@
       ],
       "resolution": "Resolved in code on 2026-11-20 by session arena/acb1e4c8-affil1, during the merge that brought this flag onto the branch. _tools/cta.py no longer builds a cart permalink from an observed ASIN and no longer appends the tag by hand. pair() now renders the cart door only when paid_link_gate holds an account-approved Special Link for that ASIN; otherwise the primary door is the official listing for the observed ASIN via buy_url() -- the same gate every other Amazon link uses -- still marked rel=\"sponsored nofollow noopener\", with a one-line note saying why there is no one-click basket. No published page contains a cart/add.html URL. Regression test: _tools/test_cta_gate.py (4 cases). The remaining question in this flag -- whether a tagged cart permalink is itself a permitted Special Link -- is not answered here and does not need to be until the account issues one; it is D-01 on /decisions/.",
       "status": "resolved-in-code"
+    },
+    {
+      "id": "FLG-030",
+      "severity": "low",
+      "title": "Two publishers are configured for the same Pages site: the legacy branch source and an Actions deploy job",
+      "expected": "One publishing source per GitHub Pages site, so a reviewer can say which pipeline put a page live.",
+      "found": "The repository's Pages configuration reports build_type \"legacy\" (source branch main, path /) while .github/workflows/pages.yml also stages and deploys an artifact when the source is \"workflow\". Both paths appear in run history; the legacy path is what serves pages today.",
+      "impact": "The site serves the repository root, so working directories are public URLs unless underscore-prefixed (see check_serving_scope). The staged _site artifact is built and checked but is not what publishes.",
+      "reading": "Ported from the Decision Desk (IRR-03) and re-verified directly on 2026-11-20 with gh api repos/karagemop466-tech/Affil1/pages, which returned build_type=legacy. A configuration fact, not a content defect.",
+      "blocks": "any claim that the staged artifact is what deploys",
+      "to_check": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+        "Run: gh api repos/karagemop466-tech/Affil1/pages and read build_type"
+      ]
+    },
+    {
+      "id": "FLG-031",
+      "severity": "low",
+      "title": "The P-05 listing pages were recorded as stating several different heat tolerances for one probe set",
+      "expected": "One product listing states one figure for the same specification.",
+      "found": "Session arena/771e5093-affil1 recorded on 2026-11-20 that the CHEF iQ Sense pages it read stated several different heat tolerances across pages (1,400 °C / 1,40 °C, 1,300 °F, 1,500 °F, 1,000 °F), including one amazon.nl page contradicting itself. The observation is carried forward as recorded; it was not re-verified in this session, and no heat-tolerance figure is published on this site.",
+      "impact": "None on the published pages: the site transcribes only the listing title, which states no heat tolerance. The flag exists so the owner checks the current listing before any future content mentions probe heat limits.",
+      "reading": "An upstream-inconsistency note with dated provenance, not a claim about the product. Ported from the Decision Desk (IRR-05) during the 2026-11-20 integration pass.",
+      "blocks": "nothing — it blocks only future copy about heat tolerances",
+      "to_check": [
+        "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "Re-open the amazon.nl listing pages recorded by session arena/771e5093-affil1 and compare the stated heat tolerances line by line"
+      ]
+    },
+    {
+      "id": "FLG-032",
+      "severity": "low",
+      "title": "edition/ (Countertop Almanac) is a second reader-facing publication on one repository; it is now noindex and robots-disallowed",
+      "expected": "One site to index: a search engine should see a single canonical publication, with internal mirrors hidden from indexing.",
+      "found": "PR #89 added edition/ — a full second publication (shop, categories, guides, compare, questions, suggestions, its own sitemap and feed) describing the same five products under the name Countertop Almanac, registered as an internal section with its own verifier. Two indexable publications on one host split canonicalisation (see FLG-008).",
+      "impact": "This integration marked every edition/ page noindex, follow and added Disallow: /edition/ to robots.txt, keeping the edition readable and gated by _platform/verify_edition.py but out of search indexes. The root publication (Crisp & Counter) is the single site in the root sitemap and feed.",
+      "reading": "An integration decision made by the final integration session on 2026-11-20, recorded so it can be reversed deliberately: remove the noindex metas and the robots line if the owner chooses Countertop Almanac as the canonical brand instead. The work in edition/ is preserved unchanged otherwise.",
+      "blocks": "nothing; it blocks only re-opening edition/ to indexing without a canonical decision",
+      "to_check": [
+        "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
+        "edition/index.html and the root sitemap.xml"
+      ]
     }
   ]
 }

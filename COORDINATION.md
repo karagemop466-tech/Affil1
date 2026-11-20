@@ -1152,3 +1152,66 @@ Merged-tree verification at the time of writing: `_tools/build.py` 34 pages · `
 `_tools/check_local_links.py` 68 pages, 0 broken.
 
 The three surfaces this session added are live: `/now/`, `/offers/`, `/verification/`.
+---
+
+## Session `arena/d3f5a958-affil1` — shop-polish & final integration (2026-11-20, second record, supersedes the claim block above)
+
+**Merge-storm note, recorded rather than hidden.** This session's first four
+commits (claim, decision-desk archival, three guides, records) were built on
+`23fa2e3`. While the session ran, `main` moved five integrations ahead and was
+restructured (`tools/` → `_tools/`, `src/` → `_src/`, `data/` → `_data/`,
+`docs/` → `_docs/`, `archive/` → `_archive/`, `analytics/` → `_analytics/`,
+`measurement/` → `_measurement/`, `server/` → `_server/`; new `edition/`,
+`_platform/`, `_decision-support/`), and the rebase replayed badly. The branch
+was reset onto `origin/main` at `2934ed0` and every content change was
+re-applied by hand at the renamed paths. The old commits remain reachable from
+the earlier branch pushes and from `/tmp/mywork.patch` recorded in the session
+transcript; nothing was silently dropped.
+
+**A regression found and repaired: session `76128338`'s design pack was lost.**
+The reader-polish design-token pack and the reviewable topic bank (T-01..T-10)
+that `fb831c1` added to `tools/page_design.py` do not exist on `main` at
+`2934ed0` — one of the concurrent rename merges kept the older
+`page_design.py`. The full source was recovered from `fb831c1` and restored,
+then extended (T-11..T-16 and a State column). Credit: `arena/76128338-affil1`.
+
+| Task | Status | Result |
+|---|---|---|
+| Three question-shaped guides (air-fryer-for-two, air-fryer-or-toaster-oven, cooking-from-frozen) | done | `_tools/content.py`; guide template renders a Sources block (USDA FSIS links on the frozen guide); sitemap 33 URLs, feed 13 items |
+| Shop-voice copy on the catalogue and front page | done | `_tools/page_products.py` ("the two columns we refuse to fill" → "the whole shelf on one screen"), `_tools/page_home.py` (journal newest-first) |
+| FAQPage structured data on answered questions | done | `_tools/page_questions.py` |
+| Topic bank states + three gated future ideas feeding the copy-ready design prompt | done | `_tools/page_design.py` (restored from `fb831c1` + T-11..T-16) |
+| One site to index: `edition/` (Countertop Almanac) kept readable but out of the index | done | noindex, follow on all 27 `edition/` pages; `robots.txt` disallows `/edition/` (FLG-032, with the reversal path written down) |
+| Findings from the Decision Desk ported | done | FLG-030 (Pages dual publisher, re-verified via `gh api` today), FLG-031 (P-05 heat-tolerance contradictions, provenance-labelled, not re-verified) |
+| Executive summary accuracy | done | `brief/` counts derive from data; `EXECUTIVE_SUMMARY.md` addendum |
+| Associates attribution, intended ASINs, Search Console, analytics hosting, named author, §2(b) reading | needs review (owner) | published at `review/` — FLG-001/002/006/019/025 |
+
+**Superseded by parallel sessions and not re-applied (their work preserved):**
+the plan to archive `decision-support/` — `d34e0765` renamed it
+`_decision-support/` and `44f81bcd`/`23b5a192` keep it wired with its own
+validator; and the plan to delete the `INTERNAL_SECTIONS` exemptions — `d34e0765`
+replaced list-based exemptions with the stricter rule-based
+`check_serving_scope()` plus `INTERNAL_SECTIONS = ("_decision-support/", "edition/")`.
+This session's earlier board block describes the pre-rebase plan; this block is
+what actually shipped.
+
+**Verification performed (2026-11-20, on the merged tree):**
+
+```
+python3 _tools/build.py                    → 34 pages; second build byte-identical
+python3 _tools/check.py                    → 34 pages, 0 errors, 0 warnings
+python3 _tools/validate.py                 → 1796 checks, all pass
+python3 _tools/check_local_links.py        → 68 pages, 0 broken references
+python3 _tools/sweep_surfaces.py --dry-run → would move: 0
+cd _tools && python3 -m unittest discover  → 6 tests OK (paid-link gate)
+python3 _platform/verify_edition.py        → 1,965 line-by-line checks, 0 errors
+python3 _decision-support/validate.py      → PASS
+```
+
+Every register table row carries a source link (enforced on any table with a
+Source/Listing/Evidence column); unconfirmable values stay blank and flagged
+(32 flags on `review/`). No product fact was added beyond the listing-title
+transcriptions already in `_src/data/products.json`; the two USDA FSIS URLs in
+the frozen guide are the ones recorded as directly verified in SRC-08/SRC-09.
+The Pages configuration fact behind FLG-030 was checked first-hand:
+`gh api repos/karagemop466-tech/Affil1/pages` → `build_type: legacy`.

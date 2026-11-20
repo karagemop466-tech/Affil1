@@ -337,3 +337,40 @@ in each row.
 Nothing in the new copy states a price, rating, review count, stock level, test
 result or ranking. The listing pages carried prices and ratings while being read
 ($74.99-tier figures, 4.4-star bands); none were copied, by rule and by check.
+---
+
+## Addendum — session `arena/d3f5a958-affil1`, 2026-11-20 (shop-polish & integration)
+
+Current build after this session: **34 pages, 13 question-shaped guides, 30
+review flags**. `_tools/check.py` 0 errors / 0 warnings; `_tools/validate.py`
+1,796 checks pass; `_tools/sweep_surfaces.py` 0 stray surfaces;
+`_platform/verify_edition.py` 1,965 checks pass; `_decision-support/validate.py`
+PASS; the build is byte-identical on a second run.
+
+1. **Three new question-shaped guides**, per the brief's cadence: *Air fryer for
+   two: what size actually fits a two-person dinner?*, *Air fryer or toaster
+   oven: which one earns the counter space?*, and *Cooking from frozen in an air
+   fryer: what to check before you trust the packet* (two USDA FSIS source links
+   rendered on the page). Facts limited to seller-stated listing wording; no
+   product tested, nothing ranked. All three are in the sitemap and RSS feed.
+2. **One site to index.** `edition/` (Countertop Almanac, added by PR #89 as a
+   second publication for the same five products) is kept readable and gated
+   but marked `noindex, follow`, and `robots.txt` disallows `/edition/`
+   (FLG-032, with the written reversal path). The root publication — Crisp &
+   Counter — is the single site in the root sitemap and feed.
+3. **Recovered work:** the design-token pack and topic bank from session
+   `76128338` were lost in the concurrent directory-rename merges and are
+   restored, extended with topics T-11..T-16 and a State column that separates
+   published guides from suggestions awaiting evidence.
+4. **Findings ported:** FLG-030 (GitHub Pages has two configured publishers —
+   verified first-hand via `gh api`) and FLG-031 (P-05 listing pages recorded
+   as stating several different heat tolerances; carried forward with stated
+   provenance, not re-verified; no figure published).
+
+### What remains unverified (unchanged)
+
+Attribution of clicks to `shopnow047c-20` (FLG-002), the intended ASINs behind
+the five supplied short-link slugs (FLG-001, Q-01), price/rating availability
+(FLG-022), a named author (FLG-006), Search Console and analytics hosting
+(FLG-019), and the §2(b) tagging reading (FLG-025). All are published on the
+review page with source links; none is inferred anywhere.
