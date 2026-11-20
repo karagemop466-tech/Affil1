@@ -102,7 +102,7 @@
         "https://link.amazon/B0f3GKalj": "https://www.amazon.com/dp/B0DZFD6R9Z (CHEF iQ Sense wireless meat thermometer)"
       },
       "agrees_with": "the pass above on all five rows, including P-04 unresolved (interstitial on every attempt)",
-      "note": "Independently contradicts the P-04 → B0DHZTCNR5 observation recorded in FLG-016 and carried in src/data/products.json. This pass never reached a product page for B0c8moW59; neither did the pass above, nor the recovered PR #15 register, nor the earliest archived register. The B0DHZTCNR5 observation remains on the record as one session's observation. See FLG-020."
+      "note": "Independently contradicts the P-04 → B0DHZTCNR5 observation recorded in FLG-016 and carried in src/data/products.json. This pass never reached a product page for B0c8moW59; neither did the pass above, nor the recovered PR #15 register, nor the earliest archived register. The B0DHZTCNR5 observation remains on the record as one session's observation. See FLG-023."
     }
   ]
 }
