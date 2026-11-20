@@ -23,7 +23,7 @@ def build_index(page_dir, meta):
 
     body = f"""{pagehead(
         'Buying guides',
-        'Four questions worth<br>answering before you buy',
+        'Questions worth<br>answering before you buy',
         'These are written to be useful whether or not you buy anything through this site. Each one is a checklist, because a checklist is what can honestly be produced without access to the products.',
         meta='No product was tested &middot; every product claim is quoted from the seller &middot; no prices, ratings or winners',
     )}
@@ -33,7 +33,7 @@ def build_index(page_dir, meta):
     return page(
         d,
         title="Buying guides \u2014 Crisp & Counter",
-        description="Four air-fryer buying guides: basket versus oven, real capacity, cleanup and counter space, and what to ask before buying a multi-function appliance.",
+        description="Kitchen buying guides: basket versus oven, real capacity, cleanup and counter space, and what to ask before buying a multi-function appliance.",
         body=body,
         active="guides/index.html",
         canonical="guides/",
@@ -79,6 +79,7 @@ def build_guide(page_dir, g, meta):
     </figure>
     {''.join(blocks)}
     <div class="article-end">
+      <p><a class="ink-link" href="../compare/index.html">Compare the kitchen shortlist →</a></p>
       <p class="article-close">{esc(g['closing'])}</p>
       <p class="fineprint">{DISCLOSURE} Links to Amazon on this site are affiliate links. A purchase through one does not change the price you pay.</p>
     </div>

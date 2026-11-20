@@ -59,7 +59,7 @@ def build_about(page_dir, sources, meta):
   </div>
   <aside class="record-side">
     <div class="side-card"><h2>At a glance</h2><dl class="side-dl">
-      <div><dt>Pages</dt><dd>18</dd></div>
+      <div><dt>Pages</dt><dd>26</dd></div>
       <div><dt>Products</dt><dd>5 submitted, 4 identified</dd></div>
       <div><dt>Tested</dt><dd>0</dd></div>
       <div><dt>Prices shown</dt><dd>None</dd></div>
@@ -104,7 +104,7 @@ def build_ledger(page_dir, meta):
 {section(f'''
 <div class="lede-prose">
   <p>A ledger is only worth keeping if every row can be traced back to a report somebody was authorised to read. The columns below are therefore fixed in advance, and the rule is that a row is added only when the value comes from an authorised first-party report, with the date and the source recorded alongside it.</p>
-  <p>There are no rows. Not because the table was forgotten, but because no Associates report has been supplied, no analytics endpoint is live, and production traffic is unknown. A table with six plausible numbers in it would be the most damaging thing this site could publish.</p>
+  <p>There are no rows. Not because the table was forgotten, but because no Associates report has been supplied, production traffic is unknown. A table with six plausible numbers in it would be the most damaging thing this site could publish.</p>
 </div>
 {table(['Date', 'Source', 'Channel', 'Eligible sessions', 'Clicks', 'Reported orders', 'Provenance note'], rows, cls='ledger')}
 <h2 style="margin-top:2.4rem">The provenance rule</h2>
@@ -149,7 +149,7 @@ def build_brief(page_dir, products, questions, flags, meta):
   </div>
   <div class="exec-block">
     <h2>What was built</h2>
-    <p>A 22-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, fifteen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <p>A publication with eight buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen decision questions, twelve suggestions, a review queue, a source list with quoted wording, an empty campaign ledger, a self-hosted aggregate counter and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
   </div>
   <div class="exec-block">
     <h2>What was actually verified</h2>
@@ -167,7 +167,7 @@ def build_brief(page_dir, products, questions, flags, meta):
       <div><dt>Price, rating, availability</dt><dd>Not shown anywhere, because Amazon permits them only from Amazon-served data or its API. This is deliberate and is the site's largest visible gap to a reader.</dd></div>
       <div><dt>Author</dt><dd>None. No name would be true, so none is used. It caps how much authority the guides can claim.</dd></div>
       <div><dt>Product quality</dt><dd>Nothing was tested. No product is ranked, scored or recommended.</dd></div>
-      <div><dt>Traffic and revenue</dt><dd>No analytics are running, no Search Console property is verified, and no commission rate has been read. Therefore no conversion score and no revenue forecast appears anywhere on this site.</dd></div>
+      <div><dt>Traffic and revenue</dt><dd>Pages analytics is not active, no Search Console property is verified, and no commission rate has been read. Therefore no conversion score and no revenue forecast appears anywhere on this site.</dd></div>
     </dl>
   </div>
   <div class="exec-block">

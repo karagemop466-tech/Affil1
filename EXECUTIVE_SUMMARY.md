@@ -1,46 +1,17 @@
-# Affil1 — Executive summary
+# Crisp & Counter | November 2026
 
-**Project:** Amazon affiliate marketing site (GitHub Pages)
-**Branch:** `arena/8206a8d0-affil1` (polish + re-verification pass, 2026-11-20)
-**Tracking ID:** `shopnow047c-20`
-**Prepared:** 2026-11-20
+**Decision:** publish the kitchen buying guides and observed listings. Hold affiliate attribution, commercial scoring and campaign optimization until authorized reports exist. The selected tracking ID is `shopnow047c-20`; a visible tag or a working redirect alone does not establish credited clicks or orders.
 
-## What this is
-A buyer-facing affiliate site for air fryers and multi-function kitchen appliances. It reads like a shop/publication, not an audit: product picks lead the front page, every page carries an above-the-fold disclosure, and every outbound product link is marked `sponsored`.
+| Submitted link | Listing observed on 20 November | Intended ASIN |
+|---|---|---|
+| [P-01](https://link.amazon/B04G1MEwY) | [CHEFMAN dual-basket fryer](https://www.amazon.com/dp/B0CDY277D3) | |
+| [P-02](https://link.amazon/B02NbDxp3) | [Emeril Lagasse countertop oven](https://www.amazon.com/dp/B09B7SB46R) | |
+| [P-03](https://link.amazon/B00hJ57DV) | [Chefman TurboFry](https://www.amazon.com/dp/B08DKYBTPH) | |
+| [P-04](https://link.amazon/B0c8moW59) | [ThermoMaven digital thermometer](https://www.amazon.com/dp/B0DHZTCNR5) | |
+| [P-05](https://link.amazon/B0f3GKalj) | [CHEF iQ Sense thermometer](https://www.amazon.com/dp/B0DZFD6R9Z) | |
 
-## Products submitted (5)
-| # | Submitted link | Intended ASIN | Verified listing | Status |
-|---|---|---|---|---|
-| 1 | https://link.amazon/B04G1MEwY | B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | Verified |
-| 2 | https://link.amazon/B02NbDxp3 | B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Verified |
-| 3 | https://link.amazon/B00hJ57DV | B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | Listing checked 2026-11-20 (re-verified) |
-| 4 | https://link.amazon/B0c8moW59 | B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | Listing checked 2026-11-20 (resolved on re-verification; was checkpoint-only) |
-| 5 | https://link.amazon/B0f3GKalj | B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | Listing checked 2026-11-20 (re-verified) |
+Blank intent fields are **unverified**. Another session observed the opposite P-04/P-05 mapping. Both observations are retained in [FLG-016](review/index.html#FLG-016). Amazon [defines ASINs](https://sell.amazon.com/blog/what-is-an-asin) as ten-character identifiers; the supplied short-link codes are not ASINs.
 
-Verified against Amazon.com (official source) on 2026-11-20. Intended ASIN and observed redirect target are stored in separate fields and never merged. Prices, ratings and commissions are blank — not confirmed from an official source, never inferred.
+The front page offers a filterable shortlist, saved picks and question-shaped articles. The editorial desk contains [questions](questions/index.html), [proposals to accept, hold or reject](suggestions/index.html), [official sources](about/index.html#sources), and an [empty report ledger](operations/ledger.html). No price, star rating, order count, revenue forecast or hands-on test result is invented.
 
-## Site structure
-- `/` — publication front page: hero, this week’s picks (product grid), buyer-question guides, how it works
-- `/categories/air-fryers.html` — findings table, one row per product, source link per row
-- `/dashboard.html` — entries/findings table + empty campaign ledger + measurement status
-- `/guides/` — four question-shaped guides (working titles)
-- `/suggestions.html` — decision suggestions; review before implementing
-- `/reviews/flagged.html` — Flagged for Review page (irregularities + unverified items)
-- `/disclosure.html` — full Associates statement
-- `/privacy.html` — privacy notice for self-hosted analytics
-- `/sitemap.xml`, `/rss.xml` — for search engines and feed readers
-
-## Measurement (turned on before content)
-Five defined events (canonical, src/data/events.json): `page_view`, `outbound_product_click`, `guide_read_75`, `compare_view`, `flag_page_view`. Self-hosted collector at `/analytics/collect` (code: `server/collect.js`); client degrades silently when unreachable. No cookies, no IP logging. Next guide topic chosen from measured queries.
-
-## Campaign ledger
-Empty and intentionally so. Entries (timestamp, source, channel, eligible sessions, clicks, reported orders, provenance report, notes) are added only from authorized first-party reports, with a dated provenance trail. No conversion score or revenue forecast is presented.
-
-## Compliance gate
-Disclosure above the fold on every page + footer repeat; `rel="nofollow sponsored"` on all outbound product links; review against Amazon Associates Operating Agreement and FTC endorsement guidance before publishing (see `PUBLISHING_WORKFLOW.md`).
-
-## Flagged items
-All five short links now resolve to product pages (re-verified 2026-11-20). Every observed ASIN differs from the 9-character short-link slug — intended and observed identifiers remain in separate fields and are never merged. Tracking attribution under shopnow047c-20 remains unconfirmed for all five (FLG-002). All flagged items are published on `/reviews/flagged.html` with source links; they do not block the launch.
-
-## Next decisions awaiting review (`/suggestions.html`)
-S-001 price/commission tracking · S-002 replace short links with validated Special Links · S-003 turn on real analytics · S-004 compliance gate in publishing workflow · S-005 brand imagery.
+**Next decision:** confirm one Special Link per product in the enrolled Associates workflow and reconcile it with an authorized report. Review queries weekly; commission the next article from observed demand rather than a model's guess. The five-event counter runs on the self-hosted edition, not static GitHub Pages. There is no verified Search Console property or connected Associates report in this checkout.

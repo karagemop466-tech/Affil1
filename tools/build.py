@@ -62,6 +62,8 @@ GENERATED = {
     "brief/index.html",
 }
 
+GENERATED.update(f"guides/{g['slug']}.html" for g in GUIDES)
+
 # Files THIS build emitted in an earlier version, now renamed, which must be
 # removed when the slug list changes. It contains nothing that predates this
 # build: guides/basket-or-oven.html and guides/capacity-checklist.html belong to
