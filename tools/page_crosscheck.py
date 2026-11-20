@@ -104,12 +104,14 @@ def build(page_dir):
   </article>
   <article class="finding">
     <p class="finding-k">Image rule</p>
-    <h3>The one photo on a site of drawings</h3>
-    <p>The seasonal band uses a photorealistic kitchen photograph. The other seven images are
-    engravings. The site's own image register permits illustrative work only, and the flag register
-    already notes the file has no recorded origin. It is not relabelled here — the honest fix is a
-    licence or a drawing, and only the owner can pick.</p>
-    <p class="finding-fix"><strong>Fix:</strong> commission or licence. Logged as OFF-05, rank 5.</p>
+    <h3>Half the pictures were photographs on a site that said they were drawings</h3>
+    <p>My first pass found one photoreal image in the seasonal band and called it an outlier. Opening the
+    rest showed the opposite: eight of the seventeen images in use were photographic renders, including
+    the images on product pages P-02 and P-04, where a photograph beside a buy button reads as evidence
+    of the product. The register called them all illustrations, and the disclaimer on each product page
+    contradicted the picture above it.</p>
+    <p class="finding-fix"><strong>Fix:</strong> all eight replaced with engravings this session; the rule
+    now states one visual language. Logged as OFF-05, and corrected above rather than edited away.</p>
   </article>
   <article class="finding">
     <p class="finding-k">Conversion path</p>

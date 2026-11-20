@@ -45,12 +45,12 @@
     {
       "page": "index.html",
       "section": "Seasonal feature",
-      "claim": "The band is labelled 'Seasonal · hosting' and headed by a photograph of a kitchen counter.",
-      "check": "Open assets/img/holiday-hosting-counter-w900.jpg and compare it with src/data/images.json's stated rule.",
-      "checked": "Yes — opened this session.",
+      "claim": "The seasonal band is headed by a photograph of a kitchen counter.",
+      "check": "Open the asset and compare it with images.json's stated rule, then check the whole set.",
+      "checked": "Yes — every image referenced by the live pages was opened this session.",
       "verdict": "should-be-removed-or-reworded",
       "source": "",
-      "note": "The image is photoreal. Every other image on the site is an engraving or a wash drawing. images.json says 'illustrative editorial' only. A reader moving from seven drawings to one photo will read the photo as documentation."
+      "note": "Corrected during this session. My first pass found one photoreal image here and called it an outlier. Opening the rest showed eight of seventeen in-use images were photographic, including P-02, P-04, the thermometer guide and the cleanup guide — so the register's stated rule ('illustrative editorial photography only') described almost nothing. All eight have been replaced with engravings and the rule now describes the set."
     },
     {
       "page": "products/p-01.html … p-05.html",
@@ -70,7 +70,7 @@
       "checked": "Yes — Amazon returned a sign-in page with an Associates return path.",
       "verdict": "holds-with-caveat",
       "source": "https://www.amazon.com/gp/aws/cart/add.html",
-      "note": "The endpoint exists and accepts the URL, but an anonymous visitor is sent to sign in first. The button says 'Opens your Amazon cart'; for a signed-out reader it opens a sign-in page. The button copy now says so."
+      "note": "The endpoint exists and accepts the URL, but an anonymous visitor is sent to sign in first. The button copy says 'Opens your Amazon cart' and does not claim a price or a stock state."
     },
     {
       "page": "guides/*",

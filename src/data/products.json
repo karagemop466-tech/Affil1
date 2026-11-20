@@ -67,7 +67,7 @@
       ],
       "photo": "assets/img/format-basket",
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
-      "photo_note": "Editorial illustration. It is not a photograph of P-01 and must not be read as one.",
+      "photo_note": "Editorial illustration of the dual-basket format. It is not a photograph of P-01 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20. The link resolved straight to the listing; the page title and breadcrumb were read from that page.",
       "identity_confidence": "observed",
@@ -84,7 +84,8 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "6 quart total, as two independent 3-quart baskets",
-      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe"
+      "stated_attributes": "Sync finish; viewing windows; auto shutoff; baskets described as nonstick and dishwasher-safe",
+      "photo_style": "engraved illustration"
     },
     {
       "ref": "P-02",
@@ -119,7 +120,7 @@
       ],
       "photo": "assets/img/format-oven",
       "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
-      "photo_note": "Editorial illustration. It is not a photograph of P-02 and must not be read as one.",
+      "photo_note": "This is a photographic image, and it is not a photograph of P-02: it shows a generic countertop oven. Read it as atmosphere, not as documentation of the product.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20 and resolved to the listing on the first request.",
       "identity_confidence": "observed",
@@ -136,7 +137,8 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "26 quart",
-      "stated_attributes": "24 one-touch presets; six cooking accessories included"
+      "stated_attributes": "24 one-touch presets; six cooking accessories included",
+      "photo_style": "photographic"
     },
     {
       "ref": "P-03",
@@ -172,7 +174,7 @@
       ],
       "photo": "assets/img/format-basket",
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
-      "photo_note": "Editorial illustration. It is not a photograph of P-03 and must not be read as one.",
+      "photo_note": "Editorial illustration of the single-basket format. It is not a photograph of P-03 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20 and resolved to the listings on the first request.",
       "identity_confidence": "observed",
@@ -189,7 +191,8 @@
         "tracking tag on the click"
       ],
       "stated_capacity": "8 quart",
-      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel"
+      "stated_attributes": "450°F high-heat option; basket described as nonstick and dishwasher-safe; stainless steel",
+      "photo_style": "engraved illustration"
     },
     {
       "ref": "P-04",
@@ -224,7 +227,7 @@
       ],
       "photo": "assets/img/instant-thermometer",
       "photo_alt": "An unbranded folding digital instant-read meat thermometer resting beside a seared chicken breast on a wooden board",
-      "photo_note": "Editorial illustration of an instant-read probe format. It is not a photograph of P-04 and must not be read as one.",
+      "photo_note": "This is a photographic image, and it is not a photograph of P-04: it shows a generic folding probe thermometer. Read it as atmosphere, not as documentation of the product.",
       "checked_on": "2026-11-20",
       "resolution_note": "Resolved on this run after failing three times in an earlier session. Verification is a record of this request, not a guarantee about the next one.",
       "identity_confidence": "observed",
@@ -243,7 +246,8 @@
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "One-second reading stated; ±0.5℉ accuracy stated; NIST/NSF certification stated; IP67 waterproof; auto-rotating screen",
       "observation_conflict": true,
-      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity.",
+      "photo_style": "photographic"
     },
     {
       "ref": "P-05",
@@ -278,7 +282,7 @@
       ],
       "photo": "assets/img/thermometer",
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
-      "photo_note": "Editorial illustration. It is not a photograph of P-05 and must not be read as one.",
+      "photo_note": "Editorial illustration of the wireless probe format. It is not a photograph of P-05 and must not be read as one.",
       "checked_on": "2026-11-20",
       "resolution_note": "Re-opened on 2026-11-20 and resolved to the listing on the first request.",
       "identity_confidence": "observed",
@@ -297,7 +301,8 @@
       "stated_capacity": "Not applicable — it is a thermometer",
       "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
       "observation_conflict": true,
-      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity.",
+      "photo_style": "engraved illustration"
     }
   ]
 }

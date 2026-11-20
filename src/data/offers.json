@@ -122,16 +122,16 @@
         "owner-time": 0,
         "reversibility": 3
       },
-      "owner_does": "Nothing — implemented in this session for the front page.",
+      "owner_does": "Nothing — shipped on the front page this session; the product pages still use the detail link.",
       "if_it_fails": "The detail-page link is still beside it, so a reader is never stranded.",
       "blocks": "Conversion measurement, because the event only exists once the CTA exists."
     },
     {
       "id": "OFF-05",
-      "title": "Replace the photoreal holiday feature with a consistent illustration",
-      "one_line": "The one section built to feel like a real publication has the one image that breaks the rule.",
-      "what_changes": "Either a licensed photograph with recorded provenance, or a re-drawn illustration in the same visual language as the other seven.",
-      "evidence_for": "This session opened assets/img/holiday-hosting-counter-w900.jpg: it is a photorealistic kitchen photograph with warm light and a bokeh window. Every other image on the site is an engraving or wash drawing. src/data/images.json states the rule as illustrative-only; FLG-020 records that this asset has no origin.",
+      "title": "Re-draw the eight photographic images so the site has one visual language",
+      "one_line": "A photograph beside a buy button reads as evidence. Half the image set was photographic.",
+      "what_changes": "Eight of seventeen in-use images replaced with engravings in the same style as the other nine, including the two on product pages P-02 and P-04.",
+      "evidence_for": "This session opened every image the live pages reference: 8 were photographic renders and 9 were engravings. src/data/images.json described the set as illustrative only. A product page that says 'not a photograph of P-02' under a photograph of an oven is the exact confusion the rule exists to prevent.",
       "evidence_url": "",
       "scores": {
         "unblocks-money": 0,
@@ -141,8 +141,8 @@
         "owner-time": 1,
         "reversibility": 3
       },
-      "owner_does": "Choose: licence a real photo, or commission the drawing. A session can draw; only the owner can licence.",
-      "if_it_fails": "Doing nothing keeps a small inconsistency, not a false product claim, because the caption does not say it is a photograph of P-02.",
+      "owner_does": "Nothing to approve if the re-draw is acceptable; license real photography only if that is preferred, and then record its provenance.",
+      "if_it_fails": "The replacement images are illustrations, so a weak drawing is a design problem, never a false claim about a product.",
       "blocks": "Nothing."
     },
     {
