@@ -40,23 +40,23 @@
     },
     {
       "id": "FLG-004",
-      "severity": "medium",
-      "title": "Commission rates are not published, because they sit behind a sign-in",
-      "what_we_saw": "The commission schedule URL resolves to an Associates sign-in page rather than a readable rate card.",
+      "severity": "high",
+      "title": "P-04 stayed unresolved for two passes, then resolved to a fallback-flagged listing",
+      "what_we_saw": "Attempts at 05:12 and 05:17 UTC returned Amazon's /checkpoint/continue interstitial with no product reached. The third attempt, 05:52 UTC, reached amazon.com/dp/B0DHZTCNR5 (ThermoMaven instant-read thermometer) carrying plpRedirect=mhFallback.",
       "why_it_matters": "Any revenue estimate would need a rate. Guessing one would put a fabricated number into a table that is supposed to be verified.",
       "what_we_could_not_determine": "The current rates for the relevant categories.",
       "source": "https://affiliate-program.amazon.com/help/operating/policies",
-      "review_action": "Read the rate card while signed in. Until then the rate field stays blank on the site."
+      "review_action": "Confirm inside Associates Central what B0c8moW59 was minted for. If it is not the ThermoMaven listing, change this row's destination and rebuild \u2014 the publication is generated from this data, so the register, the product card, the compare table and the thermometer guide all move together."
     },
     {
       "id": "FLG-005",
       "severity": "medium",
-      "title": "One supplied link never resolved to a product",
-      "what_we_saw": "link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue continue-shopping interstitial on every attempt, repeated across several minutes. The page is an official Amazon page, but it carries no product identity.",
-      "why_it_matters": "We cannot name the product, so we cannot describe it, and the site publishes no card and no outbound button for it. Publishing a button for an unidentified product would be the exact hallucination risk this project is guarding against.",
-      "what_we_could_not_determine": "The product, its ASIN, and its category.",
+      "title": "A link can be answered with a bot interstitial, so 'unresolved' is a statement about the attempt",
+      "what_we_saw": "link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial at 05:12 and 05:17 UTC and a live product page at 05:20-ish for a parallel session and at 05:52 UTC for this one. Two passes of the same link produced two different outcomes, hours apart, from the same network.",
+      "why_it_matters": "An automated check can report a link as dead when it is only being rate-limited. Every register row therefore records the attempt time and the outcome, and 'unresolved' never becomes 'invalid'.",
+      "what_we_could_not_determine": "Whether a signed-in Associates session, a different region, or a later hour changes the result for the links that resolved only intermittently.",
       "source": "https://link.amazon/B0c8moW59",
-      "review_action": "Open the link in a normal browser, let the interstitial pass, and read the product name and ASIN from the page. Send both back and the row can be completed."
+      "review_action": "Re-check from a normal browser before acting on any 'unresolved' row; treat this flag as a caution about the method as much as about the link."
     },
     {
       "id": "FLG-006",
@@ -141,12 +141,12 @@
     {
       "id": "FLG-014",
       "severity": "medium",
-      "title": "Five supplied links, four identified products",
-      "what_we_saw": "Four of the five resolved to identifiable Amazon listings. The fifth returned only a bot check. The site therefore presents four products and states plainly that a fifth was supplied and could not be identified.",
-      "why_it_matters": "Silently dropping it would misrepresent the brief; inventing it would be worse. Publishing the gap is the only honest option.",
-      "what_we_could_not_determine": "The fifth product.",
+      "title": "Five supplied links, five destinations observed \u2014 with two caveats",
+      "what_we_saw": "All five submitted links now have an observed destination: four were reached on the first or second attempt, one (P-04) only on the third. Three arrivals carried plpRedirect=mhFallback, and none carried a tag parameter. So the count is 5 of 5 for 'a product page was reached' and 0 of 5 for 'the intended product was confirmed from an official source'.",
+      "why_it_matters": "Publishing 'four of five identified, one dead' would have been as misleading as publishing five confident product cards. Both numbers are true only about the attempts, not about the owner's intent.",
+      "what_we_could_not_determine": "What product each 9-character code was minted for, and whether a tagged Special Link for the intended ASIN resolves to the same page published here.",
       "source": "https://link.amazon/B0c8moW59",
-      "review_action": "Open it in a browser and report the product name and ASIN. The site is built so that adding the row is a data edit, not a rebuild."
+      "review_action": "Read each destination in a signed-in browser against the intended product, then regenerate the five buy links in Associates Central and confirm one click in the report."
     },
     {
       "id": "FLG-015",
@@ -161,8 +161,8 @@
     {
       "id": "FLG-016",
       "severity": "medium",
-      "title": "The same short link returns different destinations on different attempts",
-      "what_we_saw": "Across three sessions on 2026-11-20: P-01 and P-02 returned Amazon's continue-shopping interstitial on one attempt and a product page on another; P-04 has never returned anything but the interstitial; a parallel pass recorded a differing destination for P-04 on its own attempts.",
+      "title": "The same short link returns different results across attempts (5 of 5 now resolve)",
+      "what_we_saw": "Across three passes on 2026-11-20: P-01 and P-02 returned the interstitial once and a product page once; P-04 returned the interstitial twice and a product page on the third attempt; P-03 and P-05 were stable. Every destination is therefore stored with a retrieval timestamp.",
       "why_it_matters": "A published link is a promise about where a reader lands. If the destination is unstable, the register must be dated and re-checked, and no page may describe a product as if the mapping were permanent.",
       "what_we_could_not_determine": "Whether link.amazon applies a fallback (homepage, interstitial, or a merchandising redirect) per request, per session or per region. No official document in this repository states the rule.",
       "source": "https://link.amazon/B0c8moW59 \u2014 observed behaviour only; the interstitial page is served by amazon.com",
@@ -177,6 +177,16 @@
       "what_we_could_not_determine": "Whether their per-product pages (products/p-01.html \u2026 p-05.html) outperform the single shortlist page. That is a measurement question, and no traffic data exists.",
       "source": "https://github.com/karagemop466-tech/Affil1/pull/27",
       "review_action": "If per-product pages are wanted, port them onto the single generator in tools/build.py rather than republishing a second build system."
+    },
+    {
+      "id": "FLG-018",
+      "severity": "high",
+      "title": "Three arrival URLs carry plpRedirect=mhFallback: the listing reached may be a fallback, not the intended product",
+      "what_we_saw": "On the 05:52 UTC pass, P-04 and P-05 arrived at amazon.com/dp/<ASIN> with query parameters including plpRedirect=mhFallback, sp_phone_homepage_blended, lv=shuf, btn_type=ss, channelId=500 and a btn_ref=srctok-* token. None carried a tag parameter.",
+      "why_it_matters": "A 'mhFallback' marker indicates Amazon answered with a merchandised fallback rather than the object the short code resolves to for a signed-in customer. If the destination is a fallback, the product page published here is not the product the owner meant to enrol, commissions land on a different item, and the editorial copy describes the wrong machine. The absence of a tag parameter independently means the click cannot be attributed as submitted.",
+      "what_we_could_not_determine": "Whether the fallback is per-request, per-session or per-region; whether a signed-in Associates account would land on a different ASIN; and what product each 9-character code was minted for.",
+      "source": "https://link.amazon/B0c8moW59 and https://link.amazon/B0f3GKalj \u2014 observed arrival URLs, read 2026-11-20T05:52Z",
+      "review_action": "Open each link while signed in to the Associates account, compare the ASIN each one shows against the intended product, and regenerate every buy destination as a Special Link inside Associates Central. Until that is done the register publishes destinations as dated observations and keeps intended_asin null."
     }
   ]
 }

@@ -9,7 +9,9 @@
     "price_policy_source": "https://affiliate-program.amazon.com/help/operating/policies",
     "price_policy_note": "Program Policies section 2(b) permits showing price and availability only where Amazon serves the link carrying that data, or where it is obtained through the Creators API or PA API. No such feed is connected here, so no price, rating, review count or availability appears anywhere on this site.",
     "confirmation_date": null,
-    "confirmation_note": "confirmation_date is blank by design. It is the date the account owner confirms each Special Link's destination and tracking report inside the Associates dashboard. That is an in-account action this session cannot perform."
+    "confirmation_note": "confirmation_date is blank by design. It is the date the account owner confirms each Special Link's destination and tracking report inside the Associates dashboard. That is an in-account action this session cannot perform.",
+    "third_pass": "A third fetch pass at 05:52 UTC re-resolved P-04 and re-confirmed P-05. All five submitted links now have an observed destination, and none of the five destinations is confirmed as the product the owner intended to enrol: three arrival URLs carried Amazon's plpRedirect=mhFallback marker.",
+    "destination_stability": "Destinations on this site are dated observations. Two links returned a bot interstitial on one attempt and a product page on a later one, so no page states that a mapping is permanent, and tools/verify_links.py exists to re-check."
   },
   "products": [
     {
@@ -30,10 +32,32 @@
       "listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
       "form": "dual-basket basket-style",
-      "title_claims": ["6 quart total", "2 independent 3-quart baskets", "easy view windows", "sync finish", "auto shutoff", "nonstick dishwasher-safe baskets"],
+      "title_claims": [
+        "6 quart total",
+        "2 independent 3-quart baskets",
+        "easy view windows",
+        "sync finish",
+        "auto shutoff",
+        "nonstick dishwasher-safe baskets"
+      ],
       "title_claims_note": "Read from the seller's listing title only. These are the seller's words, not independently measured or tested by this site.",
-      "verified_fields": ["brand", "listing_title", "category_path", "observed_redirect_asin"],
-      "unverified_fields": ["price", "rating", "review_count", "availability", "wattage", "dimensions", "warranty_terms", "intended_asin", "tracking_attribute"],
+      "verified_fields": [
+        "brand",
+        "listing_title",
+        "category_path",
+        "observed_redirect_asin"
+      ],
+      "unverified_fields": [
+        "price",
+        "rating",
+        "review_count",
+        "availability",
+        "wattage",
+        "dimensions",
+        "warranty_terms",
+        "intended_asin",
+        "tracking_attribute"
+      ],
       "notes": "First request returned Amazon's checkout/continue interstitial. A later request returned the product page. Recorded as observed, not as guaranteed."
     },
     {
@@ -54,10 +78,30 @@
       "listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
       "form": "oven-style / French door",
-      "title_claims": ["26 quart", "French door", "24 one-touch presets", "six cooking accessories included"],
+      "title_claims": [
+        "26 quart",
+        "French door",
+        "24 one-touch presets",
+        "six cooking accessories included"
+      ],
       "title_claims_note": "Read from the seller's listing title only. Not independently measured or tested.",
-      "verified_fields": ["brand", "listing_title", "category_path", "observed_redirect_asin"],
-      "unverified_fields": ["price", "rating", "review_count", "availability", "wattage", "dimensions", "warranty_terms", "intended_asin", "tracking_attribute"],
+      "verified_fields": [
+        "brand",
+        "listing_title",
+        "category_path",
+        "observed_redirect_asin"
+      ],
+      "unverified_fields": [
+        "price",
+        "rating",
+        "review_count",
+        "availability",
+        "wattage",
+        "dimensions",
+        "warranty_terms",
+        "intended_asin",
+        "tracking_attribute"
+      ],
       "notes": "Resolved only on a second attempt; the first returned the continue-shopping interstitial."
     },
     {
@@ -78,10 +122,32 @@
       "listing_title": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450 F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
       "form": "single-basket basket-style",
-      "title_claims": ["8 quart", "4-in-1", "450 F Hi-Fry option", "bake / dehydrate / frozen functions", "nonstick dishwasher-safe basket", "stainless steel"],
+      "title_claims": [
+        "8 quart",
+        "4-in-1",
+        "450 F Hi-Fry option",
+        "bake / dehydrate / frozen functions",
+        "nonstick dishwasher-safe basket",
+        "stainless steel"
+      ],
       "title_claims_note": "Read from the seller's listing title only. Not independently measured or tested.",
-      "verified_fields": ["brand", "listing_title", "category_path", "observed_redirect_asin"],
-      "unverified_fields": ["price", "rating", "review_count", "availability", "wattage", "dimensions", "warranty_terms", "intended_asin", "tracking_attribute"],
+      "verified_fields": [
+        "brand",
+        "listing_title",
+        "category_path",
+        "observed_redirect_asin"
+      ],
+      "unverified_fields": [
+        "price",
+        "rating",
+        "review_count",
+        "availability",
+        "wattage",
+        "dimensions",
+        "warranty_terms",
+        "intended_asin",
+        "tracking_attribute"
+      ],
       "notes": ""
     },
     {
@@ -93,20 +159,42 @@
       "intended_asin_status": "unconfirmed",
       "intended_asin_reason": "The supplied path segment is 9 characters. It is a short-link slug, not an ASIN.",
       "official_listing_url": null,
-      "observed_redirect_asin": null,
-      "observed_redirect_asin_length": null,
+      "observed_redirect_asin": "B0DHZTCNR5",
+      "observed_redirect_asin_length": 10,
       "confirmation_date": null,
       "source": "https://link.amazon/B0c8moW59",
-      "observed_source_url": null,
-      "brand": null,
-      "listing_title": null,
-      "category_path": null,
-      "form": null,
-      "title_claims": [],
-      "title_claims_note": "",
-      "verified_fields": [],
-      "unverified_fields": ["everything"],
-      "notes": "UNRESOLVED. Every request for this link returned Amazon's /checkpoint/continue continue-shopping interstitial, which is an official Amazon page but carries no product identity. No product page was ever reached. The listing could not be identified, so no value is recorded for it and no outbound button is published for it. See FLG-014."
+      "observed_source_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "brand": "ThermoMaven",
+      "listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, \u00b10.5\u2109 Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "form": "instant-read digital thermometer",
+      "title_claims": [
+        "1 second read",
+        "\u00b10.5\u00b0F accuracy",
+        "NIST & NSF certified",
+        "auto-rotate bright LED screen",
+        "IP67 waterproof"
+      ],
+      "title_claims_note": "Read from the seller's listing title only. These are the seller's words, not independently measured or tested by this site.",
+      "verified_fields": [
+        "brand",
+        "listing_title",
+        "category_path",
+        "observed_redirect_asin"
+      ],
+      "unverified_fields": [
+        "price",
+        "rating",
+        "review_count",
+        "availability",
+        "warranty_terms",
+        "intended_asin",
+        "tracking_attribute"
+      ],
+      "notes": "UNRESOLVED IN TWO EARLIER PASSES, RESOLVED ON THE THIRD. Attempts at 05:12 and 05:17 UTC returned Amazon's /checkpoint/continue interstitial; at 05:52 UTC the same link reached a live product page. The arrival URL carried plpRedirect=mhFallback and sp_phone_homepage_blended, which is Amazon's own sign that the destination may be a merchandised fallback rather than the product the code was minted for. Recorded as an observation with a timestamp, not as a confirmed intended destination.",
+      "observed_listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "destination_observed_at_utc": "2026-11-20T05:52Z",
+      "redirect_evidence": "arrival query carried lv=shuf, btn_type=ss, btn_ref=srctok-*, channelId=500, plpRedirect=mhFallback, content-id=amzn1.sym.* ; no tag parameter"
     },
     {
       "id": "P-05",
@@ -126,10 +214,31 @@
       "listing_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000 F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
       "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
       "form": "wireless meat thermometer",
-      "title_claims": ["3 ultra-thin probes", "WiFi range claim", "1000 F heat safe", "5 sensors", "listed for BBQ / grill / oven / smoker / air fryer"],
+      "title_claims": [
+        "3 ultra-thin probes",
+        "WiFi range claim",
+        "1000 F heat safe",
+        "5 sensors",
+        "listed for BBQ / grill / oven / smoker / air fryer"
+      ],
       "title_claims_note": "Read from the seller's listing title only. 'Unlimited Range' and 'Gen3' are the seller's terms and are not verified.",
-      "verified_fields": ["brand", "listing_title", "category_path", "observed_redirect_asin"],
-      "unverified_fields": ["price", "rating", "review_count", "availability", "battery_life", "dimensions", "warranty_terms", "intended_asin", "tracking_attribute"],
+      "verified_fields": [
+        "brand",
+        "listing_title",
+        "category_path",
+        "observed_redirect_asin"
+      ],
+      "unverified_fields": [
+        "price",
+        "rating",
+        "review_count",
+        "availability",
+        "battery_life",
+        "dimensions",
+        "warranty_terms",
+        "intended_asin",
+        "tracking_attribute"
+      ],
       "notes": "Not an air fryer. It belongs to the same cooking-decision cluster and is the only non-air-fryer in the set."
     }
   ]

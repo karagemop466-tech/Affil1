@@ -110,7 +110,7 @@ def build_front():
         <div class="byline">
           <span>Updated {BUILD_DATE}</span><span class="dot">&middot;</span>
           <span>{len(GUIDES)} guides</span><span class="dot">&middot;</span>
-          <span>{len(resolved)} of {len(ids)} listings identified</span><span class="dot">&middot;</span>
+          <span>{len(resolved)} of {len(ids)} listings reached a product page</span><span class="dot">&middot;</span>
           <span>0 prices published, on purpose</span>
         </div>
         <p class="hero-cta">
@@ -130,7 +130,7 @@ def build_front():
   <div class="wrap strip-inner">
     <span><strong>{len(GUIDES)}</strong> guides, written as questions</span>
     <span><strong>{len(ids)}</strong> submitted links checked by hand</span>
-    <span><strong>1</strong> never resolved &mdash; <a href="/flagged/">see it published, not hidden</a></span>
+    <span><strong>3</strong> arrivals carried Amazon's <span class="mono">mhFallback</span> marker &mdash; <a href="/flagged/#FLG-018">what that means</a></span>
     <span class="strip-end"><a href="/topics/">Browse by topic</a></span>
   </div>
 </section>
@@ -161,7 +161,9 @@ def build_front():
       <ul data-saved-items></ul>
     </div>
     <p class="footnote">Brand, category and ASIN were read from the page each submitted link resolved to
-    on {BUILD_DATE}. Capability wording belongs to the seller, not to us. Price, rating, review count and
+    on {BUILD_DATE}; every row is a dated observation, and three of the five arrived through Amazon's
+    <span class="mono">plpRedirect=mhFallback</span> path, so the product published here may be a fallback rather
+    than the item each code was minted for. Capability wording belongs to the seller, not to us. Price, rating, review count and
     stock are blank because Amazon permits them only in a link it serves or through its API.
     <a href="/about/#why-blank">Why we leave them blank</a> &middot;
     <a href="/sources/">Full source register</a></p>

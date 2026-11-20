@@ -442,9 +442,11 @@ def build_home():
       {product_card(p3, '03')}
     </div>
     <p style="margin-top:22px;font-size:.82rem;color:var(--ink-3)">
-      A fourth product, a wireless meat thermometer, belongs to the same cooking decision and is on the
-      <a href="/products/">products page</a>. A fifth supplied link never resolved to a listing; that gap is
-      <a href="/flagged/#FLG-014">published here</a> rather than filled in.
+      Two more rows belong to the same cooking decision rather than to a fryer: a leave-in wireless probe and an
+      instant-read thermometer, both reached from this set. All five are on the
+      <a href="/products/">products page</a>, each with the date its destination was read and the caveat that
+      three arrivals carried Amazon's <span class="mono">mhFallback</span> marker — see
+      <a href="/flagged/#FLG-018">FLG-018</a>.
     </p>
   </div>
 </section>
@@ -603,7 +605,7 @@ def build_products():
   <div class="product-grid">{cards}</div>
 
   <h2 style="margin-top:46px">Why four cards and not five</h2>
-  <p style="max-width:68ch">The fifth supplied link (<span class="mono">link.amazon/B0c8moW59</span>) returned Amazon's continue-shopping interstitial on every attempt, including repeats several minutes apart. That page is official, but it identifies no product. We could not name the item, its brand, or its category, so there is no card and no outbound button. A button pointing at something we cannot name would be the one thing this project is built to avoid. The gap is recorded as <a href="/flagged/#FLG-014">FLG-014</a> and will close as soon as someone reads the product off a normal browser session.</p>
+  <p style="max-width:68ch">The fifth supplied link (<span class="mono">link.amazon/B0c8moW59</span>) returned Amazon's continue-shopping interstitial on the first two passes of 2026-11-20 and a live listing on the third: <span class="mono">amazon.com/dp/B0DHZTCNR5</span>, a ThermoMaven instant-read thermometer. That arrival carried <span class="mono">plpRedirect=mhFallback</span>, Amazon's own marker for a merchandised fallback, so the row is published as a dated observation rather than a confirmed intended product, and the gap is tracked as <a href="/flagged/#FLG-018">FLG-018</a> and <a href="/flagged/#FLG-004">FLG-004</a> rather than presented as settled.</p>
 </div>"""
 
     return page("/products/", f"All products — {SITE_NAME}",
@@ -612,7 +614,7 @@ def build_products():
 
 
 def build_compare():
-    cols = ["P-01", "P-02", "P-03", "P-05"]
+    cols = ["P-01", "P-02", "P-03", "P-05", "P-04"]
     head = "".join(
         f'<th>{esc(PRODUCT_BY_ID[c]["brand"])}<br><span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem;color:var(--ink-3)">{esc(PRODUCT_BY_ID[c].get("form") or "")}</span></th>'
         for c in cols)
@@ -954,7 +956,7 @@ def build_flagged():
     <p>In the order that unblocks the most.</p>
   </div>
   <ol class="steps" style="max-width:68ch">
-    <li><strong>Read one product off a browser session.</strong> That clears FLG-005 and FLG-014 and turns four products into five.</li>
+    <li><strong>Read the five destinations off a signed-in browser session.</strong> That settles FLG-004 and FLG-018 — whether each short code means the product this site now publishes, or a fallback Amazon served instead.</li>
     <li><strong>Click one link while signed in.</strong> That answers FLG-002 and FLG-003 with a measurement instead of an inference, and tells you whether any of this can earn.</li>
     <li><strong>Read the rate card.</strong> Clears FLG-004 and makes any future revenue statement possible.</li>
     <li><strong>Decide on the API.</strong> Clears FLG-006, FLG-007 and FLG-015 at once, and is the only route to a page with prices and photographs.</li>
