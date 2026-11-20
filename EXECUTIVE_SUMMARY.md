@@ -3,8 +3,9 @@
 **What:** a live Amazon affiliate publication for air fryers and countertop cooking
 appliances, tracking ID `shopnow047c-20` (supplied by the owner; enrolment unverified).
 **Where:** https://karagemop466-tech.github.io/Affil1/
-**When:** 2026-11-20, integration pass by session `arena/359baa16-affil1`; counts and
-verification refreshed 2026-11-20 by session `arena/62b049f0-affil1` (see addendum at the end).
+**When:** 2026-11-20. Integration passes by sessions `arena/359baa16-affil1`, `arena/62b049f0-affil1`
+(counts and verification refresh) and `arena/10b5816b-affil1` (marketing & publication upgrade) —
+both addenda at the end.
 **Repo:** `karagemop466-tech/Affil1`, published from `main` by GitHub Actions.
 
 ## Read this first: the three facts that matter
@@ -212,3 +213,58 @@ Findability + line-by-line re-verification pass on the canonical edition:
   cadence / consolidation / search / gate suggestions and question ids; main's
   S-12, S-15, Q-16 and Q-22 already hold those, so only genuinely new items were
   kept: Q-23 (market size), Q-24 (self-test budget) and FLG-027.
+
+## Marketing & publication pass (2026-11-20, arena/10b5816b-affil1)
+
+The brief for this pass: make the site read like a shop and a publication, not an
+audit; lead with products; publish catchy, question-shaped seasonal content that
+can earn organic traffic; and keep a reviewable decision board in front of any
+change. What shipped:
+
+- **Issue Nº 02, the holiday edit.** The front page now opens on a seasonal cover
+  with a gift-edit feature and the Black Friday checklist, timed against the live
+  shopping weekend (Amazon's own homepage was running its Black Friday Week event
+  when this session fetched it — recorded as a dated observation, not a claim).
+- **Four new question-shaped guides**, each built only from listing facts in the
+  register: *Which air fryer gift fits which cook?*, *Black Friday air fryer
+  deals: what should you check before you buy?*, *Is a wireless meat thermometer
+  worth it?*, *Which air-fryer accessories will you actually use?*
+- **Three new editorial illustrations** in the house engraving style, registered
+  in the image register with prompts and alt text, labelled as illustrations.
+- **Decision board extended**: S-22 (the seasonal issue, recorded as implemented
+  with evidence), S-23..S-26 (editorial calendar from measured queries,
+  comparison-page decision column, a single 'how we choose' page, and a
+  fortnightly owner-question ritual). Every row stays unimplemented until the
+  owner accepts it on /suggestions/.
+- **Question register extended**: Q-23 (which queries actually arrive — blocked
+  on Search Console), Q-24 (cadence and sign-off), Q-25 (do the seasonal modules
+  change clicks — blocked on measurement).
+- **Third independent verification pass over the five supplied links**
+  (obs-10b5816b). Result, recorded honestly: only P-05 reproduced its registered
+  destination in this pass (B0DZFD6R9Z, CHEF iQ Sense); the other four landed on
+  the Amazon homepage this time. That is consistent with the documented
+  instability of these redirectors and with earlier archived observations; it
+  does not refute the earlier successful arrivals, which remain dated
+  observations. FLG-003 stance unchanged: the short links' compliance status is
+  unresolved, not disproven.
+- **Repository drift resolved, nothing discarded**: concurrent sessions renamed
+  the working directories (`tools/` → `_tools/`, `src/` → `_src/`) and the
+  observation log had ended up only in an archived copy. The two verification
+  passes were restored to the active register verbatim and the incident logged on
+  the coordination board.
+
+### The owner checklist this pass leaves behind, in the order that pays
+
+1. Click one buy link on the live site, then read Reports → Orders in Associates
+   Central. That single check closes FLG-002 / Q-03 and is the only proof that
+   the site can earn (S-01).
+2. Verify Search Console and submit sitemap.xml. Every topic decision before
+   that is instinct; after 28 days it is data (S-03, Q-23).
+3. Choose a path on /suggestions/ (Shop first, Publication first, Measure first),
+   then mark the rows. Nothing on that page has been implemented by anyone
+   pressing a button.
+4. Name an editor, or accept the honest desk-level byline (S-02).
+5. Answer Q-24 in one line: cadence, reviewer, and the sign-off rule.
+
+Everything else — API access, custom domain, product photography, paid
+acquisition — is sequenced behind those five and documented on /suggestions/.

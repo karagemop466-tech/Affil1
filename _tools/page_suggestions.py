@@ -99,8 +99,8 @@ def build(page_dir, suggestions, meta):
 {section(f'''
 <div class="callout">
   <h2>The one recommendation to read twice</h2>
-  <p>Everything else on this page adds something. S-07 says stop: do not commission more guides until either a real test or real search data exists. More synthetic prose makes the publication bigger, not better, and it raises the chance the whole site is treated as one undifferentiated block.</p>
-  <p>The nine guides that exist are defensible because they claim little. That is a narrow advantage, and it survives by not being diluted.</p>
+  <p>Everything else on this page adds something. S-07 says stop: beyond the seasonal edit the operator asked for on 20 November, do not commission more guides until either a real test or real search data exists. More synthetic prose makes the publication bigger, not better, and it raises the chance the whole site is treated as one undifferentiated block.</p>
+  <p>The thirteen guides that exist are defensible because they claim little. That is a narrow advantage, and it survives by not being diluted.</p>
 </div>''', cls='')}"""
     return page(
         d,

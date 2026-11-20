@@ -2,7 +2,7 @@
   "meta": {
     "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
     "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
-    "recommended_first": "S-01 and S-07. One confirms the site can earn; the other makes it findable. Neither needs new content.",
+    "recommended_first": "S-01 and S-03. One confirms the site can earn; the other makes it findable. Neither needs new content. For decision-making itself, S-24 and S-25 are the cheapest upgrades on the board.",
     "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads."
   },
   "paths": [
@@ -269,6 +269,62 @@
       "depends_on": "nothing",
       "recommendation": "Adopt as policy and leave it on this page as a recorded refusal",
       "evidence": "SRC-02"
+    },
+    {
+      "id": "S-22",
+      "status": "implemented",
+      "title": "Ship a seasonal issue: holiday cover, gift edit and trend-led guides",
+      "why": "The brief asked for a shop that reads like a publication with catchy, timely topics rather than an audit. The front page is now Issue Nº 02, the holiday edit: a gift-guide feature, a Black Friday checklist timed to the live shopping weekend, a wireless-probe buyer's guide and an accessories filter, each written around the question a shopper actually types.",
+      "effort": "done",
+      "risk": "Reduced: every product fact stays inside the listing-title register, and the seasonal framing is labelled editorial in each guide's closing note.",
+      "depends_on": "nothing — shipped on the operator's explicit instruction",
+      "recommendation": "Implemented",
+      "implemented_on": "2026-11-20",
+      "evidence": "guides/air-fryer-gift-guide.html; guides/black-friday-air-fryer-checklist.html; guides/wireless-thermometer-worth-it.html; guides/air-fryer-accessories-checklist.html; index.html holiday cover"
+    },
+    {
+      "id": "S-23",
+      "status": "open",
+      "title": "Turn the topic bank into a dated editorial calendar chosen from measured queries",
+      "why": "Thirteen guides now exist as editorial hypotheses. The next four should come from Search Console queries, not instinct: the design pack already holds the topic bank and the organic loop, and this decision turns it into slots with dates and an owner per slot. Without it the cadence collapses into bursts.",
+      "effort": "an hour of scheduling once Q-11 (Search Console) is closed",
+      "risk": "Low. The risk is publishing into the dark for another month if this is approved without the measurement step it depends on.",
+      "depends_on": "Q-25 (the query question), S-03",
+      "recommendation": "Accept, but schedule the first slot no earlier than four weeks after Search Console is verified",
+      "decision": "open"
+    },
+    {
+      "id": "S-24",
+      "status": "open",
+      "title": "Give the comparison page a 'who it suits' decision column instead of more specification text",
+      "why": "Decision-making improves when the reader can match themselves to a row. The compare page currently replicates register fields; a short 'suits you if' column drawn from each product's suits list would let a reader eliminate options instead of reading more prose.",
+      "effort": "half a day, template only — the suits lists already exist in the register",
+      "risk": "Low, provided the column stays phrased as a question to the reader and never as a ranking.",
+      "depends_on": "nothing",
+      "recommendation": "Accept; it is the cheapest decision-making upgrade left on this list",
+      "decision": "open"
+    },
+    {
+      "id": "S-25",
+      "status": "open",
+      "title": "Publish one 'how we choose' method page and link it from the Questions group",
+      "why": "The method (open the link, transcribe the listing, say what it changes, leave blanks blank) is currently scattered across the about page, the review pages and the front-page method band. One short page that states the rules in the reader's language is the single best answer to 'why does this shop show no prices' — and it is a trust asset a search snippet can quote.",
+      "effort": "two hours",
+      "risk": "None. It repeats rules the site already enforces in its checker.",
+      "depends_on": "nothing",
+      "recommendation": "Accept; pair it with S-02 (named editor) if that row is approved",
+      "decision": "open"
+    },
+    {
+      "id": "S-26",
+      "status": "open",
+      "title": "Adopt a fortnightly owner question ritual: close the top blocking question before commissioning the next guide",
+      "why": "The register shows exactly what is missing before each decision can be made. The failure mode is not ignorance, it is drift: guides get written while the two blocking questions stay open. A dated ritual — one question, one closing artefact, per fortnight — keeps the missing information list shrinking.",
+      "effort": "fifteen minutes a fortnight",
+      "risk": "None. The only risk is adopting it and skipping it.",
+      "depends_on": "Q-03 (click attribution) is the top of the queue; Q-23/Q-24 follow",
+      "recommendation": "Accept, and record each closing artefact on the questions page the same day",
+      "decision": "open"
     }
   ]
 }
