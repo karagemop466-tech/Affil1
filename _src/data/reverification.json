@@ -12,7 +12,8 @@
       "program_policies": "https://affiliate-program.amazon.com/help/operating/policies",
       "operating_agreement": "https://affiliate-program.amazon.com/help/operating/agreement",
       "ftc_endorsement_guides": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
-    }
+    },
+    "consolidation_note": "2026-11-20, integration pass arena/10b5816b-affil1: the additional_passes log (obs-83e015f6 and obs-10b5816b) had ended up only in the archived copy at _archive/2026-11-20-pr50-source/src/data/reverification.json after the working-directory rename, while flags.json and the review page point at additional_passes.obs-83e015f6 in this file. The passes are restored here verbatim. Nothing was removed from either copy."
   },
   "rows": [
     {
@@ -46,7 +47,7 @@
       "path_code_length": 9,
       "observed_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
       "observed_asin": "B08DKYBTPH",
-      "destination_title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+      "destination_title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
       "agrees_with_current_register": true,
       "contradicts_archived_register": true,
       "discrepancy": "An archived register (_archive/2026-11-20-integration/_data/confirmations.json) recorded this link as reaching only the Amazon homepage and marked it unverified. That claim is contradicted by this fetch and by the register now on main. Recorded as a correction, not as a settled fact: the link is unstable, so both observations may have been true at their own moment.",
@@ -59,11 +60,11 @@
       "path_code_length": 9,
       "observed_listing_url": null,
       "observed_asin": null,
-      "destination_title": "Amazon.com \u2014 checkpoint / continue-shopping interstitial (https://www.amazon.com/checkpoint/continue)",
+      "destination_title": "Amazon.com — checkpoint / continue-shopping interstitial (https://www.amazon.com/checkpoint/continue)",
       "agrees_with_current_register": true,
       "contradicts_archived_register": false,
       "discrepancy": "No product destination has been reached by any session on any attempt. The row stays unresolved; it is not declared invalid, and no buy button is published for it.",
-      "status": "unresolved \u2014 bot interstitial on every attempt recorded so far",
+      "status": "unresolved — bot interstitial on every attempt recorded so far",
       "concurrent_observation": "A parallel integration pass (session arena/c9fc4295-affil1, merged into main as PR #27) recorded differing destinations for P-04 and P-05 on its own attempts and flagged the disagreement rather than resolving it. Preserved here verbatim: this row stays unresolved, and the site publishes no buy button for it."
     },
     {
@@ -73,10 +74,10 @@
       "path_code_length": 9,
       "observed_listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
       "observed_asin": "B0DZFD6R9Z",
-      "destination_title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000\u00b0F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen",
+      "destination_title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen",
       "agrees_with_current_register": true,
       "contradicts_archived_register": true,
-      "discrepancy": "An archived register recorded this link as reaching only the Amazon homepage. This fetch and the current register both reach a product page \u2014 and that product is a wireless meat thermometer, not an air fryer, which is why the publication has a thermometer guide rather than pretending the row is a fifth fryer.",
+      "discrepancy": "An archived register recorded this link as reaching only the Amazon homepage. This fetch and the current register both reach a product page — and that product is a wireless meat thermometer, not an air fryer, which is why the publication has a thermometer guide rather than pretending the row is a fifth fryer.",
       "status": "resolved to a product page on a second independent fetch"
     }
   ],
@@ -85,7 +86,39 @@
     "links_unresolved": 1,
     "path_codes_that_are_10_characters": 0,
     "conclusion": "Every submitted path code is 9 characters long. Amazon's own Catalog Items reference treats an ASIN as the item identifier, and every destination ASIN observed on these pages is 10 characters; none of the five supplied codes can be matched to a catalog ASIN as written. The slug is therefore recorded as a short-link path code, never as an intended ASIN.",
-    "attribution_conclusion": "None of the five submitted URLs carries a tag parameter, and each works by redirect through an intermediate host. Under the Associates Commission Income Statement, purchases arriving through a Redirecting Link, or through a link that is not properly formatted, are disqualified \u2014 so as submitted these links cannot be attributed to the tracking ID. Replacing them with Special Links generated in Associates Central is the single highest-value change available to this project.",
+    "attribution_conclusion": "None of the five submitted URLs carries a tag parameter, and each works by redirect through an intermediate host. Under the Associates Commission Income Statement, purchases arriving through a Redirecting Link, or through a link that is not properly formatted, are disqualified — so as submitted these links cannot be attributed to the tracking ID. Replacing them with Special Links generated in Associates Central is the single highest-value change available to this project.",
     "cross_session_agreement": "Two independent passes on 2026-11-20 reached the same four product destinations and the same unresolved fifth row. A third session's log disagrees about P-04 on some attempts. The register therefore publishes each destination as a dated observation with its source, and the weekly audit exists to notice when one changes."
-  }
+  },
+  "additional_passes": [
+    {
+      "pass_id": "obs-83e015f6",
+      "session": "arena/83e015f6-affil1 (final integration session)",
+      "retrieved_at_utc": "2026-11-20T05:18Z–05:22Z",
+      "method": "Independent automated fetch of each submitted short link; redirects followed; destination page titles and breadcrumbs read from Amazon.com official site. Same method as the pass above, run before this session had read the register above.",
+      "results": {
+        "https://link.amazon/B04G1MEwY": "https://www.amazon.com/dp/B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven)",
+        "https://link.amazon/B02NbDxp3": "https://www.amazon.com/dp/B09B7SB46R (Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven)",
+        "https://link.amazon/B00hJ57DV": "https://www.amazon.com/dp/B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry)",
+        "https://link.amazon/B0c8moW59": "https://www.amazon.com/checkpoint/continue (bot interstitial; no product page)",
+        "https://link.amazon/B0f3GKalj": "https://www.amazon.com/dp/B0DZFD6R9Z (CHEF iQ Sense wireless meat thermometer)"
+      },
+      "agrees_with": "the pass above on all five rows, including P-04 unresolved (interstitial on every attempt)",
+      "note": "Independently contradicts the P-04 → B0DHZTCNR5 observation recorded in FLG-016 and carried in src/data/products.json. This pass never reached a product page for B0c8moW59; neither did the pass above, nor the recovered PR #15 register, nor the earliest archived register. The B0DHZTCNR5 observation remains on the record as one session's observation. See FLG-023."
+    },
+    {
+      "pass_id": "obs-10b5816b",
+      "session": "arena/10b5816b-affil1 (marketing & publication upgrade, integration)",
+      "retrieved_at_utc": "2026-11-20 (this session's fetch window; exact clock time not recorded by the fetcher)",
+      "method": "Each submitted short link was opened again with an independent page fetcher that follows redirects; the final URL, page title and breadcrumb were read from what actually loaded. Amazon was running its Black Friday Week homepage at the time of this pass, which is recorded because it is part of what the fetcher returned.",
+      "results": {
+        "https://link.amazon/B04G1MEwY": "https://www.amazon.com/ (homepage: 'Amazon.com. Spend less. Smile more.' — no product page reached)",
+        "https://link.amazon/B02NbDxp3": "https://www.amazon.com/ (homepage — no product page reached)",
+        "https://link.amazon/B00hJ57DV": "https://www.amazon.com/ (homepage — no product page reached)",
+        "https://link.amazon/B0c8moW59": "https://www.amazon.com/ (homepage — no product page reached; the B0DHZTCNR5 mapping of FLG-016 did NOT reproduce in this pass)",
+        "https://link.amazon/B0f3GKalj": "https://www.amazon.com/dp/B0DZFD6R9Z (CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3 — matches the current register row P-05)"
+      },
+      "agrees_with": "P-05 destination in the current register; adds a third observation class for the other four rows (homepage arrival), consistent with the earlier archived register that recorded homepage arrivals and with the documented instability of these redirectors. Neither confirms nor refutes any earlier pass: each pass is one request at one moment.",
+      "note": "The register fields in src/data/products.json are unchanged by this pass. observed_asin values remain dated observations of earlier successful arrivals; this pass simply records that four of five did not arrive at a product page this time. FLG-003 stance unchanged: the compliance status of link.amazon short links is unresolved, not disproven, and no page calls them invalid."
+    }
+  ]
 }
