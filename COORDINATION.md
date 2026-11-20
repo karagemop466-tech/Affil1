@@ -210,3 +210,11 @@ The initial shallow checkout made the ancestor appear unrelated and caused a reb
 - [PR #27](https://github.com/karagemop466-tech/Affil1/pull/27) merged as `92a3509c9a56bbd6aa01eef8d7ae0afbb4ab7f06`; the PR build and link checks passed.
 - GitHub Pages [deployment run 44682421711](https://github.com/karagemop466-tech/Affil1/actions/runs/44682421711) succeeded; the Pages API reported `built` for that merge commit.
 - Audit and link repairs: done. Full legacy-edition reconciliation, product intent, tracking attribution, and live analytics: **needs review** as detailed in FLG-016/017 and the measurement page. The older crisp-specific validator remains incompatible with the current data schema.
+
+### Buyer publication & gated research — arena/daf8045f-affil1
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Integrate the maintained publication: storefront art direction, evidence-gated next actions and editorial research, build and Pages release | in progress | arena/daf8045f-affil1 | tools/page_home.py, tools/layout.py, tools/page_suggestions.py, tools/check.py, assets/css/storefront.css, assets/img/storefront*, generated maintained HTML, COORDINATION.md |
+
+Earlier #27 integration merged. Open #29 targets legacy tables, not these publication templates. No legacy table edits planned.
