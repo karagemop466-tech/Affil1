@@ -778,3 +778,18 @@ tools/stage.py into a temp dir                    → 0 broken references
 ### Merge log
 
 Pending: see the PR linked from this board after it is opened.
+## Claim — link gate, serving scope, source quotes · arena/d34e0765-affil1 · 2026-11-20 UTC
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Reinstate the paid-link gate (tags only from an approved intent record) | in progress | arena/d34e0765-affil1 | `tools/layout.py`, `tools/paid_link_gate.py`, `tools/test_paid_link_gate.py`, `tools/check.py` |
+| Stop deploying working papers and raw registers to the public host | in progress | arena/d34e0765-affil1 | `_config.yml` |
+| Correct two source-register quotes that do not appear on their cited pages | in progress | arena/d34e0765-affil1 | `src/data/sources.json`, `decision-support/data/` source rows |
+
+Findings behind the claim, each reproduced locally or read on the live host before claiming:
+
+1. **The published front page says one thing and the code does another.** `index.html` footer: “only account-confirmed purchase links may use this tag.” Four lines away, `tools/layout.py:100-106` attaches `?tag=shopnow047c-20` to every product that has no evidence bundle, and `tools/test_paid_link_gate.py` asserts that must not happen. `python3 -m unittest test_paid_link_gate` fails on the tree as merged in #83. A tag taken from a public observation is not a validated Special Link, and the page currently tells the reader it is.
+2. **Working papers are public.** GitHub Pages is `build_type: legacy` from `main:/` with a root `.nojekyll`, so `_config.yml` excludes never apply. `decision-support/`, `data/confirmations.json`, `src/data/product-intent.json` and `tools/arm_links.py` all return 200 on the live host; none are in `_site`, `sitemap.xml` or the footer. `tools/stage.py` builds the curated 30-page edition, but nothing deploys it.
+3. **Two quotes are attributed to pages that do not contain them.** SRC-09 records “Using a food thermometer is the only reliable way to ensure safety and to determine the ‘doneness’ of meat, poultry, and egg products.” as a verbatim quote from the FSIS *Food Thermometers* page. That page says “Using a food thermometer is the only reliable way to ensure that foods have been cooked to a safe minimum internal temperature…”. SRC-10 records “Retrieves details for an item in the Amazon catalog.” against a reference whose `getCatalogItem` operation reads exactly that, but not at the cited section.
+
+No other session holds these files. Cross-scope requests go in this file, not into other sessions' files.
