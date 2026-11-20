@@ -16,6 +16,9 @@ def stage(destination):
     (destination / '.nojekyll').touch()
     files = GENERATED | {str(path.relative_to(ROOT)) for path in (ROOT / 'assets').rglob('*') if path.is_file()}
     for name in sorted(files):
+        if not (ROOT / name).exists():
+            print(f"stage: skipping missing {name}")
+            continue
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / name, target)
