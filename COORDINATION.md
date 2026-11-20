@@ -609,3 +609,18 @@ PR #60 merged to `main` at `cf4f3703bee4fba8c2ff9307079dcb40c33ebf84` (merge com
 ## arena/7755f499-affil1 — collector repair
 
 Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done. Merged as PR #87 (`1b09bbc`); Pages deploy success. Record: `COORDINATION/arena-7755f499-affil1.md`.
+
+---
+
+## Claim — session `arena/44f81bcd-affil1` (started 2026-11-20 UTC)
+
+| Task | Status | Owner | Files touched |
+|---|---|---|---|
+| Policy-gated affiliate platform, verification dashboard, category & buyer-guide publication, design-prompt workbench, pre-decision questions & discovery register, executive summary, and repo-wide line-by-line audit | in progress | `arena/44f81bcd-affil1` | `edition/**`, `platform/**`, `.github/workflows/edition-verify.yml`, `COORDINATION.md` |
+
+- **Non-overlapping scope rule:** Active concurrent PRs own `tools/*`, `src/data/*`, `EXECUTIVE_SUMMARY.md`, `INTEGRATION_REVIEW.md`, `shop/**`, and `decision-support/**`. Session `arena/44f81bcd-affil1` touches **only** `edition/**`, `platform/**`, `.github/workflows/edition-verify.yml`, and this section of `COORDINATION.md`.
+- **Cross-scope findings logged for active owners (not overwritten):**
+  1. `tools/validate.py` (claimed by `arena/487e4183-affil1`, PR #54): currently raises `KeyError: 'supplied_path_code_length'` when invoked by `.github/workflows/weekly-audit.yml` because `src/data/products.json` uses `submitted_code_length` / `observed_asin`.
+  2. `src/data/products.json` & `tools/layout.py` (root storefront owners): ensure `intended_asin`, `intended_listing_url`, `intended_confirmed_on`, and `intended_confirmation_source` remain explicitly stored as separate fields from `observed_asin` / `observed_url` (never merged), and keep Special Link status flagged as unresolved (`FLG-002` / `FLG-003`) until verified in the enrolled Associates Central workflow.
+  3. Archived parallel records (`archive/legacy-2026-11-20/` and earlier `data/confirmations.json` / `data.js`): documented on `edition/flagged/index.html` where earlier drafts placed 9-character path codes in `intended_asin` or merged `observed_redirect_target` into `official_listing_url`; preserved as historical audit evidence only.
+
