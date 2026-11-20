@@ -101,7 +101,15 @@ def outbound(page_dir, url, label, **kw):
 
 
 def product_link(page_dir, url, label, **kw):
-    """A link to Amazon. Always marked sponsored, always in a new tab."""
+    """A link to Amazon. Always marked sponsored, always in a new tab, and
+    always tagged with the Associates ID (Amazon's Special Link form).
+
+    The register's official listing URL stays untagged — it is the address of
+    the product, not an affiliate link. Tagging is added here, the one place
+    that emits links a reader can buy through."""
+    if TRACKING_ID:
+        sep = "&" if "?" in url else "?"
+        url = f"{url}{sep}tag={TRACKING_ID}"
     return link(page_dir, url, label, sponsored=True, **kw)
 
 

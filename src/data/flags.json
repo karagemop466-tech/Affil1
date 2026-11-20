@@ -205,6 +205,22 @@
       ],
       "impact": "P-05 has its own section and is never called an air fryer.",
       "blocks": "nothing"
+    },
+    {
+      "id": "FLG-016",
+      "severity": "medium",
+      "title": "Two analytics systems name the five events differently; reconciled to the canonical five",
+      "expected": "assets/js/analytics.js records the five canonical events from src/data/events.json, and tools/check.py checks the same five names.",
+      "found": "assets/js/analytics.js defined page_view, outbound_click, guide_open, search_query_referral and report_import; src/data/events.json defines page_view, outbound_product_click, guide_read_75, compare_view and flag_page_view; tools/check.py required the legacy names. Two systems for the same five events. The root-build client (assets/js/analytics.js, loaded by tools/build.py pages via tools/layout.py) has been rewritten to the canonical five. Legacy copies remain on main: analytics.js, js/analytics.js, js/events.js, assets/js/events.js, analytics/endpoint.py, server/collect.js. The canonical collector design in src/data/events.json posts to endpoint /api/e; the rewritten client posts to window.CC_ANALYTICS_ENDPOINT (still inert: nothing is deployed, so nothing is recorded — FLG-010 stands).",
+      "reading": "The live site is the root build (tools/build.py, served from the repo root by GitHub Pages). Its analytics client is the one loaded by every page. The canonical five are the definition used by the measurement plan and the validation gate; both now agree on those five names.",
+      "to_check": [
+        "src/data/events.json",
+        "assets/js/analytics.js",
+        "tools/check.py",
+        "crisp/sources/index.html"
+      ],
+      "impact": "None while inert: the client records nothing until an endpoint is configured. The risk is a future reader loading one of the legacy copies (js/analytics.js, assets/js/events.js) and recording the old five events.",
+      "blocks": "nothing"
     }
   ]
 }

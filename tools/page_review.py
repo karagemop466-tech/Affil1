@@ -43,7 +43,7 @@ def build_index(page_dir, flags, meta):
             {"html": esc(f["severity"] == "high" and "Correctness or revenue" or (f["severity"] == "medium" and "Usefulness" or "Cosmetic"))},
         ])
     flag_table = table(["Ref", "Severity", "What is flagged", "Blocks", "Affects"], flag_rows,
-                       cls="flags", caption="15 items, ordered by severity")
+                       cls="flags", caption=f"{len(fl)} items, ordered by severity")
 
     body = f"""{pagehead(
         'Review queue',
@@ -136,10 +136,10 @@ def build_measurement(page_dir, meta):
     d = page_dir
     events = [
         ("page_view", "Every page load", "Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept."),
-        ("outbound_click", "Any click on an Amazon link", "Records which product reference was clicked and the page it was clicked from. This is the number that matters for this site."),
-        ("guide_open", "Opening a guide from the index", "Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be."),
-        ("search_query_referral", "Arrival from a search engine", "Records that a referral happened and the referring host, not the query. Search Console supplies queries; this does not try to reconstruct them."),
-        ("report_import", "A manual import of an Associates report", "A dated record that a first-party report was added to the ledger, with its provenance. Never an automated scrape."),
+        ("outbound_product_click", "A reader activates an outbound link to a product listing", "Records the product reference clicked (the ASIN from the destination) and the page it was clicked from. It is counted before navigation, so it does not prove a purchase or a commission."),
+        ("guide_read_75", "A reader reaches 75% of a guide", "Separates readers who actually read a guide from those who merely open it, which changes what the next guide should be."),
+        ("compare_view", "The comparison page or a comparison table is rendered", "Counts how often the side-by-side view is entered, so the design question is answered from data, not instinct."),
+        ("flag_page_view", "The Flagged for Review page is opened", "Tells us whether the verification work is actually consulted, which tells us if it is visible."),
     ]
     rows = [[{"html": f'<code class="code">{esc(n)}</code>'}, esc(t), esc(w)] for n, t, w in events]
     body = f"""{pagehead(
@@ -150,7 +150,7 @@ def build_measurement(page_dir, meta):
     )}
 {section(f'''
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. The client exists in this repository, records the five canonical events from src/data/events.json, and is inert: nothing is recorded until a page sets an endpoint. The naming mismatch with the legacy event set (the five names in assets/js/analytics.js when this was written) is resolved — tools/check.py now enforces the canonical five and fails on the legacy names. FLG-016 lists the legacy duplicates for review.</p>
   <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
 </div>
 <h2>What would be measured</h2>

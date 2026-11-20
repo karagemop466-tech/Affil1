@@ -7,6 +7,7 @@ Shared task board for parallel sessions on this repository.
 | Session | Branch | Claimed scope | Status |
 |---|---|---|---|
 | `arena/fa9307f7-affil1` | `arena/fa9307f7-affil1` | Full rewrite: `index.html`, `guides/`, `products/`, `compare/`, `questions/`, `suggestions/`, `review/`, `about/`, `operations/`, `brief/`, `assets/`, `src/data/`, `tools/`, `README.md` | done |
+| `arena/982fea5a-affil1` | `arena/982fea5a-affil1` | Integration + verification pass (this session): validate.py schema reconciliation, analytics event reconciliation to the canonical five (FLG-016), outbound tag, docs updates, commit + push | done | `tools/validate.py`, `tools/check.py`, `tools/page_review.py`, `assets/js/analytics.js`, `tools/layout.py`, `src/data/flags.json`, `EXECUTIVE_SUMMARY.md`, `docs/EXECUTIVE-SUMMARY.md`, `COORDINATION.md`, `data/verification-observations.ndjson` |
 
 No other session had an open claim on these files when this work started. Two
 other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
@@ -21,9 +22,67 @@ other branches have open pull requests (#6 `arena/55d40788-affil1`, #7
 | Build system, checker, Pages workflow | done | arena/fa9307f7-affil1 | `tools/`, `.github/workflows/pages.yml` |
 | Product facts beyond the listing title | needs review | — | `src/data/products.json` |
 | Associates account data (intended ASINs, rate card, click report) | needs review | — | requires account owner |
+| Reconcile tools/validate.py to the canonical products.json schema | done | arena/982fea5a-affil1 | tools/validate.py |
+| Reconcile analytics to the canonical five events in src/data/events.json; add FLG-016 | done | arena/982fea5a-affil1 | assets/js/analytics.js, tools/check.py, tools/page_review.py, src/data/flags.json |
+| Tag root-build outbound product links with ?tag=shopnow047c-20 (Amazon Special Link form) | done | arena/982fea5a-affil1 | tools/layout.py |
+| Verify the combined data line by line; re-run build/check/validate/stage/repro diff; run verify_links.py | done | arena/982fea5a-affil1 | tools/build.py, tools/check.py, tools/validate.py, tools/stage.py, tools/verify_links.py, data/verification-observations.ndjson |
+| Update executive summaries (branch name, five products, reconciliation section) | done | arena/982fea5a-affil1 | EXECUTIVE_SUMMARY.md, docs/EXECUTIVE-SUMMARY.md |
 
 `needs review` means the item is published on the review page and does not block
 anything.
+
+### Sources and verification performed in this session (2026-11-20)
+
+Line-by-line verification of the five submitted links (fetch_page against the
+official Amazon pages): every link was requested, the redirect followed, the
+final URL read, the 10-character ASIN extracted from the `/dp/` segment, and the
+page title transcribed and compared with the register. No value was inferred or
+carried over from a search result.
+
+| Ref | Submitted | Resolved to | Title matches register |
+|---|---|---|---|
+| P-01 | link.amazon/B04G1MEwY | https://www.amazon.com/dp/B0CDY277D3 | CHEFMAN 6 Quart Dual Basket Air Fryer — match (src/data/products.json, P-01) |
+| P-02 | link.amazon/B02NbDxp3 | https://www.amazon.com/dp/B09B7SB46R | Emeril Lagasse 26QT French Door — match (P-02) |
+| P-03 | link.amazon/B00hJ57DV | https://www.amazon.com/dp/B08DKYBTPH | Chefman Air Fryer 8 Qt TurboFry — match (P-03) |
+| P-04 | link.amazon/B0c8moW59 | https://www.amazon.com/dp/B0DHZTCNR5 | ThermoMaven 1 Sec — match (P-04, newly observed) |
+| P-05 | link.amazon/B0f3GKalj | https://www.amazon.com/dp/B0DZFD6R9Z | CHEF iQ Sense — match (P-05) |
+
+Toolchain (all run 2026-11-20): `python3 tools/build.py` (22 pages built),
+`python3 tools/check.py` (0 errors, 0 warnings), `python3 tools/validate.py`
+(619 checks, 0 warnings), `python3 tools/stage.py _site`, CI-style
+reproducibility diff (clean). `python3 tools/verify_links.py` appended 5
+observations to `data/verification-observations.ndjson` — outcome
+`fetch_error` because bash `urllib` is blocked from this sandbox to amazon.com;
+the authoritative verification is the table above.
+
+Outbound links on the root build now resolve as tagged Special Links (verified
+by grep in `products/`, `compare/` and `guides/`):
+`https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` with `rel="sponsored
+nofollow noopener"`. The register's official listing URLs stay untagged.
+
+New sources cited this pass: the five listing pages above;
+https://affiliate-program.amazon.com/help/operating/policies (re-checked
+2026-11-20); and https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference
+(the ASIN definition, cited in src/data/products.json meta).
+
+Irregularities found and handled this pass:
+
+- `tools/validate.py` crashed with `KeyError: 'supplied_path_code_length'` — the
+  validator expected the old schema while `src/data/products.json` uses the
+  canonical register schema. Aligned to the canonical schema; passes now.
+- Analytics event-name split: `src/data/events.json` defines the five canonical
+  events (page_view, outbound_product_click, guide_read_75, compare_view,
+  flag_page_view); the root-build client `assets/js/analytics.js` defined
+  different legacy names (page_view, outbound_click, guide_open,
+  search_query_referral, report_import). The client was rewritten to the
+  canonical five; `tools/check.py` now enforces the canonical five and fails on
+  the legacy names. New flag: **FLG-016**.
+- `data/verification-observations.ndjson` — 5 fetch_error records (bash urllib
+  blocked); see the verification table above.
+- Foreign root-edition files served at the same paths still carry untagged
+  `amazon.com/dp` links: `dashboard.html`, `categories/air-fryers.html`,
+  `disclosure.html`, `privacy.html`. Out of scope for this branch (owned by
+  another session); flagged for review.
 
 ## Overlap with the other open branches
 
@@ -71,9 +130,13 @@ Link verification, performed once per link on 2026-11-20:
 
 ## Irregularities
 
-All 15 are published at `review/index.html` with source links. The three that
-matter most:
+All 16 are published at `review/index.html` with source links (15 prior flags +
+FLG-016). The three that matter most:
 
+- **FLG-016 (new)** — two analytics systems named the five events differently;
+  reconciled to the canonical five. Legacy duplicates: `analytics.js`,
+  `js/analytics.js`, `js/events.js`, `assets/js/events.js`,
+  `analytics/endpoint.py`, `server/collect.js`.
 - **FLG-001** — all five submitted codes are 9 characters; all four ASINs on
   arrival are 10. They are short-link slugs, not identifiers, so `intended_asin`
   is null rather than filled with the slug.

@@ -173,16 +173,16 @@ def main():
     data = json.loads((ROOT / "src/data/products.json").read_text())
     for prod in data["products"]:
         CHECKS += 1
-        if prod["supplied_path_code_length"] != len(prod["supplied_path_code"]):
-            err(f"{prod['id']}: supplied_path_code_length disagrees with the code")
+        if prod["submitted_code_length"] != len(prod["submitted_code"]):
+            err(f"{prod['ref']}: submitted_code_length disagrees with the code")
         CHECKS += 1
         # Rule: intended and observed identifiers are separate fields and never merged.
-        if prod.get("intended_asin") == prod.get("observed_redirect_asin") and prod.get("intended_asin"):
-            err(f"{prod['id']}: intended_asin equals observed redirect; fields must stay distinct")
+        if prod.get("intended_asin") == prod.get("observed_asin") and prod.get("intended_asin"):
+            err(f"{prod['ref']}: intended_asin equals observed ASIN; fields must stay distinct")
         CHECKS += 1
         # Rule: observed ASIN, when present, must be 10 characters.
-        if prod.get("observed_redirect_asin") and len(prod["observed_redirect_asin"]) != 10:
-            err(f"{prod['id']}: observed ASIN is not 10 characters")
+        if prod.get("observed_asin") and len(prod["observed_asin"]) != 10:
+            err(f"{prod['ref']}: observed ASIN is not 10 characters")
 
     # ---- sitemap / feed agreement ----
     sitemap = (SITE / "sitemap.xml").read_text()
