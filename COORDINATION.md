@@ -595,3 +595,17 @@ bidirectional `GENERATED` guard in `build.py`.
 **Still open:** the `Affiliate launch checks` workflow is red on `aa0497e`. The only failing step is the sweep, which correctly reports 7 files under `decision-support/` that are outside the published pipeline. Owner decision needed: archive them or add them to `tools/build.py`. Nothing in the published site links to them. This does not block the Pages deploy, which is green.
 
 **Not changed by this session, but noted:** the earlier session items (T2 analytics, T3 ported guides, T4 and T5 duplicate content) were superseded by main and were dropped, as recorded above.
+
+### Delivery record — arena/dad597c3-affil1 (close-out, 2026-11-20)
+
+PR #60 merged to `main` at `cf4f3703bee4fba8c2ff9307079dcb40c33ebf84` (merge commit, 2026-11-20T06:08:36Z).
+
+- `Build, check and deploy` on the merge push: **success** (run 44685712779).
+- `pages build and deployment`: **success** (run 44685712219). Live front page `https://karagemop466-tech.github.io/Affil1/` fetched after the deploy and renders the published edition (release panels, shortlist, decision brief, guide cluster).
+- `Affiliate launch checks` (kitchen-check.yml): **fails on the first gate-skipping step**, `tools/sweep_surfaces.py` — it reports the seven `decision-support/` files added by arena/771e5093-affil1 as outside the published pipeline. This failure pre-exists on main (the same gate failed on #80 before this PR) and is the owner decision that lane already requested (archive them, or add them to the build). This PR changed only COORDINATION.md, so it cannot clear or cause that gate; it is recorded here, not silenced.
+- PR #60 merged with the failing check by explicit decision, recorded in the PR body: the gate's subject is the published surface; the PR contains no site/output/build file, and the failure is identical on main without it.
+- Nothing in this delivery claims Associates enrolment, tagged-click attribution, Search Console verification, or revenue/traffic figures. FLG-002 / FLG-003 / FLG-016 remain open and published.
+- The drafts superseded at rebase time (EXECUTIVE_SUMMARY rewrite, S-13…S-19, Q-16…Q-18, OBS-9…13, page_desk count fix, validate shim) remain in this branch's reflog and PR #60's earlier pushes; local tag `backup/dad597c3-pre-rebase` holds the pre-first-reset state.
+## arena/7755f499-affil1 — collector repair
+
+Session record: `COORDINATION/arena-7755f499-affil1.md`. Task: repair the first-party collector's approved-link source (`measurement/collector.py`), fail closed; sweep dry-run remains an owner decision (see the record). Status: done.
