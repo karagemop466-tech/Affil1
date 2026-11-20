@@ -581,3 +581,15 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .disclosure a, .disclosure .disclosure-badge { color: #000; }
   body { background: #fff; }
 }
+
+/* ---- editorial imagery (original generated artwork, not Amazon Program Content) ---- */
+.hero-photo { grid-column: 1 / -1; margin: 10px 0 0; border-radius: 12px; overflow: hidden; background: var(--surface-2, #eef0f3); }
+.hero-photo img { display: block; width: 100%; height: 340px; object-fit: cover; }
+.season-photo { margin: 0 0 14px; border-radius: 10px; overflow: hidden; background: var(--surface-2, #eef0f3); }
+.season-photo img { display: block; width: 100%; height: 170px; object-fit: cover; }
+.band-photo { margin: 0 0 28px; border-radius: 12px; overflow: hidden; background: var(--surface-2, #eef0f3); }
+.band-photo img { display: block; width: 100%; height: 240px; object-fit: cover; }
+@media (max-width: 760px) {
+  .hero-photo img { height: 220px; }
+  .band-photo img { height: 180px; }
+}

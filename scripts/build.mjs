@@ -6,7 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { site, footerGroups } from "../lib/site.mjs";
-import { page, outbound, sponsorNote, breadcrumbs, pageHead, badge, srcLink, esc, href, abs } from "../lib/render.mjs";
+import { page as renderPage, outbound, sponsorNote, breadcrumbs, pageHead, badge, srcLink, esc, href, abs } from "../lib/render.mjs";
 import { products, heldProduct, categories, productUrl, sponsoredHref } from "../content/products.mjs";
 import { guides, guideUrl } from "../content/guides.mjs";
 
@@ -24,6 +24,30 @@ const D = {
 
 // Page registry: drives write order, sitemap, and the link checker.
 const written = [];
+
+// ---------------------------------------------------------------- structured data (JSON-LD)
+// One WebSite/Organization graph on every page; guides and products add their
+// own types. No offers, no aggregateRating, no price: nothing here asserts a
+// value the site does not publish (see S04, S05).
+const orgLd = {
+  "@type": "Organization",
+  name: site.brand,
+  url: site.baseUrl + "/",
+  logo: site.baseUrl + "/assets/img/hero-kitchen.jpg",
+  description: site.tagline,
+};
+const webSiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.brand,
+  url: site.baseUrl + "/",
+  description: site.tagline,
+  publisher: orgLd,
+};
+
+function page(o) {
+  return renderPage({ ...o, jsonLd: [webSiteLd, ...(o.jsonLd || [])] });
+}
 function emit(relPath, html) {
   const full = path.join(ROOT, relPath);
   fs.mkdirSync(path.dirname(full), { recursive: true });
@@ -70,7 +94,9 @@ function frontPage() {
         <a class="btn btn-ghost" href="${esc(href("/guides/basket-vs-oven-air-fryer/"))}">Start with the guide</a>
       </div>
     </div>
+    <figure class="hero-photo"><img src="${esc(href("/assets/img/hero-kitchen.jpg"))}" alt="Editorial photograph of a dual-basket air fryer with fresh ingredients on a kitchen counter" width="960" height="640"></figure>
     <aside class="season-card">
+      <figure class="season-photo"><img src="${esc(href("/assets/img/season-holiday.jpg"))}" alt="Editorial photograph of a countertop oven with a sheet-pan dinner in a holiday kitchen" width="640" height="400"></figure>
       <p class="season-label">In season</p>
       <h2>Cooking for a full house?</h2>
       <p>Counter space is the binding constraint in November, not wattage. Three things worth reading before you buy:</p>
@@ -239,6 +265,19 @@ ${categories
     path: "/shop/",
     body,
     current: "shop",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Products on the shelf",
+        itemListElement: products.map((p, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: abs(productUrl(p)),
+          name: p.name,
+        })),
+      },
+    ],
   });
 }
 
@@ -337,6 +376,22 @@ ${breadcrumbs([{ label: "Home", href: "/" }, { label: "Shop", href: "/shop/" }, 
     path: productUrl(p),
     body,
     current: "shop",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: p.name,
+        brand: { "@type": "Brand", name: p.brand },
+        category:
+          p.category === "air-fryers"
+            ? "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers"
+            : "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+        url: abs(productUrl(p)),
+        description: p.oneLine,
+        // No offers and no aggregateRating: prices and ratings are not
+        // published on this site (S04, S05).
+      },
+    ],
   });
 }
 
@@ -392,6 +447,7 @@ ${breadcrumbs([{ label: "Home", href: "/" }, { label: "Guides" }])}
   </div>
 </div>
 <div class="wrap" style="padding:8px 0 20px">
+  <figure class="band-photo"><img src="${esc(href("/assets/img/guides-still-life.jpg"))}" alt="Editorial still life comparing a basket-style air fryer and an oven-style countertop appliance" width="1200" height="480"></figure>
   <div class="guide-list">
     ${guides
       .map(
@@ -418,6 +474,19 @@ ${breadcrumbs([{ label: "Home", href: "/" }, { label: "Guides" }])}
     path: "/guides/",
     body,
     current: "guides",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Buying guides",
+        itemListElement: guides.map((g, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: abs(guideUrl(g)),
+          name: g.question,
+        })),
+      },
+    ],
   });
 }
 
@@ -495,6 +564,38 @@ ${breadcrumbs([{ label: "Home", href: "/" }, { label: "Guides", href: "/guides/"
     path: guideUrl(g),
     body,
     current: "guides",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: g.question,
+        description: g.dek,
+        url: abs(guideUrl(g)),
+        datePublished: "2026-11-20",
+        author: orgLd,
+        publisher: orgLd,
+        mainEntityOfPage: abs(guideUrl(g)),
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: g.question,
+            acceptedAnswer: { "@type": "Answer", text: g.bottomLine || g.dek },
+          },
+          ...g.sections.map((s) => ({
+            "@type": "Question",
+            name: s.heading,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: Array.isArray(s.body) ? s.body[0] : s.body,
+            },
+          })),
+        ],
+      },
+    ],
   });
 }
 
