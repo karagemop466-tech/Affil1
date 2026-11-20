@@ -184,7 +184,7 @@ def render_shell(
   </header>
   <div class="disclosure" role="note" aria-label="Affiliate disclosure">
     <div class="container disclosure-inner">
-      <span><strong>{esc(EXACT_ASSOCIATES_DISCLOSURE)}</strong> Paid links to Amazon are marked <code>rel="sponsored"</code> (selected Tracking ID: <code>shopnow047c-20</code>).</span>
+      <span><strong>{esc(EXACT_ASSOCIATES_DISCLOSURE)}</strong> Paid links to Amazon are marked <code>rel="sponsored"</code>. Selected Tracking ID: <code>shopnow047c-20</code> &mdash; applied only to links the account confirms; none are confirmed yet, so every link here opens the seller's listing untagged.</span>
       <span class="disclosure-meta">
         <a href="{esc(rel_href(rel_page, 'compliance/index.html'))}">Disclosure &amp; API rules</a> ·
         <a href="{esc(rel_href(rel_page, 'flagged/index.html'))}">Flagged for Review</a>

@@ -17,7 +17,7 @@
       "found": "All five submitted codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, B0c8moW59, B0f3GKalj) are 9 characters and contain lowercase letters. All five destinations now resolve, and they carry 10-character uppercase ASINs: B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5 and B0DZFD6R9Z.",
       "impact": "The intended_asin field is null for all five rather than filled with the slug. Filling it with the slug would have been an inference.",
       "reading": "The submitted codes are short-link slugs rather than identifiers. The register records what arrived, and keeps the two fields separate.",
-      "blocks": "nothing — but it explains why one column is empty",
+      "blocks": "nothing \u2014 but it explains why one column is empty",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/agreement",
         "Open each supplied link and compare the /dp/ segment to the code in the link"
@@ -34,7 +34,7 @@
       "blocks": "any claim that the site can currently earn",
       "to_check": [
         "https://affiliate-program.amazon.com/help/operating/policies",
-        "One click from the owner's device, then Reports → Orders in the Associates dashboard"
+        "One click from the owner's device, then Reports \u2192 Orders in the Associates dashboard"
       ]
     },
     {
@@ -53,7 +53,7 @@
     {
       "id": "FLG-004",
       "severity": "high",
-      "title": "P-04 failed three times, then resolved — and later observations disagree on which product it is",
+      "title": "P-04 failed three times, then resolved \u2014 and later observations disagree on which product it is",
       "expected": "One short link resolves consistently to one product page.",
       "found": "https://link.amazon/B0c8moW59 returned Amazon's /checkpoint/continue interstitial on three attempts in an earlier session. On 2026-11-20 it resolved on the first attempt to B0DHZTCNR5, a ThermoMaven digital meat thermometer. A parallel session later reported the same mapping. See FLG-016.",
       "impact": "P-04 has a product page, a category and a tagged buy link to the destination reached here. The identity is labelled as observed-and-disputed, not settled.",
@@ -68,7 +68,7 @@
     {
       "id": "FLG-005",
       "severity": "medium",
-      "title": "No price, rating, review count or stock status — by rule, not by omission",
+      "title": "No price, rating, review count or stock status \u2014 by rule, not by omission",
       "expected": "A shop normally shows price and rating next to each product.",
       "found": "Nothing is shown, because neither permitted data path is connected. Program Policies 2(b) allows price and availability only where Amazon serves the link carrying that data, or where it arrives through Creators API or PA API.",
       "impact": "Buy buttons say what they do and send the reader to Amazon, where the live figure is. No number on this site can go stale.",
@@ -218,7 +218,7 @@
       "severity": "high",
       "title": "P-04 and P-05 were mapped to opposite products by two sessions, then reconciled by later observation",
       "expected": "A short link maps consistently to one listing.",
-      "found": "This session observed P-04 (B0c8moW59) → B0DHZTCNR5 (ThermoMaven) and P-05 (B0f3GKalj) → B0DZFD6R9Z (CHEF iQ Sense). A parallel session recorded the reverse mapping on 2026-11-20. A later fetch by that session reached the same mapping recorded here, and the merged register now agrees with it. Earlier P-04 attempts still reached a checkpoint.",
+      "found": "This session observed P-04 (B0c8moW59) \u2192 B0DHZTCNR5 (ThermoMaven) and P-05 (B0f3GKalj) \u2192 B0DZFD6R9Z (CHEF iQ Sense). A parallel session recorded the reverse mapping on 2026-11-20. A later fetch by that session reached the same mapping recorded here, and the merged register now agrees with it. Earlier P-04 attempts still reached a checkpoint.",
       "impact": "The current register is internally consistent and both product pages carry an identity note because the disagreement existed and neither observation proves intent. The intended product remains unconfirmed until the operator checks SiteStripe.",
       "reading": "Agreement between sessions is corroboration, not proof. Both observations were of the same short link, so a stable redirect is plausible but the intended ASIN is still only knowable from the account.",
       "blocks": "calling either thermometer's identity settled",
@@ -304,7 +304,7 @@
       "severity": "high",
       "title": "The only supported route to price and availability data is gated behind 10 qualifying sales",
       "expected": "A site can decide to add prices once it has a data feed.",
-      "found": "Program Policies §2(b) still names “Creators API or PA API” as the permitted route. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment, at least 10 qualifying sales within the past 30 days, registration through Associates Central, and generated credentials.",
+      "found": "Program Policies \u00a72(b) still names \u201cCreators API or PA API\u201d as the permitted route. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment, at least 10 qualifying sales within the past 30 days, registration through Associates Central, and generated credentials.",
       "reading": "This turns the site's biggest missing feature into a sequencing problem rather than an engineering one. Prices arrive after the site proves it can sell, not before. A separate clause in the same section adds that a comparison-format price display must also show the lowest used price, which is a second reason this site's comparison table keeps its price column empty.",
       "to_check": [
         "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
@@ -381,14 +381,74 @@
       "severity": "medium",
       "title": "The repository's robots.txt sits in a subdirectory of the host, which crawlers are not required to read",
       "expected": "A robots.txt that crawlers consult before indexing the site.",
-      "found": "Google's robots specification states that robots.txt must be placed in the top-level directory of a site and that crawlers don't check for robots.txt files in subdirectories. This site is served from https://karagemop466-tech.github.io/Affil1/, so its robots.txt publishes at /Affil1/robots.txt — a subdirectory — and Google may never fetch it. The file itself is correctly formatted (re-checked against the specification on 2026-11-20) and excludes /archive/, but its reach cannot be guaranteed from inside a project repository.",
+      "found": "Google's robots specification states that robots.txt must be placed in the top-level directory of a site and that crawlers don't check for robots.txt files in subdirectories. This site is served from https://karagemop466-tech.github.io/Affil1/, so its robots.txt publishes at /Affil1/robots.txt \u2014 a subdirectory \u2014 and Google may never fetch it. The file itself is correctly formatted (re-checked against the specification on 2026-11-20) and excludes /archive/, but its reach cannot be guaranteed from inside a project repository.",
       "reading": "Discovery does not depend on it: every generated page carries a self-referencing canonical URL, the sitemap lists only the maintained edition, and internal links are relative and resolved. The step that actually puts the sitemap in front of Google is Search Console submission, which needs the owner's account (Q-11, S-03).",
       "to_check": [
         "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
         "https://karagemop466-tech.github.io/Affil1/robots.txt"
       ],
       "impact": "Discoverability, not correctness. The file is kept correctly formatted for any crawler that does read it; canonicals and the sitemap carry the load if it is ignored.",
-      "blocks": "nothing — but Search Console submission (Q-11 / S-03) is the required discovery step, not an optional one"
+      "blocks": "nothing \u2014 but Search Console submission (Q-11 / S-03) is the required discovery step, not an optional one"
+    },
+    {
+      "id": "FLG-028",
+      "severity": "high",
+      "title": "Two CI steps reported green while testing the wrong directory, and the collector could not import",
+      "expected": "The gates that stand in front of a deploy run this repository's own tests, and any step that collects nothing is a failure.",
+      "found": "Three defects, each reproduced on main at 2934ed0 on 2026-11-20. (1) edition-verify.yml ran 'python3 -m unittest discover -s platform'; the directory has been _platform since the Pages rename, so unittest imported CPython's stdlib platform package and printed 'Ran 45 tests' from test.test_support while running none of the platform suite. (2) kitchen-check.yml ran only 'py_compile' over _analytics/endpoint.py, which does not import at all: it inserts ROOT/'tools' on sys.path and then 'from build import GENERATED', so the module and its test suite both raised ModuleNotFoundError. (3) _tools/arm_links.py reads _src/_data/product-intent.json, which does not exist, so the owner's arming switch died with FileNotFoundError on --status before printing any state.",
+      "impact": "Any release receipt on this board that cites the 'platform unit & HTTP collector tests' step as evidence was citing a step that did not test the platform. Repaired on branch arena/3e17592d-affil1: both steps now target _platform and _analytics, each fails when discovery collects nothing (negative-tested against an empty directory and against the singular 'Ran 1 test' line), and the collector's suite passes. No product observation, confirmation or revenue figure changed.",
+      "reading": "A check that passes on code it never imported is worse than no check, because it gets quoted afterwards as verification. The general rule for the next session: if a command can succeed while collecting zero tests, it is not a gate.",
+      "blocks": "nothing \u2014 repaired here, recorded so earlier receipts can be re-read",
+      "to_check": [
+        "https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions",
+        "https://github.com/karagemop466-tech/Affil1/actions",
+        "python3 -m unittest discover -s _platform -p 'test_*.py' (6 tests) versus -s platform (45 stdlib tests)"
+      ]
+    },
+    {
+      "id": "FLG-029",
+      "severity": "high",
+      "title": "Reader-facing pages asserted a tracking tag that the paid-link gate had withheld",
+      "expected": "A page may not imply that a purchase can be credited to an Associates account while the intent register records no confirmation, and the disclosure has to stay true in both gate states.",
+      "found": "All 10 published guides carried a sidebar sentence reading 'Product links in these guides earn a commission. They are marked sponsored and every one carries the site's Amazon tag', and every product page's fine print read 'Paid link \u00b7 \u2026 \u00b7 tag shopnow047c-20'. The hrefs on those same pages are plain https://www.amazon.com/dp/ listing links with no tag parameter (0 tagged hrefs in the generated tree, measured 2026-11-20), and _src/data/product-intent.json records associate_enrollment_confirmed, site_registered and one_link_test_completed as null. The rel='sponsored' marking claim was true; the attribution claim was not.",
+      "impact": "The guide wording and the product fine print now follow the URL that is actually on the page: an untagged permitted link reads 'Listing source \u00b7 \u2026 \u00b7 this link carries no tracking tag, so nothing here can be credited to an account yet', and the tagged wording becomes available the moment arm_links.py records an approved Special Link. The annex's disclosure line, which printed the tracking ID as though it were applied, was amended in the same pass. The verbatim Associates sentence is untouched on every page.",
+      "reading": "Wording that describes a gate state rather than the current state is a defect that reads like confidence. It was rewritten to be conditional in both directions, not deleted, because the disclosure obligation does not depend on the gate.",
+      "blocks": "nothing \u2014 wording corrected on this branch",
+      "to_check": [
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+        "python3 _tools/arm_links.py --status (now runs; prints 'published state: reference links only')"
+      ]
+    },
+    {
+      "id": "FLG-030",
+      "severity": "medium",
+      "title": "The host was publishing two branded publications of the same five listings, both indexable",
+      "expected": "One site for a search engine to index, with one sitemap, one feed and one set of canonical URLs.",
+      "found": "The generated shop at the repository root (Crisp & Counter, 34 pages) and the Countertop Almanac edition under /edition/ (27 pages) describe the same five listings under different mastheads, each with self-referencing canonical URLs, its own sitemap.xml, its own feed.xml and its own RSS autodiscovery link; the annex also advertised its own sitemap in edition/robots.txt. No crawler rule could have resolved it: a robots.txt file must sit at the root of the host and cannot be placed in a subdirectory, so neither /Affil1/robots.txt nor /Affil1/edition/robots.txt is read at all (see FLG-027), and robots.txt is explicitly not a mechanism for keeping a page out of Google.",
+      "impact": "All 27 annex pages now emit <meta name=\"robots\" content=\"noindex, follow\">, carry a visible 'This is the verification annex' note linking to the shop, and no longer advertise a second sitemap. verify_edition.py asserts the tag, the note and the robots file on every page (2,047 line-by-line checks, up from 1,965) and was negative-tested by stripping the tag and the note from one page. The shop's sitemap was already correct and is unchanged. Open half: whether the annex is eventually folded into the shop's tables or retired (Q-16).",
+      "reading": "Deleting another session's edition would have destroyed reviewable work; pointing a search engine at one of the two is the smaller, reversible act. 'follow' is deliberate: a blocked crawl cannot read the tag that does the work.",
+      "blocks": "nothing \u2014 the annex stays reachable for review",
+      "to_check": [
+        "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+        "https://developers.google.com/crawling/docs/robots-txt/create-robots-txt",
+        "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+      ]
+    },
+    {
+      "id": "FLG-031",
+      "severity": "medium",
+      "title": "Three first-party collectors exist, and one of them can never match the published site",
+      "expected": "One collector with a page allowlist that matches the URLs the site actually publishes.",
+      "found": "_analytics/endpoint.py (imports the build's GENERATED set; broken until this branch, now importing and passing its suite), _measurement/collector.py (reads src/data/product-intent.json, a path that no longer exists, so its approved-link allowlist always resolves to empty, and it validates page names 'probe', 'flagged' and 'desk' from an older URL scheme that the shop does not use) and _platform/collector.py (the annex's own). Nothing in the published pages can be measured by more than one of them, and only the first is exercised by CI.",
+      "impact": "_measurement/ and _platform/collector.py were left untouched: they are other sessions' scopes, so the finding is recorded rather than silently rewritten. The practical consequence today is nil, because no collector is enabled - the client stays inert until CC_ANALYTICS_ENABLED is set by a host that does not exist yet.",
+      "reading": "The click event is now structurally capable of firing, because permitted product links carry data-affiliate-ref whether or not they are tagged (FLG-029's template). Choosing and deploying a collector is a separate owner decision (Q-25, Q-10).",
+      "blocks": "Q-25 (which collector is canonical) blocks any real measurement rollout",
+      "to_check": [
+        "_analytics/endpoint.py and _analytics/test_endpoint.py",
+        "_measurement/collector.py (see its RECORDS path and PAGES set)",
+        "_platform/collector.py"
+      ]
     }
   ]
 }

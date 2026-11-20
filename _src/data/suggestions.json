@@ -2,7 +2,7 @@
   "meta": {
     "purpose": "A decision queue, not a to-do list. Each proposal says what it would change, what it costs, what it risks, and which earlier question has to be answered first. A reviewer can approve a row without reading the whole site.",
     "how_to_use": "Read the 'depends on' column before the 'effort' column. Anything depending on Q-03 or Q-10 cannot be approved first, because approving it would spend effort on traffic that earns nothing.",
-    "recommended_first": "S-01 and S-07. One confirms the site can earn; the other makes it findable. Neither needs new content.",
+    "recommended_first": "S-01 and S-07 still come first: one confirms the site can earn, the other makes it findable. S-24 to S-27 are the follow-on set added on 2026-11-20; S-22, S-23 and S-24 are already implemented and are kept here so a reviewer can reject them in writing.",
     "implemented_note": "Rows marked implemented were completed on 2026-11-20 and are kept visible with the evidence, so the record of what changed is not just a changelog nobody reads."
   },
   "paths": [
@@ -68,8 +68,8 @@
     {
       "id": "S-04",
       "status": "open",
-      "title": "Apply for the Creators API — knowing it is gated behind 10 qualifying sales",
-      "why": "Program Policies §2(b) permits price and availability only where Amazon serves the data or it arrives through the Creators API or PA API. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment plus at least 10 qualifying sales within the past 30 days. The policy text still names both APIs, so following the policy alone would aim at a route that no longer answers.",
+      "title": "Apply for the Creators API \u2014 knowing it is gated behind 10 qualifying sales",
+      "why": "Program Policies \u00a72(b) permits price and availability only where Amazon serves the data or it arrives through the Creators API or PA API. Amazon's own documentation now records PA-API 5 as deprecated and returning 403 AccessDeniedException, and lists the Creators API prerequisites as Associates enrolment plus at least 10 qualifying sales within the past 30 days. The policy text still names both APIs, so following the policy alone would aim at a route that no longer answers.",
       "effort": "an application, plus qualifying sales on most accounts",
       "risk": "Low, but the sequence is not negotiable: live prices arrive after the site proves it can sell, not before. A separate clause also requires a comparison-format price display to show the lowest used price as well as the lowest new, which is a second reason the comparison table stays blank.",
       "depends_on": "S-01, and the 10-qualifying-sales threshold",
@@ -104,7 +104,7 @@
       "status": "open",
       "title": "Do not commission more guides until S-03 or S-05 lands",
       "why": "Eight guides already cover the decision space honestly. A ninth written from another hypothesis adds volume, not value, and raises the chance the whole publication is treated as one undifferentiated block.",
-      "effort": "none — it is a decision not to act",
+      "effort": "none \u2014 it is a decision not to act",
       "risk": "None. It is reversible the moment data arrives.",
       "depends_on": "nothing",
       "recommendation": "The least popular and most important item here",
@@ -229,7 +229,7 @@
       "id": "S-18",
       "status": "implemented",
       "title": "Give the front page a seasonal feature and a reader channel",
-      "why": "A publication has a current issue. The hosting guide is featured on the front page, and RSS is offered as the way to come back — since no mailing list exists.",
+      "why": "A publication has a current issue. The hosting guide is featured on the front page, and RSS is offered as the way to come back \u2014 since no mailing list exists.",
       "effort": "done",
       "risk": "None. The RSS block says plainly that there is no mailing list.",
       "depends_on": "nothing",
@@ -241,7 +241,7 @@
       "id": "S-19",
       "status": "open",
       "title": "Request sub-tag Associate IDs so attribution comes from Amazon's own report",
-      "why": "Program Policies §2(b) allows Amazon to issue additional sub-tag Associate IDs on request so an Associate can “monitor and optimize the performance” of different links. A sub-tag per page turns “which guide earns?” into a question Amazon's own report answers, which is far stronger evidence than anything a first-party counter can produce. The same clause forbids tying a sub-tag to an identified visitor, which this site does not do.",
+      "why": "Program Policies \u00a72(b) allows Amazon to issue additional sub-tag Associate IDs on request so an Associate can \u201cmonitor and optimize the performance\u201d of different links. A sub-tag per page turns \u201cwhich guide earns?\u201d into a question Amazon's own report answers, which is far stronger evidence than anything a first-party counter can produce. The same clause forbids tying a sub-tag to an identified visitor, which this site does not do.",
       "effort": "a support request, then a small change to how each page builds its outbound links",
       "risk": "Low. Sub-tags are subject to Amazon's approval, so the answer may be no, and nothing else on the site depends on it. It complements S-01 rather than replacing it: S-01 proves a click is credited at all, sub-tags say which page earned it.",
       "depends_on": "S-01",
@@ -264,11 +264,77 @@
       "status": "open",
       "title": "Do not buy paid search, and do not use Amazon marks in any promotion",
       "why": "Program Policies prohibit purchasing, registering or using any Amazon Mark in a search engine, disqualify purchases arriving through a paid search placement, and state that Associates must not use their tags to claim commissions from another programme on the same traffic. The site also has no measurement that could attribute a click, so paid acquisition would spend money that cannot be accounted for.",
-      "effort": "zero — this is a decision not to spend",
+      "effort": "zero \u2014 this is a decision not to spend",
       "risk": "None from complying. The risk is entirely in ignoring it, and it falls on the account rather than on a page.",
       "depends_on": "nothing",
       "recommendation": "Adopt as policy and leave it on this page as a recorded refusal",
       "evidence": "SRC-02"
+    },
+    {
+      "id": "S-22",
+      "status": "implemented",
+      "title": "Publish three guides whose only facts are a government page and the seller's own title",
+      "why": "The journal had ten decision guides and no article answering the questions a buyer types at the moment of doubt: is this chicken done, is my thermometer lying, what do I do with the food that sat out. Each of the three new guides is anchored to an official page read on 2026-11-20, so the site can be useful without inventing a test result it does not have.",
+      "effort": "one session: three articles, three commissioned illustrations, sitemap, feed and internal links regenerated by the existing build",
+      "risk": "Health-adjacent copy next to buy buttons. Contained by quoting rather than advising, linking every figure, and stating on each page that nothing was tested. Q-26 asks the owner to accept or narrow the rule.",
+      "depends_on": "nothing",
+      "recommendation": "Keep. Extend the same sourcing rule to every future guide.",
+      "evidence": "SRC-09, SRC-18 \u00b7 guides/air-fryer-chicken-done.html, guides/thermometer-ice-water-check.html, guides/leftovers-two-hour-rule.html"
+    },
+    {
+      "id": "S-23",
+      "status": "implemented",
+      "title": "Make the second edition a non-indexed annex instead of deleting it",
+      "why": "Two branded publications of the same five listings were both indexable on one host, which is the one thing a small site cannot afford. The annex also holds registers another session wrote, so deleting it would have destroyed reviewable evidence to solve a routing problem.",
+      "effort": "one template change in the annex generator, plus three assertions added to its verifier",
+      "risk": "noindex means the annex pages will leave the results within days. They stay reachable by URL and from the shop's review pages, so nothing is lost to a reviewer.",
+      "depends_on": "Q-16 for the longer-term choice",
+      "recommendation": "Keep, then decide fold-or-retire on Q-16 rather than leaving two brands indefinitely.",
+      "evidence": "SRC-19, SRC-20 \u00b7 FLG-030"
+    },
+    {
+      "id": "S-24",
+      "status": "implemented",
+      "title": "Make every CI gate fail when it tests nothing",
+      "why": "The pipeline's own evidence was inflated: a step that discovered CPython's stdlib tests reported 45 passes while running none of this repository's platform tests, and another checked a collector's syntax while the module could not import. Both are fixed, and each step now fails if discovery is empty - a state that previously read as success.",
+      "effort": "two workflow edits, negative-tested locally",
+      "risk": "A previously silent step can now fail a build. That is the point; it has been run green locally first.",
+      "depends_on": "nothing",
+      "recommendation": "Keep. Apply the same rule to any future step that counts tests rather than asserting names.",
+      "evidence": "FLG-028 \u00b7 .github/workflows/edition-verify.yml, .github/workflows/kitchen-check.yml"
+    },
+    {
+      "id": "S-25",
+      "status": "open",
+      "title": "Publish one question-shaped guide a week under the same sourcing rule",
+      "why": "Thirteen guides is enough to be read as a publication and too few to be read as an authority. The topic bank on suggestions/design.html already ranks candidate questions; a cadence turns it into a habit, and the measured queries (once Q-11 and Q-15 land) decide the order rather than instinct.",
+      "effort": "one article a week: a guide that either quotes an official page or restricts itself to the seller's listing wording",
+      "risk": "Cadence without a source rule is how this repository got its first flagged register. If a week has no citable answer, the week is skipped and the gap is recorded.",
+      "depends_on": "Q-26 (health-adjacent rule) and Q-27 (refresh rule)",
+      "recommendation": "Adopt, starting with the two remaining topic-bank questions that need no new sourcing: reheating without a microwave, and what a dehydrate setting claims.",
+      "evidence": "SRC-08, SRC-09 \u00b7 suggestions/design.html"
+    },
+    {
+      "id": "S-26",
+      "status": "open",
+      "title": "Collapse the three collectors to one before any measurement is promised",
+      "why": "The brief asks for click and conversion measurement first, and the repository currently holds three collectors with three different page vocabularies, one of which reads a register path that no longer exists and therefore fails closed forever. Publishing a dashboard on top of that would produce numbers no one can trace.",
+      "effort": "one decision, two files archived, the surviving one wired to the client and to the ledger importer",
+      "risk": "Choosing wrong costs a refactor; choosing nothing costs the ability to answer which page earns.",
+      "depends_on": "Q-25, Q-10",
+      "recommendation": "Decide Q-25 first, then delete or archive the rest with a note explaining which session wrote them.",
+      "evidence": "FLG-031 \u00b7 _analytics/, _measurement/, _platform/collector.py"
+    },
+    {
+      "id": "S-27",
+      "status": "open",
+      "title": "Run the ice-water check on the two linked thermometers and publish the result",
+      "why": "Every page on this site can only quote. One thermometer, one glass of ice water and a thermometer you already own would produce the first observation this publication could call its own, and the FSIS procedure for it is documented, cheap and reversible - it asks nothing of an account, a host or an API.",
+      "effort": "one afternoon and the cost of a fold-out dial thermometer for comparison; no equipment the kitchen does not have",
+      "risk": "The result describes one unit of one listing, so it must be published as a dated observation about an object, not a verdict about a product line. Amazon's policies bar misleading claims about a Product; a single unit's reading is not evidence about the model.",
+      "depends_on": "Q-24 (the same budget question, one tier down)",
+      "recommendation": "Cheaper and faster than S-05's full appliance purchase; worth doing as the pilot for any self-test policy.",
+      "evidence": "SRC-09 \u00b7 questions/index.html#Q-24"
     }
   ]
 }

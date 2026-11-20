@@ -103,6 +103,33 @@
       "depicts_a_real_product": false,
       "used_on": "Guides: meal-prep-sunday",
       "rules_met": "No brand mark. No price or spec implied. Labelled as illustration where it appears."
+    },
+    {
+      "file": "guide-chicken-done",
+      "alt": "Roast chicken thighs on a pale board with a digital thermometer probe inserted sideways into the thickest piece",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation, prompted for an unbranded basket fryer and a plain probe with a blank display",
+      "depicts_a_real_product": false,
+      "used_on": "The chicken-doneness guide (hero and index card) and the front page journal strip",
+      "rules_met": "No brand mark. The display is deliberately blank, so no reading is invented. Captioned as an illustration on every use, and the caption says it is not a record of a test."
+    },
+    {
+      "file": "guide-ice-water-check",
+      "alt": "A digital instant-read thermometer standing in a tall glass of ice water on a wooden counter",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation",
+      "depicts_a_real_product": false,
+      "used_on": "The thermometer calibration guide (hero and index card)",
+      "rules_met": "Shows a generic fold-out instrument, not P-04 or P-05. No digits on the display. Caption names it as an illustration."
+    },
+    {
+      "file": "guide-leftovers",
+      "alt": "Leftover roast chicken and potatoes being divided into two shallow glass containers on a kitchen counter",
+      "generated_on": "2026-11-20",
+      "generated_by": "AI image generation",
+      "depicts_a_real_product": false,
+      "used_on": "The two-hour-rule guide (hero and index card) and the front page seasonal band",
+      "rules_met": "The appliance in the background is unbranded and out of focus; the shallow containers illustrate the quoted guidance rather than a product feature."
     }
   ],
   "rejected": [
