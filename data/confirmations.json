@@ -81,5 +81,6 @@
     "Three of five submitted short links did not resolve to an official Amazon product page (homepage or checkpoint).",
     "For verified links, the observed redirect target ASIN differs from the short-link slug (intended ASIN). Fields are intentionally kept separate.",
     "Prices, ratings, review counts and commission rates are left blank: they were not confirmed from an official source and must not be inferred."
-  ]
+  ],
+  "$comment": "SUPERSEDED 2026-11-20 by data/product-intent.json (canonical product-intent confirmation record). This legacy record is kept as history and differs from the canonical register in three ways: (1) it calls two rows 'verified' where the canonical register says observed_only; (2) it copies the observed redirect target into official_listing_url, merging what the canonical register keeps separate; (3) its observations for conf-003 and conf-005 (homepage) were contradicted by later fetches the same day that resolved product pages (see product-intent.json observation_log obs-1/obs-2 and FLG-009). Do not use this file as a source of status. Intent remains unconfirmed for all five links."
 }

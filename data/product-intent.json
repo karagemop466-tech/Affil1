@@ -89,5 +89,49 @@
       "status": "observed_only",
       "flag": "FLG-003"
     }
+  ],
+  "observation_log": [
+    {
+      "obs_id": "obs-0",
+      "observed_by": "session-arena-f10ea853",
+      "observed_on": "2026-11-20",
+      "method": "Automated fetch of each submitted short link against Amazon.com official site; final URL recorded.",
+      "results": {
+        "https://link.amazon/B04G1MEwY": "https://www.amazon.com/dp/B0CDY277D3",
+        "https://link.amazon/B02NbDxp3": "https://www.amazon.com/dp/B09B7SB46R",
+        "https://link.amazon/B00hJ57DV": "https://www.amazon.com/ (homepage; no product page)",
+        "https://link.amazon/B0c8moW59": "https://www.amazon.com/checkpoint/continue (interstitial)",
+        "https://link.amazon/B0f3GKalj": "https://www.amazon.com/ (homepage; no product page)"
+      },
+      "note": "First pass. P3 and P5 landed on the Amazon homepage rather than product pages."
+    },
+    {
+      "obs_id": "obs-1",
+      "observed_by": "session building this register (PR #15 tree)",
+      "observed_at": "2026-11-20T05:20:00Z–05:24:00Z",
+      "method": "Automated fetch of the short link; final URL and page title recorded. Same method as obs-0.",
+      "results": {
+        "https://link.amazon/B04G1MEwY": "https://www.amazon.com/dp/B0CDY277D3",
+        "https://link.amazon/B02NbDxp3": "https://www.amazon.com/dp/B09B7SB46R",
+        "https://link.amazon/B00hJ57DV": "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://link.amazon/B0c8moW59": "https://www.amazon.com/checkpoint/continue (interstitial)",
+        "https://link.amazon/B0f3GKalj": "https://www.amazon.com/dp/B0DZFD6R9Z"
+      },
+      "note": "P3 and P5 now resolved to product pages; P4 returned the continue-shopping interstitial again."
+    },
+    {
+      "obs_id": "obs-2",
+      "observed_by": "session-arena-83e015f6 (independent pass)",
+      "observed_at": "2026-11-20T05:18:00Z–05:22:00Z",
+      "method": "Independent automated fetch of each short link; destination page titles read from Amazon.com official site.",
+      "results": {
+        "https://link.amazon/B04G1MEwY": "https://www.amazon.com/dp/B0CDY277D3 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven)",
+        "https://link.amazon/B02NbDxp3": "https://www.amazon.com/dp/B09B7SB46R (Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven)",
+        "https://link.amazon/B00hJ57DV": "https://www.amazon.com/dp/B08DKYBTPH (Chefman Air Fryer 8 Qt TurboFry)",
+        "https://link.amazon/B0c8moW59": "https://www.amazon.com/checkpoint/continue (interstitial)",
+        "https://link.amazon/B0f3GKalj": "https://www.amazon.com/dp/B0DZFD6R9Z (CHEF iQ Sense wireless meat thermometer)"
+      },
+      "note": "Confirms obs-1 exactly, including the P4 interstitial. Combined with obs-0, shows short-link resolution is not stable across fetches (see FLG-009). Observations remain evidence only; intended_asin stays null."
+    }
   ]
 }

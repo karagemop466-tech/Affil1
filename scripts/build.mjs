@@ -1177,6 +1177,26 @@ function flaggedPage() {
       action: "Add a scheduled workflow that fetches each outbound url weekly and opens an issue on failure.",
       source: "/records/compliance/",
     },
+    {
+      id: "FLG-009",
+      title: "Short-link resolution is not stable across fetches",
+      severity: "Open — observation variance",
+      what: "Three fetch passes over the same five short links on the same day produced different destinations. Two passes (obs-1, obs-2 in data/product-intent.json) resolved B00hJ57DV to /dp/B08DKYBTPH and B0f3GKalj to /dp/B0DZFD6R9Z; an earlier pass (obs-0) saw both land on the Amazon homepage. B0c8moW59 has only ever returned the continue-shopping interstitial. Amazon appears to gate short-link redirects behind bot checks, so any single observation is point-in-time evidence, not a guarantee.",
+      impact: "Observed redirect targets must stay observations (never promoted to intended ASINs), and a destination that resolved once may not resolve for every reader. The shop's published outbound links therefore use canonical /dp/ URLs with the tag, not the short links.",
+      evidence: "data/product-intent.json observation_log: obs-0 vs obs-1 and obs-2, all 2026-11-20, all against Amazon.com official site.",
+      action: "Re-run the observation pass from the enrolled Associates workflow (one link per product, destination plus tracking report confirmed) before scaling. Do not assert the short links are invalid — see FLG-003.",
+      source: "/records/product-intent/",
+    },
+    {
+      id: "FLG-010",
+      title: "Legacy data registers were contradictory and have been reconciled, not deleted",
+      severity: "Resolved — records preserved",
+      what: "Parallel sessions left three product registers that disagreed: data/product-intent.json (observed-only, fields separate), data/confirmations.json (called two rows 'verified' and merged observation into the listing-url field), and data/products.json (called everything unverified and claimed the build environment could not reach Amazon). The registers also used different status vocabularies.",
+      impact: "A reader of the raw data could have drawn three different conclusions about the same five links. The published pages render only from the canonical register.",
+      evidence: "data/confirmations.json rows conf-001..005; data/products.json meta.note; data/product-intent.json field_rules.",
+      action: "None required. data/product-intent.json is canonical; the other two carry supersession notes and are kept as history. Owners should treat 'observed_only' as the standing status until intent is confirmed in Associates Central.",
+      source: "/records/product-intent/",
+    },
   ];
 
   const body = `
