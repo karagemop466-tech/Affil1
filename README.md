@@ -4,7 +4,7 @@ One site, one brand, one stylesheet. Question-led buying guides for air fryers a
 countertop cooking appliances, a shortlist assembled from links that were actually
 resolved by hand, and a public register of everything that could not be confirmed.
 
-**Live:** https://karagemop466-tech.github.io/Affil1/
+**Live:** https://karagemop466-tech.github.io/Affil1/  ·  **33 pages**
 **Associates tracking ID supplied by the owner:** `shopnow047c-20` (enrolment and
 attribution are **not** verified — see [Open questions](#open-questions-and-blockers))
 **Prepared:** 2026-11-20 by session `arena/359baa16-affil1` (integration pass)
@@ -62,7 +62,17 @@ python3 -m http.server 8207 --bind 0.0.0.0   # preview; open /Affil1/ after link
 Deploy is automatic: pushing to `main` runs
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which rebuilds, runs
 the gate, fails if the committed HTML differs from the build, resolves every
-reference at the Pages project mount, and only then publishes the artifact. A weekly
+reference at the Pages project mount, and uploads the artifact.
+
+**That workflow is not currently what serves the site.** The repository's Pages
+settings report `build_type: legacy` with `source.path: "/"`, so GitHub publishes the
+repository root directly and the staged artifact is never used. This was confirmed on
+2026-11-20 by fetching `https://karagemop466-tech.github.io/Affil1/tools/build.py` and
+`.../archive/notes-edition/index.html` — both resolve publicly. The effect is that the
+live host serves the build scripts, the data registers and five retired storefronts.
+The fix is one setting (Settings → Pages → Source: GitHub Actions), and it is logged as
+OFF-02 on [/offers/](https://karagemop466-tech.github.io/Affil1/offers/). The text
+above describes the workflow; it does not describe the current deployment. A weekly
 audit (`weekly-audit.yml`) re-runs the same gate against a live snapshot so a page
 cannot quietly fall out of compliance.
 
