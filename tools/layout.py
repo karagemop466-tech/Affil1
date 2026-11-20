@@ -148,6 +148,7 @@ def footer(page_dir):
     <p class="foot-disclosure">{DISCLOSURE}</p>
     <div class="foot-grid">{"".join(groups)}</div>
     <div class="foot-bottom">
+<div class="foot-meta" role="note"><p><strong>Destination update:</strong> Checks of P-04 and P-05 produced differing destinations. Product records are observations, not confirmed intended destinations. <a href="{esc(rel(page_dir, 'review/index.html'))}#FLG-016">See the review flag and sources</a>.</p></div>
       <p>Submitted tracking ID: <code>{esc(TRACKING_ID)}</code> &mdash; supplied by the operator, attribution not independently confirmed.</p>
       <p class="foot-meta">{esc(SITE_NAME)} &middot; static site &middot; last built {esc(BUILD_DATE)} &middot; self-hosted assets · no analytics cookies</p>
     </div>
@@ -195,6 +196,7 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 {masthead(page_dir, active)}
 {disclosure_strip(page_dir)}
 <main id="main">
+
 {body}
 </main>
 {footer(page_dir)}

@@ -190,9 +190,30 @@ Verification (S-8206a8d0, 2026-11-20, via fetch_page against amazon.com official
 - CI on PR: Build, check and deploy — build pass (6s), deploy skipped (PR). On main: build success (27s), pages build success (34s). Pages latest build status: built.
 - Live: https://karagemop466-tech.github.io/Affil1/ (Crisp & Counter front page) and https://karagemop466-tech.github.io/Affil1/crisp/ (parallel edition).
 - Rebase onto PR #22 logged above; no session's work discarded. Follow-up for integration session: wire `guides/meal-prep-sunday.html`, `guides/small-kitchen-counter.html`, `guides/thermometer-pairing.html` into generated sitemap/feed (requires extending `tools/content.py` GUIDES in the PR #22 build).
+## Integration follow-up — 2026-11-20
 
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Audit and reconcile live editions, correct broken links and disclosure gaps, document differing redirect observations and broaden checks | in progress | arena/c9fc4295-affil1 | COORDINATION.md, root legacy HTML, src/data/, tools/, generated site output and workflow |
+
+The initial shallow checkout made the ancestor appear unrelated and caused a rebase conflict; after fetching complete history, main fast-forwarded without discarding either edition. Main advanced again during this work; rebase conflicts were resolved by retaining the newer session files and reapplying the observation flag and relevant independent fixes. The generated and legacy pages will be checked separately. Account-gated attribution and measurement remain unverified.
+
+### Follow-up audit results
+
+- Another session reported the opposite P-04/P-05 mapping; these observations conflict with our page-fetch on 2026-11-20: [P-04](https://link.amazon/B0c8moW59) reached [B0DZFD6R9Z](https://www.amazon.com/dp/B0DZFD6R9Z), while [P-05](https://link.amazon/B0f3GKalj) reached [B0DHZTCNR5](https://www.amazon.com/dp/B0DHZTCNR5). Prior results remain historical, not confirmation of intent. Published as FLG-016; intended ASINs and tracking remain unconfirmed. Account verification is still needed.
+- Fixed root guide paths and legacy links to retired files, added no-script disclosure fallbacks, added `sponsored` to four legacy product citations, and corrected an unsupported dishwasher-safe statement about P-02. Official listing: https://www.amazon.com/dp/B09B7SB46R. Added a sitewide destination warning and FLG-017 for conflicting legacy editions.
+- `python3 tools/build.py`, `python3 tools/check.py` (22 generated pages, 0 errors), and `python3 tools/check_local_links.py` (65 served HTML files, 0 broken relative file references) pass. The new check does not verify anchors or external URLs. The older `tools/validate.py` fails because the newer product schema is incompatible; this needs reconciliation, not a claim of success.
+- Analytics remains disabled, Search Console and Associates reporting are not connected, and no product-intent, conversion, price or commission data has been invented. Older editions remain inconsistent; consolidation and complete line-by-line verification remain **needs review**, not complete.
+
+### PR and deployment result — arena/c9fc4295-affil1
+
+- [PR #27](https://github.com/karagemop466-tech/Affil1/pull/27) merged as `92a3509c9a56bbd6aa01eef8d7ae0afbb4ab7f06`; the PR build and link checks passed.
+- GitHub Pages [deployment run 44682421711](https://github.com/karagemop466-tech/Affil1/actions/runs/44682421711) succeeded; the Pages API reported `built` for that merge commit.
+- Audit and link repairs: done. Full legacy-edition reconciliation, product intent, tracking attribution, and live analytics: **needs review** as detailed in FLG-016/017 and the measurement page. The older crisp-specific validator remains incompatible with the current data schema.
 ## arena/ae991ca9-affil1 · final integration
 
 In progress — publication design, canonical deployment, measurement, editorial review and generated pages. Scope: tools/, assets/, src/, generated pages/feed/sitemap, .github/workflows/, server/, documentation. No active claim above.
 
 Integration note: main advanced via #23 and #26. Kept the five-product official register, reader questions, seasonal articles, staged release and legacy deployment detection; reconciled conflicting homepage/navigation templates and rebuilt their generated HTML rather than merging markup. Earlier P-04 interstitial is historical: this session independently opened all five supplied links and saw the five official listing titles, including ThermoMaven B0DHZTCNR5. No attribution report was available.
+
+Integrated #27/#28: retained FLG-016 and the competing dated P-04/P-05 observations (not evidence of intent); moved its sitewide notice to the footer and retained product-level review links. Retained the all-editions link check and corrected guide claims. Rebuilt overlapping generated pages from reconciled templates. A plain pull --rebase attempted to flatten the integration merge; it was aborted without changing any work. Subsequent pulls preserve merges.
