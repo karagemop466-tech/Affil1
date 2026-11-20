@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Measurement plan — Crisp & Counter</title>
-<meta name="description" content="The five events this site would record, the collector that is written but switched off, and the four things that must exist before any of it is switched on.">
+<title>Measurement — Crisp & Counter</title>
+<meta name="description" content="The five events this site records, the self-hosted collector that is written and tested but not deployed, and the four steps that would switch it on.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/review/measurement.html">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="../feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Crisp &amp; Counter">
-<meta property="og:title" content="Measurement plan — Crisp &amp; Counter">
-<meta property="og:description" content="The five events this site would record, the collector that is written but switched off, and the four things that must exist before any of it is switched on.">
+<meta property="og:title" content="Measurement — Crisp &amp; Counter">
+<meta property="og:description" content="The five events this site records, the self-hosted collector that is written and tested but not deployed, and the four steps that would switch it on.">
 <meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/review/measurement.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="../assets/fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -41,30 +41,35 @@
 </div>
 <main id="main">
 <header class="pagehead"><div class="wrap">
-  <p class="eyebrow">Measurement plan</p>
-  <h1>Measurement is written,<br>and switched off</h1>
-  <p class="dek">Five events are defined, a client exists, and nothing is being recorded. That is the current state and it is deliberate.</p>
-  <p class="page-meta">Beacon disabled by default &middot; no cookies &middot; no third-party requests &middot; no endpoint deployed</p>
+  <p class="eyebrow">Measurement</p>
+  <h1>Five events,<br>and a collector that is off</h1>
+  <p class="dek">The client is written, the collector is written and tested, and neither is switched on. That is the state, and this page explains why it is the right one until an endpoint is deployed.</p>
+  <p class="page-meta">Beacon disabled by default &middot; no cookies &middot; honouring GPC and DNT &middot; no third-party requests</p>
 </div></header>
 <section class="section "><div class="wrap">
 <div class="lede-prose">
-  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint. Both exist in this repository. Neither is live, because shipping a live beacon before a privacy notice exists would be the wrong order of operations.</p>
-  <p>The client writes to <code class="code">sessionStorage</code> to keep one page view from being counted twice in a single tab, and sends nothing. It has no cookie, sets no identifier that persists across days, and contacts no third party. It is switched on by setting one flag on the page, and switching it on without an endpoint and a notice would be a mistake.</p>
+  <p>The brief asked for a privacy-preserving outbound-click counter and a self-hosted analytics endpoint, and for click and conversion measurement to exist before more writing. All three exist in this repository. The first two are live in code; the third is not live on the internet, because GitHub Pages serves static files and nothing else.</p>
+  <p>What that means in plain terms: the site currently knows nothing about its readers. It has no sessions, no clicks, no conversion rate and no revenue. Those numbers are absent, not estimated.</p>
 </div>
-<h2>What would be measured</h2>
-<div class="table-scroll"><table class="events"><thead><tr><th scope="col">Event</th><th scope="col">Fires when</th><th scope="col">What is stored</th></tr></thead><tbody><tr><td><code class="code">page_view</code></td><td>Every page load</td><td>Counts a visit. Stores the path only, never a query string, so nothing typed into a URL is kept.</td></tr><tr><td><code class="code">outbound_click</code></td><td>Any click on an Amazon link</td><td>Records which product reference was clicked and the page it was clicked from. This is the number that matters for this site.</td></tr><tr><td><code class="code">guide_open</code></td><td>Opening a guide from the index</td><td>Separates readers who arrive on a product page from those who arrive to read, which changes what the next guide should be.</td></tr><tr><td><code class="code">search_query_referral</code></td><td>Arrival from a search engine</td><td>Records that a referral happened and the referring host, not the query. Search Console supplies queries; this does not try to reconstruct them.</td></tr><tr><td><code class="code">report_import</code></td><td>A manual import of an Associates report</td><td>A dated record that a first-party report was added to the ledger, with its provenance. Never an automated scrape.</td></tr></tbody></table></div>
+<h2>What each event answers</h2>
+<div class="table-scroll"><table class="events"><thead><tr><th scope="col">Event</th><th scope="col">Fires when</th><th scope="col">What it is for, and what it is not</th></tr></thead><tbody><tr><td><code class="code">page_view</code></td><td>Every page render</td><td>Counts a visit. Stores the path with the query string stripped, so nothing typed into a URL is kept.</td></tr><tr><td><code class="code">outbound_product_click</code></td><td>Any click on an Amazon link</td><td>Records which ASIN was clicked and the page it was clicked from. This is the number that matters for this site, and it is still not a sale.</td></tr><tr><td><code class="code">guide_read_75</code></td><td>A reader reaches 75% of a guide&amp;#x27;s height</td><td>Separates readers who arrive to read from those who bounce. Crude: it measures scroll, not comprehension.</td></tr><tr><td><code class="code">compare_view</code></td><td>The comparison page renders</td><td>Tests whether readers want side-by-side data more than prose. That answer decides what the next page should be.</td></tr><tr><td><code class="code">flag_page_view</code></td><td>The review queue is opened</td><td>Shows whether the verification work is actually consulted, or whether it is furniture.</td></tr></tbody></table></div>
+<h2 style="margin-top:2.4rem">What is collected, precisely</h2>
+<p>Four fields per event: the event name, the page path with the query string removed, the product ASIN for a click, and the date. That is the complete list. The client sets no cookie, writes nothing to local storage, and sends nothing if Global Privacy Control or Do Not Track is present.</p>
+<p>The collector in <code class="code">analytics/collect.py</code> does not read the client address, does not read the user agent, does not read the referer header, and rejects any field not on that list. It stores an integer count per day, per event, per path. There is no per-visitor record to retain, breach or join to anything else.</p>
+<h2 style="margin-top:2.4rem">Why conversions are not an event</h2>
+<p>A browser cannot see what happens after a click leaves for Amazon. Any site claiming to measure conversions from its own beacon is either guessing or describing Amazon's report. Reported orders, when they exist, will come from the Associates report and will be entered in the <a href="../operations/ledger.html">campaign ledger</a> with a date and a provenance note.</p>
 <h2 style="margin-top:2.4rem">What has to happen before it goes live</h2>
 <ol class="tight">
-  <li><strong>A privacy notice.</strong> What is collected, why, for how long, and who to contact. This does not exist yet.</li>
-  <li><strong>A deployed collector.</strong> The endpoint is in this repository and is not hosted anywhere. GitHub Pages serves static files only.</li>
-  <li><strong>A retention decision.</strong> Raw event rows have a half-life; the ledger does not. A retention period has to be chosen, not defaulted.</li>
-  <li><strong>A consent decision.</strong> Whether visitor consent is required depends on jurisdiction and on what is collected. That is a legal question, not an engineering one, and it has not been answered.</li>
+  <li><strong>Deploy the collector somewhere that can run a process.</strong> A container, a small VPS or a serverless function all work. GitHub Pages cannot host it.</li>
+  <li><strong>Set one line.</strong> <code class="code">window.CC_ANALYTICS_ENDPOINT</code> in the page shell in <code class="code">tools/layout.py</code>, then rebuild. That is the entire integration.</li>
+  <li><strong>Publish the privacy notice.</strong> It exists at <a href="../privacy.html">/privacy.html</a> and describes exactly these four fields.</li>
+  <li><strong>Send one test event and read it back.</strong> The collector exposes an aggregate summary endpoint so the check is a number, not a hope.</li>
 </ol>
-<h2 style="margin-top:2.4rem">Why the site currently claims nothing about traffic</h2>
-<p>Every traffic statement on this site is an absence: no sessions, no clicks, no conversions, no revenue. That is not modesty. With the beacon off, the site genuinely has no numbers, and inventing plausible ones would be the single fastest way to make everything else on the site untrustworthy.</p>
+<h2 style="margin-top:2.4rem">The order that actually works</h2>
+<p>Tag the links, confirm one click in the Associates report, then measure. This site's links are now tagged and enforced by the build; the confirmation inside the account is still outstanding and is recorded as FLG-002. Measuring traffic before that confirmation would produce a chart of people arriving at a door that may not open.</p>
 <div class="callout">
   <h2>What the campaign ledger holds</h2>
-  <p>Nothing. It has a defined schema &mdash; date, source, channel, eligible sessions, clicks, reported orders &mdash; and every row has to arrive with a provenance note. <a href="../operations/ledger.html">See the empty ledger</a>.</p>
+  <p>Nothing. It has a defined schema and a provenance rule, and no rows, because no authorised report has been supplied. <a href="../operations/ledger.html">See the empty ledger</a>.</p>
 </div></div></section>
 </main>
 <footer class="site-footer">
@@ -78,6 +83,11 @@
   </div>
 </footer>
 <script src="../assets/js/site.js" defer></script>
+<script>
+  /* Off by default. Set this to a self-hosted collector to switch the five
+     events on. Leaving it empty is the current, deliberate state. */
+  window.CC_ANALYTICS_ENDPOINT = "";
+</script>
 <script src="../assets/js/analytics.js" defer></script>
 </body>
 </html>

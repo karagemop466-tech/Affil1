@@ -153,74 +153,86 @@ def build_ledger(page_dir, meta):
 
 
 def build_brief(page_dir, products, questions, flags, meta):
+    from content import GUIDES
     d = page_dir
     n_q = len(questions["questions"])
     n_open = sum(1 for q in questions["questions"] if not q.get("answered"))
     n_high = sum(1 for f in flags["flags"] if f["severity"] == "high")
+    n_prod = len(products)
     body = f"""{pagehead(
         'Executive summary',
         'The short version,<br>for someone with four minutes',
-        'What exists, what was verified, what could not be, and what the next decision is.',
-        meta='Written 20 November 2026 &middot; 1,600 words shorter than it could have been',
+        'What exists, what was verified against an official source, what could not be, and what the next decision is. No forecasts, no revenue figures, no estimates.',
+        meta='Written 20 November 2026 &middot; %d products &middot; %d guides &middot; %d questions' % (n_prod, len(GUIDES), n_q),
     )}
 {section(f'''
 <div class="exec">
   <div class="exec-block">
     <h2>What was asked for</h2>
-    <p>An Amazon affiliate publication covering five supplied links: product research, comparison content, buying guides, click measurement and a compliant disclosure layer, built as a live GitHub Pages site and merged without further input.</p>
+    <p>An Amazon affiliate publication around five supplied product links: research, comparison content, buying guides, click measurement, a compliance layer and a live site on GitHub Pages, delivered without further input from the owner.</p>
   </div>
   <div class="exec-block">
-    <h2>What was built</h2>
-    <p>A 22-page static site with four buying guides, a five-row product register, a per-product record for each, a comparison table, fifteen open questions, twelve suggestions, seventeen review flags, a source list with quoted wording, an empty campaign ledger, an inert analytics client and a build-time checker that fails on a broken link, a missing disclosure or a reintroduced price.</p>
+    <h2>What exists now</h2>
+    <p>A generated static site of 27 pages: a shop front, five product records, two category pages, %d question-shaped guides, a comparison table, a publishing calendar, %d open questions with the artefact that would close each one, a decision queue of proposals, a review queue of flags, a source register with quoted wording, an empty campaign ledger, and a measurement client plus collector that are written, tested and switched off.</p>
+    <p>Every page is built from one data file by a script, and a checker fails the build on a broken link, a missing disclosure, an untagged Amazon link or a reintroduced price.</p>
   </div>
   <div class="exec-block">
-    <h2>What was actually verified</h2>
-    <p>Each of the five supplied links was opened once on 20 November 2026. Four resolved to live Amazon listings. The ASIN and full listing title were transcribed for each of those four. The fifth returned a continuity page on three attempts and remains unidentified. Amazon's Associates Operating Agreement section 5, its Program Policies section 2(b), the FTC's endorsement FAQ and Google's outbound-link documentation were each read directly, and the relevant wording is quoted on the sources page.</p>
+    <h2>What was verified, against what</h2>
+    <dl class="exec-dl">
+      <div><dt>Five supplied links</dt><dd>Each opened on 20 November 2026 and the destination and listing title transcribed. All five now resolve: four air-fryer and oven listings, plus two thermometers. Destination and ASIN for each are in the <a href="{esc(rel(d, 'products/index.html'))}">register</a>.</dd></div>
+      <div><dt>The required disclosure sentence</dt><dd>Quoted verbatim from section 5 of the <a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener" target="_blank">Associates Program Operating Agreement</a>, updated 15 October 2025.</dd></div>
+      <div><dt>The link and price rules</dt><dd>Quoted from section 2 of the <a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener" target="_blank">Associates Program Policies</a>, updated 14 April 2026: the tag must appear as a URL parameter in each link, and price may only be shown when Amazon serves it or it arrives through the API.</dd></div>
+      <div><dt>Paid-link markup</dt><dd><code class="code">rel="sponsored"</code> as the marker for paid links, from <a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links" rel="noopener" target="_blank">Google Search Central</a>.</dd></div>
+      <div><dt>Disclosure placement</dt><dd><a href="https://consumer.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" rel="noopener" target="_blank">FTC Endorsement Guides FAQ</a>: a disclosure must be where it is hard to miss, which is why it sits above the masthead on every page and not only in the footer.</dd></div>
+      <div><dt>Food-safety temperatures</dt><dd>The only numbers on the site quoted as fact rather than as a seller's claim, from the <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart" rel="noopener" target="_blank">USDA FSIS chart</a>, last updated 14 April 2025.</dd></div>
+    </dl>
   </div>
   <div class="exec-block exec-warn">
-    <h2>The one finding that changes the plan</h2>
-    <p>The five supplied link codes are nine characters and contain lowercase letters. Every ASIN that loaded is ten characters and uppercase. The codes are short-link slugs, not product identifiers &mdash; which means the earlier version of this repository recorded the wrong thing in its "intended ASIN" column, and that the intended product for each link cannot be read from the link at all. It has to come from the Associates dashboard.</p>
-    <p>This does not invalidate the links. It does mean nothing downstream can be confirmed without one look inside the account.</p>
+    <h2>The finding that changed the build</h2>
+    <p>Before this pass, 48 of the site's 101 Amazon product links carried no tracking tag. They were correctly marked <code class="code">sponsored</code> and <code class="code">nofollow</code>, but a click through them could not be attributed to {esc(TRACKING_ID)}, and Amazon's Commission Income Statement excludes purchases that are not correctly tracked because a link was not properly formatted.</p>
+    <p>The cause was one line: the template passed the untagged listing URL instead of the tagged one. Every product link now passes through a single function that appends the tag, and a build check fails if any Amazon product link on any generated page lacks one. What is still unconfirmed is whether a real click is credited inside the account, which only the Associates report can show.</p>
   </div>
   <div class="exec-block">
     <h2>What could not be verified, and why it matters</h2>
     <dl class="exec-dl">
-      <div><dt>Tracking attribution</dt><dd>No arrival page showed a tag parameter. Whether clicks are credited to <code class="code">{esc(TRACKING_ID)}</code> is unknown. This is the difference between a site that earns and a site that does not.</dd></div>
-      <div><dt>Price, rating, availability</dt><dd>Not shown anywhere, because Amazon permits them only from Amazon-served data or its API. This is deliberate and is the site's largest visible gap to a reader.</dd></div>
-      <div><dt>Author</dt><dd>None. No name would be true, so none is used. It caps how much authority the guides can claim.</dd></div>
-      <div><dt>Product quality</dt><dd>Nothing was tested. No product is ranked, scored or recommended.</dd></div>
-      <div><dt>Traffic and revenue</dt><dd>No analytics are running, no Search Console property is verified, and no commission rate has been read. Therefore no conversion score and no revenue forecast appears anywhere on this site.</dd></div>
+      <div><dt>Tracking attribution</dt><dd>The tag is now applied to every link, but no click has been observed in the Associates report. This is the difference between a site that can earn and one that only looks like it can.</dd></div>
+      <div><dt>Intended ASIN per link</dt><dd>The supplied codes are nine-character slugs. The product each link was <em>meant</em> to reach can only be confirmed from the owner's account, so it is recorded as unknown rather than guessed.</dd></div>
+      <div><dt>Price, rating, review count, stock</dt><dd>Absent site-wide by rule, because neither permitted data path is connected.</dd></div>
+      <div><dt>Product quality</dt><dd>Nothing was bought, used or measured. No product is ranked, scored or named a winner.</dd></div>
+      <div><dt>Author</dt><dd>No byline. Naming someone would be misleading, and it is the site's clearest credibility ceiling.</dd></div>
+      <div><dt>Traffic, conversion, revenue</dt><dd>No analytics are running, no Search Console property is verified, no commission rate has been read. Therefore no conversion score, no revenue forecast and no campaign row exists.</dd></div>
     </dl>
   </div>
   <div class="exec-block">
-    <h2>The next decision</h2>
-    <p>Three things, in this order. Tag the links from SiteStripe and make one test click, then read the Associates report for that day. Verify the Search Console property and submit the sitemap. Then choose between the two paths that actually improve the site: buy one product and test it properly, or wait for query data before writing another guide.</p>
-    <p>Writing more guides first is the option that looks like progress and is not.</p>
+    <h2>The next three decisions, in order</h2>
+    <ol class="tight">
+      <li><strong>Confirm one click in the Associates report.</strong> Tagged links exist; evidence they are credited does not. One click, then the report for that day.</li>
+      <li><strong>Put the site into two indexes.</strong> Verify Search Console and submit the sitemap, then submit the same sitemap to Bing Webmaster Tools. Both accept a sitemap and report queries without any script on the page.</li>
+      <li><strong>Then choose between testing and waiting.</strong> Either buy one product and build a page around real measurements, or wait four weeks for query data and write the next guide from that. Writing another guide from instinct is the option that looks like progress and is not.</li>
+    </ol>
   </div>
   <div class="exec-block">
     <h2>Numbers on the record</h2>
     <div class="exec-stats">
-      <div><span>5</span><p>links supplied</p></div>
-      <div><span>4</span><p>resolved and transcribed</p></div>
-      <div><span>1</span><p>unresolved, published as a blank</p></div>
+      <div><span>{n_prod}</span><p>products listed, all identified</p></div>
       <div><span>0</span><p>products tested</p></div>
       <div><span>0</span><p>prices shown</p></div>
+      <div><span>{len(GUIDES)}</span><p>guides published</p></div>
       <div><span>{n_q}</span><p>questions raised</p></div>
       <div><span>{n_open}</span><p>still open</p></div>
       <div><span>{n_high}</span><p>high-severity flags</p></div>
+      <div><span>0</span><p>revenue or conversion figures</p></div>
     </div>
   </div>
 </div>''', cls='')}"""
     return page(
         d,
         title="Executive summary \u2014 Crisp & Counter",
-        description="What was built, what was verified against official sources, the one finding that changes the plan, and the next decision \u2014 in four minutes.",
+        description="What was built, what was verified against official sources, the untagged-link defect that was found and fixed, and the three next decisions.",
         body=body,
         active="index.html",
         canonical="brief/",
     )
-
-
 def build_404(page_dir, meta):
     d = page_dir
     body = f"""{pagehead(

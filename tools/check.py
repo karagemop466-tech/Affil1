@@ -364,6 +364,21 @@ def check_tagged_links():
             err(f"products.json: {p['ref']} merged listing_url and special_link")
 
 
+def check_privacy():
+    """The privacy notice must describe the collector that exists.
+
+    If the collector gains a field and the notice does not, the notice is a lie.
+    This compares the two lists rather than trusting that someone remembered."""
+    import page_privacy
+    source = (ROOT / "analytics/collect.py").read_text(encoding="utf-8")
+    start = source.index("ALLOWED_EVENTS = {")
+    block = source[start:source.index("\n}", start)]
+    collector_events = set(re.findall(r'"([a-z_0-9]+)"', block))
+    notice_events = {name for name, _, _ in page_privacy.EVENTS}
+    if collector_events != notice_events:
+        err(f"privacy: collector events {sorted(collector_events)} != notice events {sorted(notice_events)}")
+
+
 def check_assets():
     for f in (ROOT / "assets/img").glob("*"):
         if f.suffix.lower() in (".jpg", ".png") and f.stat().st_size > 400_000:
@@ -379,11 +394,17 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_click", "guide_open", "search_query_referral", "report_import"):
+    for ev in ("page_view", "outbound_product_click", "guide_read_75",
+               "compare_view", "flag_page_view"):
         if ev not in js:
             err(f"analytics.js: event {ev} is not defined")
-    if "document.cookie" in js:
-        err("analytics.js: sets a cookie")
+    if "document.cookie" in js or "localStorage" in js:
+        err("analytics.js: stores a persistent identifier")
+    if "globalPrivacyControl" not in js or "doNotTrack" not in js:
+        err("analytics.js: does not honour Global Privacy Control / Do Not Track")
+    # The beacon must stay off until a collector is deployed and reviewed.
+    if 'CC_ANALYTICS_ENDPOINT = ""' not in (ROOT / "index.html").read_text(encoding="utf-8"):
+        warn("analytics endpoint is set on the built pages - confirm the collector is live and reviewed")
 
 
 def main():
@@ -392,6 +413,7 @@ def main():
     check_sitemap_feed()
     check_data()
     check_calendar()
+    check_privacy()
     check_tagged_links()
     check_assets()
 

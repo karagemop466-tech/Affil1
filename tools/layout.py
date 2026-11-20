@@ -244,6 +244,11 @@ def page(page_dir, *, title, description, body, active=None, canonical=None,
 </main>
 {footer(page_dir)}
 <script src="{esc(js)}" defer></script>
+<script>
+  /* Off by default. Set this to a self-hosted collector to switch the five
+     events on. Leaving it empty is the current, deliberate state. */
+  window.CC_ANALYTICS_ENDPOINT = "";
+</script>
 <script src="{esc(rel(page_dir, 'assets/js/analytics.js'))}" defer></script>
 </body>
 </html>

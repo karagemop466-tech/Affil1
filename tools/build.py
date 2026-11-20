@@ -29,6 +29,7 @@ import page_review  # noqa: E402
 import page_desk  # noqa: E402
 import page_categories  # noqa: E402
 import page_calendar  # noqa: E402
+import page_privacy  # noqa: E402
 from content import GUIDES  # noqa: E402
 
 DATA = ROOT / "src" / "data"
@@ -65,6 +66,7 @@ GENERATED = {
     "categories/air-fryers.html",
     "categories/thermometers.html",
     "calendar/index.html",
+    "privacy.html",
     "operations/ledger.html",
     "brief/index.html",
 }
@@ -211,6 +213,7 @@ def main():
     for rel_path, html in page_categories.build("categories", products, meta):
         pages.append(write(rel_path, html))
     pages.append(write("calendar/index.html", page_calendar.build("calendar", meta)))
+    pages.append(write("privacy.html", page_privacy.build("", meta)))
 
     pages.append(write("sitemap.xml", sitemap(pages)))
     pages.append(write("feed.xml", feed(GUIDES)))

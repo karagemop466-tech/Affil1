@@ -601,3 +601,8 @@ table.queue td:nth-child(4),table.queue td:nth-child(6){white-space:nowrap}
 table.calendar td:nth-child(1){white-space:nowrap;font-variant-numeric:tabular-nums}
 table.calendar td:nth-child(2){min-width:15rem}
 table.discovery td:nth-child(1){white-space:nowrap}
+
+/* ---------- privacy + generic table polish ---------- */
+table.negative td:first-child{white-space:nowrap;font-weight:500}
+table.events td:first-child{white-space:nowrap}
+.callout p:last-child{margin-bottom:0}

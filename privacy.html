@@ -1,55 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy \u2014 Crisp & Counter</title>
+<meta name="description" content="What this site collects, which is nothing today: no cookies, no third-party scripts, no analytics running. What would be collected if the self-hosted collector were deployed, field by field.">
 <link rel="canonical" href="https://karagemop466-tech.github.io/Affil1/privacy.html">
-<title>Privacy | Affil1</title>
-<meta name="description" content="Affil1 privacy notice: privacy-preserving self-hosted analytics, five defined events, no cookies, no IP logging.">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="alternate" type="application/rss+xml" title="Affil1" href="rss.xml">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Crisp &amp; Counter notes" href="feed.xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Crisp &amp; Counter">
+<meta property="og:title" content="Privacy \u2014 Crisp &amp; Counter">
+<meta property="og:description" content="What this site collects, which is nothing today: no cookies, no third-party scripts, no analytics running. What would be collected if the self-hosted collector were deployed, field by field.">
+<meta property="og:url" content="https://karagemop466-tech.github.io/Affil1/privacy.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body>
-<div class="disclosure-strip" role="region" aria-label="Affiliate disclosure"><div class="container"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. Links marked “sponsored” are affiliate links. <a href="disclosure.html">Read the full disclosure</a>.</div></div>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-name">Crisp <span class="brand-amp">&amp;</span> Counter</span>
+      <span class="brand-tag">The countertop edit</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="products/index.html">Shop</a><a href="guides/index.html">Guides</a><a href="compare/index.html">Compare</a><a href="questions/index.html">Ask</a>
+    </nav>
+  </div>
+</header>
+<div class="disclosure-bar" role="region" aria-label="Affiliate disclosure">
+  <div class="wrap disclosure-inner">
+    <span class="disclosure-tag">Disclosure</span>
+    <p><strong>As an Amazon Associate I earn from qualifying purchases.</strong> Every Amazon link on this page is a paid link, marked
+      <code class="disclosure-code">rel="sponsored"</code>, and the price you pay is the same either way.
+      <a href="about/index.html#disclosure">How the links work</a>.</p>
+  </div>
+</div>
+<main id="main">
+<header class="pagehead"><div class="wrap">
+  <p class="eyebrow">Privacy</p>
+  <h1>What this site knows<br>about you, which is almost nothing</h1>
+  <p class="dek">No cookies, no advertising identifiers, no third-party scripts and no analytics running. This page describes exactly what would be collected if measurement were switched on, because a notice added after the fact is not a notice.</p>
+  <p class="page-meta">Current state: analytics switched off &middot; 0 cookies &middot; 0 third-party requests</p>
+</div></header>
+<section class="section "><div class="wrap">
+<h2>Today</h2>
+<p>Right now this site collects nothing. There is no analytics endpoint configured, no form, no account, no newsletter and no comment system. The pages are static files served by GitHub Pages, which keeps its own server logs under its own policy; that is outside this site's control and is not something this site can read.</p>
+<p>Loading any page here makes exactly two kinds of request: for the HTML file itself, and for files in this repository (styles, fonts, images, one script). No request goes to a third party.</p>
 
-<div id="site-header"></div>
-<main class="container">
-  <nav style="margin-bottom:18px;font-size:0.85rem;color:var(--muted);">
-    <a href="index.html">Home</a> &rsaquo; Privacy
-  </nav>
-  <section class="section-tight">
-    <h1>Privacy notice</h1>
+<h2>If measurement is switched on</h2>
+<p>The repository contains a measurement client and a self-hosted collector. Both are written and tested; neither is deployed. If the site's owner deploys the collector and sets one line of configuration, the following would be recorded:</p>
+<div class="table-scroll"><table class="events"><thead><tr><th scope="col">Event</th><th scope="col">Recorded when</th><th scope="col">What is stored</th></tr></thead><tbody><tr><td><code class="code">page_view</code></td><td>A page was rendered.</td><td>The page path, with the query string removed. The date.</td></tr><tr><td><code class="code">outbound_product_click</code></td><td>A reader activated a link to an Amazon listing.</td><td>The page path, the product ASIN, the date. Not the destination, not the outcome.</td></tr><tr><td><code class="code">guide_read_75</code></td><td>A reader scrolled to 75% of a guide&amp;#x27;s height.</td><td>The page path, the date.</td></tr><tr><td><code class="code">compare_view</code></td><td>The comparison page was rendered.</td><td>The page path, the date.</td></tr><tr><td><code class="code">flag_page_view</code></td><td>The review queue was opened.</td><td>The page path, the date.</td></tr></tbody></table></div>
+<p>That is the whole payload: four fields per event, an aggregate count per day. There is no visitor record to retain, so there is no retention period to expire, and nothing that could be joined to a person.</p>
 
-    <h2>Analytics</h2>
-    <p>Affil1 uses a self-hosted, privacy-preserving analytics endpoint (<code>/analytics/collect</code>; collector code at <a href="server/collect.js">server/collect.js</a>). It records only five defined events:</p>
-    <table>
-      <thead><tr><th style="width:22%;">Event</th><th>What is recorded</th></tr></thead>
-      <tbody>
-        <tr><td>page_view</td><td>Page URL, page title, referrer, session id, timestamp</td></tr>
-        <tr><td>outbound_click</td><td>Outbound link URL, link text, whether it is marked sponsored/product, session id, timestamp</td></tr>
-        <tr><td>guide_read</td><td>Guide slug, session id, timestamp</td></tr>
-        <tr><td>suggestion_review</td><td>Suggestion id, session id, timestamp</td></tr>
-        <tr><td>session_start</td><td>Session id, timestamp</td></tr>
-      </tbody>
-    </table>
-    <ul>
-      <li>No cookies. A random session id lives in sessionStorage only (not sent to any third party).</li>
-      <li>No IP addresses are logged by the client code.</li>
-      <li>No personal identifiers are collected.</li>
-      <li>Events are queued locally and sent as newline-delimited JSON to the self-hosted collector, which appends them to an append-only log. If the collector is unreachable, the page still works and events remain in the browser only.</li>
-    </ul>
+<h2>What would never be collected</h2>
+<div class="table-scroll"><table class="negative"><thead><tr><th scope="col">Never collected</th><th scope="col">Why</th></tr></thead><tbody><tr><td><strong>IP address</strong></td><td>Not read by the collector and not written anywhere. No forwarding header is trusted or stored.</td></tr><tr><td><strong>Cookies</strong></td><td>None are set. The client never touches document.cookie.</td></tr><tr><td><strong>Local or session storage</strong></td><td>Not used. There is no persistent identifier, so two visits cannot be linked.</td></tr><tr><td><strong>Query strings</strong></td><td>Stripped before anything is sent, so a search term in a URL is never transmitted.</td></tr><tr><td><strong>Referrer URL</strong></td><td>Not collected. The site does not attempt to reconstruct search queries; Search Console does that properly.</td></tr><tr><td><strong>User agent, screen size, device model</strong></td><td>Not collected.</td></tr><tr><td><strong>Anything after a click</strong></td><td>Amazon&#x27;s site is not observable from here. This site never claims to know whether a purchase happened.</td></tr></tbody></table></div>
 
-    <h2>Affiliate links</h2>
-    <p>Clicking a sponsored product link sends you to Amazon.com. Amazon’s own privacy and cookies policies apply there; Affil1 does not add tracking parameters beyond the Associates tag required by the program.</p>
+<h2>Opting out</h2>
+<p>If Global Privacy Control or Do Not Track is set in your browser, the client sends nothing at all, including page views. There is no consent banner because there is no profiling, no advertising network and no cross-site tracking to consent to; a banner in front of an integer count would be theatre.</p>
 
-    <h2>Data retention</h2>
-    <p>The events log is append-only and rotated regularly; nothing is edited or deleted after collection. You can clear your browser’s localStorage to remove any locally queued events.</p>
+<h2>Amazon links</h2>
+<p>Clicking a product link takes you to Amazon, which has its own privacy policy and its own cookies. This site is not told what you do there, and makes no claim about it. Links carry the site's Associates tag so that a qualifying purchase can be attributed; the tag identifies the site, not you.</p>
 
-    <p><a href="disclosure.html">Read the affiliate disclosure &rarr;</a></p>
-  </section>
+<h2>Changes</h2>
+<p>If the collector is deployed, this page changes in the same commit, and the change is dated in the <a href="calendar/index.html">publishing calendar</a>. A privacy notice that changes silently is not worth reading, so this one is generated from the collector's own field list and the build fails if the two disagree.</p>
+
+<div class="callout">
+  <h2>The one thing to take from this page</h2>
+  <p>The reason the site can say this plainly is that it does not run a third-party analytics product. That is a design choice with a cost: no traffic data means no data-driven decision, which is why measurement is the first item in the <a href="suggestions/index.html">decision queue</a>.</p>
+</div></div></section>
 </main>
-<div id="site-footer"></div>
-<script src="assets/js/common.js"></script>
-<script src="assets/js/analytics.js"></script>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="foot-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
+    <div class="foot-grid"><div class="foot-col"><h2>Shop</h2><ul><li><a href="products/index.html">All five products</a></li><li><a href="categories/air-fryers.html">Air fryers</a></li><li><a href="categories/thermometers.html">Meat thermometers</a></li><li><a href="products/p-01.html">Dual-basket air fryer</a></li><li><a href="products/p-02.html">French-door oven</a></li><li><a href="products/p-03.html">Single-basket air fryer</a></li><li><a href="compare/index.html">Compare everything</a></li></ul></div><div class="foot-col"><h2>Read</h2><ul><li><a href="guides/index.html">Every guide</a></li><li><a href="guides/basket-or-oven-air-fryer.html">Basket or oven?</a></li><li><a href="guides/air-fryer-capacity-checklist.html">Capacity checklist</a></li><li><a href="guides/batch-cooking-for-the-week.html">Batch cooking for the week</a></li><li><a href="guides/hosting-season-air-fryer.html">Hosting season</a></li></ul></div><div class="foot-col"><h2>Follow</h2><ul><li><a href="feed.xml">RSS feed</a></li><li><a href="calendar/index.html">Publishing calendar</a></li><li><a href="questions/index.html">Ask a question</a></li><li><a href="about/index.html#editorial">How we write</a></li><li><a href="about/index.html#disclosure">Disclosure</a></li><li><a href="privacy.html">Privacy</a></li></ul></div><div class="foot-col"><h2>Desk</h2><ul><li><a href="suggestions/index.html">Suggestions queue</a></li><li><a href="review/index.html">Flagged for review</a></li><li><a href="review/images.html">Image policy</a></li><li><a href="review/measurement.html">Measurement plan</a></li><li><a href="operations/ledger.html">Campaign ledger</a></li><li><a href="brief/index.html">Executive summary</a></li><li><a href="about/index.html">Sources</a></li></ul></div></div>
+    <div class="foot-bottom">
+      <p class="foot-meta">Crisp &amp; Counter &middot; a buying guide, not a review site &middot; last updated 2026-11-20 &middot; no cookies, no trackers, no third-party requests</p>
+      <p class="foot-meta">Tracking ID <code>shopnow047c-20</code> supplied by the publisher; attribution is not yet confirmed in the Associates account. <a href="review/index.html#FLG-002">What that means</a>.</p>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/site.js" defer></script>
+<script>
+  /* Off by default. Set this to a self-hosted collector to switch the five
+     events on. Leaving it empty is the current, deliberate state. */
+  window.CC_ANALYTICS_ENDPOINT = "";
+</script>
+<script src="assets/js/analytics.js" defer></script>
 </body>
 </html>
