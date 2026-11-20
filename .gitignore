@@ -1,6 +1,23 @@
-# build artefacts and local scratch
-__pycache__/
-*.pyc
-.venv/
-/tmp/
+# Affil1
+
+# Data / logs generated at runtime
+data/events.jsonl
+data/*.jsonl
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Caches
+.cache/
+.arena/
