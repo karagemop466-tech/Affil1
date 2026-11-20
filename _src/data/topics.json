@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "title": "Article bank and house style — the feed into the design prompt",
+    "session": "arena/7e19d8e1-affil1",
+    "dated": "2026-11-20",
+    "purpose": "Working titles and house-style rules for the next version of Crisp & Counter. This is the raw material a designer or writer receives before touching a page: what to write about, what it must never say, and how organic traffic is legitimately earned.",
+    "status_rule": "Every title below is a working title and an editorial hypothesis. None is a claim about popularity, search volume, trend data or product superiority — no keyword tool was consulted and no demand estimate is made. Titles are shaped like the questions buyers actually type; whether anyone types them is answered only by the Search Console query report after it exists (S-03, Q-07).",
+    "how_to_use": "Pick topics only after the measurement path is chosen (suggestions: PATH-C). Each topic names the evidence required before it is written; a topic whose evidence cannot be obtained is rewritten as a checklist of questions, or not written. Published guides go into tools/content.py GUIDES, which feeds the sitemap and RSS feed automatically.",
+    "counts": "14 working titles in 5 clusters · 6 map to published guides · 8 are proposals · 10 house-style rules · 1 organic-traffic loop"
+  },
+  "style_rules": [
+    {
+      "id": "ST-01",
+      "rule": "Never claim a test that did not happen. No first-person past-tense claims of cooking, measuring, buying or lab work anywhere — not even as a hypothetical example.",
+      "basis": "FTC Endorsement Guides FAQ: endorsements must reflect the honest opinion of the endorser and cannot be misleading. Official: https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking (retrieved 2026-11-20)."
+    },
+    {
+      "id": "ST-02",
+      "rule": "No superlatives or rankings without evidence: no claim of being the finest, the first, the top-rated, the award-winner or the leader of any list.",
+      "basis": "Associates Program Policies, Links on Your Site: \"You must not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or any of our policies, promotions, or prices.\" Official: https://affiliate-program.amazon.com/help/operating/policies (retrieved 2026-11-20)."
+    },
+    {
+      "id": "ST-03",
+      "rule": "No price, star rating, review count or stock figure anywhere on the site. Send the reader to Amazon, where the numbers are current.",
+      "basis": "Associates Program Policies: prices and availability may be shown only where Amazon serves the link carrying them, or where data arrives via Creators API or PA API. Neither is connected here. Official: https://affiliate-program.amazon.com/help/operating/policies (retrieved 2026-11-20)."
+    },
+    {
+      "id": "ST-04",
+      "rule": "No hollow meta: never write \"in this article\", \"look no further\", \"we've got you covered\", \"game-changer\", or a paragraph that promises to tell the reader what the next paragraph tells them.",
+      "basis": "Design decision. It is the single loudest register of generated text."
+    },
+    {
+      "id": "ST-05",
+      "rule": "Every factual product claim carries a source link to the listing or an official document, or is left blank and flagged. Blanks are honest; filled-in guesses are not.",
+      "basis": "Repository verification rule (EXECUTIVE_SUMMARY.md, review/index.html)."
+    },
+    {
+      "id": "ST-06",
+      "rule": "Write one concrete scenario per card or section — the 6pm frozen-chips panic, the counter with 40 cm of clearance, the six-person Sunday dinner. Specific scenes beat adjectives.",
+      "basis": "Design decision. It is also the cheapest way to read like a person who has a kitchen."
+    },
+    {
+      "id": "ST-07",
+      "rule": "Titles answer a question or promise a concrete artefact (chart, checklist, audit). No adjective-stack titles.",
+      "basis": "Design decision. Question-shaped titles match how buyers search and how the existing guides are structured."
+    },
+    {
+      "id": "ST-08",
+      "rule": "Read every page aloud before shipping. If two sentences in a row have the same rhythm, rewrite one.",
+      "basis": "Design decision. Monotone rhythm is the second-loudest register of generated text."
+    },
+    {
+      "id": "ST-09",
+      "rule": "The disclosure strip sits under the masthead on every page and repeats in the footer, carrying the required sentence verbatim: \"As an Amazon Associate I earn from qualifying purchases.\"",
+      "basis": "Associates Program Operating Agreement §5 (retrieved 2026-11-20): \"You must clearly and prominently state the following … 'As an Amazon Associate I earn from qualifying purchases.'\" Official: https://affiliate-program.amazon.com/help/operating/agreement"
+    },
+    {
+      "id": "ST-10",
+      "rule": "Illustrations are labelled as illustrations and never posed as photographs of a test. Product photographs replace them only when real photos of the exact variant exist.",
+      "basis": "FTC honesty principle above; repository image policy (review/images.html)."
+    }
+  ],
+  "traffic_plan": {
+    "principle": "Organic traffic is earned by one indexable site that answers real questions and can prove it. The loop is publish → sitemap and RSS → internal link → measure queries → choose the next topic from the measured ones. Nothing in the loop guesses demand.",
+    "already_done": [
+      "One canonical site — no competing edition is indexable (archive/ is noindex; robots.txt blocks it).",
+      "Sitemap and RSS feed regenerated from the same data as the pages, so no published guide is missing from either.",
+      "Canonical URLs, Open Graph images and Article/FAQPage/BreadcrumbList structured data on generated pages.",
+      "Question-shaped guides in deliberate clusters, each linking to its cluster peers and to the product pages.",
+      "A disclosure strip and a per-link sponsored mark on every page, so a search engine never has to guess the relationship."
+    ],
+    "missing_and_gated": [
+      "Search Console property and sitemap submission (S-03) — needs the owner's Google account. Until it exists, every topic choice is an editorial hypothesis (Q-07).",
+      "28-day query review against the previous window (S-07 gate) — needs the report, not instinct.",
+      "A root domain instead of the repository subpath (S-11) — a brand and budget decision (Q-17).",
+      "Any paid acquisition — refused as policy (S-21), recorded so it is not rediscovered as an idea."
+    ],
+    "official_reading": [
+      {
+        "name": "Google Search Central: people-first content",
+        "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      },
+      {
+        "name": "Google Search Central: qualify outbound links (rel=\"sponsored\")",
+        "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+        "checked": "retrieved 2026-11-20 — confirms paid/affiliate links carry rel=\"sponsored\""
+      },
+      {
+        "name": "Google Search Console Performance report",
+        "url": "https://support.google.com/webmasters/answer/7576553"
+      }
+    ]
+  },
+  "topics": [
+    {
+      "id": "T-01",
+      "cluster": "Using it well",
+      "working_title": "Air Fryer Times and Temperatures: A Cheat Sheet for the Foods You Actually Cook",
+      "shape": "utility artefact",
+      "search_intent": "informational — the reader owns an air fryer and wants a printable answer",
+      "funnel": "top",
+      "season": "evergreen",
+      "why_on_the_list": "A chart is the most linked artefact a small publication can make, and it earns attention from owners, not only buyers.",
+      "evidence_before_writing": "USDA FSIS safe-minimum-temperature chart for the doneness column (official); cooking times only as \"as stated by the manufacturer\" per listing, or left blank. Do not invent times.",
+      "maps_to": "new guide — feeds the thermometer cluster",
+      "internal_links": [
+        "guides/thermometer-pairing.html",
+        "products/p-04.html",
+        "products/p-05.html"
+      ]
+    },
+    {
+      "id": "T-02",
+      "cluster": "Using it well",
+      "working_title": "Foil, Parchment, or Oil Spray: What an Air Fryer Basket Will Actually Tolerate",
+      "shape": "question",
+      "search_intent": "informational with a safety undertone — the reader is about to do something and wants permission or a warning",
+      "funnel": "top",
+      "season": "evergreen",
+      "why_on_the_list": "Care questions arrive before buying questions and are answerable from manuals rather than testing.",
+      "evidence_before_writing": "Manufacturer care instructions for each of the three fryers; where a manual is not obtainable, publish the question list, not rules.",
+      "maps_to": "new guide — pairs with the cleanup guide",
+      "internal_links": [
+        "guides/cleanup-and-counter-space.html"
+      ]
+    },
+    {
+      "id": "T-03",
+      "cluster": "Choosing the format",
+      "working_title": "Basket or Oven-Style Air Fryer: The Five Questions That Decide It",
+      "shape": "question",
+      "search_intent": "commercial investigation — the reader is choosing between two shapes",
+      "funnel": "middle",
+      "season": "evergreen",
+      "why_on_the_list": "The format choice is the first fork every buyer meets; the site already carries the guide.",
+      "evidence_before_writing": "Published — exists and closes with what it does not claim.",
+      "maps_to": "guides/basket-or-oven-air-fryer.html",
+      "internal_links": [
+        "products/p-01.html",
+        "products/p-02.html",
+        "products/p-03.html",
+        "fit/index.html"
+      ]
+    },
+    {
+      "id": "T-04",
+      "cluster": "Choosing the format",
+      "working_title": "Combined Quarts Lie: Dual-Basket Math for Real Meals",
+      "shape": "comparison hook",
+      "search_intent": "commercial investigation — the reader suspects a spec is doing marketing work",
+      "funnel": "middle",
+      "season": "evergreen",
+      "why_on_the_list": "It turns a spec sheet into a kitchen argument, which is what a buyer is actually having with themselves.",
+      "evidence_before_writing": "Published — basket volumes quoted only as the listing states them.",
+      "maps_to": "guides/dual-zone-two-baskets.html",
+      "internal_links": [
+        "products/p-01.html",
+        "products/p-03.html",
+        "compare/index.html"
+      ]
+    },
+    {
+      "id": "T-05",
+      "cluster": "Choosing the format",
+      "working_title": "The Counter-Space Audit: Measure Once Before You Buy Any Air Fryer",
+      "shape": "utility artefact",
+      "search_intent": "informational — the reader has been burned by a too-big appliance before",
+      "funnel": "middle",
+      "season": "evergreen",
+      "why_on_the_list": "Fit is the most common return reason an owner can actually prevent with a tape measure.",
+      "evidence_before_writing": "Published — dimensions quoted only where a listing states them; the audit itself is measurement advice, not specs.",
+      "maps_to": "guides/small-kitchen-space-audit.html",
+      "internal_links": [
+        "fit/index.html",
+        "guides/cleanup-and-counter-space.html"
+      ]
+    },
+    {
+      "id": "T-06",
+      "cluster": "Living with it",
+      "working_title": "How to Clean an Air Fryer Basket Without Wrecking the Coating",
+      "shape": "question",
+      "search_intent": "informational — owner-stage, arrives weeks after purchase and links back to the buying guides",
+      "funnel": "top (owner audience)",
+      "season": "evergreen",
+      "why_on_the_list": "Owner-stage questions build the returning audience that later trusts the buying guides.",
+      "evidence_before_writing": "Manufacturer care instructions per model; no cleaning chemistry claims without a source.",
+      "maps_to": "new guide — deepens the cleanup cluster",
+      "internal_links": [
+        "guides/cleanup-and-counter-space.html"
+      ]
+    },
+    {
+      "id": "T-07",
+      "cluster": "Living with it",
+      "working_title": "New-Appliance Smell After the First Use: Off-Gassing, Residue, or a Real Problem?",
+      "shape": "question",
+      "search_intent": "informational with a worry undertone",
+      "funnel": "top (owner audience)",
+      "season": "evergreen",
+      "why_on_the_list": "A recurring worry-shaped query class; answering it calmly is exactly the publication's register.",
+      "evidence_before_writing": "Hold until manufacturer guidance or a public-health source can be cited. Without one, do not write it — a guessed safety answer is the one thing this site cannot ship.",
+      "maps_to": "proposal only — evidence gate first",
+      "internal_links": []
+    },
+    {
+      "id": "T-08",
+      "cluster": "Thermometers",
+      "working_title": "Do You Need a Meat Thermometer for an Air Fryer?",
+      "shape": "question",
+      "search_intent": "informational sitting on a purchase — the reader is one answer away from a basket add",
+      "funnel": "middle",
+      "season": "evergreen",
+      "why_on_the_list": "It is the bridge between the two product clusters, and the site already carries the guide.",
+      "evidence_before_writing": "Published — seller-stated features only.",
+      "maps_to": "guides/thermometer-pairing.html",
+      "internal_links": [
+        "products/p-04.html",
+        "products/p-05.html",
+        "guides/air-fryer-capacity-checklist.html"
+      ]
+    },
+    {
+      "id": "T-09",
+      "cluster": "Thermometers",
+      "working_title": "Instant-Read or Leave-In: Which Probe Saves Which Dinner",
+      "shape": "comparison",
+      "search_intent": "commercial investigation — the reader will buy one of the two this week",
+      "funnel": "middle",
+      "season": "evergreen",
+      "why_on_the_list": "The two thermometer rows are the easiest honest comparison on the site, because the difference is use-scenario, not quality.",
+      "evidence_before_writing": "Listing-stated features (probe count, stated response time) with source links; no accuracy claims beyond what the listing states.",
+      "maps_to": "compare/index.html extension or new guide",
+      "internal_links": [
+        "products/p-04.html",
+        "products/p-05.html",
+        "compare/index.html"
+      ]
+    },
+    {
+      "id": "T-10",
+      "cluster": "Thermometers",
+      "working_title": "Internal Temperature Chart: The One Page That Ends the Guessing",
+      "shape": "utility artefact",
+      "search_intent": "informational — high-frequency, printable, linkable",
+      "funnel": "top",
+      "season": "evergreen, with a holiday spike the site should not need to shout about",
+      "why_on_the_list": "The strongest organic-traffic artefact in the cluster, and every figure can carry an official source.",
+      "evidence_before_writing": "USDA FSIS Safe Minimum Internal Temperature chart, quoted with its official URL and retrieval date (closes FLG-012 if adopted).",
+      "maps_to": "new guide — flagship artefact",
+      "internal_links": [
+        "guides/thermometer-pairing.html",
+        "products/p-04.html",
+        "products/p-05.html"
+      ]
+    },
+    {
+      "id": "T-11",
+      "cluster": "Seasonal",
+      "working_title": "Thanksgiving When the Oven Is Full: The Countertop Overflow Plan",
+      "shape": "seasonal feature",
+      "search_intent": "seasonal planning — the reader is hosting and the oven is the bottleneck",
+      "funnel": "middle",
+      "season": "late November (US)",
+      "why_on_the_list": "Seasonal features are the one place a small site can be early instead of big; the two holiday guides already carry the argument.",
+      "evidence_before_writing": "Published — capacity stated only as listings state it.",
+      "maps_to": "guides/holiday-hosting-air-fryer.html",
+      "internal_links": [
+        "guides/holiday-side-dish-capacity.html",
+        "products/p-02.html"
+      ]
+    },
+    {
+      "id": "T-12",
+      "cluster": "Seasonal",
+      "working_title": "The 6pm Frozen Reset: Air Fryer Math for Weeknights",
+      "shape": "seasonal evergreen",
+      "search_intent": "informational-to-commercial — the reader wants tonight solved, then notices the format question",
+      "funnel": "middle",
+      "season": "evergreen; strongest in January",
+      "why_on_the_list": "The weeknight scenario is the voice the front page already uses; it earns the click the guide can convert to a format decision.",
+      "evidence_before_writing": "Listing-stated presets and capacities only; frozen-food times as \"as the listing states\", or blank.",
+      "maps_to": "new guide",
+      "internal_links": [
+        "fit/index.html",
+        "products/p-01.html",
+        "products/p-03.html"
+      ]
+    },
+    {
+      "id": "T-13",
+      "cluster": "Seasonal",
+      "working_title": "Meal Prep Sunday: What an Air Fryer Changes and What It Doesn't",
+      "shape": "question",
+      "search_intent": "informational — a habit question with a format answer hiding inside",
+      "funnel": "middle",
+      "season": "evergreen; strongest in January",
+      "why_on_the_list": "Habit content is the returning-reader engine; the guide already exists in the build.",
+      "evidence_before_writing": "Published — capacity scenarios, not cooking claims.",
+      "maps_to": "guides/meal-prep-sunday.html",
+      "internal_links": [
+        "guides/dual-zone-two-baskets.html",
+        "products/p-01.html"
+      ]
+    },
+    {
+      "id": "T-14",
+      "cluster": "Seasonal",
+      "working_title": "The Small Gift That Fixes Overcooked Dinners",
+      "shape": "seasonal feature",
+      "search_intent": "commercial — a gift buyer with a budget and no domain knowledge",
+      "funnel": "middle",
+      "season": "late November–December",
+      "why_on_the_list": "The thermometer cluster is gift-priced and giftable without any quality claim, because the article sells the problem, not the brand.",
+      "evidence_before_writing": "Listing-stated features and packaging claims only; no price, no \"under $X\" framing — price display is prohibited without a feed (ST-03).",
+      "maps_to": "new guide or holiday feature",
+      "internal_links": [
+        "products/p-04.html",
+        "products/p-05.html",
+        "guides/thermometer-pairing.html"
+      ]
+    }
+  ]
+}

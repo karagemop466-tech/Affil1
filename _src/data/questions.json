@@ -1,8 +1,9 @@
 {
   "meta": {
     "rule": "A question moves to 'answered' only when the answer has a source link or a reproducible check. 'We cannot know yet' is a legitimate answer and is recorded as such.",
-    "status": "Twenty-four questions. 10 are answered. 14 are open, and each one names the specific document, dashboard or decision that would close it.",
-    "how_to_read": "The blocking column is the useful one. A blocking question means work that depends on it is guesswork until it is answered."
+    "status": "Twenty-four questions. 10 are answered. 14 are open. Every open row now names the discovery action, the holder of the missing fact, and the effort it takes. Five open questions are blocking (Q-01, Q-03, Q-10, Q-14 and the attribution chain they form).",
+    "how_to_read": "The blocking column is the useful one. A blocking question means work that depends on it is guesswork until it is answered.",
+    "discovery_note": "Every open question below carries a discovery block: who can obtain the missing information, what it costs, and the exact action that would close the question. No question is closed by inference; a question stays open until the named artefact exists."
   },
   "questions": [
     {
@@ -13,7 +14,12 @@
       "how_to_close": "In the Associates dashboard, open SiteStripe for each product and copy the tagged link for the exact ASIN intended. Record both values side by side, as the register does.",
       "answered": false,
       "blocking": "yes — the product-record fields depend on it",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — Associates Central (SiteStripe)",
+        "effort": "10 minutes",
+        "action": "Open SiteStripe for each of the five products, copy the tagged link for the exact ASIN intended, and record intended and observed values side by side in _src/data/product-intent.json."
+      }
     },
     {
       "id": "Q-02",
@@ -34,7 +40,12 @@
       "how_to_close": "Click one link on the live site, then open Reports → Orders in the Associates dashboard and look for the click against the tag.",
       "answered": false,
       "blocking": "yes — until this is confirmed the site may be sending traffic that does not pay",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — Associates account",
+        "effort": "2 minutes plus one click",
+        "action": "Click one product link on the live site, then open Reports → Orders in the Associates dashboard and look for the click against shopnow047c-20. Either answer closes the question."
+      }
     },
     {
       "id": "Q-04",
@@ -77,7 +88,12 @@
       "how_to_close": "Verify the property, submit the sitemap, wait two to four weeks, then pick the next topic from the queries that actually appear.",
       "answered": false,
       "blocking": "no — but every further guide is a guess until it is answered",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — Google account",
+        "effort": "15 minutes of setup, then 28 days of waiting",
+        "action": "Verify a Search Console property for the site, submit sitemap.xml, and read the Performance queries report after 28 days. The measured queries choose the next topic; the article bank is the menu."
+      }
     },
     {
       "id": "Q-08",
@@ -87,7 +103,12 @@
       "how_to_close": "Name an editor and write an accurate bio, or keep the publication anonymous and stop implying personal expertise. Both are honest; the second is weaker for search.",
       "answered": false,
       "blocking": "partly — it caps how much authority the site can claim",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner",
+        "effort": "one honest conversation",
+        "action": "Name a real editor with an accurate, modest bio — or decide the publication stays explicitly unsigned and the copy says so. Claiming hands-on testing that never happened would make the problem worse, not better."
+      }
     },
     {
       "id": "Q-09",
@@ -97,7 +118,12 @@
       "how_to_close": "Open the Commission Income Statement in the Associates dashboard and record the rate for Home & Kitchen furniture and appliance categories.",
       "answered": false,
       "blocking": "no — but no revenue estimate can be made without it, and none is offered",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — Associates account",
+        "effort": "5 minutes",
+        "action": "Open the Commission Income Statement in Associates Central and record the category rates with the date seen. Until then the site publishes no revenue figure of any kind."
+      }
     },
     {
       "id": "Q-10",
@@ -107,7 +133,12 @@
       "how_to_close": "Deploy the collector to a host you control, set retention, edit the privacy page with the specifics, then point the client at it.",
       "answered": false,
       "blocking": "yes — measurement work waits on it",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — hosting decision",
+        "effort": "an afternoon, or a decision to delete",
+        "action": "Choose whether to host the analytics collector off GitHub Pages and publish a privacy and retention note — or delete the inert client and record the refusal. Both are compliant; limbo is not."
+      }
     },
     {
       "id": "Q-11",
@@ -150,7 +181,12 @@
       "how_to_close": "One click from the live site, then the Orders report. The same test closes Q-03.",
       "answered": false,
       "blocking": "yes",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — Associates account",
+        "effort": "20 minutes",
+        "action": "Generate one Special Link per product in Associates Central, test each once, and record the confirmation in the intent register — intended ASIN, listing URL, date and source in one field, observed redirect in a separate field, never merged."
+      }
     },
     {
       "id": "Q-15",
@@ -160,7 +196,12 @@
       "how_to_close": "Do not forecast. Switch on measurement, then read it.",
       "answered": false,
       "blocking": "no",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — Search Console",
+        "effort": "answers only after data exists",
+        "action": "Read the Performance report 28 days after S-03 lands. Until then the honest answer is 'unknown', and any traffic claim would be invented."
+      }
     },
     {
       "id": "Q-16",
@@ -181,7 +222,12 @@
       "how_to_close": "Decide whether to buy a domain. The build has one constant for the site URL, so the change is small when the decision is made.",
       "answered": false,
       "blocking": "no — but it constrains brand and link equity later",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — budget",
+        "effort": "one decision",
+        "action": "Decide whether to buy a domain and move off the repository subpath. Check GitHub Pages' usage limits first: Pages is not for sites primarily intended to facilitate commercial transactions."
+      }
     },
     {
       "id": "Q-18",
@@ -202,7 +248,12 @@
       "how_to_close": "Read the buttons against Program Policies 2(b) and the FTC's affiliate guidance; change the wording if it reads as a price claim.",
       "answered": false,
       "blocking": "no — but it should be reviewed before paid traffic is sent",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — with the agreement open",
+        "effort": "one review pass",
+        "action": "Review the two CTA strings ('See listing source', the tracked variant) against the Operating Agreement, ideally with Associates support in writing. The site keeps the neutral wording meanwhile."
+      }
     },
     {
       "id": "Q-20",
@@ -212,7 +263,12 @@
       "how_to_close": "Choose a provider and publish the privacy terms, or commit to RSS and stop describing a newsletter as pending.",
       "answered": false,
       "blocking": "no",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — privacy decision",
+        "effort": "choose a channel or record a refusal",
+        "action": "RSS is live and needs no data. A newsletter needs a processor, a double opt-in and a privacy note; a browser-only shortlist already exists and transmits nothing. Pick one and record why."
+      }
     },
     {
       "id": "Q-21",
@@ -233,7 +289,12 @@
       "how_to_close": "Choose one guide a fortnight or one a month, put it in the publishing workflow document, and hold to it.",
       "answered": false,
       "blocking": "no",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — calendar",
+        "effort": "one recurring slot",
+        "action": "Commit to a fortnightly or monthly writing slot the calendar can actually keep. The build adds every accepted guide to the sitemap and feed automatically, so the cadence is the only missing part."
+      }
     },
     {
       "id": "Q-23",
@@ -243,7 +304,12 @@
       "how_to_close": "Verify the Search Console property, submit the sitemap, wait for a sample of real queries, then rank future topics by observed demand instead of instinct.",
       "answered": false,
       "blocking": "no — it informs topic choice (Q-07) but blocks nothing today",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Nobody — until measurement exists",
+        "effort": "28 days of query data",
+        "action": "Treat Search Console impressions as the only demand signal this site will accept. Keyword-tool volumes are estimates sold as facts; this publication will not buy that."
+      }
     },
     {
       "id": "Q-24",
@@ -253,7 +319,12 @@
       "how_to_close": "The owner sets a budget for one unit of the cheapest submitted product (or declines on the record); the purchase and the test protocol then enter the ledger with provenance.",
       "answered": false,
       "blocking": "no — but it is the gate in front of S-05",
-      "evidence": ""
+      "evidence": "",
+      "discovery": {
+        "who": "Owner — budget",
+        "effort": "one purchase decision",
+        "action": "Authorise buying one unit and a one-week test window with a written method — or record that hands-on testing is out of scope and the site keeps its careful, listing-only register."
+      }
     }
   ]
 }
