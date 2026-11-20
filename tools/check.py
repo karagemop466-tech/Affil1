@@ -17,20 +17,15 @@ import pathlib
 import re
 import sys
 from html.parser import HTMLParser
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# This build owns the site root. Other editions on main (crisp/ and the
-# root-level *.html pages of a parallel session) are theirs, not this build's,
-# and are deliberately out of scope. Claiming to verify them would be false.
-OTHER_EDITIONS = {"crisp", "archive", "reviews", "docs", "server", "categories"}
-FOREIGN_ROOT_PAGES = {
-    "products.html", "questions.html", "suggestions.html", "guides.html",
-    "dashboard.html", "disclosure.html", "executive-summary.html",
-    "flagged-for-review.html", "privacy.html", "categories.html",
-    "compare.html", "about.html", "legacy.html", "sources.html",
-}
+# One canonical site. The superseded edition is preserved under archive/ with a
+# noindex tag on every page, and is deliberately out of scope: it is a record,
+# not a destination. Any OTHER .html file anywhere in the tree is a stray page
+# that would compete with the canonical one, and it fails the build.
+ARCHIVE = ROOT / "archive"
 
 def owned(page):
     """True only for a file this build generates.
@@ -123,9 +118,10 @@ EXTERNAL_RESOURCE = re.compile(r"^(https?:)?//", re.I)
 # Third-party hosts allowed to appear as *citations* (anchors), never as resources.
 CITATION_OK = re.compile(
     r"https?://(www\.)?(amazon\.com|affiliate-program\.amazon\.com|consumer\.ftc\.gov|"
-    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
+    r"ecfr\.gov|www\.ecfr\.gov|developers\.google\.com|support\.google\.com|docs\.github\.com|www\.fsis\.usda\.gov|"
+    r"developer-docs\.amazon\.com|sell\.amazon\.com|"
     r"sellercentral\.amazon\.com|karagemop466-tech\.github\.io|link\.amazon|github\.com|"
-    r"www\.ftc\.gov)",
+    r"www\.ftc\.gov|foodsafety\.gov)(?=/|$)",
     re.I,
 )
 
@@ -159,7 +155,7 @@ def check_page(path):
 
     # --- links resolve ---
     for attr, value, line in s.refs:
-        if not value or value.startswith(("#", "mailto:", "data:", "javascript:")):
+        if not value or value.startswith(("mailto:", "data:", "javascript:")):
             continue
         if attr == "src" and EXTERNAL_RESOURCE.match(value):
             err(f"{rel}:{line}: external resource load {value!r}")
@@ -182,11 +178,14 @@ def check_page(path):
             if frag not in ids.ids:
                 err(f"{rel}:{line}: missing anchor #{frag} in {target.name}")
 
-    # --- Amazon links must be sponsored ---
+    # --- Amazon links must be sponsored AND carry the Associates tag ---
+    from layout import approved_amazon_urls
     for a in s.anchors:
         href = a.get("href") or ""
         rels = (a.get("rel") or "").split()
         if AFFILIATE.match(href):
+            if "tag" in parse_qs(urlparse(href).query, keep_blank_values=True) and href not in approved_amazon_urls().values():
+                err(f"{rel}: unapproved tagged link: {href}")
             if "sponsored" not in rels:
                 err(f"{rel}: affiliate link not marked sponsored: {href}")
             if "nofollow" not in rels:
@@ -230,6 +229,24 @@ def check_page(path):
         trs = len(re.findall(r"<tr[ >]", body))
         if trs and tds > trs * 12:
             err(f"{rel}: table body has {tds} cells across {trs} rows - likely shredded markup")
+        # Every register row must carry a link to its evidence. The rule applies
+        # to tables that declare a Source or Listing column, which are the
+        # registers of entries and findings; prose tables without such a column
+        # are not claims about a document.
+        for tbl in re.findall(r"<table[^>]*>(.*?)</table>", body, re.S):
+            head = re.search(r"<thead>.*?</thead>", tbl, re.S)
+            if not head or not re.search(r"<th[^>]*>(Source|Listing|Evidence)</th>", head.group(0)):
+                continue
+            for row in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl.split("</thead>", 1)[-1], re.S):
+                if "<td" in row and not re.search(r'href="https?://', row):
+                    err(f"{rel}: register row lacks a source link")
+        # --- header and cell counts agree, so no column is silently missing ---
+        for tbl in re.findall(r"<table[^>]*>(.*?)</table>", body, re.S):
+            ths = len(re.findall(r"<th[ >]", tbl))
+            for row in re.findall(r"<tr[^>]*>(.*?)</tr>", tbl.split("</thead>", 1)[-1], re.S):
+                tds = len(re.findall(r"<td[ >]", row))
+                if tds and ths and tds != ths:
+                    err(f"{rel}: table row has {tds} cells against {ths} columns")
         char_cells = len(re.findall(r"<td>.{1}</td>", body))
         if char_cells > 6:
             err(f"{rel}: {char_cells} single-character cells - table cells were iterated as strings")
@@ -328,20 +345,30 @@ def check_assets():
             err(f"site.css: missing font file {css_url}")
 
     js = (ROOT / "assets/js/analytics.js").read_text(encoding="utf-8")
-    for ev in ("page_view", "outbound_product_click", "guide_read_75", "compare_view", "flag_page_view"):
+    for spec in json.loads((ROOT / "src/data/events.json").read_text())["events"]:
+        ev = spec["name"]
         if ev not in js:
-            err(f"analytics.js: canonical event {ev} is not defined")
-    for ev in ("outbound_click", "guide_open", "search_query_referral", "report_import"):
-        if ev in js:
-            err(f"analytics.js: legacy event name {ev} still present (reconciled with src/data/events.json)")
+            err(f"analytics.js: event {ev} is not defined")
     if "document.cookie" in js:
         err("analytics.js: sets a cookie")
+
+
+def check_no_stray_pages():
+    """Every served .html file is either generated by this build or archived."""
+    from build import GENERATED
+    for p in ROOT.rglob("*.html"):
+        if p.is_relative_to(ARCHIVE):
+            continue
+        rel_path = p.relative_to(ROOT).as_posix()
+        if rel_path not in GENERATED:
+            err(f"{rel_path}: not generated by this build and not archived - one site only")
 
 
 def main():
     for p in sorted(PAGES):
         check_page(p)
     check_sitemap_feed()
+    check_no_stray_pages()
     check_data()
     check_assets()
 

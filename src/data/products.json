@@ -1,28 +1,63 @@
 {
   "meta": {
     "tracking_id_supplied": "shopnow047c-20",
-    "tracking_id_status": "Not confirmed on any page reached in this session. No supplied link showed a tag parameter on arrival.",
+    "tracking_id_status": "Supplied by the operator. Not observed in any URL reached during verification, so attribution is unconfirmed and is filed as FLG-002.",
     "retrieved_on": "2026-11-20",
-    "method": "Each supplied link was requested through a headless page fetcher that follows redirects. The final URL and the listing title on the arrived-at page were read and transcribed. Nothing was inferred, and no value was carried over from a search result. Re-verification 2026-11-20 (S-8206a8d0): P-04 resolved to B0DHZTCNR5; all five now observed.",
-    "field_rule": "intended_asin (what the owner meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. Where a field could not be established it is null.",
-    "price_rule": "Program Policies §2(b) (SRC-02) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / PA API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
-    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner."
+    "verified_in_session": "5 of 5",
+    "method": "Each supplied link was opened through a fetcher that follows redirects. The final /dp/ URL, the page title and the category breadcrumb were read from the page that loaded. Nothing was inferred, and no value was carried over from a search result or from another session's notes.",
+    "field_rule": "intended_asin (what the operator meant to ship) and observed_asin (what the link actually opened) are separate fields and are never merged. The nine-character supplied codes are slugs, not identifiers, so intended_asin stays null for every product.",
+    "link_rule": "Every buy button points at https://www.amazon.com/dp/{observed_asin}?tag=shopnow047c-20. The tag parameter is required by Associates Program Policies 2(b): 'You must include your Associates ID or \"tag\" ... as a parameter in the URL of each link you place on your Site to an Amazon Site.' The bare listing URL is kept as verification evidence and is never used as the click destination.",
+    "price_rule": "Program Policies 2(b) permits showing price and availability only where Amazon serves the link carrying that data, or where it arrives via Creators API / Product Advertising API. Neither is connected, so no price, star rating, review count or stock status appears for any product on this site.",
+    "test_rule": "Nothing here was handled, cooked with, measured or tested. No product is ranked, scored or named a winner. Editorial notes say what a stated feature changes about using the appliance; they do not claim an experience of it.",
+    "categories": [
+      {
+        "id": "air-fryers",
+        "label": "Air fryers",
+        "blurb": "Two drawers, one basket, one oven door. Pick the shape before you pick the badge.",
+        "refs": [
+          "P-01",
+          "P-03",
+          "P-02"
+        ]
+      },
+      {
+        "id": "thermometers",
+        "label": "Thermometers",
+        "blurb": "The cheapest way to stop guessing whether the middle is done.",
+        "refs": [
+          "P-05",
+          "P-04"
+        ]
+      }
+    ],
+    "identity_caveat": "On 2026-11-20 this session observed P-04 → B0DHZTCNR5 and P-05 → B0DZFD6R9Z. A parallel session first recorded the opposite mapping, then later agreed with this one. The disagreement is published (FLG-016); neither mapping is presented as proof of intent."
   },
   "products": [
     {
       "ref": "P-01",
+      "category": "air-fryers",
       "submitted_link": "https://link.amazon/B04G1MEwY",
       "submitted_code": "B04G1MEwY",
       "submitted_code_length": 9,
       "intended_asin": null,
       "observed_asin": "B0CDY277D3",
       "observed_asin_length": 10,
-      "listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed_url": "https://www.amazon.com/dp/B0CDY277D3",
       "listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "listing_title_clean": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven",
       "brand": "CHEFMAN",
+      "name": "The two-drawer air fryer",
       "format": "basket",
       "format_label": "Dual-basket air fryer",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "why": "Two independent drawers are the whole argument. Chips in one, chicken in the other, and the sync-finish setting is there so they land at the same time instead of one going cold.",
+      "suits": [
+        "You cook two different things at once and want them to finish together.",
+        "You would rather shake a drawer than turn pieces on a rack.",
+        "You have about the footprint of a microwave to give it."
+      ],
+      "skip_if": "You want to bake, reheat a plate, or put a pan inside. A drawer is a container, not a cavity.",
+      "edit_note": "The 6-quart figure is two 3-quart drawers, not one big one. Compare a single drawer against another single drawer, never the total against a single-basket machine.",
       "title_stated": [
         "6 quart, described in the title as two independent 3-quart baskets",
         "two baskets that run independently",
@@ -34,8 +69,9 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-01 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "The first request for this link returned an Amazon continuity page; the second returned the listing. Recorded as observed on 2026-11-20, not as a stable guarantee.",
+      "resolution_note": "Re-opened on 2026-11-20. The link resolved straight to the listing; the page title and breadcrumb were read from that page.",
       "identity_confidence": "observed",
+      "pairs_with": "P-05",
       "unverified": [
         "intended ASIN",
         "current price",
@@ -52,18 +88,29 @@
     },
     {
       "ref": "P-02",
+      "category": "air-fryers",
       "submitted_link": "https://link.amazon/B02NbDxp3",
       "submitted_code": "B02NbDxp3",
       "submitted_code_length": 9,
       "intended_asin": null,
       "observed_asin": "B09B7SB46R",
       "observed_asin_length": 10,
-      "listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed_url": "https://www.amazon.com/dp/B09B7SB46R",
       "listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "listing_title_clean": "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven",
       "brand": "Emeril Lagasse",
+      "name": "The French-door oven",
       "format": "oven",
       "format_label": "French-door air fryer oven",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "why": "The one that replaces a toaster oven rather than sitting beside it. Doors that open outward, racks instead of a drawer, and room for a tray of vegetables or a small pan.",
+      "suits": [
+        "You want one box that air-fries, toasts, bakes and reheats.",
+        "You cook for three or more and need more than one layer at a time.",
+        "You have clear counter in front of it for the doors to open into."
+      ],
+      "skip_if": "Your counter is tight, or you mostly cook one basket of chips at a time. This is the least compact way to fry.",
+      "edit_note": "A shallow cavity changes what fits: trays, racks and pans work, loose food needs a basket accessory. Count the accessories, because each one is something to wash and store.",
       "title_stated": [
         "a stated 26 quart interior",
         "French doors, per the seller",
@@ -74,8 +121,9 @@
       "photo_alt": "An unbranded countertop oven with French doors open on a tray of roasted vegetables",
       "photo_note": "Editorial illustration. It is not a photograph of P-02 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request.",
+      "resolution_note": "Re-opened on 2026-11-20 and resolved to the listing on the first request.",
       "identity_confidence": "observed",
+      "pairs_with": "P-05",
       "unverified": [
         "intended ASIN",
         "current price",
@@ -92,18 +140,29 @@
     },
     {
       "ref": "P-03",
+      "category": "air-fryers",
       "submitted_link": "https://link.amazon/B00hJ57DV",
       "submitted_code": "B00hJ57DV",
       "submitted_code_length": 9,
       "intended_asin": null,
       "observed_asin": "B08DKYBTPH",
       "observed_asin_length": 10,
-      "listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed_url": "https://www.amazon.com/dp/B08DKYBTPH",
       "listing_title": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "listing_title_clean": "Chefman 8 Qt TurboFry Air Fryer",
       "brand": "Chefman",
+      "name": "The one-basket workhorse",
       "format": "basket",
       "format_label": "Single-basket air fryer",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "why": "One deep basket, 8 quarts of it, and no second drawer to think about. The straightforward choice if dinner is usually one thing at a time.",
+      "suits": [
+        "You cook one thing at a time and want the largest single basket here.",
+        "You want fewer parts to wash than a dual-basket machine.",
+        "You care about a high-heat setting for crispness, in the seller's wording."
+      ],
+      "skip_if": "You regularly cook two different foods that need different times. You will be running it twice.",
+      "edit_note": "Eight quarts in one basket is a genuinely different shape from six in two. One needs shaking; two need coordinating.",
       "title_stated": [
         "a stated 8 quart basket",
         "the seller calls it 4-in-1",
@@ -115,8 +174,9 @@
       "photo_alt": "Golden potato wedges being lifted from the basket of an unbranded air fryer",
       "photo_note": "Editorial illustration. It is not a photograph of P-03 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request.",
+      "resolution_note": "Re-opened on 2026-11-20 and resolved to the listings on the first request.",
       "identity_confidence": "observed",
+      "pairs_with": "P-05",
       "unverified": [
         "intended ASIN",
         "current price",
@@ -133,61 +193,83 @@
     },
     {
       "ref": "P-04",
+      "category": "thermometers",
       "submitted_link": "https://link.amazon/B0c8moW59",
       "submitted_code": "B0c8moW59",
       "submitted_code_length": 9,
       "intended_asin": null,
       "observed_asin": "B0DHZTCNR5",
       "observed_asin_length": 10,
-      "listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed_url": "https://www.amazon.com/dp/B0DHZTCNR5",
       "listing_title": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+      "listing_title_clean": "ThermoMaven 1 Sec Digital Meat Thermometer",
       "brand": "ThermoMaven",
+      "name": "The instant-read thermometer",
       "format": "thermometer",
-      "format_label": "Instant-read meat thermometer",
+      "format_label": "Digital meat thermometer",
       "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
-      "title_stated": [
-        "a 1-second professional digital read, per the seller",
-        "±0.5°F accuracy, per the seller",
-        "NIST and NSF certification, per the seller",
-        "an auto-rotate bright LED screen, per the seller",
-        "IP67 waterproof, per the seller"
+      "why": "The small, cheap end of the thermometer question: one probe, one reading, no app and no charging base. It answers the only question an air fryer cannot answer for you.",
+      "suits": [
+        "You want a quick internal reading without a companion app.",
+        "You cook chicken, pork or fish and would rather not guess.",
+        "You want a thermometer that lives in a drawer."
       ],
-      "photo": "assets/img/thermometer",
-      "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
-      "photo_note": "Editorial illustration. It is not a photograph of P-04 and must not be read as one.",
+      "skip_if": "You want to leave a probe in the meat while it roasts, or track a long cook from another room. That is a wireless leave-in probe, not this.",
+      "edit_note": "This is the fourth submitted link. Earlier runs could not get past an Amazon continuity page; on 2026-11-20 the same link opened the listing above. The product is a thermometer, not a fourth air fryer, and the site treats it that way.",
+      "title_stated": [
+        "the seller states a one-second reading",
+        "the seller states ±0.5℉ accuracy and NIST/NSF certification",
+        "IP67 waterproof, per the seller",
+        "an auto-rotating LED screen, per the seller"
+      ],
+      "photo": "assets/img/instant-thermometer",
+      "photo_alt": "An unbranded folding digital instant-read meat thermometer resting beside a seared chicken breast on a wooden board",
+      "photo_note": "Editorial illustration of an instant-read probe format. It is not a photograph of P-04 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "RESOLVED on re-verification 2026-11-20 (S-8206a8d0, fetch_page against amazon.com): link.amazon/B0c8moW59 now reaches this listing. Earlier attempts (including this build's three requests) landed only on Amazon's /checkpoint/continue interstitial. Both outcomes are dated observations; this entry reflects the latest. Single observation on one date; re-check monthly.",
+      "resolution_note": "Resolved on this run after failing three times in an earlier session. Verification is a record of this request, not a guarantee about the next one.",
       "identity_confidence": "observed",
+      "pairs_with": "P-02",
       "unverified": [
         "intended ASIN",
         "current price",
         "star rating",
         "review count",
         "availability",
+        "accuracy independent of the seller's claim",
         "battery life",
-        "probe accuracy",
         "warranty",
         "tracking tag on the click"
       ],
-      "flag": "FLG-014 (resolved 2026-11-20; see resolution_note)",
       "stated_capacity": "Not applicable — it is a thermometer",
-      "stated_attributes": "1-second read stated; ±0.5°F accuracy stated; NIST & NSF certified stated; auto-rotate LED screen; IP67 waterproof stated",
-      "attention": "Second thermometer in the set (with P-05). Instant-read, not wireless. Any guide that treats it as an air fryer would be wrong."
+      "stated_attributes": "One-second reading stated; ±0.5℉ accuracy stated; NIST/NSF certification stated; IP67 waterproof; auto-rotating screen",
+      "observation_conflict": true,
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
     },
     {
       "ref": "P-05",
+      "category": "thermometers",
       "submitted_link": "https://link.amazon/B0f3GKalj",
       "submitted_code": "B0f3GKalj",
       "submitted_code_length": 9,
       "intended_asin": null,
       "observed_asin": "B0DZFD6R9Z",
       "observed_asin_length": 10,
-      "listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
       "listing_title": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "listing_title_clean": "CHEF iQ Sense Wireless Meat Thermometer",
       "brand": "CHEF iQ",
+      "name": "The leave-in probe set",
       "format": "thermometer",
       "format_label": "Wireless meat thermometer",
       "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "why": "Three probes that stay in the food while it cooks, so you can watch the middle come up to temperature instead of opening the oven to check. The seller also lists air fryers among its uses.",
+      "suits": [
+        "You roast or smoke large pieces and want to watch without opening the door.",
+        "You cook more than one piece at once and want a probe in each.",
+        "You are comfortable with a phone in the kitchen."
+      ],
+      "skip_if": "You want a thermometer you pick up, read, and put away. Set-up and charging are part of owning this.",
+      "edit_note": "This is a different category from the air fryers, and the site keeps it in its own section. A thermometer is a measuring tool you move between appliances; an air fryer is an appliance.",
       "title_stated": [
         "three probes, per the seller",
         "the seller describes it as wireless",
@@ -198,8 +280,9 @@
       "photo_alt": "A thin probe thermometer inserted into a roasted chicken on a wooden board",
       "photo_note": "Editorial illustration. It is not a photograph of P-05 and must not be read as one.",
       "checked_on": "2026-11-20",
-      "resolution_note": "Resolved on first request. Note the category change: this is a thermometer, not a cooking appliance.",
+      "resolution_note": "Re-opened on 2026-11-20 and resolved to the listing on the first request.",
       "identity_confidence": "observed",
+      "pairs_with": "P-02",
       "unverified": [
         "intended ASIN",
         "current price",
@@ -211,9 +294,10 @@
         "warranty",
         "tracking tag on the click"
       ],
-      "attention": "This product sits in a different category from the other four. Any guide that treats it as a fifth air fryer would be wrong. It is routed to its own section.",
       "stated_capacity": "Not applicable — it is a thermometer",
-      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses"
+      "stated_attributes": "Three probes; described as wireless; 1000°F heat rating stated; lists air fryers among intended uses",
+      "observation_conflict": true,
+      "conflict_note": "Two sessions initially mapped P-04 and P-05 the other way round. A later observation agreed with the mapping on this page, but no observation can prove which product was intended. The destination is what this link actually opened, not a settled identity."
     }
   ]
 }

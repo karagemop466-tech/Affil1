@@ -1,5 +1,7 @@
 """The review queue, the image policy, and the measurement plan."""
 
+from release_panels import render as release_panel
+
 from layout import (blank, esc, eyebrow, outbound, page, pagehead, rel,
                     section, table)
 
@@ -72,19 +74,30 @@ def build_index(page_dir, flags, meta):
     return page(
         d,
         title="Flagged for review \u2014 Crisp & Counter",
-        description="Every uncertainty on this site in one place: unresolved links, unconfirmed tracking, missing prices, absent authorship and generated imagery, each with the source to check it against.",
-        body=body,
+        description="Every uncertainty on this site in one place: unconfirmed tracking, missing prices, absent authorship, generated imagery and the consolidation record, each with the source to check it against.",
+        body=body + release_panel(d, "review/"),
         active="review/index.html",
         canonical="review/",
     )
 
 
 def _urlish(text, d):
-    from layout import AFFILIATE_HINT, product_link
+    """Render a 'where to check it' entry.
+
+    A listing URL becomes a tagged Special Link, because an Amazon product link
+    without the Associates tag is exactly the defect this site was built to
+    avoid. A short link is shown as text: it cannot carry the tag, so it is
+    evidence rather than a destination. Anything else is a citation.
+    """
+    import re as _re
+    from layout import buy_url, product_link
     if text.startswith("http"):
-        if AFFILIATE_HINT.search(text):
-            return product_link(d, text, esc(text),
-                                aria="Open this Amazon listing (affiliate link, opens in a new tab)")
+        m = _re.search(r"/dp/([A-Z0-9]{10})", text)
+        if m:
+            return product_link(d, buy_url(m.group(1)), esc(text),
+                                aria="Open this Amazon listing (paid link, opens in a new tab)")
+        if "link.amazon/" in text:
+            return f'<code class="code">{esc(text)}</code>'
         return outbound(d, text, esc(text))
     return esc(text)
 
@@ -108,7 +121,7 @@ def build_images(page_dir, images, products, meta):
         'Image policy',
         'Every photograph here<br>is an illustration',
         images["meta"]["why"],
-        meta='8 generated assets &middot; 0 product photographs &middot; 3 uses declined',
+        meta=f'{len(images["assets"])} generated assets &middot; 0 product photographs &middot; {len(images["rejected"])} uses declined',
     )}
 {section(f'''
 <h2>The rule</h2>

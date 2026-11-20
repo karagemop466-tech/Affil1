@@ -12,8 +12,8 @@ import sys
 from html.parser import HTMLParser
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SITE = ROOT / "crisp"          # the section this builder owns
-BASE = "/crisp"
+SITE = ROOT                     # the section this builder owns (maintained root edition)
+BASE = ""
 ERRORS = []
 WARNINGS = []
 CHECKS = 0
@@ -68,7 +68,7 @@ class RefCollector(HTMLParser):
             self.h1_count += 1
         if tag == "img" and "alt" not in a:
             self.imgs_without_alt += 1
-        if tag == "div" and a.get("class") == "disclosure":
+        if tag == "div" and "disclosure" in (a.get("class") or ""):
             self.has_disclosure = True
         if tag == "footer":
             self.has_footer = True
@@ -78,7 +78,10 @@ def main():
     global CHECKS
     # Only validate pages this builder owns. The storefront at the repo root is
     # another session's scope; validate.py must never fail on their files.
-    pages = sorted(p for p in SITE.rglob("*.html"))
+    # Only the published tree: archive/ holds retired editions that are not
+    # served, so their lack of disclosure is not a defect of the site.
+    pages = [p for p in sorted(ROOT.rglob("*.html"))
+             if not p.relative_to(ROOT).as_posix().startswith("archive/")]
     parsed = {}
 
     for p in pages:
@@ -195,9 +198,9 @@ def main():
         CHECKS += 1
         url = c.canonical
         if url and f"<loc>{url}</loc>" not in sitemap:
-            err(f"{rel}: canonical {url} absent from crisp/sitemap.xml")
-        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/crisp"):
-            err(f"{rel}: canonical outside the /crisp base -> {url}")
+            err(f"{rel}: canonical {url} absent from sitemap.xml")
+        if url and not url.startswith("https://karagemop466-tech.github.io/Affil1/"):
+            err(f"{rel}: canonical outside the published base -> {url}")
 
     for slug in re.findall(r"<link>(https://[^<]+/guides/[^<]+)</link>", feed):
         CHECKS += 1

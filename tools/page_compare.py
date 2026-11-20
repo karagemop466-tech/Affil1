@@ -1,79 +1,84 @@
-"""The comparison table. Blanks are shown as blanks."""
+"""Side-by-side comparison. Blank cells are the design, not a bug."""
 
-from layout import (blank, esc, eyebrow, page, pagehead, product_link, rel,
-                    section, table)
+from layout import (blank, breadcrumb_schema, buy_url, esc, eyebrow, page,
+                    pagehead, product_link, rel, section, table)
 from content import COMPARE_COLUMNS
 
 
 def build(page_dir, products, meta):
     d = page_dir
-    rows = []
-    for p in products:
-        r = {
-            'ref': p['ref'], 'brand': p.get('brand'), 'shape': p.get('format_label'),
-            'capacity': p.get('stated_capacity'), 'attributes': p.get('stated_attributes'),
-            'asin': p.get('observed_asin'),
-        }
-        if r["asin"]:
-            listing = product_link(
-                d, f"https://www.amazon.com/dp/{r['asin']}", esc(r["asin"]),
-                aria=f"Open the Amazon listing for {r['ref']} (affiliate link, opens in a new tab)")
-            cap = esc(r["capacity"])
-            attrs = esc(r["attributes"])
-            shape = esc(r["shape"])
-            brand = esc(r["brand"])
-            status = '<span class="pill pill-ok">Identified</span>'
-        else:
-            listing = blank(None, "the link never reached a product page")
-            cap = attrs = shape = brand = blank(None, "not identified")
-            status = '<span class="pill pill-warn">Unresolved</span>'
-        rows.append([
-            {"html": f'<a href="{esc(rel(d, "products/" + r["ref"].lower() + ".html"))}"><strong>{esc(r["ref"])}</strong></a>'},
-            {"html": brand},
-            {"html": shape},
-            {"html": cap},
-            {"html": attrs},
-            {"html": listing},
-            {"html": status},
-        ])
 
-    tbl = table(
-        ["Ref", "Brand", "Shape", "Stated capacity", "Stated attributes", "ASIN reached", "Status"],
-        rows, cls="compare",
-        caption="Side by side, with nothing measured",
-        note="Every word in the capacity and attribute columns is the seller's own wording from the listing title. None of it has been verified by testing, and no product was measured.",
-    )
+    def cell(p, col):
+        if col == "Product":
+            return {"html": (
+                f'<a href="{esc(rel(d, "products/" + p["ref"].lower() + ".html"))}">'
+                f'<strong>{esc(p["name"])}</strong></a>'
+                f'<br><span class="tiny">{esc(p["brand"])} &middot; {esc(p["ref"])}</span>')}
+        if col == "Shape":
+            return {"html": esc(p["format_label"])}
+        if col == "Stated size":
+            return {"html": esc(p.get("stated_capacity") or "")}
+        if col == "Stated features":
+            return {"html": esc(p.get("stated_attributes") or "")}
+        if col in ("Price", "Rating"):
+            return {"html": blank(None)}
+        if col == "Listing":
+            return {"html": product_link(
+                d, buy_url(p["observed_asin"]), "See it <span aria-hidden=\"true\">&#8599;</span>",
+                cls="tlink", aria=f"Open the Amazon listing for {p['ref']} (paid link, opens in a new tab)")}
+        return {"html": ""}
+
+    headers = [c[0] for c in COMPARE_COLUMNS] + ["Listing"]
+    rows = [[cell(p, c[0]) for c in COMPARE_COLUMNS] + [cell(p, "Listing")] for p in products]
+
+    tbl = table(headers, rows, cls="compare",
+                caption="All five, side by side, on 20 November 2026",
+                note="Stated size and features are the sellers' own words from the listing titles. Price and rating are blank because Amazon serves that data and this site holds no permitted feed for it.")
 
     body = f"""{pagehead(
         'Compare',
-        'Side by side,<br>with nothing measured',
-        'Five products, seven columns. Two of those columns are the sellers talking about their own products. One is a link that was actually opened. The rest are empty.',
-        meta='No price column &middot; no rating column &middot; no winner column &middot; on purpose',
+        'Five things,<br>one table',
+        'The whole edit on one screen. Two columns are deliberately empty: price and rating live on Amazon and change hourly, and a static page cannot show them without breaking a rule or going stale.',
+        meta='Seller-stated values only &middot; no measured figures &middot; no winners declared',
     )}
 {section(f'''
-<div class="lede-prose">
-  <p>Most comparison tables rank things. This one cannot, because nothing here was tested, and a rank without a test is an opinion dressed as a measurement.</p>
-  <p>What the table can do is put the sellers' claims next to each other so the shape of the choice is visible. Read the capacity column and you can see a dual-basket machine quoting six quarts across two three-quart baskets sitting beside a single eight-quart basket and a twenty-six-quart oven. Those numbers describe three different kinds of container, which is exactly why a single capacity figure is a poor way to compare.</p>
-</div>
+<div class="sec-head"><div>{eyebrow('The table')}<h2>Everything the listings state</h2></div>
+<p>Read across a row to see one product. Read down a column to see what is genuinely comparable.</p></div>
 {tbl}''', cls='')}
 {section(f'''
-<div class="sec-head"><div>{eyebrow('Reading the table honestly')}<h2>What the columns are not</h2></div></div>
-<div class="rule-grid">
-  <div class="rule"><span class="rule-n">01</span><h3>The capacity column is a claim</h3><p>Quarts are quoted by the seller and transcribed here unchanged. No basket, cavity or portion was measured. A quart of volume and a quart of usable cooking surface are not the same thing.</p></div>
-  <div class="rule"><span class="rule-n">02</span><h3>The attribute column is marketing copy</h3><p>"Sync finish", "one-touch presets" and "dishwasher-safe" are the seller's phrases. Whether a preset produces good food, or a coating survives your dishwasher, is not something a title can tell you.</p></div>
-  <div class="rule"><span class="rule-n">03</span><h3>The empty columns are the honest ones</h3><p>Price, rating, review count and stock would be the most useful columns on the page. They are absent because Amazon permits them only from data Amazon serves or via its API. <a href="{esc(rel(d, 'about/index.html'))}#why-blank">The rule, quoted from the source</a>.</p></div>
-</div>''', cls='')}
+<div class="compare-notes">
+  <div>
+    {eyebrow('How to read it')}
+    <h2>Three honest observations</h2>
+    <ol class="tight">
+      <li><strong>Sizes are not interchangeable.</strong> P-01's 6 quarts is two 3-quart drawers; P-03's 8 quarts is one basket; P-02's 26 quarts is a different shape again. Compare like with like.</li>
+      <li><strong>Thermometers have no capacity.</strong> Two of these five are probes. They are in the table so the catalogue is complete, not so they can be ranked against an oven.</li>
+      <li><strong>Nothing here says which is better.</strong> No product was tested. The notes explain what each shape changes, and the rest is your kitchen.</li>
+    </ol>
+  </div>
+  <div class="side-card">
+    <p class="q-label">Choose by shape</p>
+    <dl class="side-dl">
+      <div><dt>One drawer</dt><dd>P-03 &mdash; one thing at a time, largest single basket</dd></div>
+      <div><dt>Two drawers</dt><dd>P-01 &mdash; two foods, two temperatures, sync finish stated</dd></div>
+      <div><dt>A door and racks</dt><dd>P-02 &mdash; trays, pans, layers, more counter needed</dd></div>
+      <div><dt>A quick reading</dt><dd>P-04 &mdash; instant read, lives in a drawer</dd></div>
+      <div><dt>A watched cook</dt><dd>P-05 &mdash; leave-in probes, app-based</dd></div>
+    </dl>
+  </div>
+</div>''', cls='section-tint')}
 {section(f'''
 <div class="callout">
-  <h2>A comparison you can actually finish</h2>
-  <p>Measure the space you have. Write down the meal you cook most. Then answer one question for each product: does my usual meal fit in one layer of this thing?</p>
-  <p class="callout-links"><a class="btn" href="{esc(rel(d, 'guides/basket-or-oven-air-fryer.html'))}">Basket or oven</a> <a class="btn btn-ghost" href="{esc(rel(d, 'guides/air-fryer-capacity-checklist.html'))}">Capacity checklist</a></p>
+  <h2>Why the price column is empty on a comparison page</h2>
+  <p>Because a comparison is exactly where a wrong price does the most damage. Amazon permits a site to show price and availability only when Amazon serves that data into the page, or when it arrives through the official product APIs. This site is a set of static files and has neither.</p>
+  <p class="callout-links"><a class="tlink" href="{esc(rel(d, 'about/index.html#why-blank'))}">Read the rule and its source <span aria-hidden="true">&rarr;</span></a></p>
 </div>''', cls='')}"""
     return page(
         d,
-        title="Compare the five \u2014 Crisp & Counter",
-        description="The five submitted products side by side: brand, shape, the capacity and attributes their sellers state, the ASIN each link reached, and the fields left blank.",
+        title="Compare the five \u2014 air fryers and thermometers | Crisp & Counter",
+        description="Every product in the edit side by side: shape, stated capacity, stated features, with price and rating deliberately blank and a link to each live listing.",
         body=body,
         active="compare/index.html",
         canonical="compare/",
+        structured=breadcrumb_schema([], "Compare", "compare/"),
     )

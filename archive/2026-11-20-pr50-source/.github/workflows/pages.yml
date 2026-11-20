@@ -1,0 +1,76 @@
+name: Deploy static site to GitHub Pages
+
+# The published site is generated, not hand-written: one HTML page per row of
+# src/data, assembled by tools/build.py. So the deploy job builds first and then
+# publishes what the build produced. Committed HTML can therefore never disagree
+# with the data at publish time, and a page that fails a rule cannot deploy.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    outputs:
+      source: ${{ steps.pages-source.outputs.source }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild the publication from its data layer
+        run: python3 tools/build.py
+
+      - name: Compliance and integrity gate
+        run: python3 tools/validate.py
+
+      - name: Confirm the build is committed (no drift between data and HTML)
+        run: |
+          if ! git diff --quiet -- '*.html' '*.xml' '*.txt'; then
+            echo "::error::generated output differs from what is committed; run python3 tools/build.py and commit the result"
+            git status --porcelain -- '*.html' '*.xml' '*.txt' | head -20
+            exit 1
+          fi
+          echo "generated output matches the committed HTML"
+
+      - name: Resolve every reference at the Pages project mount
+        run: |
+          mkdir -p "$RUNNER_TEMP/www"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/www/Affil1"
+          (cd "$RUNNER_TEMP/www" && python3 -m http.server 8207 --bind 127.0.0.1 >/dev/null 2>&1 &)
+          for i in $(seq 1 20); do
+            curl -fsS -o /dev/null http://127.0.0.1:8207/Affil1/index.html && break
+            sleep 1
+          done
+          MOUNT=http://127.0.0.1:8207/Affil1 python3 tools/check_deploy_paths.py
+
+      - uses: actions/configure-pages@v5
+        if: steps.pages-source.outputs.source == 'workflow'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.pages-source.outputs.source == 'workflow'
+        with:
+          path: .
+
+  deploy:
+    # Publishing is only for main, and only after the gate has passed.
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
