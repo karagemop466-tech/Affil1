@@ -491,3 +491,13 @@ COMPARE_COLUMNS = [
 
 # COMPARE_ROWS deliberately does not exist. The comparison table is built from
 # src/data/products.json so that a fact can never exist in two places and drift.
+
+
+# --- integration pass: five further guides, converted to this schema at build time ---
+# Kept in one source (tools/content_extra.py, written as buyer-facing prose) and adapted
+# here rather than duplicated, so a fix to the copy cannot land in one edition and not the
+# other. See tools/integration_layer.py for the conversion rules and why links are lifted
+# into a per-guide source table.
+from integration_layer import guides as _integration_guides  # noqa: E402
+
+GUIDES = GUIDES + _integration_guides()

@@ -54,6 +54,7 @@ GENERATED = {
     "about/index.html",
     "operations/ledger.html",
     "brief/index.html",
+    "verification/index.html",
 }
 GENERATED |= {f"guides/{g['slug']}.html" for g in GUIDES}
 
@@ -185,6 +186,18 @@ def main():
     pages.append(write("about/index.html", page_desk.build_about("about", sources, meta)))
     pages.append(write("operations/ledger.html", page_desk.build_ledger("operations", meta)))
     pages.append(write("brief/index.html", page_desk.build_brief("brief", products, questions, flags, meta)))
+
+    # integration layer: the consolidated verification page (tables, gate, sources)
+    from integration_layer import verification_body as _verification_body
+    pages.append(write("verification/index.html", page(
+        "verification",
+        title="Verification log and site gates | Crisp & Counter",
+        description="What was checked against official sources, when, what disagreed between passes, "
+                    "the monetization gate and the measurement plan - one table per question.",
+        body=_verification_body(),
+        active="guides/index.html",
+        canonical="verification/index.html",
+    )))
 
     pages.append(write("sitemap.xml", sitemap(pages)))
     pages.append(write("feed.xml", feed(GUIDES)))
