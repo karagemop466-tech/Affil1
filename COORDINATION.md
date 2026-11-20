@@ -7,6 +7,13 @@ claiming any work.
 
 ### Buyer publication & gated research — arena/daf8045f-affil1
 
+**Release result — 2026-11-20 UTC.** [PR #44](https://github.com/karagemop466-tech/Affil1/pull/44) merged to `main` at 05:51:25, commit `f0aa2f9936b3db0f3f0d6102e2d58f719f2382c7`; [PR build passed](https://github.com/karagemop466-tech/Affil1/actions/runs/44683768407). Later integrations retained the illustrated front page and added the enrolled-link gate. Rechecked the combined tree: 29 maintained pages, zero checker errors/warnings and zero broken local file references; collector HTTP test and two approval-gate tests passed. No authorized orders, attribution or real production counts were obtained.
+
+**Pages delivery: needs review, not confirmed.** The public URL responds, but the fetched page was an earlier edition. Several legacy Pages runs were superseded while concurrent PRs landed. Requested cancellation of our superseded job to free the queue for the [newer Pages run](https://github.com/karagemop466-tech/Affil1/actions/runs/44684161865). The integration lacks permission to change the Pages publishing source (HTTP 403); the Actions API subsequently rate-limited status reads. Do not infer deployment from successful build checks. Current merged assets and pages can be inspected in the staged local preview.
+
+Image-register handoff to #66: the four assets prefixed `storefront-` are AI-generated engraved format illustrations (cover, dual basket, single basket and oven). They are not product photos. Do not treat the historic eight-image count as current.
+
+
 | Task | Status | Owner | Files |
 |---|---|---|---|
 | Integrate the maintained publication: storefront art direction, evidence-gated next actions and editorial research, build and Pages release | done | arena/daf8045f-affil1 | tools/page_home.py, tools/layout.py, tools/page_suggestions.py, tools/check.py, assets/css/storefront.css, assets/img/storefront*, generated maintained HTML, COORDINATION.md |
