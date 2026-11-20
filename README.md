@@ -1,4 +1,4 @@
-# Crisp & Counter
+# Crisp & Counter — an Amazon affiliate publication for countertop cooking
 
 A static Amazon affiliate publication about air fryers and thermometers.
 Live at **https://karagemop466-tech.github.io/Affil1/**
@@ -12,7 +12,9 @@ hiding it.
 
 ## The site, in one table
 
-| Path | What it is |
+The brief had five parts. This is where each one lives:
+
+| The ask | Where it is answered |
 |---|---|
 | `index.html` | Publication front page: the edit, two categories, three decision paths, a seasonal feature, the journal |
 | `products/` | The shop: five picks in two categories, plus one note per product |
@@ -28,22 +30,40 @@ hiding it.
 | `tools/` | `build.py` renders the site; `check.py` verifies it |
 | `archive/legacy-2026-11-20/` | The superseded edition, kept with `noindex` on every page |
 
-## Build
+## Layout
 
-No dependencies. Python 3.9+ and nothing else.
-
-```bash
-python3 tools/build.py    # regenerate every page from src/data
-python3 tools/check.py    # verify the rules below; exits non-zero on failure
+```
+index.html            publication front page          ← generated
+guides/<slug>/index.html  9 buyer guides              ← generated
+compare/ products/ topics/ about/                     ← generated
+sources/ suggestions/ questions/ flagged/              ← generated
+dashboard/            entries, verification, ledger    ← generated
+404.html              not-found page                   ← generated
+assets/css/site.css   the only stylesheet
+assets/js/events.js   the five defined events, inert until an endpoint exists
+assets/js/shortlist.js  "Save" on a product card; localStorage only, nothing sent
+assets/img/*.jpg      commissioned illustrations (not product photography)
+src/data/*.json       every fact the site publishes, with its source
+tools/build.py        data → HTML (one template for nav, disclosure, footer)
+tools/validate.py     the gate: links, images, disclosure, sponsored marking,
+                      price prohibition, sitemap/feed agreement
+tools/check_deploy_paths.py  resolves every reference over HTTP at the /Affil1/ mount
+tools/verify_links.py re-resolve the register against Amazon and report drift
+archive/              five earlier competing surfaces (four storefronts and a parallel
+                      integration pass), preserved untouched and non-indexable
 ```
 
-`.github/workflows/pages.yml` runs both on every push and pull request, then
-fails the build if the output is not reproducible from `src/data` — which is how
-a hand-edited page gets caught.
+Nothing in the tree is hand-edited except `assets/`, `tools/`, `src/data/`, `docs/`
+and the markdown files. If you edit a generated `.html` directly, the drift check in
+CI fails and tells you so.
 
-## The rules `check.py` enforces
+## Build, check, publish
 
-Each rule exists because the site makes a matching claim somewhere.
+```bash
+python3 tools/build.py            # regenerate every page from src/data
+python3 tools/validate.py         # the gate; exits non-zero on any violation
+python3 -m http.server 8207 --bind 0.0.0.0   # preview; open /Affil1/ after linking the parent dir
+```
 
 1. **The disclosure strip is above `<main>` on every page** and repeated in the
    footer. Required by Associates Operating Agreement §5; placed high because the
@@ -70,11 +90,9 @@ Each rule exists because the site makes a matching claim somewhere.
     generated pages plus assets into `_site`, so archived editions can stay in
     the repository without being published.
 
-## Editing content
+## The rules this site publishes under
 
-Change `src/data/*.json` or `tools/content.py`, then rebuild. Never edit a
-generated `.html` file: the CI reproducibility step will fail, which is exactly
-the intent.
+Each rule below is enforced by `tools/validate.py`, not just asserted in prose:
 
 Product identity lives in `src/data/products.json`. The `intended_asin` and
 `observed_asin` fields are deliberately separate and must never be merged — see
@@ -99,7 +117,7 @@ Policy wording was read from the Operating Agreement §5, the Program Policies
 §2(a)/(b), the FTC's endorsement FAQ and Google's outbound-link documentation in
 the same session. All four are quoted, with links, on `about/index.html#sources`.
 
-## What is not connected
+## The one finding that decides whether this site can earn
 
 - No Amazon Product Advertising API / Creators API credentials.
 - No Associates account access, so no confirmed click attribution, rate card or
@@ -109,14 +127,41 @@ the same session. All four are quoted, with links, on `about/index.html#sources`
 - No named author.
 - No mailing list; RSS is the only return channel.
 
-Every one of those is published on the review page rather than described here as
-a future intention.
+## Design layer
 
-### Publication edition and release order
+Typefaces are self-hosted (Fraunces for display, Inter for text) — no external font
+request, so nothing leaks a reader's visit to a third party and the page paints without
+a network round trip. Editorial art is generated for this publication, shipped in
+width variants with `srcset`, and captioned on every use as an illustration: never a
+listing photo, never a brand mark, never in a slot that imitates one. The rule and the
+reason sit in `src/data/images.json`, carried over from the parallel integration pass
+whose artwork and typography this site adopted.
 
-The custom Actions deployment (when selected as the Pages source) packages only the maintained edition (`python3 tools/stage.py _site` after building). Older parallel editions remain in Git, not in that artifact. While legacy branch publishing is configured, GitHub still serves the committed root; the sitemap and navigation point to the maintained edition only. The sitemap and RSS feed are generated by the build; never edit them by hand.
+## Open questions and blockers
 
-1. Establish measurement first: deploy the collector outside Pages, document retention and consent, and verify test events before enabling the client. Orders belong in authorized Associates reports, not browser events. Until then there is no conversion baseline.
-2. Validate one Special Link per intended ASIN in the enrolled Associates account. Record intended ASIN, official URL, confirmation date and source independently of the observed redirect. Release a replacement only after the destination and click report agree. `shopnow047c-20` is supplied, not confirmed.
-3. After measurement is live, review Search Console queries and click counts every two weeks. Draft one guide per review cycle only when the query and reader need warrant it. Good hypotheses: “Will a tray air fryer fit under my cabinets?” and “One basket or two for dinner and a side?” Neither has verified demand. Add each accepted guide to the generated sitemap and feed.
-4. Use AI for outlines and evidence-gap checks, not for claims or automatic publication. A reviewer must check each claim against a linked official source, check nearby disclosure and API permissions, and approve the draft before release. Do not call a product trending or profitable until the underlying data exists.
+Twenty-two are listed at [/questions/](https://karagemop466-tech.github.io/Affil1/questions/)
+with the information each one needs. Five were answered by this pass. The ones that
+block everything else, in order:
+
+1. **Enrolment** — is `shopnow047c-20` an active tracking ID, and is this site listed
+   in the account? No claim is made either way here.
+2. **Special Links** — regenerate all five destinations in Associates Central and
+   confirm one click in the report before publishing more.
+3. **Search Console** — verify the property. Until then, every statement about what
+   readers want is reasoning, not evidence.
+4. **An author** — a named human with two true biographical sentences. Bylines stay at
+   desk level because inventing a person who tested these machines would be a
+   fabricated endorsement.
+
+## Editorial rule, in one line
+
+A capability sentence is published only when it quotes the seller's own listing title,
+attributed as such; nothing on this site claims a product was tested, and no figure
+appears that cannot be traced to an official source.
+
+## Licence and trademark note
+
+Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This
+site is not endorsed by or affiliated with Amazon beyond participation in the Associates
+Program. All listing titles are quoted for identification and are the property of their
+sellers. Illustrations were made for this publication and are captioned as such.

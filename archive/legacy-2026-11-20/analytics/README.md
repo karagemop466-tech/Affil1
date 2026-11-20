@@ -37,3 +37,10 @@ reported orders. Keep the campaign ledger empty until provenance is available.
 Run `python3 -m unittest discover -s analytics` before deployment. Test the same
 five events on staging, plus opt-out and a failed collector, before enabling
 production. Set and enforce retention for the aggregate table before launch.
+
+For the staged Pages edition, run `python3 tools/preview.py`. To exercise the
+actual collector locally, run `python3 tools/preview.py --measurement-demo`,
+then visit `http://127.0.0.1:4173/`. The second command enables all five counters
+only in a temporary loopback preview; it removes the SQLite file on exit and
+never changes production HTML. The normal preview and GitHub Pages do not send
+beacons.

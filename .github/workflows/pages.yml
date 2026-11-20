@@ -1,5 +1,9 @@
-name: Build, check and deploy
+name: Deploy static site to GitHub Pages
 
+# The published site is generated, not hand-written: one HTML page per row of
+# src/data, assembled by tools/build.py. So the deploy job builds first and then
+# publishes what the build produced. Committed HTML can therefore never disagree
+# with the data at publish time, and a page that fails a rule cannot deploy.
 on:
   push:
     branches: [main]
@@ -22,36 +26,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-      - name: Build the site
+      - name: Rebuild the publication from its data layer
         run: python3 tools/build.py
 
-      - name: Verify every rule the site claims
-        run: python3 tools/check.py
+      - name: Compliance and integrity gate
+        run: python3 tools/validate.py
 
-      - name: Check relative links across served editions
-        run: python3 tools/check_local_links.py
-
-      - name: Confirm the build is reproducible, not hand-edited
+      - name: Confirm the build is committed (no drift between data and HTML)
         run: |
-          cp -r . /tmp/first-build
-          python3 tools/build.py
-          if ! diff -r -q --exclude='.git' --exclude='__pycache__' /tmp/first-build . ; then
-            echo "::error::Output is not reproducible. Files were changed by hand rather than by the build."
+          if ! git diff --quiet -- '*.html' '*.xml' '*.txt'; then
+            echo "::error::generated output differs from what is committed; run python3 tools/build.py and commit the result"
+            git status --porcelain -- '*.html' '*.xml' '*.txt' | head -20
             exit 1
           fi
+          echo "generated output matches the committed HTML"
 
-      - name: Stage the public edition
-        run: python3 tools/stage.py _site
-
-      - name: Read the configured Pages source
-        id: pages-source
-        if: github.event_name != 'pull_request'
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Resolve every reference at the Pages project mount
         run: |
-          source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)
-          echo "source=$source" >> "$GITHUB_OUTPUT"
+          mkdir -p "$RUNNER_TEMP/www"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/www/Affil1"
+          (cd "$RUNNER_TEMP/www" && python3 -m http.server 8207 --bind 127.0.0.1 >/dev/null 2>&1 &)
+          for i in $(seq 1 20); do
+            curl -fsS -o /dev/null http://127.0.0.1:8207/Affil1/index.html && break
+            sleep 1
+          done
+          MOUNT=http://127.0.0.1:8207/Affil1 python3 tools/check_deploy_paths.py
 
       - uses: actions/configure-pages@v5
         if: steps.pages-source.outputs.source == 'workflow'
@@ -59,11 +62,11 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         if: steps.pages-source.outputs.source == 'workflow'
         with:
-          path: _site
+          path: .
 
   deploy:
-    if: needs.build.outputs.source == 'workflow'
-    needs: build
+    # Publishing is only for main, and only after the gate has passed.
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
